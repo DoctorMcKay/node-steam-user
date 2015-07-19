@@ -1,0 +1,24 @@
+{
+	"name": "steam-client-user",
+	"version": "1.0.0",
+	"description": "node-steam client handler for Individual and AnonUser Steam account types",
+	"keywords": ["steam", "steam client", "steam user"],
+	"homepage": "https://github.com/DoctorMcKay/node-steam-client-user",
+	"bugs": {
+		"url": "https://github.com/DoctorMcKay/node-steam-client-user/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Alexander Corn",
+		"email": "mckay@doctormckay.com",
+		"url": "https://www.doctormckay.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DoctorMcKay/node-steam-client-user.git"
+	},
+	"dependencies": {
+		"steamid": "^0.3.0",
+		"request": "^2.58.0"
+	}
+}
