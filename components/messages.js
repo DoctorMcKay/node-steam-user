@@ -9,6 +9,8 @@ protobufs[Steam.EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[Steam.EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
 protobufs[Steam.EMsg.ClientUpdateMachineAuth] = Schema.CMsgClientUpdateMachineAuth;
 protobufs[Steam.EMsg.ClientUpdateMachineAuthResponse] = Schema.CMsgClientUpdateMachineAuthResponse;
+protobufs[Steam.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;
+protobufs[Steam.EMsg.ClientNewLoginKeyAccepted] = Schema.CMsgClientNewLoginKeyAccepted;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 

@@ -39,6 +39,16 @@ function SteamUser(client, options) {
 	checkDirExists(this.options.dataDirectory);
 
 	this.client.on('message', this._handleMessage.bind(this));
+
+	var self = this;
+	this.client.on('error', function(e) {
+		if(self.options.autoRelogin) {
+			self.emit('disconnected');
+			self.logOn(true);
+		} else {
+			self.emit('error', e);
+		}
+	});
 }
 
 SteamUser.prototype.setOption = function(option, value) {

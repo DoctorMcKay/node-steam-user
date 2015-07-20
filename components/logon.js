@@ -61,6 +61,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 	switch(body.eresult) {
 		case Steam.EResult.OK:
 			this.steamID = new SteamID(body.client_supplied_steamid.toString());
+
+			this._logOnDetails.last_session_id = this.client._sessionID;
+			this._logOnDetails.client_instance_id = body.client_instance_id;
+
 			this.emit('loggedOn', body);
 			break;
 
@@ -91,6 +95,17 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 			error.eresult = body.eresult;
 			this.disconnect();
 			this.emit('error', error);
+	}
+};
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientNewLoginKey] = function(body) {
+	if(this.steamID.Type == SteamID.Type.INDIVIDUAL) {
+		delete this._logOnDetails.password;
+		this._logOnDetails.login_key = body.login_key;
+
+		if(this._logOnDetails.should_remember_password) {
+			this.emit('loginKey', body.login_key);
+		}
 	}
 };
 
