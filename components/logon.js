@@ -43,6 +43,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 		case Steam.EResult.AccountLogonDenied:
 		case Steam.EResult.AccountLoginDeniedNeedTwoFactor:
 			var self = this;
+			this.client.disconnect();
 			this.emit('steamGuard', body.eresult == Steam.EResult.AccountLogonDenied ? body.email_domain : null, function(code) {
 				self._logOnDetails[body.eresult == Steam.EResult.AccountLogonDenied ? 'auth_code' : 'two_factor_code'] = code;
 				self.logOn(self._logOnDetails);
@@ -62,6 +63,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			var error = new Error(result);
 			error.eresult = body.eresult;
+			this.client.disconnect();
 			this.emit('error', error);
 	}
 };
