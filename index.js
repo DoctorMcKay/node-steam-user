@@ -92,3 +92,4 @@ require('./components/logon.js');
 require('./components/sentry.js');
 require('./components/web.js');
 require('./components/notifications.js');
+require('./components/apps.js');
