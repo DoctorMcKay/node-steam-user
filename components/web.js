@@ -3,8 +3,6 @@ var SteamUser = require('../index.js');
 var Crypto = require('crypto');
 var SteamCrypto = require('steam-crypto');
 
-var Schema = require('./messages.js');
-
 SteamUser.prototype.webLogOn = function() {
 	this._send(Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonce, {});
 };

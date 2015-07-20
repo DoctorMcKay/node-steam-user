@@ -3,8 +3,6 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var fs = require('fs');
 
-var Schema = require('./protobufs.js');
-
 SteamUser.prototype.logOn = function(details) {
 	if(this.client.connected || this.client.loggedOn) {
 		throw new Error("Already connected or logged on, cannot log on again");
@@ -67,8 +65,12 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this.emit('loggedOn', body);
 
-			if(this.steamID.type == SteamID.Type.INDIVIDUAL && body.webapi_authenticate_user_nonce) {
-				this._webAuthenticate(body.webapi_authenticate_user_nonce);
+			if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
+				this._requestNotifications();
+
+				if(body.webapi_authenticate_user_nonce) {
+					this._webAuthenticate(body.webapi_authenticate_user_nonce);
+				}
 			}
 
 			break;

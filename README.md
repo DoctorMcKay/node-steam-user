@@ -113,3 +113,26 @@ Some libraries require you to provide your `sessionID`, others don't. If your li
 If you enabled `rememberPassword` in [`logOn`](#logondetails), this will be emitted when Steam sends us a new login key. This key can be passed to [`logOn`](#logondetails) as `loginKey` in lieu of a password on subsequent logins.
 
 At this time, I'm not sure if login keys expire, so to be safe you should record this somewhere (in a database, in a file, etc) and overwrite it every time the event is emitted.
+
+### newItems
+- `count` - How many new items you have (can be 0)
+
+Emitted when Steam sends a notification of new items. You can reset the count to 0 by loading your inventory page (https://steamcommunity.com/my/inventory) while logged in.
+
+### newComments
+- `count` - How many total new comments you have (can be 0)
+- `myItems` - How many of the total comments are on your content (workshop items, screenshots, your profile, etc.)
+- `discussions` - How many of the total comments are posts in subscribed discussion threads
+
+Emitted when Steam sends a notification of new comments.
+
+### tradeOffers
+- `count` - How many active received trade offers you have (can be 0)
+
+Emitted when Steam sends a notification of new trade offers.
+
+### offlineMessages
+- `count` - How many unread offline chat messages you have
+- `friends` - An array of SteamID strings for the users who have sent you unread offline chat messages
+
+Emitted when Steam sends a notification of unread offline chat messages. This will always be emitted after logon, even if you have no messages.

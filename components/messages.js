@@ -13,6 +13,13 @@ protobufs[Steam.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;
 protobufs[Steam.EMsg.ClientNewLoginKeyAccepted] = Schema.CMsgClientNewLoginKeyAccepted;
 protobufs[Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonce] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonce;
 protobufs[Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonceResponse;
+protobufs[Steam.EMsg.ClientItemAnnouncements] = Schema.CMsgClientItemAnnouncements;
+protobufs[Steam.EMsg.ClientRequestItemAnnouncements] = Schema.CMsgClientRequestItemAnnouncements;
+protobufs[Steam.EMsg.ClientCommentNotifications] = Schema.CMsgClientCommentNotifications;
+protobufs[Steam.EMsg.ClientRequestCommentNotifications] = Schema.CMsgClientRequestCommentNotifications;
+protobufs[Steam.EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotifications;
+protobufs[Steam.EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
+protobufs[Steam.EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
