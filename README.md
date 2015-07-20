@@ -62,6 +62,12 @@ Logs onto Steam. Omit the `details` object if you wish to login to an anonymous 
 
 Logs you off of Steam and closes the connection.
 
+### webLogOn()
+
+`SteamUser` will automatically log onto steamcommunity.com when a successful connection to Steam is established (as an individual user), but you can call `webLogOn()` to create a new session if your old one expires or becomes invalid.
+
+Listen for the [`webSession`](#websession) event to get your cookies.
+
 # Events
 
 ### loggedOn
@@ -92,3 +98,18 @@ user.on('steamGuard', function(domain, callback) {
 Emitted when an error occurs during logon. If this event isn't handled, the program will crash.
 
 The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
+
+### webSession
+- `sessionID` - The value of the `sessionid` cookie
+- `cookies` - An array of cookies, as `name=value` strings
+
+Emitted when a steamcommunity.com web session is successfully negotiated. This will automatically be emitted on logon and in response to [`webLogOn`](#weblogon) calls.
+
+Some libraries require you to provide your `sessionID`, others don't. If your library doesn't, you can safely ignore it.
+
+### loginKey
+- `key` - Your login key
+
+If you enabled `rememberPassword` in [`logOn`](#logondetails), this will be emitted when Steam sends us a new login key. This key can be passed to [`logOn`](#logondetails) as `loginKey` in lieu of a password on subsequent logins.
+
+At this time, I'm not sure if login keys expire, so to be safe you should record this somewhere (in a database, in a file, etc) and overwrite it every time the event is emitted.
