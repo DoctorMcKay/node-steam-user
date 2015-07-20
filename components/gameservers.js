@@ -48,3 +48,39 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
 		}));
 	});
 };
+
+SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
+	this._sendUnified("GameServers.GetServerSteamIDsByIP#1", {
+		"server_ips": ips
+	}, false, function(body) {
+		var servers = {};
+
+		(body.servers || []).forEach(function(server) {
+			servers[server.addr] = new SteamID(server.steamid.toString());
+		});
+
+		callback(servers);
+	});
+};
+
+SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
+	steamids = steamids.map(function(id) {
+		if(typeof id === 'object') {
+			return id.toString();
+		}
+
+		return new SteamID(id).getSteamID64();
+	});
+
+	this._sendUnified("GameServers.GetServerIPsBySteamID#1", {
+		"server_steamids": steamids
+	}, false, function(body) {
+		var servers = {};
+
+		(body.servers || []).forEach(function(server) {
+			servers[server.steamid.toString()] = server.addr;
+		});
+
+		callback(servers);
+	});
+};

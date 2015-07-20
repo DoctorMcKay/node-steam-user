@@ -166,6 +166,20 @@ Requests a list of game servers from the master server.
 
 Requests a list gameservers from Steam matching a given filter, along with information about the server as Steam knows it.
 
+### getServerSteamIDsByIP(ips, callback)
+- `ips` - An array of IP addresses, in `x.x.x.x:p` format
+- `callback` - Called when requested data is available
+	- `servers` - An object whose keys are IP addresses in `x.x.x.x:p` format and values are [`SteamID`](https://www.npmjs.com/package/steamid) objects
+
+Gets current SteamIDs for servers running on given addresses.
+
+### getServerIPsBySteamID(steamids, callback)
+- `steamids` - An array of [`SteamID`](https://www.npmjs.com/package/steamid) objects, or something which can parse into one (64-bit SteamID as string, Steam3 rendered format)
+- `callback` - Called when requested data is available
+	- `servers` - An object whose keys are 64-bit numeric SteamIDs and values are IP addresses in `x.x.x.x:p` format
+
+Gets current IP addresses for servers with given SteamIDs.
+
 ### getProductChanges(sinceChangenumber, callback)
 - `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
 - `callback` - Called when data is available
