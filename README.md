@@ -32,6 +32,30 @@ The `SteamClient` which is being used to communicate with Steam.
 
 An object containing options for this `SteamUser`. **Read-only**, use `setOption` or `setOptions` to change an option.
 
+### emailInfo
+
+An object containing information about your account's email address. `null` until [`emailInfo`](#emailinfo) is emitted.
+
+- `address` - Your email address
+- `validated` - `true` if your email is validated, `false` if not
+
+### limitations
+
+An object containing information about your account's limitations. `null` until [`accountLimitations`](#accountlimitations) is emitted.
+
+- `limited` - `true` if your account is [limited](https://support.steampowered.com/kb_article.php?ref=3330-IAGK-7663), `false` if not
+- `communityBanned` - `true` if your account is banned from Steam Community, `false` if not
+- `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
+- `canInviteFriends` - `true` if your account can invite friends, `false` if not
+
+### wallet
+
+An object containing information about your Steam Wallet. `null` until [`wallet`](#wallet) is emitted.
+
+- `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
+- `currency` - The ID of your wallet's currency
+- `balance` - Your account's wallet balance, in the lowest currency denomination (e.g. USD cents)
+
 # Methods
 
 ### Constructor([client][, options])
@@ -161,7 +185,7 @@ Emitted when Steam sends a notification of unread offline chat messages. This wi
 - `address` - Your account's email address
 - `validated` - A boolean value for whether or not your email address is validated
 
-Emitted on logon and when email info changes.
+Emitted on logon and when email info changes. The [`emailInfo`](#emailinfo) property will be updated after this event is emitted.
 
 ### accountLimitations
 - `limited` - `true` if your account is [limited](https://support.steampowered.com/kb_article.php?ref=3330-IAGK-7663), `false` if not
@@ -169,11 +193,11 @@ Emitted on logon and when email info changes.
 - `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
 - `canInviteFriends` - `true` if your account can invite friends, `false` if not
 
-Emitted on logon and probably when limitations change.
+Emitted on logon and probably when limitations change. The [`limitations`](#limitations) property will be updated after this event is emitted.
 
 ### wallet
 - `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
 - `currency` - The currency ID of your account's wallet
 - `balance` - Your account's current wallet balance in the lowest currency denomination (e.g. USD cents)
 
-Emitted on logon and when wallet balance changes.
+Emitted on logon and when wallet balance changes. The [`wallet`](#wallet) property will be updated after this event is emitted.

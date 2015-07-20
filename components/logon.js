@@ -8,6 +8,11 @@ SteamUser.prototype.logOn = function(details) {
 		throw new Error("Already connected or logged on, cannot log on again");
 	}
 
+	this.steamID = null;
+	this.limitations = null;
+	this.wallet = null;
+	this.emailInfo = null;
+
 	if(details !== true) {
 		// We're not logging on with saved details
 		details = details || {};

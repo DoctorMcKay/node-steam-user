@@ -11,6 +11,10 @@ function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
 	this.steamID = null;
 
+	this.limitations = null;
+	this.wallet = null;
+	this.emailInfo = null;
+
 	var appdir = new AppDirectory({
 		"appName": "node-steamuser",
 		"appAuthor": "doctormckay"
