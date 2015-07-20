@@ -116,6 +116,18 @@ To play a single game by AppID and name (the client-provided name is what is giv
 
 You can use multiple apps by providing an array of any mixture of the above formats.
 
+### getProductChanges(sinceChangenumber, callback)
+- `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
+- `callback` - Called when data is available
+	- `currentChangenumber` - The changenumber of the newest changelist
+	- `apps` - An array of objects for apps which have changed. Each object has these properties:
+		- `appid` - The AppID of the app
+		- `change_number` - The changenumber of the latest changelist in which the app has changed
+		- `needs_token` - `true` if you need an authorization token to get most details about this app, `null` if not
+	- `packages` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
+
+Requests a list of all apps/packages which have changed since a given changenumber.
+
 # Events
 
 ### loggedOn

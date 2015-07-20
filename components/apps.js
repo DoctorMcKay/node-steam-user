@@ -22,6 +22,16 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 	}));
 };
 
+SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
+	this._send(Steam.EMsg.ClientPICSChangesSinceRequest, {
+		"since_change_number": sinceChangenumber,
+		"send_app_info_changes": true,
+		"send_package_info_changes": true
+	}, function(body) {
+		callback(body.current_change_number, body.app_changes, body.package_changes);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
