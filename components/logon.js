@@ -66,6 +66,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 			this._logOnDetails.client_instance_id = body.client_instance_id;
 
 			this.emit('loggedOn', body);
+
+			if(this.steamID.type == SteamID.Type.INDIVIDUAL && body.webapi_authenticate_user_nonce) {
+				this._webAuthenticate(body.webapi_authenticate_user_nonce);
+			}
+
 			break;
 
 		case Steam.EResult.AccountLogonDenied:
@@ -99,7 +104,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientNewLoginKey] = function(body) {
-	if(this.steamID.Type == SteamID.Type.INDIVIDUAL) {
+	if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
 		this._logOnDetails.login_key = body.login_key;
 

@@ -23,6 +23,7 @@
 		"appdirectory": "^0.1.0",
 		"protobufjs": "^4.0.0",
 		"steam": "^1.0.0",
-		"bytebuffer": "^4.0.0"
+		"bytebuffer": "^4.0.0",
+		"steam-crypto": "^0.0.1"
 	}
 }
