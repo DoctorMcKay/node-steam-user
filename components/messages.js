@@ -25,8 +25,14 @@ protobufs[Steam.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
 protobufs[Steam.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
 protobufs[Steam.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate;
 protobufs[Steam.EMsg.ClientLicenseList] = Schema.CMsgClientLicenseList;
+protobufs[Steam.EMsg.ClientServiceMethod] = Schema.CMsgClientServiceMethod;
+protobufs[Steam.EMsg.ClientServiceMethodResponse] = Schema.CMsgClientServiceMethodResponse;
 protobufs[Steam.EMsg.ClientPICSChangesSinceRequest] = Schema.CMsgClientPICSChangesSinceRequest;
 protobufs[Steam.EMsg.ClientPICSChangesSinceResponse] = Schema.CMsgClientPICSChangesSinceResponse;
+
+// Unified protobufs
+protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
+protobufs['GameServers.GetServerList#1_Response'] = Schema.CGameServers_GetServerList_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
@@ -103,3 +109,22 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 };
 
 SteamUser.prototype._handlers = {};
+
+// Unified messages
+
+SteamUser.prototype._sendUnified = function(methodName, methodData, notification, callback) {
+	var cb;
+	if(callback && protobufs[methodName + '_Response']) {
+		cb = function(body) {
+			var Proto = protobufs[methodName + '_Response'];
+			callback(Proto.decode(body.serialized_method_response));
+		};
+	}
+
+	var Proto = protobufs[methodName + '_Request'];
+	this._send(Steam.EMsg.ClientServiceMethod, {
+		"method_name": methodName,
+		"serialized_method": new Proto(methodData).toBuffer(),
+		"is_notification": notification
+	}, cb);
+};
