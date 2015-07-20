@@ -41,7 +41,7 @@ SteamUser.prototype.logOn = function(details) {
 	this.client.connect();
 
 	this._onConnected = onConnected.bind(this);
-	this.client.on('connected', this._onConnected);
+	this.client.once('connected', this._onConnected);
 };
 
 function onConnected() {
