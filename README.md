@@ -68,6 +68,26 @@ Logs you off of Steam and closes the connection.
 
 Listen for the [`webSession`](#websession) event to get your cookies.
 
+### gamesPlayed(apps)
+`apps` - An array, object, string, or number (see below)
+
+Reports to Steam that you're playing or using zero or more games/apps. To exit all games/apps, use an empty array `[]`.
+
+To play a single game by AppID, use a single integer (e.g. `440`)
+
+To play a single non-Steam game by name, use a single string (e.g. `"Minecraft"`)
+
+To play a single game by AppID and name (the client-provided name is what is given to the WebAPI and mobile app), use an object of this format:
+
+```js
+{
+	"game_id": 440,
+	"game_extra_info": "Team Fortress 2"
+}
+```
+
+You can use multiple apps by providing an array of any mixture of the above formats.
+
 # Events
 
 ### loggedOn
@@ -136,3 +156,9 @@ Emitted when Steam sends a notification of new trade offers.
 - `friends` - An array of SteamID strings for the users who have sent you unread offline chat messages
 
 Emitted when Steam sends a notification of unread offline chat messages. This will always be emitted after logon, even if you have no messages.
+
+### emailInfo
+- `address` - Your account's email address
+- `validated` - A boolean value for whether or not your email address is validated
+
+Emitted on logon.

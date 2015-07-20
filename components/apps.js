@@ -18,9 +18,6 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 			return app;
 		}
 
-		return {
-			"game_id": app,
-			"game_extra_info": "Half-Life 3" // lol valve
-		};
+		return {"game_id": app};
 	}));
 };
