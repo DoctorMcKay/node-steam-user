@@ -9,6 +9,7 @@ module.exports = SteamUser;
 
 function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
+	this.steamID = null;
 
 	var appdir = new AppDirectory({
 		"appName": "node-steamuser",
@@ -21,6 +22,7 @@ function SteamUser(client, options) {
 		"dataDirectory": appdir.userData(),
 		"autoRelogin": true,
 		"singleSentryfile": false,
+		"promptSteamGuardCode": true,
 		"debug": false
 	};
 
