@@ -161,7 +161,7 @@ Emitted when Steam sends a notification of unread offline chat messages. This wi
 - `address` - Your account's email address
 - `validated` - A boolean value for whether or not your email address is validated
 
-Emitted on logon.
+Emitted on logon and when email info changes.
 
 ### accountLimitations
 - `limited` - `true` if your account is [limited](https://support.steampowered.com/kb_article.php?ref=3330-IAGK-7663), `false` if not
@@ -169,4 +169,11 @@ Emitted on logon.
 - `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
 - `canInviteFriends` - `true` if your account can invite friends, `false` if not
 
-Emitted on logon.
+Emitted on logon and probably when limitations change.
+
+### wallet
+- `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
+- `currency` - The currency ID of your account's wallet
+- `balance` - Your account's current wallet balance in the lowest currency denomination (e.g. USD cents)
+
+Emitted on logon and when wallet balance changes.
