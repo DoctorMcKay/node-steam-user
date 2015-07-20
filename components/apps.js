@@ -1,5 +1,6 @@
 var Steam = require('steam');
 var SteamUser = require('../index.js');
+var ByteBuffer = require('bytebuffer');
 
 SteamUser.prototype.gamesPlayed = function(apps) {
 	if(!(apps instanceof Array)) {
@@ -20,6 +21,15 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 
 		return {"game_id": app};
 	}));
+};
+
+SteamUser.prototype.getPlayerCount = function(appid, callback) {
+	var buffer = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
+	buffer.writeUint64(appid).flip();
+
+	this._send(Steam.EMsg.ClientGetNumberOfCurrentPlayers, buffer, function(body) {
+		callback(body.readUint32(), body.readUint32());
+	});
 };
 
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {

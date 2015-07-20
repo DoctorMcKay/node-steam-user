@@ -39,8 +39,8 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 	if(Proto) {
 		header.proto = {};
 		body = new Proto(body).toBuffer();
-	} else {
-		body = ByteBuffer.wrap(body);
+	} else if(ByteBuffer.isByteBuffer(body)) {
+		body = body.toBuffer();
 	}
 
 	var cb = null;
@@ -48,6 +48,8 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 		cb = function(header, body) {
 			if(protobufs[header.msg]) {
 				body = protobufs[header.msg].decode(body);
+			} else {
+				body = ByteBuffer.wrap(body);
 			}
 
 			callback(body);

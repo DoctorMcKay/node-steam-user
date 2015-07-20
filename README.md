@@ -116,6 +116,14 @@ To play a single game by AppID and name (the client-provided name is what is giv
 
 You can use multiple apps by providing an array of any mixture of the above formats.
 
+### getPlayerCount(appid, callback)
+- `appid` - The AppID of the app for which you'd like the current player/user count (use `0` to get current logged-in Steam user count)
+- `callback` - Called when the requested data is available
+	- `result` - A value from `Steam.EResult`
+	- `players` - How many Steam users are currently playing/using the app
+
+Requests a count of how many Steam users are currently playing/using an app.
+
 ### getProductChanges(sinceChangenumber, callback)
 - `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
 - `callback` - Called when data is available
