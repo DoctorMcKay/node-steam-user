@@ -124,6 +124,32 @@ You can use multiple apps by providing an array of any mixture of the above form
 
 Requests a count of how many Steam users are currently playing/using an app.
 
+### getServerList(filter, limit, callback)
+- `filter` - A master server [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter)
+- `limit` - How many servers should be returned, at maximum. Hard limit is 5000.
+- `callback` - Called when the requested data is available
+	- `servers` - An array of objects containing server data
+		- `addr` - The server's IP address in `x.x.x.x:p` format
+		- `gameport` - The port the server is running on for game clients
+		- `specport` - The port the server is running on for spectator clients (`null` for none)
+		- `steamid` - A [`SteamID`](https://www.npmjs.com/package/steamid) object containing the server's SteamID
+		- `name` - The server's hostname
+		- `appid` - The AppID of the game which the server is serving
+		- `gamedir` - The directory of the game which the server is serving
+		- `version` - The version of the game which the server is serving
+		- `product` - The product name of the game which the server is serving
+		- `region` - The region code for where the server is located
+		- `players` - How many people are currently on this server
+		- `max_players` - How many people can be on the server at once
+		- `bots` - How many CPU players are currently on this server
+		- `map` - The name of the map which the server is currently running
+		- `secure` - `true` if the server is VAC-secure, `false` if not
+		- `dedicated` - `true` if the server is dedicated, `false` if listen
+		- `os` - `w` if the server is running on Windows, `l` for Linux
+		- `gametype` - The server's tags, separated by commas
+
+Requests a list gameservers from Steam matching a given filter, along with information about the server as Steam knows it.
+
 ### getProductChanges(sinceChangenumber, callback)
 - `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
 - `callback` - Called when data is available

@@ -99,3 +99,4 @@ require('./components/web.js');
 require('./components/notifications.js');
 require('./components/apps.js');
 require('./components/account.js');
+require('./components/gameservers.js');
