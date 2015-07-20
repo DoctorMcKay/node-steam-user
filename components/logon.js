@@ -24,7 +24,7 @@ SteamUser.prototype.logOn = function(details) {
 	}
 
 	// Sentry file handling
-	var sentryFilename = require('./sentry.js').getSentryFilename();
+	var sentryFilename = this._getSentryFilename();
 	if(this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
 		var hash = require('crypto').createHash('sha1');
 		hash.update(fs.readFileSync(sentryFilename));
