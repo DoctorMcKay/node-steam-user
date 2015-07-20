@@ -162,3 +162,11 @@ Emitted when Steam sends a notification of unread offline chat messages. This wi
 - `validated` - A boolean value for whether or not your email address is validated
 
 Emitted on logon.
+
+### accountLimitations
+- `limited` - `true` if your account is [limited](https://support.steampowered.com/kb_article.php?ref=3330-IAGK-7663), `false` if not
+- `communityBanned` - `true` if your account is banned from Steam Community, `false` if not
+- `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
+- `canInviteFriends` - `true` if your account can invite friends, `false` if not
+
+Emitted on logon.

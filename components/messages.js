@@ -22,6 +22,7 @@ protobufs[Steam.EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOffl
 protobufs[Steam.EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
 protobufs[Steam.EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
 protobufs[Steam.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
+protobufs[Steam.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
