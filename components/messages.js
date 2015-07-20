@@ -7,6 +7,8 @@ var Schema = require('./protobufs.js');
 var protobufs = {};
 protobufs[Steam.EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[Steam.EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
+protobufs[Steam.EMsg.ClientUpdateMachineAuth] = Schema.CMsgClientUpdateMachineAuth;
+protobufs[Steam.EMsg.ClientUpdateMachineAuthResponse] = Schema.CMsgClientUpdateMachineAuthResponse;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
@@ -38,7 +40,7 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 	this.client.send(header, body, cb);
 };
 
-SteamUser.prototype._handleMessage = function(header, body) {
+SteamUser.prototype._handleMessage = function(header, body, callback) {
 	var msgName = header.msg;
 
 	if(this.options.debug) {
@@ -62,7 +64,22 @@ SteamUser.prototype._handleMessage = function(header, body) {
 	}
 
 	this.emit('debug', 'Handled message: ' + msgName);
-	this._handlers[header.msg].call(this, body);
+
+	var cb = null;
+	if(callback) {
+		cb = function(emsg, body) {
+			var header = {"msg": emsg};
+
+			if(protobufs[emsg]) {
+				header.proto = {};
+				body = new protobufs[emsg](body).toBuffer();
+			}
+
+			callback(header, body);
+		}
+	}
+
+	this._handlers[header.msg].call(this, body, cb);
 };
 
 SteamUser.prototype._handlers = {};

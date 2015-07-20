@@ -1,6 +1,7 @@
 var Steam = require('steam');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
+var fs = require('fs');
 
 var Schema = require('./protobufs.js');
 
@@ -20,6 +21,13 @@ SteamUser.prototype.logOn = function(options) {
 			"should_remember_password": !!options.rememberPassword,
 			"protocol_version": 65575
 		};
+	}
+
+	// Sentry file handling
+	if(this._logOnDetails.account_name && fs.existsSync(this.options.dataDirectory + '/sentry.' + this._logOnDetails.account_name + '.bin')) {
+		var hash = require('crypto').createHash('sha1');
+		hash.update(fs.readFileSync(this.options.dataDirectory + '/sentry.' + this._logOnDetails.account_name + '.bin'));
+		this._logOnDetails.sha_sentryfile = hash.digest();
 	}
 
 	var sid = new SteamID();
