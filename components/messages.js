@@ -27,6 +27,8 @@ protobufs[Steam.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate
 protobufs[Steam.EMsg.ClientLicenseList] = Schema.CMsgClientLicenseList;
 protobufs[Steam.EMsg.ClientServiceMethod] = Schema.CMsgClientServiceMethod;
 protobufs[Steam.EMsg.ClientServiceMethodResponse] = Schema.CMsgClientServiceMethodResponse;
+protobufs[Steam.EMsg.ClientGMSServerQuery] = Schema.CMsgClientGMSServerQuery;
+protobufs[Steam.EMsg.GMSClientServerQueryResponse] = Schema.CMsgGMSClientServerQueryResponse;
 protobufs[Steam.EMsg.ClientPICSChangesSinceRequest] = Schema.CMsgClientPICSChangesSinceRequest;
 protobufs[Steam.EMsg.ClientPICSChangesSinceResponse] = Schema.CMsgClientPICSChangesSinceResponse;
 

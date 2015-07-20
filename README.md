@@ -124,6 +124,22 @@ You can use multiple apps by providing an array of any mixture of the above form
 
 Requests a count of how many Steam users are currently playing/using an app.
 
+### serverQuery(conditions, callback)
+- `conditions` - A [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter) or an object containing one or more of the following properties:
+	- `app_id` - The AppID of the game for which you want servers
+	- `geo_location_ip` - The IP address of the querying client, used for geolocation (in `x.x.x.x` format)
+	- `region_code` - The [region code](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Region_codes) where you want servers
+	- `filter_text` - A [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter)
+	- `max_servers` - Maximum number of servers to return in this response (default and hard limit 5000)
+- `callback` - Called when the response is available
+	- `err` - If an error occurred, this is an `Error` object. Otherwise, it's `null`.
+	- `servers` - An array of objects containing server data
+		- `ip` - The server's IP in `x.x.x.x` format
+		- `port` - The server's game port
+		- `players` - How many authenticated players are on this server (the Steam server browser will use this value if the gameserver itself reports more players and doesn't report itself as full, to prevent inflated player counts)
+
+Requests a list of game servers from the master server.
+
 ### getServerList(filter, limit, callback)
 - `filter` - A master server [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter)
 - `limit` - How many servers should be returned, at maximum. Hard limit is 5000.
@@ -138,7 +154,7 @@ Requests a count of how many Steam users are currently playing/using an app.
 		- `gamedir` - The directory of the game which the server is serving
 		- `version` - The version of the game which the server is serving
 		- `product` - The product name of the game which the server is serving
-		- `region` - The region code for where the server is located
+		- `region` - The [region code](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Region_codes) for where the server is located
 		- `players` - How many people are currently on this server
 		- `max_players` - How many people can be on the server at once
 		- `bots` - How many CPU players are currently on this server
