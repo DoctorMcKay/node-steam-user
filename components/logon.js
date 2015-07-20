@@ -5,20 +5,20 @@ var fs = require('fs');
 
 var Schema = require('./protobufs.js');
 
-SteamUser.prototype.logOn = function(options) {
+SteamUser.prototype.logOn = function(details) {
 	if(this.client.connected || this.client.loggedOn) {
 		throw new Error("Already connected or logged on, cannot log on again");
 	}
 
-	if(options !== true) {
+	if(details !== true) {
 		// We're not logging on with saved details
-		options = options || {};
+		details = details || {};
 
 		this._logOnDetails = {
-			"account_name": options.accountName,
-			"password": options.password,
-			"login_key": options.loginKey,
-			"should_remember_password": !!options.rememberPassword,
+			"account_name": details.accountName,
+			"password": details.password,
+			"login_key": details.loginKey,
+			"should_remember_password": !!details.rememberPassword,
 			"protocol_version": 65575
 		};
 	}
@@ -49,6 +49,8 @@ function onConnected() {
 }
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function() {
+	// TODO: Send logoff if logged on, throw error if not connected
+	this.steamID = null;
 	this.client.removeListener('connected', this._onConnected);
 	this.client.disconnect();
 };
