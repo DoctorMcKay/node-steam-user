@@ -24,6 +24,7 @@ protobufs[Steam.EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
 protobufs[Steam.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
 protobufs[Steam.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
 protobufs[Steam.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate;
+protobufs[Steam.EMsg.ClientLicenseList] = Schema.CMsgClientLicenseList;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 

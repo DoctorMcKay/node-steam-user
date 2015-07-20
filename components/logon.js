@@ -12,6 +12,7 @@ SteamUser.prototype.logOn = function(details) {
 	this.limitations = null;
 	this.wallet = null;
 	this.emailInfo = null;
+	this.licenses = null;
 
 	if(details !== true) {
 		// We're not logging on with saved details

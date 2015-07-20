@@ -14,6 +14,7 @@ function SteamUser(client, options) {
 	this.limitations = null;
 	this.wallet = null;
 	this.emailInfo = null;
+	this.licenses = null;
 
 	var appdir = new AppDirectory({
 		"appName": "node-steamuser",

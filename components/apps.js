@@ -21,3 +21,10 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 		return {"game_id": app};
 	}));
 };
+
+// Handlers
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
+	this.emit('licenses', body.licenses);
+	this.licenses = body.licenses;
+};
