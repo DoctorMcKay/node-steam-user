@@ -1,11 +1,11 @@
 {
-	"name": "steam-client-user",
+	"name": "steam-user",
 	"version": "1.0.0",
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
 	"keywords": ["steam", "steam client", "steam user"],
-	"homepage": "https://github.com/DoctorMcKay/node-steam-client-user",
+	"homepage": "https://github.com/DoctorMcKay/node-steam-user",
 	"bugs": {
-		"url": "https://github.com/DoctorMcKay/node-steam-client-user/issues"
+		"url": "https://github.com/DoctorMcKay/node-steam-user/issues"
 	},
 	"license": "MIT",
 	"author": {
@@ -15,7 +15,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DoctorMcKay/node-steam-client-user.git"
+		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
 	"dependencies": {
 		"steamid": "^0.3.0",
