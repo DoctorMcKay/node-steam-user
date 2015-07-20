@@ -20,7 +20,8 @@ function SteamUser(client, options) {
 	var defaultOptions = {
 		"dataDirectory": appdir.userData(),
 		"autoRelogin": true,
-		"singleSentryfile": false
+		"singleSentryfile": false,
+		"debug": false
 	};
 
 	for(var i in defaultOptions) {

@@ -39,8 +39,19 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 };
 
 SteamUser.prototype._handleMessage = function(header, body) {
+	var msgName = header.msg;
+
+	if(this.options.debug) {
+		for(var i in Steam.EMsg) {
+			if(Steam.EMsg.hasOwnProperty(i) && Steam.EMsg[i] == header.msg) {
+				msgName = i;
+				break;
+			}
+		}
+	}
+
 	if(!this._handlers[header.msg]) {
-		this.emit('debug', 'Unhandled message: ' + header.msg);
+		this.emit('debug', 'Unhandled message: ' + msgName);
 		return;
 	}
 
@@ -50,7 +61,7 @@ SteamUser.prototype._handleMessage = function(header, body) {
 		body = ByteBuffer.wrap(body);
 	}
 
-	this.emit('debug', 'Handled message: ' + header.msg);
+	this.emit('debug', 'Handled message: ' + msgName);
 	this._handlers[header.msg].call(this, body);
 };
 
