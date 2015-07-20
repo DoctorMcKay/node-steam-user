@@ -24,9 +24,10 @@ SteamUser.prototype.logOn = function(options) {
 	}
 
 	// Sentry file handling
-	if(this._logOnDetails.account_name && fs.existsSync(this.options.dataDirectory + '/sentry.' + this._logOnDetails.account_name + '.bin')) {
+	var sentryFilename = require('./sentry.js').getSentryFilename();
+	if(this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
 		var hash = require('crypto').createHash('sha1');
-		hash.update(fs.readFileSync(this.options.dataDirectory + '/sentry.' + this._logOnDetails.account_name + '.bin'));
+		hash.update(fs.readFileSync(sentryFilename));
 		this._logOnDetails.sha_sentryfile = hash.digest();
 	}
 
