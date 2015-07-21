@@ -12,13 +12,33 @@ It's designed to be a self-contained module which provides all the functionality
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
 
-- `dataDirectory` - Controls where the Steam server list and sentry files are written. Defaults to a platform-specific user data directory.
+### dataDirectory
+
+Controls where the Steam server list and sentry files are written. Defaults to a platform-specific user data directory.
 	- On Windows, this is %localappdata%\doctormckay\node-steamuser
 	- On Mac, this is ~/Library/Application Support/node-steamuser
 	- On Linux, this is $XDG_DATA_HOME/node-steamuser, or ~/.local/share/node-steamuser if $XDG_DATA_HOME isn't defined
-- `autoRelogin` - A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected for any reason (except an explicit logoff). Defaults to `true`.
-- `singleSentryfile` - A boolean which controls whether or not `SteamUser` will use a single sentry file for all accounts. If off, a file named `sentry.accountname.bin` will be saved for each account. If on, a file named `sentry.bin` will be used for all accounts. Defaults to `false`.
-- `promptSteamGuardCode` - A boolean which controls whether or not `SteamUser` will automatically prompt for Steam Guard codes when necessary from `stdin`. Defaults to `true`.
+
+### autoRelogin
+
+A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected for any reason (except an explicit logoff).
+
+Defaults to `true`.
+
+### singleSentryfile
+
+A boolean which controls whether or not `SteamUser` will use a single sentry file for all accounts.
+
+If off, a file named `sentry.accountname.bin` will be saved for each account.
+If on, a file named `sentry.bin` will be used for all accounts.
+
+Defaults to `false`.
+
+### promptSteamGuardCode
+
+A boolean which controls whether or not `SteamUser` will automatically prompt for Steam Guard codes when necessary from `stdin`.
+
+Defaults to `true`.
 
 # Properties
 
