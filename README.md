@@ -192,6 +192,23 @@ Requests a list of game servers from the master server.
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
+### getProductInfo(apps, packages, callback)
+- `apps` - Either an array of AppIDs, or an array of objects containing `appid` and `access_token` properties
+- `packages` - Either an array of PackageIDs, or an array of objects containing `packageid` and `access_token` properties
+- `callback` - Called when requested data is available
+	- `apps` - An object whose keys are AppIDs and whose values are objects
+		- `changenumber` - The changenumber of the latest changelist in which this app changed
+		- `missingToken` - `true` if you need to provide an authorization token to get more details about this app
+		- `appinfo` - An object whose structure is identical to the output of `app_info_print` in the [Steam console](steam://nav/console)
+	- `packages` - An object whose keys are PackageIDs and whose values are objects
+		- `changenumber` - The changenumber of the latest changelist in which this package changed
+		- `missingToken` - `true` if you need to provide an authorization token to get more details about this package
+		- `packageinfo` - An object whose structure is identcial to the output of `package_info_print` in the [Steam console](steam://nav/console)
+	- `unknownApps` - An array of input AppIDs which don't exist
+	- `unknownPackages` - An array of input PackageIDs which don't exist
+
+**Works when anonymous.** Requests details about one or more apps or packages.
+
 # Events
 
 ### loggedOn

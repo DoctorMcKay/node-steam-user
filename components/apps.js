@@ -1,6 +1,8 @@
 var Steam = require('steam');
 var SteamUser = require('../index.js');
 var ByteBuffer = require('bytebuffer');
+var VDF = require('vdf');
+var BinaryKVParser = require('binarykvparser');
 
 SteamUser.prototype.gamesPlayed = function(apps) {
 	if(!(apps instanceof Array)) {
@@ -39,6 +41,89 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 		"send_package_info_changes": true
 	}, function(body) {
 		callback(body.current_change_number, body.app_changes, body.package_changes);
+	});
+};
+
+SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
+	// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
+	var appids = [];
+	var packageids = [];
+	var response = {
+		"apps": {},
+		"packages": {},
+		"unknownApps": [],
+		"unknownPackages": []
+	};
+
+	apps = apps.map(function(app) {
+		if(typeof app === 'object') {
+			appids.push(app.appid);
+			return app;
+		} else {
+			appids.push(app);
+			return {"appid": app};
+		}
+	});
+
+	packages = packages.map(function(pkg) {
+		if(typeof pkg === 'object') {
+			packageids.push(pkg.packageid);
+			return pkg;
+		} else {
+			packageids.push(pkg);
+			return {"packageid": pkg};
+		}
+	});
+
+	this._send(Steam.EMsg.ClientPICSProductInfoRequest, {
+		"apps": apps,
+		"packages": packages
+	}, function(body) {
+		(body.unknown_appids || []).forEach(function(appid) {
+			response.unknownApps.push(appid);
+			var index = appids.indexOf(appid);
+			if(index != -1) {
+				appids.splice(index, 1);
+			}
+		});
+
+		(body.unknown_packageids || []).forEach(function(packageid) {
+			response.unknownPackages.push(appid);
+			var index = packageids.indexOf(appid);
+			if(index != -1) {
+				packageids.splice(index, 1);
+			}
+		});
+
+		(body.apps || []).forEach(function(app) {
+			response.apps[app.appid] = {
+				"changenumber": app.change_number,
+				"missingToken": !!app.missing_token,
+				"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+			};
+
+			var index = appids.indexOf(app.appid);
+			if(index != -1) {
+				appids.splice(index, 1);
+			}
+		});
+
+		(body.packages || []).forEach(function(pkg) {
+			response.packages[pkg.packageid] = {
+				"changenumber": pkg.change_number,
+				"missingToken": !!pkg.missing_token,
+				"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
+			};
+
+			var index = packageids.indexOf(pkg.packageid);
+			if(index != -1) {
+				packageids.splice(index, 1);
+			}
+		});
+
+		if(appids.length === 0 && packageids.length === 0) {
+			callback(response.apps, response.packages, response.unknownApps, response.unknownPackages);
+		}
 	});
 };
 

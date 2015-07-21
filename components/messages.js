@@ -31,6 +31,8 @@ protobufs[Steam.EMsg.ClientGMSServerQuery] = Schema.CMsgClientGMSServerQuery;
 protobufs[Steam.EMsg.GMSClientServerQueryResponse] = Schema.CMsgGMSClientServerQueryResponse;
 protobufs[Steam.EMsg.ClientPICSChangesSinceRequest] = Schema.CMsgClientPICSChangesSinceRequest;
 protobufs[Steam.EMsg.ClientPICSChangesSinceResponse] = Schema.CMsgClientPICSChangesSinceResponse;
+protobufs[Steam.EMsg.ClientPICSProductInfoRequest] = Schema.CMsgClientPICSProductInfoRequest;
+protobufs[Steam.EMsg.ClientPICSProductInfoResponse] = Schema.CMsgClientPICSProductInfoResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
