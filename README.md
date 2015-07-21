@@ -3,9 +3,10 @@
 
 SteamUser is a handler module for [node-steam](https://github.com/seishun/node-steam) version 1.0.0 or greater.
 
-It's designed to be a self-contained module which provides all the functionality expected of a Steam user client.
+It's designed to be a self-contained module which provides all the functionality expected of a Steam user client, with a few exceptions:
 
-**This is currently a work in progress and is incomplete.**
+- To do friends-related stuff, use [SteamFriends](https://github.com/seishun/node-steam/blob/master/lib/handlers/friends)
+- To do trading-related stuff, use [SteamTrading](https://github.com/seishun/node-steam/blob/master/lib/handlers/trading)
 
 # Options
 
