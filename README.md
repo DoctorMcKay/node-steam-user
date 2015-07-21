@@ -86,7 +86,7 @@ Changes the value of an [option](#options).
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 
-Logs onto Steam. Omit the `details` object if you wish to login to an anonymous user account.
+Logs onto Steam. The `SteamClient` should **not** be connected. Omit the `details` object if you wish to login to an anonymous user account.
 
 ### logOff()
 
