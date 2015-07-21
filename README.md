@@ -17,7 +17,7 @@ There are a number of options which can control the behavior of the `SteamUser` 
 	- On Linux, this is ~/.local/share/node-steamuser
 - `autoRelogin` - A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected for any reason (except an explicit logoff). Defaults to `true`.
 - `singleSentryfile` - A boolean which controls whether or not `SteamUser` will use a single sentry file for all accounts. If off, a file named `sentry.accountname.bin` will be saved for each account. If on, a file named `sentry.bin` will be used for all accounts. Defaults to `false`.
-- `promptSteamGuardCode` - A boolean which controls whether or not `SteamUser` will automatically prompt for Steam Guard codes when necessary from `stdin`.
+- `promptSteamGuardCode` - A boolean which controls whether or not `SteamUser` will automatically prompt for Steam Guard codes when necessary from `stdin`. Defaults to `true`.
 
 # Properties
 
