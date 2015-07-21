@@ -14,6 +14,14 @@ SteamUser.prototype.logOn = function(details) {
 	this.emailInfo = null;
 	this.licenses = null;
 
+	if(fs.existsSync(this.options.dataDirectory + '/servers.json')) {
+		try {
+			Steam.servers = JSON.parse(fs.readFileSync(this.options.dataDirectory + '/servers.json'));
+		} catch(e) {
+			// We don't care
+		}
+	}
+
 	if(details !== true) {
 		// We're not logging on with saved details
 		details = details || {};

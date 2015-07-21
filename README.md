@@ -66,7 +66,7 @@ An array containing license data for the packages which your Steam account owns.
 - `client` - An optional `SteamClient` to use to connect to Steam. If not provided, one will be created automatically.
 - `options` - An optional object containing zero or more [options](#options) to set for this `SteamUser`.
 
-Constructs a new `SteamUser`.
+Constructs a new `SteamUser`. If you allow `SteamUser` to create its own `SteamClient`, then `SteamUser` will automatically save and reload the CM server list.
 
 ### setOption(option, value)
 - `option` - The name of the option to set

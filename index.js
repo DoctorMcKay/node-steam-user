@@ -54,6 +54,10 @@ function SteamUser(client, options) {
 			self.emit('error', e);
 		}
 	});
+
+	this.client.on('servers', function(servers) {
+		fs.writeFile(self.options.dataDirectory + '/servers.json', JSON.stringify(servers));
+	});
 }
 
 SteamUser.prototype.setOption = function(option, value) {
