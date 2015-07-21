@@ -19,7 +19,6 @@
 	},
 	"dependencies": {
 		"steamid": "^0.3.0",
-		"request": "^2.58.0",
 		"appdirectory": "^0.1.0",
 		"protobufjs": "^4.0.0",
 		"steam": "^1.0.0",
