@@ -7,6 +7,7 @@ var Schema = require('./protobufs.js');
 var protobufs = {};
 protobufs[Steam.EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[Steam.EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
+protobufs[Steam.EMsg.ClientLogOff] = Schema.CMsgClientLogOff;
 protobufs[Steam.EMsg.ClientUpdateMachineAuth] = Schema.CMsgClientUpdateMachineAuth;
 protobufs[Steam.EMsg.ClientUpdateMachineAuthResponse] = Schema.CMsgClientUpdateMachineAuthResponse;
 protobufs[Steam.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;

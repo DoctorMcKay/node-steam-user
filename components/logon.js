@@ -61,7 +61,11 @@ function onConnected() {
 }
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function() {
-	// TODO: Send logoff if logged on, throw error if not connected
+	if(!this.client.connected) {
+		throw new Error("Cannot disconnect from Steam as we're currently not connected.");
+	}
+
+	this._send(Steam.EMsg.ClientLogOff, {});
 	this.steamID = null;
 	this.client.removeListener('connected', this._onConnected);
 	this.client.disconnect();
