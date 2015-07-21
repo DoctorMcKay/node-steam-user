@@ -164,21 +164,21 @@ Requests a list of game servers from the master server.
 		- `os` - `w` if the server is running on Windows, `l` for Linux
 		- `gametype` - The server's tags, separated by commas
 
-Requests a list gameservers from Steam matching a given filter, along with information about the server as Steam knows it.
+**Works when anonymous.** Requests a list gameservers from Steam matching a given filter, along with information about the server as Steam knows it.
 
 ### getServerSteamIDsByIP(ips, callback)
 - `ips` - An array of IP addresses, in `x.x.x.x:p` format
 - `callback` - Called when requested data is available
 	- `servers` - An object whose keys are IP addresses in `x.x.x.x:p` format and values are [`SteamID`](https://www.npmjs.com/package/steamid) objects
 
-Gets current SteamIDs for servers running on given addresses.
+**Works when anonymous.** Gets current SteamIDs for servers running on given addresses.
 
 ### getServerIPsBySteamID(steamids, callback)
 - `steamids` - An array of [`SteamID`](https://www.npmjs.com/package/steamid) objects, or something which can parse into one (64-bit SteamID as string, Steam3 rendered format)
 - `callback` - Called when requested data is available
 	- `servers` - An object whose keys are 64-bit numeric SteamIDs and values are IP addresses in `x.x.x.x:p` format
 
-Gets current IP addresses for servers with given SteamIDs.
+**Works when anonymous.** Gets current IP addresses for servers with given SteamIDs.
 
 ### getProductChanges(sinceChangenumber, callback)
 - `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
@@ -190,7 +190,7 @@ Gets current IP addresses for servers with given SteamIDs.
 		- `needs_token` - `true` if you need an authorization token to get most details about this app, `null` if not
 	- `packages` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
 
-Requests a list of all apps/packages which have changed since a given changenumber.
+**Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
 # Events
 
