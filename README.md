@@ -18,9 +18,9 @@ Controls where the Steam server list and sentry files are written.
 
 Defaults to a platform-specific user data directory.
 
-- On Windows, this is %localappdata%\doctormckay\node-steamuser
-- On Mac, this is ~/Library/Application Support/node-steamuser
-- On Linux, this is $XDG_DATA_HOME/node-steamuser, or ~/.local/share/node-steamuser if $XDG_DATA_HOME isn't defined
+- On Windows, this is `%localappdata%\doctormckay\node-steamuser`
+- On Mac, this is `~/Library/Application Support/node-steamuser`
+- On Linux, this is `$XDG_DATA_HOME/node-steamuser`, or `~/.local/share/node-steamuser` if `$XDG_DATA_HOME` isn't defined or is empty
 
 ### autoRelogin
 
