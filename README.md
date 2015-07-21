@@ -187,7 +187,7 @@ Requests a list of game servers from the master server.
 	- `apps` - An array of objects for apps which have changed. Each object has these properties:
 		- `appid` - The AppID of the app
 		- `change_number` - The changenumber of the latest changelist in which the app has changed
-		- `needs_token` - `true` if you need an authorization token to get most details about this app, `null` if not
+		- `needs_token` - `true` if you need an access token to get most details about this app, `null` if not
 	- `packages` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
@@ -198,16 +198,26 @@ Requests a list of game servers from the master server.
 - `callback` - Called when requested data is available
 	- `apps` - An object whose keys are AppIDs and whose values are objects
 		- `changenumber` - The changenumber of the latest changelist in which this app changed
-		- `missingToken` - `true` if you need to provide an authorization token to get more details about this app
+		- `missingToken` - `true` if you need to provide an access token to get more details about this app
 		- `appinfo` - An object whose structure is identical to the output of `app_info_print` in the [Steam console](steam://nav/console)
-	- `packages` - An object whose keys are PackageIDs and whose values are objects
-		- `changenumber` - The changenumber of the latest changelist in which this package changed
-		- `missingToken` - `true` if you need to provide an authorization token to get more details about this package
-		- `packageinfo` - An object whose structure is identcial to the output of `package_info_print` in the [Steam console](steam://nav/console)
+	- `packages` - An object whose keys are PackageIDs and whose values are objects. Each object has the same properties as the `apps` array, except `appinfo` is `packageinfo`.
 	- `unknownApps` - An array of input AppIDs which don't exist
 	- `unknownPackages` - An array of input PackageIDs which don't exist
 
 **Works when anonymous.** Requests details about one or more apps or packages.
+
+### getProductAccessToken(apps, packages, callback)
+- `apps` - An array of AppIDs
+- `packages` - An array of PackageIDs
+- `callback` - Called when requested data is available
+	- `apps` - An object whose keys are AppIDs and whose values are access tokens
+	- `packages` - An object whose keys are PackageIDs and whose values are access tokens
+	- `appDeniedTokens` - An array of AppIDs for which Steam denied you an access token
+	- `packageDeniedTokens` - An array of PackageIDs for which Steam denied you an access token
+
+**Works when anonymous.** Requests access tokens for one or more apps or packages. These access tokens can be used with [`getProductInfo`](#productinfoapps-packages-callback).
+
+Access tokens are global. That is, everyone who has access to an app receives the same token. It's unknown at this time if tokens expire.
 
 # Events
 

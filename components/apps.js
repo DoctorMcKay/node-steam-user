@@ -127,6 +127,26 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 	});
 };
 
+SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
+	this._send(Steam.EMsg.ClientPICSAccessTokenRequest, {
+		"packageids": packages,
+		"appids": apps
+	}, function(body) {
+		var appTokens = {};
+		var packageTokens = {};
+
+		(body.app_access_tokens || []).forEach(function(app) {
+			appTokens[app.appid] = app.access_token;
+		});
+
+		(body.package_access_tokens || []).forEach(function(pkg) {
+			packageTokens[pkg.packageid] = pkg.access_token;
+		});
+
+		callback(appTokens, packageTokens, body.app_denied_tokens || [], body.package_denied_tokens || []);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
