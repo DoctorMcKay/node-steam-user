@@ -14,7 +14,10 @@ There are a number of options which can control the behavior of the `SteamUser` 
 
 ### dataDirectory
 
-Controls where the Steam server list and sentry files are written. Defaults to a platform-specific user data directory.
+Controls where the Steam server list and sentry files are written.
+
+Defaults to a platform-specific user data directory.
+
 	- On Windows, this is %localappdata%\doctormckay\node-steamuser
 	- On Mac, this is ~/Library/Application Support/node-steamuser
 	- On Linux, this is $XDG_DATA_HOME/node-steamuser, or ~/.local/share/node-steamuser if $XDG_DATA_HOME isn't defined
