@@ -88,6 +88,8 @@ A boolean which controls whether or not `SteamUser` will automatically construct
 
 See the [`friends`](#friends) and [`trading`](#trading) properties.
 
+Defaults to `true`.
+
 # Properties
 
 ### client
