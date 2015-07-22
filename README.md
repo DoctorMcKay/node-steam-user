@@ -78,7 +78,7 @@ An object containing information about your account's limitations. `null` until 
 An object containing information about your Steam Wallet. `null` until [`wallet`](#wallet-1) is emitted.
 
 - `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
-- `currency` - The ID of your wallet's currency
+- `currency` - The ID of your wallet's currency, from [`Steam.ECurrencyCode`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/enums.steamd#L658-L672)
 - `balance` - Your account's wallet balance, in the lowest currency denomination (e.g. USD cents)
 
 ### licenses
