@@ -16,9 +16,23 @@ Static properties, or properties attached directly to `SteamUser`, are accessed 
 
 The `node-steam` module installation used by `SteamUser`. You can use this in place of `require('steam')` if you'd like to avoid duplicate installations.
 
+Example of using `EResult`:
+
+```js
+var SteamUser = require('steam-user');
+var ok = SteamUser.Steam.EResult.OK;
+```
+
 ### ECurrencyCode
 
 An up-to-date enum of Steam's many currencies. [View here](https://github.com/DoctorMcKay/node-steam-user/blob/bde87d94bcafd870bd460694d036d1c88121da87/components/utility.js#L3-L37)
+
+Example:
+
+```js
+var SteamUser = require('steam-user');
+var usd = SteamUser.Steam.ECurrencyCode.USD;
+```
 
 # Static Methods
 
