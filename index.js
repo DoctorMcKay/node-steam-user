@@ -7,6 +7,8 @@ require('util').inherits(SteamUser, require('events').EventEmitter);
 
 module.exports = SteamUser;
 
+SteamUser.Steam = Steam;
+
 function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
 	this.steamID = null;
