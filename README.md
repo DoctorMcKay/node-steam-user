@@ -3,10 +3,7 @@
 
 SteamUser is a handler module for [node-steam](https://github.com/seishun/node-steam) version 1.0.0 or greater.
 
-It's designed to be a self-contained module which provides all the functionality expected of a Steam user client, with a few exceptions:
-
-- To do friends-related stuff, use [SteamFriends](https://github.com/seishun/node-steam/blob/master/lib/handlers/friends)
-- To do trading-related stuff, use [SteamTrading](https://github.com/seishun/node-steam/blob/master/lib/handlers/trading)
+It's designed to be a self-contained module which provides all the functionality expected of a Steam user client.
 
 # Static Properties
 
@@ -85,6 +82,12 @@ A boolean which controls whether or not `SteamUser` will automatically prompt fo
 
 Defaults to `true`.
 
+### createHandlers
+
+A boolean which controls whether or not `SteamUser` will automatically construct instances of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends) and [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading).
+
+See the [`friends`](#friends) and [`trading`](#trading) properties.
+
 # Properties
 
 ### client
@@ -98,6 +101,14 @@ The `SteamClient` which is being used to communicate with Steam.
 ### options
 
 An object containing options for this `SteamUser`. **Read-only**, use `setOption` or `setOptions` to change an option.
+
+### friends
+
+If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends). Not defined otherwise.
+
+### trading
+
+If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading). Not defined otherwise.
 
 ### emailInfo
 
