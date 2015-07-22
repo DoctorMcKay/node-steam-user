@@ -106,6 +106,12 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			break;
 
+		case Steam.EResult.ServiceUnavailable:
+		case Steam.EResult.TryAnotherCM:
+			this.disconnect();
+			this.logOn(true);
+			break;
+
 		default:
 			var result = body.eresult;
 
