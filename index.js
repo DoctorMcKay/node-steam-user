@@ -30,6 +30,7 @@ function SteamUser(client, options) {
 		"autoRelogin": true,
 		"singleSentryfile": false,
 		"promptSteamGuardCode": true,
+		"createHandlers": true,
 		"debug": false
 	};
 
@@ -41,6 +42,11 @@ function SteamUser(client, options) {
 		if(typeof this.options[i] === 'undefined') {
 			this.options[i] = defaultOptions[i];
 		}
+	}
+
+	if(this.options.createHandlers) {
+		this.friends = new Steam.SteamFriends(this.client);
+		this.trading = new Steam.SteamTrading(this.client);
 	}
 
 	checkDirExists(this.options.dataDirectory);
