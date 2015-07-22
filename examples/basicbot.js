@@ -35,3 +35,7 @@ client.on('newItems', function(count) {
 client.on('emailInfo', function(address, validated) {
 	console.log("Our email address is " + address + " and it's " + (validated ? "validated" : "not validated"));
 });
+
+client.on('wallet', function(hasWallet, currency, balance) {
+	console.log("Our wallet balance is " + SteamUser.formatCurrency(balance, currency));
+});

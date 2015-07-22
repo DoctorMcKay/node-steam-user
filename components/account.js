@@ -22,10 +22,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientIsLimitedAccount] = function(body
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientWalletInfoUpdate] = function(body) {
-	this.emit('wallet', body.has_wallet, body.currency, body.balance);
+	this.emit('wallet', body.has_wallet, body.currency, body.balance / 100);
 	this.wallet = {
 		"hasWallet": body.has_wallet,
 		"currency": body.currency,
-		"balance": body.balance
+		"balance": body.balance / 100
 	};
 };
