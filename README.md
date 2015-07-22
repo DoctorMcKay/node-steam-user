@@ -8,6 +8,30 @@ It's designed to be a self-contained module which provides all the functionality
 - To do friends-related stuff, use [SteamFriends](https://github.com/seishun/node-steam/blob/master/lib/handlers/friends)
 - To do trading-related stuff, use [SteamTrading](https://github.com/seishun/node-steam/blob/master/lib/handlers/trading)
 
+# Static Properties
+
+Static properties, or properties attached directly to `SteamUser`, are accessed on the root module and not on instantiated handler instances.
+
+### ECurrencyCode
+
+An up-to-date enum of Steam's many currencies. [View here](https://github.com/DoctorMcKay/node-steam-user/blob/bde87d94bcafd870bd460694d036d1c88121da87/components/utility.js#L3-L37)
+
+# Static Methods
+
+Static methods, or functions attached directly to `SteamUser`, are called on the root module and not on instantiated handler instances.
+
+### formatCurrency(amount, currency)
+- `amount` - The amount of the currency
+- `currency` - The currency code value in the [`ECurrencyCode`](#ecurrencycode) enum
+
+Formats a currency value and returns a string. For example:
+
+```js
+console.log(SteamUser.formatCurrency(12.34, SteamUser.ECurrencyCode.USD)); // $12.34
+console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ¥ 12345
+console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45€
+```
+
 # Options
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
@@ -78,8 +102,8 @@ An object containing information about your account's limitations. `null` until 
 An object containing information about your Steam Wallet. `null` until [`wallet`](#wallet-1) is emitted.
 
 - `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
-- `currency` - The ID of your wallet's currency, from [`Steam.ECurrencyCode`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/enums.steamd#L658-L672)
-- `balance` - Your account's wallet balance, in the lowest currency denomination (e.g. USD cents)
+- `currency` - The currency ID of your account's wallet (the enum of currencies is available as `SteamUser.ECurrencyCode`)
+- `balance` - Your account's current wallet balance
 
 ### licenses
 
@@ -329,8 +353,8 @@ Emitted on logon and probably when limitations change. The [`limitations`](#limi
 
 ### wallet
 - `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
-- `currency` - The currency ID of your account's wallet
-- `balance` - Your account's current wallet balance in the lowest currency denomination (e.g. USD cents)
+- `currency` - The currency ID of your account's wallet (the enum of currencies is available as `SteamUser.ECurrencyCode`)
+- `balance` - Your account's current wallet balance
 
 Emitted on logon and when wallet balance changes. The [`wallet`](#wallet) property will be updated after this event is emitted.
 
