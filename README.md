@@ -28,7 +28,7 @@ Example:
 
 ```js
 var SteamUser = require('steam-user');
-var usd = SteamUser.Steam.ECurrencyCode.USD;
+var usd = SteamUser.ECurrencyCode.USD;
 ```
 
 # Static Methods
