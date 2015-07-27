@@ -1,5 +1,19 @@
 var Steam = require('steam');
 var SteamUser = require('../index.js');
+var SteamID = require('steamid');
+
+SteamUser.prototype.createAccount = function(accountName, password, email, question, answer, callback) {
+	this._send(Steam.EMsg.ClientCreateAccountProto, {
+		"account_name": accountName,
+		"password": password,
+		"email": email,
+		"question": question,
+		"answer": answer,
+		"launcher": 0
+	}, function(body) {
+		callback(body.eresult, body.steamid ? new SteamID(body.steamid.toString()) : null);
+	});
+};
 
 // Handlers
 

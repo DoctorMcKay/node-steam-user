@@ -36,6 +36,8 @@ protobufs[Steam.EMsg.ClientPICSProductInfoRequest] = Schema.CMsgClientPICSProduc
 protobufs[Steam.EMsg.ClientPICSProductInfoResponse] = Schema.CMsgClientPICSProductInfoResponse;
 protobufs[Steam.EMsg.ClientPICSAccessTokenRequest] = Schema.CMsgClientPICSAccessTokenRequest;
 protobufs[Steam.EMsg.ClientPICSAccessTokenResponse] = Schema.CMsgClientPICSAccessTokenResponse;
+protobufs[Steam.EMsg.ClientCreateAccountProto] = Schema.CMsgClientCreateAccount;
+protobufs[Steam.EMsg.ClientCreateAccountProtoResponse] = Schema.CMsgClientCreateAccountResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
