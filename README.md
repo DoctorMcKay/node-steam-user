@@ -176,6 +176,18 @@ Logs you off of Steam and closes the connection.
 
 Listen for the [`webSession`](#websession) event to get your cookies.
 
+### createAccount(accountName, password, email, question, answer, callback)
+- `accountName` - The username of your new account
+- `password` - The password for your new account
+- `email` - The contact email for your new account
+- `question` - A security question (string) for your new account
+- `answer` - The answer for your new account's security question
+- `callback` - Called when the account is either created or an error occurs
+	- `result` - A value from `Steam.EResult`. This will be `Steam.EResult.OK` if the account was created successfully, `Steam.EResult.DuplicateName` if there is already an account with that username, or something else on another error
+	- `steamid` - If successful, this is a `SteamID` object containing the new account's SteamID
+
+Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user to use this.
+
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
 
