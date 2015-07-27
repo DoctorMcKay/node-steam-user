@@ -31,7 +31,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFSOfflineMessageNotification] = f
 	var self = this;
 	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map(function(accountid) {
 		var sid = new SteamID();
-		sid.universe = self.universe;
+		sid.universe = self.steamID.universe;
 		sid.type = SteamID.Type.INDIVIDUAL;
 		sid.instance = SteamID.Instance.DESKTOP;
 		sid.accountid = accountid;
