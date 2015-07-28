@@ -48,6 +48,35 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientIsLimitedAccount] = function(body
 	};
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientVACBanStatus] = function(body) {
+	var appids = [];
+	
+	var numBans = body.readUint32();
+	
+	var rangeStart, rangeEnd, j;
+	for(var i = 0; i < numBans; i++) {
+		rangeStart = body.readUint32();
+		rangeEnd = body.readUint32();
+		
+		if(rangeEnd < rangeStart) {
+			j = rangeEnd;
+			rangeEnd = rangeStart;
+			rangeStart = j;
+		}
+		
+		for(j = rangeStart; j <= rangeEnd; j++) {
+			appids.push(j);
+		}
+	}
+	
+	this.emit('vacBans', numBans, appids);
+	
+	this.vac = {
+		"numBans": numBans,
+		"appids": appids
+	};
+};
+
 SteamUser.prototype._handlers[Steam.EMsg.ClientWalletInfoUpdate] = function(body) {
 	this.emit('wallet', body.has_wallet, body.currency, body.balance / 100);
 	this.wallet = {

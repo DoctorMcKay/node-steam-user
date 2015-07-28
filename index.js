@@ -14,6 +14,7 @@ function SteamUser(client, options) {
 	this.steamID = null;
 
 	this.limitations = null;
+	this.vac = null;
 	this.wallet = null;
 	this.emailInfo = null;
 	this.licenses = null;

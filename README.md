@@ -128,6 +128,13 @@ An object containing information about your account's limitations. `null` until 
 - `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
 - `canInviteFriends` - `true` if your account can invite friends, `false` if not
 
+### vac
+
+An object containing information about your account's VAC bans. `null` until [`vacBans`](#vacbans) is emitted.
+
+- `numBans` - How many bans are registered on your account
+- `appids` - An array of AppIDs from which you're banned. Since each ban affects a range of AppIDs, some of the AppIDs in this array may not exist.
+
 ### wallet
 
 An object containing information about your Steam Wallet. `null` until [`wallet`](#wallet-1) is emitted.
@@ -403,6 +410,12 @@ Emitted on logon and when email info changes. The [`emailInfo`](#emailinfo) prop
 - `canInviteFriends` - `true` if your account can invite friends, `false` if not
 
 Emitted on logon and probably when limitations change. The [`limitations`](#limitations) property will be updated after this event is emitted.
+
+### vacBans
+- `numBans` - How many bans your account has
+- `appids` - The AppIDs from which you're banned. Since each ban affects a range of AppIDs, some of the AppIDs in this array may not exist.
+
+Emitted on logon and probably when you get banned/unbanned. The [`vac`](#vac) property will be updated after this event is emitted.
 
 ### wallet
 - `hasWallet` - `true` if your account has a Steam Wallet, `false` if not
