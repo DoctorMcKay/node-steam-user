@@ -11,7 +11,7 @@ Submitting an issue?
 	- A descriptive title helps for one. Titles of just "Error" or "It doesn't work" really don't help.
 	- Please describe what you're trying to do, what actually happens, and what you can do to reproduce the problem.
 	- If you have an error message or a crash, please include the full text of the error message and the stack trace.
-	- Include the relevant snippet of your code. Wrap it in `\`\`\`js /* code */ \`\`\`` and GitHub [will format it nicely for you](https://help.github.com/articles/github-flavored-markdown/#syntax-highlighting).
+	- Include the relevant snippet of your code. Wrap it in \`\`\`js /* code */ \`\`\` and GitHub [will format it nicely for you](https://help.github.com/articles/github-flavored-markdown/#syntax-highlighting).
 - If you're **requesting a feature**, please be descriptive and understanding.
 	- A good title makes a difference. Please briefly describe what you're requesting in the title.
 	- Be descriptive in the issue body, too. Say what you want to do, and ideally what the method should be named.
