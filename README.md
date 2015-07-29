@@ -164,6 +164,11 @@ Changes the value of an [option](#options).
 ### setOptions(options)
 - `options` - An object containing zero or more [options](#options).
 
+### setSentry(sentry)
+- `sentry` - A Buffer containing the binary sentry file, or `null` to unset the set sentry
+
+If you aren't using `dataDirectory` or you just want to provide your own sentry file, you can do it using this method. When you log on, `SteamUser` will use this sentry file.
+
 ### logOn([details])
 - `details` - An object containing details for this logon
 	- `accountName` - If logging into a user account, the account's name
@@ -358,6 +363,11 @@ user.on('steamGuard', function(domain, callback) {
 Emitted when an error occurs during logon. If this event isn't handled, the program will crash.
 
 The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
+
+### sentry
+- `sentry` - A Buffer containing your new sentry file
+
+Emitted when Steam sends us a new sentry file. By default, `SteamUser` will automatically save and reuse this sentry file for subsequent logins, but if you wish you may handle it yourself (see [`setSentry`](#setsentrysentry)).
 
 ### webSession
 - `sessionID` - The value of the `sessionid` cookie

@@ -2,6 +2,10 @@ var Steam = require('steam');
 var SteamUser = require('../index.js');
 var fs = require('fs');
 
+SteamUser.protoype.setSentry = function(sentry) {
+	this._sentry = sentry;
+};
+
 SteamUser.prototype._getSentryFilename = function() {
 	if(this.options.singleSentryfile) {
 		return this.options.dataDirectory + '/sentry.bin';
