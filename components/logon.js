@@ -14,7 +14,7 @@ SteamUser.prototype.logOn = function(details) {
 	this.emailInfo = null;
 	this.licenses = null;
 
-	if(fs.existsSync(this.options.dataDirectory + '/servers.json')) {
+	if(this.options.dataDirectory && fs.existsSync(this.options.dataDirectory + '/servers.json')) {
 		try {
 			Steam.servers = JSON.parse(fs.readFileSync(this.options.dataDirectory + '/servers.json'));
 		} catch(e) {
@@ -36,11 +36,13 @@ SteamUser.prototype.logOn = function(details) {
 	}
 
 	// Sentry file handling
-	var sentryFilename = this._getSentryFilename();
-	if(this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
-		var hash = require('crypto').createHash('sha1');
-		hash.update(fs.readFileSync(sentryFilename));
-		this._logOnDetails.sha_sentryfile = hash.digest();
+	if(this.options.dataDirectory) {
+		var sentryFilename = this._getSentryFilename();
+		if (this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
+			var hash = require('crypto').createHash('sha1');
+			hash.update(fs.readFileSync(sentryFilename));
+			this._logOnDetails.sha_sentryfile = hash.digest();
+		}
 	}
 
 	var sid = new SteamID();

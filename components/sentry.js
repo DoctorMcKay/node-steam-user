@@ -14,7 +14,11 @@ SteamUser.prototype._getSentryFilename = function() {
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
 	// TODO: Handle partial updates
-	fs.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
+	if(this.options.dataDirectory) {
+		fs.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
+	}
+
+	this.emit('sentry', body.bytes.toBuffer());
 
 	// Accept the sentry
 	var hash = require('crypto').createHash('sha1');

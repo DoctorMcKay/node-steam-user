@@ -53,7 +53,7 @@ There are a number of options which can control the behavior of the `SteamUser` 
 
 ### dataDirectory
 
-Controls where the Steam server list and sentry files are written.
+Controls where the Steam server list and sentry files are written. If `null`, no data will be automatically stored.
 
 Defaults to a platform-specific user data directory.
 
