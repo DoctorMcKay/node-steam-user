@@ -2,7 +2,7 @@ var Steam = require('steam');
 var SteamUser = require('../index.js');
 var fs = require('fs');
 
-SteamUser.protoype.setSentry = function(sentry) {
+SteamUser.prototype.setSentry = function(sentry) {
 	this._sentry = sentry;
 };
 
