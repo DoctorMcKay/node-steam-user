@@ -165,9 +165,11 @@ Changes the value of an [option](#options).
 - `options` - An object containing zero or more [options](#options).
 
 ### setSentry(sentry)
-- `sentry` - A Buffer containing the binary sentry file, or `null` to unset the set sentry
+- `sentry` - A Buffer containing the binary sentry file, binary SHA1 hash, or `null` to unset the set sentry
 
 If you aren't using `dataDirectory` or you just want to provide your own sentry file, you can do it using this method. When you log on, `SteamUser` will use this sentry file.
+
+You can provide either an entire sentryfile (preferred), or a Buffer containing the binary SHA1 hash of your sentryfile (e.g. the output of the `sentry` event in node-steam 0.6.x).
 
 ### logOn([details])
 - `details` - An object containing details for this logon

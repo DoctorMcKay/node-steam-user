@@ -37,10 +37,14 @@ SteamUser.prototype.logOn = function(details) {
 
 	// Sentry file handling
 	var hash;
-	if(this._logOnDetails.account_name && this._sentry) {
+	if(this._logOnDetails.account_name && this._sentry && this._sentry.length > 20) {
+		// It's a full sentryfile
 		hash = require('crypto').createHash('sha1');
 		hash.update(this._sentry);
 		this._logOnDetails.sha_sentryfile = hash.digest();
+	} else if(this._logOnDetails.account_name && this._sentry) {
+		// It's a hash of a sentryfile
+		this._logOnDetails.sha_sentryfile = this._sentry;
 	} else if(this._logOnDetails.account_name && this.options.dataDirectory) {
 		var sentryFilename = this._getSentryFilename();
 		if (this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
