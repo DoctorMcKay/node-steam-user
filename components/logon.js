@@ -119,8 +119,13 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 		case Steam.EResult.ServiceUnavailable:
 		case Steam.EResult.TryAnotherCM:
+			this.emit('debug', 'Log on response: ' + (body.eresult == Steam.EResult.ServiceUnavailable ? "ServiceUnavailable" : "TryAnotherCM"));
 			this.disconnect();
-			this.logOn(true);
+
+			setTimeout(function() {
+				this.logOn(true);
+			}, 1000);
+
 			break;
 
 		default:
