@@ -85,6 +85,7 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function() {
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
+	var self = this;
 	switch(body.eresult) {
 		case Steam.EResult.OK:
 			this.steamID = new SteamID(body.client_supplied_steamid.toString());
@@ -106,7 +107,6 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 		case Steam.EResult.AccountLogonDenied:
 		case Steam.EResult.AccountLoginDeniedNeedTwoFactor:
-			var self = this;
 			this.disconnect();
 
 			var isEmailCode = body.eresult == Steam.EResult.AccountLogonDenied;
@@ -123,7 +123,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 			this.disconnect();
 
 			setTimeout(function() {
-				this.logOn(true);
+				self.logOn(true);
 			}, 1000);
 
 			break;
