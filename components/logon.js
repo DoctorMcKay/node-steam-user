@@ -54,6 +54,10 @@ SteamUser.prototype.logOn = function(details) {
 		}
 	}
 
+	if(this._logOnDetails.sha_sentryfile && this._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
+		throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
+	}
+
 	var sid = new SteamID();
 	sid.universe = SteamID.Universe.PUBLIC;
 	sid.type = this._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
