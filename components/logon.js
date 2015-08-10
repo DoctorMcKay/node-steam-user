@@ -2,6 +2,7 @@ var Steam = require('steam');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var fs = require('fs');
+var Crypto = require('crypto');
 
 SteamUser.prototype.logOn = function(details) {
 	if(this.client.connected || this.client.loggedOn) {
@@ -13,14 +14,6 @@ SteamUser.prototype.logOn = function(details) {
 	this.wallet = null;
 	this.emailInfo = null;
 	this.licenses = null;
-
-	if(this.options.dataDirectory && fs.existsSync(this.options.dataDirectory + '/servers.json')) {
-		try {
-			Steam.servers = JSON.parse(fs.readFileSync(this.options.dataDirectory + '/servers.json'));
-		} catch(e) {
-			// We don't care
-		}
-	}
 
 	if(details !== true) {
 		// We're not logging on with saved details
@@ -35,40 +28,72 @@ SteamUser.prototype.logOn = function(details) {
 		};
 	}
 
+	var self = this;
+
 	// Sentry file handling
 	var hash;
 	if(this._logOnDetails.account_name && this._sentry && this._sentry.length > 20) {
 		// It's a full sentryfile
-		hash = require('crypto').createHash('sha1');
+		hash = Crypto.createHash('sha1');
 		hash.update(this._sentry);
 		this._logOnDetails.sha_sentryfile = hash.digest();
+		doLogin();
 	} else if(this._logOnDetails.account_name && this._sentry) {
 		// It's a hash of a sentryfile
 		this._logOnDetails.sha_sentryfile = this._sentry;
+		doLogin();
 	} else if(this._logOnDetails.account_name && this.options.dataDirectory) {
 		var sentryFilename = this._getSentryFilename();
-		if (this._logOnDetails.account_name && fs.existsSync(sentryFilename)) {
-			hash = require('crypto').createHash('sha1');
-			hash.update(fs.readFileSync(sentryFilename));
-			this._logOnDetails.sha_sentryfile = hash.digest();
+		fs.readFile(sentryFilename, function(err, file) {
+			if(err) {
+				// Guess the file doesn't exist
+				doLogin();
+				return;
+			}
+
+			hash = Crypto.createHash('sha1');
+			hash.update(file);
+			self._logOnDetails.sha_sentryfile = hash.digest();
+			doLogin();
+		});
+	}
+
+	function doLogin() {
+		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
+			throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
+		}
+
+		// See if we have a servers list
+		if(self.options.dataDirectory) {
+			fs.readFile(self.options.dataDirectory + '/servers.json', function(err, file) {
+				if(!err) {
+					try {
+						Steam.servers = JSON.parse(file);
+					} catch(e) {
+						// We don't care
+					}
+				}
+
+				doLogin2();
+			});
+		} else {
+			doLogin2();
+		}
+
+		function doLogin2() {
+			var sid = new SteamID();
+			sid.universe = SteamID.Universe.PUBLIC;
+			sid.type = self._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
+			sid.instance = self._logOnDetails.account_name ? SteamID.Instance.DESKTOP : SteamID.Instance.ALL;
+			sid.accountid = 0;
+			self.client.steamID = sid.getSteamID64();
+
+			self.client.connect();
+
+			self._onConnected = onConnected.bind(self);
+			self.client.once('connected', self._onConnected);
 		}
 	}
-
-	if(this._logOnDetails.sha_sentryfile && this._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
-		throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
-	}
-
-	var sid = new SteamID();
-	sid.universe = SteamID.Universe.PUBLIC;
-	sid.type = this._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
-	sid.instance = this._logOnDetails.account_name ? SteamID.Instance.DESKTOP : SteamID.Instance.ALL;
-	sid.accountid = 0;
-	this.client.steamID = sid.getSteamID64();
-
-	this.client.connect();
-
-	this._onConnected = onConnected.bind(this);
-	this.client.once('connected', this._onConnected);
 };
 
 function onConnected() {
