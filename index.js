@@ -63,7 +63,7 @@ function SteamUser(client, options) {
 		}
 
 		if(self.options.autoRelogin) {
-			self.emit('disconnected', Steam.EResult.RemoteDisconnect, false);
+			self.emit('disconnected', Steam.EResult.RemoteDisconnect);
 			self.steamID = null;
 			self.logOn(true);
 		} else {

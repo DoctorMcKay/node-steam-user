@@ -188,19 +188,21 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 
 	this.emit('debug', 'Logged off: ' + msg);
 
-	if(this.options.autoRelogin) {
-		// It's fatal if it's not for one of the following reasons
-		var fatal = ([Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(body.eresult) == -1);
-		this.emit('disconnected', body.eresult, fatal);
-		this.disconnect(true);
+	var fatal = true;
 
-		if(!fatal) {
-			this.logOn(true);
-		}
-	} else {
+	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(body.eresult) != -1) {
+		fatal = false;
+	}
+
+	if(fatal) {
 		var e = new Error(msg);
 		e.eresult = body.eresult;
 		this.emit('error', e);
+		this.steamID = null;
+	} else {
+		this.emit('disconnected', body.eresult);
+		this.disconnect(true);
+		this.logOn(true);
 	}
 };
 
