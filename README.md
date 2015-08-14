@@ -172,7 +172,9 @@ Changes the value of an [option](#options).
 ### setSentry(sentry)
 - `sentry` - A Buffer containing the binary sentry file, binary SHA1 hash, or `null` to unset the set sentry
 
-If you aren't using `dataDirectory` or you just want to provide your own sentry file, you can do it using this method. When you log on, `SteamUser` will use this sentry file.
+If you aren't using `dataDirectory` or you just want to provide your own sentry file, you can do it using this method.
+
+You should call this before calling `logOn`. When you log on, `SteamUser` will use this sentry file.
 
 You can provide either an entire sentryfile (preferred), or a Buffer containing the binary SHA1 hash of your sentryfile (e.g. the output of the `sentry` event in node-steam 0.6.x).
 
@@ -182,6 +184,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `password` - If logging into an account without a login key, the account's password
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
+	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 
 Logs onto Steam. The `SteamClient` should **not** be connected. Omit the `details` object if you wish to login to an anonymous user account.
 
