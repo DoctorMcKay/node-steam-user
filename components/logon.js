@@ -177,6 +177,31 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 	}
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
+	var msg = body.eresult;
+	for(var i in Steam.EResult) {
+		if(Steam.EResult.hasOwnProperty(i) && Steam.EResult[i] == body.eresult) {
+			msg = i;
+			break;
+		}
+	}
+
+	this.emit('debug', 'Logged off: ' + msg);
+
+	if(this.options.autoRelogin) {
+		// It's fatal if it's not for one of the following reasons
+		var fatal = ([Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(body.eresult) == -1);
+		this.emit('disconnected', body.eresult, fatal);
+		this.disconnect(true);
+
+		if(!fatal) {
+			this.logOn(true);
+		}
+	} else {
+		this.emit('error', new Error(msg));
+	}
+};
+
 SteamUser.prototype._handlers[Steam.EMsg.ClientNewLoginKey] = function(body) {
 	if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
