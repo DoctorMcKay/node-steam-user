@@ -50,6 +50,12 @@ protobufs['GameServers.GetServerIPsBySteamID#1_Response'] = Schema.CGameServers_
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
 SteamUser.prototype._send = function(emsg, body, callback) {
+	if((!this.steamID || !this.client.connected) && [Steam.EMsg.ChannelEncryptRequest, Steam.EMsg.ChannelEncryptResponse, Steam.EMsg.ChannelEncryptResult, Steam.EMsg.ClientLogon].indexOf(emsg) == -1) {
+		// We're disconnected, drop it
+		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
+		return;
+	}
+
 	var header = {
 		"msg": emsg
 	};
