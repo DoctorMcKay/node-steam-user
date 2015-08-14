@@ -24,6 +24,7 @@ SteamUser.prototype.logOn = function(details) {
 			"password": details.password,
 			"login_key": details.loginKey,
 			"should_remember_password": !!details.rememberPassword,
+			"obfustucated_private_ip": details.logonID || 0,
 			"protocol_version": 65575
 		};
 	}
