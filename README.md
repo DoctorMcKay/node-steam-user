@@ -68,7 +68,7 @@ Defaults to a platform-specific user data directory.
 
 ### autoRelogin
 
-A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected for any reason (except an explicit logoff).
+A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected due to Steam going down.
 
 Defaults to `true`.
 
@@ -367,9 +367,16 @@ user.on('steamGuard', function(domain, callback) {
 ### error
 - `e` - An `Error` object
 
-Emitted when an error occurs during logon. If this event isn't handled, the program will crash.
+Emitted when an error occurs during logon. Also emitted if we're disconnected and `autoRelogin` is either disabled, or it's a fatal disconnect.
+
+If this event isn't handled, the program will crash.
 
 The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
+
+### disconnected
+- `eresult` - A value from the `Steam.EResult` enum
+
+Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will continually retry connection and will either emit `loggedOn` when logged back on, or `error` if a fatal logon error is experienced.
 
 ### sentry
 - `sentry` - A Buffer containing your new sentry file
