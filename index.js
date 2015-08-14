@@ -67,6 +67,7 @@ function SteamUser(client, options) {
 			self.steamID = null;
 			self.logOn(true);
 		} else {
+			e.eresult = Steam.EResult.RemoteDisconnect;
 			self.emit('error', e);
 			self.steamID = null;
 		}

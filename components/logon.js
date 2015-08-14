@@ -198,7 +198,9 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 			this.logOn(true);
 		}
 	} else {
-		this.emit('error', new Error(msg));
+		var e = new Error(msg);
+		e.eresult = body.eresult;
+		this.emit('error', e);
 	}
 };
 
