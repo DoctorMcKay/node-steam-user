@@ -140,7 +140,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 		case Steam.EResult.AccountLogonDenied:
 		case Steam.EResult.AccountLoginDeniedNeedTwoFactor:
-			this.disconnect();
+			this.disconnect(true);
 
 			var isEmailCode = body.eresult == Steam.EResult.AccountLogonDenied;
 			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, function(code) {
@@ -153,7 +153,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 		case Steam.EResult.ServiceUnavailable:
 		case Steam.EResult.TryAnotherCM:
 			this.emit('debug', 'Log on response: ' + (body.eresult == Steam.EResult.ServiceUnavailable ? "ServiceUnavailable" : "TryAnotherCM"));
-			this.disconnect();
+			this.disconnect(true);
 
 			setTimeout(function() {
 				self.logOn(true);
@@ -173,7 +173,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			var error = new Error(result);
 			error.eresult = body.eresult;
-			this.disconnect();
+			this.disconnect(true);
 			this.emit('error', error);
 	}
 };
@@ -198,6 +198,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 	if(fatal) {
 		var e = new Error(msg);
 		e.eresult = body.eresult;
+
+		var steamID = this.steamID;
+		this.disconnect(true);
+
+		this.steamID = steamID;
 		this.emit('error', e);
 		this.steamID = null;
 	} else {
