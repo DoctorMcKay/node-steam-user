@@ -374,12 +374,14 @@ Emitted when an error occurs during logon. Also emitted if we're disconnected an
 
 If this event isn't handled, the program will crash.
 
-The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
+The `SteamUser` object's `steamID` property will still be defined when this is emitted. The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
 
 ### disconnected
 - `eresult` - A value from the `Steam.EResult` enum
 
 Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will continually retry connection and will either emit `loggedOn` when logged back on, or `error` if a fatal logon error is experienced.
+
+The `SteamUser` object's `steamID` property will still be defined when this is emitted.
 
 ### sentry
 - `sentry` - A Buffer containing your new sentry file
