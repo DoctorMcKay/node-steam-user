@@ -343,6 +343,37 @@ Requests a list of game servers from the master server.
 
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
 
+### setPersona(state[, name])
+- `state` - A value from `EPersonaState`
+- `name` - Optional. Your new profile name
+
+Changes our online status, and optionally your profile name. You need to call this after you logon or else you'll show up as offline.
+
+### addFriend(steamID)
+- `steamID` - The SteamID of the user you want to add as a friend, as a `SteamID` object or a string that can parse into one
+
+Sends a friend request to the user with the specified `SteamID`. If they've already sent you a friend request, accepts it.
+
+### removeFriend(steamID)
+- `steamID` - The SteamID of the user you want to remove from your friends list, as a `SteamID` object or a string that can parse into one
+
+Removed a specified user from your friends list.
+
+### blockUser(steamID, block[, callback])
+- `steamID` - The SteamID of the user you want to (un)block, as a `SteamID` object or a string that can parse into one
+- `block` - `true` to block communication with them, `false` to unblock
+- `callback` - Optional. Called when the request completes
+	- `eresult` - A value from the `EResult` enum
+
+Blocks or unblocks communication with a specified user.
+
+### getSteamLevels(steamids, callback)
+- `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
+- `callback` - Called when the requested data is available.
+	- `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are Steam levels
+
+Gets the Steam Level for one or more Steam users (who do not have to be on your friends list).
+
 ### trade(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 
