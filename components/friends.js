@@ -141,7 +141,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 	var self = this;
 	(body.friends || []).forEach(function(relationship) {
-		var sid = new SteamID(relationship.ulfriendid);
+		var sid = new SteamID(relationship.ulfriendid.toString());
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
 		if(body.bincremental) {
