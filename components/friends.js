@@ -56,7 +56,7 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 		}
 	});
 
-	this._client.send(Steam.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, function(body) {
+	this._send(Steam.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, function(body) {
 		var output = {};
 
 		var sid = new SteamID();
@@ -64,7 +64,7 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 		sid.type = SteamID.Type.INDIVIDUAL;
 		sid.instance = SteamID.Instance.DESKTOP;
 
-		body.friends.forEach(function(user) {
+		(body.friends || []).forEach(function(user) {
 			sid.accountid = user.accountid;
 			output[sid.getSteamID64()] = user.level;
 		});

@@ -49,7 +49,7 @@ protobufs[Steam.EMsg.ClientChangeStatus] = Schema.CMsgClientChangeStatus;
 protobufs[Steam.EMsg.ClientAddFriend] = Schema.CMsgClientAddFriend;
 protobufs[Steam.EMsg.ClientRemoveFriend] = Schema.CMsgClientRemoveFriend;
 protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevels] = Schema.CMsgClientFSGetFriendsSteamLevels;
-protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevelsRespone] = Schema.CMsgClientFSGetFriendsSteamLevelsRespone;
+protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevelsResponse] = Schema.CMsgClientFSGetFriendsSteamLevelsResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
