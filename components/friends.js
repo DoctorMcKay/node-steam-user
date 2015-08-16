@@ -32,12 +32,12 @@ SteamUser.prototype.blockUser = function(steamID, block, callback) {
 		steamID = new SteamID(steamID);
 	}
 
-	var buffer = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(this.steamID.getSteamID64());
 	buffer.writeUint64(steamID.getSteamID64());
 	buffer.writeUint8(block ? 1 : 0);
 
-	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer, function(body) {
+	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
 		if(!callback) {
 			return; // ignore
 		}
