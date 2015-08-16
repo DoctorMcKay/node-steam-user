@@ -528,7 +528,7 @@ user.on('tradeRequest', function(name, steamID, accept) {
 	- `defaultEmailChangeProbationDays`
 	- `emailChangeProbationDays`
 
-Emitted when someone responds to our trade request. Possibly also emitted when someone cancels their outstanding trade request to us (untested, but this would be consistent with TF2's behavior).
+Emitted when someone responds to our trade request. Also emitted with response `EEconTradeResponse.Cancel` when someone cancels their outstanding trade request to us.
 
 ### tradeStarted
 - `steamID` - The SteamID of your trade partner, as a `SteamID` object

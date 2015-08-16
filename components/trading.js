@@ -30,7 +30,7 @@ SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitiateTradeProposed] = fu
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitateTradeResult] = function(body) {
+SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitiateTradeResult] = function(body) {
 	// Is trade ID meaningful here?
 	this.emit('tradeResponse', new SteamID(body.other_steamid.toString()), body.response, {
 		"steamguardRequiredDays": body.steamguard_required_days,
