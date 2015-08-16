@@ -84,9 +84,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 
 		if(!self.users[sid64]) {
 			self.users[sid64] = user;
-			if(typeof self.users[sid64].gameid === 'object') {
-				self.users[sid64].gameid = self.users[sid64].gameid.toNumber();
-			}
+			processUser(self.users[sid64]);
 		}
 
 		self.emit('user', sid, user);
@@ -94,13 +92,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 
 		for(var i in user) {
 			if(user.hasOwnProperty(i)) {
-				if(i == 'gameid' && typeof user[i] === 'object') {
-					self.users[sid][i] = user[i].toNumber();
-				} else {
-					self.users[sid][i] = user[i];
-				}
+				self.users[sid][i] = user[i];
 			}
 		}
+
+		processUser(user);
 	});
 };
 
@@ -165,3 +161,17 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 		this.emit('groupList');
 	}
 };
+
+function processUser(user) {
+	if(typeof user.gameid === 'object' && user.gameid !== null) {
+		user.gameid = user.gameid.toNumber();
+	}
+
+	if(typeof user.last_logoff === 'number') {
+		user.last_logoff = new Date(user.last_logoff * 1000);
+	}
+
+	if(typeof user.last_logon === 'number') {
+		user.last_logon = new Date(user.last_logon * 1000);
+	}
+}
