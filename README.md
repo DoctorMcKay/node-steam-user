@@ -343,6 +343,16 @@ Requests a list of game servers from the master server.
 
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
 
+### trade(steamID)
+- `steamID` - Either a `SteamID` object or a string which can parse into one
+
+Send a trade request to the specified user. Listen for the [`tradeResponse`](#traderesponse) event for their response.
+
+### cancelTradeRequest(steamID)
+- `steamID` - Either a `SteamID` object or a string which can parse into one
+
+Cancels your outstanding trade request to the specified user.
+
 # Events
 
 ### loggedOn
@@ -461,3 +471,38 @@ Contains the license data for the packages which your Steam account owns. To see
 Emitted on logon and when licenses change. The [`licenses`](#licenses) property will be updated after this event is emitted.
 
 This isn't emitted for anonymous accounts. However, all anonymous user accounts have a license for package 17906 automatically.
+
+### tradeRequest
+- `name` - The name of the user who sent the request (TODO: see if this is actually filled in)
+- `steamID` - The SteamID of the user who sent the request, as a `SteamID` object
+- `respond` - A function which you should call to either accept or decline the request
+	- `accept` - `true` to accept the request, `false` to decline it
+
+Emitted when someone sends us a trade request. Example usage:
+
+```js
+user.on('tradeRequest', function(name, steamID, accept) {
+	console.log("Incoming trade request from " + name + " " + steamID.getSteam3RenderedID() + ", accepting");
+	respond(true);
+}
+```
+
+### tradeResponse
+- `steamID` - The SteamID of the other user, as a `SteamID` object
+- `response` - A value from the `EEconTradeResponse` enum
+- `restrictions` - An object containing the following properties (of which any or all could be undefined)
+	- `steamguardRequiredDays`
+	- `newDeviceCooldownDays`
+	- `defaultPasswordResetProbationDays`
+	- `passwordResetProbationDays`
+	- `defaultEmailChangeProbationDays`
+	- `emailChangeProbationDays`
+
+Emitted when someone responds to our trade request. Possibly also emitted when someone cancels their outstanding trade request to us (untested, but this would be consistent with TF2's behavior).
+
+### tradeStarted
+- `steamID` - The SteamID of your trade partner, as a `SteamID` object
+
+Emitted when a new trade session has started (either as a result of someone accepting a Steam trade request, an in-game (TF2) trade request, or something else).
+
+The trade is now available at http://steamcommunity.com/trade/<SteamID>, and can be automated with [`node-steam-trade`](https://github.com/seishun/node-steam-trade).
