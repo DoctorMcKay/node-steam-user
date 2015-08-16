@@ -152,6 +152,26 @@ An object containing information about your Steam Wallet. `null` until [`wallet`
 
 An array containing license data for the packages which your Steam account owns. `null` until [`licenses`](#licenses-1) is emitted.
 
+### users
+
+An object containing persona data about all Steam users we've encountered or requested data for. Key are 64-bit SteamIDs, values are identical to the objects received in the [`user`](#user) event.
+
+### groups
+
+An object containing information about all Steam groups we've encountered. Keys are 64-bit SteamIDs, values are identical to those received in the [`group`](#group) event.
+
+### myFriends
+
+An object whose keys are 64-bit SteamIDs, and whose values are values from the `EFriendRelationship` enum. Therefore, you can deduce your friends list from this object.
+
+When we get unfriended, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
+
+### myGroups
+
+An object whose keys are 64-bit SteamIDs, and whose values are from the `EFriendRelationship` enum. Therefore, you can deduce which groups you're in from this object.
+
+When we leave a group, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
+
 # Methods
 
 ### Constructor([client][, options])
@@ -367,6 +387,13 @@ Removed a specified user from your friends list. Also ignores an outstanding fri
 
 Blocks or unblocks communication with a specified user.
 
+### getPersonas(steamids[, callback])
+- `steamids` - An array of `SteamID` objects or strings which can parse into `SteamID` objects
+- `callback` - Optional. Called when the requested data is available.
+	- `personas` - An object whose keys are 64-bit SteamIDs and whose values are objects identical to those received in the [`user`](#user) event
+
+Requests persona data for one or more users from Steam. The response will arrive in the [`user`](#user) event, or in the callback if provided.
+
 ### getSteamLevels(steamids, callback)
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available.
@@ -536,3 +563,83 @@ Emitted when someone responds to our trade request. Also emitted with response `
 Emitted when a new trade session has started (either as a result of someone accepting a Steam trade request, an in-game (TF2) trade request, or something else).
 
 The trade is now available at http://steamcommunity.com/trade/<SteamID>, and can be automated with [`node-steam-trade`](https://github.com/seishun/node-steam-trade).
+
+### user
+- `sid` - A `SteamID` object for the user whose data we just received
+- `user` - An object containing the user's persona data
+
+Emitted when Steam sends us persona information about a user. The [`users`](#users) property isn't yet updated when this is emitted, so you can compare to see what changed.
+
+### user#id
+- `sid` - A `SteamID` object for the user whose data we just received
+- `user` - An object containing the user's persona data
+
+Same as [`user`](#user), but for a specific ID. For example, to only get updates for [U:1:46143802], bind a listener to `user#76561198006409530`.
+
+### group
+- `sid` - A `SteamID` object for the group whose data we just received
+- `group` - An object containing the group's data
+
+Emitted when Steam sends us information about a Steam group. The [`groups`](#groups) property isn't yet updated when this is emitted, so you can compare to see what changed.
+
+### group#id
+- `sid` - A `SteamID` object for the group whose data we just received
+- `group` - An object containing the group's data
+
+Same as [`group`](#group), but for a specific ID.
+
+### groupEvent
+- `sid` - A `SteamID` object for the group who just posted/started an event
+- `headline` - The name of the event
+- `date` - A `Date` object for the event's start time
+- `gid` - The event's GID (link to the event page at https://steamcommunity.com/gid/<SteamID>/event/<GID>)
+- `gameID` - The AppID of the game which this event is associated with
+
+Emitted when a group schedules a new event, or a new event starts.
+
+### groupEvent#id
+- `sid` - A `SteamID` object for the group who just posted/started an event
+- `headline` - The name of the event
+- `date` - A `Date` object for the event's start time
+- `gid` - The event's GID (link to the event page at https://steamcommunity.com/gid/<SteamID>/event/<GID>)
+- `gameID` - The AppID of the game which this event is associated with
+
+Same as [`groupEvent`](#groupevent), but for a specific group SteamID.
+
+### groupAnnouncement
+- `sid` - A `SteamID` object for the group who just posted an announcement
+- `headline` - The title of the announcement
+- `gid` - The announcement's GID (link to the announcement page at https://steamcommunity.com/gid/<SteamID>/announcements/detail/<GID>)
+
+Emitted when a group posts a new announcement.
+
+### groupAnnouncement#id
+- `sid` - A `SteamID` object for the group who just posted an announcement
+- `headline` - The title of the announcement
+- `gid` - The announcement's GID (link to the announcement page at https://steamcommunity.com/gid/<SteamID>/announcements/detail/<GID>)
+
+Same as [`groupAnnouncement`](#groupannouncement), but for a specific group SteamID.
+
+### friendRelationship
+- `sid` - A `SteamID` object for the user whose relationship with us just changed
+- `relationship` - A value from `EFriendRelationship`
+
+Emitted when our relationship with a particular user changes. For example, `EFriendRelationship.RequestRecipient` means that we got invited as a friend, `EFriendRelationship.None` means that we got unfriended.
+
+The [`myFriends`](#myfriends) property isn't yet updated when this is emitted, so you can compare to the old value to see what changed.
+
+### groupRelationship
+- `sid` - A `SteamID` object for the group whose relationship with us just changed
+- `relationship` - A value from `EFriendRelationship`
+
+Emitted when our relationship with a particular Steam group changes.
+
+The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so you can compare to the old value to see what changed.
+
+### friendsList
+
+Emitted when our friends list is downloaded from Steam after logon.
+
+### groupList
+
+Emitted when our group list is downloaded from Steam after logon.
