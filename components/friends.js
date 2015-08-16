@@ -47,6 +47,49 @@ SteamUser.prototype.blockUser = function(steamID, block, callback) {
 	});
 };
 
+SteamUser.prototype.getPersonas = function(steamids, callback) {
+	var Flags = Steam.EClientPersonaStateFlag;
+	var flags = Flags.Status|Flags.PlayerName|Flags.QueryPort|Flags.SourceID|Flags.Presence|
+		Flags.Metadata|Flags.LastSeen|Flags.ClanInfo|Flags.GameExtraInfo|Flags.GameDataBlob|
+		Flags.ClanTag|Flags.Facebook;
+
+	var ids = steamids.map(function(id) {
+		if(typeof id === 'string') {
+			return (new SteamID(id)).getSteamID64();
+		}
+
+		return id.toString();
+	});
+
+	this._send(Steam.EMsg.ClientRequestFriendData, {
+		"friends": ids,
+		"persona_state_requested": flags
+	});
+
+	if(callback) {
+		var output = {};
+
+		var self = this;
+		ids.forEach(function(id) {
+			self.once('user#' + id, receive);
+		});
+
+		function receive(sid, user) {
+			var sid64 = sid.getSteamID64();
+			output[sid64] = user;
+
+			var index = ids.indexOf(sid64);
+			if(index != -1) {
+				ids.splice(index, 1);
+			}
+
+			if(ids.length === 0) {
+				callback(output);
+			}
+		}
+	}
+};
+
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 	var accountids = steamids.map(function(steamID) {
 		if(typeof steamID === 'string') {

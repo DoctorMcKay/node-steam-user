@@ -53,6 +53,7 @@ protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevelsResponse] = Schema.CMsgClientF
 protobufs[Steam.EMsg.ClientPersonaState] = Schema.CMsgClientPersonaState;
 protobufs[Steam.EMsg.ClientClanState] = Schema.CMsgClientClanState;
 protobufs[Steam.EMsg.ClientFriendsList] = Schema.CMsgClientFriendsList;
+protobufs[Steam.EMsg.ClientRequestFriendData] = Schema.CMsgClientRequestFriendData;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
