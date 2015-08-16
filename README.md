@@ -504,7 +504,6 @@ Emitted on logon and when licenses change. The [`licenses`](#licenses) property 
 This isn't emitted for anonymous accounts. However, all anonymous user accounts have a license for package 17906 automatically.
 
 ### tradeRequest
-- `name` - The name of the user who sent the request (TODO: see if this is actually filled in)
 - `steamID` - The SteamID of the user who sent the request, as a `SteamID` object
 - `respond` - A function which you should call to either accept or decline the request
 	- `accept` - `true` to accept the request, `false` to decline it
