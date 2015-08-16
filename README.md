@@ -357,7 +357,7 @@ Sends a friend request to the user with the specified `SteamID`. If they've alre
 ### removeFriend(steamID)
 - `steamID` - The SteamID of the user you want to remove from your friends list, as a `SteamID` object or a string that can parse into one
 
-Removed a specified user from your friends list.
+Removed a specified user from your friends list. Also ignores an outstanding friend request from this user.
 
 ### blockUser(steamID, block[, callback])
 - `steamID` - The SteamID of the user you want to (un)block, as a `SteamID` object or a string that can parse into one
