@@ -125,3 +125,4 @@ require('./components/apps.js');
 require('./components/account.js');
 require('./components/gameservers.js');
 require('./components/utility.js');
+require('./components/trading.js');
