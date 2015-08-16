@@ -13,11 +13,16 @@ function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
 	this.steamID = null;
 
+	// Account info
 	this.limitations = null;
 	this.vac = null;
 	this.wallet = null;
 	this.emailInfo = null;
 	this.licenses = null;
+
+	// Friends and users info
+	this.users = {};
+	this.groups = {};
 
 	this._sentry = null;
 

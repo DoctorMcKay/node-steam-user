@@ -15,6 +15,9 @@ SteamUser.prototype.logOn = function(details) {
 	this.emailInfo = null;
 	this.licenses = null;
 
+	this.users = {};
+	this.groups = {};
+
 	if(details !== true) {
 		// We're not logging on with saved details
 		details = details || {};
