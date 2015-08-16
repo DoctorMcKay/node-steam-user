@@ -125,15 +125,23 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 		var sid64 = sid.getSteamID64();
 		delete user.friendid;
 
+		var i;
 		if(!self.users[sid64]) {
 			self.users[sid64] = user;
 			processUser(self.users[sid64]);
+		} else {
+			// Replace unknown data in the received object with already-known data
+			for(i in self.users[sid64]) {
+				if(self.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
+					user[i] = self.users[sid64][i];
+				}
+			}
 		}
 
 		self.emit('user', sid, user);
 		self.emit('user#' + sid64, sid, user);
 
-		for(var i in user) {
+		for(i in user) {
 			if(user.hasOwnProperty(i) && user[i] !== null) {
 				self.users[sid][i] = user[i];
 			}
@@ -148,14 +156,22 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 	var sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
 
+	var i;
 	if(!this.groups[sid64]) {
 		this.groups[sid64] = body;
+	} else {
+		// Replace unknown data in the received object with already-known data
+		for(i in this.groups[sid64]) {
+			if(this.groups[sid64].hasOwnProperty(i) && body.hasOwnProperty(i) && body[i] === null) {
+				body[i] = this.groups[sid64][i];
+			}
+		}
 	}
 
 	this.emit('group', sid, body);
 	this.emit('group#' + sid64, sid, body);
 
-	for(var i in body) {
+	for(i in body) {
 		if(body.hasOwnProperty(i) && body[i] !== null) {
 			this.groups[sid64][i] = body[i];
 		}
