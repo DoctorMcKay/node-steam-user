@@ -23,6 +23,8 @@ function SteamUser(client, options) {
 	// Friends and users info
 	this.users = {};
 	this.groups = {};
+	this.myFriends = {};
+	this.myGroups = {};
 
 	this._sentry = null;
 

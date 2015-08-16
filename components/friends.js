@@ -141,3 +141,27 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 		self.emit('groupAnnouncement#' + sid64, sid, announcement.headline, announcement.gid.toString());
 	});
 };
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
+	var self = this;
+	(body.friends || []).forEach(function(relationship) {
+		var sid = new SteamID(relationship.ulfriendid);
+		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
+
+		if(body.bincremental) {
+			// This isn't an initial download of the friends list, something changed
+			self.emit(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
+		}
+
+		if(relationship.efriendrelationship == Steam.EFriendRelationship.None) {
+			delete self[key][sid.getSteamID64()];
+		} else {
+			self[key][sid.getSteamID64()] = relationship.efriendrelationship;
+		}
+	});
+
+	if(!body.bincremental) {
+		this.emit('friendsList');
+		this.emit('groupList');
+	}
+};

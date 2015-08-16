@@ -17,6 +17,8 @@ SteamUser.prototype.logOn = function(details) {
 
 	this.users = {};
 	this.groups = {};
+	this.myFriends = {};
+	this.myGroups = {};
 
 	if(details !== true) {
 		// We're not logging on with saved details
