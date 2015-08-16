@@ -134,7 +134,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 		self.emit('user#' + sid64, sid, user);
 
 		for(var i in user) {
-			if(user.hasOwnProperty(i)) {
+			if(user.hasOwnProperty(i) && user[i] !== null) {
 				self.users[sid][i] = user[i];
 			}
 		}
@@ -156,7 +156,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 	this.emit('group#' + sid64, sid, body);
 
 	for(var i in body) {
-		if(body.hasOwnProperty(i)) {
+		if(body.hasOwnProperty(i) && body[i] !== null) {
 			this.groups[sid64][i] = body[i];
 		}
 	}
