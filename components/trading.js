@@ -3,19 +3,19 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
 SteamUser.prototype.trade = function(steamID) {
-	if(typeof steamID !== 'string') {
-		steamID = steamID.toString();
+	if(typeof steamID === 'string') {
+		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.EconTrading_InitiateTradeRequest, {"other_steamid": steamID});
+	this._send(Steam.EMsg.EconTrading_InitiateTradeRequest, {"other_steamid": steamID.getSteamID64()});
 };
 
 SteamUser.prototype.cancelTradeRequest = function(steamID) {
-	if(typeof steamID !== 'string') {
-		steamID = steamID.toString();
+	if(typeof steamID === 'string') {
+		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.EconTrading_CancelTradeRequest, {"other_steamid": steamID});
+	this._send(Steam.EMsg.EconTrading_CancelTradeRequest, {"other_steamid": steamID.getSteamID64()});
 };
 
 // Handlers
