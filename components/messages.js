@@ -45,6 +45,11 @@ protobufs[Steam.EMsg.EconTrading_CancelTradeRequest] = Schema.CMsgTrading_Cancel
 protobufs[Steam.EMsg.EconTrading_InitiateTradeProposed] = Schema.CMsgTrading_InitiateTradeRequest;
 protobufs[Steam.EMsg.EconTrading_InitiateTradeResult] = Schema.CMsgTrading_InitiateTradeResponse;
 protobufs[Steam.EMsg.EconTrading_StartSession] = Schema.CMsgTrading_StartSession;
+protobufs[Steam.EMsg.ClientChangeStatus] = Schema.CMsgClientChangeStatus;
+protobufs[Steam.EMsg.ClientAddFriend] = Schema.CMsgClientAddFriend;
+protobufs[Steam.EMsg.ClientRemoveFriend] = Schema.CMsgClientRemoveFriend;
+protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevels] = Schema.CMsgClientFSGetFriendsSteamLevels;
+protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevelsRespone] = Schema.CMsgClientFSGetFriendsSteamLevelsRespone;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
