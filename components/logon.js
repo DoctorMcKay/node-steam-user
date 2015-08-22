@@ -17,6 +17,7 @@ SteamUser.prototype.logOn = function(details) {
 
 	this.users = {};
 	this.groups = {};
+	this.chats = {};
 	this.myFriends = {};
 	this.myGroups = {};
 

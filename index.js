@@ -23,6 +23,7 @@ function SteamUser(client, options) {
 	// Friends and users info
 	this.users = {};
 	this.groups = {};
+	this.chats = {};
 	this.myFriends = {};
 	this.myGroups = {};
 
@@ -134,3 +135,4 @@ require('./components/gameservers.js');
 require('./components/utility.js');
 require('./components/trading.js');
 require('./components/friends.js');
+require('./components/chat.js');

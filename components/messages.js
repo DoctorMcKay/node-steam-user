@@ -54,6 +54,10 @@ protobufs[Steam.EMsg.ClientPersonaState] = Schema.CMsgClientPersonaState;
 protobufs[Steam.EMsg.ClientClanState] = Schema.CMsgClientClanState;
 protobufs[Steam.EMsg.ClientFriendsList] = Schema.CMsgClientFriendsList;
 protobufs[Steam.EMsg.ClientRequestFriendData] = Schema.CMsgClientRequestFriendData;
+protobufs[Steam.EMsg.ClientFriendMsg] = Schema.CMsgClientFriendMsg;
+protobufs[Steam.EMsg.ClientChatInvite] = Schema.CMsgClientChatInvite;
+protobufs[Steam.EMsg.ClientFriendMsgIncoming] = Schema.CMsgClientFriendMsgIncoming;
+protobufs[Steam.EMsg.CLientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
