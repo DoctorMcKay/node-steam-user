@@ -54,19 +54,35 @@ SteamUser.prototype.leaveChat = function(steamID) {
 	delete this.chats[steamID.getSteamID64()];
 };
 
-SteamUser.prototype.lockChat = function(steamID, lock) {
+SteamUser.prototype.setChatPrivate = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
-	msg.writeUint32(lock ? Steam.EChatAction.LockChat : Steam.EChatAction.UnlockChat);
+	msg.writeUint32(Steam.EChatAction.LockChat);
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
-SteamUser.prototype.setChatModerated = function(steamID, moderated) {
+SteamUser.prototype.setChatPublic = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
-	msg.writeUint32(moderated ? Steam.EChatAction.SetModerated : Steam.EChatAction.SetUnmoderated);
+	msg.writeUint32(Steam.EChatAction.UnlockChat);
+	this._send(Steam.EMsg.ClientChatAction, msg.flip());
+};
+
+SteamUser.prototype.setChatOfficersOnly = function(steamID, moderated) {
+	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
+	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
+	msg.writeUint32(Steam.EChatAction.SetModerated);
+	this._send(Steam.EMsg.ClientChatAction, msg.flip());
+};
+
+SteamUser.prototype.unsetChatOfficersOnly = function(steamID, moderated) {
+	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
+	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
+	msg.writeUint32(Steam.EChatAction.SetUnmoderated);
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
@@ -80,13 +96,23 @@ SteamUser.prototype.kickFromChat = function(chatID, userID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
-SteamUser.prototype.banFromChat = function(chatID, userID, ban) {
+SteamUser.prototype.banFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
-	msg.writeUint32(ban ? Steam.EChatAction.Ban : Steam.EChatAction.UnBan);
+	msg.writeUint32(Steam.EChatAction.Ban);
+	this._send(Steam.EMsg.ClientChatAction, msg.flip());
+};
+
+SteamUser.prototype.unbanFromChat = function(chatID, userID) {
+	userID = Helpers.steamID(userID);
+
+	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
+	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
+	msg.writeUint32(Steam.EChatAction.UnBan);
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
