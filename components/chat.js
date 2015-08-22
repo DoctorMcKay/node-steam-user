@@ -183,6 +183,49 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatInvite] = function(body) {
 	this.emit('chatInvite', fromChatID(body.steam_id_chat), body.chat_name, new SteamID(body.steam_id_patron.toString()));
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientChatMemberInfo] = function(body) {
+	var chatID = fromChatID(body.readUint64().toString());
+	var infoType = body.readUint32();
+
+	switch(infoType) {
+		case Steam.EChatInfoType.StateChange:
+			// A user's state changed
+			var target = new SteamID(body.readUint64().toString());
+			var action = body.readUint32();
+			var actor = new SteamID(body.readUint64().toString());
+
+			if(action & Steam.EChatMemberStateChange.Entered) {
+				this._emitIdEvent('chatUserJoined', chatID, target);;
+			}
+
+			if(action & Steam.EChatMemberStateChange.Left) {
+				this._emitIdEvent('chatUserLeft', chatID, target);
+			}
+
+			if(action & Steam.EChatMemberStateChange.Disconnected) {
+				this._emitIdEvent('chatUserDisconnected', chatID, target);
+			}
+
+			if(action & Steam.EChatMemberStateChange.Kicked) {
+				this._emitIdEvent('chatUserKicked', chatID, target, actor);
+			}
+
+			if(action & Steam.EChatMemberStateChange.Banned) {
+				this._emitIdEvent('chatUserBanned', chatID, target, actor);
+			}
+
+			if(action & Steam.EChatMemberStateChange.VoiceSpeaking) {
+				this._emitIdEvent('chatUserSpeaking', chatID, target);
+			}
+
+			if(action & Steam.EChatMemberStateChange.VoiceDoneSpeaking) {
+				this._emitIdEvent('chatUserDoneSpeaking', chatID, target);
+			}
+
+			break;
+	}
+};
+
 // Private functions
 
 /**
