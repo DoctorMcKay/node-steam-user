@@ -132,7 +132,40 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
 	});
 };
 
-// TODO: Ability to create chats
+/**
+ * Creates a new multi-user chat room
+ * @param convertUserID null|SteamID If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
+ * @param inviteUserID null|SteamID If specified, the user with the SteamID passed here will get invited to the new room automatically.
+ * @param callback function
+ */
+SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
+	convertUserID = convertUserID || new SteamID();
+	inviteUserID = inviteUserID || new SteamID();
+	if(typeof isPrivate !== 'boolean') {
+		isPrivate = true;
+	}
+
+	var msg = new ByteBuffer(53, ByteBuffer.LITTLE_ENDIAN);
+	msg.writeUint32(Steam.EChatRoomType.MUC); // multi-user chat
+	msg.writeUint64(0);
+	msg.writeUint64(0);
+	msg.writeUint32(Steam.EChatPermission.MemberDefault);
+	msg.writeUint32(Steam.EChatPermission.MemberDefault);
+	msg.writeUint32(Steam.EChatPermission.EveryoneDefault);
+	msg.writeUint32(0);
+	msg.writeUint8(Steam.EChatFlags.Locked);
+	msg.writeUint64(Helpers.steamID(convertUserID).getSteamID64());
+	msg.writeUint64(Helpers.steamID(inviteUserID).getSteamID64());
+	this._send(Steam.EMsg.ClientCreateChat, msg.flip());
+
+	if(callback) {
+		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
+			callback(result, chatID);
+		});
+	}
+};
+
+// TODO: Figure out why the bot is showing as using voice
 
 // Handlers
 
@@ -188,6 +221,22 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatMsg] = function(body) {
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientChatInvite] = function(body) {
 	this.emit('chatInvite', fromChatID(body.steam_id_chat), body.chat_name, new SteamID(body.steam_id_patron.toString()));
+};
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientCreateChatResponse] = function(body) {
+	var eresult = body.readUint32();
+	var chatID = new SteamID(body.readUint64().toString());
+	body.skip(4);
+	var friendID = new SteamID(body.readUint64().toString());
+
+	if(eresult != Steam.EResult.OK) {
+		this._emitIdEvent('chatCreated', friendID, eresult);
+	} else {
+		var self = this;
+		this.joinChat(chatID, function(result) {
+			self._emitIdEvent('chatCreated', friendID, result, chatID);
+		});
+	}
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientChatEnter] = function(body) {
