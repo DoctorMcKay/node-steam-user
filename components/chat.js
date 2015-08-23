@@ -203,12 +203,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatEnter] = function(body) {
 		var sid64 = chatID.getSteamID64();
 		this.chats[sid64] = {
 			"name": chatName,
-			"private": !!(chatFlags & Steam.EChatFlags.Locked),
-			"invisibleToFriends": !!(chatFlags & Steam.EChatFlags.InvisibleToFriends),
-			"officersOnlyChat": !!(chatFlags & Steam.EChatFlags.Moderated),
-			"unjoinable": !!(chatFlags & Steam.EChatFlags.Unjoinable),
 			"members": {}
 		};
+
+		decomposeChatFlags(this.chats[sid64], chatFlags);
 
 		var member;
 
@@ -299,6 +297,37 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatMemberInfo] = function(body) 
 	}
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientChatRoomInfo] = function(body) {
+	var chatID = fromChatID(body.readUint64());
+	var infoType = body.readUint32();
+
+	if(infoType != Steam.EChatInfoType.InfoUpdate) {
+		return;
+	}
+
+	var flags = body.readUint32();
+	var actor = new SteamID(body.readUint64().toString());
+
+	var sid64 = chatID.getSteamID64();
+
+	var wasPrivate = this.chats[sid64].private;
+	var wasOfficersOnly = this.chats[sid64].officersOnlyChat;
+
+	decomposeChatFlags(this.chats[sid64], flags);
+
+	if(wasPrivate && !this.chats[sid64].private) {
+		this._emitIdEvent('chatSetPublic', chatID, actor);
+	} else if(!wasPrivate && this.chats[sid64].private) {
+		this._emitIdEvent('chatSetPrivate', chatID, actor);
+	}
+
+	if(wasOfficersOnly && !this.chats[sid64].officersOnlyChat) {
+		this._emitIdEvent('chatUnsetOfficersOnly', chatID, actor);
+	} else if(!wasOfficersOnly && this.chats[sid64].officersOnlyChat) {
+		this._emitIdEvent('chatSetOfficersOnly', chatID, actor);
+	}
+};
+
 // Private functions
 
 /**
@@ -331,4 +360,11 @@ function fromChatID(steamID) {
 	}
 
 	return steamID;
+}
+
+function decomposeChatFlags(chat, chatFlags) {
+	chat.private = !!(chatFlags & Steam.EChatFlags.Locked);
+	chat.invisibleToFriends = !!(chatFlags & Steam.EChatFlags.InvisibleToFriends);
+	chat.officersOnlyChat = !!(chatFlags & Steam.EChatFlags.Moderated);
+	chat.unjoinable = !!(chatFlags & Steam.EChatFlags.Unjoinable);
 }
