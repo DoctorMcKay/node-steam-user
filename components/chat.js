@@ -35,6 +35,26 @@ SteamUser.prototype.chatTyping = function(recipient) {
 	this.chatMessage(recipient, "", Steam.EChatEntryType.Typing);
 };
 
+/**
+ * Requests chat history from Steam with a particular user. Also gets unread offline messages.
+ * @param steamID SteamID The SteamID of the other user with whom you're requesting history
+ * @param callback function An optional callback to be invoked when the response is received
+ */
+SteamUser.prototype.getChatHistory = function(steamID, callback) {
+	steamID = Helpers.steamID(steamID);
+	var sid64 = steamID.getSteamID64();
+
+	this._send(Steam.EMsg.ClientFSGetFriendMessageHistory, {
+		"steamid": sid64
+	});
+
+	if(callback) {
+		this.once('chatHistory#' + sid64, function(steamID, success, messages) {
+			callback(success, messages);
+		});
+	}
+};
+
 SteamUser.prototype.joinChat = function(steamID, callback) {
 	var msg = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
@@ -217,6 +237,17 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatMsg] = function(body) {
 	this.emit('chatMessage', room, chatter, message);
 	this.emit('chatMessage#' + room.getSteamID64(), room, chatter, message);
 	this.emit('chatMessage#' + room.getSteamID64() + '#' + chatter.getSteamID64(), room, chatter, message);
+};
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientFSGetFriendMessageHistoryResponse] = function(body) {
+	var universe = this.steamID.universe;
+	(body.messages || []).forEach(function(message) {
+		message.timestamp = new Date(message.timestamp * 1000);
+		message.steamID = new SteamID('[U:' + universe + ':' + message.accountid + ']');
+		delete message.accountid;
+	});
+
+	this._emitIdEvent('chatHistory', new SteamID(body.steamid.toString()), body.success, body.messages || []);
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientChatInvite] = function(body) {
