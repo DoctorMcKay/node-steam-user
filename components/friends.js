@@ -3,7 +3,11 @@ var Steam = require('steam');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 
-// name is optional
+/**
+ * Set your persona online state and optionally name.
+ * @param {EPersonaState} state - Your new online state
+ * @param {string} [name] - Optional. Set a new profile name.
+ */
 SteamUser.prototype.setPersona = function(state, name) {
 	this._send(Steam.EMsg.ClientChangeStatus, {
 		"persona_state": state,
@@ -11,6 +15,10 @@ SteamUser.prototype.setPersona = function(state, name) {
 	});
 };
 
+/**
+ * Send (or accept) a friend invitiation.
+ * @param {(SteamID|string)} steamID - Either a SteamID object of the user to add, or a string which can parse into one.
+ */
 SteamUser.prototype.addFriend = function(steamID) {
 	if(typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
@@ -19,6 +27,10 @@ SteamUser.prototype.addFriend = function(steamID) {
 	this._send(Steam.EMsg.ClientAddFriend, {"steamid_to_add": steamID.getSteamID64()});
 };
 
+/**
+ * Remove a friend from your friends list (or decline an invitiation)
+ * @param {(SteamID|string)} steamID - Either a SteamID object of the user to remove, or a string which can parse into one.
+ */
 SteamUser.prototype.removeFriend = function(steamID) {
 	if(typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
@@ -27,6 +39,12 @@ SteamUser.prototype.removeFriend = function(steamID) {
 	this._send(Steam.EMsg.ClientRemoveFriend, {"friendid": steamID.getSteamID64()});
 };
 
+/**
+ * Block or unblock all communication with a user.
+ * @param {(SteamID|string)} steamID - Either a SteamID object of the user to (un)block, or a string which can parse into one.
+ * @param {bool} block - true to block, false to unblock
+ * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ */
 SteamUser.prototype.blockUser = function(steamID, block, callback) {
 	if(typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
@@ -47,6 +65,11 @@ SteamUser.prototype.blockUser = function(steamID, block, callback) {
 	});
 };
 
+/**
+ * Requests information about one or more user profiles.
+ * @param {(SteamID[]|string[])} steamids - An array of SteamID objects or strings which can parse into them.
+ * @param {function} [callback] - Optional. Called with an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
+ */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	var Flags = Steam.EClientPersonaStateFlag;
 	var flags = Flags.Status|Flags.PlayerName|Flags.QueryPort|Flags.SourceID|Flags.Presence|
@@ -90,6 +113,11 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 	}
 };
 
+/**
+ * Gets the Steam Level of one or more Steam users.
+ * @param {(SteamID[]|string[])} steamids - An array of SteamID objects, or strings which can parse into one.
+ * @param {function} callback - Called on completion with an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
+ */
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 	var accountids = steamids.map(function(steamID) {
 		if(typeof steamID === 'string') {

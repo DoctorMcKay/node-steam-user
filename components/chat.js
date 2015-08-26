@@ -5,6 +5,12 @@ var ByteBuffer = require('bytebuffer');
 var BinaryKVParser = require('binarykvparser');
 var Helpers = require('./helpers.js');
 
+/**
+ * Sends a chat message to a user or a chat room.
+ * @param {(SteamID|string)} recipient - The recipient user/chat, as a SteamID object or a string which can parse into one. To send to a group chat, use the group's (clan's) SteamID.
+ * @param {string} message - The message to send.
+ * @param {EChatEntryType} [type=ChatMsg] - Optional. The type of the message. Defaults to ChatMsg. Almost never needed.
+ */
 SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipient, message, type) {
 	recipient = Helpers.steamID(recipient);
 
@@ -31,14 +37,18 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 	}
 };
 
+/**
+ * Tell another user that you're typing a message.
+ * @param {SteamID|string} recipient - The recipient, as a SteamID object or a string which can parse into one.
+ */
 SteamUser.prototype.chatTyping = function(recipient) {
 	this.chatMessage(recipient, "", Steam.EChatEntryType.Typing);
 };
 
 /**
  * Requests chat history from Steam with a particular user. Also gets unread offline messages.
- * @param steamID SteamID The SteamID of the other user with whom you're requesting history
- * @param callback function An optional callback to be invoked when the response is received
+ * @param {(SteamID|string)} steamID - The SteamID of the other user with whom you're requesting history (as a SteamID object or a string which can parse into one)
+ * @param {function} [callback] - An optional callback to be invoked when the response is received. Receives an EResult success parameter and an array of message objects.
  */
 SteamUser.prototype.getChatHistory = function(steamID, callback) {
 	steamID = Helpers.steamID(steamID);
@@ -55,6 +65,11 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 	}
 };
 
+/**
+ * Join a chat room. To join a group chat, use the group's (clan) SteamID.
+ * @param {(SteamID|string)} steamID - The SteamID of the chat to join (as a SteamID object or a string which can parse into one)
+ * @param {function} [callback] - An optional callback to be invoked when the room is joined (or a failure occurs). Receives an EResult parameter.
+ */
 SteamUser.prototype.joinChat = function(steamID, callback) {
 	var msg = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
@@ -67,6 +82,10 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
 	}
 };
 
+/**
+ * Leave a chat room.
+ * @param {(SteamID|string)} steamID - The SteamID of the chat room to leave (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.leaveChat = function(steamID) {
 	var msg = new ByteBuffer(32, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
@@ -81,6 +100,10 @@ SteamUser.prototype.leaveChat = function(steamID) {
 	delete this.chats[steamID.getSteamID64()];
 };
 
+/**
+ * Sets a chat room private (invitation required to join, unless a member of the group [if the chat is a Steam group chat])
+ * @param {(SteamID|string)} steamID - The SteamID of the chat room to make private (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.setChatPrivate = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
@@ -89,6 +112,10 @@ SteamUser.prototype.setChatPrivate = function(steamID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
+/**
+ * Sets a chat room public (no invitation required to join)
+ * @param {(SteamID|string)} steamID - The SteamID of the chat room to make public (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.setChatPublic = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
@@ -97,7 +124,11 @@ SteamUser.prototype.setChatPublic = function(steamID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
-SteamUser.prototype.setChatOfficersOnly = function(steamID, moderated) {
+/**
+ * Sets a group chat room to officers-only chat mode.
+ * @param {(SteamID|string)} steamID - The SteamID of the clan chat room to make officers-only (as a SteamID object or a string which can parse into one)
+ */
+SteamUser.prototype.setChatOfficersOnly = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
@@ -105,7 +136,11 @@ SteamUser.prototype.setChatOfficersOnly = function(steamID, moderated) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
-SteamUser.prototype.unsetChatOfficersOnly = function(steamID, moderated) {
+/**
+ * Sets a group chat room out of officers-only chat mode, so that everyone can chat.
+ * @param {(SteamID|string)} steamID - The SteamID of the clan chat room to make open (as a SteamID object or a string which can parse into one)
+ */
+SteamUser.prototype.unsetChatOfficersOnly = function(steamID) {
 	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
@@ -113,6 +148,11 @@ SteamUser.prototype.unsetChatOfficersOnly = function(steamID, moderated) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
+/**
+ * Kicks a user from a chat room.
+ * @param {(SteamID|string)} chatID - The SteamID of the chat room to kick the user from (as a SteamID object or a string which can parse into one)
+ * @param {(SteamID|string)} userID - The SteamID of the user to kick from the room (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.kickFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
@@ -123,6 +163,11 @@ SteamUser.prototype.kickFromChat = function(chatID, userID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
+/**
+ * Bans a user from a chat room.
+ * @param {(SteamID|string)} chatID - The SteamID of the chat room to ban the user from (as a SteamID object or a string which can parse into one)
+ * @param {(SteamID|string)} userID - The SteamID of the user to ban from the room (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.banFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
@@ -133,6 +178,11 @@ SteamUser.prototype.banFromChat = function(chatID, userID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
+/**
+ * Unbans a user from a chat room.
+ * @param {(SteamID|string)} chatID - The SteamID of the chat room to unban the user from (as a SteamID object or a string which can parse into one)
+ * @param {(SteamID|string)} userID - The SteamID of the user to unban from the room (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.unbanFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
@@ -143,6 +193,11 @@ SteamUser.prototype.unbanFromChat = function(chatID, userID) {
 	this._send(Steam.EMsg.ClientChatAction, msg.flip());
 };
 
+/**
+ * Invites a user to a chat room.
+ * @param {(SteamID|string)} chatID - The SteamID of the chat room to invite the user to (as a SteamID object or a string which can parse into one)
+ * @param {(SteamID|string)} userID - The SteamID of the user to invite (as a SteamID object or a string which can parse into one)
+ */
 SteamUser.prototype.inviteToChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
@@ -154,9 +209,9 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
 
 /**
  * Creates a new multi-user chat room
- * @param convertUserID null|SteamID If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
- * @param inviteUserID null|SteamID If specified, the user with the SteamID passed here will get invited to the new room automatically.
- * @param callback function
+ * @param {null|SteamID|string} [convertUserID=null] - If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
+ * @param {null|SteamID|string} [inviteUserID=null] - If specified, the user with the SteamID passed here will get invited to the new room automatically.
+ * @param {function} [callback] - Called when the chat is created or a failure occurs. Receives an EResult parameter and a chatID (as a SteamID object) parameter.
  */
 SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
 	convertUserID = convertUserID || new SteamID();
