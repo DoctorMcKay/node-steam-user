@@ -94,7 +94,10 @@ SteamUser.prototype.setOption = function(option, value) {
 	// Handle anything that needs to happen when particular options update
 	switch(option) {
 		case 'dataDirectory':
-			checkDirExists(value);
+			if(value !== null) {
+				checkDirExists(value);
+			}
+
 			break;
 	}
 };

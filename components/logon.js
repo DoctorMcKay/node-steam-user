@@ -63,6 +63,9 @@ SteamUser.prototype.logOn = function(details) {
 			self._logOnDetails.sha_sentryfile = hash.digest();
 			doLogin();
 		});
+	} else {
+		// Either we're logging on anonymously, or we just don't have a sentry.
+		doLogin();
 	}
 
 	function doLogin() {
