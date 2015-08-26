@@ -3,6 +3,7 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var fs = require('fs');
 var Crypto = require('crypto');
+var ByteBuffer = require('bytebuffer');
 
 SteamUser.prototype.logOn = function(details) {
 	if(this.client.connected || this.client.loggedOn) {
@@ -85,17 +86,29 @@ SteamUser.prototype.logOn = function(details) {
 		}
 
 		function doLogin2() {
-			var sid = new SteamID();
-			sid.universe = SteamID.Universe.PUBLIC;
-			sid.type = self._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
-			sid.instance = self._logOnDetails.account_name ? SteamID.Instance.DESKTOP : SteamID.Instance.ALL;
-			sid.accountid = 0;
-			self.client.steamID = sid.getSteamID64();
+			// Get a machine ID
+			if(details !== true) {
+				self._getMachineID(function(id) {
+					self._logOnDetails.machine_id = id;
+					doLogin3();
+				});
+			} else {
+				doLogin3();
+			}
 
-			self.client.connect();
+			function doLogin3() {
+				var sid = new SteamID();
+				sid.universe = SteamID.Universe.PUBLIC;
+				sid.type = self._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
+				sid.instance = self._logOnDetails.account_name ? SteamID.Instance.DESKTOP : SteamID.Instance.ALL;
+				sid.accountid = 0;
+				self.client.steamID = sid.getSteamID64();
 
-			self._onConnected = onConnected.bind(self);
-			self.client.once('connected', self._onConnected);
+				self.client.connect();
+
+				self._onConnected = onConnected.bind(self);
+				self.client.once('connected', self._onConnected);
+			}
 		}
 	}
 };
@@ -116,6 +129,47 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 	this.steamID = null;
 	this.client.removeListener('connected', this._onConnected);
 	this.client.disconnect();
+};
+
+SteamUser.prototype._getMachineID = function(callback) {
+	if(!this._logOnDetails.account_name || this.options.machineIdType == SteamUser.EMachineIDType.None) {
+		// No machine IDs for anonymous logons
+		callback(null);
+		return;
+	}
+
+	// The user wants to use a random machine ID that's saved to dataDirectory
+	if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom && this.options.dataDirectory) {
+		var self = this;
+		fs.readFile(this.options.dataDirectory + "/machineid.bin", function(err, id) {
+			if(err) {
+				id = getRandomID();
+				fs.writeFile(self.options.dataDirectory + "/machineid.bin", id);
+			}
+
+			callback(id);
+		});
+
+		return;
+	}
+
+	// The user wants to use a machine ID that's generated off the account name
+	if(this.options.machineIdType == SteamUser.EMachineIDType.AccountNameGenerated) {
+		callback(createMachineID(
+			"SteamUser Hash BB3 " + this._logOnDetails.account_name,
+			"SteamUser Hash FF2 " + this._logOnDetails.account_name,
+			"SteamUser Hash 3B3 " + this._logOnDetails.account_name
+		));
+
+		return;
+	}
+
+	// Default to random
+	callback(getRandomID());
+
+	function getRandomID() {
+		return createMachineID(Math.random().toString(), Math.random().toString(), Math.random().toString());
+	}
 };
 
 // Handlers
@@ -241,3 +295,37 @@ SteamUser.prototype._steamGuardPrompt = function(domain, callback) {
 		this.emit('steamGuard', domain, callback);
 	}
 };
+
+// Private functions
+
+function createMachineID(val_bb3, val_ff2, val_3b3) {
+	// Machine IDs are binary KV objects with root key MessageObject and three hashes named BB3, FF2, and 3B3.
+	// I don't feel like writing a proper BinaryKV serializer, so this will work fine.
+
+	var buffer = new ByteBuffer(155, ByteBuffer.LITTLE_ENDIAN);
+	buffer.writeByte(0); // 1 byte, total 1
+	buffer.writeCString("MessageObject"); // 14 bytes, total 15
+
+	buffer.writeByte(1); // 1 byte, total 16
+	buffer.writeCString("BB3"); // 4 bytes, total 20
+	buffer.writeCString(sha1(val_bb3)); // 41 bytes, total 61
+
+	buffer.writeByte(1); // 1 byte, total 62
+	buffer.writeCString("FF2"); // 4 bytes, total 66
+	buffer.writeCString(sha1(val_ff2)); // 41 bytes, total 107
+
+	buffer.writeByte(1); // 1 byte, total 108
+	buffer.writeCString("3B3"); // 4 bytes, total 112
+	buffer.writeCString(sha1(val_3b3)); // 41 bytes, total 153
+
+	buffer.writeByte(8); // 1 byte, total 154
+	buffer.writeByte(8); // 1 byte, total 155
+
+	return buffer.flip().toBuffer();
+
+	function sha1(input) {
+		var hash = Crypto.createHash('sha1');
+		hash.update(input, 'utf8');
+		return hash.digest('hex');
+	}
+}
