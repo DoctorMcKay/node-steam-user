@@ -166,6 +166,15 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 			}
 		}
 
+		/**
+		 * Emitted when we receive persona info about a user.
+		 * You can also listen for user#steamid64 to get info only for a specific user.
+		 *
+		 * @event SteamUser#user
+		 * @param {SteamID} steamID - The SteamID of the user
+		 * @param {Object} user - An object containing the user's persona info
+		 */
+
 		self.emit('user', sid, user);
 		self.emit('user#' + sid64, sid, user);
 
@@ -196,6 +205,15 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 		}
 	}
 
+	/**
+	 * Emitted when we receive info about a Steam group.
+	 * You can also listen for group#steamid64 to get info only for a specific group.
+	 *
+	 * @event SteamUser#group
+	 * @param {SteamID} steamID - The SteamID of the group
+	 * @param {Object} user - An object containing the group's info
+	 */
+
 	this.emit('group', sid, body);
 	this.emit('group#' + sid64, sid, body);
 
@@ -211,6 +229,18 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 			return;
 		}
 
+		/**
+		 * Emitted when a new event is posted to a Steam group.
+		 * You can also listen for groupEvent#steamid64 to get events only for a specific group.
+		 *
+		 * @event SteamUser#groupEvent
+		 * @param {SteamID} steamID - The SteamID of the group
+		 * @param {string} headline - The title of the event
+		 * @param {Date} timestamp - The time when the event will start
+		 * @param {string} gid - The event's GID
+		 * @param {number} gameID - If this is an event for a game, this is the game's appid
+		 */
+
 		self.emit('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
 		self.emit('groupEvent#' + sid64, sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
 	});
@@ -219,6 +249,16 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 		if(!announcement.just_posted) {
 			return;
 		}
+
+		/**
+		 * Emitted when a new announcement is posted to a Steam group.
+		 * You can also listen for groupAnnouncement#steamid64 to get announcements only for a specific group.
+		 *
+		 * @event SteamUser#groupAnnouncement
+		 * @param {SteamID} steamID - The SteamID of the group
+		 * @param {string} headline - The title of the announcement
+		 * @param {string} gid - The announcement's GID
+		 */
 
 		self.emit('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
 		self.emit('groupAnnouncement#' + sid64, sid, announcement.headline, announcement.gid.toString());
@@ -232,6 +272,22 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
 		if(body.bincremental) {
+			/**
+			 * Emitted when a relationship with a Steam group changes. The relationship in myGroups is updated after this is emitted.
+			 *
+			 * @event SteamUser#groupRelationship
+			 * @param {SteamID} steamID - The SteamID of the group
+			 * @param {EFriendRelationship} relationship - Your new relationship with the group
+			 */
+
+			/**
+			 * Emitted when a relationship with a Steam user changes. The relationship in myFriendsis updated after this is emitted.
+			 *
+			 * @event SteamUser#friendRelationship
+			 * @param {SteamID} steamID - The SteamID of the group
+			 * @param {EFriendRelationship} relationship - Your new relationship with the user
+			 */
+
 			// This isn't an initial download of the friends list, something changed
 			self.emit(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
@@ -244,6 +300,18 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 	});
 
 	if(!body.bincremental) {
+		/**
+		 * Emitted when our entire friends list is loaded.
+		 *
+		 * @event SteamUser#friendsList
+		 */
+
+		/**
+		 * Emitted when our entire group list is loaded.
+		 *
+		 * @event SteamUser#groupList
+		 */
+
 		this.emit('friendsList');
 		this.emit('groupList');
 	}

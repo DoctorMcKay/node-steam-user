@@ -139,3 +139,9 @@ require('./components/utility.js');
 require('./components/trading.js');
 require('./components/friends.js');
 require('./components/chat.js');
+
+/**
+ * Called when the request completes.
+ * @callback SteamUser~genericEResultCallback
+ * @param {EResult} eresult - The result of the operation
+ */
