@@ -8,6 +8,8 @@ require('util').inherits(SteamUser, require('events').EventEmitter);
 module.exports = SteamUser;
 
 SteamUser.Steam = Steam;
+SteamUser.ECurrencyCode = require('../resources/ECurrencyCode.js');
+SteamUser.CurrencyData = require('../resources/CurrencyData.js');
 
 function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
