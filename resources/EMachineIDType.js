@@ -2,7 +2,7 @@
  * What type of machine ID SteamUser will use to logon to Steam with.
  * @readonly
  * @enum {number}
- * @since 1.6.4
+ * @since 1.7.0
  */
 module.exports = {
 	/** No machine ID will be provided to Steam */

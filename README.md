@@ -95,6 +95,14 @@ See the [`friends`](#friends) and [`trading`](#trading) properties.
 
 Defaults to `true`.
 
+### machineIdType
+
+What kind of machine ID will SteamUser send to Steam when logging on? Should be a value from [`EMachineIDType`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EMachineIDType.js).
+
+Added in 1.7.0.
+
+Defaults to `AccountNameGenerated`.
+
 # Properties
 
 ### client
