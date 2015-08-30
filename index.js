@@ -109,6 +109,10 @@ SteamUser.prototype.setOptions = function(options) {
 };
 
 function checkDirExists(dir) {
+	if(!dir) {
+		return;
+	}
+
 	var path = '';
 	dir.replace(/\\/g, '/').split('/').forEach(function(dir, index) {
 		if(index === 0 && !dir) {
