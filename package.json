@@ -26,5 +26,8 @@
 		"steam-crypto": "^0.0.1",
 		"vdf": "^0.0.2",
 		"binarykvparser": "^2.0.0"
+	},
+	"scripts": {
+		"prepublish": "node scripts/prepublish.js"
 	}
 }

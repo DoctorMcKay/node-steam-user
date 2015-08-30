@@ -12,6 +12,12 @@ SteamUser.ECurrencyCode = require('./resources/ECurrencyCode.js');
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 
+try {
+	SteamUser.Steam.servers = require('./resources/servers.json');
+} catch(e) {
+	// It's okay if it isn't there
+}
+
 function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
 	this.steamID = null;
