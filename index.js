@@ -1,6 +1,7 @@
 var Steam = require('steam');
 var SteamID = require('steamid');
 var AppDirectory = require('appdirectory');
+var FileStorage = require('file-storage');
 var fs = require('fs');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
@@ -62,7 +63,7 @@ function SteamUser(client, options) {
 		this.trading = new Steam.SteamTrading(this.client);
 	}
 
-	checkDirExists(this.options.dataDirectory);
+	this.storage = new FileStorage(this.options.dataDirectory);
 
 	this.client.on('message', this._handleMessage.bind(this));
 
@@ -84,9 +85,7 @@ function SteamUser(client, options) {
 	});
 
 	this.client.on('servers', function(servers) {
-		if(self.options.dataDirectory) {
-			fs.writeFile(self.options.dataDirectory + '/servers.json', JSON.stringify(servers));
-		}
+		self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
 	});
 }
 
@@ -96,10 +95,7 @@ SteamUser.prototype.setOption = function(option, value) {
 	// Handle anything that needs to happen when particular options update
 	switch(option) {
 		case 'dataDirectory':
-			if(value !== null) {
-				checkDirExists(value);
-			}
-
+			this.storage.directory = value;
 			break;
 	}
 };
@@ -113,25 +109,6 @@ SteamUser.prototype.setOptions = function(options) {
 		this.setOption(i, options[i]);
 	}
 };
-
-function checkDirExists(dir) {
-	if(!dir) {
-		return;
-	}
-
-	var path = '';
-	dir.replace(/\\/g, '/').split('/').forEach(function(dir, index) {
-		if(index === 0 && !dir) {
-			path = '/';
-		} else {
-			path += (path ? '/' : '') + dir;
-		}
-
-		if(!fs.existsSync(path)) {
-			fs.mkdirSync(path, 0750);
-		}
-	});
-}
 
 require('./components/messages.js');
 require('./components/logon.js');

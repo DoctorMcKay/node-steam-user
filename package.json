@@ -25,8 +25,12 @@
 		"bytebuffer": "^4.0.0",
 		"steam-crypto": "^0.0.1",
 		"vdf": "^0.0.2",
-		"binarykvparser": "^2.0.0"
+		"binarykvparser": "^2.0.0",
+		"file-storage": "DoctorMcKay/node-file-storage"
 	},
+	"bundledDependencies": [
+		"file-storage"
+	],
 	"scripts": {
 		"prepublish": "node scripts/prepublish.js"
 	}

@@ -31,86 +31,58 @@ SteamUser.prototype.logOn = function(details) {
 	}
 
 	var self = this;
+	var anonLogin = !this._logOnDetails.account_name;
 
-	// Sentry file handling
-	var hash;
-	if(this._logOnDetails.account_name && this._sentry && this._sentry.length > 20) {
-		// It's a full sentryfile
-		hash = Crypto.createHash('sha1');
-		hash.update(this._sentry);
-		this._logOnDetails.sha_sentryfile = hash.digest();
-		doLogin();
-	} else if(this._logOnDetails.account_name && this._sentry) {
-		// It's a hash of a sentryfile
-		this._logOnDetails.sha_sentryfile = this._sentry;
-		doLogin();
-	} else if(this._logOnDetails.account_name && this.options.dataDirectory) {
-		var sentryFilename = this._getSentryFilename();
-		fs.readFile(sentryFilename, function(err, file) {
-			if(err) {
-				// Guess the file doesn't exist
-				doLogin();
-				return;
-			}
+	// Read the required files
+	var filenames = ['servers.json'];
+	if(!anonLogin) {
+		filenames.push('sentry.' + this._logOnDetails.account_name + '.bin');
 
-			hash = Crypto.createHash('sha1');
-			hash.update(file);
-			self._logOnDetails.sha_sentryfile = hash.digest();
-			doLogin();
-		});
-	} else {
-		// Either we're logging on anonymously, or we just don't have a sentry.
-		doLogin();
+		if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+			filenames.push('machineid.bin');
+		}
 	}
 
-	function doLogin() {
-		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
+	this.storage.readFiles(filenames, function(err, files) {
+		files = files || [];
+
+		// Servers list
+		if(files[0] && files[0].contents) {
+			Steam.servers = JSON.parse(files[0].contents.toString('utf8'));
+		}
+
+		// Sentry file
+		var sentry = self._sentry || (files[1] && files[1].contents);
+		if(sentry && sentry.length > 20) {
+			// Hash the sentry
+			var hash = Crypto.createHash('sha1');
+			hash.update(sentry);
+			sentry = hash.digest();
+		}
+
+		if(sentry && sentry.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
 			throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
 		}
 
-		// See if we have a servers list
-		if(self.options.dataDirectory) {
-			fs.readFile(self.options.dataDirectory + '/servers.json', function(err, file) {
-				if(!err) {
-					try {
-						Steam.servers = JSON.parse(file);
-					} catch(e) {
-						// We don't care
-					}
-				}
+		// Machine ID
+		var machineID = self._getMachineID(files[2] && files[2].contents);
 
-				doLogin2();
-			});
-		} else {
-			doLogin2();
-		}
+		// Do the login
+		self._logOnDetails.sha_sentryfile = sentry;
+		self._logOnDetails.machine_id = machineID;
 
-		function doLogin2() {
-			// Get a machine ID
-			if(details !== true) {
-				self._getMachineID(function(id) {
-					self._logOnDetails.machine_id = id;
-					doLogin3();
-				});
-			} else {
-				doLogin3();
-			}
+		var sid = new SteamID();
+		sid.universe = SteamID.Universe.PUBLIC;
+		sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
+		sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
+		sid.accountid = 0;
+		self.client.steamID = sid.getSteamID64();
 
-			function doLogin3() {
-				var sid = new SteamID();
-				sid.universe = SteamID.Universe.PUBLIC;
-				sid.type = self._logOnDetails.account_name ? SteamID.Type.INDIVIDUAL : SteamID.Type.ANON_USER;
-				sid.instance = self._logOnDetails.account_name ? SteamID.Instance.DESKTOP : SteamID.Instance.ALL;
-				sid.accountid = 0;
-				self.client.steamID = sid.getSteamID64();
+		self.client.connect();
 
-				self.client.connect();
-
-				self._onConnected = onConnected.bind(self);
-				self.client.once('connected', self._onConnected);
-			}
-		}
-	}
+		self._onConnected = onConnected.bind(self);
+		self.client.once('connected', self._onConnected);
+	});
 };
 
 function onConnected() {
@@ -131,41 +103,34 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 	this.client.disconnect();
 };
 
-SteamUser.prototype._getMachineID = function(callback) {
+SteamUser.prototype._getMachineID = function(localFile) {
 	if(!this._logOnDetails.account_name || this.options.machineIdType == SteamUser.EMachineIDType.None) {
 		// No machine IDs for anonymous logons
-		callback(null);
-		return;
+		return null;
 	}
 
 	// The user wants to use a random machine ID that's saved to dataDirectory
-	if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom && this.options.dataDirectory) {
-		var self = this;
-		fs.readFile(this.options.dataDirectory + "/machineid.bin", function(err, id) {
-			if(err) {
-				id = getRandomID();
-				fs.writeFile(self.options.dataDirectory + "/machineid.bin", id);
-			}
+	if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+		if(localFile) {
+			return localFile;
+		}
 
-			callback(id);
-		});
-
-		return;
+		var file = getRandomID();
+		this.storage.writeFile('machineid.bin', file);
+		return file;
 	}
 
 	// The user wants to use a machine ID that's generated off the account name
 	if(this.options.machineIdType == SteamUser.EMachineIDType.AccountNameGenerated) {
-		callback(createMachineID(
+		return createMachineID(
 			"SteamUser Hash BB3 " + this._logOnDetails.account_name,
 			"SteamUser Hash FF2 " + this._logOnDetails.account_name,
 			"SteamUser Hash 3B3 " + this._logOnDetails.account_name
-		));
-
-		return;
+		);
 	}
 
 	// Default to random
-	callback(getRandomID());
+	return getRandomID();
 
 	function getRandomID() {
 		return createMachineID(Math.random().toString(), Math.random().toString(), Math.random().toString());
