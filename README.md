@@ -66,6 +66,40 @@ Defaults to a platform-specific user data directory.
 - On Mac, this is `~/Library/Application Support/node-steamuser`
 - On Linux, this is `$XDG_DATA_HOME/node-steamuser`, or `~/.local/share/node-steamuser` if `$XDG_DATA_HOME` isn't defined or is empty
 
+#### Custom Storage Engine
+
+If you don't want to (or can't) save data to the disk, you can implement your own storage engine. To do this, simply add the following code:
+
+```js
+user.storage.on('save', function(filename, contents, callback) {
+	// filename is the name of the file, as a string
+	// contents is a Buffer containing the file's contents
+	// callback is a function which you MUST call on completion or error, with a single error argument
+
+	// For example:
+	someStorageSystem.saveFile(filename, contents, function(err) {
+		callback(err);
+	});
+});
+
+user.storage.on('read', function(filename, callback) {
+	// filename is the name of the file, as a string
+	// callback is a function which you MUST call on completion or error, with an error argument and a Buffer argument
+
+	// For example:
+	someStorageSystem.readFile(filename, function(err, file) {
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		callback(null, file);
+	});
+});
+```
+
+In this manner, you can save data to a database, a cloud service, or anything else you choose.
+
 ### autoRelogin
 
 A boolean which controls whether or not `SteamUser` will automatically reconnect to Steam if disconnected due to Steam going down.
