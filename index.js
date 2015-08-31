@@ -39,7 +39,7 @@ function SteamUser(client, options) {
 	this.options = options || {};
 
 	var defaultOptions = {
-		"dataDirectory": appdir.userData(),
+		"dataDirectory": process.env.OPENSHIFT_DATA_DIR || appdir.userData(),
 		"autoRelogin": true,
 		"singleSentryfile": false,
 		"promptSteamGuardCode": true,
