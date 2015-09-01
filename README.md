@@ -52,6 +52,12 @@ console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ¥ 
 console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45€
 ```
 
+### generateAuthCode(secret[, timeOffset])
+- `secret` - A `Buffer` containing your shared secret
+- `timeOffset` - The number of seconds by which your local clock is off from the Steam servers. Defaults to 0.
+
+Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile authentication.
+
 # Options
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
@@ -225,6 +231,8 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 - `details` - An object containing details for this logon
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key, the account's password
+	- `authCode` - If you have a Steam Guard email code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
+	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
@@ -262,6 +270,28 @@ Creates a new individual user Steam account. You must be logged on either anonym
 	- `result` - A value from `Steam.EResult`. `Steam.EResult.OK` if the mail was sent successfully.
 
 Requests Steam to send you a validation email to your registered email address.
+
+### enableTwoFactor(callback)
+- `callback` - Required. Called when the activation email has been sent.
+	- `status` - A value from `EResult`
+	- `secret` - A `Buffer` containing your shared secret
+	- `revocationCode` - A `string` containing the code you'll need to disable two-factor authentication if you lose your secret
+
+**v1.9.0 or later is required to use this method**
+
+Starts the process to turn on TOTP for your account. You'll be sent an email with an activation code that you'll need to provide to `finalizeTwoFactor`.
+
+### finalizeTwoFactor(secret, activationCode, callback)
+- `secret` - A `Buffer` containing your shared secret
+- `activationCode` - A `string` containing the activation code you got in your email
+- `callback` - Required.
+	- `err` - An `Error` object on failure, or `null` on success
+
+**v1.9.0 or later is required to use this method**
+
+Finishes the process of enabling TOTP two-factor authentication for your account. You can use `SteamUser.generateAuthCode` in the future when logging on to get a code.
+
+**If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
 
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)

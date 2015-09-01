@@ -53,7 +53,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 
 				finalize();
 			} else {
-				callback(null, secret);
+				callback(null);
 			}
 		});
 	}
