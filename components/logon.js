@@ -24,6 +24,8 @@ SteamUser.prototype.logOn = function(details) {
 			"account_name": details.accountName,
 			"password": details.password,
 			"login_key": details.loginKey,
+			"auth_code": details.authCode,
+			"two_factor_code": details.twoFactorCode,
 			"should_remember_password": !!details.rememberPassword,
 			"obfustucated_private_ip": details.logonID || 0,
 			"protocol_version": 65575
