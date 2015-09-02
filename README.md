@@ -652,6 +652,24 @@ Creates a new multi-user chat room.
 
 # Events
 
+## ID Events
+
+Events marked as **ID events** are special. They all have a `SteamID` object as their first parameter. In addition to the event itself firing, a second event comprised of `eventName + "#" + steamID.getSteamID64()` is fired.
+
+For example:
+
+```js
+// This will fire when we receive a chat message from ANY friend
+user.on('friendMessage', function(steamID, message) {
+	console.log("Friend message from " + steamID.getSteam3RenderedID() + ": " + message);
+}
+
+// This will fire when we receive a chat message from [U:1:46143802] / 76561198006409530 ONLY
+user.on('friendMessage#76561198006409530', function(steamID, message) {
+	console.log("Friend message from " + steamID.getSteam3RenderedID() + ": " + message);
+}
+```
+
 ### loggedOn
 - `details` - An object containing various details about your account (see [`CMsgClientLogonResponse`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/Protobufs/steamclient/steammessages_clientserver.proto#L93-L116))
 
@@ -774,6 +792,10 @@ This isn't emitted for anonymous accounts. However, all anonymous user accounts 
 - `respond` - A function which you should call to either accept or decline the request
 	- `accept` - `true` to accept the request, `false` to decline it
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when someone sends us a trade request. Example usage:
 
 ```js
@@ -794,10 +816,18 @@ user.on('tradeRequest', function(name, steamID, accept) {
 	- `defaultEmailChangeProbationDays`
 	- `emailChangeProbationDays`
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when someone responds to our trade request. Also emitted with response `EEconTradeResponse.Cancel` when someone cancels their outstanding trade request to us.
 
 ### tradeStarted
 - `steamID` - The SteamID of your trade partner, as a `SteamID` object
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
 
 Emitted when a new trade session has started (either as a result of someone accepting a Steam trade request, an in-game (TF2) trade request, or something else).
 
@@ -807,25 +837,21 @@ The trade is now available at http://steamcommunity.com/trade/<SteamID>, and can
 - `sid` - A `SteamID` object for the user whose data we just received
 - `user` - An object containing the user's persona data
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when Steam sends us persona information about a user. The [`users`](#users) property isn't yet updated when this is emitted, so you can compare to see what changed.
-
-### user#id
-- `sid` - A `SteamID` object for the user whose data we just received
-- `user` - An object containing the user's persona data
-
-Same as [`user`](#user), but for a specific ID. For example, to only get updates for [U:1:46143802], bind a listener to `user#76561198006409530`.
 
 ### group
 - `sid` - A `SteamID` object for the group whose data we just received
 - `group` - An object containing the group's data
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when Steam sends us information about a Steam group. The [`groups`](#groups) property isn't yet updated when this is emitted, so you can compare to see what changed.
-
-### group#id
-- `sid` - A `SteamID` object for the group whose data we just received
-- `group` - An object containing the group's data
-
-Same as [`group`](#group), but for a specific ID.
 
 ### groupEvent
 - `sid` - A `SteamID` object for the group who just posted/started an event
@@ -834,34 +860,30 @@ Same as [`group`](#group), but for a specific ID.
 - `gid` - The event's GID (link to the event page at https://steamcommunity.com/gid/<SteamID>/event/<GID>)
 - `gameID` - The AppID of the game which this event is associated with
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when a group schedules a new event, or a new event starts.
-
-### groupEvent#id
-- `sid` - A `SteamID` object for the group who just posted/started an event
-- `headline` - The name of the event
-- `date` - A `Date` object for the event's start time
-- `gid` - The event's GID (link to the event page at https://steamcommunity.com/gid/<SteamID>/event/<GID>)
-- `gameID` - The AppID of the game which this event is associated with
-
-Same as [`groupEvent`](#groupevent), but for a specific group SteamID.
 
 ### groupAnnouncement
 - `sid` - A `SteamID` object for the group who just posted an announcement
 - `headline` - The title of the announcement
 - `gid` - The announcement's GID (link to the announcement page at https://steamcommunity.com/gid/<SteamID>/announcements/detail/<GID>)
 
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
 Emitted when a group posts a new announcement.
-
-### groupAnnouncement#id
-- `sid` - A `SteamID` object for the group who just posted an announcement
-- `headline` - The title of the announcement
-- `gid` - The announcement's GID (link to the announcement page at https://steamcommunity.com/gid/<SteamID>/announcements/detail/<GID>)
-
-Same as [`groupAnnouncement`](#groupannouncement), but for a specific group SteamID.
 
 ### friendRelationship
 - `sid` - A `SteamID` object for the user whose relationship with us just changed
 - `relationship` - A value from `EFriendRelationship`
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
 
 Emitted when our relationship with a particular user changes. For example, `EFriendRelationship.RequestRecipient` means that we got invited as a friend, `EFriendRelationship.None` means that we got unfriended.
 
@@ -870,6 +892,10 @@ The [`myFriends`](#myfriends) property isn't yet updated when this is emitted, s
 ### groupRelationship
 - `sid` - A `SteamID` object for the group whose relationship with us just changed
 - `relationship` - A value from `EFriendRelationship`
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
 
 Emitted when our relationship with a particular Steam group changes.
 

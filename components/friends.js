@@ -175,8 +175,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 		 * @param {Object} user - An object containing the user's persona info
 		 */
 
-		self.emit('user', sid, user);
-		self.emit('user#' + sid64, sid, user);
+		self._emitIdEvent('user', sid, user);;
 
 		for(i in user) {
 			if(user.hasOwnProperty(i) && user[i] !== null) {
@@ -214,8 +213,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 	 * @param {Object} user - An object containing the group's info
 	 */
 
-	this.emit('group', sid, body);
-	this.emit('group#' + sid64, sid, body);
+	this._emitIdEvent('group', sid, body);
 
 	for(i in body) {
 		if(body.hasOwnProperty(i) && body[i] !== null) {
@@ -241,8 +239,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 		 * @param {number} gameID - If this is an event for a game, this is the game's appid
 		 */
 
-		self.emit('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
-		self.emit('groupEvent#' + sid64, sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
+		self._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
 	});
 
 	(body.announcements || []).forEach(function(announcement) {
@@ -260,8 +257,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 		 * @param {string} gid - The announcement's GID
 		 */
 
-		self.emit('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
-		self.emit('groupAnnouncement#' + sid64, sid, announcement.headline, announcement.gid.toString());
+		self._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
 	});
 };
 
@@ -289,7 +285,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 			 */
 
 			// This isn't an initial download of the friends list, something changed
-			self.emit(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
+			self._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
 
 		if(relationship.efriendrelationship == Steam.EFriendRelationship.None) {
