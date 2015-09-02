@@ -293,8 +293,6 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 - `accountName` - The username of your new account
 - `password` - The password for your new account
 - `email` - The contact email for your new account
-- `question` - A security question (string) for your new account
-- `answer` - The answer for your new account's security question
 - `callback` - Called when the account is either created or an error occurs
 	- `result` - A value from `Steam.EResult`.
 		- `Steam.EResult.OK` if the account was created successfully
