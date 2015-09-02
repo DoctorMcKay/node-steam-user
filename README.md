@@ -491,15 +491,23 @@ Sends a friend request to the user with the specified `SteamID`. If they've alre
 
 Removed a specified user from your friends list. Also ignores an outstanding friend request from this user.
 
-### blockUser(steamID, block[, callback])
-- `steamID` - The SteamID of the user you want to (un)block, as a `SteamID` object or a string that can parse into one
-- `block` - `true` to block communication with them, `false` to unblock
+### blockUser(steamID[, callback])
+- `steamID` - The SteamID of the user you want to block, as a `SteamID` object or a string that can parse into one
 - `callback` - Optional. Called when the request completes
 	- `eresult` - A value from the `EResult` enum
 
 **v1.9.0 or later is required to use this method**
 
-Blocks or unblocks communication with a specified user.
+Blocks all communication with a specified user.
+
+### unblockUser(steamID[, callback])
+- `steamID` - The SteamID of the user you want to unblock, as a `SteamID` object or a string that can parse into one
+- `callback` - Optional. Called when the request completes
+	- `eresult` - A value from the `EResult` enum
+
+**v1.9.0 or later is required to use this method**
+
+Unblocks all communication with a specified user.
 
 ### getPersonas(steamids[, callback])
 - `steamids` - An array of `SteamID` objects or strings which can parse into `SteamID` objects

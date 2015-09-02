@@ -40,12 +40,11 @@ SteamUser.prototype.removeFriend = function(steamID) {
 };
 
 /**
- * Block or unblock all communication with a user.
- * @param {(SteamID|string)} steamID - Either a SteamID object of the user to (un)block, or a string which can parse into one.
- * @param {bool} block - true to block, false to unblock
+ * Block all communication with a user.
+ * @param {(SteamID|string)} steamID - Either a SteamID object of the user to block, or a string which can parse into one.
  * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
  */
-SteamUser.prototype.blockUser = function(steamID, block, callback) {
+SteamUser.prototype.blockUser = function(steamID, callback) {
 	if(typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
@@ -53,7 +52,32 @@ SteamUser.prototype.blockUser = function(steamID, block, callback) {
 	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(this.steamID.getSteamID64());
 	buffer.writeUint64(steamID.getSteamID64());
-	buffer.writeUint8(block ? 1 : 0);
+	buffer.writeUint8(1);
+
+	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
+		if(!callback) {
+			return; // ignore
+		}
+
+		body.readUint64(); // unknown
+		callback(body.readUint32());
+	});
+};
+
+/**
+ * Unblock all communication with a user.
+ * @param {(SteamID|string)} steamID - Either a SteamID object of the user to unblock, or a string which can parse into one.
+ * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ */
+SteamUser.prototype.unblockUser = function(steamID, callback) {
+	if(typeof steamID === 'string') {
+		steamID = new SteamID(steamID);
+	}
+
+	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	buffer.writeUint64(this.steamID.getSteamID64());
+	buffer.writeUint64(steamID.getSteamID64());
+	buffer.writeUint8(0);
 
 	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
 		if(!callback) {
