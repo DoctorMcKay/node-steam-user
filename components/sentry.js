@@ -8,9 +8,9 @@ SteamUser.prototype.setSentry = function(sentry) {
 
 SteamUser.prototype._getSentryFilename = function() {
 	if(this.options.singleSentryfile) {
-		return this.options.dataDirectory + '/sentry.bin';
+		return 'sentry.bin';
 	} else {
-		return this.options.dataDirectory + '/sentry.' + this._logOnDetails.account_name + '.bin';
+		return 'sentry.' + this._logOnDetails.account_name + '.bin';
 	}
 };
 
@@ -18,9 +18,7 @@ SteamUser.prototype._getSentryFilename = function() {
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
 	// TODO: Handle partial updates
-	if(this.options.dataDirectory) {
-		fs.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
-	}
+	this.storage.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
 
 	this.emit('sentry', body.bytes.toBuffer());
 

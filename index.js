@@ -1,6 +1,7 @@
 var Steam = require('steam');
 var SteamID = require('steamid');
 var AppDirectory = require('appdirectory');
+var FileStorage = require('file-storage');
 var fs = require('fs');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
@@ -8,6 +9,15 @@ require('util').inherits(SteamUser, require('events').EventEmitter);
 module.exports = SteamUser;
 
 SteamUser.Steam = Steam;
+SteamUser.ECurrencyCode = require('./resources/ECurrencyCode.js');
+SteamUser.CurrencyData = require('./resources/CurrencyData.js');
+SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
+
+try {
+	SteamUser.Steam.servers = require('./resources/servers.json');
+} catch(e) {
+	// It's okay if it isn't there
+}
 
 function SteamUser(client, options) {
 	this.client = client ? client : new Steam.SteamClient();
@@ -37,11 +47,12 @@ function SteamUser(client, options) {
 	this.options = options || {};
 
 	var defaultOptions = {
-		"dataDirectory": appdir.userData(),
+		"dataDirectory": process.env.OPENSHIFT_DATA_DIR || appdir.userData(),
 		"autoRelogin": true,
 		"singleSentryfile": false,
 		"promptSteamGuardCode": true,
 		"createHandlers": true,
+		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
 		"debug": false
 	};
 
@@ -60,7 +71,7 @@ function SteamUser(client, options) {
 		this.trading = new Steam.SteamTrading(this.client);
 	}
 
-	checkDirExists(this.options.dataDirectory);
+	this.storage = new FileStorage(this.options.dataDirectory);
 
 	this.client.on('message', this._handleMessage.bind(this));
 
@@ -82,9 +93,7 @@ function SteamUser(client, options) {
 	});
 
 	this.client.on('servers', function(servers) {
-		if(self.options.dataDirectory) {
-			fs.writeFile(self.options.dataDirectory + '/servers.json', JSON.stringify(servers));
-		}
+		self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
 	});
 }
 
@@ -94,10 +103,7 @@ SteamUser.prototype.setOption = function(option, value) {
 	// Handle anything that needs to happen when particular options update
 	switch(option) {
 		case 'dataDirectory':
-			if(value !== null) {
-				checkDirExists(value);
-			}
-
+			this.storage.directory = value;
 			break;
 	}
 };
@@ -112,21 +118,6 @@ SteamUser.prototype.setOptions = function(options) {
 	}
 };
 
-function checkDirExists(dir) {
-	var path = '';
-	dir.replace(/\\/g, '/').split('/').forEach(function(dir, index) {
-		if(index === 0 && !dir) {
-			path = '/';
-		} else {
-			path += (path ? '/' : '') + dir;
-		}
-
-		if(!fs.existsSync(path)) {
-			fs.mkdirSync(path, 0750);
-		}
-	});
-}
-
 require('./components/messages.js');
 require('./components/logon.js');
 require('./components/sentry.js');
@@ -139,6 +130,7 @@ require('./components/utility.js');
 require('./components/trading.js');
 require('./components/friends.js');
 require('./components/chat.js');
+require('./components/twofactor.js');
 
 /**
  * Called when the request completes.

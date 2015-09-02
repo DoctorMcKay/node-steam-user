@@ -52,6 +52,12 @@ console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ¥ 
 console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45€
 ```
 
+### generateAuthCode(secret[, timeOffset])
+- `secret` - A `Buffer` containing your shared secret
+- `timeOffset` - The number of seconds by which your local clock is off from the Steam servers. Defaults to 0.
+
+Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile authentication.
+
 # Options
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
@@ -62,9 +68,44 @@ Controls where the Steam server list and sentry files are written. If `null`, no
 
 Defaults to a platform-specific user data directory.
 
+- On [OpenShift](https://www.openshift.com), this is the `OPENSHIFT_DATA_DIR` environment variable
 - On Windows, this is `%localappdata%\doctormckay\node-steamuser`
 - On Mac, this is `~/Library/Application Support/node-steamuser`
 - On Linux, this is `$XDG_DATA_HOME/node-steamuser`, or `~/.local/share/node-steamuser` if `$XDG_DATA_HOME` isn't defined or is empty
+
+#### Custom Storage Engine
+
+If you don't want to (or can't) save data to the disk, you can implement your own storage engine. To do this, simply add the following code:
+
+```js
+user.storage.on('save', function(filename, contents, callback) {
+	// filename is the name of the file, as a string
+	// contents is a Buffer containing the file's contents
+	// callback is a function which you MUST call on completion or error, with a single error argument
+
+	// For example:
+	someStorageSystem.saveFile(filename, contents, function(err) {
+		callback(err);
+	});
+});
+
+user.storage.on('read', function(filename, callback) {
+	// filename is the name of the file, as a string
+	// callback is a function which you MUST call on completion or error, with an error argument and a Buffer argument
+
+	// For example:
+	someStorageSystem.readFile(filename, function(err, file) {
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		callback(null, file);
+	});
+});
+```
+
+In this manner, you can save data to a database, a cloud service, or anything else you choose.
 
 ### autoRelogin
 
@@ -94,6 +135,14 @@ A boolean which controls whether or not `SteamUser` will automatically construct
 See the [`friends`](#friends) and [`trading`](#trading) properties.
 
 Defaults to `true`.
+
+### machineIdType
+
+What kind of machine ID will SteamUser send to Steam when logging on? Should be a value from [`EMachineIDType`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EMachineIDType.js).
+
+Added in 1.7.0.
+
+Defaults to `AccountNameGenerated`.
 
 # Properties
 
@@ -202,6 +251,8 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 - `details` - An object containing details for this logon
 	- `accountName` - If logging into a user account, the account's name
 	- `password` - If logging into an account without a login key, the account's password
+	- `authCode` - If you have a Steam Guard email code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
+	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
@@ -239,6 +290,43 @@ Creates a new individual user Steam account. You must be logged on either anonym
 	- `result` - A value from `Steam.EResult`. `Steam.EResult.OK` if the mail was sent successfully.
 
 Requests Steam to send you a validation email to your registered email address.
+
+### enableTwoFactor(callback)
+- `callback` - Required. Called when the activation email has been sent.
+	- `status` - A value from `EResult`
+	- `secret` - A `Buffer` containing your shared secret
+	- `revocationCode` - A `string` containing the code you'll need to disable two-factor authentication if you lose your secret
+
+**v1.9.0 or later is required to use this method**
+
+Starts the process to turn on TOTP for your account. You'll be sent an email with an activation code that you'll need to provide to `finalizeTwoFactor`.
+
+### finalizeTwoFactor(secret, activationCode, callback)
+- `secret` - A `Buffer` containing your shared secret
+- `activationCode` - A `string` containing the activation code you got in your email
+- `callback` - Required.
+	- `err` - An `Error` object on failure, or `null` on success
+
+**v1.9.0 or later is required to use this method**
+
+Finishes the process of enabling TOTP two-factor authentication for your account. You can use `SteamUser.generateAuthCode` in the future when logging on to get a code.
+
+**If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
+
+### disableTwoFactor(options, callback)
+- `options` - An object containing at least one of the following properties
+	- `revocationCode` - If you have the revocation code (which starts with R) that you got when you enabled TOTP, you can provide it here
+	- `secret` - If you have your secret, you can provide it here (as a `Buffer`)
+	- `timeOffset` - If you're using your `secret` and you know the offset between your local clock and the Steam servers, you can provide it here
+	- `deauthorizeAll` - If you want to deauthorize all other machines from Steam Guard, pass true here. Default false
+
+**v1.9.0 or later is required to use this method**
+
+Disables TOTP two-factor authentication for your account and switches you back to regular Steam Guard emails.
+
+**Either** your revocation code **or** your secret is required to disable TOTP. You don't need to provide both.
+
+If you've lost your secret but you have your revocation code, you can disable TOTP [from the support site](https://help.steampowered.com/#HelpWithLoginInfo?nav=authenticator).
 
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)

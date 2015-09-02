@@ -1,6 +1,6 @@
 {
 	"name": "steam-user",
-	"version": "1.6.3",
+	"version": "1.8.0",
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
 	"keywords": ["steam", "steam client", "steam user"],
 	"homepage": "https://github.com/DoctorMcKay/node-steam-user",
@@ -25,6 +25,13 @@
 		"bytebuffer": "^4.0.0",
 		"steam-crypto": "^0.0.1",
 		"vdf": "^0.0.2",
-		"binarykvparser": "^2.0.0"
+		"binarykvparser": "^2.0.0",
+		"file-storage": "DoctorMcKay/node-file-storage"
+	},
+	"bundledDependencies": [
+		"file-storage"
+	],
+	"scripts": {
+		"prepublish": "node scripts/prepublish.js"
 	}
 }
