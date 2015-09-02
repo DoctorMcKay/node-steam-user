@@ -130,6 +130,8 @@ Defaults to `true`.
 
 ### createHandlers
 
+**Deprecated as of v1.9.0 and will be removed in a future major version.**
+
 A boolean which controls whether or not `SteamUser` will automatically construct instances of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends) and [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading).
 
 See the [`friends`](#friends) and [`trading`](#trading) properties.
@@ -160,9 +162,13 @@ An object containing options for this `SteamUser`. **Read-only**, use `setOption
 
 ### friends
 
+**Deprecated as of v1.9.0 and will be removed in a future major version.**
+
 If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends). Not defined otherwise.
 
 ### trading
+
+**Deprecated as of v1.9.0 and will be removed in a future major version.**
 
 If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading). Not defined otherwise.
 
