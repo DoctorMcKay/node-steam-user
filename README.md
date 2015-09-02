@@ -293,6 +293,21 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 
 **If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
 
+### disableTwoFactor(options, callback)
+- `options` - An object containing at least one of the following properties
+	- `revocationCode` - If you have the revocation code (which starts with R) that you got when you enabled TOTP, you can provide it here
+	- `secret` - If you have your secret, you can provide it here (as a `Buffer`)
+	- `timeOffset` - If you're using your `secret` and you know the offset between your local clock and the Steam servers, you can provide it here
+	- `deauthorizeAll` - If you want to deauthorize all other machines from Steam Guard, pass true here. Default false
+
+**v1.9.0 or later is required to use this method**
+
+Disables TOTP two-factor authentication for your account and switches you back to regular Steam Guard emails.
+
+**Either** your revocation code **or** your secret is required to disable TOTP. You don't need to provide both.
+
+If you've lost your secret but you have your revocation code, you can disable TOTP [from the support site](https://help.steampowered.com/#HelpWithLoginInfo?nav=authenticator).
+
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
 
