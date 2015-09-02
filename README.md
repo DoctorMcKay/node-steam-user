@@ -911,9 +911,13 @@ The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so 
 
 ### friendsList
 
+**v1.9.0 or later is required to use this event**
+
 Emitted when our friends list is downloaded from Steam after logon.
 
 ### groupList
+
+**v1.9.0 or later is required to use this event**
 
 Emitted when our group list is downloaded from Steam after logon.
 
