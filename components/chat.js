@@ -282,13 +282,12 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendMsgIncoming] = function(bod
 
 	switch(body.chat_entry_type) {
 		case Steam.EChatEntryType.ChatMsg:
-			this.emit('friendMessage', senderID, message);
-			this.emit('friendMessage#' + senderID.getSteamID64(), senderID, message);
+			this._emitIdEvent('friendMessage', senderID, message);
+			this._emitIdEvent('friendOrChatMessage', senderID, message, senderID);
 			break;
 
 		case Steam.EChatEntryType.Typing:
-			this.emit('friendTyping', senderID);
-			this.emit('friendTyping#' + senderID.getSteamID64(), senderID);
+			this._emitIdEvent('friendTyping', senderID);
 			break;
 	}
 };
@@ -316,13 +315,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendMsgEchoToSender] = function
 
 	switch(body.chat_entry_type) {
 		case Steam.EChatEntryType.ChatMsg:
-			this.emit('friendMessageEcho', recipientID, message);
-			this.emit('friendMessageEcho#' + recipientID.getSteamID64(), recipientID, message);
+			this._emitIdEvent('friendMessageEcho', recipientID, message);
 			break;
 
 		case Steam.EChatEntryType.Typing:
-			this.emit('friendTypingEcho', recipientID);
-			this.emit('friendTypingEcho#' + recipientID.getSteamID64(), recipientID);
+			this._emitIdEvent('friendTypingEcho', recipientID);
 			break;
 	}
 };
@@ -350,6 +347,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatMsg] = function(body) {
 	 * @param {string} message - The chat message text
 	 */
 
+	this._emitIdEvent('friendOrChatMessage', chatter, message, room);
 	this.emit('chatMessage', room, chatter, message);
 	this.emit('chatMessage#' + room.getSteamID64(), room, chatter, message);
 	this.emit('chatMessage#' + chatter.getSteamID64(), room, chatter, message);
