@@ -497,7 +497,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatMemberInfo] = function(body) 
 		var target64 = target.getSteamID64();
 
 		if(action & Steam.EChatMemberStateChange.Entered) {
-			this._emitIdEvent('chatUserJoined', chatID, target);;
+			this._emitIdEvent('chatUserJoined', chatID, target);
 		}
 
 		if(action & Steam.EChatMemberStateChange.Left) {

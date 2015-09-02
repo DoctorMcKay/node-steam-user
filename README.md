@@ -908,3 +908,235 @@ Emitted when our friends list is downloaded from Steam after logon.
 ### groupList
 
 Emitted when our group list is downloaded from Steam after logon.
+
+### friendOrChatMessage
+- `room` - The room to which the message was sent. This is the user's `SteamID` if it was a friend message
+- `message` - The message text
+- `senderID` - The message sender, as a `SteamID` object
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when we receive either a friend message or a chat room message.
+
+### friendMessage
+- `senderID` - The message sender, as a `SteamID` object
+- `message` - The message text
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when we receive a direct friend message (that is, not through a chat room).
+
+### friendTyping
+- `senderID` - The `SteamID` of the friend who's typing
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when Steam notifies us that one of our friends is typing a message to us.
+
+### friendMessageEcho
+- `recipientID` - The `SteamID` of the user who rececived this message
+- `message` - The message text
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when Steam echos us a message that we sent to a friend on another login.
+
+### friendTypingEcho
+- `recipientID` - The `SteamID` of the user who we're typing to
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when Steam echos us a notification that we're typing to a friend on another login.
+
+### chatMessage
+- `room` - The `SteamID` of the chat room
+- `chatter` - The `SteamID` of the message sender
+- `message` - The message text
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when we receive a chat message from a chat room. This is a special ID event. Any of the following are acceptable:
+- `chatMessage`
+- `chatMessage#roomID`
+- `chatMessage#senderID`
+- `chatMessage#roomID#senderID`
+
+### chatHistory
+- `steamID` - The `SteamID` of the user with whom we got chat history
+- `success` - An `EResult` value
+- `messages` - An array of message objects
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+With the exception of the `steamID` argument, this is identical to the callback of `getChatHistory`.
+
+### chatInvite
+- `inviterID` - The `SteamID` of the user who invited us
+- `chatID` - The `SteamID` of the chat that we were invited to
+- `chatName` - The name of the chat we were invited to. Empty if it's a multi-user chat and not a group chat.
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when we're invited to join a chat room. This is a special ID event. Any of the following are acceptable:
+- `chatInvite`
+- `chatInvite#inviterID`
+- `chatInvite#chatID`
+- `chatInvite#inviterID#chatID`
+
+### chatCreated
+- `friendID` - The `SteamID` of the friend with whom we were creating this room
+- `eresult` - An `EResult` value
+- `chatID` - The `SteamID` of the newly-created chat, if successful
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+With the exception of the `friendID` argument, this event is identical to the callback of `createChatRoom`.
+
+### chatEnter
+- `chatID` - The `SteamID` of the chat room that we either entered or failed to enter
+- `response` - A value from `EChatRoomEnterResponse`
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+With the exception of the `chatID` argument, this event is identical to the callback of `joinChat`.
+
+### chatLeft
+- `chatID` - The `SteamID` of the chat room that we left
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when we leave a chat room for any reason (we left, kicked, banned, etc).
+
+### chatUserJoined
+- `chatID` - The `SteamID` of the chat room that the user joined
+- `userID` - The `SteamID` of the user who joined
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user joins a chat room we're in.
+
+### chatUserLeft
+- `chatID` - The `SteamID` of the chat room that the user left
+- `userID` - The `SteamID` of the user who left
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user leaves a chat room we're in.
+
+### chatUserDisconnected
+- `chatID` - The `SteamID` of the chat room that the user disconnected from
+- `userID` - The `SteamID` of the user who disconnected
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user in a chat room we're in disconnects from Steam.
+
+### chatUserKicked
+- `chatID` - The `SteamID` of the chat room that the user was kicked from
+- `userID` - The `SteamID` of the user who was kicked
+- `actor` - The `SteamID` of the user who did the kicking
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user is kicked from a chat room we're in.
+
+### chatUserBanned
+- `chatID` - The `SteamID` of the chat room that the user was banned from
+- `userID` - The `SteamID` of the user who was banned
+- `actor` - The `SteamID` of the user who did the banning
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user is banned from a chat room we're in.
+
+### chatUserSpeaking
+- `chatID` - The `SteamID` of the chat room that the user is speaking in
+- `userID` - The `SteamID` of the user who is speaking
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user in a chat room we're in starts speaking over voice chat.
+
+### chatUserDoneSpeaking
+- `chatID` - The `SteamID` of the chat room that the user is done speaking in
+- `userID` - The `SteamID` of the user who is done speaking
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a user in a chat room we're in stops speaking over voice chat.
+
+### chatSetPublic
+- `chatID` - The `SteamID` of the chat room that was unlocked
+- `actor` - The `SteamID` of the user who unlocked it
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a chat room we're in is unlocked so that anyone can join.
+
+### chatSetPrivate
+- `chatID` - The `SteamID` of the chat room that was locked
+- `actor` - The `SteamID` of the user who locked it
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a chat room we're in is locked so that only group members can join without an invite.
+
+### chatSetOfficersOnly
+- `chatID` - The `SteamID` of the chat room that was set officers-only
+- `actor` - The `SteamID` of the user who set it officers-only
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a chat room we're in is set so that only group officers can chat.
+
+### chatSetPrivate
+- `chatID` - The `SteamID` of the chat room that was unset officers-only
+- `actor` - The `SteamID` of the user who unset it officers-only
+
+**v1.9.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when a chat room we're in is set so that everyone can chat.
