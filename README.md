@@ -839,7 +839,7 @@ Emitted when someone responds to our trade request. Also emitted with response `
 
 Emitted when a new trade session has started (either as a result of someone accepting a Steam trade request, an in-game (TF2) trade request, or something else).
 
-The trade is now available at http://steamcommunity.com/trade/<SteamID>, and can be automated with [`node-steam-trade`](https://github.com/seishun/node-steam-trade).
+The trade is now available at http://steamcommunity.com/trade/[SteamID], and can be automated with [`node-steam-trade`](https://github.com/seishun/node-steam-trade).
 
 ### user
 - `sid` - A `SteamID` object for the user whose data we just received
