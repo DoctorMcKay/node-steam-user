@@ -3,13 +3,16 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 
-SteamUser.prototype.createAccount = function(accountName, password, email, question, answer, callback) {
+SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
+	if(typeof callback === 'string' && typeof arguments[5] === 'function') {
+		// Support people providing questions/answers from back when that was a thing
+		callback = arguments[5];
+	}
+	
 	this._send(Steam.EMsg.ClientCreateAccountProto, {
 		"account_name": accountName,
 		"password": password,
 		"email": email,
-		"question": question,
-		"answer": answer,
 		"launcher": 0
 	}, function(body) {
 		callback(body.eresult, body.steamid ? new SteamID(body.steamid.toString()) : null);
