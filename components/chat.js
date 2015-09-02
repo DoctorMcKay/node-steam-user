@@ -81,8 +81,9 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
  * @param {SteamUser~genericEResultCallback} [callback] - An optional callback to be invoked when the room is joined (or a failure occurs).
  */
 SteamUser.prototype.joinChat = function(steamID, callback) {
-	var msg = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
+	var msg = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
+	msg.writeUint8(0); // isVoiceSpeaker
 	this._send(Steam.EMsg.ClientJoinChat, msg.flip());
 
 	if(callback) {
@@ -255,8 +256,6 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 		});
 	}
 };
-
-// TODO: Figure out why the bot is showing as using voice
 
 // Handlers
 
