@@ -380,12 +380,18 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientChatInvite] = function(body) {
 	 * Emitted when we're invited to a chat room.
 	 *
 	 * @event SteamUser#chatInvite
+	 * @param {SteamID} inviterID - The SteamID of the user who invited us to the room
 	 * @param {SteamID} chatID - The SteamID of the chat room to which we were invited
 	 * @param {string} chatName - The name of the chat room to which we were invited
-	 * @param {SteamID} inviterID - The SteamID of the user who invited us to the room
 	 */
 
-	this.emit('chatInvite', fromChatID(body.steam_id_chat), body.chat_name, new SteamID(body.steam_id_patron.toString()));
+	var inviterID = new SteamID(body.steam_id_patron.toString());
+	var chatID = fromChatID(body.steam_id_chat);
+
+	this.emit('chatInvite', inviterID, chatID, body.chat_name);
+	this.emit('chatInvite#' + inviterID.getSteamID64(), inviterID, chatID, body.chat_name);
+	this.emit('chatInvite#' + chatID.getSteamID64(), inviterID, chatID, body.chat_name);
+	this.emit('chatInvite#' + inviterID.getSteamID64() + '#' + chatID.getSteamID64(), inviterID, chatID, body.chat_name);
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientCreateChatResponse] = function(body) {
