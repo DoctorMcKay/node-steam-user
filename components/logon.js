@@ -164,6 +164,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 		case Steam.EResult.AccountLogonDenied:
 		case Steam.EResult.AccountLoginDeniedNeedTwoFactor:
+		case Steam.EResult.TwoFactorCodeMismatch:
 			this.disconnect(true);
 
 			var isEmailCode = body.eresult == Steam.EResult.AccountLogonDenied;
