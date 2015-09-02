@@ -215,6 +215,18 @@ An object containing persona data about all Steam users we've encountered or req
 
 An object containing information about all Steam groups we've encountered. Keys are 64-bit SteamIDs, values are identical to those received in the [`group`](#group) event.
 
+### chats
+
+An object containing information about all chat rooms we're in. Keys are 64-bit SteamIDs, values are objects with this structure:
+- `name` - The name of the chat, or empty if it's a multi-user chat
+- `private` - `true` if only group members can join, `false` if it's open to everyone
+- `invisibleToFriends` - `true` if the chat is invisible to friends, `false` if visible (unsure what this means at this time)
+- `officersOnlyChat` - `true` if only group officers can chat right now, `false` if everyone can
+- `unjoinable` - `true` if the chat can't be joined, `false` if it can (note that this doesn't necessary mean **your** effective access)
+- `members` - An object whose keys are 64-bit SteamIDs of users in this chat room, and whose values are objects with this structure:
+	- `rank` - A value from `EClanRank`
+	- `permissions` - A bitstring of values in `EChatPermission` for the user's permissions in this chat
+
 ### myFriends
 
 An object whose keys are 64-bit SteamIDs, and whose values are values from the `EFriendRelationship` enum. Therefore, you can deduce your friends list from this object.
