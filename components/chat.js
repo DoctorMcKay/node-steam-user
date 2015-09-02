@@ -227,9 +227,6 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
 SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
 	convertUserID = convertUserID || new SteamID();
 	inviteUserID = inviteUserID || new SteamID();
-	if(typeof isPrivate !== 'boolean') {
-		isPrivate = true;
-	}
 
 	var msg = new ByteBuffer(53, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint32(Steam.EChatRoomType.MUC); // multi-user chat
