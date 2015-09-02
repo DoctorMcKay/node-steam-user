@@ -455,15 +455,21 @@ Access tokens are global. That is, everyone who has access to an app receives th
 - `state` - A value from `EPersonaState`
 - `name` - Optional. Your new profile name
 
+**v1.9.0 or later is required to use this method**
+
 Changes our online status, and optionally your profile name. You need to call this after you logon or else you'll show up as offline.
 
 ### addFriend(steamID)
 - `steamID` - The SteamID of the user you want to add as a friend, as a `SteamID` object or a string that can parse into one
 
+**v1.9.0 or later is required to use this method**
+
 Sends a friend request to the user with the specified `SteamID`. If they've already sent you a friend request, accepts it.
 
 ### removeFriend(steamID)
 - `steamID` - The SteamID of the user you want to remove from your friends list, as a `SteamID` object or a string that can parse into one
+
+**v1.9.0 or later is required to use this method**
 
 Removed a specified user from your friends list. Also ignores an outstanding friend request from this user.
 
@@ -473,12 +479,16 @@ Removed a specified user from your friends list. Also ignores an outstanding fri
 - `callback` - Optional. Called when the request completes
 	- `eresult` - A value from the `EResult` enum
 
+**v1.9.0 or later is required to use this method**
+
 Blocks or unblocks communication with a specified user.
 
 ### getPersonas(steamids[, callback])
 - `steamids` - An array of `SteamID` objects or strings which can parse into `SteamID` objects
 - `callback` - Optional. Called when the requested data is available.
 	- `personas` - An object whose keys are 64-bit SteamIDs and whose values are objects identical to those received in the [`user`](#user) event
+
+**v1.9.0 or later is required to use this method**
 
 Requests persona data for one or more users from Steam. The response will arrive in the [`user`](#user) event, or in the callback if provided.
 
@@ -487,17 +497,140 @@ Requests persona data for one or more users from Steam. The response will arrive
 - `callback` - Called when the requested data is available.
 	- `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are Steam levels
 
+**v1.9.0 or later is required to use this method**
+
 Gets the Steam Level for one or more Steam users (who do not have to be on your friends list).
 
 ### trade(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
+
+**v1.9.0 or later is required to use this method**
 
 Send a trade request to the specified user. Listen for the [`tradeResponse`](#traderesponse) event for their response.
 
 ### cancelTradeRequest(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 
+**v1.9.0 or later is required to use this method**
+
 Cancels your outstanding trade request to the specified user.
+
+### chatMessage(recipient, message[, type])
+- `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message
+- `message` - The chat message that you're sending to them
+- `type` - Optional. A value from `EChatEntryType`. Defaults to `ChatMsg`. This usually shouldn't be needed.
+
+**v1.9.0 or later is required to use this method**
+
+Sends a chat message to a friend or a chat room.
+
+### chatTyping(recipient)
+- `recipient` - Either a `SteamID` object or a string which can parse into one
+
+**v1.9.0 or later is required to use this method**
+
+Tells the `recipient` that you're typing a chat message.
+
+### getChatHistory(steamID[, callback])
+- `steamID` - Either a `SteamID` object or a string which can parse into one
+- `callback` - Optional. Called when the requested data is available
+	- `success` - An `EResult` value
+	- `messages` - An array of message objects, each of which has the following properties:
+		- `steamID` - The SteamID of the user who sent the message, either us or them (as a `SteamID` object)
+		- `timestamp` - A `Date` object for when the message was sent
+		- `message` - The message text
+		- `unread` - `true` if this was a new offline message, `false` if it's just history
+
+**v1.9.0 or later is required to use this method**
+
+Requests our chat history with a user. The results will arrive either in the callback or in the [`chatHistory`](#chathistory) event.
+
+### joinChat(steamID[, callback])
+- `steamID` - The SteamID of the chat to join (as a `SteamID` object or a string which can parse into one)
+- `callback` - Optional. Called when we either join or fail to join.
+	- `result` - A value from `EResult`
+
+**v1.9.0 or later is required to use this method**
+
+Joins a chat room. To join a group chat, use the group's SteamID.
+
+### leaveChat(steamID)
+- `steamID` - The SteamID of the chat room to leave (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Leaves a chat room we're in.
+
+### setChatPrivate(steamID)
+- `steamID` - The SteamID of the chat room to lock (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Locks a chat room so that only group members and invited users can join.
+
+### setChatPublic(steamID)
+- `steamID` - The SteamID of the chat room to unlock (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Unlocks a chat room so anyone can join.
+
+### setChatOfficersOnly(steamID)
+- `steamID` - The SteamID of the chat room to set officers-only (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Sets a chat room so that only group officers can chat.
+
+### unsetChatOfficersOnly(steamID)
+- `steamID` - The SteamID of the chat room to unset officers-only (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Sets a chat room so that anyone can chat.
+
+### kickFromChat(chatID, userID)
+- `chatID` - The SteamID of the chat room to kick the user from (as a `SteamID` object or a string which can parse into one)
+- `userID` - The SteamID of the user to kick from the room (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Kicks a user from a chat room.
+
+### banFromChat(chatID, userID)
+- `chatID` - The SteamID of the chat room to ban the user from (as a `SteamID` object or a string which can parse into one)
+- `userID` - The SteamID of the user to ban from the room (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Bans a user from a chat room.
+
+### unbanFromChat(chatID, userID)
+- `chatID` - The SteamID of the chat room to unban the user from (as a `SteamID` object or a string which can parse into one)
+- `userID` - The SteamID of the user to unban from the room (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Unbans a banned user from a chat room.
+
+### inviteToChat(chatID, userID)
+- `chatID` - The SteamID of the chat room to invite to (as a `SteamID` object or a string which can parse into one)
+- `userID` - The SteamID of the user to invite to the room (as a `SteamID` object or a string which can parse into one)
+
+**v1.9.0 or later is required to use this method**
+
+Invites a user to a chat room.
+
+### createChatRoom([convertUserID, ][inviteUserID, ][callback])
+- `convertUserID` - If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
+- `inviteUserID` - If specified, the user with the SteamID passed here will get invited to the new room automatically.
+- `callback` - Optional. Called when the chat is created or a failure occurs.
+	- `result` - A value from `EResult`
+	- `chatID` - If successful, the SteamID of the newly-created room, as a `SteamID` object
+
+**v1.9.0 or later is required to use this method**
+
+Creates a new multi-user chat room.
 
 # Events
 
