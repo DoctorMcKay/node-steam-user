@@ -10,6 +10,8 @@ SteamUser is a handler module for [node-steam](https://github.com/seishun/node-s
 
 It's designed to be a self-contained module which provides all the functionality expected of a Steam user client.
 
+[Subscribe to release announcements](https://github.com/DoctorMcKay/node-steam-user/releases.atom)
+
 # Static Properties
 
 Static properties, or properties attached directly to `SteamUser`, are accessed on the root module and not on instantiated handler instances.
