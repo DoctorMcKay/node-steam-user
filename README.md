@@ -70,7 +70,7 @@ Controls where the Steam server list and sentry files are written. If `null`, no
 
 Defaults to a platform-specific user data directory.
 
-- On [OpenShift](https://www.openshift.com), this is the `OPENSHIFT_DATA_DIR` environment variable
+- On [OpenShift](https://www.openshift.com), this is `$OPENSHIFT_DATA_DIR/node-steamuser`
 - On Windows, this is `%localappdata%\doctormckay\node-steamuser`
 - On Mac, this is `~/Library/Application Support/node-steamuser`
 - On Linux, this is `$XDG_DATA_HOME/node-steamuser`, or `~/.local/share/node-steamuser` if `$XDG_DATA_HOME` isn't defined or is empty
