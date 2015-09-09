@@ -38,47 +38,73 @@ SteamUser.prototype.logOn = function(details) {
 		};
 	}
 
-	var self = this;
 	var anonLogin = !this._logOnDetails.account_name;
 
 	// Read the required files
-	var filenames = ['servers.json'];
-	if(!anonLogin) {
-		filenames.push('sentry.' + this._logOnDetails.account_name + '.bin');
+	var filenames = [];
 
-		if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+	if(!Steam['__SteamUserServersSet__']) {
+		filenames.push('servers.json');
+	}
+
+	var sentry = this._sentry;
+	var machineID;
+
+	if(!anonLogin) {
+		if(!this._logOnDetails.sha_sentryfile && !sentry) {
+			filenames.push('sentry.' + this._logOnDetails.account_name + '.bin');
+		}
+
+		if(!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
 			filenames.push('machineid.bin');
 		}
 	}
 
+	var self = this;
 	this.storage.readFiles(filenames, function(err, files) {
 		files = files || [];
 
-		// Servers list
-		if(files[0] && files[0].contents) {
-			Steam.servers = JSON.parse(files[0].contents.toString('utf8'));
-		}
+		files.forEach(function(file) {
+			if(file.filename == 'servers.json' && file.contents) {
+				try {
+					Steam.servers = JSON.parse(file.contents.toString('utf8'));
+					Steam['__SteamUserServersSet__'] = true;
+				} catch(e) {
+					// don't care
+				}
+			}
+
+			if(file.filename.match(/^sentry/) && file.contents) {
+				sentry = file.contents;
+			}
+
+			if(file.filename == 'machineid.bin' && file.contents) {
+				machineID = file.contents;
+			}
+		});
 
 		// Sentry file
-		var sentry = self._sentry || (files[1] && files[1].contents);
-		if(sentry && sentry.length > 20) {
-			// Hash the sentry
-			var hash = Crypto.createHash('sha1');
-			hash.update(sentry);
-			sentry = hash.digest();
+		if(!self._logOnDetails.sha_sentryfile) {
+			if(sentry && sentry.length > 20) {
+				// Hash the sentry
+				var hash = Crypto.createHash('sha1');
+				hash.update(sentry);
+				sentry = hash.digest();
+			}
+
+			self._logOnDetails.sha_sentryfile = sentry;
 		}
 
-		if(sentry && sentry.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
+		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
 			throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
 		}
 
 		// Machine ID
-		var machineID = self._getMachineID(files[2] && files[2].contents);
+		if(!anonLogin && !self._logOnDetails.machine_id) {
+			self._logOnDetails.machine_id = self._getMachineID(machineID);
+		}
 
 		// Do the login
-		self._logOnDetails.sha_sentryfile = sentry;
-		self._logOnDetails.machine_id = machineID;
-
 		var sid = new SteamID();
 		sid.universe = SteamID.Universe.PUBLIC;
 		sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;

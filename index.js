@@ -94,6 +94,10 @@ function SteamUser(client, options) {
 
 	this.client.on('servers', function(servers) {
 		self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
+		if(!client) {
+			// It's an internal client, so we know that our Steam has an up-to-date server list
+			Steam['__SteamUserServersSet__'] = true;
+		}
 	});
 }
 
