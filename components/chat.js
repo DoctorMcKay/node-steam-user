@@ -258,7 +258,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientFriendMsgIncoming] = function(body) {
 	var senderID = new SteamID(body.steamid_from.toString());
-	var message = body.message.readCString();
+	var message = body.message.toString('utf8').split('\u0000')[0];
 
 	/**
 	 * Emitted when we receive a new message from another user (not from a chat room).
@@ -291,7 +291,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendMsgIncoming] = function(bod
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientFriendMsgEchoToSender] = function(body) {
 	var recipientID = new SteamID(body.steamid_from.toString());
-	var message = body.message.readCString();
+	var message = body.message.toString('utf8').split('\u0000')[0];
 
 	/**
 	 * Emitted when we receive a message sent by us on another logon.
