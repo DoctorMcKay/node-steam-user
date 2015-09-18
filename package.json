@@ -1,6 +1,6 @@
 {
 	"name": "steam-user",
-	"version": "1.9.4",
+	"version": "1.9.5",
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
 	"keywords": ["steam", "steam client", "steam user"],
 	"homepage": "https://github.com/DoctorMcKay/node-steam-user",
