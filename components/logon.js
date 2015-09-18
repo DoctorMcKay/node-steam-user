@@ -52,7 +52,7 @@ SteamUser.prototype.logOn = function(details) {
 
 	if(!anonLogin) {
 		if(!this._logOnDetails.sha_sentryfile && !sentry) {
-			filenames.push('sentry.' + this._logOnDetails.account_name + '.bin');
+			filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
 		}
 
 		if(!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
