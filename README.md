@@ -922,9 +922,9 @@ Emitted when our friends list is downloaded from Steam after logon.
 Emitted when our group list is downloaded from Steam after logon.
 
 ### friendOrChatMessage
-- `room` - The room to which the message was sent. This is the user's `SteamID` if it was a friend message
-- `message` - The message text
 - `senderID` - The message sender, as a `SteamID` object
+- `message` - The message text
+- `room` - The room to which the message was sent. This is the user's `SteamID` if it was a friend message
 
 **v1.9.0 or later is required to use this event**
 
