@@ -241,6 +241,13 @@ An object whose keys are 64-bit SteamIDs, and whose values are from the `EFriend
 
 When we leave a group, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
 
+### myFriendGroups
+
+An object containing multiple objects of friend groups.
+- `groupKey` - An object with the key from the group
+	- `name` - A `string` containing the name of the group.
+	- `members` - An array with a list of members consisting of keys that are 64-bit SteamIDs.
+
 # Methods
 
 ### Constructor([client][, options])
@@ -921,10 +928,16 @@ Emitted when our friends list is downloaded from Steam after logon.
 
 Emitted when our group list is downloaded from Steam after logon.
 
+### friendsGroupList
+
+**v1.9.X or later is required to use this event**
+
+Emitted when our friends group list is downloaded from Steam after logon.
+
 ### friendOrChatMessage
-- `senderID` - The message sender, as a `SteamID` object
-- `message` - The message text
 - `room` - The room to which the message was sent. This is the user's `SteamID` if it was a friend message
+- `message` - The message text
+- `senderID` - The message sender, as a `SteamID` object
 
 **v1.9.0 or later is required to use this event**
 

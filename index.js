@@ -36,6 +36,7 @@ function SteamUser(client, options) {
 	this.chats = {};
 	this.myFriends = {};
 	this.myGroups = {};
+	this.myFriendGroups = {};
 
 	this._sentry = null;
 

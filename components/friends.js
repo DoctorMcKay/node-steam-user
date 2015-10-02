@@ -337,6 +337,41 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 	}
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsGroupsList] = function (body) {
+	var self = this;
+	var groupList = {};
+
+	body.friendGroups.forEach(function (group) {
+		groupList[group.nGroupID] = {
+			"name": group.strGroupName,
+			"members": []
+		};
+	});
+
+	body.memberships.forEach(function (friend) {
+		var sid = new SteamID(friend.ulSteamID.toString());
+		var sid64 = sid.getSteamID64();
+
+		groupList[friend.nGroupID]['members'].push(parseInt(sid64));
+
+		if (body.bincremental) {
+			// For now it doesn't really fire, so can't really check on how to do remove / add stuff with an emit.
+		}
+	});
+
+	self.myFriendGroups = groupList;
+
+	if (!body.bincremental) {
+		/**
+		 * Emitted when our entire friends group list is loaded.
+		 *
+		 * @event SteamUser#friendsGroupList
+		 */
+
+		this.emit('friendsGroupList');
+	}
+};
+
 function processUser(user) {
 	if(typeof user.gameid === 'object' && user.gameid !== null) {
 		user.gameid = user.gameid.toNumber();
