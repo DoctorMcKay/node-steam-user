@@ -60,6 +60,7 @@ protobufs[Steam.EMsg.ClientFriendMsgIncoming] = Schema.CMsgClientFriendMsgIncomi
 protobufs[Steam.EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming;
 protobufs[Steam.EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientFSGetFriendMessageHistory;
 protobufs[Steam.EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientFSGetFriendMessageHistoryResponse;
+protobufs[Steam.EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
