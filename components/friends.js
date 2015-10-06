@@ -352,7 +352,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsGroupsList] = function (bo
 		var sid = new SteamID(friend.ulSteamID.toString());
 		var sid64 = sid.getSteamID64();
 
-		groupList[friend.nGroupID]['members'].push(parseInt(sid64));
+		groupList[friend.nGroupID]['members'].push(sid64);
 
 		if (body.bincremental) {
 			// For now it doesn't really fire, so can't really check on how to do remove / add stuff with an emit.
