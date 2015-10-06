@@ -243,10 +243,11 @@ When we leave a group, instead of setting the value to `EFriendRelationship.None
 
 ### myFriendGroups
 
-An object containing multiple objects of friend groups (In the client it self the groups are called tags).
-- `groupKey` - An object with the key from the group.
-	- `name` - A `string` containing the name of the group.
-	- `members` - An array with a list of members consisting of keys that are 64-bit SteamIDs.
+**v1.10.0 or later is required to use this property**
+
+An object containing your friend groups (in the official client, these are called *tags*). Keys are numeric group IDs, and objects as follows:
+- `name` - A `string` containing the name of the group.
+- `members` - An array containing `SteamID` objects for the members of this friend group.
 
 # Methods
 
@@ -929,10 +930,13 @@ Emitted when our friends list is downloaded from Steam after logon.
 Emitted when our group list is downloaded from Steam after logon.
 
 ### friendsGroupList
+- `groups` - An object whose structure is identical to the [`myFriendGroups`](#myfriendgroups) property
 
 **v1.10.0 or later is required to use this event**
 
-Emitted when our friends group list is downloaded from Steam after logon (In the client it self the groups are called tags).
+Emitted when our friends group list is downloaded from Steam after logon (in the official client, these are called *tags*).
+
+The `myFriendGroups` property will be updated **after** this event is emitted, so you can compare `groups` with the property to see what changed.
 
 ### friendOrChatMessage
 - `senderID` - The message sender, as a `SteamID` object
