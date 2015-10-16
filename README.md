@@ -354,6 +354,18 @@ Disables TOTP two-factor authentication for your account and switches you back t
 
 If you've lost your secret but you have your revocation code, you can disable TOTP [from the support site](https://help.steampowered.com/#HelpWithLoginInfo?nav=authenticator).
 
+### getSteamGuardDetails(callback)
+- `callback` - A function to be called when the requested data is available
+	- `enabled` - `true` if Steam Guard is enabled for your account, `false` if not
+	- `enabledTime` - A `Date` object for when Steam Guard was enabled for your account, or `null` if not available
+	- `machineTime` - A `Date` object for when your current machine was authorized with Steam Guard, or `null` if not available
+
+Requests details about your account's Steam Guard status. This could be used to see if your account passes the Steam Guard trading requirements.
+
+In order to trade, both of the following must be true:
+- `enabledTime` must be at least 15 days ago (account-level restriction)
+- `machineTime` must be at least 7 days ago (sentryfile-level restriction)
+
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
 
