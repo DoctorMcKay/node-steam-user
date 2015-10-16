@@ -360,6 +360,8 @@ If you've lost your secret but you have your revocation code, you can disable TO
 	- `enabledTime` - A `Date` object representing when Steam Guard was enabled for your account, or `null` if not available
 	- `machineTime` - A `Date` object representing when your current machine was authorized with Steam Guard, or `null` if not available
 
+**v1.11.0 or later is required to use this method**
+
 Requests details about your account's Steam Guard status. This could be used to see if your account passes the Steam Guard trading requirements.
 
 In order to trade, both of the following must be true:
