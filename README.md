@@ -283,7 +283,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
-	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
+	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 
 Logs onto Steam. The `SteamClient` should **not** be connected. Omit the `details` object if you wish to login to an anonymous user account.
 
