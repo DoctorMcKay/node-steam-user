@@ -31,6 +31,16 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 	});
 };
 
+SteamUser.prototype.getSteamGuardDetails = function(callback) {
+	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, false, function(body) {
+		callback(
+			!!body.is_steamguard_enabled,
+			body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null,
+			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null
+		);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientEmailAddrInfo] = function(body) {
