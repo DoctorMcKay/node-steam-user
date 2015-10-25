@@ -245,16 +245,24 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 	}
 
 	this.emit('debug', 'Logged off: ' + msg);
+	this._handleLogOff(body.eresult);
+};
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientServerUnavailable] = function(body) {
+	this.emit('debug', 'Server unavailable');
+	this._handleLogOff(Steam.EResult.ServiceUnavailable);
+};
+
+SteamUser.prototype._handleLogOff = function(result) {
 	var fatal = true;
 
-	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(body.eresult) != -1) {
+	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
 	}
 
 	if(fatal) {
 		var e = new Error(msg);
-		e.eresult = body.eresult;
+		e.eresult = result;
 
 		var steamID = this.steamID;
 		this.disconnect(true);
@@ -263,7 +271,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 		this.emit('error', e);
 		this.steamID = null;
 	} else {
-		this.emit('disconnected', body.eresult);
+		// Only emit "disconnected" if we were previously logged on
+		if(this.steamID) {
+			this.emit('disconnected', result);
+		}
+
 		this.disconnect(true);
 		this.logOn(true);
 	}
