@@ -33,10 +33,20 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 
 SteamUser.prototype.getSteamGuardDetails = function(callback) {
 	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, false, function(body) {
+		var canTrade = true;
+		if(!body.is_steamguard_enabled) {
+			canTrade = false;
+		} else if(!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
+			canTrade = false;
+		} else if(!body.session_data || !body.session_data[0] || !body.session_data[0].timestamp_machine_steamguard_enabled || Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)) {
+			canTrade = false;
+		}
+
 		callback(
 			!!body.is_steamguard_enabled,
 			body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null,
-			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null
+			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null,
+			canTrade
 		);
 	});
 };
