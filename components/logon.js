@@ -1,7 +1,7 @@
 var Steam = require('steam');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
-var fs = require('fs');
+var Helpers = require('./helpers.js');
 var Crypto = require('crypto');
 var ByteBuffer = require('bytebuffer');
 
@@ -181,6 +181,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this._logOnDetails.last_session_id = this.client._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
+			this.logOnResult = body;
+
+			this.publicIP = Helpers.ipIntToString(body.public_ip);
+			this.cellID = body.cell_id;
 
 			this.emit('loggedOn', body);
 
@@ -259,6 +263,9 @@ SteamUser.prototype._handleLogOff = function(result) {
 	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
 	}
+
+	delete this.publicIP;
+	delete this.cellID;
 
 	if(fatal) {
 		var e = new Error(msg);

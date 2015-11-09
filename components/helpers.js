@@ -3,7 +3,7 @@ var SteamID = require('steamid');
 /**
  * If the input isn't already a SteamID object, converts it into one and returns it
  * @param input
- * @returns SteamID
+ * @returns {SteamID}
  */
 exports.steamID = function(input) {
 	if(typeof input !== 'string') {
@@ -16,4 +16,13 @@ exports.steamID = function(input) {
 	}
 
 	return new SteamID(input);
+};
+
+/**
+ * Convert an IP in integer notation to dotted-decimal notation
+ * @param input
+ * @returns {string}
+ */
+exports.ipIntToString = function(input) {
+	return ((input >> 24) & 0xFF) + "." + ((input >> 16) & 0xFF) + "." + ((input >> 8) & 0xFF) + "." + (input & 0xFF);
 };

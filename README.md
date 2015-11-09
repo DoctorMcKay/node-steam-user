@@ -162,6 +162,18 @@ The `SteamClient` which is being used to communicate with Steam.
 
 An object containing options for this `SteamUser`. **Read-only**, use `setOption` or `setOptions` to change an option.
 
+### publicIP
+
+**v1.12.0 or later is required to use this property**
+
+Only defined if you're currently logged on. This is your public IP as reported by Steam, in "x.x.x.x" format.
+
+### cellID
+
+**v1.12.0 or later is required to use this property**
+
+Only defined if you're currently logged on. This is you cell (region ID) on the Steam network.
+
 ### friends
 
 **Deprecated as of v1.9.0 and will be removed in a future major version.**
