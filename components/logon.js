@@ -47,6 +47,12 @@ SteamUser.prototype.logOn = function(details) {
 		filenames.push('servers.json');
 	}
 
+	if(!this._logOnDetails.cell_id) {
+		// Some people might be redirecting their storage to a database and running across multiple servers in multiple regions
+		// Let's account for this by saving cellid by a "machine ID" so different boxes will store different cellids
+		filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
+	}
+
 	var sentry = this._sentry;
 	var machineID;
 
@@ -72,6 +78,10 @@ SteamUser.prototype.logOn = function(details) {
 				} catch(e) {
 					// don't care
 				}
+			}
+
+			if(file.filename.match(/^cellid/) && file.contents) {
+				self._logOnDetails.cell_id = parseInt(file.contents.toString('utf8'), 10);
 			}
 
 			if(file.filename.match(/^sentry/) && file.contents) {
@@ -185,6 +195,8 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this.publicIP = Helpers.ipIntToString(body.public_ip);
 			this.cellID = body.cell_id;
+
+			this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 
 			this.emit('loggedOn', body);
 
