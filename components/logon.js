@@ -265,15 +265,15 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 	}
 
 	this.emit('debug', 'Logged off: ' + msg);
-	this._handleLogOff(body.eresult);
+	this._handleLogOff(body.eresult, msg);
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientServerUnavailable] = function(body) {
 	this.emit('debug', 'Server unavailable');
-	this._handleLogOff(Steam.EResult.ServiceUnavailable);
+	this._handleLogOff(Steam.EResult.ServiceUnavailable, 'ServiceUnavailable');
 };
 
-SteamUser.prototype._handleLogOff = function(result) {
+SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
 
 	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(result) != -1) {
