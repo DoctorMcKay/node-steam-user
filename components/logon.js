@@ -81,7 +81,10 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			if(file.filename.match(/^cellid/) && file.contents) {
-				self._logOnDetails.cell_id = parseInt(file.contents.toString('utf8'), 10);
+				var cellID = parseInt(file.contents.toString('utf8'), 10);
+				if(!isNaN(cellID)) {
+					self._logOnDetails.cell_id = cellID;
+				}
 			}
 
 			if(file.filename.match(/^sentry/) && file.contents) {
@@ -191,6 +194,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this._logOnDetails.last_session_id = this.client._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
+			this._logOnDetails.cell_id = body.cell_id;
 			this.logOnResult = body;
 
 			this.publicIP = Helpers.ipIntToString(body.public_ip);
