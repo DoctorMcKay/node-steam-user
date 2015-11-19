@@ -148,6 +148,14 @@ Added in 1.7.0.
 
 Defaults to `AccountNameGenerated`.
 
+### machineIdFormat
+
+If you're using `machineIdType` `AccountGenerated`, this is the format it uses. This is an array of three strings, each of which will be hashed with SHA1 before being sent to Steam. `{account_name}` will be replaced with the current account name.
+
+Added in 1.13.0.
+
+Defaults to `["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"]`.
+
 # Properties
 
 ### client
