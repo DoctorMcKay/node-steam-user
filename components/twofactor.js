@@ -16,15 +16,10 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 		"steamid": self.steamID.getSteamID64(),
 		"authenticator_time": Math.floor(Date.now() / 1000),
 		"authenticator_type": 1,
-		"device_identifier": 'android:' + hash
+		"device_identifier": 'android:' + hash,
+		"sms_phone_id": "1"
 	}, false, function (body) {
-		self._sendUnified("TwoFactor.SendEmail#1", {
-			"steamid": self.steamID.getSteamID64(),
-			"email_type": 1,
-			"include_activation_code": true
-		}, false, function() {
-			callback(body.status, body.shared_secret.toBuffer(), body.revocation_code);
-		});
+		callback(body.status, body.shared_secret ? body.shared_secret.toBuffer() : undefined, body.revocation_code);
 	});
 };
 
