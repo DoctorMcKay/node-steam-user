@@ -55,7 +55,7 @@ SteamUser.generateAuthCode = function(secret, timeOffset) {
 	var chars = '23456789BCDFGHJKMNPQRTVWXY';
 
 	var code = '';
-	for(i = 0; i < 5; i++) {
+	for(var i = 0; i < 5; i++) {
 		code += chars.charAt(fullcode % chars.length);
 		fullcode /= chars.length;
 	}
