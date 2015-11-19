@@ -38,10 +38,10 @@ SteamUser.prototype._emitIdEvent = function() {
  * @returns {string}
  */
 SteamUser.generateAuthCode = function(secret, timeOffset) {
-	timeOffset = timeOffset || 0;
+	var time = Math.floor(Date.now() / 1000) + (timeOffset || 0);
 
 	var buffer = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
-	buffer.writeUint64(Math.floor((Math.floor(Date.now() / 1000) + timeOffset) / 30));
+	buffer.writeUint64(Math.floor(time / 30));
 	buffer.flip().reverse();
 
 	var hmac = require('crypto').createHmac('sha1', secret);
