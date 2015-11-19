@@ -170,9 +170,9 @@ SteamUser.prototype._getMachineID = function(localFile) {
 	// The user wants to use a machine ID that's generated off the account name
 	if(this.options.machineIdType == SteamUser.EMachineIDType.AccountNameGenerated) {
 		return createMachineID(
-			"SteamUser Hash BB3 " + this._logOnDetails.account_name,
-			"SteamUser Hash FF2 " + this._logOnDetails.account_name,
-			"SteamUser Hash 3B3 " + this._logOnDetails.account_name
+			this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._logOnDetails.account_name),
+			this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._logOnDetails.account_name),
+			this.options.machineIdFormat[2].replace(/\{account_name\}/g, this._logOnDetails.account_name)
 		);
 	}
 
