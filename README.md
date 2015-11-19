@@ -50,8 +50,8 @@ Formats a currency value and returns a string. For example:
 
 ```js
 console.log(SteamUser.formatCurrency(12.34, SteamUser.ECurrencyCode.USD)); // $12.34
-console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ¥ 12345
-console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45€
+console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ï¿½ 12345
+console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45ï¿½
 ```
 
 ### generateAuthCode(secret[, timeOffset])
@@ -341,19 +341,23 @@ Requests Steam to send you a validation email to your registered email address.
 - `callback` - Required. Called when the activation email has been sent.
 	- `status` - A value from `EResult`
 	- `secret` - A `Buffer` containing your shared secret
-	- `revocationCode` - A `string` containing the code you'll need to disable two-factor authentication if you lose your secret
+	- `revocationCode` - A `string` containing the code you'll need to disable two-factor authentication
 
-**v1.9.0 or later is required to use this method**
+**v1.14.0 or later is required to use this method**
 
-Starts the process to turn on TOTP for your account. You'll be sent an email with an activation code that you'll need to provide to `finalizeTwoFactor`.
+Starts the process to turn on TOTP for your account. You must have a phone number already linked with and verified on your account.
+
+You'll be sent an SMS with an activation code that you'll need to provide to `finalizeTwoFactor`.
+
+**Record your `revocationCode` somewhere secure. This appears to be the only way to disable two-factor authentication in the future!**
 
 ### finalizeTwoFactor(secret, activationCode, callback)
 - `secret` - A `Buffer` containing your shared secret
-- `activationCode` - A `string` containing the activation code you got in your email
+- `activationCode` - A `string` containing the activation code you got in your SMS
 - `callback` - Required.
 	- `err` - An `Error` object on failure, or `null` on success
 
-**v1.9.0 or later is required to use this method**
+**v1.14.0 or later is required to use this method**
 
 Finishes the process of enabling TOTP two-factor authentication for your account. You can use `SteamUser.generateAuthCode` in the future when logging on to get a code.
 
@@ -365,6 +369,8 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 	- `secret` - If you have your secret, you can provide it here (as a `Buffer`)
 	- `timeOffset` - If you're using your `secret` and you know the offset between your local clock and the Steam servers, you can provide it here
 	- `deauthorizeAll` - If you want to deauthorize all other machines from Steam Guard, pass true here. Default false
+
+#### This method does not appear to work at this time. Use the support site to disable two-factor authentication with your revocation code.
 
 **v1.9.0 or later is required to use this method**
 
