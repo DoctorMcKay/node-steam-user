@@ -52,7 +52,6 @@ function SteamUser(client, options) {
 		"autoRelogin": true,
 		"singleSentryfile": false,
 		"promptSteamGuardCode": true,
-		"createHandlers": true,
 		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
 		"machineIdFormat": ["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"],
 		"debug": false
@@ -66,11 +65,6 @@ function SteamUser(client, options) {
 		if(typeof this.options[i] === 'undefined') {
 			this.options[i] = defaultOptions[i];
 		}
-	}
-
-	if(this.options.createHandlers) {
-		this.friends = new Steam.SteamFriends(this.client);
-		this.trading = new Steam.SteamTrading(this.client);
 	}
 
 	this.storage = new FileStorage(this.options.dataDirectory);
