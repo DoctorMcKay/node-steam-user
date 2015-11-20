@@ -18,8 +18,21 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 		"authenticator_type": 1,
 		"device_identifier": 'android:' + hash,
 		"sms_phone_id": "1"
-	}, false, function (body) {
-		callback(body.status, body.shared_secret ? body.shared_secret.toBuffer() : undefined, body.revocation_code);
+	}, false, function(body) {
+		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
+		body.serial_number = body.serial_number ? body.serial_number.toString() : null;
+		body.server_time = body.server_time ? body.server_time.toString() : null;
+		body.identity_secret = body.identity_secret ? body.identity_secret.toBuffer().toString('base64') : null;
+		body.secret_1 = body.secret_1 ? body.secret_1.toBuffer().toString('base64') : null;
+
+		// Delete all the null keys
+		for(var i in body) {
+			if(body.hasOwnProperty(i) && body[i] === null) {
+				delete body[i];
+			}
+		}
+
+		callback(body);
 	});
 };
 
