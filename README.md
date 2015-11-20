@@ -55,10 +55,12 @@ console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 1
 ```
 
 ### generateAuthCode(secret[, timeOffset])
-- `secret` - A `Buffer` containing your shared secret
+- `secret` - A `Buffer`, hex string, or base64 string containing your shared secret
 - `timeOffset` - The number of seconds by which your local clock is off from the Steam servers. Defaults to 0.
 
 Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile authentication.
+
+**Deprecated. Use [`steam-totp`](https://www.npmjs.com/package/steam-totp) instead.**
 
 # Options
 

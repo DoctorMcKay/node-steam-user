@@ -1,5 +1,6 @@
 var SteamUser = require('../index.js');
 var ByteBuffer = require('bytebuffer');
+var SteamTotp = require('steam-totp');
 
 SteamUser.formatCurrency = function(amount, currency) {
 	amount = amount.toFixed(2);
@@ -33,32 +34,8 @@ SteamUser.prototype._emitIdEvent = function() {
 
 /**
  * Generate a Steam-style TOTP authentication code.
- * @param {Buffer} secret - Your TOTP secret
+ * @param {Buffer|string} secret - Your TOTP secret as a Buffer, hex string, or base64 string
  * @param {number} [timeOffset=0] - If you know how far off your clock is from the Steam servers, put the offset here in seconds
  * @returns {string}
  */
-SteamUser.generateAuthCode = function(secret, timeOffset) {
-	var time = Math.floor(Date.now() / 1000) + (timeOffset || 0);
-
-	var buffer = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
-	buffer.writeUint64(Math.floor(time / 30));
-	buffer.flip().reverse();
-
-	var hmac = require('crypto').createHmac('sha1', secret);
-	hmac = hmac.update(buffer.toBuffer()).digest();
-
-	var start = hmac[19] & 0x0F;
-	hmac = ByteBuffer.wrap(hmac.slice(start, start + 4), ByteBuffer.BIG_ENDIAN);
-
-	var fullcode = hmac.readUint32() & 0x7fffffff;
-
-	var chars = '23456789BCDFGHJKMNPQRTVWXY';
-
-	var code = '';
-	for(var i = 0; i < 5; i++) {
-		code += chars.charAt(fullcode % chars.length);
-		fullcode /= chars.length;
-	}
-
-	return code;
-};
+SteamUser.generateAuthCode = SteamTotp.generateAuthCode;
