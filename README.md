@@ -130,16 +130,6 @@ A boolean which controls whether or not `SteamUser` will automatically prompt fo
 
 Defaults to `true`.
 
-### createHandlers
-
-**Deprecated as of v1.9.0 and will be removed in a future major version.**
-
-A boolean which controls whether or not `SteamUser` will automatically construct instances of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends) and [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading).
-
-See the [`friends`](#friends) and [`trading`](#trading) properties.
-
-Defaults to `true`.
-
 ### machineIdType
 
 What kind of machine ID will SteamUser send to Steam when logging on? Should be a value from [`EMachineIDType`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EMachineIDType.js).
@@ -181,18 +171,6 @@ Only defined if you're currently logged on. This is your public IP as reported b
 **v1.12.0 or later is required to use this property**
 
 Only defined if you're currently logged on. This is you cell (region ID) on the Steam network.
-
-### friends
-
-**Deprecated as of v1.9.0 and will be removed in a future major version.**
-
-If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamFriends`](https://github.com/seishun/node-steam/tree/master/lib/handlers/friends). Not defined otherwise.
-
-### trading
-
-**Deprecated as of v1.9.0 and will be removed in a future major version.**
-
-If the [`createHandlers`](#createhandlers) option was `true` in the constructor, this will be an instance of [`SteamTrading`](https://github.com/seishun/node-steam/tree/master/lib/handlers/trading). Not defined otherwise.
 
 ### emailInfo
 
@@ -339,17 +317,20 @@ Requests Steam to send you a validation email to your registered email address.
 
 ### enableTwoFactor(callback)
 - `callback` - Required. Called when the activation email has been sent.
-	- `status` - A value from `EResult`
-	- `secret` - A `Buffer` containing your shared secret
-	- `revocationCode` - A `string` containing the code you'll need to disable two-factor authentication
+	- `response` - An object containing the response data
 
-**v1.14.0 or later is required to use this method**
+**v2.0.0 or later is required to use this method**
 
 Starts the process to turn on TOTP for your account. You must have a phone number already linked with and verified on your account.
 
 You'll be sent an SMS with an activation code that you'll need to provide to `finalizeTwoFactor`.
 
-**Record your `revocationCode` somewhere secure. This appears to be the only way to disable two-factor authentication in the future!**
+**You should save the entire `response` object somewhere secure.** You can use `JSON.stringify` on it safely.
+
+Properties of note in the `response` object:
+- `status` - A value from `EResult`. If this is not `OK` (1), then the request failed.
+- `shared_secret` - This is your secret that's used for two-factor authentication.
+- `revocation_code` - You will need this in the future to disable two-factor authentication.
 
 ### finalizeTwoFactor(secret, activationCode, callback)
 - `secret` - A `Buffer` containing your shared secret
