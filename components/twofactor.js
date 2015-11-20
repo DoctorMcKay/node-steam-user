@@ -1,4 +1,5 @@
 var SteamUser = require('../index.js');
+var SteamTotp = require('steam-totp');
 
 /**
  * Start the process to enable TOTP two-factor authentication for your account
@@ -50,7 +51,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 	finalize();
 
 	function finalize() {
-		var code = SteamUser.generateAuthCode(secret, diff);
+		var code = SteamTotp.generateAuthCode(secret, diff);
 
 		self._sendUnified("TwoFactor.FinalizeAddAuthenticator#1", {
 			"steamid": self.steamID.getSteamID64(),
@@ -97,7 +98,7 @@ SteamUser.prototype.disableTwoFactor = function(options, callback) {
 		var code;
 
 		if(options.secret) {
-			code = SteamUser.generateAuthCode(options.secret, offset);
+			code = SteamTotp.generateAuthCode(options.secret, offset);
 		}
 
 		self._sendUnified("TwoFactor.RemoveAuthenticator#1", {

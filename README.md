@@ -342,7 +342,7 @@ Properties of note in the `response` object:
 
 **v2.0.0 or later is required to use this method**
 
-Finishes the process of enabling TOTP two-factor authentication for your account. You can use `SteamUser.generateAuthCode` in the future when logging on to get a code.
+Finishes the process of enabling TOTP two-factor authentication for your account. You can use [`steam-totp`](https://www.npmjs.com/package/steam-totp) in the future when logging on to get a code.
 
 **If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
 
