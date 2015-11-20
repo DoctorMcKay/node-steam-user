@@ -338,7 +338,7 @@ Properties of note in the `response` object:
 - `callback` - Required.
 	- `err` - An `Error` object on failure, or `null` on success
 
-**v1.14.0 or later is required to use this method**
+**v2.0.0 or later is required to use this method**
 
 Finishes the process of enabling TOTP two-factor authentication for your account. You can use `SteamUser.generateAuthCode` in the future when logging on to get a code.
 
