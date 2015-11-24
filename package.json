@@ -1,35 +1,39 @@
 {
-	"name": "steam-user",
-	"version": "2.0.2",
-	"description": "node-steam client handler for Individual and AnonUser Steam account types",
-	"keywords": ["steam", "steam client", "steam user"],
-	"homepage": "https://github.com/DoctorMcKay/node-steam-user",
-	"bugs": {
-		"url": "https://github.com/DoctorMcKay/node-steam-user/issues"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Alexander Corn",
-		"email": "mckay@doctormckay.com",
-		"url": "https://www.doctormckay.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
-	},
-	"dependencies": {
-		"steamid": "^0.3.0",
-		"appdirectory": "^0.1.0",
-		"protobufjs": "^4.0.0",
-		"steam": "^1.0.0",
-		"bytebuffer": "^4.0.0",
-		"steam-crypto": "^0.0.1",
-		"vdf": "^0.0.2",
-		"binarykvparser": "^2.0.0",
-		"file-manager": "^1.0.0",
-		"steam-totp": "^1.0.0"
-	},
-	"scripts": {
-		"prepublish": "node scripts/prepublish.js"
-	}
+  "name": "steam-user",
+  "version": "2.0.2",
+  "description": "node-steam client handler for Individual and AnonUser Steam account types",
+  "keywords": [
+    "steam",
+    "steam client",
+    "steam user"
+  ],
+  "homepage": "https://github.com/DoctorMcKay/node-steam-user",
+  "bugs": {
+    "url": "https://github.com/DoctorMcKay/node-steam-user/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Alexander Corn",
+    "email": "mckay@doctormckay.com",
+    "url": "https://www.doctormckay.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DoctorMcKay/node-steam-user.git"
+  },
+  "dependencies": {
+    "appdirectory": "^0.1.0",
+    "binarykvparser": "^2.0.0",
+    "bytebuffer": "^4.0.0",
+    "file-manager": "^1.0.0",
+    "protobufjs": "^4.1.3",
+    "steam": "^1.0.0",
+    "steam-crypto": "^0.0.1",
+    "steam-totp": "^1.0.0",
+    "steamid": "^0.3.0",
+    "vdf": "^0.0.2"
+  },
+  "scripts": {
+    "prepublish": "node scripts/prepublish.js"
+  }
 }
