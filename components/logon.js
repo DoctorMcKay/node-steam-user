@@ -268,10 +268,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 	this._handleLogOff(body.eresult, msg);
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientServerUnavailable] = function(body) {
+// TODO: Investigate this. It doesn't always appear to mean that we're logged off.
+/*SteamUser.prototype._handlers[Steam.EMsg.ClientServerUnavailable] = function(body) {
 	this.emit('debug', 'Server unavailable');
 	this._handleLogOff(Steam.EResult.ServiceUnavailable, 'ServiceUnavailable');
-};
+};*/
 
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
