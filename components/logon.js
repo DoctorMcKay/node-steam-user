@@ -301,8 +301,9 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 		this.disconnect(true);
 
+		var self = this;
 		setTimeout(function() {
-			this.logOn(true);
+			self.logOn(true);
 		}, 1000);
 	}
 };
