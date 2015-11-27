@@ -321,6 +321,8 @@ Requests Steam to send you a validation email to your registered email address.
 - `callback` - Required. Called when the activation email has been sent.
 	- `response` - An object containing the response data
 
+#### This method is deprecated and may be removed in a future major version. [Use node-steamcommunity instead.](https://mckay.media/NIi0Q)
+
 **v2.0.0 or later is required to use this method**
 
 Starts the process to turn on TOTP for your account. You must have a phone number already linked with and verified on your account.
@@ -339,6 +341,8 @@ Properties of note in the `response` object:
 - `activationCode` - A `string` containing the activation code you got in your SMS
 - `callback` - Required.
 	- `err` - An `Error` object on failure, or `null` on success
+
+#### This method is deprecated and may be removed in a future major version. [Use node-steamcommunity instead.](https://mckay.media/NIi0Q)
 
 **v2.0.0 or later is required to use this method**
 
