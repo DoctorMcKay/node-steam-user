@@ -1,8 +1,6 @@
 var Steam = require('steam');
-var SteamID = require('steamid');
 var AppDirectory = require('appdirectory');
 var FileStorage = require('file-manager');
-var fs = require('fs');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
 
