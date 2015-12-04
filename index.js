@@ -18,6 +18,11 @@ try {
 }
 
 function SteamUser(client, options) {
+	if(client && client.constructor.name !== 'SteamClient') {
+		options = client;
+		client = null;
+	}
+
 	this.client = client ? client : new Steam.SteamClient();
 	this.steamID = null;
 
