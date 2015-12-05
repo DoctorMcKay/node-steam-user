@@ -3,7 +3,6 @@ var SteamTotp = require('steam-totp');
 
 /**
  * Start the process to enable TOTP two-factor authentication for your account
- * @deprecated Use node-steamcommunity instead https://mckay.media/NIi0Q
  * @param {function} callback - Called when an activation email has been sent. Params are status (an EResult), sharedSecret (a Buffer), and revocationCode (a string)
  */
 SteamUser.prototype.enableTwoFactor = function(callback) {
@@ -40,7 +39,6 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 
 /**
  * Finalize the process of enabling TOTP two-factor authentication
- * @deprecated Use node-steamcommunity instead https://mckay.media/NIi0Q
  * @param {Buffer} secret - Your shared secret
  * @param {string} activationCode - The activation code you got in your email
  * @param {function} callback - Called with a single Error argument, or null on success
@@ -86,5 +84,5 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
  * @deprecated No longer works. Use node-steamcommunity instead: https://mckay.media/UnsG7
  */
 SteamUser.prototype.disableTwoFactor = function() {
-	throw new Error("This method no longer works. See https://mckay.media/UnsG7 for alternative usage.");
+	throw new Error("This method no longer works. See https://mckay.media/UnsG7 for alternative.");
 };
