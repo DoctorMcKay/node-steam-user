@@ -88,8 +88,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 		});
 
 		(body.unknown_packageids || []).forEach(function(packageid) {
-			response.unknownPackages.push(appid);
-			var index = packageids.indexOf(appid);
+			response.unknownPackages.push(packageid);
+			var index = packageids.indexOf(packageid);
 			if(index != -1) {
 				packageids.splice(index, 1);
 			}
