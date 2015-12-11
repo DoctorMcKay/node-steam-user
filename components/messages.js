@@ -131,7 +131,10 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 	}
 
 	if(!this._handlers[header.msg]) {
-		this.emit('debug', 'Unhandled message: ' + msgName);
+		if(header.msg != Steam.EMsg.Multi) {
+			this.emit('debug', 'Unhandled message: ' + msgName);
+		}
+
 		return;
 	}
 
