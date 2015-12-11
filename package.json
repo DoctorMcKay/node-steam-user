@@ -22,7 +22,7 @@
 		"appdirectory": "^0.1.0",
 		"protobufjs": "^4.0.0",
 		"steam-client": "^1.0.0",
-		"bytebuffer": "^4.0.0",
+		"bytebuffer": "^5.0.0",
 		"steam-crypto": "^0.0.1",
 		"vdf": "^0.0.2",
 		"binarykvparser": "^2.0.0",
