@@ -147,6 +147,7 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 
 		var self = this;
 		var timeout = setTimeout(function() {
+			self.emit('disconnected', 0);
 			self._loggingOff = false;
 			self.client.disconnect();
 		}, 4000);
