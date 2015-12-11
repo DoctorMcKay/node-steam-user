@@ -7,6 +7,7 @@
 [![paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N36YVAT42CZ4G&item_name=node%2dsteam%2duser&currency_code=USD)
 
 SteamUser is a handler module for [node-steam](https://github.com/seishun/node-steam) version 1.0.0 or greater.
+It also works with [node-steam-client](https://github.com/DoctorMcKay/node-steam-client).
 
 It's designed to be a self-contained module which provides all the functionality expected of a Steam user client.
 
@@ -18,7 +19,8 @@ Static properties, or properties attached directly to `SteamUser`, are accessed 
 
 ### Steam
 
-The `node-steam` module installation used by `SteamUser`. You can use this in place of `require('steam')` if you'd like to avoid duplicate installations.
+The `node-steam-client` module installation used by `SteamUser`. You can use this in place of `require('steam-client')`
+if you'd like to avoid duplicate installations.
 
 Example of using `EResult`:
 

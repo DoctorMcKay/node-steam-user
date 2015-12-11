@@ -1,4 +1,4 @@
-var Steam = require('steam');
+var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var Crypto = require('crypto');
 var SteamCrypto = require('steam-crypto');

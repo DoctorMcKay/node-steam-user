@@ -1,4 +1,4 @@
-var Steam = require('steam');
+var Steam = require('steam-client');
 var AppDirectory = require('appdirectory');
 var FileStorage = require('file-manager');
 
@@ -18,12 +18,12 @@ try {
 }
 
 function SteamUser(client, options) {
-	if(client && client.constructor.name !== 'SteamClient') {
+	if(client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
 		options = client;
 		client = null;
 	}
 
-	this.client = client ? client : new Steam.SteamClient();
+	this.client = client ? client : new Steam.CMClient();
 	this.steamID = null;
 
 	// Account info

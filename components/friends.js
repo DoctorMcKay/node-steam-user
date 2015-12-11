@@ -1,5 +1,5 @@
 var SteamUser = require('../index.js');
-var Steam = require('steam');
+var Steam = require('steam-client');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 
