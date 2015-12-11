@@ -80,15 +80,7 @@ function SteamUser(client, options) {
 			return; // We've already handled this
 		}
 
-		if(self.options.autoRelogin) {
-			self.emit('disconnected', Steam.EResult.RemoteDisconnect);
-			self.steamID = null;
-			self.logOn(true);
-		} else {
-			e.eresult = Steam.EResult.RemoteDisconnect;
-			self.emit('error', e);
-			self.steamID = null;
-		}
+		self._handleLogOff(e.eresult || 0, e.message);
 	});
 
 	this.client.on('servers', function(servers) {

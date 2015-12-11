@@ -16,6 +16,8 @@ SteamUser.prototype.logOn = function(details) {
 	this.emailInfo = null;
 	this.licenses = null;
 
+	this._loggingOff = false;
+
 	this.users = {};
 	this.groups = {};
 	this.chats = {};
@@ -137,17 +139,24 @@ function onConnected() {
 }
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {
-	if(!this.client.connected) {
-		throw new Error("Cannot disconnect from Steam as we're currently not connected.");
-	}
-
-	if(!suppressLogoff) {
-		this._send(Steam.EMsg.ClientLogOff, {});
-	}
-
-	this.steamID = null;
 	this.client.removeListener('connected', this._onConnected);
-	this.client.disconnect();
+
+	if(this.client.connected && !suppressLogoff) {
+		this._loggingOff = true;
+		this._send(Steam.EMsg.ClientLogOff, {});
+
+		var self = this;
+		var timeout = setTimeout(function() {
+			self._loggingOff = false;
+			self.client.disconnect();
+		}, 4000);
+
+		this.once('disconnected', function(eresult) {
+			clearTimeout(timeout);
+		});
+	} else {
+		this.client.disconnect();
+	}
 };
 
 SteamUser.prototype._getMachineID = function(localFile) {
@@ -277,14 +286,14 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
 
-	if(this.options.autoRelogin && [Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(result) != -1) {
+	if(this.options.autoRelogin && [0, Steam.EResult.Fail, Steam.EResult.ServiceUnavailable, Steam.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
 	}
 
 	delete this.publicIP;
 	delete this.cellID;
 
-	if(fatal) {
+	if(fatal && !this._loggingOff) {
 		var e = new Error(msg);
 		e.eresult = result;
 
@@ -302,10 +311,14 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 		this.disconnect(true);
 
-		var self = this;
-		setTimeout(function() {
-			self.logOn(true);
-		}, 1000);
+		if(!this._loggingOff) {
+			var self = this;
+			setTimeout(function() {
+				self.logOn(true);
+			}, 1000);
+		}
+
+		this._loggingOff = false;
 	}
 };
 
