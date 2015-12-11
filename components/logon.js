@@ -230,7 +230,9 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 			this.disconnect(true);
 
 			var isEmailCode = body.eresult == Steam.EResult.AccountLogonDenied;
-			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, function(code) {
+			var lastCodeWrong = body.eresult == Steam.EResult.TwoFactorCodeMismatch;
+
+			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, function(code) {
 				self._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
 				self.logOn(true);
 			});
@@ -334,7 +336,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientNewLoginKey] = function(body) {
 	}
 };
 
-SteamUser.prototype._steamGuardPrompt = function(domain, callback) {
+SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback) {
 	if(this.options.promptSteamGuardCode) {
 		var rl = require('readline').createInterface({
 			"input": process.stdin,
@@ -346,7 +348,7 @@ SteamUser.prototype._steamGuardPrompt = function(domain, callback) {
 			callback(code);
 		});
 	} else {
-		this.emit('steamGuard', domain, callback);
+		this.emit('steamGuard', domain, callback, lastCodeWrong);
 	}
 };
 

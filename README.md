@@ -708,6 +708,7 @@ Emitted when you're successfully logged into Steam.
 - `domain` - If an email code is needed, the domain name of the address where the email was sent. `null` if an app code is needed.
 - `callback` - Should be called when the code is available.
 	- `code` - The Steam Guard auth code
+- `lastCodeWrong` - `true` if you're using 2FA and the last code you provided was wrong, `false` otherwise
 
 If the `promptSteamGuardCode` option is disabled, this event will be emitted when Steam requests a Steam Guard code from us. You should collect the code from the user somehow and then call the `callback` with the code as the sole argument.
 
@@ -722,7 +723,7 @@ user.on('steamGuard', function(domain, callback) {
 ```
 
 ### error
-- `e` - An `Error` object
+- `err` - An `Error` object
 
 Emitted when an error occurs during logon. Also emitted if we're disconnected and `autoRelogin` is either disabled, or it's a fatal disconnect.
 
@@ -733,7 +734,11 @@ The `SteamUser` object's `steamID` property will still be defined when this is e
 ### disconnected
 - `eresult` - A value from the `Steam.EResult` enum
 
-Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will continually retry connection and will either emit `loggedOn` when logged back on, or `error` if a fatal logon error is experienced.
+Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will
+continually retry connection and will either emit `loggedOn` when logged back on, or `error` if a fatal logon error is
+experienced.
+
+Also emitted in response to a logOff() call.
 
 The `SteamUser` object's `steamID` property will still be defined when this is emitted.
 
