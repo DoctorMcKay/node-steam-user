@@ -161,7 +161,9 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 			});
 		}
 
-		callback(body.eresult, body.purchase_result_details, packageList);
+		if(typeof callback === 'function') {
+			callback(body.eresult, body.purchase_result_details, packageList);
+		}
 	});
 };
 
