@@ -10,6 +10,7 @@ SteamUser.Steam = Steam;
 SteamUser.ECurrencyCode = require('./resources/ECurrencyCode.js');
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
+SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
 
 try {
 	SteamUser.Steam.servers = require('./resources/servers.json');
