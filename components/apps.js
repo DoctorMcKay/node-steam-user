@@ -149,7 +149,6 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 
 SteamUser.prototype.redeemKey = function(key, callback) {
 	this._send(Steam.EMsg.ClientRegisterKey, key, function(body) {
-		//VDF.parse(body.purchase_receipt_info.toString('utf8'))
 		callback(body.eresult, body.purchase_result_details, body.purchase_receipt_info);
 	});
 };
@@ -159,7 +158,4 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
 	this.emit('licenses', body.licenses);
 	this.licenses = body.licenses;
-};
-
-SteamUser.prototype._handlers[Steam.EMsg.ClientPurchaseResponse] = function(body) {
 };
