@@ -684,7 +684,7 @@ Creates a new multi-user chat room.
 - `callback` - Optional. Called when request completes
 	- `result` - An `EResult` value
 	- `details` - A `SteamUser.EPurchaseResult` value
-	- `packages` - An object whose keys are package IDs and values are package names
+	- `packages` - An object whose keys are packageIDs and values are package names
 
 Redeems game code on your account
 
