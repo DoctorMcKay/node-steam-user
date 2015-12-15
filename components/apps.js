@@ -149,7 +149,8 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 
 SteamUser.prototype.redeemKey = function(key, callback) {
 	this._send(Steam.EMsg.ClientRegisterKey, key, function(body) {
-		callback(body.eresult, body.purchase_result_details, body.purchase_receipt_info);
+		//callback(body.eresult, body.purchase_result_details, body.purchase_receipt_info);
+		callback(body.eresult, body.purchase_result_details);
 	});
 };
 
