@@ -149,8 +149,19 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 
 SteamUser.prototype.redeemKey = function(key, callback) {
 	this._send(Steam.EMsg.ClientRegisterKey, key, function(body) {
-		//callback(body.eresult, body.purchase_result_details, body.purchase_receipt_info);
-		callback(body.eresult, body.purchase_result_details);
+		var packageList = [];
+
+		var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
+		if(recipeDetails.LineItemCount > 0) {
+			recipeDetails.lineitems.forEach(function(pkg) {
+				packageList.push({
+					"game_id": pkg.PackageID,
+					"game_extra_info": pkg.ItemDescription
+				});
+			});
+		}
+
+		callback(body.eresult, body.purchase_result_details, packageList);
 	});
 };
 
