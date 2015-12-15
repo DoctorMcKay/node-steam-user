@@ -153,15 +153,12 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 			return;
 		}
 
-		var packageList = [];
+		var packageList = {};
 
 		var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
 		if(recipeDetails.LineItemCount > 0) {
 			recipeDetails.lineitems.forEach(function(pkg) {
-				packageList.push({
-					"game_id": pkg.PackageID,
-					"game_extra_info": pkg.ItemDescription
-				});
+				packageList[pkg.packageID] = pkg.ItemDescription;
 			});
 		}
 
