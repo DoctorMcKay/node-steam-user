@@ -683,7 +683,7 @@ Creates a new multi-user chat room.
 - `key` - Steam formatted game key
 - `callback` - Called when request completes
 	- `result` - An `EResult` value
-	- `details` - An `SteamUser.EPurchaseResult` value
+	- `details` - A `SteamUser.EPurchaseResult` value
 
 Redeems game code on your account
 
