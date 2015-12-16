@@ -679,6 +679,15 @@ Invites a user to a chat room.
 
 Creates a new multi-user chat room.
 
+### redeemKey(key[, callback])
+- `key` - Steam formatted game key
+- `callback` - Optional. Called when request completes
+	- `result` - An `EResult` value
+	- `details` - A `SteamUser.EPurchaseResult` value
+	- `packages` - An object whose keys are packageIDs and values are package names
+
+Redeems game code on your account
+
 # Events
 
 ## ID Events

@@ -147,6 +147,25 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	});
 };
 
+SteamUser.prototype.redeemKey = function(key, callback) {
+	this._send(Steam.EMsg.ClientRegisterKey, {"key": key}, function(body) {
+		if(typeof callback !== 'function') {
+			return;
+		}
+
+		var packageList = {};
+
+		var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
+		if(recipeDetails.LineItemCount > 0) {
+			recipeDetails.lineitems.forEach(function(pkg) {
+				packageList[pkg.PackageID] = pkg.ItemDescription;
+			});
+		}
+
+		callback(body.eresult, body.purchase_result_details, packageList);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
