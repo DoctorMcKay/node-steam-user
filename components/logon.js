@@ -141,6 +141,8 @@ function onConnected() {
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {
 	this.client.removeListener('connected', this._onConnected);
 
+	this._clearChangelistUpdateTimer();
+
 	if(this.client.connected && !suppressLogoff) {
 		this._loggingOff = true;
 		this._send(Steam.EMsg.ClientLogOff, {});
@@ -214,6 +216,8 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this.emit('loggedOn', body);
 
+			this._getChangelistUpdate();
+
 			if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
 				this._requestNotifications();
 
@@ -280,12 +284,6 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLoggedOff] = function(body) {
 	this._handleLogOff(body.eresult, msg);
 };
 
-// TODO: Investigate this. It doesn't always appear to mean that we're logged off.
-/*SteamUser.prototype._handlers[Steam.EMsg.ClientServerUnavailable] = function(body) {
-	this.emit('debug', 'Server unavailable');
-	this._handleLogOff(Steam.EResult.ServiceUnavailable, 'ServiceUnavailable');
-};*/
-
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
 
@@ -295,6 +293,8 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 	delete this.publicIP;
 	delete this.cellID;
+
+	this._clearChangelistUpdateTimer();
 
 	if(fatal && !this._loggingOff) {
 		var e = new Error(msg);

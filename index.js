@@ -42,6 +42,14 @@ function SteamUser(client, options) {
 	this.myGroups = {};
 	this.myFriendGroups = {};
 
+	// App and package cache
+	this._changelistUpdateTimer = null;
+	this.picsCache = {
+		"changenumber": 0,
+		"apps": {},
+		"packages": {}
+	};
+
 	this._sentry = null;
 
 	var appdir = new AppDirectory({
@@ -58,6 +66,9 @@ function SteamUser(client, options) {
 		"promptSteamGuardCode": true,
 		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
 		"machineIdFormat": ["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"],
+		"enablePicsCache": false,
+		"picsCacheAll": false,
+		"changelistUpdateInterval": 60000,
 		"debug": false
 	};
 
@@ -100,6 +111,14 @@ SteamUser.prototype.setOption = function(option, value) {
 	switch(option) {
 		case 'dataDirectory':
 			this.storage.directory = value;
+			break;
+
+		case 'enablePicsCache':
+			this._resetChangelistUpdateTimer();
+			break;
+
+		case 'changelistUpdateInterval':
+			this._resetChangelistUpdateTimer();
 			break;
 	}
 };

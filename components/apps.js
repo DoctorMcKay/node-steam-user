@@ -75,10 +75,51 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 		}
 	});
 
+	var self = this;
 	this._send(Steam.EMsg.ClientPICSProductInfoRequest, {
 		"apps": apps,
 		"packages": packages
 	}, function(body) {
+		// If we're using the PICS cache, then add the items in this response to it
+		if(self.options.enablePicsCache) {
+			var cache = self.picsCache;
+			cache.apps = cache.apps || {};
+			cache.packages = cache.packages || {};
+
+			(body.apps || []).forEach(function(app) {
+				var data = {
+					"changenumber": app.change_number,
+					"missingToken": !!app.missing_token,
+					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+				};
+
+				if(!cache.apps[app.appid] || cache.apps[app.appid].changenumber != data.changenumber) {
+					// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
+					self.emit('appUpdate', app.appid, data);
+				}
+
+				cache.apps[app.appid] = data;
+			});
+
+			(body.packages || []).forEach(function(pkg) {
+				var data = {
+					"changenumber": pkg.change_number,
+					"missingToken": !!pkg.missing_token,
+					"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
+				};
+
+				if(!cache.packages[pkg.packageid] || cache.packages[pkg.packageid].changenumber != data.changenumber) {
+					self.emit('packageUpdate', pkg.packageid, data);
+				}
+
+				cache.packages[pkg.packageid] = data;
+			});
+		}
+
+		if(!callback) {
+			return;
+		}
+
 		(body.unknown_appids || []).forEach(function(appid) {
 			response.unknownApps.push(appid);
 			var index = appids.indexOf(appid);
@@ -144,6 +185,106 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 		});
 
 		callback(appTokens, packageTokens, body.app_denied_tokens || [], body.package_denied_tokens || []);
+	});
+};
+
+SteamUser.prototype._resetChangelistUpdateTimer = function() {
+	this._clearChangelistUpdateTimer();
+
+	if(this.options.enablePicsCache && this.options.changelistUpdateInterval) {
+		this._changelistUpdateTimer = setTimeout(this._getChangelistUpdate.bind(this), this.options.changelistUpdateInterval);
+	}
+};
+
+SteamUser.prototype._clearChangelistUpdateTimer = function() {
+	if(this._changelistUpdateTimer) {
+		clearTimeout(this._changelistUpdateTimer);
+		this._changelistUpdateTimer = null;
+	}
+};
+
+SteamUser.prototype._getChangelistUpdate = function() {
+	this._clearChangelistUpdateTimer();
+
+	if(!this.options.enablePicsCache || !this.options.changelistUpdateInterval) {
+		return;
+	}
+
+	var self = this;
+
+	// Set a local timeout if Steam doesn't respond
+	var timedOut = false;
+	var timeout = setTimeout(function() {
+		timedOut = true;
+		self._resetChangelistUpdateTimer();
+	}, Math.max(Math.round(this.options.changelistUpdateInterval / 2), 30000));
+
+	this.getProductChanges(this.picsCache.changenumber, function(currentChangenumber, apps, packages) {
+		if(timedOut) {
+			return;
+		}
+
+		var cache = self.picsCache;
+
+		cache.apps = cache.apps || {};
+		cache.packages = cache.packages || {};
+
+		apps = apps.map(function(app) {
+			return app.appid;
+		});
+
+		packages = packages.map(function(pkg) {
+			return pkg.packageid;
+		});
+
+		var ourApps = apps.filter(function(appid) {
+			return (self.options.picsCacheAll || !!cache.apps[appid]);
+		});
+
+		var ourPackages = packages.filter(function(pkgid) {
+			return (self.options.picsCacheAll || !!cache.packages[pkgid]);
+		});
+
+		if(ourApps.length + ourPackages.length === 0) {
+			// We're done here
+
+			if(currentChangenumber != cache.changenumber && cache.changenumber != 0) {
+				self.emit('changelist', currentChangenumber, apps, packages);
+			}
+
+			cache.changenumber = currentChangenumber;
+			self._resetChangelistUpdateTimer();
+			clearTimeout(timeout);
+			return;
+		}
+
+		// Get any access tokens we may need
+		self.getProductAccessToken(ourApps, ourPackages, function(appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) {
+			if(timedOut) {
+				return;
+			}
+
+			self.emit('changelist', currentChangenumber, apps, packages);
+
+			cache.changenumber = currentChangenumber;
+			self._resetChangelistUpdateTimer();
+			clearTimeout(timeout);
+
+			var index = -1;
+			for(var appid in appTokens) {
+				if(appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
+					ourApps[index] = {"appid": parseInt(appid, 10), "access_token": appTokens[appid]};
+				}
+			}
+
+			for(var packageid in packageTokens) {
+				if(packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
+					ourPackages[index] = {"packageid": parseInt(packageid, 10), "access_token": packageTokens[packageid]};
+				}
+			}
+
+			self.getProductInfo(ourApps, ourPackages);
+		});
 	});
 };
 
