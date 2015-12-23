@@ -9,7 +9,8 @@ var PICSRequestType = {
 	"User": 0,
 	"Changelist": 1,
 	"Licenses": 2,
-	"PackageContents": 3
+	"PackageContents": 3,
+	"AddToCache": 4
 };
 
 SteamUser.prototype.gamesPlayed = function(apps) {
@@ -306,6 +307,19 @@ SteamUser.prototype._getChangelistUpdate = function() {
 			self.getProductInfo(ourApps, ourPackages, null, PICSRequestType.Changelist);
 		});
 	});
+};
+
+SteamUser.prototype._addAppToCache = function(appid) {
+	if(!this.options.enablePicsCache) {
+		return;
+	}
+
+	var apps = this.picsCache.apps || {};
+	if(apps[appid]) {
+		return;
+	}
+
+	this.getProductInfo([appid], [], null, PICSRequestType.AddToCache);
 };
 
 SteamUser.prototype._getLicenseInfo = function(packageids) {

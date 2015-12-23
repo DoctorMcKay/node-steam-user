@@ -190,6 +190,8 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 			}
 		}
 
+		processUser(user);
+
 		/**
 		 * Emitted when we receive persona info about a user.
 		 * You can also listen for user#steamid64 to get info only for a specific user.
@@ -199,15 +201,17 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 		 * @param {Object} user - An object containing the user's persona info
 		 */
 
-		self._emitIdEvent('user', sid, user);;
+		self._emitIdEvent('user', sid, user);
+
+		if(user.gameid) {
+			self._addAppToCache(user.gameid);
+		}
 
 		for(i in user) {
 			if(user.hasOwnProperty(i) && user[i] !== null) {
 				self.users[sid][i] = user[i];
 			}
 		}
-
-		processUser(user);
 	});
 };
 
