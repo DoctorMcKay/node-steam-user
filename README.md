@@ -150,6 +150,45 @@ Added in 1.13.0.
 
 Defaults to `["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"]`.
 
+### enablePicsCache
+
+If enabled, then `node-steam-user` will internally cache data about all apps and packages that it knows about.
+Currently, `node-steam-user` "knows about" an app/package if:
+
+- Packages
+    - You own it
+    - You request info about it via `getProductInfo`
+- Apps
+    - It's in a known package
+    - You request info about it via `getProductInfo`
+    - A friend who is online plays the app
+    - You request info about an online user who is playing it via `getPersonas`
+
+This option is required in order to use several methods and events. This works when logging in anonymously.
+
+Added in 3.3.0.
+
+Defaults to `false`.
+
+### picsCacheAll
+
+If enabled, `enablePicsCache` is enabled, and `changelistUpdateInterval` is nonzero, then apps and packages which get
+updated while your bot is running will also be added to the cache. Default behavior is to only cache apps and packages
+that are "known" via the above criteria.
+
+Added in 3.3.0.
+
+Defaults to `false`.
+
+### changelistUpdateInterval
+
+If `enablePicsCache` is enabled, then `node-steam-user` will automatically request app/package changes (via
+`getProductChanges`) for known apps and packages, and update the internal cache when they update. Set to `0` to disable.
+
+Added in 3.3.0.
+
+Defaults to `60000`.
+
 # Properties
 
 ### client
@@ -250,6 +289,15 @@ When we leave a group, instead of setting the value to `EFriendRelationship.None
 An object containing your friend groups (in the official client, these are called *tags*). Keys are numeric group IDs, and objects as follows:
 - `name` - A `string` containing the name of the group.
 - `members` - An array containing `SteamID` objects for the members of this friend group.
+
+### picsCache
+
+**v3.3.0 or later is required to use this property**
+
+An object containing cached data about known apps and packages. Only useful if the `enablePicsCache` option is `true`.
+- `changenumber` - The last known changenumber
+- `apps` - An object whose keys are AppIDs and values are objects identical to those returned by `getProductInfo`
+- `packages` - An object whose keys are PackageIDs and values are objects identical to those returned by `getProductInfo`
 
 # Methods
 
@@ -489,6 +537,57 @@ Requests a list of game servers from the master server.
 **Works when anonymous.** Requests access tokens for one or more apps or packages. These access tokens can be used with [`getProductInfo`](#productinfoapps-packages-callback).
 
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
+
+### getOwnedApps()
+
+**v3.3.0 or later is required to use this method**
+
+Returns an array of AppIDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
+
+`enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
+
+### ownsApp(appid)
+- `appid` - A numeric AppID
+
+**v3.3.0 or later is required to use this method**
+
+Returns `true` if your account owns the specified AppID, or `false` if not. This cannot be safely called until
+`appOwnershipCached` is emitted.
+
+`enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
+
+### getOwnedDepots()
+
+**v3.3.0 or later is required to use this method**
+
+Returns an array of depot IDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
+
+`enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
+
+### ownsDepot(depotid)
+- `depotid` - A numeric depot ID
+
+**v3.3.0 or later is required to use this method**
+
+Returns `true` if your account owns the specified depot, or `false` if not. This cannot be safely called until
+`appOwnershipCached` is emitted.
+
+`enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
+
+### getOwnedPackages()
+
+**v3.3.0 or later is required to use this method**
+
+Returns an array of package IDs which your account owns. If you logged in anonymously, this can be safely called
+immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
+
+### ownsPackage(packageid)
+- `packageid` - A numeric package ID
+
+**v3.3.0 or later is required to use this method**
+
+Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
+be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
 
 ### setPersona(state[, name])
 - `state` - A value from `EPersonaState`
@@ -824,11 +923,57 @@ Emitted on logon and when wallet balance changes. The [`wallet`](#wallet) proper
 ### licenses
 - `licenses` - An array of licenses
 
-Contains the license data for the packages which your Steam account owns. To see license object structure, see [`CMsgClientLicenseList.License`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/Protobufs/steamclient/steammessages_clientserver.proto#L307-L320).
+Contains the license data for the packages which your Steam account owns. To see license object structure, see
+[`CMsgClientLicenseList.License`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/Protobufs/steamclient/steammessages_clientserver.proto#L307-L320).
 
-Emitted on logon and when licenses change. The [`licenses`](#licenses) property will be updated after this event is emitted.
+Emitted on logon and when licenses change. The [`licenses`](#licenses) property will be updated after this event is
+emitted.
 
-This isn't emitted for anonymous accounts. However, all anonymous user accounts have a license for package 17906 automatically.
+This isn't emitted for anonymous accounts. However, all anonymous user accounts have a license for package 17906
+automatically.
+
+### appOwnershipCached
+
+**v3.3.0 or later is required to use this event**
+
+Emitted once we have all data required in order to determine app ownership. You can now safely call `getOwnedApps`,
+`ownsApp`, `getOwnedDepots`, and `ownsDepot`.
+
+This is only emitted if `enablePicsCache` is `true`.
+
+### changelist
+- `changenumber` - The changenumber of the changelist we just received
+- `apps` - An array of AppIDs which changed since our last received changelist
+- `packages` - An array of PackageIDs which changed since our last received changelist
+
+**v3.3.0 or later is required to use this method**
+
+Emitted when we receive a new changelist from Steam. The `picsCache` property is updated after this is emitted, so you
+can get the previous changenumber via `picsCache.changenumber`.
+
+This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterval` is nonzero.
+
+### appUpdate
+- `appid` - The AppID of the app which just changed
+- `data` - An object identical to that received from `getProductInfo`
+
+**v3.3.0 or later is required to use this method**
+
+Emitted when an app that was already in our cache updates. The `picsCache` property is updated after this is emitted, so
+you can get the previous app data via `picsCache.apps[appid]`.
+
+This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterval` is nonzero.
+
+### packageUpdate
+- `packageid` - The PackageID of the package which just changed
+- `data` - An object identical to that received from `getProductInfo`
+
+**v3.3.0 or later is required to use this method**
+
+Emitted when a package that was already in our cache updates. The `picsCache` property is updated after this is emitted,
+so you can get the previous package data via `picsCache.packages[packageid]`.
+
+This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterval` is nonzero.
 
 ### tradeRequest
 - `steamID` - The SteamID of the user who sent the request, as a `SteamID` object
