@@ -1,8 +1,16 @@
 var Steam = require('steam-client');
 var SteamUser = require('../index.js');
+var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 var VDF = require('vdf');
 var BinaryKVParser = require('binarykvparser');
+
+var PICSRequestType = {
+	"User": 0,
+	"Changelist": 1,
+	"Licenses": 2,
+	"PackageContents": 3
+};
 
 SteamUser.prototype.gamesPlayed = function(apps) {
 	if(!(apps instanceof Array)) {
@@ -44,7 +52,9 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 	});
 };
 
-SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
+SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestType) {
+	requestType = requestType || PICSRequestType.User;
+
 	// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
 	var appids = [];
 	var packageids = [];
@@ -93,12 +103,14 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
 				};
 
-				if(!cache.apps[app.appid] || cache.apps[app.appid].changenumber != data.changenumber) {
+				if((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
 					// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
 					self.emit('appUpdate', app.appid, data);
 				}
 
 				cache.apps[app.appid] = data;
+
+				app._parsedData = data;
 			});
 
 			(body.packages || []).forEach(function(pkg) {
@@ -108,11 +120,19 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 					"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
 				};
 
-				if(!cache.packages[pkg.packageid] || cache.packages[pkg.packageid].changenumber != data.changenumber) {
+				if((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
 					self.emit('packageUpdate', pkg.packageid, data);
 				}
 
 				cache.packages[pkg.packageid] = data;
+
+				pkg._parsedData = data;
+
+				// Request info for all the apps in this package, if this request didn't originate from the license list
+				if(requestType != PICSRequestType.Licenses) {
+					var appids = (pkg.packageinfo || {}).appids || [];
+					self.getProductInfo(appids, [], null, PICSRequestType.PackageContents);
+				}
 			});
 		}
 
@@ -137,7 +157,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 		});
 
 		(body.apps || []).forEach(function(app) {
-			response.apps[app.appid] = {
+			response.apps[app.appid] = app._parsedData || {
 				"changenumber": app.change_number,
 				"missingToken": !!app.missing_token,
 				"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
@@ -150,7 +170,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback) {
 		});
 
 		(body.packages || []).forEach(function(pkg) {
-			response.packages[pkg.packageid] = {
+			response.packages[pkg.packageid] = pkg._parsedData || {
 				"changenumber": pkg.change_number,
 				"missingToken": !!pkg.missing_token,
 				"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
@@ -283,8 +303,102 @@ SteamUser.prototype._getChangelistUpdate = function() {
 				}
 			}
 
-			self.getProductInfo(ourApps, ourPackages);
+			self.getProductInfo(ourApps, ourPackages, null, PICSRequestType.Changelist);
 		});
+	});
+};
+
+SteamUser.prototype._getLicenseInfo = function(packageids) {
+	var self = this;
+	this.getProductInfo([], packageids, function(apps, packages) {
+		// Request info for all the apps in these packages
+		var appids = [];
+
+		for(var pkgid in packages) {
+			if(!packages.hasOwnProperty(pkgid)) {
+				continue;
+			}
+
+			((packages[pkgid].packageinfo || {}).appids || []).forEach(function(appid) {
+				if(appids.indexOf(appid) == -1) {
+					appids.push(appid);
+				}
+			});
+		}
+
+		self.getProductInfo(appids, [], function(apps, packages) {
+			self.emit('appOwnershipCached');
+		}, PICSRequestType.PackageContents);
+	}, PICSRequestType.Licenses);
+};
+
+SteamUser.prototype.ownsApp = function(appid) {
+	if(!this.options.enablePicsCache) {
+		throw new Error("PICS cache is not enabled.");
+	}
+
+	if(this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
+		throw new Error("We don't have our license list yet.");
+	}
+
+	var ownedPackages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
+		return license.package_id;
+	});
+
+	appid = parseInt(appid, 10);
+
+	for(var i = 0; i < ownedPackages.length; i++) {
+		if(!this.picsCache.packages || !this.picsCache.packages[ownedPackages[i]]) {
+			continue;
+		}
+
+		if(((this.picsCache.packages[ownedPackages[i]].packageinfo || {}).appids || []).indexOf(appid) != -1) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+SteamUser.prototype.ownsDepot = function(depotid) {
+	if(!this.options.enablePicsCache) {
+		throw new Error("PICS cache is not enabled.");
+	}
+
+	if(this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
+		throw new Error("We don't have our license list yet.");
+	}
+
+	var ownedPackages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
+		return license.package_id;
+	});
+
+	depotid = parseInt(depotid, 10);
+
+	for(var i = 0; i < ownedPackages.length; i++) {
+		if(!this.picsCache.packages || !this.picsCache.packages[ownedPackages[i]]) {
+			continue;
+		}
+
+		if(((this.picsCache.packages[ownedPackages[i]].packageinfo || {}).depotids || []).indexOf(depotid) != -1) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+SteamUser.prototype.ownsPackage = function(packageid) {
+	if(this.steamID.type == SteamID.Type.ANON_USER) {
+		return packageid == 17906;
+	}
+
+	if(!this.licenses) {
+		throw new Error("We don't have our license list yet.");
+	}
+
+	return this.licenses.some(function(license) {
+		return license.package_id == packageid;
 	});
 };
 
@@ -312,4 +426,11 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
 	this.emit('licenses', body.licenses);
 	this.licenses = body.licenses;
+
+	// Request info for our licenses
+	if(this.options.enablePicsCache) {
+		this._getLicenseInfo(body.licenses.map(function(license) {
+			return license.package_id;
+		}));
+	}
 };
