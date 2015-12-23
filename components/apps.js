@@ -322,7 +322,13 @@ SteamUser.prototype._addAppToCache = function(appid) {
 	this.getProductInfo([appid], [], null, PICSRequestType.AddToCache);
 };
 
-SteamUser.prototype._getLicenseInfo = function(packageids) {
+SteamUser.prototype._getLicenseInfo = function() {
+	if(!this.options.enablePicsCache) {
+		return;
+	}
+
+	var packageids = this.getOwnedPackages();
+
 	var self = this;
 	this.getProductInfo([], packageids, function(apps, packages) {
 		// Request info for all the apps in these packages
@@ -346,75 +352,110 @@ SteamUser.prototype._getLicenseInfo = function(packageids) {
 	}, PICSRequestType.Licenses);
 };
 
-SteamUser.prototype.ownsApp = function(appid) {
+SteamUser.prototype.getOwnedApps = function() {
 	if(!this.options.enablePicsCache) {
 		throw new Error("PICS cache is not enabled.");
 	}
 
-	if(this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
-		throw new Error("We don't have our license list yet.");
+	if(!this.picsCache.packages) {
+		throw new Error("No data in PICS package cache yet.");
 	}
 
-	var ownedPackages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
-		return license.package_id;
+	var ownedPackages = this.getOwnedPackages();
+	var appids = [];
+
+	var self = this;
+	ownedPackages.forEach(function(pkg) {
+		if(!self.picsCache.packages[pkg]) {
+			return;
+		}
+
+		pkg = self.picsCache.packages[pkg];
+		if(!pkg.packageinfo) {
+			return;
+		}
+
+		pkg = pkg.packageinfo;
+		(pkg.appids || []).forEach(function(appid) {
+			if(appids.indexOf(appid) == -1) {
+				appids.push(appid);
+			}
+		});
 	});
 
-	appid = parseInt(appid, 10);
+	appids.sort(sortNumeric);
+	return appids;
+};
 
-	for(var i = 0; i < ownedPackages.length; i++) {
-		if(!this.picsCache.packages || !this.picsCache.packages[ownedPackages[i]]) {
-			continue;
-		}
+SteamUser.prototype.ownsApp = function(appid) {
+	return this.getOwnedApps().indexOf(parseInt(appid, 10)) != -1;
+};
 
-		if(((this.picsCache.packages[ownedPackages[i]].packageinfo || {}).appids || []).indexOf(appid) != -1) {
-			return true;
-		}
+SteamUser.prototype.getOwnedDepots = function() {
+	if(!this.options.enablePicsCache) {
+		throw new Error("PICS cache is not enabled.");
 	}
 
-	return false;
+	if(!this.picsCache.packages) {
+		throw new Error("No data in PICS package cache yet.");
+	}
+
+	var ownedPackages = this.getOwnedPackages();
+	var depotids = [];
+
+	var self = this;
+	ownedPackages.forEach(function(pkg) {
+		if(!self.picsCache.packages[pkg]) {
+			return;
+		}
+
+		pkg = self.picsCache.packages[pkg];
+		if(!pkg.packageinfo) {
+			return;
+		}
+
+		pkg = pkg.packageinfo;
+		(pkg.depotids || []).forEach(function(depotid) {
+			if(depotids.indexOf(depotid) == -1) {
+				depotids.push(depotid);
+			}
+		});
+	});
+
+	depotids.sort(sortNumeric);
+	return depotids;
 };
 
 SteamUser.prototype.ownsDepot = function(depotid) {
-	if(!this.options.enablePicsCache) {
-		throw new Error("PICS cache is not enabled.");
-	}
+	return this.getOwnedDepots().indexOf(parseInt(depotid, 10)) != -1;
+};
 
+SteamUser.prototype.getOwnedPackages = function() {
 	if(this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
 		throw new Error("We don't have our license list yet.");
 	}
 
-	var ownedPackages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
+	var packages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
 		return license.package_id;
 	});
 
-	depotid = parseInt(depotid, 10);
-
-	for(var i = 0; i < ownedPackages.length; i++) {
-		if(!this.picsCache.packages || !this.picsCache.packages[ownedPackages[i]]) {
-			continue;
-		}
-
-		if(((this.picsCache.packages[ownedPackages[i]].packageinfo || {}).depotids || []).indexOf(depotid) != -1) {
-			return true;
-		}
-	}
-
-	return false;
+	packages.sort(sortNumeric);
+	return packages;
 };
 
 SteamUser.prototype.ownsPackage = function(packageid) {
-	if(this.steamID.type == SteamID.Type.ANON_USER) {
-		return packageid == 17906;
-	}
-
-	if(!this.licenses) {
-		throw new Error("We don't have our license list yet.");
-	}
-
-	return this.licenses.some(function(license) {
-		return license.package_id == packageid;
-	});
+	return this.getOwnedPackages().indexOf(parseInt(packageid, 10)) != -1;
 };
+
+function sortNumeric(a, b) {
+	if(a < b) {
+		return -1;
+	} else if(a > b) {
+		return 1;
+	}
+
+	return 0;
+}
 
 SteamUser.prototype.redeemKey = function(key, callback) {
 	this._send(Steam.EMsg.ClientRegisterKey, {"key": key}, function(body) {
@@ -443,8 +484,6 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
 
 	// Request info for our licenses
 	if(this.options.enablePicsCache) {
-		this._getLicenseInfo(body.licenses.map(function(license) {
-			return license.package_id;
-		}));
+		this._getLicenseInfo();
 	}
 };

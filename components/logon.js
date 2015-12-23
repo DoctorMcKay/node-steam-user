@@ -225,7 +225,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 					this._webAuthenticate(body.webapi_authenticate_user_nonce);
 				}
 			} else if(this.steamID.type == SteamID.Type.ANON_USER) {
-				this._getLicenseInfo([17906]);
+				this._getLicenseInfo();
 			}
 
 			break;

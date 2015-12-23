@@ -115,6 +115,7 @@ SteamUser.prototype.setOption = function(option, value) {
 
 		case 'enablePicsCache':
 			this._resetChangelistUpdateTimer();
+			this._getLicenseInfo();
 			break;
 
 		case 'changelistUpdateInterval':
