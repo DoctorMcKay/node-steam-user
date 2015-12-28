@@ -6,8 +6,8 @@ var Crypto = require('crypto');
 var ByteBuffer = require('bytebuffer');
 
 SteamUser.prototype.logOn = function(details) {
-	if(this.client.connected || this.client.loggedOn) {
-		throw new Error("Already connected or logged on, cannot log on again");
+	if(this.client.loggedOn) {
+		throw new Error("Already logged on, cannot log on again");
 	}
 
 	this.steamID = null;
@@ -127,10 +127,14 @@ SteamUser.prototype.logOn = function(details) {
 		sid.accountid = 0;
 		self.client.steamID = sid.getSteamID64();
 
-		self.client.connect();
+		if(self.client.connected) {
+			onConnected.call(self);
+		} else {
+			self.client.connect();
 
-		self._onConnected = onConnected.bind(self);
-		self.client.once('connected', self._onConnected);
+			self._onConnected = onConnected.bind(self);
+			self.client.once('connected', self._onConnected);
+		}
 	});
 };
 

@@ -305,7 +305,8 @@ An object containing cached data about known apps and packages. Only useful if t
 - `client` - An optional `SteamClient` to use to connect to Steam. If not provided, one will be created automatically.
 - `options` - An optional object containing zero or more [options](#options) to set for this `SteamUser`.
 
-Constructs a new `SteamUser`. If you allow `SteamUser` to create its own `SteamClient`, then `SteamUser` will automatically save and reload the CM server list.
+Constructs a new `SteamUser`. If you allow `SteamUser` to create its own `SteamClient`, then `SteamUser` will
+automatically save and reload the CM server list.
 
 ### setOption(option, value)
 - `option` - The name of the option to set
@@ -323,7 +324,8 @@ If you aren't using `dataDirectory` or you just want to provide your own sentry 
 
 You should call this before calling `logOn`. When you log on, `SteamUser` will use this sentry file.
 
-You can provide either an entire sentryfile (preferred), or a Buffer containing the binary SHA1 hash of your sentryfile (e.g. the output of the `sentry` event in node-steam 0.6.x).
+You can provide either an entire sentryfile (preferred), or a Buffer containing the binary SHA1 hash of your sentryfile
+(e.g. the output of the `sentry` event in node-steam 0.6.x).
 
 ### logOn([details])
 - `details` - An object containing details for this logon
@@ -335,7 +337,8 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 
-Logs onto Steam. The `SteamClient` should **not** be connected. Omit the `details` object if you wish to login to an anonymous user account.
+Logs onto Steam. The `CMClient`/`SteamClient` should **not** be already logged on, although as of v3.4.0 it can be
+connected. Omit the `details` object if you wish to login to an anonymous user account.
 
 ### logOff()
 
@@ -343,7 +346,8 @@ Logs you off of Steam and closes the connection.
 
 ### webLogOn()
 
-`SteamUser` will automatically log onto steamcommunity.com when a successful connection to Steam is established (as an individual user), but you can call `webLogOn()` to create a new session if your old one expires or becomes invalid.
+`SteamUser` will automatically log onto steamcommunity.com when a successful connection to Steam is established (as an
+individual user), but you can call `webLogOn()` to create a new session if your old one expires or becomes invalid.
 
 Listen for the [`webSession`](#websession) event to get your cookies.
 
@@ -359,7 +363,8 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 		- or something else on another error
 	- `steamid` - If successful, this is a `SteamID` object containing the new account's SteamID
 
-Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user to use this.
+Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user
+to use this.
 
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
