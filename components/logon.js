@@ -139,7 +139,12 @@ SteamUser.prototype.logOn = function(details) {
 };
 
 function onConnected() {
-	this._send(Steam.EMsg.ClientLogon, this._logOnDetails);
+	if(this.client.constructor.name === 'CMClient') {
+		// We need to use this since CMClient defines the protocol version itself
+		this.client.logOn(this._logOnDetails);
+	} else {
+		this._send(Steam.EMsg.ClientLogon, this._logOnDetails);
+	}
 }
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {

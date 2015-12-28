@@ -116,6 +116,15 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 		};
 	}
 
+	if(this.options.debug) {
+		for(var i in Steam.EMsg) {
+			if(Steam.EMsg.hasOwnProperty(i) && Steam.EMsg[i] == emsg) {
+				emsg = i;
+				break;
+			}
+		}
+	}
+
 	this.emit('debug', 'Sending message: ' + emsg);
 	this.client.send(header, body, cb);
 };
