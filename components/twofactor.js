@@ -8,16 +8,11 @@ var SteamTotp = require('steam-totp');
 SteamUser.prototype.enableTwoFactor = function(callback) {
 	var self = this;
 
-	// Create a random device ID hash
-	var hash = require('crypto').createHash('sha1');
-	hash.update(self.steamID.getSteamID64());
-	hash = hash.digest('hex');
-
 	this._sendUnified("TwoFactor.AddAuthenticator#1", {
 		"steamid": self.steamID.getSteamID64(),
 		"authenticator_time": Math.floor(Date.now() / 1000),
 		"authenticator_type": 1,
-		"device_identifier": 'android:' + hash,
+		"device_identifier": SteamTotp.getDeviceID(self.steamID),
 		"sms_phone_id": "1"
 	}, false, function(body) {
 		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
