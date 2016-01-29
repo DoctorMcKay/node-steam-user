@@ -63,6 +63,8 @@ protobufs[Steam.EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClien
 protobufs[Steam.EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
 protobufs[Steam.EMsg.ClientRegisterKey] = Schema.CMsgClientRegisterKey;
 protobufs[Steam.EMsg.ClientPurchaseResponse] = Schema.CMsgClientPurchaseResponse;
+protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDP] = Schema.CMsgDPGetNumberOfCurrentPlayers;
+protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDPResponse] = Schema.CMsgDPGetNumberOfCurrentPlayersResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

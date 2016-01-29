@@ -35,11 +35,8 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 };
 
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
-	var buffer = new ByteBuffer(8, ByteBuffer.LITTLE_ENDIAN);
-	buffer.writeUint64(appid).flip();
-
-	this._send(Steam.EMsg.ClientGetNumberOfCurrentPlayers, buffer, function(body) {
-		callback(body.readUint32(), body.readUint32());
+	this._send(Steam.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
+		callback(body.eresult, body.player_count);
 	});
 };
 
