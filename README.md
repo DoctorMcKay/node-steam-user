@@ -13,6 +13,8 @@ It's designed to be a self-contained module which provides all the functionality
 
 [Subscribe to release announcements](https://github.com/DoctorMcKay/node-steam-user/releases.atom)
 
+**Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [Steam group](https://steamcommunity.com/groups/SteamRE/discussions/4/).**
+
 # Static Properties
 
 Static properties, or properties attached directly to `SteamUser`, are accessed on the root module and not on instantiated handler instances.
