@@ -1,11 +1,12 @@
 var Steam = require('steam-client');
 var SteamUser = require('../index.js');
+var SteamID = require('steamid');
 var Crypto = require('crypto');
 var SteamCrypto = require('steam-crypto');
 
 SteamUser.prototype.webLogOn = function() {
   // Verify not anonymous user
-  if(this.steamID.type === 10){
+  if(this.steamID.type === SteamID.Type.ANON_USER){
     throw new Error('Must not be anonymous user to use webLogOn (check to see you passed in valid credentials to logOn)')
   }
 
