@@ -5,9 +5,8 @@ var SteamCrypto = require('steam-crypto');
 
 SteamUser.prototype.webLogOn = function() {
   // Verify not anonymous user
-  if(! this._logOnDetails.account_name){
-    var error = new Error('Must not be anonymous user to use webLogOn (check to see you passed in valid credentials to logOn)')
-    return this.emit('error', error)
+  if(this.steamID.type === 10){
+    throw new Error('Must not be anonymous user to use webLogOn (check to see you passed in valid credentials to logOn)')
   }
 
 	this._send(Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonce, {});
