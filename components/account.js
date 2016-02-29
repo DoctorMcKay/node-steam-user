@@ -34,19 +34,30 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 SteamUser.prototype.getSteamGuardDetails = function(callback) {
 	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, false, function(body) {
 		var canTrade = true;
+		var twofactor7days = (body.is_twofactor_enabled && body.timestamp_twofactor_enabled && Math.floor(Date.now() / 1000) - body.timestamp_twofactor_enabled >= (60 * 60 * 24 * 7));
+
 		if(!body.is_steamguard_enabled) {
-			canTrade = false;
+			canTrade = false; // SG is not enabled
 		} else if(!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
-			canTrade = false;
-		} else if(!body.session_data || !body.session_data[0] || !body.session_data[0].timestamp_machine_steamguard_enabled || Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)) {
-			canTrade = false;
+			canTrade = false; // SG has not been enabled for 7 days
+		} else if(
+			!twofactor7days &&
+			(
+				!body.session_data ||
+				!body.session_data[0] ||
+				!body.session_data[0].timestamp_machine_steamguard_enabled ||
+				Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)
+			)
+		) {
+			canTrade = false; // Haven't had 2FA for 7 days, and this machine's auth is less than 7 days old
 		}
 
 		callback(
 			!!body.is_steamguard_enabled,
 			body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null,
 			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null,
-			canTrade
+			canTrade,
+			body.is_twofactor_enabled && body.timestamp_twofactor_enabled ? new Date(body.timestamp_twofactor_enabled * 1000) : null
 		);
 	});
 };

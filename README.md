@@ -413,14 +413,16 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 	- `enabledTime` - A `Date` object representing when Steam Guard was enabled for your account, or `null` if not available
 	- `machineTime` - A `Date` object representing when your current machine was authorized with Steam Guard, or `null` if not available
 	- `canTrade` - `true` if Steam Guard will allow you to trade, `false` if not. You may still be blocked by a trade ban or another trading limitation.
+	- `twofactorTime` - A `Date` object representing when the Steam Guard Mobile Authenticator was enabled for your account, or `null` if not enabled
 
-**v1.11.0 or later is required to use this method. v1.12.0 or later is required to use `canTrade`.**
+**v1.11.0 or later is required to use this method. v1.12.0 or later is required to use `canTrade`. v3.3.3 or later is required to use `twofactorTime`.**
 
 Requests details about your account's Steam Guard status. This could be used to see if your account passes the Steam Guard trading requirements.
 
-In order to trade, both of the following must be true:
+In order to trade, **all** of the following must be true:
+- `enabled` must be `true` (account-level restriction)
 - `enabledTime` must be at least 15 days ago (account-level restriction)
-- `machineTime` must be at least 7 days ago (sentryfile-level restriction)
+- ONE of `machineTime` OR `twofactorTime` must be at least 7 days ago (sentryfile-level restriction)
 
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
