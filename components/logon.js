@@ -344,6 +344,9 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientNewLoginKey] = function(body) {
 		if(this._logOnDetails.should_remember_password) {
 			this.emit('loginKey', body.login_key);
 		}
+
+		// Accept the key
+		this._send(Steam.EMsg.ClientNewLoginKeyAccepted, {"unique_id": body.unique_id});
 	}
 };
 
