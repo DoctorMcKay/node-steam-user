@@ -34,6 +34,10 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 		}
 	};
 
+	if (this.client.localAddress || this.client._localAddress) {
+		options.localAddress = this.client.localAddress || this.client._localAddress;
+	}
+
 	var self = this;
 	var req = require('https').request(options, function(res) {
 		if(res.statusCode != 200) {
