@@ -997,7 +997,7 @@ Emitted when someone sends us a trade request. Example usage:
 
 ```js
 user.on('tradeRequest', function(steamID, respond) {
-	console.log("Incoming trade request from " + name + " " + steamID.getSteam3RenderedID() + ", accepting");
+	console.log("Incoming trade request from " + steamID.getSteam3RenderedID() + ", accepting");
 	respond(true);
 }
 ```
