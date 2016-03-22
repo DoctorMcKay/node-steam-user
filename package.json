@@ -18,7 +18,7 @@
 		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
 	"dependencies": {
-		"steamid": "^0.3.0",
+		"steamid": "^1.0.0",
 		"appdirectory": "^0.1.0",
 		"protobufjs": "^4.0.0",
 		"steam-client": "^1.0.1",
