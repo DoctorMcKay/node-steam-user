@@ -62,6 +62,7 @@ protobufs[Steam.EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIn
 protobufs[Steam.EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientFSGetFriendMessageHistory;
 protobufs[Steam.EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientFSGetFriendMessageHistoryResponse;
 protobufs[Steam.EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
+protobufs[Steam.EMsg.ClientPlayerNicknameList] = Schema.CMsgClientPlayerNicknameList;
 protobufs[Steam.EMsg.ClientRegisterKey] = Schema.CMsgClientRegisterKey;
 protobufs[Steam.EMsg.ClientPurchaseResponse] = Schema.CMsgClientPurchaseResponse;
 protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDP] = Schema.CMsgDPGetNumberOfCurrentPlayers;

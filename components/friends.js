@@ -374,6 +374,11 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsGroupsList] = function(bod
 	this.myFriendGroups = groupList;
 };
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientPlayerNicknameList] = function(body) {
+	// TODO
+	//console.log(body);
+};
+
 function processUser(user) {
 	if(typeof user.gameid === 'object' && user.gameid !== null) {
 		user.gameid = user.gameid.toNumber();
