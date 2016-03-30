@@ -38,3 +38,22 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFSOfflineMessageNotification] = f
 		return sid.toString();
 	}));
 };
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientMarketingMessageUpdate2] = function(body) {
+	var time = body.readUint32();
+	var count = body.readUint32();
+
+	var messages = [];
+
+	for (var i = 0; i < count; i++) {
+		body.readUint32(); // Dunno what this is. Seems to always be 81.
+
+		messages.push({
+			"id": body.readUint64(),
+			"url": body.readCString(),
+			"flags": body.readUint32()
+		});
+	}
+
+	this.emit('marketingMessages', new Date(time * 1000), messages);
+};
