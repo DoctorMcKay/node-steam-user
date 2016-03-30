@@ -91,7 +91,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientAccountInfo] = function(body) {
 	}
 
 	this.emit('accountInfo', info);
-	this.accountInfo = body;
+	this.accountInfo = info;
 };
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientEmailAddrInfo] = function(body) {
