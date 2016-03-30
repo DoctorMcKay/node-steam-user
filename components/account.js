@@ -64,6 +64,36 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 
 // Handlers
 
+SteamUser.prototype._handlers[Steam.EMsg.ClientAccountInfo] = function(body) {
+	// Steam appears to send this twice on logon. Let's collapse it down to one event.
+	var info = {
+		"name": body.persona_name,
+		"country": body.ip_country,
+		"authedMachines": body.count_authed_computers,
+		"flags": body.account_flags,
+		"facebookID": body.facebook_id ? body.facebook_id.toString() : null,
+		"facebookName": body.facebook_name
+	};
+
+	if(this.accountInfo) {
+		// Check if everything is identical
+		var anythingDifferent = false;
+		for (var i in this.accountInfo) {
+			if (this.accountInfo.hasOwnProperty(i) && info.hasOwnProperty(i) && this.accountInfo[i] != info[i]) {
+				anythingDifferent = true;
+				break;
+			}
+		}
+
+		if(!anythingDifferent) {
+			return;
+		}
+	}
+
+	this.emit('accountInfo', info);
+	this.accountInfo = body;
+};
+
 SteamUser.prototype._handlers[Steam.EMsg.ClientEmailAddrInfo] = function(body) {
 	this.emit('emailInfo', body.email_address, body.email_is_validated);
 	this.emailInfo = {

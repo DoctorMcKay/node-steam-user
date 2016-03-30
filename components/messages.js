@@ -23,6 +23,7 @@ protobufs[Steam.EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotificatio
 protobufs[Steam.EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
 protobufs[Steam.EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
 protobufs[Steam.EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
+protobufs[Steam.EMsg.ClientAccountInfo] = Schema.CMsgClientAccountInfo;
 protobufs[Steam.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
 protobufs[Steam.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
 protobufs[Steam.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate;
