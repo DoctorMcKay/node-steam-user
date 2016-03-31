@@ -46,10 +46,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientMarketingMessageUpdate2] = functi
 	var messages = [];
 
 	for (var i = 0; i < count; i++) {
-		body.readUint32(); // Dunno what this is. Seems to always be 81.
+		body.readUint32(); // Length of this submessage
 
 		messages.push({
-			"id": body.readUint64(),
+			"id": body.readUint64().toString(),
 			"url": body.readCString(),
 			"flags": body.readUint32()
 		});
