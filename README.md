@@ -217,6 +217,17 @@ Only defined if you're currently logged on. This is your public IP as reported b
 
 Only defined if you're currently logged on. This is you cell (region ID) on the Steam network.
 
+### accountInfo
+
+An object containing information about your account. `null` until [`accountInfo`](#accountinfo-1) is emitted.
+
+- `name` - Your account's Steam (persona) name
+- `country` - The character code from which you're logging in (via GeoIP), e.g. "US"
+- `authedMachines` - How many machines are authorized to login to your account with Steam Guard
+- `flags` - Your account's bitwise [flags](https://github.com/SteamRE/SteamKit/blob/b80cdf5249891d54c655e39262d8267c7b40b249/Resources/SteamLanguage/enums.steamd#L81-L113)
+- `facebookID` - If your account is linked with Facebook, this is your Facebook account ID
+- `facebookName` - If your account is linked with Facebook, this is your (real) name on Facebook
+
 ### emailInfo
 
 An object containing information about your account's email address. `null` until [`emailInfo`](#emailinfo-1) is emitted.
@@ -902,6 +913,18 @@ Emitted when Steam sends a notification of new trade offers.
 
 Emitted when Steam sends a notification of unread offline chat messages. This will always be emitted after logon, even if you have no messages.
 
+### accountInfo
+- `name` - Your account's Steam (persona) name
+- `country` - The character code from which you're logging in (via GeoIP), e.g. "US"
+- `authedMachines` - How many machines are authorized to login to your account with Steam Guard
+- `flags` - Your account's bitwise [flags](https://github.com/SteamRE/SteamKit/blob/b80cdf5249891d54c655e39262d8267c7b40b249/Resources/SteamLanguage/enums.steamd#L81-L113)
+- `facebookID` - If your account is linked with Facebook, this is your Facebook account ID
+- `facebookName` - If your account is linked with Facebook, this is your (real) name on Facebook
+
+**v3.4.0 or later is required to use this event**
+
+Emitted on logon and when account info changes. This event is emitted before the [`accountInfo`](#accountinfo) property is updated, so you can compare to see what changed.
+
 ### emailInfo
 - `address` - Your account's email address
 - `validated` - A boolean value for whether or not your email address is validated
@@ -955,7 +978,7 @@ This is only emitted if `enablePicsCache` is `true`.
 - `apps` - An array of AppIDs which changed since our last received changelist
 - `packages` - An array of PackageIDs which changed since our last received changelist
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this event**
 
 Emitted when we receive a new changelist from Steam. The `picsCache` property is updated after this is emitted, so you
 can get the previous changenumber via `picsCache.changenumber`.
@@ -966,7 +989,7 @@ This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterva
 - `appid` - The AppID of the app which just changed
 - `data` - An object identical to that received from `getProductInfo`
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this event**
 
 Emitted when an app that was already in our cache updates. The `picsCache` property is updated after this is emitted, so
 you can get the previous app data via `picsCache.apps[appid]`.
@@ -977,12 +1000,25 @@ This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterva
 - `packageid` - The PackageID of the package which just changed
 - `data` - An object identical to that received from `getProductInfo`
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this event**
 
 Emitted when a package that was already in our cache updates. The `picsCache` property is updated after this is emitted,
 so you can get the previous package data via `picsCache.packages[packageid]`.
 
 This is only emitted if `enablePicsCache` is `true` and `changelistUpdateInterval` is nonzero.
+
+### marketingMessages
+- `timestamp` - A `Date` object containing the time when this batch of messages was published
+- `messages` - An array of objects containing the following properties
+    - `id` - The marketing message's 64-bit numeric ID, as a string
+    - `url` - The URL where you can view this message
+    - `flags` - A 32-bit integer containing the message's bitwise [flags](https://github.com/SteamRE/SteamKit/blob/b80cdf5249891d54c655e39262d8267c7b40b249/Resources/SteamLanguage/enums.steamd#L827-L836)
+
+**v3.4.0 or later is required to use this event**
+
+Emitted on logon, and when new marketing messages are published. Marketing messages are the popups that appear after
+you exit a game if you have "Notify me about additions or changes to my games, new releases, and upcoming releases"
+enabled in the Steam client.
 
 ### tradeRequest
 - `steamID` - The SteamID of the user who sent the request, as a `SteamID` object
