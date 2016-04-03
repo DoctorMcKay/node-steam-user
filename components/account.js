@@ -90,7 +90,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientAccountInfo] = function(body) {
 		}
 	}
 
-	this.emit('accountInfo', info);
+	this.emit('accountInfo', info.name, info.country, info.authedMachines, info.flags, info.facebookID, info.facebookName);
 	this.accountInfo = info;
 };
 
