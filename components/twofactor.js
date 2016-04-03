@@ -43,7 +43,15 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 	var diff = 0;
 
 	var self = this;
-	finalize();
+	SteamTotp.getTimeOffset(function(err, offset, latency) {
+		if (err) {
+			callback(err);
+			return;
+		}
+
+		diff = offset;
+		finalize();
+	});
 
 	function finalize() {
 		var code = SteamTotp.generateAuthCode(secret, diff);
