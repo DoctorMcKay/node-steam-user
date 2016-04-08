@@ -520,7 +520,7 @@ Requests a list of game servers from the master server.
 **Works when anonymous.** Gets current IP addresses for servers with given SteamIDs.
 
 ### getProductChanges(sinceChangenumber, callback)
-- `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. Use 1 to request all changes ever.
+- `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. You won't get any info except the current changenumber if you request more than around 5,000 changenumbers in the past.
 - `callback` - Called when data is available
 	- `currentChangenumber` - The changenumber of the newest changelist
 	- `apps` - An array of objects for apps which have changed. Each object has these properties:
