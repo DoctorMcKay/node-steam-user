@@ -2,7 +2,7 @@ var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var Crypto = require('crypto');
-var SteamCrypto = require('steam-crypto');
+var SteamCrypto = require('@doctormckay/steam-crypto');
 
 SteamUser.prototype.webLogOn = function() {
 	// Verify not anonymous user
