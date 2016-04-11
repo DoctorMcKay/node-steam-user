@@ -69,6 +69,7 @@ function SteamUser(client, options) {
 		"enablePicsCache": false,
 		"picsCacheAll": false,
 		"changelistUpdateInterval": 60000,
+		"saveAppTickets": true,
 		"debug": false
 	};
 
