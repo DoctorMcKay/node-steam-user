@@ -67,7 +67,7 @@ SteamUser.parseAppTicket = function(ticket) {
 		}
 
 		var date = new Date();
-		details.expired = details.generated > date || date > details.expires;
+		details.expired = details.expires < date;
 		details.validSignature = details.signature && SteamCrypto.verifySignature(ticket.slice(0, ticketLength).toBuffer(), details.signature);
 		details.isValid = !details.expired && (!details.signature || details.validSignature);
 	} catch (ex) {
