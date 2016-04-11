@@ -107,7 +107,7 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 	this.storage.readFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", function(err, file) {
 		if (!err && file) {
 			file = SteamUser.parseAppTicket(file);
-			if (file && file.isValid && file.expires - Date.now() >= (1000 * 60 * 60 * 6)) {
+			if (file && file.isValid && file.expires - Date.now() >= (1000 * 60 * 60 * 6) && file.externalIP == self.publicIP) {
 				return file;
 			}
 		}
