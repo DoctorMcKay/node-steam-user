@@ -5,7 +5,7 @@ var SteamID = require('steamid');
 var Helpers = require('./helpers.js');
 var SteamCrypto = require('@doctormckay/steam-crypto');
 
-SteamUser.prototype.getAppTicket = function(appid, callback) {
+SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 	this._send(Steam.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
 		if (body.eresult != Steam.EResult.OK) {
 			callback(new Error("Error " + body.eresult));
@@ -23,6 +23,22 @@ SteamUser.prototype.getAppTicket = function(appid, callback) {
 		// 3. Length-prefixed SESSIONHEADER
 		// 4. Length-prefixed OWNERSHIPTICKET (yes, even though the ticket itself has a length)
 		// The GCTOKEN and SESSIONHEADER portion is passed to ClientAuthList for reuse validation
+		callback(null, body.ticket.toBuffer());
+	});
+};
+
+SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
+	this._send(Steam.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
+		if (body.eresult != Steam.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		if (body.app_id != appid) {
+			callback(new Error("Cannot get app ownership ticket"));
+			return;
+		}
+
 		callback(null, body.ticket.toBuffer());
 	});
 };
