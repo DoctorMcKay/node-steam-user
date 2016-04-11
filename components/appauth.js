@@ -106,9 +106,11 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 	// See if we have one saved
 	this.storage.readFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", function(err, file) {
 		if (!err && file) {
-			file = SteamUser.parseAppTicket(file);
-			if (file && file.isValid && file.expires - Date.now() >= (1000 * 60 * 60 * 6) && file.externalIP == self.publicIP) {
-				return file;
+			var parsed = SteamUser.parseAppTicket(file);
+			// Only return the saved ticket if it has a valid signature, expires more than 6 hours from now, and has the same external IP as we have right now.
+			if (parsed && parsed.isValid && parsed.expires - Date.now() >= (1000 * 60 * 60 * 6) && parsed.externalIP == self.publicIP) {
+				callback(null, file);
+				return;
 			}
 		}
 
