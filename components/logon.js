@@ -222,6 +222,10 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 			this.cellID = body.cell_id;
 			// vanity_url isn't here because it can change while logged on
 
+			this._connectTime = Date.now();
+			this._connectionCount = 0;
+			this._gcTokens = [];
+
 			this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 
 			this.emit('loggedOn', body);
@@ -305,6 +309,10 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 	delete this.publicIP;
 	delete this.cellID;
+
+	this._gcTokens = [];
+	this._connectionCount = 0;
+	this._connectTime = 0;
 
 	this._clearChangelistUpdateTimer();
 

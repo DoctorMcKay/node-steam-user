@@ -69,6 +69,7 @@ protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDP] = Schema.CMsgDPGetNumber
 protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDPResponse] = Schema.CMsgDPGetNumberOfCurrentPlayersResponse;
 protobufs[Steam.EMsg.ClientGetAppOwnershipTicket] = Schema.CMsgClientGetAppOwnershipTicket;
 protobufs[Steam.EMsg.ClientGetAppOwnershipTicketResponse] = Schema.CMsgClientGetAppOwnershipTicketResponse;
+protobufs[Steam.EMsg.ClientGameConnectTokens] = Schema.CMsgClientGameConnectTokens;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

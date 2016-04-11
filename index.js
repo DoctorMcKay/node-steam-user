@@ -42,6 +42,10 @@ function SteamUser(client, options) {
 	this.myGroups = {};
 	this.myFriendGroups = {};
 
+	this._gcTokens = []; // game connect tokens
+	this._connectTime = 0;
+	this._connectionCount = 0;
+
 	// App and package cache
 	this._changelistUpdateTimer = null;
 	this.picsCache = {

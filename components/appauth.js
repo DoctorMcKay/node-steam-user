@@ -79,24 +79,43 @@ SteamUser.parseAppTicket = function(ticket) {
 };
 
 SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
-	this._send(Steam.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
-		if (body.eresult != Steam.EResult.OK) {
-			callback(new Error("Error " + body.eresult));
+	// For an auth session ticket we need the following:
+	// 1. 64-bit SteamID
+	// 2. Length-prefixed GCTOKEN
+	// 3. Length-prefixed SESSIONHEADER
+	// 4. Length-prefixed OWNERSHIPTICKET (yes, even though the ticket itself has a length)
+	// The GCTOKEN and SESSIONHEADER portion is passed to ClientAuthList for reuse validation
+	var self = this;
+	this.getAppOwnershipTicket(appid, function(err, ticket) {
+		if (err) {
+			callback(err);
 			return;
 		}
 
-		if (body.app_id != appid) {
-			callback(new Error("Cannot get app ticket"));
-			return;
+		// Do we have any GC tokens?
+		if (self._gcTokens.length > 0) {
+			buildToken();
+		} else {
+			self.once('_gcTokens', buildToken); // continue once we get some tokens
 		}
 
-		// This actually isn't enough. We need connect tokens also. The actual value the Steam API returns is:
-		// 1. 64-bit SteamID
-		// 2. Length-prefixed GCTOKEN
-		// 3. Length-prefixed SESSIONHEADER
-		// 4. Length-prefixed OWNERSHIPTICKET (yes, even though the ticket itself has a length)
-		// The GCTOKEN and SESSIONHEADER portion is passed to ClientAuthList for reuse validation
-		callback(null, body.ticket.toBuffer());
+		function buildToken() {
+			var gcToken = self._gcTokens.splice(0, 1)[0];
+			var buffer = new ByteBuffer(8 + 4 + gcToken.length + 4 + 24 + 4 + ticket.length, ByteBuffer.LITTLE_ENDIAN);
+			buffer.writeUint64(self.steamID.getSteamID64());
+			buffer.writeUint32(gcToken.length);
+			buffer.append(gcToken);
+			buffer.writeUint32(24); // length of the session header, which is always 24 bytes
+			buffer.writeUint32(1); // unknown 1
+			buffer.writeUint32(2); // unknown 2
+			buffer.writeUint32(Helpers.ipStringToInt(self.publicIP)); // external IP
+			buffer.writeUint32(0); // filler
+			buffer.writeUint32(Date.now() - self._connectTime); // timestamp
+			buffer.writeUint32(++self._connectionCount); // connection count
+			buffer.writeUint32(ticket.length);
+			buffer.append(ticket);
+			callback(null, buffer.flip().toBuffer());
+		}
 	});
 };
 
@@ -133,4 +152,17 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			callback(null, body.ticket.toBuffer());
 		});
 	});
+};
+
+// Handlers
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientGameConnectTokens] = function(body) {
+	var self = this;
+
+	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
+	body.tokens.forEach(function(token) {
+		self._gcTokens.push(token.toBuffer());
+	});
+
+	this.emit('_gcTokens'); // internal private event
 };
