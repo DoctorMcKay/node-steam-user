@@ -181,8 +181,6 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			}
 		}
 
-		return;
-
 		self._send(Steam.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
 			if (body.eresult != Steam.EResult.OK) {
 				callback(Helpers.eresultError(body.eresult));
