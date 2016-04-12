@@ -2,6 +2,7 @@ var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var Helpers = require('./helpers.js');
+var Schema = require('./protobufs.js');
 var Crypto = require('crypto');
 var ByteBuffer = require('bytebuffer');
 
@@ -228,7 +229,20 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 
-			this.emit('loggedOn', body);
+			var parental = body.parental_settings ? Schema.ParentalSettings.decode(body.parental_settings) : null;
+			if (parental) {
+				parental.salt = parental.salt.toBuffer();
+				parental.passwordhash = parental.passwordhash.toBuffer();
+
+				var sid = new SteamID();
+				sid.universe = this.steamID.universe;
+				sid.type = SteamID.Type.INDIVIDUAL;
+				sid.instance = SteamID.Instance.DESKTOP;
+				sid.accountid = parental.steamid.low;
+				parental.steamid = sid;
+			}
+
+			this.emit('loggedOn', body, parental);
 
 			this._getChangelistUpdate();
 
