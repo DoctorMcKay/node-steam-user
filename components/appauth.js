@@ -68,7 +68,6 @@ SteamUser.parseAppTicket = function(ticket) {
 		var ticketOffset = ticket.offset;
 		var ticketLength = ticket.readUint32();
 		if (ticketOffset + ticketLength != ticket.limit && ticketOffset + ticketLength + 128 != ticket.limit) {
-			console.log("Bad length: " + (ticketOffset + ticketLength) + " vs " + ticket.limit);
 			return null;
 		}
 
@@ -121,7 +120,6 @@ SteamUser.parseAppTicket = function(ticket) {
 		details.hasValidSignature = details.signature && SteamCrypto.verifySignature(ticket.slice(ticketOffset, ticketOffset + ticketLength).toBuffer(), details.signature);
 		details.isValid = !details.expired && (!details.signature || details.validSignature);
 	} catch (ex) {
-		console.log(ex.stack);
 		return null; // not a valid ticket
 	}
 
