@@ -45,6 +45,9 @@ function SteamUser(client, options) {
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;
 	this._connectionCount = 0;
+	this._authSeqMe = 0;
+	this._authSeqThem = 0;
+	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 
 	// App and package cache
 	this._changelistUpdateTimer = null;

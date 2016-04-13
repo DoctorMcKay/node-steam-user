@@ -4,6 +4,7 @@ var ByteBuffer = require('bytebuffer');
 var SteamID = require('steamid');
 var Helpers = require('./helpers.js');
 var SteamCrypto = require('@doctormckay/steam-crypto');
+var Crc32 = require('buffer-crc32');
 
 /**
  * Parse a Steam app or session ticket and return an object containing its details. Static.
@@ -162,7 +163,13 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 			buffer.writeUint32(++self._connectionCount); // connection count
 			buffer.writeUint32(ticket.length);
 			buffer.append(ticket);
-			callback(null, buffer.flip().toBuffer());
+
+			buffer = buffer.flip().toBuffer();
+
+			// We need to activate our ticket
+			self.validateAuthTickets(appid, buffer, function() {
+				callback(null, buffer);
+			});
 		}
 	});
 };
@@ -202,6 +209,83 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 	});
 };
 
+// TODO: Does this list need to include all the tickets we consider active and valid, regardless of who we are?
+SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
+	if (!(tickets instanceof Array)) {
+		tickets = [tickets];
+	}
+
+	var obj = {
+		"tokens_left": (this._gcTokens ? this._gcTokens.length : 0),
+		"last_request_seq": this._authSeqMe,
+		"last_request_seq_from_server": this._authSeqThem,
+		"tickets": [],
+		"app_ids": [],
+		"message_sequence": ++this._authSeqMe
+	};
+
+	var self = this;
+
+	tickets.forEach(function(ticket, idx) {
+		var authTicket = null;
+
+		if (ticket instanceof Buffer && ticket.length == 52) {
+			authTicket = ticket;
+		}
+
+		if (ticket.authTicket) {
+			authTicket = ticket.authTicket;
+		} else {
+			ticket = SteamUser.parseAppTicket(ticket);
+			if (!ticket) {
+				if (callback) {
+					callback(new Error("Ticket " + idx + " is invalid"));
+				}
+
+				return;
+			}
+
+			authTicket = ticket.authTicket;
+		}
+
+		var sid = new SteamID();
+		sid.universe = self.steamID.universe;
+		sid.type = SteamID.Type.INDIVIDUAL;
+		sid.instance = SteamID.Instance.DESKTOP;
+		sid.accountid = authTicket.readUInt32LE(12);
+		sid = sid.getSteamID64();
+
+		var isOurTicket = (sid == self.steamID.getSteamID64());
+
+		obj.tickets.push({
+			"estate": isOurTicket ? 0 : 1,
+			"steamid": isOurTicket ? 0 : sid,
+			"gameid": appid,
+			"h_steam_pipe": self._hSteamPipe,
+			"ticket_crc": Crc32.unsigned(authTicket),
+			"ticket": authTicket
+		});
+
+		obj.app_ids.push(appid);
+	});
+
+	if (tickets.length == 0) {
+		obj.app_ids.push(appid); // canceling tickets for this app
+	}
+
+	this._send(Steam.EMsg.ClientAuthList, obj, function(body) {
+		self._authSeqThem = body.message_sequence;
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
+	this.validateAuthTickets(appid, [], callback);
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[Steam.EMsg.ClientGameConnectTokens] = function(body) {
@@ -213,4 +297,13 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientGameConnectTokens] = function(bod
 	});
 
 	this.emit('_gcTokens'); // internal private event
+};
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientTicketAuthComplete] = function(body) {
+	var authUser = new SteamID(body.steam_id.toString());
+	var owner = body.owner_steam_id.toString() == "0" ? null : new SteamID(body.owner_steam_id.toString());
+	var appid = body.game_id.low;
+	var crc = body.ticket_crc;
+
+	this.emit(owner.getSteamID64() == this.steamID.getSteamID64() ? "authTicketStatus" : "authTicketValidation", appid, authUser, body.eauth_session_response, crc, owner);
 };
