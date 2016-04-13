@@ -35,7 +35,9 @@ SteamUser.parseAppTicket = function(ticket) {
 			}
 
 			details.hasToken = true;
-			ticket.skip(8); // TODO: Pull out the raw binary GCTOKEN and SESSIONHEADER for later validation
+			details.authTicket = ticket.slice(ticket.offset - 4, ticket.offset - 4 + 52).toBuffer(); // this is the part that's passed back to Steam for validation
+
+			ticket.skip(8);
 
 			if (ticket.readUint64().toString() != steamID.getSteamID64()) {
 				// Token SteamID and provided SteamID don't match.
