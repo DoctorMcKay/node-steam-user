@@ -116,9 +116,9 @@ SteamUser.parseAppTicket = function(ticket) {
 		}
 
 		var date = new Date();
-		details.isExpired = details.expires < date;
+		details.isExpired = details.ownershipTicketExpires < date;
 		details.hasValidSignature = details.signature && SteamCrypto.verifySignature(ticket.slice(ticketOffset, ticketOffset + ticketLength).toBuffer(), details.signature);
-		details.isValid = !details.expired && (!details.signature || details.validSignature);
+		details.isValid = !details.isExpired && (!details.signature || details.hasValidSignature);
 	} catch (ex) {
 		return null; // not a valid ticket
 	}
