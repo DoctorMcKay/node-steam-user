@@ -833,6 +833,9 @@ user.on('friendMessage#76561198006409530', function(steamID, message) {
 
 ### loggedOn
 - `details` - An object containing various details about your account (see [`CMsgClientLogonResponse`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/Protobufs/steamclient/steammessages_clientserver.proto#L93-L116))
+- `parental` - An object containing your parental controls settings
+
+**v3.5.0 or later is required to use `parental`.**
 
 Emitted when you're successfully logged into Steam.
 
