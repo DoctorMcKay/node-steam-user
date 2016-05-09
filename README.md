@@ -823,12 +823,12 @@ For example:
 // This will fire when we receive a chat message from ANY friend
 user.on('friendMessage', function(steamID, message) {
 	console.log("Friend message from " + steamID.getSteam3RenderedID() + ": " + message);
-}
+});
 
 // This will fire when we receive a chat message from [U:1:46143802] / 76561198006409530 ONLY
 user.on('friendMessage#76561198006409530', function(steamID, message) {
 	console.log("Friend message from " + steamID.getSteam3RenderedID() + ": " + message);
-}
+});
 ```
 
 ### loggedOn
@@ -1042,7 +1042,7 @@ Emitted when someone sends us a trade request. Example usage:
 user.on('tradeRequest', function(steamID, respond) {
 	console.log("Incoming trade request from " + steamID.getSteam3RenderedID() + ", accepting");
 	respond(true);
-}
+});
 ```
 
 ### tradeResponse
