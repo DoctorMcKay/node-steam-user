@@ -16,12 +16,12 @@ It's designed to be a self-contained module which provides all the functionality
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
 # Contents
-- [Static Properties](#static-properties)
-- [Static Methods](#static-methods)
-- [Options](#options)
-- [Properties](#properties)
-- [Methods](#methods)
-- [Events](#events)
+- [Static Properties](#static-properties-)
+- [Static Methods](#static-methods-)
+- [Options](#options-)
+- [Properties](#properties-)
+- [Methods](#methods-)
+- [Events](#events-)
 
 # Static Properties [^](#contents)
 
