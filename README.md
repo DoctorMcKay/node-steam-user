@@ -15,7 +15,7 @@ It's designed to be a self-contained module which provides all the functionality
 
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
-# Content
+# Contents
 - [Static Properties](#static-properties)
 - [Static Methods](#static-methods)
 - [Options](#options)
@@ -23,7 +23,7 @@ It's designed to be a self-contained module which provides all the functionality
 - [Methods](#methods)
 - [Events](#events)
 
-# Static Properties
+# Static Properties [^](#contents)
 
 Static properties, or properties attached directly to `SteamUser`, are accessed on the root module and not on instantiated handler instances.
 
@@ -50,7 +50,7 @@ var SteamUser = require('steam-user');
 var usd = SteamUser.ECurrencyCode.USD;
 ```
 
-# Static Methods
+# Static Methods [^](#contents)
 
 Static methods, or functions attached directly to `SteamUser`, are called on the root module and not on instantiated handler instances.
 
@@ -74,7 +74,7 @@ Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile
 
 **Deprecated. Use [`steam-totp`](https://www.npmjs.com/package/steam-totp) instead.**
 
-# Options
+# Options [^](#contents)
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
 
@@ -199,7 +199,7 @@ Added in 3.3.0.
 
 Defaults to `60000`.
 
-# Properties
+# Properties [^](#contents)
 
 ### client
 
@@ -320,7 +320,7 @@ An object containing cached data about known apps and packages. Only useful if t
 - `apps` - An object whose keys are AppIDs and values are objects identical to those returned by `getProductInfo`
 - `packages` - An object whose keys are PackageIDs and values are objects identical to those returned by `getProductInfo`
 
-# Methods
+# Methods [^](#contents)
 
 ### Constructor([client][, options])
 - `client` - An optional `SteamClient` to use to connect to Steam. If not provided, one will be created automatically.
@@ -819,7 +819,7 @@ Creates a new multi-user chat room.
 
 Redeems game code on your account
 
-# Events
+# Events [^](#contents)
 
 ## ID Events
 
