@@ -391,4 +391,12 @@ function processUser(user) {
 	if(typeof user.last_logon === 'number') {
 		user.last_logon = new Date(user.last_logon * 1000);
 	}
+
+	if (typeof user.avatar_hash !== 'undefined') {
+		var hash = user.avatar_hash.toString('hex');
+		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
+		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
+		user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
+		user.avatar_url_icon += ".jpg";
+	}
 }
