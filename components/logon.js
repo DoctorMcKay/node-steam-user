@@ -159,7 +159,7 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 
 		var self = this;
 		var timeout = setTimeout(function() {
-			self.emit('disconnected', 0);
+			self.emit('disconnected', 0, "Logged off");
 			self._loggingOff = false;
 			self.client.disconnect();
 		}, 4000);
@@ -343,7 +343,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	} else {
 		// Only emit "disconnected" if we were previously logged on
 		if(this.steamID) {
-			this.emit('disconnected', result);
+			this.emit('disconnected', result, msg);
 		}
 
 		this.disconnect(true);
