@@ -876,6 +876,7 @@ The `SteamUser` object's `steamID` property will still be defined when this is e
 
 ### disconnected
 - `eresult` - A value from the `Steam.EResult` enum
+- `msg` - A string describing the reason for the disconnect, if available (might be undefined)
 
 Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will
 continually retry connection and will either emit `loggedOn` when logged back on, or `error` if a fatal logon error is
