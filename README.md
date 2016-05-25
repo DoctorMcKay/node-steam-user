@@ -885,6 +885,9 @@ Also emitted in response to a logOff() call.
 
 The `SteamUser` object's `steamID` property will still be defined when this is emitted.
 
+The `eresult` value might be 0 (Invalid), which indicates that the disconnection was due to the connection being closed
+directly, without Steam sending a LoggedOff message.
+
 ### sentry
 - `sentry` - A Buffer containing your new sentry file
 
