@@ -392,7 +392,7 @@ function processUser(user) {
 		user.last_logon = new Date(user.last_logon * 1000);
 	}
 
-	if (typeof user.avatar_hash !== 'undefined') {
+	if (typeof user.avatar_hash === 'object' && Buffer.isBuffer(user.avatar_hash)) {
 		var hash = user.avatar_hash.toString('hex');
 		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
 		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
