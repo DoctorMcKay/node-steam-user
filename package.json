@@ -20,7 +20,7 @@
 	"dependencies": {
 		"steamid": "^1.0.0",
 		"appdirectory": "^0.1.0",
-		"protobufjs": "^4.0.0",
+		"protobufjs": "^5.0.0",
 		"steam-client": "^1.0.1",
 		"bytebuffer": "^5.0.0",
 		"@doctormckay/steam-crypto": "^1.0.0",
