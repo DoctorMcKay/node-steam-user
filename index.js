@@ -100,7 +100,7 @@ function SteamUser(client, options) {
 			return; // We've already handled this
 		}
 
-		self._handleLogOff(e.eresult || 0, e.message);
+		self._handleLogOff(e.eresult || Steam.EResult.NoConnection, e.message || "NoConnection");
 	});
 
 	this.client.on('servers', function(servers) {
