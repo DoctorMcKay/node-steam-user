@@ -1,4 +1,5 @@
 module.exports = {
+	"Invalid": -1,
 	"First": 0,
 	"Shell": 0,
 	"GM": 1,
@@ -71,6 +72,7 @@ module.exports = {
 	"Max": 67,
 
 	// Value-to-name mapping for convenience
+	"-1": "Invalid",
 	"0": "Shell",
 	"1": "GM",
 	"2": "BUM",
@@ -138,5 +140,3 @@ module.exports = {
 	"66": "PNP",
 	"67": "Max",
 };
-
-module.exports.Invalid = module.exports.-1;

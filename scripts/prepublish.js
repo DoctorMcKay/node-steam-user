@@ -81,7 +81,7 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 						// Put down the reverse, for simplicity in use
 						currentEnum.values.forEach(function(val, idx) {
-							if (val.value.match(/[^0-9]/)) {
+							if (!val.value.match(/^-?[0-9]+/)) {
 								return; // it's dynamic
 							}
 
@@ -118,7 +118,7 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 						var flags = value.split('|').map(function(flag) {
 							flag = flag.trim();
 							
-							if (flag.match(/^[0-9]+$/)) {
+							if (flag.match(/^-?[0-9]+$/)) {
 								return flag;
 							} else {
 								isDynamic = true;

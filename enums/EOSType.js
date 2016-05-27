@@ -1,4 +1,27 @@
 module.exports = {
+	"Unknown": -1,
+	"UMQ": -400,
+	"PS3": -300,
+	"MacOSUnknown": -102,
+	"MacOS104": -101,
+	"MacOS105": -100,
+	"MacOS1058": -99,
+	"MacOS106": -95,
+	"MacOS1063": -94,
+	"MacOS1064_slgu": -93,
+	"MacOS1067": -92,
+	"MacOS107": -90,
+	"MacOS108": -89,
+	"MacOS109": -88,
+	"MacOS1010": -87,
+	"LinuxUnknown": -203,
+	"Linux22": -202,
+	"Linux24": -201,
+	"Linux26": -200,
+	"Linux32": -199,
+	"Linux35": -198,
+	"Linux36": -197,
+	"Linux310": -196,
 	"WinUnknown": 0,
 	"Win311": 1,
 	"Win95": 2,
@@ -23,6 +46,29 @@ module.exports = {
 	"Max": 26,
 
 	// Value-to-name mapping for convenience
+	"-1": "Unknown",
+	"-400": "UMQ",
+	"-300": "PS3",
+	"-102": "MacOSUnknown",
+	"-101": "MacOS104",
+	"-100": "MacOS105",
+	"-99": "MacOS1058",
+	"-95": "MacOS106",
+	"-94": "MacOS1063",
+	"-93": "MacOS1064_slgu",
+	"-92": "MacOS1067",
+	"-90": "MacOS107",
+	"-89": "MacOS108",
+	"-88": "MacOS109",
+	"-87": "MacOS1010",
+	"-203": "LinuxUnknown",
+	"-202": "Linux22",
+	"-201": "Linux24",
+	"-200": "Linux26",
+	"-199": "Linux32",
+	"-198": "Linux35",
+	"-197": "Linux36",
+	"-196": "Linux310",
 	"0": "WinUnknown",
 	"1": "Win311",
 	"2": "Win95",
@@ -42,27 +88,3 @@ module.exports = {
 	"15": "WinMAX",
 	"26": "Max",
 };
-
-module.exports.Unknown = module.exports.-1;
-module.exports.UMQ = module.exports.-400;
-module.exports.PS3 = module.exports.-300;
-module.exports.MacOSUnknown = module.exports.-102;
-module.exports.MacOS104 = module.exports.-101;
-module.exports.MacOS105 = module.exports.-100;
-module.exports.MacOS1058 = module.exports.-99;
-module.exports.MacOS106 = module.exports.-95;
-module.exports.MacOS1063 = module.exports.-94;
-module.exports.MacOS1064_slgu = module.exports.-93;
-module.exports.MacOS1067 = module.exports.-92;
-module.exports.MacOS107 = module.exports.-90;
-module.exports.MacOS108 = module.exports.-89;
-module.exports.MacOS109 = module.exports.-88;
-module.exports.MacOS1010 = module.exports.-87;
-module.exports.LinuxUnknown = module.exports.-203;
-module.exports.Linux22 = module.exports.-202;
-module.exports.Linux24 = module.exports.-201;
-module.exports.Linux26 = module.exports.-200;
-module.exports.Linux32 = module.exports.-199;
-module.exports.Linux35 = module.exports.-198;
-module.exports.Linux36 = module.exports.-197;
-module.exports.Linux310 = module.exports.-196;
