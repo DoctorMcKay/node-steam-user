@@ -7,10 +7,19 @@ require('util').inherits(SteamUser, require('events').EventEmitter);
 module.exports = SteamUser;
 
 SteamUser.Steam = Steam;
-SteamUser.ECurrencyCode = require('./resources/ECurrencyCode.js');
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
+
+// Set up enums
+require('fs').readdirSync(__dirname + '/enums').forEach(function(enumFile) {
+	var match = enumFile.match(/^(E[a-zA-Z0-9]+)\.js$/);
+	if (!match) {
+		return;
+	}
+
+	SteamUser[match[1]] = require(__dirname + '/enums/' + enumFile);
+});
 
 try {
 	SteamUser.Steam.servers = require('./resources/servers.json');
