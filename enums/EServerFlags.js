@@ -1,3 +1,6 @@
+/**
+ * @enum EServerFlags
+ */
 module.exports = {
 	"None": 0,
 	"Active": 1,

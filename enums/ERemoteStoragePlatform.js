@@ -1,3 +1,6 @@
+/**
+ * @enum ERemoteStoragePlatform
+ */
 module.exports = {
 	"None": 0,
 	"Windows": 1,

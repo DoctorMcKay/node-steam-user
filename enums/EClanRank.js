@@ -1,3 +1,6 @@
+/**
+ * @enum EClanRank
+ */
 module.exports = {
 	"None": 0,
 	"Owner": 1,

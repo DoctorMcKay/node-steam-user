@@ -1,3 +1,6 @@
+/**
+ * @enum ELeaderboardDataRequest
+ */
 module.exports = {
 	"Global": 0,
 	"GlobalAroundUser": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EChatPermission
+ */
 module.exports = {
 	"Close": 1,
 	"Invite": 2,

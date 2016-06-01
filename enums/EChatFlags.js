@@ -1,3 +1,6 @@
+/**
+ * @enum EChatFlags
+ */
 module.exports = {
 	"Locked": 1,
 	"InvisibleToFriends": 2,

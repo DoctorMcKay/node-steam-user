@@ -1,3 +1,6 @@
+/**
+ * @enum EServerType
+ */
 module.exports = {
 	"Invalid": -1,
 	"First": 0,

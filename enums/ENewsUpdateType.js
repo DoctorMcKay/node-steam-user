@@ -1,3 +1,6 @@
+/**
+ * @enum ENewsUpdateType
+ */
 module.exports = {
 	"AppNews": 0,
 	"SteamAds": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum ELeaderboardDisplayType
+ */
 module.exports = {
 	"None": 0,
 	"Numeric": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EAuthSessionResponse
+ */
 module.exports = {
 	"OK": 0,
 	"UserNotConnectedToSteam": 1,

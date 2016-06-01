@@ -1,3 +1,6 @@
+/**
+ * @enum ESystemIMType
+ */
 module.exports = {
 	"RawText": 0,
 	"InvalidCard": 1,

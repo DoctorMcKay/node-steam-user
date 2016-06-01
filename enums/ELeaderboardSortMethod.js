@@ -1,3 +1,6 @@
+/**
+ * @enum ELeaderboardSortMethod
+ */
 module.exports = {
 	"None": 0,
 	"Ascending": 1,

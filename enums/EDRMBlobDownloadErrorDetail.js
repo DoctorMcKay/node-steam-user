@@ -1,3 +1,6 @@
+/**
+ * @enum EDRMBlobDownloadErrorDetail
+ */
 module.exports = {
 	"None": 0,
 	"DownloadFailed": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EPersonaState
+ */
 module.exports = {
 	"Offline": 0,
 	"Online": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EClanPermission
+ */
 module.exports = {
 	"Nobody": 0,
 	"Owner": 1,

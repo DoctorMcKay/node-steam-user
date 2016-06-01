@@ -1,3 +1,6 @@
+/**
+ * @enum EAccountType
+ */
 module.exports = {
 	"Invalid": 0,
 	"Individual": 1,

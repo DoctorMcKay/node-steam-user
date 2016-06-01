@@ -1,3 +1,6 @@
+/**
+ * @enum EChatInfoType
+ */
 module.exports = {
 	"StateChange": 1,
 	"InfoUpdate": 2,

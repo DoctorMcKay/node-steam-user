@@ -1,3 +1,6 @@
+/**
+ * @enum EChatRoomEnterResponse
+ */
 module.exports = {
 	"Success": 1,
 	"DoesntExist": 2,

@@ -1,3 +1,6 @@
+/**
+ * @enum EBillingType
+ */
 module.exports = {
 	"NoCost": 0,
 	"BillOnceOnly": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EUdpPacketType
+ */
 module.exports = {
 	"Invalid": 0,
 	"ChallengeReq": 1,

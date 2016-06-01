@@ -1,3 +1,6 @@
+/**
+ * @enum EMarketingMessageFlags
+ */
 module.exports = {
 	"None": 0,
 	"HighPriority": 1,

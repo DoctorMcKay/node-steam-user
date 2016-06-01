@@ -1,3 +1,6 @@
+/**
+ * @enum EChatEntryType
+ */
 module.exports = {
 	"Invalid": 0,
 	"ChatMsg": 1,

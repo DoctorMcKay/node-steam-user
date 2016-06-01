@@ -1,3 +1,6 @@
+/**
+ * @enum EDepotFileFlag
+ */
 module.exports = {
 	"UserConfig": 1,
 	"VersionedUserConfig": 2,

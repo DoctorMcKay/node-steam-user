@@ -1,3 +1,6 @@
+/**
+ * @enum EWorkshopFileType
+ */
 module.exports = {
 	"First": 0,
 	"SteamworksAccessInvite": 13,

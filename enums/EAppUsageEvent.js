@@ -1,3 +1,6 @@
+/**
+ * @enum EAppUsageEvent
+ */
 module.exports = {
 	"GameLaunch": 1,
 	"GameLaunchTrial": 2,

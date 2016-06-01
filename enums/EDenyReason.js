@@ -1,3 +1,6 @@
+/**
+ * @enum EDenyReason
+ */
 module.exports = {
 	"InvalidVersion": 1,
 	"Generic": 2,

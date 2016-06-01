@@ -1,3 +1,6 @@
+/**
+ * @enum EUniverse
+ */
 module.exports = {
 	"Invalid": 0,
 	"Public": 1,

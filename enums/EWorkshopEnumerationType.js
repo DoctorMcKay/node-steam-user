@@ -1,3 +1,6 @@
+/**
+ * @enum EWorkshopEnumerationType
+ */
 module.exports = {
 	"RankedByVote": 0,
 	"Recent": 1,

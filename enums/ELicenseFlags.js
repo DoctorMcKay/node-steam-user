@@ -1,3 +1,6 @@
+/**
+ * @enum ELicenseFlags
+ */
 module.exports = {
 	"None": 0,
 	"Renew": 1,

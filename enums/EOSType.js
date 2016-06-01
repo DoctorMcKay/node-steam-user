@@ -1,3 +1,6 @@
+/**
+ * @enum EOSType
+ */
 module.exports = {
 	"Unknown": -1,
 	"UMQ": -400,

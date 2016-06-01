@@ -1,3 +1,6 @@
+/**
+ * @enum EPublishedFileVisibility
+ */
 module.exports = {
 	"Public": 0,
 	"FriendsOnly": 1,

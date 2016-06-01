@@ -1,3 +1,6 @@
+/**
+ * @enum EClientStatAggregateMethod
+ */
 module.exports = {
 	"LatestOnly": 0,
 	"Sum": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EChatRoomType
+ */
 module.exports = {
 	"Friend": 1,
 	"MUC": 2,

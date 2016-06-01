@@ -1,3 +1,6 @@
+/**
+ * @enum EAccountFlags
+ */
 module.exports = {
 	"NormalUser": 0,
 	"PersonaNameSet": 1,

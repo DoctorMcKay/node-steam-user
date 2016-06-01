@@ -1,3 +1,6 @@
+/**
+ * @enum EClientStat
+ */
 module.exports = {
 	"P2PConnectionsUDP": 0,
 	"P2PConnectionsRelay": 1,

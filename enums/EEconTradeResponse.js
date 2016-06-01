@@ -1,3 +1,6 @@
+/**
+ * @enum EEconTradeResponse
+ */
 module.exports = {
 	"Accepted": 0,
 	"Declined": 1,

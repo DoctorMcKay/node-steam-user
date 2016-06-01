@@ -1,3 +1,6 @@
+/**
+ * @enum ERegionCode
+ */
 module.exports = {
 	"USEast": 0,
 	"USWest": 1,

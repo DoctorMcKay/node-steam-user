@@ -1,3 +1,6 @@
+/**
+ * @enum EDRMBlobDownloadType
+ */
 module.exports = {
 	"Error": 0,
 	"File": 1,

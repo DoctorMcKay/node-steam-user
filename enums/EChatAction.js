@@ -1,3 +1,6 @@
+/**
+ * @enum EChatAction
+ */
 module.exports = {
 	"InviteChat": 1,
 	"Kick": 2,

@@ -1,3 +1,6 @@
+/**
+ * @enum ECurrencyCode
+ */
 module.exports = {
 	"Invalid": 0,
 	"USD": 1,

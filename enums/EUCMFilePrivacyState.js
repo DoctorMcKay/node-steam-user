@@ -1,3 +1,6 @@
+/**
+ * @enum EUCMFilePrivacyState
+ */
 module.exports = {
 	"Invalid": -1,
 	"Private": 2,

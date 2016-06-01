@@ -1,3 +1,6 @@
+/**
+ * @enum EClientPersonaStateFlag
+ */
 module.exports = {
 	"Status": 1,
 	"PlayerName": 2,

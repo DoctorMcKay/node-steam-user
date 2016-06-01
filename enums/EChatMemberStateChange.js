@@ -1,3 +1,6 @@
+/**
+ * @enum EChatMemberStateChange
+ */
 module.exports = {
 	"Entered": 1,
 	"Left": 2,

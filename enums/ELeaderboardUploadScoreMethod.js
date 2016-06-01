@@ -1,3 +1,6 @@
+/**
+ * @enum ELeaderboardUploadScoreMethod
+ */
 module.exports = {
 	"None": 0,
 	"KeepBest": 1,

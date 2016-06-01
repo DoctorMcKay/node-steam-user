@@ -1,3 +1,6 @@
+/**
+ * @enum ELicenseType
+ */
 module.exports = {
 	"NoLicense": 0,
 	"SinglePurchase": 1,

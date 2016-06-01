@@ -1,3 +1,6 @@
+/**
+ * @enum EMsg
+ */
 module.exports = {
 	"Invalid": 0,
 	"Multi": 1,

@@ -1,3 +1,6 @@
+/**
+ * @enum EFriendFlags
+ */
 module.exports = {
 	"None": 0,
 	"Blocked": 1,

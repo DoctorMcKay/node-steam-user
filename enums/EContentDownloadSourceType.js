@@ -1,3 +1,6 @@
+/**
+ * @enum EContentDownloadSourceType
+ */
 module.exports = {
 	"Invalid": 0,
 	"CS": 1,

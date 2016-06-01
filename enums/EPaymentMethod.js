@@ -1,3 +1,6 @@
+/**
+ * @enum EPaymentMethod
+ */
 module.exports = {
 	"None": 0,
 	"ActivationCode": 1,

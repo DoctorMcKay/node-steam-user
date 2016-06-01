@@ -1,3 +1,6 @@
+/**
+ * @enum EActivationCodeClass
+ */
 module.exports = {
 	"WonCDKey": 0,
 	"ValveCDKey": 1,

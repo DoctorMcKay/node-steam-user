@@ -1,3 +1,6 @@
+/**
+ * @enum EAppInfoSection
+ */
 module.exports = {
 	"Unknown": 0,
 	"All": 1,

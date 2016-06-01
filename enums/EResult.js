@@ -1,3 +1,6 @@
+/**
+ * @enum EResult
+ */
 module.exports = {
 	"Invalid": 0,
 	"OK": 1,

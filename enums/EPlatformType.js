@@ -1,3 +1,6 @@
+/**
+ * @enum EPlatformType
+ */
 module.exports = {
 	"Unknown": 0,
 	"Win32": 1,

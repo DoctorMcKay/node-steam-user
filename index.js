@@ -12,15 +12,7 @@ SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
 SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
 
-// Set up enums
-require('fs').readdirSync(__dirname + '/enums').forEach(function(enumFile) {
-	var match = enumFile.match(/^(E[a-zA-Z0-9]+)\.js$/);
-	if (!match) {
-		return;
-	}
-
-	SteamUser[match[1]] = require(__dirname + '/enums/' + enumFile);
-});
+require('./resources/enums.js');
 
 try {
 	SteamUser.Steam.servers = require('./resources/servers.json');

@@ -1,3 +1,6 @@
+/**
+ * @enum EIntroducerRouting
+ */
 module.exports = {
 	"FileShare": 0, // obsolete
 	"P2PVoiceChat": 1,

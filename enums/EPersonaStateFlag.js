@@ -1,3 +1,6 @@
+/**
+ * @enum EPersonaStateFlag
+ */
 module.exports = {
 	"HasRichPresence": 1,
 	"InJoinableGame": 2,
