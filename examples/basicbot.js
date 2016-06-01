@@ -14,7 +14,7 @@ client.logOn({
 
 client.on('loggedOn', function(details) {
 	console.log("Logged into Steam as " + client.steamID.getSteam3RenderedID());
-	client.setPersona(SteamUser.Steam.EPersonaState.Online);
+	client.setPersona(SteamUser.EPersonaState.Online);
 	client.gamesPlayed(440);
 });
 

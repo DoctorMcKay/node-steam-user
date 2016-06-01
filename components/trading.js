@@ -1,4 +1,3 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
@@ -7,7 +6,7 @@ SteamUser.prototype.trade = function(steamID) {
 		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.EconTrading_InitiateTradeRequest, {"other_steamid": steamID.getSteamID64()});
+	this._send(SteamUser.EMsg.EconTrading_InitiateTradeRequest, {"other_steamid": steamID.getSteamID64()});
 };
 
 SteamUser.prototype.cancelTradeRequest = function(steamID) {
@@ -15,22 +14,22 @@ SteamUser.prototype.cancelTradeRequest = function(steamID) {
 		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.EconTrading_CancelTradeRequest, {"other_steamid": steamID.getSteamID64()});
+	this._send(SteamUser.EMsg.EconTrading_CancelTradeRequest, {"other_steamid": steamID.getSteamID64()});
 };
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitiateTradeProposed] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeProposed] = function(body) {
 	var self = this;
 	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), function(accept) {
-		self._send(Steam.EMsg.EconTrading_InitiateTradeResponse, {
+		self._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
 			"trade_request_id": body.trade_request_id,
-			"response": accept ? Steam.EEconTradeResponse.Accepted : Steam.EEconTradeResponse.Declined
+			"response": accept ? SteamUser.EEconTradeResponse.Accepted : SteamUser.EEconTradeResponse.Declined
 		});
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitiateTradeResult] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeResult] = function(body) {
 	// Is trade ID meaningful here?
 	this._emitIdEvent('tradeResponse', new SteamID(body.other_steamid.toString()), body.response, {
 		"steamguardRequiredDays": body.steamguard_required_days,
@@ -42,6 +41,6 @@ SteamUser.prototype._handlers[Steam.EMsg.EconTrading_InitiateTradeResult] = func
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.EconTrading_StartSession] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_StartSession] = function(body) {
 	this._emitIdEvent('tradeStarted', new SteamID(body.other_steamid.toString()));
 };

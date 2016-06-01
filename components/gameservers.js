@@ -1,4 +1,3 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
@@ -18,7 +17,7 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 		conditions.geo_location_ip = buf.readUInt32(0);
 	}
 
-	this._send(Steam.EMsg.ClientGMSServerQuery, conditions, function(body) {
+	this._send(SteamUser.EMsg.ClientGMSServerQuery, conditions, function(body) {
 		if(body.error) {
 			callback(new Error(body.error));
 			return;

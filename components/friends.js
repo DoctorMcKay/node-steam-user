@@ -1,5 +1,4 @@
 var SteamUser = require('../index.js');
-var Steam = require('steam-client');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 var Helpers = require('./helpers.js');
@@ -10,7 +9,7 @@ var Helpers = require('./helpers.js');
  * @param {string} [name] - Optional. Set a new profile name.
  */
 SteamUser.prototype.setPersona = function(state, name) {
-	this._send(Steam.EMsg.ClientChangeStatus, {
+	this._send(SteamUser.EMsg.ClientChangeStatus, {
 		"persona_state": state,
 		"player_name": name
 	});
@@ -21,7 +20,7 @@ SteamUser.prototype.setPersona = function(state, name) {
  * @param {EClientUIMode} mode - Your new UI mode
  */
 SteamUser.prototype.setUIMode = function(mode) {
-	this._send(Steam.EMsg.ClientCurrentUIMode, {"uimode": mode});
+	this._send(SteamUser.EMsg.ClientCurrentUIMode, {"uimode": mode});
 };
 
 /**
@@ -33,7 +32,7 @@ SteamUser.prototype.addFriend = function(steamID) {
 		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.ClientAddFriend, {"steamid_to_add": steamID.getSteamID64()});
+	this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": steamID.getSteamID64()});
 };
 
 /**
@@ -45,7 +44,7 @@ SteamUser.prototype.removeFriend = function(steamID) {
 		steamID = new SteamID(steamID);
 	}
 
-	this._send(Steam.EMsg.ClientRemoveFriend, {"friendid": steamID.getSteamID64()});
+	this._send(SteamUser.EMsg.ClientRemoveFriend, {"friendid": steamID.getSteamID64()});
 };
 
 /**
@@ -63,7 +62,7 @@ SteamUser.prototype.blockUser = function(steamID, callback) {
 	buffer.writeUint64(steamID.getSteamID64());
 	buffer.writeUint8(1);
 
-	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
+	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
 		if(!callback) {
 			return; // ignore
 		}
@@ -88,7 +87,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 	buffer.writeUint64(steamID.getSteamID64());
 	buffer.writeUint8(0);
 
-	this._send(Steam.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
+	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
 		if(!callback) {
 			return; // ignore
 		}
@@ -104,7 +103,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
  * @param {function} [callback] - Optional. Called with an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
  */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
-	var Flags = Steam.EClientPersonaStateFlag;
+	var Flags = SteamUser.EClientPersonaStateFlag;
 	var flags = Flags.Status|Flags.PlayerName|Flags.QueryPort|Flags.SourceID|Flags.Presence|
 		Flags.Metadata|Flags.LastSeen|Flags.ClanInfo|Flags.GameExtraInfo|Flags.GameDataBlob|
 		Flags.ClanTag|Flags.Facebook;
@@ -117,7 +116,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 		return id.toString();
 	});
 
-	this._send(Steam.EMsg.ClientRequestFriendData, {
+	this._send(SteamUser.EMsg.ClientRequestFriendData, {
 		"friends": ids,
 		"persona_state_requested": flags
 	});
@@ -160,7 +159,7 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 		}
 	});
 
-	this._send(Steam.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, function(body) {
+	this._send(SteamUser.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, function(body) {
 		var output = {};
 
 		var sid = new SteamID();
@@ -189,7 +188,7 @@ SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(1); // unknown
 
-	this._send(Steam.EMsg.ClientInviteUserToClan, buffer.flip());
+	this._send(SteamUser.EMsg.ClientInviteUserToClan, buffer.flip());
 };
 
 /**
@@ -202,12 +201,12 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(accept ? 1 : 0);
 
-	this._send(Steam.EMsg.ClientAcknowledgeClanInvite, buffer.flip());
+	this._send(SteamUser.EMsg.ClientAcknowledgeClanInvite, buffer.flip());
 };
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
 	var self = this;
 	body.friends.forEach(function(user) {
 		var sid = new SteamID(user.friendid.toString());
@@ -252,7 +251,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientPersonaState] = function(body) {
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 	var sid = new SteamID(body.steamid_clan.toString());
 	var sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
@@ -326,7 +325,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientClanState] = function(body) {
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body) {
 	var self = this;
 	(body.friends || []).forEach(function(relationship) {
 		var sid = new SteamID(relationship.ulfriendid.toString());
@@ -353,7 +352,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 			self._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
 
-		if(relationship.efriendrelationship == Steam.EFriendRelationship.None) {
+		if(relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
 			delete self[key][sid.getSteamID64()];
 		} else {
 			self[key][sid.getSteamID64()] = relationship.efriendrelationship;
@@ -378,7 +377,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsList] = function(body) {
 	}
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsGroupsList] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function(body) {
 	var groupList = {};
 
 	body.friendGroups.forEach(function (group) {
@@ -411,7 +410,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFriendsGroupsList] = function(bod
 	this.myFriendGroups = groupList;
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientPlayerNicknameList] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = function(body) {
 	// TODO
 	//console.log(body);
 };

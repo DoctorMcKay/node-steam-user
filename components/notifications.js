@@ -1,24 +1,23 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
 SteamUser.prototype._requestNotifications = function() {
-	this._send(Steam.EMsg.ClientRequestItemAnnouncements, {});
-	this._send(Steam.EMsg.ClientRequestCommentNotifications, {});
-	this._send(Steam.EMsg.ClientFSRequestOfflineMessageCount, {});
+	this._send(SteamUser.EMsg.ClientRequestItemAnnouncements, {});
+	this._send(SteamUser.EMsg.ClientRequestCommentNotifications, {});
+	this._send(SteamUser.EMsg.ClientFSRequestOfflineMessageCount, {});
 };
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientItemAnnouncements] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientItemAnnouncements] = function(body) {
 	this.emit('newItems', body.count_new_items);
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientCommentNotifications] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = function(body) {
 	this.emit('newComments', body.count_new_comments, body.count_new_comments_owner, body.count_new_comments_subscriptions);
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientUserNotifications] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
 	var self = this;
 	(body.notifications || []).forEach(function(notification) {
 		if(notification.user_notification_type == 1) {
@@ -27,7 +26,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientUserNotifications] = function(bod
 	});
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientFSOfflineMessageNotification] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSOfflineMessageNotification] = function(body) {
 	var self = this;
 	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map(function(accountid) {
 		var sid = new SteamID();
@@ -39,7 +38,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientFSOfflineMessageNotification] = f
 	}));
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientMarketingMessageUpdate2] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientMarketingMessageUpdate2] = function(body) {
 	var time = body.readUint32();
 	var count = body.readUint32();
 

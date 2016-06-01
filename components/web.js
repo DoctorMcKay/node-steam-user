@@ -1,4 +1,3 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 var Crypto = require('crypto');
@@ -15,7 +14,7 @@ SteamUser.prototype.webLogOn = function() {
 		throw new Error('Must not be anonymous user to use webLogOn (check to see you passed in valid credentials to logOn)')
 	}
 
-	this._send(Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonce, {});
+	this._send(SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonce, {});
 };
 
 SteamUser.prototype._webLogOn = function() {
@@ -89,8 +88,8 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = function(body) {
-	if(body.eresult != Steam.EResult.OK) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = function(body) {
+	if(body.eresult != SteamUser.EResult.OK) {
 		this.emit('debug', 'Got response ' + body.eresult + ' from ClientRequestWebAPIAuthenticateUserNonceResponse, retrying');
 		setTimeout(this._webLogOn.bind(this), 500);
 	} else {

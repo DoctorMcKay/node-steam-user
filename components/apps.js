@@ -1,7 +1,5 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
-var ByteBuffer = require('bytebuffer');
 var VDF = require('vdf');
 var BinaryKVParser = require('binarykvparser');
 
@@ -18,7 +16,7 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 		apps = [apps];
 	}
 
-	this._send(Steam.EMsg.ClientGamesPlayed, apps.map(function(app) {
+	this._send(SteamUser.EMsg.ClientGamesPlayed, apps.map(function(app) {
 		if(typeof app === 'string') {
 			return {
 				"game_id": "15190414816125648896",
@@ -35,13 +33,13 @@ SteamUser.prototype.gamesPlayed = function(apps) {
 };
 
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
-	this._send(Steam.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
+	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
 		callback(body.eresult, body.player_count);
 	});
 };
 
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
-	this._send(Steam.EMsg.ClientPICSChangesSinceRequest, {
+	this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
 		"since_change_number": sinceChangenumber,
 		"send_app_info_changes": true,
 		"send_package_info_changes": true
@@ -84,7 +82,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 	});
 
 	var self = this;
-	this._send(Steam.EMsg.ClientPICSProductInfoRequest, {
+	this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
 		"apps": apps,
 		"packages": packages
 	}, function(body) {
@@ -187,7 +185,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 };
 
 SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
-	this._send(Steam.EMsg.ClientPICSAccessTokenRequest, {
+	this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
 		"packageids": packages,
 		"appids": apps
 	}, function(body) {
@@ -455,7 +453,7 @@ function sortNumeric(a, b) {
 }
 
 SteamUser.prototype.redeemKey = function(key, callback) {
-	this._send(Steam.EMsg.ClientRegisterKey, {"key": key}, function(body) {
+	this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, function(body) {
 		if(typeof callback !== 'function') {
 			return;
 		}
@@ -475,7 +473,7 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientLicenseList] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientLicenseList] = function(body) {
 	this.emit('licenses', body.licenses);
 	this.licenses = body.licenses;
 

@@ -1,6 +1,5 @@
 var SteamID = require('steamid');
 var Crypto = require('crypto');
-var Steam = require('steam-client');
 
 /**
  * If the input isn't already a SteamID object, converts it into one and returns it
@@ -64,14 +63,14 @@ exports.getInternalMachineID = function() {
  * @returns {null|Error}
  */
 exports.eresultError = function(eresult) {
-	if (eresult == Steam.EResult.OK) {
+	if (eresult == SteamUser.EResult.OK) {
 		// no error
 		return null;
 	}
 
 	var err = new Error("Error " + eresult);
-	for (var i in Steam.EResult) {
-		if (Steam.EResult.hasOwnProperty(i) && Steam.EResult[i] == eresult) {
+	for (var i in SteamUser.EResult) {
+		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == eresult) {
 			err.message = i;
 		}
 	}

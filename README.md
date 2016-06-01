@@ -350,7 +350,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
-	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `Steam.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
+	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `SteamUser.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 
 Logs onto Steam. The `CMClient`/`SteamClient` should **not** be already logged on, although as of v3.4.0 it can be
 connected. Omit the `details` object if you wish to login to an anonymous user account.
@@ -371,10 +371,10 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 - `password` - The password for your new account
 - `email` - The contact email for your new account
 - `callback` - Called when the account is either created or an error occurs
-	- `result` - A value from `Steam.EResult`.
-		- `Steam.EResult.OK` if the account was created successfully
-		- `Steam.EResult.DuplicateName` if there is already an account with that username
-		- `Steam.EResult.IllegalPassword` if your password is too weak or otherwise bad
+	- `result` - A value from `SteamUser.EResult`.
+		- `SteamUser.EResult.OK` if the account was created successfully
+		- `SteamUser.EResult.DuplicateName` if there is already an account with that username
+		- `SteamUser.EResult.IllegalPassword` if your password is too weak or otherwise bad
 		- or something else on another error
 	- `steamid` - If successful, this is a `SteamID` object containing the new account's SteamID
 
@@ -383,7 +383,7 @@ to use this.
 
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
-	- `result` - A value from `Steam.EResult`. `Steam.EResult.OK` if the mail was sent successfully.
+	- `result` - A value from `SteamUser.EResult`. `SteamUser.EResult.OK` if the mail was sent successfully.
 
 Requests Steam to send you a validation email to your registered email address.
 
@@ -464,7 +464,7 @@ You can use multiple apps by providing an array of any mixture of the above form
 ### getPlayerCount(appid, callback)
 - `appid` - The AppID of the app for which you'd like the current player/user count (use `0` to get current logged-in Steam user count)
 - `callback` - Called when the requested data is available
-	- `result` - A value from `Steam.EResult`
+	- `result` - A value from `SteamUser.EResult`
 	- `players` - How many Steam users are currently playing/using the app
 
 Requests a count of how many Steam users are currently playing/using an app.
@@ -895,7 +895,7 @@ If this event isn't handled, the program will crash.
 The `SteamUser` object's `steamID` property will still be defined when this is emitted. The `Error` object will have an `eresult` parameter which is a value from the [`EResult`](https://github.com/SteamRE/SteamKit/blob/SteamKit_1.6.3/Resources/SteamLanguage/eresult.steamd) enum.
 
 ### disconnected
-- `eresult` - A value from the `Steam.EResult` enum
+- `eresult` - A value from the `SteamUser.EResult` enum
 - `msg` - A string describing the reason for the disconnect, if available (might be undefined)
 
 Emitted when we're disconnected from Steam for a non-fatal reason and `autoRelogin` is enabled. `SteamUser` will

@@ -1,4 +1,3 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var fs = require('fs');
 
@@ -16,7 +15,7 @@ SteamUser.prototype._getSentryFilename = function() {
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
 	// TODO: Handle partial updates
 	this.storage.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
 
@@ -26,7 +25,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientUpdateMachineAuth] = function(bod
 	var hash = require('crypto').createHash('sha1');
 	hash.update(body.bytes.toBuffer());
 
-	callback(Steam.EMsg.ClientUpdateMachineAuthResponse, {
+	callback(SteamUser.EMsg.ClientUpdateMachineAuthResponse, {
 		"sha_file": hash.digest()
 	});
 };

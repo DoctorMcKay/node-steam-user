@@ -1,4 +1,3 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var ByteBuffer = require('bytebuffer');
 var SteamID = require('steamid');
@@ -188,8 +187,8 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			}
 		}
 
-		self._send(Steam.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
-			if (body.eresult != Steam.EResult.OK) {
+		self._send(SteamUser.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, function(body) {
+			if (body.eresult != SteamUser.EResult.OK) {
 				callback(Helpers.eresultError(body.eresult));
 				return;
 			}
@@ -273,7 +272,7 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 		obj.app_ids.push(appid); // canceling tickets for this app
 	}
 
-	this._send(Steam.EMsg.ClientAuthList, obj, function(body) {
+	this._send(SteamUser.EMsg.ClientAuthList, obj, function(body) {
 		self._authSeqThem = body.message_sequence;
 
 		if (callback) {
@@ -288,7 +287,7 @@ SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientGameConnectTokens] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientGameConnectTokens] = function(body) {
 	var self = this;
 
 	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
@@ -299,7 +298,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientGameConnectTokens] = function(bod
 	this.emit('_gcTokens'); // internal private event
 };
 
-SteamUser.prototype._handlers[Steam.EMsg.ClientTicketAuthComplete] = function(body) {
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientTicketAuthComplete] = function(body) {
 	var authUser = new SteamID(body.steam_id.toString());
 	var owner = body.owner_steam_id.toString() == "0" ? null : new SteamID(body.owner_steam_id.toString());
 	var appid = body.game_id.low;

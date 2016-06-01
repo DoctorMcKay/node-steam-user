@@ -1,80 +1,79 @@
-var Steam = require('steam-client');
 var SteamUser = require('../index.js');
 var ByteBuffer = require('bytebuffer');
 
 var Schema = require('./protobufs.js');
 
 var protobufs = {};
-protobufs[Steam.EMsg.ClientLogon] = Schema.CMsgClientLogon;
-protobufs[Steam.EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
-protobufs[Steam.EMsg.ClientLogOff] = Schema.CMsgClientLogOff;
-protobufs[Steam.EMsg.ClientLoggedOff] = Schema.CMsgClientLoggedOff;
-protobufs[Steam.EMsg.ClientUpdateMachineAuth] = Schema.CMsgClientUpdateMachineAuth;
-protobufs[Steam.EMsg.ClientUpdateMachineAuthResponse] = Schema.CMsgClientUpdateMachineAuthResponse;
-protobufs[Steam.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;
-protobufs[Steam.EMsg.ClientNewLoginKeyAccepted] = Schema.CMsgClientNewLoginKeyAccepted;
-protobufs[Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonce] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonce;
-protobufs[Steam.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonceResponse;
-protobufs[Steam.EMsg.ClientItemAnnouncements] = Schema.CMsgClientItemAnnouncements;
-protobufs[Steam.EMsg.ClientRequestItemAnnouncements] = Schema.CMsgClientRequestItemAnnouncements;
-protobufs[Steam.EMsg.ClientCommentNotifications] = Schema.CMsgClientCommentNotifications;
-protobufs[Steam.EMsg.ClientRequestCommentNotifications] = Schema.CMsgClientRequestCommentNotifications;
-protobufs[Steam.EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotifications;
-protobufs[Steam.EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
-protobufs[Steam.EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
-protobufs[Steam.EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
-protobufs[Steam.EMsg.ClientAccountInfo] = Schema.CMsgClientAccountInfo;
-protobufs[Steam.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
-protobufs[Steam.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
-protobufs[Steam.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate;
-protobufs[Steam.EMsg.ClientLicenseList] = Schema.CMsgClientLicenseList;
-protobufs[Steam.EMsg.ClientServiceMethod] = Schema.CMsgClientServiceMethod;
-protobufs[Steam.EMsg.ClientServiceMethodResponse] = Schema.CMsgClientServiceMethodResponse;
-protobufs[Steam.EMsg.ClientGMSServerQuery] = Schema.CMsgClientGMSServerQuery;
-protobufs[Steam.EMsg.GMSClientServerQueryResponse] = Schema.CMsgGMSClientServerQueryResponse;
-protobufs[Steam.EMsg.ClientPICSChangesSinceRequest] = Schema.CMsgClientPICSChangesSinceRequest;
-protobufs[Steam.EMsg.ClientPICSChangesSinceResponse] = Schema.CMsgClientPICSChangesSinceResponse;
-protobufs[Steam.EMsg.ClientPICSProductInfoRequest] = Schema.CMsgClientPICSProductInfoRequest;
-protobufs[Steam.EMsg.ClientPICSProductInfoResponse] = Schema.CMsgClientPICSProductInfoResponse;
-protobufs[Steam.EMsg.ClientPICSAccessTokenRequest] = Schema.CMsgClientPICSAccessTokenRequest;
-protobufs[Steam.EMsg.ClientPICSAccessTokenResponse] = Schema.CMsgClientPICSAccessTokenResponse;
-protobufs[Steam.EMsg.ClientCreateAccountProto] = Schema.CMsgClientCreateAccount;
-protobufs[Steam.EMsg.ClientCreateAccountProtoResponse] = Schema.CMsgClientCreateAccountResponse;
-protobufs[Steam.EMsg.EconTrading_InitiateTradeRequest] = Schema.CMsgTrading_InitiateTradeRequest;
-protobufs[Steam.EMsg.EconTrading_InitiateTradeResponse] = Schema.CMsgTrading_InitiateTradeResponse;
-protobufs[Steam.EMsg.EconTrading_CancelTradeRequest] = Schema.CMsgTrading_CancelTradeRequest;
-protobufs[Steam.EMsg.EconTrading_InitiateTradeProposed] = Schema.CMsgTrading_InitiateTradeRequest;
-protobufs[Steam.EMsg.EconTrading_InitiateTradeResult] = Schema.CMsgTrading_InitiateTradeResponse;
-protobufs[Steam.EMsg.EconTrading_StartSession] = Schema.CMsgTrading_StartSession;
-protobufs[Steam.EMsg.ClientChangeStatus] = Schema.CMsgClientChangeStatus;
-protobufs[Steam.EMsg.ClientAddFriend] = Schema.CMsgClientAddFriend;
-protobufs[Steam.EMsg.ClientRemoveFriend] = Schema.CMsgClientRemoveFriend;
-protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevels] = Schema.CMsgClientFSGetFriendsSteamLevels;
-protobufs[Steam.EMsg.ClientFSGetFriendsSteamLevelsResponse] = Schema.CMsgClientFSGetFriendsSteamLevelsResponse;
-protobufs[Steam.EMsg.ClientPersonaState] = Schema.CMsgClientPersonaState;
-protobufs[Steam.EMsg.ClientClanState] = Schema.CMsgClientClanState;
-protobufs[Steam.EMsg.ClientFriendsList] = Schema.CMsgClientFriendsList;
-protobufs[Steam.EMsg.ClientRequestFriendData] = Schema.CMsgClientRequestFriendData;
-protobufs[Steam.EMsg.ClientFriendMsg] = Schema.CMsgClientFriendMsg;
-protobufs[Steam.EMsg.ClientChatInvite] = Schema.CMsgClientChatInvite;
-protobufs[Steam.EMsg.ClientFriendMsgIncoming] = Schema.CMsgClientFriendMsgIncoming;
-protobufs[Steam.EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming;
-protobufs[Steam.EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientFSGetFriendMessageHistory;
-protobufs[Steam.EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientFSGetFriendMessageHistoryResponse;
-protobufs[Steam.EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
-protobufs[Steam.EMsg.ClientPlayerNicknameList] = Schema.CMsgClientPlayerNicknameList;
-protobufs[Steam.EMsg.ClientRegisterKey] = Schema.CMsgClientRegisterKey;
-protobufs[Steam.EMsg.ClientPurchaseResponse] = Schema.CMsgClientPurchaseResponse;
-protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDP] = Schema.CMsgDPGetNumberOfCurrentPlayers;
-protobufs[Steam.EMsg.ClientGetNumberOfCurrentPlayersDPResponse] = Schema.CMsgDPGetNumberOfCurrentPlayersResponse;
-protobufs[Steam.EMsg.ClientGetAppOwnershipTicket] = Schema.CMsgClientGetAppOwnershipTicket;
-protobufs[Steam.EMsg.ClientGetAppOwnershipTicketResponse] = Schema.CMsgClientGetAppOwnershipTicketResponse;
-protobufs[Steam.EMsg.ClientGameConnectTokens] = Schema.CMsgClientGameConnectTokens;
-protobufs[Steam.EMsg.ClientAuthList] = Schema.CMsgClientAuthList;
-protobufs[Steam.EMsg.ClientAuthListAck] = Schema.CMsgClientAuthListAck;
-protobufs[Steam.EMsg.ClientTicketAuthComplete] = Schema.CMsgClientTicketAuthComplete;
-protobufs[Steam.EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
-protobufs[Steam.EMsg.ClientVanityURLChangedNotification] = Schema.CMsgClientVanityURLChangedNotification;
+protobufs[SteamUser.EMsg.ClientLogon] = Schema.CMsgClientLogon;
+protobufs[SteamUser.EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
+protobufs[SteamUser.EMsg.ClientLogOff] = Schema.CMsgClientLogOff;
+protobufs[SteamUser.EMsg.ClientLoggedOff] = Schema.CMsgClientLoggedOff;
+protobufs[SteamUser.EMsg.ClientUpdateMachineAuth] = Schema.CMsgClientUpdateMachineAuth;
+protobufs[SteamUser.EMsg.ClientUpdateMachineAuthResponse] = Schema.CMsgClientUpdateMachineAuthResponse;
+protobufs[SteamUser.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;
+protobufs[SteamUser.EMsg.ClientNewLoginKeyAccepted] = Schema.CMsgClientNewLoginKeyAccepted;
+protobufs[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonce] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonce;
+protobufs[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonceResponse;
+protobufs[SteamUser.EMsg.ClientItemAnnouncements] = Schema.CMsgClientItemAnnouncements;
+protobufs[SteamUser.EMsg.ClientRequestItemAnnouncements] = Schema.CMsgClientRequestItemAnnouncements;
+protobufs[SteamUser.EMsg.ClientCommentNotifications] = Schema.CMsgClientCommentNotifications;
+protobufs[SteamUser.EMsg.ClientRequestCommentNotifications] = Schema.CMsgClientRequestCommentNotifications;
+protobufs[SteamUser.EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotifications;
+protobufs[SteamUser.EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
+protobufs[SteamUser.EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
+protobufs[SteamUser.EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
+protobufs[SteamUser.EMsg.ClientAccountInfo] = Schema.CMsgClientAccountInfo;
+protobufs[SteamUser.EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
+protobufs[SteamUser.EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
+protobufs[SteamUser.EMsg.ClientWalletInfoUpdate] = Schema.CMsgClientWalletInfoUpdate;
+protobufs[SteamUser.EMsg.ClientLicenseList] = Schema.CMsgClientLicenseList;
+protobufs[SteamUser.EMsg.ClientServiceMethod] = Schema.CMsgClientServiceMethod;
+protobufs[SteamUser.EMsg.ClientServiceMethodResponse] = Schema.CMsgClientServiceMethodResponse;
+protobufs[SteamUser.EMsg.ClientGMSServerQuery] = Schema.CMsgClientGMSServerQuery;
+protobufs[SteamUser.EMsg.GMSClientServerQueryResponse] = Schema.CMsgGMSClientServerQueryResponse;
+protobufs[SteamUser.EMsg.ClientPICSChangesSinceRequest] = Schema.CMsgClientPICSChangesSinceRequest;
+protobufs[SteamUser.EMsg.ClientPICSChangesSinceResponse] = Schema.CMsgClientPICSChangesSinceResponse;
+protobufs[SteamUser.EMsg.ClientPICSProductInfoRequest] = Schema.CMsgClientPICSProductInfoRequest;
+protobufs[SteamUser.EMsg.ClientPICSProductInfoResponse] = Schema.CMsgClientPICSProductInfoResponse;
+protobufs[SteamUser.EMsg.ClientPICSAccessTokenRequest] = Schema.CMsgClientPICSAccessTokenRequest;
+protobufs[SteamUser.EMsg.ClientPICSAccessTokenResponse] = Schema.CMsgClientPICSAccessTokenResponse;
+protobufs[SteamUser.EMsg.ClientCreateAccountProto] = Schema.CMsgClientCreateAccount;
+protobufs[SteamUser.EMsg.ClientCreateAccountProtoResponse] = Schema.CMsgClientCreateAccountResponse;
+protobufs[SteamUser.EMsg.EconTrading_InitiateTradeRequest] = Schema.CMsgTrading_InitiateTradeRequest;
+protobufs[SteamUser.EMsg.EconTrading_InitiateTradeResponse] = Schema.CMsgTrading_InitiateTradeResponse;
+protobufs[SteamUser.EMsg.EconTrading_CancelTradeRequest] = Schema.CMsgTrading_CancelTradeRequest;
+protobufs[SteamUser.EMsg.EconTrading_InitiateTradeProposed] = Schema.CMsgTrading_InitiateTradeRequest;
+protobufs[SteamUser.EMsg.EconTrading_InitiateTradeResult] = Schema.CMsgTrading_InitiateTradeResponse;
+protobufs[SteamUser.EMsg.EconTrading_StartSession] = Schema.CMsgTrading_StartSession;
+protobufs[SteamUser.EMsg.ClientChangeStatus] = Schema.CMsgClientChangeStatus;
+protobufs[SteamUser.EMsg.ClientAddFriend] = Schema.CMsgClientAddFriend;
+protobufs[SteamUser.EMsg.ClientRemoveFriend] = Schema.CMsgClientRemoveFriend;
+protobufs[SteamUser.EMsg.ClientFSGetFriendsSteamLevels] = Schema.CMsgClientFSGetFriendsSteamLevels;
+protobufs[SteamUser.EMsg.ClientFSGetFriendsSteamLevelsResponse] = Schema.CMsgClientFSGetFriendsSteamLevelsResponse;
+protobufs[SteamUser.EMsg.ClientPersonaState] = Schema.CMsgClientPersonaState;
+protobufs[SteamUser.EMsg.ClientClanState] = Schema.CMsgClientClanState;
+protobufs[SteamUser.EMsg.ClientFriendsList] = Schema.CMsgClientFriendsList;
+protobufs[SteamUser.EMsg.ClientRequestFriendData] = Schema.CMsgClientRequestFriendData;
+protobufs[SteamUser.EMsg.ClientFriendMsg] = Schema.CMsgClientFriendMsg;
+protobufs[SteamUser.EMsg.ClientChatInvite] = Schema.CMsgClientChatInvite;
+protobufs[SteamUser.EMsg.ClientFriendMsgIncoming] = Schema.CMsgClientFriendMsgIncoming;
+protobufs[SteamUser.EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming;
+protobufs[SteamUser.EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientFSGetFriendMessageHistory;
+protobufs[SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientFSGetFriendMessageHistoryResponse;
+protobufs[SteamUser.EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
+protobufs[SteamUser.EMsg.ClientPlayerNicknameList] = Schema.CMsgClientPlayerNicknameList;
+protobufs[SteamUser.EMsg.ClientRegisterKey] = Schema.CMsgClientRegisterKey;
+protobufs[SteamUser.EMsg.ClientPurchaseResponse] = Schema.CMsgClientPurchaseResponse;
+protobufs[SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP] = Schema.CMsgDPGetNumberOfCurrentPlayers;
+protobufs[SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDPResponse] = Schema.CMsgDPGetNumberOfCurrentPlayersResponse;
+protobufs[SteamUser.EMsg.ClientGetAppOwnershipTicket] = Schema.CMsgClientGetAppOwnershipTicket;
+protobufs[SteamUser.EMsg.ClientGetAppOwnershipTicketResponse] = Schema.CMsgClientGetAppOwnershipTicketResponse;
+protobufs[SteamUser.EMsg.ClientGameConnectTokens] = Schema.CMsgClientGameConnectTokens;
+protobufs[SteamUser.EMsg.ClientAuthList] = Schema.CMsgClientAuthList;
+protobufs[SteamUser.EMsg.ClientAuthListAck] = Schema.CMsgClientAuthListAck;
+protobufs[SteamUser.EMsg.ClientTicketAuthComplete] = Schema.CMsgClientTicketAuthComplete;
+protobufs[SteamUser.EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
+protobufs[SteamUser.EMsg.ClientVanityURLChangedNotification] = Schema.CMsgClientVanityURLChangedNotification;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
@@ -97,7 +96,7 @@ protobufs['Credentials.GetSteamGuardDetails#1_Response'] = Schema.CCredentials_G
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
 SteamUser.prototype._send = function(emsg, body, callback) {
-	if((!this.steamID || !this.client.connected) && [Steam.EMsg.ChannelEncryptRequest, Steam.EMsg.ChannelEncryptResponse, Steam.EMsg.ChannelEncryptResult, Steam.EMsg.ClientLogon].indexOf(emsg) == -1) {
+	if((!this.steamID || !this.client.connected) && [SteamUser.EMsg.ChannelEncryptRequest, SteamUser.EMsg.ChannelEncryptResponse, SteamUser.EMsg.ChannelEncryptResult, SteamUser.EMsg.ClientLogon].indexOf(emsg) == -1) {
 		// We're disconnected, drop it
 		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
 		return;
@@ -129,8 +128,8 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 	}
 
 	if(this.options.debug) {
-		for(var i in Steam.EMsg) {
-			if(Steam.EMsg.hasOwnProperty(i) && Steam.EMsg[i] == emsg) {
+		for(var i in SteamUser.EMsg) {
+			if(SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == emsg) {
 				emsg = i;
 				break;
 			}
@@ -145,8 +144,8 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 	var msgName = header.msg;
 
 	if(this.options.debug) {
-		for(var i in Steam.EMsg) {
-			if(Steam.EMsg.hasOwnProperty(i) && Steam.EMsg[i] == header.msg) {
+		for(var i in SteamUser.EMsg) {
+			if(SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == header.msg) {
 				msgName = i;
 				break;
 			}
@@ -154,7 +153,7 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 	}
 
 	if(!this._handlers[header.msg]) {
-		if(header.msg != Steam.EMsg.Multi) {
+		if(header.msg != SteamUser.EMsg.Multi) {
 			this.emit('debug', 'Unhandled message: ' + msgName);
 		}
 
@@ -200,7 +199,7 @@ SteamUser.prototype._sendUnified = function(methodName, methodData, notification
 	}
 
 	var Proto = protobufs[methodName + '_Request'];
-	this._send(Steam.EMsg.ClientServiceMethod, {
+	this._send(SteamUser.EMsg.ClientServiceMethod, {
 		"method_name": methodName,
 		"serialized_method": new Proto(methodData).toBuffer(),
 		"is_notification": notification

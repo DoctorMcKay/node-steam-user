@@ -1,5 +1,4 @@
 var SteamUser = require('../index.js');
-var ByteBuffer = require('bytebuffer');
 var SteamTotp = require('steam-totp');
 
 SteamUser.formatCurrency = function(amount, currency) {

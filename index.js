@@ -102,7 +102,7 @@ function SteamUser(client, options) {
 			return; // We've already handled this
 		}
 
-		self._handleLogOff(e.eresult || Steam.EResult.NoConnection, e.message || "NoConnection");
+		self._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
 	});
 
 	this.client.on('servers', function(servers) {
