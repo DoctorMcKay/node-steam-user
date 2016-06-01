@@ -4,6 +4,7 @@ module.exports = {
 	"OnlineUsingWeb": 256,
 	"OnlineUsingMobile": 512,
 	"OnlineUsingBigPicture": 1024,
+	"OnlineUsingVR": 2048,
 
 	// Value-to-name mapping for convenience
 	"1": "HasRichPresence",
@@ -11,4 +12,5 @@ module.exports = {
 	"256": "OnlineUsingWeb",
 	"512": "OnlineUsingMobile",
 	"1024": "OnlineUsingBigPicture",
+	"2048": "OnlineUsingVR",
 };
