@@ -2,6 +2,7 @@ var SteamUser = require('../index.js');
 var Steam = require('steam-client');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
+var Helpers = require('./helpers.js');
 
 /**
  * Set your persona online state and optionally name.
@@ -174,6 +175,34 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 
 		callback(output);
 	});
+};
+
+/**
+ * Invites a user to a Steam group. Only send group invites in response to a user's request; sending automated group
+ * invites is a violation of the Steam Subscriber Agreement and can get you banned.
+ * @param {(SteamID|string)} userSteamID - The SteamID of the user you're inviting as a SteamID object, or a string that can parse into one
+ * @param {(SteamID|string)} groupSteamID - The SteamID of the group you're inviting the user to as a SteamID object, or a string that can parse into one
+ */
+SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
+	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	buffer.writeUint64(Helpers.steamID(userSteamID).toString());
+	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
+	buffer.writeUint8(1); // unknown
+
+	this._send(Steam.EMsg.ClientInviteUserToClan, buffer.flip());
+};
+
+/**
+ * Respond to an incoming group invite.
+ * @param {(SteamID|string)} groupSteamID - The group you were invited to, as a SteamID object or a string which can parse into one
+ * @param {boolean} accept - true to join the group, false to ignore invitation
+ */
+SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
+	var buffer = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
+	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
+	buffer.writeUint8(accept ? 1 : 0);
+
+	this._send(Steam.EMsg.ClientAcknowledgeClanInvite, buffer.flip());
 };
 
 // Handlers

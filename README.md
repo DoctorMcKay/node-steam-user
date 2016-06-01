@@ -680,6 +680,25 @@ Requests persona data for one or more users from Steam. The response will arrive
 
 Gets the Steam Level for one or more Steam users (who do not have to be on your friends list).
 
+### inviteToGroup(userSteamID, groupSteamID)
+- `userSteamID` - The SteamID of the user you want to invite, as a `SteamID` object or a string which can parse into one
+- `groupSteamID` - The SteamID of the group you want to invite the user to, as a `SteamID` object or a string which can parse into one
+
+**v3.7.0 or later is required to use this method**
+
+Invites a user to a Steam group.
+
+**Warning:** Only send group invites in response to a user's request; sending automated group invites is a violation of
+the Steam Subscriber Agreement and can get you banned.
+
+### respondToGroupInvite(groupSteamID, accept)
+- `groupSteamID` - The SteamID of the group you were invited to, as a `SteamID` object or a string which can parse into one
+- `accept` - `true` to join the group, `false` to ignore the invitation
+
+**v3.7.0 or later is required to use this method**
+
+Joins a group you were invited to or ignores the invite.
+
 ### trade(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 
@@ -1152,7 +1171,7 @@ The [`myFriends`](#myfriends) property isn't yet updated when this is emitted, s
 
 ### groupRelationship
 - `sid` - A `SteamID` object for the group whose relationship with us just changed
-- `relationship` - A value from `EFriendRelationship`
+- `relationship` - A value from `EClanRelationship`
 
 **v1.9.0 or later is required to use this event**
 
