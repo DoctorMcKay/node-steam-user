@@ -10,6 +10,7 @@ SteamUser.Steam = Steam;
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
+SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
 
 // Set up enums
 require('fs').readdirSync(__dirname + '/enums').forEach(function(enumFile) {

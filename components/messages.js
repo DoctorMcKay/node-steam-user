@@ -73,6 +73,7 @@ protobufs[Steam.EMsg.ClientGameConnectTokens] = Schema.CMsgClientGameConnectToke
 protobufs[Steam.EMsg.ClientAuthList] = Schema.CMsgClientAuthList;
 protobufs[Steam.EMsg.ClientAuthListAck] = Schema.CMsgClientAuthListAck;
 protobufs[Steam.EMsg.ClientTicketAuthComplete] = Schema.CMsgClientTicketAuthComplete;
+protobufs[Steam.EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

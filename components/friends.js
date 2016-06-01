@@ -16,6 +16,14 @@ SteamUser.prototype.setPersona = function(state, name) {
 };
 
 /**
+ * Set your current UI mode (displays next to your Steam online status in friends)
+ * @param {EClientUIMode} mode - Your new UI mode
+ */
+SteamUser.prototype.setUIMode = function(mode) {
+	this._send(Steam.EMsg.ClientCurrentUIMode, {"uimode": mode});
+};
+
+/**
  * Send (or accept) a friend invitiation.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to add, or a string which can parse into one.
  */

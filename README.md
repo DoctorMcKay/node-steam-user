@@ -622,12 +622,19 @@ Returns `true` if your account owns the specified package ID, or `false` if not.
 be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
 
 ### setPersona(state[, name])
-- `state` - A value from `EPersonaState`
+- `state` - A value from [`EPersonaState`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EPersonaState.js)
 - `name` - Optional. Your new profile name
 
 **v1.9.0 or later is required to use this method**
 
 Changes our online status, and optionally your profile name. You need to call this after you logon or else you'll show up as offline.
+
+### setUIMode(mode)
+- `mode` - A value from [`EClientUIMode`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EClientUIMode.js)
+
+**v3.7.0 or later is required to use this method**
+
+Sets your current UI mode, which displays as an icon next to your online status in Steam chat and the friends list.
 
 ### addFriend(steamID)
 - `steamID` - The SteamID of the user you want to add as a friend, as a `SteamID` object or a string that can parse into one
