@@ -31,6 +31,7 @@
 		"buffer-crc32": "^0.2.5"
 	},
 	"scripts": {
-		"prepublish": "node scripts/prepublish.js"
+		"prepublish": "node scripts/prepublish.js",
+		"generate-enums": "node scripts/generate-enums.js"
 	}
 }
