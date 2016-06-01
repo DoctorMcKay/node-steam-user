@@ -16,12 +16,24 @@ It's designed to be a self-contained module which provides all the functionality
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
 # Contents
+- [Enums](#enums-)
 - [Static Properties](#static-properties-)
 - [Static Methods](#static-methods-)
 - [Options](#options-)
 - [Properties](#properties-)
 - [Methods](#methods-)
 - [Events](#events-)
+
+# Enums [^](#contents)
+
+There are a lot of enums used in Steam. They're all available directly from `SteamUser`. For example, access `EResult`
+using `SteamUser.EResult`.
+
+All enums can be viewed [on GitHub](https://github.com/DoctorMcKay/node-steam-user/tree/master/enums).
+
+Additionally, for convenience, the name of an enum value is available from any enum at the key identified by the enum
+value. For example, given an EResult of `88` you can translate it using `SteamUser.EResult[88]` which gives you
+the string `TwoFactorCodeMismatch`.
 
 # Static Properties [^](#contents)
 
