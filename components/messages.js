@@ -74,6 +74,7 @@ protobufs[Steam.EMsg.ClientAuthList] = Schema.CMsgClientAuthList;
 protobufs[Steam.EMsg.ClientAuthListAck] = Schema.CMsgClientAuthListAck;
 protobufs[Steam.EMsg.ClientTicketAuthComplete] = Schema.CMsgClientTicketAuthComplete;
 protobufs[Steam.EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
+protobufs[Steam.EMsg.ClientVanityURLChangedNotification] = Schema.CMsgClientVanityURLChangedNotification;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

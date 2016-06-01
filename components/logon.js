@@ -222,7 +222,7 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientLogOnResponse] = function(body) {
 
 			this.publicIP = Helpers.ipIntToString(body.public_ip);
 			this.cellID = body.cell_id;
-			// vanity_url isn't here because it can change while logged on
+			this.vanityURL = body.vanity_url;
 
 			this._connectTime = Date.now();
 			this._connectionCount = 0;

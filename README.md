@@ -30,24 +30,11 @@ Static properties, or properties attached directly to `SteamUser`, are accessed 
 ### Steam
 
 The `node-steam-client` module installation used by `SteamUser`. You can use this in place of `require('steam-client')`
-if you'd like to avoid duplicate installations.
-
-Example of using `EResult`:
-
-```js
-var SteamUser = require('steam-user');
-var ok = SteamUser.Steam.EResult.OK;
-```
-
-### ECurrencyCode
-
-An up-to-date enum of Steam's many currencies. [View here](https://github.com/DoctorMcKay/node-steam-user/blob/bde87d94bcafd870bd460694d036d1c88121da87/components/utility.js#L3-L37)
-
-Example:
+if you'd like to avoid duplicate installations. As of v3.7.0, all enums are built into `SteamUser` so you probably won't
+need to use this. Example of using `EResult`:
 
 ```js
-var SteamUser = require('steam-user');
-var usd = SteamUser.ECurrencyCode.USD;
+var ok = SteamUser.EResult.OK;
 ```
 
 # Static Methods [^](#contents)
@@ -223,7 +210,14 @@ Only defined if you're currently logged on. This is your public IP as reported b
 
 **v1.12.0 or later is required to use this property**
 
-Only defined if you're currently logged on. This is you cell (region ID) on the Steam network.
+Only defined if you're currently logged on. This is your cell (region ID) on the Steam network.
+
+### vanityURL
+
+**v3.7.0 or later is required to use this property**
+
+Only defined if you're currently logged on. This is your vanity URL (the part that goes after `/id/` in your profile
+URL). Falsy if you don't have one.
 
 ### accountInfo
 
@@ -939,6 +933,14 @@ Emitted when Steam sends a notification of new trade offers.
 
 Emitted when Steam sends a notification of unread offline chat messages. This will always be emitted after logon, even if you have no messages.
 
+### vanityURL
+- `url` - Your new vanity URL
+
+**v3.7.0 or later is required to use this event**
+
+Emitted when your vanity URL changes. `url` is your new vanity URL. This event is emitted before the [`vanityURL`](#vanityurl)
+property is updated, so you can compare to see what changed.
+
 ### accountInfo
 - `name` - Your account's Steam (persona) name
 - `country` - The character code from which you're logging in (via GeoIP), e.g. "US"
@@ -963,7 +965,7 @@ Emitted on logon and when email info changes. The [`emailInfo`](#emailinfo) prop
 - `locked` - `true` if your account is [locked](https://support.steampowered.com/kb_article.php?ref=6416-FHVM-3982), `false` if not (accounts can also be locked by Support)
 - `canInviteFriends` - `true` if your account can invite friends, `false` if not
 
-Emitted on logon and probably when limitations change. The [`limitations`](#limitations) property will be updated after this event is emitted.
+Emitted on logon and when limitations change. The [`limitations`](#limitations) property will be updated after this event is emitted.
 
 ### vacBans
 - `numBans` - How many bans your account has

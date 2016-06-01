@@ -154,3 +154,8 @@ SteamUser.prototype._handlers[Steam.EMsg.ClientWalletInfoUpdate] = function(body
 		"balance": body.balance / 100
 	};
 };
+
+SteamUser.prototype._handlers[Steam.EMsg.ClientVanityURLChangedNotification] = function(body) {
+	this.emit('vanityURL', body.vanity_url);
+	this.vanityURL = body.vanity_url;
+};
