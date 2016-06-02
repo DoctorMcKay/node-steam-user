@@ -318,7 +318,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLoggedOff] = function(body) {
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
 
-	if(this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
+	if(this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.NoConnection, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
 	}
 
