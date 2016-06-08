@@ -231,7 +231,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 
 			var parental = body.parental_settings ? Schema.ParentalSettings.decode(body.parental_settings) : null;
-			if (parental) {
+			if (parental && parental.salt && parental.passwordhash) {
 				parental.salt = parental.salt.toBuffer();
 				parental.passwordhash = parental.passwordhash.toBuffer();
 
