@@ -1,14 +1,9 @@
 var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
-SteamUser.prototype.getPublishedFileDetails = function(ids, language, callback) {
+SteamUser.prototype.getPublishedFileDetails = function(ids, callback) {
 	if (!(ids instanceof Array)) {
 		ids = [ids];
-	}
-
-	if (typeof language === 'function') {
-		callback = language;
-		language = SteamUser.ELanguage.English;
 	}
 
 	this._sendUnified("PublishedFile.GetDetails#1", {
@@ -20,7 +15,7 @@ SteamUser.prototype.getPublishedFileDetails = function(ids, language, callback) 
 		"includevotes": true,
 		"includeforsaledata": true,
 		"includemetadata": true,
-		"language": language
+		"language": 0
 	}, false, function(body) {
 		var results = {};
 		var invalidSid = SteamID.fromIndividualAccountID(0).getSteamID64();
