@@ -11,6 +11,7 @@ SteamUser.CurrencyData = require('./resources/CurrencyData.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
 SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
+SteamUser.ELanguage = require('./resources/ELanguage.js');
 
 require('./resources/enums.js');
 
