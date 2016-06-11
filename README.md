@@ -627,6 +627,20 @@ immediately following logon. Otherwise, this cannot be safely called until `lice
 Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
 be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
 
+### getPublishedFileDetails(ids, callback)
+- `ids` - Either an integer, or an array of integers containing the IDs of the published file(s) you want details for
+- `callback` - A function to be called when the request has completed
+    - `err` - An `Error` object on failure, or `null` on success
+    - `results` - An object whose keys are published file IDs, and values are object containing a ton of information
+
+**v3.8.0 or later is required to use this method**
+
+Gets details for one or more published files. Published files are anything with a URL like
+`https://steamcommunity.com/sharedfiles/filedetails/?id=662626851` (where `id` is the published file ID).
+
+The amount of data available in `results` is huge, so I can only suggest that you `console.log` it to see what's
+available.
+
 ### setPersona(state[, name])
 - `state` - A value from [`EPersonaState`](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EPersonaState.js)
 - `name` - Optional. Your new profile name

@@ -59,6 +59,7 @@ SteamUser.prototype.getPublishedFileDetails = function(ids, callback) {
 			results[item.publishedfileid] = item;
 		});
 
-		callback(results);
+		// Send an `err` argument just in case we want to add one someday
+		callback(null, results);
 	});
 };
