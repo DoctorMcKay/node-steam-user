@@ -161,6 +161,7 @@ require('./components/trading.js');
 require('./components/friends.js');
 require('./components/chat.js');
 require('./components/twofactor.js');
+require('./components/pubfiles.js');
 
 /**
  * Called when the request completes.

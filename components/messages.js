@@ -92,6 +92,8 @@ protobufs['TwoFactor.RemoveAuthenticator#1_Request'] = Schema.CTwoFactor_RemoveA
 protobufs['TwoFactor.RemoveAuthenticator#1_Response'] = Schema.CTwoFactor_RemoveAuthenticator_Response;
 protobufs['Credentials.GetSteamGuardDetails#1_Request'] = Schema.CCredentials_GetSteamGuardDetails_Request;
 protobufs['Credentials.GetSteamGuardDetails#1_Response'] = Schema.CCredentials_GetSteamGuardDetails_Response;
+protobufs['PublishedFile.GetDetails#1_Request'] = Schema.CPublishedFile_GetDetails_Request;
+protobufs['PublishedFile.GetDetails#1_Response'] = Schema.CPublishedFile_GetDetails_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
