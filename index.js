@@ -61,11 +61,6 @@ function SteamUser(client, options) {
 
 	this._sentry = null;
 
-	var appdir = new AppDirectory({
-		"appName": "node-steamuser",
-		"appAuthor": "doctormckay"
-	});
-
 	this.options = options || {};
 
 	var defaultOptions = {
@@ -91,7 +86,13 @@ function SteamUser(client, options) {
 		}
 	}
 
-	this.options.dataDirectory = this.options.dataDirectory || (process.env.OPENSHIFT_DATA_DIR ? process.env.OPENSHIFT_DATA_DIR + "/node-steamuser" : appdir.userData());
+	if (!this.options.dataDirectory) {
+		if (process.env.OPENSHIFT_DATA_DIR) {
+			this.options.dataDirectory = process.env.OPENSHIFT_DATA_DIR + "/node-steamuser";
+		} else {
+			this.options.dataDirectory = (new AppDirectory({"appName": "node-steamuser", "appAuthor": "doctormckay"})).userData();
+		}
+	}
 
 	this.storage = new FileStorage(this.options.dataDirectory);
 
