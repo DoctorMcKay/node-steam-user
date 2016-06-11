@@ -176,6 +176,27 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 	});
 };
 
+SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
+	this._sendUnified("Player.GetGameBadgeLevels#1", {"appid": appid}, false, function(body) {
+		var regular = 0;
+		var foil = 0;
+
+		(body.badges || []).forEach(function(badge) {
+			if (badge.series != 1) {
+				return;
+			}
+
+			if (badge.border_color == 0) {
+				regular = badge.level;
+			} else if (badge.border_color == 1) {
+				foil = badge.level;
+			}
+		});
+
+		callback(null, body.player_level, regular, foil);
+	});
+};
+
 /**
  * Invites a user to a Steam group. Only send group invites in response to a user's request; sending automated group
  * invites is a violation of the Steam Subscriber Agreement and can get you banned.
