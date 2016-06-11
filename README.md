@@ -706,6 +706,18 @@ Requests persona data for one or more users from Steam. The response will arrive
 
 Gets the Steam Level for one or more Steam users (who do not have to be on your friends list).
 
+### getGameBadgeLevel(appid, callback)
+- `appid` - The AppID of the game you want to get your badge level for
+- `callback` - Called when the requested data is available.
+    - `err` - An `Error` object on failure, or `null` on success
+    - `steamLevel` - Your own Steam level
+    - `badgeLevel` - The level on your badge for this game (0 if you don't have one)
+    - `foilBadgeLevel` - The level on your foil badge for this game (0 if you don't have one)
+
+**v3.8.0 or later is required to use this method**
+
+Gets your own Steam Level, and the level you have on a badge for a particular game.
+
 ### inviteToGroup(userSteamID, groupSteamID)
 - `userSteamID` - The SteamID of the user you want to invite, as a `SteamID` object or a string which can parse into one
 - `groupSteamID` - The SteamID of the group you want to invite the user to, as a `SteamID` object or a string which can parse into one
