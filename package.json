@@ -21,7 +21,7 @@
 		"steamid": "^1.0.0",
 		"appdirectory": "^0.1.0",
 		"protobufjs": "^5.0.0",
-		"steam-client": "^1.0.1",
+		"steam-client": "^2.0.0",
 		"bytebuffer": "^5.0.0",
 		"@doctormckay/steam-crypto": "^1.0.0",
 		"vdf": "^0.0.2",
