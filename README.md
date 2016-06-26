@@ -648,6 +648,7 @@ available.
 **v1.9.0 or later is required to use this method**
 
 Changes our online status, and optionally your profile name. You need to call this after you logon or else you'll show up as offline.
+You won't receive any chat messages or persona data about your friends if you don't go online.
 
 ### setUIMode(mode)
 - `mode` - A value from [`EClientUIMode`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EClientUIMode.js)
@@ -1249,7 +1250,7 @@ The `myFriendGroups` property will be updated **after** this event is emitted, s
 
 *This is an [ID event](#id-events).*
 
-Emitted when we receive either a friend message or a chat room message.
+Emitted when we receive either a friend message or a chat room message, as long as we're [online](#setpersonastate-name).
 
 ### friendMessage
 - `senderID` - The message sender, as a `SteamID` object
@@ -1259,7 +1260,7 @@ Emitted when we receive either a friend message or a chat room message.
 
 *This is an [ID event](#id-events).*
 
-Emitted when we receive a direct friend message (that is, not through a chat room).
+Emitted when we receive a direct friend message (that is, not through a chat room), as long as we're [online](#setpersonastate-name).
 
 ### friendTyping
 - `senderID` - The `SteamID` of the friend who's typing
@@ -1268,7 +1269,7 @@ Emitted when we receive a direct friend message (that is, not through a chat roo
 
 *This is an [ID event](#id-events).*
 
-Emitted when Steam notifies us that one of our friends is typing a message to us.
+Emitted when Steam notifies us that one of our friends is typing a message to us, as long as we're [online](#setpersonastate-name).
 
 ### friendMessageEcho
 - `recipientID` - The `SteamID` of the user who rececived this message
@@ -1298,7 +1299,8 @@ Emitted when Steam echos us a notification that we're typing to a friend on anot
 
 *This is an [ID event](#id-events).*
 
-Emitted when we receive a chat message from a chat room. This is a special ID event. Any of the following are acceptable:
+Emitted when we receive a chat message from a chat room, as long as we're [online](#setpersonastate-name).
+This is a special ID event. Any of the following are acceptable:
 - `chatMessage`
 - `chatMessage#roomID`
 - `chatMessage#senderID`
