@@ -1473,3 +1473,14 @@ Emitted when a chat room we're in is set so that only group officers can chat.
 *This is an [ID event](#id-events).*
 
 Emitted when a chat room we're in is set so that everyone can chat.
+
+### lobbyInvite
+- `inviterID` - The `SteamID` of the user who invited us to a Steam lobby
+- `lobbyID` - The `SteamID` of the lobby we were invited to
+
+**v3.9.0 or later is required to use this event**
+
+* This is an [ID event](#id-events).*
+
+Emitted when we're invited to a Steam lobby. The inviter should be currently playing the game associated with this
+lobby, so you can get the AppID of the associated game from their user persona data.
