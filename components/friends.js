@@ -437,19 +437,19 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = functio
 };
 
 function processUser(user) {
-	if(typeof user.gameid === 'object' && user.gameid !== null) {
+	if (typeof user.gameid === 'object' && user.gameid !== null) {
 		user.gameid = user.gameid.toNumber();
 	}
 
-	if(typeof user.last_logoff === 'number') {
+	if (typeof user.last_logoff === 'number') {
 		user.last_logoff = new Date(user.last_logoff * 1000);
 	}
 
-	if(typeof user.last_logon === 'number') {
+	if (typeof user.last_logon === 'number') {
 		user.last_logon = new Date(user.last_logon * 1000);
 	}
 
-	if (typeof user.avatar_hash === 'object' && Buffer.isBuffer(user.avatar_hash)) {
+	if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
 		var hash = user.avatar_hash.toString('hex');
 		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
 		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
