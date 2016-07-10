@@ -225,6 +225,42 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 	this._send(SteamUser.EMsg.ClientAcknowledgeClanInvite, buffer.flip());
 };
 
+SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
+	if (!(userSteamIDs instanceof Array)) {
+		userSteamIDs = [userSteamIDs];
+	}
+
+	userSteamIDs = userSteamIDs.map(Helpers.steamID).map(function(id) { return {"steamid": id.getSteamID64()}; });
+
+	console.log({
+		"id_count": userSteamIDs.length,
+		"Ids": userSteamIDs
+	});
+
+	this._send(SteamUser.EMsg.ClientAMGetPersonaNameHistory, {
+		"id_count": userSteamIDs.length,
+		"Ids": userSteamIDs
+	}, function(body) {
+		var ids = {};
+		body.responses = body.responses || [];
+		for (var i = 0; i < body.responses.length; i++) {
+			if (body.responses[i].eresult != SteamUser.EResult.OK) {
+				var err = new Error(SteamUser.EResult[body.responses[i].eresult] || body.responses[i].eresult);
+				err.eresult = body.responses[i].eresult;
+				callback(err);
+				return;
+			}
+
+			ids[body.responses[i].steamid.toString()] = (body.responses[i].names || []).map(function(name) {
+				name.name_since = new Date(name.name_since * 1000);
+				return name;
+			});
+		}
+
+		callback(null, ids);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
