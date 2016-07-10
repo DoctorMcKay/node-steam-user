@@ -77,6 +77,8 @@ protobufs[SteamUser.EMsg.ClientCurrentUIMode] = Schema.CMsgClientUIMode;
 protobufs[SteamUser.EMsg.ClientVanityURLChangedNotification] = Schema.CMsgClientVanityURLChangedNotification;
 protobufs[SteamUser.EMsg.ClientAMGetPersonaNameHistory] = Schema.CMsgClientAMGetPersonaNameHistory;
 protobufs[SteamUser.EMsg.ClientAMGetPersonaNameHistoryResponse] = Schema.CMsgClientAMGetPersonaNameHistoryResponse;
+protobufs[SteamUser.EMsg.ClientUnlockStreaming] = Schema.CMsgAMUnlockStreaming;
+protobufs[SteamUser.EMsg.ClientUnlockStreamingResponse] = Schema.CMsgAMUnlockStreamingResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
@@ -99,6 +101,8 @@ protobufs['PublishedFile.GetDetails#1_Request'] = Schema.CPublishedFile_GetDetai
 protobufs['PublishedFile.GetDetails#1_Response'] = Schema.CPublishedFile_GetDetails_Response;
 protobufs['Player.GetGameBadgeLevels#1_Request'] = Schema.CPlayer_GetGameBadgeLevels_Request;
 protobufs['Player.GetGameBadgeLevels#1_Response'] = Schema.CPlayer_GetGameBadgeLevels_Response;
+protobufs['Credentials.GetAccountAuthSecret#1_Request'] = Schema.CCredentials_GetAccountAuthSecret_Request;
+protobufs['Credentials.GetAccountAuthSecret#1_Response'] = Schema.CCredentials_GetAccountAuthSecret_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 

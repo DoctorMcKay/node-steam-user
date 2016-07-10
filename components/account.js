@@ -1,4 +1,5 @@
 var SteamUser = require('../index.js');
+var Helpers = require('./helpers.js');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
 
@@ -61,6 +62,24 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 		);
 	});
 };
+
+SteamUser.prototype.getAuthSecret = function(callback) {
+	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, false, function(body) {
+		callback(body.secret_id, body.secret.toBuffer());
+	});
+};
+
+// Honestly not sure what this is for, but it works.
+/*SteamUser.prototype.getStreamingEncryptionKey = function(callback) {
+	this._send(SteamUser.EMsg.ClientUnlockStreaming, {}, function(body) {
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		callback(null, body.encryption_key);
+	});
+};*/
 
 // Handlers
 

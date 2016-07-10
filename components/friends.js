@@ -35,9 +35,7 @@ SteamUser.prototype.addFriend = function(steamID, callback) {
 		}
 
 		if (body.eresult != SteamUser.EResult.OK) {
-			var err = new Error(SteamUser.EResult[body.eresult] || body.eresult);
-			err.eresult = body.eresult;
-			callback(err);
+			callback(Helpers.eresultError(body.eresult));
 			return;
 		}
 
@@ -260,9 +258,7 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 		body.responses = body.responses || [];
 		for (var i = 0; i < body.responses.length; i++) {
 			if (body.responses[i].eresult != SteamUser.EResult.OK) {
-				var err = new Error(SteamUser.EResult[body.responses[i].eresult] || body.responses[i].eresult);
-				err.eresult = body.responses[i].eresult;
-				callback(err);
+				callback(Helpers.eresultError(body.responses[i].eresult));
 				return;
 			}
 

@@ -1,3 +1,4 @@
+var EResult = require('../enums/EResult.js');
 var SteamID = require('steamid');
 var Crypto = require('crypto');
 
@@ -63,18 +64,12 @@ exports.getInternalMachineID = function() {
  * @returns {null|Error}
  */
 exports.eresultError = function(eresult) {
-	if (eresult == SteamUser.EResult.OK) {
+	if (eresult == EResult.OK) {
 		// no error
 		return null;
 	}
 
-	var err = new Error("Error " + eresult);
-	for (var i in SteamUser.EResult) {
-		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == eresult) {
-			err.message = i;
-		}
-	}
-
+	var err = new Error(EResult[eresult] || ("Error " + eresult));
 	err.eresult = eresult;
 	return err;
 };
