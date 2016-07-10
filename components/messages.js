@@ -47,6 +47,7 @@ protobufs[SteamUser.EMsg.EconTrading_InitiateTradeResult] = Schema.CMsgTrading_I
 protobufs[SteamUser.EMsg.EconTrading_StartSession] = Schema.CMsgTrading_StartSession;
 protobufs[SteamUser.EMsg.ClientChangeStatus] = Schema.CMsgClientChangeStatus;
 protobufs[SteamUser.EMsg.ClientAddFriend] = Schema.CMsgClientAddFriend;
+protobufs[SteamUser.EMsg.ClientAddFriendResponse] = Schema.CMsgClientAddFriendResponse;
 protobufs[SteamUser.EMsg.ClientRemoveFriend] = Schema.CMsgClientRemoveFriend;
 protobufs[SteamUser.EMsg.ClientFSGetFriendsSteamLevels] = Schema.CMsgClientFSGetFriendsSteamLevels;
 protobufs[SteamUser.EMsg.ClientFSGetFriendsSteamLevelsResponse] = Schema.CMsgClientFSGetFriendsSteamLevelsResponse;

@@ -657,12 +657,19 @@ You won't receive any chat messages or persona data about your friends if you do
 
 Sets your current UI mode, which displays as an icon next to your online status in Steam chat and the friends list.
 
-### addFriend(steamID)
+### addFriend(steamID[, callback])
 - `steamID` - The SteamID of the user you want to add as a friend, as a `SteamID` object or a string that can parse into one
+- `callback` - Optional. Called when Steam responds to this request.
+    - `err` - An `Error` object on failure, or `null` on success. If this is an `Error` object, it will have an `eresult` property.
+    - `name` - If successful, the current persona name of the user you added.
 
-**v1.9.0 or later is required to use this method**
+**v1.9.0 or later is required to use this method. v3.10.0 or later is required to use `callback`.**
 
 Sends a friend request to the user with the specified `SteamID`. If they've already sent you a friend request, accepts it.
+
+If you provide a callback, the `message` of the `err` will be `DuplicateName` and the `eresult` will be `14` if we are
+already friends with the requested user, or if we've sent them a friend request already that they haven't accepted or
+ignored. `message` will be `Blocked` and `eresult` will be `40` if they've blocked us.
 
 ### removeFriend(steamID)
 - `steamID` - The SteamID of the user you want to remove from your friends list, as a `SteamID` object or a string that can parse into one

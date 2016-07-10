@@ -26,13 +26,23 @@ SteamUser.prototype.setUIMode = function(mode) {
 /**
  * Send (or accept) a friend invitiation.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to add, or a string which can parse into one.
+ * @param {function} [callback] - Optional. Called with `err` and `name` parameters on completion.
  */
-SteamUser.prototype.addFriend = function(steamID) {
-	if(typeof steamID === 'string') {
-		steamID = new SteamID(steamID);
-	}
+SteamUser.prototype.addFriend = function(steamID, callback) {
+	this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": Helpers.steamID(steamID).getSteamID64()}, function(body) {
+		if (!callback) {
+			return;
+		}
 
-	this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": steamID.getSteamID64()});
+		if (body.eresult != SteamUser.EResult.OK) {
+			var err = new Error(SteamUser.EResult[body.eresult] || body.eresult);
+			err.eresult = body.eresult;
+			callback(err);
+			return;
+		}
+
+		callback(null, body.persona_name_added);
+	});
 };
 
 /**
@@ -225,6 +235,11 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 	this._send(SteamUser.EMsg.ClientAcknowledgeClanInvite, buffer.flip());
 };
 
+/**
+ * Get persona name history for one or more users.
+ * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
+ * @param {function} callback
+ */
 SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 	if (!(userSteamIDs instanceof Array)) {
 		userSteamIDs = [userSteamIDs];
