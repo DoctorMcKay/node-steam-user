@@ -453,6 +453,15 @@ In order to trade, **all** of the following must be true:
 - `enabledTime` must be at least 15 days ago (account-level restriction)
 - ONE of `machineTime` OR `twoFactorTime` must be at least 7 days ago (sentryfile-level restriction)
 
+### getAuthSecret(callback)
+- `callback` - A function to be called when the requested data is available
+    - `secretID` - A numeric ID assigned to your key by Steam
+    - `key` - Your account's "auth secret", as a `Buffer`
+
+**v3.10.0 or later is required to use this method**
+
+Gets your account's auth secret, which is the pre-shared key used for in-home streaming.
+
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
 
