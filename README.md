@@ -707,6 +707,18 @@ Requests persona data for one or more users from Steam. The response will arrive
 
 Gets the Steam Level for one or more Steam users (who do not have to be on your friends list).
 
+### getAliases(steamids, callback)
+- `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
+- `callback` - Called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
+    - `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the following properties:
+        - `name` - The new name adopted by the user, as a string
+        - `name_since` - A `Date` object representing when the user adopted this name
+
+**v3.10.0 or later is required to use this method**
+
+Gets the last 10 persona names (including the current one) used by one or more Steam users (who do not have to be on your friends list).
+
 ### getGameBadgeLevel(appid, callback)
 - `appid` - The AppID of the game you want to get your badge level for
 - `callback` - Called when the requested data is available.
