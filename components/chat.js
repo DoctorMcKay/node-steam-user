@@ -285,6 +285,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendMsgIncoming] = function
 		case SteamUser.EChatEntryType.Typing:
 			this._emitIdEvent('friendTyping', senderID);
 			break;
+
+		case SteamUser.EChatEntryType.LeftConversation:
+			this._emitIdEvent('friendLeftConversation', senderID);
+			break;
 	}
 };
 
