@@ -453,6 +453,16 @@ In order to trade, **all** of the following must be true:
 - `enabledTime` must be at least 15 days ago (account-level restriction)
 - ONE of `machineTime` OR `twoFactorTime` must be at least 7 days ago (sentryfile-level restriction)
 
+### getCredentialChangeTimes(callback)
+- `callback` - A function to be called when the requested data is available
+    - `lastPasswordChange` - A `Date` object representing when your password was last changed, or `null` if never changed
+    - `lastPasswordReset` - A `Date` object representing when your password was last *reset* via the "forgot your password" utility, or `null` if never reset
+    - `lastEmailChange` - A `Date` object representing when your email address was last changed, or `null` if never changed
+
+**v3.10.0 or later is required to use this method**
+
+Gets when you last changed various account credentials.
+
 ### getAuthSecret(callback)
 - `callback` - A function to be called when the requested data is available
     - `secretID` - A numeric ID assigned to your key by Steam
