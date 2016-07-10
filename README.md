@@ -1271,6 +1271,16 @@ Emitted when we receive a direct friend message (that is, not through a chat roo
 
 Emitted when Steam notifies us that one of our friends is typing a message to us, as long as we're [online](#setpersonastate-name).
 
+### friendLeftConversation
+- `senderID` - The `SteamID` of the friend who closed our chat window
+
+**v3.10.0 or later is required to use this event**
+
+*This is an [ID event](#id-events).*
+
+Emitted when Steam notifies us that one of our friends with whom we've been chatting has closed our chat window, as
+long as we're [online](#setpersonastate-name).
+
 ### friendMessageEcho
 - `recipientID` - The `SteamID` of the user who rececived this message
 - `message` - The message text
