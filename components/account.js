@@ -63,6 +63,14 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 	});
 };
 
+SteamUser.prototype.getCredentialChangeTimes = function(callback) {
+	this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, false, function(body) {
+		callback(body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
+			body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
+			body.timestamp_last_email_change ? new Date(body.timestamp_last_email_change * 1000) : null);
+	});
+};
+
 SteamUser.prototype.getAuthSecret = function(callback) {
 	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, false, function(body) {
 		callback(body.secret_id, body.secret.toBuffer());
