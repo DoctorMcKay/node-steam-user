@@ -150,7 +150,9 @@ function onConnected() {
 }
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {
-	this.client.removeListener('connected', this._onConnected);
+	if (typeof this._onConnected === 'function') {
+		this.client.removeListener('connected', this._onConnected);
+	}
 
 	this._clearChangelistUpdateTimer();
 
