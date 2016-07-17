@@ -37,8 +37,14 @@ SteamUser.prototype.logOn = function(details) {
 			"two_factor_code": details.twoFactorCode,
 			"should_remember_password": !!details.rememberPassword,
 			"obfustucated_private_ip": details.logonID || 0,
-			"protocol_version": 65575,
-			"supports_rate_limit_response": true
+			"protocol_version": 65575, // don't get rid of this, node-steam needs it.
+			"supports_rate_limit_response": details.accountName ? true : false,
+			"machine_name": details.accountName ? (details.machineName || "") : "",
+			"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
+			"client_language": details.accountName ? "english" : "",
+			"client_os_type": Helpers.getOsType(),
+			"anon_user_target_account_name": details.accountName ? "" : "anonymous",
+			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine)
 		};
 	}
 
@@ -110,6 +116,7 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			self._logOnDetails.sha_sentryfile = sentry;
+			self._logOnDetails.eresult_sentryfile = 1;
 		}
 
 		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
