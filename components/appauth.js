@@ -177,6 +177,7 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 	var self = this;
 
 	// See if we have one saved
+	// TODO: Check if we're using storage
 	this.storage.readFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", function(err, file) {
 		if (!err && file) {
 			var parsed = SteamUser.parseAppTicket(file);
@@ -199,7 +200,7 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			}
 
 			var ticket = body.ticket.toBuffer();
-			if (ticket && ticket.length > 10 && self.options.saveAppTickets) {
+			if (ticket && ticket.length > 10 && self.options.saveAppTickets && self.storage) {
 				self.storage.saveFile("appOwnershipTicket_" + self.steamID + "_" + appid + ".bin", ticket);
 			}
 

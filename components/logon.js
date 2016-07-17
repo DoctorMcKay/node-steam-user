@@ -77,7 +77,14 @@ SteamUser.prototype.logOn = function(details) {
 	}
 
 	var self = this;
-	this.storage.readFiles(filenames, function(err, files) {
+
+	if (this.storage) {
+		this.storage.readFiles(filenames, readFileCallback);
+	} else {
+		readFileCallback(null, []);
+	}
+
+	function readFileCallback(err, files) {
 		files = files || [];
 
 		files.forEach(function(file) {
@@ -116,7 +123,7 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			self._logOnDetails.sha_sentryfile = sentry;
-			self._logOnDetails.eresult_sentryfile = 1;
+			self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
 		}
 
 		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
@@ -144,7 +151,7 @@ SteamUser.prototype.logOn = function(details) {
 			self._onConnected = onConnected.bind(self);
 			self.client.once('connected', self._onConnected);
 		}
-	});
+	}
 };
 
 function onConnected() {
@@ -195,7 +202,11 @@ SteamUser.prototype._getMachineID = function(localFile) {
 		}
 
 		var file = getRandomID();
-		this.storage.writeFile('machineid.bin', file);
+
+		if (this.storage) {
+			this.storage.writeFile('machineid.bin', file);
+		}
+
 		return file;
 	}
 
@@ -237,7 +248,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._connectionCount = 0;
 			this._gcTokens = [];
 
-			this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
+			if (this.storage) {
+				this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
+			}
 
 			var parental = body.parental_settings ? Schema.ParentalSettings.decode(body.parental_settings) : null;
 			if (parental && parental.salt && parental.passwordhash) {

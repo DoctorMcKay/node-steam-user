@@ -86,7 +86,7 @@ function SteamUser(client, options) {
 		}
 	}
 
-	if (!this.options.dataDirectory) {
+	if (!this.options.dataDirectory && this.options.dataDirectory !== null) {
 		if (process.env.OPENSHIFT_DATA_DIR) {
 			this.options.dataDirectory = process.env.OPENSHIFT_DATA_DIR + "/node-steamuser";
 		} else {
@@ -94,7 +94,9 @@ function SteamUser(client, options) {
 		}
 	}
 
-	this.storage = new FileStorage(this.options.dataDirectory);
+	if (this.options.dataDirectory) {
+		this.storage = new FileStorage(this.options.dataDirectory);
+	}
 
 	this.client.on('message', this._handleMessage.bind(this));
 
@@ -108,8 +110,11 @@ function SteamUser(client, options) {
 	});
 
 	this.client.on('servers', function(servers) {
-		self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
-		if(!client) {
+		if (self.storage) {
+			self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
+		}
+
+		if (!client) {
 			// It's an internal client, so we know that our Steam has an up-to-date server list
 			Steam['__SteamUserServersSet__'] = true;
 		}
@@ -122,7 +127,12 @@ SteamUser.prototype.setOption = function(option, value) {
 	// Handle anything that needs to happen when particular options update
 	switch(option) {
 		case 'dataDirectory':
-			this.storage.directory = value;
+			if (!this.storage) {
+				this.storage = new FileStorage(value);
+			} else {
+				this.storage.directory = value;
+			}
+
 			break;
 
 		case 'enablePicsCache':

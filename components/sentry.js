@@ -17,7 +17,9 @@ SteamUser.prototype._getSentryFilename = function() {
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
 	// TODO: Handle partial updates
-	this.storage.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
+	if (this.storage) {
+		this.storage.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
+	}
 
 	this.emit('sentry', body.bytes.toBuffer());
 
