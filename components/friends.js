@@ -245,11 +245,6 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 
 	userSteamIDs = userSteamIDs.map(Helpers.steamID).map(function(id) { return {"steamid": id.getSteamID64()}; });
 
-	console.log({
-		"id_count": userSteamIDs.length,
-		"Ids": userSteamIDs
-	});
-
 	this._send(SteamUser.EMsg.ClientAMGetPersonaNameHistory, {
 		"id_count": userSteamIDs.length,
 		"Ids": userSteamIDs
