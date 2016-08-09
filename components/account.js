@@ -202,9 +202,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateGuestPassesList] = func
 
 	var gifts = [], gift, key;
 	for (i = 0; i < countToRedeem; i++) {
-		gift = BinaryKVParser.parse(body);
-		gift = gift.MessageObject;
-		gift.gid = gift.gid.toString();
+		gift = BinaryKVParser.parse(body).MessageObject;
 
 		for (key in gift) {
 			if (!gift.hasOwnProperty(key)) {
