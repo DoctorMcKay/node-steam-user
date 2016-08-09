@@ -277,6 +277,22 @@ An object containing information about your Steam Wallet. `null` until [`wallet`
 
 An array containing license data for the packages which your Steam account owns. `null` until [`licenses`](#licenses-1) is emitted.
 
+### gifts
+
+An array containing gifts and guest passes you've received but haven't accepted (to your library or to your inventory) or declined.
+`null` until [`gifts`](#gifts-1) is emitted. Each object in the array contains these properties:
+
+- `gid` - The ID of this gift/guest pass, as a string (it's a 64-bit number)
+- `packageid` - The ID of the package which this gift/guest pass will grant
+- `TimeCreated` - A `Date` object for when this gift was purchased or guest pass was granted
+- `TimeExpiration` - A `Date` object for when this guest pass will expire (if it's a gift, this will be Mon Jan 18 2038 22:14:07 GMT-0500 (Eastern Standard Time))
+- `TimeSent` - A `Date` object for when this gift/guest pass was sent to you
+- `TimeAcked` - Appears to be the same as `TimeSent`
+- `TimeRedeemed` - Appears to always be `null`
+- `RecipientAddress` - Appears to always be an empty string
+- `SenderAddress` - Appears to always be an empty string
+- `SenderName` - The Steam display name of the user who sent you this gift
+
 ### users
 
 An object containing persona data about all Steam users we've encountered or requested data for. Key are 64-bit SteamIDs, values are identical to the objects received in the [`user`](#user) event.
@@ -1091,6 +1107,20 @@ emitted.
 
 This isn't emitted for anonymous accounts. However, all anonymous user accounts have a license for package 17906
 automatically.
+
+### gifts
+- `gifts` - An array of gift objects
+
+Emitted on logon and when you receive/accept/decline a gift or guest pass. The [`gifts`](#gifts) property will be
+updated after this event is emitted.
+
+Guest Passes (do they even still exist?) are gifts (actually, gifts are Guest Passes with a very long expiration date).
+Consequently, both come through this event.
+
+Each object in the array is an oustanding gift or guest pass that was sent to you that you haven't accepted/declined yet.
+Only **outstanding** gifts show up here. Gifts that you stored in your inventory don't show up here.
+
+The structure of the objects in the array is defined in the documentation for the [`gifts`](#gifts) property.
 
 ### appOwnershipCached
 

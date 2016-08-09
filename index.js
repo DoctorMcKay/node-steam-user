@@ -35,6 +35,7 @@ function SteamUser(client, options) {
 	this.wallet = null;
 	this.emailInfo = null;
 	this.licenses = null;
+	this.gifts = null;
 
 	// Friends and users info
 	this.users = {};

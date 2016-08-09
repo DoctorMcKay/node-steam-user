@@ -2,6 +2,7 @@ var SteamUser = require('../index.js');
 var Helpers = require('./helpers.js');
 var SteamID = require('steamid');
 var ByteBuffer = require('bytebuffer');
+var BinaryKVParser = require('binarykvparser');
 
 SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
 	if(typeof callback === 'string' && typeof arguments[5] === 'function') {
@@ -184,4 +185,48 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientWalletInfoUpdate] = function(
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientVanityURLChangedNotification] = function(body) {
 	this.emit('vanityURL', body.vanity_url);
 	this.vanityURL = body.vanity_url;
+};
+
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateGuestPassesList] = function(body) {
+	var eresult = body.readUint32();
+	if (eresult != SteamUser.EResult.OK) {
+		return;
+	}
+
+	var countToGive = body.readUint32();
+	var countToRedeem = body.readUint32();
+
+	for (var i = 0; i < countToGive; i++) {
+		BinaryKVParser.parse(body); // throw it away, I don't think this should be possible
+	}
+
+	var gifts = [], gift, key;
+	for (i = 0; i < countToRedeem; i++) {
+		gift = BinaryKVParser.parse(body);
+		gift = gift.MessageObject;
+		gift.gid = gift.gid.toString();
+
+		for (key in gift) {
+			if (!gift.hasOwnProperty(key)) {
+				continue;
+			}
+
+			if (key == 'gid') {
+				gift[key] = gift[key].toString();
+			}
+
+			if (key.match(/^Time/)) {
+				gift[key] = gift[key] ? new Date(gift[key] * 1000) : null;
+			}
+		}
+
+		gifts.push(gift);
+	}
+
+	if (this.gifts && this.gifts.length == gifts.length) {
+		return; // nothing changed
+	}
+
+	this.emit('gifts', gifts);
+	this.gifts = gifts;
 };
