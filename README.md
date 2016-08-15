@@ -492,6 +492,55 @@ Gets when you last changed various account credentials.
 
 Gets your account's auth secret, which is the pre-shared key used for in-home streaming.
 
+### requestPasswordChangeEmail(currentPassword[, callback])
+- `currentPassword` - Your account's current password, pre-change
+- `callback` - Optional. Called when the request completes.
+    - `err` - `null` on success, or an `Error` object on failure
+
+**v3.13.0 or later is required to use this method**
+
+Requests Steam to send you an email that contains a code you can supply to `changePassword` in order to change your
+account's password. If you have a Mobile Authenticator enabled, this will return success but not actually do anything.
+With 2FA, you should use a 2FA code instead of an email code.
+
+### changePassword(oldPassword, newPassword, code[, callback])
+- `oldPassword` - Your account's current (old) password
+- `newPassword` - Your desired new password
+- `code` - Either the code sent to your email from `requestPasswordChangeEmail` or your current Mobile Authenticator 2FA code (if you have 2FA on)
+- `callback` - Optional. Called when the request completes.
+    - `err` - `null` on success, or an `Error` object on failure
+
+**v3.13.0 or later is required to use this method**
+
+Changes your Steam account's password. This won't effect any trading restrictions.
+
+### changeEmail(options[, callback])
+- `options` - An object containing (some of) the following properties:
+    - `password` - Required. Your account's current password.
+    - `newEmail` - Required. The new email address you want to set on your account.
+    - `code` - Optional (at first). The verification code sent to your new email (see below).
+    - `twoFactorCode` - Optional (if you don't have 2FA enabled). If you do have 2FA (Mobile Authenticator) enabled, this is your current 2FA code (when confirming `code`).
+    - `smsCode` - Optional (if Steam doesn't want it). See below.
+- `callback` - Optional. Called when the request completes.
+    - `err` - `null` on success, or an `Error` object on failure
+    - `needsSmsCode` - `true` if Steam wants an SMS verification code (see below).
+
+**v3.13.0 or later is required to use this method.**
+
+Performs both steps in the two-step process that is changing your account's contact email. First, call this with only
+your `password` and `newEmail`. This will cause Steam to send an email to your new email address containing a
+verification code. Once you have that code, call this again with your `password`, `newEmail`, and `code`.
+
+If you have a Mobile Authenticator (2FA) enabled on your account, then for the second request you will need to include
+your current 2FA code as `twoFactorCode`. If you don't and `needsSmsCode` was `true` in the callback to the first request,
+then Steam has sent a verification code in an SMS to your phone. In this case, you need to provide that code as `smsCode`
+in the second request.
+
+`needsSmsCode` may still be `true` in the callback to the second request. In this case, simply ignore it. If you received
+no `err`, then your email was changed. The [`emailInfo`](#emailinfo-1) event will be emitted when your email changes.
+
+**Changing your account's email will start a 5-day trading cooldown.**
+
 ### gamesPlayed(apps)
 `apps` - An array, object, string, or number (see below)
 

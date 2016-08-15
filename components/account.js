@@ -90,6 +90,64 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 	});
 };*/
 
+SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callback) {
+	var buf = new ByteBuffer(81 + 4); // a static 81 bytes for the password, and 4 for the int at the end
+	buf.writeCString(currentPassword);
+
+	for (var i = currentPassword.length + 1; i <= 81; i++) {
+		buf.writeByte(0);
+	}
+
+	buf.writeUint32(1); // dunno, maybe what type of change we want?
+	this._send(SteamUser.EMsg.ClientRequestChangeMail, buf.flip(), function(body) {
+		if (!callback) {
+			return;
+		}
+
+		callback(Helpers.eresultError(body.readUint32()));
+	});
+};
+
+SteamUser.prototype.changePassword = function(oldPassword, newPassword, code, callback) {
+	var buf = new ByteBuffer(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
+	buf.writeCString(""); // unknown
+	buf.writeCString(oldPassword);
+	buf.writeCString(newPassword);
+	buf.writeCString(code);
+
+	this._send(SteamUser.EMsg.ClientPasswordChange3, buf.flip(), function(body) {
+		if (!callback) {
+			return;
+		}
+
+		callback(Helpers.eresultError(body.readUint32()));
+	});
+};
+
+SteamUser.prototype.changeEmail = function(options, callback) {
+	this._send(SteamUser.EMsg.ClientEmailChange4, {
+		"password": options.password,
+		"email": options.newEmail || options.email,
+		"code": options.code,
+		"final": !!options.code,
+		"newmethod": true,
+		"twofactor_code": options.twoFactorCode,
+		"sms_code": options.smsCode,
+		"client_supports_sms": true
+	}, function(body) {
+		if (!callback) {
+			return;
+		}
+
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		callback(null, !!body.requires_sms_code);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body) {
