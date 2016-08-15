@@ -133,7 +133,7 @@ SteamUser.prototype.changeEmail = function(options, callback) {
 		"newmethod": true,
 		"twofactor_code": options.twoFactorCode,
 		"sms_code": options.smsCode,
-		"client_supports_sms": true
+		"client_supports_sms": true // this appears to be ignored; it asks for an SMS code regardless of value
 	}, function(body) {
 		if (!callback) {
 			return;
