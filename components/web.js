@@ -59,17 +59,24 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	var self = this;
 	var req = require('https').request(options, function(res) {
-		if(res.statusCode != 200) {
+		if (res.statusCode != 200) {
 			self.emit('debug', 'Error in AuthenticateUser: ' + res.statusCode);
-			setTimeout(self._webLogOn.bind(self), 500);
+			fail();
 			return;
 		}
 
 		res.on('data', function(data) {
-			var response = JSON.parse(data);
+			try {
+				var response = JSON.parse(data);
+			} catch (ex) {
+				fail();
+				return;
+			}
+
+			delete self._webauthTimeout;
 
 			// Generate a random sessionid (CSRF token)
-			var sessionid = Math.floor(Math.random() * 1000000000);
+			var sessionid = require('crypto').randomBytes(12).toString('hex');
 			self.emit('webSession', sessionid, [
 				'sessionid=' + sessionid,
 				'steamLogin=' + response.authenticateuser.token,
@@ -80,10 +87,20 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	req.on('error', function(err) {
 		self.emit('debug', 'Error in AuthenticateUser: ' + err.message);
-		setTimeout(self._webLogOn.bind(self), 500);
+		fail();
 	});
 
 	req.end(data);
+
+	function fail() {
+		if (self._webauthTimeout) {
+			self._webauthTimeout = Math.min(self._webauthTimeout * 2, 30000);
+		} else {
+			self._webauthTimeout = 1000;
+		}
+
+		setTimeout(self._webLogOn.bind(self), self._webauthTimeout);
+	}
 };
 
 // Handlers
