@@ -116,6 +116,7 @@ module.exports = {
 	"GSOwnerDenied": 103,
 	"InvalidItemType": 104,
 	"IPBanned": 105,
+	"GSLTExpired": 106,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -223,4 +224,5 @@ module.exports = {
 	"103": "GSOwnerDenied",
 	"104": "InvalidItemType",
 	"105": "IPBanned",
+	"106": "GSLTExpired",
 };
