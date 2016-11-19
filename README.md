@@ -985,6 +985,15 @@ Creates a new multi-user chat room.
 
 Redeems game code on your account
 
+### activateGuestPass (gid[, callback])
+- `gid` - Guest Pass ID
+- `callback` - Optional. Called when request completes
+	- `result` - An `EResult` value
+	- `package_id`
+	- `must_own_appid`
+
+Activates a guest pass / gift on your account
+
 # Events [^](#contents)
 
 ## ID Events
