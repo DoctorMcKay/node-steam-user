@@ -983,7 +983,25 @@ Creates a new multi-user chat room.
 	- `details` - A `SteamUser.EPurchaseResult` value
 	- `packages` - An object whose keys are packageIDs and values are package names
 
-Redeems game code on your account
+**v3.2.0 or later is required to use this method**
+
+Redeems a game code (CD key) on your account.
+
+### getEncryptedAppTicket(appid[, userData], callback)
+- `appid` - The Steam AppID of the app for which you want a ticket
+- `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
+- `callback` - Called when the request completes
+    - `err` - If there was an error, this is an `Error` object. Otherwise, it's `null`.
+    - `ticket` - If successful, this is your encrypted appticket as a Buffer. You should provide the entire contents of the Buffer to the recipient.
+
+**v3.14.0 or later is required to use this method**
+
+Requests an "encrypted app ticket" from Steam servers for a particular game. This can be used to prove your ownership of
+an app and also your account identity to some publisher server, provided they're expecting an encrypted app ticket.
+To use encrypted app tickets, publishers must set up an encryption key in the Steamworks backend. Therefore, this will
+not work if encrypted tickets haven't been set up for the AppID you request a ticket for. You cannot decrypt an
+encrypted app ticket, nor can you view anything it contains. It is for all intents and purposes an opaque blob of binary
+data which only the developer/publisher of the game can do anything with.
 
 # Events [^](#contents)
 
