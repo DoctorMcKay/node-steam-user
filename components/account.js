@@ -232,6 +232,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientVACBanStatus] = function(body
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientWalletInfoUpdate] = function(body) {
+	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance) {
+		return; // nothing changed
+	}
+
 	this.emit('wallet', body.has_wallet, body.currency, body.balance / 100);
 	this.wallet = {
 		"hasWallet": body.has_wallet,
