@@ -71,7 +71,7 @@ console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 1
 
 Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile authentication.
 
-**Deprecated. Use [`steam-totp`](https://www.npmjs.com/package/steam-totp) instead.**
+**Deprecated and will be removed in a future release. Use [`steam-totp`](https://www.npmjs.com/package/steam-totp) instead.**
 
 # Options [^](#contents)
 
@@ -332,6 +332,14 @@ When we leave a group, instead of setting the value to `EFriendRelationship.None
 An object containing your friend groups (in the official client, these are called *tags*). Keys are numeric group IDs, and objects as follows:
 - `name` - A `string` containing the name of the group.
 - `members` - An array containing `SteamID` objects for the members of this friend group.
+
+### myNicknames
+
+**v3.15.0 or later is required to use this property**
+
+An object containing the nicknames you have assigned to other users. Keys are numeric 64-bit SteamIDs, properties are strings containing that user's nickname.
+
+This is empty until [`nicknameList`](#nicknamelist) is emitted.
 
 ### picsCache
 
@@ -814,6 +822,21 @@ Gets the Steam Level for one or more Steam users (who do not have to be on your 
 
 Gets the last 10 persona names (including the current one) used by one or more Steam users (who do not have to be on your friends list).
 
+### setNickname(steamID, nickname[, callback])
+- `steamID` - The SteamID of the user on whom you want to set a nickname, as a `SteamID` object or a string that can parse into one
+- `nickname` - The user's new nickname, as a string. Empty string to remove.
+- `callback` - Optional. Emitted when the request completes.
+    - `err` - An `Error` object on failure or `null` on success.
+
+**v3.15.0 or later is required to use this method**
+
+Sets a nickname on a user. If one already exists, overwrites it. The `myNicknames` property will be updated just before
+the callback fires, on success.
+
+**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. There also
+appears to be a delay between when you set the nickname and when it's reflected in subsequent logins or on the web.
+
+
 ### getGameBadgeLevel(appid, callback)
 - `appid` - The AppID of the game you want to get your badge level for
 - `callback` - Called when the requested data is available.
@@ -974,7 +997,7 @@ Invites a user to a chat room.
 
 **v1.9.0 or later is required to use this method**
 
-Creates a new multi-user chat room.
+Creates a new multi-user chat room
 
 ### redeemKey(key[, callback])
 - `key` - Steam formatted game key
@@ -1633,3 +1656,12 @@ Emitted when a chat room we're in is set so that everyone can chat.
 
 Emitted when we're invited to a Steam lobby. The inviter should be currently playing the game associated with this
 lobby, so you can get the AppID of the associated game from their user persona data.
+
+### nicknameList
+- `list` - The new nickname list, in an identical format to [`myNicknames`](#mynicknames)
+
+**v3.15.0 or later is required to use this event**
+
+Emitted when we receive our full nickname list from Steam. The `myNicknames` property will be updated after this event
+is emitted. I don't believe at this time that this will ever be emitted after logon, but in the event it is then you
+can compare `list` with `myNicknames` to see what changed.

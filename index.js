@@ -44,6 +44,7 @@ function SteamUser(client, options) {
 	this.myFriends = {};
 	this.myGroups = {};
 	this.myFriendGroups = {};
+	this.myNicknames = {};
 
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;

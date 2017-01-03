@@ -267,6 +267,31 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 	});
 };
 
+SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
+	steamID = Helpers.steamID(steamID);
+	var self = this;
+	this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {"steamid": steamID.toString(), "nickname": nickname}, function(body) {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		// Worked!
+		if (nickname.length == 0) {
+			delete self.myNicknames[steamID.toString()];
+		} else {
+			self.myNicknames[steamID.toString()] = nickname;
+		}
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
@@ -474,8 +499,21 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = function(body) {
-	// TODO
-	//console.log(body);
+	var myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
+
+	body.nicknames.forEach(function(user) {
+		if (body.removal) {
+			delete myNicknames[user.steamid];
+		} else {
+			myNicknames[user.steamid] = user.nickname;
+		}
+	});
+
+	if (!body.incremental) {
+		this.emit('nicknameList', myNicknames);
+	}
+
+	this.myNicknames = myNicknames;
 };
 
 function processUser(user) {
