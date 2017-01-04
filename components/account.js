@@ -148,6 +148,21 @@ SteamUser.prototype.changeEmail = function(options, callback) {
 	});
 };
 
+SteamUser.prototype.activateGuestPass = function(gid, callback) {
+	this._send(SteamUser.EMsg.ClientRedeemGuestPass, {
+		"guest_pass_id": gid
+	}, function(body) {
+		if (!callback) {
+			return;
+		}
+
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body) {

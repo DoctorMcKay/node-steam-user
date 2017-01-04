@@ -85,6 +85,8 @@ protobufs[SteamUser.EMsg.ClientUnlockStreaming] = Schema.CMsgAMUnlockStreaming;
 protobufs[SteamUser.EMsg.ClientUnlockStreamingResponse] = Schema.CMsgAMUnlockStreamingResponse;
 protobufs[SteamUser.EMsg.ClientEmailChange4] = Schema.CMsgClientEmailChange;
 protobufs[SteamUser.EMsg.ClientEmailChangeResponse4] = Schema.CMsgClientEmailChangeResponse;
+protobufs[SteamUser.EMsg.ClientRedeemGuestPass] = Schema.CMsgClientRedeemGuestPass;
+protobufs[SteamUser.EMsg.ClientRedeemGuestPassResponse] = Schema.CMsgClientRedeemGuestPassResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

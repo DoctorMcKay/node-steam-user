@@ -1028,6 +1028,15 @@ not work if encrypted tickets haven't been set up for the AppID you request a ti
 encrypted app ticket, nor can you view anything it contains. It is for all intents and purposes an opaque blob of binary
 data which only the developer/publisher of the game can do anything with.
 
+### activateGuestPass (gid[, callback])
+- `gid` - Guest Pass ID
+- `callback` - Optional. Called when request completes
+	- `result` - An `EResult` value
+	- `package_id`
+	- `must_own_appid`
+
+Activates a guest pass / gift on your account
+
 # Events [^](#contents)
 
 ## ID Events
