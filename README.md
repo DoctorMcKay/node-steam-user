@@ -833,9 +833,11 @@ Gets the last 10 persona names (including the current one) used by one or more S
 Sets a nickname on a user. If one already exists, overwrites it. The `myNicknames` property will be updated just before
 the callback fires, on success.
 
-**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. There also
-appears to be a delay between when you set the nickname and when it's reflected in subsequent logins or on the web.
-
+**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. It appears to
+also be possible for Steam to report success when using this method, when in reality your nickname wasn't saved on the
+server. You won't be able to detect this without requesting the user's Steam profile via HTTP(S) or reconnecting to the
+CM, as the `myNicknames` property is updated automatically when this method reports success without verifying with the
+server.
 
 ### getGameBadgeLevel(appid, callback)
 - `appid` - The AppID of the game you want to get your badge level for
@@ -1399,9 +1401,18 @@ Emitted when our group list is downloaded from Steam after logon.
 
 **v1.10.0 or later is required to use this event**
 
-Emitted when our friends group list is downloaded from Steam after logon (in the official client, these are called *tags*).
+Emitted when our friends group list is downloaded from Steam, which should be shortly after logon (automatically).
+
+In the official client, friend groups are called *tags*.
 
 The `myFriendGroups` property will be updated **after** this event is emitted, so you can compare `groups` with the property to see what changed.
+
+### nicknameList
+
+**v3.15.0 or later is required to use this event**
+
+Emitted when we receive our full nickname list from Steam, which should be shortly after logon (automatically).
+You can access it via the [`myNicknames`](#mynicknames) property.
 
 ### friendOrChatMessage
 - `senderID` - The message sender, as a `SteamID` object
@@ -1656,12 +1667,3 @@ Emitted when a chat room we're in is set so that everyone can chat.
 
 Emitted when we're invited to a Steam lobby. The inviter should be currently playing the game associated with this
 lobby, so you can get the AppID of the associated game from their user persona data.
-
-### nicknameList
-- `list` - The new nickname list, in an identical format to [`myNicknames`](#mynicknames)
-
-**v3.15.0 or later is required to use this event**
-
-Emitted when we receive our full nickname list from Steam. The `myNicknames` property will be updated after this event
-is emitted. I don't believe at this time that this will ever be emitted after logon, but in the event it is then you
-can compare `list` with `myNicknames` to see what changed.
