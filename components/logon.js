@@ -233,6 +233,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 	var self = this;
 	switch(body.eresult) {
 		case SteamUser.EResult.OK:
+			delete this._logonTimeout; // success, so reset reconnect timer
+
 			this.steamID = new SteamID(body.client_supplied_steamid.toString());
 
 			this._logOnDetails.last_session_id = this.client._sessionID;
@@ -284,6 +286,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 		case SteamUser.EResult.AccountLogonDenied:
 		case SteamUser.EResult.AccountLoginDeniedNeedTwoFactor:
 		case SteamUser.EResult.TwoFactorCodeMismatch:
+			// server is up, so reset logon timer
+			delete this._logonTimeout;
+
 			this.disconnect(true);
 
 			var isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
@@ -302,23 +307,20 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this.emit('debug', 'Log on response: ' + SteamUser.EResult[body.eresult]);
 			this.disconnect(true);
 
+			var timer = this._logonTimeout || 1000;
+			this._logonTimeout = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
+
 			setTimeout(function() {
 				self.logOn(true);
-			}, 1000);
+			}, timer);
 
 			break;
 
 		default:
-			var result = body.eresult;
+			// server is up, so reset logon timer
+			delete this._logonTimeout;
 
-			for(var i in SteamUser.EResult) {
-				if(SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
-					result = i;
-					break;
-				}
-			}
-
-			var error = new Error(result);
+			var error = new Error(SteamUser.EResult[body.eresult] || body.eresult);
 			error.eresult = body.eresult;
 			this.disconnect(true);
 			this.emit('error', error);
