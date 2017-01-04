@@ -833,12 +833,9 @@ Gets the last 10 persona names (including the current one) used by one or more S
 Sets a nickname on a user. If one already exists, overwrites it. The `myNicknames` property will be updated just before
 the callback fires, on success.
 
-**Note:** Currently, this doesn't appear to work due to a Steam bug. Setting nicknames via the official client doesn't
-seem to work either. It appears to succeed but doesn't persist to the web or after you restart the client. Ignore the
-following until this is resolved.
+**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. There also
+appears to be a delay between when you set the nickname and when it's reflected in subsequent logins or on the web.
 
-~~**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. There also
-appears to be a delay between when you set the nickname and when it's reflected in subsequent logins or on the web.~~
 
 ### getGameBadgeLevel(appid, callback)
 - `appid` - The AppID of the game you want to get your badge level for
