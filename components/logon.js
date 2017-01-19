@@ -249,6 +249,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._connectTime = Date.now();
 			this._connectionCount = 0;
 			this._gcTokens = [];
+			this._contentServerTokens = {};
 
 			if (this.storage) {
 				this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);

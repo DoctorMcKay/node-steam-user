@@ -2,24 +2,93 @@ var SteamUser = require('../index.js');
 var Helpers = require('./helpers.js');
 
 /**
+ * Get the list of currently-available content servers.
+ * @param {function} callback
+ */
+SteamUser.prototype.getContentServers = function(callback) {
+	if (this._contentServers.length > 0 && Date.now() - this._contentServers.timestamp < (1000 * 60 * 60)) {
+		callback(null, this._contentServers);
+		return;
+	}
+
+	var list = this.steamServers[SteamUser.EServerType.CS];
+
+	if (!list || list.length == 0) {
+		callback(new Error("Server list not yet available"));
+		return;
+	}
+
+	// pick a random one
+	var server = list[Math.floor(Math.random() * list.length)];
+	var self = this;
+	download("http://" + Helpers.ipIntToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", function(err, res) {
+		if (err) {
+			callback(err);
+			return;
+		}
+
+		if (res.type != 'complete') {
+			return;
+		}
+
+		try {
+			var parsed = require('vdf').parse(res.data.toString('utf8'));
+		} catch (ex) {
+			callback(new Error("Malformed response"));
+			return;
+		}
+
+		if (!parsed || !parsed.serverlist || !parsed.serverlist[0]) {
+			callback(new Error("Malformed response"));
+			return;
+		}
+
+		parsed.serverlist.length = 0;
+		for (var i in parsed.serverlist) {
+			if (parsed.serverlist.hasOwnProperty(i) && i != 'length') {
+				parsed.serverlist.length = parseInt(i, 10) + 1;
+			}
+		}
+
+		self._contentServers = Array.prototype.slice.call(parsed.serverlist);
+		callback(null, self._contentServers);
+	});
+};
+
+/**
  * Request the decryption key for a particular depot.
  * @param {int} appID
  * @param {int} depotID
  * @param {function} callback
  */
 SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
-	this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, function(body) {
-		if (body.eresult != SteamUser.EResult.OK) {
-			callback(Helpers.eresultError(body.eresult));
+	// Cached locally?
+	var self = this;
+
+	this.storage.readFile("depot_key_" + appID + "_" + depotID + ".bin", function(err, file) {
+		if (file && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
+			callback(null, file.slice(4));
 			return;
 		}
 
-		if (body.depot_id != depotID) {
-			callback(new Error("Did not receive decryption key for correct depot"));
-			return;
-		}
+		self._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, function(body) {
+			if (body.eresult != SteamUser.EResult.OK) {
+				callback(Helpers.eresultError(body.eresult));
+				return;
+			}
 
-		callback(null, body.depot_encryption_key.toBuffer());
+			if (body.depot_id != depotID) {
+				callback(new Error("Did not receive decryption key for correct depot"));
+				return;
+			}
+
+			var key = body.depot_encryption_key.toBuffer();
+			var file = Buffer.concat([new Buffer(4), key]);
+			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
+			self.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file);
+
+			callback(null, body.depot_encryption_key.toBuffer());
+		});
 	});
 };
 
@@ -30,12 +99,19 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
  * @param {function} callback
  */
 SteamUser.prototype.getCDNAuthToken = function(appID, hostname, callback) {
+	if (this._contentServerTokens[appID + '_' + hostname] && Date.now() - this._contentServerTokens[appID + '_' + hostname].expires > (60 * 60)) {
+		callback(null, this._contentServerTokens[appID + '_' + hostname].token, this._contentServerTokens[appID + '_' + hostname].expires);
+		return;
+	}
+
+	var self = this;
 	this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {"app_id": appID, "host_name": hostname}, function(body) {
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;
 		}
 
+		self._contentServerTokens[appID + '_' + hostname] = {"token": body.token, "expires": new Date(body.expiration_time * 1000)};
 		callback(null, body.token, new Date(body.expiration_time * 1000));
 	});
 };
@@ -56,11 +132,12 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) 
 			this.steamServers[i] = servers[i];
 		}
 	}
-};
 
-download("http://valve805.steamcontent.com/serverlist/50/20/", "cs.steamcontent.com", function(err, msg) {
-	console.log(msg);
-});
+	if (!this.contentServersReady && this.steamServers[SteamUser.EServerType.CS]) {
+		this.contentServersReady = true;
+		this.emit('contentServersReady');
+	}
+};
 
 // Private functions
 function download(url, hostHeader, destinationFilename, callback) {
