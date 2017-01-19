@@ -45,6 +45,7 @@ function SteamUser(client, options) {
 	this.myGroups = {};
 	this.myFriendGroups = {};
 	this.myNicknames = {};
+	this.steamServers = {};
 
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;
@@ -173,6 +174,7 @@ require('./components/friends.js');
 require('./components/chat.js');
 require('./components/twofactor.js');
 require('./components/pubfiles.js');
+require('./components/cdn.js');
 
 /**
  * Called when the request completes.
