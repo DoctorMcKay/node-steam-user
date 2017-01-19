@@ -1,5 +1,7 @@
+var AdmZip = require('adm-zip');
 var SteamUser = require('../index.js');
 var Helpers = require('./helpers.js');
+var ContentManifest = require('./content_manifest.js');
 
 /**
  * Get the list of currently-available content servers.
@@ -116,6 +118,55 @@ SteamUser.prototype.getCDNAuthToken = function(appID, hostname, callback) {
 	});
 };
 
+SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
+	this.getRawManifest(appID, depotID, manifestID, function(err, manifest) {
+		if (err) {
+			callback(err);
+			return;
+		}
+
+		try {
+			callback(null, ContentManifest.parse(manifest));
+		} catch (ex) {
+			callback(ex);
+		}
+	});
+};
+
+SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
+	var self = this;
+	this.getContentServers(function(err, servers) {
+		if (err) {
+			callback(err);
+			return;
+		}
+
+		var server = servers[Math.floor(Math.random() * servers.length)];
+		var urlBase = "http://" + server.Host;
+		var vhost = server.vhost || server.Host;
+
+		self.getCDNAuthToken(appID, vhost, function(err, token, expires) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			download(urlBase + "/depot/" + depotID + "/manifest/" + manifestID + "/5" + token, vhost, function(err, res) {
+				if (err) {
+					callback(err);
+					return;
+				}
+
+				if (res.type != 'complete') {
+					return;
+				}
+
+				callback(null, (new AdmZip(res.data)).readFile('z'));
+			});
+		});
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) {
@@ -162,12 +213,12 @@ function download(url, hostHeader, destinationFilename, callback) {
 			return;
 		}
 
-		res.setEncoding(null); // apparently this just doesn't work... thanks node
+		res.setEncoding('binary'); // apparently using null just doesn't work... thanks node
 		var stream = res;
 
 		if (res.headers['content-encoding'] && res.headers['content-encoding'] == 'gzip') {
 			stream = require('zlib').createGunzip();
-			stream.setEncoding(null);
+			stream.setEncoding('binary');
 			res.pipe(stream);
 		}
 
@@ -181,7 +232,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 
 		stream.on('data', function(chunk) {
 			if (typeof chunk === 'string') {
-				chunk = new Buffer(chunk, 'utf8');
+				chunk = new Buffer(chunk, 'binary');
 			}
 
 			receivedBytes += chunk.length;

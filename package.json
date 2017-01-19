@@ -28,7 +28,8 @@
 		"binarykvparser": "^2.0.0",
 		"file-manager": "^1.0.0",
 		"steam-totp": "^1.3.0",
-		"buffer-crc32": "^0.2.5"
+		"buffer-crc32": "^0.2.5",
+		"adm-zip": "^0.4.7"
 	},
 	"scripts": {
 		"prepublish": "node scripts/prepublish.js",
