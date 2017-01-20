@@ -108,7 +108,7 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
  * @param {function} callback
  */
 SteamUser.prototype.getCDNAuthToken = function(appID, hostname, callback) {
-	if (this._contentServerTokens[appID + '_' + hostname] && Date.now() - this._contentServerTokens[appID + '_' + hostname].expires > (60 * 60)) {
+	if (this._contentServerTokens[appID + '_' + hostname] && this._contentServerTokens[appID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
 		callback(null, this._contentServerTokens[appID + '_' + hostname].token, this._contentServerTokens[appID + '_' + hostname].expires);
 		return;
 	}
