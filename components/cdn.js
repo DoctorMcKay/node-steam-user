@@ -1,7 +1,14 @@
 var AdmZip = require('adm-zip');
+var ByteBuffer = require('bytebuffer');
+var crc32 = require('buffer-crc32');
+var LZMA = require('lzma');
+var SteamCrypto = require('@doctormckay/steam-crypto');
 var SteamUser = require('../index.js');
 var Helpers = require('./helpers.js');
 var ContentManifest = require('./content_manifest.js');
+
+const VZIP_HEADER = 0x5A56;
+const VZIP_FOOTER = 0x767A;
 
 /**
  * Get the list of currently-available content servers.
@@ -118,7 +125,15 @@ SteamUser.prototype.getCDNAuthToken = function(appID, hostname, callback) {
 	});
 };
 
+/**
+ * Download a depot content manifest.
+ * @param {int} appID
+ * @param {int} depotID
+ * @param {string} manifestID
+ * @param {function} callback
+ */
 SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
+	var self = this;
 	this.getRawManifest(appID, depotID, manifestID, function(err, manifest) {
 		if (err) {
 			callback(err);
@@ -126,13 +141,37 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
 		}
 
 		try {
-			callback(null, ContentManifest.parse(manifest));
+			manifest = ContentManifest.parse(manifest);
 		} catch (ex) {
 			callback(ex);
+			return;
 		}
+
+
+		if (!manifest.filenames_encrypted) {
+			callback(null, manifest);
+			return;
+		}
+
+		self.getDepotDecryptionKey(appID, depotID, function(err, key) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			ContentManifest.decryptFilenames(manifest, key);
+			callback(null, manifest);
+		});
 	});
 };
 
+/**
+ * Download and decompress a manifest, but don't parse it into a JavaScript object.
+ * @param {int} appID
+ * @param {int} depotID
+ * @param {string} manifestID
+ * @param {function} callback
+ */
 SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
 	var self = this;
 	this.getContentServers(function(err, servers) {
@@ -161,10 +200,89 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 					return;
 				}
 
-				callback(null, (new AdmZip(res.data)).readFile('z'));
+				unzip(res.data, callback);
 			});
 		});
 	});
+};
+
+/**
+ * Download a chunk from a content server.
+ * @param {int} appID - The AppID to which this chunk belongs
+ * @param {int} depotID - The depot ID to which this chunk belongs
+ * @param {string} chunkSha1 - This chunk's SHA1 hash (aka its ID)
+ * @param {object} [contentServer] - If not provided, one will be chosen randomly. Should be an object identical to those output by getContentServers
+ * @param {function} callback - First argument is Error/null, second is a Buffer containing the chunk's data
+ */
+SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentServer, callback) {
+	if (typeof contentServer === 'function') {
+		callback = contentServer;
+		contentServer = null;
+	}
+
+	chunkSha1 = chunkSha1.toLowerCase();
+	var self = this;
+
+	if (!contentServer) {
+		this.getContentServers(function(err, servers) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			contentServer = servers[Math.floor(Math.random() * servers.length)];
+			performDownload();
+		});
+	} else {
+		performDownload();
+	}
+
+	function performDownload() {
+		var urlBase = "http://" + contentServer.Host;
+		var vhost = contentServer.vhost || contentServer.Host;
+
+		self.getCDNAuthToken(appID, vhost, function(err, token, expires) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			self.getDepotDecryptionKey(appID, depotID, function(err, key) {
+				if (err) {
+					callback(err);
+					return;
+				}
+
+				download(urlBase + "/depot/" + depotID + "/chunk/" + chunkSha1 + token, vhost, function(err, res) {
+					if (err) {
+						callback(err);
+						return;
+					}
+
+					if (res.type != 'complete') {
+						return;
+					}
+
+					unzip(SteamCrypto.symmetricDecrypt(res.data, key), function(err, result) {
+						if (err) {
+							callback(err);
+							return;
+						}
+
+						// Verify the SHA1
+						var hash = require('crypto').createHash('sha1');
+						hash.update(result);
+						if (hash.digest('hex') != chunkSha1) {
+							callback(new Error("Checksum mismatch"));
+							return;
+						}
+
+						callback(null, result);
+					});
+				});
+			});
+		});
+	}
 };
 
 // Handlers
@@ -254,4 +372,62 @@ function download(url, hostHeader, destinationFilename, callback) {
 	});
 
 	req.end();
+}
+
+function unzip(data, callback) {
+	// VZip or zip?
+	if (data.readUInt16LE(0) == VZIP_HEADER) {
+		// VZip
+		data = ByteBuffer.wrap(data, ByteBuffer.LITTLE_ENDIAN);
+
+		data.skip(2); // header
+		if (String.fromCharCode(data.readByte()) != 'a') {
+			callback(new Error("Expected VZip version 'a'"));
+		}
+
+		data.skip(4); // either a timestamp or a CRC; either way, forget it
+		var properties = data.slice(data.offset, data.offset + 5).toBuffer();
+		data.skip(5);
+
+		var compressedData = data.slice(data.offset, data.limit - 10);
+		data.skip(compressedData.remaining());
+
+		var decompressedCrc = data.readUint32();
+		var decompressedSize = data.readUint32();
+		if (data.readUint16() != VZIP_FOOTER) {
+			callback(new Error("Didn't see expected VZip footer"));
+		}
+
+		var uncompressedSizeBuffer = new Buffer(8);
+		uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
+		uncompressedSizeBuffer.writeUInt32LE(0, 4);
+
+		LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), function(result, err) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			result = new Buffer(result); // it's a byte array
+
+			// Verify the result
+			if (decompressedSize != result.length) {
+				callback(new Error("Decompressed size was not valid"));
+				return;
+			}
+
+			if (crc32.unsigned(result) != decompressedCrc) {
+				callback(new Error("CRC check failed on decompressed data"));
+				return;
+			}
+
+			callback(null, result);
+		});
+	} else {
+		try {
+			callback(null, (new AdmZip(data)).readFile('z'));
+		} catch (ex) {
+			callback(ex);
+		}
+	}
 }
