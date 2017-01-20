@@ -1,6 +1,8 @@
 var AdmZip = require('adm-zip');
 var ByteBuffer = require('bytebuffer');
 var crc32 = require('buffer-crc32');
+var EventEmitter = require('events').EventEmitter;
+var fs = require('fs');
 var LZMA = require('lzma');
 var SteamCrypto = require('@doctormckay/steam-crypto');
 var SteamUser = require('../index.js');
@@ -16,7 +18,7 @@ const VZIP_FOOTER = 0x767A;
  */
 SteamUser.prototype.getContentServers = function(callback) {
 	if (this._contentServers.length > 0 && Date.now() - this._contentServers.timestamp < (1000 * 60 * 60)) {
-		callback(null, this._contentServers);
+		callback(null, JSON.parse(JSON.stringify(this._contentServers)));
 		return;
 	}
 
@@ -60,7 +62,7 @@ SteamUser.prototype.getContentServers = function(callback) {
 		}
 
 		self._contentServers = Array.prototype.slice.call(parsed.serverlist);
-		callback(null, self._contentServers);
+		callback(null, JSON.parse(JSON.stringify(self._contentServers)));
 	});
 };
 
@@ -282,6 +284,192 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 				});
 			});
 		});
+	}
+};
+
+/**
+ * Download a specific file from a depot.
+ * @param {int} appID - The AppID which owns the file you want
+ * @param {int} depotID - The depot ID which contains the file you want
+ * @param {string} fileManifest - An object from the "files" array of a downloaded and parsed manifest
+ * @param {string} [outputFilePath] - If provided, downloads the file to this location on the disk. If not, downloads the file into memory and sends it back in the callback.
+ * @param {function} callback - (err, file) but file is only present if outputFilePath is not set
+ * @returns {EventEmitter} An EventEmitter which receives `progress` events with arguments (bytesDownloaded, totalSize)
+ */
+SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, outputFilePath, callback) {
+	if (typeof outputFilePath === 'function') {
+		callback = outputFilePath;
+		outputFilePath = null;
+	}
+
+	if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
+		throw new Error("Cannot download a directory");
+	}
+
+	var numWorkers = 4;
+
+	fileManifest.size = parseInt(fileManifest.size, 10);
+	var bytesDownloaded = 0;
+
+	var self = this;
+	var availableServers;
+	var servers = [];
+	var serversInUse = [];
+	var currentServerIdx = 0;
+	var downloadBuffer;
+	var outputFd;
+	var killed = false;
+	var outputEmitter = new EventEmitter();
+
+	this.getContentServers(function(err, contentServers) {
+		if (err) {
+			callback(err);
+			return;
+		}
+
+		// Choose some content servers
+		availableServers = contentServers;
+		for (var i = 0; i < numWorkers; i++) {
+			assignServer(i);
+			serversInUse.push(false);
+		}
+
+		if (outputFilePath) {
+			fs.open(outputFilePath, "w", function(err, fd) {
+				if (err) {
+					callback(err);
+					return;
+				}
+
+				outputFd = fd;
+				fs.truncate(outputFd, parseInt(fileManifest.size, 10), function(err) {
+					if (err) {
+						fs.closeSync(outputFd);
+						callback(err);
+						return;
+					}
+
+					beginDownload();
+				});
+			});
+		} else {
+			downloadBuffer = new Buffer(parseInt(fileManifest.size, 10));
+			beginDownload();
+		}
+	});
+
+	return outputEmitter;
+
+	function beginDownload() {
+		var queue = require('async').queue(function dlChunk(chunk, cb) {
+			var serverIdx;
+
+			while (true) {
+				// Find the next available download slot
+				if (serversInUse[currentServerIdx]) {
+					incrementCurrentServerIdx();
+				} else {
+					serverIdx = currentServerIdx;
+					serversInUse[serverIdx] = true;
+					break;
+				}
+			}
+
+			self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], function(err, data) {
+				serversInUse[serverIdx] = false;
+
+				if (killed) {
+					return;
+				}
+
+				if (err) {
+					// Error downloading chunk
+					if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
+						// This chunk hasn't been retired the max times yet, and we have servers left.
+						callback(err);
+						queue.kill();
+						killed = true;
+					} else {
+						chunk.retries = chunk.retries || 0;
+						chunk.retries++;
+						assignServer(serverIdx);
+					}
+
+					return;
+				}
+
+				bytesDownloaded += data.length;
+				outputEmitter.emit('progress', bytesDownloaded, fileManifest.size);
+
+				// Chunk downloaded successfully
+				if (outputFilePath) {
+					fs.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), function(err) {
+						if (err) {
+							callback(err);
+							queue.kill();
+							killed = true;
+						} else {
+							cb();
+						}
+					});
+				} else {
+					data.copy(downloadBuffer, parseInt(chunk.offset, 10));
+					cb();
+				}
+			});
+		}, numWorkers);
+
+		fileManifest.chunks.forEach(function(chunk) {
+			queue.push(JSON.parse(JSON.stringify(chunk)));
+		});
+
+		queue.drain = function() {
+			// Verify hash
+			var hash;
+			if (outputFilePath) {
+				fs.close(outputFd, function(err) {
+					if (err) {
+						callback(err);
+						return;
+					}
+
+					// File closed. Now re-open it so we can hash it!
+					hash = require('crypto').createHash('sha1');
+					fs.createReadStream(outputFilePath).pipe(hash);
+					hash.on('readable', function() {
+						if (!hash.read) {
+							return; // already done
+						}
+
+						hash = hash.read();
+						if (hash.toString('hex') != fileManifest.sha_content) {
+							callback(new Error("File checksum mismatch"));
+						} else {
+							callback(null);
+						}
+					});
+				});
+			} else {
+				hash = require('crypto').createHash('sha1');
+				hash.update(downloadBuffer);
+				if (hash.digest('hex') != fileManifest.sha_content) {
+					callback(new Error("File checksum mismatch"));
+					return;
+				}
+
+				callback(null, downloadBuffer);
+			}
+		};
+	}
+
+	function assignServer(idx) {
+		servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
+	}
+
+	function incrementCurrentServerIdx() {
+		if (++currentServerIdx >= servers.length) {
+			currentServerIdx = 0;
+		}
 	}
 };
 

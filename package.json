@@ -30,7 +30,8 @@
 		"steam-totp": "^1.3.0",
 		"buffer-crc32": "^0.2.5",
 		"adm-zip": "^0.4.7",
-		"lzma": "^2.3.2"
+		"lzma": "^2.3.2",
+		"async": "^2.1.4"
 	},
 	"scripts": {
 		"prepublish": "node scripts/prepublish.js",
