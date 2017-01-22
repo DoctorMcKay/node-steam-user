@@ -473,6 +473,28 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 	}
 };
 
+/**
+ * Request decryption keys for a beta branch of an app from its beta password.
+ * @param {int} appID
+ * @param {string} password
+ * @param {function} callback - First arg is Error|null, second is an object mapping branch names to their decryption keys
+ */
+SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callback) {
+	this._send(SteamUser.EMsg.ClientCheckAppBetaPassword, {"app_id": appID, "betapassword": password}, function(body) {
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		var branches = {};
+		(body.betapasswords || []).forEach(function(beta) {
+			branches[beta.betaname] = new Buffer(beta.betapassword, 'hex');
+		});
+
+		callback(null, branches);
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) {

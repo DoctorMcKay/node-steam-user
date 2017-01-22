@@ -23,7 +23,7 @@
 		"protobufjs": "^5.0.0",
 		"steam-client": "^2.0.0",
 		"bytebuffer": "^5.0.0",
-		"@doctormckay/steam-crypto": "^1.0.0",
+		"@doctormckay/steam-crypto": "^1.2.0",
 		"vdf": "^0.0.2",
 		"binarykvparser": "^2.0.0",
 		"file-manager": "^1.0.0",

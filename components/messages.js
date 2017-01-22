@@ -90,6 +90,8 @@ protobufs[SteamUser.EMsg.ClientGetDepotDecryptionKey] = Schema.CMsgClientGetDepo
 protobufs[SteamUser.EMsg.ClientGetDepotDecryptionKeyResponse] = Schema.CMsgClientGetDepotDecryptionKeyResponse;
 protobufs[SteamUser.EMsg.ClientGetCDNAuthToken] = Schema.CMsgClientGetCDNAuthToken;
 protobufs[SteamUser.EMsg.ClientGetCDNAuthTokenResponse] = Schema.CMsgClientGetCDNAuthTokenResponse;
+protobufs[SteamUser.EMsg.ClientCheckAppBetaPassword] = Schema.CMsgClientCheckAppBetaPassword;
+protobufs[SteamUser.EMsg.ClientCheckAppBetaPasswordResponse] = Schema.CMsgClientCheckAppBetaPasswordResponse;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
