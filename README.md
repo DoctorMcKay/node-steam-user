@@ -321,9 +321,9 @@ When we get unfriended, instead of setting the value to `EFriendRelationship.Non
 
 ### myGroups
 
-An object whose keys are 64-bit SteamIDs, and whose values are from the `EFriendRelationship` enum. Therefore, you can deduce which groups you're in from this object.
+An object whose keys are 64-bit SteamIDs, and whose values are from the `EClanRelationship` enum. Therefore, you can deduce which groups you're in from this object.
 
-When we leave a group, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
+When we leave a group, instead of setting the value to `EClanRelationship.None`, the key is deleted from the object entirely.
 
 ### myFriendGroups
 
