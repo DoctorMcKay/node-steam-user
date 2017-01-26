@@ -1,6 +1,7 @@
 # Steam CDN Client
 
 As of v3.16.0, a `SteamUser` can interact with Steam's CDN and download content.
+**This is currently experimental.**
 
 ## Properties
 
