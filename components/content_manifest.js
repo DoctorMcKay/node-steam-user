@@ -92,13 +92,15 @@ exports.decryptFilenames = function(manifest, key) {
 		file.filename = file.filename.slice(0, file.filename.indexOf(0)).toString('utf8');
 
 		// Verify the sha1
-		if (file.sha_filename) {
+		/*if (file.sha_filename) {
 			var hash = Crypto.createHash('sha1');
-			hash.update(file.filename, 'utf8');
+			hash.update(file.filename, 'ascii');
 			if (hash.digest('hex') != file.sha_filename) {
 				throw new Error("Filename hash did not validate; is the decryption key correct?");
 			}
-		}
+		}*/
+
+		// ^ Disabled because apparently some manifests contain invalid filename hashes. Because Valve.
 	});
 
 	manifest.filenames_encrypted = false;
