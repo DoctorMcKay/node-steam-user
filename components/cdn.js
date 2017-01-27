@@ -105,24 +105,24 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 
 /**
  * Get an auth token for a particular CDN server.
- * @param {int} appID
+ * @param {int} depotID
  * @param {string} hostname - The hostname of the CDN server for which we want a token
  * @param {function} callback
  */
-SteamUser.prototype.getCDNAuthToken = function(appID, hostname, callback) {
-	if (this._contentServerTokens[appID + '_' + hostname] && this._contentServerTokens[appID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
-		callback(null, this._contentServerTokens[appID + '_' + hostname].token, this._contentServerTokens[appID + '_' + hostname].expires);
+SteamUser.prototype.getCDNAuthToken = function(depotID, hostname, callback) {
+	if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
+		callback(null, this._contentServerTokens[depotID + '_' + hostname].token, this._contentServerTokens[depotID + '_' + hostname].expires);
 		return;
 	}
 
 	var self = this;
-	this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {"app_id": appID, "host_name": hostname}, function(body) {
+	this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {"app_id": depotID, "host_name": hostname}, function(body) {
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;
 		}
 
-		self._contentServerTokens[appID + '_' + hostname] = {"token": body.token, "expires": new Date(body.expiration_time * 1000)};
+		self._contentServerTokens[depotID + '_' + hostname] = {"token": body.token, "expires": new Date(body.expiration_time * 1000)};
 		callback(null, body.token, new Date(body.expiration_time * 1000));
 	});
 };
@@ -186,7 +186,7 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 		var urlBase = "http://" + server.Host;
 		var vhost = server.vhost || server.Host;
 
-		self.getCDNAuthToken(appID, vhost, function(err, token, expires) {
+		self.getCDNAuthToken(depotID, vhost, function(err, token, expires) {
 			if (err) {
 				callback(err);
 				return;
