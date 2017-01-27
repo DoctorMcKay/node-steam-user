@@ -36,16 +36,16 @@ callback immediately for subsequent requests for this appID/depotID pair.
 
 Locally cached data expires after 14 days, after which time it will be re-requested.
 
-### getCDNAuthToken(appID, hostname, callback)
-- `appID` - The AppID of the app for which you want an auth token
+### getCDNAuthToken(depotID, hostname, callback)
+- `appID` - The ID of the depot for which you want an auth token
 - `hostname` - The hostname of the content server for which you want an auth token
 - `callback` - Called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
     - `token` - The requested auth token on success, as a string
     - `expires` - On success, this is the time when this token will expire, as a `Date` object
 
-Requests an auth token for a particular AppID to be downloaded from a given content server. One token is required per
-app and per content server. On success, the token will be cached in memory until it expires or the SteamUser disconnects.
+Requests an auth token for a particular DepotID to be downloaded from a given content server. One token is required per
+depot and per content server. On success, the token will be cached in memory until it expires or the SteamUser disconnects.
 
 ### getManifest(appID, depotID, manifestID, callback)
 - `appID` - The AppID of the app for which you want a manifest
