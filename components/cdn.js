@@ -243,7 +243,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		var urlBase = "http://" + contentServer.Host;
 		var vhost = contentServer.vhost || contentServer.Host;
 
-		self.getCDNAuthToken(appID, vhost, function(err, token, expires) {
+		self.getCDNAuthToken(depotID, vhost, function(err, token, expires) {
 			if (err) {
 				callback(err);
 				return;
@@ -393,6 +393,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 						chunk.retries = chunk.retries || 0;
 						chunk.retries++;
 						assignServer(serverIdx);
+						dlChunk(chunk, cb);
 					}
 
 					return;
