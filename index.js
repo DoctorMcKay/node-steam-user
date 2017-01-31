@@ -108,7 +108,7 @@ function SteamUser(client, options) {
 
 	var self = this;
 	this.client.on('error', function(e) {
-		if(!self.steamID) {
+		if (!self.steamID && e.result != SteamUser.EResult.ConnectFailed) {
 			return; // We've already handled this
 		}
 
