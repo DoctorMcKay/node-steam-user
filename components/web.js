@@ -71,62 +71,71 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 	}
 
 	var self = this;
-	var req = HTTPS.request(options, function(res) {
-		var failed = false;
 
-		if (res.statusCode != 200) {
-			failed = true;
-			self.emit('debug', 'Error in AuthenticateUser: ' + res.statusCode);
-			fail();
-		}
+	// Unsure if this is the issue, but it appears that Steam is currently rejecting valid nonces.
+	// Could be a communication delay between Steam servers, so let's try adding a delay on our end to see if that helps.
+	// The client does have a delay between when a nonce is received and when it tries to auth (could be coincidential?)
 
-		var responseData = "";
+	var reqDelay = Math.min(this._webauthTimeout || 0, 10000); // 10 seconds max delay
 
-		var stream = res;
-		if (res.headers['content-encoding'] == 'gzip') {
-			stream = require('zlib').createGunzip();
-			res.pipe(stream);
-		}
+	setTimeout(function() {
+		var req = HTTPS.request(options, function(res) {
+			var failed = false;
 
-		stream.on('data', function(data) {
-			responseData += data;
-		});
-
-		stream.on('end', function() {
-			if (failed) {
-				self.emit('debugAuthenticateUser', responseData);
-				return;
-			}
-
-			try {
-				var response = VDF.parse(responseData);
-			} catch (ex) {
+			if (res.statusCode != 200) {
+				failed = true;
+				self.emit('debug', 'Error in AuthenticateUser: ' + res.statusCode);
 				fail();
-				return;
 			}
 
-			delete self._webauthTimeout;
+			var responseData = "";
 
-			// Generate a random sessionid (CSRF token)
-			var sessionid = require('crypto').randomBytes(12).toString('hex');
-			self.emit('webSession', sessionid, [
-				'sessionid=' + sessionid,
-				'steamLogin=' + response.authenticateuser.token,
-				'steamLoginSecure=' + response.authenticateuser.tokensecure
-			]);
+			var stream = res;
+			if (res.headers['content-encoding'] == 'gzip') {
+				stream = require('zlib').createGunzip();
+				res.pipe(stream);
+			}
+
+			stream.on('data', function(data) {
+				responseData += data;
+			});
+
+			stream.on('end', function() {
+				if (failed) {
+					self.emit('debugAuthenticateUser', responseData);
+					return;
+				}
+
+				try {
+					var response = VDF.parse(responseData);
+				} catch (ex) {
+					fail();
+					return;
+				}
+
+				delete self._webauthTimeout;
+
+				// Generate a random sessionid (CSRF token)
+				var sessionid = require('crypto').randomBytes(12).toString('hex');
+				self.emit('webSession', sessionid, [
+					'sessionid=' + sessionid,
+					'steamLogin=' + response.authenticateuser.token,
+					'steamLoginSecure=' + response.authenticateuser.tokensecure
+				]);
+			});
 		});
-	});
 
-	req.on('error', function(err) {
-		self.emit('debug', 'Error in AuthenticateUser: ' + err.message);
-		fail();
-	});
+		req.on('error', function(err) {
+			self.emit('debug', 'Error in AuthenticateUser: ' + err.message);
+			fail();
+		});
 
-	req.end(data);
+		req.end(data);
+	}, reqDelay);
 
 	function fail() {
 		if (self._webauthTimeout) {
-			self._webauthTimeout = Math.min(self._webauthTimeout * 2, 60000);
+			self._webauthTimeout = Math.min(self._webauthTimeout * 2, 50000);
 		} else {
 			self._webauthTimeout = 1000;
 		}
