@@ -399,6 +399,18 @@ connected. Omit the `details` object if you wish to login to an anonymous user a
 
 Logs you off of Steam and closes the connection.
 
+### relog()
+
+**v3.18.0 or later is required to use this method**
+
+Logs you off of Steam and then immediately back on. If you aren't logged into an anonymous account, then you **must**
+set `rememberPassword` to `true` when logging on initially to use this. You also **must** wait for the
+[`loginKey`](#loginkey) event to be emitted before you can use this. Attempts to call this method without both
+criteria being met will result in an `Error` being thrown and nothing else will happen.
+
+When used, `disconnected` and then `loggedOn` will be emitted in succession. This is essentially the same as using
+`logOff()` and then calling `logOn()` immediately in the `disconnected` event callback.
+
 ### webLogOn()
 
 `SteamUser` will automatically log onto steamcommunity.com when a successful connection to Steam is established (as an

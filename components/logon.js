@@ -38,7 +38,7 @@ SteamUser.prototype.logOn = function(details) {
 			"should_remember_password": !!details.rememberPassword,
 			"obfustucated_private_ip": details.logonID || 0,
 			"protocol_version": 65575, // don't get rid of this, node-steam needs it.
-			"supports_rate_limit_response": details.accountName ? true : false,
+			"supports_rate_limit_response": !!details.accountName,
 			"machine_name": details.accountName ? (details.machineName || "") : "",
 			"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
 			"client_language": details.accountName ? "english" : "",
@@ -227,6 +227,15 @@ SteamUser.prototype._getMachineID = function(localFile) {
 	}
 };
 
+SteamUser.prototype.relog = function() {
+	if (this.steamID.type == SteamID.Type.INDIVIDUAL && (!this._logOnDetails || !this._logOnDetails.should_remember_password || !this._logOnDetails.login_key)) {
+		throw new Error("To use relog(), you must specify rememberPassword=true when logging on and wait for loginKey to be emitted");
+	}
+
+	this._relogging = true;
+	this.logOff();
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(body) {
@@ -250,6 +259,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._connectionCount = 0;
 			this._gcTokens = [];
 			this._contentServerTokens = {};
+
+			if (this._logOnDetails.login_key) {
+				// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.
+				this._loginKeyTimer = setTimeout(() => {
+					this.emit('loginKey', this._logOnDetails.login_key);
+				}, 5000);
+			}
 
 			if (this.storage) {
 				this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
@@ -357,7 +373,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 	this._clearChangelistUpdateTimer();
 
-	if(fatal && !this._loggingOff) {
+	if (!this._relogging && fatal && !this._loggingOff) {
 		var e = new Error(msg);
 		e.eresult = result;
 
@@ -369,13 +385,13 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 		this.steamID = null;
 	} else {
 		// Only emit "disconnected" if we were previously logged on
-		if(this.steamID) {
+		if (this.steamID) {
 			this.emit('disconnected', result, msg);
 		}
 
 		this.disconnect(true);
 
-		if(!this._loggingOff) {
+		if (!this._loggingOff || this._relogging) {
 			var self = this;
 			setTimeout(function() {
 				self.logOn(true);
@@ -383,6 +399,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 		}
 
 		this._loggingOff = false;
+		this._relogging = false;
 	}
 };
 
@@ -390,6 +407,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body)
 	if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
 		this._logOnDetails.login_key = body.login_key;
+
+		if (this._loginKeyTimer) {
+			clearTimeout(this._loginKeyTimer);
+		}
 
 		if(this._logOnDetails.should_remember_password) {
 			this.emit('loginKey', body.login_key);
