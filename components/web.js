@@ -6,6 +6,7 @@ var URL = require('url');
 var HTTP = require('http');
 var HTTPS = require('https');
 var TLS = require('tls');
+var VDF = require('vdf');
 
 SteamUser.prototype.webLogOn = function() {
 	// Verify logged on
@@ -43,7 +44,7 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 	cipher.end(nonce);
 	var encryptedNonce = Buffer.concat([aesIv.read(), cipher.read()]);
 
-	var data = "steamid=" + this.steamID.toString() +
+	var data = "format=vdf&steamid=" + this.steamID.toString() +
 		"&sessionkey=" + sessionKey.encrypted.toString('hex').replace(/../g, '%$&') +
 		"&encrypted_loginkey=" + encryptedNonce.toString('hex').replace(/../g, '%$&');
 
@@ -53,7 +54,11 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 		"method": "POST",
 		"headers": {
 			"Content-Type": "application/x-www-form-urlencoded",
-			"Content-Length": data.length
+			"Content-Length": data.length,
+			"Accept": "text/html,*/*;q=0.9",
+			"Accept-Encoding": "gzip,identity,*;q=0",
+			"Accept-Charset": "ISO-8859-1,utf-8,*;q=0.7",
+			"User-Agent": "Valve/Steam HTTP Client 1.0"
 		}
 	};
 
@@ -67,15 +72,34 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	var self = this;
 	var req = HTTPS.request(options, function(res) {
+		var failed = false;
+
 		if (res.statusCode != 200) {
+			failed = true;
 			self.emit('debug', 'Error in AuthenticateUser: ' + res.statusCode);
 			fail();
-			return;
 		}
 
-		res.on('data', function(data) {
+		var responseData = "";
+
+		var stream = res;
+		if (res.headers['content-encoding'] == 'gzip') {
+			stream = require('zlib').createGunzip();
+			res.pipe(stream);
+		}
+
+		stream.on('data', function(data) {
+			responseData += data;
+		});
+
+		stream.on('end', function() {
+			if (failed) {
+				self.emit('debugAuthenticateUser', responseData);
+				return;
+			}
+
 			try {
-				var response = JSON.parse(data);
+				var response = VDF.parse(responseData);
 			} catch (ex) {
 				fail();
 				return;
