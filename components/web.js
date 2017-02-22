@@ -102,7 +102,7 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	function fail() {
 		if (self._webauthTimeout) {
-			self._webauthTimeout = Math.min(self._webauthTimeout * 2, 30000);
+			self._webauthTimeout = Math.min(self._webauthTimeout * 2, 60000);
 		} else {
 			self._webauthTimeout = 1000;
 		}
