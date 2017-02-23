@@ -50,7 +50,7 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	var options = {
 		"hostname": "api.steampowered.com",
-		"path": "/ISteamUserAuth/AuthenticateUser/v1/",
+		"path": "/ISteamUserAuth/AuthenticateUser/v0001/",
 		"method": "POST",
 		"headers": {
 			"Content-Type": "application/x-www-form-urlencoded",
