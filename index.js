@@ -163,6 +163,7 @@ SteamUser.prototype.setOptions = function(options) {
 };
 
 require('./components/messages.js');
+require('./components/webapi.js');
 require('./components/logon.js');
 require('./components/sentry.js');
 require('./components/web.js');
