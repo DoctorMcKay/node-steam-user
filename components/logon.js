@@ -113,43 +113,66 @@ SteamUser.prototype.logOn = function(details) {
 			}
 		});
 
-		// Sentry file
-		if(!self._logOnDetails.sha_sentryfile) {
-			if(sentry && sentry.length > 20) {
-				// Hash the sentry
-				var hash = Crypto.createHash('sha1');
-				hash.update(sentry);
-				sentry = hash.digest();
+		if (Steam['__SteamUserServersSet__']) {
+			gotCMList();
+		} else {
+			// Get the CM list from the API
+			self.emit('debug', "Getting CM list from WebAPI");
+			self._apiRequest("GET", "ISteamDirectory", "GetCMList", 1, {"cellid": self._logOnDetails.cell_id || 0}, function(err, res) {
+				if (err || !res.response || res.response.result != 1 || !res.response.serverlist) {
+					gotCMList(); // just fallback to the built-in list
+				} else {
+					res.response.serverlist.length = Object.keys(res.response.serverlist).length;
+					Steam.servers = Array.prototype.slice.call(res.response.serverlist).map(function(server) {
+						var parts = server.split(':');
+						return {"host": parts[0], "port": parts[1]};
+					});
+
+					Steam['__SteamUserServersSet__'] = true;
+					gotCMList();
+				}
+			});
+		}
+
+		function gotCMList() {
+			// Sentry file
+			if (!self._logOnDetails.sha_sentryfile) {
+				if (sentry && sentry.length > 20) {
+					// Hash the sentry
+					var hash = Crypto.createHash('sha1');
+					hash.update(sentry);
+					sentry = hash.digest();
+				}
+
+				self._logOnDetails.sha_sentryfile = sentry;
+				self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
 			}
 
-			self._logOnDetails.sha_sentryfile = sentry;
-			self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
-		}
+			if (self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
+				throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
+			}
 
-		if(self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
-			throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
-		}
+			// Machine ID
+			if (!anonLogin && !self._logOnDetails.machine_id) {
+				self._logOnDetails.machine_id = self._getMachineID(machineID);
+			}
 
-		// Machine ID
-		if(!anonLogin && !self._logOnDetails.machine_id) {
-			self._logOnDetails.machine_id = self._getMachineID(machineID);
-		}
+			// Do the login
+			var sid = new SteamID();
+			sid.universe = SteamID.Universe.PUBLIC;
+			sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
+			sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
+			sid.accountid = 0;
+			self.client.steamID = sid.getSteamID64();
 
-		// Do the login
-		var sid = new SteamID();
-		sid.universe = SteamID.Universe.PUBLIC;
-		sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
-		sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
-		sid.accountid = 0;
-		self.client.steamID = sid.getSteamID64();
+			if (self.client.connected) {
+				onConnected.call(self);
+			} else {
+				self.client.connect();
 
-		if(self.client.connected) {
-			onConnected.call(self);
-		} else {
-			self.client.connect();
-
-			self._onConnected = onConnected.bind(self);
-			self.client.once('connected', self._onConnected);
+				self._onConnected = onConnected.bind(self);
+				self.client.once('connected', self._onConnected);
+			}
 		}
 	}
 };
