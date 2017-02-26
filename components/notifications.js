@@ -20,7 +20,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = funct
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
 	var self = this;
 	(body.notifications || []).forEach(function(notification) {
-		if(notification.user_notification_type == 1) {
+		if (notification.user_notification_type == 1) {
 			self.emit('tradeOffers', notification.count);
 		}
 	});

@@ -4,17 +4,17 @@ var SteamTotp = require('steam-totp');
 SteamUser.formatCurrency = function(amount, currency) {
 	amount = amount.toFixed(2);
 
-	if(!SteamUser.CurrencyData[currency]) {
+	if (!SteamUser.CurrencyData[currency]) {
 		return amount;
 	}
 
 	var data = SteamUser.CurrencyData[currency];
 
-	if(data.whole) {
+	if (data.whole) {
 		amount = amount.replace('.00', '');
 	}
 
-	if(data.commas) {
+	if (data.commas) {
 		amount = amount.replace('.', ',');
 	}
 

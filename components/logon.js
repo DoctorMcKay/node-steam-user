@@ -7,7 +7,7 @@ var Crypto = require('crypto');
 var ByteBuffer = require('bytebuffer');
 
 SteamUser.prototype.logOn = function(details) {
-	if(this.client.loggedOn) {
+	if (this.client.loggedOn) {
 		throw new Error("Already logged on, cannot log on again");
 	}
 
@@ -25,7 +25,7 @@ SteamUser.prototype.logOn = function(details) {
 	this.myFriends = {};
 	this.myGroups = {};
 
-	if(details !== true) {
+	if (details !== true) {
 		// We're not logging on with saved details
 		details = details || {};
 
@@ -53,11 +53,11 @@ SteamUser.prototype.logOn = function(details) {
 	// Read the required files
 	var filenames = [];
 
-	if(!Steam['__SteamUserServersSet__']) {
+	if (!Steam['__SteamUserServersSet__']) {
 		filenames.push('servers.json');
 	}
 
-	if(!this._logOnDetails.cell_id) {
+	if (!this._logOnDetails.cell_id) {
 		// Some people might be redirecting their storage to a database and running across multiple servers in multiple regions
 		// Let's account for this by saving cellid by a "machine ID" so different boxes will store different cellids
 		filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
@@ -66,12 +66,12 @@ SteamUser.prototype.logOn = function(details) {
 	var sentry = this._sentry;
 	var machineID;
 
-	if(!anonLogin) {
-		if(!this._logOnDetails.sha_sentryfile && !sentry) {
+	if (!anonLogin) {
+		if (!this._logOnDetails.sha_sentryfile && !sentry) {
 			filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
 		}
 
-		if(!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+		if (!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
 			filenames.push('machineid.bin');
 		}
 	}
@@ -88,27 +88,27 @@ SteamUser.prototype.logOn = function(details) {
 		files = files || [];
 
 		files.forEach(function(file) {
-			if(file.filename == 'servers.json' && file.contents) {
+			if (file.filename == 'servers.json' && file.contents) {
 				try {
 					Steam.servers = JSON.parse(file.contents.toString('utf8'));
 					Steam['__SteamUserServersSet__'] = true;
-				} catch(e) {
+				} catch (e) {
 					// don't care
 				}
 			}
 
-			if(file.filename.match(/^cellid/) && file.contents) {
+			if (file.filename.match(/^cellid/) && file.contents) {
 				var cellID = parseInt(file.contents.toString('utf8'), 10);
-				if(!isNaN(cellID)) {
+				if (!isNaN(cellID)) {
 					self._logOnDetails.cell_id = cellID;
 				}
 			}
 
-			if(file.filename.match(/^sentry/) && file.contents) {
+			if (file.filename.match(/^sentry/) && file.contents) {
 				sentry = file.contents;
 			}
 
-			if(file.filename == 'machineid.bin' && file.contents) {
+			if (file.filename == 'machineid.bin' && file.contents) {
 				machineID = file.contents;
 			}
 		});
@@ -178,7 +178,7 @@ SteamUser.prototype.logOn = function(details) {
 };
 
 function onConnected() {
-	if(this.client.constructor.name === 'CMClient') {
+	if (this.client.constructor.name === 'CMClient') {
 		// We need to use this since CMClient defines the protocol version itself
 		this.client.logOn(this._logOnDetails);
 	} else {
@@ -193,7 +193,7 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 
 	this._clearChangelistUpdateTimer();
 
-	if(this.client.connected && !suppressLogoff) {
+	if (this.client.connected && !suppressLogoff) {
 		this._loggingOff = true;
 		this._send(SteamUser.EMsg.ClientLogOff, {});
 
@@ -213,14 +213,14 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 };
 
 SteamUser.prototype._getMachineID = function(localFile) {
-	if(!this._logOnDetails.account_name || this.options.machineIdType == SteamUser.EMachineIDType.None) {
+	if (!this._logOnDetails.account_name || this.options.machineIdType == SteamUser.EMachineIDType.None) {
 		// No machine IDs for anonymous logons
 		return null;
 	}
 
 	// The user wants to use a random machine ID that's saved to dataDirectory
-	if(this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
-		if(localFile) {
+	if (this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+		if (localFile) {
 			return localFile;
 		}
 
@@ -234,7 +234,7 @@ SteamUser.prototype._getMachineID = function(localFile) {
 	}
 
 	// The user wants to use a machine ID that's generated off the account name
-	if(this.options.machineIdType == SteamUser.EMachineIDType.AccountNameGenerated) {
+	if (this.options.machineIdType == SteamUser.EMachineIDType.AccountNameGenerated) {
 		return createMachineID(
 			this.options.machineIdFormat[0].replace(/\{account_name\}/g, this._logOnDetails.account_name),
 			this.options.machineIdFormat[1].replace(/\{account_name\}/g, this._logOnDetails.account_name),
@@ -263,7 +263,7 @@ SteamUser.prototype.relog = function() {
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(body) {
 	var self = this;
-	switch(body.eresult) {
+	switch (body.eresult) {
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
 
@@ -311,13 +311,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 			this._getChangelistUpdate();
 
-			if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
+			if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 				this._requestNotifications();
 
-				if(body.webapi_authenticate_user_nonce) {
+				if (body.webapi_authenticate_user_nonce) {
 					this._webAuthenticate(body.webapi_authenticate_user_nonce);
 				}
-			} else if(this.steamID.type == SteamID.Type.ANON_USER) {
+			} else if (this.steamID.type == SteamID.Type.ANON_USER) {
 				this._getLicenseInfo();
 			}
 
@@ -369,8 +369,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientLoggedOff] = function(body) {
 	var msg = body.eresult;
-	for(var i in SteamUser.EResult) {
-		if(SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
+	for (var i in SteamUser.EResult) {
+		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
 			msg = i;
 			break;
 		}
@@ -383,7 +383,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLoggedOff] = function(body) {
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
 
-	if(this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.NoConnection, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
+	if (this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.NoConnection, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
 	}
 
@@ -427,7 +427,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body) {
-	if(this.steamID.type == SteamID.Type.INDIVIDUAL) {
+	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
 		this._logOnDetails.login_key = body.login_key;
 
@@ -435,7 +435,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body)
 			clearTimeout(this._loginKeyTimer);
 		}
 
-		if(this._logOnDetails.should_remember_password) {
+		if (this._logOnDetails.should_remember_password) {
 			this.emit('loginKey', body.login_key);
 		}
 
@@ -445,7 +445,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body)
 };
 
 SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback) {
-	if(this.options.promptSteamGuardCode) {
+	if (this.options.promptSteamGuardCode) {
 		var rl = require('readline').createInterface({
 			"input": process.stdin,
 			"output": process.stdout

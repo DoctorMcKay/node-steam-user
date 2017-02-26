@@ -27,14 +27,14 @@ client.on('loggedOn', function(details) {
 		client.getProductAccessToken(apps, packages, function(appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) {
 			console.log("Tokens denied for " + appDeniedTokens.length + " apps and " + packageDeniedTokens.length + " packages");
 
-			for(var appid in appTokens) {
-				if(appTokens[appid].toString() != '0') {
+			for (var appid in appTokens) {
+				if (appTokens[appid].toString() != '0') {
 					console.log("App " + appid + ": " + appTokens[appid].toString());
 				}
 			}
 
-			for(var packageid in packageTokens) {
-				if(packageTokens[packageid].toString() != '0') {
+			for (var packageid in packageTokens) {
+				if (packageTokens[packageid].toString() != '0') {
 					console.log("Package " + packageid + ": " + packageTokens[packageid].toString());
 				}
 			}

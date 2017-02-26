@@ -124,7 +124,7 @@ protobufs['Player.GetGameBadgeLevels#1_Response'] = Schema.CPlayer_GetGameBadgeL
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
 SteamUser.prototype._send = function(emsg, body, callback) {
-	if((!this.steamID || !this.client.connected) && [SteamUser.EMsg.ChannelEncryptRequest, SteamUser.EMsg.ChannelEncryptResponse, SteamUser.EMsg.ChannelEncryptResult, SteamUser.EMsg.ClientLogon].indexOf(emsg) == -1) {
+	if ((!this.steamID || !this.client.connected) && [SteamUser.EMsg.ChannelEncryptRequest, SteamUser.EMsg.ChannelEncryptResponse, SteamUser.EMsg.ChannelEncryptResult, SteamUser.EMsg.ClientLogon].indexOf(emsg) == -1) {
 		// We're disconnected, drop it
 		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
 		return;
@@ -135,17 +135,17 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 	};
 
 	var Proto = protobufs[emsg];
-	if(Proto) {
+	if (Proto) {
 		header.proto = {};
 		body = new Proto(body).toBuffer();
-	} else if(ByteBuffer.isByteBuffer(body)) {
+	} else if (ByteBuffer.isByteBuffer(body)) {
 		body = body.toBuffer();
 	}
 
 	var cb = null;
-	if(callback) {
+	if (callback) {
 		cb = function(header, body) {
-			if(protobufs[header.msg]) {
+			if (protobufs[header.msg]) {
 				body = protobufs[header.msg].decode(body);
 			} else {
 				body = ByteBuffer.wrap(body);
@@ -155,9 +155,9 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 		};
 	}
 
-	if(this.options.debug) {
-		for(var i in SteamUser.EMsg) {
-			if(SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == emsg) {
+	if (this.options.debug) {
+		for (var i in SteamUser.EMsg) {
+			if (SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == emsg) {
 				emsg = i;
 				break;
 			}
@@ -171,24 +171,24 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 SteamUser.prototype._handleMessage = function(header, body, callback) {
 	var msgName = header.msg;
 
-	if(this.options.debug) {
-		for(var i in SteamUser.EMsg) {
-			if(SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == header.msg) {
+	if (this.options.debug) {
+		for (var i in SteamUser.EMsg) {
+			if (SteamUser.EMsg.hasOwnProperty(i) && SteamUser.EMsg[i] == header.msg) {
 				msgName = i;
 				break;
 			}
 		}
 	}
 
-	if(!this._handlers[header.msg]) {
-		if(header.msg != SteamUser.EMsg.Multi) {
+	if (!this._handlers[header.msg]) {
+		if (header.msg != SteamUser.EMsg.Multi) {
 			this.emit('debug', 'Unhandled message: ' + msgName);
 		}
 
 		return;
 	}
 
-	if(protobufs[header.msg]) {
+	if (protobufs[header.msg]) {
 		body = protobufs[header.msg].decode(body);
 	} else {
 		body = ByteBuffer.wrap(body);
@@ -197,11 +197,11 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 	this.emit('debug', 'Handled message: ' + msgName);
 
 	var cb = null;
-	if(callback) {
+	if (callback) {
 		cb = function(emsg, body) {
 			var header = {"msg": emsg};
 
-			if(protobufs[emsg]) {
+			if (protobufs[emsg]) {
 				header.proto = {};
 				body = new protobufs[emsg](body).toBuffer();
 			}
@@ -219,7 +219,7 @@ SteamUser.prototype._handlers = {};
 
 SteamUser.prototype._sendUnified = function(methodName, methodData, notification, callback) {
 	var cb;
-	if(callback && protobufs[methodName + '_Response']) {
+	if (callback && protobufs[methodName + '_Response']) {
 		cb = function(body) {
 			var Proto = protobufs[methodName + '_Response'];
 			callback(Proto.decode(body.serialized_method_response));

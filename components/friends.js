@@ -48,7 +48,7 @@ SteamUser.prototype.addFriend = function(steamID, callback) {
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to remove, or a string which can parse into one.
  */
 SteamUser.prototype.removeFriend = function(steamID) {
-	if(typeof steamID === 'string') {
+	if (typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
 
@@ -61,7 +61,7 @@ SteamUser.prototype.removeFriend = function(steamID) {
  * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
  */
 SteamUser.prototype.blockUser = function(steamID, callback) {
-	if(typeof steamID === 'string') {
+	if (typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
 
@@ -71,7 +71,7 @@ SteamUser.prototype.blockUser = function(steamID, callback) {
 	buffer.writeUint8(1);
 
 	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
-		if(!callback) {
+		if (!callback) {
 			return; // ignore
 		}
 
@@ -86,7 +86,7 @@ SteamUser.prototype.blockUser = function(steamID, callback) {
  * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
  */
 SteamUser.prototype.unblockUser = function(steamID, callback) {
-	if(typeof steamID === 'string') {
+	if (typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
 
@@ -96,7 +96,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 	buffer.writeUint8(0);
 
 	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
-		if(!callback) {
+		if (!callback) {
 			return; // ignore
 		}
 
@@ -112,12 +112,12 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
  */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	var Flags = SteamUser.EClientPersonaStateFlag;
-	var flags = Flags.Status|Flags.PlayerName|Flags.QueryPort|Flags.SourceID|Flags.Presence|
-		Flags.Metadata|Flags.LastSeen|Flags.ClanInfo|Flags.GameExtraInfo|Flags.GameDataBlob|
-		Flags.ClanTag|Flags.Facebook;
+	var flags = Flags.Status | Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
+		Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
+		Flags.ClanTag | Flags.Facebook;
 
 	var ids = steamids.map(function(id) {
-		if(typeof id === 'string') {
+		if (typeof id === 'string') {
 			return (new SteamID(id)).getSteamID64();
 		}
 
@@ -129,7 +129,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 		"persona_state_requested": flags
 	});
 
-	if(callback) {
+	if (callback) {
 		var output = {};
 
 		var self = this;
@@ -142,11 +142,11 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 			output[sid64] = user;
 
 			var index = ids.indexOf(sid64);
-			if(index != -1) {
+			if (index != -1) {
 				ids.splice(index, 1);
 			}
 
-			if(ids.length === 0) {
+			if (ids.length === 0) {
 				callback(output);
 			}
 		}
@@ -160,7 +160,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
  */
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 	var accountids = steamids.map(function(steamID) {
-		if(typeof steamID === 'string') {
+		if (typeof steamID === 'string') {
 			return (new SteamID(steamID)).accountid;
 		} else {
 			return steamID.accountid;
@@ -243,7 +243,9 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 		userSteamIDs = [userSteamIDs];
 	}
 
-	userSteamIDs = userSteamIDs.map(Helpers.steamID).map(function(id) { return {"steamid": id.getSteamID64()}; });
+	userSteamIDs = userSteamIDs.map(Helpers.steamID).map(function(id) {
+		return {"steamid": id.getSteamID64()};
+	});
 
 	this._send(SteamUser.EMsg.ClientAMGetPersonaNameHistory, {
 		"id_count": userSteamIDs.length,
@@ -270,7 +272,10 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 	steamID = Helpers.steamID(steamID);
 	var self = this;
-	this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {"steamid": steamID.toString(), "nickname": nickname}, function(body) {
+	this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {
+		"steamid": steamID.toString(),
+		"nickname": nickname
+	}, function(body) {
 		if (body.eresult != SteamUser.EResult.OK) {
 			if (callback) {
 				callback(Helpers.eresultError(body.eresult));
@@ -302,13 +307,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body
 		delete user.friendid;
 
 		var i;
-		if(!self.users[sid64]) {
+		if (!self.users[sid64]) {
 			self.users[sid64] = user;
 			processUser(self.users[sid64]);
 		} else {
 			// Replace unknown data in the received object with already-known data
-			for(i in self.users[sid64]) {
-				if(self.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
+			for (i in self.users[sid64]) {
+				if (self.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
 					user[i] = self.users[sid64][i];
 				}
 			}
@@ -327,12 +332,12 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body
 
 		self._emitIdEvent('user', sid, user);
 
-		if(user.gameid) {
+		if (user.gameid) {
 			self._addAppToCache(user.gameid);
 		}
 
-		for(i in user) {
-			if(user.hasOwnProperty(i) && user[i] !== null) {
+		for (i in user) {
+			if (user.hasOwnProperty(i) && user[i] !== null) {
 				self.users[sid][i] = user[i];
 			}
 		}
@@ -345,12 +350,12 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 	delete body.steamid_clan;
 
 	var i;
-	if(!this.groups[sid64]) {
+	if (!this.groups[sid64]) {
 		this.groups[sid64] = body;
 	} else {
 		// Replace unknown data in the received object with already-known data
-		for(i in this.groups[sid64]) {
-			if(this.groups[sid64].hasOwnProperty(i) && body.hasOwnProperty(i) && body[i] === null) {
+		for (i in this.groups[sid64]) {
+			if (this.groups[sid64].hasOwnProperty(i) && body.hasOwnProperty(i) && body[i] === null) {
 				body[i] = this.groups[sid64][i];
 			}
 		}
@@ -367,15 +372,15 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 
 	this._emitIdEvent('group', sid, body);
 
-	for(i in body) {
-		if(body.hasOwnProperty(i) && body[i] !== null) {
+	for (i in body) {
+		if (body.hasOwnProperty(i) && body[i] !== null) {
 			this.groups[sid64][i] = body[i];
 		}
 	}
 
 	var self = this;
 	(body.events || []).forEach(function(event) {
-		if(!event.just_posted) {
+		if (!event.just_posted) {
 			return;
 		}
 
@@ -395,7 +400,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 	});
 
 	(body.announcements || []).forEach(function(announcement) {
-		if(!announcement.just_posted) {
+		if (!announcement.just_posted) {
 			return;
 		}
 
@@ -419,7 +424,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 		var sid = new SteamID(relationship.ulfriendid.toString());
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
-		if(body.bincremental) {
+		if (body.bincremental) {
 			/**
 			 * Emitted when a relationship with a Steam group changes. The relationship in myGroups is updated after this is emitted.
 			 *
@@ -440,14 +445,14 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 			self._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
 
-		if(relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
+		if (relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
 			delete self[key][sid.getSteamID64()];
 		} else {
 			self[key][sid.getSteamID64()] = relationship.efriendrelationship;
 		}
 	});
 
-	if(!body.bincremental) {
+	if (!body.bincremental) {
 		/**
 		 * Emitted when our entire friends list is loaded.
 		 *
@@ -468,7 +473,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function(body) {
 	var groupList = {};
 
-	body.friendGroups.forEach(function (group) {
+	body.friendGroups.forEach(function(group) {
 		groupList[group.nGroupID] = {
 			"name": group.strGroupName,
 			"members": []

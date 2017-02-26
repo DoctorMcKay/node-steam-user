@@ -6,7 +6,7 @@ SteamUser.prototype.setSentry = function(sentry) {
 };
 
 SteamUser.prototype._getSentryFilename = function() {
-	if(this.options.singleSentryfile) {
+	if (this.options.singleSentryfile) {
 		return 'sentry.bin';
 	} else {
 		return 'sentry.' + this._logOnDetails.account_name + '.bin';

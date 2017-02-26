@@ -122,7 +122,10 @@ SteamUser.prototype.getCDNAuthToken = function(depotID, hostname, callback) {
 			return;
 		}
 
-		self._contentServerTokens[depotID + '_' + hostname] = {"token": body.token, "expires": new Date(body.expiration_time * 1000)};
+		self._contentServerTokens[depotID + '_' + hostname] = {
+			"token": body.token,
+			"expires": new Date(body.expiration_time * 1000)
+		};
 		callback(null, body.token, new Date(body.expiration_time * 1000));
 	});
 };

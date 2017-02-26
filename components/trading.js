@@ -2,7 +2,7 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
 SteamUser.prototype.trade = function(steamID) {
-	if(typeof steamID === 'string') {
+	if (typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
 
@@ -10,7 +10,7 @@ SteamUser.prototype.trade = function(steamID) {
 };
 
 SteamUser.prototype.cancelTradeRequest = function(steamID) {
-	if(typeof steamID === 'string') {
+	if (typeof steamID === 'string') {
 		steamID = new SteamID(steamID);
 	}
 

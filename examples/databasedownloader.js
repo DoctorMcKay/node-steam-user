@@ -17,7 +17,7 @@ client.on('loggedOn', function(details) {
 	client.getProductInfo([440, 730], [], function(apps, packages, unknownApps, unknownPackages) {
 		console.log("Got app info, writing to files");
 
-		for(var appid in apps) {
+		for (var appid in apps) {
 			fs.writeFileSync(appid + '.json', JSON.stringify(apps[appid].appinfo, null, "\t"));
 		}
 

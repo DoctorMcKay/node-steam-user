@@ -22,8 +22,8 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 		body.secret_1 = body.secret_1 ? body.secret_1.toBuffer().toString('base64') : null;
 
 		// Delete all the null keys
-		for(var i in body) {
-			if(body.hasOwnProperty(i) && body[i] === null) {
+		for (var i in body) {
+			if (body.hasOwnProperty(i) && body[i] === null) {
 				delete body[i];
 			}
 		}
@@ -62,15 +62,15 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 			"authenticator_time": Math.floor(Date.now() / 1000),
 			"activation_code": activationCode
 		}, false, function(body) {
-			if(body.server_time) {
+			if (body.server_time) {
 				diff = body.server_time.toNumber() - Math.floor(Date.now() / 1000);
 			}
 
-			if(body.status == 89) {
+			if (body.status == 89) {
 				callback(new Error("Invalid activation code"));
-			} else if(!body.success) {
+			} else if (!body.success) {
 				callback(new Error("Error " + body.status));
-			} else if(body.want_more) {
+			} else if (body.want_more) {
 				attemptsLeft--;
 				diff += 30;
 

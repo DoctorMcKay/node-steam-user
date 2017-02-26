@@ -16,12 +16,12 @@ require('./resources/enums.js');
 
 try {
 	SteamUser.Steam.servers = require('./resources/servers.json');
-} catch(e) {
+} catch (e) {
 	// It's okay if it isn't there
 }
 
 function SteamUser(client, options) {
-	if(client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
+	if (client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
 		options = client;
 		client = null;
 	}
@@ -82,12 +82,12 @@ function SteamUser(client, options) {
 		"debug": false
 	};
 
-	for(var i in defaultOptions) {
-		if(!defaultOptions.hasOwnProperty(i)) {
+	for (var i in defaultOptions) {
+		if (!defaultOptions.hasOwnProperty(i)) {
 			continue;
 		}
 
-		if(typeof this.options[i] === 'undefined') {
+		if (typeof this.options[i] === 'undefined') {
 			this.options[i] = defaultOptions[i];
 		}
 	}
@@ -96,7 +96,10 @@ function SteamUser(client, options) {
 		if (process.env.OPENSHIFT_DATA_DIR) {
 			this.options.dataDirectory = process.env.OPENSHIFT_DATA_DIR + "/node-steamuser";
 		} else {
-			this.options.dataDirectory = (new AppDirectory({"appName": "node-steamuser", "appAuthor": "doctormckay"})).userData();
+			this.options.dataDirectory = (new AppDirectory({
+				"appName": "node-steamuser",
+				"appAuthor": "doctormckay"
+			})).userData();
 		}
 	}
 
@@ -131,7 +134,7 @@ SteamUser.prototype.setOption = function(option, value) {
 	this.options[option] = value;
 
 	// Handle anything that needs to happen when particular options update
-	switch(option) {
+	switch (option) {
 		case 'dataDirectory':
 			if (!this.storage) {
 				this.storage = new FileStorage(value);
@@ -153,8 +156,8 @@ SteamUser.prototype.setOption = function(option, value) {
 };
 
 SteamUser.prototype.setOptions = function(options) {
-	for(var i in options) {
-		if(!options.hasOwnProperty(i)) {
+	for (var i in options) {
+		if (!options.hasOwnProperty(i)) {
 			continue;
 		}
 

@@ -43,32 +43,32 @@ client.on('wallet', function(hasWallet, currency, balance) {
 client.on('accountLimitations', function(limited, communityBanned, locked, canInviteFriends) {
 	var limitations = [];
 
-	if(limited) {
+	if (limited) {
 		limitations.push('LIMITED');
 	}
 
-	if(communityBanned) {
+	if (communityBanned) {
 		limitations.push('COMMUNITY BANNED');
 	}
 
-	if(locked) {
+	if (locked) {
 		limitations.push('LOCKED');
 	}
 
-	if(limitations.length === 0) {
+	if (limitations.length === 0) {
 		console.log("Our account has no limitations.");
 	} else {
 		console.log("Our account is " + limitations.join(', ') + ".");
 	}
 
-	if(canInviteFriends) {
+	if (canInviteFriends) {
 		console.log("Our account can invite friends.");
 	}
 });
 
 client.on('vacBans', function(numBans, appids) {
 	console.log("We have " + numBans + " VAC ban" + (numBans == 1 ? '' : 's') + ".");
-	if(appids.length > 0) {
+	if (appids.length > 0) {
 		console.log("We are VAC banned from apps: " + appids.join(', '));
 	}
 });

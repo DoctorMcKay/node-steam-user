@@ -2,11 +2,11 @@ var SteamUser = require('../index.js');
 var SteamID = require('steamid');
 
 SteamUser.prototype.serverQuery = function(conditions, callback) {
-	if(typeof conditions === 'string') {
+	if (typeof conditions === 'string') {
 		conditions = {"filter_text": conditions};
 	}
 
-	if(conditions.geo_location_ip) {
+	if (conditions.geo_location_ip) {
 		var parts = conditions.geo_location_ip.split('.');
 		var buf = new Buffer(4);
 
@@ -18,7 +18,7 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 	}
 
 	this._send(SteamUser.EMsg.ClientGMSServerQuery, conditions, function(body) {
-		if(body.error) {
+		if (body.error) {
 			callback(new Error(body.error));
 			return;
 		}
@@ -64,7 +64,7 @@ SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
 
 SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
 	steamids = steamids.map(function(id) {
-		if(typeof id === 'object') {
+		if (typeof id === 'object') {
 			return id.toString();
 		}
 

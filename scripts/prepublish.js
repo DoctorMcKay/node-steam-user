@@ -8,7 +8,7 @@ download("https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?format=json
 		throw new Error("Cannot get CM list");
 	}
 
-	var servers = json.response.serverlist.map(function (server) {
+	var servers = json.response.serverlist.map(function(server) {
 		var parts = server.split(':');
 		return {
 			"host": parts[0],

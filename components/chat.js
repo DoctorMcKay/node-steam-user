@@ -15,7 +15,7 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 
 	type = type || SteamUser.EChatEntryType.ChatMsg;
 
-	if([SteamID.Type.CLAN, SteamID.Type.CHAT].indexOf(recipient.type) != -1) {
+	if ([SteamID.Type.CLAN, SteamID.Type.CHAT].indexOf(recipient.type) != -1) {
 		// It's a chat message
 		var msg = new ByteBuffer(8 + 8 + 4 + Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint64(this.steamID.getSteamID64()); // steamIdChatter
@@ -67,7 +67,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 	 * @param {string} messages[].message - The message that was sent
 	 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
 	 */
-	if(callback) {
+	if (callback) {
 		this.once('chatHistory#' + sid64, function(steamID, success, messages) {
 			callback(success, messages);
 		});
@@ -85,7 +85,7 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
 	msg.writeUint8(0); // isVoiceSpeaker
 	this._send(SteamUser.EMsg.ClientJoinChat, msg.flip());
 
-	if(callback) {
+	if (callback) {
 		this.once('chatEnter#' + Helpers.steamID(steamID).getSteamID64(), function(chatID, result) {
 			callback(result);
 		});
@@ -246,7 +246,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 	 * @param {EResult} eresult - The result of the creation request
 	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 	 */
-	if(callback) {
+	if (callback) {
 		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
 			callback(result, chatID);
 		});
@@ -276,7 +276,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendMsgIncoming] = function
 	 * @param {SteamID} steamID - The SteamID of the typing user
 	 */
 
-	switch(body.chat_entry_type) {
+	switch (body.chat_entry_type) {
 		case SteamUser.EChatEntryType.ChatMsg:
 			this._emitIdEvent('friendMessage', senderID, message);
 			this._emitIdEvent('friendOrChatMessage', senderID, message, senderID);
@@ -313,7 +313,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendMsgEchoToSender] = func
 	 * @param {SteamID} recipientID - The SteamID of the notification recipient
 	 */
 
-	switch(body.chat_entry_type) {
+	switch (body.chat_entry_type) {
 		case SteamUser.EChatEntryType.ChatMsg:
 			this._emitIdEvent('friendMessageEcho', recipientID, message);
 			break;
@@ -330,7 +330,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMsg] = function(body) {
 	var entryType = body.readUint32();
 	var message = body.readCString();
 
-	if(entryType != SteamUser.EChatEntryType.ChatMsg) {
+	if (entryType != SteamUser.EChatEntryType.ChatMsg) {
 		// Not sure what kind of chat entry types are possible for chat rooms...
 		return;
 	}
@@ -417,7 +417,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCreateChatResponse] = functio
 	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 	 */
 
-	if(eresult != SteamUser.EResult.OK) {
+	if (eresult != SteamUser.EResult.OK) {
 		this._emitIdEvent('chatCreated', friendID, eresult);
 	} else {
 		var self = this;
@@ -434,7 +434,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatEnter] = function(body) {
 	var response = body.readUint32();
 	var numMembers = body.readUint32();
 
-	if(response == SteamUser.EChatRoomEnterResponse.Success) {
+	if (response == SteamUser.EChatRoomEnterResponse.Success) {
 		var chatName = body.readCString();
 
 		var sid64 = chatID.getSteamID64();
@@ -447,7 +447,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatEnter] = function(body) {
 
 		var member;
 
-		for(var i = 0; i < numMembers; i++) {
+		for (var i = 0; i < numMembers; i++) {
 			member = BinaryKVParser.parse(body).MessageObject;
 			this.chats[sid64].members[member.steamid.toString()] = {
 				"rank": member.Details,
@@ -476,7 +476,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMemberInfo] = function(bo
 	var action = null;
 	var actor = null;
 
-	if(infoType == SteamUser.EChatInfoType.StateChange) {
+	if (infoType == SteamUser.EChatInfoType.StateChange) {
 		// A user's state changed
 		target = new SteamID(body.readUint64().toString());
 		action = body.readUint32();
@@ -485,12 +485,12 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMemberInfo] = function(bo
 
 	var sid64 = chatID.getSteamID64();
 
-	if(!this.chats[sid64]) {
+	if (!this.chats[sid64]) {
 		// We're not in this chat
 		return;
 	}
 
-	if(infoType == SteamUser.EChatInfoType.InfoUpdate || (action !== null && action & SteamUser.EChatMemberStateChange.Entered)) {
+	if (infoType == SteamUser.EChatInfoType.InfoUpdate || (action !== null && action & SteamUser.EChatMemberStateChange.Entered)) {
 		// There's a user info here
 		var userInfo = BinaryKVParser.parse(body).MessageObject;
 		this.chats[sid64].members[userInfo.steamid.toString()] = {
@@ -499,44 +499,44 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMemberInfo] = function(bo
 		};
 	}
 
-	if(target !== null && action !== null) {
+	if (target !== null && action !== null) {
 		// Someone was affected, so emit the proper event
 		var target64 = target.getSteamID64();
 
-		if(action & SteamUser.EChatMemberStateChange.Entered) {
+		if (action & SteamUser.EChatMemberStateChange.Entered) {
 			this._emitIdEvent('chatUserJoined', chatID, target);
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.Left) {
+		if (action & SteamUser.EChatMemberStateChange.Left) {
 			this._emitIdEvent('chatUserLeft', chatID, target);
 			delete this.chats[sid64].members[target64];
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.Disconnected) {
+		if (action & SteamUser.EChatMemberStateChange.Disconnected) {
 			this._emitIdEvent('chatUserDisconnected', chatID, target);
 			delete this.chats[sid64].members[target64];
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.Kicked) {
+		if (action & SteamUser.EChatMemberStateChange.Kicked) {
 			this._emitIdEvent('chatUserKicked', chatID, target, actor);
 			delete this.chats[sid64].members[target64];
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.Banned) {
+		if (action & SteamUser.EChatMemberStateChange.Banned) {
 			this._emitIdEvent('chatUserBanned', chatID, target, actor);
 			delete this.chats[sid64].members[target64];
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.VoiceSpeaking) {
+		if (action & SteamUser.EChatMemberStateChange.VoiceSpeaking) {
 			this._emitIdEvent('chatUserSpeaking', chatID, target);
 		}
 
-		if(action & SteamUser.EChatMemberStateChange.VoiceDoneSpeaking) {
+		if (action & SteamUser.EChatMemberStateChange.VoiceDoneSpeaking) {
 			this._emitIdEvent('chatUserDoneSpeaking', chatID, target);
 		}
 	}
 
-	if(target !== null && target.getSteamID64() == this.steamID.getSteamID64() && action !== null && action < SteamUser.EChatMemberStateChange.VoiceSpeaking) {
+	if (target !== null && target.getSteamID64() == this.steamID.getSteamID64() && action !== null && action < SteamUser.EChatMemberStateChange.VoiceSpeaking) {
 		// We've left this room, delete it
 		this._emitIdEvent('chatLeft', chatID);
 		delete this.chats[sid64];
@@ -547,7 +547,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatRoomInfo] = function(body
 	var chatID = fromChatID(body.readUint64());
 	var infoType = body.readUint32();
 
-	if(infoType != SteamUser.EChatInfoType.InfoUpdate) {
+	if (infoType != SteamUser.EChatInfoType.InfoUpdate) {
 		return;
 	}
 
@@ -561,15 +561,15 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatRoomInfo] = function(body
 
 	decomposeChatFlags(this.chats[sid64], flags);
 
-	if(wasPrivate && !this.chats[sid64].private) {
+	if (wasPrivate && !this.chats[sid64].private) {
 		this._emitIdEvent('chatSetPublic', chatID, actor);
-	} else if(!wasPrivate && this.chats[sid64].private) {
+	} else if (!wasPrivate && this.chats[sid64].private) {
 		this._emitIdEvent('chatSetPrivate', chatID, actor);
 	}
 
-	if(wasOfficersOnly && !this.chats[sid64].officersOnlyChat) {
+	if (wasOfficersOnly && !this.chats[sid64].officersOnlyChat) {
 		this._emitIdEvent('chatUnsetOfficersOnly', chatID, actor);
-	} else if(!wasOfficersOnly && this.chats[sid64].officersOnlyChat) {
+	} else if (!wasOfficersOnly && this.chats[sid64].officersOnlyChat) {
 		this._emitIdEvent('chatSetOfficersOnly', chatID, actor);
 	}
 };
@@ -584,7 +584,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatRoomInfo] = function(body
 function toChatID(steamID) {
 	steamID = Helpers.steamID(steamID);
 
-	if(steamID.type == SteamID.Type.CLAN) {
+	if (steamID.type == SteamID.Type.CLAN) {
 		steamID.type = SteamID.Type.CHAT;
 		steamID.instance |= SteamID.ChatInstanceFlags.Clan;
 	}
@@ -600,7 +600,7 @@ function toChatID(steamID) {
 function fromChatID(steamID) {
 	steamID = Helpers.steamID(steamID);
 
-	if(steamID.isGroupChat()) {
+	if (steamID.isGroupChat()) {
 		steamID.type = SteamID.Type.CLAN;
 		steamID.instance &= ~SteamID.ChatInstanceFlags.Clan;
 	}

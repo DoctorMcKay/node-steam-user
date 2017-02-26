@@ -5,11 +5,11 @@ var ByteBuffer = require('bytebuffer');
 var BinaryKVParser = require('binarykvparser');
 
 SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
-	if(typeof callback === 'string' && typeof arguments[5] === 'function') {
+	if (typeof callback === 'string' && typeof arguments[5] === 'function') {
 		// Support people providing questions/answers from back when that was a thing
 		callback = arguments[5];
 	}
-	
+
 	this._send(SteamUser.EMsg.ClientCreateAccountProto, {
 		"account_name": accountName,
 		"password": password,
@@ -24,7 +24,7 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 	var body = new ByteBuffer(1, ByteBuffer.LITTLE_ENDIAN);
 	body.writeUint8(0);
 	this._send(SteamUser.EMsg.ClientRequestValidationMail, body, function(response) {
-		if(!callback) {
+		if (!callback) {
 			return;
 		}
 
@@ -37,16 +37,14 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 		var canTrade = true;
 		var hasHadTwoFactorForWeek = (body.is_twofactor_enabled && body.timestamp_twofactor_enabled && Math.floor(Date.now() / 1000) - body.timestamp_twofactor_enabled >= (60 * 60 * 24 * 7));
 
-		if(!body.is_steamguard_enabled) {
+		if (!body.is_steamguard_enabled) {
 			canTrade = false; // SG is not enabled
-		} else if(!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
+		} else if (!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
 			canTrade = false; // SG has not been enabled for 15 days
-		} else if(
+		} else if (
 			!hasHadTwoFactorForWeek &&
 			(
-				!body.session_data ||
-				!body.session_data[0] ||
-				!body.session_data[0].timestamp_machine_steamguard_enabled ||
+				!body.session_data || !body.session_data[0] || !body.session_data[0].timestamp_machine_steamguard_enabled ||
 				Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)
 			)
 		) {
@@ -161,7 +159,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body)
 		"facebookName": body.facebook_name
 	};
 
-	if(this.accountInfo) {
+	if (this.accountInfo) {
 		// Check if everything is identical
 		var anythingDifferent = false;
 		for (var i in this.accountInfo) {
@@ -171,7 +169,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body)
 			}
 		}
 
-		if(!anythingDifferent) {
+		if (!anythingDifferent) {
 			return;
 		}
 	}
@@ -202,28 +200,28 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientVACBanStatus] = function(body
 	var appids = [], ranges = [];
 
 	var numBans = body.readUint32();
-	
+
 	var rangeStart, rangeEnd, j;
-	for(var i = 0; i < numBans; i++) {
+	for (var i = 0; i < numBans; i++) {
 		rangeStart = body.readUint32();
 		rangeEnd = body.readUint32();
 		body.skip(4); // 4-byte unknown "0" value
-		
-		if(rangeEnd < rangeStart) {
+
+		if (rangeEnd < rangeStart) {
 			j = rangeEnd;
 			rangeEnd = rangeStart;
 			rangeStart = j;
 		}
 
 		ranges.push([rangeStart, rangeEnd]);
-		
-		for(j = rangeStart; j <= rangeEnd; j++) {
+
+		for (j = rangeStart; j <= rangeEnd; j++) {
 			appids.push(j);
 		}
 	}
-	
+
 	this.emit('vacBans', numBans, appids, ranges);
-	
+
 	this.vac = {
 		"numBans": numBans,
 		"appids": appids,
