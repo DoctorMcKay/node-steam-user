@@ -1024,6 +1024,29 @@ Creates a new multi-user chat room
 
 Redeems a game code (CD key) on your account.
 
+### requestFreeLicense(appIDs[, callback])
+- `appIDs` - An array of AppIDs for which you want licenses
+- `callback` - Optional. Called when request completes
+    - `err` - An `Error` object on failure, or `null` on success
+    - `grantedPackages` - An array of package IDs that were granted to your account as a result of this request
+    - `grantedAppIDs` - An array of AppIDs that were granted to your account as a result of this request
+
+**v3.18.0 or later is required to use this method**
+
+Requests a free-on-demand license to be granted to your account.
+
+Older free-to-play games are in the "Steam" package ([package ID 0](https://steamdb.info/sub/0/)). This package is
+automatically granted to all accounts (but not anonymous ones). Games in this package do not need a license to be
+explicitly requested.
+
+All newer free-to-play games have "free-on-demand packages". These are packages that are not automatically granted to
+all accounts, but will be granted upon request ("on demand"). This is so that the Steam client can show free-to-play
+games you have previously added to your library when not installed. In order to "play" any free-to-play app that isn't
+in sub 0, you need to request a license for it using this method.
+
+If successful, calling this method will result in the [`licenses`](#licenses-1) event being emitted containing your new
+license(s).
+
 ### getEncryptedAppTicket(appid[, userData], callback)
 - `appid` - The Steam AppID of the app for which you want a ticket
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.

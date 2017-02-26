@@ -3,6 +3,8 @@ var SteamID = require('steamid');
 var VDF = require('vdf');
 var BinaryKVParser = require('binarykvparser');
 
+var Helpers = require('./helpers.js');
+
 var PICSRequestType = {
 	"User": 0,
 	"Changelist": 1,
@@ -468,6 +470,25 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 		}
 
 		callback(body.eresult, body.purchase_result_details, packageList);
+	});
+};
+
+SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
+	if (!Array.isArray(appIDs)) {
+		appIDs = [appIDs];
+	}
+
+	this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, function(body) {
+		if (!callback) {
+			return;
+		}
+
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		callback(null, body.granted_packageids, body.granted_appids);
 	});
 };
 
