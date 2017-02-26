@@ -12,7 +12,11 @@ module.exports = {
 	"AutoGrant": 7,
 	"OEMTicket": 8,
 	"RecurringOption": 9,
-	"NumBillingTypes": 10,
+	"BillOnceOrCDKey": 10,
+	"Repurchaseable": 11,
+	"FreeOnDemand": 12,
+	"Rental": 13,
+	"NumBillingTypes": 14,
 
 	// Value-to-name mapping for convenience
 	"0": "NoCost",
@@ -25,5 +29,9 @@ module.exports = {
 	"7": "AutoGrant",
 	"8": "OEMTicket",
 	"9": "RecurringOption",
-	"10": "NumBillingTypes",
+	"10": "BillOnceOrCDKey",
+	"11": "Repurchaseable",
+	"12": "FreeOnDemand",
+	"13": "Rental",
+	"14": "NumBillingTypes",
 };

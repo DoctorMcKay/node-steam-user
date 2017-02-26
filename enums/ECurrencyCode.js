@@ -35,7 +35,8 @@ module.exports = {
 	"TWD": 30,
 	"SAR": 31,
 	"AED": 32,
-	"Max": 33,
+	"SEK": 33,
+	"Max": 34,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -71,5 +72,6 @@ module.exports = {
 	"30": "TWD",
 	"31": "SAR",
 	"32": "AED",
-	"33": "Max",
+	"33": "SEK",
+	"34": "Max",
 };

@@ -11,8 +11,10 @@ module.exports = {
 	"Stats": 5,
 	"Install": 6,
 	"Depots": 7,
-	"VAC": 8,
-	"DRM": 9,
+	"VAC": 8, // obsolete
+	"VAC_UNUSED": 8, // obsolete
+	"DRM": 9, // obsolete
+	"DRM_UNUSED": 9, // obsolete
 	"UFS": 10,
 	"OGG": 11,
 	"Items": 12, // obsolete
@@ -32,8 +34,8 @@ module.exports = {
 	"5": "Stats",
 	"6": "Install",
 	"7": "Depots",
-	"8": "VAC",
-	"9": "DRM",
+	"8": "VAC_UNUSED",
+	"9": "DRM_UNUSED",
 	"10": "UFS",
 	"11": "OGG",
 	"12": "ItemsUNUSED",

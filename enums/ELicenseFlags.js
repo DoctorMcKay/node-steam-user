@@ -11,6 +11,10 @@ module.exports = {
 	"CancelledByAdmin": 32,
 	"LowViolenceContent": 64,
 	"ImportedFromSteam2": 128,
+	"ForceRunRestriction": 256,
+	"RegionRestrictionExpired": 512,
+	"CancelledByFriendlyFraudLock": 1024,
+	"NotActivated": 2048,
 
 	// Value-to-name mapping for convenience
 	"0": "None",
@@ -22,4 +26,8 @@ module.exports = {
 	"32": "CancelledByAdmin",
 	"64": "LowViolenceContent",
 	"128": "ImportedFromSteam2",
+	"256": "ForceRunRestriction",
+	"512": "RegionRestrictionExpired",
+	"1024": "CancelledByFriendlyFraudLock",
+	"2048": "NotActivated",
 };

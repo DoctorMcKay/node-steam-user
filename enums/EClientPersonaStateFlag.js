@@ -7,7 +7,7 @@ module.exports = {
 	"QueryPort": 4,
 	"SourceID": 8,
 	"Presence": 16,
-	"Metadata": 32,
+	"Metadata": 32, // obsolete
 	"LastSeen": 64,
 	"ClanInfo": 128,
 	"GameExtraInfo": 256,

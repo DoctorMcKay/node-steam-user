@@ -31,6 +31,9 @@ module.exports = {
 	"BannedFromWebAPI": 33554432,
 	"ClansOnlyFromFriends": 67108864,
 	"GlobalModerator": 134217728,
+	"ParentalSettings": 268435456,
+	"ThirdPartySupport": 536870912,
+	"NeedsSSANextSteamLogon": 1073741824,
 
 	// Value-to-name mapping for convenience
 	"0": "NormalUser",
@@ -62,4 +65,7 @@ module.exports = {
 	"33554432": "BannedFromWebAPI",
 	"67108864": "ClansOnlyFromFriends",
 	"134217728": "GlobalModerator",
+	"268435456": "ParentalSettings",
+	"536870912": "ThirdPartySupport",
+	"1073741824": "NeedsSSANextSteamLogon",
 };

@@ -13,6 +13,7 @@ module.exports = {
 	"Ignored": 512,
 	"IgnoredFriend": 1024,
 	"Suggested": 2048,
+	"ChatMember": 4096,
 	"FlagAll": 65535,
 
 	// Value-to-name mapping for convenience
@@ -27,5 +28,6 @@ module.exports = {
 	"512": "Ignored",
 	"1024": "IgnoredFriend",
 	"2048": "Suggested",
+	"4096": "ChatMember",
 	"65535": "FlagAll",
 };

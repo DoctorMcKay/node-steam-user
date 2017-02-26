@@ -7,6 +7,7 @@ module.exports = {
 	"CDN": 2,
 	"LCS": 3,
 	"ProxyCache": 4,
+	"LANPeer": 5,
 	"Max": 5,
 
 	// Value-to-name mapping for convenience

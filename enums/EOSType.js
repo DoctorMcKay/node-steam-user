@@ -3,6 +3,8 @@
  */
 module.exports = {
 	"Unknown": -1,
+	"IOSUnknown": -600,
+	"AndroidUnknown": -500,
 	"UMQ": -400,
 	"PS3": -300,
 	"MacOSUnknown": -102,
@@ -17,6 +19,9 @@ module.exports = {
 	"MacOS108": -89,
 	"MacOS109": -88,
 	"MacOS1010": -87,
+	"MacOS1011": -86,
+	"MacOS1012": -85,
+	"MacOSMax": -1,
 	"LinuxUnknown": -203,
 	"Linux22": -202,
 	"Linux24": -201,
@@ -25,31 +30,35 @@ module.exports = {
 	"Linux35": -198,
 	"Linux36": -197,
 	"Linux310": -196,
+	"LinuxMax": -103,
 	"WinUnknown": 0,
 	"Win311": 1,
 	"Win95": 2,
 	"Win98": 3,
 	"WinME": 4,
 	"WinNT": 5,
-	"Win200": 6,
+	"Win200": 6, // obsolete "renamed to Win2000"
+	"Win2000": 6,
 	"WinXP": 7,
 	"Win2003": 8,
 	"WinVista": 9,
-	"Win7": 10,
-	"Windows7": 10, // obsolete "renamed to Win7"
+	"Win7": 10, // obsolete "renamed to Windows7"
+	"Windows7": 10,
 	"Win2008": 11,
 	"Win2012": 12,
-	"Win8": 13,
-	"Windows8": 13, // obsolete "renamed to Win8"
-	"Win81": 14,
-	"Windows81": 14, // obsolete "renamed to Win81"
+	"Win8": 13, // obsolete "renamed to Windows8"
+	"Windows8": 13,
+	"Win81": 14, // obsolete "renamed to Windows81"
+	"Windows81": 14,
 	"Win2012R2": 15,
-	"Win10": 16,
+	"Win10": 16, // obsolete "renamed to Windows10"
+	"Windows10": 16,
 	"WinMAX": 15,
 	"Max": 26,
 
 	// Value-to-name mapping for convenience
-	"-1": "Unknown",
+	"-600": "IOSUnknown",
+	"-500": "AndroidUnknown",
 	"-400": "UMQ",
 	"-300": "PS3",
 	"-102": "MacOSUnknown",
@@ -64,6 +73,9 @@ module.exports = {
 	"-89": "MacOS108",
 	"-88": "MacOS109",
 	"-87": "MacOS1010",
+	"-86": "MacOS1011",
+	"-85": "MacOS1012",
+	"-1": "MacOSMax",
 	"-203": "LinuxUnknown",
 	"-202": "Linux22",
 	"-201": "Linux24",
@@ -72,13 +84,14 @@ module.exports = {
 	"-198": "Linux35",
 	"-197": "Linux36",
 	"-196": "Linux310",
+	"-103": "LinuxMax",
 	"0": "WinUnknown",
 	"1": "Win311",
 	"2": "Win95",
 	"3": "Win98",
 	"4": "WinME",
 	"5": "WinNT",
-	"6": "Win200",
+	"6": "Win2000",
 	"7": "WinXP",
 	"8": "Win2003",
 	"9": "WinVista",
@@ -87,7 +100,7 @@ module.exports = {
 	"12": "Win2012",
 	"13": "Windows8",
 	"14": "Windows81",
-	"16": "Win10",
+	"16": "Windows10",
 	"15": "WinMAX",
 	"26": "Max",
 };

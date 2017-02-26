@@ -11,6 +11,7 @@ module.exports = {
 	"Directory": 64,
 	"CustomExecutable": 128,
 	"InstallScript": 256,
+	"Symlink": 512,
 
 	// Value-to-name mapping for convenience
 	"1": "UserConfig",
@@ -22,4 +23,5 @@ module.exports = {
 	"64": "Directory",
 	"128": "CustomExecutable",
 	"256": "InstallScript",
+	"512": "Symlink",
 };

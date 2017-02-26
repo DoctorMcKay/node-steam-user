@@ -27,6 +27,12 @@ module.exports = {
 	"InitiatorSteamGuardDuration": 23,
 	"InitiatorPasswordResetProbation": 24,
 	"InitiatorNewDeviceCooldown": 25,
+	"InitiatorSentInvalidCookie": 26,
+	"NeedsEmailConfirmation": 27,
+	"InitiatorRecentEmailChange": 28,
+	"NeedsMobileConfirmation": 29,
+	"TradingHoldForClearedTradeOffersInitiator": 30,
+	"WouldExceedMaxAssetCount": 31,
 	"OKToDeliver": 50,
 
 	// Value-to-name mapping for convenience
@@ -54,5 +60,11 @@ module.exports = {
 	"23": "InitiatorSteamGuardDuration",
 	"24": "InitiatorPasswordResetProbation",
 	"25": "InitiatorNewDeviceCooldown",
+	"26": "InitiatorSentInvalidCookie",
+	"27": "NeedsEmailConfirmation",
+	"28": "InitiatorRecentEmailChange",
+	"29": "NeedsMobileConfirmation",
+	"30": "TradingHoldForClearedTradeOffersInitiator",
+	"31": "WouldExceedMaxAssetCount",
 	"50": "OKToDeliver",
 };

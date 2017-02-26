@@ -9,6 +9,7 @@ module.exports = {
 	"RecurringChargeLimitedUse": 4,
 	"RecurringChargeLimitedUseWithOverages": 5,
 	"RecurringOption": 6,
+	"LimitedUseDelayedActivation": 7,
 
 	// Value-to-name mapping for convenience
 	"0": "NoLicense",
@@ -18,4 +19,5 @@ module.exports = {
 	"4": "RecurringChargeLimitedUse",
 	"5": "RecurringChargeLimitedUseWithOverages",
 	"6": "RecurringOption",
+	"7": "LimitedUseDelayedActivation",
 };
