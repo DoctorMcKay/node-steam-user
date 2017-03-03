@@ -241,14 +241,14 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 	this._send(SteamUser.EMsg.ClientCreateChat, msg.flip());
 
 	/**
-	 * Called when the room is created or a failure occurs. If successful, you will be in the room when this callback fires.
+	 * Called when the room is created or a failure occurs. You have to call SteamUser#joinChat before start using this chat.
 	 * @callback SteamUser~createChatRoomCallback
 	 * @param {EResult} eresult - The result of the creation request
 	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 	 */
 	if (callback) {
-		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
-			callback(result, chatID);
+		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, eresult, chatID) {
+			callback(eresult, chatID);
 		});
 	}
 };
@@ -420,10 +420,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCreateChatResponse] = functio
 	if (eresult != SteamUser.EResult.OK) {
 		this._emitIdEvent('chatCreated', friendID, eresult);
 	} else {
-		var self = this;
-		this.joinChat(chatID, function(result) {
-			self._emitIdEvent('chatCreated', friendID, result, chatID);
-		});
+		self._emitIdEvent('chatCreated', friendID, eresult, chatID);
 	}
 };
 
