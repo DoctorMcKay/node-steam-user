@@ -467,6 +467,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 
 		this.emit('friendsList');
 		this.emit('groupList');
+
+		// Request persona info for all our friends
+		var friends = Object.keys(this.myFriends).filter(function(steamID) { return self.myFriends[steamID] == SteamUser.EFriendRelationship.Friend; });
+		self.getPersonas(friends);
 	}
 };
 
