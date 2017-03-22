@@ -433,6 +433,9 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user
 to use this.
 
+**Currently it seems that Steam is not properly sending back the SteamID of the newly-created account. The `steamid`
+argument in the callback is currently `null`.**
+
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
 	- `result` - A value from `SteamUser.EResult`. `SteamUser.EResult.OK` if the mail was sent successfully.
