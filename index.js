@@ -47,6 +47,8 @@ function SteamUser(client, options) {
 	this.myNicknames = {};
 	this.steamServers = {};
 	this.contentServersReady = false;
+	this.playingState = {"blocked": false, "appid": 0};
+	this._playingBlocked = false;
 
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;

@@ -13,25 +13,51 @@ var PICSRequestType = {
 	"AddToCache": 4
 };
 
-SteamUser.prototype.gamesPlayed = function(apps) {
+SteamUser.prototype.gamesPlayed = function(apps, force) {
 	if (!(apps instanceof Array)) {
 		apps = [apps];
 	}
 
-	this._send(SteamUser.EMsg.ClientGamesPlayed, apps.map(function(app) {
-		if (typeof app === 'string') {
-			return {
-				"game_id": "15190414816125648896",
-				"game_extra_info": app
-			};
+	var self = this;
+	if (this._playingBlocked) {
+		if (force) {
+			this.kickPlayingSession(doTheThing);
+			return true;
+		} else {
+			return false;
 		}
+	} else {
+		doTheThing();
+		return true;
+	}
 
-		if (typeof app === 'object') {
-			return app;
+	function doTheThing() {
+		self._send(SteamUser.EMsg.ClientGamesPlayed, apps.map(function(app) {
+			if (typeof app === 'string') {
+				return {
+					"game_id": "15190414816125648896",
+					"game_extra_info": app
+				};
+			}
+
+			if (typeof app === 'object') {
+				return app;
+			}
+
+			return {"game_id": app};
+		}));
+	}
+};
+
+SteamUser.prototype.kickPlayingSession = function(callback) {
+	this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
+	this.once('playingState', function(blocked, playingApp) {
+		if (blocked) {
+			callback(new Error("Cannot kick other session"));
+		} else {
+			callback(null);
 		}
-
-		return {"game_id": app};
-	}));
+	});
 };
 
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
@@ -502,4 +528,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLicenseList] = function(body)
 	if (this.options.enablePicsCache) {
 		this._getLicenseInfo();
 	}
+};
+
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayingSessionState] = function(body) {
+	this._playingBlocked = body.playing_blocked;
+	this.emit('playingState', body.playing_blocked, body.playing_app);
+	this.playingState = {"blocked": body.playing_blocked, "appid": body.playing_app};
 };

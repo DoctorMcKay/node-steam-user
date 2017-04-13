@@ -94,6 +94,8 @@ protobufs[SteamUser.EMsg.ClientGetCDNAuthToken] = Schema.CMsgClientGetCDNAuthTok
 protobufs[SteamUser.EMsg.ClientGetCDNAuthTokenResponse] = Schema.CMsgClientGetCDNAuthTokenResponse;
 protobufs[SteamUser.EMsg.ClientCheckAppBetaPassword] = Schema.CMsgClientCheckAppBetaPassword;
 protobufs[SteamUser.EMsg.ClientCheckAppBetaPasswordResponse] = Schema.CMsgClientCheckAppBetaPasswordResponse;
+protobufs[SteamUser.EMsg.ClientKickPlayingSession] = Schema.CMsgClientKickPlayingSession;
+protobufs[SteamUser.EMsg.ClientPlayingSessionState] = Schema.CMsgClientPlayingSessionState;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
