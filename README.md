@@ -564,8 +564,20 @@ no `err`, then your email was changed. The [`emailInfo`](#emailinfo-1) event wil
 
 **Changing your account's email will start a 5-day trading cooldown.**
 
-### gamesPlayed(apps)
-`apps` - An array, object, string, or number (see below)
+### kickPlayingSession([callback])
+- `callback` - Optional. A function to be called once Steam receives and responds to this request.
+    - `err` - An `Error` object on failure, or `null` on success
+
+**v3.21.0 or later is required to use this method**
+
+If this account is being used to play a game on another logon session, calling this method will kick that other session
+off of Steam entirely (it will get an `error` event if the other session is using node-steam-user).
+
+### gamesPlayed(apps[, force])
+- `apps` - An array, object, string, or number (see below)
+- `force` - Optional, default `false`. If `true` and this account is playing a game elsewhere, calls `kickPlayingSession` first.
+
+**v3.21.0 or later is required to use `force`**
 
 Reports to Steam that you're playing or using zero or more games/apps. To exit all games/apps, use an empty array `[]`.
 
@@ -1353,6 +1365,19 @@ Emitted when someone responds to our trade request. Also emitted with response `
 Emitted when a new trade session has started (either as a result of someone accepting a Steam trade request, an in-game (TF2) trade request, or something else).
 
 The trade is now available at http://steamcommunity.com/trade/[SteamID], and can be automated with [`node-steam-trade`](https://github.com/seishun/node-steam-trade).
+
+### playingState
+- `blocked` - `true` if you're blocked from playing a game on this session (because a game is being played on this account using another logon session)
+- `playingApp` - If `blocked`, this is the AppID of the game that is being played elsewhere
+
+**v3.21.0 or later is required to use this event**
+
+Emitted under these conditions:
+
+- Right after logon, **only if** a game is being played on this account in another location (i.e. `blocked` is `true`)
+- Whenever a game starts (or stops) being played on another session
+- Whenever you start (or stop) playing a game on this session (via `gamesPlayed`)
+    - In this case, `blocked` is `false` and `playingApp` is the AppID you're currently playing
 
 ### user
 - `sid` - A `SteamID` object for the user whose data we just received
