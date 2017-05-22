@@ -52,6 +52,10 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 SteamUser.prototype.kickPlayingSession = function(callback) {
 	this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
 	this.once('playingState', function(blocked, playingApp) {
+		if (!callback) {
+			return;
+		}
+
 		if (blocked) {
 			callback(new Error("Cannot kick other session"));
 		} else {
