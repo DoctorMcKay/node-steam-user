@@ -399,6 +399,11 @@ SteamUser.prototype.getOwnedApps = function() {
 		}
 
 		pkg = pkg.packageinfo;
+
+		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000)) {
+			return; // This package has expired. Free weekend, usually
+		}
+
 		(pkg.appids || []).forEach(function(appid) {
 			if (appids.indexOf(appid) == -1) {
 				appids.push(appid);
@@ -438,6 +443,11 @@ SteamUser.prototype.getOwnedDepots = function() {
 		}
 
 		pkg = pkg.packageinfo;
+
+		if (pkg.extended && pkg.extended.expirytime && pkg.extended.expirytime <= Math.floor(Date.now() / 1000)) {
+			return; // This package has expired. Free weekend, usually
+		}
+
 		(pkg.depotids || []).forEach(function(depotid) {
 			if (depotids.indexOf(depotid) == -1) {
 				depotids.push(depotid);
@@ -459,8 +469,8 @@ SteamUser.prototype.getOwnedPackages = function() {
 	}
 
 	var packages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
-			return license.package_id;
-		});
+		return license.package_id;
+	});
 
 	packages.sort(sortNumeric);
 	return packages;
