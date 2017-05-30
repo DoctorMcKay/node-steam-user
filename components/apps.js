@@ -19,16 +19,10 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 	}
 
 	var self = this;
-	if (this._playingBlocked) {
-		if (force) {
-			this.kickPlayingSession(doTheThing);
-			return true;
-		} else {
-			return false;
-		}
+	if (this._playingBlocked && force) {
+		this.kickPlayingSession(doTheThing);
 	} else {
 		doTheThing();
-		return true;
 	}
 
 	function doTheThing() {
