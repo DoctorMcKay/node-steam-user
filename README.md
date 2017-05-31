@@ -13,6 +13,8 @@ It's designed to be a self-contained module which provides all the functionality
 
 [Subscribe to release announcements](https://github.com/DoctorMcKay/node-steam-user/releases.atom)
 
+This reports anonymous usage statistics to the author. [See here](https://github.com/DoctorMcKay/node-stats-reporter) for more information.
+
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
 # Contents
