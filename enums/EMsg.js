@@ -14,8 +14,8 @@ module.exports = {
 	"JobHeartbeat": 123,
 	"HubConnect": 124,
 	"Subscribe": 126,
-	"RouteMessage": 127, // obsolete
-	"RemoteSysID": 128, // obsolete
+	"RouteMessage": 127, // removed
+	"RemoteSysID": 128, // removed
 	"AMCreateAccountResponse": 129,
 	"WGRequest": 130,
 	"WGResponse": 131,
@@ -24,9 +24,9 @@ module.exports = {
 	"WebAPIJobResponse": 134,
 	"ClientSessionStart": 135,
 	"ClientSessionEnd": 136,
-	"ClientSessionUpdateAuthTicket": 137, // obsolete "renamed to ClientSessionUpdate"
+	"ClientSessionUpdateAuthTicket": 137, // removed "renamed to ClientSessionUpdate"
 	"ClientSessionUpdate": 137,
-	"StatsDeprecated": 138, // obsolete
+	"StatsDeprecated": 138, // removed
 	"Ping": 139,
 	"PingResponse": 140,
 	"Stats": 141,
@@ -60,7 +60,7 @@ module.exports = {
 	"ShellSearchLogsResponse": 236,
 	"ShellCheckWindowsUpdates": 237,
 	"ShellCheckWindowsUpdatesResponse": 238,
-	"ShellFlushUserLicenseCache": 239, // obsolete
+	"ShellFlushUserLicenseCache": 239, // removed
 	"BaseGM": 300,
 	"Heartbeat": 300,
 	"ShellFailed": 301,
@@ -80,21 +80,21 @@ module.exports = {
 	"GMLoadActivationCodes": 325,
 	"GMQueueForFBS": 326,
 	"GMSchemaConversionResults": 327,
-	"GMSchemaConversionResultsResponse": 328, // obsolete
+	"GMSchemaConversionResultsResponse": 328, // removed
 	"GMWriteShellFailureToSQL": 329,
 	"GMWriteStatsToSOS": 330,
 	"GMGetServiceMethodRouting": 331,
 	"GMGetServiceMethodRoutingResponse": 332,
 	"GMConvertUserWallets": 333,
 	"BaseAIS": 400,
-	"AISRefreshContentDescription": 401, // obsolete
+	"AISRefreshContentDescription": 401, // removed
 	"AISRequestContentDescription": 402,
 	"AISUpdateAppInfo": 403,
-	"AISUpdatePackageInfo": 404, // obsolete "renamed to AISUpdatePackageCosts"
+	"AISUpdatePackageInfo": 404, // removed "renamed to AISUpdatePackageCosts"
 	"AISUpdatePackageCosts": 404,
 	"AISGetPackageChangeNumber": 405,
 	"AISGetPackageChangeNumberResponse": 406,
-	"AISAppInfoTableChanged": 407, // obsolete
+	"AISAppInfoTableChanged": 407, // removed
 	"AISUpdatePackageCostsResponse": 408,
 	"AISCreateMarketingMessage": 409,
 	"AISCreateMarketingMessageResponse": 410,
@@ -104,16 +104,16 @@ module.exports = {
 	"AISUpdateMarketingMessageResponse": 414,
 	"AISRequestMarketingMessageUpdate": 415,
 	"AISDeleteMarketingMessage": 416,
-	"AISGetMarketingTreatments": 419, // obsolete
-	"AISGetMarketingTreatmentsResponse": 420, // obsolete
-	"AISRequestMarketingTreatmentUpdate": 421, // obsolete
-	"AISTestAddPackage": 422, // obsolete
+	"AISGetMarketingTreatments": 419, // removed
+	"AISGetMarketingTreatmentsResponse": 420, // removed
+	"AISRequestMarketingTreatmentUpdate": 421, // removed
+	"AISTestAddPackage": 422, // removed
 	"AIGetAppGCFlags": 423,
 	"AIGetAppGCFlagsResponse": 424,
 	"AIGetAppList": 425,
 	"AIGetAppListResponse": 426,
-	"AIGetAppInfo": 427, // obsolete
-	"AIGetAppInfoResponse": 428, // obsolete
+	"AIGetAppInfo": 427, // removed
+	"AIGetAppInfoResponse": 428, // removed
 	"AISGetCouponDefinition": 429,
 	"AISGetCouponDefinitionResponse": 430,
 	"AISUpdateSlaveContentDescription": 431,
@@ -122,7 +122,7 @@ module.exports = {
 	"BaseAM": 500,
 	"AMUpdateUserBanRequest": 504,
 	"AMAddLicense": 505,
-	"AMBeginProcessingLicenses": 507, // obsolete
+	"AMBeginProcessingLicenses": 507, // removed
 	"AMSendSystemIMToUser": 508,
 	"AMExtendLicense": 509,
 	"AMAddMinutesToLicense": 510,
@@ -161,13 +161,13 @@ module.exports = {
 	"AMClientNotPlaying": 553,
 	"ClientRequestFriendship": 554,
 	"AMRelayPublishStatus": 555,
-	"AMResetCommunityContent": 556, // obsolete
-	"AMPrimePersonaStateCache": 557, // obsolete
-	"AMAllowUserContentQuery": 558, // obsolete
-	"AMAllowUserContentResponse": 559, // obsolete
+	"AMResetCommunityContent": 556, // removed
+	"AMPrimePersonaStateCache": 557, // removed
+	"AMAllowUserContentQuery": 558, // removed
+	"AMAllowUserContentResponse": 559, // removed
 	"AMInitPurchaseResponse": 560,
 	"AMRevokePurchaseResponse": 561,
-	"AMLockProfile": 562, // obsolete
+	"AMLockProfile": 562, // removed
 	"AMRefreshGuestPasses": 563,
 	"AMInviteUserToClan": 564,
 	"AMAcknowledgeClanInvite": 565,
@@ -198,8 +198,8 @@ module.exports = {
 	"AMSetAvatar": 591,
 	"AMAuthenticateUser": 592,
 	"AMAuthenticateUserResponse": 593,
-	"AMGetAccountFriendsCount": 594, // obsolete
-	"AMGetAccountFriendsCountResponse": 595, // obsolete
+	"AMGetAccountFriendsCount": 594, // removed
+	"AMGetAccountFriendsCountResponse": 595, // removed
 	"AMP2PIntroducerMessage": 596,
 	"ClientChatAction": 597,
 	"AMClientChatActionRelay": 598,
@@ -235,41 +235,41 @@ module.exports = {
 	"DRMEmptyGuidCache": 645,
 	"DRMEmptyGuidCacheResponse": 646,
 	"BaseCS": 650,
-	"CSUserContentRequest": 652, // obsolete
+	"CSUserContentRequest": 652, // removed
 	"BaseClient": 700,
-	"ClientLogOn_Deprecated": 701, // obsolete
-	"ClientAnonLogOn_Deprecated": 702, // obsolete
+	"ClientLogOn_Deprecated": 701, // removed
+	"ClientAnonLogOn_Deprecated": 702, // removed
 	"ClientHeartBeat": 703,
 	"ClientVACResponse": 704,
-	"ClientGamesPlayed_obsolete": 705, // obsolete
+	"ClientGamesPlayed_obsolete": 705, // removed
 	"ClientLogOff": 706,
 	"ClientNoUDPConnectivity": 707,
 	"ClientInformOfCreateAccount": 708,
-	"ClientAckVACBan": 709,
+	"ClientAckVACBan": 709, // removed
 	"ClientConnectionStats": 710,
-	"ClientInitPurchase": 711, // obsolete
+	"ClientInitPurchase": 711, // removed
 	"ClientPingResponse": 712,
 	"ClientRemoveFriend": 714,
 	"ClientGamesPlayedNoDataBlob": 715,
 	"ClientChangeStatus": 716,
 	"ClientVacStatusResponse": 717,
 	"ClientFriendMsg": 718,
-	"ClientGameConnect_obsolete": 719, // obsolete
-	"ClientGamesPlayed2_obsolete": 720, // obsolete
-	"ClientGameEnded_obsolete": 721, // obsolete
-	"ClientGetFinalPrice": 722, // obsolete
+	"ClientGameConnect_obsolete": 719, // removed
+	"ClientGamesPlayed2_obsolete": 720, // removed
+	"ClientGameEnded_obsolete": 721, // removed
+	"ClientGetFinalPrice": 722, // removed
 	"ClientSystemIM": 726,
 	"ClientSystemIMAck": 727,
 	"ClientGetLicenses": 728,
-	"ClientCancelLicense": 729, // obsolete
+	"ClientCancelLicense": 729, // removed
 	"ClientGetLegacyGameKey": 730,
-	"ClientContentServerLogOn_Deprecated": 731, // obsolete
+	"ClientContentServerLogOn_Deprecated": 731, // removed
 	"ClientAckVACBan2": 732,
-	"ClientAckMessageByGID": 735, // obsolete
+	"ClientAckMessageByGID": 735, // removed
 	"ClientGetPurchaseReceipts": 736,
-	"ClientAckPurchaseReceipt": 737, // obsolete
-	"ClientGamesPlayed3_obsolete": 738, // obsolete
-	"ClientSendGuestPass": 739, // obsolete
+	"ClientAckPurchaseReceipt": 737, // removed
+	"ClientGamesPlayed3_obsolete": 738, // removed
+	"ClientSendGuestPass": 739, // removed
 	"ClientAckGuestPass": 740,
 	"ClientRedeemGuestPass": 741,
 	"ClientGamesPlayed": 742,
@@ -278,12 +278,12 @@ module.exports = {
 	"ClientAcknowledgeClanInvite": 745,
 	"ClientPurchaseWithMachineID": 746,
 	"ClientAppUsageEvent": 747,
-	"ClientGetGiftTargetList": 748, // obsolete
-	"ClientGetGiftTargetListResponse": 749, // obsolete
+	"ClientGetGiftTargetList": 748, // removed
+	"ClientGetGiftTargetListResponse": 749, // removed
 	"ClientLogOnResponse": 751,
-	"ClientVACChallenge": 753,
+	"ClientVACChallenge": 753, // removed
 	"ClientSetHeartbeatRate": 755,
-	"ClientNotLoggedOnDeprecated": 756, // obsolete
+	"ClientNotLoggedOnDeprecated": 756, // removed
 	"ClientLoggedOff": 757,
 	"GSApprove": 758,
 	"GSDeny": 759,
@@ -295,27 +295,27 @@ module.exports = {
 	"ClientPersonaState": 766,
 	"ClientFriendsList": 767,
 	"ClientAccountInfo": 768,
-	"ClientVacStatusQuery": 770,
+	"ClientVacStatusQuery": 770, // removed
 	"ClientNewsUpdate": 771,
 	"ClientGameConnectDeny": 773,
 	"GSStatusReply": 774,
-	"ClientGetFinalPriceResponse": 775, // obsolete
+	"ClientGetFinalPriceResponse": 775, // removed
 	"ClientGameConnectTokens": 779,
 	"ClientLicenseList": 780,
-	"ClientCancelLicenseResponse": 781, // obsolete
+	"ClientCancelLicenseResponse": 781, // removed
 	"ClientVACBanStatus": 782,
 	"ClientCMList": 783,
 	"ClientEncryptPct": 784,
 	"ClientGetLegacyGameKeyResponse": 785,
-	"ClientFavoritesList": 786, // obsolete
-	"CSUserContentApprove": 787, // obsolete
-	"CSUserContentDeny": 788, // obsolete
-	"ClientInitPurchaseResponse": 789, // obsolete
+	"ClientFavoritesList": 786, // removed
+	"CSUserContentApprove": 787, // removed
+	"CSUserContentDeny": 788, // removed
+	"ClientInitPurchaseResponse": 789, // removed
 	"ClientAddFriend": 791,
 	"ClientAddFriendResponse": 792,
-	"ClientInviteFriend": 793, // obsolete
-	"ClientInviteFriendResponse": 794, // obsolete
-	"ClientSendGuestPassResponse": 795, // obsolete
+	"ClientInviteFriend": 793, // removed
+	"ClientInviteFriendResponse": 794, // removed
+	"ClientSendGuestPassResponse": 795, // removed
 	"ClientAckGuestPassResponse": 796,
 	"ClientRedeemGuestPassResponse": 797,
 	"ClientUpdateGuestPassesList": 798,
@@ -323,13 +323,13 @@ module.exports = {
 	"ClientChatInvite": 800,
 	"ClientJoinChat": 801,
 	"ClientChatMemberInfo": 802,
-	"ClientLogOnWithCredentials_Deprecated": 803, // obsolete
+	"ClientLogOnWithCredentials_Deprecated": 803, // removed
 	"ClientPasswordChangeResponse": 805,
 	"ClientChatEnter": 807,
 	"ClientFriendRemovedFromSource": 808,
 	"ClientCreateChat": 809,
 	"ClientCreateChatResponse": 810,
-	"ClientUpdateChatMetadata": 811, // obsolete
+	"ClientUpdateChatMetadata": 811, // removed
 	"ClientP2PIntroducerMessage": 813,
 	"ClientChatActionResult": 814,
 	"ClientRequestFriendData": 815,
@@ -341,11 +341,11 @@ module.exports = {
 	"ClientServiceModule": 830,
 	"ClientServiceCall": 831,
 	"ClientServiceCallResponse": 832,
-	"ClientPackageInfoRequest": 833,
-	"ClientPackageInfoResponse": 834,
+	"ClientPackageInfoRequest": 833, // removed
+	"ClientPackageInfoResponse": 834, // removed
 	"ClientNatTraversalStatEvent": 839,
-	"ClientAppInfoRequest": 840,
-	"ClientAppInfoResponse": 841,
+	"ClientAppInfoRequest": 840, // removed
+	"ClientAppInfoResponse": 841, // removed
 	"ClientSteamUsageEvent": 842,
 	"ClientCheckPassword": 845,
 	"ClientResetPassword": 846,
@@ -358,18 +358,18 @@ module.exports = {
 	"ClientGetAppOwnershipTicket": 857,
 	"ClientGetAppOwnershipTicketResponse": 858,
 	"ClientGetLobbyListResponse": 860,
-	"ClientGetLobbyMetadata": 861, // obsolete
-	"ClientGetLobbyMetadataResponse": 862, // obsolete
-	"ClientVTTCert": 863,
-	"ClientAppInfoUpdate": 866,
-	"ClientAppInfoChanges": 867,
+	"ClientGetLobbyMetadata": 861, // removed
+	"ClientGetLobbyMetadataResponse": 862, // removed
+	"ClientVTTCert": 863, // removed
+	"ClientAppInfoUpdate": 866, // removed
+	"ClientAppInfoChanges": 867, // removed
 	"ClientServerList": 880,
 	"ClientEmailChangeResponse": 891,
 	"ClientSecretQAChangeResponse": 892,
 	"ClientDRMBlobRequest": 896,
 	"ClientDRMBlobResponse": 897,
-	"ClientLookupKey": 898, // obsolete
-	"ClientLookupKeyResponse": 899, // obsolete
+	"ClientLookupKey": 898, // removed
+	"ClientLookupKeyResponse": 899, // removed
 	"BaseGameServer": 900,
 	"GSDisconnectNotice": 901,
 	"GSStatus": 903,
@@ -397,14 +397,14 @@ module.exports = {
 	"AdminCmdResponse": 1004,
 	"AdminLogListenRequest": 1005,
 	"AdminLogEvent": 1006,
-	"LogSearchRequest": 1007, // obsolete
-	"LogSearchResponse": 1008, // obsolete
-	"LogSearchCancel": 1009, // obsolete
+	"LogSearchRequest": 1007, // removed
+	"LogSearchResponse": 1008, // removed
+	"LogSearchCancel": 1009, // removed
 	"UniverseData": 1010,
-	"RequestStatHistory": 1014, // obsolete
-	"StatHistory": 1015, // obsolete
-	"AdminPwLogon": 1017, // obsolete
-	"AdminPwLogonResponse": 1018, // obsolete
+	"RequestStatHistory": 1014, // removed
+	"StatHistory": 1015, // removed
+	"AdminPwLogon": 1017, // removed
+	"AdminPwLogonResponse": 1018, // removed
 	"AdminSpew": 1019,
 	"AdminConsoleTitle": 1020,
 	"AdminGCSpew": 1023,
@@ -427,7 +427,7 @@ module.exports = {
 	"FBSRebootBox": 1110,
 	"FBSSetBigBrotherMode": 1111,
 	"FBSMinidumpServer": 1112,
-	"FBSSetShellCount_obsolete": 1113, // obsolete
+	"FBSSetShellCount_obsolete": 1113, // removed
 	"FBSDeployHotFixPackage": 1114,
 	"FBSDeployHotFixResponse": 1115,
 	"FBSDownloadHotFix": 1116,
@@ -463,41 +463,41 @@ module.exports = {
 	"ChannelEncryptResult": 1305,
 	"BaseBS": 1400,
 	"BSPurchaseStart": 1401,
-	"BSPurchaseResponse": 1402, // obsolete
-	"BSSettleNOVA": 1404, // obsolete
+	"BSPurchaseResponse": 1402, // removed
+	"BSSettleNOVA": 1404, // removed
 	"BSSettleComplete": 1406,
-	"BSBannedRequest": 1407, // obsolete
+	"BSBannedRequest": 1407, // removed
 	"BSInitPayPalTxn": 1408,
 	"BSInitPayPalTxnResponse": 1409,
 	"BSGetPayPalUserInfo": 1410,
 	"BSGetPayPalUserInfoResponse": 1411,
-	"BSRefundTxn": 1413, // obsolete
-	"BSRefundTxnResponse": 1414, // obsolete
-	"BSGetEvents": 1415, // obsolete
-	"BSChaseRFRRequest": 1416, // obsolete
+	"BSRefundTxn": 1413, // removed
+	"BSRefundTxnResponse": 1414, // removed
+	"BSGetEvents": 1415, // removed
+	"BSChaseRFRRequest": 1416, // removed
 	"BSPaymentInstrBan": 1417,
 	"BSPaymentInstrBanResponse": 1418,
-	"BSProcessGCReports": 1419, // obsolete
-	"BSProcessPPReports": 1420, // obsolete
+	"BSProcessGCReports": 1419, // removed
+	"BSProcessPPReports": 1420, // removed
 	"BSInitGCBankXferTxn": 1421,
 	"BSInitGCBankXferTxnResponse": 1422,
-	"BSQueryGCBankXferTxn": 1423, // obsolete
-	"BSQueryGCBankXferTxnResponse": 1424, // obsolete
+	"BSQueryGCBankXferTxn": 1423, // removed
+	"BSQueryGCBankXferTxnResponse": 1424, // removed
 	"BSCommitGCTxn": 1425,
 	"BSQueryTransactionStatus": 1426,
 	"BSQueryTransactionStatusResponse": 1427,
-	"BSQueryCBOrderStatus": 1428, // obsolete
-	"BSQueryCBOrderStatusResponse": 1429, // obsolete
-	"BSRunRedFlagReport": 1430, // obsolete
+	"BSQueryCBOrderStatus": 1428, // removed
+	"BSQueryCBOrderStatusResponse": 1429, // removed
+	"BSRunRedFlagReport": 1430, // removed
 	"BSQueryPaymentInstUsage": 1431,
 	"BSQueryPaymentInstResponse": 1432,
 	"BSQueryTxnExtendedInfo": 1433,
 	"BSQueryTxnExtendedInfoResponse": 1434,
 	"BSUpdateConversionRates": 1435,
-	"BSProcessUSBankReports": 1436, // obsolete
+	"BSProcessUSBankReports": 1436, // removed
 	"BSPurchaseRunFraudChecks": 1437,
 	"BSPurchaseRunFraudChecksResponse": 1438,
-	"BSStartShippingJobs": 1439, // obsolete
+	"BSStartShippingJobs": 1439, // removed
 	"BSQueryBankInformation": 1440,
 	"BSQueryBankInformationResponse": 1441,
 	"BSValidateXsollaSignature": 1445,
@@ -573,14 +573,14 @@ module.exports = {
 	"ATSCSPerfTestResponse": 1519,
 	"BaseDP": 1600,
 	"DPSetPublishingState": 1601,
-	"DPGamePlayedStats": 1602, // obsolete
+	"DPGamePlayedStats": 1602, // removed
 	"DPUniquePlayersStat": 1603,
 	"DPStreamingUniquePlayersStat": 1604,
 	"DPVacInfractionStats": 1605,
 	"DPVacBanStats": 1606,
 	"DPBlockingStats": 1607,
 	"DPNatTraversalStats": 1608,
-	"DPSteamUsageEvent": 1609, // obsolete
+	"DPSteamUsageEvent": 1609, // removed
 	"DPVacCertBanStats": 1610,
 	"DPVacCafeBanStats": 1611,
 	"DPCloudStats": 1612,
@@ -589,7 +589,7 @@ module.exports = {
 	"DPGetPlayerCount": 1615,
 	"DPGetPlayerCountResponse": 1616,
 	"DPGameServersPlayersStats": 1617,
-	"DPDownloadRateStatistics": 1618, // obsolete
+	"DPDownloadRateStatistics": 1618, // removed
 	"DPFacebookStatistics": 1619,
 	"ClientDPCheckSpecialSurvey": 1620,
 	"ClientDPCheckSpecialSurveyResponse": 1621,
@@ -597,7 +597,7 @@ module.exports = {
 	"ClientDPSendSpecialSurveyResponseReply": 1623,
 	"DPStoreSaleStatistics": 1624,
 	"ClientDPUpdateAppJobReport": 1625,
-	"ClientDPSteam2AppStarted": 1627, // obsolete obsolete
+	"ClientDPSteam2AppStarted": 1627, // removed
 	"DPUpdateContentEvent": 1626,
 	"DPPartnerMicroTxns": 1628,
 	"DPPartnerMicroTxnsResponse": 1629,
@@ -606,46 +606,46 @@ module.exports = {
 	"BaseCM": 1700,
 	"CMSetAllowState": 1701,
 	"CMSpewAllowState": 1702,
-	"CMAppInfoResponseDeprecated": 1703, // obsolete
-	"BaseDSS": 1800, // obsolete
-	"DSSNewFile": 1801, // obsolete
-	"DSSCurrentFileList": 1802, // obsolete
-	"DSSSynchList": 1803, // obsolete
-	"DSSSynchListResponse": 1804, // obsolete
-	"DSSSynchSubscribe": 1805, // obsolete
-	"DSSSynchUnsubscribe": 1806, // obsolete
-	"BaseEPM": 1900, // obsolete
-	"EPMStartProcess": 1901, // obsolete
-	"EPMStopProcess": 1902, // obsolete
-	"EPMRestartProcess": 1903, // obsolete
+	"CMAppInfoResponseDeprecated": 1703, // removed
+	"BaseDSS": 1800, // removed
+	"DSSNewFile": 1801, // removed
+	"DSSCurrentFileList": 1802, // removed
+	"DSSSynchList": 1803, // removed
+	"DSSSynchListResponse": 1804, // removed
+	"DSSSynchSubscribe": 1805, // removed
+	"DSSSynchUnsubscribe": 1806, // removed
+	"BaseEPM": 1900, // removed
+	"EPMStartProcess": 1901, // removed
+	"EPMStopProcess": 1902, // removed
+	"EPMRestartProcess": 1903, // removed
 	"BaseGC": 2200,
-	"GCSendClient": 2200, // obsolete
-	"AMRelayToGC": 2201, // obsolete
-	"GCUpdatePlayedState": 2202, // obsolete
+	"GCSendClient": 2200, // removed
+	"AMRelayToGC": 2201, // removed
+	"GCUpdatePlayedState": 2202, // removed
 	"GCCmdRevive": 2203,
-	"GCCmdBounce": 2204, // obsolete
-	"GCCmdForceBounce": 2205, // obsolete
+	"GCCmdBounce": 2204, // removed
+	"GCCmdForceBounce": 2205, // removed
 	"GCCmdDown": 2206,
 	"GCCmdDeploy": 2207,
 	"GCCmdDeployResponse": 2208,
 	"GCCmdSwitch": 2209,
 	"AMRefreshSessions": 2210,
-	"GCUpdateGSState": 2211, // obsolete
+	"GCUpdateGSState": 2211, // removed
 	"GCAchievementAwarded": 2212,
 	"GCSystemMessage": 2213,
-	"GCValidateSession": 2214, // obsolete
-	"GCValidateSessionResponse": 2215, // obsolete
+	"GCValidateSession": 2214, // removed
+	"GCValidateSessionResponse": 2215, // removed
 	"GCCmdStatus": 2216,
-	"GCRegisterWebInterfaces": 2217, // obsolete
-	"GCRegisterWebInterfaces_Deprecated": 2217, // obsolete
-	"GCGetAccountDetails": 2218, // obsolete
-	"GCGetAccountDetails_DEPRECATED": 2218, // obsolete
+	"GCRegisterWebInterfaces": 2217, // removed
+	"GCRegisterWebInterfaces_Deprecated": 2217, // removed
+	"GCGetAccountDetails": 2218, // removed
+	"GCGetAccountDetails_DEPRECATED": 2218, // removed
 	"GCInterAppMessage": 2219,
 	"GCGetEmailTemplate": 2220,
 	"GCGetEmailTemplateResponse": 2221,
-	"ISRelayToGCH": 2222, // obsolete "renamed to GCHRelay"
+	"ISRelayToGCH": 2222, // removed "renamed to GCHRelay"
 	"GCHRelay": 2222,
-	"GCHRelayClientToIS": 2223, // obsolete "renamed to GCHRelayToClient"
+	"GCHRelayClientToIS": 2223, // removed "renamed to GCHRelayToClient"
 	"GCHRelayToClient": 2223,
 	"GCHUpdateSession": 2224,
 	"GCHRequestUpdateSession": 2225,
@@ -669,42 +669,42 @@ module.exports = {
 	"SMFishingReport": 2904,
 	"SMPartitionRenames": 2905,
 	"SMMonitorSpace": 2906,
-	"SMGetSchemaConversionResults": 2907, // obsolete
-	"SMGetSchemaConversionResultsResponse": 2908, // obsolete
+	"SMGetSchemaConversionResults": 2907, // removed
+	"SMGetSchemaConversionResultsResponse": 2908, // removed
 	"BaseTest": 3000,
 	"FailServer": 3000,
 	"JobHeartbeatTest": 3001,
 	"JobHeartbeatTestResponse": 3002,
 	"BaseFTSRange": 3100,
-	"FTSGetBrowseCounts": 3101, // obsolete
-	"FTSGetBrowseCountsResponse": 3102, // obsolete
-	"FTSBrowseClans": 3103, // obsolete
-	"FTSBrowseClansResponse": 3104, // obsolete
-	"FTSSearchClansByLocation": 3105, // obsolete
-	"FTSSearchClansByLocationResponse": 3106, // obsolete
-	"FTSSearchPlayersByLocation": 3107, // obsolete
-	"FTSSearchPlayersByLocationResponse": 3108, // obsolete
-	"FTSClanDeleted": 3109, // obsolete
-	"FTSSearch": 3110, // obsolete
-	"FTSSearchResponse": 3111, // obsolete
-	"FTSSearchStatus": 3112, // obsolete
-	"FTSSearchStatusResponse": 3113, // obsolete
-	"FTSGetGSPlayStats": 3114, // obsolete
-	"FTSGetGSPlayStatsResponse": 3115, // obsolete
-	"FTSGetGSPlayStatsForServer": 3116, // obsolete
-	"FTSGetGSPlayStatsForServerResponse": 3117, // obsolete
-	"FTSReportIPUpdates": 3118, // obsolete
+	"FTSGetBrowseCounts": 3101, // removed
+	"FTSGetBrowseCountsResponse": 3102, // removed
+	"FTSBrowseClans": 3103, // removed
+	"FTSBrowseClansResponse": 3104, // removed
+	"FTSSearchClansByLocation": 3105, // removed
+	"FTSSearchClansByLocationResponse": 3106, // removed
+	"FTSSearchPlayersByLocation": 3107, // removed
+	"FTSSearchPlayersByLocationResponse": 3108, // removed
+	"FTSClanDeleted": 3109, // removed
+	"FTSSearch": 3110, // removed
+	"FTSSearchResponse": 3111, // removed
+	"FTSSearchStatus": 3112, // removed
+	"FTSSearchStatusResponse": 3113, // removed
+	"FTSGetGSPlayStats": 3114, // removed
+	"FTSGetGSPlayStatsResponse": 3115, // removed
+	"FTSGetGSPlayStatsForServer": 3116, // removed
+	"FTSGetGSPlayStatsForServerResponse": 3117, // removed
+	"FTSReportIPUpdates": 3118, // removed
 	"BaseCCSRange": 3150,
-	"CCSGetComments": 3151, // obsolete
-	"CCSGetCommentsResponse": 3152, // obsolete
-	"CCSAddComment": 3153, // obsolete
-	"CCSAddCommentResponse": 3154, // obsolete
-	"CCSDeleteComment": 3155, // obsolete
-	"CCSDeleteCommentResponse": 3156, // obsolete
-	"CCSPreloadComments": 3157, // obsolete
-	"CCSNotifyCommentCount": 3158, // obsolete
-	"CCSGetCommentsForNews": 3159, // obsolete
-	"CCSGetCommentsForNewsResponse": 3160, // obsolete
+	"CCSGetComments": 3151, // removed
+	"CCSGetCommentsResponse": 3152, // removed
+	"CCSAddComment": 3153, // removed
+	"CCSAddCommentResponse": 3154, // removed
+	"CCSDeleteComment": 3155, // removed
+	"CCSDeleteCommentResponse": 3156, // removed
+	"CCSPreloadComments": 3157, // removed
+	"CCSNotifyCommentCount": 3158, // removed
+	"CCSGetCommentsForNews": 3159, // removed
+	"CCSGetCommentsForNewsResponse": 3160, // removed
 	"CCSDeleteAllCommentsByAuthor": 3161,
 	"CCSDeleteAllCommentsByAuthorResponse": 3162,
 	"BaseLBSRange": 3200,
@@ -733,8 +733,8 @@ module.exports = {
 	"BRPProcessUSBankReports": 3602,
 	"BRPProcessGCReports": 3603,
 	"BRPProcessPPReports": 3604,
-	"BRPSettleNOVA": 3605, // obsolete
-	"BRPSettleCB": 3606, // obsolete
+	"BRPSettleNOVA": 3605, // removed
+	"BRPSettleCB": 3606, // removed
 	"BRPCommitGC": 3607,
 	"BRPCommitGCResponse": 3608,
 	"BRPFindHungTransactions": 3609,
@@ -762,12 +762,12 @@ module.exports = {
 	"BaseAMRange2": 4000,
 	"AMCreateChat": 4001,
 	"AMCreateChatResponse": 4002,
-	"AMUpdateChatMetadata": 4003, // obsolete
-	"AMPublishChatMetadata": 4004, // obsolete
+	"AMUpdateChatMetadata": 4003, // removed
+	"AMPublishChatMetadata": 4004, // removed
 	"AMSetProfileURL": 4005,
 	"AMGetAccountEmailAddress": 4006,
 	"AMGetAccountEmailAddressResponse": 4007,
-	"AMRequestFriendData": 4008, // obsolete "renamed to AMRequestClanData"
+	"AMRequestFriendData": 4008, // removed "renamed to AMRequestClanData"
 	"AMRequestClanData": 4008,
 	"AMRouteToClients": 4009,
 	"AMLeaveClan": 4010,
@@ -787,18 +787,18 @@ module.exports = {
 	"AMGetClanPermissionSettingsResponse": 4024,
 	"AMPublishChatRoomInfo": 4025,
 	"ClientChatRoomInfo": 4026,
-	"AMCreateClanAnnouncement": 4027, // obsolete
-	"AMCreateClanAnnouncementResponse": 4028, // obsolete
-	"AMUpdateClanAnnouncement": 4029, // obsolete
-	"AMUpdateClanAnnouncementResponse": 4030, // obsolete
-	"AMGetClanAnnouncementsCount": 4031, // obsolete
-	"AMGetClanAnnouncementsCountResponse": 4032, // obsolete
-	"AMGetClanAnnouncements": 4033, // obsolete
-	"AMGetClanAnnouncementsResponse": 4034, // obsolete
-	"AMDeleteClanAnnouncement": 4035, // obsolete
-	"AMDeleteClanAnnouncementResponse": 4036, // obsolete
-	"AMGetSingleClanAnnouncement": 4037, // obsolete
-	"AMGetSingleClanAnnouncementResponse": 4038, // obsolete
+	"AMCreateClanAnnouncement": 4027, // removed
+	"AMCreateClanAnnouncementResponse": 4028, // removed
+	"AMUpdateClanAnnouncement": 4029, // removed
+	"AMUpdateClanAnnouncementResponse": 4030, // removed
+	"AMGetClanAnnouncementsCount": 4031, // removed
+	"AMGetClanAnnouncementsCountResponse": 4032, // removed
+	"AMGetClanAnnouncements": 4033, // removed
+	"AMGetClanAnnouncementsResponse": 4034, // removed
+	"AMDeleteClanAnnouncement": 4035, // removed
+	"AMDeleteClanAnnouncementResponse": 4036, // removed
+	"AMGetSingleClanAnnouncement": 4037, // removed
+	"AMGetSingleClanAnnouncementResponse": 4038, // removed
 	"AMGetClanHistory": 4039,
 	"AMGetClanHistoryResponse": 4040,
 	"AMGetClanPermissionBits": 4041,
@@ -818,7 +818,7 @@ module.exports = {
 	"AMGetClanPOTWResponse": 4055,
 	"AMSetClanPOTW": 4056,
 	"AMSetClanPOTWResponse": 4057,
-	"AMRequestChatMetadata": 4058, // obsolete
+	"AMRequestChatMetadata": 4058, // removed
 	"AMDumpUser": 4059,
 	"AMKickUserFromClan": 4060,
 	"AMAddFounderToClan": 4061,
@@ -848,13 +848,13 @@ module.exports = {
 	"AMChangeClanOwner": 4085,
 	"AMCancelEasyCollect": 4086,
 	"AMCancelEasyCollectResponse": 4087,
-	"AMGetClanMembershipList": 4088, // obsolete
-	"AMGetClanMembershipListResponse": 4089, // obsolete
+	"AMGetClanMembershipList": 4088, // removed
+	"AMGetClanMembershipListResponse": 4089, // removed
 	"AMClansInCommon": 4090,
 	"AMClansInCommonResponse": 4091,
 	"AMIsValidAccountID": 4092,
 	"AMConvertClan": 4093,
-	"AMGetGiftTargetListRelay": 4094, // obsolete
+	"AMGetGiftTargetListRelay": 4094, // removed
 	"AMWipeFriendsList": 4095,
 	"AMSetIgnored": 4096,
 	"AMClansInCommonCountResponse": 4097,
@@ -896,25 +896,25 @@ module.exports = {
 	"AMTrackFailedAuthByIP": 4133,
 	"AMGetCaptchaDataByGID": 4134,
 	"AMGetCaptchaDataByGIDResponse": 4135,
-	"AMGetLobbyList": 4136, // obsolete
-	"AMGetLobbyListResponse": 4137, // obsolete
-	"AMGetLobbyMetadata": 4138, // obsolete
-	"AMGetLobbyMetadataResponse": 4139, // obsolete
+	"AMGetLobbyList": 4136, // removed
+	"AMGetLobbyListResponse": 4137, // removed
+	"AMGetLobbyMetadata": 4138, // removed
+	"AMGetLobbyMetadataResponse": 4139, // removed
 	"CommunityAddFriendNews": 4140,
-	"AMAddClanNews": 4141, // obsolete
-	"AMWriteNews": 4142, // obsolete
+	"AMAddClanNews": 4141, // removed
+	"AMWriteNews": 4142, // removed
 	"AMFindClanUser": 4143,
 	"AMFindClanUserResponse": 4144,
 	"AMBanFromChat": 4145,
-	"AMGetUserHistoryResponse": 4146, // obsolete
+	"AMGetUserHistoryResponse": 4146, // removed
 	"AMGetUserNewsSubscriptions": 4147,
 	"AMGetUserNewsSubscriptionsResponse": 4148,
 	"AMSetUserNewsSubscriptions": 4149,
-	"AMGetUserNews": 4150, // obsolete
-	"AMGetUserNewsResponse": 4151, // obsolete
+	"AMGetUserNews": 4150, // removed
+	"AMGetUserNewsResponse": 4151, // removed
 	"AMSendQueuedEmails": 4152,
 	"AMSetLicenseFlags": 4153,
-	"AMGetUserHistory": 4154, // obsolete
+	"AMGetUserHistory": 4154, // removed
 	"CommunityDeleteUserNews": 4155,
 	"AMAllowUserFilesRequest": 4156,
 	"AMAllowUserFilesResponse": 4157,
@@ -930,34 +930,34 @@ module.exports = {
 	"CommunityGetUserFriendNews": 4173,
 	"AMGetUserClansNewsResponse": 4174,
 	"AMGetUserClansNews": 4175,
-	"AMStoreInitPurchase": 4176, // obsolete
-	"AMStoreInitPurchaseResponse": 4177, // obsolete
-	"AMStoreGetFinalPrice": 4178, // obsolete
-	"AMStoreGetFinalPriceResponse": 4179, // obsolete
-	"AMStoreCompletePurchase": 4180, // obsolete
-	"AMStoreCancelPurchase": 4181, // obsolete
-	"AMStorePurchaseResponse": 4182, // obsolete
-	"AMCreateAccountRecordInSteam3": 4183, // obsolete
+	"AMStoreInitPurchase": 4176, // removed
+	"AMStoreInitPurchaseResponse": 4177, // removed
+	"AMStoreGetFinalPrice": 4178, // removed
+	"AMStoreGetFinalPriceResponse": 4179, // removed
+	"AMStoreCompletePurchase": 4180, // removed
+	"AMStoreCancelPurchase": 4181, // removed
+	"AMStorePurchaseResponse": 4182, // removed
+	"AMCreateAccountRecordInSteam3": 4183, // removed
 	"AMGetPreviousCBAccount": 4184,
 	"AMGetPreviousCBAccountResponse": 4185,
-	"AMUpdateBillingAddress": 4186, // obsolete
-	"AMUpdateBillingAddressResponse": 4187, // obsolete
-	"AMGetBillingAddress": 4188, // obsolete
-	"AMGetBillingAddressResponse": 4189, // obsolete
+	"AMUpdateBillingAddress": 4186, // removed
+	"AMUpdateBillingAddressResponse": 4187, // removed
+	"AMGetBillingAddress": 4188, // removed
+	"AMGetBillingAddressResponse": 4189, // removed
 	"AMGetUserLicenseHistory": 4190,
 	"AMGetUserLicenseHistoryResponse": 4191,
 	"AMSupportChangePassword": 4194,
 	"AMSupportChangeEmail": 4195,
-	"AMSupportChangeSecretQA": 4196, // obsolete
+	"AMSupportChangeSecretQA": 4196, // removed
 	"AMResetUserVerificationGSByIP": 4197,
 	"AMUpdateGSPlayStats": 4198,
 	"AMSupportEnableOrDisable": 4199,
-	"AMGetComments": 4200, // obsolete
-	"AMGetCommentsResponse": 4201, // obsolete
-	"AMAddComment": 4202, // obsolete
-	"AMAddCommentResponse": 4203, // obsolete
-	"AMDeleteComment": 4204, // obsolete
-	"AMDeleteCommentResponse": 4205, // obsolete
+	"AMGetComments": 4200, // removed
+	"AMGetCommentsResponse": 4201, // removed
+	"AMAddComment": 4202, // removed
+	"AMAddCommentResponse": 4203, // removed
+	"AMDeleteComment": 4204, // removed
+	"AMDeleteCommentResponse": 4205, // removed
 	"AMGetPurchaseStatus": 4206,
 	"AMSupportIsAccountEnabled": 4209,
 	"AMSupportIsAccountEnabledResponse": 4210,
@@ -970,18 +970,18 @@ module.exports = {
 	"AMVerifyDepotManagementRights": 4222,
 	"AMVerifyDepotManagementRightsResponse": 4223,
 	"AMAddFreeLicense": 4224,
-	"AMGetUserFriendsMinutesPlayed": 4225, // obsolete
-	"AMGetUserFriendsMinutesPlayedResponse": 4226, // obsolete
-	"AMGetUserMinutesPlayed": 4227, // obsolete
-	"AMGetUserMinutesPlayedResponse": 4228, // obsolete
+	"AMGetUserFriendsMinutesPlayed": 4225, // removed
+	"AMGetUserFriendsMinutesPlayedResponse": 4226, // removed
+	"AMGetUserMinutesPlayed": 4227, // removed
+	"AMGetUserMinutesPlayedResponse": 4228, // removed
 	"AMValidateEmailLink": 4231,
 	"AMValidateEmailLinkResponse": 4232,
-	"AMAddUsersToMarketingTreatment": 4234, // obsolete
+	"AMAddUsersToMarketingTreatment": 4234, // removed
 	"AMStoreUserStats": 4236,
-	"AMGetUserGameplayInfo": 4237, // obsolete
-	"AMGetUserGameplayInfoResponse": 4238, // obsolete
-	"AMGetCardList": 4239, // obsolete
-	"AMGetCardListResponse": 4240, // obsolete
+	"AMGetUserGameplayInfo": 4237, // removed
+	"AMGetUserGameplayInfoResponse": 4238, // removed
+	"AMGetCardList": 4239, // removed
+	"AMGetCardListResponse": 4240, // removed
 	"AMDeleteStoredCard": 4241,
 	"AMRevokeLegacyGameKeys": 4242,
 	"AMGetWalletDetails": 4244,
@@ -993,11 +993,11 @@ module.exports = {
 	"AMGetWalletConversionRateResponse": 4250,
 	"AMConvertWallet": 4251,
 	"AMConvertWalletResponse": 4252,
-	"AMRelayGetFriendsWhoPlayGame": 4253, // obsolete
-	"AMRelayGetFriendsWhoPlayGameResponse": 4254, // obsolete
+	"AMRelayGetFriendsWhoPlayGame": 4253, // removed
+	"AMRelayGetFriendsWhoPlayGameResponse": 4254, // removed
 	"AMSetPreApproval": 4255,
 	"AMSetPreApprovalResponse": 4256,
-	"AMMarketingTreatmentUpdate": 4257, // obsolete
+	"AMMarketingTreatmentUpdate": 4257, // removed
 	"AMCreateRefund": 4258,
 	"AMCreateRefundResponse": 4259,
 	"AMCreateChargeback": 4260,
@@ -1013,7 +1013,7 @@ module.exports = {
 	"AMGetUserCurrentGameInfoResponse": 4270,
 	"AMGetGSPlayerList": 4271,
 	"AMGetGSPlayerListResponse": 4272,
-	"AMUpdatePersonaStateCache": 4275, // obsolete
+	"AMUpdatePersonaStateCache": 4275, // removed
 	"AMGetGameMembers": 4276,
 	"AMGetGameMembersResponse": 4277,
 	"AMGetSteamIDForMicroTxn": 4278,
@@ -1029,20 +1029,20 @@ module.exports = {
 	"AMGetAccountDetailsResponse": 4288,
 	"AMGetPlayerLinkDetails": 4289,
 	"AMGetPlayerLinkDetailsResponse": 4290,
-	"AMSubscribeToPersonaFeed": 4291, // obsolete
-	"AMGetUserVacBanList": 4292, // obsolete
-	"AMGetUserVacBanListResponse": 4293, // obsolete
+	"AMSubscribeToPersonaFeed": 4291, // removed
+	"AMGetUserVacBanList": 4292, // removed
+	"AMGetUserVacBanListResponse": 4293, // removed
 	"AMGetAccountFlagsForWGSpoofing": 4294,
 	"AMGetAccountFlagsForWGSpoofingResponse": 4295,
-	"AMGetFriendsWishlistInfo": 4296, // obsolete
-	"AMGetFriendsWishlistInfoResponse": 4297, // obsolete
+	"AMGetFriendsWishlistInfo": 4296, // removed
+	"AMGetFriendsWishlistInfoResponse": 4297, // removed
 	"AMGetClanOfficers": 4298,
 	"AMGetClanOfficersResponse": 4299,
 	"AMNameChange": 4300,
 	"AMGetNameHistory": 4301,
 	"AMGetNameHistoryResponse": 4302,
 	"AMUpdateProviderStatus": 4305,
-	"AMClearPersonaMetadataBlob": 4306, // obsolete
+	"AMClearPersonaMetadataBlob": 4306, // removed
 	"AMSupportRemoveAccountSecurity": 4307,
 	"AMIsAccountInCaptchaGracePeriod": 4308,
 	"AMIsAccountInCaptchaGracePeriodResponse": 4309,
@@ -1077,7 +1077,7 @@ module.exports = {
 	"AMGameServerAccountChangePassword": 4340,
 	"AMGameServerAccountDeleteAccount": 4341,
 	"AMRenewAgreement": 4342,
-	"AMSendEmail": 4343, // obsolete
+	"AMSendEmail": 4343, // removed
 	"AMXsollaPayment": 4344,
 	"AMXsollaPaymentResponse": 4345,
 	"AMAcctAllowedToPurchase": 4346,
@@ -1175,9 +1175,9 @@ module.exports = {
 	"UFSSynchronizeFileResponse": 5218,
 	"ClientUFSDeleteFileRequest": 5219,
 	"ClientUFSDeleteFileResponse": 5220,
-	"UFSDownloadRequest": 5221, // obsolete
-	"UFSDownloadResponse": 5222, // obsolete
-	"UFSDownloadChunk": 5223, // obsolete
+	"UFSDownloadRequest": 5221, // removed
+	"UFSDownloadResponse": 5222, // removed
+	"UFSDownloadChunk": 5223, // removed
 	"ClientUFSGetUGCDetails": 5226,
 	"ClientUFSGetUGCDetailsResponse": 5227,
 	"UFSUpdateFileFlags": 5228,
@@ -1216,7 +1216,7 @@ module.exports = {
 	"ClientCreateAccount2": 5406,
 	"ClientInformOfResetForgottenPassword": 5407,
 	"ClientInformOfResetForgottenPasswordResponse": 5408,
-	"ClientAnonUserLogOn_Deprecated": 5409, // obsolete
+	"ClientAnonUserLogOn_Deprecated": 5409, // removed
 	"ClientGamesPlayedWithDataBlob": 5410,
 	"ClientUpdateUserGameInfo": 5411,
 	"ClientFileToDownload": 5412,
@@ -1227,10 +1227,10 @@ module.exports = {
 	"ClientLBSFindOrCreateLBResponse": 5417,
 	"ClientLBSGetLBEntries": 5418,
 	"ClientLBSGetLBEntriesResponse": 5419,
-	"ClientMarketingMessageUpdate": 5420, // obsolete
+	"ClientMarketingMessageUpdate": 5420, // removed
 	"ClientChatDeclined": 5426,
 	"ClientFriendMsgIncoming": 5427,
-	"ClientAuthList_Deprecated": 5428, // obsolete
+	"ClientAuthList_Deprecated": 5428, // removed
 	"ClientTicketAuthComplete": 5429,
 	"ClientIsLimitedAccount": 5430,
 	"ClientRequestAuthList": 5431,
@@ -1238,13 +1238,13 @@ module.exports = {
 	"ClientStat": 5433,
 	"ClientP2PConnectionInfo": 5434,
 	"ClientP2PConnectionFailInfo": 5435,
-	"ClientGetNumberOfCurrentPlayers": 5436, // obsolete
-	"ClientGetNumberOfCurrentPlayersResponse": 5437, // obsolete
+	"ClientGetNumberOfCurrentPlayers": 5436, // removed
+	"ClientGetNumberOfCurrentPlayersResponse": 5437, // removed
 	"ClientGetDepotDecryptionKey": 5438,
 	"ClientGetDepotDecryptionKeyResponse": 5439,
 	"GSPerformHardwareSurvey": 5440,
-	"ClientGetAppBetaPasswords": 5441,
-	"ClientGetAppBetaPasswordsResponse": 5442,
+	"ClientGetAppBetaPasswords": 5441, // removed
+	"ClientGetAppBetaPasswordsResponse": 5442, // removed
 	"ClientEnableTestLicense": 5443,
 	"ClientEnableTestLicenseResponse": 5444,
 	"ClientDisableTestLicense": 5445,
@@ -1263,10 +1263,10 @@ module.exports = {
 	"ClientPersonalQAChange3": 5459,
 	"ClientResetForgottenPassword3": 5460,
 	"ClientRequestForgottenPasswordEmail3": 5461,
-	"ClientCreateAccount3": 5462, // obsolete
+	"ClientCreateAccount3": 5462, // removed
 	"ClientNewLoginKey": 5463,
 	"ClientNewLoginKeyAccepted": 5464,
-	"ClientLogOnWithHash_Deprecated": 5465, // obsolete
+	"ClientLogOnWithHash_Deprecated": 5465, // removed
 	"ClientStoreUserStats2": 5466,
 	"ClientStatsUpdated": 5467,
 	"ClientActivateOEMLicense": 5468,
@@ -1321,8 +1321,8 @@ module.exports = {
 	"ClientLBSSetUGCResponse": 5530,
 	"ClientAMGetClanOfficers": 5531,
 	"ClientAMGetClanOfficersResponse": 5532,
-	"ClientCheckFileSignature": 5533,
-	"ClientCheckFileSignatureResponse": 5534,
+	"ClientCheckFileSignature": 5533, // removed
+	"ClientCheckFileSignatureResponse": 5534, // removed
 	"ClientFriendProfileInfo": 5535,
 	"ClientFriendProfileInfoResponse": 5536,
 	"ClientUpdateMachineAuth": 5537,
@@ -1367,8 +1367,8 @@ module.exports = {
 	"ClientItemAnnouncements": 5576,
 	"ClientRequestItemAnnouncements": 5577,
 	"ClientFriendMsgEchoToSender": 5578,
-	"ClientChangeSteamGuardOptions": 5579, // obsolete
-	"ClientChangeSteamGuardOptionsResponse": 5580, // obsolete
+	"ClientChangeSteamGuardOptions": 5579, // removed
+	"ClientChangeSteamGuardOptionsResponse": 5580, // removed
 	"ClientOGSGameServerPingSample": 5581,
 	"ClientCommentNotifications": 5582,
 	"ClientRequestCommentNotifications": 5583,
@@ -1378,8 +1378,8 @@ module.exports = {
 	"ClientPlayerNicknameList": 5587,
 	"AMClientSetPlayerNickname": 5588,
 	"AMClientSetPlayerNicknameResponse": 5589,
-	"ClientRequestOAuthTokenForApp": 5590, // obsolete
-	"ClientRequestOAuthTokenForAppResponse": 5591, // obsolete
+	"ClientRequestOAuthTokenForApp": 5590, // removed
+	"ClientRequestOAuthTokenForAppResponse": 5591, // removed
 	"ClientCreateAccountProto": 5590,
 	"ClientCreateAccountProtoResponse": 5591,
 	"ClientGetNumberOfCurrentPlayersDP": 5592,
@@ -1412,31 +1412,31 @@ module.exports = {
 	"DFSTransferComplete": 5619,
 	"DFSRouteFileResponse": 5620,
 	"BaseMDS": 5800,
-	"ClientMDSLoginRequest": 5801, // obsolete
-	"ClientMDSLoginResponse": 5802, // obsolete
-	"ClientMDSUploadManifestRequest": 5803, // obsolete
-	"ClientMDSUploadManifestResponse": 5804, // obsolete
-	"ClientMDSTransmitManifestDataChunk": 5805, // obsolete
-	"ClientMDSHeartbeat": 5806, // obsolete
-	"ClientMDSUploadDepotChunks": 5807, // obsolete
-	"ClientMDSUploadDepotChunksResponse": 5808, // obsolete
-	"ClientMDSInitDepotBuildRequest": 5809, // obsolete
-	"ClientMDSInitDepotBuildResponse": 5810, // obsolete
+	"ClientMDSLoginRequest": 5801, // removed
+	"ClientMDSLoginResponse": 5802, // removed
+	"ClientMDSUploadManifestRequest": 5803, // removed
+	"ClientMDSUploadManifestResponse": 5804, // removed
+	"ClientMDSTransmitManifestDataChunk": 5805, // removed
+	"ClientMDSHeartbeat": 5806, // removed
+	"ClientMDSUploadDepotChunks": 5807, // removed
+	"ClientMDSUploadDepotChunksResponse": 5808, // removed
+	"ClientMDSInitDepotBuildRequest": 5809, // removed
+	"ClientMDSInitDepotBuildResponse": 5810, // removed
 	"AMToMDSGetDepotDecryptionKey": 5812,
 	"MDSToAMGetDepotDecryptionKeyResponse": 5813,
-	"MDSGetVersionsForDepot": 5814, // obsolete
-	"MDSGetVersionsForDepotResponse": 5815, // obsolete
-	"MDSSetPublicVersionForDepot": 5816, // obsolete
-	"MDSSetPublicVersionForDepotResponse": 5817, // obsolete
-	"ClientMDSInitWorkshopBuildRequest": 5816, // obsolete
-	"ClientMDSInitWorkshopBuildResponse": 5817, // obsolete
-	"ClientMDSGetDepotManifest": 5818, // obsolete
-	"ClientMDSGetDepotManifestResponse": 5819, // obsolete
-	"ClientMDSGetDepotManifestChunk": 5820, // obsolete
-	"ClientMDSUploadRateTest": 5823, // obsolete
-	"ClientMDSUploadRateTestResponse": 5824, // obsolete
-	"MDSDownloadDepotChunksAck": 5825, // obsolete
-	"MDSContentServerStatsBroadcast": 5826, // obsolete
+	"MDSGetVersionsForDepot": 5814, // removed
+	"MDSGetVersionsForDepotResponse": 5815, // removed
+	"MDSSetPublicVersionForDepot": 5816, // removed
+	"MDSSetPublicVersionForDepotResponse": 5817, // removed
+	"ClientMDSInitWorkshopBuildRequest": 5816, // removed
+	"ClientMDSInitWorkshopBuildResponse": 5817, // removed
+	"ClientMDSGetDepotManifest": 5818, // removed
+	"ClientMDSGetDepotManifestResponse": 5819, // removed
+	"ClientMDSGetDepotManifestChunk": 5820, // removed
+	"ClientMDSUploadRateTest": 5823, // removed
+	"ClientMDSUploadRateTestResponse": 5824, // removed
+	"MDSDownloadDepotChunksAck": 5825, // removed
+	"MDSContentServerStatsBroadcast": 5826, // removed
 	"MDSContentServerConfigRequest": 5827,
 	"MDSContentServerConfig": 5828,
 	"MDSGetDepotManifest": 5829,
@@ -1445,18 +1445,18 @@ module.exports = {
 	"MDSGetDepotChunk": 5832,
 	"MDSGetDepotChunkResponse": 5833,
 	"MDSGetDepotChunkChunk": 5834,
-	"MDSUpdateContentServerConfig": 5835, // obsolete
+	"MDSUpdateContentServerConfig": 5835, // removed
 	"MDSGetServerListForUser": 5836,
 	"MDSGetServerListForUserResponse": 5837,
-	"ClientMDSRegisterAppBuild": 5838, // obsolete
-	"ClientMDSRegisterAppBuildResponse": 5839, // obsolete
-	"ClientMDSSetAppBuildLive": 5840, // obsolete
-	"ClientMDSSetAppBuildLiveResponse": 5841, // obsolete
-	"ClientMDSGetPrevDepotBuild": 5842, // obsolete
-	"ClientMDSGetPrevDepotBuildResponse": 5843, // obsolete
+	"ClientMDSRegisterAppBuild": 5838, // removed
+	"ClientMDSRegisterAppBuildResponse": 5839, // removed
+	"ClientMDSSetAppBuildLive": 5840, // removed
+	"ClientMDSSetAppBuildLiveResponse": 5841, // removed
+	"ClientMDSGetPrevDepotBuild": 5842, // removed
+	"ClientMDSGetPrevDepotBuildResponse": 5843, // removed
 	"MDSToCSFlushChunk": 5844,
-	"ClientMDSSignInstallScript": 5845, // obsolete
-	"ClientMDSSignInstallScriptResponse": 5846, // obsolete
+	"ClientMDSSignInstallScript": 5845, // removed
+	"ClientMDSSignInstallScriptResponse": 5846, // removed
 	"MDSMigrateChunk": 5847,
 	"MDSMigrateChunkResponse": 5848,
 	"CSBase": 6200,
@@ -1471,13 +1471,15 @@ module.exports = {
 	"GameServerOutOfDate": 6407,
 	"DeviceAuthorizationBase": 6500,
 	"ClientAuthorizeLocalDeviceRequest": 6501,
-	"ClientAuthorizeLocalDevice": 6502,
+	"ClientAuthorizeLocalDevice": 6502, // removed
+	"ClientAuthorizeLocalDeviceResponse": 6502,
 	"ClientDeauthorizeDeviceRequest": 6503,
 	"ClientDeauthorizeDevice": 6504,
 	"ClientUseLocalDeviceAuthorizations": 6505,
 	"ClientGetAuthorizedDevices": 6506,
 	"ClientGetAuthorizedDevicesResponse": 6507,
 	"AMNotifySessionDeviceAuthorized": 6508,
+	"ClientAuthorizeLocalDeviceNotification": 6509,
 	"MMSBase": 6600,
 	"ClientMMSCreateLobby": 6601,
 	"ClientMMSCreateLobbyResponse": 6602,
@@ -1513,7 +1515,7 @@ module.exports = {
 	"NonStdMsgDFSTransfer": 6807,
 	"NonStdMsgTests": 6808,
 	"NonStdMsgUMQpipeAAPL": 6809,
-	"NonStdMsgSyslog": 6810, // obsolete
+	"NonStdMsgSyslog": 6810, // removed
 	"NonStdMsgLogsink": 6811,
 	"NonStdMsgSteam2Emulator": 6812,
 	"NonStdMsgRTMPServer": 6813,
@@ -1523,44 +1525,44 @@ module.exports = {
 	"UDSRenderUserAuth": 7003,
 	"UDSRenderUserAuthResponse": 7004,
 	"ClientUDSInviteToGame": 7005,
-	"UDSFindSession": 7006, // obsolete "renamed to UDSHasSession"
+	"UDSFindSession": 7006, // removed "renamed to UDSHasSession"
 	"UDSHasSession": 7006,
-	"UDSFindSessionResponse": 7007, // obsolete "renamed to UDSHasSessionResponse"
+	"UDSFindSessionResponse": 7007, // removed "renamed to UDSHasSessionResponse"
 	"UDSHasSessionResponse": 7007,
 	"MPASBase": 7100,
 	"MPASVacBanReset": 7101,
 	"KGSBase": 7200,
-	"KGSAllocateKeyRange": 7201, // obsolete
-	"KGSAllocateKeyRangeResponse": 7202, // obsolete
-	"KGSGenerateKeys": 7203, // obsolete
-	"KGSGenerateKeysResponse": 7204, // obsolete
-	"KGSRemapKeys": 7205, // obsolete
-	"KGSRemapKeysResponse": 7206, // obsolete
-	"KGSGenerateGameStopWCKeys": 7207, // obsolete
-	"KGSGenerateGameStopWCKeysResponse": 7208, // obsolete
+	"KGSAllocateKeyRange": 7201, // removed
+	"KGSAllocateKeyRangeResponse": 7202, // removed
+	"KGSGenerateKeys": 7203, // removed
+	"KGSGenerateKeysResponse": 7204, // removed
+	"KGSRemapKeys": 7205, // removed
+	"KGSRemapKeysResponse": 7206, // removed
+	"KGSGenerateGameStopWCKeys": 7207, // removed
+	"KGSGenerateGameStopWCKeysResponse": 7208, // removed
 	"UCMBase": 7300,
 	"ClientUCMAddScreenshot": 7301,
 	"ClientUCMAddScreenshotResponse": 7302,
-	"UCMValidateObjectExists": 7303, // obsolete
-	"UCMValidateObjectExistsResponse": 7304, // obsolete
+	"UCMValidateObjectExists": 7303, // removed
+	"UCMValidateObjectExistsResponse": 7304, // removed
 	"UCMResetCommunityContent": 7307,
 	"UCMResetCommunityContentResponse": 7308,
 	"ClientUCMDeleteScreenshot": 7309,
 	"ClientUCMDeleteScreenshotResponse": 7310,
 	"ClientUCMPublishFile": 7311,
 	"ClientUCMPublishFileResponse": 7312,
-	"ClientUCMGetPublishedFileDetails": 7313, // obsolete
-	"ClientUCMGetPublishedFileDetailsResponse": 7314, // obsolete
+	"ClientUCMGetPublishedFileDetails": 7313, // removed
+	"ClientUCMGetPublishedFileDetailsResponse": 7314, // removed
 	"ClientUCMDeletePublishedFile": 7315,
 	"ClientUCMDeletePublishedFileResponse": 7316,
 	"ClientUCMEnumerateUserPublishedFiles": 7317,
 	"ClientUCMEnumerateUserPublishedFilesResponse": 7318,
-	"ClientUCMSubscribePublishedFile": 7319, // obsolete
-	"ClientUCMSubscribePublishedFileResponse": 7320, // obsolete
+	"ClientUCMSubscribePublishedFile": 7319, // removed
+	"ClientUCMSubscribePublishedFileResponse": 7320, // removed
 	"ClientUCMEnumerateUserSubscribedFiles": 7321,
 	"ClientUCMEnumerateUserSubscribedFilesResponse": 7322,
-	"ClientUCMUnsubscribePublishedFile": 7323, // obsolete
-	"ClientUCMUnsubscribePublishedFileResponse": 7324, // obsolete
+	"ClientUCMUnsubscribePublishedFile": 7323, // removed
+	"ClientUCMUnsubscribePublishedFileResponse": 7324, // removed
 	"ClientUCMUpdatePublishedFile": 7325,
 	"ClientUCMUpdatePublishedFileResponse": 7326,
 	"UCMUpdatePublishedFile": 7327,
@@ -1570,9 +1572,9 @@ module.exports = {
 	"UCMUpdatePublishedFileStat": 7331,
 	"UCMUpdatePublishedFileBan": 7332,
 	"UCMUpdatePublishedFileBanResponse": 7333,
-	"UCMUpdateTaggedScreenshot": 7334, // obsolete
-	"UCMAddTaggedScreenshot": 7335, // obsolete
-	"UCMRemoveTaggedScreenshot": 7336, // obsolete
+	"UCMUpdateTaggedScreenshot": 7334, // removed
+	"UCMAddTaggedScreenshot": 7335, // removed
+	"UCMRemoveTaggedScreenshot": 7336, // removed
 	"UCMReloadPublishedFile": 7337,
 	"UCMReloadUserFileListCaches": 7338,
 	"UCMPublishedFileReported": 7339,
@@ -1581,8 +1583,8 @@ module.exports = {
 	"UCMPublishedFilePreviewAddResponse": 7342,
 	"UCMPublishedFilePreviewRemove": 7343,
 	"UCMPublishedFilePreviewRemoveResponse": 7344,
-	"UCMPublishedFilePreviewChangeSortOrder": 7345, // obsolete
-	"UCMPublishedFilePreviewChangeSortOrderResponse": 7346, // obsolete
+	"UCMPublishedFilePreviewChangeSortOrder": 7345, // removed
+	"UCMPublishedFilePreviewChangeSortOrderResponse": 7346, // removed
 	"ClientUCMPublishedFileSubscribed": 7347,
 	"ClientUCMPublishedFileUnsubscribed": 7348,
 	"UCMPublishedFileSubscribed": 7349,
@@ -1593,13 +1595,13 @@ module.exports = {
 	"UCMPublishedFileChildAddResponse": 7354,
 	"UCMPublishedFileChildRemove": 7355,
 	"UCMPublishedFileChildRemoveResponse": 7356,
-	"UCMPublishedFileChildChangeSortOrder": 7357, // obsolete
-	"UCMPublishedFileChildChangeSortOrderResponse": 7358, // obsolete
+	"UCMPublishedFileChildChangeSortOrder": 7357, // removed
+	"UCMPublishedFileChildChangeSortOrderResponse": 7358, // removed
 	"UCMPublishedFileParentChanged": 7359,
 	"ClientUCMGetPublishedFilesForUser": 7360,
 	"ClientUCMGetPublishedFilesForUserResponse": 7361,
-	"UCMGetPublishedFilesForUser": 7362, // obsolete
-	"UCMGetPublishedFilesForUserResponse": 7363, // obsolete
+	"UCMGetPublishedFilesForUser": 7362, // removed
+	"UCMGetPublishedFilesForUserResponse": 7363, // removed
 	"ClientUCMSetUserPublishedFileAction": 7364,
 	"ClientUCMSetUserPublishedFileActionResponse": 7365,
 	"ClientUCMEnumeratePublishedFilesByUserAction": 7366,
@@ -1608,12 +1610,12 @@ module.exports = {
 	"UCMGetUserSubscribedFiles": 7369,
 	"UCMGetUserSubscribedFilesResponse": 7370,
 	"UCMFixStatsPublishedFile": 7371,
-	"UCMDeleteOldScreenshot": 7372, // obsolete
-	"UCMDeleteOldScreenshotResponse": 7373, // obsolete
-	"UCMDeleteOldVideo": 7374, // obsolete
-	"UCMDeleteOldVideoResponse": 7375, // obsolete
-	"UCMUpdateOldScreenshotPrivacy": 7376, // obsolete
-	"UCMUpdateOldScreenshotPrivacyResponse": 7377, // obsolete
+	"UCMDeleteOldScreenshot": 7372, // removed
+	"UCMDeleteOldScreenshotResponse": 7373, // removed
+	"UCMDeleteOldVideo": 7374, // removed
+	"UCMDeleteOldVideoResponse": 7375, // removed
+	"UCMUpdateOldScreenshotPrivacy": 7376, // removed
+	"UCMUpdateOldScreenshotPrivacyResponse": 7377, // removed
 	"ClientUCMEnumerateUserSubscribedFilesWithUpdates": 7378,
 	"ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse": 7379,
 	"UCMPublishedFileContentUpdated": 7380,
@@ -1689,7 +1691,7 @@ module.exports = {
 	"ClientUGSGetGlobalStats": 7901,
 	"ClientUGSGetGlobalStatsResponse": 7902,
 	"StoreBase": 8000,
-	"StoreUpdateRecommendationCount": 8000, // obsolete
+	"StoreUpdateRecommendationCount": 8000, // removed
 	"UMQBase": 8100,
 	"UMQLogonRequest": 8100,
 	"UMQLogonResponse": 8101,
@@ -1700,15 +1702,15 @@ module.exports = {
 	"UMQPoll": 8106,
 	"UMQPollResults": 8107,
 	"UMQ2AM_ClientMsgBatch": 8108,
-	"UMQEnqueueMobileSalePromotions": 8109, // obsolete
-	"UMQEnqueueMobileAnnouncements": 8110, // obsolete
+	"UMQEnqueueMobileSalePromotions": 8109, // removed
+	"UMQEnqueueMobileAnnouncements": 8110, // removed
 	"WorkshopBase": 8200,
-	"WorkshopAcceptTOSRequest": 8200, // obsolete
-	"WorkshopAcceptTOSResponse": 8201, // obsolete
+	"WorkshopAcceptTOSRequest": 8200, // removed
+	"WorkshopAcceptTOSResponse": 8201, // removed
 	"WebAPIBase": 8300,
 	"WebAPIValidateOAuth2Token": 8300,
 	"WebAPIValidateOAuth2TokenResponse": 8301,
-	"WebAPIInvalidateTokensForAccount": 8302, // obsolete
+	"WebAPIInvalidateTokensForAccount": 8302, // removed
 	"WebAPIRegisterGCInterfaces": 8303,
 	"WebAPIInvalidateOAuthClientCache": 8304,
 	"WebAPIInvalidateOAuthTokenCache": 8305,
@@ -1717,12 +1719,12 @@ module.exports = {
 	"BackpackAddToCurrency": 8401,
 	"BackpackAddToCurrencyResponse": 8402,
 	"CREBase": 8500,
-	"CRERankByTrend": 8501, // obsolete
-	"CRERankByTrendResponse": 8502, // obsolete
+	"CRERankByTrend": 8501, // removed
+	"CRERankByTrendResponse": 8502, // removed
 	"CREItemVoteSummary": 8503,
 	"CREItemVoteSummaryResponse": 8504,
-	"CRERankByVote": 8505, // obsolete
-	"CRERankByVoteResponse": 8506, // obsolete
+	"CRERankByVote": 8505, // removed
+	"CRERankByVoteResponse": 8506, // removed
 	"CREUpdateUserPublishedItemVote": 8507,
 	"CREUpdateUserPublishedItemVoteResponse": 8508,
 	"CREGetUserPublishedItemVoteDetails": 8509,
@@ -1733,9 +1735,9 @@ module.exports = {
 	"SecretsBase": 8600,
 	"SecretsRequestCredentialPair": 8600,
 	"SecretsCredentialPairResponse": 8601,
-	"SecretsRequestServerIdentity": 8602, // obsolete
-	"SecretsServerIdentityResponse": 8603, // obsolete
-	"SecretsUpdateServerIdentities": 8604, // obsolete
+	"SecretsRequestServerIdentity": 8602, // removed
+	"SecretsServerIdentityResponse": 8603, // removed
+	"SecretsUpdateServerIdentities": 8604, // removed
 	"BoxMonitorBase": 8700,
 	"BoxMonitorReportRequest": 8700,
 	"BoxMonitorReportResponse": 8701,
@@ -1761,8 +1763,8 @@ module.exports = {
 	"DRMWorkerProcessInstallDRMDLLResponse": 9105,
 	"DRMWorkerProcessSecretIdStringRequest": 9106,
 	"DRMWorkerProcessSecretIdStringResponse": 9107,
-	"DRMWorkerProcessGetDRMGuidsFromFileRequest": 9108, // obsolete
-	"DRMWorkerProcessGetDRMGuidsFromFileResponse": 9109, // obsolete
+	"DRMWorkerProcessGetDRMGuidsFromFileRequest": 9108, // removed
+	"DRMWorkerProcessGetDRMGuidsFromFileResponse": 9109, // removed
 	"DRMWorkerProcessInstallProcessedFilesRequest": 9110,
 	"DRMWorkerProcessInstallProcessedFilesResponse": 9111,
 	"DRMWorkerProcessExamineBlobRequest": 9112,
@@ -1795,13 +1797,13 @@ module.exports = {
 	"QuestServerBase": 9300,
 	"ClientGetEmoticonList": 9330,
 	"ClientEmoticonList": 9331,
-	"ClientSharedLibraryBase": 9400, // obsolete "renamed to SLCBase"
+	"ClientSharedLibraryBase": 9400, // removed "renamed to SLCBase"
 	"SLCBase": 9400,
 	"SLCUserSessionStatus": 9400,
 	"SLCRequestUserSessionStatus": 9401,
 	"SLCSharedLicensesLockStatus": 9402,
-	"ClientSharedLicensesLockStatus": 9403, // obsolete
-	"ClientSharedLicensesStopPlaying": 9404, // obsolete
+	"ClientSharedLicensesLockStatus": 9403, // removed
+	"ClientSharedLicensesStopPlaying": 9404, // removed
 	"ClientSharedLibraryLockStatus": 9405,
 	"ClientSharedLibraryStopPlaying": 9406,
 	"SLCOwnerLibraryChanged": 9407,
@@ -3282,13 +3284,14 @@ module.exports = {
 	"6407": "GameServerOutOfDate",
 	"6500": "DeviceAuthorizationBase",
 	"6501": "ClientAuthorizeLocalDeviceRequest",
-	"6502": "ClientAuthorizeLocalDevice",
+	"6502": "ClientAuthorizeLocalDeviceResponse",
 	"6503": "ClientDeauthorizeDeviceRequest",
 	"6504": "ClientDeauthorizeDevice",
 	"6505": "ClientUseLocalDeviceAuthorizations",
 	"6506": "ClientGetAuthorizedDevices",
 	"6507": "ClientGetAuthorizedDevicesResponse",
 	"6508": "AMNotifySessionDeviceAuthorized",
+	"6509": "ClientAuthorizeLocalDeviceNotification",
 	"6600": "MMSBase",
 	"6601": "ClientMMSCreateLobby",
 	"6602": "ClientMMSCreateLobbyResponse",

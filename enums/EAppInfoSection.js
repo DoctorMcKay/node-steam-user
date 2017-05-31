@@ -11,14 +11,14 @@ module.exports = {
 	"Stats": 5,
 	"Install": 6,
 	"Depots": 7,
-	"VAC": 8, // obsolete
-	"VAC_UNUSED": 8, // obsolete
-	"DRM": 9, // obsolete
-	"DRM_UNUSED": 9, // obsolete
+	"VAC": 8, // removed
+	"VAC_UNUSED": 8, // removed
+	"DRM": 9, // removed
+	"DRM_UNUSED": 9, // removed
 	"UFS": 10,
 	"OGG": 11,
-	"Items": 12, // obsolete
-	"ItemsUNUSED": 12, // obsolete
+	"Items": 12, // removed
+	"ItemsUNUSED": 12, // removed
 	"Policies": 13,
 	"SysReqs": 14,
 	"Community": 15,

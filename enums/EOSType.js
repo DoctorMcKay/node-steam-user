@@ -37,21 +37,21 @@ module.exports = {
 	"Win98": 3,
 	"WinME": 4,
 	"WinNT": 5,
-	"Win200": 6, // obsolete "renamed to Win2000"
+	"Win200": 6, // removed "renamed to Win2000"
 	"Win2000": 6,
 	"WinXP": 7,
 	"Win2003": 8,
 	"WinVista": 9,
-	"Win7": 10, // obsolete "renamed to Windows7"
+	"Win7": 10, // removed "renamed to Windows7"
 	"Windows7": 10,
 	"Win2008": 11,
 	"Win2012": 12,
-	"Win8": 13, // obsolete "renamed to Windows8"
+	"Win8": 13, // removed "renamed to Windows8"
 	"Windows8": 13,
-	"Win81": 14, // obsolete "renamed to Windows81"
+	"Win81": 14, // removed "renamed to Windows81"
 	"Windows81": 14,
 	"Win2012R2": 15,
-	"Win10": 16, // obsolete "renamed to Windows10"
+	"Win10": 16, // removed "renamed to Windows10"
 	"Windows10": 16,
 	"WinMAX": 15,
 	"Max": 26,

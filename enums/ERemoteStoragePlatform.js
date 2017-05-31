@@ -7,7 +7,7 @@ module.exports = {
 	"OSX": 2,
 	"PS3": 4,
 	"Linux": 8,
-	"Reserved1": 8, // obsolete
+	"Reserved1": 8, // removed
 	"Reserved2": 16,
 	"All": -1,
 

@@ -40,7 +40,7 @@ module.exports = {
 	"EClubPoints": 35,
 	"CreditCardJapan": 36,
 	"BankTransferJapan": 37,
-	"PayEasyJapan": 38, // obsolete "renamed to PayEasy"
+	"PayEasyJapan": 38, // removed "renamed to PayEasy"
 	"PayEasy": 38,
 	"Zong": 39,
 	"CultureVoucher": 40,
@@ -50,7 +50,7 @@ module.exports = {
 	"GameVoucher": 44,
 	"Multibanco": 45,
 	"Payshop": 46,
-	"Maestro": 47, // obsolete "renamed to MaestroBoaCompra"
+	"Maestro": 47, // removed "renamed to MaestroBoaCompra"
 	"MaestroBoaCompra": 47,
 	"OXXO": 48,
 	"ToditoCash": 49,
@@ -85,9 +85,9 @@ module.exports = {
 	"BitCoin": 79,
 	"Wallet": 128,
 	"Valve": 129,
-	"SteamPressMaster": 130, // obsolete "renamed to MasterComp"
+	"SteamPressMaster": 130, // removed "renamed to MasterComp"
 	"MasterComp": 130,
-	"StorePromotion": 131, // obsolete "renamed to Promotional"
+	"StorePromotion": 131, // removed "renamed to Promotional"
 	"Promotional": 131,
 	"OEMTicket": 256,
 	"Split": 512,

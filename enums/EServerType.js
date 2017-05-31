@@ -6,38 +6,38 @@ module.exports = {
 	"First": 0,
 	"Shell": 0,
 	"GM": 1,
-	"BUM": 2, // obsolete
-	"BUMOBOSOLETE": 2, // obsolete
+	"BUM": 2, // removed
+	"BUMOBOSOLETE": 2, // removed
 	"AM": 3,
 	"BS": 4,
 	"VS": 5,
 	"ATS": 6,
 	"CM": 7,
 	"FBS": 8,
-	"FG": 9, // obsolete "renamed to BoxMonitor"
+	"FG": 9, // removed "renamed to BoxMonitor"
 	"BoxMonitor": 9,
 	"SS": 10,
 	"DRMS": 11,
-	"HubOBSOLETE": 12, // obsolete
+	"HubOBSOLETE": 12, // removed
 	"Console": 13,
-	"ASBOBSOLETE": 14, // obsolete
+	"ASBOBSOLETE": 14, // removed
 	"PICS": 14,
 	"Client": 15,
-	"BootstrapOBSOLETE": 16, // obsolete;
+	"BootstrapOBSOLETE": 16, // removed;
 	"DP": 17,
 	"WG": 18,
 	"SM": 19,
 	"SLC": 20,
 	"UFS": 21,
 	"Util": 23,
-	"DSS": 24, // obsolete "renamed to Community"
+	"DSS": 24, // removed "renamed to Community"
 	"Community": 24,
-	"P2PRelayOBSOLETE": 25, // obsolete
+	"P2PRelayOBSOLETE": 25, // removed
 	"AppInformation": 26,
 	"Spare": 27,
 	"FTS": 28,
-	"EPM": 29, // obsolete
-	"EPMOBSOLETE": 29, // obsolete
+	"EPM": 29, // removed
+	"EPMOBSOLETE": 29, // removed
 	"PS": 30,
 	"IS": 31,
 	"CCS": 32,
@@ -59,7 +59,7 @@ module.exports = {
 	"Econ": 48,
 	"Backpack": 49,
 	"UGS": 50,
-	"Store": 51, // obsolete "renamed to StoreFeature"
+	"Store": 51, // removed "renamed to StoreFeature"
 	"StoreFeature": 51,
 	"MoneyStats": 52,
 	"CRE": 53,

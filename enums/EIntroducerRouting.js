@@ -2,7 +2,7 @@
  * @enum EIntroducerRouting
  */
 module.exports = {
-	"FileShare": 0, // obsolete
+	"FileShare": 0, // removed
 	"P2PVoiceChat": 1,
 	"P2PNetworking": 2,
 

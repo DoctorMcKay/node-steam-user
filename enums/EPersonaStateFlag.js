@@ -4,14 +4,14 @@
 module.exports = {
 	"HasRichPresence": 1,
 	"InJoinableGame": 2,
-	"Golden": 4, // obsolete "no longer has any effect"
-	"OnlineUsingWeb": 256, // obsolete "renamed to ClientTypeWeb"
+	"Golden": 4, // removed "no longer has any effect"
+	"OnlineUsingWeb": 256, // removed "renamed to ClientTypeWeb"
 	"ClientTypeWeb": 256,
-	"OnlineUsingMobile": 512, // obsolete "renamed to ClientTypeMobile"
+	"OnlineUsingMobile": 512, // removed "renamed to ClientTypeMobile"
 	"ClientTypeMobile": 512,
-	"OnlineUsingBigPicture": 1024, // obsolete "renamed to ClientTypeTenfoot"
+	"OnlineUsingBigPicture": 1024, // removed "renamed to ClientTypeTenfoot"
 	"ClientTypeTenfoot": 1024,
-	"OnlineUsingVR": 2048, // obsolete "renamed to ClientTypeVR"
+	"OnlineUsingVR": 2048, // removed "renamed to ClientTypeVR"
 	"ClientTypeVR": 2048,
 	"LaunchTypeGamepad": 4096,
 

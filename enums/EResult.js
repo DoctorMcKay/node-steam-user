@@ -57,7 +57,7 @@ module.exports = {
 	"DataCorruption": 53,
 	"DiskFull": 54,
 	"RemoteCallFailed": 55,
-	"PasswordNotSet": 56, // obsolete "renamed to PasswordUnset"
+	"PasswordNotSet": 56, // removed "renamed to PasswordUnset"
 	"PasswordUnset": 56,
 	"ExternalAccountUnlinked": 57,
 	"PSNTicketInvalid": 58,
@@ -68,7 +68,7 @@ module.exports = {
 	"AccountLogonDenied": 63,
 	"CannotUseOldPassword": 64,
 	"InvalidLoginAuthCode": 65,
-	"AccountLogonDeniedNoMailSent": 66, // obsolete "renamed to AccountLogonDeniedNoMail"
+	"AccountLogonDeniedNoMailSent": 66, // removed "renamed to AccountLogonDeniedNoMail"
 	"AccountLogonDeniedNoMail": 66,
 	"HardwareNotCapableOfIPT": 67,
 	"IPTInitError": 68,
@@ -76,7 +76,7 @@ module.exports = {
 	"FacebookQueryError": 70,
 	"ExpiredLoginAuthCode": 71,
 	"IPLoginRestrictionFailed": 72,
-	"AccountLocked": 73, // obsolete "renamed to AccountLockedDown"
+	"AccountLocked": 73, // removed "renamed to AccountLockedDown"
 	"AccountLockedDown": 73,
 	"AccountLogonDeniedVerifiedEmailRequired": 74,
 	"NoMatchingURL": 75,
@@ -89,22 +89,22 @@ module.exports = {
 	"RestrictedDevice": 82,
 	"RegionLocked": 83,
 	"RateLimitExceeded": 84,
-	"AccountLogonDeniedNeedTwoFactorCode": 85, // obsolete "renamed to AccountLoginDeniedNeedTwoFactor"
+	"AccountLogonDeniedNeedTwoFactorCode": 85, // removed "renamed to AccountLoginDeniedNeedTwoFactor"
 	"AccountLoginDeniedNeedTwoFactor": 85,
-	"ItemOrEntryHasBeenDeleted": 86, // obsolete "renamed to ItemDeleted"
+	"ItemOrEntryHasBeenDeleted": 86, // removed "renamed to ItemDeleted"
 	"ItemDeleted": 86,
 	"AccountLoginDeniedThrottle": 87,
 	"TwoFactorCodeMismatch": 88,
 	"TwoFactorActivationCodeMismatch": 89,
-	"AccountAssociatedToMultiplePlayers": 90, // obsolete "renamed to AccountAssociatedToMultiplePartners"
+	"AccountAssociatedToMultiplePlayers": 90, // removed "renamed to AccountAssociatedToMultiplePartners"
 	"AccountAssociatedToMultiplePartners": 90,
 	"NotModified": 91,
-	"NoMobileDeviceAvailable": 92, // obsolete "renamed to NoMobileDevice"
+	"NoMobileDeviceAvailable": 92, // removed "renamed to NoMobileDevice"
 	"NoMobileDevice": 92,
-	"TimeIsOutOfSync": 93, // obsolete "renamed to TimeNotSynced"
+	"TimeIsOutOfSync": 93, // removed "renamed to TimeNotSynced"
 	"TimeNotSynced": 93,
 	"SMSCodeFailed": 94,
-	"TooManyAccountsAccessThisResource": 95, // obsolete "renamed to AccountLimitExceeded"
+	"TooManyAccountsAccessThisResource": 95, // removed "renamed to AccountLimitExceeded"
 	"AccountLimitExceeded": 95,
 	"AccountActivityLimitExceeded": 96,
 	"PhoneActivityLimitExceeded": 97,
@@ -117,6 +117,8 @@ module.exports = {
 	"InvalidItemType": 104,
 	"IPBanned": 105,
 	"GSLTExpired": 106,
+	"InsufficientFunds": 107,
+	"TooManyPending": 108,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -225,4 +227,6 @@ module.exports = {
 	"104": "InvalidItemType",
 	"105": "IPBanned",
 	"106": "GSLTExpired",
+	"107": "InsufficientFunds",
+	"108": "TooManyPending",
 };

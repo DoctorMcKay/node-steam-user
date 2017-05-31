@@ -13,9 +13,9 @@ module.exports = {
 	"CommunityBan": 9,
 	"MemberBlockedYou": 10,
 	"YouBlockedMember": 11,
-	"NoRankingDataLobby": 12, // obsolete
-	"NoRankingDataUser": 13, // obsolete
-	"RankOutOfRange": 14, // obsolete
+	"NoRankingDataLobby": 12, // removed
+	"NoRankingDataUser": 13, // removed
+	"RankOutOfRange": 14, // removed
 
 	// Value-to-name mapping for convenience
 	"1": "Success",

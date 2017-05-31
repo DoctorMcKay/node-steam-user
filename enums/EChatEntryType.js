@@ -6,8 +6,8 @@ module.exports = {
 	"ChatMsg": 1,
 	"Typing": 2,
 	"InviteGame": 3,
-	"Emote": 4, // obsolete "No longer supported by clients"
-	"LobbyGameStart": 5, // obsolete "Listen for LobbyGameCreated_t callback instead"
+	"Emote": 4, // removed "No longer supported by clients"
+	"LobbyGameStart": 5, // removed "Listen for LobbyGameCreated_t callback instead"
 	"LeftConversation": 6,
 	"Entered": 7,
 	"WasKicked": 8,

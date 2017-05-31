@@ -5,7 +5,7 @@ module.exports = {
 	"Unknown": 0,
 	"Win32": 1,
 	"Win64": 2,
-	"Linux": 3, // obsolete "split to Linux64 and Linux32"
+	"Linux": 3, // removed "split to Linux64 and Linux32"
 	"Linux64": 3,
 	"OSX": 4,
 	"PS3": 5,
