@@ -2,7 +2,11 @@
 	"name": "steam-user",
 	"version": "3.21.2",
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
-	"keywords": ["steam", "steam client", "steam user"],
+	"keywords": [
+		"steam",
+		"steam client",
+		"steam user"
+	],
 	"homepage": "https://github.com/DoctorMcKay/node-steam-user",
 	"bugs": {
 		"url": "https://github.com/DoctorMcKay/node-steam-user/issues"
@@ -18,21 +22,21 @@
 		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
 	"dependencies": {
-		"steamid": "^1.1.0",
-		"appdirectory": "^0.1.0",
-		"protobufjs": "^5.0.0",
-		"steam-client": "^2.0.0",
-		"bytebuffer": "^5.0.0",
+		"@doctormckay/stats-reporter": "^1.0.0",
 		"@doctormckay/steam-crypto": "^1.2.0",
-		"vdf": "^0.0.2",
-		"binarykvparser": "^2.0.0",
-		"file-manager": "^1.0.0",
-		"steam-totp": "^1.3.0",
-		"buffer-crc32": "^0.2.5",
 		"adm-zip": "^0.4.7",
+		"appdirectory": "^0.1.0",
+		"async": "^2.4.1",
+		"binarykvparser": "^2.2.0",
+		"buffer-crc32": "^0.2.13",
+		"bytebuffer": "^5.0.0",
+		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",
-		"async": "^2.1.4",
-		"@doctormckay/stats-reporter": "^1.0.0"
+		"protobufjs": "^5.0.2",
+		"steam-client": "^2.2.2",
+		"steam-totp": "^1.4.1",
+		"steamid": "^1.1.0",
+		"vdf": "^0.0.2"
 	},
 	"scripts": {
 		"prepublish": "node scripts/prepublish.js",
