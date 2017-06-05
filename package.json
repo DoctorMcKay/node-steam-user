@@ -41,5 +41,8 @@
 	"scripts": {
 		"prepublish": "node scripts/prepublish.js",
 		"generate-enums": "node scripts/generate-enums.js"
+	},
+	"engines": {
+		"node": ">=4.0.0"
 	}
 }
