@@ -1,4 +1,5 @@
 var SteamUser = require('../index.js');
+var Helpers = require('./helpers.js');
 var SteamID = require('steamid');
 
 SteamUser.prototype.serverQuery = function(conditions, callback) {
@@ -7,14 +8,7 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 	}
 
 	if (conditions.geo_location_ip) {
-		var parts = conditions.geo_location_ip.split('.');
-		var buf = new Buffer(4);
-
-		parts.forEach(function(octet, index) {
-			buf.writeUInt8(octet, index);
-		});
-
-		conditions.geo_location_ip = buf.readUInt32(0);
+		conditions.geo_location_ip = Helpers.ipStringToInt(conditions.geo_location_ip);
 	}
 
 	this._send(SteamUser.EMsg.ClientGMSServerQuery, conditions, function(body) {
