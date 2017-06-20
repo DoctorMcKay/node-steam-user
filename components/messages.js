@@ -14,6 +14,7 @@ protobufs[SteamUser.EMsg.ClientNewLoginKey] = Schema.CMsgClientNewLoginKey;
 protobufs[SteamUser.EMsg.ClientNewLoginKeyAccepted] = Schema.CMsgClientNewLoginKeyAccepted;
 protobufs[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonce] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonce;
 protobufs[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = Schema.CMsgClientRequestWebAPIAuthenticateUserNonceResponse;
+protobufs[SteamUser.EMsg.ClientCMList] = Schema.CMsgClientCMList;
 protobufs[SteamUser.EMsg.ClientItemAnnouncements] = Schema.CMsgClientItemAnnouncements;
 protobufs[SteamUser.EMsg.ClientRequestItemAnnouncements] = Schema.CMsgClientRequestItemAnnouncements;
 protobufs[SteamUser.EMsg.ClientCommentNotifications] = Schema.CMsgClientCommentNotifications;

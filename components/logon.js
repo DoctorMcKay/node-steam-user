@@ -460,6 +460,11 @@ SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback
 	}
 };
 
+SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
+	this.emit('debug', "Got list of " + (body.cm_websocket_addresses || []).length + " WebSocket CMs, with percentage to use at " +
+		(body.percent_default_to_websocket || 0) + "%");
+};
+
 // Private functions
 
 function createMachineID(val_bb3, val_ff2, val_3b3) {
