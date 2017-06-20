@@ -65,6 +65,7 @@ message CPublishedFile_GetDetails_Request {
 	optional bool includeforsaledata = 10 [(description) = "If true, return pricing data, if applicable."];
 	optional bool includemetadata = 11 [(description) = "If true, populate the metadata field."];
 	optional int32 language = 12 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
+	optional uint32 return_playtime_stats = 13 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message PublishedFileDetails {
@@ -108,6 +109,11 @@ message PublishedFileDetails {
 		optional uint32 price_category_floor = 4;
 		optional bool price_is_pay_what_you_want = 5;
 		optional uint32 discount_percentage = 6;
+	}
+
+	message PlaytimeStats {
+		optional uint64 playtime_seconds = 1;
+		optional uint64 num_sessions = 2;
 	}
 
 	enum EPublishedFileForSaleStatus {
@@ -160,6 +166,8 @@ message PublishedFileDetails {
 	optional uint32 lifetime_subscriptions = 39;
 	optional uint32 lifetime_favorited = 40;
 	optional uint32 lifetime_followers = 41;
+	optional uint64 lifetime_playtime = 62;
+	optional uint64 lifetime_playtime_sessions = 63;
 	optional uint32 views = 42;
 	optional uint32 image_width = 43;
 	optional uint32 image_height = 44;
@@ -174,6 +182,7 @@ message PublishedFileDetails {
 	repeated .PublishedFileDetails.Child children = 53;
 	repeated .PublishedFileDetails.KVTag kvtags = 54;
 	optional .PublishedFileDetails.VoteData vote_data = 55;
+	optional .PublishedFileDetails.PlaytimeStats playtime_stats = 64;
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
 	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
 	optional string metadata = 58 [(description) = "Metadata associated with the item"];
@@ -240,6 +249,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_short_description = 24 [default = true, (description) = "Populate the short_description field instead of file_description"];
 	optional bool return_for_sale_data = 26 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
+	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -339,6 +349,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional int32 language = 33 [default = 0, (description) = "Language to search in and also what gets returned. Defaults to English."];
 	repeated .CPublishedFile_QueryFiles_Request.KVTag required_kv_tags = 34 [(description) = "Required key-value tags to match on."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
+	optional bool ids_only = 35 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
 	optional bool return_tags = 18 [(description) = "Return tags in the file details"];
 	optional bool return_kv_tags = 19 [(description) = "Return key-value tags in the file details"];
@@ -347,11 +358,95 @@ message CPublishedFile_QueryFiles_Request {
 	optional bool return_short_description = 22 [(description) = "Populate the short_description field instead of file_description"];
 	optional bool return_for_sale_data = 30 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 32 [default = false, (description) = "Populate the metadata"];
+	optional uint32 return_playtime_stats = 36 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message CPublishedFile_QueryFiles_Response {
 	optional uint32 total = 1 [(description) = "Number of matches found, not necessarily number of items returned"];
 	repeated .PublishedFileDetails publishedfiledetails = 2 [(description) = "Each file details will be populated, depending on what return values were requested."];
+}
+
+message CPublishedFile_AddAppRelationship_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 appid = 2;
+	optional uint32 relationship = 3;
+}
+
+message CPublishedFile_AddAppRelationship_Response {
+}
+
+message CPublishedFile_RemoveAppRelationship_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 appid = 2;
+	optional uint32 relationship = 3;
+}
+
+message CPublishedFile_RemoveAppRelationship_Response {
+}
+
+message CPublishedFile_GetAppRelationships_Request {
+	optional uint64 publishedfileid = 1;
+}
+
+message CPublishedFile_GetAppRelationships_Response {
+	message AppRelationship {
+		optional uint32 appid = 1;
+		optional uint32 relationship = 2;
+	}
+
+	repeated .CPublishedFile_GetAppRelationships_Response.AppRelationship app_relationships = 3;
+}
+
+message CPublishedFile_StartPlaytimeTracking_Request {
+	optional uint32 appid = 1;
+	repeated uint64 publishedfileids = 2;
+}
+
+message CPublishedFile_StartPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTracking_Request {
+	optional uint32 appid = 1;
+	repeated uint64 publishedfileids = 2;
+}
+
+message CPublishedFile_StopPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request {
+	optional uint32 appid = 1;
+}
+
+message CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response {
+}
+
+message CPublishedFile_SetPlaytimeForControllerConfigs_Request {
+	message ControllerConfigUsage {
+		optional uint64 publishedfileid = 1;
+		optional float seconds_active = 2;
+	}
+
+	optional uint32 appid = 1;
+	repeated .CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage controller_config_usage = 2;
+}
+
+message CPublishedFile_SetPlaytimeForControllerConfigs_Response {
+}
+
+message CPublishedFile_AddChild_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint64 child_publishedfileid = 2;
+}
+
+message CPublishedFile_AddChild_Response {
+}
+
+message CPublishedFile_RemoveChild_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint64 child_publishedfileid = 2;
+}
+
+message CPublishedFile_RemoveChild_Response {
 }
 
 service PublishedFile {
@@ -391,5 +486,32 @@ service PublishedFile {
 	}
 	rpc QueryFiles (.CPublishedFile_QueryFiles_Request) returns (.CPublishedFile_QueryFiles_Response) {
 		option (method_description) = "Performs a search query for published files";
+	}
+	rpc AddAppRelationship (.CPublishedFile_AddAppRelationship_Request) returns (.CPublishedFile_AddAppRelationship_Response) {
+		option (method_description) = "Adds a relationship between the published file and the given app";
+	}
+	rpc RemoveAppRelationship (.CPublishedFile_RemoveAppRelationship_Request) returns (.CPublishedFile_RemoveAppRelationship_Response) {
+		option (method_description) = "Remove a relationship between the published file and the given app";
+	}
+	rpc GetAppRelationships (.CPublishedFile_GetAppRelationships_Request) returns (.CPublishedFile_GetAppRelationships_Response) {
+		option (method_description) = "Returns the list of app relationships for this published file";
+	}
+	rpc StartPlaytimeTracking (.CPublishedFile_StartPlaytimeTracking_Request) returns (.CPublishedFile_StartPlaytimeTracking_Response) {
+		option (method_description) = "Start usage tracking for a given set of published files";
+	}
+	rpc StopPlaytimeTracking (.CPublishedFile_StopPlaytimeTracking_Request) returns (.CPublishedFile_StopPlaytimeTracking_Response) {
+		option (method_description) = "Stops usage tracking for a given set of published files";
+	}
+	rpc StopPlaytimeTrackingForAllAppItems (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request) returns (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response) {
+		option (method_description) = "Stops usage tracking for all items currently tracked for the specified app";
+	}
+	rpc SetPlaytimeForControllerConfigs (.CPublishedFile_SetPlaytimeForControllerConfigs_Request) returns (.CPublishedFile_SetPlaytimeForControllerConfigs_Response) {
+		option (method_description) = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs";
+	}
+	rpc AddChild (.CPublishedFile_AddChild_Request) returns (.CPublishedFile_AddChild_Response) {
+		option (method_description) = "Adds a parent->child relationship between the given items.";
+	}
+	rpc RemoveChild (.CPublishedFile_RemoveChild_Request) returns (.CPublishedFile_RemoveChild_Response) {
+		option (method_description) = "Removes parent->child relationship between the given items.";
 	}
 }

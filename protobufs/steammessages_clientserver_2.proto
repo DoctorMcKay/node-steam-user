@@ -12,6 +12,7 @@ message CMsgClientUCMAddScreenshot {
 	optional uint32 appid = 1;
 	optional string filename = 2;
 	optional string thumbname = 3;
+	optional string vr_filename = 14;
 	optional fixed32 rtime32_created = 4;
 	optional uint32 width = 5;
 	optional uint32 height = 6;
@@ -111,6 +112,7 @@ message CMsgClientUCMUpdatePublishedFileResponse {
 
 message CMsgClientUCMDeletePublishedFile {
 	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
 }
 
 message CMsgClientUCMDeletePublishedFileResponse {
@@ -397,52 +399,6 @@ message CMsgClientRequestMachineAuthResponse {
 	optional uint32 eresult = 1;
 }
 
-message CMsgClientCreateFriendsGroup {
-	optional fixed64 steamid = 1;
-	optional string groupname = 2;
-}
-
-message CMsgClientCreateFriendsGroupResponse {
-	optional uint32 eresult = 1;
-	optional int32 groupid = 2;
-}
-
-message CMsgClientDeleteFriendsGroup {
-	optional fixed64 steamid = 1;
-	optional int32 groupid = 2;
-}
-
-message CMsgClientDeleteFriendsGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientRenameFriendsGroup {
-	optional int32 groupid = 1;
-	optional string groupname = 2;
-}
-
-message CMsgClientRenameFriendsGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientAddFriendToGroup {
-	optional int32 groupid = 1;
-	optional fixed64 steamiduser = 2;
-}
-
-message CMsgClientAddFriendToGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientRemoveFriendFromGroup {
-	optional int32 groupid = 1;
-	optional fixed64 steamiduser = 2;
-}
-
-message CMsgClientRemoveFriendFromGroupResponse {
-	optional uint32 eresult = 1;
-}
-
 message CMsgClientRegisterKey {
 	optional string key = 1;
 }
@@ -518,8 +474,9 @@ message CMsgClientEmailChangeResponse {
 }
 
 message CMsgClientGetCDNAuthToken {
-	optional uint32 app_id = 1;
+	optional uint32 depot_id = 1;
 	optional string host_name = 2;
+	optional uint32 app_id = 3;
 }
 
 message CMsgClientGetDepotDecryptionKey {
@@ -531,21 +488,6 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 depot_id = 2;
 	optional bytes depot_encryption_key = 3;
-}
-
-message CMsgClientGetAppBetaPasswords {
-	optional uint32 app_id = 1;
-}
-
-message CMsgClientGetAppBetaPasswordsResponse {
-	message BetaPassword {
-		optional string betaname = 1;
-		optional string betapassword = 2;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 app_id = 2;
-	repeated .CMsgClientGetAppBetaPasswordsResponse.BetaPassword betapasswords = 3;
 }
 
 message CMsgClientCheckAppBetaPassword {
@@ -571,11 +513,18 @@ message CMsgClientUpdateAppJobReport {
 	optional string error_details = 5;
 	optional uint32 job_duration = 6;
 	optional uint32 files_validation_failed = 7;
-	optional uint64 bytes_downloaded = 8;
-	optional uint64 bytes_staged = 9;
+	optional uint64 job_bytes_downloaded = 8;
+	optional uint64 job_bytes_staged = 9;
 	optional uint64 bytes_comitted = 10;
 	optional uint32 start_app_state = 11;
 	optional fixed64 stats_machine_id = 12;
+	optional string branch_name = 13;
+	optional uint64 total_bytes_downloaded = 14;
+	optional uint64 total_bytes_staged = 15;
+	optional uint64 total_bytes_restored = 16;
+	optional bool is_borrowed = 17;
+	optional bool is_free_weekend = 18;
+	optional uint64 total_bytes_legacy = 19;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -880,11 +829,11 @@ message CMsgClientOfflineMessageNotification {
 message CMsgClientRequestOfflineMessageCount {
 }
 
-message CMsgClientFSGetFriendMessageHistory {
+message CMsgClientChatGetFriendMessageHistory {
 	optional fixed64 steamid = 1;
 }
 
-message CMsgClientFSGetFriendMessageHistoryResponse {
+message CMsgClientChatGetFriendMessageHistoryResponse {
 	message FriendMessage {
 		optional uint32 accountid = 1;
 		optional uint32 timestamp = 2;
@@ -894,10 +843,10 @@ message CMsgClientFSGetFriendMessageHistoryResponse {
 
 	optional fixed64 steamid = 1;
 	optional uint32 success = 2;
-	repeated .CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage messages = 3;
+	repeated .CMsgClientChatGetFriendMessageHistoryResponse.FriendMessage messages = 3;
 }
 
-message CMsgClientFSGetFriendMessageHistoryForOfflineMessages {
+message CMsgClientChatGetFriendMessageHistoryForOfflineMessages {
 }
 
 message CMsgClientFSGetFriendsSteamLevels {
@@ -1072,12 +1021,19 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 owner_account_id = 2;
 	optional uint64 authed_device_token = 3;
+}
+
+message CMsgClientAuthorizeLocalDeviceNotification {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientDeauthorizeDeviceRequest {
@@ -1115,18 +1071,6 @@ message CMsgClientGetAuthorizedDevicesResponse {
 
 	optional int32 eresult = 1 [default = 2];
 	repeated .CMsgClientGetAuthorizedDevicesResponse.AuthorizedDevice authorized_device = 2;
-}
-
-message CMsgClientGetEmoticonList {
-}
-
-message CMsgClientEmoticonList {
-	message Emoticon {
-		optional string name = 1;
-		optional int32 count = 2;
-	}
-
-	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
 }
 
 message CMsgClientSharedLibraryLockStatus {
@@ -1214,6 +1158,7 @@ message CMsgClientCreateAccount {
 	optional string password = 2;
 	optional string email = 3;
 	optional uint32 launcher = 6;
+	optional uint32 language = 7;
 }
 
 message CMsgClientCreateAccountResponse {
