@@ -499,7 +499,8 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 		var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
 		if (recipeDetails.LineItemCount > 0) {
 			recipeDetails.lineitems.forEach(function(pkg) {
-				packageList[pkg.PackageID] = pkg.ItemDescription;
+				var packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
+				packageList[packageID] = pkg.ItemDescription;
 			});
 		}
 
