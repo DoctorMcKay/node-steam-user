@@ -39,7 +39,7 @@
 		"vdf": "^0.0.2"
 	},
 	"scripts": {
-		"prepublish": "node scripts/prepublish.js",
+		"prepublishOnly": "node scripts/prepublish.js",
 		"generate-enums": "node scripts/generate-enums.js"
 	},
 	"engines": {
