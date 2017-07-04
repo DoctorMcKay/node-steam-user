@@ -22,18 +22,19 @@
 		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
 	"dependencies": {
+		"@doctormckay/proxy-agent": "^1.0.0",
 		"@doctormckay/stats-reporter": "^1.0.0",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.4.7",
 		"appdirectory": "^0.1.0",
-		"async": "^2.4.1",
+		"async": "^2.5.0",
 		"binarykvparser": "^2.2.0",
 		"buffer-crc32": "^0.2.13",
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",
 		"protobufjs": "^5.0.2",
-		"steam-client": "^2.4.2",
+		"steam-client": "^2.5.0",
 		"steam-totp": "^1.4.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2"

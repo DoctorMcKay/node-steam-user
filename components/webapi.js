@@ -1,10 +1,11 @@
-var SteamUser = require('../index.js');
-var HTTP = require('http');
-var HTTPS = require('https');
-var TLS = require('tls');
-var VDF = require('vdf');
-var URL = require('url');
-var Zlib = require('zlib');
+const SteamUser = require('../index.js');
+const ProxyAgent = require('@doctormckay/proxy-agent');
+const HTTP = require('http');
+const HTTPS = require('https');
+const TLS = require('tls');
+const VDF = require('vdf');
+const URL = require('url');
+const Zlib = require('zlib');
 
 const USER_AGENT = "Valve/Steam HTTP Client 1.0";
 const HOSTNAME = "api.steampowered.com";
@@ -48,7 +49,7 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 	}
 
 	if (this.client.httpProxy || this.client._httpProxy) {
-		options.agent = getProxyAgent(this.client.httpProxy || this.client._httpProxy);
+		options.agent = ProxyAgent.getAgent(true, this.client.httpProxy || this.client._httpProxy);
 	}
 
 	var self = this;
@@ -120,74 +121,4 @@ function getDefaultHeaders() {
 		"Accept-Charset": "ISO-8859-1,utf-8,*;q=0.7",
 		"User-Agent": USER_AGENT
 	};
-}
-
-function getProxyAgent(proxyUrl) {
-	var agent = new HTTPS.Agent({"keepAlive": false});
-
-	agent.createConnection = function(options, callback) {
-		var url = URL.parse(proxyUrl);
-		url.method = 'CONNECT';
-		url.path = options.host + ':' + options.port;
-		url.localAddress = options.localAddress;
-		url.localPort = options.localPort;
-
-		if (url.auth) {
-			url.headers = {"Proxy-Authorization": "Basic " + (new Buffer(url.auth, 'utf8')).toString('base64')};
-			delete url.auth;
-		}
-
-		var finished = false;
-		var req = HTTP.request(url);
-		req.end();
-		req.setTimeout(2000);
-
-		req.on('connect', function(res, socket, head) {
-			if (finished) {
-				socket.end();
-				return;
-			}
-
-			finished = true;
-			req.setTimeout(0);
-
-			if (res.statusCode != 200) {
-				callback(new Error("HTTP CONNECT " + res.statusCode + " " + res.statusMessage));
-				return;
-			}
-
-			// Upgrade this connection to TLS
-			var tlsSocket = TLS.connect({
-				"socket": socket,
-				"servername": options.host
-			}, function() {
-				if (!tlsSocket.authorized) {
-					callback(new Error(tlsSocket.authorizationError || "Secure connection failed"));
-					return;
-				}
-
-				callback(null, tlsSocket);
-			});
-		});
-
-		req.on('timeout', function() {
-			if (finished) {
-				return;
-			}
-
-			finished = true;
-			callback(new Error("Proxy connection timed out"));
-		});
-
-		req.on('error', function(err) {
-			if (finished) {
-				return;
-			}
-
-			finished = true;
-			callback(err);
-		});
-	};
-
-	return agent;
 }
