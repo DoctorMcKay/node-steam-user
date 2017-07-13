@@ -2,13 +2,13 @@ var ECurrencyCode = require('../enums/ECurrencyCode.js');
 
 var CurrencyData = {};
 CurrencyData[ECurrencyCode.USD] = {"prepend": "$"};
-CurrencyData[ECurrencyCode.GBP] = {"prepend": "�"};
-CurrencyData[ECurrencyCode.EUR] = {"append": "�", "commas": true};
+CurrencyData[ECurrencyCode.GBP] = {"prepend": "\u00a3"};
+CurrencyData[ECurrencyCode.EUR] = {"append": "\u20ac", "commas": true};
 CurrencyData[ECurrencyCode.CHF] = {"append": " CHF"};
 CurrencyData[ECurrencyCode.RUB] = {"append": " p\u0443\u0431.", "commas": true, "whole": true};
 CurrencyData[ECurrencyCode.PLN] = {"append": " PLN"};
 CurrencyData[ECurrencyCode.BRL] = {"append": " R$", "commas": true};
-CurrencyData[ECurrencyCode.JPY] = {"prepend": "� ", "whole": true};
+CurrencyData[ECurrencyCode.JPY] = {"prepend": "\u00a5 ", "whole": true};
 CurrencyData[ECurrencyCode.NOK] = {"append": " kr", "commas": true};
 CurrencyData[ECurrencyCode.IDR] = {"prepend": "Rp "};
 CurrencyData[ECurrencyCode.MYR] = {"prepend": "RM "};
