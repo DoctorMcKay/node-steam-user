@@ -1163,6 +1163,8 @@ Emitted when a steamcommunity.com web session is successfully negotiated. This w
 
 Some libraries require you to provide your `sessionID`, others don't. If your library doesn't, you can safely ignore it.
 
+[Read more about how cookies work and interact with other modules.](https://dev.doctormckay.com/topic/365-cookies/#user-cookieusage)
+
 ### loginKey
 - `key` - Your login key
 
