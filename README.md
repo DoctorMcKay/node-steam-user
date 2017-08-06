@@ -888,8 +888,7 @@ Gets your own Steam Level, and the level you have on a badge for a particular ga
 
 Invites a user to a Steam group.
 
-**Warning:** Only send group invites in response to a user's request; sending automated group invites is a violation of
-the Steam Subscriber Agreement and can get you banned.
+**Warning:** Group invites can only be sent to users on your friends list. [Why is this?](https://support.steampowered.com/kb_article.php?ref=2092-QLZX-8453#answer)
 
 ### respondToGroupInvite(groupSteamID, accept)
 - `groupSteamID` - The SteamID of the group you were invited to, as a `SteamID` object or a string which can parse into one
