@@ -674,9 +674,10 @@ Requests a list of game servers from the master server.
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
-### getProductInfo(apps, packages, callback)
+### getProductInfo(apps, packages[, inclTokens], callback)
 - `apps` - Either an array of AppIDs, or an array of objects containing `appid` and `access_token` properties
 - `packages` - Either an array of PackageIDs, or an array of objects containing `packageid` and `access_token` properties
+- `inclTokens` - Optional boolean to automatically request product access tokens if they need them. The default value is false.
 - `callback` - Called when requested data is available
 	- `apps` - An object whose keys are AppIDs and whose values are objects
 		- `changenumber` - The changenumber of the latest changelist in which this app changed
