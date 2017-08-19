@@ -38,7 +38,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 				return app;
 			}
 
-			return { "game_id": app };
+			return {"game_id": app};
 		}));
 	}
 };
@@ -59,7 +59,7 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 };
 
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
-	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, { "appid": appid }, function(body) {
+	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
 		callback(body.eresult, body.player_count);
 	});
 };
@@ -100,7 +100,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			return app;
 		} else {
 			appids.push(app);
-			return { "appid": app };
+			return {"appid": app};
 		}
 	});
 
@@ -110,7 +110,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			return pkg;
 		} else {
 			packageids.push(pkg);
-			return { "packageid": pkg };
+			return {"packageid": pkg};
 		}
 	});
 
@@ -234,11 +234,11 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 						var tokenPackages = [];
 
 						for (appid in appTokens) {
-							tokenApps.push({ appid: parseInt(appid, 10), access_token: appTokens[appid] })
+							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
 						}
 
 						for (packageid in packageTokens) {
-							tokenPackages.push({ appid: parseInt(packageid, 10), access_token: packageTokens[appid] })
+							tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[appid]})
 						}
 
 						self.getProductInfo(tokenApps, tokenPackages, false, function(apps, packages) {
@@ -376,13 +376,13 @@ SteamUser.prototype._getChangelistUpdate = function() {
 			var index = -1;
 			for (var appid in appTokens) {
 				if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
-					ourApps[index] = { "appid": parseInt(appid, 10), "access_token": appTokens[appid] };
+					ourApps[index] = {"appid": parseInt(appid, 10), "access_token": appTokens[appid]};
 				}
 			}
 
 			for (var packageid in packageTokens) {
 				if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
-					ourPackages[index] = { "packageid": parseInt(packageid, 10), "access_token": packageTokens[packageid] };
+					ourPackages[index] = {"packageid": parseInt(packageid, 10), "access_token": packageTokens[packageid]};
 				}
 			}
 
@@ -550,7 +550,7 @@ function sortNumeric(a, b) {
 }
 
 SteamUser.prototype.redeemKey = function(key, callback) {
-	this._send(SteamUser.EMsg.ClientRegisterKey, { "key": key }, function(body) {
+	this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, function(body) {
 		if (typeof callback !== 'function') {
 			return;
 		}
@@ -574,7 +574,7 @@ SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 		appIDs = [appIDs];
 	}
 
-	this._send(SteamUser.EMsg.ClientRequestFreeLicense, { "appids": appIDs }, function(body) {
+	this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, function(body) {
 		if (!callback) {
 			return;
 		}
@@ -603,5 +603,5 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLicenseList] = function(body)
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayingSessionState] = function(body) {
 	this._playingBlocked = body.playing_blocked;
 	this.emit('playingState', body.playing_blocked, body.playing_app);
-	this.playingState = { "blocked": body.playing_blocked, "appid": body.playing_app };
+	this.playingState = {"blocked": body.playing_blocked, "appid": body.playing_app};
 };
