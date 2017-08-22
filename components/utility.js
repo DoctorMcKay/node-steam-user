@@ -1,4 +1,4 @@
-var SteamUser = require('../index.js');
+const SteamUser = require('../index.js');
 
 SteamUser.formatCurrency = function(amount, currency) {
 	amount = amount.toFixed(2);

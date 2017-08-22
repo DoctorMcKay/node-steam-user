@@ -1,7 +1,8 @@
-var ByteBuffer = require('bytebuffer');
-var Crypto = require('crypto');
-var SteamCrypto = require('@doctormckay/steam-crypto');
-var Protos = require('./protobufs.js');
+const ByteBuffer = require('bytebuffer');
+const Crypto = require('crypto');
+const SteamCrypto = require('@doctormckay/steam-crypto');
+
+const Protos = require('./protobufs.js');
 
 const PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0;
 const PROTOBUF_METADATA_MAGIC = 0x1F4812BE;

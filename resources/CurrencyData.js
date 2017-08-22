@@ -1,4 +1,4 @@
-var ECurrencyCode = require('../enums/ECurrencyCode.js');
+const ECurrencyCode = require('../enums/ECurrencyCode.js');
 
 var CurrencyData = {};
 CurrencyData[ECurrencyCode.USD] = {"prepend": "$"};

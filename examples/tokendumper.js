@@ -4,7 +4,7 @@
  * Dumps all access tokens available to anonymous user accounts.
  */
 
-var SteamUser = require('../index.js'); // Replace this with `require('steam-user');` if used outside of the module directory
+const SteamUser = require('../index.js'); // Replace this with `require('steam-user');` if used outside of the module directory
 
 var client = new SteamUser();
 client.logOn(); // Log onto Steam anonymously

@@ -1,5 +1,6 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
+const SteamID = require('steamid');
+
+const SteamUser = require('../index.js');
 
 SteamUser.prototype._requestNotifications = function() {
 	this._send(SteamUser.EMsg.ClientRequestItemAnnouncements, {});

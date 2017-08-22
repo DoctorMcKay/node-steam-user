@@ -1,8 +1,8 @@
 require('@doctormckay/stats-reporter').setup(require('./package.json'));
 
-var Steam = require('steam-client');
-var AppDirectory = require('appdirectory');
-var FileStorage = require('file-manager');
+const AppDirectory = require('appdirectory');
+const FileStorage = require('file-manager');
+const Steam = require('steam-client');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
 

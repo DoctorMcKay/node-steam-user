@@ -1,7 +1,8 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var Crypto = require('crypto');
-var SteamCrypto = require('@doctormckay/steam-crypto');
+const Crypto = require('crypto');
+const SteamCrypto = require('@doctormckay/steam-crypto');
+const SteamID = require('steamid');
+
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.webLogOn = function() {
 	// Verify logged on

@@ -1,6 +1,6 @@
-var SteamUser = require('../index.js');
-var Helpers = require('./helpers.js');
-var Schema = require('./protobufs.js');
+const Helpers = require('./helpers.js');
+const Schema = require('./protobufs.js');
+const SteamUser = require('../index.js');
 
 /**
  * Request an encrypted appticket for a particular app. The app must be set up on the Steam backend for encrypted apptickets.

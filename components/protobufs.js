@@ -1,8 +1,8 @@
-var Protobuf = require('protobufjs');
-var fs = require('fs');
+const FS = require('fs');
+const Protobuf = require('protobufjs');
 
 var builder = new Protobuf.Builder();
-fs.readdirSync(__dirname + '/../protobufs').forEach(function(file) {
+FS.readdirSync(__dirname + '/../protobufs').forEach(function(file) {
 	Protobuf.loadProtoFile(__dirname + '/../protobufs/' + file, builder);
 });
 

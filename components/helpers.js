@@ -1,7 +1,8 @@
-var EResult = require('../enums/EResult.js');
-var EOSType = require('../enums/EOSType.js');
-var SteamID = require('steamid');
-var Crypto = require('crypto');
+const Crypto = require('crypto');
+const SteamID = require('steamid');
+
+const EResult = require('../enums/EResult.js');
+const EOSType = require('../enums/EOSType.js');
 
 /**
  * If the input isn't already a SteamID object, converts it into one and returns it

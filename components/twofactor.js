@@ -1,5 +1,6 @@
-var SteamUser = require('../index.js');
-var SteamTotp = require('steam-totp');
+const SteamTotp = require('steam-totp');
+
+const SteamUser = require('../index.js');
 
 /**
  * Start the process to enable TOTP two-factor authentication for your account

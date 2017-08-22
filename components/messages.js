@@ -1,7 +1,7 @@
-var SteamUser = require('../index.js');
-var ByteBuffer = require('bytebuffer');
+const ByteBuffer = require('bytebuffer');
+const SteamUser = require('../index.js');
 
-var Schema = require('./protobufs.js');
+const Schema = require('./protobufs.js');
 
 var protobufs = {};
 protobufs[SteamUser.EMsg.ClientLogon] = Schema.CMsgClientLogon;

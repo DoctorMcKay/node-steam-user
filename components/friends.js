@@ -1,7 +1,8 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var ByteBuffer = require('bytebuffer');
-var Helpers = require('./helpers.js');
+const ByteBuffer = require('bytebuffer');
+const SteamID = require('steamid');
+
+const Helpers = require('./helpers.js');
+const SteamUser = require('../index.js');
 
 /**
  * Set your persona online state and optionally name.

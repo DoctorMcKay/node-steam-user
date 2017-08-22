@@ -1,5 +1,6 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
+const SteamID = require('steamid');
+
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.trade = function(steamID) {
 	if (typeof steamID === 'string') {

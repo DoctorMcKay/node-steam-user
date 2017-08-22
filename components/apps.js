@@ -1,11 +1,11 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var VDF = require('vdf');
-var BinaryKVParser = require('binarykvparser');
+const BinaryKVParser = require('binarykvparser');
+const SteamID = require('steamid');
+const VDF = require('vdf');
 
-var Helpers = require('./helpers.js');
+const Helpers = require('./helpers.js');
+const SteamUser = require('../index.js');
 
-var PICSRequestType = {
+const PICSRequestType = {
 	"User": 0,
 	"Changelist": 1,
 	"Licenses": 2,

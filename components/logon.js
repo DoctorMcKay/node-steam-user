@@ -1,10 +1,11 @@
-var Steam = require('steam-client');
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var Helpers = require('./helpers.js');
-var Schema = require('./protobufs.js');
-var Crypto = require('crypto');
-var ByteBuffer = require('bytebuffer');
+const ByteBuffer = require('bytebuffer');
+const Crypto = require('crypto');
+const Steam = require('steam-client');
+const SteamID = require('steamid');
+
+const Helpers = require('./helpers.js');
+const Schema = require('./protobufs.js');
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.logOn = function(details) {
 	if (this.client.loggedOn) {

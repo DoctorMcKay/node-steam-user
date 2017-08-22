@@ -1,13 +1,14 @@
-var AdmZip = require('adm-zip');
-var ByteBuffer = require('bytebuffer');
-var crc32 = require('buffer-crc32');
-var EventEmitter = require('events').EventEmitter;
-var fs = require('fs');
-var LZMA = require('lzma');
-var SteamCrypto = require('@doctormckay/steam-crypto');
-var SteamUser = require('../index.js');
-var Helpers = require('./helpers.js');
-var ContentManifest = require('./content_manifest.js');
+const AdmZip = require('adm-zip');
+const ByteBuffer = require('bytebuffer');
+const Crc32 = require('buffer-crc32');
+const EventEmitter = require('events').EventEmitter;
+const FS = require('fs');
+const LZMA = require('lzma');
+const SteamCrypto = require('@doctormckay/steam-crypto');
+
+const Helpers = require('./helpers.js');
+const ContentManifest = require('./content_manifest.js');
+const SteamUser = require('../index.js');
 
 const VZIP_HEADER = 0x5A56;
 const VZIP_FOOTER = 0x767A;
@@ -338,16 +339,16 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		}
 
 		if (outputFilePath) {
-			fs.open(outputFilePath, "w", function(err, fd) {
+			FS.open(outputFilePath, "w", function(err, fd) {
 				if (err) {
 					callback(err);
 					return;
 				}
 
 				outputFd = fd;
-				fs.truncate(outputFd, parseInt(fileManifest.size, 10), function(err) {
+				FS.truncate(outputFd, parseInt(fileManifest.size, 10), function(err) {
 					if (err) {
-						fs.closeSync(outputFd);
+						FS.closeSync(outputFd);
 						callback(err);
 						return;
 					}
@@ -407,7 +408,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 				// Chunk downloaded successfully
 				if (outputFilePath) {
-					fs.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), function(err) {
+					FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), function(err) {
 						if (err) {
 							callback(err);
 							queue.kill();
@@ -431,7 +432,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 			// Verify hash
 			var hash;
 			if (outputFilePath) {
-				fs.close(outputFd, function(err) {
+				FS.close(outputFd, function(err) {
 					if (err) {
 						callback(err);
 						return;
@@ -439,7 +440,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 					// File closed. Now re-open it so we can hash it!
 					hash = require('crypto').createHash('sha1');
-					fs.createReadStream(outputFilePath).pipe(hash);
+					FS.createReadStream(outputFilePath).pipe(hash);
 					hash.on('readable', function() {
 						if (!hash.read) {
 							return; // already done
@@ -630,7 +631,7 @@ function unzip(data, callback) {
 				return;
 			}
 
-			if (crc32.unsigned(result) != decompressedCrc) {
+			if (Crc32.unsigned(result) != decompressedCrc) {
 				callback(new Error("CRC check failed on decompressed data"));
 				return;
 			}

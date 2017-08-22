@@ -1,11 +1,9 @@
-const SteamUser = require('../index.js');
 const ProxyAgent = require('@doctormckay/proxy-agent');
-const HTTP = require('http');
 const HTTPS = require('https');
-const TLS = require('tls');
 const VDF = require('vdf');
-const URL = require('url');
 const Zlib = require('zlib');
+
+const SteamUser = require('../index.js');
 
 const USER_AGENT = "Valve/Steam HTTP Client 1.0";
 const HOSTNAME = "api.steampowered.com";

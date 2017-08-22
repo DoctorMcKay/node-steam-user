@@ -1,8 +1,9 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var ByteBuffer = require('bytebuffer');
-var BinaryKVParser = require('binarykvparser');
+const BinaryKVParser = require('binarykvparser');
+const ByteBuffer = require('bytebuffer');
+const SteamID = require('steamid');
+
 var Helpers = require('./helpers.js');
+var SteamUser = require('../index.js');
 
 /**
  * Sends a chat message to a user or a chat room.

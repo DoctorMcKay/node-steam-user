@@ -1,6 +1,7 @@
-var SteamUser = require('../index.js');
-var Helpers = require('./helpers.js');
-var SteamID = require('steamid');
+const SteamID = require('steamid');
+
+const Helpers = require('./helpers.js');
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.serverQuery = function(conditions, callback) {
 	if (typeof conditions === 'string') {
