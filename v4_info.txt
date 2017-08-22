@@ -1,0 +1,15 @@
+To do:
+
+- Remove dependency on steam-client and remove ability to specify a custom one. Instead, build that functionality in directly.
+- Add promise support for all methods that take a callback
+- Add `err` to all callbacks that don't have it already
+
+Breaking:
+
+- Now requires node 6 (up from node 4)
+- Removed deprecated and non-functional method `disableTwoFactor`; use [steamcommunity](https://www.npmjs.com/package/steamcommunity) instead
+- Removed deprecated method `generateAuthCode`; use [steam-totp](https://www.npmjs.com/package/steam-totp) instead
+
+Before publishing:
+
+- Create v3 branch pointing to last v3 release
