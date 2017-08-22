@@ -67,14 +67,6 @@ console.log(SteamUser.formatCurrency(12345, SteamUser.ECurrencyCode.JPY)); // ï¿
 console.log(SteamUser.formatCurrency(123.45, SteamUser.ECurrencyCode.EUR)); // 123,45ï¿½
 ```
 
-### generateAuthCode(secret[, timeOffset])
-- `secret` - A `Buffer`, hex string, or base64 string containing your shared secret
-- `timeOffset` - The number of seconds by which your local clock is off from the Steam servers. Defaults to 0.
-
-Generates a 5-digit alphanumeric Steam Guard code for use with two-factor mobile authentication.
-
-**Deprecated and will be removed in a future release. Use [`steam-totp`](https://www.npmjs.com/package/steam-totp) instead.**
-
 # Options [^](#contents)
 
 There are a number of options which can control the behavior of the `SteamUser` object. They are:
