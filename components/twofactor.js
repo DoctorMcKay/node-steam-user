@@ -81,11 +81,3 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 		});
 	}
 };
-
-/**
- * Disable TOTP two-factor authentication and go back to regular Steam Guard emails.
- * @deprecated No longer works. Use node-steamcommunity instead: https://mckay.media/UnsG7
- */
-SteamUser.prototype.disableTwoFactor = function() {
-	throw new Error("This method no longer works. See https://mckay.media/UnsG7 for alternative.");
-};

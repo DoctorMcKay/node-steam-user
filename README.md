@@ -473,10 +473,6 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 
 **If TOTP two-factor authentication is enabled, a code will be required *on every login* unless a `loginKey` is used.**
 
-### disableTwoFactor(options, callback)
-
-#### This method no longer works. Attempts to call it will result in an Error being thrown. [Use node-steamcommunity instead.](https://mckay.media/UnsG7)
-
 ### getSteamGuardDetails(callback)
 - `callback` - A function to be called when the requested data is available
 	- `enabled` - `true` if Steam Guard is enabled for your account, `false` if not
