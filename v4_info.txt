@@ -9,8 +9,28 @@ Breaking:
 - Now requires node 6 (up from node 4)
 - Removed deprecated and non-functional method `disableTwoFactor`; use [steamcommunity](https://www.npmjs.com/package/steamcommunity) instead
 - Removed deprecated method `generateAuthCode`; use [steam-totp](https://www.npmjs.com/package/steam-totp) instead
-- enableTwoFactor now has an `err` as its first callback argument
 - `server_time` in enableTwoFactor callback data is now a number instead of a string
+- Callbacks now have `err` as their first argument
+    - enableTwoFactor
+    - createAccount (changed from eresult)
+    - requestValidationEmail (changed from eresult)
+    - getSteamGuardDetails
+    - getCredentialChangeTimes
+    - getAuthSecret
+    - getPlayerCount (changed from eresult)
+    - getProductChanges
+    - getProductInfo
+    - getProductAccessToken
+    - redeemKey (changed from eresult)
+    - getChatHistory (changed from eresult)
+    - blockUser (changed from eresult)
+    - unblockUser (changed from eresult)
+    - getPersonas
+    - getSteamLevels
+    - getGameBadgeLevel
+    - getServerList
+    - getServerSteamIDsByIP
+    - getServerIPsBySteamID
 
 Before publishing:
 

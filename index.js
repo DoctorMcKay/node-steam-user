@@ -190,5 +190,5 @@ require('./components/cdn.js');
 /**
  * Called when the request completes.
  * @callback SteamUser~genericEResultCallback
- * @param {EResult} eresult - The result of the operation
+ * @param {Error|null} err - Error object on failure (with eresult property), null on success (represents EResult 1 - OK)
  */

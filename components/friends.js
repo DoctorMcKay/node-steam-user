@@ -59,7 +59,7 @@ SteamUser.prototype.removeFriend = function(steamID) {
 /**
  * Block all communication with a user.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to block, or a string which can parse into one.
- * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ * @param {SteamUser~genericEResultCallback} [callback] - Optional. Called with an `err` parameter on completion.
  */
 SteamUser.prototype.blockUser = function(steamID, callback) {
 	if (typeof steamID === 'string') {
@@ -77,14 +77,14 @@ SteamUser.prototype.blockUser = function(steamID, callback) {
 		}
 
 		body.readUint64(); // unknown
-		callback(body.readUint32());
+		callback(Helpers.eresultError(body.readUint32()));
 	});
 };
 
 /**
  * Unblock all communication with a user.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to unblock, or a string which can parse into one.
- * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ * @param {SteamUser~genericEResultCallback} [callback] - Optional. Called with an `err` parameter on completion.
  */
 SteamUser.prototype.unblockUser = function(steamID, callback) {
 	if (typeof steamID === 'string') {
@@ -102,14 +102,14 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 		}
 
 		body.readUint64(); // unknown
-		callback(body.readUint32());
+		callback(Helpers.eresultError(body.readUint32()));
 	});
 };
 
 /**
  * Requests information about one or more user profiles.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects or strings which can parse into them.
- * @param {function} [callback] - Optional. Called with an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
+ * @param {function} [callback] - Optional. Called with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
  */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	var Flags = SteamUser.EClientPersonaStateFlag;
@@ -148,7 +148,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 			}
 
 			if (ids.length === 0) {
-				callback(output);
+				callback(null, output);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 /**
  * Gets the Steam Level of one or more Steam users.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects, or strings which can parse into one.
- * @param {function} callback - Called on completion with an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
+ * @param {function} callback - Called on completion with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
  */
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 	var accountids = steamids.map(function(steamID) {
@@ -181,7 +181,7 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 			output[sid.getSteamID64()] = user.level;
 		});
 
-		callback(output);
+		callback(null, output);
 	});
 };
 
@@ -236,7 +236,7 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 
 /**
  * Get persona name history for one or more users.
- * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
+ * @param {SteamID[]|string[]|SteamID|string} userSteamIDs - SteamIDs of users to request aliases for
  * @param {function} callback
  */
 SteamUser.prototype.getAliases = function(userSteamIDs, callback) {

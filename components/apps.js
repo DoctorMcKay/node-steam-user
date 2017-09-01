@@ -60,7 +60,7 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
 	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
-		callback(body.eresult, body.player_count);
+		callback(Helpers.eresultError(body.eresult), body.player_count);
 	});
 };
 
@@ -70,7 +70,7 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 		"send_app_info_changes": true,
 		"send_package_info_changes": true
 	}, function(body) {
-		callback(body.current_change_number, body.app_changes, body.package_changes);
+		callback(null, body.current_change_number, body.app_changes, body.package_changes);
 	});
 };
 
@@ -205,7 +205,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 		});
 
 		if (appids.length === 0 && packageids.length === 0) {
-			callback(response.apps, response.packages, response.unknownApps, response.unknownPackages);
+			callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
 		}
 	});
 };
@@ -226,7 +226,7 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 			packageTokens[pkg.packageid] = pkg.access_token;
 		});
 
-		callback(appTokens, packageTokens, body.app_denied_tokens || [], body.package_denied_tokens || []);
+		callback(null, appTokens, packageTokens, body.app_denied_tokens || [], body.package_denied_tokens || []);
 	});
 };
 
@@ -504,7 +504,7 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 			});
 		}
 
-		callback(body.eresult, body.purchase_result_details, packageList);
+		callback(Helpers.eresultError(body.eresult), body.purchase_result_details, packageList);
 	});
 };
 

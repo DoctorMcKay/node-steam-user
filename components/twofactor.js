@@ -30,7 +30,7 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 			}
 		}
 
-		callback(body.status == SteamUser.EResult.OK ? null : Helpers.eresultError(body.status), body);
+		callback(Helpers.eresultError(body.status), body);
 	});
 };
 

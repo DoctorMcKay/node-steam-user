@@ -36,7 +36,7 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
 		"filter": filter,
 		"limit": limit
 	}, false, function(body) {
-		callback(body.servers.map(function(server) {
+		callback(null, body.servers.map(function(server) {
 			server.steamid = new SteamID(server.steamid.toString());
 			return server;
 		}));
@@ -53,7 +53,7 @@ SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
 			servers[server.addr] = new SteamID(server.steamid.toString());
 		});
 
-		callback(servers);
+		callback(null, servers);
 	});
 };
 
@@ -75,6 +75,6 @@ SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
 			servers[server.steamid.toString()] = server.addr;
 		});
 
-		callback(servers);
+		callback(null, servers);
 	});
 };

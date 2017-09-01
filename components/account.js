@@ -17,7 +17,7 @@ SteamUser.prototype.createAccount = function(accountName, password, email, callb
 		"email": email,
 		"launcher": 0
 	}, function(body) {
-		callback(body.eresult, body.steamid ? new SteamID(body.steamid.toString()) : null);
+		callback(Helpers.eresultError(body.eresult), body.steamid ? new SteamID(body.steamid.toString()) : null);
 	});
 };
 
@@ -29,7 +29,7 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 			return;
 		}
 
-		callback(response.readUint32());
+		callback(Helpers.eresultError(response.readUint32()));
 	});
 };
 
@@ -53,6 +53,7 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 		}
 
 		callback(
+			null, // currently no error is possible, but add this for consistency and future-proofing
 			!!body.is_steamguard_enabled,
 			body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null,
 			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null,
@@ -65,7 +66,8 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 
 SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 	this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, false, function(body) {
-		callback(body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
+		callback(null, // currently no error is possible, but add this for consistency and future-proofing
+			body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
 			body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
 			body.timestamp_last_email_change ? new Date(body.timestamp_last_email_change * 1000) : null);
 	});
@@ -73,7 +75,7 @@ SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 
 SteamUser.prototype.getAuthSecret = function(callback) {
 	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, false, function(body) {
-		callback(body.secret_id, body.secret.toBuffer());
+		callback(null, body.secret_id, body.secret.toBuffer());
 	});
 };
 

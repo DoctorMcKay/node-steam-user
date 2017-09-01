@@ -61,7 +61,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 	/**
 	 * Simply binds a listener to the `chatHistory` event and removes the SteamID parameter.
 	 * @callback SteamUser~getChatHistoryCallback
-	 * @param {EResult} success - Was the request successful?
+	 * @param {Error|null} success - Was the request successful?
 	 * @param {Object[]} messages - An array of message objects
 	 * @param {SteamID} messages[].steamID - The SteamID of the user who sent the message (either you or the other user)
 	 * @param {Date} messages[].timestamp - The time when the message was sent
@@ -70,7 +70,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 	 */
 	if (callback) {
 		this.once('chatHistory#' + sid64, function(steamID, success, messages) {
-			callback(success, messages);
+			callback(Helpers.eresultError(success), messages);
 		});
 	}
 };
@@ -88,7 +88,7 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
 
 	if (callback) {
 		this.once('chatEnter#' + Helpers.steamID(steamID).getSteamID64(), function(chatID, result) {
-			callback(result);
+			callback(Helpers.eresultError(result));
 		});
 	}
 };
@@ -244,12 +244,12 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 	/**
 	 * Called when the room is created or a failure occurs. If successful, you will be in the room when this callback fires.
 	 * @callback SteamUser~createChatRoomCallback
-	 * @param {EResult} eresult - The result of the creation request
+	 * @param {Error|null} err - The result of the creation request
 	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 	 */
 	if (callback) {
 		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
-			callback(result, chatID);
+			callback(Helpers.eresultError(result), chatID);
 		});
 	}
 };
