@@ -10,6 +10,7 @@ Breaking:
 - Removed deprecated and non-functional method `disableTwoFactor`; use [steamcommunity](https://www.npmjs.com/package/steamcommunity) instead
 - Removed deprecated method `generateAuthCode`; use [steam-totp](https://www.npmjs.com/package/steam-totp) instead
 - enableTwoFactor now has an `err` as its first callback argument
+- `server_time` in enableTwoFactor callback data is now a number instead of a string
 
 Before publishing:
 

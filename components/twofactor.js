@@ -19,7 +19,7 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 	}, false, function(body) {
 		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
 		body.serial_number = body.serial_number ? body.serial_number.toString() : null;
-		body.server_time = body.server_time ? body.server_time.toString() : null;
+		body.server_time = body.server_time ? parseInt(body.server_time.toString(), 10) : null;
 		body.identity_secret = body.identity_secret ? body.identity_secret.toBuffer().toString('base64') : null;
 		body.secret_1 = body.secret_1 ? body.secret_1.toBuffer().toString('base64') : null;
 
