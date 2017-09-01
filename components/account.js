@@ -23,7 +23,7 @@ SteamUser.prototype.createAccount = function(accountName, password, email, callb
 SteamUser.prototype.requestValidationEmail = function(callback) {
 	var body = new ByteBuffer(1, ByteBuffer.LITTLE_ENDIAN);
 	body.writeUint8(0);
-	this._send(SteamUser.EMsg.ClientRequestValidationMail, body, function(response) {
+	this._send(SteamUser.EMsg.ClientRequestValidationMail, body.flip(), function(response) {
 		if (!callback) {
 			return;
 		}
