@@ -1,6 +1,7 @@
 {
 	"name": "steam-user",
 	"version": "3.21.8",
+	"private": true,
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
 	"keywords": [
 		"steam",
