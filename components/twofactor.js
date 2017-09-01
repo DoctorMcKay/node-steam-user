@@ -1,5 +1,6 @@
 const SteamTotp = require('steam-totp');
 
+const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 /**
@@ -29,7 +30,7 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 			}
 		}
 
-		callback(body);
+		callback(body.status == SteamUser.EResult.OK ? null : Helpers.eresultError(body.status), body);
 	});
 };
 
