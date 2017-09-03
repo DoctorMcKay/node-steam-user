@@ -417,11 +417,9 @@ Listen for the [`webSession`](#websession) event to get your cookies.
 - `password` - The password for your new account
 - `email` - The contact email for your new account
 - `callback` - Called when the account is either created or an error occurs
-	- `result` - A value from `SteamUser.EResult`.
-		- `SteamUser.EResult.OK` if the account was created successfully
-		- `SteamUser.EResult.DuplicateName` if there is already an account with that username
-		- `SteamUser.EResult.IllegalPassword` if your password is too weak or otherwise bad
-		- or something else on another error
+	- `err` - An `Error` object on failure, or `null` on success. Some common errors:
+		- `DuplicateName` if there is already an account with that username
+		- `IllegalPassword` if your password is too weak or otherwise bad
 	- `steamid` - If successful, this is a `SteamID` object containing the new account's SteamID
 
 Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user
@@ -432,12 +430,13 @@ argument in the callback is currently `null`.**
 
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
-	- `result` - A value from `SteamUser.EResult`. `SteamUser.EResult.OK` if the mail was sent successfully.
+	- `err` - An `Error` object on failure, or `null` on success
 
 Requests Steam to send you a validation email to your registered email address.
 
 ### enableTwoFactor(callback)
 - `callback` - Required. Called when the activation email has been sent.
+    - `err` - An `Error` object on failure, or `null` on success
 	- `response` - An object containing the response data
 
 **v2.0.0 or later is required to use this method**
@@ -467,6 +466,7 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 
 ### getSteamGuardDetails(callback)
 - `callback` - A function to be called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `enabled` - `true` if Steam Guard is enabled for your account, `false` if not
 	- `enabledTime` - A `Date` object representing when Steam Guard was enabled for your account, or `null` if not available
 	- `machineTime` - A `Date` object representing when your current machine was authorized with Steam Guard, or `null` if not available
@@ -488,6 +488,7 @@ In order to trade, **all** of the following must be true:
 
 ### getCredentialChangeTimes(callback)
 - `callback` - A function to be called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
     - `lastPasswordChange` - A `Date` object representing when your password was last changed, or `null` if never changed
     - `lastPasswordReset` - A `Date` object representing when your password was last *reset* via the "forgot your password" utility, or `null` if never reset
     - `lastEmailChange` - A `Date` object representing when your email address was last changed, or `null` if never changed
@@ -498,6 +499,7 @@ Gets when you last changed various account credentials.
 
 ### getAuthSecret(callback)
 - `callback` - A function to be called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
     - `secretID` - A numeric ID assigned to your key by Steam
     - `key` - Your account's "auth secret", as a `Buffer`
 
@@ -589,7 +591,7 @@ You can use multiple apps by providing an array of any mixture of the above form
 ### getPlayerCount(appid, callback)
 - `appid` - The AppID of the app for which you'd like the current player/user count (use `0` to get current logged-in Steam user count)
 - `callback` - Called when the requested data is available
-	- `result` - A value from `SteamUser.EResult`
+	- `err` - An `Error` object on failure, or `null` on success
 	- `players` - How many Steam users are currently playing/using the app
 
 Requests a count of how many Steam users are currently playing/using an app.
@@ -614,6 +616,7 @@ Requests a list of game servers from the master server.
 - `filter` - A master server [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter)
 - `limit` - How many servers should be returned, at maximum. Hard limit is 5000.
 - `callback` - Called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `servers` - An array of objects containing server data
 		- `addr` - The server's IP address in `x.x.x.x:p` format
 		- `gameport` - The port the server is running on for game clients
@@ -639,6 +642,7 @@ Requests a list of game servers from the master server.
 ### getServerSteamIDsByIP(ips, callback)
 - `ips` - An array of IP addresses, in `x.x.x.x:p` format
 - `callback` - Called when requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `servers` - An object whose keys are IP addresses in `x.x.x.x:p` format and values are [`SteamID`](https://www.npmjs.com/package/steamid) objects
 
 **Works when anonymous.** Gets current SteamIDs for servers running on given addresses.
@@ -646,6 +650,7 @@ Requests a list of game servers from the master server.
 ### getServerIPsBySteamID(steamids, callback)
 - `steamids` - An array of [`SteamID`](https://www.npmjs.com/package/steamid) objects, or something which can parse into one (64-bit SteamID as string, Steam3 rendered format)
 - `callback` - Called when requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `servers` - An object whose keys are 64-bit numeric SteamIDs and values are IP addresses in `x.x.x.x:p` format
 
 **Works when anonymous.** Gets current IP addresses for servers with given SteamIDs.
@@ -653,6 +658,7 @@ Requests a list of game servers from the master server.
 ### getProductChanges(sinceChangenumber, callback)
 - `sinceChangenumber` - The changenumber of the last known changelist. You will get changes which have occurred since then and now. You won't get any info except the current changenumber if you request more than around 5,000 changenumbers in the past.
 - `callback` - Called when data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `currentChangenumber` - The changenumber of the newest changelist
 	- `apps` - An array of objects for apps which have changed. Each object has these properties:
 		- `appid` - The AppID of the app
@@ -666,6 +672,7 @@ Requests a list of game servers from the master server.
 - `apps` - Either an array of AppIDs, or an array of objects containing `appid` and `access_token` properties
 - `packages` - Either an array of PackageIDs, or an array of objects containing `packageid` and `access_token` properties
 - `callback` - Called when requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `apps` - An object whose keys are AppIDs and whose values are objects
 		- `changenumber` - The changenumber of the latest changelist in which this app changed
 		- `missingToken` - `true` if you need to provide an access token to get more details about this app
@@ -680,6 +687,7 @@ Requests a list of game servers from the master server.
 - `apps` - An array of AppIDs
 - `packages` - An array of PackageIDs
 - `callback` - Called when requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
 	- `apps` - An object whose keys are AppIDs and whose values are access tokens
 	- `packages` - An object whose keys are PackageIDs and whose values are access tokens
 	- `appDeniedTokens` - An array of AppIDs for which Steam denied you an access token
@@ -794,7 +802,7 @@ Removed a specified user from your friends list. Also ignores an outstanding fri
 ### blockUser(steamID[, callback])
 - `steamID` - The SteamID of the user you want to block, as a `SteamID` object or a string that can parse into one
 - `callback` - Optional. Called when the request completes
-	- `eresult` - A value from the `EResult` enum
+	- `err` - An `Error` object on failure, or `null` on success
 
 **v1.9.0 or later is required to use this method**
 
@@ -803,7 +811,7 @@ Blocks all communication with a specified user.
 ### unblockUser(steamID[, callback])
 - `steamID` - The SteamID of the user you want to unblock, as a `SteamID` object or a string that can parse into one
 - `callback` - Optional. Called when the request completes
-	- `eresult` - A value from the `EResult` enum
+	- `err` - An `Error` object on failure, or `null` on success
 
 **v1.9.0 or later is required to use this method**
 
@@ -812,6 +820,7 @@ Unblocks all communication with a specified user.
 ### getPersonas(steamids[, callback])
 - `steamids` - An array of `SteamID` objects or strings which can parse into `SteamID` objects
 - `callback` - Optional. Called when the requested data is available.
+    - `err` - An `Error` object on failure, or `null` on success
 	- `personas` - An object whose keys are 64-bit SteamIDs and whose values are objects identical to those received in the [`user`](#user) event
 
 **v1.9.0 or later is required to use this method**
@@ -821,6 +830,7 @@ Requests persona data for one or more users from Steam. The response will arrive
 ### getSteamLevels(steamids, callback)
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available.
+    - `err` - An `Error` object on failure, or `null` on success
 	- `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are Steam levels
 
 **v1.9.0 or later is required to use this method**
@@ -919,7 +929,7 @@ Tells the `recipient` that you're typing a chat message.
 ### getChatHistory(steamID[, callback])
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 - `callback` - Optional. Called when the requested data is available
-	- `success` - An `EResult` value
+	- `err` - An `Error` object on failure, or `null` on success
 	- `messages` - An array of message objects, each of which has the following properties:
 		- `steamID` - The SteamID of the user who sent the message, either us or them (as a `SteamID` object)
 		- `timestamp` - A `Date` object for when the message was sent
@@ -1020,7 +1030,7 @@ Creates a new multi-user chat room
 ### redeemKey(key[, callback])
 - `key` - Steam formatted game key
 - `callback` - Optional. Called when request completes
-	- `result` - An `EResult` value
+	- `err` - An `Error` object on failure, or `null` on success
 	- `details` - A `SteamUser.EPurchaseResult` value
 	- `packages` - An object whose keys are packageIDs and values are package names
 
