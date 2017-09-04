@@ -2,7 +2,6 @@ To do:
 
 - Remove dependency on steam-client and remove ability to specify a custom one. Instead, build that functionality in directly.
 - Add promise support for all methods that take a callback
-- Add `err` to all callbacks that don't have it already
 
 Breaking:
 
@@ -31,6 +30,7 @@ Breaking:
     - getServerList
     - getServerSteamIDsByIP
     - getServerIPsBySteamID
+- Removed legacy support for secret questions and answers to createAccount
 
 Before publishing:
 

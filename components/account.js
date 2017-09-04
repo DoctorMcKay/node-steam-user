@@ -6,11 +6,6 @@ const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
-	if (typeof callback === 'string' && typeof arguments[5] === 'function') {
-		// Support people providing questions/answers from back when that was a thing
-		callback = arguments[5];
-	}
-
 	this._send(SteamUser.EMsg.ClientCreateAccountProto, {
 		"account_name": accountName,
 		"password": password,
