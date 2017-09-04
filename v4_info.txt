@@ -2,6 +2,8 @@ To do:
 
 - Remove dependency on steam-client and remove ability to specify a custom one. Instead, build that functionality in directly.
 - Add promise support for all methods that take a callback
+    - **This is not happening.** There is no way to do promises alongside callbacks with first-party Promises, and I'm
+      not interested in using something third-party to do promises.
 
 Breaking:
 
