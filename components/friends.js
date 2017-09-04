@@ -133,9 +133,8 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 	if (callback) {
 		var output = {};
 
-		var self = this;
-		ids.forEach(function(id) {
-			self.once('user#' + id, receive);
+		ids.forEach((id) => {
+			this.once('user#' + id, receive);
 		});
 
 		function receive(sid, user) {
@@ -272,11 +271,10 @@ SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
 
 SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 	steamID = Helpers.steamID(steamID);
-	var self = this;
 	this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {
 		"steamid": steamID.toString(),
 		"nickname": nickname
-	}, function(body) {
+	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			if (callback) {
 				callback(Helpers.eresultError(body.eresult));
@@ -287,9 +285,9 @@ SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 
 		// Worked!
 		if (nickname.length == 0) {
-			delete self.myNicknames[steamID.toString()];
+			delete this.myNicknames[steamID.toString()];
 		} else {
-			self.myNicknames[steamID.toString()] = nickname;
+			this.myNicknames[steamID.toString()] = nickname;
 		}
 
 		if (callback) {
@@ -301,21 +299,20 @@ SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
-	var self = this;
-	body.friends.forEach(function(user) {
+	body.friends.forEach((user) => {
 		var sid = new SteamID(user.friendid.toString());
 		var sid64 = sid.getSteamID64();
 		delete user.friendid;
 
 		var i;
-		if (!self.users[sid64]) {
-			self.users[sid64] = user;
-			processUser(self.users[sid64]);
+		if (!this.users[sid64]) {
+			this.users[sid64] = user;
+			processUser(this.users[sid64]);
 		} else {
 			// Replace unknown data in the received object with already-known data
-			for (i in self.users[sid64]) {
-				if (self.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
-					user[i] = self.users[sid64][i];
+			for (i in this.users[sid64]) {
+				if (this.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
+					user[i] = this.users[sid64][i];
 				}
 			}
 		}
@@ -331,15 +328,15 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body
 		 * @param {Object} user - An object containing the user's persona info
 		 */
 
-		self._emitIdEvent('user', sid, user);
+		this._emitIdEvent('user', sid, user);
 
 		if (user.gameid) {
-			self._addAppToCache(user.gameid);
+			this._addAppToCache(user.gameid);
 		}
 
 		for (i in user) {
 			if (user.hasOwnProperty(i) && user[i] !== null) {
-				self.users[sid][i] = user[i];
+				this.users[sid][i] = user[i];
 			}
 		}
 	});
@@ -379,8 +376,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		}
 	}
 
-	var self = this;
-	(body.events || []).forEach(function(event) {
+	(body.events || []).forEach((event) => {
 		if (!event.just_posted) {
 			return;
 		}
@@ -397,10 +393,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		 * @param {number} gameID - If this is an event for a game, this is the game's appid
 		 */
 
-		self._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
+		this._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
 	});
 
-	(body.announcements || []).forEach(function(announcement) {
+	(body.announcements || []).forEach((announcement) => {
 		if (!announcement.just_posted) {
 			return;
 		}
@@ -415,13 +411,12 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		 * @param {string} gid - The announcement's GID
 		 */
 
-		self._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
+		this._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
 	});
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body) {
-	var self = this;
-	(body.friends || []).forEach(function(relationship) {
+	(body.friends || []).forEach((relationship) => {
 		var sid = new SteamID(relationship.ulfriendid.toString());
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
@@ -443,13 +438,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 			 */
 
 			// This isn't an initial download of the friends list, something changed
-			self._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
+			this._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
 
 		if (relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
-			delete self[key][sid.getSteamID64()];
+			delete this[key][sid.getSteamID64()];
 		} else {
-			self[key][sid.getSteamID64()] = relationship.efriendrelationship;
+			this[key][sid.getSteamID64()] = relationship.efriendrelationship;
 		}
 	});
 
@@ -470,8 +465,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 		this.emit('groupList');
 
 		// Request persona info for all our friends
-		var friends = Object.keys(this.myFriends).filter(function(steamID) { return self.myFriends[steamID] == SteamUser.EFriendRelationship.Friend; });
-		self.getPersonas(friends);
+		var friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
+		this.getPersonas(friends);
 	}
 };
 

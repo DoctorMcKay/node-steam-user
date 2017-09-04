@@ -198,11 +198,10 @@ SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressL
 		this._loggingOff = true;
 		this._send(SteamUser.EMsg.ClientLogOff, {});
 
-		var self = this;
-		var timeout = setTimeout(function() {
-			self.emit('disconnected', 0, "Logged off");
-			self._loggingOff = false;
-			self.client.disconnect();
+		var timeout = setTimeout(() => {
+			this.emit('disconnected', 0, "Logged off");
+			this._loggingOff = false;
+			this.client.disconnect();
 		}, 4000);
 
 		this.once('disconnected', function(eresult) {
@@ -263,7 +262,6 @@ SteamUser.prototype.relog = function() {
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(body) {
-	var self = this;
 	switch (body.eresult) {
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
@@ -335,9 +333,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			var isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
 			var lastCodeWrong = body.eresult == SteamUser.EResult.TwoFactorCodeMismatch;
 
-			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, function(code) {
-				self._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
-				self.logOn(true);
+			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, (code) => {
+				this._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
+				this.logOn(true);
 			});
 
 			break;
@@ -351,8 +349,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			var timer = this._logonTimeout || 1000;
 			this._logonTimeout = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
 
-			setTimeout(function() {
-				self.logOn(true);
+			setTimeout(() => {
+				this.logOn(true);
 			}, timer);
 
 			break;
@@ -416,9 +414,8 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 		this.disconnect(true);
 
 		if (!this._loggingOff || this._relogging) {
-			var self = this;
-			setTimeout(function() {
-				self.logOn(true);
+			setTimeout(() => {
+				this.logOn(true);
 			}, 1000);
 		}
 

@@ -50,9 +50,8 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 		options.agent = ProxyAgent.getAgent(true, this.client.httpProxy || this.client._httpProxy);
 	}
 
-	var self = this;
-	var req = HTTPS.request(options, function(res) {
-		self.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
+	var req = HTTPS.request(options, (res) => {
+		this.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
 
 		if (res.statusCode != 200) {
 			res.on('data', function() {}); // discard the response

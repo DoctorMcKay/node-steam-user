@@ -8,15 +8,13 @@ const SteamUser = require('../index.js');
  * @param {function} callback - Called when an activation email has been sent. Params are status (an EResult), sharedSecret (a Buffer), and revocationCode (a string)
  */
 SteamUser.prototype.enableTwoFactor = function(callback) {
-	var self = this;
-
 	this._sendUnified("TwoFactor.AddAuthenticator#1", {
-		"steamid": self.steamID.getSteamID64(),
+		"steamid": this.steamID.getSteamID64(),
 		"authenticator_time": Math.floor(Date.now() / 1000),
 		"authenticator_type": 1,
-		"device_identifier": SteamTotp.getDeviceID(self.steamID),
+		"device_identifier": SteamTotp.getDeviceID(this.steamID),
 		"sms_phone_id": "1"
-	}, false, function(body) {
+	}, false, (body) => {
 		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
 		body.serial_number = body.serial_number ? body.serial_number.toString() : null;
 		body.server_time = body.server_time ? parseInt(body.server_time.toString(), 10) : null;

@@ -421,9 +421,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCreateChatResponse] = functio
 	if (eresult != SteamUser.EResult.OK) {
 		this._emitIdEvent('chatCreated', friendID, eresult);
 	} else {
-		var self = this;
-		this.joinChat(chatID, function(result) {
-			self._emitIdEvent('chatCreated', friendID, result, chatID);
+		this.joinChat(chatID, (result) => {
+			this._emitIdEvent('chatCreated', friendID, result, chatID);
 		});
 	}
 };

@@ -14,8 +14,7 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 		userData = new Buffer(0);
 	}
 
-	var self = this;
-	this._send(SteamUser.EMsg.ClientRequestEncryptedAppTicket, {"app_id": appid, "userdata": userData}, function(body) {
+	this._send(SteamUser.EMsg.ClientRequestEncryptedAppTicket, {"app_id": appid, "userdata": userData}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;

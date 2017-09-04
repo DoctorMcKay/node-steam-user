@@ -21,9 +21,8 @@ SteamUser.prototype.cancelTradeRequest = function(steamID) {
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeProposed] = function(body) {
-	var self = this;
-	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), function(accept) {
-		self._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
+	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), (accept) => {
+		this._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
 			"trade_request_id": body.trade_request_id,
 			"response": accept ? SteamUser.EEconTradeResponse.Accepted : SteamUser.EEconTradeResponse.Declined
 		});

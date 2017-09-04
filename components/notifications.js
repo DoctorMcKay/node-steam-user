@@ -19,19 +19,17 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = funct
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
-	var self = this;
-	(body.notifications || []).forEach(function(notification) {
+	(body.notifications || []).forEach((notification) => {
 		if (notification.user_notification_type == 1) {
-			self.emit('tradeOffers', notification.count);
+			this.emit('tradeOffers', notification.count);
 		}
 	});
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSOfflineMessageNotification] = function(body) {
-	var self = this;
-	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map(function(accountid) {
+	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map((accountid) => {
 		var sid = new SteamID();
-		sid.universe = self.steamID.universe;
+		sid.universe = this.steamID.universe;
 		sid.type = SteamID.Type.INDIVIDUAL;
 		sid.instance = SteamID.Instance.DESKTOP;
 		sid.accountid = accountid;

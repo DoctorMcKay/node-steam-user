@@ -26,7 +26,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 	}
 
 	function doTheThing() {
-		self._send(SteamUser.EMsg.ClientGamesPlayed, apps.map(function(app) {
+		self._send(SteamUser.EMsg.ClientGamesPlayed, apps.map((app) => {
 			if (typeof app === 'string') {
 				return {
 					"game_id": "15190414816125648896",
@@ -107,14 +107,13 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 		}
 	});
 
-	var self = this;
 	this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
 		"apps": apps,
 		"packages": packages
-	}, function(body) {
+	}, (body) => {
 		// If we're using the PICS cache, then add the items in this response to it
-		if (self.options.enablePicsCache) {
-			var cache = self.picsCache;
+		if (this.options.enablePicsCache) {
+			var cache = this.picsCache;
 			cache.apps = cache.apps || {};
 			cache.packages = cache.packages || {};
 
@@ -127,7 +126,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 
 				if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
 					// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
-					self.emit('appUpdate', app.appid, data);
+					this.emit('appUpdate', app.appid, data);
 				}
 
 				cache.apps[app.appid] = data;
@@ -143,7 +142,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 				};
 
 				if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
-					self.emit('packageUpdate', pkg.packageid, data);
+					this.emit('packageUpdate', pkg.packageid, data);
 				}
 
 				cache.packages[pkg.packageid] = data;
@@ -153,7 +152,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 				// Request info for all the apps in this package, if this request didn't originate from the license list
 				if (requestType != PICSRequestType.Licenses) {
 					var appids = (pkg.packageinfo || {}).appids || [];
-					self.getProductInfo(appids, [], null, PICSRequestType.PackageContents);
+					this.getProductInfo(appids, [], null, PICSRequestType.PackageContents);
 				}
 			});
 		}
@@ -252,64 +251,52 @@ SteamUser.prototype._getChangelistUpdate = function() {
 		return;
 	}
 
-	var self = this;
-
 	// Set a local timeout if Steam doesn't respond
 	var timedOut = false;
-	var timeout = setTimeout(function() {
+	var timeout = setTimeout(() => {
 		timedOut = true;
-		self._resetChangelistUpdateTimer();
+		this._resetChangelistUpdateTimer();
 	}, Math.max(Math.round(this.options.changelistUpdateInterval / 2), 30000));
 
-	this.getProductChanges(this.picsCache.changenumber, function(currentChangenumber, apps, packages) {
+	this.getProductChanges(this.picsCache.changenumber, (currentChangenumber, apps, packages) => {
 		if (timedOut) {
 			return;
 		}
 
-		var cache = self.picsCache;
+		var cache = this.picsCache;
 
 		cache.apps = cache.apps || {};
 		cache.packages = cache.packages || {};
 
-		apps = apps.map(function(app) {
-			return app.appid;
-		});
+		apps = apps.map(app => app.appid);
+		packages = packages.map(pkg => pkg.packageid);
 
-		packages = packages.map(function(pkg) {
-			return pkg.packageid;
-		});
-
-		var ourApps = apps.filter(function(appid) {
-			return (self.options.picsCacheAll || !!cache.apps[appid]);
-		});
-
-		var ourPackages = packages.filter(function(pkgid) {
-			return (self.options.picsCacheAll || !!cache.packages[pkgid]);
-		});
+		var ourApps = apps.filter(appid => this.options.picsCacheAll || cache.apps[appid]);
+		var ourPackages = packages.filter(pkgid => this.options.picsCacheAll || cache.packages[pkgid]);
 
 		if (ourApps.length + ourPackages.length === 0) {
 			// We're done here
 
 			if (currentChangenumber != cache.changenumber && cache.changenumber != 0) {
-				self.emit('changelist', currentChangenumber, apps, packages);
+				this.emit('changelist', currentChangenumber, apps, packages);
 			}
 
 			cache.changenumber = currentChangenumber;
-			self._resetChangelistUpdateTimer();
+			this._resetChangelistUpdateTimer();
 			clearTimeout(timeout);
 			return;
 		}
 
 		// Get any access tokens we may need
-		self.getProductAccessToken(ourApps, ourPackages, function(appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) {
+		this.getProductAccessToken(ourApps, ourPackages, (appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) => {
 			if (timedOut) {
 				return;
 			}
 
-			self.emit('changelist', currentChangenumber, apps, packages);
+			this.emit('changelist', currentChangenumber, apps, packages);
 
 			cache.changenumber = currentChangenumber;
-			self._resetChangelistUpdateTimer();
+			this._resetChangelistUpdateTimer();
 			clearTimeout(timeout);
 
 			var index = -1;
@@ -325,7 +312,7 @@ SteamUser.prototype._getChangelistUpdate = function() {
 				}
 			}
 
-			self.getProductInfo(ourApps, ourPackages, null, PICSRequestType.Changelist);
+			this.getProductInfo(ourApps, ourPackages, null, PICSRequestType.Changelist);
 		});
 	});
 };
@@ -350,8 +337,7 @@ SteamUser.prototype._getLicenseInfo = function() {
 
 	var packageids = this.getOwnedPackages();
 
-	var self = this;
-	this.getProductInfo([], packageids, function(apps, packages) {
+	this.getProductInfo([], packageids, (apps, packages) => {
 		// Request info for all the apps in these packages
 		var appids = [];
 
@@ -367,8 +353,8 @@ SteamUser.prototype._getLicenseInfo = function() {
 			});
 		}
 
-		self.getProductInfo(appids, [], function(apps, packages) {
-			self.emit('appOwnershipCached');
+		this.getProductInfo(appids, [], (apps, packages) => {
+			this.emit('appOwnershipCached');
 		}, PICSRequestType.PackageContents);
 	}, PICSRequestType.Licenses);
 };
@@ -385,13 +371,12 @@ SteamUser.prototype.getOwnedApps = function() {
 	var ownedPackages = this.getOwnedPackages();
 	var appids = [];
 
-	var self = this;
-	ownedPackages.forEach(function(pkg) {
-		if (!self.picsCache.packages[pkg]) {
+	ownedPackages.forEach((pkg) => {
+		if (!this.picsCache.packages[pkg]) {
 			return;
 		}
 
-		pkg = self.picsCache.packages[pkg];
+		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
 			return;
 		}
@@ -402,7 +387,7 @@ SteamUser.prototype.getOwnedApps = function() {
 			return; // This package has expired. Free weekend, usually
 		}
 
-		(pkg.appids || []).forEach(function(appid) {
+		(pkg.appids || []).forEach((appid) => {
 			if (appids.indexOf(appid) == -1) {
 				appids.push(appid);
 			}
@@ -429,13 +414,12 @@ SteamUser.prototype.getOwnedDepots = function() {
 	var ownedPackages = this.getOwnedPackages();
 	var depotids = [];
 
-	var self = this;
-	ownedPackages.forEach(function(pkg) {
-		if (!self.picsCache.packages[pkg]) {
+	ownedPackages.forEach((pkg) => {
+		if (!this.picsCache.packages[pkg]) {
 			return;
 		}
 
-		pkg = self.picsCache.packages[pkg];
+		pkg = this.picsCache.packages[pkg];
 		if (!pkg.packageinfo) {
 			return;
 		}

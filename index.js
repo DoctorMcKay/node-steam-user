@@ -113,18 +113,17 @@ function SteamUser(client, options) {
 
 	this.client.on('message', this._handleMessage.bind(this));
 
-	var self = this;
-	this.client.on('error', function(e) {
-		if (!self.steamID && e.result != SteamUser.EResult.ConnectFailed) {
+	this.client.on('error', (e) => {
+		if (!this.steamID && e.result != SteamUser.EResult.ConnectFailed) {
 			return; // We've already handled this
 		}
 
-		self._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
+		this._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
 	});
 
-	this.client.on('servers', function(servers) {
-		if (self.storage) {
-			self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
+	this.client.on('servers', (servers) => {
+		if (this.storage) {
+			this.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
 		}
 
 		if (!client) {
