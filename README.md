@@ -1456,6 +1456,13 @@ The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so 
 
 Emitted when our friends list is downloaded from Steam after logon.
 
+### friendPersonasLoaded
+
+**v3.22.0 or later is required to use this event**
+
+Emitted when all personas have been loaded for our entire friends list, and they are all now available in
+[`users`](#users).
+
 ### groupList
 
 **v1.9.0 or later is required to use this event**
