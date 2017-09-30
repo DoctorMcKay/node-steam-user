@@ -297,6 +297,20 @@ SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 	});
 };
 
+SteamUser.prototype.getNicknames = function(callback) {
+	this._sendUnified("Player.GetNicknameList#1", {}, false, (body) => {
+		var nicks = {};
+		body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
+
+		if (callback) {
+			callback(null, nicks);
+		}
+
+		this.emit('nicknameList', nicks);
+		this.myNicknames = nicks;
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
