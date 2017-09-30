@@ -1,6 +1,6 @@
 {
 	"name": "steam-user",
-	"version": "3.22.0",
+	"version": "3.23.0",
 	"description": "node-steam client handler for Individual and AnonUser Steam account types",
 	"keywords": [
 		"steam",
@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@doctormckay/proxy-agent": "^1.0.0",
-		"@doctormckay/stats-reporter": "^1.0.0",
+		"@doctormckay/stats-reporter": "^1.0.3",
 		"@doctormckay/steam-crypto": "^1.2.0",
 		"adm-zip": "^0.4.7",
 		"appdirectory": "^0.1.0",
@@ -34,7 +34,7 @@
 		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",
 		"protobufjs": "^5.0.2",
-		"steam-client": "^2.5.0",
+		"steam-client": "^2.5.4",
 		"steam-totp": "^1.4.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2"
