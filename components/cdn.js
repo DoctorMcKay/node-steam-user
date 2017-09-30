@@ -294,7 +294,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
  * Download a specific file from a depot.
  * @param {int} appID - The AppID which owns the file you want
  * @param {int} depotID - The depot ID which contains the file you want
- * @param {string} fileManifest - An object from the "files" array of a downloaded and parsed manifest
+ * @param {object} fileManifest - An object from the "files" array of a downloaded and parsed manifest
  * @param {string} [outputFilePath] - If provided, downloads the file to this location on the disk. If not, downloads the file into memory and sends it back in the callback.
  * @param {function} callback - (err, file) but file is only present if outputFilePath is not set
  * @returns {EventEmitter} An EventEmitter which receives `progress` events with arguments (bytesDownloaded, totalSize)
