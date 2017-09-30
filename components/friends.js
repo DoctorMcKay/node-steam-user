@@ -529,6 +529,17 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = functio
 	this.myNicknames = myNicknames;
 };
 
+SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = function(body) {
+	var sid = SteamID.fromIndividualAccountID(body.accountid);
+	this.emit('nickname', sid, body.nickname || null);
+	if (!body.nickname) {
+		// removal
+		delete this.myNicknames[sid.getSteamID64()];
+	} else {
+		this.myNicknames[sid.getSteamID64()] = body.nickname;
+	}
+};
+
 function processUser(user) {
 	if (typeof user.gameid === 'object' && user.gameid !== null) {
 		user.gameid = user.gameid.toNumber();

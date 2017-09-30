@@ -1487,6 +1487,17 @@ The `myFriendGroups` property will be updated **after** this event is emitted, s
 Emitted when we receive our full nickname list from Steam, which should be shortly after logon (automatically).
 You can access it via the [`myNicknames`](#mynicknames) property.
 
+### nickname
+- `steamID` - The SteamID of the user whose nickname changed, as a `SteamID` object
+- `newNickname` - The user's new nickname, or `null` if their existing nickname has been deleted
+
+**v3.23.0 or later is required to use this event**
+
+Emitted when a friend's nickname is changed somewhere else (that is, on the web or by another client sessions). This is
+not emitted in response to a `setNickname` call.
+
+This is emitted before the `myNicknames` property is updated, so you can compare with that object to see what it used to be.
+
 ### friendOrChatMessage
 - `senderID` - The message sender, as a `SteamID` object
 - `message` - The message text

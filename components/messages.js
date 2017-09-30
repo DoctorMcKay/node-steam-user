@@ -123,6 +123,7 @@ protobufs['PublishedFile.GetDetails#1_Request'] = Schema.CPublishedFile_GetDetai
 protobufs['PublishedFile.GetDetails#1_Response'] = Schema.CPublishedFile_GetDetails_Response;
 protobufs['Player.GetGameBadgeLevels#1_Request'] = Schema.CPlayer_GetGameBadgeLevels_Request;
 protobufs['Player.GetGameBadgeLevels#1_Response'] = Schema.CPlayer_GetGameBadgeLevels_Response;
+protobufs['PlayerClient.NotifyFriendNicknameChanged#1'] = Schema.CPlayer_FriendNicknameChanged_Notification;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
@@ -173,6 +174,7 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 
 SteamUser.prototype._handleMessage = function(header, body, callback) {
 	var msgName = header.msg;
+	var handlerName = header.msg;
 
 	if (this.options.debug) {
 		for (var i in SteamUser.EMsg) {
@@ -183,7 +185,8 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		}
 	}
 
-	if (!this._handlers[header.msg]) {
+	if (header.msg != SteamUser.EMsg.ServiceMethod && !this._handlers[header.msg]) {
+		// ServiceMethod is a special case which will be handled below
 		if (header.msg != SteamUser.EMsg.Multi) {
 			this.emit('debug', 'Unhandled message: ' + msgName);
 		}
@@ -193,6 +196,16 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 
 	if (protobufs[header.msg]) {
 		body = protobufs[header.msg].decode(body);
+	} else if (header.proto && header.proto.target_job_name && protobufs[header.proto.target_job_name]) {
+		// service notification
+		handlerName = header.proto.target_job_name;
+
+		if (!this._handlers[handlerName]) {
+			this.emit('debug', 'Unhandled service method: ' + handlerName);
+			return;
+		}
+
+		body = protobufs[header.proto.target_job_name].decode(body);
 	} else {
 		body = ByteBuffer.wrap(body);
 	}
@@ -213,7 +226,7 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		}
 	}
 
-	this._handlers[header.msg].call(this, body, cb);
+	this._handlers[handlerName].call(this, body, cb);
 };
 
 SteamUser.prototype._handlers = {};
