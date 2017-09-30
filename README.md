@@ -851,6 +851,20 @@ Gets the Steam Level for one or more Steam users (who do not have to be on your 
 
 Gets the last 10 persona names (including the current one) used by one or more Steam users (who do not have to be on your friends list).
 
+### getNicknames([callback])
+- `callback` - Optional. Called when the requested data is available
+    - `err` - An `Error` object on failure, or `null` on success
+    - `nicknames` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are nicknames for the corresponding users (as strings)
+
+**v3.23.0 or later is required to use this method**
+
+Retrieves an up-to-date nickname list (see [`nicknameList`](#nicknamelist)) from Steam. The `nicknameList` event will be
+emitted when the response to this request is received, immediately after the callback fires. If you provide no callback,
+the `nicknameList` event is still emitted.
+
+In theory, the nickname list in `myNicknames` will always be up-to-date since v3.23.0, but you may wish to use this if
+you want to be doubly sure.
+
 ### setNickname(steamID, nickname[, callback])
 - `steamID` - The SteamID of the user on whom you want to set a nickname, as a `SteamID` object or a string that can parse into one
 - `nickname` - The user's new nickname, as a string. Empty string to remove.
@@ -862,11 +876,8 @@ Gets the last 10 persona names (including the current one) used by one or more S
 Sets a nickname on a user. If one already exists, overwrites it. The `myNicknames` property will be updated just before
 the callback fires, on success.
 
-**Note:** Using this doesn't appear to send a notification to any other instances that may be logged on. It appears to
-also be possible for Steam to report success when using this method, when in reality your nickname wasn't saved on the
-server. You won't be able to detect this without requesting the user's Steam profile via HTTP(S) or reconnecting to the
-CM, as the `myNicknames` property is updated automatically when this method reports success without verifying with the
-server.
+**Note:** It appears to be possible for Steam to report success when using this method, when in reality your nickname
+wasn't saved on the server. You can detect this case by calling `getNicknames`.
 
 ### getGameBadgeLevel(appid, callback)
 - `appid` - The AppID of the game you want to get your badge level for
