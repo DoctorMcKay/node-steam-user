@@ -187,8 +187,20 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		}
 	}
 
-	if (header.msg != SteamUser.EMsg.ServiceMethod && !this._handlers[handlerName]) {
-		// ServiceMethod is a special case which will be handled below
+	if (header.msg == SteamUser.EMsg.ServiceMethod) {
+		if (header.proto && header.proto.target_job_name) {
+			handlerName = msgName = header.proto.target_job_name;
+		} else {
+			this.emit('debug', 'Got ServiceMethod without target_job_name');
+			return;
+		}
+	}
+
+	if (header.msg != SteamUser.EMsg.ServiceMethod && header.proto && header.proto.target_job_name) {
+		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
+	}
+
+	if (!this._handlers[handlerName]) {
 		if (header.msg != SteamUser.EMsg.Multi) {
 			this.emit('debug', 'Unhandled message: ' + msgName);
 		}
@@ -196,25 +208,7 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		return;
 	}
 
-	if (protobufs[header.msg]) {
-		body = protobufs[header.msg].decode(body);
-	} else if (header.msg == SteamUser.EMsg.ServiceMethod && header.proto && header.proto.target_job_name && protobufs[header.proto.target_job_name]) {
-		// service notification
-		handlerName = header.proto.target_job_name;
-
-		if (!this._handlers[handlerName]) {
-			this.emit('debug', 'Unhandled service method: ' + handlerName);
-			return;
-		}
-
-		body = protobufs[header.proto.target_job_name].decode(body);
-	} else {
-		body = ByteBuffer.wrap(body);
-	}
-
-	if (header.msg != SteamUser.EMsg.ServiceMethod && header.proto && header.proto.target_job_name) {
-		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
-	}
+	body = protobufs[handlerName] ? protobufs[handlerName].decode(body) : ByteBuffer.wrap(body);
 
 	this.emit('debug', 'Handled message: ' + msgName);
 
