@@ -263,11 +263,10 @@ SteamUser.prototype.relog = function() {
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(body) {
 	var self = this;
+	this.steamID = new SteamID(body.client_supplied_steamid.toString());
 	switch (body.eresult) {
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
-
-			this.steamID = new SteamID(body.client_supplied_steamid.toString());
 
 			this._logOnDetails.last_session_id = this.client._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
