@@ -27,10 +27,11 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 			// This parser isn't terribly robust, but it works as long as SteamRE doesn't change their resource format
 			var currentEnum = null;
 			fileContents.split("\n").forEach(function(line) {
-				line = line.trim();
+				// Go line-by-line
+				line = line.trim(); // trim whitespace
 				var idx = line.indexOf("//");
 				if (idx != -1) {
-					line = line.substring(0, idx).trim();
+					line = line.substring(0, idx).trim(); // remove line comments
 				}
 
 				var match;
@@ -88,7 +89,6 @@ download("https://api.github.com/repos/SteamRE/SteamKit/contents/Resources/Steam
 
 						FS.writeFileSync(__dirname + '/../enums/' + currentEnum.name + '.js', file);
 						g_EnumNames.push(currentEnum.name);
-						require('fs').appendFileSync(__dirname + '/../resources/enums.js', "SteamUser." + currentEnum.name + " = require('../enums/" + currentEnum.name + ".js');\n");
 						currentEnum = null;
 					} else if (match = line.match(/^([A-Za-z0-9_]+) = ([^;]+);(.*)$/)) {
 						var name = match[1];
