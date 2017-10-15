@@ -119,6 +119,8 @@ module.exports = {
 	"GSLTExpired": 106,
 	"InsufficientFunds": 107,
 	"TooManyPending": 108,
+	"NoSiteLicensesFound": 109,
+	"WGNetworkSendExceeded": 110,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -229,4 +231,6 @@ module.exports = {
 	"106": "GSLTExpired",
 	"107": "InsufficientFunds",
 	"108": "TooManyPending",
+	"109": "NoSiteLicensesFound",
+	"110": "WGNetworkSendExceeded",
 };

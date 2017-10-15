@@ -16,7 +16,9 @@ module.exports = {
 	"Repurchaseable": 11,
 	"FreeOnDemand": 12,
 	"Rental": 13,
-	"NumBillingTypes": 14,
+	"CommercialLicense": 14,
+	"FreeCommercialLicense": 15,
+	"NumBillingTypes": 16,
 
 	// Value-to-name mapping for convenience
 	"0": "NoCost",
@@ -33,5 +35,7 @@ module.exports = {
 	"11": "Repurchaseable",
 	"12": "FreeOnDemand",
 	"13": "Rental",
-	"14": "NumBillingTypes",
+	"14": "CommercialLicense",
+	"15": "FreeCommercialLicense",
+	"16": "NumBillingTypes",
 };
