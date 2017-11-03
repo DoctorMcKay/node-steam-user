@@ -223,7 +223,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 SteamUser.prototype._handleNetMessage = function(buffer) {
 	let buf = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 
-	let rawEMsg = buf.readUint32(0);
+	let rawEMsg = buf.readUint32();
 	let eMsg = rawEMsg & ~PROTO_MASK;
 	let isProtobuf = !!(rawEMsg & PROTO_MASK);
 
