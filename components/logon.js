@@ -6,6 +6,8 @@ const Helpers = require('./helpers.js');
 const Schema = require('./protobufs.js');
 const SteamUser = require('../index.js');
 
+const PROTOCOL_VERSION = 65579;
+
 SteamUser.prototype.logOn = function(details) {
 	if (this.client.loggedOn) {
 		throw new Error("Already logged on, cannot log on again");
@@ -37,7 +39,7 @@ SteamUser.prototype.logOn = function(details) {
 			"two_factor_code": details.twoFactorCode,
 			"should_remember_password": !!details.rememberPassword,
 			"obfustucated_private_ip": details.logonID || 0,
-			"protocol_version": 65575, // don't get rid of this, node-steam needs it.
+			"protocol_version": PROTOCOL_VERSION,
 			"supports_rate_limit_response": !!details.accountName,
 			"machine_name": details.accountName ? (details.machineName || "") : "",
 			"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
