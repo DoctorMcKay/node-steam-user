@@ -11,6 +11,7 @@ const PROTO_MASK = 0x80000000;
 
 var protobufs = {};
 protobufs[EMsg.ClientLogon] = Schema.CMsgClientLogon;
+protobufs[EMsg.ClientLogonGameServer] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
 protobufs[EMsg.ClientLogOff] = Schema.CMsgClientLogOff;
 protobufs[EMsg.ClientLoggedOff] = Schema.CMsgClientLoggedOff;
@@ -142,7 +143,8 @@ ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
  * @private
  */
 SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
-	if ((!this.steamID || !this.client.connected) && [EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResponse, EMsg.ChannelEncryptResult, EMsg.ClientLogon].indexOf(emsg) == -1) {
+	let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
+	if (!canWeSend) {
 		// We're disconnected, drop it
 		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
 		return;
@@ -187,8 +189,8 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
 	} else if (header.proto) {
 		// if we have a protobuf header, use that
-		header.proto.client_sessionid = this._sessionID;
-		header.proto.steamid = this.steamID.getSteamID64();
+		header.proto.client_sessionid = this._sessionID || 0;
+		header.proto.steamid = (this.steamID || this._tempSteamID).getSteamID64();
 		header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
 		header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
 		let hdrProtoBuf = (new Schema.CMsgProtoBufHeader(header.proto)).toBuffer();
@@ -205,8 +207,8 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
 		hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
 		hdrBuf.writeByte(239);
-		hdrBuf.writeUint64(this.steamID.getSteamID64());
-		hdrBuf.writeUint32(this._sessionID);
+		hdrBuf.writeUint64((this.steamID || this._tempSteamID).getSteamID64());
+		hdrBuf.writeUint32(this._sessionID || 0);
 	}
 
 	this._connection.send(Buffer.concat([hdrBuf.toBuffer(), body]));
@@ -346,7 +348,7 @@ SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
 	}
 
 	function processMulti(payload) {
-		while (payload.length && this.steamID) {
+		while (payload.length && (this.steamID || this._tempSteamID)) {
 			let subSize = payload.readUInt32LE(0);
 			this._handleNetMessage(payload.slice(4, 4 + subSize));
 			payload = payload.slice(4 + subSize);

@@ -61,7 +61,7 @@ function TCPConnection(user) {
 				return;
 			}
 
-			this._stream = socket;
+			this.stream = socket;
 			this._setupStream();
 		});
 
@@ -76,7 +76,7 @@ function TCPConnection(user) {
 		});
 	} else {
 		let socket = new Socket();
-		this._stream = socket;
+		this.stream = socket;
 		this._setupStream();
 
 		socket.connect({
@@ -85,6 +85,8 @@ function TCPConnection(user) {
 			"localAddress": user.options.localAddress,
 			"localPort": user.options.localPort
 		});
+		
+		this.stream.setTimeout(this.user._connectTimeout);
 	}
 }
 
@@ -97,27 +99,39 @@ TCPConnection.prototype._setupStream = function() {
 		this.user.emit('debug', msg);
 	};
 
-	this._stream.on('readable', this._readMessage.bind(this));
-	this._stream.on('timeout', () => this.emit('timeout')); // pass-thru timeout events from the socket
-	this._stream.on('error', (err) => debug('TCP connection error: ' + err.message)); // "close" will be emitted and we'll reconnect
-	this._stream.on('end', () => debug('TCP connection ended'));
-	//this._stream.on('connect', () => this.emit('connect'));
-	//this._stream.on('close', () => this.emit('close'));
+	this.stream.on('readable', this._readMessage.bind(this));
+	this.stream.on('error', (err) => debug('TCP connection error: ' + err.message)); // "close" will be emitted and we'll reconnect
+	this.stream.on('end', () => debug('TCP connection ended'));
+	//this.stream.on('close', () => this.emit('close'));
 	// TODO: handle close, connect
+
+	this.stream.on('connect', () => {
+		this.user.emit('debug', 'TCP connection established');
+		this.stream.setTimeout(Math.min(this.user._connectTimeout, 2000)); // give the CM max 2 seconds to send ChannelEncryptRequest
+	});
+
+	this.stream.on('timeout', () => {
+		this.user.emit('debug', 'TCP connection timed out');
+		this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
+		this.removeAllListeners();
+		this.on('error', () => {}); // we no longer care
+		this.end();
+		this.user._doConnection();
+	});
 };
 
 /**
  * End the connection
  */
 TCPConnection.prototype.end = function() {
-	this._stream && this._stream.end();
+	this.stream && this.stream.end();
 };
 
 /**
  * Destroy the connection; don't wait for a graceful close
  */
 TCPConnection.prototype.destroy = function() {
-	this._stream && this._stream.destroy();
+	this.stream && this.stream.destroy();
 };
 
 /**
@@ -133,7 +147,7 @@ TCPConnection.prototype.send = function(data) {
 	buf.writeUInt32LE(data.length, 0);
 	buf.write(MAGIC, 4);
 	data.copy(buf, 8);
-	this._stream.write(buf);
+	this.stream.write(buf);
 };
 
 /**
@@ -143,7 +157,7 @@ TCPConnection.prototype.send = function(data) {
 TCPConnection.prototype._readMessage = function() {
 	if (!this._messageLength) {
 		// We are not in the middle of a message, so the next thing on the wire should be a header
-		let header = this._stream.read(8);
+		let header = this.stream.read(8);
 		if (!header) {
 			return; // maybe we should tear down the connection here
 		}
@@ -155,7 +169,7 @@ TCPConnection.prototype._readMessage = function() {
 		}
 	}
 
-	let message = this._stream.read(this._messageLength);
+	let message = this.stream.read(this._messageLength);
 	if (!message) {
 		this.user.emit('debug', 'Got incomplete message; expecting ' + this._messageLength + ' more bytes');
 		return;

@@ -12,7 +12,7 @@ SteamUser.prototype._handleConnectionClose = function() {
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptRequest] = function(body) {
-	this._connection.setTimeout(0);
+	this._connection.stream.setTimeout(0);
 
 	let protocol = body.readUint32();
 	let universe = body.readUint32();
@@ -34,15 +34,22 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptRequest] = function(b
 	encResp.flip();
 
 	this._send(SteamUser.EMsg.ChannelEncryptResponse, encResp);
+	this._connection.stream.setTimeout(1000);
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptResult] = function(body) {
+	this._connection.stream.setTimeout(0);
+
 	let eresult = body.readUint32();
 	if (eresult != SteamUser.EResult.OK) {
 		this.emit('error', 'Encryption failed: ' + eresult);
 		this.disconnect(true); // TODO: Make sure this doesn't emit "disconnected"
-	} else {
-		this._connection.sessionKey = this._connection._tempSessionKey;
-		delete this._connection._tempSessionKey;
+		return;
 	}
+
+	this._connection.sessionKey = this._connection._tempSessionKey;
+	delete this._connection._tempSessionKey;
+
+	this.emit('Encryption success; now logging on');
+	this._send(this._logOnDetails.game_server_token ? SteamUser.EMsg.ClientLogonGameServer : SteamUser.EMsg.ClientLogon, this._logOnDetails);
 };

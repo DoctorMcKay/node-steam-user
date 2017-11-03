@@ -5,6 +5,7 @@ const SteamID = require('steamid');
 const Helpers = require('./helpers.js');
 const Schema = require('./protobufs.js');
 const SteamUser = require('../index.js');
+const TCPConnection = require('./connection_protocols/tcp.js');
 
 const PROTOCOL_VERSION = 65579;
 
@@ -170,34 +171,41 @@ SteamUser.prototype.logOn = function(details) {
 			sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
 			sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
 			sid.accountid = 0;
-			self.client.steamID = sid.getSteamID64();
+			self._tempSteamID = sid;
 
-			if (self.client.connected) {
-				onConnected.call(self);
-			} else {
-				self.client.connect();
-
-				self._onConnected = onConnected.bind(self);
-				self.client.once('connected', self._onConnected);
-			}
+			self._doConnection();
 		}
 	}
 };
 
-function onConnected() {
-	if (this.client.constructor.name === 'CMClient') {
-		// We need to use this since CMClient defines the protocol version itself
-		this.client.logOn(this._logOnDetails);
-	} else {
-		this._send(SteamUser.EMsg.ClientLogon, this._logOnDetails);
+SteamUser.prototype._doConnection = function() {
+	let thisProtocol = this.options.protocol;
+
+	if (thisProtocol == SteamUser.EConnectionProtocol.Auto) {
+		if (this._cmList.auto_pct_websocket) {
+			let roll = Math.floor(Math.random() * 100);
+			thisProtocol = roll <= this._cmList.auto_pct_websocket ? SteamUser.EConnectionProtocol.WebSocket : SteamUser.EConnectionProtocol.TCP;
+			this.emit('debug', 'Using ' + (thisProtocol == SteamUser.EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP') + '; we rolled ' + roll + ' and percent to use WS is ' + this._cmList.auto_pct_websocket);
+		} else {
+			thisProtocol = SteamUser.EConnectionProtocol.TCP;
+		}
 	}
-}
+
+	switch (thisProtocol) {
+		case SteamUser.EConnectionProtocol.TCP:
+			this._connection = new TCPConnection(this);
+			break;
+
+		case SteamUser.EConnectionProtocol.WebSocket:
+			// TODO
+			break;
+
+		default:
+			throw new Error("Unknown connection protocol: " + this.options.protocol);
+	}
+};
 
 SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {
-	if (typeof this._onConnected === 'function') {
-		this.client.removeListener('connected', this._onConnected);
-	}
-
 	this._clearChangelistUpdateTimer();
 
 	if (this.client.connected && !suppressLogoff) {
@@ -293,6 +301,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 			this._connectTime = Date.now();
 			this._connectionCount = 0;
+			this._connectTimeout = 1000;
 			this._gcTokens = [];
 			this._contentServerTokens = {};
 			this._currentJobID = 0;
