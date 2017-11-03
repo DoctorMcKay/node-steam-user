@@ -338,9 +338,9 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 // Handlers
 
 SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
-	this.emit('debug', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + ' multi msg');
+	this.emit('debug', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
 
-	let payload = data.message_body.toBuffer();
+	let payload = body.message_body.toBuffer();
 	if (body.size_unzipped) {
 		Zlib.gunzip(payload, (err, unzipped) => {
 			if (err) {
