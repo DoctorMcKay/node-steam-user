@@ -2,9 +2,11 @@ const EventEmitter = require('events').EventEmitter;
 const Util = require('util');
 const WS13 = require('websocket13');
 
+const SteamUser = require('../../index.js');
+
 module.exports = WebSocketConnection;
 
-require('util').inherits(WebSocketConnection, EventEmitter);
+Util.inherits(WebSocketConnection, EventEmitter);
 
 /**
  * @constructor
@@ -35,16 +37,22 @@ WebSocketConnection.prototype.connect = function(user) {
 	this._setupStream();
 
 	this.stream.on('debug', msg => this.user.emit('debug', msg));
+	this.stream.on('message', this._readMessage.bind(this));
+
 	this.stream.on('disconnected', (code, reason) => {
 		this.user.emit('debug', 'WebSocket disconnected with code ' + code + ' and reason: ' + reason);
-		// TODO
+		this.user._handleConnectionClose();
 	});
+
 	this.stream.on('error', (err) => {
 		this.user.emit('debug', 'WebSocket disconnected with error: ' + err.message);
-		// TODO
+		this.user._handleConnectionClose();
 	});
-	//TODO this.stream.on('connected', function() { self.emit.apply(self, ['connect'].concat(Array.prototype.slice.call(arguments))); });
-	this.stream.on('message', this._readMessage.bind(this));
+
+	this.stream.on('connected', () => {
+		this.user.emit('debug', 'WebSocket connection success; now logging in');
+		this.user._send(this.user._logOnDetails.game_server_token ? SteamUser.EMsg.ClientLogonGameServer : SteamUser.EMsg.ClientLogon, this.user._logOnDetails);
+	});
 
 	// TODO add setTimeout to websocket13
 };
