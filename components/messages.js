@@ -292,7 +292,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 	}
 
-	if (!this._handlers[handlerName]) {
+	if (!this._handlers[handlerName] && !this._jobs[header.targetJobID]) {
 		this.emit('debug', 'Unhandled message: ' + msgName);
 		return;
 	}
