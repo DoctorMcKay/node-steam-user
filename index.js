@@ -140,6 +140,9 @@ SteamUser.prototype.setOptions = function(options) {
 	}
 };
 
+SteamUser.prototype._handlers = {};
+
+require('./components/connection.js');
 require('./components/messages.js');
 require('./components/webapi.js');
 require('./components/logon.js');

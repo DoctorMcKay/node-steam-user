@@ -2,7 +2,6 @@ const BufferCRC32 = require('buffer-crc32');
 const ByteBuffer = require('bytebuffer');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
-const TCPConnection = require('./connection_protocols/tcp.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype._handleConnectionClose = function() {
