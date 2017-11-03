@@ -461,6 +461,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 		this._disconnect(true);
 
+		// if we're manually relogging, or we got disconnected because steam went down, enqueue a reconnect
 		if (!this._loggingOff || this._relogging) {
 			setTimeout(() => {
 				this.logOn(true);
@@ -469,6 +470,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 		this._loggingOff = false;
 		this._relogging = false;
+		this.steamID = null;
 	}
 };
 
