@@ -513,7 +513,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
 		(body.percent_default_to_websocket || 0) + "%");
 
 	this._cmList = {
-		"tcp_servers": (body.cm_addresses || []).map((addr, idx) => addr + ':' + body.cm_ports[idx]),
+		"tcp_servers": (body.cm_addresses || []).map((addr, idx) => Helpers.ipIntToString(addr) + ':' + body.cm_ports[idx]),
 		"websocket_servers": body.cm_websocket_addresses || [],
 		"auto_pct_websocket": body.percent_default_to_websocket,
 		"time": Date.now()
