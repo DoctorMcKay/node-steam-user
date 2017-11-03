@@ -144,16 +144,16 @@ ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
  * @private
  */
 SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
+	// header fields: msg, proto, sourceJobID, targetJobID
+	var header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
+	let emsg = header.msg;
+
 	let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
 	if (!canWeSend) {
 		// We're disconnected, drop it
 		this.emit('debug', 'Dropping message ' + emsg + ' because we\'re not logged on.');
 		return;
 	}
-
-	// header fields: msg, proto, sourceJobID, targetJobID
-	var header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
-	let emsg = header.msg;
 
 	var Proto = protobufs[emsg];
 	if (Proto) {
