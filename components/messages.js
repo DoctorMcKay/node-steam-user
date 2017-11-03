@@ -1,5 +1,6 @@
 const ByteBuffer = require('bytebuffer');
 const SteamUser = require('../index.js');
+const Zlib = require('zlib');
 
 const Schema = require('./protobufs.js');
 
@@ -147,6 +148,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		return;
 	}
 
+	// header fields: msg, proto, sourceJobID, targetJobID
 	var header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
 	let emsg = header.msg;
 
@@ -178,11 +180,13 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 	// Make the header
 	let hdrBuf;
 	if (header.msg == EMsg.ChannelEncryptResponse) {
+		// since we're setting up the encrypted channel, we use this very minimal header
 		hdrBuf = ByteBuffer.allocate(4 + 8 + 8, ByteBuffer.LITTLE_ENDIAN);
 		hdrBuf.writeUint32(header.msg);
 		hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
 		hdrBuf.writeUint64(jobIdSource || header.sourceJobID || JOBID_NONE);
 	} else if (header.proto) {
+		// if we have a protobuf header, use that
 		header.proto.client_sessionid = this._sessionID;
 		header.proto.steamid = this.steamID.getSteamID64();
 		header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
@@ -193,6 +197,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		hdrBuf.writeUint32(hdrProtoBuf.length);
 		hdrBuf.append(hdrProtoBuf);
 	} else {
+		// this is the standard non-protobuf extended header
 		hdrBuf = ByteBuffer.allocate(4 + 1 + 2 + 8 + 8 + 1 + 8 + 4, ByteBuffer.LITTLE_ENDIAN);
 		hdrBuf.writeUint32(emsg);
 		hdrBuf.writeByte(36);
@@ -221,13 +226,16 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 
 	let header = {"msg": eMsg};
 	if ([EMsg.ChannelEncryptRequest, EMsg.ChannelEncryptResult].includes(eMsg)) {
+		// for encryption setup, we just have a very small header with two fields
 		header.targetJobID = buf.readUint64().toString();
 		header.sourceJobID = buf.readUint64().toString();
 	} else if (isProtobuf) {
+		// decode the protobuf header
 		let headerLength = buf.readUint32();
 		header.proto = Schema.CMsgProtoBufHeader.decode(buf.slice(buf.offset, buf.offset + headerLength));
 		buf.skip(headerLength);
 	} else {
+		// decode the extended header
 		buf.skip(3); // 1 byte for header size (fixed at 36), 2 bytes for header version (fixed at 2)
 		header.targetJobID = buf.readUint64().toString();
 		header.sourceJobID = buf.readUint64().toString();
@@ -272,10 +280,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 	}
 
 	if (!this._handlers[handlerName]) {
-		if (header.msg != EMsg.Multi) {
-			this.emit('debug', 'Unhandled message: ' + msgName);
-		}
-
+		this.emit('debug', 'Unhandled message: ' + msgName);
 		return;
 	}
 
@@ -319,7 +324,35 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 	}
 };
 
+// Handlers
 SteamUser.prototype._handlers = {};
+
+SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
+	this.emit('debug', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + ' multi msg');
+
+	let payload = data.message_body.toBuffer();
+	if (body.size_unzipped) {
+		Zlib.gunzip(payload, (err, unzipped) => {
+			if (err) {
+				this.emit('error', err);
+				this.disconnect(true); // TODO: Make sure this doesn't emit 'disconnected'
+				return;
+			}
+
+			processMulti.call(this, unzipped);
+		});
+	} else {
+		processMulti.call(this, payload);
+	}
+
+	function processMulti(payload) {
+		while (payload.length && this.steamID) {
+			let subSize = payload.readUInt32LE(0);
+			this._handleNetMessage(payload.slice(4, 4 + subSize));
+			payload = payload.slice(4 + subSize);
+		}
+	}
+};
 
 // Unified messages
 
