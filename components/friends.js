@@ -296,6 +296,20 @@ SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 	});
 };
 
+SteamUser.prototype.getNicknames = function(callback) {
+	this._sendUnified("Player.GetNicknameList#1", {}, false, (body) => {
+		var nicks = {};
+		body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
+
+		if (callback) {
+			callback(null, nicks);
+		}
+
+		this.emit('nicknameList', nicks);
+		this.myNicknames = nicks;
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
@@ -466,7 +480,11 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 
 		// Request persona info for all our friends
 		var friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
-		this.getPersonas(friends);
+		this.getPersonas(friends, function() {
+			process.nextTick(function() {
+				self.emit('friendPersonasLoaded');
+			});
+		});
 	}
 };
 
@@ -519,6 +537,17 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = functio
 	}
 
 	this.myNicknames = myNicknames;
+};
+
+SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = function(body) {
+	var sid = SteamID.fromIndividualAccountID(body.accountid);
+	this.emit('nickname', sid, body.nickname || null);
+	if (!body.nickname) {
+		// removal
+		delete this.myNicknames[sid.getSteamID64()];
+	} else {
+		this.myNicknames[sid.getSteamID64()] = body.nickname;
+	}
 };
 
 function processUser(user) {

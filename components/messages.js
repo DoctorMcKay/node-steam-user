@@ -123,6 +123,9 @@ protobufs['PublishedFile.GetDetails#1_Request'] = Schema.CPublishedFile_GetDetai
 protobufs['PublishedFile.GetDetails#1_Response'] = Schema.CPublishedFile_GetDetails_Response;
 protobufs['Player.GetGameBadgeLevels#1_Request'] = Schema.CPlayer_GetGameBadgeLevels_Request;
 protobufs['Player.GetGameBadgeLevels#1_Response'] = Schema.CPlayer_GetGameBadgeLevels_Response;
+protobufs['Player.GetNicknameList#1_Request'] = Schema.CPlayer_GetNicknameList_Request;
+protobufs['Player.GetNicknameList#1_Response'] = Schema.CPlayer_GetNicknameList_Response;
+protobufs['PlayerClient.NotifyFriendNicknameChanged#1'] = Schema.CPlayer_FriendNicknameChanged_Notification;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
@@ -173,6 +176,7 @@ SteamUser.prototype._send = function(emsg, body, callback) {
 
 SteamUser.prototype._handleMessage = function(header, body, callback) {
 	var msgName = header.msg;
+	var handlerName = header.msg;
 
 	if (this.options.debug) {
 		for (var i in SteamUser.EMsg) {
@@ -183,7 +187,20 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		}
 	}
 
-	if (!this._handlers[header.msg]) {
+	if (header.msg == SteamUser.EMsg.ServiceMethod) {
+		if (header.proto && header.proto.target_job_name) {
+			handlerName = msgName = header.proto.target_job_name;
+		} else {
+			this.emit('debug', 'Got ServiceMethod without target_job_name');
+			return;
+		}
+	}
+
+	if (header.msg != SteamUser.EMsg.ServiceMethod && header.proto && header.proto.target_job_name) {
+		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
+	}
+
+	if (!this._handlers[handlerName]) {
 		if (header.msg != SteamUser.EMsg.Multi) {
 			this.emit('debug', 'Unhandled message: ' + msgName);
 		}
@@ -191,11 +208,7 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		return;
 	}
 
-	if (protobufs[header.msg]) {
-		body = protobufs[header.msg].decode(body);
-	} else {
-		body = ByteBuffer.wrap(body);
-	}
+	body = protobufs[handlerName] ? protobufs[handlerName].decode(body) : ByteBuffer.wrap(body);
 
 	this.emit('debug', 'Handled message: ' + msgName);
 
@@ -213,7 +226,13 @@ SteamUser.prototype._handleMessage = function(header, body, callback) {
 		}
 	}
 
-	this._handlers[header.msg].call(this, body, cb);
+	if (!this._handlers[handlerName]) {
+		// last sanity check
+		this.emit('debug', 'SANITY CHECK FAILED: No handler for ' + handlerName);
+		return;
+	}
+
+	this._handlers[handlerName].call(this, body, cb);
 };
 
 SteamUser.prototype._handlers = {};
