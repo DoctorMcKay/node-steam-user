@@ -293,6 +293,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._connectionCount = 0;
 			this._gcTokens = [];
 			this._contentServerTokens = {};
+			this._currentJobID = 0;
+			this._jobs = {};
 
 			if (this._logOnDetails.login_key) {
 				// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.

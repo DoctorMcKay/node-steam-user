@@ -15,12 +15,7 @@ SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
 
 require('./resources/enums.js');
 
-function SteamUser(client, options) {
-	if (client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
-		options = client;
-		client = null;
-	}
-
+function SteamUser(options) {
 	this.steamID = null;
 
 	// Account info
@@ -66,6 +61,10 @@ function SteamUser(client, options) {
 	this.options = options || {};
 
 	var defaultOptions = {
+		"protocol": SteamUser.EConnectionProtocol.Auto,
+		"httpProxy": null,
+		"localAddress": null,
+		"localPort": null,
 		"autoRelogin": true,
 		"singleSentryfile": false,
 		"promptSteamGuardCode": true,
