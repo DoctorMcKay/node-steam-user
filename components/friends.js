@@ -480,9 +480,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 
 		// Request persona info for all our friends
 		var friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
-		this.getPersonas(friends, function() {
-			process.nextTick(function() {
-				self.emit('friendPersonasLoaded');
+		this.getPersonas(friends, () => {
+			process.nextTick(() => {
+				this.emit('friendPersonasLoaded');
 			});
 		});
 	}

@@ -11,6 +11,7 @@ const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
 
 var protobufs = {};
+protobufs[EMsg.Multi] = Schema.CMsgMulti;
 protobufs[EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogonGameServer] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
@@ -251,7 +252,7 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 	let steamID = (header.proto && header.proto.steamid) || header.steamID;
 	if (sessionID && sessionID != this._sessionID) {
 		this._sessionID = sessionID;
-		this.steamID = new SteamID(steamID);
+		this.steamID = new SteamID(steamID.toString());
 		delete this._tempSteamID;
 	}
 	
