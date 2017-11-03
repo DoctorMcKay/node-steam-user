@@ -196,13 +196,13 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
 		let hdrProtoBuf = (new Schema.CMsgProtoBufHeader(header.proto)).toBuffer();
 		hdrBuf = ByteBuffer.allocate(4 + 4 + hdrProtoBuf.length, ByteBuffer.LITTLE_ENDIAN);
-		hdrBuf.writeUint32(emsg | PROTO_MASK);
+		hdrBuf.writeUint32(header.msg | PROTO_MASK);
 		hdrBuf.writeUint32(hdrProtoBuf.length);
 		hdrBuf.append(hdrProtoBuf);
 	} else {
 		// this is the standard non-protobuf extended header
 		hdrBuf = ByteBuffer.allocate(4 + 1 + 2 + 8 + 8 + 1 + 8 + 4, ByteBuffer.LITTLE_ENDIAN);
-		hdrBuf.writeUint32(emsg);
+		hdrBuf.writeUint32(header.msg);
 		hdrBuf.writeByte(36);
 		hdrBuf.writeUint16(2);
 		hdrBuf.writeUint64(header.targetJobID || JOBID_NONE);
@@ -212,7 +212,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		hdrBuf.writeUint32(this._sessionID || 0);
 	}
 
-	this._connection.send(Buffer.concat([hdrBuf.toBuffer(), body]));
+	this._connection.send(Buffer.concat([hdrBuf.flip().toBuffer(), body]));
 };
 
 /**
@@ -326,7 +326,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		this.emit('debug', 'SANITY CHECK FAILED: No handler for ' + handlerName);
 		return;
 	}
-	
+
 	if (this._jobs[header.targetJobID]) {
 		// this is a response to something, so invoke the appropriate callback
 		this._jobs[header.targetJobID].call(this, body, cb);
