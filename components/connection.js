@@ -7,6 +7,7 @@ const SteamUser = require('../index.js');
 SteamUser.prototype._handleConnectionClose = function() {
 	if (!this.steamID) {
 		// connection closed while connecting; reconnect
+		clearInterval(this._heartbeatInterval);
 		this._doConnection();
 	} else {
 		// connection closed while we were connected; fire logoff

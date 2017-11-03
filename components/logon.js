@@ -363,6 +363,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 				this._getLicenseInfo();
 			}
 
+			this._heartbeatInterval = setInterval(() => {
+				this._send(SteamUser.EMsg.ClientHeartBeat, {});
+			}, body.out_of_game_heartbeat_seconds);
+
 			break;
 
 		case SteamUser.EResult.AccountLogonDenied:
@@ -437,6 +441,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	this._connectTime = 0;
 
 	this._clearChangelistUpdateTimer();
+	clearInterval(this._heartbeatInterval);
 
 	if (!this._relogging && fatal && !this._loggingOff) {
 		var e = new Error(msg);

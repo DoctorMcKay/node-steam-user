@@ -12,6 +12,7 @@ const PROTO_MASK = 0x80000000;
 
 var protobufs = {};
 protobufs[EMsg.Multi] = Schema.CMsgMulti;
+protobufs[EMsg.ClientHeartBeat] = Schema.CMsgClientHeartBeat;
 protobufs[EMsg.ClientLogon] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogonGameServer] = Schema.CMsgClientLogon;
 protobufs[EMsg.ClientLogOnResponse] = Schema.CMsgClientLogonResponse;
