@@ -347,7 +347,7 @@ SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
 		Zlib.gunzip(payload, (err, unzipped) => {
 			if (err) {
 				this.emit('error', err);
-				this._disconnect(true); // TODO: Make sure this doesn't emit 'disconnected'
+				this._disconnect(true);
 				return;
 			}
 
