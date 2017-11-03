@@ -1,4 +1,5 @@
 const ByteBuffer = require('bytebuffer');
+const SteamID = require('steamid');
 const SteamUser = require('../index.js');
 const Zlib = require('zlib');
 
@@ -245,6 +246,14 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 		header.steamID = buf.readUint64().toString();
 		header.sessionID = buf.readUint32();
 	}
+
+	let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
+	let steamID = (header.proto && header.proto.steamid) || header.steamID;
+	if (sessionID && sessionID != this._sessionID) {
+		this._sessionID = sessionID;
+		this.steamID = new SteamID(steamID);
+		delete this._tempSteamID;
+	}
 	
 	this._handleMessage(header, buf.slice());
 };
@@ -337,7 +346,7 @@ SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
 		Zlib.gunzip(payload, (err, unzipped) => {
 			if (err) {
 				this.emit('error', err);
-				this.disconnect(true); // TODO: Make sure this doesn't emit 'disconnected'
+				this._disconnect(true); // TODO: Make sure this doesn't emit 'disconnected'
 				return;
 			}
 

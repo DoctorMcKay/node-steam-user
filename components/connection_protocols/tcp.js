@@ -102,8 +102,7 @@ TCPConnection.prototype._setupStream = function() {
 	this.stream.on('readable', this._readMessage.bind(this));
 	this.stream.on('error', (err) => debug('TCP connection error: ' + err.message)); // "close" will be emitted and we'll reconnect
 	this.stream.on('end', () => debug('TCP connection ended'));
-	//this.stream.on('close', () => this.emit('close'));
-	// TODO: handle close, connect
+	this.stream.on('close', this.user._handleConnectionClose.bind(this.user));
 
 	this.stream.on('connect', () => {
 		this.user.emit('debug', 'TCP connection established');
@@ -113,18 +112,25 @@ TCPConnection.prototype._setupStream = function() {
 	this.stream.on('timeout', () => {
 		this.user.emit('debug', 'TCP connection timed out');
 		this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
-		this.removeAllListeners();
-		this.on('error', () => {}); // we no longer care
-		this.end();
+		this.end(true);
 		this.user._doConnection();
 	});
 };
 
 /**
  * End the connection
+ * @param {boolean} [andIgnore=false] - Pass true to also ignore all further events from this connection
  */
-TCPConnection.prototype.end = function() {
-	this.stream && this.stream.end();
+TCPConnection.prototype.end = function(andIgnore) {
+	if (this.stream) {
+		if (andIgnore) {
+			this.removeAllListeners();
+			this.stream.removeAllListeners();
+			this.stream.on('error', () => {});
+		}
+
+		this.stream.end();
+	}
 };
 
 /**

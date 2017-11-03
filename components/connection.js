@@ -6,7 +6,13 @@ const TCPConnection = require('./connection_protocols/tcp.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype._handleConnectionClose = function() {
-	// TODO
+	if (!this.steamID) {
+		// connection closed while connecting; reconnect
+		this._doConnection();
+	} else {
+		// connection closed while we were connected; fire logoff
+		this._handleLogOff(SteamUser.EResult.NoConnection, "NoConnection");
+	}
 };
 
 // Handlers
@@ -43,7 +49,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptResult] = function(bo
 	let eresult = body.readUint32();
 	if (eresult != SteamUser.EResult.OK) {
 		this.emit('error', 'Encryption failed: ' + eresult);
-		this.disconnect(true); // TODO: Make sure this doesn't emit "disconnected"
+		this._disconnect(true); // TODO: Make sure this doesn't emit "disconnected"
 		return;
 	}
 

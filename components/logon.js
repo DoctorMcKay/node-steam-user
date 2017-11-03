@@ -10,7 +10,7 @@ const TCPConnection = require('./connection_protocols/tcp.js');
 const PROTOCOL_VERSION = 65579;
 
 SteamUser.prototype.logOn = function(details) {
-	if (this.client.loggedOn) {
+	if (this.steamID) {
 		throw new Error("Already logged on, cannot log on again");
 	}
 
@@ -205,24 +205,37 @@ SteamUser.prototype._doConnection = function() {
 	}
 };
 
-SteamUser.prototype.logOff = SteamUser.prototype.disconnect = function(suppressLogoff) {
+/**
+ * Log off of Steam gracefully.
+ */
+SteamUser.prototype.logOff = function() {
+	this._disconnect(false);
+};
+
+/**
+ * Disconnect from Steam
+ * @param {boolean} suppressLogoff - If true, just disconnect immediately without sending a logoff message.
+ * @private
+ */
+SteamUser.prototype._disconnect = function(suppressLogoff) {
 	this._clearChangelistUpdateTimer();
 
-	if (this.client.connected && !suppressLogoff) {
+	if (this.steamID && !suppressLogoff) {
 		this._loggingOff = true;
 		this._send(SteamUser.EMsg.ClientLogOff, {});
 
 		var timeout = setTimeout(() => {
 			this.emit('disconnected', 0, "Logged off");
 			this._loggingOff = false;
-			this.client.disconnect();
+			this._connection && this._connection.end(true);
+			this.steamID = null;
 		}, 4000);
 
 		this.once('disconnected', function(eresult) {
 			clearTimeout(timeout);
 		});
 	} else {
-		this.client.disconnect();
+		this._connection && this._connection.end(true);
 	}
 };
 
@@ -288,7 +301,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
 
-			this.steamID = new SteamID(body.client_supplied_steamid.toString());
+			//this.steamID = new SteamID(body.client_supplied_steamid.toString());
 
 			this._logOnDetails.last_session_id = this.client._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
@@ -353,7 +366,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			// server is up, so reset logon timer
 			delete this._logonTimeout;
 
-			this.disconnect(true);
+			this._disconnect(true);
 
 			var isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
 			var lastCodeWrong = body.eresult == SteamUser.EResult.TwoFactorCodeMismatch;
@@ -369,7 +382,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 		case SteamUser.EResult.ServiceUnavailable:
 		case SteamUser.EResult.TryAnotherCM:
 			this.emit('debug', 'Log on response: ' + SteamUser.EResult[body.eresult]);
-			this.disconnect(true);
+			this._disconnect(true);
 
 			var timer = this._logonTimeout || 1000;
 			this._logonTimeout = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
@@ -386,7 +399,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 			var error = new Error(SteamUser.EResult[body.eresult] || body.eresult);
 			error.eresult = body.eresult;
-			this.disconnect(true);
+			this._disconnect(true);
 			this.emit('error', error);
 	}
 };
@@ -425,7 +438,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 		e.eresult = result;
 
 		var steamID = this.steamID;
-		this.disconnect(true);
+		this._disconnect(true);
 
 		this.steamID = steamID;
 		this.emit('error', e);
@@ -436,7 +449,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 			this.emit('disconnected', result, msg);
 		}
 
-		this.disconnect(true);
+		this._disconnect(true);
 
 		if (!this._loggingOff || this._relogging) {
 			setTimeout(() => {

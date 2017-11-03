@@ -48,6 +48,7 @@ function SteamUser(options) {
 	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 	this._contentServers = [];
 	this._contentServerTokens = {};
+	this._sessionID = 0;
 
 	// App and package cache
 	this._changelistUpdateTimer = null;
@@ -102,16 +103,6 @@ function SteamUser(options) {
 	if (this.options.dataDirectory) {
 		this.storage = new FileStorage(this.options.dataDirectory);
 	}
-
-	this.client.on('message', this._handleMessage.bind(this));
-
-	this.client.on('error', (e) => {
-		if (!this.steamID && e.result != SteamUser.EResult.ConnectFailed) {
-			return; // We've already handled this
-		}
-
-		this._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
-	});
 }
 
 SteamUser.prototype.setOption = function(option, value) {
