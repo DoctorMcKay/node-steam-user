@@ -365,7 +365,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 			this._heartbeatInterval = setInterval(() => {
 				this._send(SteamUser.EMsg.ClientHeartBeat, {});
-			}, body.out_of_game_heartbeat_seconds);
+			}, body.out_of_game_heartbeat_seconds * 1000);
 
 			break;
 
