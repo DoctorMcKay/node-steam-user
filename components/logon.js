@@ -56,7 +56,7 @@ SteamUser.prototype.logOn = function(details) {
 	// Read the required files
 	var filenames = [];
 
-	if (this._cmList) {
+	if (!this._cmList) {
 		filenames.push('cm_list.json');
 	}
 
