@@ -42,12 +42,12 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 		"headers": headers
 	};
 
-	if (this.client.localAddress || this.client._localAddress) {
-		options.localAddress = this.client.localAddress || this.client._localAddress;
+	if (this.options.localAddress) {
+		options.localAddress = this.options.localAddress;
 	}
 
-	if (this.client.httpProxy || this.client._httpProxy) {
-		options.agent = ProxyAgent.getAgent(true, this.client.httpProxy || this.client._httpProxy);
+	if (this.options.httpProxy) {
+		options.agent = ProxyAgent.getAgent(true, this.options.httpProxy);
 	}
 
 	var req = HTTPS.request(options, (res) => {

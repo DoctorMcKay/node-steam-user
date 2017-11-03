@@ -303,7 +303,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 
 			//this.steamID = new SteamID(body.client_supplied_steamid.toString());
 
-			this._logOnDetails.last_session_id = this.client._sessionID;
+			this._logOnDetails.last_session_id = this._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
 			this._logOnDetails.cell_id = body.cell_id;
 			this.logOnResult = body;
