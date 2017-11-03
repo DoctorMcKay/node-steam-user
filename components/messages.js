@@ -327,9 +327,9 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		return;
 	}
 	
-	if (header.targetJobID != JOBID_NONE) {
+	if (this._jobs[header.targetJobID]) {
 		// this is a response to something, so invoke the appropriate callback
-		this._jobs[header.targetJobID] && this._jobs[header.targetJobID].call(this, body, cb);
+		this._jobs[header.targetJobID].call(this, body, cb);
 	} else {
 		this._handlers[handlerName].call(this, body, cb);
 	}
