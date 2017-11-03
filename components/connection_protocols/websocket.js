@@ -71,10 +71,6 @@ WebSocketConnection.prototype.end = function(andIgnore) {
 	}
 };
 
-WebSocketConnection.prototype.destroy = function() {
-	this.end(true);
-};
-
 /**
  * Send data over the connection.
  * @param {Buffer} data
