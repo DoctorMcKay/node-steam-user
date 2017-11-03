@@ -126,8 +126,8 @@ SteamUser.prototype.logOn = function(details) {
 					gotCMList(); // just fallback to the built-in list
 				} else {
 					self._cmList = {
-						"tcp_servers": res.response.serverlist,
-						"websocket_servers": res.response.serverlist_websockets,
+						"tcp_servers": fixVdfArray(res.response.serverlist),
+						"websocket_servers": fixVdfArray(res.response.serverlist_websockets),
 						"time": Date.now()
 					};
 
@@ -135,6 +135,11 @@ SteamUser.prototype.logOn = function(details) {
 					gotCMList();
 				}
 			});
+		}
+
+		function fixVdfArray(arr) {
+			arr.length = Object.keys(arr).length;
+			return Array.prototype.slice.call(arr);
 		}
 
 		function gotCMList() {
