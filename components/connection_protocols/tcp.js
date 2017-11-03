@@ -129,14 +129,10 @@ TCPConnection.prototype.end = function(andIgnore) {
 		}
 
 		this.stream.end();
+		if (andIgnore) {
+			this.stream.destroy();
+		}
 	}
-};
-
-/**
- * Destroy the connection; don't wait for a graceful close
- */
-TCPConnection.prototype.destroy = function() {
-	this.stream && this.stream.destroy();
 };
 
 /**
@@ -170,7 +166,9 @@ TCPConnection.prototype._readMessage = function() {
 		this._messageLength = header.readUInt32LE(0);
 		if (header.slice(4).toString('ascii') != MAGIC) {
 			// We definitely need to tear down the connection here
-			// TODO
+			this.user.emit('error', new Error('Connection out of sync'));
+			// noinspection JSAccessibilityCheck
+			this.user._disconnect(true);
 		}
 	}
 
@@ -185,7 +183,9 @@ TCPConnection.prototype._readMessage = function() {
 		try {
 			message = SteamCrypto.symmetricDecrypt(message, this.sessionKey, true);
 		} catch (ex) {
-			// TODO: Crypto error, tear down connection
+			this.user.emit('error', new Error('Encrypted message authentication failed'));
+			// noinspection JSAccessibilityCheck
+			this.user._disconnect(true);
 		}
 	}
 

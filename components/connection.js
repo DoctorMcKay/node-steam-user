@@ -48,8 +48,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptResult] = function(bo
 
 	let eresult = body.readUint32();
 	if (eresult != SteamUser.EResult.OK) {
-		this.emit('error', 'Encryption failed: ' + eresult);
-		this._disconnect(true); // TODO: Make sure this doesn't emit "disconnected"
+		this.emit('error', new Error('Encryption failed: ' + eresult));
+		this._disconnect(true);
 		return;
 	}
 
