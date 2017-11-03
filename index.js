@@ -49,6 +49,7 @@ function SteamUser(options) {
 	this._contentServers = [];
 	this._contentServerTokens = {};
 	this._sessionID = 0;
+	this._jobs = {};
 
 	// App and package cache
 	this._changelistUpdateTimer = null;
