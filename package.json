@@ -35,7 +35,6 @@
 		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",
 		"protobufjs": "^5.0.2",
-		"steam-client": "^2.5.4",
 		"steam-totp": "^1.4.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2"

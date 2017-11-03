@@ -1,6 +1,5 @@
 const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
-const Steam = require('steam-client');
 const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
@@ -54,8 +53,8 @@ SteamUser.prototype.logOn = function(details) {
 	// Read the required files
 	var filenames = [];
 
-	if (!Steam['__SteamUserServersSet__']) {
-		filenames.push('servers.json');
+	if (this._cmList) {
+		filenames.push('cm_list.json');
 	}
 
 	if (!this._logOnDetails.cell_id) {
@@ -89,10 +88,9 @@ SteamUser.prototype.logOn = function(details) {
 		files = files || [];
 
 		files.forEach(function(file) {
-			if (file.filename == 'servers.json' && file.contents) {
+			if (file.filename == 'cm_list.json' && file.contents) {
 				try {
-					Steam.servers = JSON.parse(file.contents.toString('utf8'));
-					Steam['__SteamUserServersSet__'] = true;
+					self._cmList = JSON.parse(file.contents.toString('utf8'));
 				} catch (e) {
 					// don't care
 				}
@@ -114,7 +112,8 @@ SteamUser.prototype.logOn = function(details) {
 			}
 		});
 
-		if (Steam['__SteamUserServersSet__']) {
+		if (self._cmList && (!self._cmList.time || Date.now() - self._cmList.time < (1000 * 60 * 60 * 24 * 30))) {
+			// proceed if we have a CM list already and it's less than 30 days old
 			gotCMList();
 		} else {
 			// Get the CM list from the API
@@ -123,19 +122,24 @@ SteamUser.prototype.logOn = function(details) {
 				if (err || !res.response || res.response.result != 1 || !res.response.serverlist) {
 					gotCMList(); // just fallback to the built-in list
 				} else {
-					res.response.serverlist.length = Object.keys(res.response.serverlist).length;
-					Steam.servers = Array.prototype.slice.call(res.response.serverlist).map(function(server) {
-						var parts = server.split(':');
-						return {"host": parts[0], "port": parts[1]};
-					});
+					self._cmList = {
+						"tcp_servers": res.response.serverlist,
+						"websocket_servers": res.response.serverlist_websockets,
+						"time": Date.now()
+					};
 
-					Steam['__SteamUserServersSet__'] = true;
+					self._saveCMList();
 					gotCMList();
 				}
 			});
 		}
 
 		function gotCMList() {
+			if (!self._cmList) {
+				// Get built-in list as a last resort
+				self._cmList = require('../resources/servers.json');
+			}
+
 			// Sentry file
 			if (!self._logOnDetails.sha_sentryfile) {
 				if (sentry && sentry.length > 20) {
@@ -248,6 +252,14 @@ SteamUser.prototype._getMachineID = function(localFile) {
 	function getRandomID() {
 		return createMachineID(Math.random().toString(), Math.random().toString(), Math.random().toString());
 	}
+};
+
+SteamUser.prototype._saveCMList = function() {
+	if (!this._cmList || !this.storage) {
+		return;
+	}
+
+	this.storage.writeFile('cm_list.json', JSON.stringify(this._cmList, null, "\t"));
 };
 
 SteamUser.prototype.relog = function() {
@@ -461,6 +473,15 @@ SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
 	this.emit('debug', "Got list of " + (body.cm_websocket_addresses || []).length + " WebSocket CMs, with percentage to use at " +
 		(body.percent_default_to_websocket || 0) + "%");
+
+	this._cmList = {
+		"tcp_servers": (body.cm_addresses || []).map((addr, idx) => addr + ':' + body.cm_ports[idx]),
+		"websocket_servers": body.cm_websocket_addresses || [],
+		"auto_pct_websocket": body.percent_default_to_websocket,
+		"time": Date.now()
+	};
+
+	this._saveCMList();
 };
 
 // Private functions

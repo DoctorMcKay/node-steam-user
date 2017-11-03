@@ -2,25 +2,18 @@ require('@doctormckay/stats-reporter').setup(require('./package.json'));
 
 const AppDirectory = require('appdirectory');
 const FileStorage = require('file-manager');
-const Steam = require('steam-client');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
 
 module.exports = SteamUser;
 
-SteamUser.Steam = Steam;
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
+SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
+SteamUser.EConnectionProtocol = require('./resources/EConnectionProtocol.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
-SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
 
 require('./resources/enums.js');
-
-try {
-	SteamUser.Steam.servers = require('./resources/servers.json');
-} catch (e) {
-	// It's okay if it isn't there
-}
 
 function SteamUser(client, options) {
 	if (client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
@@ -28,7 +21,6 @@ function SteamUser(client, options) {
 		client = null;
 	}
 
-	this.client = client ? client : new Steam.CMClient();
 	this.steamID = null;
 
 	// Account info
@@ -119,17 +111,6 @@ function SteamUser(client, options) {
 		}
 
 		this._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
-	});
-
-	this.client.on('servers', (servers) => {
-		if (this.storage) {
-			this.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
-		}
-
-		if (!client) {
-			// It's an internal client, so we know that our Steam has an up-to-date server list
-			Steam['__SteamUserServersSet__'] = true;
-		}
 	});
 }
 
