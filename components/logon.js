@@ -6,6 +6,7 @@ const Helpers = require('./helpers.js');
 const Schema = require('./protobufs.js');
 const SteamUser = require('../index.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
+const WebSocketConnection = require('./connection_protocols/websocket.js');
 
 const PROTOCOL_VERSION = 65579;
 
@@ -202,7 +203,7 @@ SteamUser.prototype._doConnection = function() {
 			break;
 
 		case SteamUser.EConnectionProtocol.WebSocket:
-			// TODO
+			this._connection = new WebSocketConnection(this);
 			break;
 
 		default:
