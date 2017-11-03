@@ -32,8 +32,7 @@ WebSocketConnection.prototype.connect = function(user) {
 			"localAddress": user.options.localAddress
 		}
 	});
-	this._timeout = null;
-	this._timeoutTime = 0;
+
 	this._setupStream();
 
 	this.stream.on('debug', msg => this.user.emit('debug', msg));
