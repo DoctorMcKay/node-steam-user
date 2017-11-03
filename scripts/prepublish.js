@@ -14,7 +14,7 @@ download("https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?format=json
 		"time": Date.now()
 	};
 
-	console.log("Got list of " + servers.tcp_servers.length + " TCP CMs and " + servers.websocket_servers + " WebSocket CMs from WebAPI");
+	console.log("Got list of " + servers.tcp_servers.length + " TCP CMs and " + servers.websocket_servers.length + " WebSocket CMs from WebAPI");
 	require('fs').writeFileSync(__dirname + '/../resources/servers.json', JSON.stringify(servers, null, "\t"));
 });
 
