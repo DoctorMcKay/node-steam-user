@@ -1,4 +1,5 @@
 const Crypto = require('crypto');
+const OS = require('os');
 const SteamID = require('steamid');
 
 const EResult = require('../enums/EResult.js');
@@ -61,10 +62,9 @@ exports.eresultError = function(eresult) {
  * @return {EOSType}
  */
 exports.getOsType = function() {
-	var Os = require('os');
-	switch (Os.platform()) {
+	switch (OS.platform()) {
 		case 'darwin':
-			var match = Os.release().match(/Darwin Kernel Version (\d+)\.(\d+)\.(\d+)/);
+			var match = OS.release().match(/Darwin Kernel Version (\d+)\.(\d+)\.(\d+)/);
 			if (!match) {
 				return EOSType.MacOSUnknown;
 			}
@@ -93,7 +93,7 @@ exports.getOsType = function() {
 
 		case 'win32':
 			// http://prajwaldesai.com/windows-operating-system-version-numbers/
-			var verParts = Os.release().split('.');
+			var verParts = OS.release().split('.');
 			if (verParts.length < 3) {
 				return EOSType.WinUnknown;
 			}
