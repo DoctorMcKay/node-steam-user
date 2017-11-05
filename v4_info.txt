@@ -11,7 +11,7 @@ Breaking:
 - Now requires node 6 (up from node 4)
 - Removed deprecated and non-functional method `disableTwoFactor`; use [steamcommunity](https://www.npmjs.com/package/steamcommunity) instead
 - Removed deprecated method `generateAuthCode`; use [steam-totp](https://www.npmjs.com/package/steam-totp) instead
-- `server_time` in enableTwoFactor callback data is now a number instead of a string
+- `server_time` in enableTwoFactor callback data is now a number instead of a string (not a Date as that would break the JSON-stringifyable property of the response)
 - Callbacks now have `err` as their first argument
     - enableTwoFactor
     - createAccount (changed from eresult)
