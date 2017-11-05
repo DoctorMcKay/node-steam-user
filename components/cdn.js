@@ -4,6 +4,7 @@ const Crc32 = require('buffer-crc32');
 const EventEmitter = require('events').EventEmitter;
 const FS = require('fs');
 const LZMA = require('lzma');
+const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
 const Helpers = require('./helpers.js');
@@ -32,7 +33,7 @@ SteamUser.prototype.getContentServers = function(callback) {
 
 	// pick a random one
 	var server = list[Math.floor(Math.random() * list.length)];
-	download("http://" + Helpers.ipIntToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", (err, res) => {
+	download("http://" + StdLib.IPv4.intToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", (err, res) => {
 		if (err) {
 			callback(err);
 			return;

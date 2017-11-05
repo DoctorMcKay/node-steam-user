@@ -1,5 +1,5 @@
-const ProxyAgent = require('@doctormckay/proxy-agent');
 const HTTPS = require('https');
+const StdLib = require('@doctormckay/stdlib');
 const VDF = require('vdf');
 const Zlib = require('zlib');
 
@@ -47,7 +47,7 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 	}
 
 	if (this.options.httpProxy) {
-		options.agent = ProxyAgent.getAgent(true, this.options.httpProxy);
+		options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
 	}
 
 	var req = HTTPS.request(options, (res) => {

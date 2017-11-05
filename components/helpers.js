@@ -23,25 +23,6 @@ exports.steamID = function(input) {
 };
 
 /**
- * Convert an IP in integer notation to dotted-decimal notation
- * @param {int} input
- * @returns {string}
- */
-exports.ipIntToString = function(input) {
-	return ((input >> 24) & 0xFF) + "." + ((input >> 16) & 0xFF) + "." + ((input >> 8) & 0xFF) + "." + (input & 0xFF);
-};
-
-/**
- * Convert an IP in dotted-decimal notation to integer notation
- * @param {string} input
- * @returns {int}
- */
-exports.ipStringToInt = function(input) {
-	var parts = input.split('.');
-	return ((parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]) >>> 0;
-};
-
-/**
  * Get an machine ID for internal use (not sent to Steam)
  * @returns {string}
  */

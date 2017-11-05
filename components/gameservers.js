@@ -1,6 +1,6 @@
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
-const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.serverQuery = function(conditions, callback) {
@@ -9,7 +9,7 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 	}
 
 	if (conditions.geo_location_ip) {
-		conditions.geo_location_ip = Helpers.ipStringToInt(conditions.geo_location_ip);
+		conditions.geo_location_ip = StdLib.IPv4.stringToInt(conditions.geo_location_ip);
 	}
 
 	this._send(SteamUser.EMsg.ClientGMSServerQuery, conditions, function(body) {

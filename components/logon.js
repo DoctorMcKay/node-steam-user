@@ -1,5 +1,6 @@
 const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
@@ -314,7 +315,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._logOnDetails.cell_id = body.cell_id;
 			this.logOnResult = body;
 
-			this.publicIP = Helpers.ipIntToString(body.public_ip);
+			this.publicIP = StdLib.IPv4.intToString(body.public_ip);
 			this.cellID = body.cell_id;
 			this.vanityURL = body.vanity_url;
 
@@ -514,7 +515,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
 		(body.percent_default_to_websocket || 0) + "%");
 
 	this._cmList = {
-		"tcp_servers": (body.cm_addresses || []).map((addr, idx) => Helpers.ipIntToString(addr) + ':' + body.cm_ports[idx]),
+		"tcp_servers": (body.cm_addresses || []).map((addr, idx) => StdLib.IPv4.intToString(addr) + ':' + body.cm_ports[idx]),
 		"websocket_servers": body.cm_websocket_addresses || [],
 		"auto_pct_websocket": body.percent_default_to_websocket,
 		"time": Date.now()
