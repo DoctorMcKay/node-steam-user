@@ -36,8 +36,9 @@ callback immediately for subsequent requests for this appID/depotID pair.
 
 Locally cached data expires after 14 days, after which time it will be re-requested.
 
-### getCDNAuthToken(depotID, hostname, callback)
-- `appID` - The ID of the depot for which you want an auth token
+### getCDNAuthToken(appID, depotID, hostname, callback)
+- `appID` - The ID of the app for which you want an auth token
+- `depotID` - The ID of the depot for which you want an auth token
 - `hostname` - The hostname of the content server for which you want an auth token
 - `callback` - Called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
