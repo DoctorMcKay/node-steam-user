@@ -449,7 +449,6 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatEnter] = function(body) {
 
 		for (var i = 0; i < numMembers; i++) {
 			member = BinaryKVParser.parse(body).MessageObject;
-			console.log("loading " + member.steamid.toString());
 			this.chats[sid64].members[member.steamid.toString()] = {
 				"rank": member.Details,
 				"permissions": member.permissions
