@@ -213,18 +213,18 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 		if (appids.length === 0 && packageids.length === 0) {
 			if (inclTokens) {
-				var tokenlessAppids = response.unknownApps; // Should we request tokens for unknown apps?
-				var tokenlessPackages = response.unknownPackages; // Should we request tokens for unknown packages?
+				var tokenlessAppids = [];
+				var tokenlessPackages = [];
 
-				for (appid in response.apps) {
+				for (var appid in response.apps) {
 					if (response.apps[appid].missingToken) {
-						tokenlessAppids.push(parseInt(appid));
+						tokenlessAppids.push(parseInt(appid, 10));
 					}
 				}
 
-				for (packageid in response.packages) {
+				for (var packageid in response.packages) {
 					if (response.packages[packageid].missingToken) {
-						tokenlessPackages.push(parseInt(packageid));
+						tokenlessPackages.push(parseInt(packageid, 10));
 					}
 				}
 
