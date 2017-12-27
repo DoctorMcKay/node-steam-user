@@ -554,7 +554,7 @@ SteamUser.prototype.getOwnedDepots = function() {
 	}
 
 	var ownedPackages = this.getOwnedPackages();
-	var depotids = [];
+	var depotids = {};
 
 	var self = this;
 	ownedPackages.forEach(function(pkg) {
@@ -574,12 +574,13 @@ SteamUser.prototype.getOwnedDepots = function() {
 		}
 
 		(pkg.depotids || []).forEach(function(depotid) {
-			if (depotids.indexOf(depotid) == -1) {
-				depotids.push(depotid);
+			if (!depotids[depotid]) {
+				depotids[depotid] = true;
 			}
 		});
 	});
 
+	depotids = Object.keys(depotids).map(depotid => parseInt(depotid, 10));
 	depotids.sort(sortNumeric);
 	return depotids;
 };
@@ -615,7 +616,7 @@ SteamUser.prototype.getOwnedPackages = function() {
 /**
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
- * @param {int} packageid
+ * @param {int|string} packageid
  * @returns {boolean}
  */
 SteamUser.prototype.ownsPackage = function(packageid) {
