@@ -444,7 +444,7 @@ SteamUser.prototype.getOwnedApps = function() {
 	}
 
 	var ownedPackages = this.getOwnedPackages();
-	var appids = [];
+	var appids = {};
 
 	var self = this;
 	ownedPackages.forEach(function(pkg) {
@@ -464,12 +464,13 @@ SteamUser.prototype.getOwnedApps = function() {
 		}
 
 		(pkg.appids || []).forEach(function(appid) {
-			if (appids.indexOf(appid) == -1) {
-				appids.push(appid);
+			if (!appids[appid]) {
+				appids[appid] = true;
 			}
 		});
 	});
 
+	appids = Object.keys(appids).map(appid => parseInt(appid, 10));
 	appids.sort(sortNumeric);
 	return appids;
 };
