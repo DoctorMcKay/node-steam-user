@@ -22,6 +22,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function
 	(body.notifications || []).forEach(function(notification) {
 		if (notification.user_notification_type == 1) {
 			self.emit('tradeOffers', notification.count);
+		} else {
+			self.emit('debug', 'Unknown notification type ' + notification.user_notification_type + ': ' + notification.count + '!');
 		}
 	});
 };
