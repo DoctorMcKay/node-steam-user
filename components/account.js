@@ -5,19 +5,7 @@ var ByteBuffer = require('bytebuffer');
 var BinaryKVParser = require('binarykvparser');
 
 SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
-	if (typeof callback === 'string' && typeof arguments[5] === 'function') {
-		// Support people providing questions/answers from back when that was a thing
-		callback = arguments[5];
-	}
-
-	this._send(SteamUser.EMsg.ClientCreateAccountProto, {
-		"account_name": accountName,
-		"password": password,
-		"email": email,
-		"launcher": 0
-	}, function(body) {
-		callback(body.eresult, body.steamid ? new SteamID(body.steamid.toString()) : null);
-	});
+	throw new Error("Creating accounts through node-steam-user is no longer possible due to Steam changes.");
 };
 
 SteamUser.prototype.requestValidationEmail = function(callback) {
