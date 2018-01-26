@@ -910,6 +910,19 @@ Send a trade request to the specified user. Listen for the [`tradeResponse`](#tr
 
 Cancels your outstanding trade request to the specified user.
 
+### getAssetClassInfo(language, appid, classes, callback)
+- `language` - A string containing the language code you want stuff translated in, e.g. "en" or "es" or "zh"
+- `appid` - The AppID of the game which owns the items you're interested in
+- `classes` - An array of objects, where each object has a `classid` property and optionally an `instanceid` property
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `descriptions` - An array of description objects
+
+**v3.25.0 or later is required to use this method**
+
+Retrieves asset description data from Steam. Works similarly to [the WebAPI method by the same name](https://lab.xpaw.me/steam_api_documentation.html#ISteamEconomy_GetAssetClassInfo_v1),
+although at time of documentation no tags are returned.
+
 ### chatMessage(recipient, message[, type])
 - `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message
 - `message` - The chat message that you're sending to them
