@@ -186,6 +186,7 @@ require('./components/chat.js');
 require('./components/twofactor.js');
 require('./components/pubfiles.js');
 require('./components/cdn.js');
+require('./components/econ.js');
 
 /**
  * Called when the request completes.

@@ -126,6 +126,8 @@ protobufs['Player.GetGameBadgeLevels#1_Response'] = Schema.CPlayer_GetGameBadgeL
 protobufs['Player.GetNicknameList#1_Request'] = Schema.CPlayer_GetNicknameList_Request;
 protobufs['Player.GetNicknameList#1_Response'] = Schema.CPlayer_GetNicknameList_Response;
 protobufs['PlayerClient.NotifyFriendNicknameChanged#1'] = Schema.CPlayer_FriendNicknameChanged_Notification;
+protobufs['Econ.GetAssetClassInfo#1_Request'] = Schema.CEcon_GetAssetClassInfo_Request;
+protobufs['Econ.GetAssetClassInfo#1_Response'] = Schema.CEcon_GetAssetClassInfo_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
