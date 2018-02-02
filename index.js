@@ -187,6 +187,7 @@ require('./components/twofactor.js');
 require('./components/pubfiles.js');
 require('./components/cdn.js');
 require('./components/econ.js');
+require('./components/store.js');
 
 /**
  * Called when the request completes.

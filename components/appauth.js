@@ -46,6 +46,8 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
  * @returns {object|null} - object if well-formed ticket (may not be valid), or null if not well-formed
  */
 SteamUser.parseAppTicket = function(ticket) {
+	// https://github.com/SteamRE/SteamKit/blob/master/Resources/Structs/steam3_appticket.hsl
+
 	if (!ByteBuffer.isByteBuffer(ticket)) {
 		ticket = ByteBuffer.wrap(ticket, ByteBuffer.LITTLE_ENDIAN);
 	}

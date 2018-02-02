@@ -739,6 +739,17 @@ immediately following logon. Otherwise, this cannot be safely called until `lice
 Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
 be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
 
+### getStoreTagNames(language, tagIDs, callback)
+- `language` - The language you want tag names in, e.g. "english" or "spanish"
+- `tagIDs` - An array of one or more tag IDs
+- `callback` - A function to be called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `tags` - An object whose keys are tag IDs and values are objects with two properties: `name` and `englishName`
+
+**v3.26.0 or later is required to use this method**
+
+Retrieves localized names for specified store tag IDs. Tag IDs are available in the response to `getProductInfo`.  
+
 ### getPublishedFileDetails(ids, callback)
 - `ids` - Either an integer, or an array of integers containing the IDs of the published file(s) you want details for
 - `callback` - A function to be called when the request has completed
