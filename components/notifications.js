@@ -18,12 +18,14 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = funct
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
-	var self = this;
-	(body.notifications || []).forEach(function(notification) {
+	(body.notifications || []).forEach((notification) => {
 		if (notification.user_notification_type == 1) {
-			self.emit('tradeOffers', notification.count);
+			if (this._lastTradeOfferCount !== notification.count) {
+				this.emit('tradeOffers', notification.count);
+				this._lastTradeOfferCount = notification.count;
+			}
 		} else {
-			self.emit('debug', 'Unknown notification type ' + notification.user_notification_type + ': ' + notification.count + '!');
+			this.emit('debug', 'Unknown notification type ' + notification.user_notification_type + ': ' + notification.count + '!');
 		}
 	});
 };
