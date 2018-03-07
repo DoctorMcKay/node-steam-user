@@ -18,6 +18,11 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = funct
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
+	// Steam apparently sends a count of 0 as a lack of any notifications at all
+	if (body.notifications && body.notifications.length == 0) {
+		body.notifications.push({"user_notification_type": 1, "count": 0});
+	}
+
 	(body.notifications || []).forEach((notification) => {
 		if (notification.user_notification_type == 1) {
 			if (this._lastTradeOfferCount !== notification.count) {
