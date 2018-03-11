@@ -1,5 +1,6 @@
 const ByteBuffer = require('bytebuffer');
 const CRC32 = require('buffer-crc32');
+const Crypto = require('crypto');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 const SteamID = require('steamid');
 
@@ -60,9 +61,25 @@ SteamUser.parseEncryptedAppTicket = function(ticket, encryptionKey) {
 		let userData = decrypted.slice(0, outer.cb_encrypteduserdata);
 		let ownershipTicketLength = decrypted.readUInt32LE(outer.cb_encrypteduserdata);
 		let ownershipTicket = SteamUser.parseAppTicket(decrypted.slice(outer.cb_encrypteduserdata, outer.cb_encrypteduserdata + ownershipTicketLength));
-		// there are 32 more bytes but I dunno what they're for
 		if (ownershipTicket) {
 			ownershipTicket.userData = userData;
+		}
+
+		let remainder = decrypted.slice(outer.cb_encrypteduserdata + ownershipTicketLength);
+		if (remainder.length >= 8 + 20) {
+			// salted sha1 hash
+			let salt = remainder.slice(0, 8);
+			let hash = remainder.slice(8, 28);
+			remainder = remainder.slice(28);
+
+			let sha1 = Crypto.createHash('sha1');
+			sha1.update(decrypted.slice(0, outer.cb_encrypteduserdata + ownershipTicketLength))
+				.update(salt);
+			if (!hash.equals(sha1.digest())) {
+				return null;
+			}
+
+			ownershipTicket.unknown1 = remainder.readUInt32LE(0);
 		}
 
 		return ownershipTicket;
