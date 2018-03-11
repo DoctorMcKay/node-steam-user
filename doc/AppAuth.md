@@ -86,11 +86,17 @@ On success, returns an object containing all the properties listed in `parseAppT
 The expiration time built into the ticket is not customizable, so you should check the generation time (`ownershipTicketGenerated`)
 to make sure that this ticket isn't too old for your tastes.
 
+The returned object also contains a `userData` property, which is a `Buffer` (possibly empty) containing the data
+supplied by the user when they requested the ticket from Steam.
+
 Encrypted app tickets don't need to be signed, so `hasValidSignature` will be `false`. `isValid` will be true as long
 as `ownershipTicketExpires` hasn't passed yet, but that will be weeks from the time when the ticket was generated.
 You therefore shouldn't depend on these properties. If you get a ticket back it's guaranteed not to be tampered with
 (provided your encrypted app ticket key hasn't been compromised), so all you need to check for validity is the appID,
 steamID, and whether `ownershipTicketGenerated` isn't too old for what you want.
+
+You might also want to have the client build a nonce into the ticket's `userData` to avoid ticket reuse, although
+the generation timestamp might be a good enough nonce for your purposes.
 
 ## Methods
 
