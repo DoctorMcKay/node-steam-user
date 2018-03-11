@@ -98,6 +98,10 @@ steamID, and whether `ownershipTicketGenerated` isn't too old for what you want.
 You might also want to have the client build a nonce into the ticket's `userData` to avoid ticket reuse, although
 the generation timestamp might be a good enough nonce for your purposes.
 
+It is not currently possible to determine if the user is VAC banned, which is possible through the official SteamWorks SDK.
+If you have a Steam account that is VAC banned in a game you also have the encrypted app ticket key for, please open
+a GitHub issue so I can check it out.
+
 ## Methods
 
 ### getAuthSessionTicket(appid, callback)
