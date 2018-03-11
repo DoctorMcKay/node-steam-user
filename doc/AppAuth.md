@@ -1,6 +1,6 @@
 # Steam App Auth
 
-As of v3.35.0, a `SteamUser` can retrieve non-encrypted Steam app tickets.  
+As of v3.25.0, a `SteamUser` can retrieve Steam app tickets.  
 **This is currently experimental.** The API is not finalized and may change at any time.
 
 ## Ticket Overview
@@ -45,7 +45,7 @@ let parsed = SteamUser.parseAppTicket(ticket);
 Parses an app ticket. Currently this can only parse full tickets, i.e. app ownership tickets won't work.
 If you don't know the difference, it probably doesn't matter to you.
 
-Returns an object containing these properties:
+On success, returns an object containing these properties:
 - `authTicket` - A Buffer containing the part of the ticket that's sent to Steam for validation
 - `gcToken` - A string containing a 64-bit number which is the ticket's "GC token" (GC stands for "game connect")
 - `tokenGenerated` - A `Date` object containing the time when this ticket's GC token was generated
@@ -69,6 +69,28 @@ Returns an object containing these properties:
 - `hasValidSignature` - A boolean indicating whether the app ownership ticket signature is valid
 - `isValid` - A boolean indicating whether the app ownership ticket is valid
 	- If the signature is missing, this will be true if the ticket is not expired! If you care about the signature check that separately
+
+Returns `null` if unable to decode any part of the ticket.
+
+### parseEncryptedAppTicket(ticket, encryptionKey)
+- `ticket` - A `Buffer` containing the encrypted app ticket you want to parse
+- `encryptionKey` - A `Buffer` or a hex string containing the encryption key for the app to which this ticket belongs
+
+**v3.26.0 or later is required to use this function**
+
+If you happen to be the developer of an app, you could use this to decrypt one of your encrypted app tickets. You'll
+need the encrypted app ticket key for the app to which the ticket you supply belongs. This happens 100% locally, so
+there's no need to be able to reach Steam to do this.
+
+On success, returns an object containing all the properties listed in `parseAppTicket` from `version` down.
+The expiration time built into the ticket is not customizable, so you should check the generation time (`ownershipTicketGenerated`)
+to make sure that this ticket isn't too old for your tastes.
+
+Encrypted app tickets don't need to be signed, so `hasValidSignature` will be `false`. `isValid` will be true as long
+as `ownershipTicketExpires` hasn't passed yet, but that will be weeks from the time when the ticket was generated.
+You therefore shouldn't depend on these properties. If you get a ticket back it's guaranteed not to be tampered with
+(provided your encrypted app ticket key hasn't been compromised), so all you need to check for validity is the appID,
+steamID, and whether `ownershipTicketGenerated` isn't too old for what you want.
 
 ## Methods
 

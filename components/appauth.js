@@ -41,6 +41,37 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 };
 
 /**
+ *
+ * @param {Buffer} ticket - The raw encrypted appticket
+ * @param {Buffer|string} encryptionKey - The app's encryption key, either raw hex or a Buffer
+ * @returns {object}
+ */
+SteamUser.parseEncryptedAppTicket = function(ticket, encryptionKey) {
+	try {
+		let outer = Schema.EncryptedAppTicket.decode(ticket);
+		let key = typeof encryptionKey === 'string' ? Buffer.from(encryptionKey, 'hex') : encryptionKey;
+		let decrypted = SteamCrypto.symmetricDecrypt(outer.encrypted_ticket.toBuffer(), key);
+
+		if (CRC32.unsigned(decrypted) != outer.crc_encryptedticket) {
+			return null;
+		}
+
+		// the beginning is the user-supplied data
+		let userData = decrypted.slice(0, outer.cb_encrypteduserdata);
+		let ownershipTicketLength = decrypted.readUInt32LE(outer.cb_encrypteduserdata);
+		let ownershipTicket = SteamUser.parseAppTicket(decrypted.slice(outer.cb_encrypteduserdata, outer.cb_encrypteduserdata + ownershipTicketLength));
+		// there are 32 more bytes but I dunno what they're for
+		if (ownershipTicket) {
+			ownershipTicket.userData = userData;
+		}
+
+		return ownershipTicket;
+	} catch (ex) {
+		return null;
+	}
+};
+
+/**
  * Parse a Steam app or session ticket and return an object containing its details. Static.
  * @param {Buffer|ByteBuffer} ticket - The binary appticket
  * @returns {object|null} - object if well-formed ticket (may not be valid), or null if not well-formed
@@ -133,7 +164,7 @@ SteamUser.parseAppTicket = function(ticket) {
 
 		let date = new Date();
 		details.isExpired = details.ownershipTicketExpires < date;
-		details.hasValidSignature = details.signature && SteamCrypto.verifySignature(ticket.slice(ownershipTicketOffset, ownershipTicketOffset + ownershipTicketLength).toBuffer(), details.signature);
+		details.hasValidSignature = !!details.signature && SteamCrypto.verifySignature(ticket.slice(ownershipTicketOffset, ownershipTicketOffset + ownershipTicketLength).toBuffer(), details.signature);
 		details.isValid = !details.isExpired && (!details.signature || details.hasValidSignature);
 	} catch (ex) {
 		return null; // not a valid ticket
