@@ -321,11 +321,15 @@ An object whose keys are 64-bit SteamIDs, and whose values are values from the `
 
 When we get unfriended, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
 
+This isn't populated after logon until [`friendsList`](#friendslist) is emitted.
+
 ### myGroups
 
 An object whose keys are 64-bit SteamIDs, and whose values are from the `EClanRelationship` enum. Therefore, you can deduce which groups you're in from this object.
 
 When we leave a group, instead of setting the value to `EClanRelationship.None`, the key is deleted from the object entirely.
+
+This isn't populated after logon until [`groupList`](#grouplist) is emitted.
 
 ### myFriendGroups
 
@@ -1487,7 +1491,7 @@ The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so 
 
 **v1.9.0 or later is required to use this event**
 
-Emitted when our friends list is downloaded from Steam after logon.
+Emitted when our friends list is downloaded from Steam after logon, and is now available in [`myFriends`](#myfriends).
 
 ### friendPersonasLoaded
 
@@ -1500,7 +1504,7 @@ Emitted when all personas have been loaded for our entire friends list, and they
 
 **v1.9.0 or later is required to use this event**
 
-Emitted when our group list is downloaded from Steam after logon.
+Emitted when our group list is downloaded from Steam after logon, and is now available in [`myGroups`](#mygroups).
 
 ### friendsGroupList
 - `groups` - An object whose structure is identical to the [`myFriendGroups`](#myfriendgroups) property
