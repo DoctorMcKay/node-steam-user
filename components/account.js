@@ -5,10 +5,6 @@ const SteamID = require('steamid');
 const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
-SteamUser.prototype.createAccount = function(accountName, password, email, callback) {
-	throw new Error("Creating accounts through node-steam-user is no longer possible due to Steam changes.");
-};
-
 SteamUser.prototype.requestValidationEmail = function(callback) {
 	var body = new ByteBuffer(1, ByteBuffer.LITTLE_ENDIAN);
 	body.writeUint8(0);

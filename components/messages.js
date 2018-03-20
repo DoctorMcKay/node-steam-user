@@ -48,8 +48,6 @@ protobufs[EMsg.ClientPICSProductInfoRequest] = Schema.CMsgClientPICSProductInfoR
 protobufs[EMsg.ClientPICSProductInfoResponse] = Schema.CMsgClientPICSProductInfoResponse;
 protobufs[EMsg.ClientPICSAccessTokenRequest] = Schema.CMsgClientPICSAccessTokenRequest;
 protobufs[EMsg.ClientPICSAccessTokenResponse] = Schema.CMsgClientPICSAccessTokenResponse;
-protobufs[EMsg.ClientCreateAccountProto] = Schema.CMsgClientCreateAccount;
-protobufs[EMsg.ClientCreateAccountProtoResponse] = Schema.CMsgClientCreateAccountResponse;
 protobufs[EMsg.EconTrading_InitiateTradeRequest] = Schema.CMsgTrading_InitiateTradeRequest;
 protobufs[EMsg.EconTrading_InitiateTradeResponse] = Schema.CMsgTrading_InitiateTradeResponse;
 protobufs[EMsg.EconTrading_CancelTradeRequest] = Schema.CMsgTrading_CancelTradeRequest;
@@ -185,7 +183,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 	}
 
 	this.emit('debug', 'Sending message: ' + emsg);
-	
+
 	// Make the header
 	let hdrBuf;
 	if (header.msg == EMsg.ChannelEncryptResponse) {
@@ -260,7 +258,7 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 		this.steamID = new SteamID(steamID.toString());
 		delete this._tempSteamID;
 	}
-	
+
 	this._handleMessage(header, buf.slice());
 };
 

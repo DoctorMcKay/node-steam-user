@@ -416,10 +416,6 @@ individual user), but you can call `webLogOn()` to create a new session if your 
 
 Listen for the [`webSession`](#websession) event to get your cookies.
 
-### createAccount(accountName, password, email, callback)
-
-**This no longer works and is deprecated. It will be removed entirely in a future release.**
-
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
 	- `err` - An `Error` object on failure, or `null` on success
