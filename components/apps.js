@@ -13,6 +13,11 @@ const PICSRequestType = {
 	"AddToCache": 4
 };
 
+/**
+ * Tell Steam that you're "playing" zero or more games.
+ * @param {array} apps - Array of integers (AppIDs) or strings (non-Steam game names) for the games you're playing. Empty to play nothing.
+ * @param {boolean} [force=false] If true, kick any other sessions logged into this account and playing games from Steam
+ */
 SteamUser.prototype.gamesPlayed = function(apps, force) {
 	if (!(apps instanceof Array)) {
 		apps = [apps];
@@ -43,6 +48,10 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 	}
 };
 
+/**
+ * Kick any other session logged into your account which is playing a game from Steam.
+ * @param {function} [callback] - Single err parameter
+ */
 SteamUser.prototype.kickPlayingSession = function(callback) {
 	this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
 	this.once('playingState', function(blocked, playingApp) {
@@ -58,12 +67,22 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 	});
 };
 
+/**
+ * Get count of people playing a Steam app. Use appid 0 to get number of people connected to Steam.
+ * @param {int} appid
+ * @param {function} callback - Args (eresult, player count)
+ */
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
 	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
 		callback(Helpers.eresultError(body.eresult), body.player_count);
 	});
 };
 
+/**
+ * Get a list of apps or packages which have changed since a particular changenumber.
+ * @param {int} sinceChangenumber - Changenumber to get changes since. Use 0 to get the latest changenumber, but nothing else
+ * @param {function} callback - Args (current changenumber, array of appids that changed, array of packageids that changed)
+ */
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 	this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
 		"since_change_number": sinceChangenumber,
@@ -74,7 +93,22 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 	});
 };
 
-SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestType) {
+/**
+ * Get info about some apps and/or packages from Steam.
+ * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
+ * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
+ * @param {boolean} [inclTokens=false] - If true, automatically retrieve access tokens if needed
+ * @param {function} callback - Args (array of app data, array of package data, array of appids that don't exist, array of packageids that don't exist)
+ * @param {int} [requestType] - Don't touch
+ */
+SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callback, requestType) {
+	// Adds support for the previous syntax
+	if (typeof inclTokens !== 'boolean' && typeof inclTokens === 'function') {
+		requestType = callback;
+		callback = inclTokens;
+		inclTokens = false;
+	}
+
 	requestType = requestType || PICSRequestType.User;
 
 	// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -152,7 +186,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 				// Request info for all the apps in this package, if this request didn't originate from the license list
 				if (requestType != PICSRequestType.Licenses) {
 					var appids = (pkg.packageinfo || {}).appids || [];
-					this.getProductInfo(appids, [], null, PICSRequestType.PackageContents);
+					this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents);
 				}
 			});
 		}
@@ -179,10 +213,10 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 
 		(body.apps || []).forEach(function(app) {
 			response.apps[app.appid] = app._parsedData || {
-					"changenumber": app.change_number,
-					"missingToken": !!app.missing_token,
-					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
-				};
+				"changenumber": app.change_number,
+				"missingToken": !!app.missing_token,
+				"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+			};
 
 			var index = appids.indexOf(app.appid);
 			if (index != -1) {
@@ -192,10 +226,10 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 
 		(body.packages || []).forEach(function(pkg) {
 			response.packages[pkg.packageid] = pkg._parsedData || {
-					"changenumber": pkg.change_number,
-					"missingToken": !!pkg.missing_token,
-					"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
-				};
+				"changenumber": pkg.change_number,
+				"missingToken": !!pkg.missing_token,
+				"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
+			};
 
 			var index = packageids.indexOf(pkg.packageid);
 			if (index != -1) {
@@ -204,11 +238,71 @@ SteamUser.prototype.getProductInfo = function(apps, packages, callback, requestT
 		});
 
 		if (appids.length === 0 && packageids.length === 0) {
-			callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+			if (inclTokens) {
+				var tokenlessAppids = [];
+				var tokenlessPackages = [];
+
+				for (var appid in response.apps) {
+					if (response.apps[appid].missingToken) {
+						tokenlessAppids.push(parseInt(appid, 10));
+					}
+				}
+
+				for (var packageid in response.packages) {
+					if (response.packages[packageid].missingToken) {
+						tokenlessPackages.push(parseInt(packageid, 10));
+					}
+				}
+
+				if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
+					self.getProductAccessToken(tokenlessAppids, tokenlessPackages, function(appTokens, packageTokens) {
+						var tokenApps = [];
+						var tokenPackages = [];
+
+						for (appid in appTokens) {
+							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+						}
+
+						for (packageid in packageTokens) {
+							tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[appid]})
+						}
+
+						self.getProductInfo(tokenApps, tokenPackages, false, function(apps, packages) {
+							for (appid in apps) {
+								response.apps[appid] = apps[appid];
+								var index = response.unknownApps.indexOf(parseInt(appid, 10));
+								if (index != -1) {
+									response.unknownApps.splice(index, 1);
+								}
+							}
+
+							for (packageid in packages) {
+								response.packages[packageid] = packages[packageid];
+								var index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+								if (index != -1) {
+									response.unknownPackages.splice(index, 1);
+								}
+							}
+
+							callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+						});
+					});
+				} else {
+					callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+				}
+			} else {
+				callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+			}
 		}
 	});
 };
 
+/**
+ * Get access tokens for some apps and/or packages
+ * @param {int[]} apps - Array of appids
+ * @param {int[]} packages - Array of packageids
+ * @param {function} callback - First arg is an object of (appid => access token), second is the same for packages, third is array of appids for which tokens are denied, fourth is the same for packages
+ */
 SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
 		"packageids": packages,
@@ -229,6 +323,9 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	});
 };
 
+/**
+ * @private
+ */
 SteamUser.prototype._resetChangelistUpdateTimer = function() {
 	this._clearChangelistUpdateTimer();
 
@@ -237,6 +334,9 @@ SteamUser.prototype._resetChangelistUpdateTimer = function() {
 	}
 };
 
+/**
+ * @private
+ */
 SteamUser.prototype._clearChangelistUpdateTimer = function() {
 	if (this._changelistUpdateTimer) {
 		clearTimeout(this._changelistUpdateTimer);
@@ -244,6 +344,9 @@ SteamUser.prototype._clearChangelistUpdateTimer = function() {
 	}
 };
 
+/**
+ * @private
+ */
 SteamUser.prototype._getChangelistUpdate = function() {
 	this._clearChangelistUpdateTimer();
 
@@ -312,11 +415,15 @@ SteamUser.prototype._getChangelistUpdate = function() {
 				}
 			}
 
-			this.getProductInfo(ourApps, ourPackages, null, PICSRequestType.Changelist);
+			this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist);
 		});
 	});
 };
 
+/**
+ * @param {int} appid
+ * @private
+ */
 SteamUser.prototype._addAppToCache = function(appid) {
 	if (!this.options.enablePicsCache) {
 		return;
@@ -327,9 +434,12 @@ SteamUser.prototype._addAppToCache = function(appid) {
 		return;
 	}
 
-	this.getProductInfo([appid], [], null, PICSRequestType.AddToCache);
+	this.getProductInfo([appid], [], false, null, PICSRequestType.AddToCache);
 };
 
+/**
+ * @private
+ */
 SteamUser.prototype._getLicenseInfo = function() {
 	if (!this.options.enablePicsCache) {
 		return;
@@ -337,7 +447,7 @@ SteamUser.prototype._getLicenseInfo = function() {
 
 	var packageids = this.getOwnedPackages();
 
-	this.getProductInfo([], packageids, (apps, packages) => {
+	this.getProductInfo([], packageids, false, (apps, packages) => {
 		// Request info for all the apps in these packages
 		var appids = [];
 
@@ -353,12 +463,17 @@ SteamUser.prototype._getLicenseInfo = function() {
 			});
 		}
 
-		this.getProductInfo(appids, [], (apps, packages) => {
+		this.getProductInfo(appids, [], false, (apps, packages) => {
 			this.emit('appOwnershipCached');
 		}, PICSRequestType.PackageContents);
 	}, PICSRequestType.Licenses);
 };
 
+/**
+ * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @returns {int[]}
+ */
 SteamUser.prototype.getOwnedApps = function() {
 	if (!this.options.enablePicsCache) {
 		throw new Error("PICS cache is not enabled.");
@@ -369,7 +484,7 @@ SteamUser.prototype.getOwnedApps = function() {
 	}
 
 	var ownedPackages = this.getOwnedPackages();
-	var appids = [];
+	var appids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
@@ -388,20 +503,32 @@ SteamUser.prototype.getOwnedApps = function() {
 		}
 
 		(pkg.appids || []).forEach((appid) => {
-			if (appids.indexOf(appid) == -1) {
-				appids.push(appid);
+			if (!appids[appid]) {
+				appids[appid] = true;
 			}
 		});
 	});
 
+	appids = Object.keys(appids).map(appid => parseInt(appid, 10));
 	appids.sort(sortNumeric);
 	return appids;
 };
 
+/**
+ * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @param {int} appid
+ * @returns {boolean}
+ */
 SteamUser.prototype.ownsApp = function(appid) {
 	return this.getOwnedApps().indexOf(parseInt(appid, 10)) != -1;
 };
 
+/**
+ * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @returns {int[]}
+ */
 SteamUser.prototype.getOwnedDepots = function() {
 	if (!this.options.enablePicsCache) {
 		throw new Error("PICS cache is not enabled.");
@@ -412,7 +539,7 @@ SteamUser.prototype.getOwnedDepots = function() {
 	}
 
 	var ownedPackages = this.getOwnedPackages();
-	var depotids = [];
+	var depotids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
@@ -431,20 +558,32 @@ SteamUser.prototype.getOwnedDepots = function() {
 		}
 
 		(pkg.depotids || []).forEach(function(depotid) {
-			if (depotids.indexOf(depotid) == -1) {
-				depotids.push(depotid);
+			if (!depotids[depotid]) {
+				depotids[depotid] = true;
 			}
 		});
 	});
 
+	depotids = Object.keys(depotids).map(depotid => parseInt(depotid, 10));
 	depotids.sort(sortNumeric);
 	return depotids;
 };
 
+/**
+ * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @param {int} depotid
+ * @returns {boolean}
+ */
 SteamUser.prototype.ownsDepot = function(depotid) {
 	return this.getOwnedDepots().indexOf(parseInt(depotid, 10)) != -1;
 };
 
+/**
+ * Returns an array of package IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @returns {int[]}
+ */
 SteamUser.prototype.getOwnedPackages = function() {
 	if (this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
 		throw new Error("We don't have our license list yet.");
@@ -458,6 +597,12 @@ SteamUser.prototype.getOwnedPackages = function() {
 	return packages;
 };
 
+/**
+ * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
+ * has been emitted.
+ * @param {int|string} packageid
+ * @returns {boolean}
+ */
 SteamUser.prototype.ownsPackage = function(packageid) {
 	return this.getOwnedPackages().indexOf(parseInt(packageid, 10)) != -1;
 };
@@ -472,6 +617,11 @@ function sortNumeric(a, b) {
 	return 0;
 }
 
+/**
+ * Redeem a product code on this account.
+ * @param {string} key
+ * @param {function} callback - Args (eresult value, SteamUser.EPurchaseResult value, object of (packageid => package names)
+ */
 SteamUser.prototype.redeemKey = function(key, callback) {
 	this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, function(body) {
 		if (typeof callback !== 'function') {
@@ -492,6 +642,11 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 	});
 };
 
+/**
+ * Request licenses for one or more free-on-demand apps.
+ * @param {int[]} appIDs
+ * @param {function} callback - Args (err, array of granted packageids, array of granted appids)
+ */
 SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 	if (!Array.isArray(appIDs)) {
 		appIDs = [appIDs];

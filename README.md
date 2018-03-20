@@ -313,11 +313,15 @@ An object whose keys are 64-bit SteamIDs, and whose values are values from the `
 
 When we get unfriended, instead of setting the value to `EFriendRelationship.None`, the key is deleted from the object entirely.
 
+This isn't populated after logon until [`friendsList`](#friendslist) is emitted.
+
 ### myGroups
 
 An object whose keys are 64-bit SteamIDs, and whose values are from the `EClanRelationship` enum. Therefore, you can deduce which groups you're in from this object.
 
 When we leave a group, instead of setting the value to `EClanRelationship.None`, the key is deleted from the object entirely.
+
+This isn't populated after logon until [`groupList`](#grouplist) is emitted.
 
 ### myFriendGroups
 
@@ -413,20 +417,8 @@ individual user), but you can call `webLogOn()` to create a new session if your 
 Listen for the [`webSession`](#websession) event to get your cookies.
 
 ### createAccount(accountName, password, email, callback)
-- `accountName` - The username of your new account
-- `password` - The password for your new account
-- `email` - The contact email for your new account
-- `callback` - Called when the account is either created or an error occurs
-	- `err` - An `Error` object on failure, or `null` on success. Some common errors:
-		- `DuplicateName` if there is already an account with that username
-		- `IllegalPassword` if your password is too weak or otherwise bad
-	- `steamid` - If successful, this is a `SteamID` object containing the new account's SteamID
 
-Creates a new individual user Steam account. You must be logged on either anonymously or as an existing individual user
-to use this.
-
-**Currently it seems that Steam is not properly sending back the SteamID of the newly-created account. The `steamid`
-argument in the callback is currently `null`.**
+**This no longer works and is deprecated. It will be removed entirely in a future release.**
 
 ### requestValidationEmail([callback])
 - `callback` - Optional. Called when a response is available
@@ -668,9 +660,10 @@ Requests a list of game servers from the master server.
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
-### getProductInfo(apps, packages, callback)
+### getProductInfo(apps, packages[, inclTokens], callback)
 - `apps` - Either an array of AppIDs, or an array of objects containing `appid` and `access_token` properties
 - `packages` - Either an array of PackageIDs, or an array of objects containing `packageid` and `access_token` properties
+- `inclTokens` - Optional boolean to automatically request product access tokens if they need them. The default value is false.
 - `callback` - Called when requested data is available
     - `err` - An `Error` object on failure, or `null` on success
 	- `apps` - An object whose keys are AppIDs and whose values are objects
@@ -747,6 +740,17 @@ immediately following logon. Otherwise, this cannot be safely called until `lice
 
 Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
 be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
+
+### getStoreTagNames(language, tagIDs, callback)
+- `language` - The language you want tag names in, e.g. "english" or "spanish"
+- `tagIDs` - An array of one or more tag IDs
+- `callback` - A function to be called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `tags` - An object whose keys are tag IDs and values are objects with two properties: `name` and `englishName`
+
+**v3.26.0 or later is required to use this method**
+
+Retrieves localized names for specified store tag IDs. Tag IDs are available in the response to `getProductInfo`.  
 
 ### getPublishedFileDetails(ids, callback)
 - `ids` - Either an integer, or an array of integers containing the IDs of the published file(s) you want details for
@@ -920,6 +924,19 @@ Send a trade request to the specified user. Listen for the [`tradeResponse`](#tr
 **v1.9.0 or later is required to use this method**
 
 Cancels your outstanding trade request to the specified user.
+
+### getAssetClassInfo(language, appid, classes, callback)
+- `language` - A string containing the language code you want stuff translated in, e.g. "en" or "es" or "zh"
+- `appid` - The AppID of the game which owns the items you're interested in
+- `classes` - An array of objects, where each object has a `classid` property and optionally an `instanceid` property
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `descriptions` - An array of description objects
+
+**v3.25.0 or later is required to use this method**
+
+Retrieves asset description data from Steam. Works similarly to [the WebAPI method by the same name](https://lab.xpaw.me/steam_api_documentation.html#ISteamEconomy_GetAssetClassInfo_v1),
+although at time of documentation no tags are returned.
 
 ### chatMessage(recipient, message[, type])
 - `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message
@@ -1195,7 +1212,18 @@ Emitted when Steam sends a notification of new comments.
 ### tradeOffers
 - `count` - How many active received trade offers you have (can be 0)
 
-Emitted when Steam sends a notification of new trade offers.
+Emitted when Steam sends a notification of new trade offers. This gets emitted shortly after logon iff it's nonzero, and
+every time it changes thereafter (i.e. both when you receive a trade offer and when an active trade offer you received
+gets accepted/canceled/declined).
+
+### communityMessages
+- `count` - How many unread community (moderator) messages you have (can be 0)
+
+**v3.26.0 or later is required to use this event**
+
+Emitted when Steam sends a notification of new community (moderator) messages. This gets emitted shortly after logon iff
+it's nonzero, and every time it changes thereafter (i.e. both when you receive a community message and when a community
+message gets read).
 
 ### offlineMessages
 - `count` - How many unread offline chat messages you have
@@ -1463,7 +1491,7 @@ The [`myGroups`](#mygroups) property isn't yet updated when this is emitted, so 
 
 **v1.9.0 or later is required to use this event**
 
-Emitted when our friends list is downloaded from Steam after logon.
+Emitted when our friends list is downloaded from Steam after logon, and is now available in [`myFriends`](#myfriends).
 
 ### friendPersonasLoaded
 
@@ -1476,7 +1504,7 @@ Emitted when all personas have been loaded for our entire friends list, and they
 
 **v1.9.0 or later is required to use this event**
 
-Emitted when our group list is downloaded from Steam after logon.
+Emitted when our group list is downloaded from Steam after logon, and is now available in [`myGroups`](#mygroups).
 
 ### friendsGroupList
 - `groups` - An object whose structure is identical to the [`myFriendGroups`](#myfriendgroups) property

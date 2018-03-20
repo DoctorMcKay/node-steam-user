@@ -565,6 +565,12 @@ function processUser(user) {
 
 	if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
 		var hash = user.avatar_hash.toString('hex');
+
+		// handle default avatar
+		if (hash === "0000000000000000000000000000000000000000") {
+			hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
+		}
+
 		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
 		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
 		user.avatar_url_full = user.avatar_url_icon + "_full.jpg";

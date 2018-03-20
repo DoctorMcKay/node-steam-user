@@ -48,6 +48,7 @@ function SteamUser(options) {
 	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 	this._contentServers = [];
 	this._contentServerTokens = {};
+	this._lastNotificationCounts = {};
 	this._sessionID = 0;
 	this._jobs = {};
 
@@ -161,6 +162,8 @@ require('./components/chat.js');
 require('./components/twofactor.js');
 require('./components/pubfiles.js');
 require('./components/cdn.js');
+require('./components/econ.js');
+require('./components/store.js');
 
 /**
  * Called when the request completes.

@@ -12,6 +12,7 @@ message CDataPublisher_ClientContentCorruptionReport_Notification {
 	optional uint64 object_size = 7 [(description) = "object size in bytes"];
 	optional uint32 corruption_type = 8 [(description) = "See EContentCorruptionType"];
 	optional bool used_https = 9 [(description) = "the request was HTTPS"];
+	optional bool oc_proxy_detected = 10 [(description) = "detected an OpenCache proxy"];
 }
 
 service DataPublisher {

@@ -1,9 +1,10 @@
+const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
 const OS = require('os');
 const SteamID = require('steamid');
 
-const EResult = require('../enums/EResult.js');
 const EOSType = require('../enums/EOSType.js');
+const EResult = require('../enums/EResult.js');
 
 /**
  * If the input isn't already a SteamID object, converts it into one and returns it
@@ -158,5 +159,23 @@ exports.getOsType = function() {
 
 		default:
 			return EOSType.LinuxUnknown;
+	}
+};
+
+exports.stringifyLongs = function(obj) {
+	if (typeof obj === 'object') {
+		if (obj instanceof ByteBuffer.Long) {
+			return obj.toString();
+		} else {
+			for (let i in obj) {
+				if (obj.hasOwnProperty(i)) {
+					obj[i] = exports.stringifyLongs(obj[i]);
+				}
+			}
+
+			return obj;
+		}
+	} else {
+		return obj;
 	}
 };
