@@ -192,6 +192,28 @@ Added in 3.3.0.
 
 Defaults to `60000`.
 
+### localAddress
+
+Pass an IP here (as a string) to bind to that address, or `null` to let the OS decide.
+
+Defaults to `null`.
+
+### localPort
+
+Pass a port here to bind to that port, or `null` to let the OS decide.
+
+Defaults to `null`.
+
+### httpProxy
+
+Specify a URL here to use an HTTP proxy. For example, `http://user:pass@1.2.3.4:8081`
+
+### protocol
+
+A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/v4/resources/EConnectionProtocol.js).
+
+Defaults to `Auto`.
+
 # Properties [^](#contents)
 
 ### client
