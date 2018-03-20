@@ -60,7 +60,7 @@ function SteamUser(client, options) {
 	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 	this._contentServers = [];
 	this._contentServerTokens = {};
-	this._lastTradeOfferCount = null;
+	this._lastNotificationCounts = {};
 
 	// App and package cache
 	this._changelistUpdateTimer = null;

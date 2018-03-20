@@ -1208,7 +1208,18 @@ Emitted when Steam sends a notification of new comments.
 ### tradeOffers
 - `count` - How many active received trade offers you have (can be 0)
 
-Emitted when Steam sends a notification of new trade offers.
+Emitted when Steam sends a notification of new trade offers. This gets emitted shortly after logon iff it's nonzero, and
+every time it changes thereafter (i.e. both when you receive a trade offer and when an active trade offer you received
+gets accepted/canceled/declined).
+
+### communityMessages
+- `count` - How many unread community (moderator) messages you have (can be 0)
+
+**v3.26.0 or later is required to use this event**
+
+Emitted when Steam sends a notification of new community (moderator) messages. This gets emitted shortly after logon iff
+it's nonzero, and every time it changes thereafter (i.e. both when you receive a community message and when a community
+message gets read).
 
 ### offlineMessages
 - `count` - How many unread offline chat messages you have

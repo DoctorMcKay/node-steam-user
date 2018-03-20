@@ -1,5 +1,10 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
+const SteamID = require('steamid');
+const SteamUser = require('../index.js');
+
+const NOTIFICATION_TYPES = {
+	"1": "tradeOffers",
+	"3": "communityMessages"
+};
 
 SteamUser.prototype._requestNotifications = function() {
 	this._send(SteamUser.EMsg.ClientRequestItemAnnouncements, {});
@@ -18,21 +23,43 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCommentNotifications] = funct
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUserNotifications] = function(body) {
-	// Steam apparently sends a count of 0 as a lack of any notifications at all
-	if (body.notifications && body.notifications.length == 0) {
-		body.notifications.push({"user_notification_type": 1, "count": 0});
+	// convert the notifications array into an object for easy reference
+	let notifications = {};
+	(body.notifications || []).forEach((notif) => {
+		notifications[notif.user_notification_type] = notif.count;
+	});
+
+	for (let type in NOTIFICATION_TYPES) {
+		if (!NOTIFICATION_TYPES.hasOwnProperty(type)) {
+			continue;
+		}
+
+		let name = NOTIFICATION_TYPES[type];
+		let count = notifications[type] || 0; // Steam omits an entry entirely to represent 0
+		delete notifications[type]; // we already dealt with this so delete it (in order to detect unknowns)
+
+		// if we never emitted this type before and it's 0, suppress
+		if (typeof this._lastNotificationCounts[name] === 'undefined' && count == 0) {
+			this._lastNotificationCounts[name] = 0;
+			continue;
+		}
+
+		// it's either nonzero or we emitted it before. if we last saw an identical value, suppress
+		if (count == this._lastNotificationCounts[name]) {
+			// steam's steaming and sending dupes. suppress.
+			continue;
+		}
+
+		// something changed omg
+		this._lastNotificationCounts[name] = count;
+		this.emit(name, count);
 	}
 
-	(body.notifications || []).forEach((notification) => {
-		if (notification.user_notification_type == 1) {
-			if (this._lastTradeOfferCount !== notification.count) {
-				this.emit('tradeOffers', notification.count);
-				this._lastTradeOfferCount = notification.count;
-			}
-		} else {
-			this.emit('debug', 'Unknown notification type ' + notification.user_notification_type + ': ' + notification.count + '!');
-		}
-	});
+	// any unknowns?
+	let unknowns = Object.keys(notifications);
+	if (unknowns.length > 0) {
+		this.emit('debug', '!! Unknown notification types: ' + unknowns.join(', '));
+	}
 };
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSOfflineMessageNotification] = function(body) {
