@@ -279,6 +279,30 @@ SteamUser.prototype.deleteFriendsGroup = function (userSteamID, groupID, callbac
 };
 
 /**
+ * Rename a friends group
+ * @param {int} groupID - The friends group id 
+ * @param {string} newName - The new name to update the friends group with
+ */
+SteamUser.prototype.renameFriendsGroup = function (groupID, newName) {
+	this._send(SteamUser.EMsg.ClientRenameFriendsGroup, {
+		"groupid": groupID,
+		"groupname": newName
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+/**
  * Get persona name history for one or more users.
  * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
  * @param {function} callback
