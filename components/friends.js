@@ -235,7 +235,7 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 
 /**
  * Creates a friends group (or tag)
- * @param {string} groupName - The group name to create it with
+ * @param {string} groupName - The name to create the friends group with
  * @param {function} callback 
  */
 SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
