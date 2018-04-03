@@ -327,6 +327,30 @@ SteamUser.prototype.AddFriendToGroup = function (groupID, userSteamID) {
 };
 
 /**
+ * Remove an user to friends group (tag)
+ * @param {int} groupID - The friends group
+ * @param {(SteamID|string)} userSteamID - The user to remove from the friends group with, as a SteamID object or a string which can parse into one
+ */
+SteamUser.prototype.RemoveFriendFromGroup = function (groupID, userSteamID) {
+	this._send(SteamUser.EMsg.ClientRemoveFriendFromGroup, {
+		"groupid": groupID,
+		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		if (callback) {
+			callback(null);
+		}
+	});
+}
+
+/**
  * Get persona name history for one or more users.
  * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
  * @param {function} callback
