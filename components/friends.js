@@ -279,7 +279,7 @@ SteamUser.prototype.deleteFriendsGroup = function (userSteamID, groupID, callbac
 };
 
 /**
- * Rename a friends group
+ * Rename a friends group (tag)
  * @param {int} groupID - The friends group id 
  * @param {string} newName - The new name to update the friends group with
  */
@@ -287,6 +287,30 @@ SteamUser.prototype.renameFriendsGroup = function (groupID, newName) {
 	this._send(SteamUser.EMsg.ClientRenameFriendsGroup, {
 		"groupid": groupID,
 		"groupname": newName
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+/**
+ * Add an user to friends group (tag)
+ * @param {int} groupID - The friends group
+ * @param {(SteamID|string)} userSteamID - The user to invite to the friends group with, as a SteamID object or a string which can parse into one
+ */
+SteamUser.prototype.AddFriendToGroup = function (groupID, userSteamID) {
+	this._send(SteamUser.EMsg.ClientAddFriendToGroup, {
+		"groupid": groupID,
+		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()
 	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			if (callback) {
