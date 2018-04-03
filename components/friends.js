@@ -247,6 +247,11 @@ SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
 			return;
 		}
 
+		this.myFriendGroups[body.groupid] = {
+			name: groupName,
+			members: []
+		};
+
 		callback(null, body.groupid);
 	});
 };
@@ -267,6 +272,8 @@ SteamUser.prototype.deleteFriendsGroup = function (groupID, callback) {
 
 			return;
 		}
+
+		delete this.myFriendGroups[groupID];
 
 		if (callback) {
 			callback(null);
@@ -292,6 +299,8 @@ SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
 			return;
 		}
 
+		this.myFriendGroups[groupID].name = newName;
+
 		if (callback) {
 			callback(null);
 		}
@@ -304,9 +313,11 @@ SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
  * @param {(SteamID|string)} userSteamID - The user to invite to the friends group with, as a SteamID object or a string which can parse into one
  */
 SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback) {
+	var sid = Helpers.steamID(userSteamID);
+
 	this._send(SteamUser.EMsg.AMClientAddFriendToGroup, {
 		"groupid": groupID,
-		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()
+		"steamiduser": sid.getSteamID64()
 	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			if (callback) {
@@ -315,6 +326,8 @@ SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback)
 
 			return;
 		}
+
+		this.myFriendGroups[groupID].members.push(sid);
 
 		if (callback) {
 			callback(null);
@@ -328,9 +341,11 @@ SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback)
  * @param {(SteamID|string)} userSteamID - The user to remove from the friends group with, as a SteamID object or a string which can parse into one
  */
 SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, callback) {
+	var sid = Helpers.steamID(userSteamID);
+	
 	this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
 		"groupid": groupID,
-		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()
+		"steamiduser": sid.getSteamID64()
 	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			if (callback) {
@@ -338,6 +353,12 @@ SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, call
 			}
 
 			return;
+		}
+
+		var index = this.myFriendGroups[groupID].members.indexOf(userSteamID);
+
+		if (index > -1) {
+			this.myFriendGroups[groupID].members.splice(index, 1);
 		}
 
 		if (callback) {
