@@ -303,7 +303,7 @@ SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
  * @param {int} groupID - The friends group
  * @param {(SteamID|string)} userSteamID - The user to invite to the friends group with, as a SteamID object or a string which can parse into one
  */
-SteamUser.prototype.AddFriendToGroup = function (groupID, userSteamID, callback) {
+SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback) {
 	this._send(SteamUser.EMsg.AMClientAddFriendToGroup, {
 		"groupid": groupID,
 		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()
@@ -327,7 +327,7 @@ SteamUser.prototype.AddFriendToGroup = function (groupID, userSteamID, callback)
  * @param {int} groupID - The friends group
  * @param {(SteamID|string)} userSteamID - The user to remove from the friends group with, as a SteamID object or a string which can parse into one
  */
-SteamUser.prototype.RemoveFriendFromGroup = function (groupID, userSteamID, callback) {
+SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, callback) {
 	this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
 		"groupid": groupID,
 		"steamiduser": Helpers.steamID(userSteamID).getSteamID64()

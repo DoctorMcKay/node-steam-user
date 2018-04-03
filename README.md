@@ -942,7 +942,7 @@ Renames a friends group (also known as a tag within the official Steam client)
 
 **Note**: The change does not seem to update within the official Steam client
 
-### AddFriendToGroup(groupID, userSteamID[, callback])
+### addFriendToGroup(groupID, userSteamID[, callback])
 - `groupID` - The reference group ID associated with the group
 - `userSteamID` - Either a `SteamID` object or a string which can parse into one
 - `callback` - Optional. Called when requested data is available
@@ -952,7 +952,7 @@ Renames a friends group (also known as a tag within the official Steam client)
 
 Adds a friend to a friends group (also known as a tag within the official Steam client)
 
-### RemoveFriendFromGroup(groupID, userSteamID[, callback])
+### removeFriendFromGroup(groupID, userSteamID[, callback])
 - `groupID` - The reference group ID associated with the group
 - `userSteamID` - Either a `SteamID` object or a string which can parse into one
 - `callback` - Optional. Called when requested data is available
