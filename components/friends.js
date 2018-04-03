@@ -234,6 +234,26 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 };
 
 /**
+ * 
+ * @param {(SteamID|string)} userSteamID - The user to create the friends group with, as a SteamID object or a string which can parse into one
+ * @param {string} groupName - The group name to create it with
+ * @param {function} callback 
+ */
+SteamUser.prototype.createFriendsGroup = function (userSteamID, groupName, callback) {
+	this._send(SteamUser.EMsg.ClientCreateFriendsGroup, {
+		"steamid": Helpers.steamID(userSteamID).getSteamID64(),
+		"groupname": groupName
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		callback(null, body.groupid);
+	});
+};
+
+/**
  * Get persona name history for one or more users.
  * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
  * @param {function} callback
