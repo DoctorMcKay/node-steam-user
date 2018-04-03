@@ -234,14 +234,12 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 };
 
 /**
- * Creates a friends group (or tag) with an user
- * @param {(SteamID|string)} userSteamID - The user to create the friends group with, as a SteamID object or a string which can parse into one
+ * Creates a friends group (or tag)
  * @param {string} groupName - The group name to create it with
  * @param {function} callback 
  */
 SteamUser.prototype.createFriendsGroup = function (userSteamID, groupName, callback) {
 	this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
-		"steamid": Helpers.steamID(userSteamID).getSteamID64(),
 		"groupname": groupName
 	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
@@ -254,14 +252,12 @@ SteamUser.prototype.createFriendsGroup = function (userSteamID, groupName, callb
 };
 
 /**
- * Deletes a friends group (or tag) with the last user within the group
- * @param {(SteamID|string)} userSteamID - The last user within the friends group, as a SteamID object or a string which can parse into one
+ * Deletes a friends group (or tag)
  * @param {int} groupID - The friends group id
  * @param {function} callback 
  */
 SteamUser.prototype.deleteFriendsGroup = function (userSteamID, groupID, callback) {
 	this._send(SteamUser.EMsg.AMClientDeleteFriendsGroup, {
-		"steamid": Helpers.steamID(userSteamID).getSteamID64(),
 		"groupid": groupID
 	}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
