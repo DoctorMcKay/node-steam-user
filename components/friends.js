@@ -241,12 +241,9 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
  */
 SteamUser.prototype.createFriendsGroup = function (userSteamID, groupName, callback) {
 	this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
-		"steamid": Helpers.steamID(userSteamID).toString(),
+		"steamid": Helpers.steamID(userSteamID).getSteamID64(),
 		"groupname": groupName
 	}, (body) => {
-
-		console.log(body);
-
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;
