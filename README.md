@@ -929,6 +929,57 @@ Invites a user to a Steam group.
 
 Joins a group you were invited to or ignores the invite.
 
+### createFriendsGroup(groupName, callback)
+- `groupName` - The name to create the friends group with
+- `callback` - Called when requested data is available
+	- `err` - An `Error` object on failure, or null on success
+	- `groupID` - A reference group ID associated with the group
+
+**v3.27.0 or later is required to use this method**
+
+Creates a friends group (also known as a tag within the official Steam client)
+
+### deleteFriendsGroup(groupID[, callback])
+- `groupID` - The reference group ID associated with the group
+- `callback` - Optional. Called when requested data is available
+	- `err` An `Error` object on failure, or null on success
+
+**v3.27.0 or later is required to use this method**
+
+Deletes a friends group (also known as a tag within the official Steam client)
+
+### renameFriendsGroup(groupID, newName[, callback])
+- `groupID` - The reference group ID associated with the group
+- `newName` - The new name to rename the group to
+- `callback` - Optional. Called when requested data is available
+	- `err` An `Error` object on failure, or null on success
+
+**v3.27.0 or later is required to use this method**
+
+Renames a friends group (also known as a tag within the official Steam client)
+
+**Note**: The change does not seem to update within the official Steam client
+
+### addFriendToGroup(groupID, userSteamID[, callback])
+- `groupID` - The reference group ID associated with the group
+- `userSteamID` - Either a `SteamID` object or a string which can parse into one
+- `callback` - Optional. Called when requested data is available
+	- `err` An `Error` object on failure, or null on success
+
+**v3.27.0 or later is required to use this method**
+
+Adds a friend to a friends group (also known as a tag within the official Steam client)
+
+### removeFriendFromGroup(groupID, userSteamID[, callback])
+- `groupID` - The reference group ID associated with the group
+- `userSteamID` - Either a `SteamID` object or a string which can parse into one
+- `callback` - Optional. Called when requested data is available
+	- `err` An `Error` object on failure, or null on success
+
+**v3.27.0 or later is required to use this method**
+
+Removes a friend to a friends group (also known as a tag within the official Steam client)
+
 ### trade(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 

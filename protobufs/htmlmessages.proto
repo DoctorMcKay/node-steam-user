@@ -36,6 +36,7 @@ message CMsgMouseUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 mouse_button = 2;
 	optional uint32 modifiers = 3;
+	optional bool is_off_panel = 4;
 }
 
 message CMsgMouseDblClick {
