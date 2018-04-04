@@ -234,6 +234,140 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 };
 
 /**
+ * Creates a friends group (or tag)
+ * @param {string} groupName - The name to create the friends group with
+ * @param {function} callback 
+ */
+SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
+	this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
+		"groupname": groupName
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			callback(Helpers.eresultError(body.eresult));
+			return;
+		}
+
+		this.myFriendGroups[body.groupid] = {
+			name: groupName,
+			members: []
+		};
+
+		callback(null, body.groupid);
+	});
+};
+
+/**
+ * Deletes a friends group (or tag)
+ * @param {int} groupID - The friends group id
+ * @param {function} callback 
+ */
+SteamUser.prototype.deleteFriendsGroup = function (groupID, callback) {
+	this._send(SteamUser.EMsg.AMClientDeleteFriendsGroup, {
+		"groupid": groupID
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		delete this.myFriendGroups[groupID];
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+/**
+ * Rename a friends group (tag)
+ * @param {int} groupID - The friends group id 
+ * @param {string} newName - The new name to update the friends group with
+ */
+SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
+	this._send(SteamUser.EMsg.AMClientRenameFriendsGroup, {
+		"groupid": groupID,
+		"groupname": newName
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		this.myFriendGroups[groupID].name = newName;
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+/**
+ * Add an user to friends group (tag)
+ * @param {int} groupID - The friends group
+ * @param {(SteamID|string)} userSteamID - The user to invite to the friends group with, as a SteamID object or a string which can parse into one
+ */
+SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback) {
+	var sid = Helpers.steamID(userSteamID);
+
+	this._send(SteamUser.EMsg.AMClientAddFriendToGroup, {
+		"groupid": groupID,
+		"steamiduser": sid.getSteamID64()
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		this.myFriendGroups[groupID].members.push(sid);
+
+		if (callback) {
+			callback(null);
+		}
+	});
+};
+
+/**
+ * Remove an user to friends group (tag)
+ * @param {int} groupID - The friends group
+ * @param {(SteamID|string)} userSteamID - The user to remove from the friends group with, as a SteamID object or a string which can parse into one
+ */
+SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, callback) {
+	var sid = Helpers.steamID(userSteamID);
+	
+	this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
+		"groupid": groupID,
+		"steamiduser": sid.getSteamID64()
+	}, (body) => {
+		if (body.eresult != SteamUser.EResult.OK) {
+			if (callback) {
+				callback(Helpers.eresultError(body.eresult));
+			}
+
+			return;
+		}
+
+		var index = this.myFriendGroups[groupID].members.indexOf(userSteamID);
+
+		if (index > -1) {
+			this.myFriendGroups[groupID].members.splice(index, 1);
+		}
+
+		if (callback) {
+			callback(null);
+		}
+	});
+}
+
+/**
  * Get persona name history for one or more users.
  * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
  * @param {function} callback
