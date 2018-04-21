@@ -355,7 +355,9 @@ SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, call
 			return;
 		}
 
-		var index = this.myFriendGroups[groupID].members.indexOf(userSteamID);
+		var index = this.myFriendGroups[groupID].members.findIndex((element) => {
+			return element.getSteamID64() === sid.getSteamID64();
+		});
 
 		if (index > -1) {
 			this.myFriendGroups[groupID].members.splice(index, 1);
