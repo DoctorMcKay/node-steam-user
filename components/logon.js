@@ -42,7 +42,7 @@ SteamUser.prototype.logOn = function(details) {
 			"machine_name": details.accountName ? (details.machineName || "") : "",
 			"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
 			"client_language": details.accountName ? "english" : "",
-			"client_os_type": Helpers.getOsType(),
+			"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
 			"anon_user_target_account_name": details.accountName ? "" : "anonymous",
 			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine)
 		};
