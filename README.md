@@ -394,6 +394,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `SteamUser.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 	- `machineName` - A string containing the name of this machine that you want to report to Steam. This will be displayed on steamcommunity.com when you view your games list (when logged in).
+	- `clientOS` - A number of client OS. Enums: (https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EOSType.js)[EOSType]
 	- `dontRememberMachine` - If you're providing an `authCode` but you don't want Steam to remember this sentryfile, pass `true` here.
 
 **v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**
