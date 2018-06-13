@@ -990,6 +990,24 @@ Cancels your outstanding trade request to the specified user.
 Retrieves asset description data from Steam. Works similarly to [the WebAPI method by the same name](https://lab.xpaw.me/steam_api_documentation.html#ISteamEconomy_GetAssetClassInfo_v1),
 although at time of documentation no tags are returned.
 
+### getTradeURL(callback)
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `details` - An object containing `token` and `url` properties
+
+**v3.28.0 or later is required to use this method**
+
+Gets your account's trade token and URL.
+
+### changeTradeURL(callback)
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `details` - An object containing `token` and `url` properties
+
+**v3.28.0 or later is required to use this method**
+
+Asks the Steam server to generate a new trade token for your account, and returns the new token and URL.
+
 ### chatMessage(recipient, message[, type])
 - `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message
 - `message` - The chat message that you're sending to them
