@@ -138,6 +138,8 @@ protobufs['Econ.GetAssetClassInfo#1_Request'] = Schema.CEcon_GetAssetClassInfo_R
 protobufs['Econ.GetAssetClassInfo#1_Response'] = Schema.CEcon_GetAssetClassInfo_Response;
 protobufs['Store.GetLocalizedNameForTags#1_Request'] = Schema.CStore_GetLocalizedNameForTags_Request;
 protobufs['Store.GetLocalizedNameForTags#1_Response'] = Schema.CStore_GetLocalizedNameForTags_Response;
+protobufs['Econ.GetTradeOfferAccessToken#1_Request'] = Schema.CEcon_GetTradeOfferAccessToken_Request;
+protobufs['Econ.GetTradeOfferAccessToken#1_Response'] = Schema.CEcon_GetTradeOfferAccessToken_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
