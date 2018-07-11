@@ -10,7 +10,7 @@ module.exports = {
 	"OSX": 4,
 	"PS3": 5,
 	"Linux32": 6,
-	"Max": 6,
+	"Max": 7,
 
 	// Value-to-name mapping for convenience
 	"0": "Unknown",
@@ -19,5 +19,6 @@ module.exports = {
 	"3": "Linux64",
 	"4": "OSX",
 	"5": "PS3",
-	"6": "Max",
+	"6": "Linux32",
+	"7": "Max",
 };

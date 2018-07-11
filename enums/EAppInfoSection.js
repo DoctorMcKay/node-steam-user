@@ -23,7 +23,8 @@ module.exports = {
 	"SysReqs": 14,
 	"Community": 15,
 	"Store": 16,
-	"Max": 17,
+	"Localization": 17,
+	"Max": 18,
 
 	// Value-to-name mapping for convenience
 	"0": "Unknown",
@@ -43,5 +44,6 @@ module.exports = {
 	"14": "SysReqs",
 	"15": "Community",
 	"16": "Store",
-	"17": "Max",
+	"17": "Localization",
+	"18": "Max",
 };
