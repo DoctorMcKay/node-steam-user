@@ -31,8 +31,7 @@ SteamUser.prototype.getContentServers = function(callback) {
 
 	// pick a random one
 	var server = list[Math.floor(Math.random() * list.length)];
-	var self = this;
-	download("http://" + Helpers.ipIntToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", function(err, res) {
+	download("http://" + Helpers.ipIntToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", (err, res) => {
 		if (err) {
 			callback(err);
 			return;
@@ -61,8 +60,8 @@ SteamUser.prototype.getContentServers = function(callback) {
 			}
 		}
 
-		self._contentServers = Array.prototype.slice.call(parsed.serverlist);
-		callback(null, JSON.parse(JSON.stringify(self._contentServers)));
+		this._contentServers = Array.prototype.slice.call(parsed.serverlist);
+		callback(null, JSON.parse(JSON.stringify(this._contentServers)));
 	});
 };
 
@@ -74,18 +73,17 @@ SteamUser.prototype.getContentServers = function(callback) {
  */
 SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 	// Cached locally?
-	var self = this;
 
 	appID = parseInt(appID, 10);
 	depotID = parseInt(depotID, 10);
 
-	this.storage.readFile("depot_key_" + appID + "_" + depotID + ".bin", function(err, file) {
+	this.storage.readFile("depot_key_" + appID + "_" + depotID + ".bin", (err, file) => {
 		if (file && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
 			callback(null, file.slice(4));
 			return;
 		}
 
-		self._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, function(body) {
+		this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {
 				callback(Helpers.eresultError(body.eresult));
 				return;
@@ -99,7 +97,7 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 			var key = body.depot_encryption_key.toBuffer();
 			var file = Buffer.concat([new Buffer(4), key]);
 			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
-			self.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file, function() {
+			this.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file, () => {
 				callback(null, body.depot_encryption_key.toBuffer());
 			});
 		});
@@ -119,14 +117,13 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
 		return;
 	}
 
-	var self = this;
-	this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {"app_id": appID, "depot_id": depotID, "host_name": hostname}, function(body) {
+	this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {"app_id": appID, "depot_id": depotID, "host_name": hostname}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;
 		}
 
-		self._contentServerTokens[depotID + '_' + hostname] = {
+		this._contentServerTokens[depotID + '_' + hostname] = {
 			"token": body.token,
 			"expires": new Date(body.expiration_time * 1000)
 		};
@@ -142,8 +139,7 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
  * @param {function} callback
  */
 SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
-	var self = this;
-	this.getRawManifest(appID, depotID, manifestID, function(err, manifest) {
+	this.getRawManifest(appID, depotID, manifestID, (err, manifest) => {
 		if (err) {
 			callback(err);
 			return;
@@ -162,7 +158,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
 			return;
 		}
 
-		self.getDepotDecryptionKey(appID, depotID, function(err, key) {
+		this.getDepotDecryptionKey(appID, depotID, function(err, key) {
 			if (err) {
 				callback(err);
 				return;
@@ -182,8 +178,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
  * @param {function} callback
  */
 SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
-	var self = this;
-	this.getContentServers(function(err, servers) {
+	this.getContentServers((err, servers) => {
 		if (err) {
 			callback(err);
 			return;
@@ -193,13 +188,13 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 		var urlBase = "http://" + server.Host;
 		var vhost = server.vhost || server.Host;
 
-		self.getCDNAuthToken(appID, depotID, vhost, function(err, token, expires) {
+		this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 			if (err) {
 				callback(err);
 				return;
 			}
 
-			download(urlBase + "/depot/" + depotID + "/manifest/" + manifestID + "/5" + token, vhost, function(err, res) {
+			download(urlBase + "/depot/" + depotID + "/manifest/" + manifestID + "/5" + token, vhost, (err, res) => {
 				if (err) {
 					callback(err);
 					return;
@@ -230,39 +225,38 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 	}
 
 	chunkSha1 = chunkSha1.toLowerCase();
-	var self = this;
 
 	if (!contentServer) {
-		this.getContentServers(function(err, servers) {
+		this.getContentServers((err, servers) => {
 			if (err) {
 				callback(err);
 				return;
 			}
 
 			contentServer = servers[Math.floor(Math.random() * servers.length)];
-			performDownload();
+			performDownload.call(this);
 		});
 	} else {
-		performDownload();
+		performDownload.call(this);
 	}
 
 	function performDownload() {
 		var urlBase = "http://" + contentServer.Host;
 		var vhost = contentServer.vhost || contentServer.Host;
 
-		self.getCDNAuthToken(appID, depotID, vhost, function(err, token, expires) {
+		this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 			if (err) {
 				callback(err);
 				return;
 			}
 
-			self.getDepotDecryptionKey(appID, depotID, function(err, key) {
+			this.getDepotDecryptionKey(appID, depotID, (err, key) => {
 				if (err) {
 					callback(err);
 					return;
 				}
 
-				download(urlBase + "/depot/" + depotID + "/chunk/" + chunkSha1 + token, vhost, function(err, res) {
+				download(urlBase + "/depot/" + depotID + "/chunk/" + chunkSha1 + token, vhost, (err, res) => {
 					if (err) {
 						callback(err);
 						return;
@@ -272,7 +266,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 						return;
 					}
 
-					unzip(SteamCrypto.symmetricDecrypt(res.data, key), function(err, result) {
+					unzip(SteamCrypto.symmetricDecrypt(res.data, key), (err, result) => {
 						if (err) {
 							callback(err);
 							return;
@@ -310,7 +304,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 	}
 
 	if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
-		throw new Error("Cannot download a directory");
+		throw new Error("Attempted to download a directory " + fileManifest.filename);
 	}
 
 	var numWorkers = 4;
@@ -318,7 +312,6 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 	fileManifest.size = parseInt(fileManifest.size, 10);
 	var bytesDownloaded = 0;
 
-	var self = this;
 	var availableServers;
 	var servers = [];
 	var serversInUse = [];
@@ -328,7 +321,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 	var killed = false;
 	var outputEmitter = new EventEmitter();
 
-	this.getContentServers(function(err, contentServers) {
+	this.getContentServers((err, contentServers) => {
 		if (err) {
 			callback(err);
 			return;
@@ -342,32 +335,33 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		}
 
 		if (outputFilePath) {
-			fs.open(outputFilePath, "w", function(err, fd) {
+			fs.open(outputFilePath, "w", (err, fd) => {
 				if (err) {
 					callback(err);
 					return;
 				}
 
 				outputFd = fd;
-				fs.truncate(outputFd, parseInt(fileManifest.size, 10), function(err) {
+				fs.truncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
 					if (err) {
 						fs.closeSync(outputFd);
 						callback(err);
 						return;
 					}
 
-					beginDownload();
+					beginDownload.call(this);
 				});
 			});
 		} else {
 			downloadBuffer = new Buffer(parseInt(fileManifest.size, 10));
-			beginDownload();
+			beginDownload.call(this);
 		}
 	});
 
 	return outputEmitter;
 
 	function beginDownload() {
+		var self = this;
 		var queue = require('async').queue(function dlChunk(chunk, cb) {
 			var serverIdx;
 
@@ -382,7 +376,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 				}
 			}
 
-			self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], function(err, data) {
+			self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
 				serversInUse[serverIdx] = false;
 
 				if (killed) {
@@ -411,7 +405,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 				// Chunk downloaded successfully
 				if (outputFilePath) {
-					fs.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), function(err) {
+					fs.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
 						if (err) {
 							callback(err);
 							queue.kill();
@@ -427,15 +421,15 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 			});
 		}, numWorkers);
 
-		fileManifest.chunks.forEach(function(chunk) {
+		fileManifest.chunks.forEach((chunk) => {
 			queue.push(JSON.parse(JSON.stringify(chunk)));
 		});
 
-		queue.drain = function() {
+		queue.drain = () => {
 			// Verify hash
 			var hash;
 			if (outputFilePath) {
-				fs.close(outputFd, function(err) {
+				fs.close(outputFd, (err) => {
 					if (err) {
 						callback(err);
 						return;
@@ -444,7 +438,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 					// File closed. Now re-open it so we can hash it!
 					hash = require('crypto').createHash('sha1');
 					fs.createReadStream(outputFilePath).pipe(hash);
-					hash.on('readable', function() {
+					hash.on('readable', () => {
 						if (!hash.read) {
 							return; // already done
 						}
@@ -488,14 +482,14 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
  * @param {function} callback - First arg is Error|null, second is an object mapping branch names to their decryption keys
  */
 SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callback) {
-	this._send(SteamUser.EMsg.ClientCheckAppBetaPassword, {"app_id": appID, "betapassword": password}, function(body) {
+	this._send(SteamUser.EMsg.ClientCheckAppBetaPassword, {"app_id": appID, "betapassword": password}, (body) => {
 		if (body.eresult != SteamUser.EResult.OK) {
 			callback(Helpers.eresultError(body.eresult));
 			return;
 		}
 
 		var branches = {};
-		(body.betapasswords || []).forEach(function(beta) {
+		(body.betapasswords || []).forEach((beta) => {
 			branches[beta.betaname] = new Buffer(beta.betapassword, 'hex');
 		});
 
@@ -509,7 +503,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) 
 	// It appears that each message of this type is for one server type.
 	var servers = {};
 
-	body.servers.forEach(function(server) {
+	body.servers.forEach((server) => {
 		servers[server.server_type] = servers[server.server_type] || [];
 		servers[server.server_type].push(server);
 	});
@@ -543,7 +537,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 		"User-Agent": "Valve/Steam HTTP Client 1.0"
 	};
 
-	var req = require('http').request(options, function(res) {
+	var req = require('http').request(options, (res) => {
 		if (res.statusCode != 200) {
 			callback(new Error("HTTP error " + res.statusCode));
 			return;
@@ -566,7 +560,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 			stream.pipe(require('fs').createWriteStream(destinationFilename));
 		}
 
-		stream.on('data', function(chunk) {
+		stream.on('data', (chunk) => {
 			if (typeof chunk === 'string') {
 				chunk = new Buffer(chunk, 'binary');
 			}
@@ -580,12 +574,12 @@ function download(url, hostHeader, destinationFilename, callback) {
 			callback(null, {"type": "progress", "receivedBytes": receivedBytes, "totalSizeBytes": totalSizeBytes});
 		});
 
-		stream.on('end', function() {
+		stream.on('end', () => {
 			callback(null, {"type": "complete", "data": dataBuffer});
 		});
 	});
 
-	req.on('error', function(err) {
+	req.on('error', (err) => {
 		callback(err);
 	});
 
@@ -620,7 +614,7 @@ function unzip(data, callback) {
 		uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
 		uncompressedSizeBuffer.writeUInt32LE(0, 4);
 
-		LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), function(result, err) {
+		LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), (result, err) => {
 			if (err) {
 				callback(err);
 				return;
