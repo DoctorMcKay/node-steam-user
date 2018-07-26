@@ -78,7 +78,7 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 	depotID = parseInt(depotID, 10);
 
 	this.storage.readFile("depot_key_" + appID + "_" + depotID + ".bin", (err, file) => {
-		if (file && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
+		if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
 			callback(null, file.slice(4));
 			return;
 		}
