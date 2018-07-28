@@ -2,6 +2,8 @@ const EventEmitter = require('events').EventEmitter;
 const SteamID = require('steamid');
 const Util = require('util');
 
+const Helpers = require('./helpers.js');
+
 Util.inherits(SteamChatRoomClient, EventEmitter);
 
 module.exports = SteamChatRoomClient;
@@ -30,6 +32,10 @@ function SteamChatRoomClient(user) {
 				eventName = 'friendTyping';
 				break;
 
+			case EChatEntryType.LeftConversation:
+				eventName = 'friendLeftConversation';
+				break;
+
 			default:
 				this.user.emit('debug', 'Got unknown chat entry type ' + body.chat_entry_type + ' from ' + body.steamid_friend);
 		}
@@ -38,8 +44,13 @@ function SteamChatRoomClient(user) {
 			eventName += 'Echo';
 		}
 
-		this.user._emitIdEvent(eventName, body.steamid_friend, body.message_no_bbcode);
 		this.emit(eventName, body);
+
+		// backwards compatibility
+		this.user._emitIdEvent(eventName, body.steamid_friend, body.message_no_bbcode);
+		if (body.chat_entry_type == EChatEntryType.ChatMsg) {
+			this.user._emitIdEvent('friendOrChatMessage', body.steamid_friend, body.message_no_bbcode, body.steamid_friend);
+		}
 	};
 
 	this.user._handlers['ChatRoomClient.NotifyIncomingChatMessage#1'] = (body) => {
@@ -102,23 +113,46 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 };
 
 /**
- * Subscribe to notifications related to some list of chat room groups.
- * @param {int[]|string[]} groupIds
+ * Send a direct chat message to a friend.
+ * @param {SteamID|string} steamId
+ * @param {string} message
+ * @param {{[chatEntryType], [containsBbCode]}} [options]
  * @param {function} [callback]
  */
-SteamChatRoomClient.prototype.subscribeToGroups = function(groupIds, callback) {
-	this.user._send(require('../index.js').EMsg.ClientCurrentUIMode, {"chat_mode": 2});
-	/*this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
-		"chat_group_ids": groupIds,
-		"chat_groups_data_requested": callback ? groupIds : []
+SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, options, callback) {
+	if (typeof options === 'function') {
+		callback = options;
+		options = {};
+	} else if (!options) {
+		options = {};
+	}
+
+	const EChatEntryType = require('../index.js').EChatEntryType;
+
+	this.user._sendUnified("FriendMessages.SendMessage#1", {
+		"steamid": Helpers.steamID(steamId).toString(),
+		"chat_entry_type": options.chatEntryType || EChatEntryType.ChatMsg,
+		"message": message,
+		"contains_bbcode": options.containsBbCode || false
 	}, (body) => {
 		if (!callback) {
 			return;
 		}
 
-		// TODO
+		body = preProcessObject(body);
+		body.ordinal = body.ordinal || 0;
 		callback(null, body);
-	});*/
+	});
+};
+
+/**
+ * Inform a friend that you're typing a message to them.
+ * @param {SteamID|string} steamId
+ * @param {function} [callback]
+ */
+SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
+	const EChatEntryType = require('../index.js').EChatEntryType;
+	this.sendFriendMessage(steamId, "", {"chatEntryType": EChatEntryType.Typing}, callback);
 };
 
 /**
@@ -128,7 +162,7 @@ SteamChatRoomClient.prototype.subscribeToGroups = function(groupIds, callback) {
  * @param {string} message
  * @param {function} [callback]
  */
-SteamChatRoomClient.prototype.sendMessage = function(groupId, chatId, message, callback) {
+SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, message, callback) {
 	this.user._sendUnified("ChatRoom.SendChatMessage#1", {
 		"chat_group_id": groupId,
 		"chat_id": chatId,

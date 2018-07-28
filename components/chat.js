@@ -10,6 +10,7 @@ var SteamUser = require('../index.js');
  * @param {(SteamID|string)} recipient - The recipient user/chat, as a SteamID object or a string which can parse into one. To send to a group chat, use the group's (clan's) SteamID.
  * @param {string} message - The message to send.
  * @param {EChatEntryType} [type=ChatMsg] - Optional. The type of the message. Defaults to ChatMsg. Almost never needed.
+ * @deprecated Use SteamUser.chat.sendFriendMessage instead
  */
 SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipient, message, type) {
 	recipient = Helpers.steamID(recipient);
@@ -25,21 +26,14 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 		msg.writeCString(message);
 		this._send(SteamUser.EMsg.ClientChatMsg, msg.flip());
 	} else {
-		// It's a friend message
-		var payload = ByteBuffer.allocate(Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
-		payload.writeCString(message);
-
-		this._send(SteamUser.EMsg.ClientFriendMsg, {
-			"steamid": recipient.getSteamID64(),
-			"message": payload.flip(),
-			"chat_entry_type": type
-		});
+		this.chat.sendFriendMessage(recipient, message, {"chatEntryType": type});
 	}
 };
 
 /**
  * Tell another user that you're typing a message.
  * @param {SteamID|string} recipient - The recipient, as a SteamID object or a string which can parse into one.
+ * @deprecated Use SteamUser.chat.sendFriendTyping instead
  */
 SteamUser.prototype.chatTyping = function(recipient) {
 	this.chatMessage(recipient, "", SteamUser.EChatEntryType.Typing);
@@ -255,105 +249,6 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 };
 
 // Handlers
-
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendMsgIncoming] = function(body) {
-	var senderID = new SteamID(body.steamid_from.toString());
-	var message = body.message.toString('utf8').split('\u0000')[0];
-
-	/**
-	 * Emitted when we receive a new message from another user (not from a chat room).
-	 * You can also listen for friendMessage#steamid64 to only get messages from a specific user.
-	 *
-	 * @event SteamUser#friendMessage
-	 * @param {SteamID} senderID - The SteamID of the message author
-	 * @param {string} message - The chat message itself
-	 */
-
-	/**
-	 * Emitted when we receive a notification that another user is typing a message to us.
-	 * You can also listen for friendTyping#steamid64 to only get notifications from a specific user.
-	 *
-	 * @event SteamUser#friendTyping
-	 * @param {SteamID} steamID - The SteamID of the typing user
-	 */
-
-	switch (body.chat_entry_type) {
-		case SteamUser.EChatEntryType.ChatMsg:
-			this._emitIdEvent('friendMessage', senderID, message);
-			this._emitIdEvent('friendOrChatMessage', senderID, message, senderID);
-			break;
-
-		case SteamUser.EChatEntryType.Typing:
-			this._emitIdEvent('friendTyping', senderID);
-			break;
-
-		case SteamUser.EChatEntryType.LeftConversation:
-			this._emitIdEvent('friendLeftConversation', senderID);
-			break;
-	}
-};
-
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendMsgEchoToSender] = function(body) {
-	var recipientID = new SteamID(body.steamid_from.toString());
-	var message = body.message.toString('utf8').split('\u0000')[0];
-
-	/**
-	 * Emitted when we receive a message sent by us on another logon.
-	 * You can also listen for friendMessageEcho#steamid64 to only get messages sent to a specific user.
-	 *
-	 * @event SteamUser#friendMessageEcho
-	 * @param {SteamID} recipientID - The SteamID of the message recipient
-	 * @param {string} message - The message text
-	 */
-
-	/**
-	 * Emitted when we receive a notification that we're typing a message to someone else on another logon.
-	 * You can also listen for friendTypingEcho#steamid64 to only get notifications sent to a specific user.
-	 *
-	 * @event SteamUser#friendTypingEcho
-	 * @param {SteamID} recipientID - The SteamID of the notification recipient
-	 */
-
-	switch (body.chat_entry_type) {
-		case SteamUser.EChatEntryType.ChatMsg:
-			this._emitIdEvent('friendMessageEcho', recipientID, message);
-			break;
-
-		case SteamUser.EChatEntryType.Typing:
-			this._emitIdEvent('friendTypingEcho', recipientID);
-			break;
-	}
-};
-
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMsg] = function(body) {
-	var chatter = new SteamID(body.readUint64().toString());
-	var room = fromChatID(body.readUint64());
-	var entryType = body.readUint32();
-	var message = body.readCString();
-
-	if (entryType != SteamUser.EChatEntryType.ChatMsg) {
-		// Not sure what kind of chat entry types are possible for chat rooms...
-		return;
-	}
-
-	/**
-	 * Emitted when we receive a new chat message sent to a chat room.
-	 * You can also listen for chatMessage#roomid64 to get only messages sent to a specific chat room.
-	 * You can also listen for chatMessage#senderid64 to get only messages sent by a specific user.
-	 * You can also listen for chatMessage#roomid64#senderid64 to get only messages sent to a specific chat room by a specific user.
-	 *
-	 * @event SteamUser#chatMessage
-	 * @param {SteamID} room - The SteamID of the chat room
-	 * @param {SteamID} chatter - The SteamID of the message sender
-	 * @param {string} message - The chat message text
-	 */
-
-	this._emitIdEvent('friendOrChatMessage', chatter, message, room);
-	this.emit('chatMessage', room, chatter, message);
-	this.emit('chatMessage#' + room.getSteamID64(), room, chatter, message);
-	this.emit('chatMessage#' + chatter.getSteamID64(), room, chatter, message);
-	this.emit('chatMessage#' + room.getSteamID64() + '#' + chatter.getSteamID64(), room, chatter, message);
-};
 
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse] = function(body) {
 	var universe = this.steamID.universe;

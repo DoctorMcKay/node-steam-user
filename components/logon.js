@@ -49,7 +49,8 @@ SteamUser.prototype.logOn = function(details) {
 			"client_language": details.accountName ? "english" : "",
 			"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
 			"anon_user_target_account_name": details.accountName ? "" : "anonymous",
-			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine)
+			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine),
+			"chat_mode": 2 // enable new chat
 		};
 	}
 
