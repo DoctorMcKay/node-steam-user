@@ -185,7 +185,7 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 };
 
 SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
-	this._sendUnified("Player.GetGameBadgeLevels#1", {"appid": appid}, false, function(body) {
+	this._sendUnified("Player.GetGameBadgeLevels#1", {appid}, function(body) {
 		var regular = 0;
 		var foil = 0;
 
@@ -433,7 +433,7 @@ SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
 };
 
 SteamUser.prototype.getNicknames = function(callback) {
-	this._sendUnified("Player.GetNicknameList#1", {}, false, (body) => {
+	this._sendUnified("Player.GetNicknameList#1", {}, (body) => {
 		var nicks = {};
 		body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
 

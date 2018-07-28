@@ -18,7 +18,7 @@ SteamUser.prototype.requestValidationEmail = function(callback) {
 };
 
 SteamUser.prototype.getSteamGuardDetails = function(callback) {
-	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, false, function(body) {
+	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, function(body) {
 		var canTrade = true;
 		var hasHadTwoFactorForWeek = (body.is_twofactor_enabled && body.timestamp_twofactor_enabled && Math.floor(Date.now() / 1000) - body.timestamp_twofactor_enabled >= (60 * 60 * 24 * 7));
 
@@ -49,7 +49,7 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 };
 
 SteamUser.prototype.getCredentialChangeTimes = function(callback) {
-	this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, false, function(body) {
+	this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, function(body) {
 		callback(null, // currently no error is possible, but add this for consistency and future-proofing
 			body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
 			body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
@@ -58,7 +58,7 @@ SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 };
 
 SteamUser.prototype.getAuthSecret = function(callback) {
-	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, false, function(body) {
+	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, function(body) {
 		callback(null, body.secret_id, body.secret.toBuffer());
 	});
 };

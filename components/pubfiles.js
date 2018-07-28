@@ -17,7 +17,7 @@ SteamUser.prototype.getPublishedFileDetails = function(ids, callback) {
 		"includeforsaledata": true,
 		"includemetadata": true,
 		"language": 0
-	}, false, function(body) {
+	}, function(body) {
 		var results = {};
 		var invalidSid = SteamID.fromIndividualAccountID(0).getSteamID64();
 

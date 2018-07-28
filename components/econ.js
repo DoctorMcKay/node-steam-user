@@ -10,7 +10,7 @@ const Helpers = require('./helpers.js');
  * @param {function} callback
  */
 SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callback) {
-	this._sendUnified("Econ.GetAssetClassInfo#1", {language, appid, classes}, false, (body) => {
+	this._sendUnified("Econ.GetAssetClassInfo#1", {language, appid, classes}, (body) => {
 		callback(null, Helpers.stringifyLongs(body.descriptions));
 	});
 };
@@ -20,7 +20,7 @@ SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callb
  * @param {function} callback
  */
 SteamUser.prototype.getTradeURL = function(callback) {
-	this._sendUnified("Econ.GetTradeOfferAccessToken#1", {}, false, (body) => {
+	this._sendUnified("Econ.GetTradeOfferAccessToken#1", {}, (body) => {
 		callback(null, {
 			"token": body.trade_offer_access_token,
 			"url": "https://steamcommunity.com/tradeoffer/new/?partner=" + this.steamID.accountid + "&token=" + body.trade_offer_access_token

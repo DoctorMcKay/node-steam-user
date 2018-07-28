@@ -161,7 +161,7 @@ ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
  */
 SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 	// header fields: msg, proto, sourceJobID, targetJobID
-	var header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
+	let header = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
 	let emsg = header.msg;
 
 	let canWeSend = this.steamID || (this._tempSteamID && [EMsg.ChannelEncryptResponse, EMsg.ClientLogon].includes(emsg));
@@ -173,7 +173,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 
 	var Proto = protobufs[emsg];
 	if (Proto) {
-		header.proto = {};
+		header.proto = header.proto || {};
 		body = new Proto(body).toBuffer();
 	} else if (ByteBuffer.isByteBuffer(body)) {
 		body = body.toBuffer();
@@ -253,6 +253,11 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 		let headerLength = buf.readUint32();
 		header.proto = Schema.CMsgProtoBufHeader.decode(buf.slice(buf.offset, buf.offset + headerLength));
 		buf.skip(headerLength);
+
+		header.targetJobID = header.proto.jobid_target && header.proto.jobid_target.toString();
+		header.sourceJobID = header.proto.jobid_source && header.proto.jobid_source.toString();
+		header.steamID = header.proto.steamid && header.proto.steamid.toString();
+		header.sessionID = header.proto.client_sessionid;
 	} else {
 		// decode the extended header
 		buf.skip(3); // 1 byte for header size (fixed at 36), 2 bytes for header version (fixed at 2)
@@ -293,16 +298,21 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		}
 	}
 
-	if (header.msg == EMsg.ServiceMethod) {
+	let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
+	if (isServiceMethodMsg) {
 		if (header.proto && header.proto.target_job_name) {
 			handlerName = msgName = header.proto.target_job_name;
+			if (header.msg == EMsg.ServiceMethodResponse) {
+				handlerName += '_Response';
+				msgName += '_Response';
+			}
 		} else {
-			this.emit('debug', 'Got ServiceMethod without target_job_name');
+			this.emit('debug', 'Got ' + (header.msg == EMsg.ServiceMethod ? 'ServiceMethod' : 'ServiceMethodResponse') + ' without target_job_name');
 			return;
 		}
 	}
 
-	if (header.msg != EMsg.ServiceMethod && header.proto && header.proto.target_job_name) {
+	if (!isServiceMethodMsg && header.proto && header.proto.target_job_name) {
 		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 	}
 
@@ -337,17 +347,16 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		}
 	}
 
-	if (!this._handlers[handlerName]) {
-		// last sanity check
-		this.emit('debug', 'SANITY CHECK FAILED: No handler for ' + handlerName);
-		return;
-	}
-
 	if (this._jobs[header.targetJobID]) {
 		// this is a response to something, so invoke the appropriate callback
 		this._jobs[header.targetJobID].call(this, body, cb);
 	} else {
-		this._handlers[handlerName].call(this, body, cb);
+		if (!this._handlers[handlerName]) {
+			// last sanity check
+			this.emit('debug', 'SANITY CHECK FAILED: No handler for ' + handlerName);
+		} else {
+			this._handlers[handlerName].call(this, body, cb);
+		}
 	}
 };
 
@@ -386,23 +395,17 @@ SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
  * Send a unified message.
  * @param {string} methodName - In format Interface.Method#Version, e.g. Foo.DoThing#1
  * @param {object} methodData
- * @param {boolean} notification
- * @param {function} callback
+ * @param {function} [callback]
  * @private
  */
-SteamUser.prototype._sendUnified = function(methodName, methodData, notification, callback) {
-	var cb;
-	if (callback && protobufs[methodName + '_Response']) {
-		cb = function(body) {
-			var Proto = protobufs[methodName + '_Response'];
-			callback(Proto.decode(body.serialized_method_response));
-		};
-	}
+SteamUser.prototype._sendUnified = function(methodName, methodData, callback) {
+	let Proto = protobufs[methodName + '_Request'];
+	let header = {
+		"msg": EMsg.ServiceMethodCallFromClient,
+		"proto": {
+			"target_job_name": methodName
+		}
+	};
 
-	var Proto = protobufs[methodName + '_Request'];
-	this._send(EMsg.ClientServiceMethod, {
-		"method_name": methodName,
-		"serialized_method": new Proto(methodData).toBuffer(),
-		"is_notification": notification
-	}, cb);
+	this._send(header, new Proto(methodData).toBuffer(), callback);
 };

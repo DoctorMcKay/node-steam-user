@@ -14,7 +14,7 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 		"authenticator_type": 1,
 		"device_identifier": SteamTotp.getDeviceID(this.steamID),
 		"sms_phone_id": "1"
-	}, false, (body) => {
+	}, (body) => {
 		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
 		body.serial_number = body.serial_number ? body.serial_number.toString() : null;
 		body.server_time = body.server_time ? parseInt(body.server_time.toString(), 10) : null;
@@ -61,7 +61,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 			"authenticator_code": code,
 			"authenticator_time": Math.floor(Date.now() / 1000),
 			"activation_code": activationCode
-		}, false, function(body) {
+		}, function(body) {
 			if (body.server_time) {
 				diff = body.server_time.toNumber() - Math.floor(Date.now() / 1000);
 			}

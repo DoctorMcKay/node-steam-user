@@ -35,7 +35,7 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
 	this._sendUnified("GameServers.GetServerList#1", {
 		"filter": filter,
 		"limit": limit
-	}, false, function(body) {
+	}, function(body) {
 		callback(null, body.servers.map(function(server) {
 			server.steamid = new SteamID(server.steamid.toString());
 			return server;
@@ -46,7 +46,7 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
 SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
 	this._sendUnified("GameServers.GetServerSteamIDsByIP#1", {
 		"server_ips": ips
-	}, false, function(body) {
+	}, function(body) {
 		var servers = {};
 
 		(body.servers || []).forEach(function(server) {
@@ -68,7 +68,7 @@ SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
 
 	this._sendUnified("GameServers.GetServerIPsBySteamID#1", {
 		"server_steamids": steamids
-	}, false, function(body) {
+	}, function(body) {
 		var servers = {};
 
 		(body.servers || []).forEach(function(server) {

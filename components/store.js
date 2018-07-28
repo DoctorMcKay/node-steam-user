@@ -1,7 +1,7 @@
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.getStoreTagNames = function(language, tagIDs, callback) {
-	this._sendUnified("Store.GetLocalizedNameForTags#1", {"language": language, "tagids": tagIDs}, false, (body) => {
+	this._sendUnified("Store.GetLocalizedNameForTags#1", {"language": language, "tagids": tagIDs}, (body) => {
 		if (body.tags.length == 0) {
 			callback(new Error("Unable to get tag data; is your language correct?"));
 			return;
