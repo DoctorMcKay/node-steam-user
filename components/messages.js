@@ -5,7 +5,7 @@ const Zlib = require('zlib');
 
 const Schema = require('./protobufs.js');
 
-const EMsg = EMsg;
+const EMsg = SteamUser.EMsg;
 
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
