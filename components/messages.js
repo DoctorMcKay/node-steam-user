@@ -10,6 +10,11 @@ const EMsg = SteamUser.EMsg;
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
 
+const VERBOSE_EMSG_LIST = [
+	EMsg.Multi,
+	EMsg.ClientHeartBeat
+];
+
 var protobufs = {};
 protobufs[EMsg.Multi] = Schema.CMsgMulti;
 protobufs[EMsg.ClientHeartBeat] = Schema.CMsgClientHeartBeat;
@@ -150,6 +155,93 @@ protobufs['Store.GetLocalizedNameForTags#1_Request'] = Schema.CStore_GetLocalize
 protobufs['Store.GetLocalizedNameForTags#1_Response'] = Schema.CStore_GetLocalizedNameForTags_Response;
 protobufs['Econ.GetTradeOfferAccessToken#1_Request'] = Schema.CEcon_GetTradeOfferAccessToken_Request;
 protobufs['Econ.GetTradeOfferAccessToken#1_Response'] = Schema.CEcon_GetTradeOfferAccessToken_Response;
+protobufs['ChatRoom.CreateChatRoomGroup#1_Request'] = Schema.CChatRoom_CreateChatRoomGroup_Request;
+protobufs['ChatRoom.CreateChatRoomGroup#1_Response'] = Schema.CChatRoom_CreateChatRoomGroup_Response;
+protobufs['ChatRoom.SaveChatRoomGroup#1_Request'] = Schema.CChatRoom_SaveChatRoomGroup_Request;
+protobufs['ChatRoom.SaveChatRoomGroup#1_Response'] = Schema.CChatRoom_SaveChatRoomGroup_Response;
+protobufs['ChatRoom.RenameChatRoomGroup#1_Request'] = Schema.CChatRoom_RenameChatRoomGroup_Request;
+protobufs['ChatRoom.RenameChatRoomGroup#1_Response'] = Schema.CChatRoom_RenameChatRoomGroup_Response;
+protobufs['ChatRoom.SetChatRoomGroupTagline#1_Request'] = Schema.CChatRoom_SetChatRoomGroupTagline_Request;
+protobufs['ChatRoom.SetChatRoomGroupTagline#1_Response'] = Schema.CChatRoom_SetChatRoomGroupTagline_Response;
+protobufs['ChatRoom.SetChatRoomGroupAvatar#1_Request'] = Schema.CChatRoom_SetChatRoomGroupAvatar_Request;
+protobufs['ChatRoom.SetChatRoomGroupAvatar#1_Response'] = Schema.CChatRoom_SetChatRoomGroupAvatar_Response;
+protobufs['ChatRoom.MuteUserInGroup#1_Request'] = Schema.CChatRoom_MuteUser_Request;
+protobufs['ChatRoom.MuteUserInGroup#1_Response'] = Schema.CChatRoom_MuteUser_Response;
+protobufs['ChatRoom.KickUserFromGroup#1_Request'] = Schema.CChatRoom_KickUser_Request;
+protobufs['ChatRoom.KickUserFromGroup#1_Response'] = Schema.CChatRoom_KickUser_Response;
+protobufs['ChatRoom.SetUserBanState#1_Request'] = Schema.CChatRoom_SetUserBanState_Request;
+protobufs['ChatRoom.SetUserBanState#1_Response'] = Schema.CChatRoom_SetUserBanState_Response;
+protobufs['ChatRoom.RevokeInviteToGroup#1_Request'] = Schema.CChatRoom_RevokeInvite_Request;
+protobufs['ChatRoom.RevokeInviteToGroup#1_Response'] = Schema.CChatRoom_RevokeInvite_Response;
+protobufs['ChatRoom.CreateRole#1_Request'] = Schema.CChatRoom_CreateRole_Request;
+protobufs['ChatRoom.CreateRole#1_Response'] = Schema.CChatRoom_CreateRole_Response;
+protobufs['ChatRoom.GetRoles#1_Request'] = Schema.NotImplemented;
+protobufs['ChatRoom.GetRoles#1_Response'] = Schema.CChatRoom_GetRoles_Response;
+protobufs['ChatRoom.RenameRole#1_Request'] = Schema.CChatRoom_RenameRole_Request;
+protobufs['ChatRoom.RenameRole#1_Response'] = Schema.CChatRoom_RenameRole_Response;
+protobufs['ChatRoom.ReorderRole#1_Request'] = Schema.CChatRoom_ReorderRole_Request;
+protobufs['ChatRoom.ReorderRole#1_Response'] = Schema.CChatRoom_ReorderRole_Response;
+protobufs['ChatRoom.DeleteRole#1_Request'] = Schema.CChatRoom_DeleteRole_Request;
+protobufs['ChatRoom.DeleteRole#1_Response'] = Schema.CChatRoom_DeleteRole_Response;
+protobufs['ChatRoom.GetRoleActions#1_Request'] = Schema.NotImplemented;
+protobufs['ChatRoom.GetRoleActions#1_Response'] = Schema.CChatRoom_GetRoleActions_Response;
+protobufs['ChatRoom.ReplaceRoleActions#1_Request'] = Schema.CChatRoom_ReplaceRoleActions_Request;
+protobufs['ChatRoom.ReplaceRoleActions#1_Response'] = Schema.CChatRoom_ReplaceRoleActions_Response;
+protobufs['ChatRoom.AddRoleToUser#1_Request'] = Schema.CChatRoom_AddRoleToUser_Request;
+protobufs['ChatRoom.AddRoleToUser#1_Response'] = Schema.CChatRoom_AddRoleToUser_Response;
+protobufs['ChatRoom.GetRolesForUser#1_Request'] = Schema.NotImplemented;
+protobufs['ChatRoom.GetRolesForUser#1_Response'] = Schema.CChatRoom_GetRolesForUser_Response;
+protobufs['ChatRoom.DeleteRoleFromUser#1_Request'] = Schema.CChatRoom_DeleteRoleFromUser_Request;
+protobufs['ChatRoom.DeleteRoleFromUser#1_Response'] = Schema.CChatRoom_DeleteRoleFromUser_Response;
+protobufs['ChatRoom.JoinChatRoomGroup#1_Request'] = Schema.CChatRoom_JoinChatRoomGroup_Request;
+protobufs['ChatRoom.JoinChatRoomGroup#1_Response'] = Schema.CChatRoom_JoinChatRoomGroup_Response;
+protobufs['ChatRoom.InviteFriendToChatRoomGroup#1_Request'] = Schema.CChatRoom_InviteFriendToChatRoomGroup_Request;
+protobufs['ChatRoom.InviteFriendToChatRoomGroup#1_Response'] = Schema.CChatRoom_InviteFriendToChatRoomGroup_Response;
+protobufs['ChatRoom.LeaveChatRoomGroup#1_Request'] = Schema.CChatRoom_LeaveChatRoomGroup_Request;
+protobufs['ChatRoom.LeaveChatRoomGroup#1_Response'] = Schema.CChatRoom_LeaveChatRoomGroup_Response;
+protobufs['ChatRoom.CreateChatRoom#1_Request'] = Schema.CChatRoom_CreateChatRoom_Request;
+protobufs['ChatRoom.CreateChatRoom#1_Response'] = Schema.CChatRoom_CreateChatRoom_Response;
+protobufs['ChatRoom.DeleteChatRoom#1_Request'] = Schema.CChatRoom_DeleteChatRoom_Request;
+protobufs['ChatRoom.DeleteChatRoom#1_Response'] = Schema.CChatRoom_DeleteChatRoom_Response;
+protobufs['ChatRoom.RenameChatRoom#1_Request'] = Schema.CChatRoom_RenameChatRoom_Request;
+protobufs['ChatRoom.RenameChatRoom#1_Response'] = Schema.CChatRoom_RenameChatRoom_Response;
+protobufs['ChatRoom.SendChatMessage#1_Request'] = Schema.CChatRoom_SendChatMessage_Request;
+protobufs['ChatRoom.SendChatMessage#1_Response'] = Schema.CChatRoom_SendChatMessage_Response;
+protobufs['ChatRoom.JoinVoiceChat#1_Request'] = Schema.CChatRoom_JoinVoiceChat_Request;
+protobufs['ChatRoom.JoinVoiceChat#1_Response'] = Schema.CChatRoom_JoinVoiceChat_Response;
+protobufs['ChatRoom.LeaveVoiceChat#1_Request'] = Schema.CChatRoom_LeaveVoiceChat_Request;
+protobufs['ChatRoom.LeaveVoiceChat#1_Response'] = Schema.CChatRoom_LeaveVoiceChat_Response;
+protobufs['ChatRoom.GetMessageHistory#1_Request'] = Schema.CChatRoom_GetMessageHistory_Request;
+protobufs['ChatRoom.GetMessageHistory#1_Response'] = Schema.CChatRoom_GetMessageHistory_Response;
+protobufs['ChatRoom.GetMyChatRoomGroups#1_Request'] = Schema.CChatRoom_GetMyChatRoomGroups_Request;
+protobufs['ChatRoom.GetMyChatRoomGroups#1_Response'] = Schema.CChatRoom_GetMyChatRoomGroups_Response;
+protobufs['ChatRoom.GetChatRoomGroupState#1_Request'] = Schema.NotImplemented;
+protobufs['ChatRoom.GetChatRoomGroupState#1_Response'] = Schema.CChatRoom_GetChatRoomGroupState_Response;
+protobufs['ChatRoom.GetChatRoomGroupSummary#1_Request'] = Schema.NotImplemented;
+protobufs['ChatRoom.GetChatRoomGroupSummary#1_Response'] = Schema.CChatRoom_GetChatRoomGroupSummary_Response;
+protobufs['ChatRoom.AckChatMessage#1_Request'] = Schema.CChatRoom_AckChatMessage_Notification;
+protobufs['ChatRoom.CreateInviteLink#1_Request'] = Schema.CChatRoom_CreateInviteLink_Request;
+protobufs['ChatRoom.CreateInviteLink#1_Response'] = Schema.CChatRoom_CreateInviteLink_Response;
+protobufs['ChatRoom.GetInviteLinkInfo#1_Request'] = Schema.CChatRoom_GetInviteLinkInfo_Request;
+protobufs['ChatRoom.GetInviteLinkInfo#1_Response'] = Schema.CChatRoom_GetInviteLinkInfo_Response;
+protobufs['ChatRoom.GetInviteInfo#1_Request'] = Schema.CChatRoom_GetInviteInfo_Request;
+protobufs['ChatRoom.GetInviteInfo#1_Response'] = Schema.CChatRoom_GetInviteInfo_Response;
+protobufs['ChatRoom.GetInviteLinksForGroup#1_Request'] = Schema.CChatRoom_GetInviteLinksForGroup_Request;
+protobufs['ChatRoom.GetInviteLinksForGroup#1_Response'] = Schema.CChatRoom_GetInviteLinksForGroup_Response;
+protobufs['ChatRoom.GetBanList#1_Request'] = Schema.CChatRoom_GetBanList_Request;
+protobufs['ChatRoom.GetBanList#1_Response'] = Schema.CChatRoom_GetBanList_Response;
+protobufs['ChatRoom.GetInviteList#1_Request'] = Schema.CChatRoom_GetInviteList_Request;
+protobufs['ChatRoom.GetInviteList#1_Response'] = Schema.CChatRoom_GetInviteList_Response;
+protobufs['ChatRoom.DeleteInviteLink#1_Request'] = Schema.CChatRoom_DeleteInviteLink_Request;
+protobufs['ChatRoom.DeleteInviteLink#1_Response'] = Schema.CChatRoom_DeleteInviteLink_Response;
+protobufs['ChatRoom.SetSessionActiveChatRoomGroups#1_Request'] = Schema.CChatRoom_SetSessionActiveChatRoomGroups_Request;
+protobufs['ChatRoom.SetSessionActiveChatRoomGroups#1_Response'] = Schema.CChatRoom_SetSessionActiveChatRoomGroups_Response;
+protobufs['ChatRoom.SetUserChatPreferences#1_Request'] = Schema.CChatRoom_SetUserChatPreferences_Request;
+protobufs['ChatRoom.SetUserChatPreferences#1_Response'] = Schema.CChatRoom_SetUserChatPreferences_Response;
+protobufs['ChatRoom.SetUserChatGroupPreferences#1_Request'] = Schema.CChatRoom_SetUserChatGroupPreferences_Request;
+protobufs['ChatRoom.SetUserChatGroupPreferences#1_Response'] = Schema.CChatRoom_SetUserChatGroupPreferences_Response;
+protobufs['ChatRoom.DeleteChatMessages#1_Request'] = Schema.CChatRoom_DeleteChatMessages_Request;
+protobufs['ChatRoom.DeleteChatMessages#1_Response'] = Schema.CChatRoom_DeleteChatMessages_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
@@ -185,16 +277,17 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		this._jobs[jobIdSource] = callback;
 	}
 
+	let emsgName = emsg;
 	if (this.options.debug) {
 		for (var i in EMsg) {
 			if (EMsg.hasOwnProperty(i) && EMsg[i] == emsg) {
-				emsg = i;
+				emsgName = i;
 				break;
 			}
 		}
 	}
 
-	this.emit('debug', 'Sending message: ' + emsg);
+	this.emit(VERBOSE_EMSG_LIST.includes(emsg) ? 'debug-verbose' : 'debug', 'Sending message: ' + emsgName);
 
 	// Make the header
 	let hdrBuf;
@@ -290,7 +383,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 	var handlerName = header.msg;
 
 	if (this.options.debug) {
-		for (var i in EMsg) {
+		for (let i in EMsg) {
 			if (EMsg.hasOwnProperty(i) && EMsg[i] == header.msg) {
 				msgName = i;
 				break;
@@ -317,7 +410,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 	}
 
 	if (!this._handlers[handlerName] && !this._jobs[header.targetJobID]) {
-		this.emit('debug', 'Unhandled message: ' + msgName);
+		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Unhandled message: ' + msgName);
 		return;
 	}
 
@@ -326,7 +419,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		body = protobufs[handlerName].decode(bodyBuf);
 	}
 
-	this.emit('debug', 'Handled message: ' + msgName);
+	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Handled message: ' + msgName);
 
 	var cb = null;
 	if (header.sourceJobID != JOBID_NONE) {
@@ -363,7 +456,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 // Handlers
 
 SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
-	this.emit('debug', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
+	this.emit('debug-verbose', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
 
 	let payload = body.message_body.toBuffer();
 	if (body.size_unzipped) {

@@ -1,0 +1,91 @@
+{
+	"chat_room_groups": {
+		"414898": {
+			"group_summary": {
+				"chat_group_id": "414898",
+				"chat_group_name": "McKay Dev New Chat",
+				"active_member_count": 3,
+				"active_voice_member_count": 0,
+				"default_chat_id": "1419823",
+				"chat_rooms": [
+					{
+						"chat_id": "1419823",
+						"chat_name": "",
+						"voice_allowed": false,
+						"members_in_voice": [],
+						"time_last_message": "2018-07-28T05:43:05.000Z"
+					}
+				],
+				"clanid": null,
+				"chat_group_tagline": "547847",
+				"top_members": [
+					{
+						"universe": 1,
+						"type": 1,
+						"instance": 1,
+						"accountid": 46143802
+					},
+					{
+						"universe": 1,
+						"type": 1,
+						"instance": 1,
+						"accountid": 150212593
+					},
+					{
+						"universe": 1,
+						"type": 1,
+						"instance": 1,
+						"accountid": 79530664
+					}
+				],
+				"chat_group_avatar_sha": null,
+				"rank": 0,
+				"default_role_id": "609897",
+				"role_ids": [],
+				"role_actions": [
+					{
+						"role_id": "609897",
+						"can_create_rename_delete_channel": true,
+						"can_kick": false,
+						"can_ban": false,
+						"can_invite": true,
+						"can_change_tagline_avatar_name": true,
+						"can_chat": true,
+						"can_view_history": true,
+						"can_change_group_roles": false,
+						"can_change_user_roles": false,
+						"can_mention_all": true
+					}
+				],
+				"steamid_owner": {
+					"universe": 1,
+					"type": 1,
+					"instance": 1,
+					"accountid": 46143802
+				}
+			},
+			"group_state": {
+				"chat_group_id": "414898",
+				"time_joined": "2018-07-28T03:59:25.000Z",
+				"user_chat_room_state": [
+					{
+						"chat_id": "1419823",
+						"time_joined": null,
+						"time_last_ack": null,
+						"desktop_notification_level": 0,
+						"mobile_notification_level": 0,
+						"time_last_mention": null,
+						"unread_indicator_muted": false
+					}
+				],
+				"desktop_notification_level": 0,
+				"mobile_notification_level": 0,
+				"time_last_group_ack": 0,
+				"unread_indicator_muted": false
+			}
+		}
+	},
+	"desktop_notification_level": 0,
+	"mobile_notification_level": 0,
+	"unread_indicator_muted": false
+}

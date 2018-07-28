@@ -3,6 +3,8 @@ require('@doctormckay/stats-reporter').setup(require('./package.json'));
 const AppDirectory = require('appdirectory');
 const FileStorage = require('file-manager');
 
+const ChatRoomClient = require('./components/chatroom.js');
+
 require('util').inherits(SteamUser, require('events').EventEmitter);
 
 module.exports = SteamUser;
@@ -17,6 +19,8 @@ require('./resources/enums.js');
 
 function SteamUser(options) {
 	this.steamID = null;
+
+	this.chatRoomClient = new ChatRoomClient(this);
 
 	// Account info
 	this.limitations = null;
