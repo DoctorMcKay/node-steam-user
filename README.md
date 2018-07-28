@@ -408,6 +408,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `SteamUser.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 	- `machineName` - A string containing the name of this machine that you want to report to Steam. This will be displayed on steamcommunity.com when you view your games list (when logged in).
+	- `clientOS` - A [number](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EOSType.js) to identify your client OS. Auto-detected if you don't provide one.
 	- `dontRememberMachine` - If you're providing an `authCode` but you don't want Steam to remember this sentryfile, pass `true` here.
 
 **v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**
@@ -693,6 +694,9 @@ Requests a list of game servers from the master server.
 	- `unknownPackages` - An array of input PackageIDs which don't exist
 
 **Works when anonymous.** Requests details about one or more apps or packages.
+
+If you have the PICS cache enabled and the risk of getting stale data is acceptable, you could check
+[the PICS cache](#picscache) if you want instead of calling `getProductInfo`.
 
 ### getProductAccessToken(apps, packages, callback)
 - `apps` - An array of AppIDs
@@ -1006,6 +1010,24 @@ Cancels your outstanding trade request to the specified user.
 
 Retrieves asset description data from Steam. Works similarly to [the WebAPI method by the same name](https://lab.xpaw.me/steam_api_documentation.html#ISteamEconomy_GetAssetClassInfo_v1),
 although at time of documentation no tags are returned.
+
+### getTradeURL(callback)
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `details` - An object containing `token` and `url` properties
+
+**v3.28.0 or later is required to use this method**
+
+Gets your account's trade token and URL.
+
+### changeTradeURL(callback)
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `details` - An object containing `token` and `url` properties
+
+**v3.28.0 or later is required to use this method**
+
+Asks the Steam server to generate a new trade token for your account, and returns the new token and URL.
 
 ### chatMessage(recipient, message[, type])
 - `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message

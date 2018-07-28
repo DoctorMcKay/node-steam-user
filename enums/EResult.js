@@ -121,6 +121,8 @@ module.exports = {
 	"TooManyPending": 108,
 	"NoSiteLicensesFound": 109,
 	"WGNetworkSendExceeded": 110,
+	"AccountNotFriends": 111,
+	"LimitedUserAccount": 112,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -233,4 +235,6 @@ module.exports = {
 	"108": "TooManyPending",
 	"109": "NoSiteLicensesFound",
 	"110": "WGNetworkSendExceeded",
+	"111": "AccountNotFriends",
+	"112": "LimitedUserAccount",
 };

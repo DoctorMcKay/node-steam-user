@@ -5,7 +5,7 @@ const Zlib = require('zlib');
 
 const Schema = require('./protobufs.js');
 
-const EMsg = SteamUser.EMsg;
+const EMsg = EMsg;
 
 const JOBID_NONE = '18446744073709551615';
 const PROTO_MASK = 0x80000000;
@@ -71,16 +71,16 @@ protobufs[EMsg.ClientFriendMsgEchoToSender] = Schema.CMsgClientFriendMsgIncoming
 protobufs[EMsg.ClientFSGetFriendMessageHistory] = Schema.CMsgClientChatGetFriendMessageHistory;
 protobufs[EMsg.ClientFSGetFriendMessageHistoryResponse] = Schema.CMsgClientChatGetFriendMessageHistoryResponse;
 protobufs[EMsg.ClientFriendsGroupsList] = Schema.CMsgClientFriendsGroupsList;
-protobufs[SteamUser.EMsg.AMClientCreateFriendsGroup] = Schema.CMsgClientCreateFriendsGroup;
-protobufs[SteamUser.EMsg.AMClientCreateFriendsGroupResponse] = Schema.CMsgClientCreateFriendsGroupResponse;
-protobufs[SteamUser.EMsg.AMClientDeleteFriendsGroup] = Schema.CMsgClientDeleteFriendsGroup;
-protobufs[SteamUser.EMsg.AMClientDeleteFriendsGroupResponse] = Schema.CMsgClientDeleteFriendsGroupResponse;
-protobufs[SteamUser.EMsg.AMClientRenameFriendsGroup] = Schema.CMsgClientRenameFriendsGroup;
-protobufs[SteamUser.EMsg.AMClientRenameFriendsGroupResponse] = Schema.CMsgClientRenameFriendsGroupResponse;
-protobufs[SteamUser.EMsg.AMClientAddFriendToGroup] = Schema.CMsgClientAddFriendToGroup;
-protobufs[SteamUser.EMsg.AMClientAddFriendToGroupResponse] = Schema.CMsgClientAddFriendToGroupResponse;
-protobufs[SteamUser.EMsg.AMClientRemoveFriendFromGroup] = Schema.CMsgClientRemoveFriendFromGroup;
-protobufs[SteamUser.EMsg.AMClientRemoveFriendFromGroupResponse] = Schema.CMsgClientRemoveFriendFromGroupResponse;
+protobufs[EMsg.AMClientCreateFriendsGroup] = Schema.CMsgClientCreateFriendsGroup;
+protobufs[EMsg.AMClientCreateFriendsGroupResponse] = Schema.CMsgClientCreateFriendsGroupResponse;
+protobufs[EMsg.AMClientDeleteFriendsGroup] = Schema.CMsgClientDeleteFriendsGroup;
+protobufs[EMsg.AMClientDeleteFriendsGroupResponse] = Schema.CMsgClientDeleteFriendsGroupResponse;
+protobufs[EMsg.AMClientRenameFriendsGroup] = Schema.CMsgClientManageFriendsGroup;
+protobufs[EMsg.AMClientRenameFriendsGroupResponse] = Schema.CMsgClientManageFriendsGroupResponse;
+protobufs[EMsg.AMClientAddFriendToGroup] = Schema.CMsgClientAddFriendToGroup;
+protobufs[EMsg.AMClientAddFriendToGroupResponse] = Schema.CMsgClientAddFriendToGroupResponse;
+protobufs[EMsg.AMClientRemoveFriendFromGroup] = Schema.CMsgClientRemoveFriendFromGroup;
+protobufs[EMsg.AMClientRemoveFriendFromGroupResponse] = Schema.CMsgClientRemoveFriendFromGroupResponse;
 protobufs[EMsg.ClientPlayerNicknameList] = Schema.CMsgClientPlayerNicknameList;
 protobufs[EMsg.AMClientSetPlayerNickname] = Schema.CMsgClientSetPlayerNickname;
 protobufs[EMsg.AMClientSetPlayerNicknameResponse] = Schema.CMsgClientSetPlayerNicknameResponse;
@@ -148,6 +148,8 @@ protobufs['Econ.GetAssetClassInfo#1_Request'] = Schema.CEcon_GetAssetClassInfo_R
 protobufs['Econ.GetAssetClassInfo#1_Response'] = Schema.CEcon_GetAssetClassInfo_Response;
 protobufs['Store.GetLocalizedNameForTags#1_Request'] = Schema.CStore_GetLocalizedNameForTags_Request;
 protobufs['Store.GetLocalizedNameForTags#1_Response'] = Schema.CStore_GetLocalizedNameForTags_Response;
+protobufs['Econ.GetTradeOfferAccessToken#1_Request'] = Schema.CEcon_GetTradeOfferAccessToken_Request;
+protobufs['Econ.GetTradeOfferAccessToken#1_Response'] = Schema.CEcon_GetTradeOfferAccessToken_Response;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 

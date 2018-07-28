@@ -8,7 +8,10 @@ module.exports = {
 	"LCS": 3,
 	"ProxyCache": 4,
 	"LANPeer": 5,
-	"Max": 5,
+	"SLS": 6,
+	"SteamCache": 7,
+	"OpenCache": 8,
+	"Max": 9,
 
 	// Value-to-name mapping for convenience
 	"0": "Invalid",
@@ -16,5 +19,9 @@ module.exports = {
 	"2": "CDN",
 	"3": "LCS",
 	"4": "ProxyCache",
-	"5": "Max",
+	"5": "LANPeer",
+	"6": "SLS",
+	"7": "SteamCache",
+	"8": "OpenCache",
+	"9": "Max",
 };
