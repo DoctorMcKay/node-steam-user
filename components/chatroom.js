@@ -23,6 +23,26 @@ SteamChatRoomClient.prototype.getGroups = function(callback) {
 	});
 };
 
+/**
+ * Get details from a chat group invite link.
+ * @param {string} linkUrl
+ * @param {function} callback
+ */
+SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
+	let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
+	if (!match) {
+		callback(new Error("Malformed invite link"));
+		return;
+	}
+
+	this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body) => {
+		body = preProcessObject(body);
+		body.group_summary = processChatGroupSummary(body.group_summary);
+		body.user_chat_group_state = processChatGroupState(body.user_chat_group_state);
+		callback(null, body);
+	});
+};
+
 
 
 
@@ -86,11 +106,13 @@ function preProcessObject(obj) {
 		}
 
 		let val = obj[key];
-		if (val !== null && typeof val === 'object' && val.constructor.name == 'Long') {
+		if (key.match(/^steamid_/) && typeof val === 'object' && val !== null) {
+			obj[key] = new SteamID(val.toString());
+		} else if (val !== null && typeof val === 'object' && val.constructor.name == 'Long') {
 			obj[key] = val.toString();
 		} else if (key.match(/^time_/)) {
 			if (val === 0) {
-				//obj[key] = null;
+				obj[key] = null;
 			} else if (val !== null) {
 				obj[key] = new Date(val * 1000);
 			}
