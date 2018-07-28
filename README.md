@@ -680,6 +680,9 @@ Requests a list of game servers from the master server.
 
 **Works when anonymous.** Requests details about one or more apps or packages.
 
+If you have the PICS cache enabled and the risk of getting stale data is acceptable, you could check
+[the PICS cache](#picscache) if you want instead of calling `getProductInfo`.
+
 ### getProductAccessToken(apps, packages, callback)
 - `apps` - An array of AppIDs
 - `packages` - An array of PackageIDs
