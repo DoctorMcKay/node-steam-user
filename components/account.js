@@ -6,7 +6,7 @@ const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.requestValidationEmail = function(callback) {
-	var body = new ByteBuffer(1, ByteBuffer.LITTLE_ENDIAN);
+	var body = ByteBuffer.allocate(1, ByteBuffer.LITTLE_ENDIAN);
 	body.writeUint8(0);
 	this._send(SteamUser.EMsg.ClientRequestValidationMail, body.flip(), function(response) {
 		if (!callback) {
@@ -76,7 +76,7 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 };*/
 
 SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callback) {
-	var buf = new ByteBuffer(81 + 4); // a static 81 bytes for the password, and 4 for the int at the end
+	var buf = ByteBuffer.allocate(81 + 4, ByteBuffer.LITTLE_ENDIAN); // a static 81 bytes for the password, and 4 for the int at the end
 	buf.writeCString(currentPassword);
 
 	for (var i = currentPassword.length + 1; i <= 81; i++) {
@@ -94,7 +94,7 @@ SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callb
 };
 
 SteamUser.prototype.changePassword = function(oldPassword, newPassword, code, callback) {
-	var buf = new ByteBuffer(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
+	var buf = ByteBuffer.allocate(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
 	buf.writeCString(""); // unknown
 	buf.writeCString(oldPassword);
 	buf.writeCString(newPassword);

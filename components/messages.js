@@ -252,8 +252,6 @@ protobufs['ChatRoomClient.NotifyChatUserPreferencesChanged#1'] = Schema.ChatRoom
 protobufs['ChatRoomClient.NotifyChatGroupUserStateChanged#1'] = Schema.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification;
 protobufs['ChatRoomClient.NotifyAckChatMessageEcho#1'] = Schema.CChatRoom_AckChatMessage_Notification;
 
-ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
-
 /**
  * @param {int|object} emsgOrHeader
  * @param {object|Buffer|ByteBuffer} body

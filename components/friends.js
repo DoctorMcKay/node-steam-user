@@ -66,7 +66,7 @@ SteamUser.prototype.blockUser = function(steamID, callback) {
 		steamID = new SteamID(steamID);
 	}
 
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(this.steamID.getSteamID64());
 	buffer.writeUint64(steamID.getSteamID64());
 	buffer.writeUint8(1);
@@ -91,7 +91,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 		steamID = new SteamID(steamID);
 	}
 
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(this.steamID.getSteamID64());
 	buffer.writeUint64(steamID.getSteamID64());
 	buffer.writeUint8(0);
@@ -212,7 +212,7 @@ SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
  * @param {(SteamID|string)} groupSteamID - The SteamID of the group you're inviting the user to as a SteamID object, or a string that can parse into one
  */
 SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(userSteamID).toString());
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(1); // unknown
@@ -226,7 +226,7 @@ SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
  * @param {boolean} accept - true to join the group, false to ignore invitation
  */
 SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
-	var buffer = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(accept ? 1 : 0);
 

@@ -18,7 +18,7 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 
 	if ([SteamID.Type.CLAN, SteamID.Type.CHAT].indexOf(recipient.type) != -1) {
 		// It's a chat message
-		var msg = new ByteBuffer(8 + 8 + 4 + Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
+		var msg = ByteBuffer.allocate(8 + 8 + 4 + Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint64(this.steamID.getSteamID64()); // steamIdChatter
 		msg.writeUint64(toChatID(recipient).getSteamID64()); // steamIdChatRoom
 		msg.writeUint32(type); // chatMsgType
@@ -26,7 +26,7 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 		this._send(SteamUser.EMsg.ClientChatMsg, msg.flip());
 	} else {
 		// It's a friend message
-		var payload = new ByteBuffer(Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
+		var payload = ByteBuffer.allocate(Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
 		payload.writeCString(message);
 
 		this._send(SteamUser.EMsg.ClientFriendMsg, {
@@ -81,7 +81,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
  * @param {SteamUser~genericEResultCallback} [callback] - An optional callback to be invoked when the room is joined (or a failure occurs).
  */
 SteamUser.prototype.joinChat = function(steamID, callback) {
-	var msg = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint8(0); // isVoiceSpeaker
 	this._send(SteamUser.EMsg.ClientJoinChat, msg.flip());
@@ -98,7 +98,7 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
  * @param {(SteamID|string)} steamID - The SteamID of the chat room to leave (as a SteamID object or a string which can parse into one)
  */
 SteamUser.prototype.leaveChat = function(steamID) {
-	var msg = new ByteBuffer(32, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(32, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint32(SteamUser.EChatInfoType.StateChange); // type
 	msg.writeUint64(this.steamID.getSteamID64());
@@ -116,7 +116,7 @@ SteamUser.prototype.leaveChat = function(steamID) {
  * @param {(SteamID|string)} steamID - The SteamID of the chat room to make private (as a SteamID object or a string which can parse into one)
  */
 SteamUser.prototype.setChatPrivate = function(steamID) {
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.LockChat);
@@ -128,7 +128,7 @@ SteamUser.prototype.setChatPrivate = function(steamID) {
  * @param {(SteamID|string)} steamID - The SteamID of the chat room to make public (as a SteamID object or a string which can parse into one)
  */
 SteamUser.prototype.setChatPublic = function(steamID) {
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.UnlockChat);
@@ -140,7 +140,7 @@ SteamUser.prototype.setChatPublic = function(steamID) {
  * @param {(SteamID|string)} steamID - The SteamID of the clan chat room to make officers-only (as a SteamID object or a string which can parse into one)
  */
 SteamUser.prototype.setChatOfficersOnly = function(steamID) {
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.SetModerated);
@@ -152,7 +152,7 @@ SteamUser.prototype.setChatOfficersOnly = function(steamID) {
  * @param {(SteamID|string)} steamID - The SteamID of the clan chat room to make open (as a SteamID object or a string which can parse into one)
  */
 SteamUser.prototype.unsetChatOfficersOnly = function(steamID) {
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.SetUnmoderated);
@@ -167,7 +167,7 @@ SteamUser.prototype.unsetChatOfficersOnly = function(steamID) {
 SteamUser.prototype.kickFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.Kick);
@@ -182,7 +182,7 @@ SteamUser.prototype.kickFromChat = function(chatID, userID) {
 SteamUser.prototype.banFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.Ban);
@@ -197,7 +197,7 @@ SteamUser.prototype.banFromChat = function(chatID, userID) {
 SteamUser.prototype.unbanFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = new ByteBuffer(20, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.UnBan);
@@ -228,7 +228,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 	convertUserID = convertUserID || new SteamID();
 	inviteUserID = inviteUserID || new SteamID();
 
-	var msg = new ByteBuffer(53, ByteBuffer.LITTLE_ENDIAN);
+	var msg = ByteBuffer.allocate(53, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint32(SteamUser.EChatRoomType.MUC); // multi-user chat
 	msg.writeUint64(0);
 	msg.writeUint64(0);

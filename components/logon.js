@@ -531,7 +531,7 @@ function createMachineID(val_bb3, val_ff2, val_3b3) {
 	// Machine IDs are binary KV objects with root key MessageObject and three hashes named BB3, FF2, and 3B3.
 	// I don't feel like writing a proper BinaryKV serializer, so this will work fine.
 
-	var buffer = new ByteBuffer(155, ByteBuffer.LITTLE_ENDIAN);
+	var buffer = ByteBuffer.allocate(155, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeByte(0); // 1 byte, total 1
 	buffer.writeCString("MessageObject"); // 14 bytes, total 15
 

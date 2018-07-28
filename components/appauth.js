@@ -204,7 +204,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 
 		let buildToken = () => {
 			let gcToken = this._gcTokens.splice(0, 1)[0];
-			let buffer = new ByteBuffer(4 + gcToken.length + 4 + 24 + 4 + ticket.length, ByteBuffer.LITTLE_ENDIAN);
+			let buffer = ByteBuffer.allocate(4 + gcToken.length + 4 + 24 + 4 + ticket.length, ByteBuffer.LITTLE_ENDIAN);
 			buffer.writeUint32(gcToken.length);
 			buffer.append(gcToken);
 			buffer.writeUint32(24); // length of the session header, which is always 24 bytes
