@@ -361,8 +361,8 @@ SteamUser.prototype._getChangelistUpdate = function() {
 		this._resetChangelistUpdateTimer();
 	}, Math.max(Math.round(this.options.changelistUpdateInterval / 2), 30000));
 
-	this.getProductChanges(this.picsCache.changenumber, (currentChangenumber, apps, packages) => {
-		if (timedOut) {
+	this.getProductChanges(this.picsCache.changenumber, (err, currentChangenumber, apps, packages) => {
+		if (err || timedOut) {
 			return;
 		}
 
