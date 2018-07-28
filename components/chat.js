@@ -249,7 +249,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 	 */
 	if (callback) {
 		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
-			callback(Helpers.eresultError(result), chatID);
+			callback(Helpers.eresultError(result || 1), chatID);
 		});
 	}
 };

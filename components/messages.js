@@ -251,6 +251,17 @@ protobufs['ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1'] = Schema.CChat
 protobufs['ChatRoomClient.NotifyChatUserPreferencesChanged#1'] = Schema.ChatRoomClient_NotifyChatUserPreferencesChanged_Notification;
 protobufs['ChatRoomClient.NotifyChatGroupUserStateChanged#1'] = Schema.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification;
 protobufs['ChatRoomClient.NotifyAckChatMessageEcho#1'] = Schema.CChatRoom_AckChatMessage_Notification;
+protobufs['FriendMessages.GetRecentMessages#1_Request'] = Schema.CFriendMessages_GetRecentMessages_Request;
+protobufs['FriendMessages.GetRecentMessages#1_Response'] = Schema.CFriendMessages_GetRecentMessages_Response;
+protobufs['FriendMessages.GetActiveMessageSessions#1_Request'] = Schema.CFriendsMessages_GetActiveMessageSessions_Request;
+protobufs['FriendMessages.GetActiveMessageSessions#1_Response'] = Schema.CFriendsMessages_GetActiveMessageSessions_Response;
+protobufs['FriendMessages.SendMessage#1_Request'] = Schema.CFriendMessages_SendMessage_Request;
+protobufs['FriendMessages.SendMessage#1_Response'] = Schema.CFriendMessages_SendMessage_Response;
+protobufs['FriendMessages.AckMessage#1'] = Schema.CFriendMessages_AckMessage_Notification;
+protobufs['FriendMessages.IsInFriendsUIBeta#1_Request'] = Schema.CFriendMessages_IsInFriendsUIBeta_Request;
+protobufs['FriendMessages.IsInFriendsUIBeta#1_Response'] = Schema.CFriendMessages_IsInFriendsUIBeta_Response;
+protobufs['FriendMessagesClient.IncomingMessage#1'] = Schema.CFriendMessages_IncomingMessage_Notification;
+protobufs['FriendMessagesClient.NotifyAckMessageEcho#1'] = Schema.CFriendMessages_AckMessage_Notification;
 
 /**
  * @param {int|object} emsgOrHeader

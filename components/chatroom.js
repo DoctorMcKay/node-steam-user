@@ -9,13 +9,46 @@ module.exports = SteamChatRoomClient;
 function SteamChatRoomClient(user) {
 	this.user = user;
 
+	this.user._handlers['FriendMessagesClient.IncomingMessage#1'] = (body) => {
+		body = preProcessObject(body);
+		body.local_echo = body.local_echo || false; // coerce null to false
+		body.from_limited_account = body.from_limited_account || false;
+		body.low_priority = body.low_priority || false;
+		body.ordinal = body.ordinal || 0;
+		body.server_timestamp = body.rtime32_server_timestamp;
+		body.message_no_bbcode = body.message_no_bbcode || body.message;
+		delete body.rtime32_server_timestamp;
+
+		const EChatEntryType = require('../index.js').EChatEntryType;
+		let eventName = "";
+		switch (body.chat_entry_type) {
+			case EChatEntryType.ChatMsg:
+				eventName = 'friendMessage';
+				break;
+
+			case EChatEntryType.Typing:
+				eventName = 'friendTyping';
+				break;
+
+			default:
+				this.user.emit('debug', 'Got unknown chat entry type ' + body.chat_entry_type + ' from ' + body.steamid_friend);
+		}
+
+		if (body.local_echo) {
+			eventName += 'Echo';
+		}
+
+		this.user._emitIdEvent(eventName, body.steamid_friend, body.message_no_bbcode);
+		this.emit(eventName, body);
+	};
+
 	this.user._handlers['ChatRoomClient.NotifyIncomingChatMessage#1'] = (body) => {
 		body = preProcessObject(body);
 		if (body.mentions) {
 			body.mentions = processChatMentions(body.mentions);
 		}
 
-		this.emit('incomingChatMessage', body);
+		this.emit('chatMessage', body);
 	};
 
 	this.user._handlers['ChatRoomClient.NotifyChatMessageModified#1'] = (body) => {
@@ -75,7 +108,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
  */
 SteamChatRoomClient.prototype.subscribeToGroups = function(groupIds, callback) {
 	this.user._send(require('../index.js').EMsg.ClientCurrentUIMode, {"chat_mode": 2});
-	this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
+	/*this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
 		"chat_group_ids": groupIds,
 		"chat_groups_data_requested": callback ? groupIds : []
 	}, (body) => {
@@ -85,7 +118,7 @@ SteamChatRoomClient.prototype.subscribeToGroups = function(groupIds, callback) {
 
 		// TODO
 		callback(null, body);
-	});
+	});*/
 };
 
 /**
@@ -218,7 +251,7 @@ function preProcessObject(obj) {
 			obj[key] = new SteamID(val.toString());
 		} else if (val !== null && typeof val === 'object' && val.constructor.name == 'Long') {
 			obj[key] = val.toString();
-		} else if (key == 'timestamp' || key == 'server_timestamp' || key.match(/^time_/)) {
+		} else if (key == 'timestamp' || key.match(/^time_/) || key.match(/_timestamp$/)) {
 			if (val === 0) {
 				obj[key] = null;
 			} else if (val !== null) {
