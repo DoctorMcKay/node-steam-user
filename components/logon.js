@@ -9,7 +9,7 @@ const SteamUser = require('../index.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
 const WebSocketConnection = require('./connection_protocols/websocket.js');
 
-const PROTOCOL_VERSION = 65579;
+const PROTOCOL_VERSION = 65580;
 
 SteamUser.prototype.logOn = function(details) {
 	if (this.steamID) {

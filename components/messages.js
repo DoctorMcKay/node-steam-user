@@ -242,6 +242,15 @@ protobufs['ChatRoom.SetUserChatGroupPreferences#1_Request'] = Schema.CChatRoom_S
 protobufs['ChatRoom.SetUserChatGroupPreferences#1_Response'] = Schema.CChatRoom_SetUserChatGroupPreferences_Response;
 protobufs['ChatRoom.DeleteChatMessages#1_Request'] = Schema.CChatRoom_DeleteChatMessages_Request;
 protobufs['ChatRoom.DeleteChatMessages#1_Response'] = Schema.CChatRoom_DeleteChatMessages_Response;
+protobufs['ChatRoomClient.NotifyIncomingChatMessage#1'] = Schema.CChatRoom_IncomingChatMessage_Notification;
+protobufs['ChatRoomClient.NotifyChatMessageModified#1'] = Schema.CChatRoom_ChatMessageModified_Notification;
+protobufs['ChatRoomClient.NotifyMemberStateChange#1'] = Schema.CChatRoom_MemberStateChange_Notification;
+protobufs['ChatRoomClient.NotifyChatRoomHeaderStateChange#1'] = Schema.CChatRoom_ChatRoomHeaderState_Notification;
+protobufs['ChatRoomClient.NotifyChatRoomGroupRoomsChange#1'] = Schema.CChatRoom_ChatRoomGroupRoomsChange_Notification;
+protobufs['ChatRoomClient.NotifyShouldRejoinChatRoomVoiceChat#1'] = Schema.CChatRoom_NotifyShouldRejoinChatRoomVoiceChat_Notification;
+protobufs['ChatRoomClient.NotifyChatUserPreferencesChanged#1'] = Schema.ChatRoomClient_NotifyChatUserPreferencesChanged_Notification;
+protobufs['ChatRoomClient.NotifyChatGroupUserStateChanged#1'] = Schema.ChatRoomClient_NotifyChatGroupUserStateChanged_Notification;
+protobufs['ChatRoomClient.NotifyAckChatMessageEcho#1'] = Schema.CChatRoom_AckChatMessage_Notification;
 
 ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.LITTLE_ENDIAN;
 
