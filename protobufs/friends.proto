@@ -126,7 +126,7 @@ message CChatRoom_RevokeInvite_Response {
 message CChatRole {
 	optional uint64 role_id = 1;
 	optional string name = 2;
-	optional uint32 ordinal = 3;
+	optional uint32 ordinal = 3 [default = 0];
 }
 
 message CChatRoleActions {
@@ -168,7 +168,7 @@ message CChatRoom_RenameRole_Response {
 message CChatRoom_ReorderRole_Request {
 	optional uint64 chat_group_id = 1;
 	optional uint64 role_id = 2;
-	optional uint32 ordinal = 3;
+	optional uint32 ordinal = 3 [default = 0];
 }
 
 message CChatRoom_ReorderRole_Response {
@@ -408,7 +408,7 @@ message CChatRoom_SendChatMessage_Request {
 message CChatRoom_SendChatMessage_Response {
 	optional string modified_message = 1;
 	optional uint32 server_timestamp = 2;
-	optional uint32 ordinal = 3;
+	optional uint32 ordinal = 3 [default = 0];
 }
 
 message CChatRoom_IncomingChatMessage_Notification {
@@ -418,7 +418,7 @@ message CChatRoom_IncomingChatMessage_Notification {
 	optional string message = 4;
 	optional uint32 timestamp = 5;
 	optional .CChatMentions mentions = 6;
-	optional uint32 ordinal = 7;
+	optional uint32 ordinal = 7 [default = 0];
 	optional .ServerMessage server_message = 8;
 	optional string message_no_bbcode = 9;
 }
@@ -431,8 +431,8 @@ message CChatRoom_ChatMessageModified_Notification {
 
 message CChatRoom_ChatMessageModified_Notification_ChatMessage {
 	optional uint32 server_timestamp = 1;
-	optional uint32 ordinal = 2;
-	optional bool deleted = 3;
+	optional uint32 ordinal = 2 [default = 0];
+	optional bool deleted = 3 [default = false];
 }
 
 message CChatRoom_GetMessageHistory_Request {
@@ -454,9 +454,9 @@ message CChatRoom_GetMessageHistory_Response_ChatMessage {
 	optional uint32 sender = 1;
 	optional uint32 server_timestamp = 2;
 	optional string message = 3;
-	optional uint32 ordinal = 4;
+	optional uint32 ordinal = 4 [default = 0];
 	optional .ServerMessage server_message = 5;
-	optional bool deleted = 6;
+	optional bool deleted = 6 [default = false];
 }
 
 message CChatRoom_MemberStateChange_Notification {
@@ -615,7 +615,7 @@ message CChatRoom_DeleteChatMessages_Request {
 
 message CChatRoom_DeleteChatMessages_Request_Message {
 	optional uint32 server_timestamp = 1;
-	optional uint32 ordinal = 2;
+	optional uint32 ordinal = 2 [default = 0];
 }
 
 message CChatRoom_DeleteChatMessages_Response {
