@@ -17,6 +17,11 @@ function SteamChatRoomClient(user) {
 
 		this.emit('incomingChatMessage', body);
 	};
+
+	this.user._handlers['ChatRoomClient.NotifyChatMessageModified#1'] = (body) => {
+		body = preProcessObject(body);
+		this.emit('chatMessagesModified', body);
+	};
 }
 
 /**
@@ -209,7 +214,9 @@ function preProcessObject(obj) {
 		}
 
 		let val = obj[key];
-		if (key.match(/^steamid_/) && typeof val === 'object' && val !== null) {
+		if (key == 'ordinal' && val === null) {
+			obj[key] = 0;
+		} else if (key.match(/^steamid_/) && typeof val === 'object' && val !== null) {
 			obj[key] = new SteamID(val.toString());
 		} else if (val !== null && typeof val === 'object' && val.constructor.name == 'Long') {
 			obj[key] = val.toString();
