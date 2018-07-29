@@ -162,20 +162,7 @@ exports.getOsType = function() {
 	}
 };
 
-exports.stringifyLongs = function(obj) {
-	if (typeof obj === 'object') {
-		if (obj instanceof ByteBuffer.Long) {
-			return obj.toString();
-		} else {
-			for (let i in obj) {
-				if (obj.hasOwnProperty(i)) {
-					obj[i] = exports.stringifyLongs(obj[i]);
-				}
-			}
-
-			return obj;
-		}
-	} else {
-		return obj;
-	}
+exports.fixVdfArray = function(arr) {
+	arr.length = Object.keys(arr).length;
+	return Array.prototype.slice.call(arr);
 };

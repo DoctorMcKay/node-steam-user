@@ -119,8 +119,8 @@ SteamUser.prototype.logOn = function(details) {
 			}
 		});
 
-		if (self._cmList && (!self._cmList.time || Date.now() - self._cmList.time < (1000 * 60 * 60 * 24 * 30))) {
-			// proceed if we have a CM list already and it's less than 30 days old
+		if (self._cmList && (!self._cmList.time || Date.now() - self._cmList.time < (1000 * 60 * 60 * 24 * 7))) {
+			// proceed if we have a CM list already and it's less than 7 days old
 			gotCMList();
 		} else {
 			// Get the CM list from the API
@@ -130,8 +130,8 @@ SteamUser.prototype.logOn = function(details) {
 					gotCMList(); // just fallback to the built-in list
 				} else {
 					self._cmList = {
-						"tcp_servers": fixVdfArray(res.response.serverlist),
-						"websocket_servers": fixVdfArray(res.response.serverlist_websockets),
+						"tcp_servers": Helpers.fixVdfArray(res.response.serverlist),
+						"websocket_servers": Helpers.fixVdfArray(res.response.serverlist_websockets),
 						"time": Date.now()
 					};
 
@@ -139,11 +139,6 @@ SteamUser.prototype.logOn = function(details) {
 					gotCMList();
 				}
 			});
-		}
-
-		function fixVdfArray(arr) {
-			arr.length = Object.keys(arr).length;
-			return Array.prototype.slice.call(arr);
 		}
 
 		function gotCMList() {
@@ -163,10 +158,6 @@ SteamUser.prototype.logOn = function(details) {
 
 				self._logOnDetails.sha_sentryfile = sentry;
 				self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
-			}
-
-			if (self._logOnDetails.sha_sentryfile && self._logOnDetails.sha_sentryfile.toString('hex') == 'aa57132157ac337ba2936099e22236062aafafdd') {
-				throw new Error("You're trying to log on with a decoy sentry file. You're probably looking for the sentry file that's hidden.");
 			}
 
 			// Machine ID

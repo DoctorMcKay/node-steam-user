@@ -11,7 +11,7 @@ const Helpers = require('./helpers.js');
  */
 SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callback) {
 	this._sendUnified("Econ.GetAssetClassInfo#1", {language, appid, classes}, (body) => {
-		callback(null, Helpers.stringifyLongs(body.descriptions));
+		callback(null, body.descriptions);
 	});
 };
 
