@@ -103,6 +103,7 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 		this.user.emit('debug', 'WS connection timed out');
 		this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
 		this.stream.disconnect();
+		this.user._doConnection();
 	});
 };
 
