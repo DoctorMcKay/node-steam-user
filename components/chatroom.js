@@ -281,10 +281,8 @@ function preProcessObject(obj) {
 		}
 
 		let val = obj[key];
-		if (key.match(/^steamid_/) && typeof val === 'object' && val !== null) {
+		if (key.match(/^steamid_/) && typeof val === 'string' && val != '0') {
 			obj[key] = new SteamID(val.toString());
-		} else if (val !== null && typeof val === 'object' && val.constructor.name == 'Long') {
-			obj[key] = val.toString();
 		} else if (key == 'timestamp' || key.match(/^time_/) || key.match(/_timestamp$/)) {
 			if (val === 0) {
 				obj[key] = null;
