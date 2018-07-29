@@ -15,14 +15,13 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 		"device_identifier": SteamTotp.getDeviceID(this.steamID),
 		"sms_phone_id": "1"
 	}, (body) => {
-		body.shared_secret = body.shared_secret ? body.shared_secret.toBuffer().toString('base64') : null;
-		body.serial_number = body.serial_number ? body.serial_number.toString() : null;
-		body.server_time = body.server_time ? parseInt(body.server_time.toString(), 10) : null;
-		body.identity_secret = body.identity_secret ? body.identity_secret.toBuffer().toString('base64') : null;
-		body.secret_1 = body.secret_1 ? body.secret_1.toBuffer().toString('base64') : null;
+		body.server_time = typeof body.server_time === 'string' ? parseInt(body.server_time, 10) : (body.server_time || null);
+		body.shared_secret = body.shared_secret ? body.shared_secret.toString('base64') : null;
+		body.identity_secret = body.identity_secret ? body.identity_secret.toString('base64') : null;
+		body.secret_1 = body.secret_1 ? body.secret_1.toString('base64') : null;
 
 		// Delete all the null keys
-		for (var i in body) {
+		for (let i in body) {
 			if (body.hasOwnProperty(i) && body[i] === null) {
 				delete body[i];
 			}
