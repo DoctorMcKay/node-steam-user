@@ -34,7 +34,7 @@
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",
-		"protobufjs": "^5.0.2",
+		"protobufjs": "^6.8.8",
 		"steam-totp": "^2.0.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2",
@@ -42,7 +42,8 @@
 	},
 	"scripts": {
 		"prepublishOnly": "node scripts/prepublish.js",
-		"generate-enums": "node scripts/generate-enums.js"
+		"generate-enums": "node scripts/generate-enums.js",
+		"generate-protos": "node scripts/generate-protos.js"
 	},
 	"engines": {
 		"node": ">=6.0.0"

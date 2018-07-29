@@ -4,7 +4,8 @@ const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
-const Schema = require('./protobufs.js');
+const Messages = require('./messages.js');
+const Schema = require('../protobufs/generated/_load.js');
 const SteamUser = require('../index.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
 const WebSocketConnection = require('./connection_protocols/websocket.js');
@@ -340,11 +341,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 				this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 			}
 
-			var parental = body.parental_settings ? Schema.ParentalSettings.decode(body.parental_settings) : null;
+			var parental = body.parental_settings ? Messages.decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
 			if (parental && parental.salt && parental.passwordhash) {
-				parental.salt = parental.salt.toBuffer();
-				parental.passwordhash = parental.passwordhash.toBuffer();
-
 				var sid = new SteamID();
 				sid.universe = this.steamID.universe;
 				sid.type = SteamID.Type.INDIVIDUAL;

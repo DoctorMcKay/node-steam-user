@@ -96,11 +96,11 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 				return;
 			}
 
-			var key = body.depot_encryption_key.toBuffer();
+			var key = body.depot_encryption_key;
 			var file = Buffer.concat([new Buffer(4), key]);
 			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
 			this.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file, () => {
-				callback(null, body.depot_encryption_key.toBuffer());
+				callback(null, key);
 			});
 		});
 	});

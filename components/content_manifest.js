@@ -2,7 +2,8 @@ const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
-const Protos = require('./protobufs.js');
+const Messages = require('./messages.js');
+const Schema = require('../protobufs/generated/_load.js');
 
 const PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0;
 const PROTOBUF_METADATA_MAGIC = 0x1F4812BE;
@@ -25,19 +26,19 @@ exports.parse = function(buffer) {
 		switch (magic) {
 			case PROTOBUF_PAYLOAD_MAGIC:
 				length = buffer.readUint32();
-				manifest.files = Protos.ContentManifestPayload.decode(buffer.slice(buffer.offset, buffer.offset + length)).mappings;
+				manifest.files = Messages.decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length)).mappings;
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_METADATA_MAGIC:
 				length = buffer.readUint32();
-				meta = Protos.ContentManifestMetadata.decode(buffer.slice(buffer.offset, buffer.offset + length));
+				meta = Messages.decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length));
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_SIGNATURE_MAGIC:
 				length = buffer.readUint32();
-				//manifest.signature = Protos.ContentManifestSignature.decode(buffer.slice(buffer.offset, buffer.offset + length)).signature.toBuffer();
+				//manifest.signature = Messages.decodeProto(Schema.ContentManifestSignature, buffer.slice(buffer.offset, buffer.offset + length)).signature;
 				buffer.skip(length);
 				// maybe at some point we should verify this signature, but for now I can't figure out how
 				break;

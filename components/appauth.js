@@ -5,7 +5,8 @@ const SteamCrypto = require('@doctormckay/steam-crypto');
 const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
-const Schema = require('./protobufs.js');
+const Messages = require('./messages.js');
+const Schema = require('../protobufs/generated/_load.js');
 const SteamUser = require('../index.js');
 
 /**
@@ -37,7 +38,7 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 			return;
 		}
 
-		callback(null, (new Schema.EncryptedAppTicket(body.encrypted_app_ticket)).toBuffer());
+		callback(null, Messages.encodeProto(Schema.EncryptedAppTicket, body.encrypted_app_ticket));
 	});
 };
 
@@ -49,9 +50,9 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
  */
 SteamUser.parseEncryptedAppTicket = function(ticket, encryptionKey) {
 	try {
-		let outer = Schema.EncryptedAppTicket.decode(ticket);
+		let outer = Messages.decodeProto(Schema.EncryptedAppTicket, ticket);
 		let key = typeof encryptionKey === 'string' ? Buffer.from(encryptionKey, 'hex') : encryptionKey;
-		let decrypted = SteamCrypto.symmetricDecrypt(outer.encrypted_ticket.toBuffer(), key);
+		let decrypted = SteamCrypto.symmetricDecrypt(outer.encrypted_ticket, key);
 
 		if (CRC32.unsigned(decrypted) != outer.crc_encryptedticket) {
 			return null;
@@ -247,12 +248,12 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 				return;
 			}
 
-			let ticket = body.ticket.toBuffer();
+			let ticket = body.ticket;
 			if (ticket && ticket.length > 10 && this.options.saveAppTickets && this.storage) {
 				this.storage.saveFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", ticket);
 			}
 
-			callback(null, body.ticket.toBuffer());
+			callback(null, ticket);
 		});
 	};
 
@@ -356,7 +357,7 @@ SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientGameConnectTokens] = function(body) {
 	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
 	body.tokens.forEach((token) => {
-		this._gcTokens.push(token.toBuffer());
+		this._gcTokens.push(token);
 	});
 
 	this.emit('_gcTokens'); // internal private event

@@ -59,7 +59,7 @@ SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 
 SteamUser.prototype.getAuthSecret = function(callback) {
 	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, function(body) {
-		callback(null, body.secret_id, body.secret.toBuffer());
+		callback(null, body.secret_id, body.secret);
 	});
 };
 

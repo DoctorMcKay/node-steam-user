@@ -3,7 +3,7 @@ const SteamID = require('steamid');
 const SteamUser = require('../index.js');
 const Zlib = require('zlib');
 
-const Schema = require('./protobufs.js');
+const Schema = require('../protobufs/generated/_load.js');
 
 const EMsg = SteamUser.EMsg;
 
@@ -15,7 +15,7 @@ const VERBOSE_EMSG_LIST = [
 	EMsg.ClientHeartBeat
 ];
 
-var protobufs = {};
+const protobufs = {};
 protobufs[EMsg.Multi] = Schema.CMsgMulti;
 protobufs[EMsg.ClientHeartBeat] = Schema.CMsgClientHeartBeat;
 protobufs[EMsg.ClientLogon] = Schema.CMsgClientLogon;
@@ -264,6 +264,31 @@ protobufs['FriendMessagesClient.IncomingMessage#1'] = Schema.CFriendMessages_Inc
 protobufs['FriendMessagesClient.NotifyAckMessageEcho#1'] = Schema.CFriendMessages_AckMessage_Notification;
 
 /**
+ * Encode a protobuf.
+ * @param {object} proto - The protobuf class
+ * @param {object} data - The data to serialize
+ * @returns {Buffer}
+ */
+exports.encodeProto = function(proto, data) {
+	return proto.encode(data).finish();
+};
+
+/**
+ * Decode a protobuf.
+ * @param {object} proto - The protobuf class
+ * @param {Buffer|ByteBuffer} encoded - The data to decode
+ * @returns {object}
+ */
+exports.decodeProto = function(proto, encoded) {
+	if (ByteBuffer.isByteBuffer(encoded)) {
+		encoded = encoded.toBuffer();
+	}
+
+	let decoded = proto.decode(encoded);
+	return proto.toObject(proto.decode(encoded), {"defaults": true, "longs": String});
+};
+
+/**
  * @param {int|object} emsgOrHeader
  * @param {object|Buffer|ByteBuffer} body
  * @param {function} [callback]
@@ -281,10 +306,10 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		return;
 	}
 
-	var Proto = protobufs[emsg];
+	const Proto = protobufs[emsg];
 	if (Proto) {
 		header.proto = header.proto || {};
-		body = new Proto(body).toBuffer();
+		body = exports.encodeProto(Proto, body);
 	} else if (ByteBuffer.isByteBuffer(body)) {
 		body = body.toBuffer();
 	}
@@ -321,7 +346,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		header.proto.steamid = (this.steamID || this._tempSteamID).getSteamID64();
 		header.proto.jobid_source = jobIdSource || header.proto.jobid_source || header.sourceJobID || JOBID_NONE;
 		header.proto.jobid_target = header.proto.jobid_target || header.targetJobID || JOBID_NONE;
-		let hdrProtoBuf = (new Schema.CMsgProtoBufHeader(header.proto)).toBuffer();
+		let hdrProtoBuf = exports.encodeProto(Schema.CMsgProtoBufHeader, header.proto);
 		hdrBuf = ByteBuffer.allocate(4 + 4 + hdrProtoBuf.length, ByteBuffer.LITTLE_ENDIAN);
 		hdrBuf.writeUint32(header.msg | PROTO_MASK);
 		hdrBuf.writeUint32(hdrProtoBuf.length);
@@ -362,7 +387,7 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 	} else if (isProtobuf) {
 		// decode the protobuf header
 		let headerLength = buf.readUint32();
-		header.proto = Schema.CMsgProtoBufHeader.decode(buf.slice(buf.offset, buf.offset + headerLength));
+		header.proto = exports.decodeProto(Schema.CMsgProtoBufHeader, buf.slice(buf.offset, buf.offset + headerLength));
 		buf.skip(headerLength);
 
 		header.targetJobID = header.proto.jobid_target && header.proto.jobid_target.toString();
@@ -434,7 +459,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 
 	let body = bodyBuf;
 	if (protobufs[handlerName]) {
-		body = protobufs[handlerName].decode(bodyBuf);
+		body = exports.decodeProto(protobufs[handlerName], bodyBuf);
 	}
 
 	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Handled message: ' + msgName);
@@ -449,7 +474,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 
 			if (protobufs[emsg]) {
 				responseHeader.proto = {"jobid_target": header.sourceJobID};
-				body = new protobufs[emsg](body).toBuffer();
+				body = exports.encodeProto(protobufs[emsg], body);
 			} else {
 				responseHeader.targetJobID = header.sourceJobID;
 			}
@@ -476,7 +501,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
 	this.emit('debug-verbose', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
 
-	let payload = body.message_body.toBuffer();
+	let payload = body.message_body;
 	if (body.size_unzipped) {
 		Zlib.gunzip(payload, (err, unzipped) => {
 			if (err) {
@@ -518,5 +543,5 @@ SteamUser.prototype._sendUnified = function(methodName, methodData, callback) {
 		}
 	};
 
-	this._send(header, new Proto(methodData).toBuffer(), callback);
+	this._send(header, exports.encodeProto(Proto, methodData), callback);
 };

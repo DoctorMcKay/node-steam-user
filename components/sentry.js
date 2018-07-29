@@ -17,14 +17,14 @@ SteamUser.prototype._getSentryFilename = function() {
 SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateMachineAuth] = function(body, callback) {
 	// TODO: Handle partial updates
 	if (this.storage) {
-		this.storage.writeFile(this._getSentryFilename(), body.bytes.toBuffer());
+		this.storage.writeFile(this._getSentryFilename(), body.bytes);
 	}
 
-	this.emit('sentry', body.bytes.toBuffer());
+	this.emit('sentry', body.bytes);
 
 	// Accept the sentry
 	var hash = require('crypto').createHash('sha1');
-	hash.update(body.bytes.toBuffer());
+	hash.update(body.bytes);
 
 	callback(SteamUser.EMsg.ClientUpdateMachineAuthResponse, {
 		"sha_file": hash.digest()
