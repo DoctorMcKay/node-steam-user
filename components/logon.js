@@ -182,8 +182,7 @@ SteamUser.prototype._doConnection = function() {
 	let thisProtocol = this.options.protocol;
 
 	if (thisProtocol == SteamUser.EConnectionProtocol.Auto) {
-		if (this._cmList.auto_pct_websocket && false) {
-			// TODO
+		if (this._cmList.auto_pct_websocket) {
 			let roll = Math.floor(Math.random() * 100);
 			thisProtocol = roll <= this._cmList.auto_pct_websocket ? SteamUser.EConnectionProtocol.WebSocket : SteamUser.EConnectionProtocol.TCP;
 			this.emit('debug', 'Using ' + (thisProtocol == SteamUser.EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP') + '; we rolled ' + roll + ' and percent to use WS is ' + this._cmList.auto_pct_websocket);
