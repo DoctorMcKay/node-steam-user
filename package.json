@@ -38,7 +38,7 @@
 		"steam-totp": "^2.0.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2",
-		"websocket13": "^1.7.0"
+		"websocket13": "^1.7.2"
 	},
 	"scripts": {
 		"prepublishOnly": "node scripts/prepublish.js",
