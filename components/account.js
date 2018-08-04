@@ -1,65 +1,94 @@
 const BinaryKVParser = require('binarykvparser');
 const ByteBuffer = require('bytebuffer');
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.requestValidationEmail = function(callback) {
-	var body = ByteBuffer.allocate(1, ByteBuffer.LITTLE_ENDIAN);
-	body.writeUint8(0);
-	this._send(SteamUser.EMsg.ClientRequestValidationMail, body.flip(), function(response) {
-		if (!callback) {
-			return;
-		}
-
-		callback(Helpers.eresultError(response.readUint32()));
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		let body = Buffer.alloc(1, 0x0); // pre-fills with 0x0
+		this._send(SteamUser.EMsg.ClientRequestValidationMail, body, (response) => {
+			let err = Helpers.eresultError(response.readUint32());
+			if (err) {
+				reject(err);
+			} else {
+				accept();
+			}
+		});
 	});
 };
 
 SteamUser.prototype.getSteamGuardDetails = function(callback) {
-	this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, function(body) {
-		var canTrade = true;
-		var hasHadTwoFactorForWeek = (body.is_twofactor_enabled && body.timestamp_twofactor_enabled && Math.floor(Date.now() / 1000) - body.timestamp_twofactor_enabled >= (60 * 60 * 24 * 7));
+	let callbackArgs = [
+		'isSteamGuardEnabled',
+		'timestampSteamGuardEnabled',
+		'timestampMachineSteamGuardEnabled',
+		'canTrade',
+		'timestampTwoFactorEnabled',
+		'isPhoneVerified'
+	];
 
-		if (!body.is_steamguard_enabled) {
-			canTrade = false; // SG is not enabled
-		} else if (!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
-			canTrade = false; // SG has not been enabled for 15 days
-		} else if (
-			!hasHadTwoFactorForWeek &&
-			(
-				!body.session_data || !body.session_data[0] || !body.session_data[0].timestamp_machine_steamguard_enabled ||
-				Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)
-			)
-		) {
-			canTrade = false; // Haven't had 2FA for 7 days, and this machine's auth is less than 7 days old
-		}
+	return StdLib.Promises.callbackPromise(callbackArgs, callback, (accept, reject) => {
+		this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, (body) => {
+			let res = {};
 
-		callback(
-			null, // currently no error is possible, but add this for consistency and future-proofing
-			!!body.is_steamguard_enabled,
-			body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null,
-			body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null,
-			canTrade,
-			body.is_twofactor_enabled && body.timestamp_twofactor_enabled ? new Date(body.timestamp_twofactor_enabled * 1000) : null,
-			body.is_phone_verified || false
-		);
+			res.canTrade = true;
+			let hasHadTwoFactorForWeek = (body.is_twofactor_enabled && body.timestamp_twofactor_enabled && Math.floor(Date.now() / 1000) - body.timestamp_twofactor_enabled >= (60 * 60 * 24 * 7));
+
+			if (!body.is_steamguard_enabled) {
+				res.canTrade = false; // SG is not enabled
+			} else if (!body.timestamp_steamguard_enabled || Math.floor(Date.now() / 1000) - body.timestamp_steamguard_enabled < (60 * 60 * 24 * 15)) {
+				res.canTrade = false; // SG has not been enabled for 15 days
+			} else if (
+				!hasHadTwoFactorForWeek &&
+				(
+					!body.session_data || !body.session_data[0] || !body.session_data[0].timestamp_machine_steamguard_enabled ||
+					Math.floor(Date.now() / 1000) - body.session_data[0].timestamp_machine_steamguard_enabled < (60 * 60 * 24 * 7)
+				)
+			) {
+				res.canTrade = false; // Haven't had 2FA for 7 days, and this machine's auth is less than 7 days old
+			}
+
+			res.isSteamGuardEnabled = !!body.is_steamguard_enabled;
+			res.timestampSteamGuardEnabled = body.timestamp_steamguard_enabled ? new Date(body.timestamp_steamguard_enabled * 1000) : null;
+			res.timestampMachineSteamGuardEnabled = body.session_data && body.session_data[0] && body.session_data[0].timestamp_machine_steamguard_enabled ? new Date(body.session_data[0].timestamp_machine_steamguard_enabled * 1000) : null;
+			res.isTwoFactorEnabled = !!body.is_twofactor_enabled;
+			res.timestampTwoFactorEnabled = body.timestamp_twofactor_enabled ? new Date(body.timestamp_twofactor_enabled * 1000) : null;
+			res.isPhoneVerified = !!body.is_phone_verified;
+
+			accept(res);
+		});
 	});
 };
 
 SteamUser.prototype.getCredentialChangeTimes = function(callback) {
-	this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, function(body) {
-		callback(null, // currently no error is possible, but add this for consistency and future-proofing
-			body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
-			body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
-			body.timestamp_last_email_change ? new Date(body.timestamp_last_email_change * 1000) : null);
+	let callbackArgs = [
+		'timestampLastPasswordChange',
+		'timestampLastPasswordReset',
+		'timestampLastEmailChange'
+	];
+
+	return StdLib.Promises.callbackPromise(callbackArgs, callback, (accept, reject) => {
+		this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, (body) => {
+			accept({
+				"timestampLastPasswordChange": body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
+				"timestampLastPasswordReset": body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
+				"timestampLastEmailChange": body.timestamp_last_email_change ? new Date(body.timestamp_last_email_change * 1000) : null
+			});
+		});
 	});
 };
 
 SteamUser.prototype.getAuthSecret = function(callback) {
-	this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, function(body) {
-		callback(null, body.secret_id, body.secret);
+	return StdLib.Promises.callbackPromise(['secretID', 'key'], callback, (accept, reject) => {
+		this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, (body) => {
+			accept({
+				"secretID": body.secret_id,
+				"key": body.secret
+			});
+		});
 	});
 };
 
@@ -76,60 +105,78 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 };*/
 
 SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callback) {
-	var buf = ByteBuffer.allocate(81 + 4, ByteBuffer.LITTLE_ENDIAN); // a static 81 bytes for the password, and 4 for the int at the end
-	buf.writeCString(currentPassword);
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		let buf = ByteBuffer.allocate(81 + 4, ByteBuffer.LITTLE_ENDIAN); // a static 81 bytes for the password, and 4 for the int at the end
+		buf.writeCString(currentPassword);
 
-	for (var i = currentPassword.length + 1; i <= 81; i++) {
-		buf.writeByte(0);
-	}
-
-	buf.writeUint32(1); // dunno, maybe what type of change we want?
-	this._send(SteamUser.EMsg.ClientRequestChangeMail, buf.flip(), function(body) {
-		if (!callback) {
-			return;
+		for (let i = currentPassword.length + 1; i <= 81; i++) {
+			buf.writeByte(0);
 		}
 
-		callback(Helpers.eresultError(body.readUint32()));
+		buf.writeUint32(1); // dunno, maybe what type of change we want?
+		this._send(SteamUser.EMsg.ClientRequestChangeMail, buf.flip(), (body) => {
+			if (!callback) {
+				return;
+			}
+
+			let err = Helpers.eresultError(body.readUint32());
+			if (err) {
+				reject(err);
+			} else {
+				accept();
+			}
+		});
 	});
 };
 
 SteamUser.prototype.changePassword = function(oldPassword, newPassword, code, callback) {
-	var buf = ByteBuffer.allocate(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
-	buf.writeCString(""); // unknown
-	buf.writeCString(oldPassword);
-	buf.writeCString(newPassword);
-	buf.writeCString(code);
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		let buf = ByteBuffer.allocate(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
+		buf.writeCString(""); // unknown
+		buf.writeCString(oldPassword);
+		buf.writeCString(newPassword);
+		buf.writeCString(code);
 
-	this._send(SteamUser.EMsg.ClientPasswordChange3, buf.flip(), function(body) {
-		if (!callback) {
-			return;
-		}
+		this._send(SteamUser.EMsg.ClientPasswordChange3, buf.flip(), (body) => {
+			if (!callback) {
+				return;
+			}
 
-		callback(Helpers.eresultError(body.readUint32()));
+			let err = Helpers.eresultError(body.readUint32());
+			if (err) {
+				reject(err);
+			} else {
+				accept();
+			}
+		});
 	});
 };
 
 SteamUser.prototype.changeEmail = function(options, callback) {
-	this._send(SteamUser.EMsg.ClientEmailChange4, {
-		"password": options.password,
-		"email": options.newEmail || options.email,
-		"code": options.code,
-		"final": !!options.code,
-		"newmethod": true,
-		"twofactor_code": options.twoFactorCode,
-		"sms_code": options.smsCode,
-		"client_supports_sms": true // this appears to be ignored; it asks for an SMS code regardless of value
-	}, function(body) {
-		if (!callback) {
-			return;
-		}
+	return StdLib.Promises.callbackPromise(['requiresSmsCode'], callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientEmailChange4, {
+			"password": options.password,
+			"email": options.newEmail || options.email,
+			"code": options.code,
+			"final": !!options.code,
+			"newmethod": true,
+			"twofactor_code": options.twoFactorCode,
+			"sms_code": options.smsCode,
+			"client_supports_sms": true // this appears to be ignored; it asks for an SMS code regardless of value
+		}, (body) => {
+			if (!callback) {
+				return;
+			}
 
-		if (body.eresult != SteamUser.EResult.OK) {
-			callback(Helpers.eresultError(body.eresult));
-			return;
-		}
+			let err = Helpers.eresultError(body.eresult);
+			if (err) {
+				return reject(err);
+			}
 
-		callback(null, !!body.requires_sms_code);
+			accept({
+				"requiresSmsCode": !!body.requires_sms_code
+			});
+		});
 	});
 };
 
