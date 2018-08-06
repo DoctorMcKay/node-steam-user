@@ -515,6 +515,8 @@ Gets your account's auth secret, which is the pre-shared key used for in-home st
 
 **v3.13.0 or later is required to use this method**
 
+**This no longer works and is deprecated. It will be removed entirely in a future release.**
+
 Requests Steam to send you an email that contains a code you can supply to `changePassword` in order to change your
 account's password. If you have a Mobile Authenticator enabled, this will return success but not actually do anything.
 With 2FA, you should use a 2FA code instead of an email code.
@@ -527,6 +529,8 @@ With 2FA, you should use a 2FA code instead of an email code.
     - `err` - `null` on success, or an `Error` object on failure
 
 **v3.13.0 or later is required to use this method**
+
+**This no longer works and is deprecated. It will be removed entirely in a future release.**
 
 Changes your Steam account's password. This won't effect any trading restrictions.
 
