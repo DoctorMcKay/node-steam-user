@@ -518,32 +518,6 @@ Gets when you last changed various account credentials.
 
 Gets your account's auth secret, which is the pre-shared key used for in-home streaming.
 
-### requestPasswordChangeEmail(currentPassword[, callback])
-- `currentPassword` - Your account's current password, pre-change
-- `callback` - Optional. Called when the request completes.
-    - `err` - `null` on success, or an `Error` object on failure
-
-**v3.13.0 or later is required to use this method**
-
-**This no longer works and is deprecated. It will be removed entirely in a future release.**
-
-Requests Steam to send you an email that contains a code you can supply to `changePassword` in order to change your
-account's password. If you have a Mobile Authenticator enabled, this will return success but not actually do anything.
-With 2FA, you should use a 2FA code instead of an email code.
-
-### changePassword(oldPassword, newPassword, code[, callback])
-- `oldPassword` - Your account's current (old) password
-- `newPassword` - Your desired new password
-- `code` - Either the code sent to your email from `requestPasswordChangeEmail` or your current Mobile Authenticator 2FA code (if you have 2FA on)
-- `callback` - Optional. Called when the request completes.
-    - `err` - `null` on success, or an `Error` object on failure
-
-**v3.13.0 or later is required to use this method**
-
-**This no longer works and is deprecated. It will be removed entirely in a future release.**
-
-Changes your Steam account's password. This won't effect any trading restrictions.
-
 ### changeEmail(options[, callback])
 - `options` - An object containing (some of) the following properties:
     - `password` - Required. Your account's current password.
