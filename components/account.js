@@ -104,6 +104,11 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 	});
 };*/
 
+/**
+ * @param {string} currentPassword
+ * @param {function} callback
+ * @deprecated No longer works
+ */
 SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callback) {
 	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
 		let buf = ByteBuffer.allocate(81 + 4, ByteBuffer.LITTLE_ENDIAN); // a static 81 bytes for the password, and 4 for the int at the end
@@ -129,6 +134,13 @@ SteamUser.prototype.requestPasswordChangeEmail = function(currentPassword, callb
 	});
 };
 
+/**
+ * @param {string} oldPassword
+ * @param {string} newPassword
+ * @param {string} code
+ * @param {function} callback
+ * @deprecated No longer works
+ */
 SteamUser.prototype.changePassword = function(oldPassword, newPassword, code, callback) {
 	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
 		let buf = ByteBuffer.allocate(1 + oldPassword.length + 1 + newPassword.length + 1 + code.length + 1, ByteBuffer.LITTLE_ENDIAN);
