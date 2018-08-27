@@ -173,6 +173,10 @@ SteamUser.prototype.logOn = function(details) {
 			sid.accountid = 0;
 			self._tempSteamID = sid;
 
+			if (anonLogin && self._logOnDetails.password) {
+				process.stderr.write("[steam-user] Warning: Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?\n");
+			}
+
 			self._doConnection();
 		}
 	}
