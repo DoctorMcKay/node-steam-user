@@ -441,7 +441,7 @@ SteamUser.prototype._addAppToCache = function(appid) {
  * @private
  */
 SteamUser.prototype._getLicenseInfo = function() {
-	if (!this.options.enablePicsCache) {
+	if (!this.options.enablePicsCache || !this.steamID) {
 		return;
 	}
 
