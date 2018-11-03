@@ -200,6 +200,15 @@ Added in 3.3.0.
 
 Defaults to `60000`.
 
+### additionalHeaders
+
+Set this to an object where keys are header names and values are header values, and those headers will be included
+with all HTTP requests `node-steam-user` makes to the Steam WebAPI.
+
+Added in 3.29.0.
+
+Defaults to `{}`.
+
 # Properties [^](#contents)
 
 ### client
