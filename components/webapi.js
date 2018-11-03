@@ -27,7 +27,7 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 	data.format = "vdf"; // for parity with the Steam client
 
 	var query = buildQueryString(data);
-	var headers = getDefaultHeaders();
+	var headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
 	var path = "/" + iface + "/" + method + "/v" + version + "/";
 
 	if (httpMethod == "POST") {
