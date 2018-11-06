@@ -36,7 +36,11 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
 		"limit": limit
 	}, false, function(body) {
 		callback(body.servers.map(function(server) {
-			server.steamid = new SteamID(server.steamid.toString());
+			try {
+				server.steamid = new SteamID(server.steamid.toString());
+			} catch(e) {
+				
+			}
 			return server;
 		}));
 	});
