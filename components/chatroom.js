@@ -1,4 +1,5 @@
 const EventEmitter = require('events').EventEmitter;
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 const Util = require('util');
 
@@ -70,45 +71,55 @@ function SteamChatRoomClient(user) {
 
 /**
  * Get a list of the chat room groups you're in.
- * @param {function} callback
+ * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.getGroups = function(callback) {
-	this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body) => {
-		body.chat_room_groups = body.chat_room_groups.map(processChatRoomSummaryPair);
-		let groups = {};
-		body.chat_room_groups.forEach((group) => {
-			groups[group.group_summary.chat_group_id] = group;
-		});
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body) => {
+			body.chat_room_groups = body.chat_room_groups.map(processChatRoomSummaryPair);
+			let groups = {};
+			body.chat_room_groups.forEach((group) => {
+				groups[group.group_summary.chat_group_id] = group;
+			});
 
-		body.chat_room_groups = groups;
-		callback(null, body);
+			body.chat_room_groups = groups;
+			accept(body);
+		});
 	});
 };
 
 /**
  * Get details from a chat group invite link.
  * @param {string} linkUrl
- * @param {function} callback
+ * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
-	let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
-	if (!match) {
-		callback(new Error("Malformed invite link"));
-		return;
-	}
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
+		if (!match) {
+			return reject(new Error("Malformed invite link"));
+		}
 
-	this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body) => {
-		body = preProcessObject(body);
-		body.group_summary = processChatGroupSummary(body.group_summary);
-		body.user_chat_group_state = preProcessObject(body.user_chat_group_state);
-		callback(null, body);
+		this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body) => {
+			body = preProcessObject(body);
+			body.group_summary = processChatGroupSummary(body.group_summary);
+			body.user_chat_group_state = preProcessObject(body.user_chat_group_state);
+			accept(body);
+		});
 	});
 };
 
 SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback) {
-	this.user._sendUnified("ChatRoom.JoinChatRoomGroup#1", {"chat_group_id": groupId, "invite_code": inviteCode}, (body) => {
-		body = preProcessObject(body);
-		// TODO
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		this.user._sendUnified("ChatRoom.JoinChatRoomGroup#1", {
+			"chat_group_id": groupId,
+			"invite_code": inviteCode
+		}, (body) => {
+			body = preProcessObject(body);
+			// TODO
+		});
 	});
 };
 
@@ -118,6 +129,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
  * @param {string} message
  * @param {{[chatEntryType], [containsBbCode]}} [options]
  * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, options, callback) {
 	if (typeof options === 'function') {
@@ -127,21 +139,19 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 		options = {};
 	}
 
-	const EChatEntryType = require('../index.js').EChatEntryType;
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		const EChatEntryType = require('../index.js').EChatEntryType;
 
-	this.user._sendUnified("FriendMessages.SendMessage#1", {
-		"steamid": Helpers.steamID(steamId).toString(),
-		"chat_entry_type": options.chatEntryType || EChatEntryType.ChatMsg,
-		"message": message,
-		"contains_bbcode": options.containsBbCode || false
-	}, (body) => {
-		if (!callback) {
-			return;
-		}
-
-		body = preProcessObject(body);
-		body.ordinal = body.ordinal || 0;
-		callback(null, body);
+		this.user._sendUnified("FriendMessages.SendMessage#1", {
+			"steamid": Helpers.steamID(steamId).toString(),
+			"chat_entry_type": options.chatEntryType || EChatEntryType.ChatMsg,
+			"message": message,
+			"contains_bbcode": options.containsBbCode || false
+		}, (body) => {
+			body = preProcessObject(body);
+			body.ordinal = body.ordinal || 0;
+			accept(body);
+		});
 	});
 };
 
@@ -149,10 +159,11 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
  * Inform a friend that you're typing a message to them.
  * @param {SteamID|string} steamId
  * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
 	const EChatEntryType = require('../index.js').EChatEntryType;
-	this.sendFriendMessage(steamId, "", {"chatEntryType": EChatEntryType.Typing}, callback);
+	return this.sendFriendMessage(steamId, "", {"chatEntryType": EChatEntryType.Typing}, callback);
 };
 
 /**
@@ -161,19 +172,18 @@ SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
  * @param {int} chatId
  * @param {string} message
  * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, message, callback) {
-	this.user._sendUnified("ChatRoom.SendChatMessage#1", {
-		"chat_group_id": groupId,
-		"chat_id": chatId,
-		"message": message
-	}, (body) => {
-		if (!callback) {
-			return;
-		}
-
-		body = preProcessObject(body);
-		callback(null, body);
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		this.user._sendUnified("ChatRoom.SendChatMessage#1", {
+			"chat_group_id": groupId,
+			"chat_id": chatId,
+			"message": message
+		}, (body) => {
+			body = preProcessObject(body);
+			accept(body);
+		});
 	});
 };
 
@@ -182,7 +192,8 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
  * @param {int} groupId
  * @param {int} chatId
  * @param {{[maxCount], [lastTime], [lastOrdinal], [startTime], [startOrdinal]}} [options]
- * @param {function} callback
+ * @param {function} [callback]
+ * @return Promise
  */
 SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, options, callback) {
 	if (typeof options === 'function') {
@@ -190,35 +201,37 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 		options = {};
 	}
 
-	let max_count = options.maxCount || 100;
-	let last_time = options.lastTime;
-	let last_ordinal = options.lastOrdinal;
-	let start_time = options.startTime;
-	let start_ordinal = options.startOrdinal;
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		let max_count = options.maxCount || 100;
+		let last_time = options.lastTime;
+		let last_ordinal = options.lastOrdinal;
+		let start_time = options.startTime;
+		let start_ordinal = options.startOrdinal;
 
-	if (last_time instanceof Date) {
-		last_time = Math.floor(last_time.getTime() / 1000);
-	}
-
-	if (start_time instanceof Date) {
-		start_time = Math.floor(start_time.getTime() / 1000);
-	}
-
-	this.user._sendUnified("ChatRoom.GetMessageHistory#1", {
-		"chat_group_id": groupId,
-		"chat_id": chatId,
-		last_time,
-		last_ordinal,
-		start_time,
-		start_ordinal,
-		max_count
-	}, (body) => {
-		body = preProcessObject(body);
-		if (body.messages) {
-			body.messages = processChatMessageHistory(body.messages);
+		if (last_time instanceof Date) {
+			last_time = Math.floor(last_time.getTime() / 1000);
 		}
 
-		callback(null, body);
+		if (start_time instanceof Date) {
+			start_time = Math.floor(start_time.getTime() / 1000);
+		}
+
+		this.user._sendUnified("ChatRoom.GetMessageHistory#1", {
+			"chat_group_id": groupId,
+			"chat_id": chatId,
+			last_time,
+			last_ordinal,
+			start_time,
+			start_ordinal,
+			max_count
+		}, (body) => {
+			body = preProcessObject(body);
+			if (body.messages) {
+				body.messages = processChatMessageHistory(body.messages);
+			}
+
+			accept(body);
+		});
 	});
 };
 
