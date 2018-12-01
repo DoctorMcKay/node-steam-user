@@ -1,9 +1,10 @@
 const BinaryKVParser = require('binarykvparser');
 const ByteBuffer = require('bytebuffer');
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 
-var Helpers = require('./helpers.js');
-var SteamUser = require('../index.js');
+const Helpers = require('./helpers.js');
+const SteamUser = require('../index.js');
 
 /**
  * Sends a chat message to a user or a chat room.
@@ -43,49 +44,61 @@ SteamUser.prototype.chatTyping = function(recipient) {
  * Requests chat history from Steam with a particular user. Also gets unread offline messages.
  * @param {(SteamID|string)} steamID - The SteamID of the other user with whom you're requesting history (as a SteamID object or a string which can parse into one)
  * @param {SteamUser~getChatHistoryCallback} [callback] - An optional callback to be invoked when the response is received.
+ * @return Promise
  */
 SteamUser.prototype.getChatHistory = function(steamID, callback) {
-	steamID = Helpers.steamID(steamID);
-	var sid64 = steamID.getSteamID64();
+	return StdLib.Promises.callbackPromise(['messages'], callback, true, (accept, reject) => {
+		steamID = Helpers.steamID(steamID);
+		let sid64 = steamID.getSteamID64();
 
-	this._send(SteamUser.EMsg.ClientFSGetFriendMessageHistory, {
-		"steamid": sid64
-	});
-
-	/**
-	 * Simply binds a listener to the `chatHistory` event and removes the SteamID parameter.
-	 * @callback SteamUser~getChatHistoryCallback
-	 * @param {Error|null} success - Was the request successful?
-	 * @param {Object[]} messages - An array of message objects
-	 * @param {SteamID} messages[].steamID - The SteamID of the user who sent the message (either you or the other user)
-	 * @param {Date} messages[].timestamp - The time when the message was sent
-	 * @param {string} messages[].message - The message that was sent
-	 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
-	 */
-	if (callback) {
-		this.once('chatHistory#' + sid64, function(steamID, success, messages) {
-			callback(Helpers.eresultError(success), messages);
+		this._send(SteamUser.EMsg.ClientFSGetFriendMessageHistory, {
+			"steamid": sid64
 		});
-	}
+
+		/**
+		 * Simply binds a listener to the `chatHistory` event and removes the SteamID parameter.
+		 * @callback SteamUser~getChatHistoryCallback
+		 * @param {Error|null} success - Was the request successful?
+		 * @param {Object[]} messages - An array of message objects
+		 * @param {SteamID} messages[].steamID - The SteamID of the user who sent the message (either you or the other user)
+		 * @param {Date} messages[].timestamp - The time when the message was sent
+		 * @param {string} messages[].message - The message that was sent
+		 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
+		 */
+		this.once('chatHistory#' + sid64, (steamID, success, messages) => {
+			let err = Helpers.eresultError(success);
+			if (err) {
+				return reject(err);
+			} else {
+				return accept({messages});
+			}
+		});
+	});
 };
 
 /**
  * Join a chat room. To join a group chat, use the group's (clan) SteamID.
  * @param {(SteamID|string)} steamID - The SteamID of the chat to join (as a SteamID object or a string which can parse into one)
  * @param {SteamUser~genericEResultCallback} [callback] - An optional callback to be invoked when the room is joined (or a failure occurs).
+ * @return Promise
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.joinChat = function(steamID, callback) {
-	var msg = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
-	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
-	msg.writeUint8(0); // isVoiceSpeaker
-	this._send(SteamUser.EMsg.ClientJoinChat, msg.flip());
+	return StdLib.Promises.callbackPromise([], callback, true, (accept, reject) => {
+		let msg = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
+		msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
+		msg.writeUint8(0); // isVoiceSpeaker
+		this._send(SteamUser.EMsg.ClientJoinChat, msg.flip());
 
-	if (callback) {
-		this.once('chatEnter#' + Helpers.steamID(steamID).getSteamID64(), function(chatID, result) {
-			callback(Helpers.eresultError(result));
+		this.once('chatEnter#' + Helpers.steamID(steamID).getSteamID64(), (chatID, result) => {
+			let err = Helpers.eresultError(result);
+			if (err) {
+				return reject(err);
+			} else {
+				return accept();
+			}
 		});
-	}
+	});
 };
 
 /**
@@ -227,36 +240,42 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
  * @param {null|SteamID|string} [convertUserID=null] - If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
  * @param {null|SteamID|string} [inviteUserID=null] - If specified, the user with the SteamID passed here will get invited to the new room automatically.
  * @param {SteamUser~createChatRoomCallback} [callback] - Called when the chat is created or a failure occurs.
+ * @return Promise
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
-	convertUserID = convertUserID || new SteamID();
-	inviteUserID = inviteUserID || new SteamID();
+	return StdLib.Promises.callbackPromise(['chatID'], callback, true, (accept, reject) => {
+		convertUserID = convertUserID || new SteamID();
+		inviteUserID = inviteUserID || new SteamID();
 
-	var msg = ByteBuffer.allocate(53, ByteBuffer.LITTLE_ENDIAN);
-	msg.writeUint32(SteamUser.EChatRoomType.MUC); // multi-user chat
-	msg.writeUint64(0);
-	msg.writeUint64(0);
-	msg.writeUint32(SteamUser.EChatPermission.MemberDefault);
-	msg.writeUint32(SteamUser.EChatPermission.MemberDefault);
-	msg.writeUint32(SteamUser.EChatPermission.EveryoneDefault);
-	msg.writeUint32(0);
-	msg.writeUint8(SteamUser.EChatFlags.Locked);
-	msg.writeUint64(Helpers.steamID(convertUserID).getSteamID64());
-	msg.writeUint64(Helpers.steamID(inviteUserID).getSteamID64());
-	this._send(SteamUser.EMsg.ClientCreateChat, msg.flip());
+		var msg = ByteBuffer.allocate(53, ByteBuffer.LITTLE_ENDIAN);
+		msg.writeUint32(SteamUser.EChatRoomType.MUC); // multi-user chat
+		msg.writeUint64(0);
+		msg.writeUint64(0);
+		msg.writeUint32(SteamUser.EChatPermission.MemberDefault);
+		msg.writeUint32(SteamUser.EChatPermission.MemberDefault);
+		msg.writeUint32(SteamUser.EChatPermission.EveryoneDefault);
+		msg.writeUint32(0);
+		msg.writeUint8(SteamUser.EChatFlags.Locked);
+		msg.writeUint64(Helpers.steamID(convertUserID).getSteamID64());
+		msg.writeUint64(Helpers.steamID(inviteUserID).getSteamID64());
+		this._send(SteamUser.EMsg.ClientCreateChat, msg.flip());
 
-	/**
-	 * Called when the room is created or a failure occurs. If successful, you will be in the room when this callback fires.
-	 * @callback SteamUser~createChatRoomCallback
-	 * @param {Error|null} err - The result of the creation request
-	 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
-	 */
-	if (callback) {
-		this.once('chatCreated#' + convertUserID.getSteamID64(), function(convertedUserID, result, chatID) {
-			callback(Helpers.eresultError(result || 1), chatID);
+		/**
+		 * Called when the room is created or a failure occurs. If successful, you will be in the room when this callback fires.
+		 * @callback SteamUser~createChatRoomCallback
+		 * @param {Error|null} err - The result of the creation request
+		 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
+		 */
+		this.once('chatCreated#' + convertUserID.getSteamID64(), (convertedUserID, result, chatID) => {
+			let err = Helpers.eresultError(result || SteamUser.EResult.OK);
+			if (err) {
+				return reject(err);
+			} else {
+				return accept({chatID});
+			}
 		});
-	}
+	});
 };
 
 // Handlers
