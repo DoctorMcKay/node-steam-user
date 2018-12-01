@@ -1,7 +1,5 @@
 const BinaryKVParser = require('binarykvparser');
-const ByteBuffer = require('bytebuffer');
 const StdLib = require('@doctormckay/stdlib');
-const SteamID = require('steamid');
 
 const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
