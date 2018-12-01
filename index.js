@@ -82,7 +82,8 @@ function SteamUser(options) {
 		"picsCacheAll": false,
 		"changelistUpdateInterval": 60000,
 		"saveAppTickets": true,
-		"debug": false
+		"debug": false,
+		"additionalHeaders": {},
 	};
 
 	for (var i in defaultOptions) {
