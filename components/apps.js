@@ -1,4 +1,5 @@
 const BinaryKVParser = require('binarykvparser');
+const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 const VDF = require('vdf');
 
@@ -51,45 +52,60 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 /**
  * Kick any other session logged into your account which is playing a game from Steam.
  * @param {function} [callback] - Single err parameter
+ * @return Promise
  */
 SteamUser.prototype.kickPlayingSession = function(callback) {
-	this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
-	this.once('playingState', function(blocked, playingApp) {
-		if (!callback) {
-			return;
-		}
-
-		if (blocked) {
-			callback(new Error("Cannot kick other session"));
-		} else {
-			callback(null);
-		}
+	return StdLib.Promises.callbackPromise([], callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
+		this.once('playingState', (blocked, playingApp) => {
+			if (blocked) {
+				reject(new Error("Cannot kick other session"));
+			} else {
+				accept();
+			}
+		});
 	});
 };
 
 /**
  * Get count of people playing a Steam app. Use appid 0 to get number of people connected to Steam.
  * @param {int} appid
- * @param {function} callback - Args (eresult, player count)
+ * @param {function} [callback] - Args (eresult, player count)
+ * @return Promise
  */
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
-	this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, function(body) {
-		callback(Helpers.eresultError(body.eresult), body.player_count);
+	return StdLib.Promises.callbackPromise(['playerCount'], callback, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, (body) => {
+			let err = Helpers.eresultError(body.eresult);
+			if (err) {
+				reject(err);
+			} else {
+				accept({"playerCount": body.player_count});
+			}
+		});
 	});
 };
 
 /**
  * Get a list of apps or packages which have changed since a particular changenumber.
  * @param {int} sinceChangenumber - Changenumber to get changes since. Use 0 to get the latest changenumber, but nothing else
- * @param {function} callback - Args (current changenumber, array of appids that changed, array of packageids that changed)
+ * @param {function} [callback] - Args (current changenumber, array of appids that changed, array of packageids that changed)
+ * @return Promise
  */
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
-	this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
-		"since_change_number": sinceChangenumber,
-		"send_app_info_changes": true,
-		"send_package_info_changes": true
-	}, function(body) {
-		callback(null, body.current_change_number, body.app_changes, body.package_changes);
+	let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
+	return StdLib.Promises.callbackPromise(args, callback, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
+			"since_change_number": sinceChangenumber,
+			"send_app_info_changes": true,
+			"send_package_info_changes": true
+		}, (body) => {
+			accept({
+				"currentChangeNumber": body.current_change_number,
+				"appChanges": body.app_changes,
+				"packageChanges": body.package_changes
+			});
+		});
 	});
 };
 
@@ -98,8 +114,9 @@ SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
  * @param {int[]|object[]} apps - Array of AppIDs. May be empty. May also contain objects with keys {appid, access_token}
  * @param {int[]|object[]} packages - Array of package IDs. May be empty. May also contain objects with keys {packageid, access_token}
  * @param {boolean} [inclTokens=false] - If true, automatically retrieve access tokens if needed
- * @param {function} callback - Args (array of app data, array of package data, array of appids that don't exist, array of packageids that don't exist)
+ * @param {function} [callback] - Args (array of app data, array of package data, array of appids that don't exist, array of packageids that don't exist)
  * @param {int} [requestType] - Don't touch
+ * @return Promise
  */
 SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callback, requestType) {
 	// Adds support for the previous syntax
@@ -109,191 +126,189 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	requestType = requestType || PICSRequestType.User;
+	return StdLib.Promises.callbackPromise(['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (accept, reject) => {
+		requestType = requestType || PICSRequestType.User;
 
-	// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
-	var appids = [];
-	var packageids = [];
-	var response = {
-		"apps": {},
-		"packages": {},
-		"unknownApps": [],
-		"unknownPackages": []
-	};
+		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
+		var appids = [];
+		var packageids = [];
+		var response = {
+			"apps": {},
+			"packages": {},
+			"unknownApps": [],
+			"unknownPackages": []
+		};
 
-	apps = apps.map(function(app) {
-		if (typeof app === 'object') {
-			appids.push(app.appid);
-			return app;
-		} else {
-			appids.push(app);
-			return {"appid": app};
-		}
-	});
+		apps = apps.map((app) => {
+			if (typeof app === 'object') {
+				appids.push(app.appid);
+				return app;
+			} else {
+				appids.push(app);
+				return {"appid": app};
+			}
+		});
 
-	packages = packages.map(function(pkg) {
-		if (typeof pkg === 'object') {
-			packageids.push(pkg.packageid);
-			return pkg;
-		} else {
-			packageids.push(pkg);
-			return {"packageid": pkg};
-		}
-	});
+		packages = packages.map((pkg) => {
+			if (typeof pkg === 'object') {
+				packageids.push(pkg.packageid);
+				return pkg;
+			} else {
+				packageids.push(pkg);
+				return {"packageid": pkg};
+			}
+		});
 
-	this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
-		"apps": apps,
-		"packages": packages
-	}, (body) => {
-		// If we're using the PICS cache, then add the items in this response to it
-		if (this.options.enablePicsCache) {
-			var cache = this.picsCache;
-			cache.apps = cache.apps || {};
-			cache.packages = cache.packages || {};
+		this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
+			"apps": apps,
+			"packages": packages
+		}, (body) => {
+			// If we're using the PICS cache, then add the items in this response to it
+			if (this.options.enablePicsCache) {
+				var cache = this.picsCache;
+				cache.apps = cache.apps || {};
+				cache.packages = cache.packages || {};
 
-			(body.apps || []).forEach(function(app) {
-				var data = {
+				(body.apps || []).forEach((app) => {
+					var data = {
+						"changenumber": app.change_number,
+						"missingToken": !!app.missing_token,
+						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
+					};
+
+					if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
+						// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
+						this.emit('appUpdate', app.appid, data);
+					}
+
+					cache.apps[app.appid] = data;
+
+					app._parsedData = data;
+				});
+
+				(body.packages || []).forEach((pkg) => {
+					var data = {
+						"changenumber": pkg.change_number,
+						"missingToken": !!pkg.missing_token,
+						"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
+					};
+
+					if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
+						this.emit('packageUpdate', pkg.packageid, data);
+					}
+
+					cache.packages[pkg.packageid] = data;
+
+					pkg._parsedData = data;
+
+					// Request info for all the apps in this package, if this request didn't originate from the license list
+					if (requestType != PICSRequestType.Licenses) {
+						var appids = (pkg.packageinfo || {}).appids || [];
+						this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents);
+					}
+				});
+			}
+
+			(body.unknown_appids || []).forEach((appid) => {
+				response.unknownApps.push(appid);
+				var index = appids.indexOf(appid);
+				if (index != -1) {
+					appids.splice(index, 1);
+				}
+			});
+
+			(body.unknown_packageids || []).forEach((packageid) => {
+				response.unknownPackages.push(packageid);
+				var index = packageids.indexOf(packageid);
+				if (index != -1) {
+					packageids.splice(index, 1);
+				}
+			});
+
+			(body.apps || []).forEach((app) => {
+				response.apps[app.appid] = app._parsedData || {
 					"changenumber": app.change_number,
 					"missingToken": !!app.missing_token,
 					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
 				};
 
-				if ((!cache.apps[app.appid] && requestType == PICSRequestType.Changelist) || (cache.apps[app.appid] && cache.apps[app.appid].changenumber != data.changenumber)) {
-					// Only emit the event if we previously didn't have the appinfo, or if the changenumber changed
-					this.emit('appUpdate', app.appid, data);
+				var index = appids.indexOf(app.appid);
+				if (index != -1) {
+					appids.splice(index, 1);
 				}
-
-				cache.apps[app.appid] = data;
-
-				app._parsedData = data;
 			});
 
-			(body.packages || []).forEach(function(pkg) {
-				var data = {
+			(body.packages || []).forEach((pkg) => {
+				response.packages[pkg.packageid] = pkg._parsedData || {
 					"changenumber": pkg.change_number,
 					"missingToken": !!pkg.missing_token,
 					"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
 				};
 
-				if ((!cache.packages[pkg.packageid] && requestType == PICSRequestType.Changelist) || (cache.packages[pkg.packageid] && cache.packages[pkg.packageid].changenumber != data.changenumber)) {
-					this.emit('packageUpdate', pkg.packageid, data);
-				}
-
-				cache.packages[pkg.packageid] = data;
-
-				pkg._parsedData = data;
-
-				// Request info for all the apps in this package, if this request didn't originate from the license list
-				if (requestType != PICSRequestType.Licenses) {
-					var appids = (pkg.packageinfo || {}).appids || [];
-					this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents);
+				var index = packageids.indexOf(pkg.packageid);
+				if (index != -1) {
+					packageids.splice(index, 1);
 				}
 			});
-		}
 
-		if (!callback) {
-			return;
-		}
+			if (appids.length === 0 && packageids.length === 0) {
+				if (inclTokens) {
+					var tokenlessAppids = [];
+					var tokenlessPackages = [];
 
-		(body.unknown_appids || []).forEach(function(appid) {
-			response.unknownApps.push(appid);
-			var index = appids.indexOf(appid);
-			if (index != -1) {
-				appids.splice(index, 1);
-			}
-		});
-
-		(body.unknown_packageids || []).forEach(function(packageid) {
-			response.unknownPackages.push(packageid);
-			var index = packageids.indexOf(packageid);
-			if (index != -1) {
-				packageids.splice(index, 1);
-			}
-		});
-
-		(body.apps || []).forEach(function(app) {
-			response.apps[app.appid] = app._parsedData || {
-				"changenumber": app.change_number,
-				"missingToken": !!app.missing_token,
-				"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
-			};
-
-			var index = appids.indexOf(app.appid);
-			if (index != -1) {
-				appids.splice(index, 1);
-			}
-		});
-
-		(body.packages || []).forEach(function(pkg) {
-			response.packages[pkg.packageid] = pkg._parsedData || {
-				"changenumber": pkg.change_number,
-				"missingToken": !!pkg.missing_token,
-				"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
-			};
-
-			var index = packageids.indexOf(pkg.packageid);
-			if (index != -1) {
-				packageids.splice(index, 1);
-			}
-		});
-
-		if (appids.length === 0 && packageids.length === 0) {
-			if (inclTokens) {
-				var tokenlessAppids = [];
-				var tokenlessPackages = [];
-
-				for (var appid in response.apps) {
-					if (response.apps[appid].missingToken) {
-						tokenlessAppids.push(parseInt(appid, 10));
-					}
-				}
-
-				for (var packageid in response.packages) {
-					if (response.packages[packageid].missingToken) {
-						tokenlessPackages.push(parseInt(packageid, 10));
-					}
-				}
-
-				if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
-					self.getProductAccessToken(tokenlessAppids, tokenlessPackages, function(appTokens, packageTokens) {
-						var tokenApps = [];
-						var tokenPackages = [];
-
-						for (appid in appTokens) {
-							tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+					for (var appid in response.apps) {
+						if (response.apps[appid].missingToken) {
+							tokenlessAppids.push(parseInt(appid, 10));
 						}
+					}
 
-						for (packageid in packageTokens) {
-							tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[appid]})
+					for (var packageid in response.packages) {
+						if (response.packages[packageid].missingToken) {
+							tokenlessPackages.push(parseInt(packageid, 10));
 						}
+					}
 
-						self.getProductInfo(tokenApps, tokenPackages, false, function(apps, packages) {
-							for (appid in apps) {
-								response.apps[appid] = apps[appid];
-								var index = response.unknownApps.indexOf(parseInt(appid, 10));
-								if (index != -1) {
-									response.unknownApps.splice(index, 1);
-								}
+					if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
+						self.getProductAccessToken(tokenlessAppids, tokenlessPackages, (appTokens, packageTokens) => {
+							var tokenApps = [];
+							var tokenPackages = [];
+
+							for (appid in appTokens) {
+								tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
 							}
 
-							for (packageid in packages) {
-								response.packages[packageid] = packages[packageid];
-								var index = response.unknownPackages.indexOf(parseInt(packageid, 10));
-								if (index != -1) {
-									response.unknownPackages.splice(index, 1);
-								}
+							for (packageid in packageTokens) {
+								tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[appid]})
 							}
 
-							callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+							self.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
+								for (appid in apps) {
+									response.apps[appid] = apps[appid];
+									var index = response.unknownApps.indexOf(parseInt(appid, 10));
+									if (index != -1) {
+										response.unknownApps.splice(index, 1);
+									}
+								}
+
+								for (packageid in packages) {
+									response.packages[packageid] = packages[packageid];
+									var index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+									if (index != -1) {
+										response.unknownPackages.splice(index, 1);
+									}
+								}
+
+								accept(response);
+							});
 						});
-					});
+					} else {
+						accept(response);
+					}
 				} else {
-					callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
+					accept(response);
 				}
-			} else {
-				callback(null, response.apps, response.packages, response.unknownApps, response.unknownPackages);
 			}
-		}
+		});
 	});
 };
 
@@ -301,25 +316,34 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
  * Get access tokens for some apps and/or packages
  * @param {int[]} apps - Array of appids
  * @param {int[]} packages - Array of packageids
- * @param {function} callback - First arg is an object of (appid => access token), second is the same for packages, third is array of appids for which tokens are denied, fourth is the same for packages
+ * @param {function} [callback] - First arg is an object of (appid => access token), second is the same for packages, third is array of appids for which tokens are denied, fourth is the same for packages
+ * @return Promise
  */
 SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
-	this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
-		"packageids": packages,
-		"appids": apps
-	}, function(body) {
-		var appTokens = {};
-		var packageTokens = {};
+	let args = ['appTokens', 'packageTokens', 'appDeniedTokens', 'packageDeniedTokens'];
+	return StdLib.Promises.callbackPromise(args, callback, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
+			"packageids": packages,
+			"appids": apps
+		}, (body) => {
+			var appTokens = {};
+			var packageTokens = {};
 
-		(body.app_access_tokens || []).forEach(function(app) {
-			appTokens[app.appid] = app.access_token;
+			(body.app_access_tokens || []).forEach((app) => {
+				appTokens[app.appid] = app.access_token;
+			});
+
+			(body.package_access_tokens || []).forEach((pkg) => {
+				packageTokens[pkg.packageid] = pkg.access_token;
+			});
+
+			accept({
+				appTokens,
+				packageTokens,
+				"appDeniedTokens": body.app_denied_tokens || [],
+				"packageDeniedTokens": body.package_denied_tokens || []
+			});
 		});
-
-		(body.package_access_tokens || []).forEach(function(pkg) {
-			packageTokens[pkg.packageid] = pkg.access_token;
-		});
-
-		callback(null, appTokens, packageTokens, body.app_denied_tokens || [], body.package_denied_tokens || []);
 	});
 };
 
@@ -620,49 +644,57 @@ function sortNumeric(a, b) {
 /**
  * Redeem a product code on this account.
  * @param {string} key
- * @param {function} callback - Args (eresult value, SteamUser.EPurchaseResult value, object of (packageid => package names)
+ * @param {function} [callback] - Args (eresult value, SteamUser.EPurchaseResult value, object of (packageid => package names)
+ * @return Promise
  */
 SteamUser.prototype.redeemKey = function(key, callback) {
-	this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, function(body) {
-		if (typeof callback !== 'function') {
-			return;
-		}
+	return StdLib.Promises.callbackPromise(['purchaseResultDetails', 'packageList'], callback, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
+			var packageList = {};
 
-		var packageList = {};
+			var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
+			if (recipeDetails.LineItemCount > 0) {
+				recipeDetails.lineitems.forEach((pkg) => {
+					var packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
+					packageList[packageID] = pkg.ItemDescription;
+				});
+			}
 
-		var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
-		if (recipeDetails.LineItemCount > 0) {
-			recipeDetails.lineitems.forEach(function(pkg) {
-				var packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
-				packageList[packageID] = pkg.ItemDescription;
-			});
-		}
-
-		callback(Helpers.eresultError(body.eresult), body.purchase_result_details, packageList);
+			let err = Helpers.eresultError(body.eresult);
+			if (err) {
+				reject(err);
+			} else {
+				accept({
+					"purchaseResultDetails": body.purchase_result_details,
+					packageList
+				});
+			}
+		});
 	});
 };
 
 /**
  * Request licenses for one or more free-on-demand apps.
  * @param {int[]} appIDs
- * @param {function} callback - Args (err, array of granted packageids, array of granted appids)
+ * @param {function} [callback] - Args (err, array of granted packageids, array of granted appids)
+ * @return Promise
  */
 SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 	if (!Array.isArray(appIDs)) {
 		appIDs = [appIDs];
 	}
 
-	this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, function(body) {
-		if (!callback) {
-			return;
-		}
-
-		if (body.eresult != SteamUser.EResult.OK) {
-			callback(Helpers.eresultError(body.eresult));
-			return;
-		}
-
-		callback(null, body.granted_packageids, body.granted_appids);
+	return StdLib.Promises.callbackPromise(['grantedPackageIds', 'grantedAppIds'], callback, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				reject(Helpers.eresultError(body.eresult));
+			} else {
+				accept({
+					"grantedPackageIds": body.granted_packageids,
+					"grantedAppIds": body.granted_appids
+				})
+			}
+		});
 	});
 };
 
