@@ -1,6 +1,5 @@
 const AdmZip = require('adm-zip');
 const ByteBuffer = require('bytebuffer');
-const Crc32 = require('buffer-crc32');
 const EventEmitter = require('events').EventEmitter;
 const FS = require('fs');
 const LZMA = require('lzma');
@@ -630,7 +629,7 @@ function unzip(data, callback) {
 				return;
 			}
 
-			if (Crc32.unsigned(result) != decompressedCrc) {
+			if (StdLib.Hashing.crc32(result) != decompressedCrc) {
 				callback(new Error("CRC check failed on decompressed data"));
 				return;
 			}

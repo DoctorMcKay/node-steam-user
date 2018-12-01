@@ -1,5 +1,4 @@
 const ByteBuffer = require('bytebuffer');
-const CRC32 = require('buffer-crc32');
 const Crypto = require('crypto');
 const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
@@ -57,7 +56,7 @@ SteamUser.parseEncryptedAppTicket = function(ticket, encryptionKey) {
 		let key = typeof encryptionKey === 'string' ? Buffer.from(encryptionKey, 'hex') : encryptionKey;
 		let decrypted = SteamCrypto.symmetricDecrypt(outer.encrypted_ticket, key);
 
-		if (CRC32.unsigned(decrypted) != outer.crc_encryptedticket) {
+		if (StdLib.Hashing.crc32(decrypted) != outer.crc_encryptedticket) {
 			return null;
 		}
 

@@ -30,7 +30,6 @@
 		"appdirectory": "^0.1.0",
 		"async": "^2.5.0",
 		"binarykvparser": "^2.2.0",
-		"buffer-crc32": "^0.2.13",
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^1.0.1",
 		"lzma": "^2.3.2",

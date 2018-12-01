@@ -1,5 +1,5 @@
-const BufferCRC32 = require('buffer-crc32');
 const ByteBuffer = require('bytebuffer');
+const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 
 const SteamUser = require('../index.js');
@@ -29,13 +29,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptRequest] = function(b
 
 	let sessionKey = SteamCrypto.generateSessionKey(nonce);
 	this._connection._tempSessionKey = sessionKey.plain;
-	let keyCrc = BufferCRC32.signed(sessionKey.encrypted);
+	let keyCrc = StdLib.Hashing.crc32(sessionKey.encrypted);
 
 	let encResp = ByteBuffer.allocate(4 + 4 + sessionKey.encrypted.length + 4 + 4, ByteBuffer.LITTLE_ENDIAN);
 	encResp.writeUint32(protocol);
 	encResp.writeUint32(sessionKey.encrypted.length); // key size
 	encResp.append(sessionKey.encrypted);
-	encResp.writeInt32(keyCrc);
+	encResp.writeUint32(keyCrc);
 	encResp.writeUint32(0);
 	encResp.flip();
 
