@@ -205,11 +205,15 @@ Defaults to `{}`.
 
 Pass an IP here (as a string) to bind to that address, or `null` to let the OS decide.
 
+Added in 4.0.0.
+
 Defaults to `null`.
 
 ### localPort
 
 Pass a port here to bind to that port, or `null` to let the OS decide.
+
+Added in 4.0.0.
 
 Defaults to `null`.
 
@@ -217,9 +221,13 @@ Defaults to `null`.
 
 Specify a URL here to use an HTTP proxy. For example, `http://user:pass@1.2.3.4:8081`
 
+Added in 4.0.0.
+
 ### protocol
 
 A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/v4/resources/EConnectionProtocol.js).
+
+Added in 4.0.0.
 
 Defaults to `Auto`.
 
