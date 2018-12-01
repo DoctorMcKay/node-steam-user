@@ -75,7 +75,6 @@ function SteamUser(options) {
 		"localPort": null,
 		"autoRelogin": true,
 		"singleSentryfile": false,
-		"promptSteamGuardCode": true,
 		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
 		"machineIdFormat": ["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"],
 		"enablePicsCache": false,

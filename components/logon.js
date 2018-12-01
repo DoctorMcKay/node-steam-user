@@ -489,7 +489,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body)
 };
 
 SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback) {
-	if (this.options.promptSteamGuardCode) {
+	if (this.listenerCount('steamGuard') == 0) {
+		// No steamGuard listeners, so prompt for one from stdin
+
 		var rl = require('readline').createInterface({
 			"input": process.stdin,
 			"output": process.stdout

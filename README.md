@@ -131,12 +131,6 @@ If on, a file named `sentry.bin` will be used for all accounts.
 
 Defaults to `false`.
 
-### promptSteamGuardCode
-
-A boolean which controls whether or not `SteamUser` will automatically prompt for Steam Guard codes when necessary from `stdin`.
-
-Defaults to `true`.
-
 ### machineIdType
 
 What kind of machine ID will SteamUser send to Steam when logging on? Should be a value from [`EMachineIDType`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EMachineIDType.js).
@@ -1225,7 +1219,10 @@ Emitted when you're successfully logged into Steam.
 	- `code` - The Steam Guard auth code
 - `lastCodeWrong` - `true` if you're using 2FA and the last code you provided was wrong, `false` otherwise
 
-If the `promptSteamGuardCode` option is disabled, this event will be emitted when Steam requests a Steam Guard code from us. You should collect the code from the user somehow and then call the `callback` with the code as the sole argument.
+This event will be emitted when Steam requests a Steam Guard code from us.
+You should collect the code from the user somehow and then call the `callback` with the code as the sole argument.
+
+If no listener is bound to this event, then `steam-user` will prompt the user for a code via stdin.
 
 Example:
 
