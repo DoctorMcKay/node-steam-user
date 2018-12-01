@@ -26,7 +26,7 @@
 		"@doctormckay/stats-reporter": "^1.0.3",
 		"@doctormckay/stdlib": "^1.1.0",
 		"@doctormckay/steam-crypto": "^1.2.0",
-		"adm-zip": "^0.4.7",
+		"adm-zip": "^0.4.13",
 		"appdirectory": "^0.1.0",
 		"async": "^2.5.0",
 		"binarykvparser": "^2.2.0",
