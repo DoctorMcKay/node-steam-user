@@ -71,7 +71,7 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 // Handlers
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, function(body) {
 	if (body.eresult != SteamUser.EResult.OK) {
 		this.emit('debug', 'Got response ' + body.eresult + ' from ClientRequestWebAPIAuthenticateUserNonceResponse, retrying');
 		setTimeout(this._webLogOn.bind(this), 500);

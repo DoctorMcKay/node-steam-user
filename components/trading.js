@@ -20,7 +20,7 @@ SteamUser.prototype.cancelTradeRequest = function(steamID) {
 
 // Handlers
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.EconTrading_InitiateTradeProposed, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_InitiateTradeProposed, function(body) {
 	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), (accept) => {
 		this._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
 			"trade_request_id": body.trade_request_id,
@@ -29,7 +29,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.EconTrading_InitiateTradePropose
 	});
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.EconTrading_InitiateTradeResult, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_InitiateTradeResult, function(body) {
 	// Is trade ID meaningful here?
 	this._emitIdEvent('tradeResponse', new SteamID(body.other_steamid.toString()), body.response, {
 		"steamguardRequiredDays": body.steamguard_required_days,
@@ -41,6 +41,6 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.EconTrading_InitiateTradeResult,
 	});
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.EconTrading_StartSession, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_StartSession, function(body) {
 	this._emitIdEvent('tradeStarted', new SteamID(body.other_steamid.toString()));
 });

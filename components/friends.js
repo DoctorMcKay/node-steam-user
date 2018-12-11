@@ -448,7 +448,7 @@ SteamUser.prototype.getNicknames = function(callback) {
 
 // Handlers
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientPersonaState, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
 	body.friends.forEach((user) => {
 		var sid = new SteamID(user.friendid.toString());
 		var sid64 = sid.getSteamID64();
@@ -492,7 +492,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientPersonaState, function(bod
 	});
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientClanState, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function(body) {
 	var sid = new SteamID(body.steamid_clan.toString());
 	var sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
@@ -565,7 +565,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientClanState, function(body) 
 	});
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFriendsList, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, function(body) {
 	(body.friends || []).forEach((relationship) => {
 		var sid = new SteamID(relationship.ulfriendid.toString());
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
@@ -624,7 +624,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFriendsList, function(body
 	}
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFriendsGroupsList, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, function(body) {
 	var groupList = {};
 
 	body.friendGroups.forEach(function(group) {
@@ -657,7 +657,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFriendsGroupsList, functio
 	this.myFriendGroups = groupList;
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientPlayerNicknameList, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayerNicknameList, function(body) {
 	var myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
 
 	body.nicknames.forEach(function(user) {
@@ -675,7 +675,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientPlayerNicknameList, functi
 	this.myNicknames = myNicknames;
 });
 
-SteamUser.prototype.handlers.add('PlayerClient.NotifyFriendNicknameChanged#1', function(body) {
+SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChanged#1', function(body) {
 	var sid = SteamID.fromIndividualAccountID(body.accountid);
 	this.emit('nickname', sid, body.nickname || null);
 	if (!body.nickname) {

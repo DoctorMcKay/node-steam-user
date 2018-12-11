@@ -300,7 +300,7 @@ SteamUser.prototype.relog = function() {
 
 // Handlers
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientLogOnResponse, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, function(body) {
 	switch (body.eresult) {
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
@@ -409,7 +409,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientLogOnResponse, function(bo
 	}
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientLoggedOff, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function(body) {
 	var msg = body.eresult;
 	for (var i in SteamUser.EResult) {
 		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
@@ -470,7 +470,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	}
 };
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientNewLoginKey, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientNewLoginKey, function(body) {
 	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
 		this._logOnDetails.login_key = body.login_key;
@@ -506,7 +506,7 @@ SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback
 	}
 };
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientCMList, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCMList, function(body) {
 	this.emit('debug', "Got list of " + (body.cm_websocket_addresses || []).length + " WebSocket CMs, with percentage to use at " +
 		(body.percent_default_to_websocket || 0) + "%");
 

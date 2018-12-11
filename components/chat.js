@@ -280,7 +280,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 
 // Handlers
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse, function(body) {
 	var universe = this.steamID.universe;
 	(body.messages || []).forEach(function(message) {
 		message.timestamp = new Date(message.timestamp * 1000);
@@ -304,7 +304,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientFSGetFriendMessageHistoryR
 	this._emitIdEvent('chatHistory', new SteamID(body.steamid.toString()), body.success, body.messages || []);
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatInvite, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, function(body) {
 	/**
 	 * Emitted when we're invited to a chat room.
 	 *
@@ -327,7 +327,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatInvite, function(body)
 	}
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientCreateChatResponse, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCreateChatResponse, function(body) {
 	var eresult = body.readUint32();
 	var chatID = new SteamID(body.readUint64().toString());
 	body.skip(4);
@@ -352,7 +352,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientCreateChatResponse, functi
 	}
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatEnter, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function(body) {
 	var chatID = fromChatID(body.readUint64());
 	body.skip(28);
 	var chatFlags = body.readUint8();
@@ -396,7 +396,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatEnter, function(body) 
 	this._emitIdEvent('chatEnter', chatID, response);
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatMemberInfo, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, function(body) {
 	var chatID = fromChatID(body.readUint64().toString());
 	var infoType = body.readUint32();
 
@@ -471,7 +471,7 @@ SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatMemberInfo, function(b
 	}
 });
 
-SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientChatRoomInfo, function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatRoomInfo, function(body) {
 	var chatID = fromChatID(body.readUint64());
 	var infoType = body.readUint32();
 
