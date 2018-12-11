@@ -17,7 +17,7 @@ SteamUser.prototype._handleConnectionClose = function() {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptRequest] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptRequest, function(body) {
 	this._connection.stream.setTimeout(0);
 
 	let protocol = body.readUint32();
@@ -41,9 +41,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptRequest] = function(b
 
 	this._send(SteamUser.EMsg.ChannelEncryptResponse, encResp);
 	this._connection.stream.setTimeout(1000);
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptResult] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptResult, function(body) {
 	this._connection.stream.setTimeout(0);
 
 	let eresult = body.readUint32();
@@ -58,4 +58,4 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ChannelEncryptResult] = function(bo
 
 	this.emit('Encryption success; now logging on');
 	this._send(this._logOnDetails.game_server_token ? SteamUser.EMsg.ClientLogonGameServer : SteamUser.EMsg.ClientLogon, this._logOnDetails);
-};
+});

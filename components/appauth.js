@@ -352,16 +352,16 @@ SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientGameConnectTokens] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGameConnectTokens, function(body) {
 	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
 	body.tokens.forEach((token) => {
 		this._gcTokens.push(token);
 	});
 
 	this.emit('_gcTokens'); // internal private event
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientTicketAuthComplete] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientTicketAuthComplete, function(body) {
 	let eventBody = {
 		"steamID": new SteamID(body.steam_id.toString()),
 		"appOwnerSteamID": body.owner_steam_id.toString() == "0" ? null : new SteamID(body.owner_steam_id.toString()),
@@ -379,4 +379,4 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientTicketAuthComplete] = functio
 	}
 
 	this.emit(eventName, eventBody);
-};
+});

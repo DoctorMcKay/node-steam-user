@@ -12,7 +12,7 @@ module.exports = SteamChatRoomClient;
 function SteamChatRoomClient(user) {
 	this.user = user;
 
-	this.user._handlers['FriendMessagesClient.IncomingMessage#1'] = (body) => {
+	this.user._handlerManager.add('FriendMessagesClient.IncomingMessage#1', function(body) {
 		body = preProcessObject(body);
 		body.local_echo = body.local_echo || false; // coerce null to false
 		body.from_limited_account = body.from_limited_account || false;
@@ -38,35 +38,35 @@ function SteamChatRoomClient(user) {
 				break;
 
 			default:
-				this.user.emit('debug', 'Got unknown chat entry type ' + body.chat_entry_type + ' from ' + body.steamid_friend);
+				this.emit('debug', 'Got unknown chat entry type ' + body.chat_entry_type + ' from ' + body.steamid_friend);
 		}
 
 		if (body.local_echo) {
 			eventName += 'Echo';
 		}
 
-		this.emit(eventName, body);
+		this.chat.emit(eventName, body);
 
 		// backwards compatibility
-		this.user._emitIdEvent(eventName, body.steamid_friend, body.message_no_bbcode);
+		this._emitIdEvent(eventName, body.steamid_friend, body.message_no_bbcode);
 		if (body.chat_entry_type == EChatEntryType.ChatMsg) {
-			this.user._emitIdEvent('friendOrChatMessage', body.steamid_friend, body.message_no_bbcode, body.steamid_friend);
+			this._emitIdEvent('friendOrChatMessage', body.steamid_friend, body.message_no_bbcode, body.steamid_friend);
 		}
-	};
+	});
 
-	this.user._handlers['ChatRoomClient.NotifyIncomingChatMessage#1'] = (body) => {
+	this.user._handlerManager.add('ChatRoomClient.NotifyIncomingChatMessage#1', function(body) {
 		body = preProcessObject(body);
 		if (body.mentions) {
 			body.mentions = processChatMentions(body.mentions);
 		}
 
-		this.emit('chatMessage', body);
-	};
+		this.chat.emit('chatMessage', body);
+	});
 
-	this.user._handlers['ChatRoomClient.NotifyChatMessageModified#1'] = (body) => {
+	this.user._handlerManager.add('ChatRoomClient.NotifyChatMessageModified#1', function(body) {
 		body = preProcessObject(body);
-		this.emit('chatMessagesModified', body);
-	};
+		this.chat.emit('chatMessagesModified', body);
+	});
 }
 
 /**

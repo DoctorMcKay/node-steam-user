@@ -236,7 +236,7 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 /**
  * Creates a friends group (or tag)
  * @param {string} groupName - The name to create the friends group with
- * @param {function} callback 
+ * @param {function} callback
  */
 SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
 	this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
@@ -259,7 +259,7 @@ SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
 /**
  * Deletes a friends group (or tag)
  * @param {int} groupID - The friends group id
- * @param {function} callback 
+ * @param {function} callback
  */
 SteamUser.prototype.deleteFriendsGroup = function (groupID, callback) {
 	this._send(SteamUser.EMsg.AMClientDeleteFriendsGroup, {
@@ -283,7 +283,7 @@ SteamUser.prototype.deleteFriendsGroup = function (groupID, callback) {
 
 /**
  * Rename a friends group (tag)
- * @param {int} groupID - The friends group id 
+ * @param {int} groupID - The friends group id
  * @param {string} newName - The new name to update the friends group with
  */
 SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
@@ -342,7 +342,7 @@ SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback)
  */
 SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, callback) {
 	var sid = Helpers.steamID(userSteamID);
-	
+
 	this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
 		"groupid": groupID,
 		"steamiduser": sid.getSteamID64()
@@ -448,7 +448,7 @@ SteamUser.prototype.getNicknames = function(callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
 	body.friends.forEach((user) => {
 		var sid = new SteamID(user.friendid.toString());
 		var sid64 = sid.getSteamID64();
@@ -490,9 +490,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body
 			}
 		}
 	});
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function(body) {
 	var sid = new SteamID(body.steamid_clan.toString());
 	var sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
@@ -563,9 +563,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 
 		this._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
 	});
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, function(body) {
 	(body.friends || []).forEach((relationship) => {
 		var sid = new SteamID(relationship.ulfriendid.toString());
 		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
@@ -622,9 +622,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 			});
 		});
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, function(body) {
 	var groupList = {};
 
 	body.friendGroups.forEach(function(group) {
@@ -655,9 +655,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function
 	}
 
 	this.myFriendGroups = groupList;
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayerNicknameList, function(body) {
 	var myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
 
 	body.nicknames.forEach(function(user) {
@@ -673,9 +673,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = functio
 	}
 
 	this.myNicknames = myNicknames;
-};
+});
 
-SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = function(body) {
+SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChanged#1', function(body) {
 	var sid = SteamID.fromIndividualAccountID(body.accountid);
 	this.emit('nickname', sid, body.nickname || null);
 	if (!body.nickname) {
@@ -684,7 +684,7 @@ SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = fu
 	} else {
 		this.myNicknames[sid.getSteamID64()] = body.nickname;
 	}
-};
+});
 
 function processUser(user) {
 	if (typeof user.gameid === 'object' && user.gameid !== null) {

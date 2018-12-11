@@ -700,7 +700,7 @@ SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientLicenseList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLicenseList, function(body) {
 	this.emit('licenses', body.licenses);
 	this.licenses = body.licenses;
 
@@ -708,10 +708,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLicenseList] = function(body)
 	if (this.options.enablePicsCache) {
 		this._getLicenseInfo();
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayingSessionState] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayingSessionState, function(body) {
 	this._playingBlocked = body.playing_blocked;
 	this.emit('playingState', body.playing_blocked, body.playing_app);
 	this.playingState = {"blocked": body.playing_blocked, "appid": body.playing_app};
-};
+});

@@ -452,7 +452,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 	}
 
-	if (!this._handlers[handlerName] && !this._jobs[header.targetJobID]) {
+	if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
 		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Unhandled message: ' + msgName);
 		return;
 	}
@@ -487,18 +487,13 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		// this is a response to something, so invoke the appropriate callback
 		this._jobs[header.targetJobID].call(this, body, cb);
 	} else {
-		if (!this._handlers[handlerName]) {
-			// last sanity check
-			this.emit('debug', 'SANITY CHECK FAILED: No handler for ' + handlerName);
-		} else {
-			this._handlers[handlerName].call(this, body, cb);
-		}
+		this._handlerManager.emit(this, handlerName, body, cb);
 	}
 };
 
 // Handlers
 
-SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
+SteamUser.prototype._handlerManager.add(EMsg.Multi, function(body) {
 	this.emit('debug-verbose', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
 
 	let payload = body.message_body;
@@ -523,7 +518,7 @@ SteamUser.prototype._handlers[EMsg.Multi] = function(body) {
 			payload = payload.slice(4 + subSize);
 		}
 	}
-};
+});
 
 // Unified messages
 

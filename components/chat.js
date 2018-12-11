@@ -280,7 +280,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse, function(body) {
 	var universe = this.steamID.universe;
 	(body.messages || []).forEach(function(message) {
 		message.timestamp = new Date(message.timestamp * 1000);
@@ -302,9 +302,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFSGetFriendMessageHistoryResp
 	 */
 
 	this._emitIdEvent('chatHistory', new SteamID(body.steamid.toString()), body.success, body.messages || []);
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatInvite] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, function(body) {
 	/**
 	 * Emitted when we're invited to a chat room.
 	 *
@@ -325,9 +325,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatInvite] = function(body) 
 		this.emit('chatInvite#' + chatID.getSteamID64(), inviterID, chatID, body.chat_name);
 		this.emit('chatInvite#' + inviterID.getSteamID64() + '#' + chatID.getSteamID64(), inviterID, chatID, body.chat_name);
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientCreateChatResponse] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCreateChatResponse, function(body) {
 	var eresult = body.readUint32();
 	var chatID = new SteamID(body.readUint64().toString());
 	body.skip(4);
@@ -350,9 +350,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCreateChatResponse] = functio
 			this._emitIdEvent('chatCreated', friendID, result, chatID);
 		});
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatEnter] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function(body) {
 	var chatID = fromChatID(body.readUint64());
 	body.skip(28);
 	var chatFlags = body.readUint8();
@@ -394,9 +394,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatEnter] = function(body) {
 	 */
 
 	this._emitIdEvent('chatEnter', chatID, response);
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMemberInfo] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, function(body) {
 	var chatID = fromChatID(body.readUint64().toString());
 	var infoType = body.readUint32();
 
@@ -469,9 +469,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatMemberInfo] = function(bo
 		this._emitIdEvent('chatLeft', chatID);
 		delete this.chats[sid64];
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatRoomInfo] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatRoomInfo, function(body) {
 	var chatID = fromChatID(body.readUint64());
 	var infoType = body.readUint32();
 
@@ -500,7 +500,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientChatRoomInfo] = function(body
 	} else if (!wasOfficersOnly && this.chats[sid64].officersOnlyChat) {
 		this._emitIdEvent('chatSetOfficersOnly', chatID, actor);
 	}
-};
+});
 
 // Private functions
 

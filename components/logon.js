@@ -300,7 +300,7 @@ SteamUser.prototype.relog = function() {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, function(body) {
 	switch (body.eresult) {
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
@@ -407,9 +407,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLogOnResponse] = function(bod
 			this._disconnect(true);
 			this.emit('error', error);
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientLoggedOff] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function(body) {
 	var msg = body.eresult;
 	for (var i in SteamUser.EResult) {
 		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
@@ -420,7 +420,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientLoggedOff] = function(body) {
 
 	this.emit('debug', 'Logged off: ' + msg);
 	this._handleLogOff(body.eresult, msg);
-};
+});
 
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	var fatal = true;
@@ -470,7 +470,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	}
 };
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientNewLoginKey, function(body) {
 	if (this.steamID.type == SteamID.Type.INDIVIDUAL) {
 		delete this._logOnDetails.password;
 		this._logOnDetails.login_key = body.login_key;
@@ -486,7 +486,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientNewLoginKey] = function(body)
 		// Accept the key
 		this._send(SteamUser.EMsg.ClientNewLoginKeyAccepted, {"unique_id": body.unique_id});
 	}
-};
+});
 
 SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback) {
 	if (this.listenerCount('steamGuard') == 0) {
@@ -506,7 +506,7 @@ SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback
 	}
 };
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCMList, function(body) {
 	this.emit('debug', "Got list of " + (body.cm_websocket_addresses || []).length + " WebSocket CMs, with percentage to use at " +
 		(body.percent_default_to_websocket || 0) + "%");
 
@@ -518,7 +518,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientCMList] = function(body) {
 	};
 
 	this._saveCMList();
-};
+});
 
 // Private functions
 

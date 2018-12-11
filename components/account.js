@@ -132,7 +132,7 @@ SteamUser.prototype.changeEmail = function(options, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAccountInfo, function(body) {
 	// Steam appears to send this twice on logon. Let's collapse it down to one event.
 	var info = {
 		"name": body.persona_name,
@@ -160,17 +160,17 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientAccountInfo] = function(body)
 
 	this.emit('accountInfo', info.name, info.country, info.authedMachines, info.flags, info.facebookID, info.facebookName);
 	this.accountInfo = info;
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientEmailAddrInfo] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientEmailAddrInfo, function(body) {
 	this.emit('emailInfo', body.email_address, body.email_is_validated);
 	this.emailInfo = {
 		"address": body.email_address,
 		"validated": body.email_is_validated
 	};
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientIsLimitedAccount] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientIsLimitedAccount, function(body) {
 	this.emit('accountLimitations', body.bis_limited_account, body.bis_community_banned, body.bis_locked_account, body.bis_limited_account_allowed_to_invite_friends);
 	this.limitations = {
 		"limited": body.bis_limited_account,
@@ -178,9 +178,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientIsLimitedAccount] = function(
 		"locked": body.bis_locked_account,
 		"canInviteFriends": body.bis_limited_account_allowed_to_invite_friends
 	};
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientVACBanStatus] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientVACBanStatus, function(body) {
 	var appids = [], ranges = [];
 
 	var numBans = body.readUint32();
@@ -211,9 +211,9 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientVACBanStatus] = function(body
 		"appids": appids,
 		"ranges": ranges
 	};
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientWalletInfoUpdate] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientWalletInfoUpdate, function(body) {
 	if (this.wallet && body.has_wallet == this.wallet.hasWallet && body.currency == this.wallet.currency && body.balance / 100 == this.wallet.balance) {
 		return; // nothing changed
 	}
@@ -224,14 +224,14 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientWalletInfoUpdate] = function(
 		"currency": body.currency,
 		"balance": body.balance / 100
 	};
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientVanityURLChangedNotification] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientVanityURLChangedNotification, function(body) {
 	this.emit('vanityURL', body.vanity_url);
 	this.vanityURL = body.vanity_url;
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateGuestPassesList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateGuestPassesList, function(body) {
 	var eresult = body.readUint32();
 	if (eresult != SteamUser.EResult.OK) {
 		return;
@@ -271,4 +271,4 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientUpdateGuestPassesList] = func
 
 	this.emit('gifts', gifts);
 	this.gifts = gifts;
-};
+});

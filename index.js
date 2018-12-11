@@ -3,6 +3,7 @@ require('@doctormckay/stats-reporter').setup(require('./package.json'));
 const AppDirectory = require('appdirectory');
 const FileStorage = require('file-manager');
 
+const HandlerManager = require('./components/classes/HandlerManager.js');
 const SteamChatRoomClient = require('./components/chatroom.js');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
@@ -147,6 +148,7 @@ SteamUser.prototype.setOptions = function(options) {
 };
 
 SteamUser.prototype._handlers = {};
+SteamUser.prototype._handlerManager = new HandlerManager();
 
 require('./components/connection.js');
 require('./components/messages.js');

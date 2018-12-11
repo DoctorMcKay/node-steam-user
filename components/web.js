@@ -71,11 +71,11 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, function(body) {
 	if (body.eresult != SteamUser.EResult.OK) {
 		this.emit('debug', 'Got response ' + body.eresult + ' from ClientRequestWebAPIAuthenticateUserNonceResponse, retrying');
 		setTimeout(this._webLogOn.bind(this), 500);
 	} else {
 		this._webAuthenticate(body.webapi_authenticate_user_nonce);
 	}
-};
+});

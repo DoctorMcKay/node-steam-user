@@ -503,7 +503,7 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientServerList, function(body) {
 	// It appears that each message of this type is for one server type.
 	var servers = {};
 
@@ -522,7 +522,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientServerList] = function(body) 
 		this.contentServersReady = true;
 		this.emit('contentServersReady');
 	}
-};
+});
 
 // Private functions
 function download(url, hostHeader, destinationFilename, callback) {
