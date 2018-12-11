@@ -8,6 +8,8 @@ class HandlerManager {
 	}
 
 	add(msg, handler) {
+		this.checkMsgForLegacyHandlers(msg);
+
 		if (!this._handlers[msg]) {
 			this._handlers[msg] = [];
 		}
@@ -21,6 +23,8 @@ class HandlerManager {
 	}
 
 	emit(instance, msg, ...args) {
+		this.checkMsgForLegacyHandlers(msg);
+
 		let handlers = this._handlers[msg];
 		if (!handlers || handlers.length == 0) {
 			return;
@@ -29,5 +33,13 @@ class HandlerManager {
 		handlers.forEach((handler) => {
 			handler.apply(instance, args);
 		});
+	}
+
+	checkMsgForLegacyHandlers(msg) {
+		const SteamUser = require('../../index.js');
+		if (typeof SteamUser.prototype._handlers[msg] === 'function') {
+			this.add(msg, SteamUser.prototype._handlers[msg]);
+			delete SteamUser.prototype._handlers[msg];
+		}
 	}
 }
