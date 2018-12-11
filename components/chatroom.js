@@ -12,7 +12,7 @@ module.exports = SteamChatRoomClient;
 function SteamChatRoomClient(user) {
 	this.user = user;
 
-	this.user._handlerManager.add('FriendMessagesClient.IncomingMessage#1', function(body) {
+	this.user.handlers.add('FriendMessagesClient.IncomingMessage#1', function(body) {
 		body = preProcessObject(body);
 		body.local_echo = body.local_echo || false; // coerce null to false
 		body.from_limited_account = body.from_limited_account || false;
@@ -54,7 +54,7 @@ function SteamChatRoomClient(user) {
 		}
 	});
 
-	this.user._handlerManager.add('ChatRoomClient.NotifyIncomingChatMessage#1', function(body) {
+	this.user.handlers.add('ChatRoomClient.NotifyIncomingChatMessage#1', function(body) {
 		body = preProcessObject(body);
 		if (body.mentions) {
 			body.mentions = processChatMentions(body.mentions);
@@ -63,7 +63,7 @@ function SteamChatRoomClient(user) {
 		this.chat.emit('chatMessage', body);
 	});
 
-	this.user._handlerManager.add('ChatRoomClient.NotifyChatMessageModified#1', function(body) {
+	this.user.handlers.add('ChatRoomClient.NotifyChatMessageModified#1', function(body) {
 		body = preProcessObject(body);
 		this.chat.emit('chatMessagesModified', body);
 	});

@@ -148,7 +148,7 @@ SteamUser.prototype.setOptions = function(options) {
 };
 
 SteamUser.prototype._handlers = {};
-SteamUser.prototype._handlerManager = new HandlerManager();
+SteamUser.prototype.handlers = new HandlerManager();
 
 require('./components/connection.js');
 require('./components/messages.js');

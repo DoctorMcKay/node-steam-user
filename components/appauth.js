@@ -352,7 +352,7 @@ SteamUser.prototype.cancelAuthTicket = function(appid, callback) {
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGameConnectTokens, function(body) {
+SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientGameConnectTokens, function(body) {
 	this.emit('debug', "Received " + body.tokens.length + " game connect tokens");
 	body.tokens.forEach((token) => {
 		this._gcTokens.push(token);
@@ -361,7 +361,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGameConnectTokens, 
 	this.emit('_gcTokens'); // internal private event
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientTicketAuthComplete, function(body) {
+SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientTicketAuthComplete, function(body) {
 	let eventBody = {
 		"steamID": new SteamID(body.steam_id.toString()),
 		"appOwnerSteamID": body.owner_steam_id.toString() == "0" ? null : new SteamID(body.owner_steam_id.toString()),

@@ -452,7 +452,7 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		this.emit('debug', 'Got unknown target_job_name ' + header.proto.target_job_name + ' for msg ' + msgName);
 	}
 
-	if (!this._handlerManager.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
+	if (!this.handlers.hasHandler(handlerName) && !this._jobs[header.targetJobID]) {
 		this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Unhandled message: ' + msgName);
 		return;
 	}
@@ -487,13 +487,13 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 		// this is a response to something, so invoke the appropriate callback
 		this._jobs[header.targetJobID].call(this, body, cb);
 	} else {
-		this._handlerManager.emit(this, handlerName, body, cb);
+		this.handlers.emit(this, handlerName, body, cb);
 	}
 };
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(EMsg.Multi, function(body) {
+SteamUser.prototype.handlers.add(EMsg.Multi, function(body) {
 	this.emit('debug-verbose', 'Processing ' + (body.size_unzipped ? 'gzipped ' : '') + 'multi msg');
 
 	let payload = body.message_body;

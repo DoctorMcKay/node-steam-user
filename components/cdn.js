@@ -503,7 +503,7 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientServerList, function(body) {
+SteamUser.prototype.handlers.add(SteamUser.EMsg.ClientServerList, function(body) {
 	// It appears that each message of this type is for one server type.
 	var servers = {};
 

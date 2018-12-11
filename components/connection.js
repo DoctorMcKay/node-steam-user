@@ -17,7 +17,7 @@ SteamUser.prototype._handleConnectionClose = function() {
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptRequest, function(body) {
+SteamUser.prototype.handlers.add(SteamUser.EMsg.ChannelEncryptRequest, function(body) {
 	this._connection.stream.setTimeout(0);
 
 	let protocol = body.readUint32();
@@ -43,7 +43,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptRequest, fu
 	this._connection.stream.setTimeout(1000);
 });
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ChannelEncryptResult, function(body) {
+SteamUser.prototype.handlers.add(SteamUser.EMsg.ChannelEncryptResult, function(body) {
 	this._connection.stream.setTimeout(0);
 
 	let eresult = body.readUint32();
