@@ -43,3 +43,5 @@ class HandlerManager {
 		}
 	}
 }
+
+module.exports = HandlerManager;
