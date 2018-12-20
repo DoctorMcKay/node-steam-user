@@ -1,3 +1,4 @@
+const AppTicket = require('steam-appticket');
 const ByteBuffer = require('bytebuffer');
 const Crypto = require('crypto');
 const StdLib = require('@doctormckay/stdlib');
@@ -50,148 +51,15 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
  * @param {Buffer|string} encryptionKey - The app's encryption key, either raw hex or a Buffer
  * @returns {object}
  */
-SteamUser.parseEncryptedAppTicket = function(ticket, encryptionKey) {
-	try {
-		let outer = Messages.decodeProto(Schema.EncryptedAppTicket, ticket);
-		let key = typeof encryptionKey === 'string' ? Buffer.from(encryptionKey, 'hex') : encryptionKey;
-		let decrypted = SteamCrypto.symmetricDecrypt(outer.encrypted_ticket, key);
-
-		if (StdLib.Hashing.crc32(decrypted) != outer.crc_encryptedticket) {
-			return null;
-		}
-
-		// the beginning is the user-supplied data
-		let userData = decrypted.slice(0, outer.cb_encrypteduserdata);
-		let ownershipTicketLength = decrypted.readUInt32LE(outer.cb_encrypteduserdata);
-		let ownershipTicket = SteamUser.parseAppTicket(decrypted.slice(outer.cb_encrypteduserdata, outer.cb_encrypteduserdata + ownershipTicketLength));
-		if (ownershipTicket) {
-			ownershipTicket.userData = userData;
-		}
-
-		let remainder = decrypted.slice(outer.cb_encrypteduserdata + ownershipTicketLength);
-		if (remainder.length >= 8 + 20) {
-			// salted sha1 hash
-			let salt = remainder.slice(0, 8);
-			let hash = remainder.slice(8, 28);
-			remainder = remainder.slice(28);
-
-			let sha1 = Crypto.createHash('sha1');
-			sha1.update(decrypted.slice(0, outer.cb_encrypteduserdata + ownershipTicketLength))
-				.update(salt);
-			if (!hash.equals(sha1.digest())) {
-				return null;
-			}
-
-			ownershipTicket.unknown1 = remainder.readUInt32LE(0);
-		}
-
-		return ownershipTicket;
-	} catch (ex) {
-		return null;
-	}
-};
+SteamUser.parseEncryptedAppTicket = AppTicket.parseEncryptedAppTicket;
 
 /**
  * Parse a Steam app or session ticket and return an object containing its details. Static.
  * @param {Buffer|ByteBuffer} ticket - The binary appticket
+ * @param {boolean} [allowInvalidSignature=false] - Pass true to get back data even if the ticket has no valid signature.
  * @returns {object|null} - object if well-formed ticket (may not be valid), or null if not well-formed
  */
-SteamUser.parseAppTicket = function(ticket) {
-	// https://github.com/SteamRE/SteamKit/blob/master/Resources/Structs/steam3_appticket.hsl
-
-	if (!ByteBuffer.isByteBuffer(ticket)) {
-		ticket = ByteBuffer.wrap(ticket, ByteBuffer.LITTLE_ENDIAN);
-	}
-
-	let details = {};
-
-	try {
-		let initialLength = ticket.readUint32();
-		if (initialLength == 20) {
-			// This is a full appticket, with a GC token and session header (in addition to ownership ticket)
-			details.authTicket = ticket.slice(ticket.offset - 4, ticket.offset - 4 + 52).toBuffer(); // this is the part that's passed back to Steam for validation
-
-			details.gcToken = ticket.readUint64().toString();
-			//details.steamID = new SteamID(ticket.readUint64().toString());
-			ticket.skip(8); // the SteamID gets read later on
-			details.tokenGenerated = new Date(ticket.readUint32() * 1000);
-
-			if (ticket.readUint32() != 24) {
-				// SESSIONHEADER should be 24 bytes.
-				return null;
-			}
-
-			ticket.skip(8); // unknown 1 and unknown 2
-			details.sessionExternalIP = Helpers.ipIntToString(ticket.readUint32());
-			ticket.skip(4); // filler
-			details.clientConnectionTime = ticket.readUint32(); // time the client has been connected to Steam in ms
-			details.clientConnectionCount = ticket.readUint32(); // how many servers the client has connected to
-
-			if (ticket.readUint32() + ticket.offset != ticket.limit) {
-				// OWNERSHIPSECTIONWITHSIGNATURE sectlength
-				return null;
-			}
-		} else {
-			ticket.skip(-4);
-		}
-
-		// Start reading the ownership ticket
-		let ownershipTicketOffset = ticket.offset;
-		let ownershipTicketLength = ticket.readUint32(); // including itself, for some reason
-		if (ownershipTicketOffset + ownershipTicketLength != ticket.limit && ownershipTicketOffset + ownershipTicketLength + 128 != ticket.limit) {
-			return null;
-		}
-
-		let i, j, dlc;
-
-		details.version = ticket.readUint32();
-		details.steamID = new SteamID(ticket.readUint64().toString());
-		details.appID = ticket.readUint32();
-		details.ownershipTicketExternalIP = Helpers.ipIntToString(ticket.readUint32());
-		details.ownershipTicketInternalIP = Helpers.ipIntToString(ticket.readUint32());
-		details.ownershipFlags = ticket.readUint32();
-		details.ownershipTicketGenerated = new Date(ticket.readUint32() * 1000);
-		details.ownershipTicketExpires = new Date(ticket.readUint32() * 1000);
-		details.licenses = [];
-
-		let licenseCount = ticket.readUint16();
-		for (i = 0; i < licenseCount; i++) {
-			details.licenses.push(ticket.readUint32());
-		}
-
-		details.dlc = [];
-
-		let dlcCount = ticket.readUint16();
-		for (i = 0; i < dlcCount; i++) {
-			dlc = {};
-			dlc.appID = ticket.readUint32();
-			dlc.licenses = [];
-
-			licenseCount = ticket.readUint16();
-
-			for (j = 0; j < licenseCount; j++) {
-				dlc.licenses.push(ticket.readUint32());
-			}
-
-			details.dlc.push(dlc);
-		}
-
-		ticket.readUint16(); // reserved
-		if (ticket.offset + 128 == ticket.limit) {
-			// Has signature
-			details.signature = ticket.slice(ticket.offset, ticket.offset + 128).toBuffer();
-		}
-
-		let date = new Date();
-		details.isExpired = details.ownershipTicketExpires < date;
-		details.hasValidSignature = !!details.signature && SteamCrypto.verifySignature(ticket.slice(ownershipTicketOffset, ownershipTicketOffset + ownershipTicketLength).toBuffer(), details.signature);
-		details.isValid = !details.isExpired && (!details.signature || details.hasValidSignature);
-	} catch (ex) {
-		return null; // not a valid ticket
-	}
-
-	return details;
-};
+SteamUser.parseAppTicket = AppTicket.parseAppTicket;
 
 SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 	return StdLib.Promises.callbackPromise(['appTicket'], callback, (accept, reject) => {
