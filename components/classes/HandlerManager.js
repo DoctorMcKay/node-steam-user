@@ -14,8 +14,11 @@ class HandlerManager {
 			this._handlers[msg] = [];
 		}
 
-		if (this._handlers[msg].some(existingHandler => existingHandler === handler)) {
+		if (this._handlers[msg].some(existingHandler => existingHandler.toString() == handler.toString())) {
 			// This handler already exists
+			// We can't check if the functions equal each other because anonymous functions won't, necessarily...
+			// So instead we stringify the functions and if they're identical, then don't add them both. Probably going
+			// to cause problems down the road, but whatever.
 			return;
 		}
 
