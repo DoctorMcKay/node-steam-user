@@ -32,7 +32,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 	}
 
 	function doTheThing() {
-		self._send(SteamUser.EMsg.ClientGamesPlayed, apps.map((app) => {
+		self._send(SteamUser.EMsg.ClientGamesPlayedWithDataBlob, {"games_played": apps.map((app) => {
 			if (typeof app === 'string') {
 				return {
 					"game_id": "15190414816125648896",
@@ -45,7 +45,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 			}
 
 			return {"game_id": app};
-		}));
+		})});
 	}
 };
 

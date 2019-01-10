@@ -38,6 +38,7 @@ protobufs[EMsg.ClientUserNotifications] = Schema.CMsgClientUserNotifications;
 protobufs[EMsg.ClientFSOfflineMessageNotification] = Schema.CMsgClientOfflineMessageNotification;
 protobufs[EMsg.ClientFSRequestOfflineMessageCount] = Schema.CMsgClientRequestOfflineMessageCount;
 protobufs[EMsg.ClientGamesPlayed] = Schema.CMsgClientGamesPlayed;
+protobufs[EMsg.ClientGamesPlayedWithDataBlob] = Schema.CMsgClientGamesPlayed;
 protobufs[EMsg.ClientAccountInfo] = Schema.CMsgClientAccountInfo;
 protobufs[EMsg.ClientEmailAddrInfo] = Schema.CMsgClientEmailAddrInfo;
 protobufs[EMsg.ClientIsLimitedAccount] = Schema.CMsgClientIsLimitedAccount;
