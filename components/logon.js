@@ -235,11 +235,13 @@ SteamUser.prototype._disconnect = function(suppressLogoff) {
 			this.steamID = null;
 		}, 4000);
 
-		this.once('disconnected', function(eresult) {
+		this.once('disconnected', (eresult) => {
 			clearTimeout(timeout);
+			this.steamID = null;
 		});
 	} else {
 		this._connection && this._connection.end(true);
+		this.steamID = null;
 	}
 };
 
