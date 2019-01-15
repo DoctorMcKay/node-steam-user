@@ -7,7 +7,7 @@ SteamUser.formatCurrency = function(amount, currency) {
 		return amount;
 	}
 
-	var data = SteamUser.CurrencyData[currency];
+	let data = SteamUser.CurrencyData[currency];
 
 	if (data.whole) {
 		amount = amount.replace('.00', '');
