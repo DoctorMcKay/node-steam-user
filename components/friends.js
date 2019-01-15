@@ -200,13 +200,13 @@ SteamUser.prototype.getSteamLevels = function(steamids, callback) {
 };
 
 /**
- * Get the level of a user's game badge (and also their Steam level).
+ * Get the level of your game badge (and also your Steam level).
  * @param {int} appid - AppID of game in question
  * @param {function} [callback]
  * @returns {Promise}
  */
 SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
-	return StdLib.Promises.callbackPromise(['playerLevel', 'regularBadgeLevel', 'foilBadgeLevel'], callback, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(['steamLevel', 'regularBadgeLevel', 'foilBadgeLevel'], callback, (accept, reject) => {
 		this._sendUnified("Player.GetGameBadgeLevels#1", {appid}, (body) => {
 			let regular = 0;
 			let foil = 0;

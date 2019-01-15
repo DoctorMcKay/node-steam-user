@@ -1,30 +1,49 @@
 # SteamUser
-### A handler module for node-steam v1.0.0 and greater
+### Allows interaction with the Steam network via the Steam client protocol
 [![npm version](https://img.shields.io/npm/v/steam-user.svg)](https://npmjs.com/package/steam-user)
 [![npm downloads](https://img.shields.io/npm/dm/steam-user.svg)](https://npmjs.com/package/steam-user)
 [![dependencies](https://img.shields.io/david/DoctorMcKay/node-steam-user.svg)](https://david-dm.org/DoctorMcKay/node-steam-user)
 [![license](https://img.shields.io/npm/l/steam-user.svg)](https://github.com/DoctorMcKay/node-steam-user/blob/master/LICENSE)
 [![paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N36YVAT42CZ4G&item_name=node%2dsteam%2duser&currency_code=USD)
 
-SteamUser is a handler module for [node-steam](https://github.com/seishun/node-steam) version 1.0.0 or greater.
-It also works with [node-steam-client](https://github.com/DoctorMcKay/node-steam-client).
-
-It's designed to be a self-contained module which provides all the functionality expected of a Steam user client.
+SteamUser allows you to communicate with the Steam servers in the same manner as a proper Steam client. It's designed to
+be a self-contained module which provides all the functionality expected of a Steam user client.
 
 [Subscribe to release announcements](https://github.com/DoctorMcKay/node-steam-user/releases.atom)
 
-This reports anonymous usage statistics to the author. [See here](https://github.com/DoctorMcKay/node-stats-reporter) for more information.
+This reports anonymous usage statistics to the author.
+[See here](https://github.com/DoctorMcKay/node-stats-reporter) for more information.
 
 **Have a question about the module or coding in general? *Do not create a GitHub issue.* GitHub issues are for feature requests and bug reports. Instead, post in the [dedicated forum](https://dev.doctormckay.com/forum/7-node-steam-user/). Such issues may be ignored!**
 
 # Contents
+- [Patterns](#patterns-)
 - [Enums](#enums-)
-- [Static Properties](#static-properties-)
 - [Static Methods](#static-methods-)
 - [Options](#options-)
 - [Properties](#properties-)
 - [Methods](#methods-)
 - [Events](#events-)
+
+# Patterns [^](#contents)
+
+There are a number of coding patterns that are repeated throughout `SteamUser`. **Please read this section in its
+entirety before starting work with `SteamUser`.**
+
+### Callbacks and Promises
+
+All methods listed in this document that accept a callback also return a `Promise`. You may use either callbacks or
+promises.
+
+Legacy callbacks return their data spanning across multiple arguments. All promises (which return any data at all)
+return a single object containing one or more properties. The names of these properties for legacy callbacks are the
+names of the callback arguments listed in this readme. Newer callbacks return a single object `response` argument, which
+is identical to the promise output for that method.
+
+Some methods indicate that their callback is required or optional. **You are never required to use callbacks over
+promises**, but if a callback is listed as optional then an unhandled promise rejection will not raise a warning/error.
+If a callback is listed as required and you neither supply a callback nor handle the promise rejection, then a
+promise rejection will raise a warning, and eventually a crash in a future Node.js release.
 
 # Enums [^](#contents)
 
@@ -36,20 +55,6 @@ All enums can be viewed [on GitHub](https://github.com/DoctorMcKay/node-steam-us
 Additionally, for convenience, the name of an enum value is available from any enum at the key identified by the enum
 value. For example, given an EResult of `88` you can translate it using `SteamUser.EResult[88]` which gives you
 the string `TwoFactorCodeMismatch`.
-
-# Static Properties [^](#contents)
-
-Static properties, or properties attached directly to `SteamUser`, are accessed on the root module and not on instantiated handler instances.
-
-### Steam
-
-The `node-steam-client` module installation used by `SteamUser`. You can use this in place of `require('steam-client')`
-if you'd like to avoid duplicate installations. As of v3.7.0, all enums are built into `SteamUser` so you probably won't
-need to use this. Example of using `EResult`:
-
-```js
-var ok = SteamUser.EResult.OK;
-```
 
 # Static Methods [^](#contents)
 
@@ -236,17 +241,13 @@ Defaults to `english`.
 
 # Properties [^](#contents)
 
-### client
-
-The `SteamClient` which is being used to communicate with Steam.
-
 ### steamID
 
 `null` if not connected, a [`SteamID`](https://www.npmjs.com/package/steamid) containing your SteamID otherwise.
 
 ### options
 
-An object containing options for this `SteamUser`. **Read-only**, use `setOption` or `setOptions` to change an option.
+An object containing options for this `SteamUser`. **Read-only**; use `setOption` or `setOptions` to change an option.
 
 ### publicIP
 
@@ -433,8 +434,7 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 
 **v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**
 
-Logs onto Steam. The `CMClient`/`SteamClient` should **not** be already logged on, although as of v3.4.0 it can be
-connected. Omit the `details` object if you wish to login to an anonymous user account.
+Logs onto Steam. Omit the `details` object if you wish to login to an anonymous user account.
 
 ### logOff()
 
@@ -498,17 +498,17 @@ Finishes the process of enabling TOTP two-factor authentication for your account
 ### getSteamGuardDetails(callback)
 - `callback` - A function to be called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
-	- `enabled` - `true` if Steam Guard is enabled for your account, `false` if not
-	- `enabledTime` - A `Date` object representing when Steam Guard was enabled for your account, or `null` if not available
-	- `machineTime` - A `Date` object representing when your current machine was authorized with Steam Guard, or `null` if not available
+	- `isSteamGuardEnabled` - `true` if Steam Guard is enabled for your account, `false` if not
+	- `timestampSteamGuardEnabled` - A `Date` object representing when Steam Guard was enabled for your account, or `null` if not available
+	- `timestampMachineSteamGuardEnabled` - A `Date` object representing when your current machine was authorized with Steam Guard, or `null` if not available
 	- `canTrade` - `true` if Steam Guard will allow you to trade, `false` if not. You may still be blocked by a trade ban or another trading limitation.
-	- `twoFactorTime` - A `Date` object representing when the Steam Guard Mobile Authenticator was enabled for your account, or `null` if not enabled
-	- `hasPhone` - `true` if your account has a linked phone, `false` if not
+	- `timestampTwoFactorEnabled` - A `Date` object representing when the Steam Guard Mobile Authenticator was enabled for your account, or `null` if not enabled
+	- `isPhoneVerified` - `true` if your account has a linked phone, `false` if not
 
-**v1.11.0 or later is required to use this method.
-v1.12.0 or later is required to use `canTrade`.
-v3.3.3 or later is required to use `twofactorTime`.
-v3.5.0 or later is required to use `hasPhone`.**
+**v1.11.0 or later is required to use this method.  
+v1.12.0 or later is required to use `canTrade`.  
+v3.3.3 or later is required to use `timestampTwoFactorEnabled`.  
+v3.5.0 or later is required to use `isPhoneVerified`.**
 
 Requests details about your account's Steam Guard status. This could be used to see if your account passes the Steam Guard trading requirements.
 
@@ -520,9 +520,9 @@ In order to trade, **all** of the following must be true:
 ### getCredentialChangeTimes(callback)
 - `callback` - A function to be called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
-    - `lastPasswordChange` - A `Date` object representing when your password was last changed, or `null` if never changed
-    - `lastPasswordReset` - A `Date` object representing when your password was last *reset* via the "forgot your password" utility, or `null` if never reset
-    - `lastEmailChange` - A `Date` object representing when your email address was last changed, or `null` if never changed
+    - `timestampLastPasswordChange` - A `Date` object representing when your password was last changed, or `null` if never changed
+    - `timestampLastPasswordReset` - A `Date` object representing when your password was last *reset* via the "forgot your password" utility, or `null` if never reset
+    - `timestampLastEmailChange` - A `Date` object representing when your email address was last changed, or `null` if never changed
 
 **v3.10.0 or later is required to use this method**
 
@@ -547,7 +547,7 @@ Gets your account's auth secret, which is the pre-shared key used for in-home st
     - `smsCode` - Optional (if Steam doesn't want it). See below.
 - `callback` - Optional. Called when the request completes.
     - `err` - `null` on success, or an `Error` object on failure
-    - `needsSmsCode` - `true` if Steam wants an SMS verification code (see below).
+    - `requiresSmsCode` - `true` if Steam wants an SMS verification code (see below).
 
 **v3.13.0 or later is required to use this method.**
 
@@ -556,11 +556,11 @@ your `password` and `newEmail`. This will cause Steam to send an email to your n
 verification code. Once you have that code, call this again with your `password`, `newEmail`, and `code`.
 
 If you have a Mobile Authenticator (2FA) enabled on your account, then for the second request you will need to include
-your current 2FA code as `twoFactorCode`. If you don't and `needsSmsCode` was `true` in the callback to the first request,
+your current 2FA code as `twoFactorCode`. If you don't and `requiresSmsCode` was `true` in the callback to the first request,
 then Steam has sent a verification code in an SMS to your phone. In this case, you need to provide that code as `smsCode`
 in the second request.
 
-`needsSmsCode` may still be `true` in the callback to the second request. In this case, simply ignore it. If you received
+`requiresSmsCode` may still be `true` in the callback to the second request. In this case, simply ignore it. If you received
 no `err`, then your email was changed. The [`emailInfo`](#emailinfo-1) event will be emitted when your email changes.
 
 **Changing your account's email will start a 5-day trading cooldown.**
@@ -588,7 +588,7 @@ To play a single non-Steam game by name, use a single string (e.g. `"Minecraft"`
 
 To play a single game by AppID and name (the client-provided name is what is given to the WebAPI and mobile app), use an object of this format:
 
-```js
+```json
 {
 	"game_id": 440,
 	"game_extra_info": "Team Fortress 2"
@@ -601,7 +601,7 @@ You can use multiple apps by providing an array of any mixture of the above form
 - `appid` - The AppID of the app for which you'd like the current player/user count (use `0` to get current logged-in Steam user count)
 - `callback` - Called when the requested data is available
 	- `err` - An `Error` object on failure, or `null` on success
-	- `players` - How many Steam users are currently playing/using the app
+	- `playerCount` - How many Steam users are currently playing/using the app
 
 Requests a count of how many Steam users are currently playing/using an app.
 
@@ -669,11 +669,11 @@ Requests a list of game servers from the master server.
 - `callback` - Called when data is available
     - `err` - An `Error` object on failure, or `null` on success
 	- `currentChangenumber` - The changenumber of the newest changelist
-	- `apps` - An array of objects for apps which have changed. Each object has these properties:
+	- `appChanges` - An array of objects for apps which have changed. Each object has these properties:
 		- `appid` - The AppID of the app
 		- `change_number` - The changenumber of the latest changelist in which the app has changed
 		- `needs_token` - `true` if you need an access token to get most details about this app, `null` if not
-	- `packages` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
+	- `packageChanges` - An array of objects for packages which have changed. Each object has the same properties as the `apps` array, except `appid` is `packageid`.
 
 **Works when anonymous.** Requests a list of all apps/packages which have changed since a given changenumber.
 
@@ -701,8 +701,8 @@ If you have the PICS cache enabled and the risk of getting stale data is accepta
 - `packages` - An array of PackageIDs
 - `callback` - Called when requested data is available
     - `err` - An `Error` object on failure, or `null` on success
-	- `apps` - An object whose keys are AppIDs and whose values are access tokens
-	- `packages` - An object whose keys are PackageIDs and whose values are access tokens
+	- `appTokens` - An object whose keys are AppIDs and whose values are access tokens
+	- `packageTokens` - An object whose keys are PackageIDs and whose values are access tokens
 	- `appDeniedTokens` - An array of AppIDs for which Steam denied you an access token
 	- `packageDeniedTokens` - An array of PackageIDs for which Steam denied you an access token
 
@@ -776,7 +776,7 @@ Retrieves localized names for specified store tag IDs. Tag IDs are available in 
 - `ids` - Either an integer, or an array of integers containing the IDs of the published file(s) you want details for
 - `callback` - A function to be called when the request has completed
     - `err` - An `Error` object on failure, or `null` on success
-    - `results` - An object whose keys are published file IDs, and values are object containing a ton of information
+    - `files` - An object whose keys are published file IDs, and values are object containing a ton of information
 
 **v3.8.0 or later is required to use this method**
 
@@ -806,7 +806,7 @@ Sets your current UI mode, which displays as an icon next to your online status 
 - `steamID` - The SteamID of the user you want to add as a friend, as a `SteamID` object or a string that can parse into one
 - `callback` - Optional. Called when Steam responds to this request.
     - `err` - An `Error` object on failure, or `null` on success. If this is an `Error` object, it will have an `eresult` property.
-    - `name` - If successful, the current persona name of the user you added.
+    - `personaName` - If successful, the current persona name of the user you added.
 
 **v1.9.0 or later is required to use this method. v3.10.0 or later is required to use `callback`.**
 
@@ -856,7 +856,8 @@ Requests persona data for one or more users from Steam. The response will arrive
 - `language` - The full name of the language you want, e.g. "english" or "spanish"
 - `callback` - Called when the requested data is available.
 	- `err` - An `Error` object on failure, or `null` on success
-	- `tokens` - An object where keys are localization tokens (prefixed with `#`, e.g. `#TF_RichPresence_Display`) and values are localized strings
+	- `response` - The response object
+		- `tokens` - An object where keys are localization tokens (prefixed with `#`, e.g. `#TF_RichPresence_Display`) and values are localized strings
 
 **v4.0.0 or later is required to use this method**
 
@@ -867,7 +868,7 @@ Requests localized rich presence strings for a particular app in the given langu
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available.
     - `err` - An `Error` object on failure, or `null` on success
-	- `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are Steam levels
+	- `users` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are Steam levels
 
 **v1.9.0 or later is required to use this method**
 
@@ -877,7 +878,7 @@ Gets the Steam Level for one or more Steam users (who do not have to be on your 
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
-    - `results` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the following properties:
+    - `users` - An object whose keys are 64-bit SteamIDs (as strings) and whose values are objects containing the following properties:
         - `name` - The new name adopted by the user, as a string
         - `name_since` - A `Date` object representing when the user adopted this name
 
@@ -918,7 +919,7 @@ wasn't saved on the server. You can detect this case by calling `getNicknames`.
 - `callback` - Called when the requested data is available.
     - `err` - An `Error` object on failure, or `null` on success
     - `steamLevel` - Your own Steam level
-    - `badgeLevel` - The level on your badge for this game (0 if you don't have one)
+    - `regularBadgeLevel` - The level on your badge for this game (0 if you don't have one)
     - `foilBadgeLevel` - The level on your foil badge for this game (0 if you don't have one)
 
 **v3.8.0 or later is required to use this method**
@@ -943,9 +944,9 @@ Invites a user to a Steam group.
 
 Joins a group you were invited to or ignores the invite.
 
-### createFriendsGroup(groupName, callback)
+### createFriendsGroup(groupName[, callback])
 - `groupName` - The name to create the friends group with
-- `callback` - Called when requested data is available
+- `callback` - Optional. Called when requested data is available
 	- `err` - An `Error` object on failure, or null on success
 	- `groupID` - A reference group ID associated with the group
 
@@ -1024,7 +1025,9 @@ although at time of documentation no tags are returned.
 ### getTradeURL(callback)
 - `callback` - Called when the requested data is available
 	- `err` - An `Error` object on failure, or `null` on success
-	- `details` - An object containing `token` and `url` properties
+	- `response` - The response object
+		- `token` - Just the token part of your trade URL
+		- `url` - Your full trade URL
 
 **v3.28.0 or later is required to use this method**
 
@@ -1033,7 +1036,9 @@ Gets your account's trade token and URL.
 ### changeTradeURL(callback)
 - `callback` - Called when the requested data is available
 	- `err` - An `Error` object on failure, or `null` on success
-	- `details` - An object containing `token` and `url` properties
+	- `response` - The response object
+		- `token` - Just the token part of your new trade URL
+		- `url` - Your full new trade URL
 
 **v3.28.0 or later is required to use this method**
 
@@ -1072,7 +1077,7 @@ Requests our chat history with a user. The results will arrive either in the cal
 ### joinChat(steamID[, callback])
 - `steamID` - The SteamID of the chat to join (as a `SteamID` object or a string which can parse into one)
 - `callback` - Optional. Called when we either join or fail to join.
-	- `result` - A value from `EResult`
+	- `err` - An `Error` object on failure, or `null` on success
 
 **v1.9.0 or later is required to use this method**
 
@@ -1149,19 +1154,22 @@ Invites a user to a chat room.
 - `convertUserID` - If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
 - `inviteUserID` - If specified, the user with the SteamID passed here will get invited to the new room automatically.
 - `callback` - Optional. Called when the chat is created or a failure occurs.
-	- `result` - A value from `EResult`
+	- `err` - An `Error` object on failure, or `null` on success
 	- `chatID` - If successful, the SteamID of the newly-created room, as a `SteamID` object
 
 **v1.9.0 or later is required to use this method**
 
-Creates a new multi-user chat room
+Creates a new multi-user chat room.
+
+**This method is deprecated.** This creates an old-style, pre-new-chat chat room, which is not compatible with Steam's
+newer chat system.
 
 ### redeemKey(key[, callback])
 - `key` - Steam formatted game key
 - `callback` - Optional. Called when request completes
 	- `err` - An `Error` object on failure, or `null` on success
-	- `details` - A `SteamUser.EPurchaseResult` value
-	- `packages` - An object whose keys are packageIDs and values are package names
+	- `purchaseResultDetails` - A `SteamUser.EPurchaseResult` value
+	- `packageList` - An object whose keys are packageIDs and values are package names
 
 **v3.2.0 or later is required to use this method**
 
@@ -1171,8 +1179,8 @@ Redeems a game code (CD key) on your account.
 - `appIDs` - An array of AppIDs for which you want licenses
 - `callback` - Optional. Called when request completes
     - `err` - An `Error` object on failure, or `null` on success
-    - `grantedPackages` - An array of package IDs that were granted to your account as a result of this request
-    - `grantedAppIDs` - An array of AppIDs that were granted to your account as a result of this request
+    - `grantedPackageIds` - An array of package IDs that were granted to your account as a result of this request
+    - `grantedAppIds` - An array of AppIDs that were granted to your account as a result of this request
 
 **v3.18.0 or later is required to use this method**
 
@@ -1195,7 +1203,7 @@ license(s).
 - `userData` - If the app expects some "user data" (arbitrary data which will be encrypted into the ticket), provide it here. Otherwise, omit this argument or pass an empty Buffer.
 - `callback` - Called when the request completes
     - `err` - If there was an error, this is an `Error` object. Otherwise, it's `null`.
-    - `ticket` - If successful, this is your encrypted appticket as a Buffer. You should provide the entire contents of the Buffer to the recipient.
+    - `encryptedAppTicket` - If successful, this is your encrypted appticket as a Buffer. You should provide the entire contents of the Buffer to the recipient.
 
 **v3.14.0 or later is required to use this method**
 

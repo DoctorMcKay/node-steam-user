@@ -269,20 +269,20 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					}
 
 					if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
-						self.getProductAccessToken(tokenlessAppids, tokenlessPackages, (appTokens, packageTokens) => {
+						this.getProductAccessToken(tokenlessAppids, tokenlessPackages, (appTokens, packageTokens) => {
 							let tokenApps = [];
 							let tokenPackages = [];
 
-							for (appid in appTokens) {
+							for (let appid in appTokens) {
 								tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
 							}
 
-							for (packageid in packageTokens) {
+							for (let packageid in packageTokens) {
 								tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[appid]})
 							}
 
-							self.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
-								for (appid in apps) {
+							this.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
+								for (let appid in apps) {
 									response.apps[appid] = apps[appid];
 									let index = response.unknownApps.indexOf(parseInt(appid, 10));
 									if (index != -1) {
@@ -290,7 +290,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 									}
 								}
 
-								for (packageid in packages) {
+								for (let packageid in packages) {
 									response.packages[packageid] = packages[packageid];
 									let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
 									if (index != -1) {

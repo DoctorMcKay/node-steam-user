@@ -26,13 +26,15 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 				return;
 			}
 
-			accept((body.servers || []).map((server) => {
-				return {
-					"ip": StdLib.IPv4.intToString(server.server_ip),
-					"port": server.server_port,
-					"players": server.auth_players
-				};
-			}));
+			accept({
+				"servers": (body.servers || []).map((server) => {
+					return {
+						"ip": StdLib.IPv4.intToString(server.server_ip),
+						"port": server.server_port,
+						"players": server.auth_players
+					};
+				})
+			});
 		});
 	});
 };
