@@ -35,7 +35,7 @@ exports.getInternalMachineID = function() {
 
 	cpus.sort();
 
-	let id = os.hostname() + os.totalmem() + cpus.join('');
+	let id = OS.hostname() + OS.totalmem() + cpus.join('');
 	let hash = Crypto.createHash('md5');
 	hash.update(id);
 	return hash.digest('hex');
