@@ -842,6 +842,18 @@ Unblocks all communication with a specified user.
 
 Requests persona data for one or more users from Steam. The response will arrive in the [`user`](#user) event, or in the callback if provided.
 
+### getAppRichPresenceLocalization(appID, language, callback)
+- `appID` - The ID of the app for which you want rich presence localizations
+- `language` - The full name of the language you want, e.g. "english" or "spanish"
+- `callback` - Called when the requested data is available.
+	- `err` - An `Error` object on failure, or `null` on success
+	- `tokens` - An object where keys are localization tokens (prefixed with `#`, e.g. `#TF_RichPresence_Display`) and values are localized strings
+
+**v4.0.0 or later is required to use this method**
+
+Requests localized rich presence strings for a particular app in the given language. This will allow you to decode the
+`rich_presence` array in the [`user`](#user) event into the localized string displayed in the Steam client.
+
 ### getSteamLevels(steamids, callback)
 - `steamids` - An array of `SteamID` objects or strings that can parse into `SteamID` objects
 - `callback` - Called when the requested data is available.
