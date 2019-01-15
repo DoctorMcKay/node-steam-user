@@ -29,16 +29,16 @@ SteamUser.prototype._webLogOn = function() {
 
 SteamUser.prototype._webAuthenticate = function(nonce) {
 	// Encrypt the nonce. I don't know if the client uses HMAC IV here, but there's no harm in it...
-	var sessionKey = SteamCrypto.generateSessionKey();
-	var encryptedNonce = SteamCrypto.symmetricEncryptWithHmacIv(nonce, sessionKey.plain);
+	let sessionKey = SteamCrypto.generateSessionKey();
+	let encryptedNonce = SteamCrypto.symmetricEncryptWithHmacIv(nonce, sessionKey.plain);
 
-	var data = {
+	let data = {
 		"steamid": this.steamID.toString(),
 		"sessionkey": sessionKey.encrypted,
 		"encrypted_loginkey": encryptedNonce
 	};
 
-	var self = this;
+	let self = this;
 
 	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, function(err, res) {
 		if (err) {
@@ -49,7 +49,7 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 			fail();
 		} else {
 			// Generate a random sessionid (CSRF token)
-			var sessionid = Crypto.randomBytes(12).toString('hex');
+			let sessionid = Crypto.randomBytes(12).toString('hex');
 			self.emit('webSession', sessionid, [
 				'sessionid=' + sessionid,
 				'steamLogin=' + res.authenticateuser.token,
