@@ -262,7 +262,9 @@ protobufs['FriendMessages.AckMessage#1'] = Schema.CFriendMessages_AckMessage_Not
 protobufs['FriendMessages.IsInFriendsUIBeta#1_Request'] = Schema.CFriendMessages_IsInFriendsUIBeta_Request;
 protobufs['FriendMessages.IsInFriendsUIBeta#1_Response'] = Schema.CFriendMessages_IsInFriendsUIBeta_Response;
 protobufs['FriendMessagesClient.IncomingMessage#1'] = Schema.CFriendMessages_IncomingMessage_Notification;
-protobufs['FriendMessagesClient.NotifyAckMessageEcho#1'] = Schema.CFriendMessages_AckMessage_Notification;
+protobufs['FriendMessagesClient.NotifyAckMessaeEcho#1'] = Schema.CFriendMessages_AckMessage_Notification;
+protobufs['Community.GetAppRichPresenceLocalization#1_Request'] = Schema.CCommunity_GetAppRichPresenceLocalization_Request;
+protobufs['Community.GetAppRichPresenceLocalization#1_Response'] = Schema.CCommunity_GetAppRichPresenceLocalization_Response;
 
 /**
  * Encode a protobuf.

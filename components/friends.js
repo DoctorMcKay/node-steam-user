@@ -474,6 +474,44 @@ SteamUser.prototype.getNicknames = function(callback) {
 	});
 };
 
+/**
+ * Get the localization keys for rich presence for an app on Steam.
+ * @param {int} appID - The app you want rich presence localizations for
+ * @param {string} language - The full name of the language you want localizations for (e.g. "english" or "spanish")
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		this._sendUnified('Community.GetAppRichPresenceLocalization#1', {
+			"appid": appID,
+			language
+		}, (body) => {
+			console.log(body);
+			if (body.appid != appID) {
+				return reject(new Error('Did not get localizations for requested app ' + appID + ' (' + body.appID + ')'));
+			}
+
+			let tokens = {};
+			let foundLanguage = false;
+			body.token_lists.forEach((list) => {
+				if (list.language == language) {
+					foundLanguage = true;
+					list.tokens.forEach((token) => {
+						tokens[token.name] = token.value;
+					});
+				}
+			});
+
+			if (!foundLanguage) {
+				return reject(new Error('Did not get localizations for requested language ' + language));
+			}
+
+			return accept({tokens});
+		});
+	});
+};
+
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
