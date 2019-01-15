@@ -134,7 +134,7 @@ SteamUser.prototype.changeEmail = function(options, callback) {
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAccountInfo, function(body) {
 	// Steam appears to send this twice on logon. Let's collapse it down to one event.
-	var info = {
+	let info = {
 		"name": body.persona_name,
 		"country": body.ip_country,
 		"authedMachines": body.count_authed_computers,
@@ -145,8 +145,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAccountInfo, functi
 
 	if (this.accountInfo) {
 		// Check if everything is identical
-		var anythingDifferent = false;
-		for (var i in this.accountInfo) {
+		let anythingDifferent = false;
+		for (let i in this.accountInfo) {
 			if (this.accountInfo.hasOwnProperty(i) && info.hasOwnProperty(i) && this.accountInfo[i] != info[i]) {
 				anythingDifferent = true;
 				break;
@@ -181,12 +181,12 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientIsLimitedAccount, f
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientVACBanStatus, function(body) {
-	var appids = [], ranges = [];
+	let appids = [], ranges = [];
 
-	var numBans = body.readUint32();
+	let numBans = body.readUint32();
 
-	var rangeStart, rangeEnd, j;
-	for (var i = 0; i < numBans; i++) {
+	let rangeStart, rangeEnd, j;
+	for (let i = 0; i < numBans; i++) {
 		rangeStart = body.readUint32();
 		rangeEnd = body.readUint32();
 		body.skip(4); // 4-byte unknown "0" value
@@ -232,19 +232,19 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientVanityURLChangedNot
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateGuestPassesList, function(body) {
-	var eresult = body.readUint32();
+	let eresult = body.readUint32();
 	if (eresult != SteamUser.EResult.OK) {
 		return;
 	}
 
-	var countToGive = body.readUint32();
-	var countToRedeem = body.readUint32();
+	let countToGive = body.readUint32();
+	let countToRedeem = body.readUint32();
 
-	for (var i = 0; i < countToGive; i++) {
+	for (let i = 0; i < countToGive; i++) {
 		BinaryKVParser.parse(body); // throw it away, I don't think this should be possible
 	}
 
-	var gifts = [], gift, key;
+	let gifts = [], gift, key;
 	for (i = 0; i < countToRedeem; i++) {
 		gift = BinaryKVParser.parse(body).MessageObject;
 

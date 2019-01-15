@@ -65,7 +65,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUserNotifications, 
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSOfflineMessageNotification, function(body) {
 	this.emit('offlineMessages', body.offline_messages, (body.friends_with_offline_messages || []).map((accountid) => {
-		var sid = new SteamID();
+		let sid = new SteamID();
 		sid.universe = this.steamID.universe;
 		sid.type = SteamID.Type.INDIVIDUAL;
 		sid.instance = SteamID.Instance.DESKTOP;
@@ -75,12 +75,12 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSOfflineMessageNot
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientMarketingMessageUpdate2, function(body) {
-	var time = body.readUint32();
-	var count = body.readUint32();
+	let time = body.readUint32();
+	let count = body.readUint32();
 
-	var messages = [];
+	let messages = [];
 
-	for (var i = 0; i < count; i++) {
+	for (let i = 0; i < count; i++) {
 		body.readUint32(); // Length of this submessage
 
 		messages.push({

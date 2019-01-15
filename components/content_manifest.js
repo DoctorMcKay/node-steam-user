@@ -16,10 +16,10 @@ exports.parse = function(buffer) {
 		buffer = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 	}
 
-	var manifest = {};
-	var magic;
-	var meta;
-	var length;
+	let manifest = {};
+	let magic;
+	let meta;
+	let length;
 
 	while (buffer.remaining() > 0) {
 		magic = buffer.readUint32();
@@ -56,7 +56,7 @@ exports.parse = function(buffer) {
 	}
 
 	(manifest.files || []).forEach(function process(file) {
-		for (var i in file) {
+		for (let i in file) {
 			if (!file.hasOwnProperty(i)) {
 				continue;
 			}
@@ -74,7 +74,7 @@ exports.parse = function(buffer) {
 	});
 
 	if (meta) {
-		for (var i in meta) {
+		for (let i in meta) {
 			if (meta.hasOwnProperty(i)) {
 				manifest[i] = meta[i] instanceof ByteBuffer.Long ? meta[i].toString() : meta[i];
 			}
@@ -95,7 +95,7 @@ exports.decryptFilenames = function(manifest, key) {
 
 		// Verify the sha1
 		/*if (file.sha_filename) {
-			var hash = Crypto.createHash('sha1');
+			let hash = Crypto.createHash('sha1');
 			hash.update(file.filename, 'ascii');
 			if (hash.digest('hex') != file.sha_filename) {
 				throw new Error("Filename hash did not validate; is the decryption key correct?");

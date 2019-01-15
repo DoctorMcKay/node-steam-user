@@ -20,7 +20,7 @@ SteamUser.prototype.chatMessage = SteamUser.prototype.chatMsg = function(recipie
 
 	if ([SteamID.Type.CLAN, SteamID.Type.CHAT].indexOf(recipient.type) != -1) {
 		// It's a chat message
-		var msg = ByteBuffer.allocate(8 + 8 + 4 + Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
+		let msg = ByteBuffer.allocate(8 + 8 + 4 + Buffer.byteLength(message) + 1, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint64(this.steamID.getSteamID64()); // steamIdChatter
 		msg.writeUint64(toChatID(recipient).getSteamID64()); // steamIdChatRoom
 		msg.writeUint32(type); // chatMsgType
@@ -107,7 +107,7 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.leaveChat = function(steamID) {
-	var msg = ByteBuffer.allocate(32, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(32, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint32(SteamUser.EChatInfoType.StateChange); // type
 	msg.writeUint64(this.steamID.getSteamID64());
@@ -126,7 +126,7 @@ SteamUser.prototype.leaveChat = function(steamID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.setChatPrivate = function(steamID) {
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.LockChat);
@@ -139,7 +139,7 @@ SteamUser.prototype.setChatPrivate = function(steamID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.setChatPublic = function(steamID) {
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.UnlockChat);
@@ -152,7 +152,7 @@ SteamUser.prototype.setChatPublic = function(steamID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.setChatOfficersOnly = function(steamID) {
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.SetModerated);
@@ -165,7 +165,7 @@ SteamUser.prototype.setChatOfficersOnly = function(steamID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.unsetChatOfficersOnly = function(steamID) {
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 	msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.SetUnmoderated);
@@ -181,7 +181,7 @@ SteamUser.prototype.unsetChatOfficersOnly = function(steamID) {
 SteamUser.prototype.kickFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.Kick);
@@ -197,7 +197,7 @@ SteamUser.prototype.kickFromChat = function(chatID, userID) {
 SteamUser.prototype.banFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.Ban);
@@ -213,7 +213,7 @@ SteamUser.prototype.banFromChat = function(chatID, userID) {
 SteamUser.prototype.unbanFromChat = function(chatID, userID) {
 	userID = Helpers.steamID(userID);
 
-	var msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
+	let msg = ByteBuffer.allocate(20, ByteBuffer.LITTLE_ENDIAN);
 	msg.writeUint64(toChatID(chatID).getSteamID64()); // steamIdChat
 	msg.writeUint64(userID.getSteamID64()); // steamIdUserToActOn
 	msg.writeUint32(SteamUser.EChatAction.UnBan);
@@ -248,7 +248,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 		convertUserID = convertUserID || new SteamID();
 		inviteUserID = inviteUserID || new SteamID();
 
-		var msg = ByteBuffer.allocate(53, ByteBuffer.LITTLE_ENDIAN);
+		let msg = ByteBuffer.allocate(53, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint32(SteamUser.EChatRoomType.MUC); // multi-user chat
 		msg.writeUint64(0);
 		msg.writeUint64(0);
@@ -281,7 +281,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFSGetFriendMessageHistoryResponse, function(body) {
-	var universe = this.steamID.universe;
+	let universe = this.steamID.universe;
 	(body.messages || []).forEach(function(message) {
 		message.timestamp = new Date(message.timestamp * 1000);
 		message.steamID = new SteamID('[U:' + universe + ':' + message.accountid + ']');
@@ -314,8 +314,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, functio
 	 * @param {string} chatName - The name of the chat room to which we were invited
 	 */
 
-	var inviterID = new SteamID(body.steam_id_patron.toString());
-	var chatID = fromChatID(body.steam_id_chat);
+	let inviterID = new SteamID(body.steam_id_patron.toString());
+	let chatID = fromChatID(body.steam_id_chat);
 
 	if (chatID.isLobby()) {
 		this._emitIdEvent('lobbyInvite', inviterID, chatID);
@@ -328,10 +328,10 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatInvite, functio
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCreateChatResponse, function(body) {
-	var eresult = body.readUint32();
-	var chatID = new SteamID(body.readUint64().toString());
+	let eresult = body.readUint32();
+	let chatID = new SteamID(body.readUint64().toString());
 	body.skip(4);
-	var friendID = new SteamID(body.readUint64().toString());
+	let friendID = new SteamID(body.readUint64().toString());
 
 	/**
 	 * Emitted when a chat room is created (in response to a {createChatRoom} request)
@@ -353,16 +353,16 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientCreateChatResponse,
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function(body) {
-	var chatID = fromChatID(body.readUint64());
+	let chatID = fromChatID(body.readUint64());
 	body.skip(28);
-	var chatFlags = body.readUint8();
-	var response = body.readUint32();
-	var numMembers = body.readUint32();
+	let chatFlags = body.readUint8();
+	let response = body.readUint32();
+	let numMembers = body.readUint32();
 
 	if (response == SteamUser.EChatRoomEnterResponse.Success) {
-		var chatName = body.readCString();
+		let chatName = body.readCString();
 
-		var sid64 = chatID.getSteamID64();
+		let sid64 = chatID.getSteamID64();
 		this.chats[sid64] = {
 			"name": chatName,
 			"members": {}
@@ -370,9 +370,9 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function
 
 		decomposeChatFlags(this.chats[sid64], chatFlags);
 
-		var member;
+		let member;
 
-		for (var i = 0; i < numMembers; i++) {
+		for (let i = 0; i < numMembers; i++) {
 			member = BinaryKVParser.parse(body).MessageObject;
 			this.chats[sid64].members[member.steamid.toString()] = {
 				"rank": member.Details,
@@ -397,12 +397,12 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatEnter, function
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, function(body) {
-	var chatID = fromChatID(body.readUint64().toString());
-	var infoType = body.readUint32();
+	let chatID = fromChatID(body.readUint64().toString());
+	let infoType = body.readUint32();
 
-	var target = null;
-	var action = null;
-	var actor = null;
+	let target = null;
+	let action = null;
+	let actor = null;
 
 	if (infoType == SteamUser.EChatInfoType.StateChange) {
 		// A user's state changed
@@ -411,7 +411,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, fun
 		actor = new SteamID(body.readUint64().toString());
 	}
 
-	var sid64 = chatID.getSteamID64();
+	let sid64 = chatID.getSteamID64();
 
 	if (!this.chats[sid64]) {
 		// We're not in this chat
@@ -420,7 +420,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, fun
 
 	if (infoType == SteamUser.EChatInfoType.InfoUpdate || (action !== null && action & SteamUser.EChatMemberStateChange.Entered)) {
 		// There's a user info here
-		var userInfo = BinaryKVParser.parse(body).MessageObject;
+		let userInfo = BinaryKVParser.parse(body).MessageObject;
 		this.chats[sid64].members[userInfo.steamid.toString()] = {
 			"rank": userInfo.Details,
 			"permissions": userInfo.permissions
@@ -429,7 +429,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, fun
 
 	if (target !== null && action !== null) {
 		// Someone was affected, so emit the proper event
-		var target64 = target.getSteamID64();
+		let target64 = target.getSteamID64();
 
 		if (action & SteamUser.EChatMemberStateChange.Entered) {
 			this._emitIdEvent('chatUserJoined', chatID, target);
@@ -472,20 +472,20 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatMemberInfo, fun
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientChatRoomInfo, function(body) {
-	var chatID = fromChatID(body.readUint64());
-	var infoType = body.readUint32();
+	let chatID = fromChatID(body.readUint64());
+	let infoType = body.readUint32();
 
 	if (infoType != SteamUser.EChatInfoType.InfoUpdate) {
 		return;
 	}
 
-	var flags = body.readUint32();
-	var actor = new SteamID(body.readUint64().toString());
+	let flags = body.readUint32();
+	let actor = new SteamID(body.readUint64().toString());
 
-	var sid64 = chatID.getSteamID64();
+	let sid64 = chatID.getSteamID64();
 
-	var wasPrivate = this.chats[sid64].private;
-	var wasOfficersOnly = this.chats[sid64].officersOnlyChat;
+	let wasPrivate = this.chats[sid64].private;
+	let wasOfficersOnly = this.chats[sid64].officersOnlyChat;
 
 	decomposeChatFlags(this.chats[sid64], flags);
 

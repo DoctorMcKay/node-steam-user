@@ -24,7 +24,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 		apps = [apps];
 	}
 
-	var self = this;
+	let self = this;
 	if (this._playingBlocked && force) {
 		this.kickPlayingSession(doTheThing);
 	} else {
@@ -130,9 +130,9 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
-		var appids = [];
-		var packageids = [];
-		var response = {
+		let appids = [];
+		let packageids = [];
+		let response = {
 			"apps": {},
 			"packages": {},
 			"unknownApps": [],
@@ -165,12 +165,12 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		}, (body) => {
 			// If we're using the PICS cache, then add the items in this response to it
 			if (this.options.enablePicsCache) {
-				var cache = this.picsCache;
+				let cache = this.picsCache;
 				cache.apps = cache.apps || {};
 				cache.packages = cache.packages || {};
 
 				(body.apps || []).forEach((app) => {
-					var data = {
+					let data = {
 						"changenumber": app.change_number,
 						"missingToken": !!app.missing_token,
 						"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
@@ -187,7 +187,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 				});
 
 				(body.packages || []).forEach((pkg) => {
-					var data = {
+					let data = {
 						"changenumber": pkg.change_number,
 						"missingToken": !!pkg.missing_token,
 						"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
@@ -203,7 +203,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 					// Request info for all the apps in this package, if this request didn't originate from the license list
 					if (requestType != PICSRequestType.Licenses) {
-						var appids = (pkg.packageinfo || {}).appids || [];
+						let appids = (pkg.packageinfo || {}).appids || [];
 						this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents);
 					}
 				});
@@ -211,7 +211,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 			(body.unknown_appids || []).forEach((appid) => {
 				response.unknownApps.push(appid);
-				var index = appids.indexOf(appid);
+				let index = appids.indexOf(appid);
 				if (index != -1) {
 					appids.splice(index, 1);
 				}
@@ -219,7 +219,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 			(body.unknown_packageids || []).forEach((packageid) => {
 				response.unknownPackages.push(packageid);
-				var index = packageids.indexOf(packageid);
+				let index = packageids.indexOf(packageid);
 				if (index != -1) {
 					packageids.splice(index, 1);
 				}
@@ -232,7 +232,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					"appinfo": VDF.parse(app.buffer.toString('utf8')).appinfo
 				};
 
-				var index = appids.indexOf(app.appid);
+				let index = appids.indexOf(app.appid);
 				if (index != -1) {
 					appids.splice(index, 1);
 				}
@@ -245,7 +245,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					"packageinfo": BinaryKVParser.parse(pkg.buffer)[pkg.packageid]
 				};
 
-				var index = packageids.indexOf(pkg.packageid);
+				let index = packageids.indexOf(pkg.packageid);
 				if (index != -1) {
 					packageids.splice(index, 1);
 				}
@@ -253,16 +253,16 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 			if (appids.length === 0 && packageids.length === 0) {
 				if (inclTokens) {
-					var tokenlessAppids = [];
-					var tokenlessPackages = [];
+					let tokenlessAppids = [];
+					let tokenlessPackages = [];
 
-					for (var appid in response.apps) {
+					for (let appid in response.apps) {
 						if (response.apps[appid].missingToken) {
 							tokenlessAppids.push(parseInt(appid, 10));
 						}
 					}
 
-					for (var packageid in response.packages) {
+					for (let packageid in response.packages) {
 						if (response.packages[packageid].missingToken) {
 							tokenlessPackages.push(parseInt(packageid, 10));
 						}
@@ -270,8 +270,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 					if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
 						self.getProductAccessToken(tokenlessAppids, tokenlessPackages, (appTokens, packageTokens) => {
-							var tokenApps = [];
-							var tokenPackages = [];
+							let tokenApps = [];
+							let tokenPackages = [];
 
 							for (appid in appTokens) {
 								tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
@@ -284,7 +284,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 							self.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
 								for (appid in apps) {
 									response.apps[appid] = apps[appid];
-									var index = response.unknownApps.indexOf(parseInt(appid, 10));
+									let index = response.unknownApps.indexOf(parseInt(appid, 10));
 									if (index != -1) {
 										response.unknownApps.splice(index, 1);
 									}
@@ -292,7 +292,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 								for (packageid in packages) {
 									response.packages[packageid] = packages[packageid];
-									var index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+									let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
 									if (index != -1) {
 										response.unknownPackages.splice(index, 1);
 									}
@@ -326,8 +326,8 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 			"packageids": packages,
 			"appids": apps
 		}, (body) => {
-			var appTokens = {};
-			var packageTokens = {};
+			let appTokens = {};
+			let packageTokens = {};
 
 			(body.app_access_tokens || []).forEach((app) => {
 				appTokens[app.appid] = app.access_token;
@@ -379,8 +379,8 @@ SteamUser.prototype._getChangelistUpdate = function() {
 	}
 
 	// Set a local timeout if Steam doesn't respond
-	var timedOut = false;
-	var timeout = setTimeout(() => {
+	let timedOut = false;
+	let timeout = setTimeout(() => {
 		timedOut = true;
 		this._resetChangelistUpdateTimer();
 	}, Math.max(Math.round(this.options.changelistUpdateInterval / 2), 30000));
@@ -390,7 +390,7 @@ SteamUser.prototype._getChangelistUpdate = function() {
 			return;
 		}
 
-		var cache = this.picsCache;
+		let cache = this.picsCache;
 
 		cache.apps = cache.apps || {};
 		cache.packages = cache.packages || {};
@@ -398,8 +398,8 @@ SteamUser.prototype._getChangelistUpdate = function() {
 		apps = apps.map(app => app.appid);
 		packages = packages.map(pkg => pkg.packageid);
 
-		var ourApps = apps.filter(appid => this.options.picsCacheAll || cache.apps[appid]);
-		var ourPackages = packages.filter(pkgid => this.options.picsCacheAll || cache.packages[pkgid]);
+		let ourApps = apps.filter(appid => this.options.picsCacheAll || cache.apps[appid]);
+		let ourPackages = packages.filter(pkgid => this.options.picsCacheAll || cache.packages[pkgid]);
 
 		if (ourApps.length + ourPackages.length === 0) {
 			// We're done here
@@ -426,14 +426,14 @@ SteamUser.prototype._getChangelistUpdate = function() {
 			this._resetChangelistUpdateTimer();
 			clearTimeout(timeout);
 
-			var index = -1;
-			for (var appid in appTokens) {
+			let index = -1;
+			for (let appid in appTokens) {
 				if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
 					ourApps[index] = {"appid": parseInt(appid, 10), "access_token": appTokens[appid]};
 				}
 			}
 
-			for (var packageid in packageTokens) {
+			for (let packageid in packageTokens) {
 				if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
 					ourPackages[index] = {"packageid": parseInt(packageid, 10), "access_token": packageTokens[packageid]};
 				}
@@ -453,7 +453,7 @@ SteamUser.prototype._addAppToCache = function(appid) {
 		return;
 	}
 
-	var apps = this.picsCache.apps || {};
+	let apps = this.picsCache.apps || {};
 	if (apps[appid]) {
 		return;
 	}
@@ -469,13 +469,13 @@ SteamUser.prototype._getLicenseInfo = function() {
 		return;
 	}
 
-	var packageids = this.getOwnedPackages();
+	let packageids = this.getOwnedPackages();
 
 	this.getProductInfo([], packageids, false, (apps, packages) => {
 		// Request info for all the apps in these packages
-		var appids = [];
+		let appids = [];
 
-		for (var pkgid in packages) {
+		for (let pkgid in packages) {
 			if (!packages.hasOwnProperty(pkgid)) {
 				continue;
 			}
@@ -507,8 +507,8 @@ SteamUser.prototype.getOwnedApps = function() {
 		throw new Error("No data in PICS package cache yet.");
 	}
 
-	var ownedPackages = this.getOwnedPackages();
-	var appids = {};
+	let ownedPackages = this.getOwnedPackages();
+	let appids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
@@ -562,8 +562,8 @@ SteamUser.prototype.getOwnedDepots = function() {
 		throw new Error("No data in PICS package cache yet.");
 	}
 
-	var ownedPackages = this.getOwnedPackages();
-	var depotids = {};
+	let ownedPackages = this.getOwnedPackages();
+	let depotids = {};
 
 	ownedPackages.forEach((pkg) => {
 		if (!this.picsCache.packages[pkg]) {
@@ -613,7 +613,7 @@ SteamUser.prototype.getOwnedPackages = function() {
 		throw new Error("We don't have our license list yet.");
 	}
 
-	var packages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
+	let packages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
 		return license.package_id;
 	});
 
@@ -650,12 +650,12 @@ function sortNumeric(a, b) {
 SteamUser.prototype.redeemKey = function(key, callback) {
 	return StdLib.Promises.callbackPromise(['purchaseResultDetails', 'packageList'], callback, (accept, reject) => {
 		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
-			var packageList = {};
+			let packageList = {};
 
-			var recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
+			let recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
 			if (recipeDetails.LineItemCount > 0) {
 				recipeDetails.lineitems.forEach((pkg) => {
-					var packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
+					let packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
 					packageList[packageID] = pkg.ItemDescription;
 				});
 			}

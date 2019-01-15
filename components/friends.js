@@ -239,7 +239,7 @@ SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
  * @param {(SteamID|string)} groupSteamID - The SteamID of the group you're inviting the user to as a SteamID object, or a string that can parse into one
  */
 SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
-	var buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
+	let buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(userSteamID).toString());
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(1); // unknown
@@ -253,7 +253,7 @@ SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
  * @param {boolean} accept - true to join the group, false to ignore invitation
  */
 SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
-	var buffer = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
+	let buffer = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(accept ? 1 : 0);
 
@@ -565,11 +565,11 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, funct
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function(body) {
-	var sid = new SteamID(body.steamid_clan.toString());
-	var sid64 = sid.getSteamID64();
+	let sid = new SteamID(body.steamid_clan.toString());
+	let sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
 
-	var i;
+	let i;
 	if (!this.groups[sid64]) {
 		this.groups[sid64] = body;
 	} else {
@@ -639,8 +639,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, function(body) {
 	(body.friends || []).forEach((relationship) => {
-		var sid = new SteamID(relationship.ulfriendid.toString());
-		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
+		let sid = new SteamID(relationship.ulfriendid.toString());
+		let key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
 		if (body.bincremental) {
 			/**
@@ -687,7 +687,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, functi
 		this.emit('groupList');
 
 		// Request persona info for all our friends
-		var friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
+		let friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
 		this.getPersonas(friends, () => {
 			process.nextTick(() => {
 				this.emit('friendPersonasLoaded');
@@ -697,7 +697,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, functi
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, function(body) {
-	var groupList = {};
+	let groupList = {};
 
 	body.friendGroups.forEach(function(group) {
 		groupList[group.nGroupID] = {
@@ -707,7 +707,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, 
 	});
 
 	body.memberships.forEach(function(friend) {
-		var sid = new SteamID(friend.ulSteamID.toString());
+		let sid = new SteamID(friend.ulSteamID.toString());
 
 		groupList[friend.nGroupID].members.push(sid);
 
@@ -730,7 +730,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, 
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayerNicknameList, function(body) {
-	var myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
+	let myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
 
 	body.nicknames.forEach(function(user) {
 		if (body.removal) {
@@ -748,7 +748,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayerNicknameList,
 });
 
 SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChanged#1', function(body) {
-	var sid = SteamID.fromIndividualAccountID(body.accountid);
+	let sid = SteamID.fromIndividualAccountID(body.accountid);
 	this.emit('nickname', sid, body.nickname || null);
 	if (!body.nickname) {
 		// removal

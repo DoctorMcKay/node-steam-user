@@ -325,7 +325,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 
 	let emsgName = emsg;
 	if (this.options.debug) {
-		for (var i in EMsg) {
+		for (let i in EMsg) {
 			if (EMsg.hasOwnProperty(i) && EMsg[i] == emsg) {
 				emsgName = i;
 				break;
@@ -425,8 +425,8 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
  * @private
  */
 SteamUser.prototype._handleMessage = function(header, bodyBuf) {
-	var msgName = header.msg;
-	var handlerName = header.msg;
+	let msgName = header.msg;
+	let handlerName = header.msg;
 
 	if (this.options.debug) {
 		for (let i in EMsg) {
@@ -467,12 +467,12 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 
 	this.emit(VERBOSE_EMSG_LIST.includes(header.msg) ? 'debug-verbose' : 'debug', 'Handled message: ' + msgName);
 
-	var cb = null;
+	let cb = null;
 	if (header.sourceJobID != JOBID_NONE) {
 		// this message expects a response. make a callback we can pass to the end-user.
 		cb = (emsgOrHeader, body) => {
 			// once invoked the callback should set the jobid_target
-			var responseHeader = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
+			let responseHeader = typeof emsgOrHeader === 'object' ? emsgOrHeader : {"msg": emsgOrHeader};
 			let emsg = responseHeader.msg;
 
 			if (protobufs[emsg]) {

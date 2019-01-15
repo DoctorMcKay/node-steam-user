@@ -24,14 +24,14 @@ SteamUser.prototype.getContentServers = function(callback) {
 			return accept({"servers": JSON.parse(JSON.stringify(this._contentServers))});
 		}
 
-		var list = this.steamServers[SteamUser.EServerType.CS];
+		let list = this.steamServers[SteamUser.EServerType.CS];
 
 		if (!list || list.length == 0) {
 			return reject(new Error("Server list not yet available"));
 		}
 
 		// pick a random one
-		var server = list[Math.floor(Math.random() * list.length)];
+		let server = list[Math.floor(Math.random() * list.length)];
 		download("http://" + StdLib.IPv4.intToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", (err, res) => {
 			if (err) {
 				return reject(err);
@@ -42,7 +42,7 @@ SteamUser.prototype.getContentServers = function(callback) {
 			}
 
 			try {
-				var parsed = require('vdf').parse(res.data.toString('utf8'));
+				let parsed = require('vdf').parse(res.data.toString('utf8'));
 			} catch (ex) {
 				return reject(new Error("Malformed response"));
 			}
@@ -52,7 +52,7 @@ SteamUser.prototype.getContentServers = function(callback) {
 			}
 
 			parsed.serverlist.length = 0;
-			for (var i in parsed.serverlist) {
+			for (let i in parsed.serverlist) {
 				if (parsed.serverlist.hasOwnProperty(i) && i != 'length') {
 					parsed.serverlist.length = parseInt(i, 10) + 1;
 				}
@@ -92,8 +92,8 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 					return reject(new Error("Did not receive decryption key for correct depot"));
 				}
 
-				var key = body.depot_encryption_key;
-				var file = Buffer.concat([new Buffer(4), key]);
+				let key = body.depot_encryption_key;
+				let file = Buffer.concat([new Buffer(4), key]);
 				file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
 				this.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file, () => {
 					return accept({key});
@@ -186,9 +186,9 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 				return reject(err);
 			}
 
-			var server = servers[Math.floor(Math.random() * servers.length)];
-			var urlBase = "http://" + server.Host;
-			var vhost = server.vhost || server.Host;
+			let server = servers[Math.floor(Math.random() * servers.length)];
+			let urlBase = "http://" + server.Host;
+			let vhost = server.vhost || server.Host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
@@ -249,8 +249,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		}
 
 		function performDownload() {
-			var urlBase = "http://" + contentServer.Host;
-			var vhost = contentServer.vhost || contentServer.Host;
+			let urlBase = "http://" + contentServer.Host;
+			let vhost = contentServer.vhost || contentServer.Host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
@@ -309,19 +309,19 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		throw new Error("Attempted to download a directory " + fileManifest.filename);
 	}
 
-	var numWorkers = 4;
+	let numWorkers = 4;
 
 	fileManifest.size = parseInt(fileManifest.size, 10);
-	var bytesDownloaded = 0;
+	let bytesDownloaded = 0;
 
-	var availableServers;
-	var servers = [];
-	var serversInUse = [];
-	var currentServerIdx = 0;
-	var downloadBuffer;
-	var outputFd;
-	var killed = false;
-	var outputEmitter = new EventEmitter();
+	let availableServers;
+	let servers = [];
+	let serversInUse = [];
+	let currentServerIdx = 0;
+	let downloadBuffer;
+	let outputFd;
+	let killed = false;
+	let outputEmitter = new EventEmitter();
 
 	this.getContentServers((err, contentServers) => {
 		if (err) {
@@ -331,7 +331,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 		// Choose some content servers
 		availableServers = contentServers;
-		for (var i = 0; i < numWorkers; i++) {
+		for (let i = 0; i < numWorkers; i++) {
 			assignServer(i);
 			serversInUse.push(false);
 		}
@@ -363,9 +363,9 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 	return outputEmitter;
 
 	function beginDownload() {
-		var self = this;
-		var queue = require('async').queue(function dlChunk(chunk, cb) {
-			var serverIdx;
+		let self = this;
+		let queue = require('async').queue(function dlChunk(chunk, cb) {
+			let serverIdx;
 
 			while (true) {
 				// Find the next available download slot
@@ -429,7 +429,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 		queue.drain = () => {
 			// Verify hash
-			var hash;
+			let hash;
 			if (outputFilePath) {
 				FS.close(outputFd, (err) => {
 					if (err) {
@@ -491,7 +491,7 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			var branches = {};
+			let branches = {};
 			(body.betapasswords || []).forEach((beta) => {
 				branches[beta.betaname] = new Buffer(beta.betapassword, 'hex');
 			});
@@ -505,14 +505,14 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientServerList, function(body) {
 	// It appears that each message of this type is for one server type.
-	var servers = {};
+	let servers = {};
 
 	body.servers.forEach((server) => {
 		servers[server.server_type] = servers[server.server_type] || [];
 		servers[server.server_type].push(server);
 	});
 
-	for (var i in servers) {
+	for (let i in servers) {
 		if (servers.hasOwnProperty(i)) {
 			this.steamServers[i] = servers[i];
 		}
@@ -531,7 +531,7 @@ function download(url, hostHeader, destinationFilename, callback) {
 		destinationFilename = null;
 	}
 
-	var options = require('url').parse(url);
+	let options = require('url').parse(url);
 	options.method = "GET";
 	options.headers = {
 		"Host": hostHeader,
@@ -541,14 +541,14 @@ function download(url, hostHeader, destinationFilename, callback) {
 		"User-Agent": "Valve/Steam HTTP Client 1.0"
 	};
 
-	var req = require('http').request(options, (res) => {
+	let req = require('http').request(options, (res) => {
 		if (res.statusCode != 200) {
 			callback(new Error("HTTP error " + res.statusCode));
 			return;
 		}
 
 		res.setEncoding('binary'); // apparently using null just doesn't work... thanks node
-		var stream = res;
+		let stream = res;
 
 		if (res.headers['content-encoding'] && res.headers['content-encoding'] == 'gzip') {
 			stream = require('zlib').createGunzip();
@@ -556,9 +556,9 @@ function download(url, hostHeader, destinationFilename, callback) {
 			res.pipe(stream);
 		}
 
-		var totalSizeBytes = parseInt(res.headers['content-length'] || 0, 10);
-		var receivedBytes = 0;
-		var dataBuffer = new Buffer(0);
+		let totalSizeBytes = parseInt(res.headers['content-length'] || 0, 10);
+		let receivedBytes = 0;
+		let dataBuffer = new Buffer(0);
 
 		if (destinationFilename) {
 			stream.pipe(require('fs').createWriteStream(destinationFilename));
@@ -602,19 +602,19 @@ function unzip(data, callback) {
 		}
 
 		data.skip(4); // either a timestamp or a CRC; either way, forget it
-		var properties = data.slice(data.offset, data.offset + 5).toBuffer();
+		let properties = data.slice(data.offset, data.offset + 5).toBuffer();
 		data.skip(5);
 
-		var compressedData = data.slice(data.offset, data.limit - 10);
+		let compressedData = data.slice(data.offset, data.limit - 10);
 		data.skip(compressedData.remaining());
 
-		var decompressedCrc = data.readUint32();
-		var decompressedSize = data.readUint32();
+		let decompressedCrc = data.readUint32();
+		let decompressedSize = data.readUint32();
 		if (data.readUint16() != VZIP_FOOTER) {
 			callback(new Error("Didn't see expected VZip footer"));
 		}
 
-		var uncompressedSizeBuffer = new Buffer(8);
+		let uncompressedSizeBuffer = new Buffer(8);
 		uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
 		uncompressedSizeBuffer.writeUInt32LE(0, 4);
 
