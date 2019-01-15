@@ -55,10 +55,10 @@ SteamUser.prototype.logOn = function(details) {
 		};
 	}
 
-	var anonLogin = !this._logOnDetails.account_name;
+	let anonLogin = !this._logOnDetails.account_name;
 
 	// Read the required files
-	var filenames = [];
+	let filenames = [];
 
 	if (!this._cmList) {
 		filenames.push('cm_list.json');
@@ -70,8 +70,8 @@ SteamUser.prototype.logOn = function(details) {
 		filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
 	}
 
-	var sentry = this._sentry;
-	var machineID;
+	let sentry = this._sentry;
+	let machineID;
 
 	if (!anonLogin) {
 		if (!this._logOnDetails.sha_sentryfile && !sentry) {
@@ -83,7 +83,7 @@ SteamUser.prototype.logOn = function(details) {
 		}
 	}
 
-	var self = this;
+	let self = this;
 
 	if (this.storage) {
 		this.storage.readFiles(filenames, readFileCallback);
@@ -104,7 +104,7 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			if (file.filename.match(/^cellid/) && file.contents) {
-				var cellID = parseInt(file.contents.toString('utf8'), 10);
+				let cellID = parseInt(file.contents.toString('utf8'), 10);
 				if (!isNaN(cellID)) {
 					self._logOnDetails.cell_id = cellID;
 				}
@@ -151,7 +151,7 @@ SteamUser.prototype.logOn = function(details) {
 			if (!self._logOnDetails.sha_sentryfile) {
 				if (sentry && sentry.length > 20) {
 					// Hash the sentry
-					var hash = Crypto.createHash('sha1');
+					let hash = Crypto.createHash('sha1');
 					hash.update(sentry);
 					sentry = hash.digest();
 				}
@@ -166,7 +166,7 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			// Do the login
-			var sid = new SteamID();
+			let sid = new SteamID();
 			sid.universe = SteamID.Universe.PUBLIC;
 			sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
 			sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
@@ -228,7 +228,7 @@ SteamUser.prototype._disconnect = function(suppressLogoff) {
 		this._loggingOff = true;
 		this._send(SteamUser.EMsg.ClientLogOff, {});
 
-		var timeout = setTimeout(() => {
+		let timeout = setTimeout(() => {
 			this.emit('disconnected', 0, "Logged off");
 			this._loggingOff = false;
 			this._connection && this._connection.end(true);
@@ -257,7 +257,7 @@ SteamUser.prototype._getMachineID = function(localFile) {
 			return localFile;
 		}
 
-		var file = getRandomID();
+		let file = getRandomID();
 
 		if (this.storage) {
 			this.storage.writeFile('machineid.bin', file);
@@ -337,9 +337,9 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 				this.storage.saveFile('cellid-' + Helpers.getInternalMachineID() + '.txt', body.cell_id);
 			}
 
-			var parental = body.parental_settings ? Messages.decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
+			let parental = body.parental_settings ? Messages.decodeProto(Schema.ParentalSettings, body.parental_settings) : null;
 			if (parental && parental.salt && parental.passwordhash) {
-				var sid = new SteamID();
+				let sid = new SteamID();
 				sid.universe = this.steamID.universe;
 				sid.type = SteamID.Type.INDIVIDUAL;
 				sid.instance = SteamID.Instance.DESKTOP;
@@ -375,8 +375,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 
 			this._disconnect(true);
 
-			var isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
-			var lastCodeWrong = body.eresult == SteamUser.EResult.TwoFactorCodeMismatch;
+			let isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
+			let lastCodeWrong = body.eresult == SteamUser.EResult.TwoFactorCodeMismatch;
 
 			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, (code) => {
 				this._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
@@ -391,7 +391,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			this.emit('debug', 'Log on response: ' + SteamUser.EResult[body.eresult]);
 			this._disconnect(true);
 
-			var timer = this._logonTimeout || 1000;
+			let timer = this._logonTimeout || 1000;
 			this._logonTimeout = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
 
 			setTimeout(() => {
@@ -404,7 +404,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			// server is up, so reset logon timer
 			delete this._logonTimeout;
 
-			var error = new Error(SteamUser.EResult[body.eresult] || body.eresult);
+			let error = new Error(SteamUser.EResult[body.eresult] || body.eresult);
 			error.eresult = body.eresult;
 			this._disconnect(true);
 			this.emit('error', error);
@@ -412,8 +412,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 });
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function(body) {
-	var msg = body.eresult;
-	for (var i in SteamUser.EResult) {
+	let msg = body.eresult;
+	for (let i in SteamUser.EResult) {
 		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
 			msg = i;
 			break;
@@ -425,7 +425,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function
 });
 
 SteamUser.prototype._handleLogOff = function(result, msg) {
-	var fatal = true;
+	let fatal = true;
 
 	if (this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.NoConnection, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
 		fatal = false;
@@ -442,10 +442,10 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 	clearInterval(this._heartbeatInterval);
 
 	if (!this._relogging && fatal && !this._loggingOff) {
-		var e = new Error(msg);
+		let e = new Error(msg);
 		e.eresult = result;
 
-		var steamID = this.steamID;
+		let steamID = this.steamID;
 		this._disconnect(true);
 
 		this.steamID = steamID;
@@ -494,7 +494,7 @@ SteamUser.prototype._steamGuardPrompt = function(domain, lastCodeWrong, callback
 	if (this.listenerCount('steamGuard') == 0) {
 		// No steamGuard listeners, so prompt for one from stdin
 
-		var rl = require('readline').createInterface({
+		let rl = require('readline').createInterface({
 			"input": process.stdin,
 			"output": process.stdout
 		});
@@ -528,7 +528,7 @@ function createMachineID(val_bb3, val_ff2, val_3b3) {
 	// Machine IDs are binary KV objects with root key MessageObject and three hashes named BB3, FF2, and 3B3.
 	// I don't feel like writing a proper BinaryKV serializer, so this will work fine.
 
-	var buffer = ByteBuffer.allocate(155, ByteBuffer.LITTLE_ENDIAN);
+	let buffer = ByteBuffer.allocate(155, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeByte(0); // 1 byte, total 1
 	buffer.writeCString("MessageObject"); // 14 bytes, total 15
 
@@ -550,7 +550,7 @@ function createMachineID(val_bb3, val_ff2, val_3b3) {
 	return buffer.flip().toBuffer();
 
 	function sha1(input) {
-		var hash = Crypto.createHash('sha1');
+		let hash = Crypto.createHash('sha1');
 		hash.update(input, 'utf8');
 		return hash.digest('hex');
 	}
