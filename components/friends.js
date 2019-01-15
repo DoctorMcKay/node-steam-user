@@ -5,6 +5,8 @@ const SteamID = require('steamid');
 const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
+let g_ProcessPersonaSemaphore = new StdLib.Concurrency.Semaphore();
+
 /**
  * Set your persona online state and optionally name.
  * @param {EPersonaState} state - Your new online state
@@ -487,7 +489,6 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
 			"appid": appID,
 			language
 		}, (body) => {
-			console.log(body);
 			if (body.appid != appID) {
 				return reject(new Error('Did not get localizations for requested app ' + appID + ' (' + body.appID + ')'));
 			}
@@ -507,6 +508,13 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
 				return reject(new Error('Did not get localizations for requested language ' + language));
 			}
 
+			if (Object.keys(tokens).length > 0) {
+				this._richPresenceLocalization[appID] = {
+					"timestamp": Date.now(),
+					tokens
+				};
+			}
+
 			return accept({tokens});
 		});
 	});
@@ -516,45 +524,43 @@ SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, c
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
 	body.friends.forEach((user) => {
-		var sid = new SteamID(user.friendid.toString());
-		var sid64 = sid.getSteamID64();
+		let sid = new SteamID(user.friendid.toString());
+		let sid64 = sid.getSteamID64();
 		delete user.friendid;
 
-		var i;
 		if (!this.users[sid64]) {
-			this.users[sid64] = user;
-			processUser(this.users[sid64]);
+			this.users[sid64] = {};
 		} else {
 			// Replace unknown data in the received object with already-known data
-			for (i in this.users[sid64]) {
+			for (let i in this.users[sid64]) {
 				if (this.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
 					user[i] = this.users[sid64][i];
 				}
 			}
 		}
 
-		processUser(user);
+		processUser(this, user).then((processedUser) => {
+			/**
+			 * Emitted when we receive persona info about a user.
+			 * You can also listen for user#steamid64 to get info only for a specific user.
+			 *
+			 * @event SteamUser#user
+			 * @param {SteamID} steamID - The SteamID of the user
+			 * @param {Object} user - An object containing the user's persona info
+			 */
 
-		/**
-		 * Emitted when we receive persona info about a user.
-		 * You can also listen for user#steamid64 to get info only for a specific user.
-		 *
-		 * @event SteamUser#user
-		 * @param {SteamID} steamID - The SteamID of the user
-		 * @param {Object} user - An object containing the user's persona info
-		 */
+			this._emitIdEvent('user', sid, processedUser);
 
-		this._emitIdEvent('user', sid, user);
-
-		if (user.gameid) {
-			this._addAppToCache(user.gameid);
-		}
-
-		for (i in user) {
-			if (user.hasOwnProperty(i) && user[i] !== null) {
-				this.users[sid][i] = user[i];
+			if (processedUser.gameid) {
+				this._addAppToCache(processedUser.gameid);
 			}
-		}
+
+			for (let i in processedUser) {
+				if (processedUser.hasOwnProperty(i) && processedUser[i] !== null) {
+					this.users[sid][i] = processedUser[i];
+				}
+			}
+		});
 	});
 });
 
@@ -752,30 +758,99 @@ SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChange
 	}
 });
 
-function processUser(user) {
-	if (typeof user.gameid === 'object' && user.gameid !== null) {
-		user.gameid = user.gameid.toNumber();
-	}
+function processUser(steamUser, user) {
+	return new Promise((accept) => {
+		g_ProcessPersonaSemaphore.wait(async (release) => {
+			if (typeof user.gameid === 'object' && user.gameid !== null) {
+				user.gameid = user.gameid.toNumber();
+			}
 
-	if (typeof user.last_logoff === 'number') {
-		user.last_logoff = new Date(user.last_logoff * 1000);
-	}
+			if (typeof user.last_logoff === 'number') {
+				user.last_logoff = new Date(user.last_logoff * 1000);
+			}
 
-	if (typeof user.last_logon === 'number') {
-		user.last_logon = new Date(user.last_logon * 1000);
-	}
+			if (typeof user.last_logon === 'number') {
+				user.last_logon = new Date(user.last_logon * 1000);
+			}
 
-	if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
-		var hash = user.avatar_hash.toString('hex');
+			if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
+				let hash = user.avatar_hash.toString('hex');
 
-		// handle default avatar
-		if (hash === "0000000000000000000000000000000000000000") {
-			hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
-		}
+				// handle default avatar
+				if (hash === "0000000000000000000000000000000000000000") {
+					hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
+				}
 
-		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
-		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
-		user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
-		user.avatar_url_icon += ".jpg";
-	}
+				user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
+				user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
+				user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
+				user.avatar_url_icon += ".jpg";
+			}
+
+			if (!user.rich_presence || user.rich_presence.length == 0 || !user.gameid) {
+				delete user.rich_presence_string;
+				release();
+				return accept(user);
+			}
+
+			let rpTokens = {};
+			user.rich_presence.forEach((token) => {
+				rpTokens[token.key] = token.value;
+			});
+
+			if (!rpTokens.steam_display) {
+				// Nothing to do here
+				release();
+				return accept(user);
+			}
+
+			let localizationTokens;
+			if (steamUser._richPresenceLocalization[user.gameid] && steamUser._richPresenceLocalization[user.gameid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
+				// We already have localization
+				localizationTokens = steamUser._richPresenceLocalization[user.gameid].tokens;
+			} else {
+				try {
+					localizationTokens = (await steamUser.getAppRichPresenceLocalization(user.gameid, steamUser.options.language || "english")).tokens;
+				} catch (ex) {
+					// Oh well
+					delete user.rich_presence_string;
+					release();
+					return accept(user);
+				}
+			}
+
+			for (let i in rpTokens) {
+				if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
+					rpTokens[i] = localizationTokens[rpTokens[i]];
+				}
+			}
+
+			let rpString = rpTokens.steam_display;
+			while (true) {
+				let newRpString = rpString;
+				for (let i in rpTokens) {
+					if (rpTokens.hasOwnProperty(i)) {
+						newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
+					}
+				}
+
+				(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
+					token = token.substring(1, token.length - 1);
+					if (localizationTokens[token]) {
+						newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
+					}
+				});
+
+				if (newRpString == rpString) {
+					break;
+				} else {
+					rpString = newRpString;
+				}
+			}
+
+			user.rich_presence_string = rpString;
+			release();
+			return accept(user);
+		});
+	});
 }

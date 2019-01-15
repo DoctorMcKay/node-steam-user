@@ -56,6 +56,7 @@ function SteamUser(options) {
 	this._lastNotificationCounts = {};
 	this._sessionID = 0;
 	this._jobs = {};
+	this._richPresenceLocalization = {};
 
 	// App and package cache
 	this._changelistUpdateTimer = null;
@@ -84,6 +85,7 @@ function SteamUser(options) {
 		"saveAppTickets": true,
 		"debug": false,
 		"additionalHeaders": {},
+		"language": "english"
 	};
 
 	for (var i in defaultOptions) {
