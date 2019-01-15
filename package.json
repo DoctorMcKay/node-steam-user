@@ -1,7 +1,6 @@
 {
 	"name": "steam-user",
 	"version": "4.0.0-beta.1",
-	"private": true,
 	"description": "Steam client for Individual and AnonUser Steam account types",
 	"keywords": [
 		"steam",
@@ -46,6 +45,6 @@
 		"generate-protos": "node scripts/generate-protos.js"
 	},
 	"engines": {
-		"node": ">=6.0.0"
+		"node": ">=8.0.0"
 	}
 }
