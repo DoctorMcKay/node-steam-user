@@ -18,6 +18,7 @@ message CMsgKeyDown {
 	optional uint32 browser_handle = 1;
 	optional uint32 keyCode = 2;
 	optional uint32 modifiers = 3;
+	optional bool is_system_key = 4;
 }
 
 message CMsgKeyChar {
@@ -49,8 +50,9 @@ message CMsgMouseDblClick {
 
 message CMsgMouseWheel {
 	optional uint32 browser_handle = 1;
-	optional int32 delta = 2;
-	optional uint32 modifiers = 3;
+	optional int32 deltax = 2;
+	optional int32 deltay = 3;
+	optional uint32 modifiers = 4;
 }
 
 message CMsgMouseMove {
@@ -79,6 +81,9 @@ message CMsgBrowserCreate {
 	optional uint32 browser_type = 14 [default = 0];
 	optional int32 initial_top = 15 [default = -2147483648];
 	optional int32 initial_left = 16 [default = -2147483648];
+	optional bool only_allow_trusted_popups = 17 [default = false];
+	optional string initial_url = 18;
+	optional fixed64 hwnd_parent = 19;
 }
 
 message CMsgBrowserCreateResponse {
@@ -130,6 +135,8 @@ message CMsgBrowserPosition {
 	optional uint32 browser_handle = 1;
 	optional int32 x = 2;
 	optional int32 y = 3;
+	optional int32 x_local = 4;
+	optional int32 y_local = 5;
 }
 
 message CMsgBrowserResized {
@@ -175,6 +182,10 @@ message CMsgWasHidden {
 }
 
 message CMsgClearHistory {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgClearAllBrowsingData {
 	optional uint32 browser_handle = 1;
 }
 
@@ -245,7 +256,7 @@ message CMsgSetVerticalScroll {
 
 message CMsgSetZoomLevel {
 	optional uint32 browser_handle = 1;
-	optional uint32 zoom = 2;
+	optional double zoom = 2;
 }
 
 message CMsgViewSource {
@@ -255,6 +266,7 @@ message CMsgViewSource {
 message CMsgBrowserReady {
 	optional uint32 browser_handle = 1;
 	optional string vr_overlay_key = 2;
+	optional fixed64 hwnd_browser = 3;
 }
 
 message CMsgURLChanged {
@@ -578,16 +590,19 @@ message CMsgRequestFullScreen {
 	optional uint32 browser_handle = 1;
 }
 
-message CMsgRequestFullScreenResponse {
-	optional uint32 browser_handle = 1;
-	optional bool ballow = 2;
-}
-
 message CMsgExitFullScreen {
 	optional uint32 browser_handle = 1;
 }
 
+message CMsgToggleFindInPageDialog {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgSetPIDShuttingDown {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgDisableBackgroundThrottling {
 	optional uint32 browser_handle = 1;
 }
 
@@ -753,10 +768,6 @@ message CMsgLoadLocalization {
 	optional string language = 3;
 }
 
-message CMsgEnableSteamClientAPI {
-	optional uint32 browser_handle = 1;
-}
-
 message CMsgJumpListLink {
 	optional string display_name = 1;
 	optional string url_link = 2;
@@ -837,5 +848,25 @@ message CMsgMinimizeWindow {
 
 message CMsgShowBrowserContextMenu {
 	optional uint32 browser_handle = 1;
+}
+
+message CMsgImeSetComposition {
+	optional uint32 browser_handle = 1;
+	optional string text = 2;
+}
+
+message CMsgImeCommitText {
+	optional uint32 browser_handle = 1;
+	optional string text = 2;
+}
+
+message CMsgImeCancelComposition {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgImeCompositionRangeChanged {
+	optional uint32 browser_handle = 1;
+	optional uint32 x = 2;
+	optional uint32 y = 3;
 }
 

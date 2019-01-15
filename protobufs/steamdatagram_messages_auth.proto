@@ -1,3 +1,4 @@
+option optimize_for = SPEED;
 option cc_generic_services = false;
 
 message CMsgSteamDatagramRelayAuthTicket {
@@ -9,15 +10,18 @@ message CMsgSteamDatagramRelayAuthTicket {
 	}
 
 	optional fixed32 time_expiry = 1;
-	optional fixed64 authorized_steam_id = 2;
+	optional bytes authorized_client_identity = 12;
+	optional bytes gameserver_identity = 13;
 	optional fixed32 authorized_public_ip = 3;
-	optional fixed64 gameserver_steam_id = 4;
-	optional fixed64 gameserver_net_id = 5;
-	optional bytes legacy_signature = 6;
+	optional bytes gameserver_address = 11;
 	optional uint32 app_id = 7;
-	optional fixed32 gameserver_pop_id = 9;
 	optional uint32 virtual_port = 10;
 	repeated .CMsgSteamDatagramRelayAuthTicket.ExtraField extra_fields = 8;
+	optional fixed64 legacy_authorized_steam_id = 2;
+	optional fixed64 legacy_gameserver_steam_id = 4;
+	optional fixed64 legacy_gameserver_net_id = 5;
+	optional fixed32 legacy_gameserver_pop_id = 9;
+	optional bytes DELETED_signature = 6;
 }
 
 message CMsgSteamDatagramSignedRelayAuthTicket {

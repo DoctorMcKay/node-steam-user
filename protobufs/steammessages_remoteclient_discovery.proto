@@ -20,6 +20,7 @@ enum ERemoteClientService {
 	k_ERemoteClientServiceRemoteControl = 1;
 	k_ERemoteClientServiceGameStreaming = 2;
 	k_ERemoteClientServiceSiteLicense = 4;
+	k_ERemoteClientServiceContentCache = 8;
 }
 
 enum ERemoteDeviceAuthorizationResult {
@@ -77,6 +78,7 @@ message CMsgRemoteClientBroadcastStatus {
 	optional uint32 download_lan_peer_group = 16;
 	optional bool broadcasting_active = 17;
 	optional bool vr_active = 18;
+	optional uint32 content_cache_port = 19;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {

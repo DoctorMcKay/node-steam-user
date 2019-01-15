@@ -1,0 +1,99 @@
+enum EControllerLayoutType {
+	k_EControllerLayoutTypePhone = 0;
+	k_EControllerLayoutTypeTablet = 1;
+}
+
+message CVirtualControllerElement {
+	message JoyStickControl {
+		optional string label = 1;
+		optional uint32 x_axis_id = 2;
+		optional uint32 y_axis_id = 3;
+		optional uint32 x_axis_range = 4;
+		optional uint32 y_axis_range = 5;
+	}
+
+	message JoyButtonControl {
+		optional string label = 1;
+		optional uint32 button_id = 2;
+	}
+
+	message JoyPadControl {
+		optional string label = 1;
+		optional uint32 up_button_id = 2;
+		optional uint32 down_button_id = 3;
+		optional uint32 left_button_id = 4;
+		optional uint32 right_button_id = 5;
+	}
+
+	message MacroButtonControl {
+		optional string label = 1;
+		optional uint32 button_id = 2;
+	}
+
+	message TrackpadControl {
+		optional string label = 1;
+		optional uint32 x_axis_range = 2;
+		optional uint32 y_axis_range = 3;
+	}
+
+	message AxisButtonControl {
+		optional string label = 1;
+		optional uint32 axis_id = 2;
+		optional uint32 axis_pressed_value = 3;
+	}
+
+	optional uint32 x_position = 1;
+	optional uint32 y_position = 2;
+	optional uint32 width = 3;
+	optional uint32 height = 4;
+	oneof control {
+		.CVirtualControllerElement.JoyStickControl joy_stick = 5;
+		.CVirtualControllerElement.JoyButtonControl joy_button = 6;
+		.CVirtualControllerElement.JoyPadControl joy_pad = 7;
+		.CVirtualControllerElement.MacroButtonControl macro_button = 8;
+		.CVirtualControllerElement.TrackpadControl trackpad = 9;
+		.CVirtualControllerElement.AxisButtonControl axis_button = 10;
+	}
+}
+
+message CVirtualControllerLayout {
+	optional .EControllerLayoutType layout_type = 1 [default = k_EControllerLayoutTypePhone];
+	repeated .CVirtualControllerElement elements = 2;
+}
+
+message CVirtualControllerLayouts {
+	repeated .CVirtualControllerLayout layouts = 1;
+}
+
+message CVirtualControllerConfig {
+	message Control {
+		optional string name = 1;
+		optional string icon = 2;
+		optional int32 input_source = 3;
+		optional int32 input_mode = 4;
+		optional int32 input_element = 5;
+		optional int32 output_gamepad = 6;
+		optional int32 output_keyboard = 7;
+		optional int32 output_mouse = 8;
+		optional string icon_foreground = 9;
+		optional string icon_background = 10;
+	}
+
+	message ActionSet {
+		optional int32 id = 1;
+		optional int32 parent_id = 2;
+		optional string name = 3;
+		repeated .CVirtualControllerConfig.Control controls = 4;
+	}
+
+	optional string name = 1;
+	repeated .CVirtualControllerConfig.ActionSet actionsets = 2;
+}
+
+message CVirtualControllerLayoutPackage {
+	optional uint32 appid = 1;
+	optional uint32 revision = 2;
+	optional .CVirtualControllerConfig config = 3;
+	optional .CVirtualControllerLayouts layouts = 4;
+}
+
