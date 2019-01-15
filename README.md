@@ -225,6 +225,15 @@ Added in 4.0.0.
 
 Defaults to `Auto`.
 
+### language
+
+Set this to the full name of a language (e.g. "english" or "spanish") to localize specific things within steam-user.
+Currently this is only used to localize `rich_presence_string` in [`user`](#user) event data.
+
+Added in 4.0.0.
+
+Defaults to `english`.
+
 # Properties [^](#contents)
 
 ### client
