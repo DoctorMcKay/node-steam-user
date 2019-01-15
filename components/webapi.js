@@ -24,9 +24,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 
 	data.format = "vdf"; // for parity with the Steam client
 
-	var query = buildQueryString(data);
-	var headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
-	var path = "/" + iface + "/" + method + "/v" + version + "/";
+	let query = buildQueryString(data);
+	let headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
+	let path = "/" + iface + "/" + method + "/v" + version + "/";
 
 	if (httpMethod == "POST") {
 		headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -35,7 +35,7 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 		path += "?" + query;
 	}
 
-	var options = {
+	let options = {
 		"hostname": HOSTNAME,
 		"path": path,
 		"method": httpMethod,
@@ -50,7 +50,7 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 		options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
 	}
 
-	var req = HTTPS.request(options, (res) => {
+	let req = HTTPS.request(options, (res) => {
 		this.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
 
 		if (res.statusCode != 200) {
@@ -59,9 +59,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 			return;
 		}
 
-		var responseData = "";
+		let responseData = "";
 
-		var stream = res;
+		let stream = res;
 		if (res.headers['content-encoding'] && res.headers['content-encoding'].toLowerCase() == 'gzip') {
 			stream = Zlib.createGunzip();
 			res.pipe(stream);
@@ -92,9 +92,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 
 function buildQueryString(data) {
 	// We can't use the querystring module's encode because we want binary data to be completely percent-encoded
-	var str = "";
+	let str = "";
 
-	for (var i in data) {
+	for (let i in data) {
 		if (!data.hasOwnProperty(i)) {
 			continue;
 		}
