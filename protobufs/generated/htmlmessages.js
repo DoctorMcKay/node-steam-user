@@ -275,6 +275,7 @@
          * @property {number|null} [browser_handle] CMsgKeyDown browser_handle
          * @property {number|null} [keyCode] CMsgKeyDown keyCode
          * @property {number|null} [modifiers] CMsgKeyDown modifiers
+         * @property {boolean|null} [is_system_key] CMsgKeyDown is_system_key
          */
     
         /**
@@ -317,6 +318,14 @@
         CMsgKeyDown.prototype.modifiers = 0;
     
         /**
+         * CMsgKeyDown is_system_key.
+         * @member {boolean} is_system_key
+         * @memberof CMsgKeyDown
+         * @instance
+         */
+        CMsgKeyDown.prototype.is_system_key = false;
+    
+        /**
          * Creates a new CMsgKeyDown instance using the specified properties.
          * @function create
          * @memberof CMsgKeyDown
@@ -346,6 +355,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.keyCode);
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
+            if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_system_key);
             return writer;
         };
     
@@ -388,6 +399,9 @@
                     break;
                 case 3:
                     message.modifiers = reader.uint32();
+                    break;
+                case 4:
+                    message.is_system_key = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -433,6 +447,9 @@
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 if (!$util.isInteger(message.modifiers))
                     return "modifiers: integer expected";
+            if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
+                if (typeof message.is_system_key !== "boolean")
+                    return "is_system_key: boolean expected";
             return null;
         };
     
@@ -454,6 +471,8 @@
                 message.keyCode = object.keyCode >>> 0;
             if (object.modifiers != null)
                 message.modifiers = object.modifiers >>> 0;
+            if (object.is_system_key != null)
+                message.is_system_key = Boolean(object.is_system_key);
             return message;
         };
     
@@ -474,6 +493,7 @@
                 object.browser_handle = 0;
                 object.keyCode = 0;
                 object.modifiers = 0;
+                object.is_system_key = false;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -481,6 +501,8 @@
                 object.keyCode = message.keyCode;
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 object.modifiers = message.modifiers;
+            if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
+                object.is_system_key = message.is_system_key;
             return object;
         };
     
@@ -1499,7 +1521,8 @@
          * @exports ICMsgMouseWheel
          * @interface ICMsgMouseWheel
          * @property {number|null} [browser_handle] CMsgMouseWheel browser_handle
-         * @property {number|null} [delta] CMsgMouseWheel delta
+         * @property {number|null} [deltax] CMsgMouseWheel deltax
+         * @property {number|null} [deltay] CMsgMouseWheel deltay
          * @property {number|null} [modifiers] CMsgMouseWheel modifiers
          */
     
@@ -1527,12 +1550,20 @@
         CMsgMouseWheel.prototype.browser_handle = 0;
     
         /**
-         * CMsgMouseWheel delta.
-         * @member {number} delta
+         * CMsgMouseWheel deltax.
+         * @member {number} deltax
          * @memberof CMsgMouseWheel
          * @instance
          */
-        CMsgMouseWheel.prototype.delta = 0;
+        CMsgMouseWheel.prototype.deltax = 0;
+    
+        /**
+         * CMsgMouseWheel deltay.
+         * @member {number} deltay
+         * @memberof CMsgMouseWheel
+         * @instance
+         */
+        CMsgMouseWheel.prototype.deltay = 0;
     
         /**
          * CMsgMouseWheel modifiers.
@@ -1568,10 +1599,12 @@
                 writer = $Writer.create();
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.delta != null && message.hasOwnProperty("delta"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.delta);
+            if (message.deltax != null && message.hasOwnProperty("deltax"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.deltax);
+            if (message.deltay != null && message.hasOwnProperty("deltay"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deltay);
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.modifiers);
             return writer;
         };
     
@@ -1610,9 +1643,12 @@
                     message.browser_handle = reader.uint32();
                     break;
                 case 2:
-                    message.delta = reader.int32();
+                    message.deltax = reader.int32();
                     break;
                 case 3:
+                    message.deltay = reader.int32();
+                    break;
+                case 4:
                     message.modifiers = reader.uint32();
                     break;
                 default:
@@ -1653,9 +1689,12 @@
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 if (!$util.isInteger(message.browser_handle))
                     return "browser_handle: integer expected";
-            if (message.delta != null && message.hasOwnProperty("delta"))
-                if (!$util.isInteger(message.delta))
-                    return "delta: integer expected";
+            if (message.deltax != null && message.hasOwnProperty("deltax"))
+                if (!$util.isInteger(message.deltax))
+                    return "deltax: integer expected";
+            if (message.deltay != null && message.hasOwnProperty("deltay"))
+                if (!$util.isInteger(message.deltay))
+                    return "deltay: integer expected";
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 if (!$util.isInteger(message.modifiers))
                     return "modifiers: integer expected";
@@ -1676,8 +1715,10 @@
             var message = new $root.CMsgMouseWheel();
             if (object.browser_handle != null)
                 message.browser_handle = object.browser_handle >>> 0;
-            if (object.delta != null)
-                message.delta = object.delta | 0;
+            if (object.deltax != null)
+                message.deltax = object.deltax | 0;
+            if (object.deltay != null)
+                message.deltay = object.deltay | 0;
             if (object.modifiers != null)
                 message.modifiers = object.modifiers >>> 0;
             return message;
@@ -1698,13 +1739,16 @@
             var object = {};
             if (options.defaults) {
                 object.browser_handle = 0;
-                object.delta = 0;
+                object.deltax = 0;
+                object.deltay = 0;
                 object.modifiers = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
-            if (message.delta != null && message.hasOwnProperty("delta"))
-                object.delta = message.delta;
+            if (message.deltax != null && message.hasOwnProperty("deltax"))
+                object.deltax = message.deltax;
+            if (message.deltay != null && message.hasOwnProperty("deltay"))
+                object.deltay = message.deltay;
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 object.modifiers = message.modifiers;
             return object;
@@ -2185,6 +2229,9 @@
          * @property {number|null} [browser_type] CMsgBrowserCreate browser_type
          * @property {number|null} [initial_top] CMsgBrowserCreate initial_top
          * @property {number|null} [initial_left] CMsgBrowserCreate initial_left
+         * @property {boolean|null} [only_allow_trusted_popups] CMsgBrowserCreate only_allow_trusted_popups
+         * @property {string|null} [initial_url] CMsgBrowserCreate initial_url
+         * @property {number|Long|null} [hwnd_parent] CMsgBrowserCreate hwnd_parent
          */
     
         /**
@@ -2315,6 +2362,30 @@
         CMsgBrowserCreate.prototype.initial_left = -2147483648;
     
         /**
+         * CMsgBrowserCreate only_allow_trusted_popups.
+         * @member {boolean} only_allow_trusted_popups
+         * @memberof CMsgBrowserCreate
+         * @instance
+         */
+        CMsgBrowserCreate.prototype.only_allow_trusted_popups = false;
+    
+        /**
+         * CMsgBrowserCreate initial_url.
+         * @member {string} initial_url
+         * @memberof CMsgBrowserCreate
+         * @instance
+         */
+        CMsgBrowserCreate.prototype.initial_url = "";
+    
+        /**
+         * CMsgBrowserCreate hwnd_parent.
+         * @member {number|Long} hwnd_parent
+         * @memberof CMsgBrowserCreate
+         * @instance
+         */
+        CMsgBrowserCreate.prototype.hwnd_parent = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
          * Creates a new CMsgBrowserCreate instance using the specified properties.
          * @function create
          * @memberof CMsgBrowserCreate
@@ -2366,6 +2437,12 @@
                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.initial_top);
             if (message.initial_left != null && message.hasOwnProperty("initial_left"))
                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.initial_left);
+            if (message.only_allow_trusted_popups != null && message.hasOwnProperty("only_allow_trusted_popups"))
+                writer.uint32(/* id 17, wireType 0 =*/136).bool(message.only_allow_trusted_popups);
+            if (message.initial_url != null && message.hasOwnProperty("initial_url"))
+                writer.uint32(/* id 18, wireType 2 =*/146).string(message.initial_url);
+            if (message.hwnd_parent != null && message.hasOwnProperty("hwnd_parent"))
+                writer.uint32(/* id 19, wireType 1 =*/153).fixed64(message.hwnd_parent);
             return writer;
         };
     
@@ -2441,6 +2518,15 @@
                     break;
                 case 16:
                     message.initial_left = reader.int32();
+                    break;
+                case 17:
+                    message.only_allow_trusted_popups = reader.bool();
+                    break;
+                case 18:
+                    message.initial_url = reader.string();
+                    break;
+                case 19:
+                    message.hwnd_parent = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2519,6 +2605,15 @@
             if (message.initial_left != null && message.hasOwnProperty("initial_left"))
                 if (!$util.isInteger(message.initial_left))
                     return "initial_left: integer expected";
+            if (message.only_allow_trusted_popups != null && message.hasOwnProperty("only_allow_trusted_popups"))
+                if (typeof message.only_allow_trusted_popups !== "boolean")
+                    return "only_allow_trusted_popups: boolean expected";
+            if (message.initial_url != null && message.hasOwnProperty("initial_url"))
+                if (!$util.isString(message.initial_url))
+                    return "initial_url: string expected";
+            if (message.hwnd_parent != null && message.hasOwnProperty("hwnd_parent"))
+                if (!$util.isInteger(message.hwnd_parent) && !(message.hwnd_parent && $util.isInteger(message.hwnd_parent.low) && $util.isInteger(message.hwnd_parent.high)))
+                    return "hwnd_parent: integer|Long expected";
             return null;
         };
     
@@ -2562,6 +2657,19 @@
                 message.initial_top = object.initial_top | 0;
             if (object.initial_left != null)
                 message.initial_left = object.initial_left | 0;
+            if (object.only_allow_trusted_popups != null)
+                message.only_allow_trusted_popups = Boolean(object.only_allow_trusted_popups);
+            if (object.initial_url != null)
+                message.initial_url = String(object.initial_url);
+            if (object.hwnd_parent != null)
+                if ($util.Long)
+                    (message.hwnd_parent = $util.Long.fromValue(object.hwnd_parent)).unsigned = false;
+                else if (typeof object.hwnd_parent === "string")
+                    message.hwnd_parent = parseInt(object.hwnd_parent, 10);
+                else if (typeof object.hwnd_parent === "number")
+                    message.hwnd_parent = object.hwnd_parent;
+                else if (typeof object.hwnd_parent === "object")
+                    message.hwnd_parent = new $util.LongBits(object.hwnd_parent.low >>> 0, object.hwnd_parent.high >>> 0).toNumber();
             return message;
         };
     
@@ -2593,6 +2701,13 @@
                 object.browser_type = 0;
                 object.initial_top = -2147483648;
                 object.initial_left = -2147483648;
+                object.only_allow_trusted_popups = false;
+                object.initial_url = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.hwnd_parent = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.hwnd_parent = options.longs === String ? "0" : 0;
             }
             if (message.request_id != null && message.hasOwnProperty("request_id"))
                 object.request_id = message.request_id;
@@ -2622,6 +2737,15 @@
                 object.initial_top = message.initial_top;
             if (message.initial_left != null && message.hasOwnProperty("initial_left"))
                 object.initial_left = message.initial_left;
+            if (message.only_allow_trusted_popups != null && message.hasOwnProperty("only_allow_trusted_popups"))
+                object.only_allow_trusted_popups = message.only_allow_trusted_popups;
+            if (message.initial_url != null && message.hasOwnProperty("initial_url"))
+                object.initial_url = message.initial_url;
+            if (message.hwnd_parent != null && message.hasOwnProperty("hwnd_parent"))
+                if (typeof message.hwnd_parent === "number")
+                    object.hwnd_parent = options.longs === String ? String(message.hwnd_parent) : message.hwnd_parent;
+                else
+                    object.hwnd_parent = options.longs === String ? $util.Long.prototype.toString.call(message.hwnd_parent) : options.longs === Number ? new $util.LongBits(message.hwnd_parent.low >>> 0, message.hwnd_parent.high >>> 0).toNumber() : message.hwnd_parent;
             return object;
         };
     
@@ -4359,6 +4483,8 @@
          * @property {number|null} [browser_handle] CMsgBrowserPosition browser_handle
          * @property {number|null} [x] CMsgBrowserPosition x
          * @property {number|null} [y] CMsgBrowserPosition y
+         * @property {number|null} [x_local] CMsgBrowserPosition x_local
+         * @property {number|null} [y_local] CMsgBrowserPosition y_local
          */
     
         /**
@@ -4401,6 +4527,22 @@
         CMsgBrowserPosition.prototype.y = 0;
     
         /**
+         * CMsgBrowserPosition x_local.
+         * @member {number} x_local
+         * @memberof CMsgBrowserPosition
+         * @instance
+         */
+        CMsgBrowserPosition.prototype.x_local = 0;
+    
+        /**
+         * CMsgBrowserPosition y_local.
+         * @member {number} y_local
+         * @memberof CMsgBrowserPosition
+         * @instance
+         */
+        CMsgBrowserPosition.prototype.y_local = 0;
+    
+        /**
          * Creates a new CMsgBrowserPosition instance using the specified properties.
          * @function create
          * @memberof CMsgBrowserPosition
@@ -4430,6 +4572,10 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.x);
             if (message.y != null && message.hasOwnProperty("y"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.y);
+            if (message.x_local != null && message.hasOwnProperty("x_local"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.x_local);
+            if (message.y_local != null && message.hasOwnProperty("y_local"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.y_local);
             return writer;
         };
     
@@ -4472,6 +4618,12 @@
                     break;
                 case 3:
                     message.y = reader.int32();
+                    break;
+                case 4:
+                    message.x_local = reader.int32();
+                    break;
+                case 5:
+                    message.y_local = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4517,6 +4669,12 @@
             if (message.y != null && message.hasOwnProperty("y"))
                 if (!$util.isInteger(message.y))
                     return "y: integer expected";
+            if (message.x_local != null && message.hasOwnProperty("x_local"))
+                if (!$util.isInteger(message.x_local))
+                    return "x_local: integer expected";
+            if (message.y_local != null && message.hasOwnProperty("y_local"))
+                if (!$util.isInteger(message.y_local))
+                    return "y_local: integer expected";
             return null;
         };
     
@@ -4538,6 +4696,10 @@
                 message.x = object.x | 0;
             if (object.y != null)
                 message.y = object.y | 0;
+            if (object.x_local != null)
+                message.x_local = object.x_local | 0;
+            if (object.y_local != null)
+                message.y_local = object.y_local | 0;
             return message;
         };
     
@@ -4558,6 +4720,8 @@
                 object.browser_handle = 0;
                 object.x = 0;
                 object.y = 0;
+                object.x_local = 0;
+                object.y_local = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -4565,6 +4729,10 @@
                 object.x = message.x;
             if (message.y != null && message.hasOwnProperty("y"))
                 object.y = message.y;
+            if (message.x_local != null && message.hasOwnProperty("x_local"))
+                object.x_local = message.x_local;
+            if (message.y_local != null && message.hasOwnProperty("y_local"))
+                object.y_local = message.y_local;
             return object;
         };
     
@@ -6487,6 +6655,193 @@
         };
     
         return CMsgClearHistory;
+    })();
+    
+    $root.CMsgClearAllBrowsingData = (function() {
+    
+        /**
+         * Properties of a CMsgClearAllBrowsingData.
+         * @exports ICMsgClearAllBrowsingData
+         * @interface ICMsgClearAllBrowsingData
+         * @property {number|null} [browser_handle] CMsgClearAllBrowsingData browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgClearAllBrowsingData.
+         * @exports CMsgClearAllBrowsingData
+         * @classdesc Represents a CMsgClearAllBrowsingData.
+         * @implements ICMsgClearAllBrowsingData
+         * @constructor
+         * @param {ICMsgClearAllBrowsingData=} [properties] Properties to set
+         */
+        function CMsgClearAllBrowsingData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgClearAllBrowsingData browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgClearAllBrowsingData
+         * @instance
+         */
+        CMsgClearAllBrowsingData.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgClearAllBrowsingData instance using the specified properties.
+         * @function create
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {ICMsgClearAllBrowsingData=} [properties] Properties to set
+         * @returns {CMsgClearAllBrowsingData} CMsgClearAllBrowsingData instance
+         */
+        CMsgClearAllBrowsingData.create = function create(properties) {
+            return new CMsgClearAllBrowsingData(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgClearAllBrowsingData message. Does not implicitly {@link CMsgClearAllBrowsingData.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {ICMsgClearAllBrowsingData} message CMsgClearAllBrowsingData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClearAllBrowsingData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgClearAllBrowsingData message, length delimited. Does not implicitly {@link CMsgClearAllBrowsingData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {ICMsgClearAllBrowsingData} message CMsgClearAllBrowsingData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgClearAllBrowsingData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgClearAllBrowsingData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgClearAllBrowsingData} CMsgClearAllBrowsingData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClearAllBrowsingData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClearAllBrowsingData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgClearAllBrowsingData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgClearAllBrowsingData} CMsgClearAllBrowsingData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgClearAllBrowsingData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgClearAllBrowsingData message.
+         * @function verify
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgClearAllBrowsingData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgClearAllBrowsingData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgClearAllBrowsingData} CMsgClearAllBrowsingData
+         */
+        CMsgClearAllBrowsingData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgClearAllBrowsingData)
+                return object;
+            var message = new $root.CMsgClearAllBrowsingData();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgClearAllBrowsingData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgClearAllBrowsingData
+         * @static
+         * @param {CMsgClearAllBrowsingData} message CMsgClearAllBrowsingData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgClearAllBrowsingData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgClearAllBrowsingData to JSON.
+         * @function toJSON
+         * @memberof CMsgClearAllBrowsingData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgClearAllBrowsingData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgClearAllBrowsingData;
     })();
     
     $root.CMsgCopy = (function() {
@@ -9182,7 +9537,7 @@
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             if (message.zoom != null && message.hasOwnProperty("zoom"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.zoom);
+                writer.uint32(/* id 2, wireType 1 =*/17).double(message.zoom);
             return writer;
         };
     
@@ -9221,7 +9576,7 @@
                     message.browser_handle = reader.uint32();
                     break;
                 case 2:
-                    message.zoom = reader.uint32();
+                    message.zoom = reader.double();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9262,8 +9617,8 @@
                 if (!$util.isInteger(message.browser_handle))
                     return "browser_handle: integer expected";
             if (message.zoom != null && message.hasOwnProperty("zoom"))
-                if (!$util.isInteger(message.zoom))
-                    return "zoom: integer expected";
+                if (typeof message.zoom !== "number")
+                    return "zoom: number expected";
             return null;
         };
     
@@ -9282,7 +9637,7 @@
             if (object.browser_handle != null)
                 message.browser_handle = object.browser_handle >>> 0;
             if (object.zoom != null)
-                message.zoom = object.zoom >>> 0;
+                message.zoom = Number(object.zoom);
             return message;
         };
     
@@ -9306,7 +9661,7 @@
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
             if (message.zoom != null && message.hasOwnProperty("zoom"))
-                object.zoom = message.zoom;
+                object.zoom = options.json && !isFinite(message.zoom) ? String(message.zoom) : message.zoom;
             return object;
         };
     
@@ -9519,6 +9874,7 @@
          * @interface ICMsgBrowserReady
          * @property {number|null} [browser_handle] CMsgBrowserReady browser_handle
          * @property {string|null} [vr_overlay_key] CMsgBrowserReady vr_overlay_key
+         * @property {number|Long|null} [hwnd_browser] CMsgBrowserReady hwnd_browser
          */
     
         /**
@@ -9553,6 +9909,14 @@
         CMsgBrowserReady.prototype.vr_overlay_key = "";
     
         /**
+         * CMsgBrowserReady hwnd_browser.
+         * @member {number|Long} hwnd_browser
+         * @memberof CMsgBrowserReady
+         * @instance
+         */
+        CMsgBrowserReady.prototype.hwnd_browser = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
          * Creates a new CMsgBrowserReady instance using the specified properties.
          * @function create
          * @memberof CMsgBrowserReady
@@ -9580,6 +9944,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
             if (message.vr_overlay_key != null && message.hasOwnProperty("vr_overlay_key"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.vr_overlay_key);
+            if (message.hwnd_browser != null && message.hasOwnProperty("hwnd_browser"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.hwnd_browser);
             return writer;
         };
     
@@ -9619,6 +9985,9 @@
                     break;
                 case 2:
                     message.vr_overlay_key = reader.string();
+                    break;
+                case 3:
+                    message.hwnd_browser = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9661,6 +10030,9 @@
             if (message.vr_overlay_key != null && message.hasOwnProperty("vr_overlay_key"))
                 if (!$util.isString(message.vr_overlay_key))
                     return "vr_overlay_key: string expected";
+            if (message.hwnd_browser != null && message.hasOwnProperty("hwnd_browser"))
+                if (!$util.isInteger(message.hwnd_browser) && !(message.hwnd_browser && $util.isInteger(message.hwnd_browser.low) && $util.isInteger(message.hwnd_browser.high)))
+                    return "hwnd_browser: integer|Long expected";
             return null;
         };
     
@@ -9680,6 +10052,15 @@
                 message.browser_handle = object.browser_handle >>> 0;
             if (object.vr_overlay_key != null)
                 message.vr_overlay_key = String(object.vr_overlay_key);
+            if (object.hwnd_browser != null)
+                if ($util.Long)
+                    (message.hwnd_browser = $util.Long.fromValue(object.hwnd_browser)).unsigned = false;
+                else if (typeof object.hwnd_browser === "string")
+                    message.hwnd_browser = parseInt(object.hwnd_browser, 10);
+                else if (typeof object.hwnd_browser === "number")
+                    message.hwnd_browser = object.hwnd_browser;
+                else if (typeof object.hwnd_browser === "object")
+                    message.hwnd_browser = new $util.LongBits(object.hwnd_browser.low >>> 0, object.hwnd_browser.high >>> 0).toNumber();
             return message;
         };
     
@@ -9699,11 +10080,21 @@
             if (options.defaults) {
                 object.browser_handle = 0;
                 object.vr_overlay_key = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.hwnd_browser = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.hwnd_browser = options.longs === String ? "0" : 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
             if (message.vr_overlay_key != null && message.hasOwnProperty("vr_overlay_key"))
                 object.vr_overlay_key = message.vr_overlay_key;
+            if (message.hwnd_browser != null && message.hasOwnProperty("hwnd_browser"))
+                if (typeof message.hwnd_browser === "number")
+                    object.hwnd_browser = options.longs === String ? String(message.hwnd_browser) : message.hwnd_browser;
+                else
+                    object.hwnd_browser = options.longs === String ? $util.Long.prototype.toString.call(message.hwnd_browser) : options.longs === Number ? new $util.LongBits(message.hwnd_browser.low >>> 0, message.hwnd_browser.high >>> 0).toNumber() : message.hwnd_browser;
             return object;
         };
     
@@ -22010,216 +22401,6 @@
         return CMsgRequestFullScreen;
     })();
     
-    $root.CMsgRequestFullScreenResponse = (function() {
-    
-        /**
-         * Properties of a CMsgRequestFullScreenResponse.
-         * @exports ICMsgRequestFullScreenResponse
-         * @interface ICMsgRequestFullScreenResponse
-         * @property {number|null} [browser_handle] CMsgRequestFullScreenResponse browser_handle
-         * @property {boolean|null} [ballow] CMsgRequestFullScreenResponse ballow
-         */
-    
-        /**
-         * Constructs a new CMsgRequestFullScreenResponse.
-         * @exports CMsgRequestFullScreenResponse
-         * @classdesc Represents a CMsgRequestFullScreenResponse.
-         * @implements ICMsgRequestFullScreenResponse
-         * @constructor
-         * @param {ICMsgRequestFullScreenResponse=} [properties] Properties to set
-         */
-        function CMsgRequestFullScreenResponse(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgRequestFullScreenResponse browser_handle.
-         * @member {number} browser_handle
-         * @memberof CMsgRequestFullScreenResponse
-         * @instance
-         */
-        CMsgRequestFullScreenResponse.prototype.browser_handle = 0;
-    
-        /**
-         * CMsgRequestFullScreenResponse ballow.
-         * @member {boolean} ballow
-         * @memberof CMsgRequestFullScreenResponse
-         * @instance
-         */
-        CMsgRequestFullScreenResponse.prototype.ballow = false;
-    
-        /**
-         * Creates a new CMsgRequestFullScreenResponse instance using the specified properties.
-         * @function create
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {ICMsgRequestFullScreenResponse=} [properties] Properties to set
-         * @returns {CMsgRequestFullScreenResponse} CMsgRequestFullScreenResponse instance
-         */
-        CMsgRequestFullScreenResponse.create = function create(properties) {
-            return new CMsgRequestFullScreenResponse(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgRequestFullScreenResponse message. Does not implicitly {@link CMsgRequestFullScreenResponse.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {ICMsgRequestFullScreenResponse} message CMsgRequestFullScreenResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgRequestFullScreenResponse.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            if (message.ballow != null && message.hasOwnProperty("ballow"))
-                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ballow);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgRequestFullScreenResponse message, length delimited. Does not implicitly {@link CMsgRequestFullScreenResponse.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {ICMsgRequestFullScreenResponse} message CMsgRequestFullScreenResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgRequestFullScreenResponse.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgRequestFullScreenResponse message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgRequestFullScreenResponse} CMsgRequestFullScreenResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgRequestFullScreenResponse.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgRequestFullScreenResponse();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.browser_handle = reader.uint32();
-                    break;
-                case 2:
-                    message.ballow = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgRequestFullScreenResponse message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgRequestFullScreenResponse} CMsgRequestFullScreenResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgRequestFullScreenResponse.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgRequestFullScreenResponse message.
-         * @function verify
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgRequestFullScreenResponse.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                if (!$util.isInteger(message.browser_handle))
-                    return "browser_handle: integer expected";
-            if (message.ballow != null && message.hasOwnProperty("ballow"))
-                if (typeof message.ballow !== "boolean")
-                    return "ballow: boolean expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgRequestFullScreenResponse message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgRequestFullScreenResponse} CMsgRequestFullScreenResponse
-         */
-        CMsgRequestFullScreenResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgRequestFullScreenResponse)
-                return object;
-            var message = new $root.CMsgRequestFullScreenResponse();
-            if (object.browser_handle != null)
-                message.browser_handle = object.browser_handle >>> 0;
-            if (object.ballow != null)
-                message.ballow = Boolean(object.ballow);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgRequestFullScreenResponse message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgRequestFullScreenResponse
-         * @static
-         * @param {CMsgRequestFullScreenResponse} message CMsgRequestFullScreenResponse
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgRequestFullScreenResponse.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.browser_handle = 0;
-                object.ballow = false;
-            }
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                object.browser_handle = message.browser_handle;
-            if (message.ballow != null && message.hasOwnProperty("ballow"))
-                object.ballow = message.ballow;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgRequestFullScreenResponse to JSON.
-         * @function toJSON
-         * @memberof CMsgRequestFullScreenResponse
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgRequestFullScreenResponse.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgRequestFullScreenResponse;
-    })();
-    
     $root.CMsgExitFullScreen = (function() {
     
         /**
@@ -22407,6 +22588,193 @@
         return CMsgExitFullScreen;
     })();
     
+    $root.CMsgToggleFindInPageDialog = (function() {
+    
+        /**
+         * Properties of a CMsgToggleFindInPageDialog.
+         * @exports ICMsgToggleFindInPageDialog
+         * @interface ICMsgToggleFindInPageDialog
+         * @property {number|null} [browser_handle] CMsgToggleFindInPageDialog browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgToggleFindInPageDialog.
+         * @exports CMsgToggleFindInPageDialog
+         * @classdesc Represents a CMsgToggleFindInPageDialog.
+         * @implements ICMsgToggleFindInPageDialog
+         * @constructor
+         * @param {ICMsgToggleFindInPageDialog=} [properties] Properties to set
+         */
+        function CMsgToggleFindInPageDialog(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgToggleFindInPageDialog browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgToggleFindInPageDialog
+         * @instance
+         */
+        CMsgToggleFindInPageDialog.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgToggleFindInPageDialog instance using the specified properties.
+         * @function create
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {ICMsgToggleFindInPageDialog=} [properties] Properties to set
+         * @returns {CMsgToggleFindInPageDialog} CMsgToggleFindInPageDialog instance
+         */
+        CMsgToggleFindInPageDialog.create = function create(properties) {
+            return new CMsgToggleFindInPageDialog(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgToggleFindInPageDialog message. Does not implicitly {@link CMsgToggleFindInPageDialog.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {ICMsgToggleFindInPageDialog} message CMsgToggleFindInPageDialog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgToggleFindInPageDialog.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgToggleFindInPageDialog message, length delimited. Does not implicitly {@link CMsgToggleFindInPageDialog.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {ICMsgToggleFindInPageDialog} message CMsgToggleFindInPageDialog message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgToggleFindInPageDialog.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgToggleFindInPageDialog message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgToggleFindInPageDialog} CMsgToggleFindInPageDialog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgToggleFindInPageDialog.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgToggleFindInPageDialog();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgToggleFindInPageDialog message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgToggleFindInPageDialog} CMsgToggleFindInPageDialog
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgToggleFindInPageDialog.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgToggleFindInPageDialog message.
+         * @function verify
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgToggleFindInPageDialog.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgToggleFindInPageDialog message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgToggleFindInPageDialog} CMsgToggleFindInPageDialog
+         */
+        CMsgToggleFindInPageDialog.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgToggleFindInPageDialog)
+                return object;
+            var message = new $root.CMsgToggleFindInPageDialog();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgToggleFindInPageDialog message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgToggleFindInPageDialog
+         * @static
+         * @param {CMsgToggleFindInPageDialog} message CMsgToggleFindInPageDialog
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgToggleFindInPageDialog.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgToggleFindInPageDialog to JSON.
+         * @function toJSON
+         * @memberof CMsgToggleFindInPageDialog
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgToggleFindInPageDialog.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgToggleFindInPageDialog;
+    })();
+    
     $root.CMsgSetPIDShuttingDown = (function() {
     
         /**
@@ -22592,6 +22960,193 @@
         };
     
         return CMsgSetPIDShuttingDown;
+    })();
+    
+    $root.CMsgDisableBackgroundThrottling = (function() {
+    
+        /**
+         * Properties of a CMsgDisableBackgroundThrottling.
+         * @exports ICMsgDisableBackgroundThrottling
+         * @interface ICMsgDisableBackgroundThrottling
+         * @property {number|null} [browser_handle] CMsgDisableBackgroundThrottling browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgDisableBackgroundThrottling.
+         * @exports CMsgDisableBackgroundThrottling
+         * @classdesc Represents a CMsgDisableBackgroundThrottling.
+         * @implements ICMsgDisableBackgroundThrottling
+         * @constructor
+         * @param {ICMsgDisableBackgroundThrottling=} [properties] Properties to set
+         */
+        function CMsgDisableBackgroundThrottling(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgDisableBackgroundThrottling browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgDisableBackgroundThrottling
+         * @instance
+         */
+        CMsgDisableBackgroundThrottling.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgDisableBackgroundThrottling instance using the specified properties.
+         * @function create
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {ICMsgDisableBackgroundThrottling=} [properties] Properties to set
+         * @returns {CMsgDisableBackgroundThrottling} CMsgDisableBackgroundThrottling instance
+         */
+        CMsgDisableBackgroundThrottling.create = function create(properties) {
+            return new CMsgDisableBackgroundThrottling(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgDisableBackgroundThrottling message. Does not implicitly {@link CMsgDisableBackgroundThrottling.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {ICMsgDisableBackgroundThrottling} message CMsgDisableBackgroundThrottling message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgDisableBackgroundThrottling.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgDisableBackgroundThrottling message, length delimited. Does not implicitly {@link CMsgDisableBackgroundThrottling.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {ICMsgDisableBackgroundThrottling} message CMsgDisableBackgroundThrottling message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgDisableBackgroundThrottling.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgDisableBackgroundThrottling message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgDisableBackgroundThrottling} CMsgDisableBackgroundThrottling
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgDisableBackgroundThrottling.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgDisableBackgroundThrottling();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgDisableBackgroundThrottling message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgDisableBackgroundThrottling} CMsgDisableBackgroundThrottling
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgDisableBackgroundThrottling.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgDisableBackgroundThrottling message.
+         * @function verify
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgDisableBackgroundThrottling.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgDisableBackgroundThrottling message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgDisableBackgroundThrottling} CMsgDisableBackgroundThrottling
+         */
+        CMsgDisableBackgroundThrottling.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgDisableBackgroundThrottling)
+                return object;
+            var message = new $root.CMsgDisableBackgroundThrottling();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgDisableBackgroundThrottling message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgDisableBackgroundThrottling
+         * @static
+         * @param {CMsgDisableBackgroundThrottling} message CMsgDisableBackgroundThrottling
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgDisableBackgroundThrottling.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgDisableBackgroundThrottling to JSON.
+         * @function toJSON
+         * @memberof CMsgDisableBackgroundThrottling
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgDisableBackgroundThrottling.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgDisableBackgroundThrottling;
     })();
     
     $root.CMsgAckPIDShuttingDown = (function() {
@@ -29270,193 +29825,6 @@
         return CMsgLoadLocalization;
     })();
     
-    $root.CMsgEnableSteamClientAPI = (function() {
-    
-        /**
-         * Properties of a CMsgEnableSteamClientAPI.
-         * @exports ICMsgEnableSteamClientAPI
-         * @interface ICMsgEnableSteamClientAPI
-         * @property {number|null} [browser_handle] CMsgEnableSteamClientAPI browser_handle
-         */
-    
-        /**
-         * Constructs a new CMsgEnableSteamClientAPI.
-         * @exports CMsgEnableSteamClientAPI
-         * @classdesc Represents a CMsgEnableSteamClientAPI.
-         * @implements ICMsgEnableSteamClientAPI
-         * @constructor
-         * @param {ICMsgEnableSteamClientAPI=} [properties] Properties to set
-         */
-        function CMsgEnableSteamClientAPI(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgEnableSteamClientAPI browser_handle.
-         * @member {number} browser_handle
-         * @memberof CMsgEnableSteamClientAPI
-         * @instance
-         */
-        CMsgEnableSteamClientAPI.prototype.browser_handle = 0;
-    
-        /**
-         * Creates a new CMsgEnableSteamClientAPI instance using the specified properties.
-         * @function create
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {ICMsgEnableSteamClientAPI=} [properties] Properties to set
-         * @returns {CMsgEnableSteamClientAPI} CMsgEnableSteamClientAPI instance
-         */
-        CMsgEnableSteamClientAPI.create = function create(properties) {
-            return new CMsgEnableSteamClientAPI(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgEnableSteamClientAPI message. Does not implicitly {@link CMsgEnableSteamClientAPI.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {ICMsgEnableSteamClientAPI} message CMsgEnableSteamClientAPI message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgEnableSteamClientAPI.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgEnableSteamClientAPI message, length delimited. Does not implicitly {@link CMsgEnableSteamClientAPI.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {ICMsgEnableSteamClientAPI} message CMsgEnableSteamClientAPI message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgEnableSteamClientAPI.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgEnableSteamClientAPI message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgEnableSteamClientAPI} CMsgEnableSteamClientAPI
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgEnableSteamClientAPI.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgEnableSteamClientAPI();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.browser_handle = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgEnableSteamClientAPI message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgEnableSteamClientAPI} CMsgEnableSteamClientAPI
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgEnableSteamClientAPI.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgEnableSteamClientAPI message.
-         * @function verify
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgEnableSteamClientAPI.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                if (!$util.isInteger(message.browser_handle))
-                    return "browser_handle: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgEnableSteamClientAPI message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgEnableSteamClientAPI} CMsgEnableSteamClientAPI
-         */
-        CMsgEnableSteamClientAPI.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgEnableSteamClientAPI)
-                return object;
-            var message = new $root.CMsgEnableSteamClientAPI();
-            if (object.browser_handle != null)
-                message.browser_handle = object.browser_handle >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgEnableSteamClientAPI message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgEnableSteamClientAPI
-         * @static
-         * @param {CMsgEnableSteamClientAPI} message CMsgEnableSteamClientAPI
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgEnableSteamClientAPI.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.browser_handle = 0;
-            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
-                object.browser_handle = message.browser_handle;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgEnableSteamClientAPI to JSON.
-         * @function toJSON
-         * @memberof CMsgEnableSteamClientAPI
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgEnableSteamClientAPI.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgEnableSteamClientAPI;
-    })();
-    
     $root.CMsgJumpListLink = (function() {
     
         /**
@@ -32839,6 +33207,845 @@
         };
     
         return CMsgShowBrowserContextMenu;
+    })();
+    
+    $root.CMsgImeSetComposition = (function() {
+    
+        /**
+         * Properties of a CMsgImeSetComposition.
+         * @exports ICMsgImeSetComposition
+         * @interface ICMsgImeSetComposition
+         * @property {number|null} [browser_handle] CMsgImeSetComposition browser_handle
+         * @property {string|null} [text] CMsgImeSetComposition text
+         */
+    
+        /**
+         * Constructs a new CMsgImeSetComposition.
+         * @exports CMsgImeSetComposition
+         * @classdesc Represents a CMsgImeSetComposition.
+         * @implements ICMsgImeSetComposition
+         * @constructor
+         * @param {ICMsgImeSetComposition=} [properties] Properties to set
+         */
+        function CMsgImeSetComposition(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgImeSetComposition browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgImeSetComposition
+         * @instance
+         */
+        CMsgImeSetComposition.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgImeSetComposition text.
+         * @member {string} text
+         * @memberof CMsgImeSetComposition
+         * @instance
+         */
+        CMsgImeSetComposition.prototype.text = "";
+    
+        /**
+         * Creates a new CMsgImeSetComposition instance using the specified properties.
+         * @function create
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {ICMsgImeSetComposition=} [properties] Properties to set
+         * @returns {CMsgImeSetComposition} CMsgImeSetComposition instance
+         */
+        CMsgImeSetComposition.create = function create(properties) {
+            return new CMsgImeSetComposition(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgImeSetComposition message. Does not implicitly {@link CMsgImeSetComposition.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {ICMsgImeSetComposition} message CMsgImeSetComposition message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeSetComposition.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.text != null && message.hasOwnProperty("text"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgImeSetComposition message, length delimited. Does not implicitly {@link CMsgImeSetComposition.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {ICMsgImeSetComposition} message CMsgImeSetComposition message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeSetComposition.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgImeSetComposition message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgImeSetComposition} CMsgImeSetComposition
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeSetComposition.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgImeSetComposition();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.text = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgImeSetComposition message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgImeSetComposition} CMsgImeSetComposition
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeSetComposition.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgImeSetComposition message.
+         * @function verify
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgImeSetComposition.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.text != null && message.hasOwnProperty("text"))
+                if (!$util.isString(message.text))
+                    return "text: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgImeSetComposition message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgImeSetComposition} CMsgImeSetComposition
+         */
+        CMsgImeSetComposition.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgImeSetComposition)
+                return object;
+            var message = new $root.CMsgImeSetComposition();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.text != null)
+                message.text = String(object.text);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgImeSetComposition message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgImeSetComposition
+         * @static
+         * @param {CMsgImeSetComposition} message CMsgImeSetComposition
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgImeSetComposition.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.text = "";
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.text != null && message.hasOwnProperty("text"))
+                object.text = message.text;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgImeSetComposition to JSON.
+         * @function toJSON
+         * @memberof CMsgImeSetComposition
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgImeSetComposition.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgImeSetComposition;
+    })();
+    
+    $root.CMsgImeCommitText = (function() {
+    
+        /**
+         * Properties of a CMsgImeCommitText.
+         * @exports ICMsgImeCommitText
+         * @interface ICMsgImeCommitText
+         * @property {number|null} [browser_handle] CMsgImeCommitText browser_handle
+         * @property {string|null} [text] CMsgImeCommitText text
+         */
+    
+        /**
+         * Constructs a new CMsgImeCommitText.
+         * @exports CMsgImeCommitText
+         * @classdesc Represents a CMsgImeCommitText.
+         * @implements ICMsgImeCommitText
+         * @constructor
+         * @param {ICMsgImeCommitText=} [properties] Properties to set
+         */
+        function CMsgImeCommitText(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgImeCommitText browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgImeCommitText
+         * @instance
+         */
+        CMsgImeCommitText.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgImeCommitText text.
+         * @member {string} text
+         * @memberof CMsgImeCommitText
+         * @instance
+         */
+        CMsgImeCommitText.prototype.text = "";
+    
+        /**
+         * Creates a new CMsgImeCommitText instance using the specified properties.
+         * @function create
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {ICMsgImeCommitText=} [properties] Properties to set
+         * @returns {CMsgImeCommitText} CMsgImeCommitText instance
+         */
+        CMsgImeCommitText.create = function create(properties) {
+            return new CMsgImeCommitText(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCommitText message. Does not implicitly {@link CMsgImeCommitText.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {ICMsgImeCommitText} message CMsgImeCommitText message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCommitText.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.text != null && message.hasOwnProperty("text"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCommitText message, length delimited. Does not implicitly {@link CMsgImeCommitText.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {ICMsgImeCommitText} message CMsgImeCommitText message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCommitText.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgImeCommitText message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgImeCommitText} CMsgImeCommitText
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCommitText.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgImeCommitText();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.text = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgImeCommitText message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgImeCommitText} CMsgImeCommitText
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCommitText.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgImeCommitText message.
+         * @function verify
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgImeCommitText.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.text != null && message.hasOwnProperty("text"))
+                if (!$util.isString(message.text))
+                    return "text: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgImeCommitText message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgImeCommitText} CMsgImeCommitText
+         */
+        CMsgImeCommitText.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgImeCommitText)
+                return object;
+            var message = new $root.CMsgImeCommitText();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.text != null)
+                message.text = String(object.text);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgImeCommitText message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgImeCommitText
+         * @static
+         * @param {CMsgImeCommitText} message CMsgImeCommitText
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgImeCommitText.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.text = "";
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.text != null && message.hasOwnProperty("text"))
+                object.text = message.text;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgImeCommitText to JSON.
+         * @function toJSON
+         * @memberof CMsgImeCommitText
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgImeCommitText.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgImeCommitText;
+    })();
+    
+    $root.CMsgImeCancelComposition = (function() {
+    
+        /**
+         * Properties of a CMsgImeCancelComposition.
+         * @exports ICMsgImeCancelComposition
+         * @interface ICMsgImeCancelComposition
+         * @property {number|null} [browser_handle] CMsgImeCancelComposition browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgImeCancelComposition.
+         * @exports CMsgImeCancelComposition
+         * @classdesc Represents a CMsgImeCancelComposition.
+         * @implements ICMsgImeCancelComposition
+         * @constructor
+         * @param {ICMsgImeCancelComposition=} [properties] Properties to set
+         */
+        function CMsgImeCancelComposition(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgImeCancelComposition browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgImeCancelComposition
+         * @instance
+         */
+        CMsgImeCancelComposition.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgImeCancelComposition instance using the specified properties.
+         * @function create
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {ICMsgImeCancelComposition=} [properties] Properties to set
+         * @returns {CMsgImeCancelComposition} CMsgImeCancelComposition instance
+         */
+        CMsgImeCancelComposition.create = function create(properties) {
+            return new CMsgImeCancelComposition(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCancelComposition message. Does not implicitly {@link CMsgImeCancelComposition.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {ICMsgImeCancelComposition} message CMsgImeCancelComposition message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCancelComposition.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCancelComposition message, length delimited. Does not implicitly {@link CMsgImeCancelComposition.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {ICMsgImeCancelComposition} message CMsgImeCancelComposition message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCancelComposition.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgImeCancelComposition message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgImeCancelComposition} CMsgImeCancelComposition
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCancelComposition.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgImeCancelComposition();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgImeCancelComposition message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgImeCancelComposition} CMsgImeCancelComposition
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCancelComposition.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgImeCancelComposition message.
+         * @function verify
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgImeCancelComposition.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgImeCancelComposition message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgImeCancelComposition} CMsgImeCancelComposition
+         */
+        CMsgImeCancelComposition.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgImeCancelComposition)
+                return object;
+            var message = new $root.CMsgImeCancelComposition();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgImeCancelComposition message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgImeCancelComposition
+         * @static
+         * @param {CMsgImeCancelComposition} message CMsgImeCancelComposition
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgImeCancelComposition.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgImeCancelComposition to JSON.
+         * @function toJSON
+         * @memberof CMsgImeCancelComposition
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgImeCancelComposition.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgImeCancelComposition;
+    })();
+    
+    $root.CMsgImeCompositionRangeChanged = (function() {
+    
+        /**
+         * Properties of a CMsgImeCompositionRangeChanged.
+         * @exports ICMsgImeCompositionRangeChanged
+         * @interface ICMsgImeCompositionRangeChanged
+         * @property {number|null} [browser_handle] CMsgImeCompositionRangeChanged browser_handle
+         * @property {number|null} [x] CMsgImeCompositionRangeChanged x
+         * @property {number|null} [y] CMsgImeCompositionRangeChanged y
+         */
+    
+        /**
+         * Constructs a new CMsgImeCompositionRangeChanged.
+         * @exports CMsgImeCompositionRangeChanged
+         * @classdesc Represents a CMsgImeCompositionRangeChanged.
+         * @implements ICMsgImeCompositionRangeChanged
+         * @constructor
+         * @param {ICMsgImeCompositionRangeChanged=} [properties] Properties to set
+         */
+        function CMsgImeCompositionRangeChanged(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgImeCompositionRangeChanged browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgImeCompositionRangeChanged
+         * @instance
+         */
+        CMsgImeCompositionRangeChanged.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgImeCompositionRangeChanged x.
+         * @member {number} x
+         * @memberof CMsgImeCompositionRangeChanged
+         * @instance
+         */
+        CMsgImeCompositionRangeChanged.prototype.x = 0;
+    
+        /**
+         * CMsgImeCompositionRangeChanged y.
+         * @member {number} y
+         * @memberof CMsgImeCompositionRangeChanged
+         * @instance
+         */
+        CMsgImeCompositionRangeChanged.prototype.y = 0;
+    
+        /**
+         * Creates a new CMsgImeCompositionRangeChanged instance using the specified properties.
+         * @function create
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {ICMsgImeCompositionRangeChanged=} [properties] Properties to set
+         * @returns {CMsgImeCompositionRangeChanged} CMsgImeCompositionRangeChanged instance
+         */
+        CMsgImeCompositionRangeChanged.create = function create(properties) {
+            return new CMsgImeCompositionRangeChanged(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCompositionRangeChanged message. Does not implicitly {@link CMsgImeCompositionRangeChanged.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {ICMsgImeCompositionRangeChanged} message CMsgImeCompositionRangeChanged message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCompositionRangeChanged.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.x != null && message.hasOwnProperty("x"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
+            if (message.y != null && message.hasOwnProperty("y"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgImeCompositionRangeChanged message, length delimited. Does not implicitly {@link CMsgImeCompositionRangeChanged.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {ICMsgImeCompositionRangeChanged} message CMsgImeCompositionRangeChanged message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgImeCompositionRangeChanged.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgImeCompositionRangeChanged message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgImeCompositionRangeChanged} CMsgImeCompositionRangeChanged
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCompositionRangeChanged.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgImeCompositionRangeChanged();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.x = reader.uint32();
+                    break;
+                case 3:
+                    message.y = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgImeCompositionRangeChanged message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgImeCompositionRangeChanged} CMsgImeCompositionRangeChanged
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgImeCompositionRangeChanged.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgImeCompositionRangeChanged message.
+         * @function verify
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgImeCompositionRangeChanged.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgImeCompositionRangeChanged message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgImeCompositionRangeChanged} CMsgImeCompositionRangeChanged
+         */
+        CMsgImeCompositionRangeChanged.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgImeCompositionRangeChanged)
+                return object;
+            var message = new $root.CMsgImeCompositionRangeChanged();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgImeCompositionRangeChanged message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgImeCompositionRangeChanged
+         * @static
+         * @param {CMsgImeCompositionRangeChanged} message CMsgImeCompositionRangeChanged
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgImeCompositionRangeChanged.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgImeCompositionRangeChanged to JSON.
+         * @function toJSON
+         * @memberof CMsgImeCompositionRangeChanged
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgImeCompositionRangeChanged.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgImeCompositionRangeChanged;
     })();
 
     return $root;

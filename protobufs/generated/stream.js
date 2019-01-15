@@ -74,9 +74,9 @@
      * @property {number} k_EStreamControlInputMouseUp=57 k_EStreamControlInputMouseUp value
      * @property {number} k_EStreamControlInputKeyDown=58 k_EStreamControlInputKeyDown value
      * @property {number} k_EStreamControlInputKeyUp=59 k_EStreamControlInputKeyUp value
-     * @property {number} k_EStreamControlInputGamepadAttached=60 k_EStreamControlInputGamepadAttached value
-     * @property {number} k_EStreamControlInputGamepadEvent=61 k_EStreamControlInputGamepadEvent value
-     * @property {number} k_EStreamControlInputGamepadDetached=62 k_EStreamControlInputGamepadDetached value
+     * @property {number} k_EStreamControlInputGamepadAttached_OBSOLETE=60 k_EStreamControlInputGamepadAttached_OBSOLETE value
+     * @property {number} k_EStreamControlInputGamepadEvent_OBSOLETE=61 k_EStreamControlInputGamepadEvent_OBSOLETE value
+     * @property {number} k_EStreamControlInputGamepadDetached_OBSOLETE=62 k_EStreamControlInputGamepadDetached_OBSOLETE value
      * @property {number} k_EStreamControlShowCursor=63 k_EStreamControlShowCursor value
      * @property {number} k_EStreamControlHideCursor=64 k_EStreamControlHideCursor value
      * @property {number} k_EStreamControlSetCursor=65 k_EStreamControlSetCursor value
@@ -85,7 +85,7 @@
      * @property {number} k_EStreamControlDeleteCursor=68 k_EStreamControlDeleteCursor value
      * @property {number} k_EStreamControlSetTargetFramerate=69 k_EStreamControlSetTargetFramerate value
      * @property {number} k_EStreamControlInputLatencyTest=70 k_EStreamControlInputLatencyTest value
-     * @property {number} k_EStreamControlGamepadRumble=71 k_EStreamControlGamepadRumble value
+     * @property {number} k_EStreamControlGamepadRumble_OBSOLETE=71 k_EStreamControlGamepadRumble_OBSOLETE value
      * @property {number} k_EStreamControlOverlayEnabled=74 k_EStreamControlOverlayEnabled value
      * @property {number} k_EStreamControlInputControllerAttached_OBSOLETE=75 k_EStreamControlInputControllerAttached_OBSOLETE value
      * @property {number} k_EStreamControlInputControllerState_OBSOLETE=76 k_EStreamControlInputControllerState_OBSOLETE value
@@ -116,6 +116,13 @@
      * @property {number} k_EStreamControlStartMicrophoneData=107 k_EStreamControlStartMicrophoneData value
      * @property {number} k_EStreamControlStopMicrophoneData=108 k_EStreamControlStopMicrophoneData value
      * @property {number} k_EStreamControlInputText=109 k_EStreamControlInputText value
+     * @property {number} k_EStreamControlTouchConfigActive=110 k_EStreamControlTouchConfigActive value
+     * @property {number} k_EStreamControlGetTouchConfigData=111 k_EStreamControlGetTouchConfigData value
+     * @property {number} k_EStreamControlSetTouchConfigData=112 k_EStreamControlSetTouchConfigData value
+     * @property {number} k_EStreamControlSaveTouchConfigLayout=113 k_EStreamControlSaveTouchConfigLayout value
+     * @property {number} k_EStreamControlTouchActionSetActive=114 k_EStreamControlTouchActionSetActive value
+     * @property {number} k_EStreamControlGetTouchIconData=115 k_EStreamControlGetTouchIconData value
+     * @property {number} k_EStreamControlSetTouchIconData=116 k_EStreamControlSetTouchIconData value
      */
     $root.EStreamControlMessage = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -139,9 +146,9 @@
         values[valuesById[57] = "k_EStreamControlInputMouseUp"] = 57;
         values[valuesById[58] = "k_EStreamControlInputKeyDown"] = 58;
         values[valuesById[59] = "k_EStreamControlInputKeyUp"] = 59;
-        values[valuesById[60] = "k_EStreamControlInputGamepadAttached"] = 60;
-        values[valuesById[61] = "k_EStreamControlInputGamepadEvent"] = 61;
-        values[valuesById[62] = "k_EStreamControlInputGamepadDetached"] = 62;
+        values[valuesById[60] = "k_EStreamControlInputGamepadAttached_OBSOLETE"] = 60;
+        values[valuesById[61] = "k_EStreamControlInputGamepadEvent_OBSOLETE"] = 61;
+        values[valuesById[62] = "k_EStreamControlInputGamepadDetached_OBSOLETE"] = 62;
         values[valuesById[63] = "k_EStreamControlShowCursor"] = 63;
         values[valuesById[64] = "k_EStreamControlHideCursor"] = 64;
         values[valuesById[65] = "k_EStreamControlSetCursor"] = 65;
@@ -150,7 +157,7 @@
         values[valuesById[68] = "k_EStreamControlDeleteCursor"] = 68;
         values[valuesById[69] = "k_EStreamControlSetTargetFramerate"] = 69;
         values[valuesById[70] = "k_EStreamControlInputLatencyTest"] = 70;
-        values[valuesById[71] = "k_EStreamControlGamepadRumble"] = 71;
+        values[valuesById[71] = "k_EStreamControlGamepadRumble_OBSOLETE"] = 71;
         values[valuesById[74] = "k_EStreamControlOverlayEnabled"] = 74;
         values[valuesById[75] = "k_EStreamControlInputControllerAttached_OBSOLETE"] = 75;
         values[valuesById[76] = "k_EStreamControlInputControllerState_OBSOLETE"] = 76;
@@ -181,6 +188,13 @@
         values[valuesById[107] = "k_EStreamControlStartMicrophoneData"] = 107;
         values[valuesById[108] = "k_EStreamControlStopMicrophoneData"] = 108;
         values[valuesById[109] = "k_EStreamControlInputText"] = 109;
+        values[valuesById[110] = "k_EStreamControlTouchConfigActive"] = 110;
+        values[valuesById[111] = "k_EStreamControlGetTouchConfigData"] = 111;
+        values[valuesById[112] = "k_EStreamControlSetTouchConfigData"] = 112;
+        values[valuesById[113] = "k_EStreamControlSaveTouchConfigLayout"] = 113;
+        values[valuesById[114] = "k_EStreamControlTouchActionSetActive"] = 114;
+        values[valuesById[115] = "k_EStreamControlGetTouchIconData"] = 115;
+        values[valuesById[116] = "k_EStreamControlSetTouchIconData"] = 116;
         return values;
     })();
     
@@ -2996,6 +3010,10 @@
          * @property {number|null} [maximum_burst_bitrate_kbps] CStreamingClientCaps maximum_burst_bitrate_kbps
          * @property {boolean|null} [supports_video_hevc] CStreamingClientCaps supports_video_hevc
          * @property {boolean|null} [disable_steam_store] CStreamingClientCaps disable_steam_store
+         * @property {boolean|null} [disable_client_cursor] CStreamingClientCaps disable_client_cursor
+         * @property {boolean|null} [disable_intel_hardware_encoding] CStreamingClientCaps disable_intel_hardware_encoding
+         * @property {boolean|null} [disable_amd_hardware_encoding] CStreamingClientCaps disable_amd_hardware_encoding
+         * @property {boolean|null} [disable_nvidia_hardware_encoding] CStreamingClientCaps disable_nvidia_hardware_encoding
          */
     
         /**
@@ -3062,6 +3080,38 @@
         CStreamingClientCaps.prototype.disable_steam_store = false;
     
         /**
+         * CStreamingClientCaps disable_client_cursor.
+         * @member {boolean} disable_client_cursor
+         * @memberof CStreamingClientCaps
+         * @instance
+         */
+        CStreamingClientCaps.prototype.disable_client_cursor = false;
+    
+        /**
+         * CStreamingClientCaps disable_intel_hardware_encoding.
+         * @member {boolean} disable_intel_hardware_encoding
+         * @memberof CStreamingClientCaps
+         * @instance
+         */
+        CStreamingClientCaps.prototype.disable_intel_hardware_encoding = false;
+    
+        /**
+         * CStreamingClientCaps disable_amd_hardware_encoding.
+         * @member {boolean} disable_amd_hardware_encoding
+         * @memberof CStreamingClientCaps
+         * @instance
+         */
+        CStreamingClientCaps.prototype.disable_amd_hardware_encoding = false;
+    
+        /**
+         * CStreamingClientCaps disable_nvidia_hardware_encoding.
+         * @member {boolean} disable_nvidia_hardware_encoding
+         * @memberof CStreamingClientCaps
+         * @instance
+         */
+        CStreamingClientCaps.prototype.disable_nvidia_hardware_encoding = false;
+    
+        /**
          * Creates a new CStreamingClientCaps instance using the specified properties.
          * @function create
          * @memberof CStreamingClientCaps
@@ -3097,6 +3147,14 @@
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.supports_video_hevc);
             if (message.disable_steam_store != null && message.hasOwnProperty("disable_steam_store"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.disable_steam_store);
+            if (message.disable_client_cursor != null && message.hasOwnProperty("disable_client_cursor"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.disable_client_cursor);
+            if (message.disable_intel_hardware_encoding != null && message.hasOwnProperty("disable_intel_hardware_encoding"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.disable_intel_hardware_encoding);
+            if (message.disable_amd_hardware_encoding != null && message.hasOwnProperty("disable_amd_hardware_encoding"))
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.disable_amd_hardware_encoding);
+            if (message.disable_nvidia_hardware_encoding != null && message.hasOwnProperty("disable_nvidia_hardware_encoding"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.disable_nvidia_hardware_encoding);
             return writer;
         };
     
@@ -3148,6 +3206,18 @@
                     break;
                 case 6:
                     message.disable_steam_store = reader.bool();
+                    break;
+                case 7:
+                    message.disable_client_cursor = reader.bool();
+                    break;
+                case 8:
+                    message.disable_intel_hardware_encoding = reader.bool();
+                    break;
+                case 9:
+                    message.disable_amd_hardware_encoding = reader.bool();
+                    break;
+                case 10:
+                    message.disable_nvidia_hardware_encoding = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3202,6 +3272,18 @@
             if (message.disable_steam_store != null && message.hasOwnProperty("disable_steam_store"))
                 if (typeof message.disable_steam_store !== "boolean")
                     return "disable_steam_store: boolean expected";
+            if (message.disable_client_cursor != null && message.hasOwnProperty("disable_client_cursor"))
+                if (typeof message.disable_client_cursor !== "boolean")
+                    return "disable_client_cursor: boolean expected";
+            if (message.disable_intel_hardware_encoding != null && message.hasOwnProperty("disable_intel_hardware_encoding"))
+                if (typeof message.disable_intel_hardware_encoding !== "boolean")
+                    return "disable_intel_hardware_encoding: boolean expected";
+            if (message.disable_amd_hardware_encoding != null && message.hasOwnProperty("disable_amd_hardware_encoding"))
+                if (typeof message.disable_amd_hardware_encoding !== "boolean")
+                    return "disable_amd_hardware_encoding: boolean expected";
+            if (message.disable_nvidia_hardware_encoding != null && message.hasOwnProperty("disable_nvidia_hardware_encoding"))
+                if (typeof message.disable_nvidia_hardware_encoding !== "boolean")
+                    return "disable_nvidia_hardware_encoding: boolean expected";
             return null;
         };
     
@@ -3229,6 +3311,14 @@
                 message.supports_video_hevc = Boolean(object.supports_video_hevc);
             if (object.disable_steam_store != null)
                 message.disable_steam_store = Boolean(object.disable_steam_store);
+            if (object.disable_client_cursor != null)
+                message.disable_client_cursor = Boolean(object.disable_client_cursor);
+            if (object.disable_intel_hardware_encoding != null)
+                message.disable_intel_hardware_encoding = Boolean(object.disable_intel_hardware_encoding);
+            if (object.disable_amd_hardware_encoding != null)
+                message.disable_amd_hardware_encoding = Boolean(object.disable_amd_hardware_encoding);
+            if (object.disable_nvidia_hardware_encoding != null)
+                message.disable_nvidia_hardware_encoding = Boolean(object.disable_nvidia_hardware_encoding);
             return message;
         };
     
@@ -3252,6 +3342,10 @@
                 object.maximum_burst_bitrate_kbps = 0;
                 object.supports_video_hevc = false;
                 object.disable_steam_store = false;
+                object.disable_client_cursor = false;
+                object.disable_intel_hardware_encoding = false;
+                object.disable_amd_hardware_encoding = false;
+                object.disable_nvidia_hardware_encoding = false;
             }
             if (message.system_info != null && message.hasOwnProperty("system_info"))
                 object.system_info = message.system_info;
@@ -3265,6 +3359,14 @@
                 object.supports_video_hevc = message.supports_video_hevc;
             if (message.disable_steam_store != null && message.hasOwnProperty("disable_steam_store"))
                 object.disable_steam_store = message.disable_steam_store;
+            if (message.disable_client_cursor != null && message.hasOwnProperty("disable_client_cursor"))
+                object.disable_client_cursor = message.disable_client_cursor;
+            if (message.disable_intel_hardware_encoding != null && message.hasOwnProperty("disable_intel_hardware_encoding"))
+                object.disable_intel_hardware_encoding = message.disable_intel_hardware_encoding;
+            if (message.disable_amd_hardware_encoding != null && message.hasOwnProperty("disable_amd_hardware_encoding"))
+                object.disable_amd_hardware_encoding = message.disable_amd_hardware_encoding;
+            if (message.disable_nvidia_hardware_encoding != null && message.hasOwnProperty("disable_nvidia_hardware_encoding"))
+                object.disable_nvidia_hardware_encoding = message.disable_nvidia_hardware_encoding;
             return object;
         };
     
@@ -8053,1024 +8155,6 @@
         };
     
         return CInputTextMsg;
-    })();
-    
-    $root.CInputGamepadAttachedMsg = (function() {
-    
-        /**
-         * Properties of a CInputGamepadAttachedMsg.
-         * @exports ICInputGamepadAttachedMsg
-         * @interface ICInputGamepadAttachedMsg
-         * @property {number} controller_id CInputGamepadAttachedMsg controller_id
-         * @property {number|null} [controller_type] CInputGamepadAttachedMsg controller_type
-         * @property {number|null} [controller_subtype] CInputGamepadAttachedMsg controller_subtype
-         */
-    
-        /**
-         * Constructs a new CInputGamepadAttachedMsg.
-         * @exports CInputGamepadAttachedMsg
-         * @classdesc Represents a CInputGamepadAttachedMsg.
-         * @implements ICInputGamepadAttachedMsg
-         * @constructor
-         * @param {ICInputGamepadAttachedMsg=} [properties] Properties to set
-         */
-        function CInputGamepadAttachedMsg(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInputGamepadAttachedMsg controller_id.
-         * @member {number} controller_id
-         * @memberof CInputGamepadAttachedMsg
-         * @instance
-         */
-        CInputGamepadAttachedMsg.prototype.controller_id = 0;
-    
-        /**
-         * CInputGamepadAttachedMsg controller_type.
-         * @member {number} controller_type
-         * @memberof CInputGamepadAttachedMsg
-         * @instance
-         */
-        CInputGamepadAttachedMsg.prototype.controller_type = 0;
-    
-        /**
-         * CInputGamepadAttachedMsg controller_subtype.
-         * @member {number} controller_subtype
-         * @memberof CInputGamepadAttachedMsg
-         * @instance
-         */
-        CInputGamepadAttachedMsg.prototype.controller_subtype = 0;
-    
-        /**
-         * Creates a new CInputGamepadAttachedMsg instance using the specified properties.
-         * @function create
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {ICInputGamepadAttachedMsg=} [properties] Properties to set
-         * @returns {CInputGamepadAttachedMsg} CInputGamepadAttachedMsg instance
-         */
-        CInputGamepadAttachedMsg.create = function create(properties) {
-            return new CInputGamepadAttachedMsg(properties);
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadAttachedMsg message. Does not implicitly {@link CInputGamepadAttachedMsg.verify|verify} messages.
-         * @function encode
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {ICInputGamepadAttachedMsg} message CInputGamepadAttachedMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadAttachedMsg.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.controller_id);
-            if (message.controller_type != null && message.hasOwnProperty("controller_type"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.controller_type);
-            if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.controller_subtype);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadAttachedMsg message, length delimited. Does not implicitly {@link CInputGamepadAttachedMsg.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {ICInputGamepadAttachedMsg} message CInputGamepadAttachedMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadAttachedMsg.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInputGamepadAttachedMsg message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInputGamepadAttachedMsg} CInputGamepadAttachedMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadAttachedMsg.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputGamepadAttachedMsg();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.controller_id = reader.int32();
-                    break;
-                case 2:
-                    message.controller_type = reader.uint32();
-                    break;
-                case 3:
-                    message.controller_subtype = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("controller_id"))
-                throw $util.ProtocolError("missing required 'controller_id'", { instance: message });
-            return message;
-        };
-    
-        /**
-         * Decodes a CInputGamepadAttachedMsg message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInputGamepadAttachedMsg} CInputGamepadAttachedMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadAttachedMsg.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInputGamepadAttachedMsg message.
-         * @function verify
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInputGamepadAttachedMsg.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.controller_id))
-                return "controller_id: integer expected";
-            if (message.controller_type != null && message.hasOwnProperty("controller_type"))
-                if (!$util.isInteger(message.controller_type))
-                    return "controller_type: integer expected";
-            if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
-                if (!$util.isInteger(message.controller_subtype))
-                    return "controller_subtype: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInputGamepadAttachedMsg message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInputGamepadAttachedMsg} CInputGamepadAttachedMsg
-         */
-        CInputGamepadAttachedMsg.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInputGamepadAttachedMsg)
-                return object;
-            var message = new $root.CInputGamepadAttachedMsg();
-            if (object.controller_id != null)
-                message.controller_id = object.controller_id | 0;
-            if (object.controller_type != null)
-                message.controller_type = object.controller_type >>> 0;
-            if (object.controller_subtype != null)
-                message.controller_subtype = object.controller_subtype >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInputGamepadAttachedMsg message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInputGamepadAttachedMsg
-         * @static
-         * @param {CInputGamepadAttachedMsg} message CInputGamepadAttachedMsg
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInputGamepadAttachedMsg.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.controller_id = 0;
-                object.controller_type = 0;
-                object.controller_subtype = 0;
-            }
-            if (message.controller_id != null && message.hasOwnProperty("controller_id"))
-                object.controller_id = message.controller_id;
-            if (message.controller_type != null && message.hasOwnProperty("controller_type"))
-                object.controller_type = message.controller_type;
-            if (message.controller_subtype != null && message.hasOwnProperty("controller_subtype"))
-                object.controller_subtype = message.controller_subtype;
-            return object;
-        };
-    
-        /**
-         * Converts this CInputGamepadAttachedMsg to JSON.
-         * @function toJSON
-         * @memberof CInputGamepadAttachedMsg
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInputGamepadAttachedMsg.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInputGamepadAttachedMsg;
-    })();
-    
-    $root.CInputGamepadEventMsg = (function() {
-    
-        /**
-         * Properties of a CInputGamepadEventMsg.
-         * @exports ICInputGamepadEventMsg
-         * @interface ICInputGamepadEventMsg
-         * @property {number|null} [input_mark] CInputGamepadEventMsg input_mark
-         * @property {number} controller_id CInputGamepadEventMsg controller_id
-         * @property {EStreamGamepadInputType} input CInputGamepadEventMsg input
-         * @property {number} value CInputGamepadEventMsg value
-         */
-    
-        /**
-         * Constructs a new CInputGamepadEventMsg.
-         * @exports CInputGamepadEventMsg
-         * @classdesc Represents a CInputGamepadEventMsg.
-         * @implements ICInputGamepadEventMsg
-         * @constructor
-         * @param {ICInputGamepadEventMsg=} [properties] Properties to set
-         */
-        function CInputGamepadEventMsg(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInputGamepadEventMsg input_mark.
-         * @member {number} input_mark
-         * @memberof CInputGamepadEventMsg
-         * @instance
-         */
-        CInputGamepadEventMsg.prototype.input_mark = 0;
-    
-        /**
-         * CInputGamepadEventMsg controller_id.
-         * @member {number} controller_id
-         * @memberof CInputGamepadEventMsg
-         * @instance
-         */
-        CInputGamepadEventMsg.prototype.controller_id = 0;
-    
-        /**
-         * CInputGamepadEventMsg input.
-         * @member {EStreamGamepadInputType} input
-         * @memberof CInputGamepadEventMsg
-         * @instance
-         */
-        CInputGamepadEventMsg.prototype.input = 0;
-    
-        /**
-         * CInputGamepadEventMsg value.
-         * @member {number} value
-         * @memberof CInputGamepadEventMsg
-         * @instance
-         */
-        CInputGamepadEventMsg.prototype.value = 0;
-    
-        /**
-         * Creates a new CInputGamepadEventMsg instance using the specified properties.
-         * @function create
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {ICInputGamepadEventMsg=} [properties] Properties to set
-         * @returns {CInputGamepadEventMsg} CInputGamepadEventMsg instance
-         */
-        CInputGamepadEventMsg.create = function create(properties) {
-            return new CInputGamepadEventMsg(properties);
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadEventMsg message. Does not implicitly {@link CInputGamepadEventMsg.verify|verify} messages.
-         * @function encode
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {ICInputGamepadEventMsg} message CInputGamepadEventMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadEventMsg.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.input_mark);
-            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.controller_id);
-            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.input);
-            writer.uint32(/* id 4, wireType 5 =*/37).float(message.value);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadEventMsg message, length delimited. Does not implicitly {@link CInputGamepadEventMsg.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {ICInputGamepadEventMsg} message CInputGamepadEventMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadEventMsg.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInputGamepadEventMsg message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInputGamepadEventMsg} CInputGamepadEventMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadEventMsg.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputGamepadEventMsg();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.input_mark = reader.uint32();
-                    break;
-                case 2:
-                    message.controller_id = reader.int32();
-                    break;
-                case 3:
-                    message.input = reader.int32();
-                    break;
-                case 4:
-                    message.value = reader.float();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("controller_id"))
-                throw $util.ProtocolError("missing required 'controller_id'", { instance: message });
-            if (!message.hasOwnProperty("input"))
-                throw $util.ProtocolError("missing required 'input'", { instance: message });
-            if (!message.hasOwnProperty("value"))
-                throw $util.ProtocolError("missing required 'value'", { instance: message });
-            return message;
-        };
-    
-        /**
-         * Decodes a CInputGamepadEventMsg message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInputGamepadEventMsg} CInputGamepadEventMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadEventMsg.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInputGamepadEventMsg message.
-         * @function verify
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInputGamepadEventMsg.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
-                if (!$util.isInteger(message.input_mark))
-                    return "input_mark: integer expected";
-            if (!$util.isInteger(message.controller_id))
-                return "controller_id: integer expected";
-            switch (message.input) {
-            default:
-                return "input: enum value expected";
-            case 0:
-            case 1:
-            case 2:
-            case 4:
-            case 8:
-            case 16:
-            case 32:
-            case 64:
-            case 128:
-            case 256:
-            case 512:
-            case 1024:
-            case 4096:
-            case 8192:
-            case 16384:
-            case 32768:
-            case 65536:
-            case 131072:
-            case 262144:
-            case 524288:
-            case 1048576:
-            case 2097152:
-                break;
-            }
-            if (typeof message.value !== "number")
-                return "value: number expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInputGamepadEventMsg message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInputGamepadEventMsg} CInputGamepadEventMsg
-         */
-        CInputGamepadEventMsg.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInputGamepadEventMsg)
-                return object;
-            var message = new $root.CInputGamepadEventMsg();
-            if (object.input_mark != null)
-                message.input_mark = object.input_mark >>> 0;
-            if (object.controller_id != null)
-                message.controller_id = object.controller_id | 0;
-            switch (object.input) {
-            case "k_EStreamGamepadInputInvalid":
-            case 0:
-                message.input = 0;
-                break;
-            case "k_EStreamGamepadInputDPadUp":
-            case 1:
-                message.input = 1;
-                break;
-            case "k_EStreamGamepadInputDPadDown":
-            case 2:
-                message.input = 2;
-                break;
-            case "k_EStreamGamepadInputDPadLeft":
-            case 4:
-                message.input = 4;
-                break;
-            case "k_EStreamGamepadInputDPadRight":
-            case 8:
-                message.input = 8;
-                break;
-            case "k_EStreamGamepadInputStart":
-            case 16:
-                message.input = 16;
-                break;
-            case "k_EStreamGamepadInputBack":
-            case 32:
-                message.input = 32;
-                break;
-            case "k_EStreamGamepadInputLeftThumb":
-            case 64:
-                message.input = 64;
-                break;
-            case "k_EStreamGamepadInputRightThumb":
-            case 128:
-                message.input = 128;
-                break;
-            case "k_EStreamGamepadInputLeftShoulder":
-            case 256:
-                message.input = 256;
-                break;
-            case "k_EStreamGamepadInputRightShoulder":
-            case 512:
-                message.input = 512;
-                break;
-            case "k_EStreamGamepadInputGuide":
-            case 1024:
-                message.input = 1024;
-                break;
-            case "k_EStreamGamepadInputA":
-            case 4096:
-                message.input = 4096;
-                break;
-            case "k_EStreamGamepadInputB":
-            case 8192:
-                message.input = 8192;
-                break;
-            case "k_EStreamGamepadInputX":
-            case 16384:
-                message.input = 16384;
-                break;
-            case "k_EStreamGamepadInputY":
-            case 32768:
-                message.input = 32768;
-                break;
-            case "k_EStreamGamepadInputLeftThumbX":
-            case 65536:
-                message.input = 65536;
-                break;
-            case "k_EStreamGamepadInputLeftThumbY":
-            case 131072:
-                message.input = 131072;
-                break;
-            case "k_EStreamGamepadInputRightThumbX":
-            case 262144:
-                message.input = 262144;
-                break;
-            case "k_EStreamGamepadInputRightThumbY":
-            case 524288:
-                message.input = 524288;
-                break;
-            case "k_EStreamGamepadInputLeftTrigger":
-            case 1048576:
-                message.input = 1048576;
-                break;
-            case "k_EStreamGamepadInputRightTrigger":
-            case 2097152:
-                message.input = 2097152;
-                break;
-            }
-            if (object.value != null)
-                message.value = Number(object.value);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInputGamepadEventMsg message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInputGamepadEventMsg
-         * @static
-         * @param {CInputGamepadEventMsg} message CInputGamepadEventMsg
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInputGamepadEventMsg.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.input_mark = 0;
-                object.controller_id = 0;
-                object.input = options.enums === String ? "k_EStreamGamepadInputInvalid" : 0;
-                object.value = 0;
-            }
-            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
-                object.input_mark = message.input_mark;
-            if (message.controller_id != null && message.hasOwnProperty("controller_id"))
-                object.controller_id = message.controller_id;
-            if (message.input != null && message.hasOwnProperty("input"))
-                object.input = options.enums === String ? $root.EStreamGamepadInputType[message.input] : message.input;
-            if (message.value != null && message.hasOwnProperty("value"))
-                object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
-            return object;
-        };
-    
-        /**
-         * Converts this CInputGamepadEventMsg to JSON.
-         * @function toJSON
-         * @memberof CInputGamepadEventMsg
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInputGamepadEventMsg.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInputGamepadEventMsg;
-    })();
-    
-    $root.CInputGamepadDetachedMsg = (function() {
-    
-        /**
-         * Properties of a CInputGamepadDetachedMsg.
-         * @exports ICInputGamepadDetachedMsg
-         * @interface ICInputGamepadDetachedMsg
-         * @property {number} controller_id CInputGamepadDetachedMsg controller_id
-         */
-    
-        /**
-         * Constructs a new CInputGamepadDetachedMsg.
-         * @exports CInputGamepadDetachedMsg
-         * @classdesc Represents a CInputGamepadDetachedMsg.
-         * @implements ICInputGamepadDetachedMsg
-         * @constructor
-         * @param {ICInputGamepadDetachedMsg=} [properties] Properties to set
-         */
-        function CInputGamepadDetachedMsg(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInputGamepadDetachedMsg controller_id.
-         * @member {number} controller_id
-         * @memberof CInputGamepadDetachedMsg
-         * @instance
-         */
-        CInputGamepadDetachedMsg.prototype.controller_id = 0;
-    
-        /**
-         * Creates a new CInputGamepadDetachedMsg instance using the specified properties.
-         * @function create
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {ICInputGamepadDetachedMsg=} [properties] Properties to set
-         * @returns {CInputGamepadDetachedMsg} CInputGamepadDetachedMsg instance
-         */
-        CInputGamepadDetachedMsg.create = function create(properties) {
-            return new CInputGamepadDetachedMsg(properties);
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadDetachedMsg message. Does not implicitly {@link CInputGamepadDetachedMsg.verify|verify} messages.
-         * @function encode
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {ICInputGamepadDetachedMsg} message CInputGamepadDetachedMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadDetachedMsg.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.controller_id);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInputGamepadDetachedMsg message, length delimited. Does not implicitly {@link CInputGamepadDetachedMsg.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {ICInputGamepadDetachedMsg} message CInputGamepadDetachedMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInputGamepadDetachedMsg.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInputGamepadDetachedMsg message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInputGamepadDetachedMsg} CInputGamepadDetachedMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadDetachedMsg.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputGamepadDetachedMsg();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.controller_id = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("controller_id"))
-                throw $util.ProtocolError("missing required 'controller_id'", { instance: message });
-            return message;
-        };
-    
-        /**
-         * Decodes a CInputGamepadDetachedMsg message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInputGamepadDetachedMsg} CInputGamepadDetachedMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInputGamepadDetachedMsg.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInputGamepadDetachedMsg message.
-         * @function verify
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInputGamepadDetachedMsg.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.controller_id))
-                return "controller_id: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInputGamepadDetachedMsg message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInputGamepadDetachedMsg} CInputGamepadDetachedMsg
-         */
-        CInputGamepadDetachedMsg.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInputGamepadDetachedMsg)
-                return object;
-            var message = new $root.CInputGamepadDetachedMsg();
-            if (object.controller_id != null)
-                message.controller_id = object.controller_id | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInputGamepadDetachedMsg message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInputGamepadDetachedMsg
-         * @static
-         * @param {CInputGamepadDetachedMsg} message CInputGamepadDetachedMsg
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInputGamepadDetachedMsg.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.controller_id = 0;
-            if (message.controller_id != null && message.hasOwnProperty("controller_id"))
-                object.controller_id = message.controller_id;
-            return object;
-        };
-    
-        /**
-         * Converts this CInputGamepadDetachedMsg to JSON.
-         * @function toJSON
-         * @memberof CInputGamepadDetachedMsg
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInputGamepadDetachedMsg.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInputGamepadDetachedMsg;
-    })();
-    
-    $root.CGamepadRumbleMsg = (function() {
-    
-        /**
-         * Properties of a CGamepadRumbleMsg.
-         * @exports ICGamepadRumbleMsg
-         * @interface ICGamepadRumbleMsg
-         * @property {number} controller_id CGamepadRumbleMsg controller_id
-         * @property {number|null} [left_motor_speed] CGamepadRumbleMsg left_motor_speed
-         * @property {number|null} [right_motor_speed] CGamepadRumbleMsg right_motor_speed
-         */
-    
-        /**
-         * Constructs a new CGamepadRumbleMsg.
-         * @exports CGamepadRumbleMsg
-         * @classdesc Represents a CGamepadRumbleMsg.
-         * @implements ICGamepadRumbleMsg
-         * @constructor
-         * @param {ICGamepadRumbleMsg=} [properties] Properties to set
-         */
-        function CGamepadRumbleMsg(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CGamepadRumbleMsg controller_id.
-         * @member {number} controller_id
-         * @memberof CGamepadRumbleMsg
-         * @instance
-         */
-        CGamepadRumbleMsg.prototype.controller_id = 0;
-    
-        /**
-         * CGamepadRumbleMsg left_motor_speed.
-         * @member {number} left_motor_speed
-         * @memberof CGamepadRumbleMsg
-         * @instance
-         */
-        CGamepadRumbleMsg.prototype.left_motor_speed = 0;
-    
-        /**
-         * CGamepadRumbleMsg right_motor_speed.
-         * @member {number} right_motor_speed
-         * @memberof CGamepadRumbleMsg
-         * @instance
-         */
-        CGamepadRumbleMsg.prototype.right_motor_speed = 0;
-    
-        /**
-         * Creates a new CGamepadRumbleMsg instance using the specified properties.
-         * @function create
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {ICGamepadRumbleMsg=} [properties] Properties to set
-         * @returns {CGamepadRumbleMsg} CGamepadRumbleMsg instance
-         */
-        CGamepadRumbleMsg.create = function create(properties) {
-            return new CGamepadRumbleMsg(properties);
-        };
-    
-        /**
-         * Encodes the specified CGamepadRumbleMsg message. Does not implicitly {@link CGamepadRumbleMsg.verify|verify} messages.
-         * @function encode
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {ICGamepadRumbleMsg} message CGamepadRumbleMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CGamepadRumbleMsg.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.controller_id);
-            if (message.left_motor_speed != null && message.hasOwnProperty("left_motor_speed"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.left_motor_speed);
-            if (message.right_motor_speed != null && message.hasOwnProperty("right_motor_speed"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.right_motor_speed);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CGamepadRumbleMsg message, length delimited. Does not implicitly {@link CGamepadRumbleMsg.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {ICGamepadRumbleMsg} message CGamepadRumbleMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CGamepadRumbleMsg.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CGamepadRumbleMsg message from the specified reader or buffer.
-         * @function decode
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CGamepadRumbleMsg} CGamepadRumbleMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CGamepadRumbleMsg.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CGamepadRumbleMsg();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.controller_id = reader.int32();
-                    break;
-                case 2:
-                    message.left_motor_speed = reader.int32();
-                    break;
-                case 3:
-                    message.right_motor_speed = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("controller_id"))
-                throw $util.ProtocolError("missing required 'controller_id'", { instance: message });
-            return message;
-        };
-    
-        /**
-         * Decodes a CGamepadRumbleMsg message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CGamepadRumbleMsg} CGamepadRumbleMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CGamepadRumbleMsg.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CGamepadRumbleMsg message.
-         * @function verify
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CGamepadRumbleMsg.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.controller_id))
-                return "controller_id: integer expected";
-            if (message.left_motor_speed != null && message.hasOwnProperty("left_motor_speed"))
-                if (!$util.isInteger(message.left_motor_speed))
-                    return "left_motor_speed: integer expected";
-            if (message.right_motor_speed != null && message.hasOwnProperty("right_motor_speed"))
-                if (!$util.isInteger(message.right_motor_speed))
-                    return "right_motor_speed: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CGamepadRumbleMsg message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CGamepadRumbleMsg} CGamepadRumbleMsg
-         */
-        CGamepadRumbleMsg.fromObject = function fromObject(object) {
-            if (object instanceof $root.CGamepadRumbleMsg)
-                return object;
-            var message = new $root.CGamepadRumbleMsg();
-            if (object.controller_id != null)
-                message.controller_id = object.controller_id | 0;
-            if (object.left_motor_speed != null)
-                message.left_motor_speed = object.left_motor_speed | 0;
-            if (object.right_motor_speed != null)
-                message.right_motor_speed = object.right_motor_speed | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CGamepadRumbleMsg message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CGamepadRumbleMsg
-         * @static
-         * @param {CGamepadRumbleMsg} message CGamepadRumbleMsg
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CGamepadRumbleMsg.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.controller_id = 0;
-                object.left_motor_speed = 0;
-                object.right_motor_speed = 0;
-            }
-            if (message.controller_id != null && message.hasOwnProperty("controller_id"))
-                object.controller_id = message.controller_id;
-            if (message.left_motor_speed != null && message.hasOwnProperty("left_motor_speed"))
-                object.left_motor_speed = message.left_motor_speed;
-            if (message.right_motor_speed != null && message.hasOwnProperty("right_motor_speed"))
-                object.right_motor_speed = message.right_motor_speed;
-            return object;
-        };
-    
-        /**
-         * Converts this CGamepadRumbleMsg to JSON.
-         * @function toJSON
-         * @memberof CGamepadRumbleMsg
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CGamepadRumbleMsg.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CGamepadRumbleMsg;
     })();
     
     $root.CSetTitleMsg = (function() {
@@ -13865,6 +12949,1555 @@
         return CRemoteHIDMsg;
     })();
     
+    $root.CTouchConfigActiveMsg = (function() {
+    
+        /**
+         * Properties of a CTouchConfigActiveMsg.
+         * @exports ICTouchConfigActiveMsg
+         * @interface ICTouchConfigActiveMsg
+         * @property {number|null} [appid] CTouchConfigActiveMsg appid
+         * @property {number|null} [revision] CTouchConfigActiveMsg revision
+         */
+    
+        /**
+         * Constructs a new CTouchConfigActiveMsg.
+         * @exports CTouchConfigActiveMsg
+         * @classdesc Represents a CTouchConfigActiveMsg.
+         * @implements ICTouchConfigActiveMsg
+         * @constructor
+         * @param {ICTouchConfigActiveMsg=} [properties] Properties to set
+         */
+        function CTouchConfigActiveMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CTouchConfigActiveMsg appid.
+         * @member {number} appid
+         * @memberof CTouchConfigActiveMsg
+         * @instance
+         */
+        CTouchConfigActiveMsg.prototype.appid = 0;
+    
+        /**
+         * CTouchConfigActiveMsg revision.
+         * @member {number} revision
+         * @memberof CTouchConfigActiveMsg
+         * @instance
+         */
+        CTouchConfigActiveMsg.prototype.revision = 0;
+    
+        /**
+         * Creates a new CTouchConfigActiveMsg instance using the specified properties.
+         * @function create
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {ICTouchConfigActiveMsg=} [properties] Properties to set
+         * @returns {CTouchConfigActiveMsg} CTouchConfigActiveMsg instance
+         */
+        CTouchConfigActiveMsg.create = function create(properties) {
+            return new CTouchConfigActiveMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CTouchConfigActiveMsg message. Does not implicitly {@link CTouchConfigActiveMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {ICTouchConfigActiveMsg} message CTouchConfigActiveMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTouchConfigActiveMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.revision);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CTouchConfigActiveMsg message, length delimited. Does not implicitly {@link CTouchConfigActiveMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {ICTouchConfigActiveMsg} message CTouchConfigActiveMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTouchConfigActiveMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CTouchConfigActiveMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CTouchConfigActiveMsg} CTouchConfigActiveMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTouchConfigActiveMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CTouchConfigActiveMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.revision = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CTouchConfigActiveMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CTouchConfigActiveMsg} CTouchConfigActiveMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTouchConfigActiveMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CTouchConfigActiveMsg message.
+         * @function verify
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CTouchConfigActiveMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                if (!$util.isInteger(message.revision))
+                    return "revision: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CTouchConfigActiveMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CTouchConfigActiveMsg} CTouchConfigActiveMsg
+         */
+        CTouchConfigActiveMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CTouchConfigActiveMsg)
+                return object;
+            var message = new $root.CTouchConfigActiveMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.revision != null)
+                message.revision = object.revision >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CTouchConfigActiveMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CTouchConfigActiveMsg
+         * @static
+         * @param {CTouchConfigActiveMsg} message CTouchConfigActiveMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CTouchConfigActiveMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.revision = 0;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                object.revision = message.revision;
+            return object;
+        };
+    
+        /**
+         * Converts this CTouchConfigActiveMsg to JSON.
+         * @function toJSON
+         * @memberof CTouchConfigActiveMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CTouchConfigActiveMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CTouchConfigActiveMsg;
+    })();
+    
+    $root.CGetTouchConfigDataMsg = (function() {
+    
+        /**
+         * Properties of a CGetTouchConfigDataMsg.
+         * @exports ICGetTouchConfigDataMsg
+         * @interface ICGetTouchConfigDataMsg
+         * @property {number|null} [appid] CGetTouchConfigDataMsg appid
+         */
+    
+        /**
+         * Constructs a new CGetTouchConfigDataMsg.
+         * @exports CGetTouchConfigDataMsg
+         * @classdesc Represents a CGetTouchConfigDataMsg.
+         * @implements ICGetTouchConfigDataMsg
+         * @constructor
+         * @param {ICGetTouchConfigDataMsg=} [properties] Properties to set
+         */
+        function CGetTouchConfigDataMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CGetTouchConfigDataMsg appid.
+         * @member {number} appid
+         * @memberof CGetTouchConfigDataMsg
+         * @instance
+         */
+        CGetTouchConfigDataMsg.prototype.appid = 0;
+    
+        /**
+         * Creates a new CGetTouchConfigDataMsg instance using the specified properties.
+         * @function create
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {ICGetTouchConfigDataMsg=} [properties] Properties to set
+         * @returns {CGetTouchConfigDataMsg} CGetTouchConfigDataMsg instance
+         */
+        CGetTouchConfigDataMsg.create = function create(properties) {
+            return new CGetTouchConfigDataMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CGetTouchConfigDataMsg message. Does not implicitly {@link CGetTouchConfigDataMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {ICGetTouchConfigDataMsg} message CGetTouchConfigDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CGetTouchConfigDataMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CGetTouchConfigDataMsg message, length delimited. Does not implicitly {@link CGetTouchConfigDataMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {ICGetTouchConfigDataMsg} message CGetTouchConfigDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CGetTouchConfigDataMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CGetTouchConfigDataMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CGetTouchConfigDataMsg} CGetTouchConfigDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CGetTouchConfigDataMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CGetTouchConfigDataMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CGetTouchConfigDataMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CGetTouchConfigDataMsg} CGetTouchConfigDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CGetTouchConfigDataMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CGetTouchConfigDataMsg message.
+         * @function verify
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CGetTouchConfigDataMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CGetTouchConfigDataMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CGetTouchConfigDataMsg} CGetTouchConfigDataMsg
+         */
+        CGetTouchConfigDataMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CGetTouchConfigDataMsg)
+                return object;
+            var message = new $root.CGetTouchConfigDataMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CGetTouchConfigDataMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CGetTouchConfigDataMsg
+         * @static
+         * @param {CGetTouchConfigDataMsg} message CGetTouchConfigDataMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CGetTouchConfigDataMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.appid = 0;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CGetTouchConfigDataMsg to JSON.
+         * @function toJSON
+         * @memberof CGetTouchConfigDataMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CGetTouchConfigDataMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CGetTouchConfigDataMsg;
+    })();
+    
+    $root.CSetTouchConfigDataMsg = (function() {
+    
+        /**
+         * Properties of a CSetTouchConfigDataMsg.
+         * @exports ICSetTouchConfigDataMsg
+         * @interface ICSetTouchConfigDataMsg
+         * @property {number|null} [appid] CSetTouchConfigDataMsg appid
+         * @property {number|null} [revision] CSetTouchConfigDataMsg revision
+         * @property {Uint8Array|null} [data] CSetTouchConfigDataMsg data
+         * @property {Uint8Array|null} [layout] CSetTouchConfigDataMsg layout
+         */
+    
+        /**
+         * Constructs a new CSetTouchConfigDataMsg.
+         * @exports CSetTouchConfigDataMsg
+         * @classdesc Represents a CSetTouchConfigDataMsg.
+         * @implements ICSetTouchConfigDataMsg
+         * @constructor
+         * @param {ICSetTouchConfigDataMsg=} [properties] Properties to set
+         */
+        function CSetTouchConfigDataMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSetTouchConfigDataMsg appid.
+         * @member {number} appid
+         * @memberof CSetTouchConfigDataMsg
+         * @instance
+         */
+        CSetTouchConfigDataMsg.prototype.appid = 0;
+    
+        /**
+         * CSetTouchConfigDataMsg revision.
+         * @member {number} revision
+         * @memberof CSetTouchConfigDataMsg
+         * @instance
+         */
+        CSetTouchConfigDataMsg.prototype.revision = 0;
+    
+        /**
+         * CSetTouchConfigDataMsg data.
+         * @member {Uint8Array} data
+         * @memberof CSetTouchConfigDataMsg
+         * @instance
+         */
+        CSetTouchConfigDataMsg.prototype.data = $util.newBuffer([]);
+    
+        /**
+         * CSetTouchConfigDataMsg layout.
+         * @member {Uint8Array} layout
+         * @memberof CSetTouchConfigDataMsg
+         * @instance
+         */
+        CSetTouchConfigDataMsg.prototype.layout = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CSetTouchConfigDataMsg instance using the specified properties.
+         * @function create
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {ICSetTouchConfigDataMsg=} [properties] Properties to set
+         * @returns {CSetTouchConfigDataMsg} CSetTouchConfigDataMsg instance
+         */
+        CSetTouchConfigDataMsg.create = function create(properties) {
+            return new CSetTouchConfigDataMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CSetTouchConfigDataMsg message. Does not implicitly {@link CSetTouchConfigDataMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {ICSetTouchConfigDataMsg} message CSetTouchConfigDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetTouchConfigDataMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.revision);
+            if (message.data != null && message.hasOwnProperty("data"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.layout);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSetTouchConfigDataMsg message, length delimited. Does not implicitly {@link CSetTouchConfigDataMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {ICSetTouchConfigDataMsg} message CSetTouchConfigDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetTouchConfigDataMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSetTouchConfigDataMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSetTouchConfigDataMsg} CSetTouchConfigDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetTouchConfigDataMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSetTouchConfigDataMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.revision = reader.uint32();
+                    break;
+                case 3:
+                    message.data = reader.bytes();
+                    break;
+                case 4:
+                    message.layout = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSetTouchConfigDataMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSetTouchConfigDataMsg} CSetTouchConfigDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetTouchConfigDataMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSetTouchConfigDataMsg message.
+         * @function verify
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSetTouchConfigDataMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                if (!$util.isInteger(message.revision))
+                    return "revision: integer expected";
+            if (message.data != null && message.hasOwnProperty("data"))
+                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                    return "data: buffer expected";
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                if (!(message.layout && typeof message.layout.length === "number" || $util.isString(message.layout)))
+                    return "layout: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSetTouchConfigDataMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSetTouchConfigDataMsg} CSetTouchConfigDataMsg
+         */
+        CSetTouchConfigDataMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSetTouchConfigDataMsg)
+                return object;
+            var message = new $root.CSetTouchConfigDataMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.revision != null)
+                message.revision = object.revision >>> 0;
+            if (object.data != null)
+                if (typeof object.data === "string")
+                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                else if (object.data.length)
+                    message.data = object.data;
+            if (object.layout != null)
+                if (typeof object.layout === "string")
+                    $util.base64.decode(object.layout, message.layout = $util.newBuffer($util.base64.length(object.layout)), 0);
+                else if (object.layout.length)
+                    message.layout = object.layout;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSetTouchConfigDataMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSetTouchConfigDataMsg
+         * @static
+         * @param {CSetTouchConfigDataMsg} message CSetTouchConfigDataMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSetTouchConfigDataMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.revision = 0;
+                if (options.bytes === String)
+                    object.data = "";
+                else {
+                    object.data = [];
+                    if (options.bytes !== Array)
+                        object.data = $util.newBuffer(object.data);
+                }
+                if (options.bytes === String)
+                    object.layout = "";
+                else {
+                    object.layout = [];
+                    if (options.bytes !== Array)
+                        object.layout = $util.newBuffer(object.layout);
+                }
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.revision != null && message.hasOwnProperty("revision"))
+                object.revision = message.revision;
+            if (message.data != null && message.hasOwnProperty("data"))
+                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                object.layout = options.bytes === String ? $util.base64.encode(message.layout, 0, message.layout.length) : options.bytes === Array ? Array.prototype.slice.call(message.layout) : message.layout;
+            return object;
+        };
+    
+        /**
+         * Converts this CSetTouchConfigDataMsg to JSON.
+         * @function toJSON
+         * @memberof CSetTouchConfigDataMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSetTouchConfigDataMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSetTouchConfigDataMsg;
+    })();
+    
+    $root.CSaveTouchConfigLayoutMsg = (function() {
+    
+        /**
+         * Properties of a CSaveTouchConfigLayoutMsg.
+         * @exports ICSaveTouchConfigLayoutMsg
+         * @interface ICSaveTouchConfigLayoutMsg
+         * @property {number|null} [appid] CSaveTouchConfigLayoutMsg appid
+         * @property {Uint8Array|null} [layout] CSaveTouchConfigLayoutMsg layout
+         */
+    
+        /**
+         * Constructs a new CSaveTouchConfigLayoutMsg.
+         * @exports CSaveTouchConfigLayoutMsg
+         * @classdesc Represents a CSaveTouchConfigLayoutMsg.
+         * @implements ICSaveTouchConfigLayoutMsg
+         * @constructor
+         * @param {ICSaveTouchConfigLayoutMsg=} [properties] Properties to set
+         */
+        function CSaveTouchConfigLayoutMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSaveTouchConfigLayoutMsg appid.
+         * @member {number} appid
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @instance
+         */
+        CSaveTouchConfigLayoutMsg.prototype.appid = 0;
+    
+        /**
+         * CSaveTouchConfigLayoutMsg layout.
+         * @member {Uint8Array} layout
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @instance
+         */
+        CSaveTouchConfigLayoutMsg.prototype.layout = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CSaveTouchConfigLayoutMsg instance using the specified properties.
+         * @function create
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {ICSaveTouchConfigLayoutMsg=} [properties] Properties to set
+         * @returns {CSaveTouchConfigLayoutMsg} CSaveTouchConfigLayoutMsg instance
+         */
+        CSaveTouchConfigLayoutMsg.create = function create(properties) {
+            return new CSaveTouchConfigLayoutMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CSaveTouchConfigLayoutMsg message. Does not implicitly {@link CSaveTouchConfigLayoutMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {ICSaveTouchConfigLayoutMsg} message CSaveTouchConfigLayoutMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSaveTouchConfigLayoutMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.layout);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSaveTouchConfigLayoutMsg message, length delimited. Does not implicitly {@link CSaveTouchConfigLayoutMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {ICSaveTouchConfigLayoutMsg} message CSaveTouchConfigLayoutMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSaveTouchConfigLayoutMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSaveTouchConfigLayoutMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSaveTouchConfigLayoutMsg} CSaveTouchConfigLayoutMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSaveTouchConfigLayoutMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSaveTouchConfigLayoutMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 4:
+                    message.layout = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSaveTouchConfigLayoutMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSaveTouchConfigLayoutMsg} CSaveTouchConfigLayoutMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSaveTouchConfigLayoutMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSaveTouchConfigLayoutMsg message.
+         * @function verify
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSaveTouchConfigLayoutMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                if (!(message.layout && typeof message.layout.length === "number" || $util.isString(message.layout)))
+                    return "layout: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSaveTouchConfigLayoutMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSaveTouchConfigLayoutMsg} CSaveTouchConfigLayoutMsg
+         */
+        CSaveTouchConfigLayoutMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSaveTouchConfigLayoutMsg)
+                return object;
+            var message = new $root.CSaveTouchConfigLayoutMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.layout != null)
+                if (typeof object.layout === "string")
+                    $util.base64.decode(object.layout, message.layout = $util.newBuffer($util.base64.length(object.layout)), 0);
+                else if (object.layout.length)
+                    message.layout = object.layout;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSaveTouchConfigLayoutMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @static
+         * @param {CSaveTouchConfigLayoutMsg} message CSaveTouchConfigLayoutMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSaveTouchConfigLayoutMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                if (options.bytes === String)
+                    object.layout = "";
+                else {
+                    object.layout = [];
+                    if (options.bytes !== Array)
+                        object.layout = $util.newBuffer(object.layout);
+                }
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.layout != null && message.hasOwnProperty("layout"))
+                object.layout = options.bytes === String ? $util.base64.encode(message.layout, 0, message.layout.length) : options.bytes === Array ? Array.prototype.slice.call(message.layout) : message.layout;
+            return object;
+        };
+    
+        /**
+         * Converts this CSaveTouchConfigLayoutMsg to JSON.
+         * @function toJSON
+         * @memberof CSaveTouchConfigLayoutMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSaveTouchConfigLayoutMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSaveTouchConfigLayoutMsg;
+    })();
+    
+    $root.CTouchActionSetActiveMsg = (function() {
+    
+        /**
+         * Properties of a CTouchActionSetActiveMsg.
+         * @exports ICTouchActionSetActiveMsg
+         * @interface ICTouchActionSetActiveMsg
+         * @property {number|null} [appid] CTouchActionSetActiveMsg appid
+         * @property {number|null} [actionset_id] CTouchActionSetActiveMsg actionset_id
+         */
+    
+        /**
+         * Constructs a new CTouchActionSetActiveMsg.
+         * @exports CTouchActionSetActiveMsg
+         * @classdesc Represents a CTouchActionSetActiveMsg.
+         * @implements ICTouchActionSetActiveMsg
+         * @constructor
+         * @param {ICTouchActionSetActiveMsg=} [properties] Properties to set
+         */
+        function CTouchActionSetActiveMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CTouchActionSetActiveMsg appid.
+         * @member {number} appid
+         * @memberof CTouchActionSetActiveMsg
+         * @instance
+         */
+        CTouchActionSetActiveMsg.prototype.appid = 0;
+    
+        /**
+         * CTouchActionSetActiveMsg actionset_id.
+         * @member {number} actionset_id
+         * @memberof CTouchActionSetActiveMsg
+         * @instance
+         */
+        CTouchActionSetActiveMsg.prototype.actionset_id = 0;
+    
+        /**
+         * Creates a new CTouchActionSetActiveMsg instance using the specified properties.
+         * @function create
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {ICTouchActionSetActiveMsg=} [properties] Properties to set
+         * @returns {CTouchActionSetActiveMsg} CTouchActionSetActiveMsg instance
+         */
+        CTouchActionSetActiveMsg.create = function create(properties) {
+            return new CTouchActionSetActiveMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CTouchActionSetActiveMsg message. Does not implicitly {@link CTouchActionSetActiveMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {ICTouchActionSetActiveMsg} message CTouchActionSetActiveMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTouchActionSetActiveMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.actionset_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CTouchActionSetActiveMsg message, length delimited. Does not implicitly {@link CTouchActionSetActiveMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {ICTouchActionSetActiveMsg} message CTouchActionSetActiveMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTouchActionSetActiveMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CTouchActionSetActiveMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CTouchActionSetActiveMsg} CTouchActionSetActiveMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTouchActionSetActiveMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CTouchActionSetActiveMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.actionset_id = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CTouchActionSetActiveMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CTouchActionSetActiveMsg} CTouchActionSetActiveMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTouchActionSetActiveMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CTouchActionSetActiveMsg message.
+         * @function verify
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CTouchActionSetActiveMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                if (!$util.isInteger(message.actionset_id))
+                    return "actionset_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CTouchActionSetActiveMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CTouchActionSetActiveMsg} CTouchActionSetActiveMsg
+         */
+        CTouchActionSetActiveMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CTouchActionSetActiveMsg)
+                return object;
+            var message = new $root.CTouchActionSetActiveMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.actionset_id != null)
+                message.actionset_id = object.actionset_id | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CTouchActionSetActiveMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CTouchActionSetActiveMsg
+         * @static
+         * @param {CTouchActionSetActiveMsg} message CTouchActionSetActiveMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CTouchActionSetActiveMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.actionset_id = 0;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                object.actionset_id = message.actionset_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CTouchActionSetActiveMsg to JSON.
+         * @function toJSON
+         * @memberof CTouchActionSetActiveMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CTouchActionSetActiveMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CTouchActionSetActiveMsg;
+    })();
+    
+    $root.CGetTouchIconDataMsg = (function() {
+    
+        /**
+         * Properties of a CGetTouchIconDataMsg.
+         * @exports ICGetTouchIconDataMsg
+         * @interface ICGetTouchIconDataMsg
+         * @property {number|null} [appid] CGetTouchIconDataMsg appid
+         * @property {string|null} [icon] CGetTouchIconDataMsg icon
+         */
+    
+        /**
+         * Constructs a new CGetTouchIconDataMsg.
+         * @exports CGetTouchIconDataMsg
+         * @classdesc Represents a CGetTouchIconDataMsg.
+         * @implements ICGetTouchIconDataMsg
+         * @constructor
+         * @param {ICGetTouchIconDataMsg=} [properties] Properties to set
+         */
+        function CGetTouchIconDataMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CGetTouchIconDataMsg appid.
+         * @member {number} appid
+         * @memberof CGetTouchIconDataMsg
+         * @instance
+         */
+        CGetTouchIconDataMsg.prototype.appid = 0;
+    
+        /**
+         * CGetTouchIconDataMsg icon.
+         * @member {string} icon
+         * @memberof CGetTouchIconDataMsg
+         * @instance
+         */
+        CGetTouchIconDataMsg.prototype.icon = "";
+    
+        /**
+         * Creates a new CGetTouchIconDataMsg instance using the specified properties.
+         * @function create
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {ICGetTouchIconDataMsg=} [properties] Properties to set
+         * @returns {CGetTouchIconDataMsg} CGetTouchIconDataMsg instance
+         */
+        CGetTouchIconDataMsg.create = function create(properties) {
+            return new CGetTouchIconDataMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CGetTouchIconDataMsg message. Does not implicitly {@link CGetTouchIconDataMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {ICGetTouchIconDataMsg} message CGetTouchIconDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CGetTouchIconDataMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.icon);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CGetTouchIconDataMsg message, length delimited. Does not implicitly {@link CGetTouchIconDataMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {ICGetTouchIconDataMsg} message CGetTouchIconDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CGetTouchIconDataMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CGetTouchIconDataMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CGetTouchIconDataMsg} CGetTouchIconDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CGetTouchIconDataMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CGetTouchIconDataMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.icon = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CGetTouchIconDataMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CGetTouchIconDataMsg} CGetTouchIconDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CGetTouchIconDataMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CGetTouchIconDataMsg message.
+         * @function verify
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CGetTouchIconDataMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                if (!$util.isString(message.icon))
+                    return "icon: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CGetTouchIconDataMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CGetTouchIconDataMsg} CGetTouchIconDataMsg
+         */
+        CGetTouchIconDataMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CGetTouchIconDataMsg)
+                return object;
+            var message = new $root.CGetTouchIconDataMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.icon != null)
+                message.icon = String(object.icon);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CGetTouchIconDataMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CGetTouchIconDataMsg
+         * @static
+         * @param {CGetTouchIconDataMsg} message CGetTouchIconDataMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CGetTouchIconDataMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.icon = "";
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                object.icon = message.icon;
+            return object;
+        };
+    
+        /**
+         * Converts this CGetTouchIconDataMsg to JSON.
+         * @function toJSON
+         * @memberof CGetTouchIconDataMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CGetTouchIconDataMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CGetTouchIconDataMsg;
+    })();
+    
+    $root.CSetTouchIconDataMsg = (function() {
+    
+        /**
+         * Properties of a CSetTouchIconDataMsg.
+         * @exports ICSetTouchIconDataMsg
+         * @interface ICSetTouchIconDataMsg
+         * @property {number|null} [appid] CSetTouchIconDataMsg appid
+         * @property {string|null} [icon] CSetTouchIconDataMsg icon
+         * @property {Uint8Array|null} [data] CSetTouchIconDataMsg data
+         */
+    
+        /**
+         * Constructs a new CSetTouchIconDataMsg.
+         * @exports CSetTouchIconDataMsg
+         * @classdesc Represents a CSetTouchIconDataMsg.
+         * @implements ICSetTouchIconDataMsg
+         * @constructor
+         * @param {ICSetTouchIconDataMsg=} [properties] Properties to set
+         */
+        function CSetTouchIconDataMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSetTouchIconDataMsg appid.
+         * @member {number} appid
+         * @memberof CSetTouchIconDataMsg
+         * @instance
+         */
+        CSetTouchIconDataMsg.prototype.appid = 0;
+    
+        /**
+         * CSetTouchIconDataMsg icon.
+         * @member {string} icon
+         * @memberof CSetTouchIconDataMsg
+         * @instance
+         */
+        CSetTouchIconDataMsg.prototype.icon = "";
+    
+        /**
+         * CSetTouchIconDataMsg data.
+         * @member {Uint8Array} data
+         * @memberof CSetTouchIconDataMsg
+         * @instance
+         */
+        CSetTouchIconDataMsg.prototype.data = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CSetTouchIconDataMsg instance using the specified properties.
+         * @function create
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {ICSetTouchIconDataMsg=} [properties] Properties to set
+         * @returns {CSetTouchIconDataMsg} CSetTouchIconDataMsg instance
+         */
+        CSetTouchIconDataMsg.create = function create(properties) {
+            return new CSetTouchIconDataMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CSetTouchIconDataMsg message. Does not implicitly {@link CSetTouchIconDataMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {ICSetTouchIconDataMsg} message CSetTouchIconDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetTouchIconDataMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.icon);
+            if (message.data != null && message.hasOwnProperty("data"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSetTouchIconDataMsg message, length delimited. Does not implicitly {@link CSetTouchIconDataMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {ICSetTouchIconDataMsg} message CSetTouchIconDataMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetTouchIconDataMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSetTouchIconDataMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSetTouchIconDataMsg} CSetTouchIconDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetTouchIconDataMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSetTouchIconDataMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.icon = reader.string();
+                    break;
+                case 3:
+                    message.data = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSetTouchIconDataMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSetTouchIconDataMsg} CSetTouchIconDataMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetTouchIconDataMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSetTouchIconDataMsg message.
+         * @function verify
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSetTouchIconDataMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                if (!$util.isString(message.icon))
+                    return "icon: string expected";
+            if (message.data != null && message.hasOwnProperty("data"))
+                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                    return "data: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSetTouchIconDataMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSetTouchIconDataMsg} CSetTouchIconDataMsg
+         */
+        CSetTouchIconDataMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSetTouchIconDataMsg)
+                return object;
+            var message = new $root.CSetTouchIconDataMsg();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.icon != null)
+                message.icon = String(object.icon);
+            if (object.data != null)
+                if (typeof object.data === "string")
+                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                else if (object.data.length)
+                    message.data = object.data;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSetTouchIconDataMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSetTouchIconDataMsg
+         * @static
+         * @param {CSetTouchIconDataMsg} message CSetTouchIconDataMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSetTouchIconDataMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.icon = "";
+                if (options.bytes === String)
+                    object.data = "";
+                else {
+                    object.data = [];
+                    if (options.bytes !== Array)
+                        object.data = $util.newBuffer(object.data);
+                }
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.icon != null && message.hasOwnProperty("icon"))
+                object.icon = message.icon;
+            if (message.data != null && message.hasOwnProperty("data"))
+                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+            return object;
+        };
+    
+        /**
+         * Converts this CSetTouchIconDataMsg to JSON.
+         * @function toJSON
+         * @memberof CSetTouchIconDataMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSetTouchIconDataMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSetTouchIconDataMsg;
+    })();
+    
     $root.CStreamDataLostMsg = (function() {
     
         /**
@@ -16042,6 +16675,238 @@
         };
     
         return CFrameStatsListMsg;
+    })();
+    
+    $root.CStreamingSessionStats = (function() {
+    
+        /**
+         * Properties of a CStreamingSessionStats.
+         * @exports ICStreamingSessionStats
+         * @interface ICStreamingSessionStats
+         * @property {number|null} [frame_loss_percentage] CStreamingSessionStats frame_loss_percentage
+         * @property {number|null} [average_network_time_ms] CStreamingSessionStats average_network_time_ms
+         * @property {number|null} [stddev_network_time_ms] CStreamingSessionStats stddev_network_time_ms
+         */
+    
+        /**
+         * Constructs a new CStreamingSessionStats.
+         * @exports CStreamingSessionStats
+         * @classdesc Represents a CStreamingSessionStats.
+         * @implements ICStreamingSessionStats
+         * @constructor
+         * @param {ICStreamingSessionStats=} [properties] Properties to set
+         */
+        function CStreamingSessionStats(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CStreamingSessionStats frame_loss_percentage.
+         * @member {number} frame_loss_percentage
+         * @memberof CStreamingSessionStats
+         * @instance
+         */
+        CStreamingSessionStats.prototype.frame_loss_percentage = 0;
+    
+        /**
+         * CStreamingSessionStats average_network_time_ms.
+         * @member {number} average_network_time_ms
+         * @memberof CStreamingSessionStats
+         * @instance
+         */
+        CStreamingSessionStats.prototype.average_network_time_ms = 0;
+    
+        /**
+         * CStreamingSessionStats stddev_network_time_ms.
+         * @member {number} stddev_network_time_ms
+         * @memberof CStreamingSessionStats
+         * @instance
+         */
+        CStreamingSessionStats.prototype.stddev_network_time_ms = 0;
+    
+        /**
+         * Creates a new CStreamingSessionStats instance using the specified properties.
+         * @function create
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {ICStreamingSessionStats=} [properties] Properties to set
+         * @returns {CStreamingSessionStats} CStreamingSessionStats instance
+         */
+        CStreamingSessionStats.create = function create(properties) {
+            return new CStreamingSessionStats(properties);
+        };
+    
+        /**
+         * Encodes the specified CStreamingSessionStats message. Does not implicitly {@link CStreamingSessionStats.verify|verify} messages.
+         * @function encode
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {ICStreamingSessionStats} message CStreamingSessionStats message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CStreamingSessionStats.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.frame_loss_percentage != null && message.hasOwnProperty("frame_loss_percentage"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.frame_loss_percentage);
+            if (message.average_network_time_ms != null && message.hasOwnProperty("average_network_time_ms"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.average_network_time_ms);
+            if (message.stddev_network_time_ms != null && message.hasOwnProperty("stddev_network_time_ms"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.stddev_network_time_ms);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CStreamingSessionStats message, length delimited. Does not implicitly {@link CStreamingSessionStats.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {ICStreamingSessionStats} message CStreamingSessionStats message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CStreamingSessionStats.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CStreamingSessionStats message from the specified reader or buffer.
+         * @function decode
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CStreamingSessionStats} CStreamingSessionStats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CStreamingSessionStats.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStreamingSessionStats();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.frame_loss_percentage = reader.float();
+                    break;
+                case 2:
+                    message.average_network_time_ms = reader.float();
+                    break;
+                case 3:
+                    message.stddev_network_time_ms = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CStreamingSessionStats message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CStreamingSessionStats} CStreamingSessionStats
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CStreamingSessionStats.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CStreamingSessionStats message.
+         * @function verify
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CStreamingSessionStats.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.frame_loss_percentage != null && message.hasOwnProperty("frame_loss_percentage"))
+                if (typeof message.frame_loss_percentage !== "number")
+                    return "frame_loss_percentage: number expected";
+            if (message.average_network_time_ms != null && message.hasOwnProperty("average_network_time_ms"))
+                if (typeof message.average_network_time_ms !== "number")
+                    return "average_network_time_ms: number expected";
+            if (message.stddev_network_time_ms != null && message.hasOwnProperty("stddev_network_time_ms"))
+                if (typeof message.stddev_network_time_ms !== "number")
+                    return "stddev_network_time_ms: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CStreamingSessionStats message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CStreamingSessionStats} CStreamingSessionStats
+         */
+        CStreamingSessionStats.fromObject = function fromObject(object) {
+            if (object instanceof $root.CStreamingSessionStats)
+                return object;
+            var message = new $root.CStreamingSessionStats();
+            if (object.frame_loss_percentage != null)
+                message.frame_loss_percentage = Number(object.frame_loss_percentage);
+            if (object.average_network_time_ms != null)
+                message.average_network_time_ms = Number(object.average_network_time_ms);
+            if (object.stddev_network_time_ms != null)
+                message.stddev_network_time_ms = Number(object.stddev_network_time_ms);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CStreamingSessionStats message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CStreamingSessionStats
+         * @static
+         * @param {CStreamingSessionStats} message CStreamingSessionStats
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CStreamingSessionStats.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.frame_loss_percentage = 0;
+                object.average_network_time_ms = 0;
+                object.stddev_network_time_ms = 0;
+            }
+            if (message.frame_loss_percentage != null && message.hasOwnProperty("frame_loss_percentage"))
+                object.frame_loss_percentage = options.json && !isFinite(message.frame_loss_percentage) ? String(message.frame_loss_percentage) : message.frame_loss_percentage;
+            if (message.average_network_time_ms != null && message.hasOwnProperty("average_network_time_ms"))
+                object.average_network_time_ms = options.json && !isFinite(message.average_network_time_ms) ? String(message.average_network_time_ms) : message.average_network_time_ms;
+            if (message.stddev_network_time_ms != null && message.hasOwnProperty("stddev_network_time_ms"))
+                object.stddev_network_time_ms = options.json && !isFinite(message.stddev_network_time_ms) ? String(message.stddev_network_time_ms) : message.stddev_network_time_ms;
+            return object;
+        };
+    
+        /**
+         * Converts this CStreamingSessionStats to JSON.
+         * @function toJSON
+         * @memberof CStreamingSessionStats
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CStreamingSessionStats.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CStreamingSessionStats;
     })();
     
     $root.CDebugDumpMsg = (function() {

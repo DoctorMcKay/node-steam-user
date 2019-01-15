@@ -2592,13 +2592,9 @@
          * @property {number|null} [time_subscribed] PublishedFileDetails time_subscribed
          * @property {PublishedFileDetails.IForSaleData|null} [for_sale_data] PublishedFileDetails for_sale_data
          * @property {string|null} [metadata] PublishedFileDetails metadata
-         * @property {number|Long|null} [incompatible_actor] PublishedFileDetails incompatible_actor
-         * @property {number|null} [incompatible_timestamp] PublishedFileDetails incompatible_timestamp
          * @property {number|null} [language] PublishedFileDetails language
-         * @property {boolean|null} [app_has_adult_content] PublishedFileDetails app_has_adult_content
-         * @property {boolean|null} [app_has_adult_content_sex] PublishedFileDetails app_has_adult_content_sex
-         * @property {boolean|null} [app_has_adult_content_violence] PublishedFileDetails app_has_adult_content_violence
-         * @property {boolean|null} [maybe_inappropriate] PublishedFileDetails maybe_inappropriate
+         * @property {boolean|null} [maybe_inappropriate_sex] PublishedFileDetails maybe_inappropriate_sex
+         * @property {boolean|null} [maybe_inappropriate_violence] PublishedFileDetails maybe_inappropriate_violence
          */
     
         /**
@@ -3109,22 +3105,6 @@
         PublishedFileDetails.prototype.metadata = "";
     
         /**
-         * PublishedFileDetails incompatible_actor.
-         * @member {number|Long} incompatible_actor
-         * @memberof PublishedFileDetails
-         * @instance
-         */
-        PublishedFileDetails.prototype.incompatible_actor = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * PublishedFileDetails incompatible_timestamp.
-         * @member {number} incompatible_timestamp
-         * @memberof PublishedFileDetails
-         * @instance
-         */
-        PublishedFileDetails.prototype.incompatible_timestamp = 0;
-    
-        /**
          * PublishedFileDetails language.
          * @member {number} language
          * @memberof PublishedFileDetails
@@ -3133,36 +3113,20 @@
         PublishedFileDetails.prototype.language = 0;
     
         /**
-         * PublishedFileDetails app_has_adult_content.
-         * @member {boolean} app_has_adult_content
+         * PublishedFileDetails maybe_inappropriate_sex.
+         * @member {boolean} maybe_inappropriate_sex
          * @memberof PublishedFileDetails
          * @instance
          */
-        PublishedFileDetails.prototype.app_has_adult_content = false;
+        PublishedFileDetails.prototype.maybe_inappropriate_sex = false;
     
         /**
-         * PublishedFileDetails app_has_adult_content_sex.
-         * @member {boolean} app_has_adult_content_sex
+         * PublishedFileDetails maybe_inappropriate_violence.
+         * @member {boolean} maybe_inappropriate_violence
          * @memberof PublishedFileDetails
          * @instance
          */
-        PublishedFileDetails.prototype.app_has_adult_content_sex = false;
-    
-        /**
-         * PublishedFileDetails app_has_adult_content_violence.
-         * @member {boolean} app_has_adult_content_violence
-         * @memberof PublishedFileDetails
-         * @instance
-         */
-        PublishedFileDetails.prototype.app_has_adult_content_violence = false;
-    
-        /**
-         * PublishedFileDetails maybe_inappropriate.
-         * @member {boolean} maybe_inappropriate
-         * @memberof PublishedFileDetails
-         * @instance
-         */
-        PublishedFileDetails.prototype.maybe_inappropriate = false;
+        PublishedFileDetails.prototype.maybe_inappropriate_violence = false;
     
         /**
          * Creates a new PublishedFileDetails instance using the specified properties.
@@ -3308,10 +3272,6 @@
                 $root.PublishedFileDetails.ForSaleData.encode(message.for_sale_data, writer.uint32(/* id 57, wireType 2 =*/458).fork()).ldelim();
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 writer.uint32(/* id 58, wireType 2 =*/466).string(message.metadata);
-            if (message.incompatible_actor != null && message.hasOwnProperty("incompatible_actor"))
-                writer.uint32(/* id 59, wireType 1 =*/473).fixed64(message.incompatible_actor);
-            if (message.incompatible_timestamp != null && message.hasOwnProperty("incompatible_timestamp"))
-                writer.uint32(/* id 60, wireType 0 =*/480).uint32(message.incompatible_timestamp);
             if (message.language != null && message.hasOwnProperty("language"))
                 writer.uint32(/* id 61, wireType 0 =*/488).int32(message.language);
             if (message.lifetime_playtime != null && message.hasOwnProperty("lifetime_playtime"))
@@ -3320,14 +3280,10 @@
                 writer.uint32(/* id 63, wireType 0 =*/504).uint64(message.lifetime_playtime_sessions);
             if (message.playtime_stats != null && message.hasOwnProperty("playtime_stats"))
                 $root.PublishedFileDetails.PlaytimeStats.encode(message.playtime_stats, writer.uint32(/* id 64, wireType 2 =*/514).fork()).ldelim();
-            if (message.app_has_adult_content != null && message.hasOwnProperty("app_has_adult_content"))
-                writer.uint32(/* id 65, wireType 0 =*/520).bool(message.app_has_adult_content);
-            if (message.app_has_adult_content_sex != null && message.hasOwnProperty("app_has_adult_content_sex"))
-                writer.uint32(/* id 66, wireType 0 =*/528).bool(message.app_has_adult_content_sex);
-            if (message.app_has_adult_content_violence != null && message.hasOwnProperty("app_has_adult_content_violence"))
-                writer.uint32(/* id 67, wireType 0 =*/536).bool(message.app_has_adult_content_violence);
-            if (message.maybe_inappropriate != null && message.hasOwnProperty("maybe_inappropriate"))
-                writer.uint32(/* id 68, wireType 0 =*/544).bool(message.maybe_inappropriate);
+            if (message.maybe_inappropriate_sex != null && message.hasOwnProperty("maybe_inappropriate_sex"))
+                writer.uint32(/* id 65, wireType 0 =*/520).bool(message.maybe_inappropriate_sex);
+            if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
+                writer.uint32(/* id 66, wireType 0 =*/528).bool(message.maybe_inappropriate_violence);
             return writer;
         };
     
@@ -3553,26 +3509,14 @@
                 case 58:
                     message.metadata = reader.string();
                     break;
-                case 59:
-                    message.incompatible_actor = reader.fixed64();
-                    break;
-                case 60:
-                    message.incompatible_timestamp = reader.uint32();
-                    break;
                 case 61:
                     message.language = reader.int32();
                     break;
                 case 65:
-                    message.app_has_adult_content = reader.bool();
+                    message.maybe_inappropriate_sex = reader.bool();
                     break;
                 case 66:
-                    message.app_has_adult_content_sex = reader.bool();
-                    break;
-                case 67:
-                    message.app_has_adult_content_violence = reader.bool();
-                    break;
-                case 68:
-                    message.maybe_inappropriate = reader.bool();
+                    message.maybe_inappropriate_violence = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3822,27 +3766,15 @@
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 if (!$util.isString(message.metadata))
                     return "metadata: string expected";
-            if (message.incompatible_actor != null && message.hasOwnProperty("incompatible_actor"))
-                if (!$util.isInteger(message.incompatible_actor) && !(message.incompatible_actor && $util.isInteger(message.incompatible_actor.low) && $util.isInteger(message.incompatible_actor.high)))
-                    return "incompatible_actor: integer|Long expected";
-            if (message.incompatible_timestamp != null && message.hasOwnProperty("incompatible_timestamp"))
-                if (!$util.isInteger(message.incompatible_timestamp))
-                    return "incompatible_timestamp: integer expected";
             if (message.language != null && message.hasOwnProperty("language"))
                 if (!$util.isInteger(message.language))
                     return "language: integer expected";
-            if (message.app_has_adult_content != null && message.hasOwnProperty("app_has_adult_content"))
-                if (typeof message.app_has_adult_content !== "boolean")
-                    return "app_has_adult_content: boolean expected";
-            if (message.app_has_adult_content_sex != null && message.hasOwnProperty("app_has_adult_content_sex"))
-                if (typeof message.app_has_adult_content_sex !== "boolean")
-                    return "app_has_adult_content_sex: boolean expected";
-            if (message.app_has_adult_content_violence != null && message.hasOwnProperty("app_has_adult_content_violence"))
-                if (typeof message.app_has_adult_content_violence !== "boolean")
-                    return "app_has_adult_content_violence: boolean expected";
-            if (message.maybe_inappropriate != null && message.hasOwnProperty("maybe_inappropriate"))
-                if (typeof message.maybe_inappropriate !== "boolean")
-                    return "maybe_inappropriate: boolean expected";
+            if (message.maybe_inappropriate_sex != null && message.hasOwnProperty("maybe_inappropriate_sex"))
+                if (typeof message.maybe_inappropriate_sex !== "boolean")
+                    return "maybe_inappropriate_sex: boolean expected";
+            if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
+                if (typeof message.maybe_inappropriate_violence !== "boolean")
+                    return "maybe_inappropriate_violence: boolean expected";
             return null;
         };
     
@@ -4084,27 +4016,12 @@
             }
             if (object.metadata != null)
                 message.metadata = String(object.metadata);
-            if (object.incompatible_actor != null)
-                if ($util.Long)
-                    (message.incompatible_actor = $util.Long.fromValue(object.incompatible_actor)).unsigned = false;
-                else if (typeof object.incompatible_actor === "string")
-                    message.incompatible_actor = parseInt(object.incompatible_actor, 10);
-                else if (typeof object.incompatible_actor === "number")
-                    message.incompatible_actor = object.incompatible_actor;
-                else if (typeof object.incompatible_actor === "object")
-                    message.incompatible_actor = new $util.LongBits(object.incompatible_actor.low >>> 0, object.incompatible_actor.high >>> 0).toNumber();
-            if (object.incompatible_timestamp != null)
-                message.incompatible_timestamp = object.incompatible_timestamp >>> 0;
             if (object.language != null)
                 message.language = object.language | 0;
-            if (object.app_has_adult_content != null)
-                message.app_has_adult_content = Boolean(object.app_has_adult_content);
-            if (object.app_has_adult_content_sex != null)
-                message.app_has_adult_content_sex = Boolean(object.app_has_adult_content_sex);
-            if (object.app_has_adult_content_violence != null)
-                message.app_has_adult_content_violence = Boolean(object.app_has_adult_content_violence);
-            if (object.maybe_inappropriate != null)
-                message.maybe_inappropriate = Boolean(object.maybe_inappropriate);
+            if (object.maybe_inappropriate_sex != null)
+                message.maybe_inappropriate_sex = Boolean(object.maybe_inappropriate_sex);
+            if (object.maybe_inappropriate_violence != null)
+                message.maybe_inappropriate_violence = Boolean(object.maybe_inappropriate_violence);
             return message;
         };
     
@@ -4210,12 +4127,6 @@
                 object.time_subscribed = 0;
                 object.for_sale_data = null;
                 object.metadata = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.incompatible_actor = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.incompatible_actor = options.longs === String ? "0" : 0;
-                object.incompatible_timestamp = 0;
                 object.language = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
@@ -4228,10 +4139,8 @@
                 } else
                     object.lifetime_playtime_sessions = options.longs === String ? "0" : 0;
                 object.playtime_stats = null;
-                object.app_has_adult_content = false;
-                object.app_has_adult_content_sex = false;
-                object.app_has_adult_content_violence = false;
-                object.maybe_inappropriate = false;
+                object.maybe_inappropriate_sex = false;
+                object.maybe_inappropriate_violence = false;
             }
             if (message.result != null && message.hasOwnProperty("result"))
                 object.result = message.result;
@@ -4382,13 +4291,6 @@
                 object.for_sale_data = $root.PublishedFileDetails.ForSaleData.toObject(message.for_sale_data, options);
             if (message.metadata != null && message.hasOwnProperty("metadata"))
                 object.metadata = message.metadata;
-            if (message.incompatible_actor != null && message.hasOwnProperty("incompatible_actor"))
-                if (typeof message.incompatible_actor === "number")
-                    object.incompatible_actor = options.longs === String ? String(message.incompatible_actor) : message.incompatible_actor;
-                else
-                    object.incompatible_actor = options.longs === String ? $util.Long.prototype.toString.call(message.incompatible_actor) : options.longs === Number ? new $util.LongBits(message.incompatible_actor.low >>> 0, message.incompatible_actor.high >>> 0).toNumber() : message.incompatible_actor;
-            if (message.incompatible_timestamp != null && message.hasOwnProperty("incompatible_timestamp"))
-                object.incompatible_timestamp = message.incompatible_timestamp;
             if (message.language != null && message.hasOwnProperty("language"))
                 object.language = message.language;
             if (message.lifetime_playtime != null && message.hasOwnProperty("lifetime_playtime"))
@@ -4403,14 +4305,10 @@
                     object.lifetime_playtime_sessions = options.longs === String ? $util.Long.prototype.toString.call(message.lifetime_playtime_sessions) : options.longs === Number ? new $util.LongBits(message.lifetime_playtime_sessions.low >>> 0, message.lifetime_playtime_sessions.high >>> 0).toNumber(true) : message.lifetime_playtime_sessions;
             if (message.playtime_stats != null && message.hasOwnProperty("playtime_stats"))
                 object.playtime_stats = $root.PublishedFileDetails.PlaytimeStats.toObject(message.playtime_stats, options);
-            if (message.app_has_adult_content != null && message.hasOwnProperty("app_has_adult_content"))
-                object.app_has_adult_content = message.app_has_adult_content;
-            if (message.app_has_adult_content_sex != null && message.hasOwnProperty("app_has_adult_content_sex"))
-                object.app_has_adult_content_sex = message.app_has_adult_content_sex;
-            if (message.app_has_adult_content_violence != null && message.hasOwnProperty("app_has_adult_content_violence"))
-                object.app_has_adult_content_violence = message.app_has_adult_content_violence;
-            if (message.maybe_inappropriate != null && message.hasOwnProperty("maybe_inappropriate"))
-                object.maybe_inappropriate = message.maybe_inappropriate;
+            if (message.maybe_inappropriate_sex != null && message.hasOwnProperty("maybe_inappropriate_sex"))
+                object.maybe_inappropriate_sex = message.maybe_inappropriate_sex;
+            if (message.maybe_inappropriate_violence != null && message.hasOwnProperty("maybe_inappropriate_violence"))
+                object.maybe_inappropriate_violence = message.maybe_inappropriate_violence;
             return object;
         };
     
@@ -11327,6 +11225,7 @@
          * @interface ICPublishedFile_QueryFiles_Request
          * @property {number|null} [query_type] CPublishedFile_QueryFiles_Request query_type
          * @property {number|null} [page] CPublishedFile_QueryFiles_Request page
+         * @property {string|null} [cursor] CPublishedFile_QueryFiles_Request cursor
          * @property {number|null} [numperpage] CPublishedFile_QueryFiles_Request numperpage
          * @property {number|null} [creator_appid] CPublishedFile_QueryFiles_Request creator_appid
          * @property {number|null} [appid] CPublishedFile_QueryFiles_Request appid
@@ -11393,6 +11292,14 @@
          * @instance
          */
         CPublishedFile_QueryFiles_Request.prototype.page = 0;
+    
+        /**
+         * CPublishedFile_QueryFiles_Request cursor.
+         * @member {string} cursor
+         * @memberof CPublishedFile_QueryFiles_Request
+         * @instance
+         */
+        CPublishedFile_QueryFiles_Request.prototype.cursor = "";
     
         /**
          * CPublishedFile_QueryFiles_Request numperpage.
@@ -11717,6 +11624,8 @@
                 writer.uint32(/* id 37, wireType 0 =*/296).bool(message.return_details);
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.strip_description_bbcode);
+            if (message.cursor != null && message.hasOwnProperty("cursor"))
+                writer.uint32(/* id 39, wireType 2 =*/314).string(message.cursor);
             return writer;
         };
     
@@ -11756,6 +11665,9 @@
                     break;
                 case 2:
                     message.page = reader.uint32();
+                    break;
+                case 39:
+                    message.cursor = reader.string();
                     break;
                 case 3:
                     message.numperpage = reader.uint32();
@@ -11895,6 +11807,9 @@
             if (message.page != null && message.hasOwnProperty("page"))
                 if (!$util.isInteger(message.page))
                     return "page: integer expected";
+            if (message.cursor != null && message.hasOwnProperty("cursor"))
+                if (!$util.isString(message.cursor))
+                    return "cursor: string expected";
             if (message.numperpage != null && message.hasOwnProperty("numperpage"))
                 if (!$util.isInteger(message.numperpage))
                     return "numperpage: integer expected";
@@ -12023,6 +11938,8 @@
                 message.query_type = object.query_type >>> 0;
             if (object.page != null)
                 message.page = object.page >>> 0;
+            if (object.cursor != null)
+                message.cursor = String(object.cursor);
             if (object.numperpage != null)
                 message.numperpage = object.numperpage >>> 0;
             if (object.creator_appid != null)
@@ -12170,6 +12087,7 @@
                 object.return_playtime_stats = 0;
                 object.return_details = false;
                 object.strip_description_bbcode = false;
+                object.cursor = "";
             }
             if (message.query_type != null && message.hasOwnProperty("query_type"))
                 object.query_type = message.query_type;
@@ -12251,6 +12169,8 @@
                 object.return_details = message.return_details;
             if (message.strip_description_bbcode != null && message.hasOwnProperty("strip_description_bbcode"))
                 object.strip_description_bbcode = message.strip_description_bbcode;
+            if (message.cursor != null && message.hasOwnProperty("cursor"))
+                object.cursor = message.cursor;
             return object;
         };
     
@@ -12486,6 +12406,7 @@
          * @interface ICPublishedFile_QueryFiles_Response
          * @property {number|null} [total] CPublishedFile_QueryFiles_Response total
          * @property {Array.<IPublishedFileDetails>|null} [publishedfiledetails] CPublishedFile_QueryFiles_Response publishedfiledetails
+         * @property {string|null} [next_cursor] CPublishedFile_QueryFiles_Response next_cursor
          */
     
         /**
@@ -12521,6 +12442,14 @@
         CPublishedFile_QueryFiles_Response.prototype.publishedfiledetails = $util.emptyArray;
     
         /**
+         * CPublishedFile_QueryFiles_Response next_cursor.
+         * @member {string} next_cursor
+         * @memberof CPublishedFile_QueryFiles_Response
+         * @instance
+         */
+        CPublishedFile_QueryFiles_Response.prototype.next_cursor = "";
+    
+        /**
          * Creates a new CPublishedFile_QueryFiles_Response instance using the specified properties.
          * @function create
          * @memberof CPublishedFile_QueryFiles_Response
@@ -12549,6 +12478,8 @@
             if (message.publishedfiledetails != null && message.publishedfiledetails.length)
                 for (var i = 0; i < message.publishedfiledetails.length; ++i)
                     $root.PublishedFileDetails.encode(message.publishedfiledetails[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.next_cursor != null && message.hasOwnProperty("next_cursor"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.next_cursor);
             return writer;
         };
     
@@ -12590,6 +12521,9 @@
                     if (!(message.publishedfiledetails && message.publishedfiledetails.length))
                         message.publishedfiledetails = [];
                     message.publishedfiledetails.push($root.PublishedFileDetails.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.next_cursor = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12638,6 +12572,9 @@
                         return "publishedfiledetails." + error;
                 }
             }
+            if (message.next_cursor != null && message.hasOwnProperty("next_cursor"))
+                if (!$util.isString(message.next_cursor))
+                    return "next_cursor: string expected";
             return null;
         };
     
@@ -12665,6 +12602,8 @@
                     message.publishedfiledetails[i] = $root.PublishedFileDetails.fromObject(object.publishedfiledetails[i]);
                 }
             }
+            if (object.next_cursor != null)
+                message.next_cursor = String(object.next_cursor);
             return message;
         };
     
@@ -12683,8 +12622,10 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.publishedfiledetails = [];
-            if (options.defaults)
+            if (options.defaults) {
                 object.total = 0;
+                object.next_cursor = "";
+            }
             if (message.total != null && message.hasOwnProperty("total"))
                 object.total = message.total;
             if (message.publishedfiledetails && message.publishedfiledetails.length) {
@@ -12692,6 +12633,8 @@
                 for (var j = 0; j < message.publishedfiledetails.length; ++j)
                     object.publishedfiledetails[j] = $root.PublishedFileDetails.toObject(message.publishedfiledetails[j], options);
             }
+            if (message.next_cursor != null && message.hasOwnProperty("next_cursor"))
+                object.next_cursor = message.next_cursor;
             return object;
         };
     

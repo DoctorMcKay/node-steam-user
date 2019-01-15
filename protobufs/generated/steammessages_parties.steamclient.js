@@ -16,25 +16,25 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
-    $root.CInventory_GetInventory_Request = (function() {
+    $root.CParties_JoinParty_Request = (function() {
     
         /**
-         * Properties of a CInventory_GetInventory_Request.
-         * @exports ICInventory_GetInventory_Request
-         * @interface ICInventory_GetInventory_Request
-         * @property {number|null} [appid] CInventory_GetInventory_Request appid
-         * @property {number|Long|null} [steamid] CInventory_GetInventory_Request steamid
+         * Properties of a CParties_JoinParty_Request.
+         * @exports ICParties_JoinParty_Request
+         * @interface ICParties_JoinParty_Request
+         * @property {number|Long|null} [steamid] CParties_JoinParty_Request steamid
+         * @property {number|Long|null} [beacon_id] CParties_JoinParty_Request beacon_id
          */
     
         /**
-         * Constructs a new CInventory_GetInventory_Request.
-         * @exports CInventory_GetInventory_Request
-         * @classdesc Represents a CInventory_GetInventory_Request.
-         * @implements ICInventory_GetInventory_Request
+         * Constructs a new CParties_JoinParty_Request.
+         * @exports CParties_JoinParty_Request
+         * @classdesc Represents a CParties_JoinParty_Request.
+         * @implements ICParties_JoinParty_Request
          * @constructor
-         * @param {ICInventory_GetInventory_Request=} [properties] Properties to set
+         * @param {ICParties_JoinParty_Request=} [properties] Properties to set
          */
-        function CInventory_GetInventory_Request(properties) {
+        function CParties_JoinParty_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -42,88 +42,88 @@
         }
     
         /**
-         * CInventory_GetInventory_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_GetInventory_Request
-         * @instance
-         */
-        CInventory_GetInventory_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_GetInventory_Request steamid.
+         * CParties_JoinParty_Request steamid.
          * @member {number|Long} steamid
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @instance
          */
-        CInventory_GetInventory_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        CParties_JoinParty_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * Creates a new CInventory_GetInventory_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetInventory_Request
-         * @static
-         * @param {ICInventory_GetInventory_Request=} [properties] Properties to set
-         * @returns {CInventory_GetInventory_Request} CInventory_GetInventory_Request instance
+         * CParties_JoinParty_Request beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_JoinParty_Request
+         * @instance
          */
-        CInventory_GetInventory_Request.create = function create(properties) {
-            return new CInventory_GetInventory_Request(properties);
+        CParties_JoinParty_Request.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_JoinParty_Request instance using the specified properties.
+         * @function create
+         * @memberof CParties_JoinParty_Request
+         * @static
+         * @param {ICParties_JoinParty_Request=} [properties] Properties to set
+         * @returns {CParties_JoinParty_Request} CParties_JoinParty_Request instance
+         */
+        CParties_JoinParty_Request.create = function create(properties) {
+            return new CParties_JoinParty_Request(properties);
         };
     
         /**
-         * Encodes the specified CInventory_GetInventory_Request message. Does not implicitly {@link CInventory_GetInventory_Request.verify|verify} messages.
+         * Encodes the specified CParties_JoinParty_Request message. Does not implicitly {@link CParties_JoinParty_Request.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
-         * @param {ICInventory_GetInventory_Request} message CInventory_GetInventory_Request message or plain object to encode
+         * @param {ICParties_JoinParty_Request} message CParties_JoinParty_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetInventory_Request.encode = function encode(message, writer) {
+        CParties_JoinParty_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.beacon_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_GetInventory_Request message, length delimited. Does not implicitly {@link CInventory_GetInventory_Request.verify|verify} messages.
+         * Encodes the specified CParties_JoinParty_Request message, length delimited. Does not implicitly {@link CParties_JoinParty_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
-         * @param {ICInventory_GetInventory_Request} message CInventory_GetInventory_Request message or plain object to encode
+         * @param {ICParties_JoinParty_Request} message CParties_JoinParty_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetInventory_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_JoinParty_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_GetInventory_Request message from the specified reader or buffer.
+         * Decodes a CParties_JoinParty_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetInventory_Request} CInventory_GetInventory_Request
+         * @returns {CParties_JoinParty_Request} CParties_JoinParty_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetInventory_Request.decode = function decode(reader, length) {
+        CParties_JoinParty_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetInventory_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_JoinParty_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.appid = reader.uint32();
+                    message.steamid = reader.fixed64();
                     break;
                 case 2:
-                    message.steamid = reader.uint64();
+                    message.beacon_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -134,136 +134,145 @@
         };
     
         /**
-         * Decodes a CInventory_GetInventory_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_JoinParty_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetInventory_Request} CInventory_GetInventory_Request
+         * @returns {CParties_JoinParty_Request} CParties_JoinParty_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetInventory_Request.decodeDelimited = function decodeDelimited(reader) {
+        CParties_JoinParty_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_GetInventory_Request message.
+         * Verifies a CParties_JoinParty_Request message.
          * @function verify
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_GetInventory_Request.verify = function verify(message) {
+        CParties_JoinParty_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
                     return "steamid: integer|Long expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_GetInventory_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_JoinParty_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetInventory_Request} CInventory_GetInventory_Request
+         * @returns {CParties_JoinParty_Request} CParties_JoinParty_Request
          */
-        CInventory_GetInventory_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetInventory_Request)
+        CParties_JoinParty_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_JoinParty_Request)
                 return object;
-            var message = new $root.CInventory_GetInventory_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
+            var message = new $root.CParties_JoinParty_Request();
             if (object.steamid != null)
                 if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
                 else if (typeof object.steamid === "string")
                     message.steamid = parseInt(object.steamid, 10);
                 else if (typeof object.steamid === "number")
                     message.steamid = object.steamid;
                 else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_GetInventory_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_JoinParty_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @static
-         * @param {CInventory_GetInventory_Request} message CInventory_GetInventory_Request
+         * @param {CParties_JoinParty_Request} message CParties_JoinParty_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_GetInventory_Request.toObject = function toObject(message, options) {
+        CParties_JoinParty_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.appid = 0;
                 if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
+                    var long = new $util.Long(0, 0, false);
                     object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
             }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
                     object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
                 else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
             return object;
         };
     
         /**
-         * Converts this CInventory_GetInventory_Request to JSON.
+         * Converts this CParties_JoinParty_Request to JSON.
          * @function toJSON
-         * @memberof CInventory_GetInventory_Request
+         * @memberof CParties_JoinParty_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_GetInventory_Request.prototype.toJSON = function toJSON() {
+        CParties_JoinParty_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_GetInventory_Request;
+        return CParties_JoinParty_Request;
     })();
     
-    $root.CInventory_Response = (function() {
+    $root.CParties_JoinParty_Response = (function() {
     
         /**
-         * Properties of a CInventory_Response.
-         * @exports ICInventory_Response
-         * @interface ICInventory_Response
-         * @property {string|null} [etag] CInventory_Response etag
-         * @property {Array.<number|Long>|null} [removeditemids] CInventory_Response removeditemids
-         * @property {string|null} [item_json] CInventory_Response item_json
-         * @property {string|null} [itemdef_json] CInventory_Response itemdef_json
-         * @property {Uint8Array|null} [ticket] CInventory_Response ticket
-         * @property {boolean|null} [replayed] CInventory_Response replayed
+         * Properties of a CParties_JoinParty_Response.
+         * @exports ICParties_JoinParty_Response
+         * @interface ICParties_JoinParty_Response
+         * @property {number|Long|null} [beacon_id] CParties_JoinParty_Response beacon_id
+         * @property {string|null} [connect_string] CParties_JoinParty_Response connect_string
          */
     
         /**
-         * Constructs a new CInventory_Response.
-         * @exports CInventory_Response
-         * @classdesc Represents a CInventory_Response.
-         * @implements ICInventory_Response
+         * Constructs a new CParties_JoinParty_Response.
+         * @exports CParties_JoinParty_Response
+         * @classdesc Represents a CParties_JoinParty_Response.
+         * @implements ICParties_JoinParty_Response
          * @constructor
-         * @param {ICInventory_Response=} [properties] Properties to set
+         * @param {ICParties_JoinParty_Response=} [properties] Properties to set
          */
-        function CInventory_Response(properties) {
-            this.removeditemids = [];
+        function CParties_JoinParty_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -271,148 +280,582 @@
         }
     
         /**
-         * CInventory_Response etag.
-         * @member {string} etag
-         * @memberof CInventory_Response
+         * CParties_JoinParty_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_JoinParty_Response
          * @instance
          */
-        CInventory_Response.prototype.etag = "";
+        CParties_JoinParty_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventory_Response removeditemids.
-         * @member {Array.<number|Long>} removeditemids
-         * @memberof CInventory_Response
+         * CParties_JoinParty_Response connect_string.
+         * @member {string} connect_string
+         * @memberof CParties_JoinParty_Response
          * @instance
          */
-        CInventory_Response.prototype.removeditemids = $util.emptyArray;
+        CParties_JoinParty_Response.prototype.connect_string = "";
     
         /**
-         * CInventory_Response item_json.
-         * @member {string} item_json
-         * @memberof CInventory_Response
-         * @instance
-         */
-        CInventory_Response.prototype.item_json = "";
-    
-        /**
-         * CInventory_Response itemdef_json.
-         * @member {string} itemdef_json
-         * @memberof CInventory_Response
-         * @instance
-         */
-        CInventory_Response.prototype.itemdef_json = "";
-    
-        /**
-         * CInventory_Response ticket.
-         * @member {Uint8Array} ticket
-         * @memberof CInventory_Response
-         * @instance
-         */
-        CInventory_Response.prototype.ticket = $util.newBuffer([]);
-    
-        /**
-         * CInventory_Response replayed.
-         * @member {boolean} replayed
-         * @memberof CInventory_Response
-         * @instance
-         */
-        CInventory_Response.prototype.replayed = false;
-    
-        /**
-         * Creates a new CInventory_Response instance using the specified properties.
+         * Creates a new CParties_JoinParty_Response instance using the specified properties.
          * @function create
-         * @memberof CInventory_Response
+         * @memberof CParties_JoinParty_Response
          * @static
-         * @param {ICInventory_Response=} [properties] Properties to set
-         * @returns {CInventory_Response} CInventory_Response instance
+         * @param {ICParties_JoinParty_Response=} [properties] Properties to set
+         * @returns {CParties_JoinParty_Response} CParties_JoinParty_Response instance
          */
-        CInventory_Response.create = function create(properties) {
-            return new CInventory_Response(properties);
+        CParties_JoinParty_Response.create = function create(properties) {
+            return new CParties_JoinParty_Response(properties);
         };
     
         /**
-         * Encodes the specified CInventory_Response message. Does not implicitly {@link CInventory_Response.verify|verify} messages.
+         * Encodes the specified CParties_JoinParty_Response message. Does not implicitly {@link CParties_JoinParty_Response.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_Response
+         * @memberof CParties_JoinParty_Response
          * @static
-         * @param {ICInventory_Response} message CInventory_Response message or plain object to encode
+         * @param {ICParties_JoinParty_Response} message CParties_JoinParty_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_Response.encode = function encode(message, writer) {
+        CParties_JoinParty_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.etag != null && message.hasOwnProperty("etag"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.etag);
-            if (message.removeditemids != null && message.removeditemids.length)
-                for (var i = 0; i < message.removeditemids.length; ++i)
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.removeditemids[i]);
-            if (message.item_json != null && message.hasOwnProperty("item_json"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.item_json);
-            if (message.itemdef_json != null && message.hasOwnProperty("itemdef_json"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.itemdef_json);
-            if (message.ticket != null && message.hasOwnProperty("ticket"))
-                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.ticket);
-            if (message.replayed != null && message.hasOwnProperty("replayed"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.replayed);
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.connect_string);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_Response message, length delimited. Does not implicitly {@link CInventory_Response.verify|verify} messages.
+         * Encodes the specified CParties_JoinParty_Response message, length delimited. Does not implicitly {@link CParties_JoinParty_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_Response
+         * @memberof CParties_JoinParty_Response
          * @static
-         * @param {ICInventory_Response} message CInventory_Response message or plain object to encode
+         * @param {ICParties_JoinParty_Response} message CParties_JoinParty_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_JoinParty_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_Response message from the specified reader or buffer.
+         * Decodes a CParties_JoinParty_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_Response
+         * @memberof CParties_JoinParty_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_Response} CInventory_Response
+         * @returns {CParties_JoinParty_Response} CParties_JoinParty_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_Response.decode = function decode(reader, length) {
+        CParties_JoinParty_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_JoinParty_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.etag = reader.string();
+                    message.beacon_id = reader.uint64();
                     break;
                 case 2:
-                    if (!(message.removeditemids && message.removeditemids.length))
-                        message.removeditemids = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.removeditemids.push(reader.uint64());
-                    } else
-                        message.removeditemids.push(reader.uint64());
+                    message.connect_string = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CParties_JoinParty_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CParties_JoinParty_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CParties_JoinParty_Response} CParties_JoinParty_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_JoinParty_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CParties_JoinParty_Response message.
+         * @function verify
+         * @memberof CParties_JoinParty_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CParties_JoinParty_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                if (!$util.isString(message.connect_string))
+                    return "connect_string: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CParties_JoinParty_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CParties_JoinParty_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CParties_JoinParty_Response} CParties_JoinParty_Response
+         */
+        CParties_JoinParty_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_JoinParty_Response)
+                return object;
+            var message = new $root.CParties_JoinParty_Response();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            if (object.connect_string != null)
+                message.connect_string = String(object.connect_string);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_JoinParty_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_JoinParty_Response
+         * @static
+         * @param {CParties_JoinParty_Response} message CParties_JoinParty_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CParties_JoinParty_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+                object.connect_string = "";
+            }
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                object.connect_string = message.connect_string;
+            return object;
+        };
+    
+        /**
+         * Converts this CParties_JoinParty_Response to JSON.
+         * @function toJSON
+         * @memberof CParties_JoinParty_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CParties_JoinParty_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CParties_JoinParty_Response;
+    })();
+    
+    $root.CParties_BeaconLocation = (function() {
+    
+        /**
+         * Properties of a CParties_BeaconLocation.
+         * @exports ICParties_BeaconLocation
+         * @interface ICParties_BeaconLocation
+         * @property {number|null} [location_type] CParties_BeaconLocation location_type
+         * @property {number|Long|null} [location_id] CParties_BeaconLocation location_id
+         */
+    
+        /**
+         * Constructs a new CParties_BeaconLocation.
+         * @exports CParties_BeaconLocation
+         * @classdesc Represents a CParties_BeaconLocation.
+         * @implements ICParties_BeaconLocation
+         * @constructor
+         * @param {ICParties_BeaconLocation=} [properties] Properties to set
+         */
+        function CParties_BeaconLocation(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CParties_BeaconLocation location_type.
+         * @member {number} location_type
+         * @memberof CParties_BeaconLocation
+         * @instance
+         */
+        CParties_BeaconLocation.prototype.location_type = 0;
+    
+        /**
+         * CParties_BeaconLocation location_id.
+         * @member {number|Long} location_id
+         * @memberof CParties_BeaconLocation
+         * @instance
+         */
+        CParties_BeaconLocation.prototype.location_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_BeaconLocation instance using the specified properties.
+         * @function create
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {ICParties_BeaconLocation=} [properties] Properties to set
+         * @returns {CParties_BeaconLocation} CParties_BeaconLocation instance
+         */
+        CParties_BeaconLocation.create = function create(properties) {
+            return new CParties_BeaconLocation(properties);
+        };
+    
+        /**
+         * Encodes the specified CParties_BeaconLocation message. Does not implicitly {@link CParties_BeaconLocation.verify|verify} messages.
+         * @function encode
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {ICParties_BeaconLocation} message CParties_BeaconLocation message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_BeaconLocation.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.location_type != null && message.hasOwnProperty("location_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.location_type);
+            if (message.location_id != null && message.hasOwnProperty("location_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.location_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CParties_BeaconLocation message, length delimited. Does not implicitly {@link CParties_BeaconLocation.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {ICParties_BeaconLocation} message CParties_BeaconLocation message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_BeaconLocation.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CParties_BeaconLocation message from the specified reader or buffer.
+         * @function decode
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CParties_BeaconLocation} CParties_BeaconLocation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_BeaconLocation.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_BeaconLocation();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.location_type = reader.uint32();
+                    break;
+                case 2:
+                    message.location_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CParties_BeaconLocation message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CParties_BeaconLocation} CParties_BeaconLocation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_BeaconLocation.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CParties_BeaconLocation message.
+         * @function verify
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CParties_BeaconLocation.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.location_type != null && message.hasOwnProperty("location_type"))
+                if (!$util.isInteger(message.location_type))
+                    return "location_type: integer expected";
+            if (message.location_id != null && message.hasOwnProperty("location_id"))
+                if (!$util.isInteger(message.location_id) && !(message.location_id && $util.isInteger(message.location_id.low) && $util.isInteger(message.location_id.high)))
+                    return "location_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CParties_BeaconLocation message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CParties_BeaconLocation} CParties_BeaconLocation
+         */
+        CParties_BeaconLocation.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_BeaconLocation)
+                return object;
+            var message = new $root.CParties_BeaconLocation();
+            if (object.location_type != null)
+                message.location_type = object.location_type >>> 0;
+            if (object.location_id != null)
+                if ($util.Long)
+                    (message.location_id = $util.Long.fromValue(object.location_id)).unsigned = true;
+                else if (typeof object.location_id === "string")
+                    message.location_id = parseInt(object.location_id, 10);
+                else if (typeof object.location_id === "number")
+                    message.location_id = object.location_id;
+                else if (typeof object.location_id === "object")
+                    message.location_id = new $util.LongBits(object.location_id.low >>> 0, object.location_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_BeaconLocation message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_BeaconLocation
+         * @static
+         * @param {CParties_BeaconLocation} message CParties_BeaconLocation
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CParties_BeaconLocation.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.location_type = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.location_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.location_id = options.longs === String ? "0" : 0;
+            }
+            if (message.location_type != null && message.hasOwnProperty("location_type"))
+                object.location_type = message.location_type;
+            if (message.location_id != null && message.hasOwnProperty("location_id"))
+                if (typeof message.location_id === "number")
+                    object.location_id = options.longs === String ? String(message.location_id) : message.location_id;
+                else
+                    object.location_id = options.longs === String ? $util.Long.prototype.toString.call(message.location_id) : options.longs === Number ? new $util.LongBits(message.location_id.low >>> 0, message.location_id.high >>> 0).toNumber(true) : message.location_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CParties_BeaconLocation to JSON.
+         * @function toJSON
+         * @memberof CParties_BeaconLocation
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CParties_BeaconLocation.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CParties_BeaconLocation;
+    })();
+    
+    $root.CParties_CreateBeacon_Request = (function() {
+    
+        /**
+         * Properties of a CParties_CreateBeacon_Request.
+         * @exports ICParties_CreateBeacon_Request
+         * @interface ICParties_CreateBeacon_Request
+         * @property {number|null} [appid] CParties_CreateBeacon_Request appid
+         * @property {number|null} [num_open_slots] CParties_CreateBeacon_Request num_open_slots
+         * @property {Array.<ICParties_BeaconLocation>|null} [locations] CParties_CreateBeacon_Request locations
+         * @property {string|null} [connect_string] CParties_CreateBeacon_Request connect_string
+         * @property {string|null} [metadata] CParties_CreateBeacon_Request metadata
+         */
+    
+        /**
+         * Constructs a new CParties_CreateBeacon_Request.
+         * @exports CParties_CreateBeacon_Request
+         * @classdesc Represents a CParties_CreateBeacon_Request.
+         * @implements ICParties_CreateBeacon_Request
+         * @constructor
+         * @param {ICParties_CreateBeacon_Request=} [properties] Properties to set
+         */
+        function CParties_CreateBeacon_Request(properties) {
+            this.locations = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CParties_CreateBeacon_Request appid.
+         * @member {number} appid
+         * @memberof CParties_CreateBeacon_Request
+         * @instance
+         */
+        CParties_CreateBeacon_Request.prototype.appid = 0;
+    
+        /**
+         * CParties_CreateBeacon_Request num_open_slots.
+         * @member {number} num_open_slots
+         * @memberof CParties_CreateBeacon_Request
+         * @instance
+         */
+        CParties_CreateBeacon_Request.prototype.num_open_slots = 0;
+    
+        /**
+         * CParties_CreateBeacon_Request locations.
+         * @member {Array.<ICParties_BeaconLocation>} locations
+         * @memberof CParties_CreateBeacon_Request
+         * @instance
+         */
+        CParties_CreateBeacon_Request.prototype.locations = $util.emptyArray;
+    
+        /**
+         * CParties_CreateBeacon_Request connect_string.
+         * @member {string} connect_string
+         * @memberof CParties_CreateBeacon_Request
+         * @instance
+         */
+        CParties_CreateBeacon_Request.prototype.connect_string = "";
+    
+        /**
+         * CParties_CreateBeacon_Request metadata.
+         * @member {string} metadata
+         * @memberof CParties_CreateBeacon_Request
+         * @instance
+         */
+        CParties_CreateBeacon_Request.prototype.metadata = "";
+    
+        /**
+         * Creates a new CParties_CreateBeacon_Request instance using the specified properties.
+         * @function create
+         * @memberof CParties_CreateBeacon_Request
+         * @static
+         * @param {ICParties_CreateBeacon_Request=} [properties] Properties to set
+         * @returns {CParties_CreateBeacon_Request} CParties_CreateBeacon_Request instance
+         */
+        CParties_CreateBeacon_Request.create = function create(properties) {
+            return new CParties_CreateBeacon_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CParties_CreateBeacon_Request message. Does not implicitly {@link CParties_CreateBeacon_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CParties_CreateBeacon_Request
+         * @static
+         * @param {ICParties_CreateBeacon_Request} message CParties_CreateBeacon_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_CreateBeacon_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_open_slots);
+            if (message.locations != null && message.locations.length)
+                for (var i = 0; i < message.locations.length; ++i)
+                    $root.CParties_BeaconLocation.encode(message.locations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.connect_string);
+            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.metadata);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CParties_CreateBeacon_Request message, length delimited. Does not implicitly {@link CParties_CreateBeacon_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CParties_CreateBeacon_Request
+         * @static
+         * @param {ICParties_CreateBeacon_Request} message CParties_CreateBeacon_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_CreateBeacon_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CParties_CreateBeacon_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CParties_CreateBeacon_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CParties_CreateBeacon_Request} CParties_CreateBeacon_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_CreateBeacon_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_CreateBeacon_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.num_open_slots = reader.uint32();
                     break;
                 case 3:
-                    message.item_json = reader.string();
+                    if (!(message.locations && message.locations.length))
+                        message.locations = [];
+                    message.locations.push($root.CParties_BeaconLocation.decode(reader, reader.uint32()));
                     break;
                 case 4:
-                    message.itemdef_json = reader.string();
+                    message.connect_string = reader.string();
                     break;
                 case 5:
-                    message.ticket = reader.bytes();
-                    break;
-                case 6:
-                    message.replayed = reader.bool();
+                    message.metadata = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -423,2038 +866,158 @@
         };
     
         /**
-         * Decodes a CInventory_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_CreateBeacon_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_Response
+         * @memberof CParties_CreateBeacon_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_Response} CInventory_Response
+         * @returns {CParties_CreateBeacon_Request} CParties_CreateBeacon_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_Response.decodeDelimited = function decodeDelimited(reader) {
+        CParties_CreateBeacon_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_Response message.
+         * Verifies a CParties_CreateBeacon_Request message.
          * @function verify
-         * @memberof CInventory_Response
+         * @memberof CParties_CreateBeacon_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.etag != null && message.hasOwnProperty("etag"))
-                if (!$util.isString(message.etag))
-                    return "etag: string expected";
-            if (message.removeditemids != null && message.hasOwnProperty("removeditemids")) {
-                if (!Array.isArray(message.removeditemids))
-                    return "removeditemids: array expected";
-                for (var i = 0; i < message.removeditemids.length; ++i)
-                    if (!$util.isInteger(message.removeditemids[i]) && !(message.removeditemids[i] && $util.isInteger(message.removeditemids[i].low) && $util.isInteger(message.removeditemids[i].high)))
-                        return "removeditemids: integer|Long[] expected";
-            }
-            if (message.item_json != null && message.hasOwnProperty("item_json"))
-                if (!$util.isString(message.item_json))
-                    return "item_json: string expected";
-            if (message.itemdef_json != null && message.hasOwnProperty("itemdef_json"))
-                if (!$util.isString(message.itemdef_json))
-                    return "itemdef_json: string expected";
-            if (message.ticket != null && message.hasOwnProperty("ticket"))
-                if (!(message.ticket && typeof message.ticket.length === "number" || $util.isString(message.ticket)))
-                    return "ticket: buffer expected";
-            if (message.replayed != null && message.hasOwnProperty("replayed"))
-                if (typeof message.replayed !== "boolean")
-                    return "replayed: boolean expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_Response} CInventory_Response
-         */
-        CInventory_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_Response)
-                return object;
-            var message = new $root.CInventory_Response();
-            if (object.etag != null)
-                message.etag = String(object.etag);
-            if (object.removeditemids) {
-                if (!Array.isArray(object.removeditemids))
-                    throw TypeError(".CInventory_Response.removeditemids: array expected");
-                message.removeditemids = [];
-                for (var i = 0; i < object.removeditemids.length; ++i)
-                    if ($util.Long)
-                        (message.removeditemids[i] = $util.Long.fromValue(object.removeditemids[i])).unsigned = true;
-                    else if (typeof object.removeditemids[i] === "string")
-                        message.removeditemids[i] = parseInt(object.removeditemids[i], 10);
-                    else if (typeof object.removeditemids[i] === "number")
-                        message.removeditemids[i] = object.removeditemids[i];
-                    else if (typeof object.removeditemids[i] === "object")
-                        message.removeditemids[i] = new $util.LongBits(object.removeditemids[i].low >>> 0, object.removeditemids[i].high >>> 0).toNumber(true);
-            }
-            if (object.item_json != null)
-                message.item_json = String(object.item_json);
-            if (object.itemdef_json != null)
-                message.itemdef_json = String(object.itemdef_json);
-            if (object.ticket != null)
-                if (typeof object.ticket === "string")
-                    $util.base64.decode(object.ticket, message.ticket = $util.newBuffer($util.base64.length(object.ticket)), 0);
-                else if (object.ticket.length)
-                    message.ticket = object.ticket;
-            if (object.replayed != null)
-                message.replayed = Boolean(object.replayed);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_Response
-         * @static
-         * @param {CInventory_Response} message CInventory_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.removeditemids = [];
-            if (options.defaults) {
-                object.etag = "";
-                object.item_json = "";
-                object.itemdef_json = "";
-                if (options.bytes === String)
-                    object.ticket = "";
-                else {
-                    object.ticket = [];
-                    if (options.bytes !== Array)
-                        object.ticket = $util.newBuffer(object.ticket);
-                }
-                object.replayed = false;
-            }
-            if (message.etag != null && message.hasOwnProperty("etag"))
-                object.etag = message.etag;
-            if (message.removeditemids && message.removeditemids.length) {
-                object.removeditemids = [];
-                for (var j = 0; j < message.removeditemids.length; ++j)
-                    if (typeof message.removeditemids[j] === "number")
-                        object.removeditemids[j] = options.longs === String ? String(message.removeditemids[j]) : message.removeditemids[j];
-                    else
-                        object.removeditemids[j] = options.longs === String ? $util.Long.prototype.toString.call(message.removeditemids[j]) : options.longs === Number ? new $util.LongBits(message.removeditemids[j].low >>> 0, message.removeditemids[j].high >>> 0).toNumber(true) : message.removeditemids[j];
-            }
-            if (message.item_json != null && message.hasOwnProperty("item_json"))
-                object.item_json = message.item_json;
-            if (message.itemdef_json != null && message.hasOwnProperty("itemdef_json"))
-                object.itemdef_json = message.itemdef_json;
-            if (message.ticket != null && message.hasOwnProperty("ticket"))
-                object.ticket = options.bytes === String ? $util.base64.encode(message.ticket, 0, message.ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.ticket) : message.ticket;
-            if (message.replayed != null && message.hasOwnProperty("replayed"))
-                object.replayed = message.replayed;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_Response to JSON.
-         * @function toJSON
-         * @memberof CInventory_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_Response;
-    })();
-    
-    $root.CInventory_ExchangeItem_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_ExchangeItem_Request.
-         * @exports ICInventory_ExchangeItem_Request
-         * @interface ICInventory_ExchangeItem_Request
-         * @property {number|null} [appid] CInventory_ExchangeItem_Request appid
-         * @property {number|Long|null} [steamid] CInventory_ExchangeItem_Request steamid
-         * @property {Array.<number|Long>|null} [materialsitemid] CInventory_ExchangeItem_Request materialsitemid
-         * @property {Array.<number>|null} [materialsquantity] CInventory_ExchangeItem_Request materialsquantity
-         * @property {number|Long|null} [outputitemdefid] CInventory_ExchangeItem_Request outputitemdefid
-         */
-    
-        /**
-         * Constructs a new CInventory_ExchangeItem_Request.
-         * @exports CInventory_ExchangeItem_Request
-         * @classdesc Represents a CInventory_ExchangeItem_Request.
-         * @implements ICInventory_ExchangeItem_Request
-         * @constructor
-         * @param {ICInventory_ExchangeItem_Request=} [properties] Properties to set
-         */
-        function CInventory_ExchangeItem_Request(properties) {
-            this.materialsitemid = [];
-            this.materialsquantity = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_ExchangeItem_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         */
-        CInventory_ExchangeItem_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_ExchangeItem_Request steamid.
-         * @member {number|Long} steamid
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         */
-        CInventory_ExchangeItem_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_ExchangeItem_Request materialsitemid.
-         * @member {Array.<number|Long>} materialsitemid
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         */
-        CInventory_ExchangeItem_Request.prototype.materialsitemid = $util.emptyArray;
-    
-        /**
-         * CInventory_ExchangeItem_Request materialsquantity.
-         * @member {Array.<number>} materialsquantity
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         */
-        CInventory_ExchangeItem_Request.prototype.materialsquantity = $util.emptyArray;
-    
-        /**
-         * CInventory_ExchangeItem_Request outputitemdefid.
-         * @member {number|Long} outputitemdefid
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         */
-        CInventory_ExchangeItem_Request.prototype.outputitemdefid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_ExchangeItem_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {ICInventory_ExchangeItem_Request=} [properties] Properties to set
-         * @returns {CInventory_ExchangeItem_Request} CInventory_ExchangeItem_Request instance
-         */
-        CInventory_ExchangeItem_Request.create = function create(properties) {
-            return new CInventory_ExchangeItem_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_ExchangeItem_Request message. Does not implicitly {@link CInventory_ExchangeItem_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {ICInventory_ExchangeItem_Request} message CInventory_ExchangeItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ExchangeItem_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
-            if (message.materialsitemid != null && message.materialsitemid.length)
-                for (var i = 0; i < message.materialsitemid.length; ++i)
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.materialsitemid[i]);
-            if (message.materialsquantity != null && message.materialsquantity.length)
-                for (var i = 0; i < message.materialsquantity.length; ++i)
-                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.materialsquantity[i]);
-            if (message.outputitemdefid != null && message.hasOwnProperty("outputitemdefid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.outputitemdefid);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_ExchangeItem_Request message, length delimited. Does not implicitly {@link CInventory_ExchangeItem_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {ICInventory_ExchangeItem_Request} message CInventory_ExchangeItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ExchangeItem_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_ExchangeItem_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_ExchangeItem_Request} CInventory_ExchangeItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ExchangeItem_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_ExchangeItem_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.steamid = reader.uint64();
-                    break;
-                case 3:
-                    if (!(message.materialsitemid && message.materialsitemid.length))
-                        message.materialsitemid = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.materialsitemid.push(reader.uint64());
-                    } else
-                        message.materialsitemid.push(reader.uint64());
-                    break;
-                case 4:
-                    if (!(message.materialsquantity && message.materialsquantity.length))
-                        message.materialsquantity = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.materialsquantity.push(reader.uint32());
-                    } else
-                        message.materialsquantity.push(reader.uint32());
-                    break;
-                case 5:
-                    message.outputitemdefid = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_ExchangeItem_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_ExchangeItem_Request} CInventory_ExchangeItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ExchangeItem_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_ExchangeItem_Request message.
-         * @function verify
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_ExchangeItem_Request.verify = function verify(message) {
+        CParties_CreateBeacon_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.appid != null && message.hasOwnProperty("appid"))
                 if (!$util.isInteger(message.appid))
                     return "appid: integer expected";
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            if (message.materialsitemid != null && message.hasOwnProperty("materialsitemid")) {
-                if (!Array.isArray(message.materialsitemid))
-                    return "materialsitemid: array expected";
-                for (var i = 0; i < message.materialsitemid.length; ++i)
-                    if (!$util.isInteger(message.materialsitemid[i]) && !(message.materialsitemid[i] && $util.isInteger(message.materialsitemid[i].low) && $util.isInteger(message.materialsitemid[i].high)))
-                        return "materialsitemid: integer|Long[] expected";
-            }
-            if (message.materialsquantity != null && message.hasOwnProperty("materialsquantity")) {
-                if (!Array.isArray(message.materialsquantity))
-                    return "materialsquantity: array expected";
-                for (var i = 0; i < message.materialsquantity.length; ++i)
-                    if (!$util.isInteger(message.materialsquantity[i]))
-                        return "materialsquantity: integer[] expected";
-            }
-            if (message.outputitemdefid != null && message.hasOwnProperty("outputitemdefid"))
-                if (!$util.isInteger(message.outputitemdefid) && !(message.outputitemdefid && $util.isInteger(message.outputitemdefid.low) && $util.isInteger(message.outputitemdefid.high)))
-                    return "outputitemdefid: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_ExchangeItem_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_ExchangeItem_Request} CInventory_ExchangeItem_Request
-         */
-        CInventory_ExchangeItem_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_ExchangeItem_Request)
-                return object;
-            var message = new $root.CInventory_ExchangeItem_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
-            if (object.materialsitemid) {
-                if (!Array.isArray(object.materialsitemid))
-                    throw TypeError(".CInventory_ExchangeItem_Request.materialsitemid: array expected");
-                message.materialsitemid = [];
-                for (var i = 0; i < object.materialsitemid.length; ++i)
-                    if ($util.Long)
-                        (message.materialsitemid[i] = $util.Long.fromValue(object.materialsitemid[i])).unsigned = true;
-                    else if (typeof object.materialsitemid[i] === "string")
-                        message.materialsitemid[i] = parseInt(object.materialsitemid[i], 10);
-                    else if (typeof object.materialsitemid[i] === "number")
-                        message.materialsitemid[i] = object.materialsitemid[i];
-                    else if (typeof object.materialsitemid[i] === "object")
-                        message.materialsitemid[i] = new $util.LongBits(object.materialsitemid[i].low >>> 0, object.materialsitemid[i].high >>> 0).toNumber(true);
-            }
-            if (object.materialsquantity) {
-                if (!Array.isArray(object.materialsquantity))
-                    throw TypeError(".CInventory_ExchangeItem_Request.materialsquantity: array expected");
-                message.materialsquantity = [];
-                for (var i = 0; i < object.materialsquantity.length; ++i)
-                    message.materialsquantity[i] = object.materialsquantity[i] >>> 0;
-            }
-            if (object.outputitemdefid != null)
-                if ($util.Long)
-                    (message.outputitemdefid = $util.Long.fromValue(object.outputitemdefid)).unsigned = true;
-                else if (typeof object.outputitemdefid === "string")
-                    message.outputitemdefid = parseInt(object.outputitemdefid, 10);
-                else if (typeof object.outputitemdefid === "number")
-                    message.outputitemdefid = object.outputitemdefid;
-                else if (typeof object.outputitemdefid === "object")
-                    message.outputitemdefid = new $util.LongBits(object.outputitemdefid.low >>> 0, object.outputitemdefid.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_ExchangeItem_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_ExchangeItem_Request
-         * @static
-         * @param {CInventory_ExchangeItem_Request} message CInventory_ExchangeItem_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_ExchangeItem_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults) {
-                object.materialsitemid = [];
-                object.materialsquantity = [];
-            }
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.outputitemdefid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.outputitemdefid = options.longs === String ? "0" : 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
-            if (message.materialsitemid && message.materialsitemid.length) {
-                object.materialsitemid = [];
-                for (var j = 0; j < message.materialsitemid.length; ++j)
-                    if (typeof message.materialsitemid[j] === "number")
-                        object.materialsitemid[j] = options.longs === String ? String(message.materialsitemid[j]) : message.materialsitemid[j];
-                    else
-                        object.materialsitemid[j] = options.longs === String ? $util.Long.prototype.toString.call(message.materialsitemid[j]) : options.longs === Number ? new $util.LongBits(message.materialsitemid[j].low >>> 0, message.materialsitemid[j].high >>> 0).toNumber(true) : message.materialsitemid[j];
-            }
-            if (message.materialsquantity && message.materialsquantity.length) {
-                object.materialsquantity = [];
-                for (var j = 0; j < message.materialsquantity.length; ++j)
-                    object.materialsquantity[j] = message.materialsquantity[j];
-            }
-            if (message.outputitemdefid != null && message.hasOwnProperty("outputitemdefid"))
-                if (typeof message.outputitemdefid === "number")
-                    object.outputitemdefid = options.longs === String ? String(message.outputitemdefid) : message.outputitemdefid;
-                else
-                    object.outputitemdefid = options.longs === String ? $util.Long.prototype.toString.call(message.outputitemdefid) : options.longs === Number ? new $util.LongBits(message.outputitemdefid.low >>> 0, message.outputitemdefid.high >>> 0).toNumber(true) : message.outputitemdefid;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_ExchangeItem_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_ExchangeItem_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_ExchangeItem_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_ExchangeItem_Request;
-    })();
-    
-    $root.CInventory_GetEligiblePromoItemDefIDs_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_GetEligiblePromoItemDefIDs_Request.
-         * @exports ICInventory_GetEligiblePromoItemDefIDs_Request
-         * @interface ICInventory_GetEligiblePromoItemDefIDs_Request
-         * @property {number|null} [appid] CInventory_GetEligiblePromoItemDefIDs_Request appid
-         * @property {number|Long|null} [steamid] CInventory_GetEligiblePromoItemDefIDs_Request steamid
-         */
-    
-        /**
-         * Constructs a new CInventory_GetEligiblePromoItemDefIDs_Request.
-         * @exports CInventory_GetEligiblePromoItemDefIDs_Request
-         * @classdesc Represents a CInventory_GetEligiblePromoItemDefIDs_Request.
-         * @implements ICInventory_GetEligiblePromoItemDefIDs_Request
-         * @constructor
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request=} [properties] Properties to set
-         */
-        function CInventory_GetEligiblePromoItemDefIDs_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_GetEligiblePromoItemDefIDs_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @instance
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_GetEligiblePromoItemDefIDs_Request steamid.
-         * @member {number|Long} steamid
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @instance
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_GetEligiblePromoItemDefIDs_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request=} [properties] Properties to set
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Request} CInventory_GetEligiblePromoItemDefIDs_Request instance
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.create = function create(properties) {
-            return new CInventory_GetEligiblePromoItemDefIDs_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetEligiblePromoItemDefIDs_Request message. Does not implicitly {@link CInventory_GetEligiblePromoItemDefIDs_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request} message CInventory_GetEligiblePromoItemDefIDs_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetEligiblePromoItemDefIDs_Request message, length delimited. Does not implicitly {@link CInventory_GetEligiblePromoItemDefIDs_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request} message CInventory_GetEligiblePromoItemDefIDs_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_GetEligiblePromoItemDefIDs_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Request} CInventory_GetEligiblePromoItemDefIDs_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetEligiblePromoItemDefIDs_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.steamid = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_GetEligiblePromoItemDefIDs_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Request} CInventory_GetEligiblePromoItemDefIDs_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_GetEligiblePromoItemDefIDs_Request message.
-         * @function verify
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_GetEligiblePromoItemDefIDs_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Request} CInventory_GetEligiblePromoItemDefIDs_Request
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetEligiblePromoItemDefIDs_Request)
-                return object;
-            var message = new $root.CInventory_GetEligiblePromoItemDefIDs_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_GetEligiblePromoItemDefIDs_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @static
-         * @param {CInventory_GetEligiblePromoItemDefIDs_Request} message CInventory_GetEligiblePromoItemDefIDs_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_GetEligiblePromoItemDefIDs_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_GetEligiblePromoItemDefIDs_Request;
-    })();
-    
-    $root.CInventory_GetEligiblePromoItemDefIDs_Response = (function() {
-    
-        /**
-         * Properties of a CInventory_GetEligiblePromoItemDefIDs_Response.
-         * @exports ICInventory_GetEligiblePromoItemDefIDs_Response
-         * @interface ICInventory_GetEligiblePromoItemDefIDs_Response
-         * @property {Array.<number|Long>|null} [itemdefids] CInventory_GetEligiblePromoItemDefIDs_Response itemdefids
-         */
-    
-        /**
-         * Constructs a new CInventory_GetEligiblePromoItemDefIDs_Response.
-         * @exports CInventory_GetEligiblePromoItemDefIDs_Response
-         * @classdesc Represents a CInventory_GetEligiblePromoItemDefIDs_Response.
-         * @implements ICInventory_GetEligiblePromoItemDefIDs_Response
-         * @constructor
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Response=} [properties] Properties to set
-         */
-        function CInventory_GetEligiblePromoItemDefIDs_Response(properties) {
-            this.itemdefids = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_GetEligiblePromoItemDefIDs_Response itemdefids.
-         * @member {Array.<number|Long>} itemdefids
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @instance
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.prototype.itemdefids = $util.emptyArray;
-    
-        /**
-         * Creates a new CInventory_GetEligiblePromoItemDefIDs_Response instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Response=} [properties] Properties to set
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Response} CInventory_GetEligiblePromoItemDefIDs_Response instance
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.create = function create(properties) {
-            return new CInventory_GetEligiblePromoItemDefIDs_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetEligiblePromoItemDefIDs_Response message. Does not implicitly {@link CInventory_GetEligiblePromoItemDefIDs_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Response} message CInventory_GetEligiblePromoItemDefIDs_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.itemdefids != null && message.itemdefids.length)
-                for (var i = 0; i < message.itemdefids.length; ++i)
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.itemdefids[i]);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetEligiblePromoItemDefIDs_Response message, length delimited. Does not implicitly {@link CInventory_GetEligiblePromoItemDefIDs_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Response} message CInventory_GetEligiblePromoItemDefIDs_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_GetEligiblePromoItemDefIDs_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Response} CInventory_GetEligiblePromoItemDefIDs_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetEligiblePromoItemDefIDs_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.itemdefids && message.itemdefids.length))
-                        message.itemdefids = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.itemdefids.push(reader.uint64());
-                    } else
-                        message.itemdefids.push(reader.uint64());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_GetEligiblePromoItemDefIDs_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Response} CInventory_GetEligiblePromoItemDefIDs_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_GetEligiblePromoItemDefIDs_Response message.
-         * @function verify
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.itemdefids != null && message.hasOwnProperty("itemdefids")) {
-                if (!Array.isArray(message.itemdefids))
-                    return "itemdefids: array expected";
-                for (var i = 0; i < message.itemdefids.length; ++i)
-                    if (!$util.isInteger(message.itemdefids[i]) && !(message.itemdefids[i] && $util.isInteger(message.itemdefids[i].low) && $util.isInteger(message.itemdefids[i].high)))
-                        return "itemdefids: integer|Long[] expected";
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_GetEligiblePromoItemDefIDs_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetEligiblePromoItemDefIDs_Response} CInventory_GetEligiblePromoItemDefIDs_Response
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetEligiblePromoItemDefIDs_Response)
-                return object;
-            var message = new $root.CInventory_GetEligiblePromoItemDefIDs_Response();
-            if (object.itemdefids) {
-                if (!Array.isArray(object.itemdefids))
-                    throw TypeError(".CInventory_GetEligiblePromoItemDefIDs_Response.itemdefids: array expected");
-                message.itemdefids = [];
-                for (var i = 0; i < object.itemdefids.length; ++i)
-                    if ($util.Long)
-                        (message.itemdefids[i] = $util.Long.fromValue(object.itemdefids[i])).unsigned = true;
-                    else if (typeof object.itemdefids[i] === "string")
-                        message.itemdefids[i] = parseInt(object.itemdefids[i], 10);
-                    else if (typeof object.itemdefids[i] === "number")
-                        message.itemdefids[i] = object.itemdefids[i];
-                    else if (typeof object.itemdefids[i] === "object")
-                        message.itemdefids[i] = new $util.LongBits(object.itemdefids[i].low >>> 0, object.itemdefids[i].high >>> 0).toNumber(true);
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_GetEligiblePromoItemDefIDs_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @static
-         * @param {CInventory_GetEligiblePromoItemDefIDs_Response} message CInventory_GetEligiblePromoItemDefIDs_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.itemdefids = [];
-            if (message.itemdefids && message.itemdefids.length) {
-                object.itemdefids = [];
-                for (var j = 0; j < message.itemdefids.length; ++j)
-                    if (typeof message.itemdefids[j] === "number")
-                        object.itemdefids[j] = options.longs === String ? String(message.itemdefids[j]) : message.itemdefids[j];
-                    else
-                        object.itemdefids[j] = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefids[j]) : options.longs === Number ? new $util.LongBits(message.itemdefids[j].low >>> 0, message.itemdefids[j].high >>> 0).toNumber(true) : message.itemdefids[j];
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_GetEligiblePromoItemDefIDs_Response to JSON.
-         * @function toJSON
-         * @memberof CInventory_GetEligiblePromoItemDefIDs_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_GetEligiblePromoItemDefIDs_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_GetEligiblePromoItemDefIDs_Response;
-    })();
-    
-    $root.CInventory_AddItem_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_AddItem_Request.
-         * @exports ICInventory_AddItem_Request
-         * @interface ICInventory_AddItem_Request
-         * @property {number|null} [appid] CInventory_AddItem_Request appid
-         * @property {Array.<number|Long>|null} [itemdefid] CInventory_AddItem_Request itemdefid
-         * @property {Array.<string>|null} [itempropsjson] CInventory_AddItem_Request itempropsjson
-         * @property {number|Long|null} [steamid] CInventory_AddItem_Request steamid
-         * @property {boolean|null} [notify] CInventory_AddItem_Request notify
-         * @property {number|Long|null} [requestid] CInventory_AddItem_Request requestid
-         * @property {boolean|null} [trade_restriction] CInventory_AddItem_Request trade_restriction
-         * @property {boolean|null} [is_purchase] CInventory_AddItem_Request is_purchase
-         */
-    
-        /**
-         * Constructs a new CInventory_AddItem_Request.
-         * @exports CInventory_AddItem_Request
-         * @classdesc Represents a CInventory_AddItem_Request.
-         * @implements ICInventory_AddItem_Request
-         * @constructor
-         * @param {ICInventory_AddItem_Request=} [properties] Properties to set
-         */
-        function CInventory_AddItem_Request(properties) {
-            this.itemdefid = [];
-            this.itempropsjson = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_AddItem_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_AddItem_Request itemdefid.
-         * @member {Array.<number|Long>} itemdefid
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.itemdefid = $util.emptyArray;
-    
-        /**
-         * CInventory_AddItem_Request itempropsjson.
-         * @member {Array.<string>} itempropsjson
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.itempropsjson = $util.emptyArray;
-    
-        /**
-         * CInventory_AddItem_Request steamid.
-         * @member {number|Long} steamid
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_AddItem_Request notify.
-         * @member {boolean} notify
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.notify = false;
-    
-        /**
-         * CInventory_AddItem_Request requestid.
-         * @member {number|Long} requestid
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.requestid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_AddItem_Request trade_restriction.
-         * @member {boolean} trade_restriction
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.trade_restriction = false;
-    
-        /**
-         * CInventory_AddItem_Request is_purchase.
-         * @member {boolean} is_purchase
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         */
-        CInventory_AddItem_Request.prototype.is_purchase = false;
-    
-        /**
-         * Creates a new CInventory_AddItem_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {ICInventory_AddItem_Request=} [properties] Properties to set
-         * @returns {CInventory_AddItem_Request} CInventory_AddItem_Request instance
-         */
-        CInventory_AddItem_Request.create = function create(properties) {
-            return new CInventory_AddItem_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_AddItem_Request message. Does not implicitly {@link CInventory_AddItem_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {ICInventory_AddItem_Request} message CInventory_AddItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_AddItem_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.itemdefid != null && message.itemdefid.length)
-                for (var i = 0; i < message.itemdefid.length; ++i)
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemdefid[i]);
-            if (message.itempropsjson != null && message.itempropsjson.length)
-                for (var i = 0; i < message.itempropsjson.length; ++i)
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.itempropsjson[i]);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.steamid);
-            if (message.notify != null && message.hasOwnProperty("notify"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.notify);
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.requestid);
-            if (message.trade_restriction != null && message.hasOwnProperty("trade_restriction"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.trade_restriction);
-            if (message.is_purchase != null && message.hasOwnProperty("is_purchase"))
-                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.is_purchase);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_AddItem_Request message, length delimited. Does not implicitly {@link CInventory_AddItem_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {ICInventory_AddItem_Request} message CInventory_AddItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_AddItem_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_AddItem_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_AddItem_Request} CInventory_AddItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_AddItem_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_AddItem_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    if (!(message.itemdefid && message.itemdefid.length))
-                        message.itemdefid = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.itemdefid.push(reader.uint64());
-                    } else
-                        message.itemdefid.push(reader.uint64());
-                    break;
-                case 3:
-                    if (!(message.itempropsjson && message.itempropsjson.length))
-                        message.itempropsjson = [];
-                    message.itempropsjson.push(reader.string());
-                    break;
-                case 4:
-                    message.steamid = reader.uint64();
-                    break;
-                case 5:
-                    message.notify = reader.bool();
-                    break;
-                case 6:
-                    message.requestid = reader.uint64();
-                    break;
-                case 7:
-                    message.trade_restriction = reader.bool();
-                    break;
-                case 8:
-                    message.is_purchase = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_AddItem_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_AddItem_Request} CInventory_AddItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_AddItem_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_AddItem_Request message.
-         * @function verify
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_AddItem_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid")) {
-                if (!Array.isArray(message.itemdefid))
-                    return "itemdefid: array expected";
-                for (var i = 0; i < message.itemdefid.length; ++i)
-                    if (!$util.isInteger(message.itemdefid[i]) && !(message.itemdefid[i] && $util.isInteger(message.itemdefid[i].low) && $util.isInteger(message.itemdefid[i].high)))
-                        return "itemdefid: integer|Long[] expected";
-            }
-            if (message.itempropsjson != null && message.hasOwnProperty("itempropsjson")) {
-                if (!Array.isArray(message.itempropsjson))
-                    return "itempropsjson: array expected";
-                for (var i = 0; i < message.itempropsjson.length; ++i)
-                    if (!$util.isString(message.itempropsjson[i]))
-                        return "itempropsjson: string[] expected";
-            }
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            if (message.notify != null && message.hasOwnProperty("notify"))
-                if (typeof message.notify !== "boolean")
-                    return "notify: boolean expected";
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                if (!$util.isInteger(message.requestid) && !(message.requestid && $util.isInteger(message.requestid.low) && $util.isInteger(message.requestid.high)))
-                    return "requestid: integer|Long expected";
-            if (message.trade_restriction != null && message.hasOwnProperty("trade_restriction"))
-                if (typeof message.trade_restriction !== "boolean")
-                    return "trade_restriction: boolean expected";
-            if (message.is_purchase != null && message.hasOwnProperty("is_purchase"))
-                if (typeof message.is_purchase !== "boolean")
-                    return "is_purchase: boolean expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_AddItem_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_AddItem_Request} CInventory_AddItem_Request
-         */
-        CInventory_AddItem_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_AddItem_Request)
-                return object;
-            var message = new $root.CInventory_AddItem_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.itemdefid) {
-                if (!Array.isArray(object.itemdefid))
-                    throw TypeError(".CInventory_AddItem_Request.itemdefid: array expected");
-                message.itemdefid = [];
-                for (var i = 0; i < object.itemdefid.length; ++i)
-                    if ($util.Long)
-                        (message.itemdefid[i] = $util.Long.fromValue(object.itemdefid[i])).unsigned = true;
-                    else if (typeof object.itemdefid[i] === "string")
-                        message.itemdefid[i] = parseInt(object.itemdefid[i], 10);
-                    else if (typeof object.itemdefid[i] === "number")
-                        message.itemdefid[i] = object.itemdefid[i];
-                    else if (typeof object.itemdefid[i] === "object")
-                        message.itemdefid[i] = new $util.LongBits(object.itemdefid[i].low >>> 0, object.itemdefid[i].high >>> 0).toNumber(true);
-            }
-            if (object.itempropsjson) {
-                if (!Array.isArray(object.itempropsjson))
-                    throw TypeError(".CInventory_AddItem_Request.itempropsjson: array expected");
-                message.itempropsjson = [];
-                for (var i = 0; i < object.itempropsjson.length; ++i)
-                    message.itempropsjson[i] = String(object.itempropsjson[i]);
-            }
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
-            if (object.notify != null)
-                message.notify = Boolean(object.notify);
-            if (object.requestid != null)
-                if ($util.Long)
-                    (message.requestid = $util.Long.fromValue(object.requestid)).unsigned = true;
-                else if (typeof object.requestid === "string")
-                    message.requestid = parseInt(object.requestid, 10);
-                else if (typeof object.requestid === "number")
-                    message.requestid = object.requestid;
-                else if (typeof object.requestid === "object")
-                    message.requestid = new $util.LongBits(object.requestid.low >>> 0, object.requestid.high >>> 0).toNumber(true);
-            if (object.trade_restriction != null)
-                message.trade_restriction = Boolean(object.trade_restriction);
-            if (object.is_purchase != null)
-                message.is_purchase = Boolean(object.is_purchase);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_AddItem_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_AddItem_Request
-         * @static
-         * @param {CInventory_AddItem_Request} message CInventory_AddItem_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_AddItem_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults) {
-                object.itemdefid = [];
-                object.itempropsjson = [];
-            }
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-                object.notify = false;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.requestid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.requestid = options.longs === String ? "0" : 0;
-                object.trade_restriction = false;
-                object.is_purchase = false;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.itemdefid && message.itemdefid.length) {
-                object.itemdefid = [];
-                for (var j = 0; j < message.itemdefid.length; ++j)
-                    if (typeof message.itemdefid[j] === "number")
-                        object.itemdefid[j] = options.longs === String ? String(message.itemdefid[j]) : message.itemdefid[j];
-                    else
-                        object.itemdefid[j] = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefid[j]) : options.longs === Number ? new $util.LongBits(message.itemdefid[j].low >>> 0, message.itemdefid[j].high >>> 0).toNumber(true) : message.itemdefid[j];
-            }
-            if (message.itempropsjson && message.itempropsjson.length) {
-                object.itempropsjson = [];
-                for (var j = 0; j < message.itempropsjson.length; ++j)
-                    object.itempropsjson[j] = message.itempropsjson[j];
-            }
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
-            if (message.notify != null && message.hasOwnProperty("notify"))
-                object.notify = message.notify;
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                if (typeof message.requestid === "number")
-                    object.requestid = options.longs === String ? String(message.requestid) : message.requestid;
-                else
-                    object.requestid = options.longs === String ? $util.Long.prototype.toString.call(message.requestid) : options.longs === Number ? new $util.LongBits(message.requestid.low >>> 0, message.requestid.high >>> 0).toNumber(true) : message.requestid;
-            if (message.trade_restriction != null && message.hasOwnProperty("trade_restriction"))
-                object.trade_restriction = message.trade_restriction;
-            if (message.is_purchase != null && message.hasOwnProperty("is_purchase"))
-                object.is_purchase = message.is_purchase;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_AddItem_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_AddItem_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_AddItem_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_AddItem_Request;
-    })();
-    
-    $root.CInventory_ModifyItems_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_ModifyItems_Request.
-         * @exports ICInventory_ModifyItems_Request
-         * @interface ICInventory_ModifyItems_Request
-         * @property {number|null} [appid] CInventory_ModifyItems_Request appid
-         * @property {number|Long|null} [steamid] CInventory_ModifyItems_Request steamid
-         * @property {Array.<CInventory_ModifyItems_Request.IItemPropertyUpdate>|null} [updates] CInventory_ModifyItems_Request updates
-         * @property {number|null} [timestamp] CInventory_ModifyItems_Request timestamp
-         */
-    
-        /**
-         * Constructs a new CInventory_ModifyItems_Request.
-         * @exports CInventory_ModifyItems_Request
-         * @classdesc Represents a CInventory_ModifyItems_Request.
-         * @implements ICInventory_ModifyItems_Request
-         * @constructor
-         * @param {ICInventory_ModifyItems_Request=} [properties] Properties to set
-         */
-        function CInventory_ModifyItems_Request(properties) {
-            this.updates = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_ModifyItems_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_ModifyItems_Request
-         * @instance
-         */
-        CInventory_ModifyItems_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_ModifyItems_Request steamid.
-         * @member {number|Long} steamid
-         * @memberof CInventory_ModifyItems_Request
-         * @instance
-         */
-        CInventory_ModifyItems_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_ModifyItems_Request updates.
-         * @member {Array.<CInventory_ModifyItems_Request.IItemPropertyUpdate>} updates
-         * @memberof CInventory_ModifyItems_Request
-         * @instance
-         */
-        CInventory_ModifyItems_Request.prototype.updates = $util.emptyArray;
-    
-        /**
-         * CInventory_ModifyItems_Request timestamp.
-         * @member {number} timestamp
-         * @memberof CInventory_ModifyItems_Request
-         * @instance
-         */
-        CInventory_ModifyItems_Request.prototype.timestamp = 0;
-    
-        /**
-         * Creates a new CInventory_ModifyItems_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {ICInventory_ModifyItems_Request=} [properties] Properties to set
-         * @returns {CInventory_ModifyItems_Request} CInventory_ModifyItems_Request instance
-         */
-        CInventory_ModifyItems_Request.create = function create(properties) {
-            return new CInventory_ModifyItems_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_ModifyItems_Request message. Does not implicitly {@link CInventory_ModifyItems_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {ICInventory_ModifyItems_Request} message CInventory_ModifyItems_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ModifyItems_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
-            if (message.updates != null && message.updates.length)
-                for (var i = 0; i < message.updates.length; ++i)
-                    $root.CInventory_ModifyItems_Request.ItemPropertyUpdate.encode(message.updates[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.timestamp);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_ModifyItems_Request message, length delimited. Does not implicitly {@link CInventory_ModifyItems_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {ICInventory_ModifyItems_Request} message CInventory_ModifyItems_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ModifyItems_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_ModifyItems_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_ModifyItems_Request} CInventory_ModifyItems_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ModifyItems_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_ModifyItems_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.steamid = reader.uint64();
-                    break;
-                case 3:
-                    if (!(message.updates && message.updates.length))
-                        message.updates = [];
-                    message.updates.push($root.CInventory_ModifyItems_Request.ItemPropertyUpdate.decode(reader, reader.uint32()));
-                    break;
-                case 4:
-                    message.timestamp = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_ModifyItems_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_ModifyItems_Request} CInventory_ModifyItems_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ModifyItems_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_ModifyItems_Request message.
-         * @function verify
-         * @memberof CInventory_ModifyItems_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_ModifyItems_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            if (message.updates != null && message.hasOwnProperty("updates")) {
-                if (!Array.isArray(message.updates))
-                    return "updates: array expected";
-                for (var i = 0; i < message.updates.length; ++i) {
-                    var error = $root.CInventory_ModifyItems_Request.ItemPropertyUpdate.verify(message.updates[i]);
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                if (!$util.isInteger(message.num_open_slots))
+                    return "num_open_slots: integer expected";
+            if (message.locations != null && message.hasOwnProperty("locations")) {
+                if (!Array.isArray(message.locations))
+                    return "locations: array expected";
+                for (var i = 0; i < message.locations.length; ++i) {
+                    var error = $root.CParties_BeaconLocation.verify(message.locations[i]);
                     if (error)
-                        return "updates." + error;
+                        return "locations." + error;
                 }
             }
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (!$util.isInteger(message.timestamp))
-                    return "timestamp: integer expected";
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                if (!$util.isString(message.connect_string))
+                    return "connect_string: string expected";
+            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                if (!$util.isString(message.metadata))
+                    return "metadata: string expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_ModifyItems_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_CreateBeacon_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_ModifyItems_Request
+         * @memberof CParties_CreateBeacon_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_ModifyItems_Request} CInventory_ModifyItems_Request
+         * @returns {CParties_CreateBeacon_Request} CParties_CreateBeacon_Request
          */
-        CInventory_ModifyItems_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_ModifyItems_Request)
+        CParties_CreateBeacon_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_CreateBeacon_Request)
                 return object;
-            var message = new $root.CInventory_ModifyItems_Request();
+            var message = new $root.CParties_CreateBeacon_Request();
             if (object.appid != null)
                 message.appid = object.appid >>> 0;
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
-            if (object.updates) {
-                if (!Array.isArray(object.updates))
-                    throw TypeError(".CInventory_ModifyItems_Request.updates: array expected");
-                message.updates = [];
-                for (var i = 0; i < object.updates.length; ++i) {
-                    if (typeof object.updates[i] !== "object")
-                        throw TypeError(".CInventory_ModifyItems_Request.updates: object expected");
-                    message.updates[i] = $root.CInventory_ModifyItems_Request.ItemPropertyUpdate.fromObject(object.updates[i]);
+            if (object.num_open_slots != null)
+                message.num_open_slots = object.num_open_slots >>> 0;
+            if (object.locations) {
+                if (!Array.isArray(object.locations))
+                    throw TypeError(".CParties_CreateBeacon_Request.locations: array expected");
+                message.locations = [];
+                for (var i = 0; i < object.locations.length; ++i) {
+                    if (typeof object.locations[i] !== "object")
+                        throw TypeError(".CParties_CreateBeacon_Request.locations: object expected");
+                    message.locations[i] = $root.CParties_BeaconLocation.fromObject(object.locations[i]);
                 }
             }
-            if (object.timestamp != null)
-                message.timestamp = object.timestamp >>> 0;
+            if (object.connect_string != null)
+                message.connect_string = String(object.connect_string);
+            if (object.metadata != null)
+                message.metadata = String(object.metadata);
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_ModifyItems_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_CreateBeacon_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_ModifyItems_Request
+         * @memberof CParties_CreateBeacon_Request
          * @static
-         * @param {CInventory_ModifyItems_Request} message CInventory_ModifyItems_Request
+         * @param {CParties_CreateBeacon_Request} message CParties_CreateBeacon_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_ModifyItems_Request.toObject = function toObject(message, options) {
+        CParties_CreateBeacon_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
-                object.updates = [];
+                object.locations = [];
             if (options.defaults) {
                 object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-                object.timestamp = 0;
+                object.num_open_slots = 0;
+                object.connect_string = "";
+                object.metadata = "";
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
-            if (message.updates && message.updates.length) {
-                object.updates = [];
-                for (var j = 0; j < message.updates.length; ++j)
-                    object.updates[j] = $root.CInventory_ModifyItems_Request.ItemPropertyUpdate.toObject(message.updates[j], options);
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                object.num_open_slots = message.num_open_slots;
+            if (message.locations && message.locations.length) {
+                object.locations = [];
+                for (var j = 0; j < message.locations.length; ++j)
+                    object.locations[j] = $root.CParties_BeaconLocation.toObject(message.locations[j], options);
             }
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                object.timestamp = message.timestamp;
+            if (message.connect_string != null && message.hasOwnProperty("connect_string"))
+                object.connect_string = message.connect_string;
+            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                object.metadata = message.metadata;
             return object;
         };
     
         /**
-         * Converts this CInventory_ModifyItems_Request to JSON.
+         * Converts this CParties_CreateBeacon_Request to JSON.
          * @function toJSON
-         * @memberof CInventory_ModifyItems_Request
+         * @memberof CParties_CreateBeacon_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_ModifyItems_Request.prototype.toJSON = function toJSON() {
+        CParties_CreateBeacon_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CInventory_ModifyItems_Request.ItemPropertyUpdate = (function() {
-    
-            /**
-             * Properties of an ItemPropertyUpdate.
-             * @memberof CInventory_ModifyItems_Request
-             * @interface IItemPropertyUpdate
-             * @property {number|Long|null} [itemid] ItemPropertyUpdate itemid
-             * @property {boolean|null} [remove_property] ItemPropertyUpdate remove_property
-             * @property {string|null} [property_name] ItemPropertyUpdate property_name
-             * @property {boolean|null} [property_value_bool] ItemPropertyUpdate property_value_bool
-             * @property {number|Long|null} [property_value_int] ItemPropertyUpdate property_value_int
-             * @property {string|null} [property_value_string] ItemPropertyUpdate property_value_string
-             * @property {number|null} [property_value_float] ItemPropertyUpdate property_value_float
-             */
-    
-            /**
-             * Constructs a new ItemPropertyUpdate.
-             * @memberof CInventory_ModifyItems_Request
-             * @classdesc Represents an ItemPropertyUpdate.
-             * @implements IItemPropertyUpdate
-             * @constructor
-             * @param {CInventory_ModifyItems_Request.IItemPropertyUpdate=} [properties] Properties to set
-             */
-            function ItemPropertyUpdate(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * ItemPropertyUpdate itemid.
-             * @member {number|Long} itemid
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.itemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-            /**
-             * ItemPropertyUpdate remove_property.
-             * @member {boolean} remove_property
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.remove_property = false;
-    
-            /**
-             * ItemPropertyUpdate property_name.
-             * @member {string} property_name
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.property_name = "";
-    
-            /**
-             * ItemPropertyUpdate property_value_bool.
-             * @member {boolean} property_value_bool
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.property_value_bool = false;
-    
-            /**
-             * ItemPropertyUpdate property_value_int.
-             * @member {number|Long} property_value_int
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.property_value_int = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-            /**
-             * ItemPropertyUpdate property_value_string.
-             * @member {string} property_value_string
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.property_value_string = "";
-    
-            /**
-             * ItemPropertyUpdate property_value_float.
-             * @member {number} property_value_float
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             */
-            ItemPropertyUpdate.prototype.property_value_float = 0;
-    
-            /**
-             * Creates a new ItemPropertyUpdate instance using the specified properties.
-             * @function create
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {CInventory_ModifyItems_Request.IItemPropertyUpdate=} [properties] Properties to set
-             * @returns {CInventory_ModifyItems_Request.ItemPropertyUpdate} ItemPropertyUpdate instance
-             */
-            ItemPropertyUpdate.create = function create(properties) {
-                return new ItemPropertyUpdate(properties);
-            };
-    
-            /**
-             * Encodes the specified ItemPropertyUpdate message. Does not implicitly {@link CInventory_ModifyItems_Request.ItemPropertyUpdate.verify|verify} messages.
-             * @function encode
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {CInventory_ModifyItems_Request.IItemPropertyUpdate} message ItemPropertyUpdate message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ItemPropertyUpdate.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.itemid != null && message.hasOwnProperty("itemid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.itemid);
-                if (message.remove_property != null && message.hasOwnProperty("remove_property"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.remove_property);
-                if (message.property_name != null && message.hasOwnProperty("property_name"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.property_name);
-                if (message.property_value_bool != null && message.hasOwnProperty("property_value_bool"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.property_value_bool);
-                if (message.property_value_int != null && message.hasOwnProperty("property_value_int"))
-                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.property_value_int);
-                if (message.property_value_string != null && message.hasOwnProperty("property_value_string"))
-                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.property_value_string);
-                if (message.property_value_float != null && message.hasOwnProperty("property_value_float"))
-                    writer.uint32(/* id 7, wireType 5 =*/61).float(message.property_value_float);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified ItemPropertyUpdate message, length delimited. Does not implicitly {@link CInventory_ModifyItems_Request.ItemPropertyUpdate.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {CInventory_ModifyItems_Request.IItemPropertyUpdate} message ItemPropertyUpdate message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ItemPropertyUpdate.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes an ItemPropertyUpdate message from the specified reader or buffer.
-             * @function decode
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CInventory_ModifyItems_Request.ItemPropertyUpdate} ItemPropertyUpdate
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ItemPropertyUpdate.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_ModifyItems_Request.ItemPropertyUpdate();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.itemid = reader.uint64();
-                        break;
-                    case 2:
-                        message.remove_property = reader.bool();
-                        break;
-                    case 3:
-                        message.property_name = reader.string();
-                        break;
-                    case 4:
-                        message.property_value_bool = reader.bool();
-                        break;
-                    case 5:
-                        message.property_value_int = reader.int64();
-                        break;
-                    case 6:
-                        message.property_value_string = reader.string();
-                        break;
-                    case 7:
-                        message.property_value_float = reader.float();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes an ItemPropertyUpdate message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CInventory_ModifyItems_Request.ItemPropertyUpdate} ItemPropertyUpdate
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ItemPropertyUpdate.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies an ItemPropertyUpdate message.
-             * @function verify
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ItemPropertyUpdate.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.itemid != null && message.hasOwnProperty("itemid"))
-                    if (!$util.isInteger(message.itemid) && !(message.itemid && $util.isInteger(message.itemid.low) && $util.isInteger(message.itemid.high)))
-                        return "itemid: integer|Long expected";
-                if (message.remove_property != null && message.hasOwnProperty("remove_property"))
-                    if (typeof message.remove_property !== "boolean")
-                        return "remove_property: boolean expected";
-                if (message.property_name != null && message.hasOwnProperty("property_name"))
-                    if (!$util.isString(message.property_name))
-                        return "property_name: string expected";
-                if (message.property_value_bool != null && message.hasOwnProperty("property_value_bool"))
-                    if (typeof message.property_value_bool !== "boolean")
-                        return "property_value_bool: boolean expected";
-                if (message.property_value_int != null && message.hasOwnProperty("property_value_int"))
-                    if (!$util.isInteger(message.property_value_int) && !(message.property_value_int && $util.isInteger(message.property_value_int.low) && $util.isInteger(message.property_value_int.high)))
-                        return "property_value_int: integer|Long expected";
-                if (message.property_value_string != null && message.hasOwnProperty("property_value_string"))
-                    if (!$util.isString(message.property_value_string))
-                        return "property_value_string: string expected";
-                if (message.property_value_float != null && message.hasOwnProperty("property_value_float"))
-                    if (typeof message.property_value_float !== "number")
-                        return "property_value_float: number expected";
-                return null;
-            };
-    
-            /**
-             * Creates an ItemPropertyUpdate message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CInventory_ModifyItems_Request.ItemPropertyUpdate} ItemPropertyUpdate
-             */
-            ItemPropertyUpdate.fromObject = function fromObject(object) {
-                if (object instanceof $root.CInventory_ModifyItems_Request.ItemPropertyUpdate)
-                    return object;
-                var message = new $root.CInventory_ModifyItems_Request.ItemPropertyUpdate();
-                if (object.itemid != null)
-                    if ($util.Long)
-                        (message.itemid = $util.Long.fromValue(object.itemid)).unsigned = true;
-                    else if (typeof object.itemid === "string")
-                        message.itemid = parseInt(object.itemid, 10);
-                    else if (typeof object.itemid === "number")
-                        message.itemid = object.itemid;
-                    else if (typeof object.itemid === "object")
-                        message.itemid = new $util.LongBits(object.itemid.low >>> 0, object.itemid.high >>> 0).toNumber(true);
-                if (object.remove_property != null)
-                    message.remove_property = Boolean(object.remove_property);
-                if (object.property_name != null)
-                    message.property_name = String(object.property_name);
-                if (object.property_value_bool != null)
-                    message.property_value_bool = Boolean(object.property_value_bool);
-                if (object.property_value_int != null)
-                    if ($util.Long)
-                        (message.property_value_int = $util.Long.fromValue(object.property_value_int)).unsigned = false;
-                    else if (typeof object.property_value_int === "string")
-                        message.property_value_int = parseInt(object.property_value_int, 10);
-                    else if (typeof object.property_value_int === "number")
-                        message.property_value_int = object.property_value_int;
-                    else if (typeof object.property_value_int === "object")
-                        message.property_value_int = new $util.LongBits(object.property_value_int.low >>> 0, object.property_value_int.high >>> 0).toNumber();
-                if (object.property_value_string != null)
-                    message.property_value_string = String(object.property_value_string);
-                if (object.property_value_float != null)
-                    message.property_value_float = Number(object.property_value_float);
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from an ItemPropertyUpdate message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @static
-             * @param {CInventory_ModifyItems_Request.ItemPropertyUpdate} message ItemPropertyUpdate
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            ItemPropertyUpdate.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    if ($util.Long) {
-                        var long = new $util.Long(0, 0, true);
-                        object.itemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.itemid = options.longs === String ? "0" : 0;
-                    object.remove_property = false;
-                    object.property_name = "";
-                    object.property_value_bool = false;
-                    if ($util.Long) {
-                        var long = new $util.Long(0, 0, false);
-                        object.property_value_int = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.property_value_int = options.longs === String ? "0" : 0;
-                    object.property_value_string = "";
-                    object.property_value_float = 0;
-                }
-                if (message.itemid != null && message.hasOwnProperty("itemid"))
-                    if (typeof message.itemid === "number")
-                        object.itemid = options.longs === String ? String(message.itemid) : message.itemid;
-                    else
-                        object.itemid = options.longs === String ? $util.Long.prototype.toString.call(message.itemid) : options.longs === Number ? new $util.LongBits(message.itemid.low >>> 0, message.itemid.high >>> 0).toNumber(true) : message.itemid;
-                if (message.remove_property != null && message.hasOwnProperty("remove_property"))
-                    object.remove_property = message.remove_property;
-                if (message.property_name != null && message.hasOwnProperty("property_name"))
-                    object.property_name = message.property_name;
-                if (message.property_value_bool != null && message.hasOwnProperty("property_value_bool"))
-                    object.property_value_bool = message.property_value_bool;
-                if (message.property_value_int != null && message.hasOwnProperty("property_value_int"))
-                    if (typeof message.property_value_int === "number")
-                        object.property_value_int = options.longs === String ? String(message.property_value_int) : message.property_value_int;
-                    else
-                        object.property_value_int = options.longs === String ? $util.Long.prototype.toString.call(message.property_value_int) : options.longs === Number ? new $util.LongBits(message.property_value_int.low >>> 0, message.property_value_int.high >>> 0).toNumber() : message.property_value_int;
-                if (message.property_value_string != null && message.hasOwnProperty("property_value_string"))
-                    object.property_value_string = message.property_value_string;
-                if (message.property_value_float != null && message.hasOwnProperty("property_value_float"))
-                    object.property_value_float = options.json && !isFinite(message.property_value_float) ? String(message.property_value_float) : message.property_value_float;
-                return object;
-            };
-    
-            /**
-             * Converts this ItemPropertyUpdate to JSON.
-             * @function toJSON
-             * @memberof CInventory_ModifyItems_Request.ItemPropertyUpdate
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            ItemPropertyUpdate.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return ItemPropertyUpdate;
-        })();
-    
-        return CInventory_ModifyItems_Request;
+        return CParties_CreateBeacon_Request;
     })();
     
-    $root.CInventory_ConsumePlaytime_Request = (function() {
+    $root.CParties_CreateBeacon_Response = (function() {
     
         /**
-         * Properties of a CInventory_ConsumePlaytime_Request.
-         * @exports ICInventory_ConsumePlaytime_Request
-         * @interface ICInventory_ConsumePlaytime_Request
-         * @property {number|null} [appid] CInventory_ConsumePlaytime_Request appid
-         * @property {number|Long|null} [itemdefid] CInventory_ConsumePlaytime_Request itemdefid
+         * Properties of a CParties_CreateBeacon_Response.
+         * @exports ICParties_CreateBeacon_Response
+         * @interface ICParties_CreateBeacon_Response
+         * @property {number|Long|null} [beacon_id] CParties_CreateBeacon_Response beacon_id
          */
     
         /**
-         * Constructs a new CInventory_ConsumePlaytime_Request.
-         * @exports CInventory_ConsumePlaytime_Request
-         * @classdesc Represents a CInventory_ConsumePlaytime_Request.
-         * @implements ICInventory_ConsumePlaytime_Request
+         * Constructs a new CParties_CreateBeacon_Response.
+         * @exports CParties_CreateBeacon_Response
+         * @classdesc Represents a CParties_CreateBeacon_Response.
+         * @implements ICParties_CreateBeacon_Response
          * @constructor
-         * @param {ICInventory_ConsumePlaytime_Request=} [properties] Properties to set
+         * @param {ICParties_CreateBeacon_Response=} [properties] Properties to set
          */
-        function CInventory_ConsumePlaytime_Request(properties) {
+        function CParties_CreateBeacon_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2462,88 +1025,75 @@
         }
     
         /**
-         * CInventory_ConsumePlaytime_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_ConsumePlaytime_Request
+         * CParties_CreateBeacon_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_CreateBeacon_Response
          * @instance
          */
-        CInventory_ConsumePlaytime_Request.prototype.appid = 0;
+        CParties_CreateBeacon_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventory_ConsumePlaytime_Request itemdefid.
-         * @member {number|Long} itemdefid
-         * @memberof CInventory_ConsumePlaytime_Request
-         * @instance
-         */
-        CInventory_ConsumePlaytime_Request.prototype.itemdefid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_ConsumePlaytime_Request instance using the specified properties.
+         * Creates a new CParties_CreateBeacon_Response instance using the specified properties.
          * @function create
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
-         * @param {ICInventory_ConsumePlaytime_Request=} [properties] Properties to set
-         * @returns {CInventory_ConsumePlaytime_Request} CInventory_ConsumePlaytime_Request instance
+         * @param {ICParties_CreateBeacon_Response=} [properties] Properties to set
+         * @returns {CParties_CreateBeacon_Response} CParties_CreateBeacon_Response instance
          */
-        CInventory_ConsumePlaytime_Request.create = function create(properties) {
-            return new CInventory_ConsumePlaytime_Request(properties);
+        CParties_CreateBeacon_Response.create = function create(properties) {
+            return new CParties_CreateBeacon_Response(properties);
         };
     
         /**
-         * Encodes the specified CInventory_ConsumePlaytime_Request message. Does not implicitly {@link CInventory_ConsumePlaytime_Request.verify|verify} messages.
+         * Encodes the specified CParties_CreateBeacon_Response message. Does not implicitly {@link CParties_CreateBeacon_Response.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
-         * @param {ICInventory_ConsumePlaytime_Request} message CInventory_ConsumePlaytime_Request message or plain object to encode
+         * @param {ICParties_CreateBeacon_Response} message CParties_CreateBeacon_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_ConsumePlaytime_Request.encode = function encode(message, writer) {
+        CParties_CreateBeacon_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemdefid);
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_ConsumePlaytime_Request message, length delimited. Does not implicitly {@link CInventory_ConsumePlaytime_Request.verify|verify} messages.
+         * Encodes the specified CParties_CreateBeacon_Response message, length delimited. Does not implicitly {@link CParties_CreateBeacon_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
-         * @param {ICInventory_ConsumePlaytime_Request} message CInventory_ConsumePlaytime_Request message or plain object to encode
+         * @param {ICParties_CreateBeacon_Response} message CParties_CreateBeacon_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_ConsumePlaytime_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_CreateBeacon_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_ConsumePlaytime_Request message from the specified reader or buffer.
+         * Decodes a CParties_CreateBeacon_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_ConsumePlaytime_Request} CInventory_ConsumePlaytime_Request
+         * @returns {CParties_CreateBeacon_Response} CParties_CreateBeacon_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_ConsumePlaytime_Request.decode = function decode(reader, length) {
+        CParties_CreateBeacon_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_ConsumePlaytime_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_CreateBeacon_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.itemdefid = reader.uint64();
+                    message.beacon_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2554,1432 +1104,122 @@
         };
     
         /**
-         * Decodes a CInventory_ConsumePlaytime_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_CreateBeacon_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_ConsumePlaytime_Request} CInventory_ConsumePlaytime_Request
+         * @returns {CParties_CreateBeacon_Response} CParties_CreateBeacon_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_ConsumePlaytime_Request.decodeDelimited = function decodeDelimited(reader) {
+        CParties_CreateBeacon_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_ConsumePlaytime_Request message.
+         * Verifies a CParties_CreateBeacon_Response message.
          * @function verify
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_ConsumePlaytime_Request.verify = function verify(message) {
+        CParties_CreateBeacon_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                if (!$util.isInteger(message.itemdefid) && !(message.itemdefid && $util.isInteger(message.itemdefid.low) && $util.isInteger(message.itemdefid.high)))
-                    return "itemdefid: integer|Long expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_ConsumePlaytime_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_CreateBeacon_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_ConsumePlaytime_Request} CInventory_ConsumePlaytime_Request
+         * @returns {CParties_CreateBeacon_Response} CParties_CreateBeacon_Response
          */
-        CInventory_ConsumePlaytime_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_ConsumePlaytime_Request)
+        CParties_CreateBeacon_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_CreateBeacon_Response)
                 return object;
-            var message = new $root.CInventory_ConsumePlaytime_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.itemdefid != null)
+            var message = new $root.CParties_CreateBeacon_Response();
+            if (object.beacon_id != null)
                 if ($util.Long)
-                    (message.itemdefid = $util.Long.fromValue(object.itemdefid)).unsigned = true;
-                else if (typeof object.itemdefid === "string")
-                    message.itemdefid = parseInt(object.itemdefid, 10);
-                else if (typeof object.itemdefid === "number")
-                    message.itemdefid = object.itemdefid;
-                else if (typeof object.itemdefid === "object")
-                    message.itemdefid = new $util.LongBits(object.itemdefid.low >>> 0, object.itemdefid.high >>> 0).toNumber(true);
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_ConsumePlaytime_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_CreateBeacon_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_ConsumePlaytime_Request
+         * @memberof CParties_CreateBeacon_Response
          * @static
-         * @param {CInventory_ConsumePlaytime_Request} message CInventory_ConsumePlaytime_Request
+         * @param {CParties_CreateBeacon_Response} message CParties_CreateBeacon_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_ConsumePlaytime_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.itemdefid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.itemdefid = options.longs === String ? "0" : 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                if (typeof message.itemdefid === "number")
-                    object.itemdefid = options.longs === String ? String(message.itemdefid) : message.itemdefid;
-                else
-                    object.itemdefid = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefid) : options.longs === Number ? new $util.LongBits(message.itemdefid.low >>> 0, message.itemdefid.high >>> 0).toNumber(true) : message.itemdefid;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_ConsumePlaytime_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_ConsumePlaytime_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_ConsumePlaytime_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_ConsumePlaytime_Request;
-    })();
-    
-    $root.CInventory_ConsumeItem_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_ConsumeItem_Request.
-         * @exports ICInventory_ConsumeItem_Request
-         * @interface ICInventory_ConsumeItem_Request
-         * @property {number|null} [appid] CInventory_ConsumeItem_Request appid
-         * @property {number|Long|null} [itemid] CInventory_ConsumeItem_Request itemid
-         * @property {number|null} [quantity] CInventory_ConsumeItem_Request quantity
-         * @property {string|null} [timestamp] CInventory_ConsumeItem_Request timestamp
-         * @property {number|Long|null} [steamid] CInventory_ConsumeItem_Request steamid
-         * @property {number|Long|null} [requestid] CInventory_ConsumeItem_Request requestid
-         */
-    
-        /**
-         * Constructs a new CInventory_ConsumeItem_Request.
-         * @exports CInventory_ConsumeItem_Request
-         * @classdesc Represents a CInventory_ConsumeItem_Request.
-         * @implements ICInventory_ConsumeItem_Request
-         * @constructor
-         * @param {ICInventory_ConsumeItem_Request=} [properties] Properties to set
-         */
-        function CInventory_ConsumeItem_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_ConsumeItem_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_ConsumeItem_Request itemid.
-         * @member {number|Long} itemid
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.itemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_ConsumeItem_Request quantity.
-         * @member {number} quantity
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.quantity = 0;
-    
-        /**
-         * CInventory_ConsumeItem_Request timestamp.
-         * @member {string} timestamp
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.timestamp = "";
-    
-        /**
-         * CInventory_ConsumeItem_Request steamid.
-         * @member {number|Long} steamid
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_ConsumeItem_Request requestid.
-         * @member {number|Long} requestid
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         */
-        CInventory_ConsumeItem_Request.prototype.requestid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_ConsumeItem_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {ICInventory_ConsumeItem_Request=} [properties] Properties to set
-         * @returns {CInventory_ConsumeItem_Request} CInventory_ConsumeItem_Request instance
-         */
-        CInventory_ConsumeItem_Request.create = function create(properties) {
-            return new CInventory_ConsumeItem_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_ConsumeItem_Request message. Does not implicitly {@link CInventory_ConsumeItem_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {ICInventory_ConsumeItem_Request} message CInventory_ConsumeItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ConsumeItem_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemid);
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.quantity);
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.timestamp);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.steamid);
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.requestid);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_ConsumeItem_Request message, length delimited. Does not implicitly {@link CInventory_ConsumeItem_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {ICInventory_ConsumeItem_Request} message CInventory_ConsumeItem_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_ConsumeItem_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_ConsumeItem_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_ConsumeItem_Request} CInventory_ConsumeItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ConsumeItem_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_ConsumeItem_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.itemid = reader.uint64();
-                    break;
-                case 3:
-                    message.quantity = reader.uint32();
-                    break;
-                case 4:
-                    message.timestamp = reader.string();
-                    break;
-                case 5:
-                    message.steamid = reader.uint64();
-                    break;
-                case 6:
-                    message.requestid = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_ConsumeItem_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_ConsumeItem_Request} CInventory_ConsumeItem_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_ConsumeItem_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_ConsumeItem_Request message.
-         * @function verify
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_ConsumeItem_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                if (!$util.isInteger(message.itemid) && !(message.itemid && $util.isInteger(message.itemid.low) && $util.isInteger(message.itemid.high)))
-                    return "itemid: integer|Long expected";
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                if (!$util.isInteger(message.quantity))
-                    return "quantity: integer expected";
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                if (!$util.isString(message.timestamp))
-                    return "timestamp: string expected";
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                if (!$util.isInteger(message.requestid) && !(message.requestid && $util.isInteger(message.requestid.low) && $util.isInteger(message.requestid.high)))
-                    return "requestid: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_ConsumeItem_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_ConsumeItem_Request} CInventory_ConsumeItem_Request
-         */
-        CInventory_ConsumeItem_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_ConsumeItem_Request)
-                return object;
-            var message = new $root.CInventory_ConsumeItem_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.itemid != null)
-                if ($util.Long)
-                    (message.itemid = $util.Long.fromValue(object.itemid)).unsigned = true;
-                else if (typeof object.itemid === "string")
-                    message.itemid = parseInt(object.itemid, 10);
-                else if (typeof object.itemid === "number")
-                    message.itemid = object.itemid;
-                else if (typeof object.itemid === "object")
-                    message.itemid = new $util.LongBits(object.itemid.low >>> 0, object.itemid.high >>> 0).toNumber(true);
-            if (object.quantity != null)
-                message.quantity = object.quantity >>> 0;
-            if (object.timestamp != null)
-                message.timestamp = String(object.timestamp);
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
-            if (object.requestid != null)
-                if ($util.Long)
-                    (message.requestid = $util.Long.fromValue(object.requestid)).unsigned = true;
-                else if (typeof object.requestid === "string")
-                    message.requestid = parseInt(object.requestid, 10);
-                else if (typeof object.requestid === "number")
-                    message.requestid = object.requestid;
-                else if (typeof object.requestid === "object")
-                    message.requestid = new $util.LongBits(object.requestid.low >>> 0, object.requestid.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_ConsumeItem_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_ConsumeItem_Request
-         * @static
-         * @param {CInventory_ConsumeItem_Request} message CInventory_ConsumeItem_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_ConsumeItem_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.itemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.itemid = options.longs === String ? "0" : 0;
-                object.quantity = 0;
-                object.timestamp = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.requestid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.requestid = options.longs === String ? "0" : 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                if (typeof message.itemid === "number")
-                    object.itemid = options.longs === String ? String(message.itemid) : message.itemid;
-                else
-                    object.itemid = options.longs === String ? $util.Long.prototype.toString.call(message.itemid) : options.longs === Number ? new $util.LongBits(message.itemid.low >>> 0, message.itemid.high >>> 0).toNumber(true) : message.itemid;
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                object.quantity = message.quantity;
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                object.timestamp = message.timestamp;
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
-            if (message.requestid != null && message.hasOwnProperty("requestid"))
-                if (typeof message.requestid === "number")
-                    object.requestid = options.longs === String ? String(message.requestid) : message.requestid;
-                else
-                    object.requestid = options.longs === String ? $util.Long.prototype.toString.call(message.requestid) : options.longs === Number ? new $util.LongBits(message.requestid.low >>> 0, message.requestid.high >>> 0).toNumber(true) : message.requestid;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_ConsumeItem_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_ConsumeItem_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_ConsumeItem_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_ConsumeItem_Request;
-    })();
-    
-    $root.CInventory_DevSetNextDrop_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_DevSetNextDrop_Request.
-         * @exports ICInventory_DevSetNextDrop_Request
-         * @interface ICInventory_DevSetNextDrop_Request
-         * @property {number|null} [appid] CInventory_DevSetNextDrop_Request appid
-         * @property {number|Long|null} [itemdefid] CInventory_DevSetNextDrop_Request itemdefid
-         * @property {string|null} [droptime] CInventory_DevSetNextDrop_Request droptime
-         */
-    
-        /**
-         * Constructs a new CInventory_DevSetNextDrop_Request.
-         * @exports CInventory_DevSetNextDrop_Request
-         * @classdesc Represents a CInventory_DevSetNextDrop_Request.
-         * @implements ICInventory_DevSetNextDrop_Request
-         * @constructor
-         * @param {ICInventory_DevSetNextDrop_Request=} [properties] Properties to set
-         */
-        function CInventory_DevSetNextDrop_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_DevSetNextDrop_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @instance
-         */
-        CInventory_DevSetNextDrop_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_DevSetNextDrop_Request itemdefid.
-         * @member {number|Long} itemdefid
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @instance
-         */
-        CInventory_DevSetNextDrop_Request.prototype.itemdefid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_DevSetNextDrop_Request droptime.
-         * @member {string} droptime
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @instance
-         */
-        CInventory_DevSetNextDrop_Request.prototype.droptime = "";
-    
-        /**
-         * Creates a new CInventory_DevSetNextDrop_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {ICInventory_DevSetNextDrop_Request=} [properties] Properties to set
-         * @returns {CInventory_DevSetNextDrop_Request} CInventory_DevSetNextDrop_Request instance
-         */
-        CInventory_DevSetNextDrop_Request.create = function create(properties) {
-            return new CInventory_DevSetNextDrop_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_DevSetNextDrop_Request message. Does not implicitly {@link CInventory_DevSetNextDrop_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {ICInventory_DevSetNextDrop_Request} message CInventory_DevSetNextDrop_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_DevSetNextDrop_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemdefid);
-            if (message.droptime != null && message.hasOwnProperty("droptime"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.droptime);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_DevSetNextDrop_Request message, length delimited. Does not implicitly {@link CInventory_DevSetNextDrop_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {ICInventory_DevSetNextDrop_Request} message CInventory_DevSetNextDrop_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_DevSetNextDrop_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_DevSetNextDrop_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_DevSetNextDrop_Request} CInventory_DevSetNextDrop_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_DevSetNextDrop_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_DevSetNextDrop_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.itemdefid = reader.uint64();
-                    break;
-                case 3:
-                    message.droptime = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_DevSetNextDrop_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_DevSetNextDrop_Request} CInventory_DevSetNextDrop_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_DevSetNextDrop_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_DevSetNextDrop_Request message.
-         * @function verify
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_DevSetNextDrop_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                if (!$util.isInteger(message.itemdefid) && !(message.itemdefid && $util.isInteger(message.itemdefid.low) && $util.isInteger(message.itemdefid.high)))
-                    return "itemdefid: integer|Long expected";
-            if (message.droptime != null && message.hasOwnProperty("droptime"))
-                if (!$util.isString(message.droptime))
-                    return "droptime: string expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_DevSetNextDrop_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_DevSetNextDrop_Request} CInventory_DevSetNextDrop_Request
-         */
-        CInventory_DevSetNextDrop_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_DevSetNextDrop_Request)
-                return object;
-            var message = new $root.CInventory_DevSetNextDrop_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.itemdefid != null)
-                if ($util.Long)
-                    (message.itemdefid = $util.Long.fromValue(object.itemdefid)).unsigned = true;
-                else if (typeof object.itemdefid === "string")
-                    message.itemdefid = parseInt(object.itemdefid, 10);
-                else if (typeof object.itemdefid === "number")
-                    message.itemdefid = object.itemdefid;
-                else if (typeof object.itemdefid === "object")
-                    message.itemdefid = new $util.LongBits(object.itemdefid.low >>> 0, object.itemdefid.high >>> 0).toNumber(true);
-            if (object.droptime != null)
-                message.droptime = String(object.droptime);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_DevSetNextDrop_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @static
-         * @param {CInventory_DevSetNextDrop_Request} message CInventory_DevSetNextDrop_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_DevSetNextDrop_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.itemdefid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.itemdefid = options.longs === String ? "0" : 0;
-                object.droptime = "";
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                if (typeof message.itemdefid === "number")
-                    object.itemdefid = options.longs === String ? String(message.itemdefid) : message.itemdefid;
-                else
-                    object.itemdefid = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefid) : options.longs === Number ? new $util.LongBits(message.itemdefid.low >>> 0, message.itemdefid.high >>> 0).toNumber(true) : message.itemdefid;
-            if (message.droptime != null && message.hasOwnProperty("droptime"))
-                object.droptime = message.droptime;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_DevSetNextDrop_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_DevSetNextDrop_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_DevSetNextDrop_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_DevSetNextDrop_Request;
-    })();
-    
-    $root.CInventory_SplitItemStack_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_SplitItemStack_Request.
-         * @exports ICInventory_SplitItemStack_Request
-         * @interface ICInventory_SplitItemStack_Request
-         * @property {number|null} [appid] CInventory_SplitItemStack_Request appid
-         * @property {number|Long|null} [itemid] CInventory_SplitItemStack_Request itemid
-         * @property {number|null} [quantity] CInventory_SplitItemStack_Request quantity
-         */
-    
-        /**
-         * Constructs a new CInventory_SplitItemStack_Request.
-         * @exports CInventory_SplitItemStack_Request
-         * @classdesc Represents a CInventory_SplitItemStack_Request.
-         * @implements ICInventory_SplitItemStack_Request
-         * @constructor
-         * @param {ICInventory_SplitItemStack_Request=} [properties] Properties to set
-         */
-        function CInventory_SplitItemStack_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_SplitItemStack_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_SplitItemStack_Request
-         * @instance
-         */
-        CInventory_SplitItemStack_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_SplitItemStack_Request itemid.
-         * @member {number|Long} itemid
-         * @memberof CInventory_SplitItemStack_Request
-         * @instance
-         */
-        CInventory_SplitItemStack_Request.prototype.itemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_SplitItemStack_Request quantity.
-         * @member {number} quantity
-         * @memberof CInventory_SplitItemStack_Request
-         * @instance
-         */
-        CInventory_SplitItemStack_Request.prototype.quantity = 0;
-    
-        /**
-         * Creates a new CInventory_SplitItemStack_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {ICInventory_SplitItemStack_Request=} [properties] Properties to set
-         * @returns {CInventory_SplitItemStack_Request} CInventory_SplitItemStack_Request instance
-         */
-        CInventory_SplitItemStack_Request.create = function create(properties) {
-            return new CInventory_SplitItemStack_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_SplitItemStack_Request message. Does not implicitly {@link CInventory_SplitItemStack_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {ICInventory_SplitItemStack_Request} message CInventory_SplitItemStack_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_SplitItemStack_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.itemid);
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.quantity);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_SplitItemStack_Request message, length delimited. Does not implicitly {@link CInventory_SplitItemStack_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {ICInventory_SplitItemStack_Request} message CInventory_SplitItemStack_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_SplitItemStack_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_SplitItemStack_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_SplitItemStack_Request} CInventory_SplitItemStack_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_SplitItemStack_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_SplitItemStack_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.itemid = reader.uint64();
-                    break;
-                case 3:
-                    message.quantity = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_SplitItemStack_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_SplitItemStack_Request} CInventory_SplitItemStack_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_SplitItemStack_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_SplitItemStack_Request message.
-         * @function verify
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_SplitItemStack_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                if (!$util.isInteger(message.itemid) && !(message.itemid && $util.isInteger(message.itemid.low) && $util.isInteger(message.itemid.high)))
-                    return "itemid: integer|Long expected";
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                if (!$util.isInteger(message.quantity))
-                    return "quantity: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_SplitItemStack_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_SplitItemStack_Request} CInventory_SplitItemStack_Request
-         */
-        CInventory_SplitItemStack_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_SplitItemStack_Request)
-                return object;
-            var message = new $root.CInventory_SplitItemStack_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.itemid != null)
-                if ($util.Long)
-                    (message.itemid = $util.Long.fromValue(object.itemid)).unsigned = true;
-                else if (typeof object.itemid === "string")
-                    message.itemid = parseInt(object.itemid, 10);
-                else if (typeof object.itemid === "number")
-                    message.itemid = object.itemid;
-                else if (typeof object.itemid === "object")
-                    message.itemid = new $util.LongBits(object.itemid.low >>> 0, object.itemid.high >>> 0).toNumber(true);
-            if (object.quantity != null)
-                message.quantity = object.quantity >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_SplitItemStack_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_SplitItemStack_Request
-         * @static
-         * @param {CInventory_SplitItemStack_Request} message CInventory_SplitItemStack_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_SplitItemStack_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.itemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.itemid = options.longs === String ? "0" : 0;
-                object.quantity = 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.itemid != null && message.hasOwnProperty("itemid"))
-                if (typeof message.itemid === "number")
-                    object.itemid = options.longs === String ? String(message.itemid) : message.itemid;
-                else
-                    object.itemid = options.longs === String ? $util.Long.prototype.toString.call(message.itemid) : options.longs === Number ? new $util.LongBits(message.itemid.low >>> 0, message.itemid.high >>> 0).toNumber(true) : message.itemid;
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                object.quantity = message.quantity;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_SplitItemStack_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_SplitItemStack_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_SplitItemStack_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_SplitItemStack_Request;
-    })();
-    
-    $root.CInventory_CombineItemStacks_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_CombineItemStacks_Request.
-         * @exports ICInventory_CombineItemStacks_Request
-         * @interface ICInventory_CombineItemStacks_Request
-         * @property {number|null} [appid] CInventory_CombineItemStacks_Request appid
-         * @property {number|Long|null} [fromitemid] CInventory_CombineItemStacks_Request fromitemid
-         * @property {number|Long|null} [destitemid] CInventory_CombineItemStacks_Request destitemid
-         * @property {number|null} [quantity] CInventory_CombineItemStacks_Request quantity
-         */
-    
-        /**
-         * Constructs a new CInventory_CombineItemStacks_Request.
-         * @exports CInventory_CombineItemStacks_Request
-         * @classdesc Represents a CInventory_CombineItemStacks_Request.
-         * @implements ICInventory_CombineItemStacks_Request
-         * @constructor
-         * @param {ICInventory_CombineItemStacks_Request=} [properties] Properties to set
-         */
-        function CInventory_CombineItemStacks_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_CombineItemStacks_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_CombineItemStacks_Request
-         * @instance
-         */
-        CInventory_CombineItemStacks_Request.prototype.appid = 0;
-    
-        /**
-         * CInventory_CombineItemStacks_Request fromitemid.
-         * @member {number|Long} fromitemid
-         * @memberof CInventory_CombineItemStacks_Request
-         * @instance
-         */
-        CInventory_CombineItemStacks_Request.prototype.fromitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_CombineItemStacks_Request destitemid.
-         * @member {number|Long} destitemid
-         * @memberof CInventory_CombineItemStacks_Request
-         * @instance
-         */
-        CInventory_CombineItemStacks_Request.prototype.destitemid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_CombineItemStacks_Request quantity.
-         * @member {number} quantity
-         * @memberof CInventory_CombineItemStacks_Request
-         * @instance
-         */
-        CInventory_CombineItemStacks_Request.prototype.quantity = 0;
-    
-        /**
-         * Creates a new CInventory_CombineItemStacks_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {ICInventory_CombineItemStacks_Request=} [properties] Properties to set
-         * @returns {CInventory_CombineItemStacks_Request} CInventory_CombineItemStacks_Request instance
-         */
-        CInventory_CombineItemStacks_Request.create = function create(properties) {
-            return new CInventory_CombineItemStacks_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_CombineItemStacks_Request message. Does not implicitly {@link CInventory_CombineItemStacks_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {ICInventory_CombineItemStacks_Request} message CInventory_CombineItemStacks_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_CombineItemStacks_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.fromitemid != null && message.hasOwnProperty("fromitemid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.fromitemid);
-            if (message.destitemid != null && message.hasOwnProperty("destitemid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.destitemid);
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.quantity);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_CombineItemStacks_Request message, length delimited. Does not implicitly {@link CInventory_CombineItemStacks_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {ICInventory_CombineItemStacks_Request} message CInventory_CombineItemStacks_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_CombineItemStacks_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_CombineItemStacks_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_CombineItemStacks_Request} CInventory_CombineItemStacks_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_CombineItemStacks_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_CombineItemStacks_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.fromitemid = reader.uint64();
-                    break;
-                case 3:
-                    message.destitemid = reader.uint64();
-                    break;
-                case 4:
-                    message.quantity = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_CombineItemStacks_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_CombineItemStacks_Request} CInventory_CombineItemStacks_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_CombineItemStacks_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_CombineItemStacks_Request message.
-         * @function verify
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_CombineItemStacks_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.fromitemid != null && message.hasOwnProperty("fromitemid"))
-                if (!$util.isInteger(message.fromitemid) && !(message.fromitemid && $util.isInteger(message.fromitemid.low) && $util.isInteger(message.fromitemid.high)))
-                    return "fromitemid: integer|Long expected";
-            if (message.destitemid != null && message.hasOwnProperty("destitemid"))
-                if (!$util.isInteger(message.destitemid) && !(message.destitemid && $util.isInteger(message.destitemid.low) && $util.isInteger(message.destitemid.high)))
-                    return "destitemid: integer|Long expected";
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                if (!$util.isInteger(message.quantity))
-                    return "quantity: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_CombineItemStacks_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_CombineItemStacks_Request} CInventory_CombineItemStacks_Request
-         */
-        CInventory_CombineItemStacks_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_CombineItemStacks_Request)
-                return object;
-            var message = new $root.CInventory_CombineItemStacks_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.fromitemid != null)
-                if ($util.Long)
-                    (message.fromitemid = $util.Long.fromValue(object.fromitemid)).unsigned = true;
-                else if (typeof object.fromitemid === "string")
-                    message.fromitemid = parseInt(object.fromitemid, 10);
-                else if (typeof object.fromitemid === "number")
-                    message.fromitemid = object.fromitemid;
-                else if (typeof object.fromitemid === "object")
-                    message.fromitemid = new $util.LongBits(object.fromitemid.low >>> 0, object.fromitemid.high >>> 0).toNumber(true);
-            if (object.destitemid != null)
-                if ($util.Long)
-                    (message.destitemid = $util.Long.fromValue(object.destitemid)).unsigned = true;
-                else if (typeof object.destitemid === "string")
-                    message.destitemid = parseInt(object.destitemid, 10);
-                else if (typeof object.destitemid === "number")
-                    message.destitemid = object.destitemid;
-                else if (typeof object.destitemid === "object")
-                    message.destitemid = new $util.LongBits(object.destitemid.low >>> 0, object.destitemid.high >>> 0).toNumber(true);
-            if (object.quantity != null)
-                message.quantity = object.quantity >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_CombineItemStacks_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_CombineItemStacks_Request
-         * @static
-         * @param {CInventory_CombineItemStacks_Request} message CInventory_CombineItemStacks_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_CombineItemStacks_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.fromitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.fromitemid = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.destitemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.destitemid = options.longs === String ? "0" : 0;
-                object.quantity = 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.fromitemid != null && message.hasOwnProperty("fromitemid"))
-                if (typeof message.fromitemid === "number")
-                    object.fromitemid = options.longs === String ? String(message.fromitemid) : message.fromitemid;
-                else
-                    object.fromitemid = options.longs === String ? $util.Long.prototype.toString.call(message.fromitemid) : options.longs === Number ? new $util.LongBits(message.fromitemid.low >>> 0, message.fromitemid.high >>> 0).toNumber(true) : message.fromitemid;
-            if (message.destitemid != null && message.hasOwnProperty("destitemid"))
-                if (typeof message.destitemid === "number")
-                    object.destitemid = options.longs === String ? String(message.destitemid) : message.destitemid;
-                else
-                    object.destitemid = options.longs === String ? $util.Long.prototype.toString.call(message.destitemid) : options.longs === Number ? new $util.LongBits(message.destitemid.low >>> 0, message.destitemid.high >>> 0).toNumber(true) : message.destitemid;
-            if (message.quantity != null && message.hasOwnProperty("quantity"))
-                object.quantity = message.quantity;
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_CombineItemStacks_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_CombineItemStacks_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_CombineItemStacks_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_CombineItemStacks_Request;
-    })();
-    
-    $root.CInventory_GetItemDefMeta_Request = (function() {
-    
-        /**
-         * Properties of a CInventory_GetItemDefMeta_Request.
-         * @exports ICInventory_GetItemDefMeta_Request
-         * @interface ICInventory_GetItemDefMeta_Request
-         * @property {number|null} [appid] CInventory_GetItemDefMeta_Request appid
-         */
-    
-        /**
-         * Constructs a new CInventory_GetItemDefMeta_Request.
-         * @exports CInventory_GetItemDefMeta_Request
-         * @classdesc Represents a CInventory_GetItemDefMeta_Request.
-         * @implements ICInventory_GetItemDefMeta_Request
-         * @constructor
-         * @param {ICInventory_GetItemDefMeta_Request=} [properties] Properties to set
-         */
-        function CInventory_GetItemDefMeta_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_GetItemDefMeta_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @instance
-         */
-        CInventory_GetItemDefMeta_Request.prototype.appid = 0;
-    
-        /**
-         * Creates a new CInventory_GetItemDefMeta_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {ICInventory_GetItemDefMeta_Request=} [properties] Properties to set
-         * @returns {CInventory_GetItemDefMeta_Request} CInventory_GetItemDefMeta_Request instance
-         */
-        CInventory_GetItemDefMeta_Request.create = function create(properties) {
-            return new CInventory_GetItemDefMeta_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetItemDefMeta_Request message. Does not implicitly {@link CInventory_GetItemDefMeta_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {ICInventory_GetItemDefMeta_Request} message CInventory_GetItemDefMeta_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetItemDefMeta_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetItemDefMeta_Request message, length delimited. Does not implicitly {@link CInventory_GetItemDefMeta_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {ICInventory_GetItemDefMeta_Request} message CInventory_GetItemDefMeta_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetItemDefMeta_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_GetItemDefMeta_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetItemDefMeta_Request} CInventory_GetItemDefMeta_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetItemDefMeta_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetItemDefMeta_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.appid = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_GetItemDefMeta_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetItemDefMeta_Request} CInventory_GetItemDefMeta_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetItemDefMeta_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_GetItemDefMeta_Request message.
-         * @function verify
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_GetItemDefMeta_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_GetItemDefMeta_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetItemDefMeta_Request} CInventory_GetItemDefMeta_Request
-         */
-        CInventory_GetItemDefMeta_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetItemDefMeta_Request)
-                return object;
-            var message = new $root.CInventory_GetItemDefMeta_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_GetItemDefMeta_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_GetItemDefMeta_Request
-         * @static
-         * @param {CInventory_GetItemDefMeta_Request} message CInventory_GetItemDefMeta_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_GetItemDefMeta_Request.toObject = function toObject(message, options) {
+        CParties_CreateBeacon_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
-                object.appid = 0;
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
             return object;
         };
     
         /**
-         * Converts this CInventory_GetItemDefMeta_Request to JSON.
+         * Converts this CParties_CreateBeacon_Response to JSON.
          * @function toJSON
-         * @memberof CInventory_GetItemDefMeta_Request
+         * @memberof CParties_CreateBeacon_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_GetItemDefMeta_Request.prototype.toJSON = function toJSON() {
+        CParties_CreateBeacon_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_GetItemDefMeta_Request;
+        return CParties_CreateBeacon_Response;
     })();
     
-    $root.CInventory_GetItemDefMeta_Response = (function() {
+    $root.CParties_OnReservationCompleted_Request = (function() {
     
         /**
-         * Properties of a CInventory_GetItemDefMeta_Response.
-         * @exports ICInventory_GetItemDefMeta_Response
-         * @interface ICInventory_GetItemDefMeta_Response
-         * @property {number|null} [modified] CInventory_GetItemDefMeta_Response modified
-         * @property {string|null} [digest] CInventory_GetItemDefMeta_Response digest
+         * Properties of a CParties_OnReservationCompleted_Request.
+         * @exports ICParties_OnReservationCompleted_Request
+         * @interface ICParties_OnReservationCompleted_Request
+         * @property {number|Long|null} [beacon_id] CParties_OnReservationCompleted_Request beacon_id
+         * @property {number|Long|null} [user_steamid] CParties_OnReservationCompleted_Request user_steamid
          */
     
         /**
-         * Constructs a new CInventory_GetItemDefMeta_Response.
-         * @exports CInventory_GetItemDefMeta_Response
-         * @classdesc Represents a CInventory_GetItemDefMeta_Response.
-         * @implements ICInventory_GetItemDefMeta_Response
+         * Constructs a new CParties_OnReservationCompleted_Request.
+         * @exports CParties_OnReservationCompleted_Request
+         * @classdesc Represents a CParties_OnReservationCompleted_Request.
+         * @implements ICParties_OnReservationCompleted_Request
          * @constructor
-         * @param {ICInventory_GetItemDefMeta_Response=} [properties] Properties to set
+         * @param {ICParties_OnReservationCompleted_Request=} [properties] Properties to set
          */
-        function CInventory_GetItemDefMeta_Response(properties) {
+        function CParties_OnReservationCompleted_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3987,88 +1227,88 @@
         }
     
         /**
-         * CInventory_GetItemDefMeta_Response modified.
-         * @member {number} modified
-         * @memberof CInventory_GetItemDefMeta_Response
+         * CParties_OnReservationCompleted_Request beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_OnReservationCompleted_Request
          * @instance
          */
-        CInventory_GetItemDefMeta_Response.prototype.modified = 0;
+        CParties_OnReservationCompleted_Request.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventory_GetItemDefMeta_Response digest.
-         * @member {string} digest
-         * @memberof CInventory_GetItemDefMeta_Response
+         * CParties_OnReservationCompleted_Request user_steamid.
+         * @member {number|Long} user_steamid
+         * @memberof CParties_OnReservationCompleted_Request
          * @instance
          */
-        CInventory_GetItemDefMeta_Response.prototype.digest = "";
+        CParties_OnReservationCompleted_Request.prototype.user_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * Creates a new CInventory_GetItemDefMeta_Response instance using the specified properties.
+         * Creates a new CParties_OnReservationCompleted_Request instance using the specified properties.
          * @function create
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
-         * @param {ICInventory_GetItemDefMeta_Response=} [properties] Properties to set
-         * @returns {CInventory_GetItemDefMeta_Response} CInventory_GetItemDefMeta_Response instance
+         * @param {ICParties_OnReservationCompleted_Request=} [properties] Properties to set
+         * @returns {CParties_OnReservationCompleted_Request} CParties_OnReservationCompleted_Request instance
          */
-        CInventory_GetItemDefMeta_Response.create = function create(properties) {
-            return new CInventory_GetItemDefMeta_Response(properties);
+        CParties_OnReservationCompleted_Request.create = function create(properties) {
+            return new CParties_OnReservationCompleted_Request(properties);
         };
     
         /**
-         * Encodes the specified CInventory_GetItemDefMeta_Response message. Does not implicitly {@link CInventory_GetItemDefMeta_Response.verify|verify} messages.
+         * Encodes the specified CParties_OnReservationCompleted_Request message. Does not implicitly {@link CParties_OnReservationCompleted_Request.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
-         * @param {ICInventory_GetItemDefMeta_Response} message CInventory_GetItemDefMeta_Response message or plain object to encode
+         * @param {ICParties_OnReservationCompleted_Request} message CParties_OnReservationCompleted_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetItemDefMeta_Response.encode = function encode(message, writer) {
+        CParties_OnReservationCompleted_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.modified != null && message.hasOwnProperty("modified"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.modified);
-            if (message.digest != null && message.hasOwnProperty("digest"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.digest);
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_GetItemDefMeta_Response message, length delimited. Does not implicitly {@link CInventory_GetItemDefMeta_Response.verify|verify} messages.
+         * Encodes the specified CParties_OnReservationCompleted_Request message, length delimited. Does not implicitly {@link CParties_OnReservationCompleted_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
-         * @param {ICInventory_GetItemDefMeta_Response} message CInventory_GetItemDefMeta_Response message or plain object to encode
+         * @param {ICParties_OnReservationCompleted_Request} message CParties_OnReservationCompleted_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetItemDefMeta_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_OnReservationCompleted_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_GetItemDefMeta_Response message from the specified reader or buffer.
+         * Decodes a CParties_OnReservationCompleted_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetItemDefMeta_Response} CInventory_GetItemDefMeta_Response
+         * @returns {CParties_OnReservationCompleted_Request} CParties_OnReservationCompleted_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetItemDefMeta_Response.decode = function decode(reader, length) {
+        CParties_OnReservationCompleted_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetItemDefMeta_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_OnReservationCompleted_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.modified = reader.uint32();
+                    message.beacon_id = reader.uint64();
                     break;
                 case 2:
-                    message.digest = reader.string();
+                    message.user_steamid = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4079,115 +1319,144 @@
         };
     
         /**
-         * Decodes a CInventory_GetItemDefMeta_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_OnReservationCompleted_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetItemDefMeta_Response} CInventory_GetItemDefMeta_Response
+         * @returns {CParties_OnReservationCompleted_Request} CParties_OnReservationCompleted_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetItemDefMeta_Response.decodeDelimited = function decodeDelimited(reader) {
+        CParties_OnReservationCompleted_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_GetItemDefMeta_Response message.
+         * Verifies a CParties_OnReservationCompleted_Request message.
          * @function verify
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_GetItemDefMeta_Response.verify = function verify(message) {
+        CParties_OnReservationCompleted_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.modified != null && message.hasOwnProperty("modified"))
-                if (!$util.isInteger(message.modified))
-                    return "modified: integer expected";
-            if (message.digest != null && message.hasOwnProperty("digest"))
-                if (!$util.isString(message.digest))
-                    return "digest: string expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (!$util.isInteger(message.user_steamid) && !(message.user_steamid && $util.isInteger(message.user_steamid.low) && $util.isInteger(message.user_steamid.high)))
+                    return "user_steamid: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_GetItemDefMeta_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_OnReservationCompleted_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetItemDefMeta_Response} CInventory_GetItemDefMeta_Response
+         * @returns {CParties_OnReservationCompleted_Request} CParties_OnReservationCompleted_Request
          */
-        CInventory_GetItemDefMeta_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetItemDefMeta_Response)
+        CParties_OnReservationCompleted_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_OnReservationCompleted_Request)
                 return object;
-            var message = new $root.CInventory_GetItemDefMeta_Response();
-            if (object.modified != null)
-                message.modified = object.modified >>> 0;
-            if (object.digest != null)
-                message.digest = String(object.digest);
+            var message = new $root.CParties_OnReservationCompleted_Request();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            if (object.user_steamid != null)
+                if ($util.Long)
+                    (message.user_steamid = $util.Long.fromValue(object.user_steamid)).unsigned = false;
+                else if (typeof object.user_steamid === "string")
+                    message.user_steamid = parseInt(object.user_steamid, 10);
+                else if (typeof object.user_steamid === "number")
+                    message.user_steamid = object.user_steamid;
+                else if (typeof object.user_steamid === "object")
+                    message.user_steamid = new $util.LongBits(object.user_steamid.low >>> 0, object.user_steamid.high >>> 0).toNumber();
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_GetItemDefMeta_Response message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_OnReservationCompleted_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @static
-         * @param {CInventory_GetItemDefMeta_Response} message CInventory_GetItemDefMeta_Response
+         * @param {CParties_OnReservationCompleted_Request} message CParties_OnReservationCompleted_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_GetItemDefMeta_Response.toObject = function toObject(message, options) {
+        CParties_OnReservationCompleted_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.modified = 0;
-                object.digest = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.user_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.user_steamid = options.longs === String ? "0" : 0;
             }
-            if (message.modified != null && message.hasOwnProperty("modified"))
-                object.modified = message.modified;
-            if (message.digest != null && message.hasOwnProperty("digest"))
-                object.digest = message.digest;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (typeof message.user_steamid === "number")
+                    object.user_steamid = options.longs === String ? String(message.user_steamid) : message.user_steamid;
+                else
+                    object.user_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.user_steamid) : options.longs === Number ? new $util.LongBits(message.user_steamid.low >>> 0, message.user_steamid.high >>> 0).toNumber() : message.user_steamid;
             return object;
         };
     
         /**
-         * Converts this CInventory_GetItemDefMeta_Response to JSON.
+         * Converts this CParties_OnReservationCompleted_Request to JSON.
          * @function toJSON
-         * @memberof CInventory_GetItemDefMeta_Response
+         * @memberof CParties_OnReservationCompleted_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_GetItemDefMeta_Response.prototype.toJSON = function toJSON() {
+        CParties_OnReservationCompleted_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_GetItemDefMeta_Response;
+        return CParties_OnReservationCompleted_Request;
     })();
     
-    $root.CInventory_GetUserPurchaseInfo_Request = (function() {
+    $root.CParties_OnReservationCompleted_Response = (function() {
     
         /**
-         * Properties of a CInventory_GetUserPurchaseInfo_Request.
-         * @exports ICInventory_GetUserPurchaseInfo_Request
-         * @interface ICInventory_GetUserPurchaseInfo_Request
+         * Properties of a CParties_OnReservationCompleted_Response.
+         * @exports ICParties_OnReservationCompleted_Response
+         * @interface ICParties_OnReservationCompleted_Response
+         * @property {number|Long|null} [beacon_id] CParties_OnReservationCompleted_Response beacon_id
          */
     
         /**
-         * Constructs a new CInventory_GetUserPurchaseInfo_Request.
-         * @exports CInventory_GetUserPurchaseInfo_Request
-         * @classdesc Represents a CInventory_GetUserPurchaseInfo_Request.
-         * @implements ICInventory_GetUserPurchaseInfo_Request
+         * Constructs a new CParties_OnReservationCompleted_Response.
+         * @exports CParties_OnReservationCompleted_Response
+         * @classdesc Represents a CParties_OnReservationCompleted_Response.
+         * @implements ICParties_OnReservationCompleted_Response
          * @constructor
-         * @param {ICInventory_GetUserPurchaseInfo_Request=} [properties] Properties to set
+         * @param {ICParties_OnReservationCompleted_Response=} [properties] Properties to set
          */
-        function CInventory_GetUserPurchaseInfo_Request(properties) {
+        function CParties_OnReservationCompleted_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4195,236 +1464,75 @@
         }
     
         /**
-         * Creates a new CInventory_GetUserPurchaseInfo_Request instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Request=} [properties] Properties to set
-         * @returns {CInventory_GetUserPurchaseInfo_Request} CInventory_GetUserPurchaseInfo_Request instance
+         * CParties_OnReservationCompleted_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_OnReservationCompleted_Response
+         * @instance
          */
-        CInventory_GetUserPurchaseInfo_Request.create = function create(properties) {
-            return new CInventory_GetUserPurchaseInfo_Request(properties);
+        CParties_OnReservationCompleted_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_OnReservationCompleted_Response instance using the specified properties.
+         * @function create
+         * @memberof CParties_OnReservationCompleted_Response
+         * @static
+         * @param {ICParties_OnReservationCompleted_Response=} [properties] Properties to set
+         * @returns {CParties_OnReservationCompleted_Response} CParties_OnReservationCompleted_Response instance
+         */
+        CParties_OnReservationCompleted_Response.create = function create(properties) {
+            return new CParties_OnReservationCompleted_Response(properties);
         };
     
         /**
-         * Encodes the specified CInventory_GetUserPurchaseInfo_Request message. Does not implicitly {@link CInventory_GetUserPurchaseInfo_Request.verify|verify} messages.
+         * Encodes the specified CParties_OnReservationCompleted_Response message. Does not implicitly {@link CParties_OnReservationCompleted_Response.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_GetUserPurchaseInfo_Request
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Request} message CInventory_GetUserPurchaseInfo_Request message or plain object to encode
+         * @param {ICParties_OnReservationCompleted_Response} message CParties_OnReservationCompleted_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetUserPurchaseInfo_Request.encode = function encode(message, writer) {
+        CParties_OnReservationCompleted_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_GetUserPurchaseInfo_Request message, length delimited. Does not implicitly {@link CInventory_GetUserPurchaseInfo_Request.verify|verify} messages.
+         * Encodes the specified CParties_OnReservationCompleted_Response message, length delimited. Does not implicitly {@link CParties_OnReservationCompleted_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_GetUserPurchaseInfo_Request
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Request} message CInventory_GetUserPurchaseInfo_Request message or plain object to encode
+         * @param {ICParties_OnReservationCompleted_Response} message CParties_OnReservationCompleted_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_GetUserPurchaseInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_OnReservationCompleted_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_GetUserPurchaseInfo_Request message from the specified reader or buffer.
+         * Decodes a CParties_OnReservationCompleted_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_GetUserPurchaseInfo_Request
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetUserPurchaseInfo_Request} CInventory_GetUserPurchaseInfo_Request
+         * @returns {CParties_OnReservationCompleted_Response} CParties_OnReservationCompleted_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetUserPurchaseInfo_Request.decode = function decode(reader, length) {
+        CParties_OnReservationCompleted_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetUserPurchaseInfo_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_GetUserPurchaseInfo_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetUserPurchaseInfo_Request} CInventory_GetUserPurchaseInfo_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetUserPurchaseInfo_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_GetUserPurchaseInfo_Request message.
-         * @function verify
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_GetUserPurchaseInfo_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_GetUserPurchaseInfo_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetUserPurchaseInfo_Request} CInventory_GetUserPurchaseInfo_Request
-         */
-        CInventory_GetUserPurchaseInfo_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetUserPurchaseInfo_Request)
-                return object;
-            return new $root.CInventory_GetUserPurchaseInfo_Request();
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_GetUserPurchaseInfo_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @static
-         * @param {CInventory_GetUserPurchaseInfo_Request} message CInventory_GetUserPurchaseInfo_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_GetUserPurchaseInfo_Request.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CInventory_GetUserPurchaseInfo_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_GetUserPurchaseInfo_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_GetUserPurchaseInfo_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CInventory_GetUserPurchaseInfo_Request;
-    })();
-    
-    $root.CInventory_GetUserPurchaseInfo_Response = (function() {
-    
-        /**
-         * Properties of a CInventory_GetUserPurchaseInfo_Response.
-         * @exports ICInventory_GetUserPurchaseInfo_Response
-         * @interface ICInventory_GetUserPurchaseInfo_Response
-         * @property {number|null} [ecurrency] CInventory_GetUserPurchaseInfo_Response ecurrency
-         */
-    
-        /**
-         * Constructs a new CInventory_GetUserPurchaseInfo_Response.
-         * @exports CInventory_GetUserPurchaseInfo_Response
-         * @classdesc Represents a CInventory_GetUserPurchaseInfo_Response.
-         * @implements ICInventory_GetUserPurchaseInfo_Response
-         * @constructor
-         * @param {ICInventory_GetUserPurchaseInfo_Response=} [properties] Properties to set
-         */
-        function CInventory_GetUserPurchaseInfo_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_GetUserPurchaseInfo_Response ecurrency.
-         * @member {number} ecurrency
-         * @memberof CInventory_GetUserPurchaseInfo_Response
-         * @instance
-         */
-        CInventory_GetUserPurchaseInfo_Response.prototype.ecurrency = 0;
-    
-        /**
-         * Creates a new CInventory_GetUserPurchaseInfo_Response instance using the specified properties.
-         * @function create
-         * @memberof CInventory_GetUserPurchaseInfo_Response
-         * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Response=} [properties] Properties to set
-         * @returns {CInventory_GetUserPurchaseInfo_Response} CInventory_GetUserPurchaseInfo_Response instance
-         */
-        CInventory_GetUserPurchaseInfo_Response.create = function create(properties) {
-            return new CInventory_GetUserPurchaseInfo_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetUserPurchaseInfo_Response message. Does not implicitly {@link CInventory_GetUserPurchaseInfo_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_GetUserPurchaseInfo_Response
-         * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Response} message CInventory_GetUserPurchaseInfo_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetUserPurchaseInfo_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ecurrency);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_GetUserPurchaseInfo_Response message, length delimited. Does not implicitly {@link CInventory_GetUserPurchaseInfo_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_GetUserPurchaseInfo_Response
-         * @static
-         * @param {ICInventory_GetUserPurchaseInfo_Response} message CInventory_GetUserPurchaseInfo_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_GetUserPurchaseInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_GetUserPurchaseInfo_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_GetUserPurchaseInfo_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_GetUserPurchaseInfo_Response} CInventory_GetUserPurchaseInfo_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_GetUserPurchaseInfo_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_GetUserPurchaseInfo_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_OnReservationCompleted_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ecurrency = reader.int32();
+                    message.beacon_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4435,110 +1543,122 @@
         };
     
         /**
-         * Decodes a CInventory_GetUserPurchaseInfo_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_OnReservationCompleted_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_GetUserPurchaseInfo_Response
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_GetUserPurchaseInfo_Response} CInventory_GetUserPurchaseInfo_Response
+         * @returns {CParties_OnReservationCompleted_Response} CParties_OnReservationCompleted_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_GetUserPurchaseInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+        CParties_OnReservationCompleted_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_GetUserPurchaseInfo_Response message.
+         * Verifies a CParties_OnReservationCompleted_Response message.
          * @function verify
-         * @memberof CInventory_GetUserPurchaseInfo_Response
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_GetUserPurchaseInfo_Response.verify = function verify(message) {
+        CParties_OnReservationCompleted_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
-                if (!$util.isInteger(message.ecurrency))
-                    return "ecurrency: integer expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_GetUserPurchaseInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_OnReservationCompleted_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_GetUserPurchaseInfo_Response
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_GetUserPurchaseInfo_Response} CInventory_GetUserPurchaseInfo_Response
+         * @returns {CParties_OnReservationCompleted_Response} CParties_OnReservationCompleted_Response
          */
-        CInventory_GetUserPurchaseInfo_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_GetUserPurchaseInfo_Response)
+        CParties_OnReservationCompleted_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_OnReservationCompleted_Response)
                 return object;
-            var message = new $root.CInventory_GetUserPurchaseInfo_Response();
-            if (object.ecurrency != null)
-                message.ecurrency = object.ecurrency | 0;
+            var message = new $root.CParties_OnReservationCompleted_Response();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_GetUserPurchaseInfo_Response message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_OnReservationCompleted_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_GetUserPurchaseInfo_Response
+         * @memberof CParties_OnReservationCompleted_Response
          * @static
-         * @param {CInventory_GetUserPurchaseInfo_Response} message CInventory_GetUserPurchaseInfo_Response
+         * @param {CParties_OnReservationCompleted_Response} message CParties_OnReservationCompleted_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_GetUserPurchaseInfo_Response.toObject = function toObject(message, options) {
+        CParties_OnReservationCompleted_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
-                object.ecurrency = 0;
-            if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
-                object.ecurrency = message.ecurrency;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
             return object;
         };
     
         /**
-         * Converts this CInventory_GetUserPurchaseInfo_Response to JSON.
+         * Converts this CParties_OnReservationCompleted_Response to JSON.
          * @function toJSON
-         * @memberof CInventory_GetUserPurchaseInfo_Response
+         * @memberof CParties_OnReservationCompleted_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_GetUserPurchaseInfo_Response.prototype.toJSON = function toJSON() {
+        CParties_OnReservationCompleted_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_GetUserPurchaseInfo_Response;
+        return CParties_OnReservationCompleted_Response;
     })();
     
-    $root.CInventory_PurchaseInit_Request = (function() {
+    $root.CParties_CancelReservation_Request = (function() {
     
         /**
-         * Properties of a CInventory_PurchaseInit_Request.
-         * @exports ICInventory_PurchaseInit_Request
-         * @interface ICInventory_PurchaseInit_Request
-         * @property {number|null} [appid] CInventory_PurchaseInit_Request appid
-         * @property {number|null} [language] CInventory_PurchaseInit_Request language
-         * @property {Array.<CInventory_PurchaseInit_Request.ILineItem>|null} [line_items] CInventory_PurchaseInit_Request line_items
+         * Properties of a CParties_CancelReservation_Request.
+         * @exports ICParties_CancelReservation_Request
+         * @interface ICParties_CancelReservation_Request
+         * @property {number|Long|null} [beacon_id] CParties_CancelReservation_Request beacon_id
+         * @property {number|Long|null} [user_steamid] CParties_CancelReservation_Request user_steamid
          */
     
         /**
-         * Constructs a new CInventory_PurchaseInit_Request.
-         * @exports CInventory_PurchaseInit_Request
-         * @classdesc Represents a CInventory_PurchaseInit_Request.
-         * @implements ICInventory_PurchaseInit_Request
+         * Constructs a new CParties_CancelReservation_Request.
+         * @exports CParties_CancelReservation_Request
+         * @classdesc Represents a CParties_CancelReservation_Request.
+         * @implements ICParties_CancelReservation_Request
          * @constructor
-         * @param {ICInventory_PurchaseInit_Request=} [properties] Properties to set
+         * @param {ICParties_CancelReservation_Request=} [properties] Properties to set
          */
-        function CInventory_PurchaseInit_Request(properties) {
-            this.line_items = [];
+        function CParties_CancelReservation_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4546,104 +1666,88 @@
         }
     
         /**
-         * CInventory_PurchaseInit_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_PurchaseInit_Request
+         * CParties_CancelReservation_Request beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_CancelReservation_Request
          * @instance
          */
-        CInventory_PurchaseInit_Request.prototype.appid = 0;
+        CParties_CancelReservation_Request.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventory_PurchaseInit_Request language.
-         * @member {number} language
-         * @memberof CInventory_PurchaseInit_Request
+         * CParties_CancelReservation_Request user_steamid.
+         * @member {number|Long} user_steamid
+         * @memberof CParties_CancelReservation_Request
          * @instance
          */
-        CInventory_PurchaseInit_Request.prototype.language = 0;
+        CParties_CancelReservation_Request.prototype.user_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CInventory_PurchaseInit_Request line_items.
-         * @member {Array.<CInventory_PurchaseInit_Request.ILineItem>} line_items
-         * @memberof CInventory_PurchaseInit_Request
-         * @instance
-         */
-        CInventory_PurchaseInit_Request.prototype.line_items = $util.emptyArray;
-    
-        /**
-         * Creates a new CInventory_PurchaseInit_Request instance using the specified properties.
+         * Creates a new CParties_CancelReservation_Request instance using the specified properties.
          * @function create
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
-         * @param {ICInventory_PurchaseInit_Request=} [properties] Properties to set
-         * @returns {CInventory_PurchaseInit_Request} CInventory_PurchaseInit_Request instance
+         * @param {ICParties_CancelReservation_Request=} [properties] Properties to set
+         * @returns {CParties_CancelReservation_Request} CParties_CancelReservation_Request instance
          */
-        CInventory_PurchaseInit_Request.create = function create(properties) {
-            return new CInventory_PurchaseInit_Request(properties);
+        CParties_CancelReservation_Request.create = function create(properties) {
+            return new CParties_CancelReservation_Request(properties);
         };
     
         /**
-         * Encodes the specified CInventory_PurchaseInit_Request message. Does not implicitly {@link CInventory_PurchaseInit_Request.verify|verify} messages.
+         * Encodes the specified CParties_CancelReservation_Request message. Does not implicitly {@link CParties_CancelReservation_Request.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
-         * @param {ICInventory_PurchaseInit_Request} message CInventory_PurchaseInit_Request message or plain object to encode
+         * @param {ICParties_CancelReservation_Request} message CParties_CancelReservation_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_PurchaseInit_Request.encode = function encode(message, writer) {
+        CParties_CancelReservation_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.language);
-            if (message.line_items != null && message.line_items.length)
-                for (var i = 0; i < message.line_items.length; ++i)
-                    $root.CInventory_PurchaseInit_Request.LineItem.encode(message.line_items[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_PurchaseInit_Request message, length delimited. Does not implicitly {@link CInventory_PurchaseInit_Request.verify|verify} messages.
+         * Encodes the specified CParties_CancelReservation_Request message, length delimited. Does not implicitly {@link CParties_CancelReservation_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
-         * @param {ICInventory_PurchaseInit_Request} message CInventory_PurchaseInit_Request message or plain object to encode
+         * @param {ICParties_CancelReservation_Request} message CParties_CancelReservation_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_PurchaseInit_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_CancelReservation_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_PurchaseInit_Request message from the specified reader or buffer.
+         * Decodes a CParties_CancelReservation_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_PurchaseInit_Request} CInventory_PurchaseInit_Request
+         * @returns {CParties_CancelReservation_Request} CParties_CancelReservation_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_PurchaseInit_Request.decode = function decode(reader, length) {
+        CParties_CancelReservation_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_PurchaseInit_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_CancelReservation_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.appid = reader.uint32();
+                    message.beacon_id = reader.uint64();
                     break;
                 case 2:
-                    message.language = reader.int32();
-                    break;
-                case 3:
-                    if (!(message.line_items && message.line_items.length))
-                        message.line_items = [];
-                    message.line_items.push($root.CInventory_PurchaseInit_Request.LineItem.decode(reader, reader.uint32()));
+                    message.user_steamid = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4654,606 +1758,144 @@
         };
     
         /**
-         * Decodes a CInventory_PurchaseInit_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_CancelReservation_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_PurchaseInit_Request} CInventory_PurchaseInit_Request
+         * @returns {CParties_CancelReservation_Request} CParties_CancelReservation_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_PurchaseInit_Request.decodeDelimited = function decodeDelimited(reader) {
+        CParties_CancelReservation_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_PurchaseInit_Request message.
+         * Verifies a CParties_CancelReservation_Request message.
          * @function verify
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_PurchaseInit_Request.verify = function verify(message) {
+        CParties_CancelReservation_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isInteger(message.language))
-                    return "language: integer expected";
-            if (message.line_items != null && message.hasOwnProperty("line_items")) {
-                if (!Array.isArray(message.line_items))
-                    return "line_items: array expected";
-                for (var i = 0; i < message.line_items.length; ++i) {
-                    var error = $root.CInventory_PurchaseInit_Request.LineItem.verify(message.line_items[i]);
-                    if (error)
-                        return "line_items." + error;
-                }
-            }
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (!$util.isInteger(message.user_steamid) && !(message.user_steamid && $util.isInteger(message.user_steamid.low) && $util.isInteger(message.user_steamid.high)))
+                    return "user_steamid: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_PurchaseInit_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_CancelReservation_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_PurchaseInit_Request} CInventory_PurchaseInit_Request
+         * @returns {CParties_CancelReservation_Request} CParties_CancelReservation_Request
          */
-        CInventory_PurchaseInit_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_PurchaseInit_Request)
+        CParties_CancelReservation_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_CancelReservation_Request)
                 return object;
-            var message = new $root.CInventory_PurchaseInit_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.language != null)
-                message.language = object.language | 0;
-            if (object.line_items) {
-                if (!Array.isArray(object.line_items))
-                    throw TypeError(".CInventory_PurchaseInit_Request.line_items: array expected");
-                message.line_items = [];
-                for (var i = 0; i < object.line_items.length; ++i) {
-                    if (typeof object.line_items[i] !== "object")
-                        throw TypeError(".CInventory_PurchaseInit_Request.line_items: object expected");
-                    message.line_items[i] = $root.CInventory_PurchaseInit_Request.LineItem.fromObject(object.line_items[i]);
-                }
-            }
+            var message = new $root.CParties_CancelReservation_Request();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            if (object.user_steamid != null)
+                if ($util.Long)
+                    (message.user_steamid = $util.Long.fromValue(object.user_steamid)).unsigned = false;
+                else if (typeof object.user_steamid === "string")
+                    message.user_steamid = parseInt(object.user_steamid, 10);
+                else if (typeof object.user_steamid === "number")
+                    message.user_steamid = object.user_steamid;
+                else if (typeof object.user_steamid === "object")
+                    message.user_steamid = new $util.LongBits(object.user_steamid.low >>> 0, object.user_steamid.high >>> 0).toNumber();
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_PurchaseInit_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_CancelReservation_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_PurchaseInit_Request
+         * @memberof CParties_CancelReservation_Request
          * @static
-         * @param {CInventory_PurchaseInit_Request} message CInventory_PurchaseInit_Request
+         * @param {CParties_CancelReservation_Request} message CParties_CancelReservation_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_PurchaseInit_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.line_items = [];
-            if (options.defaults) {
-                object.appid = 0;
-                object.language = 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.line_items && message.line_items.length) {
-                object.line_items = [];
-                for (var j = 0; j < message.line_items.length; ++j)
-                    object.line_items[j] = $root.CInventory_PurchaseInit_Request.LineItem.toObject(message.line_items[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CInventory_PurchaseInit_Request to JSON.
-         * @function toJSON
-         * @memberof CInventory_PurchaseInit_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CInventory_PurchaseInit_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CInventory_PurchaseInit_Request.LineItem = (function() {
-    
-            /**
-             * Properties of a LineItem.
-             * @memberof CInventory_PurchaseInit_Request
-             * @interface ILineItem
-             * @property {number|Long|null} [itemdefid] LineItem itemdefid
-             * @property {number|null} [quantity] LineItem quantity
-             */
-    
-            /**
-             * Constructs a new LineItem.
-             * @memberof CInventory_PurchaseInit_Request
-             * @classdesc Represents a LineItem.
-             * @implements ILineItem
-             * @constructor
-             * @param {CInventory_PurchaseInit_Request.ILineItem=} [properties] Properties to set
-             */
-            function LineItem(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * LineItem itemdefid.
-             * @member {number|Long} itemdefid
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @instance
-             */
-            LineItem.prototype.itemdefid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-            /**
-             * LineItem quantity.
-             * @member {number} quantity
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @instance
-             */
-            LineItem.prototype.quantity = 0;
-    
-            /**
-             * Creates a new LineItem instance using the specified properties.
-             * @function create
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {CInventory_PurchaseInit_Request.ILineItem=} [properties] Properties to set
-             * @returns {CInventory_PurchaseInit_Request.LineItem} LineItem instance
-             */
-            LineItem.create = function create(properties) {
-                return new LineItem(properties);
-            };
-    
-            /**
-             * Encodes the specified LineItem message. Does not implicitly {@link CInventory_PurchaseInit_Request.LineItem.verify|verify} messages.
-             * @function encode
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {CInventory_PurchaseInit_Request.ILineItem} message LineItem message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            LineItem.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.itemdefid);
-                if (message.quantity != null && message.hasOwnProperty("quantity"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.quantity);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified LineItem message, length delimited. Does not implicitly {@link CInventory_PurchaseInit_Request.LineItem.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {CInventory_PurchaseInit_Request.ILineItem} message LineItem message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            LineItem.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a LineItem message from the specified reader or buffer.
-             * @function decode
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CInventory_PurchaseInit_Request.LineItem} LineItem
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            LineItem.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_PurchaseInit_Request.LineItem();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.itemdefid = reader.uint64();
-                        break;
-                    case 2:
-                        message.quantity = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a LineItem message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CInventory_PurchaseInit_Request.LineItem} LineItem
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            LineItem.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a LineItem message.
-             * @function verify
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            LineItem.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                    if (!$util.isInteger(message.itemdefid) && !(message.itemdefid && $util.isInteger(message.itemdefid.low) && $util.isInteger(message.itemdefid.high)))
-                        return "itemdefid: integer|Long expected";
-                if (message.quantity != null && message.hasOwnProperty("quantity"))
-                    if (!$util.isInteger(message.quantity))
-                        return "quantity: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a LineItem message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CInventory_PurchaseInit_Request.LineItem} LineItem
-             */
-            LineItem.fromObject = function fromObject(object) {
-                if (object instanceof $root.CInventory_PurchaseInit_Request.LineItem)
-                    return object;
-                var message = new $root.CInventory_PurchaseInit_Request.LineItem();
-                if (object.itemdefid != null)
-                    if ($util.Long)
-                        (message.itemdefid = $util.Long.fromValue(object.itemdefid)).unsigned = true;
-                    else if (typeof object.itemdefid === "string")
-                        message.itemdefid = parseInt(object.itemdefid, 10);
-                    else if (typeof object.itemdefid === "number")
-                        message.itemdefid = object.itemdefid;
-                    else if (typeof object.itemdefid === "object")
-                        message.itemdefid = new $util.LongBits(object.itemdefid.low >>> 0, object.itemdefid.high >>> 0).toNumber(true);
-                if (object.quantity != null)
-                    message.quantity = object.quantity >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a LineItem message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @static
-             * @param {CInventory_PurchaseInit_Request.LineItem} message LineItem
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            LineItem.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    if ($util.Long) {
-                        var long = new $util.Long(0, 0, true);
-                        object.itemdefid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                    } else
-                        object.itemdefid = options.longs === String ? "0" : 0;
-                    object.quantity = 0;
-                }
-                if (message.itemdefid != null && message.hasOwnProperty("itemdefid"))
-                    if (typeof message.itemdefid === "number")
-                        object.itemdefid = options.longs === String ? String(message.itemdefid) : message.itemdefid;
-                    else
-                        object.itemdefid = options.longs === String ? $util.Long.prototype.toString.call(message.itemdefid) : options.longs === Number ? new $util.LongBits(message.itemdefid.low >>> 0, message.itemdefid.high >>> 0).toNumber(true) : message.itemdefid;
-                if (message.quantity != null && message.hasOwnProperty("quantity"))
-                    object.quantity = message.quantity;
-                return object;
-            };
-    
-            /**
-             * Converts this LineItem to JSON.
-             * @function toJSON
-             * @memberof CInventory_PurchaseInit_Request.LineItem
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            LineItem.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return LineItem;
-        })();
-    
-        return CInventory_PurchaseInit_Request;
-    })();
-    
-    $root.CInventory_PurchaseInit_Response = (function() {
-    
-        /**
-         * Properties of a CInventory_PurchaseInit_Response.
-         * @exports ICInventory_PurchaseInit_Response
-         * @interface ICInventory_PurchaseInit_Response
-         * @property {number|Long|null} [orderid] CInventory_PurchaseInit_Response orderid
-         * @property {number|Long|null} [transid] CInventory_PurchaseInit_Response transid
-         */
-    
-        /**
-         * Constructs a new CInventory_PurchaseInit_Response.
-         * @exports CInventory_PurchaseInit_Response
-         * @classdesc Represents a CInventory_PurchaseInit_Response.
-         * @implements ICInventory_PurchaseInit_Response
-         * @constructor
-         * @param {ICInventory_PurchaseInit_Response=} [properties] Properties to set
-         */
-        function CInventory_PurchaseInit_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CInventory_PurchaseInit_Response orderid.
-         * @member {number|Long} orderid
-         * @memberof CInventory_PurchaseInit_Response
-         * @instance
-         */
-        CInventory_PurchaseInit_Response.prototype.orderid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CInventory_PurchaseInit_Response transid.
-         * @member {number|Long} transid
-         * @memberof CInventory_PurchaseInit_Response
-         * @instance
-         */
-        CInventory_PurchaseInit_Response.prototype.transid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_PurchaseInit_Response instance using the specified properties.
-         * @function create
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {ICInventory_PurchaseInit_Response=} [properties] Properties to set
-         * @returns {CInventory_PurchaseInit_Response} CInventory_PurchaseInit_Response instance
-         */
-        CInventory_PurchaseInit_Response.create = function create(properties) {
-            return new CInventory_PurchaseInit_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CInventory_PurchaseInit_Response message. Does not implicitly {@link CInventory_PurchaseInit_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {ICInventory_PurchaseInit_Response} message CInventory_PurchaseInit_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_PurchaseInit_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.orderid);
-            if (message.transid != null && message.hasOwnProperty("transid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.transid);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CInventory_PurchaseInit_Response message, length delimited. Does not implicitly {@link CInventory_PurchaseInit_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {ICInventory_PurchaseInit_Response} message CInventory_PurchaseInit_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CInventory_PurchaseInit_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CInventory_PurchaseInit_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_PurchaseInit_Response} CInventory_PurchaseInit_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_PurchaseInit_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_PurchaseInit_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.orderid = reader.uint64();
-                    break;
-                case 2:
-                    message.transid = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CInventory_PurchaseInit_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_PurchaseInit_Response} CInventory_PurchaseInit_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CInventory_PurchaseInit_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CInventory_PurchaseInit_Response message.
-         * @function verify
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CInventory_PurchaseInit_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                if (!$util.isInteger(message.orderid) && !(message.orderid && $util.isInteger(message.orderid.low) && $util.isInteger(message.orderid.high)))
-                    return "orderid: integer|Long expected";
-            if (message.transid != null && message.hasOwnProperty("transid"))
-                if (!$util.isInteger(message.transid) && !(message.transid && $util.isInteger(message.transid.low) && $util.isInteger(message.transid.high)))
-                    return "transid: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CInventory_PurchaseInit_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_PurchaseInit_Response} CInventory_PurchaseInit_Response
-         */
-        CInventory_PurchaseInit_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_PurchaseInit_Response)
-                return object;
-            var message = new $root.CInventory_PurchaseInit_Response();
-            if (object.orderid != null)
-                if ($util.Long)
-                    (message.orderid = $util.Long.fromValue(object.orderid)).unsigned = true;
-                else if (typeof object.orderid === "string")
-                    message.orderid = parseInt(object.orderid, 10);
-                else if (typeof object.orderid === "number")
-                    message.orderid = object.orderid;
-                else if (typeof object.orderid === "object")
-                    message.orderid = new $util.LongBits(object.orderid.low >>> 0, object.orderid.high >>> 0).toNumber(true);
-            if (object.transid != null)
-                if ($util.Long)
-                    (message.transid = $util.Long.fromValue(object.transid)).unsigned = true;
-                else if (typeof object.transid === "string")
-                    message.transid = parseInt(object.transid, 10);
-                else if (typeof object.transid === "number")
-                    message.transid = object.transid;
-                else if (typeof object.transid === "object")
-                    message.transid = new $util.LongBits(object.transid.low >>> 0, object.transid.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CInventory_PurchaseInit_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventory_PurchaseInit_Response
-         * @static
-         * @param {CInventory_PurchaseInit_Response} message CInventory_PurchaseInit_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CInventory_PurchaseInit_Response.toObject = function toObject(message, options) {
+        CParties_CancelReservation_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.orderid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.orderid = options.longs === String ? "0" : 0;
+                    object.beacon_id = options.longs === String ? "0" : 0;
                 if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.transid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    var long = new $util.Long(0, 0, false);
+                    object.user_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.transid = options.longs === String ? "0" : 0;
+                    object.user_steamid = options.longs === String ? "0" : 0;
             }
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                if (typeof message.orderid === "number")
-                    object.orderid = options.longs === String ? String(message.orderid) : message.orderid;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
                 else
-                    object.orderid = options.longs === String ? $util.Long.prototype.toString.call(message.orderid) : options.longs === Number ? new $util.LongBits(message.orderid.low >>> 0, message.orderid.high >>> 0).toNumber(true) : message.orderid;
-            if (message.transid != null && message.hasOwnProperty("transid"))
-                if (typeof message.transid === "number")
-                    object.transid = options.longs === String ? String(message.transid) : message.transid;
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (typeof message.user_steamid === "number")
+                    object.user_steamid = options.longs === String ? String(message.user_steamid) : message.user_steamid;
                 else
-                    object.transid = options.longs === String ? $util.Long.prototype.toString.call(message.transid) : options.longs === Number ? new $util.LongBits(message.transid.low >>> 0, message.transid.high >>> 0).toNumber(true) : message.transid;
+                    object.user_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.user_steamid) : options.longs === Number ? new $util.LongBits(message.user_steamid.low >>> 0, message.user_steamid.high >>> 0).toNumber() : message.user_steamid;
             return object;
         };
     
         /**
-         * Converts this CInventory_PurchaseInit_Response to JSON.
+         * Converts this CParties_CancelReservation_Request to JSON.
          * @function toJSON
-         * @memberof CInventory_PurchaseInit_Response
+         * @memberof CParties_CancelReservation_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_PurchaseInit_Response.prototype.toJSON = function toJSON() {
+        CParties_CancelReservation_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_PurchaseInit_Response;
+        return CParties_CancelReservation_Request;
     })();
     
-    $root.CInventory_PurchaseFinalize_Request = (function() {
+    $root.CParties_CancelReservation_Response = (function() {
     
         /**
-         * Properties of a CInventory_PurchaseFinalize_Request.
-         * @exports ICInventory_PurchaseFinalize_Request
-         * @interface ICInventory_PurchaseFinalize_Request
-         * @property {number|null} [appid] CInventory_PurchaseFinalize_Request appid
-         * @property {number|null} [language] CInventory_PurchaseFinalize_Request language
-         * @property {number|Long|null} [orderid] CInventory_PurchaseFinalize_Request orderid
+         * Properties of a CParties_CancelReservation_Response.
+         * @exports ICParties_CancelReservation_Response
+         * @interface ICParties_CancelReservation_Response
+         * @property {number|Long|null} [beacon_id] CParties_CancelReservation_Response beacon_id
          */
     
         /**
-         * Constructs a new CInventory_PurchaseFinalize_Request.
-         * @exports CInventory_PurchaseFinalize_Request
-         * @classdesc Represents a CInventory_PurchaseFinalize_Request.
-         * @implements ICInventory_PurchaseFinalize_Request
+         * Constructs a new CParties_CancelReservation_Response.
+         * @exports CParties_CancelReservation_Response
+         * @classdesc Represents a CParties_CancelReservation_Response.
+         * @implements ICParties_CancelReservation_Response
          * @constructor
-         * @param {ICInventory_PurchaseFinalize_Request=} [properties] Properties to set
+         * @param {ICParties_CancelReservation_Response=} [properties] Properties to set
          */
-        function CInventory_PurchaseFinalize_Request(properties) {
+        function CParties_CancelReservation_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5261,101 +1903,75 @@
         }
     
         /**
-         * CInventory_PurchaseFinalize_Request appid.
-         * @member {number} appid
-         * @memberof CInventory_PurchaseFinalize_Request
+         * CParties_CancelReservation_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_CancelReservation_Response
          * @instance
          */
-        CInventory_PurchaseFinalize_Request.prototype.appid = 0;
+        CParties_CancelReservation_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventory_PurchaseFinalize_Request language.
-         * @member {number} language
-         * @memberof CInventory_PurchaseFinalize_Request
-         * @instance
-         */
-        CInventory_PurchaseFinalize_Request.prototype.language = 0;
-    
-        /**
-         * CInventory_PurchaseFinalize_Request orderid.
-         * @member {number|Long} orderid
-         * @memberof CInventory_PurchaseFinalize_Request
-         * @instance
-         */
-        CInventory_PurchaseFinalize_Request.prototype.orderid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CInventory_PurchaseFinalize_Request instance using the specified properties.
+         * Creates a new CParties_CancelReservation_Response instance using the specified properties.
          * @function create
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
-         * @param {ICInventory_PurchaseFinalize_Request=} [properties] Properties to set
-         * @returns {CInventory_PurchaseFinalize_Request} CInventory_PurchaseFinalize_Request instance
+         * @param {ICParties_CancelReservation_Response=} [properties] Properties to set
+         * @returns {CParties_CancelReservation_Response} CParties_CancelReservation_Response instance
          */
-        CInventory_PurchaseFinalize_Request.create = function create(properties) {
-            return new CInventory_PurchaseFinalize_Request(properties);
+        CParties_CancelReservation_Response.create = function create(properties) {
+            return new CParties_CancelReservation_Response(properties);
         };
     
         /**
-         * Encodes the specified CInventory_PurchaseFinalize_Request message. Does not implicitly {@link CInventory_PurchaseFinalize_Request.verify|verify} messages.
+         * Encodes the specified CParties_CancelReservation_Response message. Does not implicitly {@link CParties_CancelReservation_Response.verify|verify} messages.
          * @function encode
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
-         * @param {ICInventory_PurchaseFinalize_Request} message CInventory_PurchaseFinalize_Request message or plain object to encode
+         * @param {ICParties_CancelReservation_Response} message CParties_CancelReservation_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_PurchaseFinalize_Request.encode = function encode(message, writer) {
+        CParties_CancelReservation_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.language);
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.orderid);
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventory_PurchaseFinalize_Request message, length delimited. Does not implicitly {@link CInventory_PurchaseFinalize_Request.verify|verify} messages.
+         * Encodes the specified CParties_CancelReservation_Response message, length delimited. Does not implicitly {@link CParties_CancelReservation_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
-         * @param {ICInventory_PurchaseFinalize_Request} message CInventory_PurchaseFinalize_Request message or plain object to encode
+         * @param {ICParties_CancelReservation_Response} message CParties_CancelReservation_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventory_PurchaseFinalize_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_CancelReservation_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventory_PurchaseFinalize_Request message from the specified reader or buffer.
+         * Decodes a CParties_CancelReservation_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventory_PurchaseFinalize_Request} CInventory_PurchaseFinalize_Request
+         * @returns {CParties_CancelReservation_Response} CParties_CancelReservation_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_PurchaseFinalize_Request.decode = function decode(reader, length) {
+        CParties_CancelReservation_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventory_PurchaseFinalize_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_CancelReservation_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.appid = reader.uint32();
-                    break;
-                case 2:
-                    message.language = reader.int32();
-                    break;
-                case 3:
-                    message.orderid = reader.uint64();
+                    message.beacon_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5366,139 +1982,122 @@
         };
     
         /**
-         * Decodes a CInventory_PurchaseFinalize_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_CancelReservation_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventory_PurchaseFinalize_Request} CInventory_PurchaseFinalize_Request
+         * @returns {CParties_CancelReservation_Response} CParties_CancelReservation_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventory_PurchaseFinalize_Request.decodeDelimited = function decodeDelimited(reader) {
+        CParties_CancelReservation_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventory_PurchaseFinalize_Request message.
+         * Verifies a CParties_CancelReservation_Response message.
          * @function verify
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventory_PurchaseFinalize_Request.verify = function verify(message) {
+        CParties_CancelReservation_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isInteger(message.language))
-                    return "language: integer expected";
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                if (!$util.isInteger(message.orderid) && !(message.orderid && $util.isInteger(message.orderid.low) && $util.isInteger(message.orderid.high)))
-                    return "orderid: integer|Long expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CInventory_PurchaseFinalize_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_CancelReservation_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventory_PurchaseFinalize_Request} CInventory_PurchaseFinalize_Request
+         * @returns {CParties_CancelReservation_Response} CParties_CancelReservation_Response
          */
-        CInventory_PurchaseFinalize_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventory_PurchaseFinalize_Request)
+        CParties_CancelReservation_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_CancelReservation_Response)
                 return object;
-            var message = new $root.CInventory_PurchaseFinalize_Request();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.language != null)
-                message.language = object.language | 0;
-            if (object.orderid != null)
+            var message = new $root.CParties_CancelReservation_Response();
+            if (object.beacon_id != null)
                 if ($util.Long)
-                    (message.orderid = $util.Long.fromValue(object.orderid)).unsigned = true;
-                else if (typeof object.orderid === "string")
-                    message.orderid = parseInt(object.orderid, 10);
-                else if (typeof object.orderid === "number")
-                    message.orderid = object.orderid;
-                else if (typeof object.orderid === "object")
-                    message.orderid = new $util.LongBits(object.orderid.low >>> 0, object.orderid.high >>> 0).toNumber(true);
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventory_PurchaseFinalize_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CParties_CancelReservation_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @static
-         * @param {CInventory_PurchaseFinalize_Request} message CInventory_PurchaseFinalize_Request
+         * @param {CParties_CancelReservation_Response} message CParties_CancelReservation_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventory_PurchaseFinalize_Request.toObject = function toObject(message, options) {
+        CParties_CancelReservation_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                object.language = 0;
+            if (options.defaults)
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.orderid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.orderid = options.longs === String ? "0" : 0;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.orderid != null && message.hasOwnProperty("orderid"))
-                if (typeof message.orderid === "number")
-                    object.orderid = options.longs === String ? String(message.orderid) : message.orderid;
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
                 else
-                    object.orderid = options.longs === String ? $util.Long.prototype.toString.call(message.orderid) : options.longs === Number ? new $util.LongBits(message.orderid.low >>> 0, message.orderid.high >>> 0).toNumber(true) : message.orderid;
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
             return object;
         };
     
         /**
-         * Converts this CInventory_PurchaseFinalize_Request to JSON.
+         * Converts this CParties_CancelReservation_Response to JSON.
          * @function toJSON
-         * @memberof CInventory_PurchaseFinalize_Request
+         * @memberof CParties_CancelReservation_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventory_PurchaseFinalize_Request.prototype.toJSON = function toJSON() {
+        CParties_CancelReservation_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventory_PurchaseFinalize_Request;
+        return CParties_CancelReservation_Response;
     })();
     
-    $root.CInventoryClient_NewItems_Notification = (function() {
+    $root.CParties_ChangeNumOpenSlots_Request = (function() {
     
         /**
-         * Properties of a CInventoryClient_NewItems_Notification.
-         * @exports ICInventoryClient_NewItems_Notification
-         * @interface ICInventoryClient_NewItems_Notification
-         * @property {number|null} [appid] CInventoryClient_NewItems_Notification appid
-         * @property {ICInventory_Response|null} [inventory_response] CInventoryClient_NewItems_Notification inventory_response
+         * Properties of a CParties_ChangeNumOpenSlots_Request.
+         * @exports ICParties_ChangeNumOpenSlots_Request
+         * @interface ICParties_ChangeNumOpenSlots_Request
+         * @property {number|Long|null} [beacon_id] CParties_ChangeNumOpenSlots_Request beacon_id
+         * @property {number|null} [num_open_slots] CParties_ChangeNumOpenSlots_Request num_open_slots
          */
     
         /**
-         * Constructs a new CInventoryClient_NewItems_Notification.
-         * @exports CInventoryClient_NewItems_Notification
-         * @classdesc Represents a CInventoryClient_NewItems_Notification.
-         * @implements ICInventoryClient_NewItems_Notification
+         * Constructs a new CParties_ChangeNumOpenSlots_Request.
+         * @exports CParties_ChangeNumOpenSlots_Request
+         * @classdesc Represents a CParties_ChangeNumOpenSlots_Request.
+         * @implements ICParties_ChangeNumOpenSlots_Request
          * @constructor
-         * @param {ICInventoryClient_NewItems_Notification=} [properties] Properties to set
+         * @param {ICParties_ChangeNumOpenSlots_Request=} [properties] Properties to set
          */
-        function CInventoryClient_NewItems_Notification(properties) {
+        function CParties_ChangeNumOpenSlots_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5506,88 +2105,88 @@
         }
     
         /**
-         * CInventoryClient_NewItems_Notification appid.
-         * @member {number} appid
-         * @memberof CInventoryClient_NewItems_Notification
+         * CParties_ChangeNumOpenSlots_Request beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @instance
          */
-        CInventoryClient_NewItems_Notification.prototype.appid = 0;
+        CParties_ChangeNumOpenSlots_Request.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
-         * CInventoryClient_NewItems_Notification inventory_response.
-         * @member {ICInventory_Response|null|undefined} inventory_response
-         * @memberof CInventoryClient_NewItems_Notification
+         * CParties_ChangeNumOpenSlots_Request num_open_slots.
+         * @member {number} num_open_slots
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @instance
          */
-        CInventoryClient_NewItems_Notification.prototype.inventory_response = null;
+        CParties_ChangeNumOpenSlots_Request.prototype.num_open_slots = 0;
     
         /**
-         * Creates a new CInventoryClient_NewItems_Notification instance using the specified properties.
+         * Creates a new CParties_ChangeNumOpenSlots_Request instance using the specified properties.
          * @function create
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
-         * @param {ICInventoryClient_NewItems_Notification=} [properties] Properties to set
-         * @returns {CInventoryClient_NewItems_Notification} CInventoryClient_NewItems_Notification instance
+         * @param {ICParties_ChangeNumOpenSlots_Request=} [properties] Properties to set
+         * @returns {CParties_ChangeNumOpenSlots_Request} CParties_ChangeNumOpenSlots_Request instance
          */
-        CInventoryClient_NewItems_Notification.create = function create(properties) {
-            return new CInventoryClient_NewItems_Notification(properties);
+        CParties_ChangeNumOpenSlots_Request.create = function create(properties) {
+            return new CParties_ChangeNumOpenSlots_Request(properties);
         };
     
         /**
-         * Encodes the specified CInventoryClient_NewItems_Notification message. Does not implicitly {@link CInventoryClient_NewItems_Notification.verify|verify} messages.
+         * Encodes the specified CParties_ChangeNumOpenSlots_Request message. Does not implicitly {@link CParties_ChangeNumOpenSlots_Request.verify|verify} messages.
          * @function encode
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
-         * @param {ICInventoryClient_NewItems_Notification} message CInventoryClient_NewItems_Notification message or plain object to encode
+         * @param {ICParties_ChangeNumOpenSlots_Request} message CParties_ChangeNumOpenSlots_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventoryClient_NewItems_Notification.encode = function encode(message, writer) {
+        CParties_ChangeNumOpenSlots_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
-            if (message.inventory_response != null && message.hasOwnProperty("inventory_response"))
-                $root.CInventory_Response.encode(message.inventory_response, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_open_slots);
             return writer;
         };
     
         /**
-         * Encodes the specified CInventoryClient_NewItems_Notification message, length delimited. Does not implicitly {@link CInventoryClient_NewItems_Notification.verify|verify} messages.
+         * Encodes the specified CParties_ChangeNumOpenSlots_Request message, length delimited. Does not implicitly {@link CParties_ChangeNumOpenSlots_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
-         * @param {ICInventoryClient_NewItems_Notification} message CInventoryClient_NewItems_Notification message or plain object to encode
+         * @param {ICParties_ChangeNumOpenSlots_Request} message CParties_ChangeNumOpenSlots_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CInventoryClient_NewItems_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+        CParties_ChangeNumOpenSlots_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CInventoryClient_NewItems_Notification message from the specified reader or buffer.
+         * Decodes a CParties_ChangeNumOpenSlots_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CInventoryClient_NewItems_Notification} CInventoryClient_NewItems_Notification
+         * @returns {CParties_ChangeNumOpenSlots_Request} CParties_ChangeNumOpenSlots_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventoryClient_NewItems_Notification.decode = function decode(reader, length) {
+        CParties_ChangeNumOpenSlots_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInventoryClient_NewItems_Notification();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_ChangeNumOpenSlots_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.appid = reader.uint32();
+                    message.beacon_id = reader.uint64();
                     break;
                 case 2:
-                    message.inventory_response = $root.CInventory_Response.decode(reader, reader.uint32());
+                    message.num_open_slots = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5598,699 +2197,946 @@
         };
     
         /**
-         * Decodes a CInventoryClient_NewItems_Notification message from the specified reader or buffer, length delimited.
+         * Decodes a CParties_ChangeNumOpenSlots_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CInventoryClient_NewItems_Notification} CInventoryClient_NewItems_Notification
+         * @returns {CParties_ChangeNumOpenSlots_Request} CParties_ChangeNumOpenSlots_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CInventoryClient_NewItems_Notification.decodeDelimited = function decodeDelimited(reader) {
+        CParties_ChangeNumOpenSlots_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CInventoryClient_NewItems_Notification message.
+         * Verifies a CParties_ChangeNumOpenSlots_Request message.
          * @function verify
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CInventoryClient_NewItems_Notification.verify = function verify(message) {
+        CParties_ChangeNumOpenSlots_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                if (!$util.isInteger(message.appid))
-                    return "appid: integer expected";
-            if (message.inventory_response != null && message.hasOwnProperty("inventory_response")) {
-                var error = $root.CInventory_Response.verify(message.inventory_response);
-                if (error)
-                    return "inventory_response." + error;
-            }
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                if (!$util.isInteger(message.num_open_slots))
+                    return "num_open_slots: integer expected";
             return null;
         };
     
         /**
-         * Creates a CInventoryClient_NewItems_Notification message from a plain object. Also converts values to their respective internal types.
+         * Creates a CParties_ChangeNumOpenSlots_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CInventoryClient_NewItems_Notification} CInventoryClient_NewItems_Notification
+         * @returns {CParties_ChangeNumOpenSlots_Request} CParties_ChangeNumOpenSlots_Request
          */
-        CInventoryClient_NewItems_Notification.fromObject = function fromObject(object) {
-            if (object instanceof $root.CInventoryClient_NewItems_Notification)
+        CParties_ChangeNumOpenSlots_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_ChangeNumOpenSlots_Request)
                 return object;
-            var message = new $root.CInventoryClient_NewItems_Notification();
-            if (object.appid != null)
-                message.appid = object.appid >>> 0;
-            if (object.inventory_response != null) {
-                if (typeof object.inventory_response !== "object")
-                    throw TypeError(".CInventoryClient_NewItems_Notification.inventory_response: object expected");
-                message.inventory_response = $root.CInventory_Response.fromObject(object.inventory_response);
+            var message = new $root.CParties_ChangeNumOpenSlots_Request();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            if (object.num_open_slots != null)
+                message.num_open_slots = object.num_open_slots >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_ChangeNumOpenSlots_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_ChangeNumOpenSlots_Request
+         * @static
+         * @param {CParties_ChangeNumOpenSlots_Request} message CParties_ChangeNumOpenSlots_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CParties_ChangeNumOpenSlots_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+                object.num_open_slots = 0;
+            }
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            if (message.num_open_slots != null && message.hasOwnProperty("num_open_slots"))
+                object.num_open_slots = message.num_open_slots;
+            return object;
+        };
+    
+        /**
+         * Converts this CParties_ChangeNumOpenSlots_Request to JSON.
+         * @function toJSON
+         * @memberof CParties_ChangeNumOpenSlots_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CParties_ChangeNumOpenSlots_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CParties_ChangeNumOpenSlots_Request;
+    })();
+    
+    $root.CParties_ChangeNumOpenSlots_Response = (function() {
+    
+        /**
+         * Properties of a CParties_ChangeNumOpenSlots_Response.
+         * @exports ICParties_ChangeNumOpenSlots_Response
+         * @interface ICParties_ChangeNumOpenSlots_Response
+         * @property {number|Long|null} [beacon_id] CParties_ChangeNumOpenSlots_Response beacon_id
+         */
+    
+        /**
+         * Constructs a new CParties_ChangeNumOpenSlots_Response.
+         * @exports CParties_ChangeNumOpenSlots_Response
+         * @classdesc Represents a CParties_ChangeNumOpenSlots_Response.
+         * @implements ICParties_ChangeNumOpenSlots_Response
+         * @constructor
+         * @param {ICParties_ChangeNumOpenSlots_Response=} [properties] Properties to set
+         */
+        function CParties_ChangeNumOpenSlots_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CParties_ChangeNumOpenSlots_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @instance
+         */
+        CParties_ChangeNumOpenSlots_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_ChangeNumOpenSlots_Response instance using the specified properties.
+         * @function create
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {ICParties_ChangeNumOpenSlots_Response=} [properties] Properties to set
+         * @returns {CParties_ChangeNumOpenSlots_Response} CParties_ChangeNumOpenSlots_Response instance
+         */
+        CParties_ChangeNumOpenSlots_Response.create = function create(properties) {
+            return new CParties_ChangeNumOpenSlots_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CParties_ChangeNumOpenSlots_Response message. Does not implicitly {@link CParties_ChangeNumOpenSlots_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {ICParties_ChangeNumOpenSlots_Response} message CParties_ChangeNumOpenSlots_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_ChangeNumOpenSlots_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CParties_ChangeNumOpenSlots_Response message, length delimited. Does not implicitly {@link CParties_ChangeNumOpenSlots_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {ICParties_ChangeNumOpenSlots_Response} message CParties_ChangeNumOpenSlots_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_ChangeNumOpenSlots_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CParties_ChangeNumOpenSlots_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CParties_ChangeNumOpenSlots_Response} CParties_ChangeNumOpenSlots_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_ChangeNumOpenSlots_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_ChangeNumOpenSlots_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.beacon_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
             }
             return message;
         };
     
         /**
-         * Creates a plain object from a CInventoryClient_NewItems_Notification message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CInventoryClient_NewItems_Notification
+         * Decodes a CParties_ChangeNumOpenSlots_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CParties_ChangeNumOpenSlots_Response
          * @static
-         * @param {CInventoryClient_NewItems_Notification} message CInventoryClient_NewItems_Notification
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CParties_ChangeNumOpenSlots_Response} CParties_ChangeNumOpenSlots_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_ChangeNumOpenSlots_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CParties_ChangeNumOpenSlots_Response message.
+         * @function verify
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CParties_ChangeNumOpenSlots_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CParties_ChangeNumOpenSlots_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CParties_ChangeNumOpenSlots_Response} CParties_ChangeNumOpenSlots_Response
+         */
+        CParties_ChangeNumOpenSlots_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_ChangeNumOpenSlots_Response)
+                return object;
+            var message = new $root.CParties_ChangeNumOpenSlots_Response();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_ChangeNumOpenSlots_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_ChangeNumOpenSlots_Response
+         * @static
+         * @param {CParties_ChangeNumOpenSlots_Response} message CParties_ChangeNumOpenSlots_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CInventoryClient_NewItems_Notification.toObject = function toObject(message, options) {
+        CParties_ChangeNumOpenSlots_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.appid = 0;
-                object.inventory_response = null;
-            }
-            if (message.appid != null && message.hasOwnProperty("appid"))
-                object.appid = message.appid;
-            if (message.inventory_response != null && message.hasOwnProperty("inventory_response"))
-                object.inventory_response = $root.CInventory_Response.toObject(message.inventory_response, options);
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
             return object;
         };
     
         /**
-         * Converts this CInventoryClient_NewItems_Notification to JSON.
+         * Converts this CParties_ChangeNumOpenSlots_Response to JSON.
          * @function toJSON
-         * @memberof CInventoryClient_NewItems_Notification
+         * @memberof CParties_ChangeNumOpenSlots_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CInventoryClient_NewItems_Notification.prototype.toJSON = function toJSON() {
+        CParties_ChangeNumOpenSlots_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CInventoryClient_NewItems_Notification;
+        return CParties_ChangeNumOpenSlots_Response;
     })();
     
-    $root.Inventory = (function() {
+    $root.CParties_DestroyBeacon_Request = (function() {
     
         /**
-         * Constructs a new Inventory service.
-         * @exports Inventory
-         * @classdesc Represents an Inventory
+         * Properties of a CParties_DestroyBeacon_Request.
+         * @exports ICParties_DestroyBeacon_Request
+         * @interface ICParties_DestroyBeacon_Request
+         * @property {number|Long|null} [beacon_id] CParties_DestroyBeacon_Request beacon_id
+         */
+    
+        /**
+         * Constructs a new CParties_DestroyBeacon_Request.
+         * @exports CParties_DestroyBeacon_Request
+         * @classdesc Represents a CParties_DestroyBeacon_Request.
+         * @implements ICParties_DestroyBeacon_Request
+         * @constructor
+         * @param {ICParties_DestroyBeacon_Request=} [properties] Properties to set
+         */
+        function CParties_DestroyBeacon_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CParties_DestroyBeacon_Request beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_DestroyBeacon_Request
+         * @instance
+         */
+        CParties_DestroyBeacon_Request.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_DestroyBeacon_Request instance using the specified properties.
+         * @function create
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {ICParties_DestroyBeacon_Request=} [properties] Properties to set
+         * @returns {CParties_DestroyBeacon_Request} CParties_DestroyBeacon_Request instance
+         */
+        CParties_DestroyBeacon_Request.create = function create(properties) {
+            return new CParties_DestroyBeacon_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CParties_DestroyBeacon_Request message. Does not implicitly {@link CParties_DestroyBeacon_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {ICParties_DestroyBeacon_Request} message CParties_DestroyBeacon_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_DestroyBeacon_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CParties_DestroyBeacon_Request message, length delimited. Does not implicitly {@link CParties_DestroyBeacon_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {ICParties_DestroyBeacon_Request} message CParties_DestroyBeacon_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_DestroyBeacon_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CParties_DestroyBeacon_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CParties_DestroyBeacon_Request} CParties_DestroyBeacon_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_DestroyBeacon_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_DestroyBeacon_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.beacon_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CParties_DestroyBeacon_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CParties_DestroyBeacon_Request} CParties_DestroyBeacon_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_DestroyBeacon_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CParties_DestroyBeacon_Request message.
+         * @function verify
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CParties_DestroyBeacon_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CParties_DestroyBeacon_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CParties_DestroyBeacon_Request} CParties_DestroyBeacon_Request
+         */
+        CParties_DestroyBeacon_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_DestroyBeacon_Request)
+                return object;
+            var message = new $root.CParties_DestroyBeacon_Request();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_DestroyBeacon_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_DestroyBeacon_Request
+         * @static
+         * @param {CParties_DestroyBeacon_Request} message CParties_DestroyBeacon_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CParties_DestroyBeacon_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CParties_DestroyBeacon_Request to JSON.
+         * @function toJSON
+         * @memberof CParties_DestroyBeacon_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CParties_DestroyBeacon_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CParties_DestroyBeacon_Request;
+    })();
+    
+    $root.CParties_DestroyBeacon_Response = (function() {
+    
+        /**
+         * Properties of a CParties_DestroyBeacon_Response.
+         * @exports ICParties_DestroyBeacon_Response
+         * @interface ICParties_DestroyBeacon_Response
+         * @property {number|Long|null} [beacon_id] CParties_DestroyBeacon_Response beacon_id
+         */
+    
+        /**
+         * Constructs a new CParties_DestroyBeacon_Response.
+         * @exports CParties_DestroyBeacon_Response
+         * @classdesc Represents a CParties_DestroyBeacon_Response.
+         * @implements ICParties_DestroyBeacon_Response
+         * @constructor
+         * @param {ICParties_DestroyBeacon_Response=} [properties] Properties to set
+         */
+        function CParties_DestroyBeacon_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CParties_DestroyBeacon_Response beacon_id.
+         * @member {number|Long} beacon_id
+         * @memberof CParties_DestroyBeacon_Response
+         * @instance
+         */
+        CParties_DestroyBeacon_Response.prototype.beacon_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CParties_DestroyBeacon_Response instance using the specified properties.
+         * @function create
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {ICParties_DestroyBeacon_Response=} [properties] Properties to set
+         * @returns {CParties_DestroyBeacon_Response} CParties_DestroyBeacon_Response instance
+         */
+        CParties_DestroyBeacon_Response.create = function create(properties) {
+            return new CParties_DestroyBeacon_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CParties_DestroyBeacon_Response message. Does not implicitly {@link CParties_DestroyBeacon_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {ICParties_DestroyBeacon_Response} message CParties_DestroyBeacon_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_DestroyBeacon_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.beacon_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CParties_DestroyBeacon_Response message, length delimited. Does not implicitly {@link CParties_DestroyBeacon_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {ICParties_DestroyBeacon_Response} message CParties_DestroyBeacon_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CParties_DestroyBeacon_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CParties_DestroyBeacon_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CParties_DestroyBeacon_Response} CParties_DestroyBeacon_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_DestroyBeacon_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CParties_DestroyBeacon_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.beacon_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CParties_DestroyBeacon_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CParties_DestroyBeacon_Response} CParties_DestroyBeacon_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CParties_DestroyBeacon_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CParties_DestroyBeacon_Response message.
+         * @function verify
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CParties_DestroyBeacon_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (!$util.isInteger(message.beacon_id) && !(message.beacon_id && $util.isInteger(message.beacon_id.low) && $util.isInteger(message.beacon_id.high)))
+                    return "beacon_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CParties_DestroyBeacon_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CParties_DestroyBeacon_Response} CParties_DestroyBeacon_Response
+         */
+        CParties_DestroyBeacon_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CParties_DestroyBeacon_Response)
+                return object;
+            var message = new $root.CParties_DestroyBeacon_Response();
+            if (object.beacon_id != null)
+                if ($util.Long)
+                    (message.beacon_id = $util.Long.fromValue(object.beacon_id)).unsigned = true;
+                else if (typeof object.beacon_id === "string")
+                    message.beacon_id = parseInt(object.beacon_id, 10);
+                else if (typeof object.beacon_id === "number")
+                    message.beacon_id = object.beacon_id;
+                else if (typeof object.beacon_id === "object")
+                    message.beacon_id = new $util.LongBits(object.beacon_id.low >>> 0, object.beacon_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CParties_DestroyBeacon_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CParties_DestroyBeacon_Response
+         * @static
+         * @param {CParties_DestroyBeacon_Response} message CParties_DestroyBeacon_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CParties_DestroyBeacon_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.beacon_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.beacon_id = options.longs === String ? "0" : 0;
+            if (message.beacon_id != null && message.hasOwnProperty("beacon_id"))
+                if (typeof message.beacon_id === "number")
+                    object.beacon_id = options.longs === String ? String(message.beacon_id) : message.beacon_id;
+                else
+                    object.beacon_id = options.longs === String ? $util.Long.prototype.toString.call(message.beacon_id) : options.longs === Number ? new $util.LongBits(message.beacon_id.low >>> 0, message.beacon_id.high >>> 0).toNumber(true) : message.beacon_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CParties_DestroyBeacon_Response to JSON.
+         * @function toJSON
+         * @memberof CParties_DestroyBeacon_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CParties_DestroyBeacon_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CParties_DestroyBeacon_Response;
+    })();
+    
+    $root.Parties = (function() {
+    
+        /**
+         * Constructs a new Parties service.
+         * @exports Parties
+         * @classdesc Represents a Parties
          * @extends $protobuf.rpc.Service
          * @constructor
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function Inventory(rpcImpl, requestDelimited, responseDelimited) {
+        function Parties(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
     
-        (Inventory.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Inventory;
+        (Parties.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Parties;
     
         /**
-         * Creates new Inventory service using the specified rpc implementation.
+         * Creates new Parties service using the specified rpc implementation.
          * @function create
-         * @memberof Inventory
+         * @memberof Parties
          * @static
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Inventory} RPC service. Useful where requests and/or responses are streamed.
+         * @returns {Parties} RPC service. Useful where requests and/or responses are streamed.
          */
-        Inventory.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+        Parties.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
     
         /**
-         * Callback as used by {@link Inventory#getInventory}.
-         * @memberof Inventory
-         * @typedef GetInventoryCallback
+         * Callback as used by {@link Parties#joinParty}.
+         * @memberof Parties
+         * @typedef JoinPartyCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
+         * @param {CParties_JoinParty_Response} [response] CParties_JoinParty_Response
          */
     
         /**
-         * Calls GetInventory.
-         * @function getInventory
-         * @memberof Inventory
+         * Calls JoinParty.
+         * @function joinParty
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_GetInventory_Request} request CInventory_GetInventory_Request message or plain object
-         * @param {Inventory.GetInventoryCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @param {ICParties_JoinParty_Request} request CParties_JoinParty_Request message or plain object
+         * @param {Parties.JoinPartyCallback} callback Node-style callback called with the error, if any, and CParties_JoinParty_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.getInventory = function getInventory(request, callback) {
-            return this.rpcCall(getInventory, $root.CInventory_GetInventory_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "GetInventory" });
+        Object.defineProperty(Parties.prototype.joinParty = function joinParty(request, callback) {
+            return this.rpcCall(joinParty, $root.CParties_JoinParty_Request, $root.CParties_JoinParty_Response, request, callback);
+        }, "name", { value: "JoinParty" });
     
         /**
-         * Calls GetInventory.
-         * @function getInventory
-         * @memberof Inventory
+         * Calls JoinParty.
+         * @function joinParty
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_GetInventory_Request} request CInventory_GetInventory_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
+         * @param {ICParties_JoinParty_Request} request CParties_JoinParty_Request message or plain object
+         * @returns {Promise<CParties_JoinParty_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Inventory#exchangeItem}.
-         * @memberof Inventory
-         * @typedef ExchangeItemCallback
+         * Callback as used by {@link Parties#createBeacon}.
+         * @memberof Parties
+         * @typedef CreateBeaconCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
+         * @param {CParties_CreateBeacon_Response} [response] CParties_CreateBeacon_Response
          */
     
         /**
-         * Calls ExchangeItem.
-         * @function exchangeItem
-         * @memberof Inventory
+         * Calls CreateBeacon.
+         * @function createBeacon
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ExchangeItem_Request} request CInventory_ExchangeItem_Request message or plain object
-         * @param {Inventory.ExchangeItemCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @param {ICParties_CreateBeacon_Request} request CParties_CreateBeacon_Request message or plain object
+         * @param {Parties.CreateBeaconCallback} callback Node-style callback called with the error, if any, and CParties_CreateBeacon_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.exchangeItem = function exchangeItem(request, callback) {
-            return this.rpcCall(exchangeItem, $root.CInventory_ExchangeItem_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "ExchangeItem" });
+        Object.defineProperty(Parties.prototype.createBeacon = function createBeacon(request, callback) {
+            return this.rpcCall(createBeacon, $root.CParties_CreateBeacon_Request, $root.CParties_CreateBeacon_Response, request, callback);
+        }, "name", { value: "CreateBeacon" });
     
         /**
-         * Calls ExchangeItem.
-         * @function exchangeItem
-         * @memberof Inventory
+         * Calls CreateBeacon.
+         * @function createBeacon
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ExchangeItem_Request} request CInventory_ExchangeItem_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
+         * @param {ICParties_CreateBeacon_Request} request CParties_CreateBeacon_Request message or plain object
+         * @returns {Promise<CParties_CreateBeacon_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Inventory#getEligiblePromoItemDefIDs}.
-         * @memberof Inventory
-         * @typedef GetEligiblePromoItemDefIDsCallback
+         * Callback as used by {@link Parties#onReservationCompleted}.
+         * @memberof Parties
+         * @typedef OnReservationCompletedCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_GetEligiblePromoItemDefIDs_Response} [response] CInventory_GetEligiblePromoItemDefIDs_Response
+         * @param {CParties_OnReservationCompleted_Response} [response] CParties_OnReservationCompleted_Response
          */
     
         /**
-         * Calls GetEligiblePromoItemDefIDs.
-         * @function getEligiblePromoItemDefIDs
-         * @memberof Inventory
+         * Calls OnReservationCompleted.
+         * @function onReservationCompleted
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request} request CInventory_GetEligiblePromoItemDefIDs_Request message or plain object
-         * @param {Inventory.GetEligiblePromoItemDefIDsCallback} callback Node-style callback called with the error, if any, and CInventory_GetEligiblePromoItemDefIDs_Response
+         * @param {ICParties_OnReservationCompleted_Request} request CParties_OnReservationCompleted_Request message or plain object
+         * @param {Parties.OnReservationCompletedCallback} callback Node-style callback called with the error, if any, and CParties_OnReservationCompleted_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.getEligiblePromoItemDefIDs = function getEligiblePromoItemDefIDs(request, callback) {
-            return this.rpcCall(getEligiblePromoItemDefIDs, $root.CInventory_GetEligiblePromoItemDefIDs_Request, $root.CInventory_GetEligiblePromoItemDefIDs_Response, request, callback);
-        }, "name", { value: "GetEligiblePromoItemDefIDs" });
+        Object.defineProperty(Parties.prototype.onReservationCompleted = function onReservationCompleted(request, callback) {
+            return this.rpcCall(onReservationCompleted, $root.CParties_OnReservationCompleted_Request, $root.CParties_OnReservationCompleted_Response, request, callback);
+        }, "name", { value: "OnReservationCompleted" });
     
         /**
-         * Calls GetEligiblePromoItemDefIDs.
-         * @function getEligiblePromoItemDefIDs
-         * @memberof Inventory
+         * Calls OnReservationCompleted.
+         * @function onReservationCompleted
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_GetEligiblePromoItemDefIDs_Request} request CInventory_GetEligiblePromoItemDefIDs_Request message or plain object
-         * @returns {Promise<CInventory_GetEligiblePromoItemDefIDs_Response>} Promise
+         * @param {ICParties_OnReservationCompleted_Request} request CParties_OnReservationCompleted_Request message or plain object
+         * @returns {Promise<CParties_OnReservationCompleted_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Inventory#addPromoItem}.
-         * @memberof Inventory
-         * @typedef AddPromoItemCallback
+         * Callback as used by {@link Parties#cancelReservation}.
+         * @memberof Parties
+         * @typedef CancelReservationCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
+         * @param {CParties_CancelReservation_Response} [response] CParties_CancelReservation_Response
          */
     
         /**
-         * Calls AddPromoItem.
-         * @function addPromoItem
-         * @memberof Inventory
+         * Calls CancelReservation.
+         * @function cancelReservation
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_AddItem_Request} request CInventory_AddItem_Request message or plain object
-         * @param {Inventory.AddPromoItemCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @param {ICParties_CancelReservation_Request} request CParties_CancelReservation_Request message or plain object
+         * @param {Parties.CancelReservationCallback} callback Node-style callback called with the error, if any, and CParties_CancelReservation_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.addPromoItem = function addPromoItem(request, callback) {
-            return this.rpcCall(addPromoItem, $root.CInventory_AddItem_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "AddPromoItem" });
+        Object.defineProperty(Parties.prototype.cancelReservation = function cancelReservation(request, callback) {
+            return this.rpcCall(cancelReservation, $root.CParties_CancelReservation_Request, $root.CParties_CancelReservation_Response, request, callback);
+        }, "name", { value: "CancelReservation" });
     
         /**
-         * Calls AddPromoItem.
-         * @function addPromoItem
-         * @memberof Inventory
+         * Calls CancelReservation.
+         * @function cancelReservation
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_AddItem_Request} request CInventory_AddItem_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
+         * @param {ICParties_CancelReservation_Request} request CParties_CancelReservation_Request message or plain object
+         * @returns {Promise<CParties_CancelReservation_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Inventory#safeModifyItems}.
-         * @memberof Inventory
-         * @typedef SafeModifyItemsCallback
+         * Callback as used by {@link Parties#changeNumOpenSlots}.
+         * @memberof Parties
+         * @typedef ChangeNumOpenSlotsCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
+         * @param {CParties_ChangeNumOpenSlots_Response} [response] CParties_ChangeNumOpenSlots_Response
          */
     
         /**
-         * Calls SafeModifyItems.
-         * @function safeModifyItems
-         * @memberof Inventory
+         * Calls ChangeNumOpenSlots.
+         * @function changeNumOpenSlots
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ModifyItems_Request} request CInventory_ModifyItems_Request message or plain object
-         * @param {Inventory.SafeModifyItemsCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @param {ICParties_ChangeNumOpenSlots_Request} request CParties_ChangeNumOpenSlots_Request message or plain object
+         * @param {Parties.ChangeNumOpenSlotsCallback} callback Node-style callback called with the error, if any, and CParties_ChangeNumOpenSlots_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.safeModifyItems = function safeModifyItems(request, callback) {
-            return this.rpcCall(safeModifyItems, $root.CInventory_ModifyItems_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "SafeModifyItems" });
+        Object.defineProperty(Parties.prototype.changeNumOpenSlots = function changeNumOpenSlots(request, callback) {
+            return this.rpcCall(changeNumOpenSlots, $root.CParties_ChangeNumOpenSlots_Request, $root.CParties_ChangeNumOpenSlots_Response, request, callback);
+        }, "name", { value: "ChangeNumOpenSlots" });
     
         /**
-         * Calls SafeModifyItems.
-         * @function safeModifyItems
-         * @memberof Inventory
+         * Calls ChangeNumOpenSlots.
+         * @function changeNumOpenSlots
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ModifyItems_Request} request CInventory_ModifyItems_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
+         * @param {ICParties_ChangeNumOpenSlots_Request} request CParties_ChangeNumOpenSlots_Request message or plain object
+         * @returns {Promise<CParties_ChangeNumOpenSlots_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Inventory#consumePlaytime}.
-         * @memberof Inventory
-         * @typedef ConsumePlaytimeCallback
+         * Callback as used by {@link Parties#destroyBeacon}.
+         * @memberof Parties
+         * @typedef DestroyBeaconCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
+         * @param {CParties_DestroyBeacon_Response} [response] CParties_DestroyBeacon_Response
          */
     
         /**
-         * Calls ConsumePlaytime.
-         * @function consumePlaytime
-         * @memberof Inventory
+         * Calls DestroyBeacon.
+         * @function destroyBeacon
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ConsumePlaytime_Request} request CInventory_ConsumePlaytime_Request message or plain object
-         * @param {Inventory.ConsumePlaytimeCallback} callback Node-style callback called with the error, if any, and CInventory_Response
+         * @param {ICParties_DestroyBeacon_Request} request CParties_DestroyBeacon_Request message or plain object
+         * @param {Parties.DestroyBeaconCallback} callback Node-style callback called with the error, if any, and CParties_DestroyBeacon_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Inventory.prototype.consumePlaytime = function consumePlaytime(request, callback) {
-            return this.rpcCall(consumePlaytime, $root.CInventory_ConsumePlaytime_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "ConsumePlaytime" });
+        Object.defineProperty(Parties.prototype.destroyBeacon = function destroyBeacon(request, callback) {
+            return this.rpcCall(destroyBeacon, $root.CParties_DestroyBeacon_Request, $root.CParties_DestroyBeacon_Response, request, callback);
+        }, "name", { value: "DestroyBeacon" });
     
         /**
-         * Calls ConsumePlaytime.
-         * @function consumePlaytime
-         * @memberof Inventory
+         * Calls DestroyBeacon.
+         * @function destroyBeacon
+         * @memberof Parties
          * @instance
-         * @param {ICInventory_ConsumePlaytime_Request} request CInventory_ConsumePlaytime_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
+         * @param {ICParties_DestroyBeacon_Request} request CParties_DestroyBeacon_Request message or plain object
+         * @returns {Promise<CParties_DestroyBeacon_Response>} Promise
          * @variation 2
          */
     
-        /**
-         * Callback as used by {@link Inventory#consumeItem}.
-         * @memberof Inventory
-         * @typedef ConsumeItemCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls ConsumeItem.
-         * @function consumeItem
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_ConsumeItem_Request} request CInventory_ConsumeItem_Request message or plain object
-         * @param {Inventory.ConsumeItemCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.consumeItem = function consumeItem(request, callback) {
-            return this.rpcCall(consumeItem, $root.CInventory_ConsumeItem_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "ConsumeItem" });
-    
-        /**
-         * Calls ConsumeItem.
-         * @function consumeItem
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_ConsumeItem_Request} request CInventory_ConsumeItem_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#devGenerateItem}.
-         * @memberof Inventory
-         * @typedef DevGenerateItemCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls DevGenerateItem.
-         * @function devGenerateItem
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_AddItem_Request} request CInventory_AddItem_Request message or plain object
-         * @param {Inventory.DevGenerateItemCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.devGenerateItem = function devGenerateItem(request, callback) {
-            return this.rpcCall(devGenerateItem, $root.CInventory_AddItem_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "DevGenerateItem" });
-    
-        /**
-         * Calls DevGenerateItem.
-         * @function devGenerateItem
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_AddItem_Request} request CInventory_AddItem_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#devSetNextDrop}.
-         * @memberof Inventory
-         * @typedef DevSetNextDropCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls DevSetNextDrop.
-         * @function devSetNextDrop
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_DevSetNextDrop_Request} request CInventory_DevSetNextDrop_Request message or plain object
-         * @param {Inventory.DevSetNextDropCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.devSetNextDrop = function devSetNextDrop(request, callback) {
-            return this.rpcCall(devSetNextDrop, $root.CInventory_DevSetNextDrop_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "DevSetNextDrop" });
-    
-        /**
-         * Calls DevSetNextDrop.
-         * @function devSetNextDrop
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_DevSetNextDrop_Request} request CInventory_DevSetNextDrop_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#splitItemStack}.
-         * @memberof Inventory
-         * @typedef SplitItemStackCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls SplitItemStack.
-         * @function splitItemStack
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_SplitItemStack_Request} request CInventory_SplitItemStack_Request message or plain object
-         * @param {Inventory.SplitItemStackCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.splitItemStack = function splitItemStack(request, callback) {
-            return this.rpcCall(splitItemStack, $root.CInventory_SplitItemStack_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "SplitItemStack" });
-    
-        /**
-         * Calls SplitItemStack.
-         * @function splitItemStack
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_SplitItemStack_Request} request CInventory_SplitItemStack_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#combineItemStacks}.
-         * @memberof Inventory
-         * @typedef CombineItemStacksCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls CombineItemStacks.
-         * @function combineItemStacks
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_CombineItemStacks_Request} request CInventory_CombineItemStacks_Request message or plain object
-         * @param {Inventory.CombineItemStacksCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.combineItemStacks = function combineItemStacks(request, callback) {
-            return this.rpcCall(combineItemStacks, $root.CInventory_CombineItemStacks_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "CombineItemStacks" });
-    
-        /**
-         * Calls CombineItemStacks.
-         * @function combineItemStacks
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_CombineItemStacks_Request} request CInventory_CombineItemStacks_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#getItemDefMeta}.
-         * @memberof Inventory
-         * @typedef GetItemDefMetaCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_GetItemDefMeta_Response} [response] CInventory_GetItemDefMeta_Response
-         */
-    
-        /**
-         * Calls GetItemDefMeta.
-         * @function getItemDefMeta
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_GetItemDefMeta_Request} request CInventory_GetItemDefMeta_Request message or plain object
-         * @param {Inventory.GetItemDefMetaCallback} callback Node-style callback called with the error, if any, and CInventory_GetItemDefMeta_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.getItemDefMeta = function getItemDefMeta(request, callback) {
-            return this.rpcCall(getItemDefMeta, $root.CInventory_GetItemDefMeta_Request, $root.CInventory_GetItemDefMeta_Response, request, callback);
-        }, "name", { value: "GetItemDefMeta" });
-    
-        /**
-         * Calls GetItemDefMeta.
-         * @function getItemDefMeta
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_GetItemDefMeta_Request} request CInventory_GetItemDefMeta_Request message or plain object
-         * @returns {Promise<CInventory_GetItemDefMeta_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#getUserPurchaseInfo}.
-         * @memberof Inventory
-         * @typedef GetUserPurchaseInfoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_GetUserPurchaseInfo_Response} [response] CInventory_GetUserPurchaseInfo_Response
-         */
-    
-        /**
-         * Calls GetUserPurchaseInfo.
-         * @function getUserPurchaseInfo
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_GetUserPurchaseInfo_Request} request CInventory_GetUserPurchaseInfo_Request message or plain object
-         * @param {Inventory.GetUserPurchaseInfoCallback} callback Node-style callback called with the error, if any, and CInventory_GetUserPurchaseInfo_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.getUserPurchaseInfo = function getUserPurchaseInfo(request, callback) {
-            return this.rpcCall(getUserPurchaseInfo, $root.CInventory_GetUserPurchaseInfo_Request, $root.CInventory_GetUserPurchaseInfo_Response, request, callback);
-        }, "name", { value: "GetUserPurchaseInfo" });
-    
-        /**
-         * Calls GetUserPurchaseInfo.
-         * @function getUserPurchaseInfo
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_GetUserPurchaseInfo_Request} request CInventory_GetUserPurchaseInfo_Request message or plain object
-         * @returns {Promise<CInventory_GetUserPurchaseInfo_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#purchaseInit}.
-         * @memberof Inventory
-         * @typedef PurchaseInitCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_PurchaseInit_Response} [response] CInventory_PurchaseInit_Response
-         */
-    
-        /**
-         * Calls PurchaseInit.
-         * @function purchaseInit
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_PurchaseInit_Request} request CInventory_PurchaseInit_Request message or plain object
-         * @param {Inventory.PurchaseInitCallback} callback Node-style callback called with the error, if any, and CInventory_PurchaseInit_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.purchaseInit = function purchaseInit(request, callback) {
-            return this.rpcCall(purchaseInit, $root.CInventory_PurchaseInit_Request, $root.CInventory_PurchaseInit_Response, request, callback);
-        }, "name", { value: "PurchaseInit" });
-    
-        /**
-         * Calls PurchaseInit.
-         * @function purchaseInit
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_PurchaseInit_Request} request CInventory_PurchaseInit_Request message or plain object
-         * @returns {Promise<CInventory_PurchaseInit_Response>} Promise
-         * @variation 2
-         */
-    
-        /**
-         * Callback as used by {@link Inventory#purchaseFinalize}.
-         * @memberof Inventory
-         * @typedef PurchaseFinalizeCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CInventory_Response} [response] CInventory_Response
-         */
-    
-        /**
-         * Calls PurchaseFinalize.
-         * @function purchaseFinalize
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_PurchaseFinalize_Request} request CInventory_PurchaseFinalize_Request message or plain object
-         * @param {Inventory.PurchaseFinalizeCallback} callback Node-style callback called with the error, if any, and CInventory_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Inventory.prototype.purchaseFinalize = function purchaseFinalize(request, callback) {
-            return this.rpcCall(purchaseFinalize, $root.CInventory_PurchaseFinalize_Request, $root.CInventory_Response, request, callback);
-        }, "name", { value: "PurchaseFinalize" });
-    
-        /**
-         * Calls PurchaseFinalize.
-         * @function purchaseFinalize
-         * @memberof Inventory
-         * @instance
-         * @param {ICInventory_PurchaseFinalize_Request} request CInventory_PurchaseFinalize_Request message or plain object
-         * @returns {Promise<CInventory_Response>} Promise
-         * @variation 2
-         */
-    
-        return Inventory;
-    })();
-    
-    $root.InventoryClient = (function() {
-    
-        /**
-         * Constructs a new InventoryClient service.
-         * @exports InventoryClient
-         * @classdesc Represents an InventoryClient
-         * @extends $protobuf.rpc.Service
-         * @constructor
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         */
-        function InventoryClient(rpcImpl, requestDelimited, responseDelimited) {
-            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-        }
-    
-        (InventoryClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = InventoryClient;
-    
-        /**
-         * Creates new InventoryClient service using the specified rpc implementation.
-         * @function create
-         * @memberof InventoryClient
-         * @static
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {InventoryClient} RPC service. Useful where requests and/or responses are streamed.
-         */
-        InventoryClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-            return new this(rpcImpl, requestDelimited, responseDelimited);
-        };
-    
-        /**
-         * Callback as used by {@link InventoryClient#notifyNewItems}.
-         * @memberof InventoryClient
-         * @typedef NotifyNewItemsCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {NoResponse} [response] NoResponse
-         */
-    
-        /**
-         * Calls NotifyNewItems.
-         * @function notifyNewItems
-         * @memberof InventoryClient
-         * @instance
-         * @param {ICInventoryClient_NewItems_Notification} request CInventoryClient_NewItems_Notification message or plain object
-         * @param {InventoryClient.NotifyNewItemsCallback} callback Node-style callback called with the error, if any, and NoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(InventoryClient.prototype.notifyNewItems = function notifyNewItems(request, callback) {
-            return this.rpcCall(notifyNewItems, $root.CInventoryClient_NewItems_Notification, $root.NoResponse, request, callback);
-        }, "name", { value: "NotifyNewItems" });
-    
-        /**
-         * Calls NotifyNewItems.
-         * @function notifyNewItems
-         * @memberof InventoryClient
-         * @instance
-         * @param {ICInventoryClient_NewItems_Notification} request CInventoryClient_NewItems_Notification message or plain object
-         * @returns {Promise<NoResponse>} Promise
-         * @variation 2
-         */
-    
-        return InventoryClient;
+        return Parties;
     })();
     
     /**

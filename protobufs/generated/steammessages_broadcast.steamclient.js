@@ -16,6 +16,32 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * EBroadcastWatchLocation enum.
+     * @exports EBroadcastWatchLocation
+     * @enum {string}
+     * @property {number} k_EBroadcastWatchLocation_Invalid=0 k_EBroadcastWatchLocation_Invalid value
+     * @property {number} k_EBroadcastWatchLocation_SteamTV_Tab=1 k_EBroadcastWatchLocation_SteamTV_Tab value
+     * @property {number} k_EBroadcastWatchLocation_SteamTV_WatchParty=2 k_EBroadcastWatchLocation_SteamTV_WatchParty value
+     * @property {number} k_EBroadcastWatchLocation_Chat_Tab=3 k_EBroadcastWatchLocation_Chat_Tab value
+     * @property {number} k_EBroadcastWatchLocation_Chat_WatchParty=4 k_EBroadcastWatchLocation_Chat_WatchParty value
+     * @property {number} k_EBroadcastWatchLocation_CommunityPage=5 k_EBroadcastWatchLocation_CommunityPage value
+     * @property {number} k_EBroadcastWatchLocation_StoreAppPage=6 k_EBroadcastWatchLocation_StoreAppPage value
+     * @property {number} k_EBroadcastWatchLocation_InGame=7 k_EBroadcastWatchLocation_InGame value
+     */
+    $root.EBroadcastWatchLocation = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EBroadcastWatchLocation_Invalid"] = 0;
+        values[valuesById[1] = "k_EBroadcastWatchLocation_SteamTV_Tab"] = 1;
+        values[valuesById[2] = "k_EBroadcastWatchLocation_SteamTV_WatchParty"] = 2;
+        values[valuesById[3] = "k_EBroadcastWatchLocation_Chat_Tab"] = 3;
+        values[valuesById[4] = "k_EBroadcastWatchLocation_Chat_WatchParty"] = 4;
+        values[valuesById[5] = "k_EBroadcastWatchLocation_CommunityPage"] = 5;
+        values[valuesById[6] = "k_EBroadcastWatchLocation_StoreAppPage"] = 6;
+        values[valuesById[7] = "k_EBroadcastWatchLocation_InGame"] = 7;
+        return values;
+    })();
+    
     $root.CBroadcast_BeginBroadcastSession_Request = (function() {
     
         /**
@@ -388,6 +414,7 @@
          * @property {string|null} [thumbnail_upload_address] CBroadcast_BeginBroadcastSession_Response thumbnail_upload_address
          * @property {string|null} [thumbnail_upload_token] CBroadcast_BeginBroadcastSession_Response thumbnail_upload_token
          * @property {number|null} [thumbnail_interval_seconds] CBroadcast_BeginBroadcastSession_Response thumbnail_interval_seconds
+         * @property {number|null} [heartbeat_interval_seconds] CBroadcast_BeginBroadcastSession_Response heartbeat_interval_seconds
          */
     
         /**
@@ -438,6 +465,14 @@
         CBroadcast_BeginBroadcastSession_Response.prototype.thumbnail_interval_seconds = 0;
     
         /**
+         * CBroadcast_BeginBroadcastSession_Response heartbeat_interval_seconds.
+         * @member {number} heartbeat_interval_seconds
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.heartbeat_interval_seconds = 0;
+    
+        /**
          * Creates a new CBroadcast_BeginBroadcastSession_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_BeginBroadcastSession_Response
@@ -469,6 +504,8 @@
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.thumbnail_upload_token);
             if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.thumbnail_interval_seconds);
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.heartbeat_interval_seconds);
             return writer;
         };
     
@@ -514,6 +551,9 @@
                     break;
                 case 4:
                     message.thumbnail_interval_seconds = reader.uint32();
+                    break;
+                case 5:
+                    message.heartbeat_interval_seconds = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -562,6 +602,9 @@
             if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
                 if (!$util.isInteger(message.thumbnail_interval_seconds))
                     return "thumbnail_interval_seconds: integer expected";
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                if (!$util.isInteger(message.heartbeat_interval_seconds))
+                    return "heartbeat_interval_seconds: integer expected";
             return null;
         };
     
@@ -592,6 +635,8 @@
                 message.thumbnail_upload_token = String(object.thumbnail_upload_token);
             if (object.thumbnail_interval_seconds != null)
                 message.thumbnail_interval_seconds = object.thumbnail_interval_seconds >>> 0;
+            if (object.heartbeat_interval_seconds != null)
+                message.heartbeat_interval_seconds = object.heartbeat_interval_seconds >>> 0;
             return message;
         };
     
@@ -617,6 +662,7 @@
                 object.thumbnail_upload_address = "";
                 object.thumbnail_upload_token = "";
                 object.thumbnail_interval_seconds = 0;
+                object.heartbeat_interval_seconds = 0;
             }
             if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 if (typeof message.broadcast_id === "number")
@@ -629,6 +675,8 @@
                 object.thumbnail_upload_token = message.thumbnail_upload_token;
             if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
                 object.thumbnail_interval_seconds = message.thumbnail_interval_seconds;
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                object.heartbeat_interval_seconds = message.heartbeat_interval_seconds;
             return object;
         };
     
@@ -1017,6 +1065,7 @@
          * @property {number|null} [cellid] CBroadcast_StartBroadcastUpload_Request cellid
          * @property {boolean|null} [as_rtmp] CBroadcast_StartBroadcastUpload_Request as_rtmp
          * @property {number|null} [delay_seconds] CBroadcast_StartBroadcastUpload_Request delay_seconds
+         * @property {number|Long|null} [rtmp_token] CBroadcast_StartBroadcastUpload_Request rtmp_token
          */
     
         /**
@@ -1067,6 +1116,14 @@
         CBroadcast_StartBroadcastUpload_Request.prototype.delay_seconds = 0;
     
         /**
+         * CBroadcast_StartBroadcastUpload_Request rtmp_token.
+         * @member {number|Long} rtmp_token
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.rtmp_token = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CBroadcast_StartBroadcastUpload_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_StartBroadcastUpload_Request
@@ -1098,6 +1155,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.as_rtmp);
             if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_seconds);
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.rtmp_token);
             return writer;
         };
     
@@ -1143,6 +1202,9 @@
                     break;
                 case 4:
                     message.delay_seconds = reader.uint32();
+                    break;
+                case 5:
+                    message.rtmp_token = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1191,6 +1253,9 @@
             if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
                 if (!$util.isInteger(message.delay_seconds))
                     return "delay_seconds: integer expected";
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (!$util.isInteger(message.rtmp_token) && !(message.rtmp_token && $util.isInteger(message.rtmp_token.low) && $util.isInteger(message.rtmp_token.high)))
+                    return "rtmp_token: integer|Long expected";
             return null;
         };
     
@@ -1221,6 +1286,15 @@
                 message.as_rtmp = Boolean(object.as_rtmp);
             if (object.delay_seconds != null)
                 message.delay_seconds = object.delay_seconds >>> 0;
+            if (object.rtmp_token != null)
+                if ($util.Long)
+                    (message.rtmp_token = $util.Long.fromValue(object.rtmp_token)).unsigned = true;
+                else if (typeof object.rtmp_token === "string")
+                    message.rtmp_token = parseInt(object.rtmp_token, 10);
+                else if (typeof object.rtmp_token === "number")
+                    message.rtmp_token = object.rtmp_token;
+                else if (typeof object.rtmp_token === "object")
+                    message.rtmp_token = new $util.LongBits(object.rtmp_token.low >>> 0, object.rtmp_token.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -1246,6 +1320,11 @@
                 object.cellid = 0;
                 object.as_rtmp = false;
                 object.delay_seconds = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.rtmp_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.rtmp_token = options.longs === String ? "0" : 0;
             }
             if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 if (typeof message.broadcast_id === "number")
@@ -1258,6 +1337,11 @@
                 object.as_rtmp = message.as_rtmp;
             if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
                 object.delay_seconds = message.delay_seconds;
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (typeof message.rtmp_token === "number")
+                    object.rtmp_token = options.longs === String ? String(message.rtmp_token) : message.rtmp_token;
+                else
+                    object.rtmp_token = options.longs === String ? $util.Long.prototype.toString.call(message.rtmp_token) : options.longs === Number ? new $util.LongBits(message.rtmp_token.low >>> 0, message.rtmp_token.high >>> 0).toNumber(true) : message.rtmp_token;
             return object;
         };
     
@@ -1800,6 +1884,7 @@
          * @property {number|Long|null} [viewer_token] CBroadcast_WatchBroadcast_Request viewer_token
          * @property {number|null} [client_ip] CBroadcast_WatchBroadcast_Request client_ip
          * @property {number|null} [client_cell] CBroadcast_WatchBroadcast_Request client_cell
+         * @property {EBroadcastWatchLocation|null} [watch_location] CBroadcast_WatchBroadcast_Request watch_location
          */
     
         /**
@@ -1858,6 +1943,14 @@
         CBroadcast_WatchBroadcast_Request.prototype.client_cell = 0;
     
         /**
+         * CBroadcast_WatchBroadcast_Request watch_location.
+         * @member {EBroadcastWatchLocation} watch_location
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.watch_location = 0;
+    
+        /**
          * Creates a new CBroadcast_WatchBroadcast_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_WatchBroadcast_Request
@@ -1891,6 +1984,8 @@
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.client_ip);
             if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.client_cell);
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.watch_location);
             return writer;
         };
     
@@ -1939,6 +2034,9 @@
                     break;
                 case 5:
                     message.client_cell = reader.uint32();
+                    break;
+                case 6:
+                    message.watch_location = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1990,6 +2088,20 @@
             if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 if (!$util.isInteger(message.client_cell))
                     return "client_cell: integer expected";
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                switch (message.watch_location) {
+                default:
+                    return "watch_location: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
+                }
             return null;
         };
     
@@ -2036,6 +2148,40 @@
                 message.client_ip = object.client_ip >>> 0;
             if (object.client_cell != null)
                 message.client_cell = object.client_cell >>> 0;
+            switch (object.watch_location) {
+            case "k_EBroadcastWatchLocation_Invalid":
+            case 0:
+                message.watch_location = 0;
+                break;
+            case "k_EBroadcastWatchLocation_SteamTV_Tab":
+            case 1:
+                message.watch_location = 1;
+                break;
+            case "k_EBroadcastWatchLocation_SteamTV_WatchParty":
+            case 2:
+                message.watch_location = 2;
+                break;
+            case "k_EBroadcastWatchLocation_Chat_Tab":
+            case 3:
+                message.watch_location = 3;
+                break;
+            case "k_EBroadcastWatchLocation_Chat_WatchParty":
+            case 4:
+                message.watch_location = 4;
+                break;
+            case "k_EBroadcastWatchLocation_CommunityPage":
+            case 5:
+                message.watch_location = 5;
+                break;
+            case "k_EBroadcastWatchLocation_StoreAppPage":
+            case 6:
+                message.watch_location = 6;
+                break;
+            case "k_EBroadcastWatchLocation_InGame":
+            case 7:
+                message.watch_location = 7;
+                break;
+            }
             return message;
         };
     
@@ -2070,6 +2216,7 @@
                     object.viewer_token = options.longs === String ? "0" : 0;
                 object.client_ip = 0;
                 object.client_cell = 0;
+                object.watch_location = options.enums === String ? "k_EBroadcastWatchLocation_Invalid" : 0;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -2090,6 +2237,8 @@
                 object.client_ip = message.client_ip;
             if (message.client_cell != null && message.hasOwnProperty("client_cell"))
                 object.client_cell = message.client_cell;
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                object.watch_location = options.enums === String ? $root.EBroadcastWatchLocation[message.watch_location] : message.watch_location;
             return object;
         };
     
@@ -2124,6 +2273,8 @@
          * @property {number|null} [seconds_delay] CBroadcast_WatchBroadcast_Response seconds_delay
          * @property {number|Long|null} [viewer_token] CBroadcast_WatchBroadcast_Response viewer_token
          * @property {string|null} [hls_m3u8_master_url] CBroadcast_WatchBroadcast_Response hls_m3u8_master_url
+         * @property {number|null} [heartbeat_interval] CBroadcast_WatchBroadcast_Response heartbeat_interval
+         * @property {string|null} [thumbnail_url] CBroadcast_WatchBroadcast_Response thumbnail_url
          */
     
         /**
@@ -2230,6 +2381,22 @@
         CBroadcast_WatchBroadcast_Response.prototype.hls_m3u8_master_url = "";
     
         /**
+         * CBroadcast_WatchBroadcast_Response heartbeat_interval.
+         * @member {number} heartbeat_interval
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.heartbeat_interval = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.thumbnail_url = "";
+    
+        /**
          * Creates a new CBroadcast_WatchBroadcast_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_WatchBroadcast_Response
@@ -2275,6 +2442,10 @@
                 writer.uint32(/* id 10, wireType 1 =*/81).fixed64(message.viewer_token);
             if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.hls_m3u8_master_url);
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.heartbeat_interval);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.thumbnail_url);
             return writer;
         };
     
@@ -2341,6 +2512,12 @@
                     break;
                 case 11:
                     message.hls_m3u8_master_url = reader.string();
+                    break;
+                case 12:
+                    message.heartbeat_interval = reader.int32();
+                    break;
+                case 13:
+                    message.thumbnail_url = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2425,6 +2602,12 @@
             if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
                 if (!$util.isString(message.hls_m3u8_master_url))
                     return "hls_m3u8_master_url: string expected";
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                if (!$util.isInteger(message.heartbeat_interval))
+                    return "heartbeat_interval: integer expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
             return null;
         };
     
@@ -2531,6 +2714,10 @@
                     message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
             if (object.hls_m3u8_master_url != null)
                 message.hls_m3u8_master_url = String(object.hls_m3u8_master_url);
+            if (object.heartbeat_interval != null)
+                message.heartbeat_interval = object.heartbeat_interval | 0;
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
             return message;
         };
     
@@ -2571,6 +2758,8 @@
                 } else
                     object.viewer_token = options.longs === String ? "0" : 0;
                 object.hls_m3u8_master_url = "";
+                object.heartbeat_interval = 0;
+                object.thumbnail_url = "";
             }
             if (message.response != null && message.hasOwnProperty("response"))
                 object.response = options.enums === String ? $root.CBroadcast_WatchBroadcast_Response.EWatchResponse[message.response] : message.response;
@@ -2603,6 +2792,10 @@
                     object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
             if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
                 object.hls_m3u8_master_url = message.hls_m3u8_master_url;
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                object.heartbeat_interval = message.heartbeat_interval;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
             return object;
         };
     
@@ -2652,6 +2845,576 @@
         })();
     
         return CBroadcast_WatchBroadcast_Response;
+    })();
+    
+    $root.CBroadcast_HeartbeatBroadcast_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_HeartbeatBroadcast_Notification.
+         * @exports ICBroadcast_HeartbeatBroadcast_Notification
+         * @interface ICBroadcast_HeartbeatBroadcast_Notification
+         * @property {number|Long|null} [steamid] CBroadcast_HeartbeatBroadcast_Notification steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_HeartbeatBroadcast_Notification broadcast_id
+         * @property {number|Long|null} [viewer_token] CBroadcast_HeartbeatBroadcast_Notification viewer_token
+         * @property {number|null} [representation] CBroadcast_HeartbeatBroadcast_Notification representation
+         */
+    
+        /**
+         * Constructs a new CBroadcast_HeartbeatBroadcast_Notification.
+         * @exports CBroadcast_HeartbeatBroadcast_Notification
+         * @classdesc Represents a CBroadcast_HeartbeatBroadcast_Notification.
+         * @implements ICBroadcast_HeartbeatBroadcast_Notification
+         * @constructor
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_HeartbeatBroadcast_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification representation.
+         * @member {number} representation
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.representation = 0;
+    
+        /**
+         * Creates a new CBroadcast_HeartbeatBroadcast_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.create = function create(properties) {
+            return new CBroadcast_HeartbeatBroadcast_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_HeartbeatBroadcast_Notification message. Does not implicitly {@link CBroadcast_HeartbeatBroadcast_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.representation);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_HeartbeatBroadcast_Notification message, length delimited. Does not implicitly {@link CBroadcast_HeartbeatBroadcast_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_HeartbeatBroadcast_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_HeartbeatBroadcast_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                case 4:
+                    message.representation = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_HeartbeatBroadcast_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_HeartbeatBroadcast_Notification message.
+         * @function verify
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                if (!$util.isInteger(message.representation))
+                    return "representation: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_HeartbeatBroadcast_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_HeartbeatBroadcast_Notification)
+                return object;
+            var message = new $root.CBroadcast_HeartbeatBroadcast_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            if (object.representation != null)
+                message.representation = object.representation >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_HeartbeatBroadcast_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {CBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+                object.representation = 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                object.representation = message.representation;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_HeartbeatBroadcast_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_HeartbeatBroadcast_Notification;
+    })();
+    
+    $root.CBroadcast_StopWatchingBroadcast_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StopWatchingBroadcast_Notification.
+         * @exports ICBroadcast_StopWatchingBroadcast_Notification
+         * @interface ICBroadcast_StopWatchingBroadcast_Notification
+         * @property {number|Long|null} [steamid] CBroadcast_StopWatchingBroadcast_Notification steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_StopWatchingBroadcast_Notification broadcast_id
+         * @property {number|Long|null} [viewer_token] CBroadcast_StopWatchingBroadcast_Notification viewer_token
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StopWatchingBroadcast_Notification.
+         * @exports CBroadcast_StopWatchingBroadcast_Notification
+         * @classdesc Represents a CBroadcast_StopWatchingBroadcast_Notification.
+         * @implements ICBroadcast_StopWatchingBroadcast_Notification
+         * @constructor
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_StopWatchingBroadcast_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_StopWatchingBroadcast_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.create = function create(properties) {
+            return new CBroadcast_StopWatchingBroadcast_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopWatchingBroadcast_Notification message. Does not implicitly {@link CBroadcast_StopWatchingBroadcast_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopWatchingBroadcast_Notification message, length delimited. Does not implicitly {@link CBroadcast_StopWatchingBroadcast_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopWatchingBroadcast_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StopWatchingBroadcast_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopWatchingBroadcast_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StopWatchingBroadcast_Notification message.
+         * @function verify
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StopWatchingBroadcast_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StopWatchingBroadcast_Notification)
+                return object;
+            var message = new $root.CBroadcast_StopWatchingBroadcast_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StopWatchingBroadcast_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {CBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StopWatchingBroadcast_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StopWatchingBroadcast_Notification;
     })();
     
     $root.CBroadcast_GetBroadcastStatus_Request = (function() {
@@ -2905,6 +3668,10 @@
          * @property {boolean|null} [is_rtmp] CBroadcast_GetBroadcastStatus_Response is_rtmp
          * @property {number|null} [seconds_delay] CBroadcast_GetBroadcastStatus_Response seconds_delay
          * @property {boolean|null} [is_publisher] CBroadcast_GetBroadcastStatus_Response is_publisher
+         * @property {string|null} [thumbnail_url] CBroadcast_GetBroadcastStatus_Response thumbnail_url
+         * @property {number|null} [update_interval] CBroadcast_GetBroadcastStatus_Response update_interval
+         * @property {boolean|null} [is_uploading] CBroadcast_GetBroadcastStatus_Response is_uploading
+         * @property {number|null} [duration] CBroadcast_GetBroadcastStatus_Response duration
          */
     
         /**
@@ -2979,6 +3746,38 @@
         CBroadcast_GetBroadcastStatus_Response.prototype.is_publisher = false;
     
         /**
+         * CBroadcast_GetBroadcastStatus_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.thumbnail_url = "";
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response update_interval.
+         * @member {number} update_interval
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.update_interval = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response is_uploading.
+         * @member {boolean} is_uploading
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_uploading = false;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response duration.
+         * @member {number} duration
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.duration = 0;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastStatus_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastStatus_Response
@@ -3016,6 +3815,14 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds_delay);
             if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_publisher);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.thumbnail_url);
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.update_interval);
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_uploading);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.duration);
             return writer;
         };
     
@@ -3070,6 +3877,18 @@
                     break;
                 case 7:
                     message.is_publisher = reader.bool();
+                    break;
+                case 8:
+                    message.thumbnail_url = reader.string();
+                    break;
+                case 9:
+                    message.update_interval = reader.int32();
+                    break;
+                case 10:
+                    message.is_uploading = reader.bool();
+                    break;
+                case 11:
+                    message.duration = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3127,6 +3946,18 @@
             if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
                 if (typeof message.is_publisher !== "boolean")
                     return "is_publisher: boolean expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                if (!$util.isInteger(message.update_interval))
+                    return "update_interval: integer expected";
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                if (typeof message.is_uploading !== "boolean")
+                    return "is_uploading: boolean expected";
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
             return null;
         };
     
@@ -3163,6 +3994,14 @@
                 message.seconds_delay = object.seconds_delay | 0;
             if (object.is_publisher != null)
                 message.is_publisher = Boolean(object.is_publisher);
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            if (object.update_interval != null)
+                message.update_interval = object.update_interval | 0;
+            if (object.is_uploading != null)
+                message.is_uploading = Boolean(object.is_uploading);
+            if (object.duration != null)
+                message.duration = object.duration >>> 0;
             return message;
         };
     
@@ -3191,6 +4030,10 @@
                 object.is_rtmp = false;
                 object.seconds_delay = 0;
                 object.is_publisher = false;
+                object.thumbnail_url = "";
+                object.update_interval = 0;
+                object.is_uploading = false;
+                object.duration = 0;
             }
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 if (typeof message.gameid === "number")
@@ -3209,6 +4052,14 @@
                 object.seconds_delay = message.seconds_delay;
             if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
                 object.is_publisher = message.is_publisher;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                object.update_interval = message.update_interval;
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                object.is_uploading = message.is_uploading;
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
             return object;
         };
     
@@ -3472,6 +4323,7 @@
          * @interface ICBroadcast_GetBroadcastThumbnail_Response
          * @property {string|null} [thumbnail_url] CBroadcast_GetBroadcastThumbnail_Response thumbnail_url
          * @property {number|null} [update_interval] CBroadcast_GetBroadcastThumbnail_Response update_interval
+         * @property {number|null} [num_viewers] CBroadcast_GetBroadcastThumbnail_Response num_viewers
          */
     
         /**
@@ -3506,6 +4358,14 @@
         CBroadcast_GetBroadcastThumbnail_Response.prototype.update_interval = 0;
     
         /**
+         * CBroadcast_GetBroadcastThumbnail_Response num_viewers.
+         * @member {number} num_viewers
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.num_viewers = 0;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastThumbnail_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastThumbnail_Response
@@ -3533,6 +4393,8 @@
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail_url);
             if (message.update_interval != null && message.hasOwnProperty("update_interval"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.update_interval);
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.num_viewers);
             return writer;
         };
     
@@ -3572,6 +4434,9 @@
                     break;
                 case 2:
                     message.update_interval = reader.int32();
+                    break;
+                case 3:
+                    message.num_viewers = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3614,6 +4479,9 @@
             if (message.update_interval != null && message.hasOwnProperty("update_interval"))
                 if (!$util.isInteger(message.update_interval))
                     return "update_interval: integer expected";
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                if (!$util.isInteger(message.num_viewers))
+                    return "num_viewers: integer expected";
             return null;
         };
     
@@ -3633,6 +4501,8 @@
                 message.thumbnail_url = String(object.thumbnail_url);
             if (object.update_interval != null)
                 message.update_interval = object.update_interval | 0;
+            if (object.num_viewers != null)
+                message.num_viewers = object.num_viewers | 0;
             return message;
         };
     
@@ -3652,11 +4522,14 @@
             if (options.defaults) {
                 object.thumbnail_url = "";
                 object.update_interval = 0;
+                object.num_viewers = 0;
             }
             if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 object.thumbnail_url = message.thumbnail_url;
             if (message.update_interval != null && message.hasOwnProperty("update_interval"))
                 object.update_interval = message.update_interval;
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                object.num_viewers = message.num_viewers;
             return object;
         };
     
@@ -5497,6 +6370,7 @@
          * @property {string|null} [persona_name] CBroadcast_PostChatMessage_Response persona_name
          * @property {boolean|null} [in_game] CBroadcast_PostChatMessage_Response in_game
          * @property {number|null} [result] CBroadcast_PostChatMessage_Response result
+         * @property {number|null} [cooldown_time_seconds] CBroadcast_PostChatMessage_Response cooldown_time_seconds
          */
     
         /**
@@ -5539,6 +6413,14 @@
         CBroadcast_PostChatMessage_Response.prototype.result = 0;
     
         /**
+         * CBroadcast_PostChatMessage_Response cooldown_time_seconds.
+         * @member {number} cooldown_time_seconds
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Response.prototype.cooldown_time_seconds = 0;
+    
+        /**
          * Creates a new CBroadcast_PostChatMessage_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_PostChatMessage_Response
@@ -5568,6 +6450,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.in_game);
             if (message.result != null && message.hasOwnProperty("result"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.result);
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cooldown_time_seconds);
             return writer;
         };
     
@@ -5610,6 +6494,9 @@
                     break;
                 case 3:
                     message.result = reader.int32();
+                    break;
+                case 4:
+                    message.cooldown_time_seconds = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5655,6 +6542,9 @@
             if (message.result != null && message.hasOwnProperty("result"))
                 if (!$util.isInteger(message.result))
                     return "result: integer expected";
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                if (!$util.isInteger(message.cooldown_time_seconds))
+                    return "cooldown_time_seconds: integer expected";
             return null;
         };
     
@@ -5676,6 +6566,8 @@
                 message.in_game = Boolean(object.in_game);
             if (object.result != null)
                 message.result = object.result | 0;
+            if (object.cooldown_time_seconds != null)
+                message.cooldown_time_seconds = object.cooldown_time_seconds | 0;
             return message;
         };
     
@@ -5696,6 +6588,7 @@
                 object.persona_name = "";
                 object.in_game = false;
                 object.result = 0;
+                object.cooldown_time_seconds = 0;
             }
             if (message.persona_name != null && message.hasOwnProperty("persona_name"))
                 object.persona_name = message.persona_name;
@@ -5703,6 +6596,8 @@
                 object.in_game = message.in_game;
             if (message.result != null && message.hasOwnProperty("result"))
                 object.result = message.result;
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                object.cooldown_time_seconds = message.cooldown_time_seconds;
             return object;
         };
     
@@ -9085,6 +9980,72 @@
          * @instance
          * @param {ICBroadcast_WatchBroadcast_Request} request CBroadcast_WatchBroadcast_Request message or plain object
          * @returns {Promise<CBroadcast_WatchBroadcast_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#heartbeatBroadcast}.
+         * @memberof Broadcast
+         * @typedef HeartbeatBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls HeartbeatBroadcast.
+         * @function heartbeatBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} request CBroadcast_HeartbeatBroadcast_Notification message or plain object
+         * @param {Broadcast.HeartbeatBroadcastCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.heartbeatBroadcast = function heartbeatBroadcast(request, callback) {
+            return this.rpcCall(heartbeatBroadcast, $root.CBroadcast_HeartbeatBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "HeartbeatBroadcast" });
+    
+        /**
+         * Calls HeartbeatBroadcast.
+         * @function heartbeatBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} request CBroadcast_HeartbeatBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#stopWatchingBroadcast}.
+         * @memberof Broadcast
+         * @typedef StopWatchingBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls StopWatchingBroadcast.
+         * @function stopWatchingBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} request CBroadcast_StopWatchingBroadcast_Notification message or plain object
+         * @param {Broadcast.StopWatchingBroadcastCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.stopWatchingBroadcast = function stopWatchingBroadcast(request, callback) {
+            return this.rpcCall(stopWatchingBroadcast, $root.CBroadcast_StopWatchingBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "StopWatchingBroadcast" });
+    
+        /**
+         * Calls StopWatchingBroadcast.
+         * @function stopWatchingBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} request CBroadcast_StopWatchingBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */
     

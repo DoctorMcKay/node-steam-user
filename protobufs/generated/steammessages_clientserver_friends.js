@@ -3905,6 +3905,7 @@
          * @property {boolean|null} [high_priority] CMsgClientChangeStatus high_priority
          * @property {boolean|null} [persona_set_by_user] CMsgClientChangeStatus persona_set_by_user
          * @property {number|null} [persona_state_flags] CMsgClientChangeStatus persona_state_flags
+         * @property {boolean|null} [need_persona_response] CMsgClientChangeStatus need_persona_response
          */
     
         /**
@@ -3971,6 +3972,14 @@
         CMsgClientChangeStatus.prototype.persona_state_flags = 0;
     
         /**
+         * CMsgClientChangeStatus need_persona_response.
+         * @member {boolean} need_persona_response
+         * @memberof CMsgClientChangeStatus
+         * @instance
+         */
+        CMsgClientChangeStatus.prototype.need_persona_response = false;
+    
+        /**
          * Creates a new CMsgClientChangeStatus instance using the specified properties.
          * @function create
          * @memberof CMsgClientChangeStatus
@@ -4006,6 +4015,8 @@
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.persona_set_by_user);
             if (message.persona_state_flags != null && message.hasOwnProperty("persona_state_flags"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.persona_state_flags);
+            if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.need_persona_response);
             return writer;
         };
     
@@ -4057,6 +4068,9 @@
                     break;
                 case 6:
                     message.persona_state_flags = reader.uint32();
+                    break;
+                case 7:
+                    message.need_persona_response = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4111,6 +4125,9 @@
             if (message.persona_state_flags != null && message.hasOwnProperty("persona_state_flags"))
                 if (!$util.isInteger(message.persona_state_flags))
                     return "persona_state_flags: integer expected";
+            if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
+                if (typeof message.need_persona_response !== "boolean")
+                    return "need_persona_response: boolean expected";
             return null;
         };
     
@@ -4138,6 +4155,8 @@
                 message.persona_set_by_user = Boolean(object.persona_set_by_user);
             if (object.persona_state_flags != null)
                 message.persona_state_flags = object.persona_state_flags >>> 0;
+            if (object.need_persona_response != null)
+                message.need_persona_response = Boolean(object.need_persona_response);
             return message;
         };
     
@@ -4161,6 +4180,7 @@
                 object.high_priority = false;
                 object.persona_set_by_user = false;
                 object.persona_state_flags = 0;
+                object.need_persona_response = false;
             }
             if (message.persona_state != null && message.hasOwnProperty("persona_state"))
                 object.persona_state = message.persona_state;
@@ -4174,6 +4194,8 @@
                 object.persona_set_by_user = message.persona_set_by_user;
             if (message.persona_state_flags != null && message.hasOwnProperty("persona_state_flags"))
                 object.persona_state_flags = message.persona_state_flags;
+            if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
+                object.need_persona_response = message.need_persona_response;
             return object;
         };
     
@@ -4650,6 +4672,7 @@
              * @property {Uint8Array|null} [avatar_hash] Friend avatar_hash
              * @property {number|null} [last_logoff] Friend last_logoff
              * @property {number|null} [last_logon] Friend last_logon
+             * @property {number|null} [last_seen_online] Friend last_seen_online
              * @property {number|null} [clan_rank] Friend clan_rank
              * @property {string|null} [game_name] Friend game_name
              * @property {number|Long|null} [gameid] Friend gameid
@@ -4659,6 +4682,10 @@
              * @property {Array.<CMsgClientPersonaState.Friend.IKV>|null} [rich_presence] Friend rich_presence
              * @property {number|Long|null} [broadcast_id] Friend broadcast_id
              * @property {number|Long|null} [game_lobby_id] Friend game_lobby_id
+             * @property {number|null} [watching_broadcast_accountid] Friend watching_broadcast_accountid
+             * @property {number|null} [watching_broadcast_appid] Friend watching_broadcast_appid
+             * @property {number|null} [watching_broadcast_viewers] Friend watching_broadcast_viewers
+             * @property {string|null} [watching_broadcast_title] Friend watching_broadcast_title
              */
     
             /**
@@ -4798,6 +4825,14 @@
             Friend.prototype.last_logon = 0;
     
             /**
+             * Friend last_seen_online.
+             * @member {number} last_seen_online
+             * @memberof CMsgClientPersonaState.Friend
+             * @instance
+             */
+            Friend.prototype.last_seen_online = 0;
+    
+            /**
              * Friend clan_rank.
              * @member {number} clan_rank
              * @memberof CMsgClientPersonaState.Friend
@@ -4870,6 +4905,38 @@
             Friend.prototype.game_lobby_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
             /**
+             * Friend watching_broadcast_accountid.
+             * @member {number} watching_broadcast_accountid
+             * @memberof CMsgClientPersonaState.Friend
+             * @instance
+             */
+            Friend.prototype.watching_broadcast_accountid = 0;
+    
+            /**
+             * Friend watching_broadcast_appid.
+             * @member {number} watching_broadcast_appid
+             * @memberof CMsgClientPersonaState.Friend
+             * @instance
+             */
+            Friend.prototype.watching_broadcast_appid = 0;
+    
+            /**
+             * Friend watching_broadcast_viewers.
+             * @member {number} watching_broadcast_viewers
+             * @memberof CMsgClientPersonaState.Friend
+             * @instance
+             */
+            Friend.prototype.watching_broadcast_viewers = 0;
+    
+            /**
+             * Friend watching_broadcast_title.
+             * @member {string} watching_broadcast_title
+             * @memberof CMsgClientPersonaState.Friend
+             * @instance
+             */
+            Friend.prototype.watching_broadcast_title = "";
+    
+            /**
              * Creates a new Friend instance using the specified properties.
              * @function create
              * @memberof CMsgClientPersonaState.Friend
@@ -4923,6 +4990,8 @@
                     writer.uint32(/* id 45, wireType 0 =*/360).uint32(message.last_logoff);
                 if (message.last_logon != null && message.hasOwnProperty("last_logon"))
                     writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.last_logon);
+                if (message.last_seen_online != null && message.hasOwnProperty("last_seen_online"))
+                    writer.uint32(/* id 47, wireType 0 =*/376).uint32(message.last_seen_online);
                 if (message.clan_rank != null && message.hasOwnProperty("clan_rank"))
                     writer.uint32(/* id 50, wireType 0 =*/400).uint32(message.clan_rank);
                 if (message.game_name != null && message.hasOwnProperty("game_name"))
@@ -4942,6 +5011,14 @@
                     writer.uint32(/* id 72, wireType 1 =*/577).fixed64(message.broadcast_id);
                 if (message.game_lobby_id != null && message.hasOwnProperty("game_lobby_id"))
                     writer.uint32(/* id 73, wireType 1 =*/585).fixed64(message.game_lobby_id);
+                if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
+                    writer.uint32(/* id 74, wireType 0 =*/592).uint32(message.watching_broadcast_accountid);
+                if (message.watching_broadcast_appid != null && message.hasOwnProperty("watching_broadcast_appid"))
+                    writer.uint32(/* id 75, wireType 0 =*/600).uint32(message.watching_broadcast_appid);
+                if (message.watching_broadcast_viewers != null && message.hasOwnProperty("watching_broadcast_viewers"))
+                    writer.uint32(/* id 76, wireType 0 =*/608).uint32(message.watching_broadcast_viewers);
+                if (message.watching_broadcast_title != null && message.hasOwnProperty("watching_broadcast_title"))
+                    writer.uint32(/* id 77, wireType 2 =*/618).string(message.watching_broadcast_title);
                 return writer;
             };
     
@@ -5021,6 +5098,9 @@
                     case 46:
                         message.last_logon = reader.uint32();
                         break;
+                    case 47:
+                        message.last_seen_online = reader.uint32();
+                        break;
                     case 50:
                         message.clan_rank = reader.uint32();
                         break;
@@ -5049,6 +5129,18 @@
                         break;
                     case 73:
                         message.game_lobby_id = reader.fixed64();
+                        break;
+                    case 74:
+                        message.watching_broadcast_accountid = reader.uint32();
+                        break;
+                    case 75:
+                        message.watching_broadcast_appid = reader.uint32();
+                        break;
+                    case 76:
+                        message.watching_broadcast_viewers = reader.uint32();
+                        break;
+                    case 77:
+                        message.watching_broadcast_title = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5130,6 +5222,9 @@
                 if (message.last_logon != null && message.hasOwnProperty("last_logon"))
                     if (!$util.isInteger(message.last_logon))
                         return "last_logon: integer expected";
+                if (message.last_seen_online != null && message.hasOwnProperty("last_seen_online"))
+                    if (!$util.isInteger(message.last_seen_online))
+                        return "last_seen_online: integer expected";
                 if (message.clan_rank != null && message.hasOwnProperty("clan_rank"))
                     if (!$util.isInteger(message.clan_rank))
                         return "clan_rank: integer expected";
@@ -5165,6 +5260,18 @@
                 if (message.game_lobby_id != null && message.hasOwnProperty("game_lobby_id"))
                     if (!$util.isInteger(message.game_lobby_id) && !(message.game_lobby_id && $util.isInteger(message.game_lobby_id.low) && $util.isInteger(message.game_lobby_id.high)))
                         return "game_lobby_id: integer|Long expected";
+                if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
+                    if (!$util.isInteger(message.watching_broadcast_accountid))
+                        return "watching_broadcast_accountid: integer expected";
+                if (message.watching_broadcast_appid != null && message.hasOwnProperty("watching_broadcast_appid"))
+                    if (!$util.isInteger(message.watching_broadcast_appid))
+                        return "watching_broadcast_appid: integer expected";
+                if (message.watching_broadcast_viewers != null && message.hasOwnProperty("watching_broadcast_viewers"))
+                    if (!$util.isInteger(message.watching_broadcast_viewers))
+                        return "watching_broadcast_viewers: integer expected";
+                if (message.watching_broadcast_title != null && message.hasOwnProperty("watching_broadcast_title"))
+                    if (!$util.isString(message.watching_broadcast_title))
+                        return "watching_broadcast_title: string expected";
                 return null;
             };
     
@@ -5227,6 +5334,8 @@
                     message.last_logoff = object.last_logoff >>> 0;
                 if (object.last_logon != null)
                     message.last_logon = object.last_logon >>> 0;
+                if (object.last_seen_online != null)
+                    message.last_seen_online = object.last_seen_online >>> 0;
                 if (object.clan_rank != null)
                     message.clan_rank = object.clan_rank >>> 0;
                 if (object.game_name != null)
@@ -5280,6 +5389,14 @@
                         message.game_lobby_id = object.game_lobby_id;
                     else if (typeof object.game_lobby_id === "object")
                         message.game_lobby_id = new $util.LongBits(object.game_lobby_id.low >>> 0, object.game_lobby_id.high >>> 0).toNumber();
+                if (object.watching_broadcast_accountid != null)
+                    message.watching_broadcast_accountid = object.watching_broadcast_accountid >>> 0;
+                if (object.watching_broadcast_appid != null)
+                    message.watching_broadcast_appid = object.watching_broadcast_appid >>> 0;
+                if (object.watching_broadcast_viewers != null)
+                    message.watching_broadcast_viewers = object.watching_broadcast_viewers >>> 0;
+                if (object.watching_broadcast_title != null)
+                    message.watching_broadcast_title = String(object.watching_broadcast_title);
                 return message;
             };
     
@@ -5328,6 +5445,7 @@
                     }
                     object.last_logoff = 0;
                     object.last_logon = 0;
+                    object.last_seen_online = 0;
                     object.clan_rank = 0;
                     object.game_name = "";
                     if ($util.Long) {
@@ -5354,6 +5472,10 @@
                         object.game_lobby_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.game_lobby_id = options.longs === String ? "0" : 0;
+                    object.watching_broadcast_accountid = 0;
+                    object.watching_broadcast_appid = 0;
+                    object.watching_broadcast_viewers = 0;
+                    object.watching_broadcast_title = "";
                 }
                 if (message.friendid != null && message.hasOwnProperty("friendid"))
                     if (typeof message.friendid === "number")
@@ -5391,6 +5513,8 @@
                     object.last_logoff = message.last_logoff;
                 if (message.last_logon != null && message.hasOwnProperty("last_logon"))
                     object.last_logon = message.last_logon;
+                if (message.last_seen_online != null && message.hasOwnProperty("last_seen_online"))
+                    object.last_seen_online = message.last_seen_online;
                 if (message.clan_rank != null && message.hasOwnProperty("clan_rank"))
                     object.clan_rank = message.clan_rank;
                 if (message.game_name != null && message.hasOwnProperty("game_name"))
@@ -5421,6 +5545,14 @@
                         object.game_lobby_id = options.longs === String ? String(message.game_lobby_id) : message.game_lobby_id;
                     else
                         object.game_lobby_id = options.longs === String ? $util.Long.prototype.toString.call(message.game_lobby_id) : options.longs === Number ? new $util.LongBits(message.game_lobby_id.low >>> 0, message.game_lobby_id.high >>> 0).toNumber() : message.game_lobby_id;
+                if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
+                    object.watching_broadcast_accountid = message.watching_broadcast_accountid;
+                if (message.watching_broadcast_appid != null && message.hasOwnProperty("watching_broadcast_appid"))
+                    object.watching_broadcast_appid = message.watching_broadcast_appid;
+                if (message.watching_broadcast_viewers != null && message.hasOwnProperty("watching_broadcast_viewers"))
+                    object.watching_broadcast_viewers = message.watching_broadcast_viewers;
+                if (message.watching_broadcast_title != null && message.hasOwnProperty("watching_broadcast_title"))
+                    object.watching_broadcast_title = message.watching_broadcast_title;
                 return object;
             };
     
@@ -9055,6 +9187,7 @@
              * @property {number|null} [count] Emoticon count
              * @property {number|null} [time_last_used] Emoticon time_last_used
              * @property {number|null} [use_count] Emoticon use_count
+             * @property {number|null} [time_received] Emoticon time_received
              */
     
             /**
@@ -9105,6 +9238,14 @@
             Emoticon.prototype.use_count = 0;
     
             /**
+             * Emoticon time_received.
+             * @member {number} time_received
+             * @memberof CMsgClientEmoticonList.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.time_received = 0;
+    
+            /**
              * Creates a new Emoticon instance using the specified properties.
              * @function create
              * @memberof CMsgClientEmoticonList.Emoticon
@@ -9136,6 +9277,8 @@
                     writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time_last_used);
                 if (message.use_count != null && message.hasOwnProperty("use_count"))
                     writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.use_count);
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.time_received);
                 return writer;
             };
     
@@ -9181,6 +9324,9 @@
                         break;
                     case 4:
                         message.use_count = reader.uint32();
+                        break;
+                    case 5:
+                        message.time_received = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -9229,6 +9375,9 @@
                 if (message.use_count != null && message.hasOwnProperty("use_count"))
                     if (!$util.isInteger(message.use_count))
                         return "use_count: integer expected";
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    if (!$util.isInteger(message.time_received))
+                        return "time_received: integer expected";
                 return null;
             };
     
@@ -9252,6 +9401,8 @@
                     message.time_last_used = object.time_last_used >>> 0;
                 if (object.use_count != null)
                     message.use_count = object.use_count >>> 0;
+                if (object.time_received != null)
+                    message.time_received = object.time_received >>> 0;
                 return message;
             };
     
@@ -9273,6 +9424,7 @@
                     object.count = 0;
                     object.time_last_used = 0;
                     object.use_count = 0;
+                    object.time_received = 0;
                 }
                 if (message.name != null && message.hasOwnProperty("name"))
                     object.name = message.name;
@@ -9282,6 +9434,8 @@
                     object.time_last_used = message.time_last_used;
                 if (message.use_count != null && message.hasOwnProperty("use_count"))
                     object.use_count = message.use_count;
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    object.time_received = message.time_received;
                 return object;
             };
     

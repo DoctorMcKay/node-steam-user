@@ -58,6 +58,7 @@
      * @property {number} k_ERemoteClientServiceRemoteControl=1 k_ERemoteClientServiceRemoteControl value
      * @property {number} k_ERemoteClientServiceGameStreaming=2 k_ERemoteClientServiceGameStreaming value
      * @property {number} k_ERemoteClientServiceSiteLicense=4 k_ERemoteClientServiceSiteLicense value
+     * @property {number} k_ERemoteClientServiceContentCache=8 k_ERemoteClientServiceContentCache value
      */
     $root.ERemoteClientService = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -65,6 +66,7 @@
         values[valuesById[1] = "k_ERemoteClientServiceRemoteControl"] = 1;
         values[valuesById[2] = "k_ERemoteClientServiceGameStreaming"] = 2;
         values[valuesById[4] = "k_ERemoteClientServiceSiteLicense"] = 4;
+        values[valuesById[8] = "k_ERemoteClientServiceContentCache"] = 8;
         return values;
     })();
     
@@ -475,6 +477,7 @@
          * @property {number|null} [download_lan_peer_group] CMsgRemoteClientBroadcastStatus download_lan_peer_group
          * @property {boolean|null} [broadcasting_active] CMsgRemoteClientBroadcastStatus broadcasting_active
          * @property {boolean|null} [vr_active] CMsgRemoteClientBroadcastStatus vr_active
+         * @property {number|null} [content_cache_port] CMsgRemoteClientBroadcastStatus content_cache_port
          */
     
         /**
@@ -623,6 +626,14 @@
         CMsgRemoteClientBroadcastStatus.prototype.vr_active = false;
     
         /**
+         * CMsgRemoteClientBroadcastStatus content_cache_port.
+         * @member {number} content_cache_port
+         * @memberof CMsgRemoteClientBroadcastStatus
+         * @instance
+         */
+        CMsgRemoteClientBroadcastStatus.prototype.content_cache_port = 0;
+    
+        /**
          * Creates a new CMsgRemoteClientBroadcastStatus instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteClientBroadcastStatus
@@ -680,6 +691,8 @@
                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.broadcasting_active);
             if (message.vr_active != null && message.hasOwnProperty("vr_active"))
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.vr_active);
+            if (message.content_cache_port != null && message.hasOwnProperty("content_cache_port"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.content_cache_port);
             return writer;
         };
     
@@ -765,6 +778,9 @@
                     break;
                 case 18:
                     message.vr_active = reader.bool();
+                    break;
+                case 19:
+                    message.content_cache_port = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -859,6 +875,9 @@
             if (message.vr_active != null && message.hasOwnProperty("vr_active"))
                 if (typeof message.vr_active !== "boolean")
                     return "vr_active: boolean expected";
+            if (message.content_cache_port != null && message.hasOwnProperty("content_cache_port"))
+                if (!$util.isInteger(message.content_cache_port))
+                    return "content_cache_port: integer expected";
             return null;
         };
     
@@ -919,6 +938,8 @@
                 message.broadcasting_active = Boolean(object.broadcasting_active);
             if (object.vr_active != null)
                 message.vr_active = Boolean(object.vr_active);
+            if (object.content_cache_port != null)
+                message.content_cache_port = object.content_cache_port >>> 0;
             return message;
         };
     
@@ -954,6 +975,7 @@
                 object.download_lan_peer_group = 0;
                 object.broadcasting_active = false;
                 object.vr_active = false;
+                object.content_cache_port = 0;
             }
             if (message.version != null && message.hasOwnProperty("version"))
                 object.version = message.version;
@@ -993,6 +1015,8 @@
                 object.broadcasting_active = message.broadcasting_active;
             if (message.vr_active != null && message.hasOwnProperty("vr_active"))
                 object.vr_active = message.vr_active;
+            if (message.content_cache_port != null && message.hasOwnProperty("content_cache_port"))
+                object.content_cache_port = message.content_cache_port;
             return object;
         };
     

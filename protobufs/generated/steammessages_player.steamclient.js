@@ -16,6 +16,22 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * ENotificationSetting enum.
+     * @exports ENotificationSetting
+     * @enum {string}
+     * @property {number} k_ENotificationSettingNotifyUseDefault=0 k_ENotificationSettingNotifyUseDefault value
+     * @property {number} k_ENotificationSettingAlways=1 k_ENotificationSettingAlways value
+     * @property {number} k_ENotificationSettingNever=2 k_ENotificationSettingNever value
+     */
+    $root.ENotificationSetting = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_ENotificationSettingNotifyUseDefault"] = 0;
+        values[valuesById[1] = "k_ENotificationSettingAlways"] = 1;
+        values[valuesById[2] = "k_ENotificationSettingNever"] = 2;
+        return values;
+    })();
+    
     $root.CPlayer_GetMutualFriendsForIncomingInvites_Request = (function() {
     
         /**
@@ -1681,6 +1697,7 @@
              * @property {number|null} [last_playtime] Game last_playtime
              * @property {number|null} [playtime_2weeks] Game playtime_2weeks
              * @property {number|null} [playtime_forever] Game playtime_forever
+             * @property {number|null} [first_playtime] Game first_playtime
              */
     
             /**
@@ -1731,6 +1748,14 @@
             Game.prototype.playtime_forever = 0;
     
             /**
+             * Game first_playtime.
+             * @member {number} first_playtime
+             * @memberof CPlayer_GetLastPlayedTimes_Response.Game
+             * @instance
+             */
+            Game.prototype.first_playtime = 0;
+    
+            /**
              * Creates a new Game instance using the specified properties.
              * @function create
              * @memberof CPlayer_GetLastPlayedTimes_Response.Game
@@ -1762,6 +1787,8 @@
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.playtime_2weeks);
                 if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.playtime_forever);
+                if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.first_playtime);
                 return writer;
             };
     
@@ -1807,6 +1834,9 @@
                         break;
                     case 4:
                         message.playtime_forever = reader.int32();
+                        break;
+                    case 5:
+                        message.first_playtime = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1855,6 +1885,9 @@
                 if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
                     if (!$util.isInteger(message.playtime_forever))
                         return "playtime_forever: integer expected";
+                if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
+                    if (!$util.isInteger(message.first_playtime))
+                        return "first_playtime: integer expected";
                 return null;
             };
     
@@ -1878,6 +1911,8 @@
                     message.playtime_2weeks = object.playtime_2weeks | 0;
                 if (object.playtime_forever != null)
                     message.playtime_forever = object.playtime_forever | 0;
+                if (object.first_playtime != null)
+                    message.first_playtime = object.first_playtime >>> 0;
                 return message;
             };
     
@@ -1899,6 +1934,7 @@
                     object.last_playtime = 0;
                     object.playtime_2weeks = 0;
                     object.playtime_forever = 0;
+                    object.first_playtime = 0;
                 }
                 if (message.appid != null && message.hasOwnProperty("appid"))
                     object.appid = message.appid;
@@ -1908,6 +1944,8 @@
                     object.playtime_2weeks = message.playtime_2weeks;
                 if (message.playtime_forever != null && message.hasOwnProperty("playtime_forever"))
                     object.playtime_forever = message.playtime_forever;
+                if (message.first_playtime != null && message.hasOwnProperty("first_playtime"))
+                    object.first_playtime = message.first_playtime;
                 return object;
             };
     
@@ -2824,6 +2862,1176 @@
         })();
     
         return CPlayer_GetNicknameList_Response;
+    })();
+    
+    $root.CPlayer_GetPerFriendPreferences_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPerFriendPreferences_Request.
+         * @exports ICPlayer_GetPerFriendPreferences_Request
+         * @interface ICPlayer_GetPerFriendPreferences_Request
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPerFriendPreferences_Request.
+         * @exports CPlayer_GetPerFriendPreferences_Request
+         * @classdesc Represents a CPlayer_GetPerFriendPreferences_Request.
+         * @implements ICPlayer_GetPerFriendPreferences_Request
+         * @constructor
+         * @param {ICPlayer_GetPerFriendPreferences_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetPerFriendPreferences_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_GetPerFriendPreferences_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetPerFriendPreferences_Request} CPlayer_GetPerFriendPreferences_Request instance
+         */
+        CPlayer_GetPerFriendPreferences_Request.create = function create(properties) {
+            return new CPlayer_GetPerFriendPreferences_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPerFriendPreferences_Request message. Does not implicitly {@link CPlayer_GetPerFriendPreferences_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Request} message CPlayer_GetPerFriendPreferences_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPerFriendPreferences_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPerFriendPreferences_Request message, length delimited. Does not implicitly {@link CPlayer_GetPerFriendPreferences_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Request} message CPlayer_GetPerFriendPreferences_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPerFriendPreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPerFriendPreferences_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPerFriendPreferences_Request} CPlayer_GetPerFriendPreferences_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPerFriendPreferences_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPerFriendPreferences_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPerFriendPreferences_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPerFriendPreferences_Request} CPlayer_GetPerFriendPreferences_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPerFriendPreferences_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPerFriendPreferences_Request message.
+         * @function verify
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPerFriendPreferences_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPerFriendPreferences_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPerFriendPreferences_Request} CPlayer_GetPerFriendPreferences_Request
+         */
+        CPlayer_GetPerFriendPreferences_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPerFriendPreferences_Request)
+                return object;
+            return new $root.CPlayer_GetPerFriendPreferences_Request();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPerFriendPreferences_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @static
+         * @param {CPlayer_GetPerFriendPreferences_Request} message CPlayer_GetPerFriendPreferences_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPerFriendPreferences_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_GetPerFriendPreferences_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPerFriendPreferences_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPerFriendPreferences_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPerFriendPreferences_Request;
+    })();
+    
+    $root.PerFriendPreferences = (function() {
+    
+        /**
+         * Properties of a PerFriendPreferences.
+         * @exports IPerFriendPreferences
+         * @interface IPerFriendPreferences
+         * @property {number|null} [accountid] PerFriendPreferences accountid
+         * @property {string|null} [nickname] PerFriendPreferences nickname
+         * @property {ENotificationSetting|null} [notifications_showingame] PerFriendPreferences notifications_showingame
+         * @property {ENotificationSetting|null} [notifications_showonline] PerFriendPreferences notifications_showonline
+         * @property {ENotificationSetting|null} [notifications_showmessages] PerFriendPreferences notifications_showmessages
+         * @property {ENotificationSetting|null} [sounds_showingame] PerFriendPreferences sounds_showingame
+         * @property {ENotificationSetting|null} [sounds_showonline] PerFriendPreferences sounds_showonline
+         * @property {ENotificationSetting|null} [sounds_showmessages] PerFriendPreferences sounds_showmessages
+         */
+    
+        /**
+         * Constructs a new PerFriendPreferences.
+         * @exports PerFriendPreferences
+         * @classdesc Represents a PerFriendPreferences.
+         * @implements IPerFriendPreferences
+         * @constructor
+         * @param {IPerFriendPreferences=} [properties] Properties to set
+         */
+        function PerFriendPreferences(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * PerFriendPreferences accountid.
+         * @member {number} accountid
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.accountid = 0;
+    
+        /**
+         * PerFriendPreferences nickname.
+         * @member {string} nickname
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.nickname = "";
+    
+        /**
+         * PerFriendPreferences notifications_showingame.
+         * @member {ENotificationSetting} notifications_showingame
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.notifications_showingame = 0;
+    
+        /**
+         * PerFriendPreferences notifications_showonline.
+         * @member {ENotificationSetting} notifications_showonline
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.notifications_showonline = 0;
+    
+        /**
+         * PerFriendPreferences notifications_showmessages.
+         * @member {ENotificationSetting} notifications_showmessages
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.notifications_showmessages = 0;
+    
+        /**
+         * PerFriendPreferences sounds_showingame.
+         * @member {ENotificationSetting} sounds_showingame
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.sounds_showingame = 0;
+    
+        /**
+         * PerFriendPreferences sounds_showonline.
+         * @member {ENotificationSetting} sounds_showonline
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.sounds_showonline = 0;
+    
+        /**
+         * PerFriendPreferences sounds_showmessages.
+         * @member {ENotificationSetting} sounds_showmessages
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.sounds_showmessages = 0;
+    
+        /**
+         * Creates a new PerFriendPreferences instance using the specified properties.
+         * @function create
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {IPerFriendPreferences=} [properties] Properties to set
+         * @returns {PerFriendPreferences} PerFriendPreferences instance
+         */
+        PerFriendPreferences.create = function create(properties) {
+            return new PerFriendPreferences(properties);
+        };
+    
+        /**
+         * Encodes the specified PerFriendPreferences message. Does not implicitly {@link PerFriendPreferences.verify|verify} messages.
+         * @function encode
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {IPerFriendPreferences} message PerFriendPreferences message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PerFriendPreferences.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.accountid);
+            if (message.nickname != null && message.hasOwnProperty("nickname"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nickname);
+            if (message.notifications_showingame != null && message.hasOwnProperty("notifications_showingame"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.notifications_showingame);
+            if (message.notifications_showonline != null && message.hasOwnProperty("notifications_showonline"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.notifications_showonline);
+            if (message.notifications_showmessages != null && message.hasOwnProperty("notifications_showmessages"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.notifications_showmessages);
+            if (message.sounds_showingame != null && message.hasOwnProperty("sounds_showingame"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.sounds_showingame);
+            if (message.sounds_showonline != null && message.hasOwnProperty("sounds_showonline"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.sounds_showonline);
+            if (message.sounds_showmessages != null && message.hasOwnProperty("sounds_showmessages"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.sounds_showmessages);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified PerFriendPreferences message, length delimited. Does not implicitly {@link PerFriendPreferences.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {IPerFriendPreferences} message PerFriendPreferences message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PerFriendPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a PerFriendPreferences message from the specified reader or buffer.
+         * @function decode
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {PerFriendPreferences} PerFriendPreferences
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PerFriendPreferences.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.PerFriendPreferences();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.accountid = reader.fixed32();
+                    break;
+                case 2:
+                    message.nickname = reader.string();
+                    break;
+                case 3:
+                    message.notifications_showingame = reader.int32();
+                    break;
+                case 4:
+                    message.notifications_showonline = reader.int32();
+                    break;
+                case 5:
+                    message.notifications_showmessages = reader.int32();
+                    break;
+                case 6:
+                    message.sounds_showingame = reader.int32();
+                    break;
+                case 7:
+                    message.sounds_showonline = reader.int32();
+                    break;
+                case 8:
+                    message.sounds_showmessages = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a PerFriendPreferences message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {PerFriendPreferences} PerFriendPreferences
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PerFriendPreferences.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a PerFriendPreferences message.
+         * @function verify
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PerFriendPreferences.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (!$util.isInteger(message.accountid))
+                    return "accountid: integer expected";
+            if (message.nickname != null && message.hasOwnProperty("nickname"))
+                if (!$util.isString(message.nickname))
+                    return "nickname: string expected";
+            if (message.notifications_showingame != null && message.hasOwnProperty("notifications_showingame"))
+                switch (message.notifications_showingame) {
+                default:
+                    return "notifications_showingame: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.notifications_showonline != null && message.hasOwnProperty("notifications_showonline"))
+                switch (message.notifications_showonline) {
+                default:
+                    return "notifications_showonline: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.notifications_showmessages != null && message.hasOwnProperty("notifications_showmessages"))
+                switch (message.notifications_showmessages) {
+                default:
+                    return "notifications_showmessages: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.sounds_showingame != null && message.hasOwnProperty("sounds_showingame"))
+                switch (message.sounds_showingame) {
+                default:
+                    return "sounds_showingame: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.sounds_showonline != null && message.hasOwnProperty("sounds_showonline"))
+                switch (message.sounds_showonline) {
+                default:
+                    return "sounds_showonline: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.sounds_showmessages != null && message.hasOwnProperty("sounds_showmessages"))
+                switch (message.sounds_showmessages) {
+                default:
+                    return "sounds_showmessages: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a PerFriendPreferences message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {PerFriendPreferences} PerFriendPreferences
+         */
+        PerFriendPreferences.fromObject = function fromObject(object) {
+            if (object instanceof $root.PerFriendPreferences)
+                return object;
+            var message = new $root.PerFriendPreferences();
+            if (object.accountid != null)
+                message.accountid = object.accountid >>> 0;
+            if (object.nickname != null)
+                message.nickname = String(object.nickname);
+            switch (object.notifications_showingame) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.notifications_showingame = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.notifications_showingame = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.notifications_showingame = 2;
+                break;
+            }
+            switch (object.notifications_showonline) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.notifications_showonline = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.notifications_showonline = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.notifications_showonline = 2;
+                break;
+            }
+            switch (object.notifications_showmessages) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.notifications_showmessages = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.notifications_showmessages = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.notifications_showmessages = 2;
+                break;
+            }
+            switch (object.sounds_showingame) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.sounds_showingame = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.sounds_showingame = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.sounds_showingame = 2;
+                break;
+            }
+            switch (object.sounds_showonline) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.sounds_showonline = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.sounds_showonline = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.sounds_showonline = 2;
+                break;
+            }
+            switch (object.sounds_showmessages) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.sounds_showmessages = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.sounds_showmessages = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.sounds_showmessages = 2;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a PerFriendPreferences message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof PerFriendPreferences
+         * @static
+         * @param {PerFriendPreferences} message PerFriendPreferences
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PerFriendPreferences.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.accountid = 0;
+                object.nickname = "";
+                object.notifications_showingame = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.notifications_showonline = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.notifications_showmessages = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.sounds_showingame = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.sounds_showonline = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.sounds_showmessages = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+            }
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                object.accountid = message.accountid;
+            if (message.nickname != null && message.hasOwnProperty("nickname"))
+                object.nickname = message.nickname;
+            if (message.notifications_showingame != null && message.hasOwnProperty("notifications_showingame"))
+                object.notifications_showingame = options.enums === String ? $root.ENotificationSetting[message.notifications_showingame] : message.notifications_showingame;
+            if (message.notifications_showonline != null && message.hasOwnProperty("notifications_showonline"))
+                object.notifications_showonline = options.enums === String ? $root.ENotificationSetting[message.notifications_showonline] : message.notifications_showonline;
+            if (message.notifications_showmessages != null && message.hasOwnProperty("notifications_showmessages"))
+                object.notifications_showmessages = options.enums === String ? $root.ENotificationSetting[message.notifications_showmessages] : message.notifications_showmessages;
+            if (message.sounds_showingame != null && message.hasOwnProperty("sounds_showingame"))
+                object.sounds_showingame = options.enums === String ? $root.ENotificationSetting[message.sounds_showingame] : message.sounds_showingame;
+            if (message.sounds_showonline != null && message.hasOwnProperty("sounds_showonline"))
+                object.sounds_showonline = options.enums === String ? $root.ENotificationSetting[message.sounds_showonline] : message.sounds_showonline;
+            if (message.sounds_showmessages != null && message.hasOwnProperty("sounds_showmessages"))
+                object.sounds_showmessages = options.enums === String ? $root.ENotificationSetting[message.sounds_showmessages] : message.sounds_showmessages;
+            return object;
+        };
+    
+        /**
+         * Converts this PerFriendPreferences to JSON.
+         * @function toJSON
+         * @memberof PerFriendPreferences
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PerFriendPreferences.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return PerFriendPreferences;
+    })();
+    
+    $root.CPlayer_GetPerFriendPreferences_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPerFriendPreferences_Response.
+         * @exports ICPlayer_GetPerFriendPreferences_Response
+         * @interface ICPlayer_GetPerFriendPreferences_Response
+         * @property {Array.<IPerFriendPreferences>|null} [preferences] CPlayer_GetPerFriendPreferences_Response preferences
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPerFriendPreferences_Response.
+         * @exports CPlayer_GetPerFriendPreferences_Response
+         * @classdesc Represents a CPlayer_GetPerFriendPreferences_Response.
+         * @implements ICPlayer_GetPerFriendPreferences_Response
+         * @constructor
+         * @param {ICPlayer_GetPerFriendPreferences_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetPerFriendPreferences_Response(properties) {
+            this.preferences = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPerFriendPreferences_Response preferences.
+         * @member {Array.<IPerFriendPreferences>} preferences
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @instance
+         */
+        CPlayer_GetPerFriendPreferences_Response.prototype.preferences = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetPerFriendPreferences_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetPerFriendPreferences_Response} CPlayer_GetPerFriendPreferences_Response instance
+         */
+        CPlayer_GetPerFriendPreferences_Response.create = function create(properties) {
+            return new CPlayer_GetPerFriendPreferences_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPerFriendPreferences_Response message. Does not implicitly {@link CPlayer_GetPerFriendPreferences_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Response} message CPlayer_GetPerFriendPreferences_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPerFriendPreferences_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.preferences != null && message.preferences.length)
+                for (var i = 0; i < message.preferences.length; ++i)
+                    $root.PerFriendPreferences.encode(message.preferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPerFriendPreferences_Response message, length delimited. Does not implicitly {@link CPlayer_GetPerFriendPreferences_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_GetPerFriendPreferences_Response} message CPlayer_GetPerFriendPreferences_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPerFriendPreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPerFriendPreferences_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPerFriendPreferences_Response} CPlayer_GetPerFriendPreferences_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPerFriendPreferences_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPerFriendPreferences_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.preferences && message.preferences.length))
+                        message.preferences = [];
+                    message.preferences.push($root.PerFriendPreferences.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPerFriendPreferences_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPerFriendPreferences_Response} CPlayer_GetPerFriendPreferences_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPerFriendPreferences_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPerFriendPreferences_Response message.
+         * @function verify
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPerFriendPreferences_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.preferences != null && message.hasOwnProperty("preferences")) {
+                if (!Array.isArray(message.preferences))
+                    return "preferences: array expected";
+                for (var i = 0; i < message.preferences.length; ++i) {
+                    var error = $root.PerFriendPreferences.verify(message.preferences[i]);
+                    if (error)
+                        return "preferences." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPerFriendPreferences_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPerFriendPreferences_Response} CPlayer_GetPerFriendPreferences_Response
+         */
+        CPlayer_GetPerFriendPreferences_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPerFriendPreferences_Response)
+                return object;
+            var message = new $root.CPlayer_GetPerFriendPreferences_Response();
+            if (object.preferences) {
+                if (!Array.isArray(object.preferences))
+                    throw TypeError(".CPlayer_GetPerFriendPreferences_Response.preferences: array expected");
+                message.preferences = [];
+                for (var i = 0; i < object.preferences.length; ++i) {
+                    if (typeof object.preferences[i] !== "object")
+                        throw TypeError(".CPlayer_GetPerFriendPreferences_Response.preferences: object expected");
+                    message.preferences[i] = $root.PerFriendPreferences.fromObject(object.preferences[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPerFriendPreferences_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @static
+         * @param {CPlayer_GetPerFriendPreferences_Response} message CPlayer_GetPerFriendPreferences_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPerFriendPreferences_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.preferences = [];
+            if (message.preferences && message.preferences.length) {
+                object.preferences = [];
+                for (var j = 0; j < message.preferences.length; ++j)
+                    object.preferences[j] = $root.PerFriendPreferences.toObject(message.preferences[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPerFriendPreferences_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPerFriendPreferences_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPerFriendPreferences_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPerFriendPreferences_Response;
+    })();
+    
+    $root.CPlayer_SetPerFriendPreferences_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetPerFriendPreferences_Request.
+         * @exports ICPlayer_SetPerFriendPreferences_Request
+         * @interface ICPlayer_SetPerFriendPreferences_Request
+         * @property {IPerFriendPreferences|null} [preferences] CPlayer_SetPerFriendPreferences_Request preferences
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetPerFriendPreferences_Request.
+         * @exports CPlayer_SetPerFriendPreferences_Request
+         * @classdesc Represents a CPlayer_SetPerFriendPreferences_Request.
+         * @implements ICPlayer_SetPerFriendPreferences_Request
+         * @constructor
+         * @param {ICPlayer_SetPerFriendPreferences_Request=} [properties] Properties to set
+         */
+        function CPlayer_SetPerFriendPreferences_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_SetPerFriendPreferences_Request preferences.
+         * @member {IPerFriendPreferences|null|undefined} preferences
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @instance
+         */
+        CPlayer_SetPerFriendPreferences_Request.prototype.preferences = null;
+    
+        /**
+         * Creates a new CPlayer_SetPerFriendPreferences_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Request=} [properties] Properties to set
+         * @returns {CPlayer_SetPerFriendPreferences_Request} CPlayer_SetPerFriendPreferences_Request instance
+         */
+        CPlayer_SetPerFriendPreferences_Request.create = function create(properties) {
+            return new CPlayer_SetPerFriendPreferences_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetPerFriendPreferences_Request message. Does not implicitly {@link CPlayer_SetPerFriendPreferences_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Request} message CPlayer_SetPerFriendPreferences_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetPerFriendPreferences_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                $root.PerFriendPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetPerFriendPreferences_Request message, length delimited. Does not implicitly {@link CPlayer_SetPerFriendPreferences_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Request} message CPlayer_SetPerFriendPreferences_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetPerFriendPreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetPerFriendPreferences_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetPerFriendPreferences_Request} CPlayer_SetPerFriendPreferences_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetPerFriendPreferences_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetPerFriendPreferences_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.preferences = $root.PerFriendPreferences.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetPerFriendPreferences_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetPerFriendPreferences_Request} CPlayer_SetPerFriendPreferences_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetPerFriendPreferences_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetPerFriendPreferences_Request message.
+         * @function verify
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetPerFriendPreferences_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.preferences != null && message.hasOwnProperty("preferences")) {
+                var error = $root.PerFriendPreferences.verify(message.preferences);
+                if (error)
+                    return "preferences." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetPerFriendPreferences_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetPerFriendPreferences_Request} CPlayer_SetPerFriendPreferences_Request
+         */
+        CPlayer_SetPerFriendPreferences_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetPerFriendPreferences_Request)
+                return object;
+            var message = new $root.CPlayer_SetPerFriendPreferences_Request();
+            if (object.preferences != null) {
+                if (typeof object.preferences !== "object")
+                    throw TypeError(".CPlayer_SetPerFriendPreferences_Request.preferences: object expected");
+                message.preferences = $root.PerFriendPreferences.fromObject(object.preferences);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetPerFriendPreferences_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @static
+         * @param {CPlayer_SetPerFriendPreferences_Request} message CPlayer_SetPerFriendPreferences_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetPerFriendPreferences_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.preferences = null;
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                object.preferences = $root.PerFriendPreferences.toObject(message.preferences, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_SetPerFriendPreferences_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetPerFriendPreferences_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetPerFriendPreferences_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetPerFriendPreferences_Request;
+    })();
+    
+    $root.CPlayer_SetPerFriendPreferences_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_SetPerFriendPreferences_Response.
+         * @exports ICPlayer_SetPerFriendPreferences_Response
+         * @interface ICPlayer_SetPerFriendPreferences_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_SetPerFriendPreferences_Response.
+         * @exports CPlayer_SetPerFriendPreferences_Response
+         * @classdesc Represents a CPlayer_SetPerFriendPreferences_Response.
+         * @implements ICPlayer_SetPerFriendPreferences_Response
+         * @constructor
+         * @param {ICPlayer_SetPerFriendPreferences_Response=} [properties] Properties to set
+         */
+        function CPlayer_SetPerFriendPreferences_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_SetPerFriendPreferences_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Response=} [properties] Properties to set
+         * @returns {CPlayer_SetPerFriendPreferences_Response} CPlayer_SetPerFriendPreferences_Response instance
+         */
+        CPlayer_SetPerFriendPreferences_Response.create = function create(properties) {
+            return new CPlayer_SetPerFriendPreferences_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetPerFriendPreferences_Response message. Does not implicitly {@link CPlayer_SetPerFriendPreferences_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Response} message CPlayer_SetPerFriendPreferences_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetPerFriendPreferences_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_SetPerFriendPreferences_Response message, length delimited. Does not implicitly {@link CPlayer_SetPerFriendPreferences_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {ICPlayer_SetPerFriendPreferences_Response} message CPlayer_SetPerFriendPreferences_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_SetPerFriendPreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_SetPerFriendPreferences_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_SetPerFriendPreferences_Response} CPlayer_SetPerFriendPreferences_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetPerFriendPreferences_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_SetPerFriendPreferences_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_SetPerFriendPreferences_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_SetPerFriendPreferences_Response} CPlayer_SetPerFriendPreferences_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_SetPerFriendPreferences_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_SetPerFriendPreferences_Response message.
+         * @function verify
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_SetPerFriendPreferences_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_SetPerFriendPreferences_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_SetPerFriendPreferences_Response} CPlayer_SetPerFriendPreferences_Response
+         */
+        CPlayer_SetPerFriendPreferences_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_SetPerFriendPreferences_Response)
+                return object;
+            return new $root.CPlayer_SetPerFriendPreferences_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_SetPerFriendPreferences_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @static
+         * @param {CPlayer_SetPerFriendPreferences_Response} message CPlayer_SetPerFriendPreferences_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_SetPerFriendPreferences_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_SetPerFriendPreferences_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_SetPerFriendPreferences_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_SetPerFriendPreferences_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_SetPerFriendPreferences_Response;
     })();
     
     $root.CPlayer_AddFriend_Request = (function() {
@@ -6777,6 +7985,221 @@
         return CPlayer_CommunityPreferencesChanged_Notification;
     })();
     
+    $root.CPlayer_PerFriendPreferencesChanged_Notification = (function() {
+    
+        /**
+         * Properties of a CPlayer_PerFriendPreferencesChanged_Notification.
+         * @exports ICPlayer_PerFriendPreferencesChanged_Notification
+         * @interface ICPlayer_PerFriendPreferencesChanged_Notification
+         * @property {number|null} [accountid] CPlayer_PerFriendPreferencesChanged_Notification accountid
+         * @property {IPerFriendPreferences|null} [preferences] CPlayer_PerFriendPreferencesChanged_Notification preferences
+         */
+    
+        /**
+         * Constructs a new CPlayer_PerFriendPreferencesChanged_Notification.
+         * @exports CPlayer_PerFriendPreferencesChanged_Notification
+         * @classdesc Represents a CPlayer_PerFriendPreferencesChanged_Notification.
+         * @implements ICPlayer_PerFriendPreferencesChanged_Notification
+         * @constructor
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification=} [properties] Properties to set
+         */
+        function CPlayer_PerFriendPreferencesChanged_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_PerFriendPreferencesChanged_Notification accountid.
+         * @member {number} accountid
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @instance
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.prototype.accountid = 0;
+    
+        /**
+         * CPlayer_PerFriendPreferencesChanged_Notification preferences.
+         * @member {IPerFriendPreferences|null|undefined} preferences
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @instance
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.prototype.preferences = null;
+    
+        /**
+         * Creates a new CPlayer_PerFriendPreferencesChanged_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification=} [properties] Properties to set
+         * @returns {CPlayer_PerFriendPreferencesChanged_Notification} CPlayer_PerFriendPreferencesChanged_Notification instance
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.create = function create(properties) {
+            return new CPlayer_PerFriendPreferencesChanged_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PerFriendPreferencesChanged_Notification message. Does not implicitly {@link CPlayer_PerFriendPreferencesChanged_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification} message CPlayer_PerFriendPreferencesChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.accountid);
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                $root.PerFriendPreferences.encode(message.preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PerFriendPreferencesChanged_Notification message, length delimited. Does not implicitly {@link CPlayer_PerFriendPreferencesChanged_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification} message CPlayer_PerFriendPreferencesChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_PerFriendPreferencesChanged_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_PerFriendPreferencesChanged_Notification} CPlayer_PerFriendPreferencesChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PerFriendPreferencesChanged_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.accountid = reader.fixed32();
+                    break;
+                case 2:
+                    message.preferences = $root.PerFriendPreferences.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_PerFriendPreferencesChanged_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_PerFriendPreferencesChanged_Notification} CPlayer_PerFriendPreferencesChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_PerFriendPreferencesChanged_Notification message.
+         * @function verify
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (!$util.isInteger(message.accountid))
+                    return "accountid: integer expected";
+            if (message.preferences != null && message.hasOwnProperty("preferences")) {
+                var error = $root.PerFriendPreferences.verify(message.preferences);
+                if (error)
+                    return "preferences." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_PerFriendPreferencesChanged_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_PerFriendPreferencesChanged_Notification} CPlayer_PerFriendPreferencesChanged_Notification
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_PerFriendPreferencesChanged_Notification)
+                return object;
+            var message = new $root.CPlayer_PerFriendPreferencesChanged_Notification();
+            if (object.accountid != null)
+                message.accountid = object.accountid >>> 0;
+            if (object.preferences != null) {
+                if (typeof object.preferences !== "object")
+                    throw TypeError(".CPlayer_PerFriendPreferencesChanged_Notification.preferences: object expected");
+                message.preferences = $root.PerFriendPreferences.fromObject(object.preferences);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_PerFriendPreferencesChanged_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @static
+         * @param {CPlayer_PerFriendPreferencesChanged_Notification} message CPlayer_PerFriendPreferencesChanged_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.accountid = 0;
+                object.preferences = null;
+            }
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                object.accountid = message.accountid;
+            if (message.preferences != null && message.hasOwnProperty("preferences"))
+                object.preferences = $root.PerFriendPreferences.toObject(message.preferences, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_PerFriendPreferencesChanged_Notification to JSON.
+         * @function toJSON
+         * @memberof CPlayer_PerFriendPreferencesChanged_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_PerFriendPreferencesChanged_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_PerFriendPreferencesChanged_Notification;
+    })();
+    
     $root.Player = (function() {
     
         /**
@@ -6971,6 +8394,72 @@
          * @instance
          * @param {ICPlayer_GetNicknameList_Request} request CPlayer_GetNicknameList_Request message or plain object
          * @returns {Promise<CPlayer_GetNicknameList_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getPerFriendPreferences}.
+         * @memberof Player
+         * @typedef GetPerFriendPreferencesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetPerFriendPreferences_Response} [response] CPlayer_GetPerFriendPreferences_Response
+         */
+    
+        /**
+         * Calls GetPerFriendPreferences.
+         * @function getPerFriendPreferences
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPerFriendPreferences_Request} request CPlayer_GetPerFriendPreferences_Request message or plain object
+         * @param {Player.GetPerFriendPreferencesCallback} callback Node-style callback called with the error, if any, and CPlayer_GetPerFriendPreferences_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getPerFriendPreferences = function getPerFriendPreferences(request, callback) {
+            return this.rpcCall(getPerFriendPreferences, $root.CPlayer_GetPerFriendPreferences_Request, $root.CPlayer_GetPerFriendPreferences_Response, request, callback);
+        }, "name", { value: "GetPerFriendPreferences" });
+    
+        /**
+         * Calls GetPerFriendPreferences.
+         * @function getPerFriendPreferences
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPerFriendPreferences_Request} request CPlayer_GetPerFriendPreferences_Request message or plain object
+         * @returns {Promise<CPlayer_GetPerFriendPreferences_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#setPerFriendPreferences}.
+         * @memberof Player
+         * @typedef SetPerFriendPreferencesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_SetPerFriendPreferences_Response} [response] CPlayer_SetPerFriendPreferences_Response
+         */
+    
+        /**
+         * Calls SetPerFriendPreferences.
+         * @function setPerFriendPreferences
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetPerFriendPreferences_Request} request CPlayer_SetPerFriendPreferences_Request message or plain object
+         * @param {Player.SetPerFriendPreferencesCallback} callback Node-style callback called with the error, if any, and CPlayer_SetPerFriendPreferences_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.setPerFriendPreferences = function setPerFriendPreferences(request, callback) {
+            return this.rpcCall(setPerFriendPreferences, $root.CPlayer_SetPerFriendPreferences_Request, $root.CPlayer_SetPerFriendPreferences_Response, request, callback);
+        }, "name", { value: "SetPerFriendPreferences" });
+    
+        /**
+         * Calls SetPerFriendPreferences.
+         * @function setPerFriendPreferences
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_SetPerFriendPreferences_Request} request CPlayer_SetPerFriendPreferences_Request message or plain object
+         * @returns {Promise<CPlayer_SetPerFriendPreferences_Response>} Promise
          * @variation 2
          */
     
@@ -7368,6 +8857,39 @@
          * @memberof PlayerClient
          * @instance
          * @param {ICPlayer_CommunityPreferencesChanged_Notification} request CPlayer_CommunityPreferencesChanged_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PlayerClient#notifyPerFriendPreferencesChanged}.
+         * @memberof PlayerClient
+         * @typedef NotifyPerFriendPreferencesChangedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyPerFriendPreferencesChanged.
+         * @function notifyPerFriendPreferencesChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification} request CPlayer_PerFriendPreferencesChanged_Notification message or plain object
+         * @param {PlayerClient.NotifyPerFriendPreferencesChangedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PlayerClient.prototype.notifyPerFriendPreferencesChanged = function notifyPerFriendPreferencesChanged(request, callback) {
+            return this.rpcCall(notifyPerFriendPreferencesChanged, $root.CPlayer_PerFriendPreferencesChanged_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyPerFriendPreferencesChanged" });
+    
+        /**
+         * Calls NotifyPerFriendPreferencesChanged.
+         * @function notifyPerFriendPreferencesChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_PerFriendPreferencesChanged_Notification} request CPlayer_PerFriendPreferencesChanged_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */

@@ -16,6 +16,314 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    $root.CMsgSteamNetworkingIdentity = (function() {
+    
+        /**
+         * Properties of a CMsgSteamNetworkingIdentity.
+         * @exports ICMsgSteamNetworkingIdentity
+         * @interface ICMsgSteamNetworkingIdentity
+         * @property {number|Long|null} [steam_id] CMsgSteamNetworkingIdentity steam_id
+         * @property {string|null} [xbox_pairwise_id] CMsgSteamNetworkingIdentity xbox_pairwise_id
+         * @property {Uint8Array|null} [generic_bytes] CMsgSteamNetworkingIdentity generic_bytes
+         * @property {string|null} [generic_string] CMsgSteamNetworkingIdentity generic_string
+         * @property {Uint8Array|null} [ipv6_and_port] CMsgSteamNetworkingIdentity ipv6_and_port
+         */
+    
+        /**
+         * Constructs a new CMsgSteamNetworkingIdentity.
+         * @exports CMsgSteamNetworkingIdentity
+         * @classdesc Represents a CMsgSteamNetworkingIdentity.
+         * @implements ICMsgSteamNetworkingIdentity
+         * @constructor
+         * @param {ICMsgSteamNetworkingIdentity=} [properties] Properties to set
+         */
+        function CMsgSteamNetworkingIdentity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamNetworkingIdentity steam_id.
+         * @member {number|Long} steam_id
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamNetworkingIdentity xbox_pairwise_id.
+         * @member {string} xbox_pairwise_id
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.xbox_pairwise_id = "";
+    
+        /**
+         * CMsgSteamNetworkingIdentity generic_bytes.
+         * @member {Uint8Array} generic_bytes
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.generic_bytes = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamNetworkingIdentity generic_string.
+         * @member {string} generic_string
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.generic_string = "";
+    
+        /**
+         * CMsgSteamNetworkingIdentity ipv6_and_port.
+         * @member {Uint8Array} ipv6_and_port
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.ipv6_and_port = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamNetworkingIdentity instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity=} [properties] Properties to set
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity instance
+         */
+        CMsgSteamNetworkingIdentity.create = function create(properties) {
+            return new CMsgSteamNetworkingIdentity(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingIdentity message. Does not implicitly {@link CMsgSteamNetworkingIdentity.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingIdentity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.generic_bytes);
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.generic_string);
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ipv6_and_port);
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                writer.uint32(/* id 16, wireType 1 =*/129).fixed64(message.steam_id);
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                writer.uint32(/* id 17, wireType 2 =*/138).string(message.xbox_pairwise_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingIdentity message, length delimited. Does not implicitly {@link CMsgSteamNetworkingIdentity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingIdentity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingIdentity message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingIdentity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingIdentity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 16:
+                    message.steam_id = reader.fixed64();
+                    break;
+                case 17:
+                    message.xbox_pairwise_id = reader.string();
+                    break;
+                case 2:
+                    message.generic_bytes = reader.bytes();
+                    break;
+                case 3:
+                    message.generic_string = reader.string();
+                    break;
+                case 4:
+                    message.ipv6_and_port = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingIdentity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingIdentity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamNetworkingIdentity message.
+         * @function verify
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamNetworkingIdentity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
+                    return "steam_id: integer|Long expected";
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                if (!$util.isString(message.xbox_pairwise_id))
+                    return "xbox_pairwise_id: string expected";
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                if (!(message.generic_bytes && typeof message.generic_bytes.length === "number" || $util.isString(message.generic_bytes)))
+                    return "generic_bytes: buffer expected";
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                if (!$util.isString(message.generic_string))
+                    return "generic_string: string expected";
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                if (!(message.ipv6_and_port && typeof message.ipv6_and_port.length === "number" || $util.isString(message.ipv6_and_port)))
+                    return "ipv6_and_port: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamNetworkingIdentity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         */
+        CMsgSteamNetworkingIdentity.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamNetworkingIdentity)
+                return object;
+            var message = new $root.CMsgSteamNetworkingIdentity();
+            if (object.steam_id != null)
+                if ($util.Long)
+                    (message.steam_id = $util.Long.fromValue(object.steam_id)).unsigned = false;
+                else if (typeof object.steam_id === "string")
+                    message.steam_id = parseInt(object.steam_id, 10);
+                else if (typeof object.steam_id === "number")
+                    message.steam_id = object.steam_id;
+                else if (typeof object.steam_id === "object")
+                    message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber();
+            if (object.xbox_pairwise_id != null)
+                message.xbox_pairwise_id = String(object.xbox_pairwise_id);
+            if (object.generic_bytes != null)
+                if (typeof object.generic_bytes === "string")
+                    $util.base64.decode(object.generic_bytes, message.generic_bytes = $util.newBuffer($util.base64.length(object.generic_bytes)), 0);
+                else if (object.generic_bytes.length)
+                    message.generic_bytes = object.generic_bytes;
+            if (object.generic_string != null)
+                message.generic_string = String(object.generic_string);
+            if (object.ipv6_and_port != null)
+                if (typeof object.ipv6_and_port === "string")
+                    $util.base64.decode(object.ipv6_and_port, message.ipv6_and_port = $util.newBuffer($util.base64.length(object.ipv6_and_port)), 0);
+                else if (object.ipv6_and_port.length)
+                    message.ipv6_and_port = object.ipv6_and_port;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamNetworkingIdentity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {CMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamNetworkingIdentity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.generic_bytes = "";
+                else {
+                    object.generic_bytes = [];
+                    if (options.bytes !== Array)
+                        object.generic_bytes = $util.newBuffer(object.generic_bytes);
+                }
+                object.generic_string = "";
+                if (options.bytes === String)
+                    object.ipv6_and_port = "";
+                else {
+                    object.ipv6_and_port = [];
+                    if (options.bytes !== Array)
+                        object.ipv6_and_port = $util.newBuffer(object.ipv6_and_port);
+                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steam_id = options.longs === String ? "0" : 0;
+                object.xbox_pairwise_id = "";
+            }
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                object.generic_bytes = options.bytes === String ? $util.base64.encode(message.generic_bytes, 0, message.generic_bytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.generic_bytes) : message.generic_bytes;
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                object.generic_string = message.generic_string;
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                object.ipv6_and_port = options.bytes === String ? $util.base64.encode(message.ipv6_and_port, 0, message.ipv6_and_port.length) : options.bytes === Array ? Array.prototype.slice.call(message.ipv6_and_port) : message.ipv6_and_port;
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                if (typeof message.steam_id === "number")
+                    object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
+                else
+                    object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber() : message.steam_id;
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                object.xbox_pairwise_id = message.xbox_pairwise_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamNetworkingIdentity to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamNetworkingIdentity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamNetworkingIdentity;
+    })();
+    
     $root.CMsgSteamDatagramCertificate = (function() {
     
         /**

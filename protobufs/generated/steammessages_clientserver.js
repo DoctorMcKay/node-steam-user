@@ -5342,6 +5342,7 @@
              * @property {number|null} [total_steam_controller_count] GamePlayed total_steam_controller_count
              * @property {number|null} [total_non_steam_controller_count] GamePlayed total_non_steam_controller_count
              * @property {number|Long|null} [controller_workshop_file_id] GamePlayed controller_workshop_file_id
+             * @property {number|null} [launch_source] GamePlayed launch_source
              */
     
             /**
@@ -5520,6 +5521,14 @@
             GamePlayed.prototype.controller_workshop_file_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
             /**
+             * GamePlayed launch_source.
+             * @member {number} launch_source
+             * @memberof CMsgClientGamesPlayed.GamePlayed
+             * @instance
+             */
+            GamePlayed.prototype.launch_source = 0;
+    
+            /**
              * Creates a new GamePlayed instance using the specified properties.
              * @function create
              * @memberof CMsgClientGamesPlayed.GamePlayed
@@ -5583,6 +5592,8 @@
                     writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.total_non_steam_controller_count);
                 if (message.controller_workshop_file_id != null && message.hasOwnProperty("controller_workshop_file_id"))
                     writer.uint32(/* id 20, wireType 0 =*/160).uint64(message.controller_workshop_file_id);
+                if (message.launch_source != null && message.hasOwnProperty("launch_source"))
+                    writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.launch_source);
                 return writer;
             };
     
@@ -5676,6 +5687,9 @@
                         break;
                     case 20:
                         message.controller_workshop_file_id = reader.uint64();
+                        break;
+                    case 21:
+                        message.launch_source = reader.uint32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -5772,6 +5786,9 @@
                 if (message.controller_workshop_file_id != null && message.hasOwnProperty("controller_workshop_file_id"))
                     if (!$util.isInteger(message.controller_workshop_file_id) && !(message.controller_workshop_file_id && $util.isInteger(message.controller_workshop_file_id.low) && $util.isInteger(message.controller_workshop_file_id.high)))
                         return "controller_workshop_file_id: integer|Long expected";
+                if (message.launch_source != null && message.hasOwnProperty("launch_source"))
+                    if (!$util.isInteger(message.launch_source))
+                        return "launch_source: integer expected";
                 return null;
             };
     
@@ -5854,6 +5871,8 @@
                         message.controller_workshop_file_id = object.controller_workshop_file_id;
                     else if (typeof object.controller_workshop_file_id === "object")
                         message.controller_workshop_file_id = new $util.LongBits(object.controller_workshop_file_id.low >>> 0, object.controller_workshop_file_id.high >>> 0).toNumber(true);
+                if (object.launch_source != null)
+                    message.launch_source = object.launch_source >>> 0;
                 return message;
             };
     
@@ -5915,6 +5934,7 @@
                         object.controller_workshop_file_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.controller_workshop_file_id = options.longs === String ? "0" : 0;
+                    object.launch_source = 0;
                 }
                 if (message.steam_id_gs != null && message.hasOwnProperty("steam_id_gs"))
                     if (typeof message.steam_id_gs === "number")
@@ -5965,6 +5985,8 @@
                         object.controller_workshop_file_id = options.longs === String ? String(message.controller_workshop_file_id) : message.controller_workshop_file_id;
                     else
                         object.controller_workshop_file_id = options.longs === String ? $util.Long.prototype.toString.call(message.controller_workshop_file_id) : options.longs === Number ? new $util.LongBits(message.controller_workshop_file_id.low >>> 0, message.controller_workshop_file_id.high >>> 0).toNumber(true) : message.controller_workshop_file_id;
+                if (message.launch_source != null && message.hasOwnProperty("launch_source"))
+                    object.launch_source = message.launch_source;
                 return object;
             };
     

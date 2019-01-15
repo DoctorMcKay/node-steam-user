@@ -19510,6 +19510,8 @@
          * @property {boolean|null} [is_borrowed] CMsgClientUpdateAppJobReport is_borrowed
          * @property {boolean|null} [is_free_weekend] CMsgClientUpdateAppJobReport is_free_weekend
          * @property {number|Long|null} [total_bytes_legacy] CMsgClientUpdateAppJobReport total_bytes_legacy
+         * @property {number|Long|null} [total_bytes_patched] CMsgClientUpdateAppJobReport total_bytes_patched
+         * @property {number|Long|null} [total_bytes_saved] CMsgClientUpdateAppJobReport total_bytes_saved
          */
     
         /**
@@ -19681,6 +19683,22 @@
         CMsgClientUpdateAppJobReport.prototype.total_bytes_legacy = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
+         * CMsgClientUpdateAppJobReport total_bytes_patched.
+         * @member {number|Long} total_bytes_patched
+         * @memberof CMsgClientUpdateAppJobReport
+         * @instance
+         */
+        CMsgClientUpdateAppJobReport.prototype.total_bytes_patched = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CMsgClientUpdateAppJobReport total_bytes_saved.
+         * @member {number|Long} total_bytes_saved
+         * @memberof CMsgClientUpdateAppJobReport
+         * @instance
+         */
+        CMsgClientUpdateAppJobReport.prototype.total_bytes_saved = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CMsgClientUpdateAppJobReport instance using the specified properties.
          * @function create
          * @memberof CMsgClientUpdateAppJobReport
@@ -19743,6 +19761,10 @@
                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_free_weekend);
             if (message.total_bytes_legacy != null && message.hasOwnProperty("total_bytes_legacy"))
                 writer.uint32(/* id 19, wireType 0 =*/152).uint64(message.total_bytes_legacy);
+            if (message.total_bytes_patched != null && message.hasOwnProperty("total_bytes_patched"))
+                writer.uint32(/* id 20, wireType 0 =*/160).uint64(message.total_bytes_patched);
+            if (message.total_bytes_saved != null && message.hasOwnProperty("total_bytes_saved"))
+                writer.uint32(/* id 21, wireType 0 =*/168).uint64(message.total_bytes_saved);
             return writer;
         };
     
@@ -19841,6 +19863,12 @@
                 case 19:
                     message.total_bytes_legacy = reader.uint64();
                     break;
+                case 20:
+                    message.total_bytes_patched = reader.uint64();
+                    break;
+                case 21:
+                    message.total_bytes_saved = reader.uint64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -19937,6 +19965,12 @@
             if (message.total_bytes_legacy != null && message.hasOwnProperty("total_bytes_legacy"))
                 if (!$util.isInteger(message.total_bytes_legacy) && !(message.total_bytes_legacy && $util.isInteger(message.total_bytes_legacy.low) && $util.isInteger(message.total_bytes_legacy.high)))
                     return "total_bytes_legacy: integer|Long expected";
+            if (message.total_bytes_patched != null && message.hasOwnProperty("total_bytes_patched"))
+                if (!$util.isInteger(message.total_bytes_patched) && !(message.total_bytes_patched && $util.isInteger(message.total_bytes_patched.low) && $util.isInteger(message.total_bytes_patched.high)))
+                    return "total_bytes_patched: integer|Long expected";
+            if (message.total_bytes_saved != null && message.hasOwnProperty("total_bytes_saved"))
+                if (!$util.isInteger(message.total_bytes_saved) && !(message.total_bytes_saved && $util.isInteger(message.total_bytes_saved.low) && $util.isInteger(message.total_bytes_saved.high)))
+                    return "total_bytes_saved: integer|Long expected";
             return null;
         };
     
@@ -20051,6 +20085,24 @@
                     message.total_bytes_legacy = object.total_bytes_legacy;
                 else if (typeof object.total_bytes_legacy === "object")
                     message.total_bytes_legacy = new $util.LongBits(object.total_bytes_legacy.low >>> 0, object.total_bytes_legacy.high >>> 0).toNumber(true);
+            if (object.total_bytes_patched != null)
+                if ($util.Long)
+                    (message.total_bytes_patched = $util.Long.fromValue(object.total_bytes_patched)).unsigned = true;
+                else if (typeof object.total_bytes_patched === "string")
+                    message.total_bytes_patched = parseInt(object.total_bytes_patched, 10);
+                else if (typeof object.total_bytes_patched === "number")
+                    message.total_bytes_patched = object.total_bytes_patched;
+                else if (typeof object.total_bytes_patched === "object")
+                    message.total_bytes_patched = new $util.LongBits(object.total_bytes_patched.low >>> 0, object.total_bytes_patched.high >>> 0).toNumber(true);
+            if (object.total_bytes_saved != null)
+                if ($util.Long)
+                    (message.total_bytes_saved = $util.Long.fromValue(object.total_bytes_saved)).unsigned = true;
+                else if (typeof object.total_bytes_saved === "string")
+                    message.total_bytes_saved = parseInt(object.total_bytes_saved, 10);
+                else if (typeof object.total_bytes_saved === "number")
+                    message.total_bytes_saved = object.total_bytes_saved;
+                else if (typeof object.total_bytes_saved === "object")
+                    message.total_bytes_saved = new $util.LongBits(object.total_bytes_saved.low >>> 0, object.total_bytes_saved.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -20120,6 +20172,16 @@
                     object.total_bytes_legacy = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.total_bytes_legacy = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.total_bytes_patched = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.total_bytes_patched = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.total_bytes_saved = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.total_bytes_saved = options.longs === String ? "0" : 0;
             }
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
@@ -20186,6 +20248,16 @@
                     object.total_bytes_legacy = options.longs === String ? String(message.total_bytes_legacy) : message.total_bytes_legacy;
                 else
                     object.total_bytes_legacy = options.longs === String ? $util.Long.prototype.toString.call(message.total_bytes_legacy) : options.longs === Number ? new $util.LongBits(message.total_bytes_legacy.low >>> 0, message.total_bytes_legacy.high >>> 0).toNumber(true) : message.total_bytes_legacy;
+            if (message.total_bytes_patched != null && message.hasOwnProperty("total_bytes_patched"))
+                if (typeof message.total_bytes_patched === "number")
+                    object.total_bytes_patched = options.longs === String ? String(message.total_bytes_patched) : message.total_bytes_patched;
+                else
+                    object.total_bytes_patched = options.longs === String ? $util.Long.prototype.toString.call(message.total_bytes_patched) : options.longs === Number ? new $util.LongBits(message.total_bytes_patched.low >>> 0, message.total_bytes_patched.high >>> 0).toNumber(true) : message.total_bytes_patched;
+            if (message.total_bytes_saved != null && message.hasOwnProperty("total_bytes_saved"))
+                if (typeof message.total_bytes_saved === "number")
+                    object.total_bytes_saved = options.longs === String ? String(message.total_bytes_saved) : message.total_bytes_saved;
+                else
+                    object.total_bytes_saved = options.longs === String ? $util.Long.prototype.toString.call(message.total_bytes_saved) : options.longs === Number ? new $util.LongBits(message.total_bytes_saved.low >>> 0, message.total_bytes_saved.high >>> 0).toNumber(true) : message.total_bytes_saved;
             return object;
         };
     
@@ -27474,6 +27546,7 @@
          * @property {Uint8Array|null} [payload] CMsgGCClient payload
          * @property {number|Long|null} [steamid] CMsgGCClient steamid
          * @property {string|null} [gcname] CMsgGCClient gcname
+         * @property {number|null} [ip] CMsgGCClient ip
          */
     
         /**
@@ -27532,6 +27605,14 @@
         CMsgGCClient.prototype.gcname = "";
     
         /**
+         * CMsgGCClient ip.
+         * @member {number} ip
+         * @memberof CMsgGCClient
+         * @instance
+         */
+        CMsgGCClient.prototype.ip = 0;
+    
+        /**
          * Creates a new CMsgGCClient instance using the specified properties.
          * @function create
          * @memberof CMsgGCClient
@@ -27565,6 +27646,8 @@
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid);
             if (message.gcname != null && message.hasOwnProperty("gcname"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.gcname);
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.ip);
             return writer;
         };
     
@@ -27613,6 +27696,9 @@
                     break;
                 case 5:
                     message.gcname = reader.string();
+                    break;
+                case 6:
+                    message.ip = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -27664,6 +27750,9 @@
             if (message.gcname != null && message.hasOwnProperty("gcname"))
                 if (!$util.isString(message.gcname))
                     return "gcname: string expected";
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                if (!$util.isInteger(message.ip))
+                    return "ip: integer expected";
             return null;
         };
     
@@ -27699,6 +27788,8 @@
                     message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
             if (object.gcname != null)
                 message.gcname = String(object.gcname);
+            if (object.ip != null)
+                message.ip = object.ip >>> 0;
             return message;
         };
     
@@ -27731,6 +27822,7 @@
                 } else
                     object.steamid = options.longs === String ? "0" : 0;
                 object.gcname = "";
+                object.ip = 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
@@ -27745,6 +27837,8 @@
                     object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
             if (message.gcname != null && message.hasOwnProperty("gcname"))
                 object.gcname = message.gcname;
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                object.ip = message.ip;
             return object;
         };
     

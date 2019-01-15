@@ -71,6 +71,8 @@
          * @property {boolean|null} [is_generic_gamepad] CHIDDeviceInfo is_generic_gamepad
          * @property {boolean|null} [is_generic_joystick] CHIDDeviceInfo is_generic_joystick
          * @property {number|null} [caps_bits] CHIDDeviceInfo caps_bits
+         * @property {number|null} [session_id] CHIDDeviceInfo session_id
+         * @property {number|null} [eControllerType] CHIDDeviceInfo eControllerType
          */
     
         /**
@@ -209,6 +211,22 @@
         CHIDDeviceInfo.prototype.caps_bits = 0;
     
         /**
+         * CHIDDeviceInfo session_id.
+         * @member {number} session_id
+         * @memberof CHIDDeviceInfo
+         * @instance
+         */
+        CHIDDeviceInfo.prototype.session_id = 0;
+    
+        /**
+         * CHIDDeviceInfo eControllerType.
+         * @member {number} eControllerType
+         * @memberof CHIDDeviceInfo
+         * @instance
+         */
+        CHIDDeviceInfo.prototype.eControllerType = 0;
+    
+        /**
          * Creates a new CHIDDeviceInfo instance using the specified properties.
          * @function create
          * @memberof CHIDDeviceInfo
@@ -262,6 +280,10 @@
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_generic_joystick);
             if (message.caps_bits != null && message.hasOwnProperty("caps_bits"))
                 writer.uint32(/* id 15, wireType 0 =*/120).uint32(message.caps_bits);
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.session_id);
+            if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
+                writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.eControllerType);
             return writer;
         };
     
@@ -340,6 +362,12 @@
                     break;
                 case 15:
                     message.caps_bits = reader.uint32();
+                    break;
+                case 16:
+                    message.session_id = reader.uint32();
+                    break;
+                case 17:
+                    message.eControllerType = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -427,6 +455,12 @@
             if (message.caps_bits != null && message.hasOwnProperty("caps_bits"))
                 if (!$util.isInteger(message.caps_bits))
                     return "caps_bits: integer expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id))
+                    return "session_id: integer expected";
+            if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
+                if (!$util.isInteger(message.eControllerType))
+                    return "eControllerType: integer expected";
             return null;
         };
     
@@ -484,6 +518,10 @@
                 message.is_generic_joystick = Boolean(object.is_generic_joystick);
             if (object.caps_bits != null)
                 message.caps_bits = object.caps_bits >>> 0;
+            if (object.session_id != null)
+                message.session_id = object.session_id >>> 0;
+            if (object.eControllerType != null)
+                message.eControllerType = object.eControllerType >>> 0;
             return message;
         };
     
@@ -516,6 +554,8 @@
                 object.is_generic_gamepad = false;
                 object.is_generic_joystick = false;
                 object.caps_bits = 0;
+                object.session_id = 0;
+                object.eControllerType = 0;
             }
             if (message.location != null && message.hasOwnProperty("location"))
                 object.location = options.enums === String ? $root.EHIDDeviceLocation[message.location] : message.location;
@@ -547,6 +587,10 @@
                 object.is_generic_joystick = message.is_generic_joystick;
             if (message.caps_bits != null && message.hasOwnProperty("caps_bits"))
                 object.caps_bits = message.caps_bits;
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                object.session_id = message.session_id;
+            if (message.eControllerType != null && message.hasOwnProperty("eControllerType"))
+                object.eControllerType = message.eControllerType;
             return object;
         };
     
