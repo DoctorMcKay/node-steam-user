@@ -40,21 +40,25 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 	let self = this;
 
-	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, function(err, res) {
+	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, (err, res) => {
 		if (err) {
-			self.emit('debug', 'Error in AuthenticateUser: ' + err.message);
+			this.emit('debug', 'Error in AuthenticateUser: ' + err.message);
 			fail();
-		} else if (!res.authenticateuser || !res.authenticateuser.token || !res.authenticateuser.tokensecure) {
-			self.emit('debug', 'Error in AuthenticateUser: malformed response');
+		} else if (!res.authenticateuser || (!res.authenticateuser.token && !res.authenticateuser.tokensecure)) {
+			this.emit('debug', 'Error in AuthenticateUser: malformed response');
 			fail();
 		} else {
 			// Generate a random sessionid (CSRF token)
 			let sessionid = Crypto.randomBytes(12).toString('hex');
-			self.emit('webSession', sessionid, [
-				'sessionid=' + sessionid,
-				'steamLogin=' + res.authenticateuser.token,
-				'steamLoginSecure=' + res.authenticateuser.tokensecure
-			]);
+			let cookies = ['sessionid=' + sessionid];
+			if (res.authenticateuser.token) {
+				cookies.push('steamLogin=' + res.authenticateuser.token);
+			}
+			if (res.authenticateuser.tokensecure) {
+				cookies.push('steamLoginSecure=' + res.authenticateuser.tokensecure);
+			}
+
+			this.emit('webSession', sessionid, cookies);
 		}
 	});
 
