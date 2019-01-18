@@ -132,6 +132,8 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
  * @return Promise
  */
 SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, options, callback) {
+	const EChatEntryType = require('../index.js').EChatEntryType;
+
 	if (typeof options === 'function') {
 		callback = options;
 		options = {};
@@ -139,14 +141,20 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 		options = {};
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
-		const EChatEntryType = require('../index.js').EChatEntryType;
+	if (!options.chatEntryType) {
+		options.chatEntryType = EChatEntryType.ChatMsg;
+	}
 
+	if (options.chatEntryType && typeof options.containsBbCode === 'undefined') {
+		options.containsBbCode = true;
+	}
+
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
 		this.user._sendUnified("FriendMessages.SendMessage#1", {
 			"steamid": Helpers.steamID(steamId).toString(),
-			"chat_entry_type": options.chatEntryType || EChatEntryType.ChatMsg,
+			"chat_entry_type": options.chatEntryType,
 			"message": message,
-			"contains_bbcode": options.containsBbCode || false
+			"contains_bbcode": options.containsBbCode
 		}, (body) => {
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
