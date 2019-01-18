@@ -14,7 +14,8 @@ const SteamUser = require('../index.js');
  * Request an encrypted appticket for a particular app. The app must be set up on the Steam backend for encrypted apptickets.
  * @param {int} appid - The Steam AppID of the app you want a ticket for
  * @param {Buffer} [userData] - If the app expects some "user data", provide it here
- * @param {function} callback - First argument is "err", second is the ticket as a Buffer (on success)
+ * @param {function} [callback] - First argument is "err", second is the ticket as a Buffer (on success)
+ * @return {Promise}
  */
 SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) {
 	if (typeof userData === 'function') {

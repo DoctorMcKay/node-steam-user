@@ -168,7 +168,7 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 /**
  * Gets the Steam Level of one or more Steam users.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects, or strings which can parse into one.
- * @param {function} callback - Called on completion with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
+ * @param {function} [callback] - Called on completion with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
  * @return {Promise}
  */
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
