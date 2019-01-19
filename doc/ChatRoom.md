@@ -1,3 +1,11 @@
+# Concepts
+
+### Ordinal
+
+Each message in new Steam chat has both a `timestamp` and an `ordinal`. The `timestamp` value should be self-explanatory,
+but the `ordinal` value is a 0-indexed counter that increments if a user sends multiple messages within the same second.
+This enables messages to be identified uniquely using only their timestamp and their ordinal.
+
 # Standard Objects
 
 "Standard objects" are objects that are reused across multiple methods and events in the `SteamChatRoomClient`.
@@ -137,3 +145,46 @@ Gets details about a chat room group from an invite link. If the provided invite
 
 Requests to join a chat room group. If the provided group ID or invite code are not valid, you will get an `Error` with
 message `"Invalid group ID or invite code"`.
+
+### sendFriendMessage(steamId, message[, options][, callback])
+- `steamId` - The SteamID of your friend, as a `SteamID` object or a string that can parse into one
+- `message` - The string message you want to send
+- `options` - Optional. An object containing zero or more of these properties:
+	- `chatEntryType` - A value from [EChatEntryType](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EChatEntryType.js). Defaults to `ChatMsg`.
+	- `containsBbCode` - `true` to allow the Steam server to parse /commands (default `true`)
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `modified_message` - A string containing the message as it will be broadcast to the other user. If any /commands got parsed and turned into BBCode, you'll see that BBCode here.
+		- `server_timestamp` - A `Date` object containing the timestamp the server gave to this message.
+		- `ordinal` - This message's [ordinal](#ordinal)
+
+Sends a chat message to a friend.
+
+### sendFriendTyping(steamId[, callback])
+- `steamId` - The SteamID of your friend, as a `SteamID` object or a string that can parse into one
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+
+Notifies a friend that you are typing a chat message to them.
+
+### sendChatMessage(groupId, chatId, message[, callback])
+- `groupId` - The ID of the chat room group you want to send this message to
+- `chatId` - The ID of the chat room (channel) you want to send this message to
+- `message` - Your actual message text
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `modified_message` - A string containing the message as it will be broadcast to the other user. If any /commands got parsed and turned into BBCode, you'll see that BBCode here.
+		- `server_timestamp` - A `Date` object containing the timestamp the server gave to this message.
+		- `ordinal` - This message's [ordinal](#ordinal)
+
+Sends a chat message to a chat channel.
+
+### getChatMessageHistory(gropuId, chatId[, options][, callback])
+
+TODO
+
+# Events
+
+TODO

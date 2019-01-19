@@ -182,6 +182,7 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 		}, (body) => {
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
+			body.modified_message = body.modified_message || message;
 			accept(body);
 		});
 	});
@@ -200,8 +201,8 @@ SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
 
 /**
  * Send a message to a chat room.
- * @param {int} groupId
- * @param {int} chatId
+ * @param {int|string} groupId
+ * @param {int|string} chatId
  * @param {string} message
  * @param {function} [callback]
  * @return Promise
@@ -214,6 +215,8 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 			"message": message
 		}, (body) => {
 			body = preProcessObject(body);
+			body.ordinal = body.ordinal || 0;
+			body.modified_message = body.modified_message || message;
 			accept(body);
 		});
 	});
@@ -221,8 +224,8 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 
 /**
  * Get message history for a chat (channel).
- * @param {int} groupId
- * @param {int} chatId
+ * @param {int|string} groupId
+ * @param {int|string} chatId
  * @param {{[maxCount], [lastTime], [lastOrdinal], [startTime], [startOrdinal]}} [options]
  * @param {function} [callback]
  * @return Promise
