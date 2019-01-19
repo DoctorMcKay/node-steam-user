@@ -99,26 +99,50 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
 		let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
 		if (!match) {
-			return reject(new Error("Malformed invite link"));
+			return reject(new Error("Invalid invite link"));
 		}
 
 		this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body) => {
+			if (!body || (!body.steamid_sender && !body.chat_id && !body.group_summary)) {
+				return reject(new Error("Invalid invite link"));
+			}
+
 			body = preProcessObject(body);
-			body.group_summary = processChatGroupSummary(body.group_summary);
-			body.user_chat_group_state = preProcessObject(body.user_chat_group_state);
+			body.group_summary = processChatGroupSummary(body.group_summary, true);
+			body.user_chat_group_state = processChatGroupState(body.user_chat_group_state, true);
+			body.banned = !!body.banned;
+			body.invite_code = match[1];
 			accept(body);
 		});
 	});
 };
 
+/**
+ * Join a chat room group.
+ * @param {int|string} groupId - The group's ID
+ * @param {string} [inviteCode] - An invite code to join this chat. Not necessary for public Steam groups.
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
 SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback) {
+	if (typeof inviteCode === 'function') {
+		callback = inviteCode;
+		inviteCode = undefined;
+	}
+
 	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
 		this.user._sendUnified("ChatRoom.JoinChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"invite_code": inviteCode
 		}, (body) => {
+			if (!body.state && !body.user_chat_state) {
+				return reject(new Error("Invalid group ID or invite code"));
+			}
+
 			body = preProcessObject(body);
-			// TODO
+			body.state = processChatGroupState(body.state, true);
+			body.user_chat_state = processUserChatGroupState(body.user_chat_state, true);
+			accept(body);
 		});
 	});
 };
@@ -251,11 +275,16 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 /**
  * Process a chat room summary pair.
  * @param {object} summaryPair
+ * @param {boolean} [preProcessed=false]
  * @returns {object}
  */
-function processChatRoomSummaryPair(summaryPair) {
-	summaryPair.group_state = preProcessObject(summaryPair.user_chat_group_state);
-	summaryPair.group_summary = preProcessObject(summaryPair.group_summary);
+function processChatRoomSummaryPair(summaryPair, preProcessed) {
+	if (!preProcessed) {
+		summaryPair = preProcessObject(summaryPair);
+	}
+
+	summaryPair.group_state = processChatGroupState(summaryPair.user_chat_group_state, true);
+	summaryPair.group_summary = processChatGroupSummary(summaryPair.group_summary, true);
 	delete summaryPair.user_chat_group_state;
 	return summaryPair;
 }
@@ -263,15 +292,57 @@ function processChatRoomSummaryPair(summaryPair) {
 /**
  * Process a chat group summary.
  * @param {object} groupSummary
+ * @param {boolean} [preProcessed=false]
  * @returns {object}
  */
-function processChatGroupSummary(groupSummary) {
-	groupSummary = preProcessObject(groupSummary);
+function processChatGroupSummary(groupSummary, preProcessed) {
+	if (!preProcessed) {
+		groupSummary = preProcessObject(groupSummary);
+	}
+
 	if (groupSummary.top_members) {
 		groupSummary.top_members = groupSummary.top_members.map(accountid => SteamID.fromIndividualAccountID(accountid));
 	}
 
 	return groupSummary;
+}
+
+function processChatGroupState(state, preProcessed) {
+	if (!preProcessed) {
+		state = preProcessObject(state);
+	}
+
+	state.chat_rooms = state.chat_rooms.map(processChatRoomState, true);
+	return state;
+}
+
+function processUserChatGroupState(state, preProcessed) {
+	if (!preProcessed) {
+		state = preProcessObject(state);
+	}
+
+	state.user_chat_room_state = processUserChatRoomState(state.user_chat_room_state, true);
+	state.unread_indicator_muted = !!state.unread_indicator_muted;
+	return state;
+}
+
+function processUserChatRoomState(state, preProcessed) {
+	if (!preProcessed) {
+		state = preProcessObject(state);
+	}
+
+	state.unread_indicator_muted = !!state.unread_indicator_muted;
+	return state;
+}
+
+function processChatRoomState(state, preProcessed) {
+	if (!preProcessed) {
+		state = preProcessObject(state);
+	}
+
+	state.voice_allowed = !!state.voice_allowed;
+	state.members_in_voice = state.members_in_voice.map(m => SteamID.fromIndividualAccountID(m));
+	return state;
 }
 
 function processChatMentions(mentions) {
@@ -310,9 +381,28 @@ function preProcessObject(obj) {
 			} else if (val !== null) {
 				obj[key] = new Date(val * 1000);
 			}
-		} else if (key.match(/^accountid_/) && typeof val === 'number') {
-			obj[key.replace('accountid_', 'steamid_')] = val === 0 ? null : SteamID.fromIndividualAccountID(val);
+		} else if (key == 'clanid' && typeof val === 'number') {
+			let id = new SteamID();
+			id.universe = SteamID.Universe.PUBLIC;
+			id.type = SteamID.Type.CLAN;
+			id.instance = SteamID.Instance.ALL;
+			id.accountid = val;
+			obj[key] = id;
+		} else if ((key == 'accountid' || key.match(/^accountid_/) || key.match(/_accountid$/)) && typeof val === 'number') {
+			let newKey = key == 'accountid' ? 'steamid' : key.replace('accountid_', 'steamid_').replace('_accountid', '_steamid');
+			obj[newKey] = val === 0 ? null : SteamID.fromIndividualAccountID(val);
 			delete obj[key];
+		} else if (key.includes('avatar_sha')) {
+			let url = null;
+			if (obj[key] && obj[key].length) {
+				url = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/chaticons/";
+				url += obj[key][0].toString(16) + '/';
+				url += obj[key][1].toString(16) + '/';
+				url += obj[key][2].toString(16) + '/';
+				url += obj[key].toString('hex') + '_256.jpg';
+			}
+
+			obj[key.replace('avatar_sha', 'avatar_url')] = url;
 		} else if (isDataObject(val)) {
 			obj[key] = preProcessObject(val);
 		} else if (Array.isArray(val) && val.every(isDataObject)) {
