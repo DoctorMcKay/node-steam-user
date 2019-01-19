@@ -530,6 +530,8 @@ function preProcessObject(obj) {
 			}
 
 			obj[key.replace('avatar_sha', 'avatar_url')] = url;
+		} else if (key.match(/^can_/) && obj[key] === null) {
+			obj[key] = false;
 		} else if (isDataObject(val)) {
 			obj[key] = preProcessObject(val);
 		} else if (Array.isArray(val) && val.every(isDataObject)) {
