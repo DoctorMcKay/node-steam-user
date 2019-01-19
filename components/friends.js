@@ -773,6 +773,10 @@ function processUser(steamUser, user) {
 				user.last_logon = new Date(user.last_logon * 1000);
 			}
 
+			if (typeof user.last_seen_online === 'number') {
+				user.last_seen_online = new Date(user.last_seen_online * 1000);
+			}
+
 			if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
 				let hash = user.avatar_hash.toString('hex');
 
