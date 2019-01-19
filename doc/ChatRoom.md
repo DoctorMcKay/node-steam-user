@@ -14,8 +14,9 @@
 - `chat_group_tagline` - The group's tagline
 - `appid` - If the chat group is linked to an app, this is its AppID. Otherwise, `null`.
 - `steamid_owner` - A `SteamID` object representing the group's owner
-- `watching_broadcast_accountid` - TODO
-- `chat_group_avatar_sha` - TODO
+- `watching_broadcast_steamid` - If the group is collectively watching a broadcast, this is the `SteamID` of the broadcaster
+- `chat_group_avatar_sha` - If the group has an avatar set, this is its SHA-1 hash, as a `Buffer`. If not, `null`.
+- `chat_group_avatar_url` - If the group has an avatar set, this is the URL where you can download it. If not, `null`.
 
 ### Chat Room Group State
 
@@ -53,11 +54,12 @@
 - `steamid_owner` - A `SteamID` object representing the owner of this chat room group
 - `appid` - If the chat group is linked to an app, this is its AppID. Otherwise, `null`.
 - `tagline` - The group's tagline
-- `avatar_sha` - TODO
+- `avatar_sha` - If the group has an avatar set, this is its SHA-1 hash, as a `Buffer`. If not, `null`.
+- `avatar_url` - If the group has an avatar set, this is the URL where you can download it. If not, `null`.
 - `default_role_id` - The ID of the default role applied to new members
 - `roles` - An array of [Chat Role](#chat-role) objects
 - `role_actions` - An array of [Chat Role Actions](#chat-role-actions) objects
-- `watching_broadcast_accountid` - TODO
+- `watching_broadcast_steamid` - If the group is collectively watching a broadcast, this is the `SteamID` of the broadcaster
 
 ### Chat Room Member
 
@@ -99,9 +101,15 @@
 
 # Methods
 
-### getGroups
+### getGroups(callback)
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `chat_room_groups` - An object where keys are numeric chat room group IDs and values are objects with these keys:
+			- `group_summary` - A [Chat Room Group Summary](#chat-room-group-summary) object
+			- `group_state` - A [Chat Room Group State](#chat-room-group-state) object
 
-TODO
+Returns a list of all chat room groups you are a member of.
 
 ### getInviteLinkInfo(linkUrl, callback)
 - `linkUrl` - The full invite link URL for a group chat (e.g. `https://s.team/chat/abcdefg`)
@@ -118,9 +126,9 @@ TODO
 Gets details about a chat room group from an invite link. If the provided invite link is not valid, you will get an
 `Error` with message `"Invalid invite link"`.
 
-### joinGroup(groupId, inviteCode, callback)
+### joinGroup(groupId[, inviteCode], callback)
 - `groupId` - The chat group ID you want to join (`group_summary.chat_group_id` in `getInviteLinkInfo` response)
-- `inviteCode` - The invite code you were provided to join this group
+- `inviteCode` - The invite code you were provided to join this group. Not necessary if you're joining the chat room for a Steam group you have access to.
 - `callback` - Called when the request completes
 	- `err` - An `Error` object on failure, or `null` on success
 	- `response` - The response object
