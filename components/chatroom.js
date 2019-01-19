@@ -118,6 +118,37 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 };
 
 /**
+ * Get the chat room group info for a clan (Steam group). Allows you to join a group chat.
+ * @param {SteamID|string} clanSteamID - The group's SteamID or a string that can parse into one
+ * @param {function} [callback]
+ * @return {Promise}
+ */
+SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		clanSteamID = Helpers.steamID(clanSteamID);
+		if (clanSteamID.type != SteamID.Type.CLAN) {
+			return reject(new Error("SteamID is not for a clan"));
+		}
+
+		// just set these to what they should be
+		clanSteamID.universe = SteamID.Universe.PUBLIC;
+		clanSteamID.instance = SteamID.Instance.ALL;
+
+		this.user._sendUnified("ClanChatRooms.GetClanChatRoomInfo#1", {
+			"steamid": clanSteamID.toString(),
+			"autocreate": true
+		}, (body) => {
+			if (!body.chat_group_summary) {
+				return reject(new Error("Invalid clan ID"));
+			}
+
+			body.chat_group_summary = processChatGroupSummary(body.chat_group_summary);
+			accept(body);
+		});
+	});
+};
+
+/**
  * Join a chat room group.
  * @param {int|string} groupId - The group's ID
  * @param {string} [inviteCode] - An invite code to join this chat. Not necessary for public Steam groups.

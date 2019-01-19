@@ -22,7 +22,7 @@ This enables messages to be identified uniquely using only their timestamp and t
 - `chat_group_tagline` - The group's tagline
 - `appid` - If the chat group is linked to an app, this is its AppID. Otherwise, `null`.
 - `steamid_owner` - A `SteamID` object representing the group's owner
-- `watching_broadcast_steamid` - If the group is collectively watching a broadcast, this is the `SteamID` of the broadcaster
+- `watching_broadcast_steamid` - If the group is in a broadcast watch party, this is the `SteamID` of the broadcaster
 - `chat_group_avatar_sha` - If the group has an avatar set, this is its SHA-1 hash, as a `Buffer`. If not, `null`.
 - `chat_group_avatar_url` - If the group has an avatar set, this is the URL where you can download it. If not, `null`.
 
@@ -67,7 +67,7 @@ This enables messages to be identified uniquely using only their timestamp and t
 - `default_role_id` - The ID of the default role applied to new members
 - `roles` - An array of [Chat Role](#chat-role) objects
 - `role_actions` - An array of [Chat Role Actions](#chat-role-actions) objects
-- `watching_broadcast_steamid` - If the group is collectively watching a broadcast, this is the `SteamID` of the broadcaster
+- `watching_broadcast_steamid` - If the group is in a broadcast watch party, this is the `SteamID` of the broadcaster
 
 ### Chat Room Member
 
@@ -133,6 +133,17 @@ Returns a list of all chat room groups you are a member of.
 
 Gets details about a chat room group from an invite link. If the provided invite link is not valid, you will get an
 `Error` with message `"Invalid invite link"`.
+
+### getClanChatGroupInfo(clanSteamID, callback)
+- `clanSteamID` - The group's `SteamID` or a string that can parse into one
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `chat_group_summary` - A [Chat Room Group Summary](#chat-room-group-summary) object
+
+Get details about a clan (Steam group)'s chat room group. The returned summary includes the group's chat room group ID,
+which you can use with [joinGroup](#joingroupgroupid-invitecode-callback) to join that group chat. You do not need
+an invite code to join a Steam group chat that you have access to.
 
 ### joinGroup(groupId[, inviteCode], callback)
 - `groupId` - The chat group ID you want to join (`group_summary.chat_group_id` in `getInviteLinkInfo` response)
