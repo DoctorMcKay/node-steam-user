@@ -549,7 +549,7 @@ function isDataObject(val) {
 function convertDateToUnix(date) {
 	if (date instanceof Date) {
 		return Math.floor(date.getTime() / 1000);
-	} else if (typeof date !== 'numeric') {
+	} else if (typeof date !== 'number') {
 		throw new Error('Timestamp must be a Date object or a numeric Unix timestamp');
 	} else if (date > 1420088400000) {
 		return Math.floor(date / 1000);
