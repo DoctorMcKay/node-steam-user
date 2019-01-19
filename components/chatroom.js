@@ -56,6 +56,9 @@ function SteamChatRoomClient(user) {
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyIncomingChatMessage#1', function(body) {
 		body = preProcessObject(body);
+		body.ordinal = body.ordinal || 0;
+		body.message_no_bbcode = body.message_no_bbcode || body.message;
+
 		if (body.mentions) {
 			body.mentions = processChatMentions(body.mentions);
 		}
@@ -65,6 +68,11 @@ function SteamChatRoomClient(user) {
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyChatMessageModified#1', function(body) {
 		body = preProcessObject(body);
+		body.messages = body.messages.map((msg) => {
+			msg.ordinal = msg.ordinal || 0;
+			return msg;
+		});
+
 		this.chat.emit('chatMessagesModified', body);
 	});
 }
@@ -297,6 +305,62 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 			}
 
 			accept(body);
+		});
+	});
+};
+
+/**
+ * Delete one or more messages from a chat channel.
+ * @param {int|string} groupId
+ * @param {int|string} chatId
+ * @param {{server_timestamp, ordinal}[]} messages
+ * @param {function} [callback]
+ * @return {Promise}
+ */
+SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, messages, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		if (!Array.isArray(messages)) {
+			return reject(new Error('The \'messages\' argument must be an array'));
+		}
+
+		for (let i = 0; i < messages.length; i++) {
+			if (!messages[i] || typeof messages[i] !== 'object' || (!messages[i].server_timestamp && !messages[i].timestamp)) {
+				return reject(new Error('The \'messages\' argument is malformed: must be an array of objects with properties {(server_timestamp|timestamp), ordinal}'));
+			}
+		}
+
+		messages = messages.map((msg) => {
+			let out = {};
+
+			msg.ordinal = msg.ordinal || 0;
+			if (msg.timestamp && !msg.server_timestamp) {
+				msg.server_timestamp = msg.timestamp;
+			}
+
+			if (msg.server_timestamp instanceof Date) {
+				out.server_timestamp = Math.floor(msg.server_timestamp.getTime() / 1000);
+			} else if (msg.server_timestamp > 1420088400000) {
+				// Unix time with milliseconds
+				out.server_timestamp = Math.floor(msg.server_timestamp / 1000);
+			} else if (typeof msg.server_timestamp !== 'number') {
+				throw new Error('server_timestamp must be a number or Date');
+			} else {
+				out.server_timestamp = msg.server_timestamp;
+			}
+
+			if (msg.ordinal) {
+				out.ordinal = msg.ordinal;
+			}
+
+			return out;
+		});
+
+		this.user._sendUnified("ChatRoom.DeleteChatMessages#1", {
+			"chat_group_id": groupId,
+			"chat_id": chatId,
+			"messages": messages
+		}, (body) => {
+			accept();
 		});
 	});
 };
