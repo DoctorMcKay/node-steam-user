@@ -187,6 +187,24 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 };
 
 /**
+ * Invite a friend to a chat room group.
+ * @param {int} groupId
+ * @param {SteamID|string} steamId
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		return this.user._sendUnified("ChatRoom.InviteFriendToChatRoomGroup#1", {
+			"chat_group_id": groupId,
+			"steamid": Helpers.steamID(steamId).toString()
+		}, (body) => {
+			accept();
+		});
+	});
+};
+
+/**
  * Send a direct chat message to a friend.
  * @param {SteamID|string} steamId
  * @param {string} message
@@ -337,16 +355,7 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
 				msg.server_timestamp = msg.timestamp;
 			}
 
-			if (msg.server_timestamp instanceof Date) {
-				out.server_timestamp = Math.floor(msg.server_timestamp.getTime() / 1000);
-			} else if (msg.server_timestamp > 1420088400000) {
-				// Unix time with milliseconds
-				out.server_timestamp = Math.floor(msg.server_timestamp / 1000);
-			} else if (typeof msg.server_timestamp !== 'number') {
-				throw new Error('server_timestamp must be a number or Date');
-			} else {
-				out.server_timestamp = msg.server_timestamp;
-			}
+			out.server_timestamp = convertDateToUnix(msg.server_timestamp);
 
 			if (msg.ordinal) {
 				out.ordinal = msg.ordinal;
@@ -359,6 +368,26 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
 			"chat_group_id": groupId,
 			"chat_id": chatId,
 			"messages": messages
+		}, (body) => {
+			accept();
+		});
+	});
+};
+
+/**
+ * Kick a user from a chat room group.
+ * @param {int|string} groupId
+ * @param {SteamID|string} steamId
+ * @param {Date|int} [expireTime] - Time when they should be allowed to join again. Omit for immediate.
+ * @param {function} [callback]
+ * @return {Promise}
+ */
+SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, expireTime, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		this.user._sendUnified("ChatRoom.KickUserFromGroup#1", {
+			"chat_group_id": groupId,
+			"steamid": Helpers.steamID(steamId).toString(),
+			"expiration": expireTime ? convertDateToUnix(expireTime) : Math.floor(Date.now() / 1000)
 		}, (body) => {
 			accept();
 		});
@@ -513,4 +542,16 @@ function preProcessObject(obj) {
 
 function isDataObject(val) {
 	return val !== null && typeof val === 'object' && (val.constructor.name == 'Object' || val.constructor.name == '');
+}
+
+function convertDateToUnix(date) {
+	if (date instanceof Date) {
+		return Math.floor(date.getTime() / 1000);
+	} else if (typeof date !== 'numeric') {
+		throw new Error('Timestamp must be a Date object or a numeric Unix timestamp');
+	} else if (date > 1420088400000) {
+		return Math.floor(date / 1000);
+	} else {
+		return date;
+	}
 }
