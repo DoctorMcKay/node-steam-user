@@ -192,6 +192,16 @@ Notifies a friend that you are typing a chat message to them.
 
 Sends a chat message to a chat channel.
 
+### deleteChatMessages(groupId, chatId, messages[, callback])
+- `groupId` - The ID of the chat room group you want to delete a message from
+- `chatId` - The ID of the chat room (channel) you want to delete a message from
+- `messages` - An array of objects with these properties:
+	- `server_timestamp` - Either a `Date` or a numeric Unix timestamp (you may also name this property `timestamp`)
+	- `ordinal` - The ordinal of the message you want to delete. May be omitted if 0.
+
+Deletes some messages from a chat room, provided you have access. Note that the message sender gets no indication that
+their message was deleted, but everyone else sees [MESSAGE DELETED].
+
 ### getChatMessageHistory(gropuId, chatId[, options][, callback])
 
 TODO
