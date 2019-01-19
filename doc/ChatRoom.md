@@ -1,4 +1,19 @@
-# Concepts
+# SteamChatRoomClient
+
+Available as a `chat` property on every `SteamUser` instance, `SteamChatRoomClient` is how you can interact
+programmatically with "new Steam chat", including the new chat rooms.
+
+Unlike most `SteamUser` methods and events, these are all only available from the `SteamChatRoomProperty` via the `chat`
+property. For example:
+
+```js
+let user = new SteamUser();
+// log on the user
+
+user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
+```
+
+## Concepts
 
 ### Ordinal
 
@@ -6,7 +21,7 @@ Each message in new Steam chat has both a `timestamp` and an `ordinal`. The `tim
 but the `ordinal` value is a 0-indexed counter that increments if a user sends multiple messages within the same second.
 This enables messages to be identified uniquely using only their timestamp and their ordinal.
 
-# Standard Objects
+## Standard Objects
 
 "Standard objects" are objects that are reused across multiple methods and events in the `SteamChatRoomClient`.
 
@@ -107,7 +122,7 @@ This enables messages to be identified uniquely using only their timestamp and t
 - `can_mention_all` - Boolean
 - `can_set_watching_broadcast` - Boolean
 
-# Methods
+## Methods
 
 ### getGroups(callback)
 - `callback` - Called when the request completes
@@ -231,6 +246,6 @@ Always returns success, even if you don't have permission to kick the user in qu
 
 TODO
 
-# Events
+## Events
 
 TODO
