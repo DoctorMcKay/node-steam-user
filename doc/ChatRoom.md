@@ -157,6 +157,16 @@ an invite code to join a Steam group chat that you have access to.
 Requests to join a chat room group. If the provided group ID or invite code are not valid, you will get an `Error` with
 message `"Invalid group ID or invite code"`.
 
+### inviteUserToGroup(groupId, steamId[, callback])
+- `groupId` - The chat group ID you want to invite a friend to
+- `steamId` - Your friend's `SteamID` object, or a string that can parse into one
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+
+Invites a Steam friend to join a chat room group. You must have permission to do so.
+
+Always returns success, even if you don't have permission to send this invite.
+
 ### sendFriendMessage(steamId, message[, options][, callback])
 - `steamId` - The SteamID of your friend, as a `SteamID` object or a string that can parse into one
 - `message` - The string message you want to send
@@ -198,9 +208,24 @@ Sends a chat message to a chat channel.
 - `messages` - An array of objects with these properties:
 	- `server_timestamp` - Either a `Date` or a numeric Unix timestamp (you may also name this property `timestamp`)
 	- `ordinal` - The ordinal of the message you want to delete. May be omitted if 0.
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
 
 Deletes some messages from a chat room, provided you have access. Note that the message sender gets no indication that
 their message was deleted, but everyone else sees [MESSAGE DELETED].
+
+Always returns success, even if you don't have permission to delete the messages in question or you provided bad timestamps/ordinals.
+
+### kickUserFromGroup(groupId, steamId[, expireTime][, callback])
+- `groupId` - The ID of the chat room group you want to kick someone from
+- `steamId` - The `SteamID` object for the user you want to kick, or a string that can parse into one
+- `expireTime` - A `Date` object or numeric Unix timestamp for when the user should be permitted to rejoin. Omit to allow them to rejoin immediately (provided they have an invite link)
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+
+Kicks a user from a chat room group, provided you have access to do so.
+
+Always returns success, even if you don't have permission to kick the user in question. 
 
 ### getChatMessageHistory(gropuId, chatId[, options][, callback])
 
