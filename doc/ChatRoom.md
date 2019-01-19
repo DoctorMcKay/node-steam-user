@@ -13,6 +13,33 @@ let user = new SteamUser();
 user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 ```
 
+## Table of Contents
+
+- [Concepts](#concepts)
+	- [Ordinal](#ordinal)
+- [Standard Objects](#standard-objects)
+	- [Chat Room Group Summary](#chat-room-group-summary)
+	- [Chat Room Group State](#chat-room-group-state)
+	- [User Chat Room Group State](#user-chat-room-group-state)
+	- [User Chat Room State](#user-chat-room-state)
+	- [Chat Room Group Header State](#chat-room-group-header-state)
+	- [Chat Room Member](#chat-room-member)
+	- [Chat Room State](#chat-room-state)
+	- [Chat Role](#chat-role)
+	- [Chat Role Actions](#chat-role-actions)
+- [Methods](#methods)
+	- [getGroups(callback)](#getgroupscallback)
+	- [getInviteLinkInfo(linkUrl, callback)](#getinvitelinkinfolinkurl-callback)
+	- [getClanChatGroupInfo(clanSteamID, callback)](#getclanchatgroupinfoclansteamid-callback)
+	- [joinGroup(groupId\[, inviteCode\], callback)](#joingroupgroupid-invitecode-callback)
+	- [inviteUserToGroup(groupId, steamId\[, callback\])](#inviteusertogroupgroupid-steamid-callback)
+	- [sendFriendMessage(steamId, message\[, options\]\[, callback\])](#sendfriendmessagesteamid-message-options-callback)
+	- [sendFriendTyping(steamId\[, callback\])](#sendfriendtypingsteamid-callback)
+	- [sendChatMessage(groupId, chatId, message\[, callback\])](#sendchatmessagegroupid-chatid-message-callback)
+	- [deleteChatMessages(groupId, chatId, messages\[, callback\])](#deletechatmessagesgroupid-chatid-messages-callback)
+	- [kickUserFromGroup(groupId, steamId\[, expireTime\]\[, callback\])](#kickuserfromgroupgroupid-steamid-expiretime-callback)
+- [Events](#events)
+
 ## Concepts
 
 ### Ordinal
@@ -20,6 +47,19 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 Each message in new Steam chat has both a `timestamp` and an `ordinal`. The `timestamp` value should be self-explanatory,
 but the `ordinal` value is a 0-indexed counter that increments if a user sends multiple messages within the same second.
 This enables messages to be identified uniquely using only their timestamp and their ordinal.
+
+### Chat Rooms vs. Chat Room Groups vs. Steam Groups
+
+All three of the above are distinctly separate things in Steam.
+
+- Chat Rooms - Internally, Steam calls chat channels "chat rooms". When you see the term "chat room", think "channel".
+- Chat Room Groups - Think "Discord server". This is a "group chat" on your friends list. Chat room groups are owned by
+one individual, and can have multiple text and voice channels.
+- Steam Groups - Steam groups have pretty much nothing to do with chat room groups/chat rooms, except that there's a
+button on a Steam group's overview page to join a chat room group which is linked to that Steam group. Internally though,
+Steam groups and chat room groups are entirely separate things, linked only by
+[getClanChatGroupInfo(clanSteamID, callback)](#getclanchatgroupinfoclansteamid-callback) and by the `clanid` property in
+[Chat Room Group Header State](#chat-room-group-header-state).
 
 ## Standard Objects
 
