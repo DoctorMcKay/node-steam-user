@@ -125,7 +125,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	return StdLib.Promises.callbackPromise(['personas'], callback, true, (accept, reject) => {
 		const Flags = SteamUser.EClientPersonaStateFlag;
-		let flags = Flags.Status | Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
+		let flags = Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
 			Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
 			Flags.ClanTag | Flags.Facebook;
 
