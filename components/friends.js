@@ -112,7 +112,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
  */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
 	var Flags = SteamUser.EClientPersonaStateFlag;
-	var flags = Flags.Status | Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
+	var flags = Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
 		Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
 		Flags.ClanTag | Flags.Facebook;
 
