@@ -117,7 +117,7 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 
 			body = preProcessObject(body);
 			body.group_summary = processChatGroupSummary(body.group_summary, true);
-			body.user_chat_group_state = processChatGroupState(body.user_chat_group_state, true);
+			body.user_chat_group_state = processUserChatGroupState(body.user_chat_group_state, true);
 			body.banned = !!body.banned;
 			body.invite_code = match[1];
 			accept(body);
@@ -410,7 +410,7 @@ function processChatRoomSummaryPair(summaryPair, preProcessed) {
 		summaryPair = preProcessObject(summaryPair);
 	}
 
-	summaryPair.group_state = processChatGroupState(summaryPair.user_chat_group_state, true);
+	summaryPair.group_state = processUserChatGroupState(summaryPair.user_chat_group_state, true);
 	summaryPair.group_summary = processChatGroupSummary(summaryPair.group_summary, true);
 	delete summaryPair.user_chat_group_state;
 	return summaryPair;
