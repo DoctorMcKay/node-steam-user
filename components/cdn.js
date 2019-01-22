@@ -296,8 +296,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
  * @param {int} depotID - The depot ID which contains the file you want
  * @param {object} fileManifest - An object from the "files" array of a downloaded and parsed manifest
  * @param {string} [outputFilePath] - If provided, downloads the file to this location on the disk. If not, downloads the file into memory and sends it back in the callback.
- * @param {function} callback - (err, file) but file is only present if outputFilePath is not set
- * @returns {EventEmitter} An EventEmitter which receives `progress` events with arguments (bytesDownloaded, totalSize)
+ * @param {function} [callback]
+ * @returns {Promise}
  */
 SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, outputFilePath, callback) {
 	if (typeof outputFilePath === 'function') {
@@ -305,176 +305,181 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		outputFilePath = null;
 	}
 
-	if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
-		throw new Error("Attempted to download a directory " + fileManifest.filename);
-	}
-
-	let numWorkers = 4;
-
-	fileManifest.size = parseInt(fileManifest.size, 10);
-	let bytesDownloaded = 0;
-
-	let availableServers;
-	let servers = [];
-	let serversInUse = [];
-	let currentServerIdx = 0;
-	let downloadBuffer;
-	let outputFd;
-	let killed = false;
-	let outputEmitter = new EventEmitter();
-
-	this.getContentServers((err, contentServers) => {
-		if (err) {
-			callback(err);
-			return;
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
+			return reject(new Error("Attempted to download a directory " + fileManifest.filename));
 		}
 
-		// Choose some content servers
-		availableServers = contentServers;
-		for (let i = 0; i < numWorkers; i++) {
-			assignServer(i);
-			serversInUse.push(false);
-		}
+		let numWorkers = 4;
 
-		if (outputFilePath) {
-			FS.open(outputFilePath, "w", (err, fd) => {
-				if (err) {
-					callback(err);
-					return;
-				}
+		fileManifest.size = parseInt(fileManifest.size, 10);
+		let bytesDownloaded = 0;
 
-				outputFd = fd;
-				FS.truncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
-					if (err) {
-						FS.closeSync(outputFd);
-						callback(err);
-						return;
-					}
+		let availableServers;
+		let servers = [];
+		let serversInUse = [];
+		let currentServerIdx = 0;
+		let downloadBuffer;
+		let outputFd;
+		let killed = false;
 
-					beginDownload.call(this);
-				});
-			});
-		} else {
-			downloadBuffer = new Buffer(parseInt(fileManifest.size, 10));
-			beginDownload.call(this);
-		}
-	});
-
-	return outputEmitter;
-
-	function beginDownload() {
-		let self = this;
-		let queue = require('async').queue(function dlChunk(chunk, cb) {
-			let serverIdx;
-
-			while (true) {
-				// Find the next available download slot
-				if (serversInUse[currentServerIdx]) {
-					incrementCurrentServerIdx();
-				} else {
-					serverIdx = currentServerIdx;
-					serversInUse[serverIdx] = true;
-					break;
-				}
+		this.getContentServers((err, contentServers) => {
+			if (err) {
+				return reject(err);
 			}
 
-			this.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
-				serversInUse[serverIdx] = false;
+			// Choose some content servers
+			availableServers = contentServers;
+			for (let i = 0; i < numWorkers; i++) {
+				assignServer(i);
+				serversInUse.push(false);
+			}
 
-				if (killed) {
-					return;
-				}
-
-				if (err) {
-					// Error downloading chunk
-					if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
-						// This chunk hasn't been retired the max times yet, and we have servers left.
-						callback(err);
-						queue.kill();
-						killed = true;
-					} else {
-						chunk.retries = chunk.retries || 0;
-						chunk.retries++;
-						assignServer(serverIdx);
-						dlChunk(chunk, cb);
-					}
-
-					return;
-				}
-
-				bytesDownloaded += data.length;
-				outputEmitter.emit('progress', bytesDownloaded, fileManifest.size);
-
-				// Chunk downloaded successfully
-				if (outputFilePath) {
-					FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
-						if (err) {
-							callback(err);
-							queue.kill();
-							killed = true;
-						} else {
-							cb();
-						}
-					});
-				} else {
-					data.copy(downloadBuffer, parseInt(chunk.offset, 10));
-					cb();
-				}
-			});
-		}, numWorkers);
-
-		fileManifest.chunks.forEach((chunk) => {
-			queue.push(JSON.parse(JSON.stringify(chunk)));
-		});
-
-		queue.drain = () => {
-			// Verify hash
-			let hash;
 			if (outputFilePath) {
-				FS.close(outputFd, (err) => {
+				FS.open(outputFilePath, "w", (err, fd) => {
 					if (err) {
-						callback(err);
-						return;
+						return reject(err);
 					}
 
-					// File closed. Now re-open it so we can hash it!
-					hash = require('crypto').createHash('sha1');
-					FS.createReadStream(outputFilePath).pipe(hash);
-					hash.on('readable', () => {
-						if (!hash.read) {
-							return; // already done
+					outputFd = fd;
+					FS.truncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
+						if (err) {
+							FS.closeSync(outputFd);
+							return reject(err);
 						}
 
-						hash = hash.read();
-						if (hash.toString('hex') != fileManifest.sha_content) {
-							callback(new Error("File checksum mismatch"));
-						} else {
-							callback(null);
-						}
+						beginDownload.call(this);
 					});
 				});
 			} else {
-				hash = require('crypto').createHash('sha1');
-				hash.update(downloadBuffer);
-				if (hash.digest('hex') != fileManifest.sha_content) {
-					callback(new Error("File checksum mismatch"));
-					return;
+				downloadBuffer = Buffer.alloc(parseInt(fileManifest.size, 10));
+				beginDownload.call(this);
+			}
+		});
+
+		function beginDownload() {
+			let self = this;
+			let queue = require('async').queue(function dlChunk(chunk, cb) {
+				let serverIdx;
+
+				while (true) {
+					// Find the next available download slot
+					if (serversInUse[currentServerIdx]) {
+						incrementCurrentServerIdx();
+					} else {
+						serverIdx = currentServerIdx;
+						serversInUse[serverIdx] = true;
+						break;
+					}
 				}
 
-				callback(null, downloadBuffer);
-			}
-		};
-	}
+				this.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
+					serversInUse[serverIdx] = false;
 
-	function assignServer(idx) {
-		servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
-	}
+					if (killed) {
+						return;
+					}
 
-	function incrementCurrentServerIdx() {
-		if (++currentServerIdx >= servers.length) {
-			currentServerIdx = 0;
+					if (err) {
+						// Error downloading chunk
+						if ((chunk.retries && chunk.retries >= 5) || availableServers.length == 0) {
+							// This chunk hasn't been retired the max times yet, and we have servers left.
+							reject(err);
+							queue.kill();
+							killed = true;
+						} else {
+							chunk.retries = chunk.retries || 0;
+							chunk.retries++;
+							assignServer(serverIdx);
+							dlChunk(chunk, cb);
+						}
+
+						return;
+					}
+
+					bytesDownloaded += data.length;
+					if (typeof callback === 'function') {
+						callback(null, {
+							"type": "progress",
+							bytesDownloaded,
+							"totalSizeBytes": fileManifest.size
+						});
+					}
+
+					// Chunk downloaded successfully
+					if (outputFilePath) {
+						FS.write(outputFd, data, 0, data.length, parseInt(chunk.offset, 10), (err) => {
+							if (err) {
+								reject(err);
+								queue.kill();
+								killed = true;
+							} else {
+								cb();
+							}
+						});
+					} else {
+						data.copy(downloadBuffer, parseInt(chunk.offset, 10));
+						cb();
+					}
+				});
+			}, numWorkers);
+
+			fileManifest.chunks.forEach((chunk) => {
+				queue.push(JSON.parse(JSON.stringify(chunk)));
+			});
+
+			queue.drain = () => {
+				// Verify hash
+				let hash;
+				if (outputFilePath) {
+					FS.close(outputFd, (err) => {
+						if (err) {
+							return reject(err);
+						}
+
+						// File closed. Now re-open it so we can hash it!
+						hash = require('crypto').createHash('sha1');
+						FS.createReadStream(outputFilePath).pipe(hash);
+						hash.on('readable', () => {
+							if (!hash.read) {
+								return; // already done
+							}
+
+							hash = hash.read();
+							if (hash.toString('hex') != fileManifest.sha_content) {
+								return reject(new Error("File checksum mismatch"));
+							} else {
+								accept({
+									"type": "complete"
+								});
+							}
+						});
+					});
+				} else {
+					hash = require('crypto').createHash('sha1');
+					hash.update(downloadBuffer);
+					if (hash.digest('hex') != fileManifest.sha_content) {
+						return reject(new Error("File checksum mismatch"));
+					}
+
+					return accept({
+						"type": "complete",
+						"file": downloadBuffer
+					});
+				}
+			};
 		}
-	}
+
+		function assignServer(idx) {
+			servers[idx] = availableServers.splice(Math.floor(Math.random() * availableServers.length), 1)[0];
+		}
+
+		function incrementCurrentServerIdx() {
+			if (++currentServerIdx >= servers.length) {
+				currentServerIdx = 0;
+			}
+		}
+	});
 };
 
 /**
