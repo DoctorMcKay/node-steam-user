@@ -523,7 +523,6 @@ SteamUser.prototype._handleMessage = function(header, bodyBuf) {
 
 			if (protobufs[emsg]) {
 				responseHeader.proto = {"jobid_target": header.sourceJobID};
-				body = exports.encodeProto(protobufs[emsg], body);
 			} else {
 				responseHeader.targetJobID = header.sourceJobID;
 			}
