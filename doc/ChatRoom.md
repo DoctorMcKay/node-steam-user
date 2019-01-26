@@ -27,6 +27,10 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 	- [Chat Room State](#chat-room-state)
 	- [Chat Role](#chat-role)
 	- [Chat Role Actions](#chat-role-actions)
+	- [Incoming Friend Message](#incoming-friend-message)
+	- [Incoming Chat Message](#incoming-chat-message)
+	- [Chat Mentions](#chat-mentions)
+	- [Server Message](#server-message)
 - [Methods](#methods)
 	- [getGroups(callback)](#getgroupscallback)
 	- [getInviteLinkInfo(linkUrl, callback)](#getinvitelinkinfolinkurl-callback)
@@ -162,6 +166,42 @@ Steam groups and chat room groups are entirely separate things, linked only by
 - `can_mention_all` - Boolean
 - `can_set_watching_broadcast` - Boolean
 
+### Incoming Friend Message
+
+- `steamid_friend` - A `SteamID` object
+- `chat_entry_type` - A value from [EChatEntryType](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EChatEntryType.js)
+- `from_limited_account` - This is `true` if the message sender is a limited Steam account
+- `message` - The message text
+- `message_no_bbcode` - The message text without BBCode tags (if possible; may still contain BBCode for text that has no plaintext alternative, e.g. [flip])
+- `server_timestamp` - A `Date` object for this message's timestamp
+- `ordinal` - This message's ordinal
+- `local_echo` - This is `true` if this is a message you sent on another client that is being "echoed" to another client instance
+- `low_priority` - Boolean
+
+### Incoming Chat Message
+
+- `chat_group_id` - The ID of the chat room group this was sent to
+- `chat_id` - The ID of the chat room (channel) this was sent to
+- `steamid_sender` - A `SteamID` object
+- `message` - The message text
+- `message_no_bbcode` - The message text without BBCode tags (if possible; may still contain BBCode for text that has no plaintext alternative, e.g. [flip])
+- `server_timestamp` - A `Date` object for this message's timestamp
+- `ordinal` - This message's ordinal
+- `mentions` - A [Chat Mentions](#chat-mentions) object, or `null`
+- `server_message` - A [Server Message](#server-message) object, or `null`
+
+### Chat Mentions
+
+- `mention_all` - Boolean
+- `mention_here` - Boolean
+- `mention_steamids` - An array of `SteamID` objects
+
+### Server Message
+
+- `message` - A value from [EChatRoomServerMessage](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EChatRoomServerMessage.js)
+- `string_param` - An optional string parameter
+- `steamid_param` - An optional `SteamID` object
+
 ## Methods
 
 ### getGroups(callback)
@@ -282,10 +322,79 @@ Kicks a user from a chat room group, provided you have access to do so.
 
 Always returns success, even if you don't have permission to kick the user in question. 
 
-### getChatMessageHistory(gropuId, chatId[, options][, callback])
+### getChatMessageHistory(groupId, chatId[, options], callback)
+- `groupId` - The ID of the chat room group you want history in
+- `chatId` - The ID of the chat room (channel) you want history in
+- `options` - Optional. An object containing zero or more of these properties
+	- `maxCount` - The maximum number of messages to return. Default 100.
+	- `lastTime` - The latest timestamp you want messages for, as a `Date` object or Unix timestamp.
+	- `lastOrdinal` - The last ordinal you want messages for.
+	- `startTime` - The earliest timestamp you want messages for, as a `Date` object or Unix timestamp.
+	- `startOrdinal` - The first ordinal you want messages for.
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `messages` - An array of objects with these properties
+			- `sender` - A `SteamID` object
+			- `server_timestamp` - A `Date` object for the message's timestamp
+			- `ordinal` - The message's ordinal
+			- `message` - The message text
+			- `server_message` - An optional [Server Message](#server-message) object
+			- `deleted` - Boolean indicating whether the message is deleted
+		- `more_available` - Boolean
 
-TODO
+Retrieves chat message history from a chat room group.
 
 ## Events
 
-TODO
+### friendMessage
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when a friend sends you a direct message.
+
+### friendMessageEcho
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when you send a direct message to a friend on another client instance.
+
+### friendTyping
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when a friend is typing you a direct message.
+
+### friendTypingEcho
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when you are typing a friend a direct message on another client instance.
+
+**This has not been tested and may not be emitted.**
+
+### friendLeftConversation
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when a friend has closed their direct chat window with you.
+
+**This has not been tested and may not be emitted.**
+
+### friendLeftConversation
+- `message` - An [Incoming Friend Message](#incoming-friend-message) object
+
+Emitted when you close your direct chat window with a friend on another instance.
+
+**This has not been tested and may not be emitted.**
+
+### chatMessage
+- `message` - An [Incoming Chat Message](#incoming-chat-message) object
+
+Emitted when a message is sent to a chat room you're in.
+
+### chatMessagesModified
+- `details` - An object containing these properties
+	- `chat_group_id` - The ID of the chat room group containing the modified messages
+	- `chat_id` - The ID of the chat room (channel) containing the modified messages
+	- `messages` - An array of objects containing these properties
+		- `server_timestamp` - A `Date` object for the timestamp of the message in question
+		- `ordinal` - The ordinal of the message in question
+		- `deleted` - Boolean determining if the message was deleted
+
+Emitted when chat messages are modified (deleted) in a chat room you're in.

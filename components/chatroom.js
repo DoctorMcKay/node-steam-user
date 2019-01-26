@@ -56,6 +56,8 @@ function SteamChatRoomClient(user) {
 
 	this.user._handlerManager.add('ChatRoomClient.NotifyIncomingChatMessage#1', function(body) {
 		body = preProcessObject(body);
+		body.server_timestamp = body.timestamp;
+		delete body.timestamp;
 		body.ordinal = body.ordinal || 0;
 		body.message_no_bbcode = body.message_no_bbcode || body.message;
 
@@ -295,18 +297,10 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 
 	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
 		let max_count = options.maxCount || 100;
-		let last_time = options.lastTime;
+		let last_time = options.lastTime ? convertDateToUnix(options.lastTime) : undefined;
 		let last_ordinal = options.lastOrdinal;
-		let start_time = options.startTime;
+		let start_time = options.startTime ? convertDateToUnix(options.startTime) : undefined;
 		let start_ordinal = options.startOrdinal;
-
-		if (last_time instanceof Date) {
-			last_time = Math.floor(last_time.getTime() / 1000);
-		}
-
-		if (start_time instanceof Date) {
-			start_time = Math.floor(start_time.getTime() / 1000);
-		}
 
 		this.user._sendUnified("ChatRoom.GetMessageHistory#1", {
 			"chat_group_id": groupId,
@@ -473,6 +467,10 @@ function processChatRoomState(state, preProcessed) {
 }
 
 function processChatMentions(mentions) {
+	if (!mentions) {
+		return mentions;
+	}
+
 	if (mentions.mention_accountids) {
 		mentions.mention_steamids = mentions.mention_accountids.map(acctid => SteamID.fromIndividualAccountID(acctid));
 		delete mentions.mention_accountids;
