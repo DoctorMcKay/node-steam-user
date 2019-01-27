@@ -138,6 +138,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			"unknownApps": [],
 			"unknownPackages": []
 		};
+	var callbackFired = false;
 
 		apps = apps.map((app) => {
 			if (typeof app === 'object') {
@@ -298,17 +299,25 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 									}
 								}
 
+							if (!callbackFired) {
+								callbackFired = true;
 								accept(response);
-							});
+							}
 						});
-					} else {
+					});
+				} else {
+					if (!callbackFired) {
+						callbackFired = true;
 						accept(response);
 					}
-				} else {
+				}
+			} else {
+				if (!callbackFired) {
+					callbackFired = true;
 					accept(response);
 				}
 			}
-		});
+		}
 	});
 };
 
