@@ -546,33 +546,6 @@ Gets when you last changed various account credentials.
 
 Gets your account's auth secret, which is the pre-shared key used for in-home streaming.
 
-### changeEmail(options[, callback])
-- `options` - An object containing (some of) the following properties:
-    - `password` - Required. Your account's current password.
-    - `newEmail` - Required. The new email address you want to set on your account.
-    - `code` - Optional (at first). The verification code sent to your new email (see below).
-    - `twoFactorCode` - Optional (if you don't have 2FA enabled). If you do have 2FA (Mobile Authenticator) enabled, this is your current 2FA code (when confirming `code`).
-    - `smsCode` - Optional (if Steam doesn't want it). See below.
-- `callback` - Optional. Called when the request completes.
-    - `err` - `null` on success, or an `Error` object on failure
-    - `requiresSmsCode` - `true` if Steam wants an SMS verification code (see below).
-
-**v3.13.0 or later is required to use this method.**
-
-Performs both steps in the two-step process that is changing your account's contact email. First, call this with only
-your `password` and `newEmail`. This will cause Steam to send an email to your new email address containing a
-verification code. Once you have that code, call this again with your `password`, `newEmail`, and `code`.
-
-If you have a Mobile Authenticator (2FA) enabled on your account, then for the second request you will need to include
-your current 2FA code as `twoFactorCode`. If you don't and `requiresSmsCode` was `true` in the callback to the first request,
-then Steam has sent a verification code in an SMS to your phone. In this case, you need to provide that code as `smsCode`
-in the second request.
-
-`requiresSmsCode` may still be `true` in the callback to the second request. In this case, simply ignore it. If you received
-no `err`, then your email was changed. The [`emailInfo`](#emailinfo-1) event will be emitted when your email changes.
-
-**Changing your account's email will start a 5-day trading cooldown.**
-
 ### kickPlayingSession([callback])
 - `callback` - Optional. A function to be called once Steam receives and responds to this request.
     - `err` - An `Error` object on failure, or `null` on success

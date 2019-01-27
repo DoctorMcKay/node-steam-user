@@ -102,34 +102,6 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 	});
 };*/
 
-SteamUser.prototype.changeEmail = function(options, callback) {
-	return StdLib.Promises.callbackPromise(['requiresSmsCode'], callback, true, (accept, reject) => {
-		this._send(SteamUser.EMsg.ClientEmailChange4, {
-			"password": options.password,
-			"email": options.newEmail || options.email,
-			"code": options.code,
-			"final": !!options.code,
-			"newmethod": true,
-			"twofactor_code": options.twoFactorCode,
-			"sms_code": options.smsCode,
-			"client_supports_sms": true // this appears to be ignored; it asks for an SMS code regardless of value
-		}, (body) => {
-			if (!callback) {
-				return;
-			}
-
-			let err = Helpers.eresultError(body.eresult);
-			if (err) {
-				return reject(err);
-			}
-
-			accept({
-				"requiresSmsCode": !!body.requires_sms_code
-			});
-		});
-	});
-};
-
 // Handlers
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAccountInfo, function(body) {
