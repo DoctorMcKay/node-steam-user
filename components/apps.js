@@ -138,7 +138,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 			"unknownApps": [],
 			"unknownPackages": []
 		};
-	var callbackFired = false;
+		let callbackFired = false;
 
 		apps = apps.map((app) => {
 			if (typeof app === 'object') {
@@ -299,12 +299,13 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 									}
 								}
 
-							if (!callbackFired) {
-								callbackFired = true;
-								accept(response);
-							}
+								if (!callbackFired) {
+									callbackFired = true;
+									accept(response);
+								}
+							});
 						});
-					});
+					}
 				} else {
 					if (!callbackFired) {
 						callbackFired = true;
@@ -317,7 +318,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					accept(response);
 				}
 			}
-		}
+		});
 	});
 };
 
