@@ -5,6 +5,7 @@ const FS = require('fs');
 const LZMA = require('lzma');
 const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
+const VDF = require('vdf');
 
 const Helpers = require('./helpers.js');
 const ContentManifest = require('./content_manifest.js');
@@ -41,8 +42,9 @@ SteamUser.prototype.getContentServers = function(callback) {
 				return;
 			}
 
+			let parsed;
 			try {
-				let parsed = require('vdf').parse(res.data.toString('utf8'));
+				parsed = VDF.parse(res.data.toString('utf8'));
 			} catch (ex) {
 				return reject(new Error("Malformed response"));
 			}
