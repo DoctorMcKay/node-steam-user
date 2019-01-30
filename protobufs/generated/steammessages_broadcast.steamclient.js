@@ -1,0 +1,17382 @@
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
+(function(global, factory) { /* global define, require, module */
+
+    /* AMD */ if (typeof define === 'function' && define.amd)
+        define(["protobufjs/minimal"], factory);
+
+    /* CommonJS */ else if (typeof require === 'function' && typeof module === 'object' && module && module.exports)
+        module.exports = factory(require("protobufjs/minimal"));
+
+})(this, function($protobuf) {
+    "use strict";
+
+    // Common aliases
+    var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+    
+    // Exported root namespace
+    var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+    
+    /**
+     * EBroadcastWatchLocation enum.
+     * @exports EBroadcastWatchLocation
+     * @enum {string}
+     * @property {number} k_EBroadcastWatchLocation_Invalid=0 k_EBroadcastWatchLocation_Invalid value
+     * @property {number} k_EBroadcastWatchLocation_SteamTV_Tab=1 k_EBroadcastWatchLocation_SteamTV_Tab value
+     * @property {number} k_EBroadcastWatchLocation_SteamTV_WatchParty=2 k_EBroadcastWatchLocation_SteamTV_WatchParty value
+     * @property {number} k_EBroadcastWatchLocation_Chat_Tab=3 k_EBroadcastWatchLocation_Chat_Tab value
+     * @property {number} k_EBroadcastWatchLocation_Chat_WatchParty=4 k_EBroadcastWatchLocation_Chat_WatchParty value
+     * @property {number} k_EBroadcastWatchLocation_CommunityPage=5 k_EBroadcastWatchLocation_CommunityPage value
+     * @property {number} k_EBroadcastWatchLocation_StoreAppPage=6 k_EBroadcastWatchLocation_StoreAppPage value
+     * @property {number} k_EBroadcastWatchLocation_InGame=7 k_EBroadcastWatchLocation_InGame value
+     */
+    $root.EBroadcastWatchLocation = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EBroadcastWatchLocation_Invalid"] = 0;
+        values[valuesById[1] = "k_EBroadcastWatchLocation_SteamTV_Tab"] = 1;
+        values[valuesById[2] = "k_EBroadcastWatchLocation_SteamTV_WatchParty"] = 2;
+        values[valuesById[3] = "k_EBroadcastWatchLocation_Chat_Tab"] = 3;
+        values[valuesById[4] = "k_EBroadcastWatchLocation_Chat_WatchParty"] = 4;
+        values[valuesById[5] = "k_EBroadcastWatchLocation_CommunityPage"] = 5;
+        values[valuesById[6] = "k_EBroadcastWatchLocation_StoreAppPage"] = 6;
+        values[valuesById[7] = "k_EBroadcastWatchLocation_InGame"] = 7;
+        return values;
+    })();
+    
+    $root.CBroadcast_BeginBroadcastSession_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BeginBroadcastSession_Request.
+         * @exports ICBroadcast_BeginBroadcastSession_Request
+         * @interface ICBroadcast_BeginBroadcastSession_Request
+         * @property {number|null} [permission] CBroadcast_BeginBroadcastSession_Request permission
+         * @property {number|Long|null} [gameid] CBroadcast_BeginBroadcastSession_Request gameid
+         * @property {number|Long|null} [client_instance_id] CBroadcast_BeginBroadcastSession_Request client_instance_id
+         * @property {string|null} [title] CBroadcast_BeginBroadcastSession_Request title
+         * @property {number|null} [cellid] CBroadcast_BeginBroadcastSession_Request cellid
+         * @property {number|Long|null} [rtmp_token] CBroadcast_BeginBroadcastSession_Request rtmp_token
+         * @property {boolean|null} [thumbnail_upload] CBroadcast_BeginBroadcastSession_Request thumbnail_upload
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BeginBroadcastSession_Request.
+         * @exports CBroadcast_BeginBroadcastSession_Request
+         * @classdesc Represents a CBroadcast_BeginBroadcastSession_Request.
+         * @implements ICBroadcast_BeginBroadcastSession_Request
+         * @constructor
+         * @param {ICBroadcast_BeginBroadcastSession_Request=} [properties] Properties to set
+         */
+        function CBroadcast_BeginBroadcastSession_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request permission.
+         * @member {number} permission
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.permission = 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request gameid.
+         * @member {number|Long} gameid
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.gameid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request client_instance_id.
+         * @member {number|Long} client_instance_id
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.client_instance_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request title.
+         * @member {string} title
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.title = "";
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request cellid.
+         * @member {number} cellid
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.cellid = 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request rtmp_token.
+         * @member {number|Long} rtmp_token
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.rtmp_token = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Request thumbnail_upload.
+         * @member {boolean} thumbnail_upload
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.thumbnail_upload = false;
+    
+        /**
+         * Creates a new CBroadcast_BeginBroadcastSession_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Request=} [properties] Properties to set
+         * @returns {CBroadcast_BeginBroadcastSession_Request} CBroadcast_BeginBroadcastSession_Request instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.create = function create(properties) {
+            return new CBroadcast_BeginBroadcastSession_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BeginBroadcastSession_Request message. Does not implicitly {@link CBroadcast_BeginBroadcastSession_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Request} message CBroadcast_BeginBroadcastSession_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BeginBroadcastSession_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.permission);
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gameid);
+            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.client_instance_id);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.title);
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.cellid);
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.rtmp_token);
+            if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.thumbnail_upload);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BeginBroadcastSession_Request message, length delimited. Does not implicitly {@link CBroadcast_BeginBroadcastSession_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Request} message CBroadcast_BeginBroadcastSession_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BeginBroadcastSession_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BeginBroadcastSession_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BeginBroadcastSession_Request} CBroadcast_BeginBroadcastSession_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BeginBroadcastSession_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BeginBroadcastSession_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.permission = reader.int32();
+                    break;
+                case 2:
+                    message.gameid = reader.uint64();
+                    break;
+                case 3:
+                    message.client_instance_id = reader.uint64();
+                    break;
+                case 4:
+                    message.title = reader.string();
+                    break;
+                case 5:
+                    message.cellid = reader.uint32();
+                    break;
+                case 6:
+                    message.rtmp_token = reader.uint64();
+                    break;
+                case 7:
+                    message.thumbnail_upload = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BeginBroadcastSession_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BeginBroadcastSession_Request} CBroadcast_BeginBroadcastSession_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BeginBroadcastSession_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BeginBroadcastSession_Request message.
+         * @function verify
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BeginBroadcastSession_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                if (!$util.isInteger(message.permission))
+                    return "permission: integer expected";
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (!$util.isInteger(message.gameid) && !(message.gameid && $util.isInteger(message.gameid.low) && $util.isInteger(message.gameid.high)))
+                    return "gameid: integer|Long expected";
+            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
+                if (!$util.isInteger(message.client_instance_id) && !(message.client_instance_id && $util.isInteger(message.client_instance_id.low) && $util.isInteger(message.client_instance_id.high)))
+                    return "client_instance_id: integer|Long expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                if (!$util.isInteger(message.cellid))
+                    return "cellid: integer expected";
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (!$util.isInteger(message.rtmp_token) && !(message.rtmp_token && $util.isInteger(message.rtmp_token.low) && $util.isInteger(message.rtmp_token.high)))
+                    return "rtmp_token: integer|Long expected";
+            if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
+                if (typeof message.thumbnail_upload !== "boolean")
+                    return "thumbnail_upload: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BeginBroadcastSession_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BeginBroadcastSession_Request} CBroadcast_BeginBroadcastSession_Request
+         */
+        CBroadcast_BeginBroadcastSession_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BeginBroadcastSession_Request)
+                return object;
+            var message = new $root.CBroadcast_BeginBroadcastSession_Request();
+            if (object.permission != null)
+                message.permission = object.permission | 0;
+            if (object.gameid != null)
+                if ($util.Long)
+                    (message.gameid = $util.Long.fromValue(object.gameid)).unsigned = true;
+                else if (typeof object.gameid === "string")
+                    message.gameid = parseInt(object.gameid, 10);
+                else if (typeof object.gameid === "number")
+                    message.gameid = object.gameid;
+                else if (typeof object.gameid === "object")
+                    message.gameid = new $util.LongBits(object.gameid.low >>> 0, object.gameid.high >>> 0).toNumber(true);
+            if (object.client_instance_id != null)
+                if ($util.Long)
+                    (message.client_instance_id = $util.Long.fromValue(object.client_instance_id)).unsigned = true;
+                else if (typeof object.client_instance_id === "string")
+                    message.client_instance_id = parseInt(object.client_instance_id, 10);
+                else if (typeof object.client_instance_id === "number")
+                    message.client_instance_id = object.client_instance_id;
+                else if (typeof object.client_instance_id === "object")
+                    message.client_instance_id = new $util.LongBits(object.client_instance_id.low >>> 0, object.client_instance_id.high >>> 0).toNumber(true);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.cellid != null)
+                message.cellid = object.cellid >>> 0;
+            if (object.rtmp_token != null)
+                if ($util.Long)
+                    (message.rtmp_token = $util.Long.fromValue(object.rtmp_token)).unsigned = true;
+                else if (typeof object.rtmp_token === "string")
+                    message.rtmp_token = parseInt(object.rtmp_token, 10);
+                else if (typeof object.rtmp_token === "number")
+                    message.rtmp_token = object.rtmp_token;
+                else if (typeof object.rtmp_token === "object")
+                    message.rtmp_token = new $util.LongBits(object.rtmp_token.low >>> 0, object.rtmp_token.high >>> 0).toNumber(true);
+            if (object.thumbnail_upload != null)
+                message.thumbnail_upload = Boolean(object.thumbnail_upload);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BeginBroadcastSession_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @static
+         * @param {CBroadcast_BeginBroadcastSession_Request} message CBroadcast_BeginBroadcastSession_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BeginBroadcastSession_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.permission = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gameid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.client_instance_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.client_instance_id = options.longs === String ? "0" : 0;
+                object.title = "";
+                object.cellid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.rtmp_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.rtmp_token = options.longs === String ? "0" : 0;
+                object.thumbnail_upload = false;
+            }
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                object.permission = message.permission;
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (typeof message.gameid === "number")
+                    object.gameid = options.longs === String ? String(message.gameid) : message.gameid;
+                else
+                    object.gameid = options.longs === String ? $util.Long.prototype.toString.call(message.gameid) : options.longs === Number ? new $util.LongBits(message.gameid.low >>> 0, message.gameid.high >>> 0).toNumber(true) : message.gameid;
+            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
+                if (typeof message.client_instance_id === "number")
+                    object.client_instance_id = options.longs === String ? String(message.client_instance_id) : message.client_instance_id;
+                else
+                    object.client_instance_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_instance_id) : options.longs === Number ? new $util.LongBits(message.client_instance_id.low >>> 0, message.client_instance_id.high >>> 0).toNumber(true) : message.client_instance_id;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                object.cellid = message.cellid;
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (typeof message.rtmp_token === "number")
+                    object.rtmp_token = options.longs === String ? String(message.rtmp_token) : message.rtmp_token;
+                else
+                    object.rtmp_token = options.longs === String ? $util.Long.prototype.toString.call(message.rtmp_token) : options.longs === Number ? new $util.LongBits(message.rtmp_token.low >>> 0, message.rtmp_token.high >>> 0).toNumber(true) : message.rtmp_token;
+            if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
+                object.thumbnail_upload = message.thumbnail_upload;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BeginBroadcastSession_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_BeginBroadcastSession_Request;
+    })();
+    
+    $root.CBroadcast_BeginBroadcastSession_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BeginBroadcastSession_Response.
+         * @exports ICBroadcast_BeginBroadcastSession_Response
+         * @interface ICBroadcast_BeginBroadcastSession_Response
+         * @property {number|Long|null} [broadcast_id] CBroadcast_BeginBroadcastSession_Response broadcast_id
+         * @property {string|null} [thumbnail_upload_address] CBroadcast_BeginBroadcastSession_Response thumbnail_upload_address
+         * @property {string|null} [thumbnail_upload_token] CBroadcast_BeginBroadcastSession_Response thumbnail_upload_token
+         * @property {number|null} [thumbnail_interval_seconds] CBroadcast_BeginBroadcastSession_Response thumbnail_interval_seconds
+         * @property {number|null} [heartbeat_interval_seconds] CBroadcast_BeginBroadcastSession_Response heartbeat_interval_seconds
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BeginBroadcastSession_Response.
+         * @exports CBroadcast_BeginBroadcastSession_Response
+         * @classdesc Represents a CBroadcast_BeginBroadcastSession_Response.
+         * @implements ICBroadcast_BeginBroadcastSession_Response
+         * @constructor
+         * @param {ICBroadcast_BeginBroadcastSession_Response=} [properties] Properties to set
+         */
+        function CBroadcast_BeginBroadcastSession_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Response broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Response thumbnail_upload_address.
+         * @member {string} thumbnail_upload_address
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.thumbnail_upload_address = "";
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Response thumbnail_upload_token.
+         * @member {string} thumbnail_upload_token
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.thumbnail_upload_token = "";
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Response thumbnail_interval_seconds.
+         * @member {number} thumbnail_interval_seconds
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.thumbnail_interval_seconds = 0;
+    
+        /**
+         * CBroadcast_BeginBroadcastSession_Response heartbeat_interval_seconds.
+         * @member {number} heartbeat_interval_seconds
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.heartbeat_interval_seconds = 0;
+    
+        /**
+         * Creates a new CBroadcast_BeginBroadcastSession_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Response=} [properties] Properties to set
+         * @returns {CBroadcast_BeginBroadcastSession_Response} CBroadcast_BeginBroadcastSession_Response instance
+         */
+        CBroadcast_BeginBroadcastSession_Response.create = function create(properties) {
+            return new CBroadcast_BeginBroadcastSession_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BeginBroadcastSession_Response message. Does not implicitly {@link CBroadcast_BeginBroadcastSession_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Response} message CBroadcast_BeginBroadcastSession_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BeginBroadcastSession_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.thumbnail_upload_address);
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.thumbnail_upload_token);
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.thumbnail_interval_seconds);
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.heartbeat_interval_seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BeginBroadcastSession_Response message, length delimited. Does not implicitly {@link CBroadcast_BeginBroadcastSession_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_BeginBroadcastSession_Response} message CBroadcast_BeginBroadcastSession_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BeginBroadcastSession_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BeginBroadcastSession_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BeginBroadcastSession_Response} CBroadcast_BeginBroadcastSession_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BeginBroadcastSession_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BeginBroadcastSession_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.thumbnail_upload_address = reader.string();
+                    break;
+                case 3:
+                    message.thumbnail_upload_token = reader.string();
+                    break;
+                case 4:
+                    message.thumbnail_interval_seconds = reader.uint32();
+                    break;
+                case 5:
+                    message.heartbeat_interval_seconds = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BeginBroadcastSession_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BeginBroadcastSession_Response} CBroadcast_BeginBroadcastSession_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BeginBroadcastSession_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BeginBroadcastSession_Response message.
+         * @function verify
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BeginBroadcastSession_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                if (!$util.isString(message.thumbnail_upload_address))
+                    return "thumbnail_upload_address: string expected";
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                if (!$util.isString(message.thumbnail_upload_token))
+                    return "thumbnail_upload_token: string expected";
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                if (!$util.isInteger(message.thumbnail_interval_seconds))
+                    return "thumbnail_interval_seconds: integer expected";
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                if (!$util.isInteger(message.heartbeat_interval_seconds))
+                    return "heartbeat_interval_seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BeginBroadcastSession_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BeginBroadcastSession_Response} CBroadcast_BeginBroadcastSession_Response
+         */
+        CBroadcast_BeginBroadcastSession_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BeginBroadcastSession_Response)
+                return object;
+            var message = new $root.CBroadcast_BeginBroadcastSession_Response();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.thumbnail_upload_address != null)
+                message.thumbnail_upload_address = String(object.thumbnail_upload_address);
+            if (object.thumbnail_upload_token != null)
+                message.thumbnail_upload_token = String(object.thumbnail_upload_token);
+            if (object.thumbnail_interval_seconds != null)
+                message.thumbnail_interval_seconds = object.thumbnail_interval_seconds >>> 0;
+            if (object.heartbeat_interval_seconds != null)
+                message.heartbeat_interval_seconds = object.heartbeat_interval_seconds >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BeginBroadcastSession_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @static
+         * @param {CBroadcast_BeginBroadcastSession_Response} message CBroadcast_BeginBroadcastSession_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BeginBroadcastSession_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                object.thumbnail_upload_address = "";
+                object.thumbnail_upload_token = "";
+                object.thumbnail_interval_seconds = 0;
+                object.heartbeat_interval_seconds = 0;
+            }
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                object.thumbnail_upload_address = message.thumbnail_upload_address;
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                object.thumbnail_upload_token = message.thumbnail_upload_token;
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                object.thumbnail_interval_seconds = message.thumbnail_interval_seconds;
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                object.heartbeat_interval_seconds = message.heartbeat_interval_seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BeginBroadcastSession_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BeginBroadcastSession_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BeginBroadcastSession_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_BeginBroadcastSession_Response;
+    })();
+    
+    $root.CBroadcast_EndBroadcastSession_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_EndBroadcastSession_Request.
+         * @exports ICBroadcast_EndBroadcastSession_Request
+         * @interface ICBroadcast_EndBroadcastSession_Request
+         * @property {number|Long|null} [broadcast_id] CBroadcast_EndBroadcastSession_Request broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_EndBroadcastSession_Request.
+         * @exports CBroadcast_EndBroadcastSession_Request
+         * @classdesc Represents a CBroadcast_EndBroadcastSession_Request.
+         * @implements ICBroadcast_EndBroadcastSession_Request
+         * @constructor
+         * @param {ICBroadcast_EndBroadcastSession_Request=} [properties] Properties to set
+         */
+        function CBroadcast_EndBroadcastSession_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_EndBroadcastSession_Request broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_EndBroadcastSession_Request.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_EndBroadcastSession_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Request=} [properties] Properties to set
+         * @returns {CBroadcast_EndBroadcastSession_Request} CBroadcast_EndBroadcastSession_Request instance
+         */
+        CBroadcast_EndBroadcastSession_Request.create = function create(properties) {
+            return new CBroadcast_EndBroadcastSession_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_EndBroadcastSession_Request message. Does not implicitly {@link CBroadcast_EndBroadcastSession_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Request} message CBroadcast_EndBroadcastSession_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_EndBroadcastSession_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_EndBroadcastSession_Request message, length delimited. Does not implicitly {@link CBroadcast_EndBroadcastSession_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Request} message CBroadcast_EndBroadcastSession_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_EndBroadcastSession_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_EndBroadcastSession_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_EndBroadcastSession_Request} CBroadcast_EndBroadcastSession_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_EndBroadcastSession_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_EndBroadcastSession_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_EndBroadcastSession_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_EndBroadcastSession_Request} CBroadcast_EndBroadcastSession_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_EndBroadcastSession_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_EndBroadcastSession_Request message.
+         * @function verify
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_EndBroadcastSession_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_EndBroadcastSession_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_EndBroadcastSession_Request} CBroadcast_EndBroadcastSession_Request
+         */
+        CBroadcast_EndBroadcastSession_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_EndBroadcastSession_Request)
+                return object;
+            var message = new $root.CBroadcast_EndBroadcastSession_Request();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_EndBroadcastSession_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @static
+         * @param {CBroadcast_EndBroadcastSession_Request} message CBroadcast_EndBroadcastSession_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_EndBroadcastSession_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_EndBroadcastSession_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_EndBroadcastSession_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_EndBroadcastSession_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_EndBroadcastSession_Request;
+    })();
+    
+    $root.CBroadcast_EndBroadcastSession_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_EndBroadcastSession_Response.
+         * @exports ICBroadcast_EndBroadcastSession_Response
+         * @interface ICBroadcast_EndBroadcastSession_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_EndBroadcastSession_Response.
+         * @exports CBroadcast_EndBroadcastSession_Response
+         * @classdesc Represents a CBroadcast_EndBroadcastSession_Response.
+         * @implements ICBroadcast_EndBroadcastSession_Response
+         * @constructor
+         * @param {ICBroadcast_EndBroadcastSession_Response=} [properties] Properties to set
+         */
+        function CBroadcast_EndBroadcastSession_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_EndBroadcastSession_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Response=} [properties] Properties to set
+         * @returns {CBroadcast_EndBroadcastSession_Response} CBroadcast_EndBroadcastSession_Response instance
+         */
+        CBroadcast_EndBroadcastSession_Response.create = function create(properties) {
+            return new CBroadcast_EndBroadcastSession_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_EndBroadcastSession_Response message. Does not implicitly {@link CBroadcast_EndBroadcastSession_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Response} message CBroadcast_EndBroadcastSession_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_EndBroadcastSession_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_EndBroadcastSession_Response message, length delimited. Does not implicitly {@link CBroadcast_EndBroadcastSession_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {ICBroadcast_EndBroadcastSession_Response} message CBroadcast_EndBroadcastSession_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_EndBroadcastSession_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_EndBroadcastSession_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_EndBroadcastSession_Response} CBroadcast_EndBroadcastSession_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_EndBroadcastSession_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_EndBroadcastSession_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_EndBroadcastSession_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_EndBroadcastSession_Response} CBroadcast_EndBroadcastSession_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_EndBroadcastSession_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_EndBroadcastSession_Response message.
+         * @function verify
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_EndBroadcastSession_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_EndBroadcastSession_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_EndBroadcastSession_Response} CBroadcast_EndBroadcastSession_Response
+         */
+        CBroadcast_EndBroadcastSession_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_EndBroadcastSession_Response)
+                return object;
+            return new $root.CBroadcast_EndBroadcastSession_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_EndBroadcastSession_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @static
+         * @param {CBroadcast_EndBroadcastSession_Response} message CBroadcast_EndBroadcastSession_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_EndBroadcastSession_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_EndBroadcastSession_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_EndBroadcastSession_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_EndBroadcastSession_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_EndBroadcastSession_Response;
+    })();
+    
+    $root.CBroadcast_StartBroadcastUpload_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StartBroadcastUpload_Request.
+         * @exports ICBroadcast_StartBroadcastUpload_Request
+         * @interface ICBroadcast_StartBroadcastUpload_Request
+         * @property {number|Long|null} [broadcast_id] CBroadcast_StartBroadcastUpload_Request broadcast_id
+         * @property {number|null} [cellid] CBroadcast_StartBroadcastUpload_Request cellid
+         * @property {boolean|null} [as_rtmp] CBroadcast_StartBroadcastUpload_Request as_rtmp
+         * @property {number|null} [delay_seconds] CBroadcast_StartBroadcastUpload_Request delay_seconds
+         * @property {number|Long|null} [rtmp_token] CBroadcast_StartBroadcastUpload_Request rtmp_token
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StartBroadcastUpload_Request.
+         * @exports CBroadcast_StartBroadcastUpload_Request
+         * @classdesc Represents a CBroadcast_StartBroadcastUpload_Request.
+         * @implements ICBroadcast_StartBroadcastUpload_Request
+         * @constructor
+         * @param {ICBroadcast_StartBroadcastUpload_Request=} [properties] Properties to set
+         */
+        function CBroadcast_StartBroadcastUpload_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request cellid.
+         * @member {number} cellid
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.cellid = 0;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request as_rtmp.
+         * @member {boolean} as_rtmp
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.as_rtmp = false;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request delay_seconds.
+         * @member {number} delay_seconds
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.delay_seconds = 0;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request rtmp_token.
+         * @member {number|Long} rtmp_token
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.rtmp_token = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CBroadcast_StartBroadcastUpload_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Request=} [properties] Properties to set
+         * @returns {CBroadcast_StartBroadcastUpload_Request} CBroadcast_StartBroadcastUpload_Request instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.create = function create(properties) {
+            return new CBroadcast_StartBroadcastUpload_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBroadcastUpload_Request message. Does not implicitly {@link CBroadcast_StartBroadcastUpload_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Request} message CBroadcast_StartBroadcastUpload_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBroadcastUpload_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.cellid);
+            if (message.as_rtmp != null && message.hasOwnProperty("as_rtmp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.as_rtmp);
+            if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_seconds);
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.rtmp_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBroadcastUpload_Request message, length delimited. Does not implicitly {@link CBroadcast_StartBroadcastUpload_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Request} message CBroadcast_StartBroadcastUpload_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBroadcastUpload_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBroadcastUpload_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StartBroadcastUpload_Request} CBroadcast_StartBroadcastUpload_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBroadcastUpload_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StartBroadcastUpload_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.cellid = reader.uint32();
+                    break;
+                case 3:
+                    message.as_rtmp = reader.bool();
+                    break;
+                case 4:
+                    message.delay_seconds = reader.uint32();
+                    break;
+                case 5:
+                    message.rtmp_token = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBroadcastUpload_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StartBroadcastUpload_Request} CBroadcast_StartBroadcastUpload_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBroadcastUpload_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StartBroadcastUpload_Request message.
+         * @function verify
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StartBroadcastUpload_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                if (!$util.isInteger(message.cellid))
+                    return "cellid: integer expected";
+            if (message.as_rtmp != null && message.hasOwnProperty("as_rtmp"))
+                if (typeof message.as_rtmp !== "boolean")
+                    return "as_rtmp: boolean expected";
+            if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
+                if (!$util.isInteger(message.delay_seconds))
+                    return "delay_seconds: integer expected";
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (!$util.isInteger(message.rtmp_token) && !(message.rtmp_token && $util.isInteger(message.rtmp_token.low) && $util.isInteger(message.rtmp_token.high)))
+                    return "rtmp_token: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StartBroadcastUpload_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StartBroadcastUpload_Request} CBroadcast_StartBroadcastUpload_Request
+         */
+        CBroadcast_StartBroadcastUpload_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StartBroadcastUpload_Request)
+                return object;
+            var message = new $root.CBroadcast_StartBroadcastUpload_Request();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.cellid != null)
+                message.cellid = object.cellid >>> 0;
+            if (object.as_rtmp != null)
+                message.as_rtmp = Boolean(object.as_rtmp);
+            if (object.delay_seconds != null)
+                message.delay_seconds = object.delay_seconds >>> 0;
+            if (object.rtmp_token != null)
+                if ($util.Long)
+                    (message.rtmp_token = $util.Long.fromValue(object.rtmp_token)).unsigned = true;
+                else if (typeof object.rtmp_token === "string")
+                    message.rtmp_token = parseInt(object.rtmp_token, 10);
+                else if (typeof object.rtmp_token === "number")
+                    message.rtmp_token = object.rtmp_token;
+                else if (typeof object.rtmp_token === "object")
+                    message.rtmp_token = new $util.LongBits(object.rtmp_token.low >>> 0, object.rtmp_token.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StartBroadcastUpload_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @static
+         * @param {CBroadcast_StartBroadcastUpload_Request} message CBroadcast_StartBroadcastUpload_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StartBroadcastUpload_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                object.cellid = 0;
+                object.as_rtmp = false;
+                object.delay_seconds = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.rtmp_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.rtmp_token = options.longs === String ? "0" : 0;
+            }
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                object.cellid = message.cellid;
+            if (message.as_rtmp != null && message.hasOwnProperty("as_rtmp"))
+                object.as_rtmp = message.as_rtmp;
+            if (message.delay_seconds != null && message.hasOwnProperty("delay_seconds"))
+                object.delay_seconds = message.delay_seconds;
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (typeof message.rtmp_token === "number")
+                    object.rtmp_token = options.longs === String ? String(message.rtmp_token) : message.rtmp_token;
+                else
+                    object.rtmp_token = options.longs === String ? $util.Long.prototype.toString.call(message.rtmp_token) : options.longs === Number ? new $util.LongBits(message.rtmp_token.low >>> 0, message.rtmp_token.high >>> 0).toNumber(true) : message.rtmp_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StartBroadcastUpload_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StartBroadcastUpload_Request;
+    })();
+    
+    $root.CBroadcast_StartBroadcastUpload_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StartBroadcastUpload_Response.
+         * @exports ICBroadcast_StartBroadcastUpload_Response
+         * @interface ICBroadcast_StartBroadcastUpload_Response
+         * @property {string|null} [upload_token] CBroadcast_StartBroadcastUpload_Response upload_token
+         * @property {string|null} [upload_address] CBroadcast_StartBroadcastUpload_Response upload_address
+         * @property {number|Long|null} [upload_relay_id] CBroadcast_StartBroadcastUpload_Response upload_relay_id
+         * @property {string|null} [thumbnail_upload_address] CBroadcast_StartBroadcastUpload_Response thumbnail_upload_address
+         * @property {number|null} [thumbnail_interval_seconds] CBroadcast_StartBroadcastUpload_Response thumbnail_interval_seconds
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StartBroadcastUpload_Response.
+         * @exports CBroadcast_StartBroadcastUpload_Response
+         * @classdesc Represents a CBroadcast_StartBroadcastUpload_Response.
+         * @implements ICBroadcast_StartBroadcastUpload_Response
+         * @constructor
+         * @param {ICBroadcast_StartBroadcastUpload_Response=} [properties] Properties to set
+         */
+        function CBroadcast_StartBroadcastUpload_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Response upload_token.
+         * @member {string} upload_token
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.upload_token = "";
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Response upload_address.
+         * @member {string} upload_address
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.upload_address = "";
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Response upload_relay_id.
+         * @member {number|Long} upload_relay_id
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.upload_relay_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Response thumbnail_upload_address.
+         * @member {string} thumbnail_upload_address
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.thumbnail_upload_address = "";
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Response thumbnail_interval_seconds.
+         * @member {number} thumbnail_interval_seconds
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.thumbnail_interval_seconds = 0;
+    
+        /**
+         * Creates a new CBroadcast_StartBroadcastUpload_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Response=} [properties] Properties to set
+         * @returns {CBroadcast_StartBroadcastUpload_Response} CBroadcast_StartBroadcastUpload_Response instance
+         */
+        CBroadcast_StartBroadcastUpload_Response.create = function create(properties) {
+            return new CBroadcast_StartBroadcastUpload_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBroadcastUpload_Response message. Does not implicitly {@link CBroadcast_StartBroadcastUpload_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Response} message CBroadcast_StartBroadcastUpload_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBroadcastUpload_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.upload_token);
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.upload_address);
+            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.upload_relay_id);
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.thumbnail_upload_address);
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.thumbnail_interval_seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBroadcastUpload_Response message, length delimited. Does not implicitly {@link CBroadcast_StartBroadcastUpload_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {ICBroadcast_StartBroadcastUpload_Response} message CBroadcast_StartBroadcastUpload_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBroadcastUpload_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBroadcastUpload_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StartBroadcastUpload_Response} CBroadcast_StartBroadcastUpload_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBroadcastUpload_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StartBroadcastUpload_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.upload_token = reader.string();
+                    break;
+                case 2:
+                    message.upload_address = reader.string();
+                    break;
+                case 3:
+                    message.upload_relay_id = reader.fixed64();
+                    break;
+                case 4:
+                    message.thumbnail_upload_address = reader.string();
+                    break;
+                case 5:
+                    message.thumbnail_interval_seconds = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBroadcastUpload_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StartBroadcastUpload_Response} CBroadcast_StartBroadcastUpload_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBroadcastUpload_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StartBroadcastUpload_Response message.
+         * @function verify
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StartBroadcastUpload_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                if (!$util.isString(message.upload_token))
+                    return "upload_token: string expected";
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                if (!$util.isString(message.upload_address))
+                    return "upload_address: string expected";
+            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
+                if (!$util.isInteger(message.upload_relay_id) && !(message.upload_relay_id && $util.isInteger(message.upload_relay_id.low) && $util.isInteger(message.upload_relay_id.high)))
+                    return "upload_relay_id: integer|Long expected";
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                if (!$util.isString(message.thumbnail_upload_address))
+                    return "thumbnail_upload_address: string expected";
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                if (!$util.isInteger(message.thumbnail_interval_seconds))
+                    return "thumbnail_interval_seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StartBroadcastUpload_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StartBroadcastUpload_Response} CBroadcast_StartBroadcastUpload_Response
+         */
+        CBroadcast_StartBroadcastUpload_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StartBroadcastUpload_Response)
+                return object;
+            var message = new $root.CBroadcast_StartBroadcastUpload_Response();
+            if (object.upload_token != null)
+                message.upload_token = String(object.upload_token);
+            if (object.upload_address != null)
+                message.upload_address = String(object.upload_address);
+            if (object.upload_relay_id != null)
+                if ($util.Long)
+                    (message.upload_relay_id = $util.Long.fromValue(object.upload_relay_id)).unsigned = false;
+                else if (typeof object.upload_relay_id === "string")
+                    message.upload_relay_id = parseInt(object.upload_relay_id, 10);
+                else if (typeof object.upload_relay_id === "number")
+                    message.upload_relay_id = object.upload_relay_id;
+                else if (typeof object.upload_relay_id === "object")
+                    message.upload_relay_id = new $util.LongBits(object.upload_relay_id.low >>> 0, object.upload_relay_id.high >>> 0).toNumber();
+            if (object.thumbnail_upload_address != null)
+                message.thumbnail_upload_address = String(object.thumbnail_upload_address);
+            if (object.thumbnail_interval_seconds != null)
+                message.thumbnail_interval_seconds = object.thumbnail_interval_seconds >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StartBroadcastUpload_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @static
+         * @param {CBroadcast_StartBroadcastUpload_Response} message CBroadcast_StartBroadcastUpload_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StartBroadcastUpload_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.upload_token = "";
+                object.upload_address = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.upload_relay_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.upload_relay_id = options.longs === String ? "0" : 0;
+                object.thumbnail_upload_address = "";
+                object.thumbnail_interval_seconds = 0;
+            }
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                object.upload_token = message.upload_token;
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                object.upload_address = message.upload_address;
+            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
+                if (typeof message.upload_relay_id === "number")
+                    object.upload_relay_id = options.longs === String ? String(message.upload_relay_id) : message.upload_relay_id;
+                else
+                    object.upload_relay_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_relay_id) : options.longs === Number ? new $util.LongBits(message.upload_relay_id.low >>> 0, message.upload_relay_id.high >>> 0).toNumber() : message.upload_relay_id;
+            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
+                object.thumbnail_upload_address = message.thumbnail_upload_address;
+            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
+                object.thumbnail_interval_seconds = message.thumbnail_interval_seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StartBroadcastUpload_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StartBroadcastUpload_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StartBroadcastUpload_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StartBroadcastUpload_Response;
+    })();
+    
+    $root.CBroadcast_NotifyBroadcastUploadStop_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_NotifyBroadcastUploadStop_Notification.
+         * @exports ICBroadcast_NotifyBroadcastUploadStop_Notification
+         * @interface ICBroadcast_NotifyBroadcastUploadStop_Notification
+         * @property {number|Long|null} [broadcast_relay_id] CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_relay_id
+         * @property {number|null} [upload_result] CBroadcast_NotifyBroadcastUploadStop_Notification upload_result
+         */
+    
+        /**
+         * Constructs a new CBroadcast_NotifyBroadcastUploadStop_Notification.
+         * @exports CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @classdesc Represents a CBroadcast_NotifyBroadcastUploadStop_Notification.
+         * @implements ICBroadcast_NotifyBroadcastUploadStop_Notification
+         * @constructor
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_NotifyBroadcastUploadStop_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_relay_id.
+         * @member {number|Long} broadcast_relay_id
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @instance
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.prototype.broadcast_relay_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_NotifyBroadcastUploadStop_Notification upload_result.
+         * @member {number} upload_result
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @instance
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.prototype.upload_result = 0;
+    
+        /**
+         * Creates a new CBroadcast_NotifyBroadcastUploadStop_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_NotifyBroadcastUploadStop_Notification} CBroadcast_NotifyBroadcastUploadStop_Notification instance
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.create = function create(properties) {
+            return new CBroadcast_NotifyBroadcastUploadStop_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_NotifyBroadcastUploadStop_Notification message. Does not implicitly {@link CBroadcast_NotifyBroadcastUploadStop_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification} message CBroadcast_NotifyBroadcastUploadStop_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_relay_id);
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.upload_result);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_NotifyBroadcastUploadStop_Notification message, length delimited. Does not implicitly {@link CBroadcast_NotifyBroadcastUploadStop_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification} message CBroadcast_NotifyBroadcastUploadStop_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_NotifyBroadcastUploadStop_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_NotifyBroadcastUploadStop_Notification} CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_NotifyBroadcastUploadStop_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_relay_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.upload_result = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_NotifyBroadcastUploadStop_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_NotifyBroadcastUploadStop_Notification} CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_NotifyBroadcastUploadStop_Notification message.
+         * @function verify
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                if (!$util.isInteger(message.broadcast_relay_id) && !(message.broadcast_relay_id && $util.isInteger(message.broadcast_relay_id.low) && $util.isInteger(message.broadcast_relay_id.high)))
+                    return "broadcast_relay_id: integer|Long expected";
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                if (!$util.isInteger(message.upload_result))
+                    return "upload_result: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_NotifyBroadcastUploadStop_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_NotifyBroadcastUploadStop_Notification} CBroadcast_NotifyBroadcastUploadStop_Notification
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_NotifyBroadcastUploadStop_Notification)
+                return object;
+            var message = new $root.CBroadcast_NotifyBroadcastUploadStop_Notification();
+            if (object.broadcast_relay_id != null)
+                if ($util.Long)
+                    (message.broadcast_relay_id = $util.Long.fromValue(object.broadcast_relay_id)).unsigned = false;
+                else if (typeof object.broadcast_relay_id === "string")
+                    message.broadcast_relay_id = parseInt(object.broadcast_relay_id, 10);
+                else if (typeof object.broadcast_relay_id === "number")
+                    message.broadcast_relay_id = object.broadcast_relay_id;
+                else if (typeof object.broadcast_relay_id === "object")
+                    message.broadcast_relay_id = new $util.LongBits(object.broadcast_relay_id.low >>> 0, object.broadcast_relay_id.high >>> 0).toNumber();
+            if (object.upload_result != null)
+                message.upload_result = object.upload_result >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_NotifyBroadcastUploadStop_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @static
+         * @param {CBroadcast_NotifyBroadcastUploadStop_Notification} message CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_relay_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_relay_id = options.longs === String ? "0" : 0;
+                object.upload_result = 0;
+            }
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                if (typeof message.broadcast_relay_id === "number")
+                    object.broadcast_relay_id = options.longs === String ? String(message.broadcast_relay_id) : message.broadcast_relay_id;
+                else
+                    object.broadcast_relay_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_relay_id) : options.longs === Number ? new $util.LongBits(message.broadcast_relay_id.low >>> 0, message.broadcast_relay_id.high >>> 0).toNumber() : message.broadcast_relay_id;
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                object.upload_result = message.upload_result;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_NotifyBroadcastUploadStop_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_NotifyBroadcastUploadStop_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_NotifyBroadcastUploadStop_Notification;
+    })();
+    
+    $root.CBroadcast_WatchBroadcast_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WatchBroadcast_Request.
+         * @exports ICBroadcast_WatchBroadcast_Request
+         * @interface ICBroadcast_WatchBroadcast_Request
+         * @property {number|Long|null} [steamid] CBroadcast_WatchBroadcast_Request steamid
+         * @property {number|Long|null} [existing_broadcast_id] CBroadcast_WatchBroadcast_Request existing_broadcast_id
+         * @property {number|Long|null} [viewer_token] CBroadcast_WatchBroadcast_Request viewer_token
+         * @property {number|null} [client_ip] CBroadcast_WatchBroadcast_Request client_ip
+         * @property {number|null} [client_cell] CBroadcast_WatchBroadcast_Request client_cell
+         * @property {EBroadcastWatchLocation|null} [watch_location] CBroadcast_WatchBroadcast_Request watch_location
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WatchBroadcast_Request.
+         * @exports CBroadcast_WatchBroadcast_Request
+         * @classdesc Represents a CBroadcast_WatchBroadcast_Request.
+         * @implements ICBroadcast_WatchBroadcast_Request
+         * @constructor
+         * @param {ICBroadcast_WatchBroadcast_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WatchBroadcast_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request existing_broadcast_id.
+         * @member {number|Long} existing_broadcast_id
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.existing_broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request client_ip.
+         * @member {number} client_ip
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.client_ip = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request client_cell.
+         * @member {number} client_cell
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.client_cell = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Request watch_location.
+         * @member {EBroadcastWatchLocation} watch_location
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.watch_location = 0;
+    
+        /**
+         * Creates a new CBroadcast_WatchBroadcast_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WatchBroadcast_Request} CBroadcast_WatchBroadcast_Request instance
+         */
+        CBroadcast_WatchBroadcast_Request.create = function create(properties) {
+            return new CBroadcast_WatchBroadcast_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WatchBroadcast_Request message. Does not implicitly {@link CBroadcast_WatchBroadcast_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Request} message CBroadcast_WatchBroadcast_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WatchBroadcast_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.existing_broadcast_id != null && message.hasOwnProperty("existing_broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.existing_broadcast_id);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.client_ip);
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.client_cell);
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.watch_location);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WatchBroadcast_Request message, length delimited. Does not implicitly {@link CBroadcast_WatchBroadcast_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Request} message CBroadcast_WatchBroadcast_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WatchBroadcast_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WatchBroadcast_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WatchBroadcast_Request} CBroadcast_WatchBroadcast_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WatchBroadcast_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WatchBroadcast_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.existing_broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                case 4:
+                    message.client_ip = reader.uint32();
+                    break;
+                case 5:
+                    message.client_cell = reader.uint32();
+                    break;
+                case 6:
+                    message.watch_location = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WatchBroadcast_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WatchBroadcast_Request} CBroadcast_WatchBroadcast_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WatchBroadcast_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WatchBroadcast_Request message.
+         * @function verify
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WatchBroadcast_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.existing_broadcast_id != null && message.hasOwnProperty("existing_broadcast_id"))
+                if (!$util.isInteger(message.existing_broadcast_id) && !(message.existing_broadcast_id && $util.isInteger(message.existing_broadcast_id.low) && $util.isInteger(message.existing_broadcast_id.high)))
+                    return "existing_broadcast_id: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                if (!$util.isInteger(message.client_ip))
+                    return "client_ip: integer expected";
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                if (!$util.isInteger(message.client_cell))
+                    return "client_cell: integer expected";
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                switch (message.watch_location) {
+                default:
+                    return "watch_location: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WatchBroadcast_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WatchBroadcast_Request} CBroadcast_WatchBroadcast_Request
+         */
+        CBroadcast_WatchBroadcast_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WatchBroadcast_Request)
+                return object;
+            var message = new $root.CBroadcast_WatchBroadcast_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.existing_broadcast_id != null)
+                if ($util.Long)
+                    (message.existing_broadcast_id = $util.Long.fromValue(object.existing_broadcast_id)).unsigned = false;
+                else if (typeof object.existing_broadcast_id === "string")
+                    message.existing_broadcast_id = parseInt(object.existing_broadcast_id, 10);
+                else if (typeof object.existing_broadcast_id === "number")
+                    message.existing_broadcast_id = object.existing_broadcast_id;
+                else if (typeof object.existing_broadcast_id === "object")
+                    message.existing_broadcast_id = new $util.LongBits(object.existing_broadcast_id.low >>> 0, object.existing_broadcast_id.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            if (object.client_ip != null)
+                message.client_ip = object.client_ip >>> 0;
+            if (object.client_cell != null)
+                message.client_cell = object.client_cell >>> 0;
+            switch (object.watch_location) {
+            case "k_EBroadcastWatchLocation_Invalid":
+            case 0:
+                message.watch_location = 0;
+                break;
+            case "k_EBroadcastWatchLocation_SteamTV_Tab":
+            case 1:
+                message.watch_location = 1;
+                break;
+            case "k_EBroadcastWatchLocation_SteamTV_WatchParty":
+            case 2:
+                message.watch_location = 2;
+                break;
+            case "k_EBroadcastWatchLocation_Chat_Tab":
+            case 3:
+                message.watch_location = 3;
+                break;
+            case "k_EBroadcastWatchLocation_Chat_WatchParty":
+            case 4:
+                message.watch_location = 4;
+                break;
+            case "k_EBroadcastWatchLocation_CommunityPage":
+            case 5:
+                message.watch_location = 5;
+                break;
+            case "k_EBroadcastWatchLocation_StoreAppPage":
+            case 6:
+                message.watch_location = 6;
+                break;
+            case "k_EBroadcastWatchLocation_InGame":
+            case 7:
+                message.watch_location = 7;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WatchBroadcast_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @static
+         * @param {CBroadcast_WatchBroadcast_Request} message CBroadcast_WatchBroadcast_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WatchBroadcast_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.existing_broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.existing_broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+                object.client_ip = 0;
+                object.client_cell = 0;
+                object.watch_location = options.enums === String ? "k_EBroadcastWatchLocation_Invalid" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.existing_broadcast_id != null && message.hasOwnProperty("existing_broadcast_id"))
+                if (typeof message.existing_broadcast_id === "number")
+                    object.existing_broadcast_id = options.longs === String ? String(message.existing_broadcast_id) : message.existing_broadcast_id;
+                else
+                    object.existing_broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.existing_broadcast_id) : options.longs === Number ? new $util.LongBits(message.existing_broadcast_id.low >>> 0, message.existing_broadcast_id.high >>> 0).toNumber() : message.existing_broadcast_id;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                object.client_ip = message.client_ip;
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                object.client_cell = message.client_cell;
+            if (message.watch_location != null && message.hasOwnProperty("watch_location"))
+                object.watch_location = options.enums === String ? $root.EBroadcastWatchLocation[message.watch_location] : message.watch_location;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WatchBroadcast_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WatchBroadcast_Request;
+    })();
+    
+    $root.CBroadcast_WatchBroadcast_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WatchBroadcast_Response.
+         * @exports ICBroadcast_WatchBroadcast_Response
+         * @interface ICBroadcast_WatchBroadcast_Response
+         * @property {CBroadcast_WatchBroadcast_Response.EWatchResponse|null} [response] CBroadcast_WatchBroadcast_Response response
+         * @property {string|null} [mpd_url] CBroadcast_WatchBroadcast_Response mpd_url
+         * @property {number|Long|null} [broadcast_id] CBroadcast_WatchBroadcast_Response broadcast_id
+         * @property {number|Long|null} [gameid] CBroadcast_WatchBroadcast_Response gameid
+         * @property {string|null} [title] CBroadcast_WatchBroadcast_Response title
+         * @property {number|null} [num_viewers] CBroadcast_WatchBroadcast_Response num_viewers
+         * @property {number|null} [permission] CBroadcast_WatchBroadcast_Response permission
+         * @property {boolean|null} [is_rtmp] CBroadcast_WatchBroadcast_Response is_rtmp
+         * @property {number|null} [seconds_delay] CBroadcast_WatchBroadcast_Response seconds_delay
+         * @property {number|Long|null} [viewer_token] CBroadcast_WatchBroadcast_Response viewer_token
+         * @property {string|null} [hls_m3u8_master_url] CBroadcast_WatchBroadcast_Response hls_m3u8_master_url
+         * @property {number|null} [heartbeat_interval] CBroadcast_WatchBroadcast_Response heartbeat_interval
+         * @property {string|null} [thumbnail_url] CBroadcast_WatchBroadcast_Response thumbnail_url
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WatchBroadcast_Response.
+         * @exports CBroadcast_WatchBroadcast_Response
+         * @classdesc Represents a CBroadcast_WatchBroadcast_Response.
+         * @implements ICBroadcast_WatchBroadcast_Response
+         * @constructor
+         * @param {ICBroadcast_WatchBroadcast_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WatchBroadcast_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response response.
+         * @member {CBroadcast_WatchBroadcast_Response.EWatchResponse} response
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.response = 1;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response mpd_url.
+         * @member {string} mpd_url
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.mpd_url = "";
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response gameid.
+         * @member {number|Long} gameid
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.gameid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response title.
+         * @member {string} title
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.title = "";
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response num_viewers.
+         * @member {number} num_viewers
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.num_viewers = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response permission.
+         * @member {number} permission
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.permission = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response is_rtmp.
+         * @member {boolean} is_rtmp
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.is_rtmp = false;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response seconds_delay.
+         * @member {number} seconds_delay
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.seconds_delay = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response hls_m3u8_master_url.
+         * @member {string} hls_m3u8_master_url
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.hls_m3u8_master_url = "";
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response heartbeat_interval.
+         * @member {number} heartbeat_interval
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.heartbeat_interval = 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.thumbnail_url = "";
+    
+        /**
+         * Creates a new CBroadcast_WatchBroadcast_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WatchBroadcast_Response} CBroadcast_WatchBroadcast_Response instance
+         */
+        CBroadcast_WatchBroadcast_Response.create = function create(properties) {
+            return new CBroadcast_WatchBroadcast_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WatchBroadcast_Response message. Does not implicitly {@link CBroadcast_WatchBroadcast_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Response} message CBroadcast_WatchBroadcast_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WatchBroadcast_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.response != null && message.hasOwnProperty("response"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.response);
+            if (message.mpd_url != null && message.hasOwnProperty("mpd_url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mpd_url);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.broadcast_id);
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.gameid);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.num_viewers);
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.permission);
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.is_rtmp);
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.seconds_delay);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 10, wireType 1 =*/81).fixed64(message.viewer_token);
+            if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
+                writer.uint32(/* id 11, wireType 2 =*/90).string(message.hls_m3u8_master_url);
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.heartbeat_interval);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.thumbnail_url);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WatchBroadcast_Response message, length delimited. Does not implicitly {@link CBroadcast_WatchBroadcast_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {ICBroadcast_WatchBroadcast_Response} message CBroadcast_WatchBroadcast_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WatchBroadcast_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WatchBroadcast_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WatchBroadcast_Response} CBroadcast_WatchBroadcast_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WatchBroadcast_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WatchBroadcast_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.response = reader.int32();
+                    break;
+                case 2:
+                    message.mpd_url = reader.string();
+                    break;
+                case 3:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 4:
+                    message.gameid = reader.uint64();
+                    break;
+                case 5:
+                    message.title = reader.string();
+                    break;
+                case 6:
+                    message.num_viewers = reader.uint32();
+                    break;
+                case 7:
+                    message.permission = reader.int32();
+                    break;
+                case 8:
+                    message.is_rtmp = reader.bool();
+                    break;
+                case 9:
+                    message.seconds_delay = reader.int32();
+                    break;
+                case 10:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                case 11:
+                    message.hls_m3u8_master_url = reader.string();
+                    break;
+                case 12:
+                    message.heartbeat_interval = reader.int32();
+                    break;
+                case 13:
+                    message.thumbnail_url = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WatchBroadcast_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WatchBroadcast_Response} CBroadcast_WatchBroadcast_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WatchBroadcast_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WatchBroadcast_Response message.
+         * @function verify
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WatchBroadcast_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.response != null && message.hasOwnProperty("response"))
+                switch (message.response) {
+                default:
+                    return "response: enum value expected";
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                    break;
+                }
+            if (message.mpd_url != null && message.hasOwnProperty("mpd_url"))
+                if (!$util.isString(message.mpd_url))
+                    return "mpd_url: string expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (!$util.isInteger(message.gameid) && !(message.gameid && $util.isInteger(message.gameid.low) && $util.isInteger(message.gameid.high)))
+                    return "gameid: integer|Long expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                if (!$util.isInteger(message.num_viewers))
+                    return "num_viewers: integer expected";
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                if (!$util.isInteger(message.permission))
+                    return "permission: integer expected";
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                if (typeof message.is_rtmp !== "boolean")
+                    return "is_rtmp: boolean expected";
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                if (!$util.isInteger(message.seconds_delay))
+                    return "seconds_delay: integer expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
+                if (!$util.isString(message.hls_m3u8_master_url))
+                    return "hls_m3u8_master_url: string expected";
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                if (!$util.isInteger(message.heartbeat_interval))
+                    return "heartbeat_interval: integer expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WatchBroadcast_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WatchBroadcast_Response} CBroadcast_WatchBroadcast_Response
+         */
+        CBroadcast_WatchBroadcast_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WatchBroadcast_Response)
+                return object;
+            var message = new $root.CBroadcast_WatchBroadcast_Response();
+            switch (object.response) {
+            case "k_EWatchResponseReady":
+            case 1:
+                message.response = 1;
+                break;
+            case "k_EWatchResponseNotAvailable":
+            case 2:
+                message.response = 2;
+                break;
+            case "k_EWatchResponseWaitingForApproval":
+            case 3:
+                message.response = 3;
+                break;
+            case "k_EWatchResponseWaitingForStart":
+            case 4:
+                message.response = 4;
+                break;
+            case "k_EWatchResponseInvalidSession":
+            case 5:
+                message.response = 5;
+                break;
+            case "k_EWatchResponseTooManyBroadcasts":
+            case 6:
+                message.response = 6;
+                break;
+            case "k_EWatchResponseWaitingForReconnect":
+            case 7:
+                message.response = 7;
+                break;
+            case "k_EWatchResponseSystemNotSupported":
+            case 8:
+                message.response = 8;
+                break;
+            case "k_EWatchResponseUserRestricted":
+            case 9:
+                message.response = 9;
+                break;
+            case "k_EWatchResponseClientOutOfDate":
+            case 10:
+                message.response = 10;
+                break;
+            case "k_EWatchResponsePoorUploadQuality":
+            case 11:
+                message.response = 11;
+                break;
+            case "k_EWatchResponseMissingSubscription":
+            case 12:
+                message.response = 12;
+                break;
+            }
+            if (object.mpd_url != null)
+                message.mpd_url = String(object.mpd_url);
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.gameid != null)
+                if ($util.Long)
+                    (message.gameid = $util.Long.fromValue(object.gameid)).unsigned = true;
+                else if (typeof object.gameid === "string")
+                    message.gameid = parseInt(object.gameid, 10);
+                else if (typeof object.gameid === "number")
+                    message.gameid = object.gameid;
+                else if (typeof object.gameid === "object")
+                    message.gameid = new $util.LongBits(object.gameid.low >>> 0, object.gameid.high >>> 0).toNumber(true);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.num_viewers != null)
+                message.num_viewers = object.num_viewers >>> 0;
+            if (object.permission != null)
+                message.permission = object.permission | 0;
+            if (object.is_rtmp != null)
+                message.is_rtmp = Boolean(object.is_rtmp);
+            if (object.seconds_delay != null)
+                message.seconds_delay = object.seconds_delay | 0;
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            if (object.hls_m3u8_master_url != null)
+                message.hls_m3u8_master_url = String(object.hls_m3u8_master_url);
+            if (object.heartbeat_interval != null)
+                message.heartbeat_interval = object.heartbeat_interval | 0;
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WatchBroadcast_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @static
+         * @param {CBroadcast_WatchBroadcast_Response} message CBroadcast_WatchBroadcast_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WatchBroadcast_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.response = options.enums === String ? "k_EWatchResponseReady" : 1;
+                object.mpd_url = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gameid = options.longs === String ? "0" : 0;
+                object.title = "";
+                object.num_viewers = 0;
+                object.permission = 0;
+                object.is_rtmp = false;
+                object.seconds_delay = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+                object.hls_m3u8_master_url = "";
+                object.heartbeat_interval = 0;
+                object.thumbnail_url = "";
+            }
+            if (message.response != null && message.hasOwnProperty("response"))
+                object.response = options.enums === String ? $root.CBroadcast_WatchBroadcast_Response.EWatchResponse[message.response] : message.response;
+            if (message.mpd_url != null && message.hasOwnProperty("mpd_url"))
+                object.mpd_url = message.mpd_url;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (typeof message.gameid === "number")
+                    object.gameid = options.longs === String ? String(message.gameid) : message.gameid;
+                else
+                    object.gameid = options.longs === String ? $util.Long.prototype.toString.call(message.gameid) : options.longs === Number ? new $util.LongBits(message.gameid.low >>> 0, message.gameid.high >>> 0).toNumber(true) : message.gameid;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                object.num_viewers = message.num_viewers;
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                object.permission = message.permission;
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                object.is_rtmp = message.is_rtmp;
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                object.seconds_delay = message.seconds_delay;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            if (message.hls_m3u8_master_url != null && message.hasOwnProperty("hls_m3u8_master_url"))
+                object.hls_m3u8_master_url = message.hls_m3u8_master_url;
+            if (message.heartbeat_interval != null && message.hasOwnProperty("heartbeat_interval"))
+                object.heartbeat_interval = message.heartbeat_interval;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WatchBroadcast_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * EWatchResponse enum.
+         * @name CBroadcast_WatchBroadcast_Response.EWatchResponse
+         * @enum {string}
+         * @property {number} k_EWatchResponseReady=1 k_EWatchResponseReady value
+         * @property {number} k_EWatchResponseNotAvailable=2 k_EWatchResponseNotAvailable value
+         * @property {number} k_EWatchResponseWaitingForApproval=3 k_EWatchResponseWaitingForApproval value
+         * @property {number} k_EWatchResponseWaitingForStart=4 k_EWatchResponseWaitingForStart value
+         * @property {number} k_EWatchResponseInvalidSession=5 k_EWatchResponseInvalidSession value
+         * @property {number} k_EWatchResponseTooManyBroadcasts=6 k_EWatchResponseTooManyBroadcasts value
+         * @property {number} k_EWatchResponseWaitingForReconnect=7 k_EWatchResponseWaitingForReconnect value
+         * @property {number} k_EWatchResponseSystemNotSupported=8 k_EWatchResponseSystemNotSupported value
+         * @property {number} k_EWatchResponseUserRestricted=9 k_EWatchResponseUserRestricted value
+         * @property {number} k_EWatchResponseClientOutOfDate=10 k_EWatchResponseClientOutOfDate value
+         * @property {number} k_EWatchResponsePoorUploadQuality=11 k_EWatchResponsePoorUploadQuality value
+         * @property {number} k_EWatchResponseMissingSubscription=12 k_EWatchResponseMissingSubscription value
+         */
+        CBroadcast_WatchBroadcast_Response.EWatchResponse = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[1] = "k_EWatchResponseReady"] = 1;
+            values[valuesById[2] = "k_EWatchResponseNotAvailable"] = 2;
+            values[valuesById[3] = "k_EWatchResponseWaitingForApproval"] = 3;
+            values[valuesById[4] = "k_EWatchResponseWaitingForStart"] = 4;
+            values[valuesById[5] = "k_EWatchResponseInvalidSession"] = 5;
+            values[valuesById[6] = "k_EWatchResponseTooManyBroadcasts"] = 6;
+            values[valuesById[7] = "k_EWatchResponseWaitingForReconnect"] = 7;
+            values[valuesById[8] = "k_EWatchResponseSystemNotSupported"] = 8;
+            values[valuesById[9] = "k_EWatchResponseUserRestricted"] = 9;
+            values[valuesById[10] = "k_EWatchResponseClientOutOfDate"] = 10;
+            values[valuesById[11] = "k_EWatchResponsePoorUploadQuality"] = 11;
+            values[valuesById[12] = "k_EWatchResponseMissingSubscription"] = 12;
+            return values;
+        })();
+    
+        return CBroadcast_WatchBroadcast_Response;
+    })();
+    
+    $root.CBroadcast_HeartbeatBroadcast_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_HeartbeatBroadcast_Notification.
+         * @exports ICBroadcast_HeartbeatBroadcast_Notification
+         * @interface ICBroadcast_HeartbeatBroadcast_Notification
+         * @property {number|Long|null} [steamid] CBroadcast_HeartbeatBroadcast_Notification steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_HeartbeatBroadcast_Notification broadcast_id
+         * @property {number|Long|null} [viewer_token] CBroadcast_HeartbeatBroadcast_Notification viewer_token
+         * @property {number|null} [representation] CBroadcast_HeartbeatBroadcast_Notification representation
+         */
+    
+        /**
+         * Constructs a new CBroadcast_HeartbeatBroadcast_Notification.
+         * @exports CBroadcast_HeartbeatBroadcast_Notification
+         * @classdesc Represents a CBroadcast_HeartbeatBroadcast_Notification.
+         * @implements ICBroadcast_HeartbeatBroadcast_Notification
+         * @constructor
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_HeartbeatBroadcast_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_HeartbeatBroadcast_Notification representation.
+         * @member {number} representation
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.representation = 0;
+    
+        /**
+         * Creates a new CBroadcast_HeartbeatBroadcast_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification instance
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.create = function create(properties) {
+            return new CBroadcast_HeartbeatBroadcast_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_HeartbeatBroadcast_Notification message. Does not implicitly {@link CBroadcast_HeartbeatBroadcast_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.representation);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_HeartbeatBroadcast_Notification message, length delimited. Does not implicitly {@link CBroadcast_HeartbeatBroadcast_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_HeartbeatBroadcast_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_HeartbeatBroadcast_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                case 4:
+                    message.representation = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_HeartbeatBroadcast_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_HeartbeatBroadcast_Notification message.
+         * @function verify
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                if (!$util.isInteger(message.representation))
+                    return "representation: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_HeartbeatBroadcast_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_HeartbeatBroadcast_Notification} CBroadcast_HeartbeatBroadcast_Notification
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_HeartbeatBroadcast_Notification)
+                return object;
+            var message = new $root.CBroadcast_HeartbeatBroadcast_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            if (object.representation != null)
+                message.representation = object.representation >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_HeartbeatBroadcast_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @static
+         * @param {CBroadcast_HeartbeatBroadcast_Notification} message CBroadcast_HeartbeatBroadcast_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+                object.representation = 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            if (message.representation != null && message.hasOwnProperty("representation"))
+                object.representation = message.representation;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_HeartbeatBroadcast_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_HeartbeatBroadcast_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_HeartbeatBroadcast_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_HeartbeatBroadcast_Notification;
+    })();
+    
+    $root.CBroadcast_StopWatchingBroadcast_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StopWatchingBroadcast_Notification.
+         * @exports ICBroadcast_StopWatchingBroadcast_Notification
+         * @interface ICBroadcast_StopWatchingBroadcast_Notification
+         * @property {number|Long|null} [steamid] CBroadcast_StopWatchingBroadcast_Notification steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_StopWatchingBroadcast_Notification broadcast_id
+         * @property {number|Long|null} [viewer_token] CBroadcast_StopWatchingBroadcast_Notification viewer_token
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StopWatchingBroadcast_Notification.
+         * @exports CBroadcast_StopWatchingBroadcast_Notification
+         * @classdesc Represents a CBroadcast_StopWatchingBroadcast_Notification.
+         * @implements ICBroadcast_StopWatchingBroadcast_Notification
+         * @constructor
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_StopWatchingBroadcast_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopWatchingBroadcast_Notification viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_StopWatchingBroadcast_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification instance
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.create = function create(properties) {
+            return new CBroadcast_StopWatchingBroadcast_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopWatchingBroadcast_Notification message. Does not implicitly {@link CBroadcast_StopWatchingBroadcast_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopWatchingBroadcast_Notification message, length delimited. Does not implicitly {@link CBroadcast_StopWatchingBroadcast_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopWatchingBroadcast_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StopWatchingBroadcast_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopWatchingBroadcast_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StopWatchingBroadcast_Notification message.
+         * @function verify
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StopWatchingBroadcast_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StopWatchingBroadcast_Notification} CBroadcast_StopWatchingBroadcast_Notification
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StopWatchingBroadcast_Notification)
+                return object;
+            var message = new $root.CBroadcast_StopWatchingBroadcast_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StopWatchingBroadcast_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @static
+         * @param {CBroadcast_StopWatchingBroadcast_Notification} message CBroadcast_StopWatchingBroadcast_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StopWatchingBroadcast_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StopWatchingBroadcast_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StopWatchingBroadcast_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StopWatchingBroadcast_Notification;
+    })();
+    
+    $root.CBroadcast_GetBroadcastStatus_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastStatus_Request.
+         * @exports ICBroadcast_GetBroadcastStatus_Request
+         * @interface ICBroadcast_GetBroadcastStatus_Request
+         * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastStatus_Request steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_GetBroadcastStatus_Request broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastStatus_Request.
+         * @exports CBroadcast_GetBroadcastStatus_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastStatus_Request.
+         * @implements ICBroadcast_GetBroadcastStatus_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastStatus_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Request broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Request.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastStatus_Request} CBroadcast_GetBroadcastStatus_Request instance
+         */
+        CBroadcast_GetBroadcastStatus_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastStatus_Request message. Does not implicitly {@link CBroadcast_GetBroadcastStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Request} message CBroadcast_GetBroadcastStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastStatus_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Request} message CBroadcast_GetBroadcastStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastStatus_Request} CBroadcast_GetBroadcastStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastStatus_Request} CBroadcast_GetBroadcastStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastStatus_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastStatus_Request} CBroadcast_GetBroadcastStatus_Request
+         */
+        CBroadcast_GetBroadcastStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastStatus_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastStatus_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastStatus_Request} message CBroadcast_GetBroadcastStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastStatus_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastStatus_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastStatus_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastStatus_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastStatus_Response.
+         * @exports ICBroadcast_GetBroadcastStatus_Response
+         * @interface ICBroadcast_GetBroadcastStatus_Response
+         * @property {number|Long|null} [gameid] CBroadcast_GetBroadcastStatus_Response gameid
+         * @property {string|null} [title] CBroadcast_GetBroadcastStatus_Response title
+         * @property {number|null} [num_viewers] CBroadcast_GetBroadcastStatus_Response num_viewers
+         * @property {number|null} [permission] CBroadcast_GetBroadcastStatus_Response permission
+         * @property {boolean|null} [is_rtmp] CBroadcast_GetBroadcastStatus_Response is_rtmp
+         * @property {number|null} [seconds_delay] CBroadcast_GetBroadcastStatus_Response seconds_delay
+         * @property {boolean|null} [is_publisher] CBroadcast_GetBroadcastStatus_Response is_publisher
+         * @property {string|null} [thumbnail_url] CBroadcast_GetBroadcastStatus_Response thumbnail_url
+         * @property {number|null} [update_interval] CBroadcast_GetBroadcastStatus_Response update_interval
+         * @property {boolean|null} [is_uploading] CBroadcast_GetBroadcastStatus_Response is_uploading
+         * @property {number|null} [duration] CBroadcast_GetBroadcastStatus_Response duration
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastStatus_Response.
+         * @exports CBroadcast_GetBroadcastStatus_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastStatus_Response.
+         * @implements ICBroadcast_GetBroadcastStatus_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastStatus_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response gameid.
+         * @member {number|Long} gameid
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.gameid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response title.
+         * @member {string} title
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.title = "";
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response num_viewers.
+         * @member {number} num_viewers
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.num_viewers = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response permission.
+         * @member {number} permission
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.permission = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response is_rtmp.
+         * @member {boolean} is_rtmp
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_rtmp = false;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response seconds_delay.
+         * @member {number} seconds_delay
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.seconds_delay = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response is_publisher.
+         * @member {boolean} is_publisher
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_publisher = false;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.thumbnail_url = "";
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response update_interval.
+         * @member {number} update_interval
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.update_interval = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response is_uploading.
+         * @member {boolean} is_uploading
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_uploading = false;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response duration.
+         * @member {number} duration
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.duration = 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastStatus_Response} CBroadcast_GetBroadcastStatus_Response instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastStatus_Response message. Does not implicitly {@link CBroadcast_GetBroadcastStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Response} message CBroadcast_GetBroadcastStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.gameid);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.num_viewers);
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.permission);
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.is_rtmp);
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds_delay);
+            if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_publisher);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.thumbnail_url);
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.update_interval);
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_uploading);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.duration);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastStatus_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastStatus_Response} message CBroadcast_GetBroadcastStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastStatus_Response} CBroadcast_GetBroadcastStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gameid = reader.uint64();
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                case 3:
+                    message.num_viewers = reader.uint32();
+                    break;
+                case 4:
+                    message.permission = reader.int32();
+                    break;
+                case 5:
+                    message.is_rtmp = reader.bool();
+                    break;
+                case 6:
+                    message.seconds_delay = reader.int32();
+                    break;
+                case 7:
+                    message.is_publisher = reader.bool();
+                    break;
+                case 8:
+                    message.thumbnail_url = reader.string();
+                    break;
+                case 9:
+                    message.update_interval = reader.int32();
+                    break;
+                case 10:
+                    message.is_uploading = reader.bool();
+                    break;
+                case 11:
+                    message.duration = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastStatus_Response} CBroadcast_GetBroadcastStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastStatus_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (!$util.isInteger(message.gameid) && !(message.gameid && $util.isInteger(message.gameid.low) && $util.isInteger(message.gameid.high)))
+                    return "gameid: integer|Long expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                if (!$util.isInteger(message.num_viewers))
+                    return "num_viewers: integer expected";
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                if (!$util.isInteger(message.permission))
+                    return "permission: integer expected";
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                if (typeof message.is_rtmp !== "boolean")
+                    return "is_rtmp: boolean expected";
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                if (!$util.isInteger(message.seconds_delay))
+                    return "seconds_delay: integer expected";
+            if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
+                if (typeof message.is_publisher !== "boolean")
+                    return "is_publisher: boolean expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                if (!$util.isInteger(message.update_interval))
+                    return "update_interval: integer expected";
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                if (typeof message.is_uploading !== "boolean")
+                    return "is_uploading: boolean expected";
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastStatus_Response} CBroadcast_GetBroadcastStatus_Response
+         */
+        CBroadcast_GetBroadcastStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastStatus_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastStatus_Response();
+            if (object.gameid != null)
+                if ($util.Long)
+                    (message.gameid = $util.Long.fromValue(object.gameid)).unsigned = true;
+                else if (typeof object.gameid === "string")
+                    message.gameid = parseInt(object.gameid, 10);
+                else if (typeof object.gameid === "number")
+                    message.gameid = object.gameid;
+                else if (typeof object.gameid === "object")
+                    message.gameid = new $util.LongBits(object.gameid.low >>> 0, object.gameid.high >>> 0).toNumber(true);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.num_viewers != null)
+                message.num_viewers = object.num_viewers >>> 0;
+            if (object.permission != null)
+                message.permission = object.permission | 0;
+            if (object.is_rtmp != null)
+                message.is_rtmp = Boolean(object.is_rtmp);
+            if (object.seconds_delay != null)
+                message.seconds_delay = object.seconds_delay | 0;
+            if (object.is_publisher != null)
+                message.is_publisher = Boolean(object.is_publisher);
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            if (object.update_interval != null)
+                message.update_interval = object.update_interval | 0;
+            if (object.is_uploading != null)
+                message.is_uploading = Boolean(object.is_uploading);
+            if (object.duration != null)
+                message.duration = object.duration >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastStatus_Response} message CBroadcast_GetBroadcastStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gameid = options.longs === String ? "0" : 0;
+                object.title = "";
+                object.num_viewers = 0;
+                object.permission = 0;
+                object.is_rtmp = false;
+                object.seconds_delay = 0;
+                object.is_publisher = false;
+                object.thumbnail_url = "";
+                object.update_interval = 0;
+                object.is_uploading = false;
+                object.duration = 0;
+            }
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (typeof message.gameid === "number")
+                    object.gameid = options.longs === String ? String(message.gameid) : message.gameid;
+                else
+                    object.gameid = options.longs === String ? $util.Long.prototype.toString.call(message.gameid) : options.longs === Number ? new $util.LongBits(message.gameid.low >>> 0, message.gameid.high >>> 0).toNumber(true) : message.gameid;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                object.num_viewers = message.num_viewers;
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                object.permission = message.permission;
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                object.is_rtmp = message.is_rtmp;
+            if (message.seconds_delay != null && message.hasOwnProperty("seconds_delay"))
+                object.seconds_delay = message.seconds_delay;
+            if (message.is_publisher != null && message.hasOwnProperty("is_publisher"))
+                object.is_publisher = message.is_publisher;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                object.update_interval = message.update_interval;
+            if (message.is_uploading != null && message.hasOwnProperty("is_uploading"))
+                object.is_uploading = message.is_uploading;
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastStatus_Response;
+    })();
+    
+    $root.CBroadcast_GetBroadcastThumbnail_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastThumbnail_Request.
+         * @exports ICBroadcast_GetBroadcastThumbnail_Request
+         * @interface ICBroadcast_GetBroadcastThumbnail_Request
+         * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastThumbnail_Request steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_GetBroadcastThumbnail_Request broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastThumbnail_Request.
+         * @exports CBroadcast_GetBroadcastThumbnail_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastThumbnail_Request.
+         * @implements ICBroadcast_GetBroadcastThumbnail_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastThumbnail_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastThumbnail_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastThumbnail_Request broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastThumbnail_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastThumbnail_Request} CBroadcast_GetBroadcastThumbnail_Request instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastThumbnail_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastThumbnail_Request message. Does not implicitly {@link CBroadcast_GetBroadcastThumbnail_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request} message CBroadcast_GetBroadcastThumbnail_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastThumbnail_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastThumbnail_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request} message CBroadcast_GetBroadcastThumbnail_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastThumbnail_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastThumbnail_Request} CBroadcast_GetBroadcastThumbnail_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastThumbnail_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastThumbnail_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastThumbnail_Request} CBroadcast_GetBroadcastThumbnail_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastThumbnail_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastThumbnail_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastThumbnail_Request} CBroadcast_GetBroadcastThumbnail_Request
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastThumbnail_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastThumbnail_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastThumbnail_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastThumbnail_Request} message CBroadcast_GetBroadcastThumbnail_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastThumbnail_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastThumbnail_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastThumbnail_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastThumbnail_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastThumbnail_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastThumbnail_Response.
+         * @exports ICBroadcast_GetBroadcastThumbnail_Response
+         * @interface ICBroadcast_GetBroadcastThumbnail_Response
+         * @property {string|null} [thumbnail_url] CBroadcast_GetBroadcastThumbnail_Response thumbnail_url
+         * @property {number|null} [update_interval] CBroadcast_GetBroadcastThumbnail_Response update_interval
+         * @property {number|null} [num_viewers] CBroadcast_GetBroadcastThumbnail_Response num_viewers
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastThumbnail_Response.
+         * @exports CBroadcast_GetBroadcastThumbnail_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastThumbnail_Response.
+         * @implements ICBroadcast_GetBroadcastThumbnail_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastThumbnail_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastThumbnail_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastThumbnail_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.thumbnail_url = "";
+    
+        /**
+         * CBroadcast_GetBroadcastThumbnail_Response update_interval.
+         * @member {number} update_interval
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.update_interval = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastThumbnail_Response num_viewers.
+         * @member {number} num_viewers
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.num_viewers = 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastThumbnail_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastThumbnail_Response} CBroadcast_GetBroadcastThumbnail_Response instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastThumbnail_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastThumbnail_Response message. Does not implicitly {@link CBroadcast_GetBroadcastThumbnail_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Response} message CBroadcast_GetBroadcastThumbnail_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail_url);
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.update_interval);
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.num_viewers);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastThumbnail_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastThumbnail_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastThumbnail_Response} message CBroadcast_GetBroadcastThumbnail_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastThumbnail_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastThumbnail_Response} CBroadcast_GetBroadcastThumbnail_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastThumbnail_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.thumbnail_url = reader.string();
+                    break;
+                case 2:
+                    message.update_interval = reader.int32();
+                    break;
+                case 3:
+                    message.num_viewers = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastThumbnail_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastThumbnail_Response} CBroadcast_GetBroadcastThumbnail_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastThumbnail_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                if (!$util.isInteger(message.update_interval))
+                    return "update_interval: integer expected";
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                if (!$util.isInteger(message.num_viewers))
+                    return "num_viewers: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastThumbnail_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastThumbnail_Response} CBroadcast_GetBroadcastThumbnail_Response
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastThumbnail_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastThumbnail_Response();
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            if (object.update_interval != null)
+                message.update_interval = object.update_interval | 0;
+            if (object.num_viewers != null)
+                message.num_viewers = object.num_viewers | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastThumbnail_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastThumbnail_Response} message CBroadcast_GetBroadcastThumbnail_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.thumbnail_url = "";
+                object.update_interval = 0;
+                object.num_viewers = 0;
+            }
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            if (message.update_interval != null && message.hasOwnProperty("update_interval"))
+                object.update_interval = message.update_interval;
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                object.num_viewers = message.num_viewers;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastThumbnail_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastThumbnail_Response;
+    })();
+    
+    $root.CBroadcast_InviteToBroadcast_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_InviteToBroadcast_Request.
+         * @exports ICBroadcast_InviteToBroadcast_Request
+         * @interface ICBroadcast_InviteToBroadcast_Request
+         * @property {number|Long|null} [steamid] CBroadcast_InviteToBroadcast_Request steamid
+         * @property {boolean|null} [approval_response] CBroadcast_InviteToBroadcast_Request approval_response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_InviteToBroadcast_Request.
+         * @exports CBroadcast_InviteToBroadcast_Request
+         * @classdesc Represents a CBroadcast_InviteToBroadcast_Request.
+         * @implements ICBroadcast_InviteToBroadcast_Request
+         * @constructor
+         * @param {ICBroadcast_InviteToBroadcast_Request=} [properties] Properties to set
+         */
+        function CBroadcast_InviteToBroadcast_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_InviteToBroadcast_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @instance
+         */
+        CBroadcast_InviteToBroadcast_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_InviteToBroadcast_Request approval_response.
+         * @member {boolean} approval_response
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @instance
+         */
+        CBroadcast_InviteToBroadcast_Request.prototype.approval_response = false;
+    
+        /**
+         * Creates a new CBroadcast_InviteToBroadcast_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Request=} [properties] Properties to set
+         * @returns {CBroadcast_InviteToBroadcast_Request} CBroadcast_InviteToBroadcast_Request instance
+         */
+        CBroadcast_InviteToBroadcast_Request.create = function create(properties) {
+            return new CBroadcast_InviteToBroadcast_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_InviteToBroadcast_Request message. Does not implicitly {@link CBroadcast_InviteToBroadcast_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Request} message CBroadcast_InviteToBroadcast_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_InviteToBroadcast_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.approval_response != null && message.hasOwnProperty("approval_response"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.approval_response);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_InviteToBroadcast_Request message, length delimited. Does not implicitly {@link CBroadcast_InviteToBroadcast_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Request} message CBroadcast_InviteToBroadcast_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_InviteToBroadcast_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_InviteToBroadcast_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_InviteToBroadcast_Request} CBroadcast_InviteToBroadcast_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_InviteToBroadcast_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_InviteToBroadcast_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.approval_response = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_InviteToBroadcast_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_InviteToBroadcast_Request} CBroadcast_InviteToBroadcast_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_InviteToBroadcast_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_InviteToBroadcast_Request message.
+         * @function verify
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_InviteToBroadcast_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.approval_response != null && message.hasOwnProperty("approval_response"))
+                if (typeof message.approval_response !== "boolean")
+                    return "approval_response: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_InviteToBroadcast_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_InviteToBroadcast_Request} CBroadcast_InviteToBroadcast_Request
+         */
+        CBroadcast_InviteToBroadcast_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_InviteToBroadcast_Request)
+                return object;
+            var message = new $root.CBroadcast_InviteToBroadcast_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.approval_response != null)
+                message.approval_response = Boolean(object.approval_response);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_InviteToBroadcast_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @static
+         * @param {CBroadcast_InviteToBroadcast_Request} message CBroadcast_InviteToBroadcast_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_InviteToBroadcast_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.approval_response = false;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.approval_response != null && message.hasOwnProperty("approval_response"))
+                object.approval_response = message.approval_response;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_InviteToBroadcast_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_InviteToBroadcast_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_InviteToBroadcast_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_InviteToBroadcast_Request;
+    })();
+    
+    $root.CBroadcast_InviteToBroadcast_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_InviteToBroadcast_Response.
+         * @exports ICBroadcast_InviteToBroadcast_Response
+         * @interface ICBroadcast_InviteToBroadcast_Response
+         * @property {boolean|null} [success] CBroadcast_InviteToBroadcast_Response success
+         */
+    
+        /**
+         * Constructs a new CBroadcast_InviteToBroadcast_Response.
+         * @exports CBroadcast_InviteToBroadcast_Response
+         * @classdesc Represents a CBroadcast_InviteToBroadcast_Response.
+         * @implements ICBroadcast_InviteToBroadcast_Response
+         * @constructor
+         * @param {ICBroadcast_InviteToBroadcast_Response=} [properties] Properties to set
+         */
+        function CBroadcast_InviteToBroadcast_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_InviteToBroadcast_Response success.
+         * @member {boolean} success
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @instance
+         */
+        CBroadcast_InviteToBroadcast_Response.prototype.success = false;
+    
+        /**
+         * Creates a new CBroadcast_InviteToBroadcast_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Response=} [properties] Properties to set
+         * @returns {CBroadcast_InviteToBroadcast_Response} CBroadcast_InviteToBroadcast_Response instance
+         */
+        CBroadcast_InviteToBroadcast_Response.create = function create(properties) {
+            return new CBroadcast_InviteToBroadcast_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_InviteToBroadcast_Response message. Does not implicitly {@link CBroadcast_InviteToBroadcast_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Response} message CBroadcast_InviteToBroadcast_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_InviteToBroadcast_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.success != null && message.hasOwnProperty("success"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_InviteToBroadcast_Response message, length delimited. Does not implicitly {@link CBroadcast_InviteToBroadcast_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {ICBroadcast_InviteToBroadcast_Response} message CBroadcast_InviteToBroadcast_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_InviteToBroadcast_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_InviteToBroadcast_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_InviteToBroadcast_Response} CBroadcast_InviteToBroadcast_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_InviteToBroadcast_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_InviteToBroadcast_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.success = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_InviteToBroadcast_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_InviteToBroadcast_Response} CBroadcast_InviteToBroadcast_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_InviteToBroadcast_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_InviteToBroadcast_Response message.
+         * @function verify
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_InviteToBroadcast_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.success != null && message.hasOwnProperty("success"))
+                if (typeof message.success !== "boolean")
+                    return "success: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_InviteToBroadcast_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_InviteToBroadcast_Response} CBroadcast_InviteToBroadcast_Response
+         */
+        CBroadcast_InviteToBroadcast_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_InviteToBroadcast_Response)
+                return object;
+            var message = new $root.CBroadcast_InviteToBroadcast_Response();
+            if (object.success != null)
+                message.success = Boolean(object.success);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_InviteToBroadcast_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @static
+         * @param {CBroadcast_InviteToBroadcast_Response} message CBroadcast_InviteToBroadcast_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_InviteToBroadcast_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.success = false;
+            if (message.success != null && message.hasOwnProperty("success"))
+                object.success = message.success;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_InviteToBroadcast_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_InviteToBroadcast_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_InviteToBroadcast_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_InviteToBroadcast_Response;
+    })();
+    
+    $root.CBroadcast_SendBroadcastStateToServer_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SendBroadcastStateToServer_Request.
+         * @exports ICBroadcast_SendBroadcastStateToServer_Request
+         * @interface ICBroadcast_SendBroadcastStateToServer_Request
+         * @property {number|null} [permission] CBroadcast_SendBroadcastStateToServer_Request permission
+         * @property {number|Long|null} [gameid] CBroadcast_SendBroadcastStateToServer_Request gameid
+         * @property {string|null} [title] CBroadcast_SendBroadcastStateToServer_Request title
+         * @property {string|null} [game_data_config] CBroadcast_SendBroadcastStateToServer_Request game_data_config
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SendBroadcastStateToServer_Request.
+         * @exports CBroadcast_SendBroadcastStateToServer_Request
+         * @classdesc Represents a CBroadcast_SendBroadcastStateToServer_Request.
+         * @implements ICBroadcast_SendBroadcastStateToServer_Request
+         * @constructor
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request=} [properties] Properties to set
+         */
+        function CBroadcast_SendBroadcastStateToServer_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_SendBroadcastStateToServer_Request permission.
+         * @member {number} permission
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.prototype.permission = 0;
+    
+        /**
+         * CBroadcast_SendBroadcastStateToServer_Request gameid.
+         * @member {number|Long} gameid
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.prototype.gameid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_SendBroadcastStateToServer_Request title.
+         * @member {string} title
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.prototype.title = "";
+    
+        /**
+         * CBroadcast_SendBroadcastStateToServer_Request game_data_config.
+         * @member {string} game_data_config
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.prototype.game_data_config = "";
+    
+        /**
+         * Creates a new CBroadcast_SendBroadcastStateToServer_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request=} [properties] Properties to set
+         * @returns {CBroadcast_SendBroadcastStateToServer_Request} CBroadcast_SendBroadcastStateToServer_Request instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.create = function create(properties) {
+            return new CBroadcast_SendBroadcastStateToServer_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendBroadcastStateToServer_Request message. Does not implicitly {@link CBroadcast_SendBroadcastStateToServer_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request} message CBroadcast_SendBroadcastStateToServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.permission);
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.gameid);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+            if (message.game_data_config != null && message.hasOwnProperty("game_data_config"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.game_data_config);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendBroadcastStateToServer_Request message, length delimited. Does not implicitly {@link CBroadcast_SendBroadcastStateToServer_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request} message CBroadcast_SendBroadcastStateToServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendBroadcastStateToServer_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SendBroadcastStateToServer_Request} CBroadcast_SendBroadcastStateToServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SendBroadcastStateToServer_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.permission = reader.int32();
+                    break;
+                case 2:
+                    message.gameid = reader.uint64();
+                    break;
+                case 3:
+                    message.title = reader.string();
+                    break;
+                case 4:
+                    message.game_data_config = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendBroadcastStateToServer_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SendBroadcastStateToServer_Request} CBroadcast_SendBroadcastStateToServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SendBroadcastStateToServer_Request message.
+         * @function verify
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                if (!$util.isInteger(message.permission))
+                    return "permission: integer expected";
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (!$util.isInteger(message.gameid) && !(message.gameid && $util.isInteger(message.gameid.low) && $util.isInteger(message.gameid.high)))
+                    return "gameid: integer|Long expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.game_data_config != null && message.hasOwnProperty("game_data_config"))
+                if (!$util.isString(message.game_data_config))
+                    return "game_data_config: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SendBroadcastStateToServer_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SendBroadcastStateToServer_Request} CBroadcast_SendBroadcastStateToServer_Request
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SendBroadcastStateToServer_Request)
+                return object;
+            var message = new $root.CBroadcast_SendBroadcastStateToServer_Request();
+            if (object.permission != null)
+                message.permission = object.permission | 0;
+            if (object.gameid != null)
+                if ($util.Long)
+                    (message.gameid = $util.Long.fromValue(object.gameid)).unsigned = true;
+                else if (typeof object.gameid === "string")
+                    message.gameid = parseInt(object.gameid, 10);
+                else if (typeof object.gameid === "number")
+                    message.gameid = object.gameid;
+                else if (typeof object.gameid === "object")
+                    message.gameid = new $util.LongBits(object.gameid.low >>> 0, object.gameid.high >>> 0).toNumber(true);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.game_data_config != null)
+                message.game_data_config = String(object.game_data_config);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SendBroadcastStateToServer_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @static
+         * @param {CBroadcast_SendBroadcastStateToServer_Request} message CBroadcast_SendBroadcastStateToServer_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.permission = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.gameid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.gameid = options.longs === String ? "0" : 0;
+                object.title = "";
+                object.game_data_config = "";
+            }
+            if (message.permission != null && message.hasOwnProperty("permission"))
+                object.permission = message.permission;
+            if (message.gameid != null && message.hasOwnProperty("gameid"))
+                if (typeof message.gameid === "number")
+                    object.gameid = options.longs === String ? String(message.gameid) : message.gameid;
+                else
+                    object.gameid = options.longs === String ? $util.Long.prototype.toString.call(message.gameid) : options.longs === Number ? new $util.LongBits(message.gameid.low >>> 0, message.gameid.high >>> 0).toNumber(true) : message.gameid;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.game_data_config != null && message.hasOwnProperty("game_data_config"))
+                object.game_data_config = message.game_data_config;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_SendBroadcastStateToServer_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SendBroadcastStateToServer_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SendBroadcastStateToServer_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SendBroadcastStateToServer_Request;
+    })();
+    
+    $root.CBroadcast_SendBroadcastStateToServer_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SendBroadcastStateToServer_Response.
+         * @exports ICBroadcast_SendBroadcastStateToServer_Response
+         * @interface ICBroadcast_SendBroadcastStateToServer_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SendBroadcastStateToServer_Response.
+         * @exports CBroadcast_SendBroadcastStateToServer_Response
+         * @classdesc Represents a CBroadcast_SendBroadcastStateToServer_Response.
+         * @implements ICBroadcast_SendBroadcastStateToServer_Response
+         * @constructor
+         * @param {ICBroadcast_SendBroadcastStateToServer_Response=} [properties] Properties to set
+         */
+        function CBroadcast_SendBroadcastStateToServer_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_SendBroadcastStateToServer_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Response=} [properties] Properties to set
+         * @returns {CBroadcast_SendBroadcastStateToServer_Response} CBroadcast_SendBroadcastStateToServer_Response instance
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.create = function create(properties) {
+            return new CBroadcast_SendBroadcastStateToServer_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendBroadcastStateToServer_Response message. Does not implicitly {@link CBroadcast_SendBroadcastStateToServer_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Response} message CBroadcast_SendBroadcastStateToServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendBroadcastStateToServer_Response message, length delimited. Does not implicitly {@link CBroadcast_SendBroadcastStateToServer_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {ICBroadcast_SendBroadcastStateToServer_Response} message CBroadcast_SendBroadcastStateToServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendBroadcastStateToServer_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SendBroadcastStateToServer_Response} CBroadcast_SendBroadcastStateToServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SendBroadcastStateToServer_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendBroadcastStateToServer_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SendBroadcastStateToServer_Response} CBroadcast_SendBroadcastStateToServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SendBroadcastStateToServer_Response message.
+         * @function verify
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SendBroadcastStateToServer_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SendBroadcastStateToServer_Response} CBroadcast_SendBroadcastStateToServer_Response
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SendBroadcastStateToServer_Response)
+                return object;
+            return new $root.CBroadcast_SendBroadcastStateToServer_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SendBroadcastStateToServer_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @static
+         * @param {CBroadcast_SendBroadcastStateToServer_Response} message CBroadcast_SendBroadcastStateToServer_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_SendBroadcastStateToServer_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SendBroadcastStateToServer_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SendBroadcastStateToServer_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SendBroadcastStateToServer_Response;
+    })();
+    
+    $root.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.
+         * @exports ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @interface ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_NotifyBroadcastSessionHeartbeat_Notification broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.
+         * @exports CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @classdesc Represents a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.
+         * @implements ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @constructor
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_NotifyBroadcastSessionHeartbeat_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_NotifyBroadcastSessionHeartbeat_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @instance
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_NotifyBroadcastSessionHeartbeat_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_NotifyBroadcastSessionHeartbeat_Notification} CBroadcast_NotifyBroadcastSessionHeartbeat_Notification instance
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.create = function create(properties) {
+            return new CBroadcast_NotifyBroadcastSessionHeartbeat_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message. Does not implicitly {@link CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification} message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message, length delimited. Does not implicitly {@link CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification} message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_NotifyBroadcastSessionHeartbeat_Notification} CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_NotifyBroadcastSessionHeartbeat_Notification} CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message.
+         * @function verify
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_NotifyBroadcastSessionHeartbeat_Notification} CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification)
+                return object;
+            var message = new $root.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @static
+         * @param {CBroadcast_NotifyBroadcastSessionHeartbeat_Notification} message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_NotifyBroadcastSessionHeartbeat_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_NotifyBroadcastSessionHeartbeat_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_NotifyBroadcastSessionHeartbeat_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_NotifyBroadcastSessionHeartbeat_Notification;
+    })();
+    
+    $root.CBroadcast_GetBroadcastChatInfo_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastChatInfo_Request.
+         * @exports ICBroadcast_GetBroadcastChatInfo_Request
+         * @interface ICBroadcast_GetBroadcastChatInfo_Request
+         * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastChatInfo_Request steamid
+         * @property {number|Long|null} [broadcast_id] CBroadcast_GetBroadcastChatInfo_Request broadcast_id
+         * @property {number|null} [client_ip] CBroadcast_GetBroadcastChatInfo_Request client_ip
+         * @property {number|null} [client_cell] CBroadcast_GetBroadcastChatInfo_Request client_cell
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastChatInfo_Request.
+         * @exports CBroadcast_GetBroadcastChatInfo_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastChatInfo_Request.
+         * @implements ICBroadcast_GetBroadcastChatInfo_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastChatInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Request broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Request client_ip.
+         * @member {number} client_ip
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.prototype.client_ip = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Request client_cell.
+         * @member {number} client_cell
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.prototype.client_cell = 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastChatInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastChatInfo_Request} CBroadcast_GetBroadcastChatInfo_Request instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastChatInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatInfo_Request message. Does not implicitly {@link CBroadcast_GetBroadcastChatInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request} message CBroadcast_GetBroadcastChatInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_id);
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.client_ip);
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.client_cell);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatInfo_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastChatInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request} message CBroadcast_GetBroadcastChatInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastChatInfo_Request} CBroadcast_GetBroadcastChatInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastChatInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.client_ip = reader.uint32();
+                    break;
+                case 4:
+                    message.client_cell = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastChatInfo_Request} CBroadcast_GetBroadcastChatInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastChatInfo_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                if (!$util.isInteger(message.client_ip))
+                    return "client_ip: integer expected";
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                if (!$util.isInteger(message.client_cell))
+                    return "client_cell: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastChatInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastChatInfo_Request} CBroadcast_GetBroadcastChatInfo_Request
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastChatInfo_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastChatInfo_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.client_ip != null)
+                message.client_ip = object.client_ip >>> 0;
+            if (object.client_cell != null)
+                message.client_cell = object.client_cell >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastChatInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastChatInfo_Request} message CBroadcast_GetBroadcastChatInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                object.client_ip = 0;
+                object.client_cell = 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.client_ip != null && message.hasOwnProperty("client_ip"))
+                object.client_ip = message.client_ip;
+            if (message.client_cell != null && message.hasOwnProperty("client_cell"))
+                object.client_cell = message.client_cell;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastChatInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastChatInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastChatInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastChatInfo_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastChatInfo_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastChatInfo_Response.
+         * @exports ICBroadcast_GetBroadcastChatInfo_Response
+         * @interface ICBroadcast_GetBroadcastChatInfo_Response
+         * @property {number|Long|null} [chat_id] CBroadcast_GetBroadcastChatInfo_Response chat_id
+         * @property {string|null} [view_url] CBroadcast_GetBroadcastChatInfo_Response view_url
+         * @property {string|null} [view_url_template] CBroadcast_GetBroadcastChatInfo_Response view_url_template
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastChatInfo_Response.
+         * @exports CBroadcast_GetBroadcastChatInfo_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastChatInfo_Response.
+         * @implements ICBroadcast_GetBroadcastChatInfo_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastChatInfo_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastChatInfo_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Response chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Response view_url.
+         * @member {string} view_url
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.prototype.view_url = "";
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Response view_url_template.
+         * @member {string} view_url_template
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.prototype.view_url_template = "";
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastChatInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastChatInfo_Response} CBroadcast_GetBroadcastChatInfo_Response instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastChatInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatInfo_Response message. Does not implicitly {@link CBroadcast_GetBroadcastChatInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Response} message CBroadcast_GetBroadcastChatInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.view_url != null && message.hasOwnProperty("view_url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.view_url);
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.view_url_template);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatInfo_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastChatInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatInfo_Response} message CBroadcast_GetBroadcastChatInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastChatInfo_Response} CBroadcast_GetBroadcastChatInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastChatInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.view_url = reader.string();
+                    break;
+                case 3:
+                    message.view_url_template = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastChatInfo_Response} CBroadcast_GetBroadcastChatInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastChatInfo_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.view_url != null && message.hasOwnProperty("view_url"))
+                if (!$util.isString(message.view_url))
+                    return "view_url: string expected";
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                if (!$util.isString(message.view_url_template))
+                    return "view_url_template: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastChatInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastChatInfo_Response} CBroadcast_GetBroadcastChatInfo_Response
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastChatInfo_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastChatInfo_Response();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.view_url != null)
+                message.view_url = String(object.view_url);
+            if (object.view_url_template != null)
+                message.view_url_template = String(object.view_url_template);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastChatInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastChatInfo_Response} message CBroadcast_GetBroadcastChatInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                object.view_url = "";
+                object.view_url_template = "";
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.view_url != null && message.hasOwnProperty("view_url"))
+                object.view_url = message.view_url;
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                object.view_url_template = message.view_url_template;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastChatInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastChatInfo_Response;
+    })();
+    
+    $root.CBroadcast_PostChatMessage_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_PostChatMessage_Request.
+         * @exports ICBroadcast_PostChatMessage_Request
+         * @interface ICBroadcast_PostChatMessage_Request
+         * @property {number|Long|null} [chat_id] CBroadcast_PostChatMessage_Request chat_id
+         * @property {string|null} [message] CBroadcast_PostChatMessage_Request message
+         * @property {number|null} [instance_id] CBroadcast_PostChatMessage_Request instance_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_PostChatMessage_Request.
+         * @exports CBroadcast_PostChatMessage_Request
+         * @classdesc Represents a CBroadcast_PostChatMessage_Request.
+         * @implements ICBroadcast_PostChatMessage_Request
+         * @constructor
+         * @param {ICBroadcast_PostChatMessage_Request=} [properties] Properties to set
+         */
+        function CBroadcast_PostChatMessage_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_PostChatMessage_Request chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Request.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_PostChatMessage_Request message.
+         * @member {string} message
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Request.prototype.message = "";
+    
+        /**
+         * CBroadcast_PostChatMessage_Request instance_id.
+         * @member {number} instance_id
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Request.prototype.instance_id = 0;
+    
+        /**
+         * Creates a new CBroadcast_PostChatMessage_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Request=} [properties] Properties to set
+         * @returns {CBroadcast_PostChatMessage_Request} CBroadcast_PostChatMessage_Request instance
+         */
+        CBroadcast_PostChatMessage_Request.create = function create(properties) {
+            return new CBroadcast_PostChatMessage_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_PostChatMessage_Request message. Does not implicitly {@link CBroadcast_PostChatMessage_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Request} message CBroadcast_PostChatMessage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_PostChatMessage_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+            if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.instance_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_PostChatMessage_Request message, length delimited. Does not implicitly {@link CBroadcast_PostChatMessage_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Request} message CBroadcast_PostChatMessage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_PostChatMessage_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_PostChatMessage_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_PostChatMessage_Request} CBroadcast_PostChatMessage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_PostChatMessage_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_PostChatMessage_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.message = reader.string();
+                    break;
+                case 3:
+                    message.instance_id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_PostChatMessage_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_PostChatMessage_Request} CBroadcast_PostChatMessage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_PostChatMessage_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_PostChatMessage_Request message.
+         * @function verify
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_PostChatMessage_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                if (!$util.isInteger(message.instance_id))
+                    return "instance_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_PostChatMessage_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_PostChatMessage_Request} CBroadcast_PostChatMessage_Request
+         */
+        CBroadcast_PostChatMessage_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_PostChatMessage_Request)
+                return object;
+            var message = new $root.CBroadcast_PostChatMessage_Request();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.instance_id != null)
+                message.instance_id = object.instance_id >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_PostChatMessage_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @static
+         * @param {CBroadcast_PostChatMessage_Request} message CBroadcast_PostChatMessage_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_PostChatMessage_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                object.message = "";
+                object.instance_id = 0;
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                object.instance_id = message.instance_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_PostChatMessage_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_PostChatMessage_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_PostChatMessage_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_PostChatMessage_Request;
+    })();
+    
+    $root.CBroadcast_PostChatMessage_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_PostChatMessage_Response.
+         * @exports ICBroadcast_PostChatMessage_Response
+         * @interface ICBroadcast_PostChatMessage_Response
+         * @property {string|null} [persona_name] CBroadcast_PostChatMessage_Response persona_name
+         * @property {boolean|null} [in_game] CBroadcast_PostChatMessage_Response in_game
+         * @property {number|null} [result] CBroadcast_PostChatMessage_Response result
+         * @property {number|null} [cooldown_time_seconds] CBroadcast_PostChatMessage_Response cooldown_time_seconds
+         */
+    
+        /**
+         * Constructs a new CBroadcast_PostChatMessage_Response.
+         * @exports CBroadcast_PostChatMessage_Response
+         * @classdesc Represents a CBroadcast_PostChatMessage_Response.
+         * @implements ICBroadcast_PostChatMessage_Response
+         * @constructor
+         * @param {ICBroadcast_PostChatMessage_Response=} [properties] Properties to set
+         */
+        function CBroadcast_PostChatMessage_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_PostChatMessage_Response persona_name.
+         * @member {string} persona_name
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Response.prototype.persona_name = "";
+    
+        /**
+         * CBroadcast_PostChatMessage_Response in_game.
+         * @member {boolean} in_game
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Response.prototype.in_game = false;
+    
+        /**
+         * CBroadcast_PostChatMessage_Response result.
+         * @member {number} result
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Response.prototype.result = 0;
+    
+        /**
+         * CBroadcast_PostChatMessage_Response cooldown_time_seconds.
+         * @member {number} cooldown_time_seconds
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         */
+        CBroadcast_PostChatMessage_Response.prototype.cooldown_time_seconds = 0;
+    
+        /**
+         * Creates a new CBroadcast_PostChatMessage_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Response=} [properties] Properties to set
+         * @returns {CBroadcast_PostChatMessage_Response} CBroadcast_PostChatMessage_Response instance
+         */
+        CBroadcast_PostChatMessage_Response.create = function create(properties) {
+            return new CBroadcast_PostChatMessage_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_PostChatMessage_Response message. Does not implicitly {@link CBroadcast_PostChatMessage_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Response} message CBroadcast_PostChatMessage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_PostChatMessage_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.persona_name);
+            if (message.in_game != null && message.hasOwnProperty("in_game"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.in_game);
+            if (message.result != null && message.hasOwnProperty("result"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.result);
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cooldown_time_seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_PostChatMessage_Response message, length delimited. Does not implicitly {@link CBroadcast_PostChatMessage_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {ICBroadcast_PostChatMessage_Response} message CBroadcast_PostChatMessage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_PostChatMessage_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_PostChatMessage_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_PostChatMessage_Response} CBroadcast_PostChatMessage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_PostChatMessage_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_PostChatMessage_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.persona_name = reader.string();
+                    break;
+                case 2:
+                    message.in_game = reader.bool();
+                    break;
+                case 3:
+                    message.result = reader.int32();
+                    break;
+                case 4:
+                    message.cooldown_time_seconds = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_PostChatMessage_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_PostChatMessage_Response} CBroadcast_PostChatMessage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_PostChatMessage_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_PostChatMessage_Response message.
+         * @function verify
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_PostChatMessage_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                if (!$util.isString(message.persona_name))
+                    return "persona_name: string expected";
+            if (message.in_game != null && message.hasOwnProperty("in_game"))
+                if (typeof message.in_game !== "boolean")
+                    return "in_game: boolean expected";
+            if (message.result != null && message.hasOwnProperty("result"))
+                if (!$util.isInteger(message.result))
+                    return "result: integer expected";
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                if (!$util.isInteger(message.cooldown_time_seconds))
+                    return "cooldown_time_seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_PostChatMessage_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_PostChatMessage_Response} CBroadcast_PostChatMessage_Response
+         */
+        CBroadcast_PostChatMessage_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_PostChatMessage_Response)
+                return object;
+            var message = new $root.CBroadcast_PostChatMessage_Response();
+            if (object.persona_name != null)
+                message.persona_name = String(object.persona_name);
+            if (object.in_game != null)
+                message.in_game = Boolean(object.in_game);
+            if (object.result != null)
+                message.result = object.result | 0;
+            if (object.cooldown_time_seconds != null)
+                message.cooldown_time_seconds = object.cooldown_time_seconds | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_PostChatMessage_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @static
+         * @param {CBroadcast_PostChatMessage_Response} message CBroadcast_PostChatMessage_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_PostChatMessage_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.persona_name = "";
+                object.in_game = false;
+                object.result = 0;
+                object.cooldown_time_seconds = 0;
+            }
+            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                object.persona_name = message.persona_name;
+            if (message.in_game != null && message.hasOwnProperty("in_game"))
+                object.in_game = message.in_game;
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = message.result;
+            if (message.cooldown_time_seconds != null && message.hasOwnProperty("cooldown_time_seconds"))
+                object.cooldown_time_seconds = message.cooldown_time_seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_PostChatMessage_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_PostChatMessage_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_PostChatMessage_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_PostChatMessage_Response;
+    })();
+    
+    $root.CBroadcast_MuteBroadcastChatUser_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_MuteBroadcastChatUser_Request.
+         * @exports ICBroadcast_MuteBroadcastChatUser_Request
+         * @interface ICBroadcast_MuteBroadcastChatUser_Request
+         * @property {number|Long|null} [chat_id] CBroadcast_MuteBroadcastChatUser_Request chat_id
+         * @property {number|Long|null} [user_steamid] CBroadcast_MuteBroadcastChatUser_Request user_steamid
+         * @property {boolean|null} [muted] CBroadcast_MuteBroadcastChatUser_Request muted
+         */
+    
+        /**
+         * Constructs a new CBroadcast_MuteBroadcastChatUser_Request.
+         * @exports CBroadcast_MuteBroadcastChatUser_Request
+         * @classdesc Represents a CBroadcast_MuteBroadcastChatUser_Request.
+         * @implements ICBroadcast_MuteBroadcastChatUser_Request
+         * @constructor
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request=} [properties] Properties to set
+         */
+        function CBroadcast_MuteBroadcastChatUser_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_MuteBroadcastChatUser_Request chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @instance
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_MuteBroadcastChatUser_Request user_steamid.
+         * @member {number|Long} user_steamid
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @instance
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.prototype.user_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_MuteBroadcastChatUser_Request muted.
+         * @member {boolean} muted
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @instance
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.prototype.muted = false;
+    
+        /**
+         * Creates a new CBroadcast_MuteBroadcastChatUser_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request=} [properties] Properties to set
+         * @returns {CBroadcast_MuteBroadcastChatUser_Request} CBroadcast_MuteBroadcastChatUser_Request instance
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.create = function create(properties) {
+            return new CBroadcast_MuteBroadcastChatUser_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_MuteBroadcastChatUser_Request message. Does not implicitly {@link CBroadcast_MuteBroadcastChatUser_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request} message CBroadcast_MuteBroadcastChatUser_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.muted);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_MuteBroadcastChatUser_Request message, length delimited. Does not implicitly {@link CBroadcast_MuteBroadcastChatUser_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request} message CBroadcast_MuteBroadcastChatUser_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_MuteBroadcastChatUser_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_MuteBroadcastChatUser_Request} CBroadcast_MuteBroadcastChatUser_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_MuteBroadcastChatUser_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.user_steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.muted = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_MuteBroadcastChatUser_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_MuteBroadcastChatUser_Request} CBroadcast_MuteBroadcastChatUser_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_MuteBroadcastChatUser_Request message.
+         * @function verify
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (!$util.isInteger(message.user_steamid) && !(message.user_steamid && $util.isInteger(message.user_steamid.low) && $util.isInteger(message.user_steamid.high)))
+                    return "user_steamid: integer|Long expected";
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                if (typeof message.muted !== "boolean")
+                    return "muted: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_MuteBroadcastChatUser_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_MuteBroadcastChatUser_Request} CBroadcast_MuteBroadcastChatUser_Request
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_MuteBroadcastChatUser_Request)
+                return object;
+            var message = new $root.CBroadcast_MuteBroadcastChatUser_Request();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.user_steamid != null)
+                if ($util.Long)
+                    (message.user_steamid = $util.Long.fromValue(object.user_steamid)).unsigned = false;
+                else if (typeof object.user_steamid === "string")
+                    message.user_steamid = parseInt(object.user_steamid, 10);
+                else if (typeof object.user_steamid === "number")
+                    message.user_steamid = object.user_steamid;
+                else if (typeof object.user_steamid === "object")
+                    message.user_steamid = new $util.LongBits(object.user_steamid.low >>> 0, object.user_steamid.high >>> 0).toNumber();
+            if (object.muted != null)
+                message.muted = Boolean(object.muted);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_MuteBroadcastChatUser_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @static
+         * @param {CBroadcast_MuteBroadcastChatUser_Request} message CBroadcast_MuteBroadcastChatUser_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.user_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.user_steamid = options.longs === String ? "0" : 0;
+                object.muted = false;
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (typeof message.user_steamid === "number")
+                    object.user_steamid = options.longs === String ? String(message.user_steamid) : message.user_steamid;
+                else
+                    object.user_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.user_steamid) : options.longs === Number ? new $util.LongBits(message.user_steamid.low >>> 0, message.user_steamid.high >>> 0).toNumber() : message.user_steamid;
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                object.muted = message.muted;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_MuteBroadcastChatUser_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_MuteBroadcastChatUser_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_MuteBroadcastChatUser_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_MuteBroadcastChatUser_Request;
+    })();
+    
+    $root.CBroadcast_MuteBroadcastChatUser_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_MuteBroadcastChatUser_Response.
+         * @exports ICBroadcast_MuteBroadcastChatUser_Response
+         * @interface ICBroadcast_MuteBroadcastChatUser_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_MuteBroadcastChatUser_Response.
+         * @exports CBroadcast_MuteBroadcastChatUser_Response
+         * @classdesc Represents a CBroadcast_MuteBroadcastChatUser_Response.
+         * @implements ICBroadcast_MuteBroadcastChatUser_Response
+         * @constructor
+         * @param {ICBroadcast_MuteBroadcastChatUser_Response=} [properties] Properties to set
+         */
+        function CBroadcast_MuteBroadcastChatUser_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_MuteBroadcastChatUser_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Response=} [properties] Properties to set
+         * @returns {CBroadcast_MuteBroadcastChatUser_Response} CBroadcast_MuteBroadcastChatUser_Response instance
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.create = function create(properties) {
+            return new CBroadcast_MuteBroadcastChatUser_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_MuteBroadcastChatUser_Response message. Does not implicitly {@link CBroadcast_MuteBroadcastChatUser_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Response} message CBroadcast_MuteBroadcastChatUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_MuteBroadcastChatUser_Response message, length delimited. Does not implicitly {@link CBroadcast_MuteBroadcastChatUser_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {ICBroadcast_MuteBroadcastChatUser_Response} message CBroadcast_MuteBroadcastChatUser_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_MuteBroadcastChatUser_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_MuteBroadcastChatUser_Response} CBroadcast_MuteBroadcastChatUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_MuteBroadcastChatUser_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_MuteBroadcastChatUser_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_MuteBroadcastChatUser_Response} CBroadcast_MuteBroadcastChatUser_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_MuteBroadcastChatUser_Response message.
+         * @function verify
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_MuteBroadcastChatUser_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_MuteBroadcastChatUser_Response} CBroadcast_MuteBroadcastChatUser_Response
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_MuteBroadcastChatUser_Response)
+                return object;
+            return new $root.CBroadcast_MuteBroadcastChatUser_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_MuteBroadcastChatUser_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @static
+         * @param {CBroadcast_MuteBroadcastChatUser_Response} message CBroadcast_MuteBroadcastChatUser_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_MuteBroadcastChatUser_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_MuteBroadcastChatUser_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_MuteBroadcastChatUser_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_MuteBroadcastChatUser_Response;
+    })();
+    
+    $root.CBroadcast_RemoveUserChatText_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_RemoveUserChatText_Request.
+         * @exports ICBroadcast_RemoveUserChatText_Request
+         * @interface ICBroadcast_RemoveUserChatText_Request
+         * @property {number|Long|null} [chat_id] CBroadcast_RemoveUserChatText_Request chat_id
+         * @property {number|Long|null} [user_steamid] CBroadcast_RemoveUserChatText_Request user_steamid
+         */
+    
+        /**
+         * Constructs a new CBroadcast_RemoveUserChatText_Request.
+         * @exports CBroadcast_RemoveUserChatText_Request
+         * @classdesc Represents a CBroadcast_RemoveUserChatText_Request.
+         * @implements ICBroadcast_RemoveUserChatText_Request
+         * @constructor
+         * @param {ICBroadcast_RemoveUserChatText_Request=} [properties] Properties to set
+         */
+        function CBroadcast_RemoveUserChatText_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_RemoveUserChatText_Request chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @instance
+         */
+        CBroadcast_RemoveUserChatText_Request.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_RemoveUserChatText_Request user_steamid.
+         * @member {number|Long} user_steamid
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @instance
+         */
+        CBroadcast_RemoveUserChatText_Request.prototype.user_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_RemoveUserChatText_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Request=} [properties] Properties to set
+         * @returns {CBroadcast_RemoveUserChatText_Request} CBroadcast_RemoveUserChatText_Request instance
+         */
+        CBroadcast_RemoveUserChatText_Request.create = function create(properties) {
+            return new CBroadcast_RemoveUserChatText_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_RemoveUserChatText_Request message. Does not implicitly {@link CBroadcast_RemoveUserChatText_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Request} message CBroadcast_RemoveUserChatText_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_RemoveUserChatText_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_RemoveUserChatText_Request message, length delimited. Does not implicitly {@link CBroadcast_RemoveUserChatText_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Request} message CBroadcast_RemoveUserChatText_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_RemoveUserChatText_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_RemoveUserChatText_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_RemoveUserChatText_Request} CBroadcast_RemoveUserChatText_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_RemoveUserChatText_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_RemoveUserChatText_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.user_steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_RemoveUserChatText_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_RemoveUserChatText_Request} CBroadcast_RemoveUserChatText_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_RemoveUserChatText_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_RemoveUserChatText_Request message.
+         * @function verify
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_RemoveUserChatText_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (!$util.isInteger(message.user_steamid) && !(message.user_steamid && $util.isInteger(message.user_steamid.low) && $util.isInteger(message.user_steamid.high)))
+                    return "user_steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_RemoveUserChatText_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_RemoveUserChatText_Request} CBroadcast_RemoveUserChatText_Request
+         */
+        CBroadcast_RemoveUserChatText_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_RemoveUserChatText_Request)
+                return object;
+            var message = new $root.CBroadcast_RemoveUserChatText_Request();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.user_steamid != null)
+                if ($util.Long)
+                    (message.user_steamid = $util.Long.fromValue(object.user_steamid)).unsigned = false;
+                else if (typeof object.user_steamid === "string")
+                    message.user_steamid = parseInt(object.user_steamid, 10);
+                else if (typeof object.user_steamid === "number")
+                    message.user_steamid = object.user_steamid;
+                else if (typeof object.user_steamid === "object")
+                    message.user_steamid = new $util.LongBits(object.user_steamid.low >>> 0, object.user_steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_RemoveUserChatText_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @static
+         * @param {CBroadcast_RemoveUserChatText_Request} message CBroadcast_RemoveUserChatText_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_RemoveUserChatText_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.user_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.user_steamid = options.longs === String ? "0" : 0;
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid"))
+                if (typeof message.user_steamid === "number")
+                    object.user_steamid = options.longs === String ? String(message.user_steamid) : message.user_steamid;
+                else
+                    object.user_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.user_steamid) : options.longs === Number ? new $util.LongBits(message.user_steamid.low >>> 0, message.user_steamid.high >>> 0).toNumber() : message.user_steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_RemoveUserChatText_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_RemoveUserChatText_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_RemoveUserChatText_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_RemoveUserChatText_Request;
+    })();
+    
+    $root.CBroadcast_RemoveUserChatText_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_RemoveUserChatText_Response.
+         * @exports ICBroadcast_RemoveUserChatText_Response
+         * @interface ICBroadcast_RemoveUserChatText_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_RemoveUserChatText_Response.
+         * @exports CBroadcast_RemoveUserChatText_Response
+         * @classdesc Represents a CBroadcast_RemoveUserChatText_Response.
+         * @implements ICBroadcast_RemoveUserChatText_Response
+         * @constructor
+         * @param {ICBroadcast_RemoveUserChatText_Response=} [properties] Properties to set
+         */
+        function CBroadcast_RemoveUserChatText_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_RemoveUserChatText_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Response=} [properties] Properties to set
+         * @returns {CBroadcast_RemoveUserChatText_Response} CBroadcast_RemoveUserChatText_Response instance
+         */
+        CBroadcast_RemoveUserChatText_Response.create = function create(properties) {
+            return new CBroadcast_RemoveUserChatText_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_RemoveUserChatText_Response message. Does not implicitly {@link CBroadcast_RemoveUserChatText_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Response} message CBroadcast_RemoveUserChatText_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_RemoveUserChatText_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_RemoveUserChatText_Response message, length delimited. Does not implicitly {@link CBroadcast_RemoveUserChatText_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {ICBroadcast_RemoveUserChatText_Response} message CBroadcast_RemoveUserChatText_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_RemoveUserChatText_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_RemoveUserChatText_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_RemoveUserChatText_Response} CBroadcast_RemoveUserChatText_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_RemoveUserChatText_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_RemoveUserChatText_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_RemoveUserChatText_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_RemoveUserChatText_Response} CBroadcast_RemoveUserChatText_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_RemoveUserChatText_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_RemoveUserChatText_Response message.
+         * @function verify
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_RemoveUserChatText_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_RemoveUserChatText_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_RemoveUserChatText_Response} CBroadcast_RemoveUserChatText_Response
+         */
+        CBroadcast_RemoveUserChatText_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_RemoveUserChatText_Response)
+                return object;
+            return new $root.CBroadcast_RemoveUserChatText_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_RemoveUserChatText_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @static
+         * @param {CBroadcast_RemoveUserChatText_Response} message CBroadcast_RemoveUserChatText_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_RemoveUserChatText_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_RemoveUserChatText_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_RemoveUserChatText_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_RemoveUserChatText_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_RemoveUserChatText_Response;
+    })();
+    
+    $root.CBroadcast_GetBroadcastChatUserNames_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastChatUserNames_Request.
+         * @exports ICBroadcast_GetBroadcastChatUserNames_Request
+         * @interface ICBroadcast_GetBroadcastChatUserNames_Request
+         * @property {number|Long|null} [chat_id] CBroadcast_GetBroadcastChatUserNames_Request chat_id
+         * @property {Array.<number|Long>|null} [user_steamid] CBroadcast_GetBroadcastChatUserNames_Request user_steamid
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastChatUserNames_Request.
+         * @exports CBroadcast_GetBroadcastChatUserNames_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastChatUserNames_Request.
+         * @implements ICBroadcast_GetBroadcastChatUserNames_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastChatUserNames_Request(properties) {
+            this.user_steamid = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastChatUserNames_Request chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastChatUserNames_Request user_steamid.
+         * @member {Array.<number|Long>} user_steamid
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.prototype.user_steamid = $util.emptyArray;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastChatUserNames_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Request} CBroadcast_GetBroadcastChatUserNames_Request instance
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastChatUserNames_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatUserNames_Request message. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request} message CBroadcast_GetBroadcastChatUserNames_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.user_steamid != null && message.user_steamid.length)
+                for (var i = 0; i < message.user_steamid.length; ++i)
+                    writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.user_steamid[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatUserNames_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request} message CBroadcast_GetBroadcastChatUserNames_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatUserNames_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Request} CBroadcast_GetBroadcastChatUserNames_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastChatUserNames_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    if (!(message.user_steamid && message.user_steamid.length))
+                        message.user_steamid = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.user_steamid.push(reader.fixed64());
+                    } else
+                        message.user_steamid.push(reader.fixed64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatUserNames_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Request} CBroadcast_GetBroadcastChatUserNames_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastChatUserNames_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.user_steamid != null && message.hasOwnProperty("user_steamid")) {
+                if (!Array.isArray(message.user_steamid))
+                    return "user_steamid: array expected";
+                for (var i = 0; i < message.user_steamid.length; ++i)
+                    if (!$util.isInteger(message.user_steamid[i]) && !(message.user_steamid[i] && $util.isInteger(message.user_steamid[i].low) && $util.isInteger(message.user_steamid[i].high)))
+                        return "user_steamid: integer|Long[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastChatUserNames_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Request} CBroadcast_GetBroadcastChatUserNames_Request
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastChatUserNames_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastChatUserNames_Request();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.user_steamid) {
+                if (!Array.isArray(object.user_steamid))
+                    throw TypeError(".CBroadcast_GetBroadcastChatUserNames_Request.user_steamid: array expected");
+                message.user_steamid = [];
+                for (var i = 0; i < object.user_steamid.length; ++i)
+                    if ($util.Long)
+                        (message.user_steamid[i] = $util.Long.fromValue(object.user_steamid[i])).unsigned = false;
+                    else if (typeof object.user_steamid[i] === "string")
+                        message.user_steamid[i] = parseInt(object.user_steamid[i], 10);
+                    else if (typeof object.user_steamid[i] === "number")
+                        message.user_steamid[i] = object.user_steamid[i];
+                    else if (typeof object.user_steamid[i] === "object")
+                        message.user_steamid[i] = new $util.LongBits(object.user_steamid[i].low >>> 0, object.user_steamid[i].high >>> 0).toNumber();
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastChatUserNames_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastChatUserNames_Request} message CBroadcast_GetBroadcastChatUserNames_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.user_steamid = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.user_steamid && message.user_steamid.length) {
+                object.user_steamid = [];
+                for (var j = 0; j < message.user_steamid.length; ++j)
+                    if (typeof message.user_steamid[j] === "number")
+                        object.user_steamid[j] = options.longs === String ? String(message.user_steamid[j]) : message.user_steamid[j];
+                    else
+                        object.user_steamid[j] = options.longs === String ? $util.Long.prototype.toString.call(message.user_steamid[j]) : options.longs === Number ? new $util.LongBits(message.user_steamid[j].low >>> 0, message.user_steamid[j].high >>> 0).toNumber() : message.user_steamid[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastChatUserNames_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastChatUserNames_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastChatUserNames_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastChatUserNames_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastChatUserNames_Response.
+         * @exports ICBroadcast_GetBroadcastChatUserNames_Response
+         * @interface ICBroadcast_GetBroadcastChatUserNames_Response
+         * @property {Array.<CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName>|null} [persona_names] CBroadcast_GetBroadcastChatUserNames_Response persona_names
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastChatUserNames_Response.
+         * @exports CBroadcast_GetBroadcastChatUserNames_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastChatUserNames_Response.
+         * @implements ICBroadcast_GetBroadcastChatUserNames_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastChatUserNames_Response(properties) {
+            this.persona_names = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastChatUserNames_Response persona_names.
+         * @member {Array.<CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName>} persona_names
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.prototype.persona_names = $util.emptyArray;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastChatUserNames_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Response} CBroadcast_GetBroadcastChatUserNames_Response instance
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastChatUserNames_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatUserNames_Response message. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Response} message CBroadcast_GetBroadcastChatUserNames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.persona_names != null && message.persona_names.length)
+                for (var i = 0; i < message.persona_names.length; ++i)
+                    $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.encode(message.persona_names[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastChatUserNames_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Response} message CBroadcast_GetBroadcastChatUserNames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatUserNames_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Response} CBroadcast_GetBroadcastChatUserNames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastChatUserNames_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.persona_names && message.persona_names.length))
+                        message.persona_names = [];
+                    message.persona_names.push($root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastChatUserNames_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Response} CBroadcast_GetBroadcastChatUserNames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastChatUserNames_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.persona_names != null && message.hasOwnProperty("persona_names")) {
+                if (!Array.isArray(message.persona_names))
+                    return "persona_names: array expected";
+                for (var i = 0; i < message.persona_names.length; ++i) {
+                    var error = $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.verify(message.persona_names[i]);
+                    if (error)
+                        return "persona_names." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastChatUserNames_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastChatUserNames_Response} CBroadcast_GetBroadcastChatUserNames_Response
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastChatUserNames_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastChatUserNames_Response();
+            if (object.persona_names) {
+                if (!Array.isArray(object.persona_names))
+                    throw TypeError(".CBroadcast_GetBroadcastChatUserNames_Response.persona_names: array expected");
+                message.persona_names = [];
+                for (var i = 0; i < object.persona_names.length; ++i) {
+                    if (typeof object.persona_names[i] !== "object")
+                        throw TypeError(".CBroadcast_GetBroadcastChatUserNames_Response.persona_names: object expected");
+                    message.persona_names[i] = $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.fromObject(object.persona_names[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastChatUserNames_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastChatUserNames_Response} message CBroadcast_GetBroadcastChatUserNames_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.persona_names = [];
+            if (message.persona_names && message.persona_names.length) {
+                object.persona_names = [];
+                for (var j = 0; j < message.persona_names.length; ++j)
+                    object.persona_names[j] = $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.toObject(message.persona_names[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastChatUserNames_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastChatUserNames_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CBroadcast_GetBroadcastChatUserNames_Response.PersonaName = (function() {
+    
+            /**
+             * Properties of a PersonaName.
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+             * @interface IPersonaName
+             * @property {number|Long|null} [steam_id] PersonaName steam_id
+             * @property {string|null} [persona] PersonaName persona
+             */
+    
+            /**
+             * Constructs a new PersonaName.
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response
+             * @classdesc Represents a PersonaName.
+             * @implements IPersonaName
+             * @constructor
+             * @param {CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName=} [properties] Properties to set
+             */
+            function PersonaName(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * PersonaName steam_id.
+             * @member {number|Long} steam_id
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @instance
+             */
+            PersonaName.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * PersonaName persona.
+             * @member {string} persona
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @instance
+             */
+            PersonaName.prototype.persona = "";
+    
+            /**
+             * Creates a new PersonaName instance using the specified properties.
+             * @function create
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName=} [properties] Properties to set
+             * @returns {CBroadcast_GetBroadcastChatUserNames_Response.PersonaName} PersonaName instance
+             */
+            PersonaName.create = function create(properties) {
+                return new PersonaName(properties);
+            };
+    
+            /**
+             * Encodes the specified PersonaName message. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.verify|verify} messages.
+             * @function encode
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName} message PersonaName message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PersonaName.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steam_id);
+                if (message.persona != null && message.hasOwnProperty("persona"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.persona);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified PersonaName message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastChatUserNames_Response.PersonaName.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {CBroadcast_GetBroadcastChatUserNames_Response.IPersonaName} message PersonaName message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            PersonaName.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a PersonaName message from the specified reader or buffer.
+             * @function decode
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CBroadcast_GetBroadcastChatUserNames_Response.PersonaName} PersonaName
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PersonaName.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steam_id = reader.fixed64();
+                        break;
+                    case 2:
+                        message.persona = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a PersonaName message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CBroadcast_GetBroadcastChatUserNames_Response.PersonaName} PersonaName
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            PersonaName.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a PersonaName message.
+             * @function verify
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            PersonaName.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                    if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
+                        return "steam_id: integer|Long expected";
+                if (message.persona != null && message.hasOwnProperty("persona"))
+                    if (!$util.isString(message.persona))
+                        return "persona: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a PersonaName message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CBroadcast_GetBroadcastChatUserNames_Response.PersonaName} PersonaName
+             */
+            PersonaName.fromObject = function fromObject(object) {
+                if (object instanceof $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName)
+                    return object;
+                var message = new $root.CBroadcast_GetBroadcastChatUserNames_Response.PersonaName();
+                if (object.steam_id != null)
+                    if ($util.Long)
+                        (message.steam_id = $util.Long.fromValue(object.steam_id)).unsigned = false;
+                    else if (typeof object.steam_id === "string")
+                        message.steam_id = parseInt(object.steam_id, 10);
+                    else if (typeof object.steam_id === "number")
+                        message.steam_id = object.steam_id;
+                    else if (typeof object.steam_id === "object")
+                        message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber();
+                if (object.persona != null)
+                    message.persona = String(object.persona);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a PersonaName message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @static
+             * @param {CBroadcast_GetBroadcastChatUserNames_Response.PersonaName} message PersonaName
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            PersonaName.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steam_id = options.longs === String ? "0" : 0;
+                    object.persona = "";
+                }
+                if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                    if (typeof message.steam_id === "number")
+                        object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
+                    else
+                        object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber() : message.steam_id;
+                if (message.persona != null && message.hasOwnProperty("persona"))
+                    object.persona = message.persona;
+                return object;
+            };
+    
+            /**
+             * Converts this PersonaName to JSON.
+             * @function toJSON
+             * @memberof CBroadcast_GetBroadcastChatUserNames_Response.PersonaName
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            PersonaName.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return PersonaName;
+        })();
+    
+        return CBroadcast_GetBroadcastChatUserNames_Response;
+    })();
+    
+    $root.CBroadcast_BroadcastViewerState_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BroadcastViewerState_Notification.
+         * @exports ICBroadcast_BroadcastViewerState_Notification
+         * @interface ICBroadcast_BroadcastViewerState_Notification
+         * @property {number|Long|null} [steamid] CBroadcast_BroadcastViewerState_Notification steamid
+         * @property {CBroadcast_BroadcastViewerState_Notification.EViewerState|null} [state] CBroadcast_BroadcastViewerState_Notification state
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BroadcastViewerState_Notification.
+         * @exports CBroadcast_BroadcastViewerState_Notification
+         * @classdesc Represents a CBroadcast_BroadcastViewerState_Notification.
+         * @implements ICBroadcast_BroadcastViewerState_Notification
+         * @constructor
+         * @param {ICBroadcast_BroadcastViewerState_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_BroadcastViewerState_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BroadcastViewerState_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastViewerState_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BroadcastViewerState_Notification state.
+         * @member {CBroadcast_BroadcastViewerState_Notification.EViewerState} state
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastViewerState_Notification.prototype.state = 1;
+    
+        /**
+         * Creates a new CBroadcast_BroadcastViewerState_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastViewerState_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_BroadcastViewerState_Notification} CBroadcast_BroadcastViewerState_Notification instance
+         */
+        CBroadcast_BroadcastViewerState_Notification.create = function create(properties) {
+            return new CBroadcast_BroadcastViewerState_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastViewerState_Notification message. Does not implicitly {@link CBroadcast_BroadcastViewerState_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastViewerState_Notification} message CBroadcast_BroadcastViewerState_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastViewerState_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.state != null && message.hasOwnProperty("state"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastViewerState_Notification message, length delimited. Does not implicitly {@link CBroadcast_BroadcastViewerState_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastViewerState_Notification} message CBroadcast_BroadcastViewerState_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastViewerState_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastViewerState_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BroadcastViewerState_Notification} CBroadcast_BroadcastViewerState_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastViewerState_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BroadcastViewerState_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.state = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastViewerState_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BroadcastViewerState_Notification} CBroadcast_BroadcastViewerState_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastViewerState_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BroadcastViewerState_Notification message.
+         * @function verify
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BroadcastViewerState_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                switch (message.state) {
+                default:
+                    return "state: enum value expected";
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BroadcastViewerState_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BroadcastViewerState_Notification} CBroadcast_BroadcastViewerState_Notification
+         */
+        CBroadcast_BroadcastViewerState_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BroadcastViewerState_Notification)
+                return object;
+            var message = new $root.CBroadcast_BroadcastViewerState_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            switch (object.state) {
+            case "k_EViewerNeedsApproval":
+            case 1:
+                message.state = 1;
+                break;
+            case "k_EViewerWatching":
+            case 2:
+                message.state = 2;
+                break;
+            case "k_EViewerLeft":
+            case 3:
+                message.state = 3;
+                break;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BroadcastViewerState_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @static
+         * @param {CBroadcast_BroadcastViewerState_Notification} message CBroadcast_BroadcastViewerState_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BroadcastViewerState_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.state = options.enums === String ? "k_EViewerNeedsApproval" : 1;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = options.enums === String ? $root.CBroadcast_BroadcastViewerState_Notification.EViewerState[message.state] : message.state;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BroadcastViewerState_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BroadcastViewerState_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BroadcastViewerState_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * EViewerState enum.
+         * @name CBroadcast_BroadcastViewerState_Notification.EViewerState
+         * @enum {string}
+         * @property {number} k_EViewerNeedsApproval=1 k_EViewerNeedsApproval value
+         * @property {number} k_EViewerWatching=2 k_EViewerWatching value
+         * @property {number} k_EViewerLeft=3 k_EViewerLeft value
+         */
+        CBroadcast_BroadcastViewerState_Notification.EViewerState = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[1] = "k_EViewerNeedsApproval"] = 1;
+            values[valuesById[2] = "k_EViewerWatching"] = 2;
+            values[valuesById[3] = "k_EViewerLeft"] = 3;
+            return values;
+        })();
+    
+        return CBroadcast_BroadcastViewerState_Notification;
+    })();
+    
+    $root.CBroadcast_WaitingBroadcastViewer_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WaitingBroadcastViewer_Notification.
+         * @exports ICBroadcast_WaitingBroadcastViewer_Notification
+         * @interface ICBroadcast_WaitingBroadcastViewer_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_WaitingBroadcastViewer_Notification broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WaitingBroadcastViewer_Notification.
+         * @exports CBroadcast_WaitingBroadcastViewer_Notification
+         * @classdesc Represents a CBroadcast_WaitingBroadcastViewer_Notification.
+         * @implements ICBroadcast_WaitingBroadcastViewer_Notification
+         * @constructor
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WaitingBroadcastViewer_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WaitingBroadcastViewer_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @instance
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_WaitingBroadcastViewer_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WaitingBroadcastViewer_Notification} CBroadcast_WaitingBroadcastViewer_Notification instance
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.create = function create(properties) {
+            return new CBroadcast_WaitingBroadcastViewer_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WaitingBroadcastViewer_Notification message. Does not implicitly {@link CBroadcast_WaitingBroadcastViewer_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification} message CBroadcast_WaitingBroadcastViewer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WaitingBroadcastViewer_Notification message, length delimited. Does not implicitly {@link CBroadcast_WaitingBroadcastViewer_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification} message CBroadcast_WaitingBroadcastViewer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WaitingBroadcastViewer_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WaitingBroadcastViewer_Notification} CBroadcast_WaitingBroadcastViewer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WaitingBroadcastViewer_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WaitingBroadcastViewer_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WaitingBroadcastViewer_Notification} CBroadcast_WaitingBroadcastViewer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WaitingBroadcastViewer_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WaitingBroadcastViewer_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WaitingBroadcastViewer_Notification} CBroadcast_WaitingBroadcastViewer_Notification
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WaitingBroadcastViewer_Notification)
+                return object;
+            var message = new $root.CBroadcast_WaitingBroadcastViewer_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WaitingBroadcastViewer_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @static
+         * @param {CBroadcast_WaitingBroadcastViewer_Notification} message CBroadcast_WaitingBroadcastViewer_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WaitingBroadcastViewer_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WaitingBroadcastViewer_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WaitingBroadcastViewer_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WaitingBroadcastViewer_Notification;
+    })();
+    
+    $root.CBroadcast_StopBroadcastUpload_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StopBroadcastUpload_Notification.
+         * @exports ICBroadcast_StopBroadcastUpload_Notification
+         * @interface ICBroadcast_StopBroadcastUpload_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_StopBroadcastUpload_Notification broadcast_id
+         * @property {number|Long|null} [broadcast_relay_id] CBroadcast_StopBroadcastUpload_Notification broadcast_relay_id
+         * @property {number|null} [upload_result] CBroadcast_StopBroadcastUpload_Notification upload_result
+         * @property {boolean|null} [too_many_poor_uploads] CBroadcast_StopBroadcastUpload_Notification too_many_poor_uploads
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StopBroadcastUpload_Notification.
+         * @exports CBroadcast_StopBroadcastUpload_Notification
+         * @classdesc Represents a CBroadcast_StopBroadcastUpload_Notification.
+         * @implements ICBroadcast_StopBroadcastUpload_Notification
+         * @constructor
+         * @param {ICBroadcast_StopBroadcastUpload_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_StopBroadcastUpload_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StopBroadcastUpload_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @instance
+         */
+        CBroadcast_StopBroadcastUpload_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopBroadcastUpload_Notification broadcast_relay_id.
+         * @member {number|Long} broadcast_relay_id
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @instance
+         */
+        CBroadcast_StopBroadcastUpload_Notification.prototype.broadcast_relay_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StopBroadcastUpload_Notification upload_result.
+         * @member {number} upload_result
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @instance
+         */
+        CBroadcast_StopBroadcastUpload_Notification.prototype.upload_result = 0;
+    
+        /**
+         * CBroadcast_StopBroadcastUpload_Notification too_many_poor_uploads.
+         * @member {boolean} too_many_poor_uploads
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @instance
+         */
+        CBroadcast_StopBroadcastUpload_Notification.prototype.too_many_poor_uploads = false;
+    
+        /**
+         * Creates a new CBroadcast_StopBroadcastUpload_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {ICBroadcast_StopBroadcastUpload_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_StopBroadcastUpload_Notification} CBroadcast_StopBroadcastUpload_Notification instance
+         */
+        CBroadcast_StopBroadcastUpload_Notification.create = function create(properties) {
+            return new CBroadcast_StopBroadcastUpload_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopBroadcastUpload_Notification message. Does not implicitly {@link CBroadcast_StopBroadcastUpload_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {ICBroadcast_StopBroadcastUpload_Notification} message CBroadcast_StopBroadcastUpload_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopBroadcastUpload_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_relay_id);
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.upload_result);
+            if (message.too_many_poor_uploads != null && message.hasOwnProperty("too_many_poor_uploads"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.too_many_poor_uploads);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StopBroadcastUpload_Notification message, length delimited. Does not implicitly {@link CBroadcast_StopBroadcastUpload_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {ICBroadcast_StopBroadcastUpload_Notification} message CBroadcast_StopBroadcastUpload_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StopBroadcastUpload_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopBroadcastUpload_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StopBroadcastUpload_Notification} CBroadcast_StopBroadcastUpload_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopBroadcastUpload_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StopBroadcastUpload_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_relay_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.upload_result = reader.uint32();
+                    break;
+                case 4:
+                    message.too_many_poor_uploads = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StopBroadcastUpload_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StopBroadcastUpload_Notification} CBroadcast_StopBroadcastUpload_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StopBroadcastUpload_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StopBroadcastUpload_Notification message.
+         * @function verify
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StopBroadcastUpload_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                if (!$util.isInteger(message.broadcast_relay_id) && !(message.broadcast_relay_id && $util.isInteger(message.broadcast_relay_id.low) && $util.isInteger(message.broadcast_relay_id.high)))
+                    return "broadcast_relay_id: integer|Long expected";
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                if (!$util.isInteger(message.upload_result))
+                    return "upload_result: integer expected";
+            if (message.too_many_poor_uploads != null && message.hasOwnProperty("too_many_poor_uploads"))
+                if (typeof message.too_many_poor_uploads !== "boolean")
+                    return "too_many_poor_uploads: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StopBroadcastUpload_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StopBroadcastUpload_Notification} CBroadcast_StopBroadcastUpload_Notification
+         */
+        CBroadcast_StopBroadcastUpload_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StopBroadcastUpload_Notification)
+                return object;
+            var message = new $root.CBroadcast_StopBroadcastUpload_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.broadcast_relay_id != null)
+                if ($util.Long)
+                    (message.broadcast_relay_id = $util.Long.fromValue(object.broadcast_relay_id)).unsigned = false;
+                else if (typeof object.broadcast_relay_id === "string")
+                    message.broadcast_relay_id = parseInt(object.broadcast_relay_id, 10);
+                else if (typeof object.broadcast_relay_id === "number")
+                    message.broadcast_relay_id = object.broadcast_relay_id;
+                else if (typeof object.broadcast_relay_id === "object")
+                    message.broadcast_relay_id = new $util.LongBits(object.broadcast_relay_id.low >>> 0, object.broadcast_relay_id.high >>> 0).toNumber();
+            if (object.upload_result != null)
+                message.upload_result = object.upload_result >>> 0;
+            if (object.too_many_poor_uploads != null)
+                message.too_many_poor_uploads = Boolean(object.too_many_poor_uploads);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StopBroadcastUpload_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @static
+         * @param {CBroadcast_StopBroadcastUpload_Notification} message CBroadcast_StopBroadcastUpload_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StopBroadcastUpload_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_relay_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_relay_id = options.longs === String ? "0" : 0;
+                object.upload_result = 0;
+                object.too_many_poor_uploads = false;
+            }
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
+                if (typeof message.broadcast_relay_id === "number")
+                    object.broadcast_relay_id = options.longs === String ? String(message.broadcast_relay_id) : message.broadcast_relay_id;
+                else
+                    object.broadcast_relay_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_relay_id) : options.longs === Number ? new $util.LongBits(message.broadcast_relay_id.low >>> 0, message.broadcast_relay_id.high >>> 0).toNumber() : message.broadcast_relay_id;
+            if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                object.upload_result = message.upload_result;
+            if (message.too_many_poor_uploads != null && message.hasOwnProperty("too_many_poor_uploads"))
+                object.too_many_poor_uploads = message.too_many_poor_uploads;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StopBroadcastUpload_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StopBroadcastUpload_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StopBroadcastUpload_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StopBroadcastUpload_Notification;
+    })();
+    
+    $root.CBroadcast_SessionClosed_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SessionClosed_Notification.
+         * @exports ICBroadcast_SessionClosed_Notification
+         * @interface ICBroadcast_SessionClosed_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_SessionClosed_Notification broadcast_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SessionClosed_Notification.
+         * @exports CBroadcast_SessionClosed_Notification
+         * @classdesc Represents a CBroadcast_SessionClosed_Notification.
+         * @implements ICBroadcast_SessionClosed_Notification
+         * @constructor
+         * @param {ICBroadcast_SessionClosed_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_SessionClosed_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_SessionClosed_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @instance
+         */
+        CBroadcast_SessionClosed_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_SessionClosed_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {ICBroadcast_SessionClosed_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_SessionClosed_Notification} CBroadcast_SessionClosed_Notification instance
+         */
+        CBroadcast_SessionClosed_Notification.create = function create(properties) {
+            return new CBroadcast_SessionClosed_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SessionClosed_Notification message. Does not implicitly {@link CBroadcast_SessionClosed_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {ICBroadcast_SessionClosed_Notification} message CBroadcast_SessionClosed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SessionClosed_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SessionClosed_Notification message, length delimited. Does not implicitly {@link CBroadcast_SessionClosed_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {ICBroadcast_SessionClosed_Notification} message CBroadcast_SessionClosed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SessionClosed_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SessionClosed_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SessionClosed_Notification} CBroadcast_SessionClosed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SessionClosed_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SessionClosed_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SessionClosed_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SessionClosed_Notification} CBroadcast_SessionClosed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SessionClosed_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SessionClosed_Notification message.
+         * @function verify
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SessionClosed_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SessionClosed_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SessionClosed_Notification} CBroadcast_SessionClosed_Notification
+         */
+        CBroadcast_SessionClosed_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SessionClosed_Notification)
+                return object;
+            var message = new $root.CBroadcast_SessionClosed_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SessionClosed_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @static
+         * @param {CBroadcast_SessionClosed_Notification} message CBroadcast_SessionClosed_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SessionClosed_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_SessionClosed_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SessionClosed_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SessionClosed_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SessionClosed_Notification;
+    })();
+    
+    $root.CBroadcast_ViewerBroadcastInvite_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_ViewerBroadcastInvite_Notification.
+         * @exports ICBroadcast_ViewerBroadcastInvite_Notification
+         * @interface ICBroadcast_ViewerBroadcastInvite_Notification
+         * @property {number|Long|null} [broadcaster_steamid] CBroadcast_ViewerBroadcastInvite_Notification broadcaster_steamid
+         */
+    
+        /**
+         * Constructs a new CBroadcast_ViewerBroadcastInvite_Notification.
+         * @exports CBroadcast_ViewerBroadcastInvite_Notification
+         * @classdesc Represents a CBroadcast_ViewerBroadcastInvite_Notification.
+         * @implements ICBroadcast_ViewerBroadcastInvite_Notification
+         * @constructor
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_ViewerBroadcastInvite_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_ViewerBroadcastInvite_Notification broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @instance
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_ViewerBroadcastInvite_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_ViewerBroadcastInvite_Notification} CBroadcast_ViewerBroadcastInvite_Notification instance
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.create = function create(properties) {
+            return new CBroadcast_ViewerBroadcastInvite_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_ViewerBroadcastInvite_Notification message. Does not implicitly {@link CBroadcast_ViewerBroadcastInvite_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification} message CBroadcast_ViewerBroadcastInvite_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_ViewerBroadcastInvite_Notification message, length delimited. Does not implicitly {@link CBroadcast_ViewerBroadcastInvite_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification} message CBroadcast_ViewerBroadcastInvite_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_ViewerBroadcastInvite_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_ViewerBroadcastInvite_Notification} CBroadcast_ViewerBroadcastInvite_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_ViewerBroadcastInvite_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_ViewerBroadcastInvite_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_ViewerBroadcastInvite_Notification} CBroadcast_ViewerBroadcastInvite_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_ViewerBroadcastInvite_Notification message.
+         * @function verify
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_ViewerBroadcastInvite_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_ViewerBroadcastInvite_Notification} CBroadcast_ViewerBroadcastInvite_Notification
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_ViewerBroadcastInvite_Notification)
+                return object;
+            var message = new $root.CBroadcast_ViewerBroadcastInvite_Notification();
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_ViewerBroadcastInvite_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @static
+         * @param {CBroadcast_ViewerBroadcastInvite_Notification} message CBroadcast_ViewerBroadcastInvite_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_ViewerBroadcastInvite_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_ViewerBroadcastInvite_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_ViewerBroadcastInvite_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_ViewerBroadcastInvite_Notification;
+    })();
+    
+    $root.CBroadcast_BroadcastStatus_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BroadcastStatus_Notification.
+         * @exports ICBroadcast_BroadcastStatus_Notification
+         * @interface ICBroadcast_BroadcastStatus_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_BroadcastStatus_Notification broadcast_id
+         * @property {number|null} [num_viewers] CBroadcast_BroadcastStatus_Notification num_viewers
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BroadcastStatus_Notification.
+         * @exports CBroadcast_BroadcastStatus_Notification
+         * @classdesc Represents a CBroadcast_BroadcastStatus_Notification.
+         * @implements ICBroadcast_BroadcastStatus_Notification
+         * @constructor
+         * @param {ICBroadcast_BroadcastStatus_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_BroadcastStatus_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BroadcastStatus_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastStatus_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BroadcastStatus_Notification num_viewers.
+         * @member {number} num_viewers
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastStatus_Notification.prototype.num_viewers = 0;
+    
+        /**
+         * Creates a new CBroadcast_BroadcastStatus_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastStatus_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_BroadcastStatus_Notification} CBroadcast_BroadcastStatus_Notification instance
+         */
+        CBroadcast_BroadcastStatus_Notification.create = function create(properties) {
+            return new CBroadcast_BroadcastStatus_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastStatus_Notification message. Does not implicitly {@link CBroadcast_BroadcastStatus_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastStatus_Notification} message CBroadcast_BroadcastStatus_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastStatus_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.num_viewers);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastStatus_Notification message, length delimited. Does not implicitly {@link CBroadcast_BroadcastStatus_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastStatus_Notification} message CBroadcast_BroadcastStatus_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastStatus_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastStatus_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BroadcastStatus_Notification} CBroadcast_BroadcastStatus_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastStatus_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BroadcastStatus_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.num_viewers = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastStatus_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BroadcastStatus_Notification} CBroadcast_BroadcastStatus_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastStatus_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BroadcastStatus_Notification message.
+         * @function verify
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BroadcastStatus_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                if (!$util.isInteger(message.num_viewers))
+                    return "num_viewers: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BroadcastStatus_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BroadcastStatus_Notification} CBroadcast_BroadcastStatus_Notification
+         */
+        CBroadcast_BroadcastStatus_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BroadcastStatus_Notification)
+                return object;
+            var message = new $root.CBroadcast_BroadcastStatus_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.num_viewers != null)
+                message.num_viewers = object.num_viewers | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BroadcastStatus_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @static
+         * @param {CBroadcast_BroadcastStatus_Notification} message CBroadcast_BroadcastStatus_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BroadcastStatus_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                object.num_viewers = 0;
+            }
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                object.num_viewers = message.num_viewers;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BroadcastStatus_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BroadcastStatus_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BroadcastStatus_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_BroadcastStatus_Notification;
+    })();
+    
+    $root.CBroadcast_SendThumbnailToRelay_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SendThumbnailToRelay_Notification.
+         * @exports ICBroadcast_SendThumbnailToRelay_Notification
+         * @interface ICBroadcast_SendThumbnailToRelay_Notification
+         * @property {string|null} [thumbnail_upload_token] CBroadcast_SendThumbnailToRelay_Notification thumbnail_upload_token
+         * @property {number|Long|null} [thumbnail_broadcast_session_id] CBroadcast_SendThumbnailToRelay_Notification thumbnail_broadcast_session_id
+         * @property {Uint8Array|null} [thumbnail_data] CBroadcast_SendThumbnailToRelay_Notification thumbnail_data
+         * @property {number|null} [thumbnail_width] CBroadcast_SendThumbnailToRelay_Notification thumbnail_width
+         * @property {number|null} [thumbnail_height] CBroadcast_SendThumbnailToRelay_Notification thumbnail_height
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SendThumbnailToRelay_Notification.
+         * @exports CBroadcast_SendThumbnailToRelay_Notification
+         * @classdesc Represents a CBroadcast_SendThumbnailToRelay_Notification.
+         * @implements ICBroadcast_SendThumbnailToRelay_Notification
+         * @constructor
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_SendThumbnailToRelay_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_SendThumbnailToRelay_Notification thumbnail_upload_token.
+         * @member {string} thumbnail_upload_token
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.thumbnail_upload_token = "";
+    
+        /**
+         * CBroadcast_SendThumbnailToRelay_Notification thumbnail_broadcast_session_id.
+         * @member {number|Long} thumbnail_broadcast_session_id
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.thumbnail_broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_SendThumbnailToRelay_Notification thumbnail_data.
+         * @member {Uint8Array} thumbnail_data
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.thumbnail_data = $util.newBuffer([]);
+    
+        /**
+         * CBroadcast_SendThumbnailToRelay_Notification thumbnail_width.
+         * @member {number} thumbnail_width
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.thumbnail_width = 0;
+    
+        /**
+         * CBroadcast_SendThumbnailToRelay_Notification thumbnail_height.
+         * @member {number} thumbnail_height
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.thumbnail_height = 0;
+    
+        /**
+         * Creates a new CBroadcast_SendThumbnailToRelay_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_SendThumbnailToRelay_Notification} CBroadcast_SendThumbnailToRelay_Notification instance
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.create = function create(properties) {
+            return new CBroadcast_SendThumbnailToRelay_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendThumbnailToRelay_Notification message. Does not implicitly {@link CBroadcast_SendThumbnailToRelay_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification} message CBroadcast_SendThumbnailToRelay_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail_upload_token);
+            if (message.thumbnail_broadcast_session_id != null && message.hasOwnProperty("thumbnail_broadcast_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.thumbnail_broadcast_session_id);
+            if (message.thumbnail_data != null && message.hasOwnProperty("thumbnail_data"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thumbnail_data);
+            if (message.thumbnail_width != null && message.hasOwnProperty("thumbnail_width"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.thumbnail_width);
+            if (message.thumbnail_height != null && message.hasOwnProperty("thumbnail_height"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.thumbnail_height);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SendThumbnailToRelay_Notification message, length delimited. Does not implicitly {@link CBroadcast_SendThumbnailToRelay_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification} message CBroadcast_SendThumbnailToRelay_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendThumbnailToRelay_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SendThumbnailToRelay_Notification} CBroadcast_SendThumbnailToRelay_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SendThumbnailToRelay_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.thumbnail_upload_token = reader.string();
+                    break;
+                case 2:
+                    message.thumbnail_broadcast_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.thumbnail_data = reader.bytes();
+                    break;
+                case 4:
+                    message.thumbnail_width = reader.uint32();
+                    break;
+                case 5:
+                    message.thumbnail_height = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SendThumbnailToRelay_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SendThumbnailToRelay_Notification} CBroadcast_SendThumbnailToRelay_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SendThumbnailToRelay_Notification message.
+         * @function verify
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                if (!$util.isString(message.thumbnail_upload_token))
+                    return "thumbnail_upload_token: string expected";
+            if (message.thumbnail_broadcast_session_id != null && message.hasOwnProperty("thumbnail_broadcast_session_id"))
+                if (!$util.isInteger(message.thumbnail_broadcast_session_id) && !(message.thumbnail_broadcast_session_id && $util.isInteger(message.thumbnail_broadcast_session_id.low) && $util.isInteger(message.thumbnail_broadcast_session_id.high)))
+                    return "thumbnail_broadcast_session_id: integer|Long expected";
+            if (message.thumbnail_data != null && message.hasOwnProperty("thumbnail_data"))
+                if (!(message.thumbnail_data && typeof message.thumbnail_data.length === "number" || $util.isString(message.thumbnail_data)))
+                    return "thumbnail_data: buffer expected";
+            if (message.thumbnail_width != null && message.hasOwnProperty("thumbnail_width"))
+                if (!$util.isInteger(message.thumbnail_width))
+                    return "thumbnail_width: integer expected";
+            if (message.thumbnail_height != null && message.hasOwnProperty("thumbnail_height"))
+                if (!$util.isInteger(message.thumbnail_height))
+                    return "thumbnail_height: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SendThumbnailToRelay_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SendThumbnailToRelay_Notification} CBroadcast_SendThumbnailToRelay_Notification
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SendThumbnailToRelay_Notification)
+                return object;
+            var message = new $root.CBroadcast_SendThumbnailToRelay_Notification();
+            if (object.thumbnail_upload_token != null)
+                message.thumbnail_upload_token = String(object.thumbnail_upload_token);
+            if (object.thumbnail_broadcast_session_id != null)
+                if ($util.Long)
+                    (message.thumbnail_broadcast_session_id = $util.Long.fromValue(object.thumbnail_broadcast_session_id)).unsigned = false;
+                else if (typeof object.thumbnail_broadcast_session_id === "string")
+                    message.thumbnail_broadcast_session_id = parseInt(object.thumbnail_broadcast_session_id, 10);
+                else if (typeof object.thumbnail_broadcast_session_id === "number")
+                    message.thumbnail_broadcast_session_id = object.thumbnail_broadcast_session_id;
+                else if (typeof object.thumbnail_broadcast_session_id === "object")
+                    message.thumbnail_broadcast_session_id = new $util.LongBits(object.thumbnail_broadcast_session_id.low >>> 0, object.thumbnail_broadcast_session_id.high >>> 0).toNumber();
+            if (object.thumbnail_data != null)
+                if (typeof object.thumbnail_data === "string")
+                    $util.base64.decode(object.thumbnail_data, message.thumbnail_data = $util.newBuffer($util.base64.length(object.thumbnail_data)), 0);
+                else if (object.thumbnail_data.length)
+                    message.thumbnail_data = object.thumbnail_data;
+            if (object.thumbnail_width != null)
+                message.thumbnail_width = object.thumbnail_width >>> 0;
+            if (object.thumbnail_height != null)
+                message.thumbnail_height = object.thumbnail_height >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SendThumbnailToRelay_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @static
+         * @param {CBroadcast_SendThumbnailToRelay_Notification} message CBroadcast_SendThumbnailToRelay_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.thumbnail_upload_token = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.thumbnail_broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.thumbnail_broadcast_session_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.thumbnail_data = "";
+                else {
+                    object.thumbnail_data = [];
+                    if (options.bytes !== Array)
+                        object.thumbnail_data = $util.newBuffer(object.thumbnail_data);
+                }
+                object.thumbnail_width = 0;
+                object.thumbnail_height = 0;
+            }
+            if (message.thumbnail_upload_token != null && message.hasOwnProperty("thumbnail_upload_token"))
+                object.thumbnail_upload_token = message.thumbnail_upload_token;
+            if (message.thumbnail_broadcast_session_id != null && message.hasOwnProperty("thumbnail_broadcast_session_id"))
+                if (typeof message.thumbnail_broadcast_session_id === "number")
+                    object.thumbnail_broadcast_session_id = options.longs === String ? String(message.thumbnail_broadcast_session_id) : message.thumbnail_broadcast_session_id;
+                else
+                    object.thumbnail_broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.thumbnail_broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.thumbnail_broadcast_session_id.low >>> 0, message.thumbnail_broadcast_session_id.high >>> 0).toNumber() : message.thumbnail_broadcast_session_id;
+            if (message.thumbnail_data != null && message.hasOwnProperty("thumbnail_data"))
+                object.thumbnail_data = options.bytes === String ? $util.base64.encode(message.thumbnail_data, 0, message.thumbnail_data.length) : options.bytes === Array ? Array.prototype.slice.call(message.thumbnail_data) : message.thumbnail_data;
+            if (message.thumbnail_width != null && message.hasOwnProperty("thumbnail_width"))
+                object.thumbnail_width = message.thumbnail_width;
+            if (message.thumbnail_height != null && message.hasOwnProperty("thumbnail_height"))
+                object.thumbnail_height = message.thumbnail_height;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_SendThumbnailToRelay_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SendThumbnailToRelay_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SendThumbnailToRelay_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SendThumbnailToRelay_Notification;
+    })();
+    
+    $root.Broadcast = (function() {
+    
+        /**
+         * Constructs a new Broadcast service.
+         * @exports Broadcast
+         * @classdesc Represents a Broadcast
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function Broadcast(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (Broadcast.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Broadcast;
+    
+        /**
+         * Creates new Broadcast service using the specified rpc implementation.
+         * @function create
+         * @memberof Broadcast
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {Broadcast} RPC service. Useful where requests and/or responses are streamed.
+         */
+        Broadcast.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link Broadcast#beginBroadcastSession}.
+         * @memberof Broadcast
+         * @typedef BeginBroadcastSessionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_BeginBroadcastSession_Response} [response] CBroadcast_BeginBroadcastSession_Response
+         */
+    
+        /**
+         * Calls BeginBroadcastSession.
+         * @function beginBroadcastSession
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_BeginBroadcastSession_Request} request CBroadcast_BeginBroadcastSession_Request message or plain object
+         * @param {Broadcast.BeginBroadcastSessionCallback} callback Node-style callback called with the error, if any, and CBroadcast_BeginBroadcastSession_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.beginBroadcastSession = function beginBroadcastSession(request, callback) {
+            return this.rpcCall(beginBroadcastSession, $root.CBroadcast_BeginBroadcastSession_Request, $root.CBroadcast_BeginBroadcastSession_Response, request, callback);
+        }, "name", { value: "BeginBroadcastSession" });
+    
+        /**
+         * Calls BeginBroadcastSession.
+         * @function beginBroadcastSession
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_BeginBroadcastSession_Request} request CBroadcast_BeginBroadcastSession_Request message or plain object
+         * @returns {Promise<CBroadcast_BeginBroadcastSession_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#endBroadcastSession}.
+         * @memberof Broadcast
+         * @typedef EndBroadcastSessionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_EndBroadcastSession_Response} [response] CBroadcast_EndBroadcastSession_Response
+         */
+    
+        /**
+         * Calls EndBroadcastSession.
+         * @function endBroadcastSession
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_EndBroadcastSession_Request} request CBroadcast_EndBroadcastSession_Request message or plain object
+         * @param {Broadcast.EndBroadcastSessionCallback} callback Node-style callback called with the error, if any, and CBroadcast_EndBroadcastSession_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.endBroadcastSession = function endBroadcastSession(request, callback) {
+            return this.rpcCall(endBroadcastSession, $root.CBroadcast_EndBroadcastSession_Request, $root.CBroadcast_EndBroadcastSession_Response, request, callback);
+        }, "name", { value: "EndBroadcastSession" });
+    
+        /**
+         * Calls EndBroadcastSession.
+         * @function endBroadcastSession
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_EndBroadcastSession_Request} request CBroadcast_EndBroadcastSession_Request message or plain object
+         * @returns {Promise<CBroadcast_EndBroadcastSession_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#startBroadcastUpload}.
+         * @memberof Broadcast
+         * @typedef StartBroadcastUploadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_StartBroadcastUpload_Response} [response] CBroadcast_StartBroadcastUpload_Response
+         */
+    
+        /**
+         * Calls StartBroadcastUpload.
+         * @function startBroadcastUpload
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StartBroadcastUpload_Request} request CBroadcast_StartBroadcastUpload_Request message or plain object
+         * @param {Broadcast.StartBroadcastUploadCallback} callback Node-style callback called with the error, if any, and CBroadcast_StartBroadcastUpload_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.startBroadcastUpload = function startBroadcastUpload(request, callback) {
+            return this.rpcCall(startBroadcastUpload, $root.CBroadcast_StartBroadcastUpload_Request, $root.CBroadcast_StartBroadcastUpload_Response, request, callback);
+        }, "name", { value: "StartBroadcastUpload" });
+    
+        /**
+         * Calls StartBroadcastUpload.
+         * @function startBroadcastUpload
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StartBroadcastUpload_Request} request CBroadcast_StartBroadcastUpload_Request message or plain object
+         * @returns {Promise<CBroadcast_StartBroadcastUpload_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#notifyBroadcastUploadStop}.
+         * @memberof Broadcast
+         * @typedef NotifyBroadcastUploadStopCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastUploadStop.
+         * @function notifyBroadcastUploadStop
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification} request CBroadcast_NotifyBroadcastUploadStop_Notification message or plain object
+         * @param {Broadcast.NotifyBroadcastUploadStopCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.notifyBroadcastUploadStop = function notifyBroadcastUploadStop(request, callback) {
+            return this.rpcCall(notifyBroadcastUploadStop, $root.CBroadcast_NotifyBroadcastUploadStop_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastUploadStop" });
+    
+        /**
+         * Calls NotifyBroadcastUploadStop.
+         * @function notifyBroadcastUploadStop
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_NotifyBroadcastUploadStop_Notification} request CBroadcast_NotifyBroadcastUploadStop_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#watchBroadcast}.
+         * @memberof Broadcast
+         * @typedef WatchBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WatchBroadcast_Response} [response] CBroadcast_WatchBroadcast_Response
+         */
+    
+        /**
+         * Calls WatchBroadcast.
+         * @function watchBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WatchBroadcast_Request} request CBroadcast_WatchBroadcast_Request message or plain object
+         * @param {Broadcast.WatchBroadcastCallback} callback Node-style callback called with the error, if any, and CBroadcast_WatchBroadcast_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.watchBroadcast = function watchBroadcast(request, callback) {
+            return this.rpcCall(watchBroadcast, $root.CBroadcast_WatchBroadcast_Request, $root.CBroadcast_WatchBroadcast_Response, request, callback);
+        }, "name", { value: "WatchBroadcast" });
+    
+        /**
+         * Calls WatchBroadcast.
+         * @function watchBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WatchBroadcast_Request} request CBroadcast_WatchBroadcast_Request message or plain object
+         * @returns {Promise<CBroadcast_WatchBroadcast_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#heartbeatBroadcast}.
+         * @memberof Broadcast
+         * @typedef HeartbeatBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls HeartbeatBroadcast.
+         * @function heartbeatBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} request CBroadcast_HeartbeatBroadcast_Notification message or plain object
+         * @param {Broadcast.HeartbeatBroadcastCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.heartbeatBroadcast = function heartbeatBroadcast(request, callback) {
+            return this.rpcCall(heartbeatBroadcast, $root.CBroadcast_HeartbeatBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "HeartbeatBroadcast" });
+    
+        /**
+         * Calls HeartbeatBroadcast.
+         * @function heartbeatBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_HeartbeatBroadcast_Notification} request CBroadcast_HeartbeatBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#stopWatchingBroadcast}.
+         * @memberof Broadcast
+         * @typedef StopWatchingBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls StopWatchingBroadcast.
+         * @function stopWatchingBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} request CBroadcast_StopWatchingBroadcast_Notification message or plain object
+         * @param {Broadcast.StopWatchingBroadcastCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.stopWatchingBroadcast = function stopWatchingBroadcast(request, callback) {
+            return this.rpcCall(stopWatchingBroadcast, $root.CBroadcast_StopWatchingBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "StopWatchingBroadcast" });
+    
+        /**
+         * Calls StopWatchingBroadcast.
+         * @function stopWatchingBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StopWatchingBroadcast_Notification} request CBroadcast_StopWatchingBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastStatus}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastStatus_Response} [response] CBroadcast_GetBroadcastStatus_Response
+         */
+    
+        /**
+         * Calls GetBroadcastStatus.
+         * @function getBroadcastStatus
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastStatus_Request} request CBroadcast_GetBroadcastStatus_Request message or plain object
+         * @param {Broadcast.GetBroadcastStatusCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastStatus = function getBroadcastStatus(request, callback) {
+            return this.rpcCall(getBroadcastStatus, $root.CBroadcast_GetBroadcastStatus_Request, $root.CBroadcast_GetBroadcastStatus_Response, request, callback);
+        }, "name", { value: "GetBroadcastStatus" });
+    
+        /**
+         * Calls GetBroadcastStatus.
+         * @function getBroadcastStatus
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastStatus_Request} request CBroadcast_GetBroadcastStatus_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastThumbnail}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastThumbnailCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastThumbnail_Response} [response] CBroadcast_GetBroadcastThumbnail_Response
+         */
+    
+        /**
+         * Calls GetBroadcastThumbnail.
+         * @function getBroadcastThumbnail
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request} request CBroadcast_GetBroadcastThumbnail_Request message or plain object
+         * @param {Broadcast.GetBroadcastThumbnailCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastThumbnail_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastThumbnail = function getBroadcastThumbnail(request, callback) {
+            return this.rpcCall(getBroadcastThumbnail, $root.CBroadcast_GetBroadcastThumbnail_Request, $root.CBroadcast_GetBroadcastThumbnail_Response, request, callback);
+        }, "name", { value: "GetBroadcastThumbnail" });
+    
+        /**
+         * Calls GetBroadcastThumbnail.
+         * @function getBroadcastThumbnail
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastThumbnail_Request} request CBroadcast_GetBroadcastThumbnail_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastThumbnail_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#inviteToBroadcast}.
+         * @memberof Broadcast
+         * @typedef InviteToBroadcastCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_InviteToBroadcast_Response} [response] CBroadcast_InviteToBroadcast_Response
+         */
+    
+        /**
+         * Calls InviteToBroadcast.
+         * @function inviteToBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_InviteToBroadcast_Request} request CBroadcast_InviteToBroadcast_Request message or plain object
+         * @param {Broadcast.InviteToBroadcastCallback} callback Node-style callback called with the error, if any, and CBroadcast_InviteToBroadcast_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.inviteToBroadcast = function inviteToBroadcast(request, callback) {
+            return this.rpcCall(inviteToBroadcast, $root.CBroadcast_InviteToBroadcast_Request, $root.CBroadcast_InviteToBroadcast_Response, request, callback);
+        }, "name", { value: "InviteToBroadcast" });
+    
+        /**
+         * Calls InviteToBroadcast.
+         * @function inviteToBroadcast
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_InviteToBroadcast_Request} request CBroadcast_InviteToBroadcast_Request message or plain object
+         * @returns {Promise<CBroadcast_InviteToBroadcast_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#sendBroadcastStateToServer}.
+         * @memberof Broadcast
+         * @typedef SendBroadcastStateToServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_SendBroadcastStateToServer_Response} [response] CBroadcast_SendBroadcastStateToServer_Response
+         */
+    
+        /**
+         * Calls SendBroadcastStateToServer.
+         * @function sendBroadcastStateToServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request} request CBroadcast_SendBroadcastStateToServer_Request message or plain object
+         * @param {Broadcast.SendBroadcastStateToServerCallback} callback Node-style callback called with the error, if any, and CBroadcast_SendBroadcastStateToServer_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.sendBroadcastStateToServer = function sendBroadcastStateToServer(request, callback) {
+            return this.rpcCall(sendBroadcastStateToServer, $root.CBroadcast_SendBroadcastStateToServer_Request, $root.CBroadcast_SendBroadcastStateToServer_Response, request, callback);
+        }, "name", { value: "SendBroadcastStateToServer" });
+    
+        /**
+         * Calls SendBroadcastStateToServer.
+         * @function sendBroadcastStateToServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SendBroadcastStateToServer_Request} request CBroadcast_SendBroadcastStateToServer_Request message or plain object
+         * @returns {Promise<CBroadcast_SendBroadcastStateToServer_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#notifyBroadcastSessionHeartbeat}.
+         * @memberof Broadcast
+         * @typedef NotifyBroadcastSessionHeartbeatCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastSessionHeartbeat.
+         * @function notifyBroadcastSessionHeartbeat
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification} request CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message or plain object
+         * @param {Broadcast.NotifyBroadcastSessionHeartbeatCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.notifyBroadcastSessionHeartbeat = function notifyBroadcastSessionHeartbeat(request, callback) {
+            return this.rpcCall(notifyBroadcastSessionHeartbeat, $root.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastSessionHeartbeat" });
+    
+        /**
+         * Calls NotifyBroadcastSessionHeartbeat.
+         * @function notifyBroadcastSessionHeartbeat
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_NotifyBroadcastSessionHeartbeat_Notification} request CBroadcast_NotifyBroadcastSessionHeartbeat_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastChatInfo}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastChatInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastChatInfo_Response} [response] CBroadcast_GetBroadcastChatInfo_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChatInfo.
+         * @function getBroadcastChatInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request} request CBroadcast_GetBroadcastChatInfo_Request message or plain object
+         * @param {Broadcast.GetBroadcastChatInfoCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastChatInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastChatInfo = function getBroadcastChatInfo(request, callback) {
+            return this.rpcCall(getBroadcastChatInfo, $root.CBroadcast_GetBroadcastChatInfo_Request, $root.CBroadcast_GetBroadcastChatInfo_Response, request, callback);
+        }, "name", { value: "GetBroadcastChatInfo" });
+    
+        /**
+         * Calls GetBroadcastChatInfo.
+         * @function getBroadcastChatInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastChatInfo_Request} request CBroadcast_GetBroadcastChatInfo_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastChatInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#postChatMessage}.
+         * @memberof Broadcast
+         * @typedef PostChatMessageCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_PostChatMessage_Response} [response] CBroadcast_PostChatMessage_Response
+         */
+    
+        /**
+         * Calls PostChatMessage.
+         * @function postChatMessage
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_PostChatMessage_Request} request CBroadcast_PostChatMessage_Request message or plain object
+         * @param {Broadcast.PostChatMessageCallback} callback Node-style callback called with the error, if any, and CBroadcast_PostChatMessage_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.postChatMessage = function postChatMessage(request, callback) {
+            return this.rpcCall(postChatMessage, $root.CBroadcast_PostChatMessage_Request, $root.CBroadcast_PostChatMessage_Response, request, callback);
+        }, "name", { value: "PostChatMessage" });
+    
+        /**
+         * Calls PostChatMessage.
+         * @function postChatMessage
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_PostChatMessage_Request} request CBroadcast_PostChatMessage_Request message or plain object
+         * @returns {Promise<CBroadcast_PostChatMessage_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#muteBroadcastChatUser}.
+         * @memberof Broadcast
+         * @typedef MuteBroadcastChatUserCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_MuteBroadcastChatUser_Response} [response] CBroadcast_MuteBroadcastChatUser_Response
+         */
+    
+        /**
+         * Calls MuteBroadcastChatUser.
+         * @function muteBroadcastChatUser
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request} request CBroadcast_MuteBroadcastChatUser_Request message or plain object
+         * @param {Broadcast.MuteBroadcastChatUserCallback} callback Node-style callback called with the error, if any, and CBroadcast_MuteBroadcastChatUser_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.muteBroadcastChatUser = function muteBroadcastChatUser(request, callback) {
+            return this.rpcCall(muteBroadcastChatUser, $root.CBroadcast_MuteBroadcastChatUser_Request, $root.CBroadcast_MuteBroadcastChatUser_Response, request, callback);
+        }, "name", { value: "MuteBroadcastChatUser" });
+    
+        /**
+         * Calls MuteBroadcastChatUser.
+         * @function muteBroadcastChatUser
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_MuteBroadcastChatUser_Request} request CBroadcast_MuteBroadcastChatUser_Request message or plain object
+         * @returns {Promise<CBroadcast_MuteBroadcastChatUser_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#removeUserChatText}.
+         * @memberof Broadcast
+         * @typedef RemoveUserChatTextCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_RemoveUserChatText_Response} [response] CBroadcast_RemoveUserChatText_Response
+         */
+    
+        /**
+         * Calls RemoveUserChatText.
+         * @function removeUserChatText
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_RemoveUserChatText_Request} request CBroadcast_RemoveUserChatText_Request message or plain object
+         * @param {Broadcast.RemoveUserChatTextCallback} callback Node-style callback called with the error, if any, and CBroadcast_RemoveUserChatText_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.removeUserChatText = function removeUserChatText(request, callback) {
+            return this.rpcCall(removeUserChatText, $root.CBroadcast_RemoveUserChatText_Request, $root.CBroadcast_RemoveUserChatText_Response, request, callback);
+        }, "name", { value: "RemoveUserChatText" });
+    
+        /**
+         * Calls RemoveUserChatText.
+         * @function removeUserChatText
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_RemoveUserChatText_Request} request CBroadcast_RemoveUserChatText_Request message or plain object
+         * @returns {Promise<CBroadcast_RemoveUserChatText_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastChatUserNames}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastChatUserNamesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastChatUserNames_Response} [response] CBroadcast_GetBroadcastChatUserNames_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChatUserNames.
+         * @function getBroadcastChatUserNames
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request} request CBroadcast_GetBroadcastChatUserNames_Request message or plain object
+         * @param {Broadcast.GetBroadcastChatUserNamesCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastChatUserNames_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastChatUserNames = function getBroadcastChatUserNames(request, callback) {
+            return this.rpcCall(getBroadcastChatUserNames, $root.CBroadcast_GetBroadcastChatUserNames_Request, $root.CBroadcast_GetBroadcastChatUserNames_Response, request, callback);
+        }, "name", { value: "GetBroadcastChatUserNames" });
+    
+        /**
+         * Calls GetBroadcastChatUserNames.
+         * @function getBroadcastChatUserNames
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastChatUserNames_Request} request CBroadcast_GetBroadcastChatUserNames_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastChatUserNames_Response>} Promise
+         * @variation 2
+         */
+    
+        return Broadcast;
+    })();
+    
+    $root.BroadcastClient = (function() {
+    
+        /**
+         * Constructs a new BroadcastClient service.
+         * @exports BroadcastClient
+         * @classdesc Represents a BroadcastClient
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function BroadcastClient(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (BroadcastClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BroadcastClient;
+    
+        /**
+         * Creates new BroadcastClient service using the specified rpc implementation.
+         * @function create
+         * @memberof BroadcastClient
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {BroadcastClient} RPC service. Useful where requests and/or responses are streamed.
+         */
+        BroadcastClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyBroadcastViewerState}.
+         * @memberof BroadcastClient
+         * @typedef NotifyBroadcastViewerStateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastViewerState.
+         * @function notifyBroadcastViewerState
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastViewerState_Notification} request CBroadcast_BroadcastViewerState_Notification message or plain object
+         * @param {BroadcastClient.NotifyBroadcastViewerStateCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyBroadcastViewerState = function notifyBroadcastViewerState(request, callback) {
+            return this.rpcCall(notifyBroadcastViewerState, $root.CBroadcast_BroadcastViewerState_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastViewerState" });
+    
+        /**
+         * Calls NotifyBroadcastViewerState.
+         * @function notifyBroadcastViewerState
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastViewerState_Notification} request CBroadcast_BroadcastViewerState_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyWaitingBroadcastViewer}.
+         * @memberof BroadcastClient
+         * @typedef NotifyWaitingBroadcastViewerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWaitingBroadcastViewer.
+         * @function notifyWaitingBroadcastViewer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification} request CBroadcast_WaitingBroadcastViewer_Notification message or plain object
+         * @param {BroadcastClient.NotifyWaitingBroadcastViewerCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyWaitingBroadcastViewer = function notifyWaitingBroadcastViewer(request, callback) {
+            return this.rpcCall(notifyWaitingBroadcastViewer, $root.CBroadcast_WaitingBroadcastViewer_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWaitingBroadcastViewer" });
+    
+        /**
+         * Calls NotifyWaitingBroadcastViewer.
+         * @function notifyWaitingBroadcastViewer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WaitingBroadcastViewer_Notification} request CBroadcast_WaitingBroadcastViewer_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyStopBroadcastUpload}.
+         * @memberof BroadcastClient
+         * @typedef NotifyStopBroadcastUploadCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyStopBroadcastUpload.
+         * @function notifyStopBroadcastUpload
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_StopBroadcastUpload_Notification} request CBroadcast_StopBroadcastUpload_Notification message or plain object
+         * @param {BroadcastClient.NotifyStopBroadcastUploadCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyStopBroadcastUpload = function notifyStopBroadcastUpload(request, callback) {
+            return this.rpcCall(notifyStopBroadcastUpload, $root.CBroadcast_StopBroadcastUpload_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyStopBroadcastUpload" });
+    
+        /**
+         * Calls NotifyStopBroadcastUpload.
+         * @function notifyStopBroadcastUpload
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_StopBroadcastUpload_Notification} request CBroadcast_StopBroadcastUpload_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifySessionClosed}.
+         * @memberof BroadcastClient
+         * @typedef NotifySessionClosedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifySessionClosed.
+         * @function notifySessionClosed
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_SessionClosed_Notification} request CBroadcast_SessionClosed_Notification message or plain object
+         * @param {BroadcastClient.NotifySessionClosedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifySessionClosed = function notifySessionClosed(request, callback) {
+            return this.rpcCall(notifySessionClosed, $root.CBroadcast_SessionClosed_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifySessionClosed" });
+    
+        /**
+         * Calls NotifySessionClosed.
+         * @function notifySessionClosed
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_SessionClosed_Notification} request CBroadcast_SessionClosed_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyViewerBroadcastInvite}.
+         * @memberof BroadcastClient
+         * @typedef NotifyViewerBroadcastInviteCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyViewerBroadcastInvite.
+         * @function notifyViewerBroadcastInvite
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification} request CBroadcast_ViewerBroadcastInvite_Notification message or plain object
+         * @param {BroadcastClient.NotifyViewerBroadcastInviteCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyViewerBroadcastInvite = function notifyViewerBroadcastInvite(request, callback) {
+            return this.rpcCall(notifyViewerBroadcastInvite, $root.CBroadcast_ViewerBroadcastInvite_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyViewerBroadcastInvite" });
+    
+        /**
+         * Calls NotifyViewerBroadcastInvite.
+         * @function notifyViewerBroadcastInvite
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_ViewerBroadcastInvite_Notification} request CBroadcast_ViewerBroadcastInvite_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyBroadcastStatus}.
+         * @memberof BroadcastClient
+         * @typedef NotifyBroadcastStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastStatus.
+         * @function notifyBroadcastStatus
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastStatus_Notification} request CBroadcast_BroadcastStatus_Notification message or plain object
+         * @param {BroadcastClient.NotifyBroadcastStatusCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyBroadcastStatus = function notifyBroadcastStatus(request, callback) {
+            return this.rpcCall(notifyBroadcastStatus, $root.CBroadcast_BroadcastStatus_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastStatus" });
+    
+        /**
+         * Calls NotifyBroadcastStatus.
+         * @function notifyBroadcastStatus
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastStatus_Notification} request CBroadcast_BroadcastStatus_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#sendThumbnailToRelay}.
+         * @memberof BroadcastClient
+         * @typedef SendThumbnailToRelayCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls SendThumbnailToRelay.
+         * @function sendThumbnailToRelay
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification} request CBroadcast_SendThumbnailToRelay_Notification message or plain object
+         * @param {BroadcastClient.SendThumbnailToRelayCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.sendThumbnailToRelay = function sendThumbnailToRelay(request, callback) {
+            return this.rpcCall(sendThumbnailToRelay, $root.CBroadcast_SendThumbnailToRelay_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "SendThumbnailToRelay" });
+    
+        /**
+         * Calls SendThumbnailToRelay.
+         * @function sendThumbnailToRelay
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_SendThumbnailToRelay_Notification} request CBroadcast_SendThumbnailToRelay_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        return BroadcastClient;
+    })();
+    
+    /**
+     * EProtoExecutionSite enum.
+     * @exports EProtoExecutionSite
+     * @enum {string}
+     * @property {number} k_EProtoExecutionSiteUnknown=0 k_EProtoExecutionSiteUnknown value
+     * @property {number} k_EProtoExecutionSiteSteamClient=2 k_EProtoExecutionSiteSteamClient value
+     */
+    $root.EProtoExecutionSite = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EProtoExecutionSiteUnknown"] = 0;
+        values[valuesById[2] = "k_EProtoExecutionSiteSteamClient"] = 2;
+        return values;
+    })();
+    
+    $root.NoResponse = (function() {
+    
+        /**
+         * Properties of a NoResponse.
+         * @exports INoResponse
+         * @interface INoResponse
+         */
+    
+        /**
+         * Constructs a new NoResponse.
+         * @exports NoResponse
+         * @classdesc Represents a NoResponse.
+         * @implements INoResponse
+         * @constructor
+         * @param {INoResponse=} [properties] Properties to set
+         */
+        function NoResponse(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new NoResponse instance using the specified properties.
+         * @function create
+         * @memberof NoResponse
+         * @static
+         * @param {INoResponse=} [properties] Properties to set
+         * @returns {NoResponse} NoResponse instance
+         */
+        NoResponse.create = function create(properties) {
+            return new NoResponse(properties);
+        };
+    
+        /**
+         * Encodes the specified NoResponse message. Does not implicitly {@link NoResponse.verify|verify} messages.
+         * @function encode
+         * @memberof NoResponse
+         * @static
+         * @param {INoResponse} message NoResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        NoResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified NoResponse message, length delimited. Does not implicitly {@link NoResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof NoResponse
+         * @static
+         * @param {INoResponse} message NoResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        NoResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a NoResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof NoResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {NoResponse} NoResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        NoResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.NoResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a NoResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof NoResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {NoResponse} NoResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        NoResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a NoResponse message.
+         * @function verify
+         * @memberof NoResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        NoResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a NoResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof NoResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {NoResponse} NoResponse
+         */
+        NoResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.NoResponse)
+                return object;
+            return new $root.NoResponse();
+        };
+    
+        /**
+         * Creates a plain object from a NoResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof NoResponse
+         * @static
+         * @param {NoResponse} message NoResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        NoResponse.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this NoResponse to JSON.
+         * @function toJSON
+         * @memberof NoResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        NoResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return NoResponse;
+    })();
+    
+    $root.google = (function() {
+    
+        /**
+         * Namespace google.
+         * @exports google
+         * @namespace
+         */
+        var google = {};
+    
+        google.protobuf = (function() {
+    
+            /**
+             * Namespace protobuf.
+             * @memberof google
+             * @namespace
+             */
+            var protobuf = {};
+    
+            protobuf.FileDescriptorSet = (function() {
+    
+                /**
+                 * Properties of a FileDescriptorSet.
+                 * @memberof google.protobuf
+                 * @interface IFileDescriptorSet
+                 * @property {Array.<google.protobuf.IFileDescriptorProto>|null} [file] FileDescriptorSet file
+                 */
+    
+                /**
+                 * Constructs a new FileDescriptorSet.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FileDescriptorSet.
+                 * @implements IFileDescriptorSet
+                 * @constructor
+                 * @param {google.protobuf.IFileDescriptorSet=} [properties] Properties to set
+                 */
+                function FileDescriptorSet(properties) {
+                    this.file = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FileDescriptorSet file.
+                 * @member {Array.<google.protobuf.IFileDescriptorProto>} file
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @instance
+                 */
+                FileDescriptorSet.prototype.file = $util.emptyArray;
+    
+                /**
+                 * Creates a new FileDescriptorSet instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorSet=} [properties] Properties to set
+                 * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet instance
+                 */
+                FileDescriptorSet.create = function create(properties) {
+                    return new FileDescriptorSet(properties);
+                };
+    
+                /**
+                 * Encodes the specified FileDescriptorSet message. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorSet} message FileDescriptorSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileDescriptorSet.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.file != null && message.file.length)
+                        for (var i = 0; i < message.file.length; ++i)
+                            $root.google.protobuf.FileDescriptorProto.encode(message.file[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FileDescriptorSet message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorSet} message FileDescriptorSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileDescriptorSet.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FileDescriptorSet message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileDescriptorSet.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.file && message.file.length))
+                                message.file = [];
+                            message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FileDescriptorSet message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileDescriptorSet.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FileDescriptorSet message.
+                 * @function verify
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FileDescriptorSet.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.file != null && message.hasOwnProperty("file")) {
+                        if (!Array.isArray(message.file))
+                            return "file: array expected";
+                        for (var i = 0; i < message.file.length; ++i) {
+                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i]);
+                            if (error)
+                                return "file." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FileDescriptorSet message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
+                 */
+                FileDescriptorSet.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FileDescriptorSet)
+                        return object;
+                    var message = new $root.google.protobuf.FileDescriptorSet();
+                    if (object.file) {
+                        if (!Array.isArray(object.file))
+                            throw TypeError(".google.protobuf.FileDescriptorSet.file: array expected");
+                        message.file = [];
+                        for (var i = 0; i < object.file.length; ++i) {
+                            if (typeof object.file[i] !== "object")
+                                throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
+                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FileDescriptorSet message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @static
+                 * @param {google.protobuf.FileDescriptorSet} message FileDescriptorSet
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FileDescriptorSet.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.file = [];
+                    if (message.file && message.file.length) {
+                        object.file = [];
+                        for (var j = 0; j < message.file.length; ++j)
+                            object.file[j] = $root.google.protobuf.FileDescriptorProto.toObject(message.file[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FileDescriptorSet to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FileDescriptorSet
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FileDescriptorSet.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return FileDescriptorSet;
+            })();
+    
+            protobuf.FileDescriptorProto = (function() {
+    
+                /**
+                 * Properties of a FileDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IFileDescriptorProto
+                 * @property {string|null} [name] FileDescriptorProto name
+                 * @property {string|null} ["package"] FileDescriptorProto package
+                 * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
+                 * @property {Array.<number>|null} [public_dependency] FileDescriptorProto public_dependency
+                 * @property {Array.<number>|null} [weak_dependency] FileDescriptorProto weak_dependency
+                 * @property {Array.<google.protobuf.IDescriptorProto>|null} [message_type] FileDescriptorProto message_type
+                 * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enum_type] FileDescriptorProto enum_type
+                 * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
+                 * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] FileDescriptorProto extension
+                 * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
+                 * @property {google.protobuf.ISourceCodeInfo|null} [source_code_info] FileDescriptorProto source_code_info
+                 */
+    
+                /**
+                 * Constructs a new FileDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FileDescriptorProto.
+                 * @implements IFileDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IFileDescriptorProto=} [properties] Properties to set
+                 */
+                function FileDescriptorProto(properties) {
+                    this.dependency = [];
+                    this.public_dependency = [];
+                    this.weak_dependency = [];
+                    this.message_type = [];
+                    this.enum_type = [];
+                    this.service = [];
+                    this.extension = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FileDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.name = "";
+    
+                /**
+                 * FileDescriptorProto package.
+                 * @member {string} package
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype["package"] = "";
+    
+                /**
+                 * FileDescriptorProto dependency.
+                 * @member {Array.<string>} dependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.dependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto public_dependency.
+                 * @member {Array.<number>} public_dependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.public_dependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto weak_dependency.
+                 * @member {Array.<number>} weak_dependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.weak_dependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto message_type.
+                 * @member {Array.<google.protobuf.IDescriptorProto>} message_type
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.message_type = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto enum_type.
+                 * @member {Array.<google.protobuf.IEnumDescriptorProto>} enum_type
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.enum_type = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto service.
+                 * @member {Array.<google.protobuf.IServiceDescriptorProto>} service
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.service = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto extension.
+                 * @member {Array.<google.protobuf.IFieldDescriptorProto>} extension
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.extension = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto options.
+                 * @member {google.protobuf.IFileOptions|null|undefined} options
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.options = null;
+    
+                /**
+                 * FileDescriptorProto source_code_info.
+                 * @member {google.protobuf.ISourceCodeInfo|null|undefined} source_code_info
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.source_code_info = null;
+    
+                /**
+                 * Creates a new FileDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto instance
+                 */
+                FileDescriptorProto.create = function create(properties) {
+                    return new FileDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified FileDescriptorProto message. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorProto} message FileDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message["package"]);
+                    if (message.dependency != null && message.dependency.length)
+                        for (var i = 0; i < message.dependency.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.dependency[i]);
+                    if (message.message_type != null && message.message_type.length)
+                        for (var i = 0; i < message.message_type.length; ++i)
+                            $root.google.protobuf.DescriptorProto.encode(message.message_type[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.enum_type != null && message.enum_type.length)
+                        for (var i = 0; i < message.enum_type.length; ++i)
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enum_type[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.service != null && message.service.length)
+                        for (var i = 0; i < message.service.length; ++i)
+                            $root.google.protobuf.ServiceDescriptorProto.encode(message.service[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.extension != null && message.extension.length)
+                        for (var i = 0; i < message.extension.length; ++i)
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.FileOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
+                        $root.google.protobuf.SourceCodeInfo.encode(message.source_code_info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.public_dependency != null && message.public_dependency.length)
+                        for (var i = 0; i < message.public_dependency.length; ++i)
+                            writer.uint32(/* id 10, wireType 0 =*/80).int32(message.public_dependency[i]);
+                    if (message.weak_dependency != null && message.weak_dependency.length)
+                        for (var i = 0; i < message.weak_dependency.length; ++i)
+                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.weak_dependency[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FileDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFileDescriptorProto} message FileDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FileDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message["package"] = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.dependency && message.dependency.length))
+                                message.dependency = [];
+                            message.dependency.push(reader.string());
+                            break;
+                        case 10:
+                            if (!(message.public_dependency && message.public_dependency.length))
+                                message.public_dependency = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.public_dependency.push(reader.int32());
+                            } else
+                                message.public_dependency.push(reader.int32());
+                            break;
+                        case 11:
+                            if (!(message.weak_dependency && message.weak_dependency.length))
+                                message.weak_dependency = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.weak_dependency.push(reader.int32());
+                            } else
+                                message.weak_dependency.push(reader.int32());
+                            break;
+                        case 4:
+                            if (!(message.message_type && message.message_type.length))
+                                message.message_type = [];
+                            message.message_type.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            if (!(message.enum_type && message.enum_type.length))
+                                message.enum_type = [];
+                            message.enum_type.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 6:
+                            if (!(message.service && message.service.length))
+                                message.service = [];
+                            message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 7:
+                            if (!(message.extension && message.extension.length))
+                                message.extension = [];
+                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 8:
+                            message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            message.source_code_info = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FileDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FileDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FileDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        if (!$util.isString(message["package"]))
+                            return "package: string expected";
+                    if (message.dependency != null && message.hasOwnProperty("dependency")) {
+                        if (!Array.isArray(message.dependency))
+                            return "dependency: array expected";
+                        for (var i = 0; i < message.dependency.length; ++i)
+                            if (!$util.isString(message.dependency[i]))
+                                return "dependency: string[] expected";
+                    }
+                    if (message.public_dependency != null && message.hasOwnProperty("public_dependency")) {
+                        if (!Array.isArray(message.public_dependency))
+                            return "public_dependency: array expected";
+                        for (var i = 0; i < message.public_dependency.length; ++i)
+                            if (!$util.isInteger(message.public_dependency[i]))
+                                return "public_dependency: integer[] expected";
+                    }
+                    if (message.weak_dependency != null && message.hasOwnProperty("weak_dependency")) {
+                        if (!Array.isArray(message.weak_dependency))
+                            return "weak_dependency: array expected";
+                        for (var i = 0; i < message.weak_dependency.length; ++i)
+                            if (!$util.isInteger(message.weak_dependency[i]))
+                                return "weak_dependency: integer[] expected";
+                    }
+                    if (message.message_type != null && message.hasOwnProperty("message_type")) {
+                        if (!Array.isArray(message.message_type))
+                            return "message_type: array expected";
+                        for (var i = 0; i < message.message_type.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.message_type[i]);
+                            if (error)
+                                return "message_type." + error;
+                        }
+                    }
+                    if (message.enum_type != null && message.hasOwnProperty("enum_type")) {
+                        if (!Array.isArray(message.enum_type))
+                            return "enum_type: array expected";
+                        for (var i = 0; i < message.enum_type.length; ++i) {
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enum_type[i]);
+                            if (error)
+                                return "enum_type." + error;
+                        }
+                    }
+                    if (message.service != null && message.hasOwnProperty("service")) {
+                        if (!Array.isArray(message.service))
+                            return "service: array expected";
+                        for (var i = 0; i < message.service.length; ++i) {
+                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i]);
+                            if (error)
+                                return "service." + error;
+                        }
+                    }
+                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                        if (!Array.isArray(message.extension))
+                            return "extension: array expected";
+                        for (var i = 0; i < message.extension.length; ++i) {
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            if (error)
+                                return "extension." + error;
+                        }
+                    }
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.FileOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info")) {
+                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.source_code_info);
+                        if (error)
+                            return "source_code_info." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FileDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
+                 */
+                FileDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FileDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.FileDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object["package"] != null)
+                        message["package"] = String(object["package"]);
+                    if (object.dependency) {
+                        if (!Array.isArray(object.dependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.dependency: array expected");
+                        message.dependency = [];
+                        for (var i = 0; i < object.dependency.length; ++i)
+                            message.dependency[i] = String(object.dependency[i]);
+                    }
+                    if (object.public_dependency) {
+                        if (!Array.isArray(object.public_dependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.public_dependency: array expected");
+                        message.public_dependency = [];
+                        for (var i = 0; i < object.public_dependency.length; ++i)
+                            message.public_dependency[i] = object.public_dependency[i] | 0;
+                    }
+                    if (object.weak_dependency) {
+                        if (!Array.isArray(object.weak_dependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.weak_dependency: array expected");
+                        message.weak_dependency = [];
+                        for (var i = 0; i < object.weak_dependency.length; ++i)
+                            message.weak_dependency[i] = object.weak_dependency[i] | 0;
+                    }
+                    if (object.message_type) {
+                        if (!Array.isArray(object.message_type))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.message_type: array expected");
+                        message.message_type = [];
+                        for (var i = 0; i < object.message_type.length; ++i) {
+                            if (typeof object.message_type[i] !== "object")
+                                throw TypeError(".google.protobuf.FileDescriptorProto.message_type: object expected");
+                            message.message_type[i] = $root.google.protobuf.DescriptorProto.fromObject(object.message_type[i]);
+                        }
+                    }
+                    if (object.enum_type) {
+                        if (!Array.isArray(object.enum_type))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.enum_type: array expected");
+                        message.enum_type = [];
+                        for (var i = 0; i < object.enum_type.length; ++i) {
+                            if (typeof object.enum_type[i] !== "object")
+                                throw TypeError(".google.protobuf.FileDescriptorProto.enum_type: object expected");
+                            message.enum_type[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enum_type[i]);
+                        }
+                    }
+                    if (object.service) {
+                        if (!Array.isArray(object.service))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.service: array expected");
+                        message.service = [];
+                        for (var i = 0; i < object.service.length; ++i) {
+                            if (typeof object.service[i] !== "object")
+                                throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
+                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i]);
+                        }
+                    }
+                    if (object.extension) {
+                        if (!Array.isArray(object.extension))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.extension: array expected");
+                        message.extension = [];
+                        for (var i = 0; i < object.extension.length; ++i) {
+                            if (typeof object.extension[i] !== "object")
+                                throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                        }
+                    }
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options);
+                    }
+                    if (object.source_code_info != null) {
+                        if (typeof object.source_code_info !== "object")
+                            throw TypeError(".google.protobuf.FileDescriptorProto.source_code_info: object expected");
+                        message.source_code_info = $root.google.protobuf.SourceCodeInfo.fromObject(object.source_code_info);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FileDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @static
+                 * @param {google.protobuf.FileDescriptorProto} message FileDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FileDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.dependency = [];
+                        object.message_type = [];
+                        object.enum_type = [];
+                        object.service = [];
+                        object.extension = [];
+                        object.public_dependency = [];
+                        object.weak_dependency = [];
+                    }
+                    if (options.defaults) {
+                        object.name = "";
+                        object["package"] = "";
+                        object.options = null;
+                        object.source_code_info = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        object["package"] = message["package"];
+                    if (message.dependency && message.dependency.length) {
+                        object.dependency = [];
+                        for (var j = 0; j < message.dependency.length; ++j)
+                            object.dependency[j] = message.dependency[j];
+                    }
+                    if (message.message_type && message.message_type.length) {
+                        object.message_type = [];
+                        for (var j = 0; j < message.message_type.length; ++j)
+                            object.message_type[j] = $root.google.protobuf.DescriptorProto.toObject(message.message_type[j], options);
+                    }
+                    if (message.enum_type && message.enum_type.length) {
+                        object.enum_type = [];
+                        for (var j = 0; j < message.enum_type.length; ++j)
+                            object.enum_type[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enum_type[j], options);
+                    }
+                    if (message.service && message.service.length) {
+                        object.service = [];
+                        for (var j = 0; j < message.service.length; ++j)
+                            object.service[j] = $root.google.protobuf.ServiceDescriptorProto.toObject(message.service[j], options);
+                    }
+                    if (message.extension && message.extension.length) {
+                        object.extension = [];
+                        for (var j = 0; j < message.extension.length; ++j)
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                    }
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.FileOptions.toObject(message.options, options);
+                    if (message.source_code_info != null && message.hasOwnProperty("source_code_info"))
+                        object.source_code_info = $root.google.protobuf.SourceCodeInfo.toObject(message.source_code_info, options);
+                    if (message.public_dependency && message.public_dependency.length) {
+                        object.public_dependency = [];
+                        for (var j = 0; j < message.public_dependency.length; ++j)
+                            object.public_dependency[j] = message.public_dependency[j];
+                    }
+                    if (message.weak_dependency && message.weak_dependency.length) {
+                        object.weak_dependency = [];
+                        for (var j = 0; j < message.weak_dependency.length; ++j)
+                            object.weak_dependency[j] = message.weak_dependency[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FileDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FileDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return FileDescriptorProto;
+            })();
+    
+            protobuf.DescriptorProto = (function() {
+    
+                /**
+                 * Properties of a DescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IDescriptorProto
+                 * @property {string|null} [name] DescriptorProto name
+                 * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [field] DescriptorProto field
+                 * @property {Array.<google.protobuf.IFieldDescriptorProto>|null} [extension] DescriptorProto extension
+                 * @property {Array.<google.protobuf.IDescriptorProto>|null} [nested_type] DescriptorProto nested_type
+                 * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enum_type] DescriptorProto enum_type
+                 * @property {Array.<google.protobuf.DescriptorProto.IExtensionRange>|null} [extension_range] DescriptorProto extension_range
+                 * @property {Array.<google.protobuf.IOneofDescriptorProto>|null} [oneof_decl] DescriptorProto oneof_decl
+                 * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new DescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a DescriptorProto.
+                 * @implements IDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IDescriptorProto=} [properties] Properties to set
+                 */
+                function DescriptorProto(properties) {
+                    this.field = [];
+                    this.extension = [];
+                    this.nested_type = [];
+                    this.enum_type = [];
+                    this.extension_range = [];
+                    this.oneof_decl = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.name = "";
+    
+                /**
+                 * DescriptorProto field.
+                 * @member {Array.<google.protobuf.IFieldDescriptorProto>} field
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.field = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto extension.
+                 * @member {Array.<google.protobuf.IFieldDescriptorProto>} extension
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.extension = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto nested_type.
+                 * @member {Array.<google.protobuf.IDescriptorProto>} nested_type
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.nested_type = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto enum_type.
+                 * @member {Array.<google.protobuf.IEnumDescriptorProto>} enum_type
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.enum_type = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto extension_range.
+                 * @member {Array.<google.protobuf.DescriptorProto.IExtensionRange>} extension_range
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.extension_range = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto oneof_decl.
+                 * @member {Array.<google.protobuf.IOneofDescriptorProto>} oneof_decl
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.oneof_decl = $util.emptyArray;
+    
+                /**
+                 * DescriptorProto options.
+                 * @member {google.protobuf.IMessageOptions|null|undefined} options
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new DescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {google.protobuf.IDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.DescriptorProto} DescriptorProto instance
+                 */
+                DescriptorProto.create = function create(properties) {
+                    return new DescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified DescriptorProto message. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {google.protobuf.IDescriptorProto} message DescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.field != null && message.field.length)
+                        for (var i = 0; i < message.field.length; ++i)
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.field[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.nested_type != null && message.nested_type.length)
+                        for (var i = 0; i < message.nested_type.length; ++i)
+                            $root.google.protobuf.DescriptorProto.encode(message.nested_type[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.enum_type != null && message.enum_type.length)
+                        for (var i = 0; i < message.enum_type.length; ++i)
+                            $root.google.protobuf.EnumDescriptorProto.encode(message.enum_type[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.extension_range != null && message.extension_range.length)
+                        for (var i = 0; i < message.extension_range.length; ++i)
+                            $root.google.protobuf.DescriptorProto.ExtensionRange.encode(message.extension_range[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.extension != null && message.extension.length)
+                        for (var i = 0; i < message.extension.length; ++i)
+                            $root.google.protobuf.FieldDescriptorProto.encode(message.extension[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.MessageOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.oneof_decl != null && message.oneof_decl.length)
+                        for (var i = 0; i < message.oneof_decl.length; ++i)
+                            $root.google.protobuf.OneofDescriptorProto.encode(message.oneof_decl[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {google.protobuf.IDescriptorProto} message DescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.DescriptorProto} DescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.field && message.field.length))
+                                message.field = [];
+                            message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 6:
+                            if (!(message.extension && message.extension.length))
+                                message.extension = [];
+                            message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            if (!(message.nested_type && message.nested_type.length))
+                                message.nested_type = [];
+                            message.nested_type.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            if (!(message.enum_type && message.enum_type.length))
+                                message.enum_type = [];
+                            message.enum_type.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            if (!(message.extension_range && message.extension_range.length))
+                                message.extension_range = [];
+                            message.extension_range.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                            break;
+                        case 8:
+                            if (!(message.oneof_decl && message.oneof_decl.length))
+                                message.oneof_decl = [];
+                            message.oneof_decl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 7:
+                            message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.DescriptorProto} DescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.field != null && message.hasOwnProperty("field")) {
+                        if (!Array.isArray(message.field))
+                            return "field: array expected";
+                        for (var i = 0; i < message.field.length; ++i) {
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i]);
+                            if (error)
+                                return "field." + error;
+                        }
+                    }
+                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                        if (!Array.isArray(message.extension))
+                            return "extension: array expected";
+                        for (var i = 0; i < message.extension.length; ++i) {
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            if (error)
+                                return "extension." + error;
+                        }
+                    }
+                    if (message.nested_type != null && message.hasOwnProperty("nested_type")) {
+                        if (!Array.isArray(message.nested_type))
+                            return "nested_type: array expected";
+                        for (var i = 0; i < message.nested_type.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.nested_type[i]);
+                            if (error)
+                                return "nested_type." + error;
+                        }
+                    }
+                    if (message.enum_type != null && message.hasOwnProperty("enum_type")) {
+                        if (!Array.isArray(message.enum_type))
+                            return "enum_type: array expected";
+                        for (var i = 0; i < message.enum_type.length; ++i) {
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enum_type[i]);
+                            if (error)
+                                return "enum_type." + error;
+                        }
+                    }
+                    if (message.extension_range != null && message.hasOwnProperty("extension_range")) {
+                        if (!Array.isArray(message.extension_range))
+                            return "extension_range: array expected";
+                        for (var i = 0; i < message.extension_range.length; ++i) {
+                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extension_range[i]);
+                            if (error)
+                                return "extension_range." + error;
+                        }
+                    }
+                    if (message.oneof_decl != null && message.hasOwnProperty("oneof_decl")) {
+                        if (!Array.isArray(message.oneof_decl))
+                            return "oneof_decl: array expected";
+                        for (var i = 0; i < message.oneof_decl.length; ++i) {
+                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneof_decl[i]);
+                            if (error)
+                                return "oneof_decl." + error;
+                        }
+                    }
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.MessageOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a DescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.DescriptorProto} DescriptorProto
+                 */
+                DescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.DescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.DescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.field) {
+                        if (!Array.isArray(object.field))
+                            throw TypeError(".google.protobuf.DescriptorProto.field: array expected");
+                        message.field = [];
+                        for (var i = 0; i < object.field.length; ++i) {
+                            if (typeof object.field[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
+                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i]);
+                        }
+                    }
+                    if (object.extension) {
+                        if (!Array.isArray(object.extension))
+                            throw TypeError(".google.protobuf.DescriptorProto.extension: array expected");
+                        message.extension = [];
+                        for (var i = 0; i < object.extension.length; ++i) {
+                            if (typeof object.extension[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                        }
+                    }
+                    if (object.nested_type) {
+                        if (!Array.isArray(object.nested_type))
+                            throw TypeError(".google.protobuf.DescriptorProto.nested_type: array expected");
+                        message.nested_type = [];
+                        for (var i = 0; i < object.nested_type.length; ++i) {
+                            if (typeof object.nested_type[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.nested_type: object expected");
+                            message.nested_type[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nested_type[i]);
+                        }
+                    }
+                    if (object.enum_type) {
+                        if (!Array.isArray(object.enum_type))
+                            throw TypeError(".google.protobuf.DescriptorProto.enum_type: array expected");
+                        message.enum_type = [];
+                        for (var i = 0; i < object.enum_type.length; ++i) {
+                            if (typeof object.enum_type[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.enum_type: object expected");
+                            message.enum_type[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enum_type[i]);
+                        }
+                    }
+                    if (object.extension_range) {
+                        if (!Array.isArray(object.extension_range))
+                            throw TypeError(".google.protobuf.DescriptorProto.extension_range: array expected");
+                        message.extension_range = [];
+                        for (var i = 0; i < object.extension_range.length; ++i) {
+                            if (typeof object.extension_range[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.extension_range: object expected");
+                            message.extension_range[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extension_range[i]);
+                        }
+                    }
+                    if (object.oneof_decl) {
+                        if (!Array.isArray(object.oneof_decl))
+                            throw TypeError(".google.protobuf.DescriptorProto.oneof_decl: array expected");
+                        message.oneof_decl = [];
+                        for (var i = 0; i < object.oneof_decl.length; ++i) {
+                            if (typeof object.oneof_decl[i] !== "object")
+                                throw TypeError(".google.protobuf.DescriptorProto.oneof_decl: object expected");
+                            message.oneof_decl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneof_decl[i]);
+                        }
+                    }
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DescriptorProto
+                 * @static
+                 * @param {google.protobuf.DescriptorProto} message DescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.field = [];
+                        object.nested_type = [];
+                        object.enum_type = [];
+                        object.extension_range = [];
+                        object.extension = [];
+                        object.oneof_decl = [];
+                    }
+                    if (options.defaults) {
+                        object.name = "";
+                        object.options = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.field && message.field.length) {
+                        object.field = [];
+                        for (var j = 0; j < message.field.length; ++j)
+                            object.field[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.field[j], options);
+                    }
+                    if (message.nested_type && message.nested_type.length) {
+                        object.nested_type = [];
+                        for (var j = 0; j < message.nested_type.length; ++j)
+                            object.nested_type[j] = $root.google.protobuf.DescriptorProto.toObject(message.nested_type[j], options);
+                    }
+                    if (message.enum_type && message.enum_type.length) {
+                        object.enum_type = [];
+                        for (var j = 0; j < message.enum_type.length; ++j)
+                            object.enum_type[j] = $root.google.protobuf.EnumDescriptorProto.toObject(message.enum_type[j], options);
+                    }
+                    if (message.extension_range && message.extension_range.length) {
+                        object.extension_range = [];
+                        for (var j = 0; j < message.extension_range.length; ++j)
+                            object.extension_range[j] = $root.google.protobuf.DescriptorProto.ExtensionRange.toObject(message.extension_range[j], options);
+                    }
+                    if (message.extension && message.extension.length) {
+                        object.extension = [];
+                        for (var j = 0; j < message.extension.length; ++j)
+                            object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options);
+                    }
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options);
+                    if (message.oneof_decl && message.oneof_decl.length) {
+                        object.oneof_decl = [];
+                        for (var j = 0; j < message.oneof_decl.length; ++j)
+                            object.oneof_decl[j] = $root.google.protobuf.OneofDescriptorProto.toObject(message.oneof_decl[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this DescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                DescriptorProto.ExtensionRange = (function() {
+    
+                    /**
+                     * Properties of an ExtensionRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @interface IExtensionRange
+                     * @property {number|null} [start] ExtensionRange start
+                     * @property {number|null} [end] ExtensionRange end
+                     */
+    
+                    /**
+                     * Constructs a new ExtensionRange.
+                     * @memberof google.protobuf.DescriptorProto
+                     * @classdesc Represents an ExtensionRange.
+                     * @implements IExtensionRange
+                     * @constructor
+                     * @param {google.protobuf.DescriptorProto.IExtensionRange=} [properties] Properties to set
+                     */
+                    function ExtensionRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExtensionRange start.
+                     * @member {number} start
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @instance
+                     */
+                    ExtensionRange.prototype.start = 0;
+    
+                    /**
+                     * ExtensionRange end.
+                     * @member {number} end
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @instance
+                     */
+                    ExtensionRange.prototype.end = 0;
+    
+                    /**
+                     * Creates a new ExtensionRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IExtensionRange=} [properties] Properties to set
+                     * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange instance
+                     */
+                    ExtensionRange.create = function create(properties) {
+                        return new ExtensionRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExtensionRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IExtensionRange} message ExtensionRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExtensionRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExtensionRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.IExtensionRange} message ExtensionRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExtensionRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExtensionRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExtensionRange.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.start = reader.int32();
+                                break;
+                            case 2:
+                                message.end = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExtensionRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExtensionRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExtensionRange message.
+                     * @function verify
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExtensionRange.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            if (!$util.isInteger(message.start))
+                                return "start: integer expected";
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            if (!$util.isInteger(message.end))
+                                return "end: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExtensionRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
+                     */
+                    ExtensionRange.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
+                            return object;
+                        var message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
+                        if (object.start != null)
+                            message.start = object.start | 0;
+                        if (object.end != null)
+                            message.end = object.end | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExtensionRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @static
+                     * @param {google.protobuf.DescriptorProto.ExtensionRange} message ExtensionRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExtensionRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.start = 0;
+                            object.end = 0;
+                        }
+                        if (message.start != null && message.hasOwnProperty("start"))
+                            object.start = message.start;
+                        if (message.end != null && message.hasOwnProperty("end"))
+                            object.end = message.end;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExtensionRange to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.DescriptorProto.ExtensionRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExtensionRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ExtensionRange;
+                })();
+    
+                return DescriptorProto;
+            })();
+    
+            protobuf.FieldDescriptorProto = (function() {
+    
+                /**
+                 * Properties of a FieldDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IFieldDescriptorProto
+                 * @property {string|null} [name] FieldDescriptorProto name
+                 * @property {number|null} [number] FieldDescriptorProto number
+                 * @property {google.protobuf.FieldDescriptorProto.Label|null} [label] FieldDescriptorProto label
+                 * @property {google.protobuf.FieldDescriptorProto.Type|null} [type] FieldDescriptorProto type
+                 * @property {string|null} [type_name] FieldDescriptorProto type_name
+                 * @property {string|null} [extendee] FieldDescriptorProto extendee
+                 * @property {string|null} [default_value] FieldDescriptorProto default_value
+                 * @property {number|null} [oneof_index] FieldDescriptorProto oneof_index
+                 * @property {google.protobuf.IFieldOptions|null} [options] FieldDescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new FieldDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldDescriptorProto.
+                 * @implements IFieldDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IFieldDescriptorProto=} [properties] Properties to set
+                 */
+                function FieldDescriptorProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.name = "";
+    
+                /**
+                 * FieldDescriptorProto number.
+                 * @member {number} number
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.number = 0;
+    
+                /**
+                 * FieldDescriptorProto label.
+                 * @member {google.protobuf.FieldDescriptorProto.Label} label
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.label = 1;
+    
+                /**
+                 * FieldDescriptorProto type.
+                 * @member {google.protobuf.FieldDescriptorProto.Type} type
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.type = 1;
+    
+                /**
+                 * FieldDescriptorProto type_name.
+                 * @member {string} type_name
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.type_name = "";
+    
+                /**
+                 * FieldDescriptorProto extendee.
+                 * @member {string} extendee
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.extendee = "";
+    
+                /**
+                 * FieldDescriptorProto default_value.
+                 * @member {string} default_value
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.default_value = "";
+    
+                /**
+                 * FieldDescriptorProto oneof_index.
+                 * @member {number} oneof_index
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.oneof_index = 0;
+    
+                /**
+                 * FieldDescriptorProto options.
+                 * @member {google.protobuf.IFieldOptions|null|undefined} options
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 */
+                FieldDescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new FieldDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFieldDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto instance
+                 */
+                FieldDescriptorProto.create = function create(properties) {
+                    return new FieldDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldDescriptorProto message. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFieldDescriptorProto} message FieldDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.extendee);
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.number);
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.label);
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.type_name);
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
+                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.default_value);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.FieldOptions.encode(message.options, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
+                        writer.uint32(/* id 9, wireType 0 =*/72).int32(message.oneof_index);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IFieldDescriptorProto} message FieldDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 3:
+                            message.number = reader.int32();
+                            break;
+                        case 4:
+                            message.label = reader.int32();
+                            break;
+                        case 5:
+                            message.type = reader.int32();
+                            break;
+                        case 6:
+                            message.type_name = reader.string();
+                            break;
+                        case 2:
+                            message.extendee = reader.string();
+                            break;
+                        case 7:
+                            message.default_value = reader.string();
+                            break;
+                        case 9:
+                            message.oneof_index = reader.int32();
+                            break;
+                        case 8:
+                            message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        if (!$util.isInteger(message.number))
+                            return "number: integer expected";
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        switch (message.label) {
+                        default:
+                            return "label: enum value expected";
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        switch (message.type) {
+                        default:
+                            return "type: enum value expected";
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                        case 18:
+                            break;
+                        }
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
+                        if (!$util.isString(message.type_name))
+                            return "type_name: string expected";
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                        if (!$util.isString(message.extendee))
+                            return "extendee: string expected";
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
+                        if (!$util.isString(message.default_value))
+                            return "default_value: string expected";
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
+                        if (!$util.isInteger(message.oneof_index))
+                            return "oneof_index: integer expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.FieldOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
+                 */
+                FieldDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.FieldDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.number != null)
+                        message.number = object.number | 0;
+                    switch (object.label) {
+                    case "LABEL_OPTIONAL":
+                    case 1:
+                        message.label = 1;
+                        break;
+                    case "LABEL_REQUIRED":
+                    case 2:
+                        message.label = 2;
+                        break;
+                    case "LABEL_REPEATED":
+                    case 3:
+                        message.label = 3;
+                        break;
+                    }
+                    switch (object.type) {
+                    case "TYPE_DOUBLE":
+                    case 1:
+                        message.type = 1;
+                        break;
+                    case "TYPE_FLOAT":
+                    case 2:
+                        message.type = 2;
+                        break;
+                    case "TYPE_INT64":
+                    case 3:
+                        message.type = 3;
+                        break;
+                    case "TYPE_UINT64":
+                    case 4:
+                        message.type = 4;
+                        break;
+                    case "TYPE_INT32":
+                    case 5:
+                        message.type = 5;
+                        break;
+                    case "TYPE_FIXED64":
+                    case 6:
+                        message.type = 6;
+                        break;
+                    case "TYPE_FIXED32":
+                    case 7:
+                        message.type = 7;
+                        break;
+                    case "TYPE_BOOL":
+                    case 8:
+                        message.type = 8;
+                        break;
+                    case "TYPE_STRING":
+                    case 9:
+                        message.type = 9;
+                        break;
+                    case "TYPE_GROUP":
+                    case 10:
+                        message.type = 10;
+                        break;
+                    case "TYPE_MESSAGE":
+                    case 11:
+                        message.type = 11;
+                        break;
+                    case "TYPE_BYTES":
+                    case 12:
+                        message.type = 12;
+                        break;
+                    case "TYPE_UINT32":
+                    case 13:
+                        message.type = 13;
+                        break;
+                    case "TYPE_ENUM":
+                    case 14:
+                        message.type = 14;
+                        break;
+                    case "TYPE_SFIXED32":
+                    case 15:
+                        message.type = 15;
+                        break;
+                    case "TYPE_SFIXED64":
+                    case 16:
+                        message.type = 16;
+                        break;
+                    case "TYPE_SINT32":
+                    case 17:
+                        message.type = 17;
+                        break;
+                    case "TYPE_SINT64":
+                    case 18:
+                        message.type = 18;
+                        break;
+                    }
+                    if (object.type_name != null)
+                        message.type_name = String(object.type_name);
+                    if (object.extendee != null)
+                        message.extendee = String(object.extendee);
+                    if (object.default_value != null)
+                        message.default_value = String(object.default_value);
+                    if (object.oneof_index != null)
+                        message.oneof_index = object.oneof_index | 0;
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @static
+                 * @param {google.protobuf.FieldDescriptorProto} message FieldDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.extendee = "";
+                        object.number = 0;
+                        object.label = options.enums === String ? "LABEL_OPTIONAL" : 1;
+                        object.type = options.enums === String ? "TYPE_DOUBLE" : 1;
+                        object.type_name = "";
+                        object.default_value = "";
+                        object.options = null;
+                        object.oneof_index = 0;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                        object.extendee = message.extendee;
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        object.number = message.number;
+                    if (message.label != null && message.hasOwnProperty("label"))
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                    if (message.type_name != null && message.hasOwnProperty("type_name"))
+                        object.type_name = message.type_name;
+                    if (message.default_value != null && message.hasOwnProperty("default_value"))
+                        object.default_value = message.default_value;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options);
+                    if (message.oneof_index != null && message.hasOwnProperty("oneof_index"))
+                        object.oneof_index = message.oneof_index;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Type enum.
+                 * @name google.protobuf.FieldDescriptorProto.Type
+                 * @enum {string}
+                 * @property {number} TYPE_DOUBLE=1 TYPE_DOUBLE value
+                 * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
+                 * @property {number} TYPE_INT64=3 TYPE_INT64 value
+                 * @property {number} TYPE_UINT64=4 TYPE_UINT64 value
+                 * @property {number} TYPE_INT32=5 TYPE_INT32 value
+                 * @property {number} TYPE_FIXED64=6 TYPE_FIXED64 value
+                 * @property {number} TYPE_FIXED32=7 TYPE_FIXED32 value
+                 * @property {number} TYPE_BOOL=8 TYPE_BOOL value
+                 * @property {number} TYPE_STRING=9 TYPE_STRING value
+                 * @property {number} TYPE_GROUP=10 TYPE_GROUP value
+                 * @property {number} TYPE_MESSAGE=11 TYPE_MESSAGE value
+                 * @property {number} TYPE_BYTES=12 TYPE_BYTES value
+                 * @property {number} TYPE_UINT32=13 TYPE_UINT32 value
+                 * @property {number} TYPE_ENUM=14 TYPE_ENUM value
+                 * @property {number} TYPE_SFIXED32=15 TYPE_SFIXED32 value
+                 * @property {number} TYPE_SFIXED64=16 TYPE_SFIXED64 value
+                 * @property {number} TYPE_SINT32=17 TYPE_SINT32 value
+                 * @property {number} TYPE_SINT64=18 TYPE_SINT64 value
+                 */
+                FieldDescriptorProto.Type = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[1] = "TYPE_DOUBLE"] = 1;
+                    values[valuesById[2] = "TYPE_FLOAT"] = 2;
+                    values[valuesById[3] = "TYPE_INT64"] = 3;
+                    values[valuesById[4] = "TYPE_UINT64"] = 4;
+                    values[valuesById[5] = "TYPE_INT32"] = 5;
+                    values[valuesById[6] = "TYPE_FIXED64"] = 6;
+                    values[valuesById[7] = "TYPE_FIXED32"] = 7;
+                    values[valuesById[8] = "TYPE_BOOL"] = 8;
+                    values[valuesById[9] = "TYPE_STRING"] = 9;
+                    values[valuesById[10] = "TYPE_GROUP"] = 10;
+                    values[valuesById[11] = "TYPE_MESSAGE"] = 11;
+                    values[valuesById[12] = "TYPE_BYTES"] = 12;
+                    values[valuesById[13] = "TYPE_UINT32"] = 13;
+                    values[valuesById[14] = "TYPE_ENUM"] = 14;
+                    values[valuesById[15] = "TYPE_SFIXED32"] = 15;
+                    values[valuesById[16] = "TYPE_SFIXED64"] = 16;
+                    values[valuesById[17] = "TYPE_SINT32"] = 17;
+                    values[valuesById[18] = "TYPE_SINT64"] = 18;
+                    return values;
+                })();
+    
+                /**
+                 * Label enum.
+                 * @name google.protobuf.FieldDescriptorProto.Label
+                 * @enum {string}
+                 * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
+                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
+                 * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
+                 */
+                FieldDescriptorProto.Label = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[1] = "LABEL_OPTIONAL"] = 1;
+                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
+                    values[valuesById[3] = "LABEL_REPEATED"] = 3;
+                    return values;
+                })();
+    
+                return FieldDescriptorProto;
+            })();
+    
+            protobuf.OneofDescriptorProto = (function() {
+    
+                /**
+                 * Properties of an OneofDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IOneofDescriptorProto
+                 * @property {string|null} [name] OneofDescriptorProto name
+                 */
+    
+                /**
+                 * Constructs a new OneofDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an OneofDescriptorProto.
+                 * @implements IOneofDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IOneofDescriptorProto=} [properties] Properties to set
+                 */
+                function OneofDescriptorProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OneofDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 */
+                OneofDescriptorProto.prototype.name = "";
+    
+                /**
+                 * Creates a new OneofDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IOneofDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto instance
+                 */
+                OneofDescriptorProto.create = function create(properties) {
+                    return new OneofDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified OneofDescriptorProto message. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IOneofDescriptorProto} message OneofDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OneofDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IOneofDescriptorProto} message OneofDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OneofDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OneofDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OneofDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OneofDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OneofDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OneofDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OneofDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
+                 */
+                OneofDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.OneofDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.OneofDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OneofDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @static
+                 * @param {google.protobuf.OneofDescriptorProto} message OneofDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OneofDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OneofDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.OneofDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OneofDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return OneofDescriptorProto;
+            })();
+    
+            protobuf.EnumDescriptorProto = (function() {
+    
+                /**
+                 * Properties of an EnumDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IEnumDescriptorProto
+                 * @property {string|null} [name] EnumDescriptorProto name
+                 * @property {Array.<google.protobuf.IEnumValueDescriptorProto>|null} [value] EnumDescriptorProto value
+                 * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new EnumDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an EnumDescriptorProto.
+                 * @implements IEnumDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IEnumDescriptorProto=} [properties] Properties to set
+                 */
+                function EnumDescriptorProto(properties) {
+                    this.value = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * EnumDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.name = "";
+    
+                /**
+                 * EnumDescriptorProto value.
+                 * @member {Array.<google.protobuf.IEnumValueDescriptorProto>} value
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.value = $util.emptyArray;
+    
+                /**
+                 * EnumDescriptorProto options.
+                 * @member {google.protobuf.IEnumOptions|null|undefined} options
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new EnumDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto instance
+                 */
+                EnumDescriptorProto.create = function create(properties) {
+                    return new EnumDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified EnumDescriptorProto message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumDescriptorProto} message EnumDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.value != null && message.value.length)
+                        for (var i = 0; i < message.value.length; ++i)
+                            $root.google.protobuf.EnumValueDescriptorProto.encode(message.value[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.EnumOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified EnumDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumDescriptorProto} message EnumDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an EnumDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.value && message.value.length))
+                                message.value = [];
+                            message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an EnumDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an EnumDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                EnumDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.value != null && message.hasOwnProperty("value")) {
+                        if (!Array.isArray(message.value))
+                            return "value: array expected";
+                        for (var i = 0; i < message.value.length; ++i) {
+                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i]);
+                            if (error)
+                                return "value." + error;
+                        }
+                    }
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.EnumOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an EnumDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
+                 */
+                EnumDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.EnumDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.EnumDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.value) {
+                        if (!Array.isArray(object.value))
+                            throw TypeError(".google.protobuf.EnumDescriptorProto.value: array expected");
+                        message.value = [];
+                        for (var i = 0; i < object.value.length; ++i) {
+                            if (typeof object.value[i] !== "object")
+                                throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
+                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i]);
+                        }
+                    }
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an EnumDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @static
+                 * @param {google.protobuf.EnumDescriptorProto} message EnumDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                EnumDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.value = [];
+                    if (options.defaults) {
+                        object.name = "";
+                        object.options = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.value && message.value.length) {
+                        object.value = [];
+                        for (var j = 0; j < message.value.length; ++j)
+                            object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options);
+                    }
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this EnumDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                EnumDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return EnumDescriptorProto;
+            })();
+    
+            protobuf.EnumValueDescriptorProto = (function() {
+    
+                /**
+                 * Properties of an EnumValueDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IEnumValueDescriptorProto
+                 * @property {string|null} [name] EnumValueDescriptorProto name
+                 * @property {number|null} [number] EnumValueDescriptorProto number
+                 * @property {google.protobuf.IEnumValueOptions|null} [options] EnumValueDescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new EnumValueDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an EnumValueDescriptorProto.
+                 * @implements IEnumValueDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IEnumValueDescriptorProto=} [properties] Properties to set
+                 */
+                function EnumValueDescriptorProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * EnumValueDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @instance
+                 */
+                EnumValueDescriptorProto.prototype.name = "";
+    
+                /**
+                 * EnumValueDescriptorProto number.
+                 * @member {number} number
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @instance
+                 */
+                EnumValueDescriptorProto.prototype.number = 0;
+    
+                /**
+                 * EnumValueDescriptorProto options.
+                 * @member {google.protobuf.IEnumValueOptions|null|undefined} options
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @instance
+                 */
+                EnumValueDescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new EnumValueDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumValueDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto instance
+                 */
+                EnumValueDescriptorProto.create = function create(properties) {
+                    return new EnumValueDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified EnumValueDescriptorProto message. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumValueDescriptorProto} message EnumValueDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumValueDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.number);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.EnumValueOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified EnumValueDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IEnumValueDescriptorProto} message EnumValueDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumValueDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an EnumValueDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message.number = reader.int32();
+                            break;
+                        case 3:
+                            message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an EnumValueDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumValueDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an EnumValueDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                EnumValueDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        if (!$util.isInteger(message.number))
+                            return "number: integer expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an EnumValueDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
+                 */
+                EnumValueDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.EnumValueDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.number != null)
+                        message.number = object.number | 0;
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an EnumValueDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @static
+                 * @param {google.protobuf.EnumValueDescriptorProto} message EnumValueDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                EnumValueDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.number = 0;
+                        object.options = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.number != null && message.hasOwnProperty("number"))
+                        object.number = message.number;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this EnumValueDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.EnumValueDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                EnumValueDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return EnumValueDescriptorProto;
+            })();
+    
+            protobuf.ServiceDescriptorProto = (function() {
+    
+                /**
+                 * Properties of a ServiceDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IServiceDescriptorProto
+                 * @property {string|null} [name] ServiceDescriptorProto name
+                 * @property {Array.<google.protobuf.IMethodDescriptorProto>|null} [method] ServiceDescriptorProto method
+                 * @property {google.protobuf.IServiceOptions|null} [options] ServiceDescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new ServiceDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ServiceDescriptorProto.
+                 * @implements IServiceDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IServiceDescriptorProto=} [properties] Properties to set
+                 */
+                function ServiceDescriptorProto(properties) {
+                    this.method = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ServiceDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @instance
+                 */
+                ServiceDescriptorProto.prototype.name = "";
+    
+                /**
+                 * ServiceDescriptorProto method.
+                 * @member {Array.<google.protobuf.IMethodDescriptorProto>} method
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @instance
+                 */
+                ServiceDescriptorProto.prototype.method = $util.emptyArray;
+    
+                /**
+                 * ServiceDescriptorProto options.
+                 * @member {google.protobuf.IServiceOptions|null|undefined} options
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @instance
+                 */
+                ServiceDescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new ServiceDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IServiceDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto instance
+                 */
+                ServiceDescriptorProto.create = function create(properties) {
+                    return new ServiceDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified ServiceDescriptorProto message. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IServiceDescriptorProto} message ServiceDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ServiceDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.method != null && message.method.length)
+                        for (var i = 0; i < message.method.length; ++i)
+                            $root.google.protobuf.MethodDescriptorProto.encode(message.method[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.ServiceOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ServiceDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IServiceDescriptorProto} message ServiceDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ServiceDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ServiceDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ServiceDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.method && message.method.length))
+                                message.method = [];
+                            message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ServiceDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ServiceDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ServiceDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ServiceDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.method != null && message.hasOwnProperty("method")) {
+                        if (!Array.isArray(message.method))
+                            return "method: array expected";
+                        for (var i = 0; i < message.method.length; ++i) {
+                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i]);
+                            if (error)
+                                return "method." + error;
+                        }
+                    }
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.ServiceOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ServiceDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
+                 */
+                ServiceDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.ServiceDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.method) {
+                        if (!Array.isArray(object.method))
+                            throw TypeError(".google.protobuf.ServiceDescriptorProto.method: array expected");
+                        message.method = [];
+                        for (var i = 0; i < object.method.length; ++i) {
+                            if (typeof object.method[i] !== "object")
+                                throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
+                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i]);
+                        }
+                    }
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ServiceDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @static
+                 * @param {google.protobuf.ServiceDescriptorProto} message ServiceDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ServiceDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.method = [];
+                    if (options.defaults) {
+                        object.name = "";
+                        object.options = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.method && message.method.length) {
+                        object.method = [];
+                        for (var j = 0; j < message.method.length; ++j)
+                            object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options);
+                    }
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this ServiceDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ServiceDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ServiceDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ServiceDescriptorProto;
+            })();
+    
+            protobuf.MethodDescriptorProto = (function() {
+    
+                /**
+                 * Properties of a MethodDescriptorProto.
+                 * @memberof google.protobuf
+                 * @interface IMethodDescriptorProto
+                 * @property {string|null} [name] MethodDescriptorProto name
+                 * @property {string|null} [input_type] MethodDescriptorProto input_type
+                 * @property {string|null} [output_type] MethodDescriptorProto output_type
+                 * @property {google.protobuf.IMethodOptions|null} [options] MethodDescriptorProto options
+                 */
+    
+                /**
+                 * Constructs a new MethodDescriptorProto.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a MethodDescriptorProto.
+                 * @implements IMethodDescriptorProto
+                 * @constructor
+                 * @param {google.protobuf.IMethodDescriptorProto=} [properties] Properties to set
+                 */
+                function MethodDescriptorProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * MethodDescriptorProto name.
+                 * @member {string} name
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.name = "";
+    
+                /**
+                 * MethodDescriptorProto input_type.
+                 * @member {string} input_type
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.input_type = "";
+    
+                /**
+                 * MethodDescriptorProto output_type.
+                 * @member {string} output_type
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.output_type = "";
+    
+                /**
+                 * MethodDescriptorProto options.
+                 * @member {google.protobuf.IMethodOptions|null|undefined} options
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 */
+                MethodDescriptorProto.prototype.options = null;
+    
+                /**
+                 * Creates a new MethodDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IMethodDescriptorProto=} [properties] Properties to set
+                 * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto instance
+                 */
+                MethodDescriptorProto.create = function create(properties) {
+                    return new MethodDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified MethodDescriptorProto message. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IMethodDescriptorProto} message MethodDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MethodDescriptorProto.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.input_type);
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.output_type);
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        $root.google.protobuf.MethodOptions.encode(message.options, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified MethodDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {google.protobuf.IMethodDescriptorProto} message MethodDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MethodDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a MethodDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MethodDescriptorProto.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        case 2:
+                            message.input_type = reader.string();
+                            break;
+                        case 3:
+                            message.output_type = reader.string();
+                            break;
+                        case 4:
+                            message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a MethodDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MethodDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a MethodDescriptorProto message.
+                 * @function verify
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                MethodDescriptorProto.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
+                        if (!$util.isString(message.input_type))
+                            return "input_type: string expected";
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
+                        if (!$util.isString(message.output_type))
+                            return "output_type: string expected";
+                    if (message.options != null && message.hasOwnProperty("options")) {
+                        var error = $root.google.protobuf.MethodOptions.verify(message.options);
+                        if (error)
+                            return "options." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a MethodDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
+                 */
+                MethodDescriptorProto.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.MethodDescriptorProto)
+                        return object;
+                    var message = new $root.google.protobuf.MethodDescriptorProto();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.input_type != null)
+                        message.input_type = String(object.input_type);
+                    if (object.output_type != null)
+                        message.output_type = String(object.output_type);
+                    if (object.options != null) {
+                        if (typeof object.options !== "object")
+                            throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
+                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a MethodDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @static
+                 * @param {google.protobuf.MethodDescriptorProto} message MethodDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                MethodDescriptorProto.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.input_type = "";
+                        object.output_type = "";
+                        object.options = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.input_type != null && message.hasOwnProperty("input_type"))
+                        object.input_type = message.input_type;
+                    if (message.output_type != null && message.hasOwnProperty("output_type"))
+                        object.output_type = message.output_type;
+                    if (message.options != null && message.hasOwnProperty("options"))
+                        object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this MethodDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.MethodDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                MethodDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return MethodDescriptorProto;
+            })();
+    
+            protobuf.FileOptions = (function() {
+    
+                /**
+                 * Properties of a FileOptions.
+                 * @memberof google.protobuf
+                 * @interface IFileOptions
+                 * @property {string|null} [java_package] FileOptions java_package
+                 * @property {string|null} [java_outer_classname] FileOptions java_outer_classname
+                 * @property {boolean|null} [java_multiple_files] FileOptions java_multiple_files
+                 * @property {boolean|null} [java_generate_equals_and_hash] FileOptions java_generate_equals_and_hash
+                 * @property {boolean|null} [java_string_check_utf8] FileOptions java_string_check_utf8
+                 * @property {google.protobuf.FileOptions.OptimizeMode|null} [optimize_for] FileOptions optimize_for
+                 * @property {string|null} [go_package] FileOptions go_package
+                 * @property {boolean|null} [cc_generic_services] FileOptions cc_generic_services
+                 * @property {boolean|null} [java_generic_services] FileOptions java_generic_services
+                 * @property {boolean|null} [py_generic_services] FileOptions py_generic_services
+                 * @property {boolean|null} [deprecated] FileOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FileOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new FileOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FileOptions.
+                 * @implements IFileOptions
+                 * @constructor
+                 * @param {google.protobuf.IFileOptions=} [properties] Properties to set
+                 */
+                function FileOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FileOptions java_package.
+                 * @member {string} java_package
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_package = "";
+    
+                /**
+                 * FileOptions java_outer_classname.
+                 * @member {string} java_outer_classname
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_outer_classname = "";
+    
+                /**
+                 * FileOptions java_multiple_files.
+                 * @member {boolean} java_multiple_files
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_multiple_files = false;
+    
+                /**
+                 * FileOptions java_generate_equals_and_hash.
+                 * @member {boolean} java_generate_equals_and_hash
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_generate_equals_and_hash = false;
+    
+                /**
+                 * FileOptions java_string_check_utf8.
+                 * @member {boolean} java_string_check_utf8
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_string_check_utf8 = false;
+    
+                /**
+                 * FileOptions optimize_for.
+                 * @member {google.protobuf.FileOptions.OptimizeMode} optimize_for
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.optimize_for = 1;
+    
+                /**
+                 * FileOptions go_package.
+                 * @member {string} go_package
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.go_package = "";
+    
+                /**
+                 * FileOptions cc_generic_services.
+                 * @member {boolean} cc_generic_services
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.cc_generic_services = false;
+    
+                /**
+                 * FileOptions java_generic_services.
+                 * @member {boolean} java_generic_services
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.java_generic_services = false;
+    
+                /**
+                 * FileOptions py_generic_services.
+                 * @member {boolean} py_generic_services
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.py_generic_services = false;
+    
+                /**
+                 * FileOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.deprecated = false;
+    
+                /**
+                 * FileOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new FileOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {google.protobuf.IFileOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.FileOptions} FileOptions instance
+                 */
+                FileOptions.create = function create(properties) {
+                    return new FileOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified FileOptions message. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {google.protobuf.IFileOptions} message FileOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.java_package);
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.java_outer_classname);
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
+                        writer.uint32(/* id 9, wireType 0 =*/72).int32(message.optimize_for);
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
+                        writer.uint32(/* id 10, wireType 0 =*/80).bool(message.java_multiple_files);
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
+                        writer.uint32(/* id 11, wireType 2 =*/90).string(message.go_package);
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
+                        writer.uint32(/* id 16, wireType 0 =*/128).bool(message.cc_generic_services);
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
+                        writer.uint32(/* id 17, wireType 0 =*/136).bool(message.java_generic_services);
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
+                        writer.uint32(/* id 18, wireType 0 =*/144).bool(message.py_generic_services);
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
+                        writer.uint32(/* id 20, wireType 0 =*/160).bool(message.java_generate_equals_and_hash);
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 23, wireType 0 =*/184).bool(message.deprecated);
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
+                        writer.uint32(/* id 27, wireType 0 =*/216).bool(message.java_string_check_utf8);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FileOptions message, length delimited. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {google.protobuf.IFileOptions} message FileOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FileOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FileOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FileOptions} FileOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.java_package = reader.string();
+                            break;
+                        case 8:
+                            message.java_outer_classname = reader.string();
+                            break;
+                        case 10:
+                            message.java_multiple_files = reader.bool();
+                            break;
+                        case 20:
+                            message.java_generate_equals_and_hash = reader.bool();
+                            break;
+                        case 27:
+                            message.java_string_check_utf8 = reader.bool();
+                            break;
+                        case 9:
+                            message.optimize_for = reader.int32();
+                            break;
+                        case 11:
+                            message.go_package = reader.string();
+                            break;
+                        case 16:
+                            message.cc_generic_services = reader.bool();
+                            break;
+                        case 17:
+                            message.java_generic_services = reader.bool();
+                            break;
+                        case 18:
+                            message.py_generic_services = reader.bool();
+                            break;
+                        case 23:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FileOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FileOptions} FileOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FileOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FileOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FileOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
+                        if (!$util.isString(message.java_package))
+                            return "java_package: string expected";
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
+                        if (!$util.isString(message.java_outer_classname))
+                            return "java_outer_classname: string expected";
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
+                        if (typeof message.java_multiple_files !== "boolean")
+                            return "java_multiple_files: boolean expected";
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
+                        if (typeof message.java_generate_equals_and_hash !== "boolean")
+                            return "java_generate_equals_and_hash: boolean expected";
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
+                        if (typeof message.java_string_check_utf8 !== "boolean")
+                            return "java_string_check_utf8: boolean expected";
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
+                        switch (message.optimize_for) {
+                        default:
+                            return "optimize_for: enum value expected";
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
+                        if (!$util.isString(message.go_package))
+                            return "go_package: string expected";
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
+                        if (typeof message.cc_generic_services !== "boolean")
+                            return "cc_generic_services: boolean expected";
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
+                        if (typeof message.java_generic_services !== "boolean")
+                            return "java_generic_services: boolean expected";
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
+                        if (typeof message.py_generic_services !== "boolean")
+                            return "py_generic_services: boolean expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FileOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FileOptions} FileOptions
+                 */
+                FileOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FileOptions)
+                        return object;
+                    var message = new $root.google.protobuf.FileOptions();
+                    if (object.java_package != null)
+                        message.java_package = String(object.java_package);
+                    if (object.java_outer_classname != null)
+                        message.java_outer_classname = String(object.java_outer_classname);
+                    if (object.java_multiple_files != null)
+                        message.java_multiple_files = Boolean(object.java_multiple_files);
+                    if (object.java_generate_equals_and_hash != null)
+                        message.java_generate_equals_and_hash = Boolean(object.java_generate_equals_and_hash);
+                    if (object.java_string_check_utf8 != null)
+                        message.java_string_check_utf8 = Boolean(object.java_string_check_utf8);
+                    switch (object.optimize_for) {
+                    case "SPEED":
+                    case 1:
+                        message.optimize_for = 1;
+                        break;
+                    case "CODE_SIZE":
+                    case 2:
+                        message.optimize_for = 2;
+                        break;
+                    case "LITE_RUNTIME":
+                    case 3:
+                        message.optimize_for = 3;
+                        break;
+                    }
+                    if (object.go_package != null)
+                        message.go_package = String(object.go_package);
+                    if (object.cc_generic_services != null)
+                        message.cc_generic_services = Boolean(object.cc_generic_services);
+                    if (object.java_generic_services != null)
+                        message.java_generic_services = Boolean(object.java_generic_services);
+                    if (object.py_generic_services != null)
+                        message.py_generic_services = Boolean(object.py_generic_services);
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FileOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FileOptions
+                 * @static
+                 * @param {google.protobuf.FileOptions} message FileOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FileOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.java_package = "";
+                        object.java_outer_classname = "";
+                        object.optimize_for = options.enums === String ? "SPEED" : 1;
+                        object.java_multiple_files = false;
+                        object.go_package = "";
+                        object.cc_generic_services = false;
+                        object.java_generic_services = false;
+                        object.py_generic_services = false;
+                        object.java_generate_equals_and_hash = false;
+                        object.deprecated = false;
+                        object.java_string_check_utf8 = false;
+                    }
+                    if (message.java_package != null && message.hasOwnProperty("java_package"))
+                        object.java_package = message.java_package;
+                    if (message.java_outer_classname != null && message.hasOwnProperty("java_outer_classname"))
+                        object.java_outer_classname = message.java_outer_classname;
+                    if (message.optimize_for != null && message.hasOwnProperty("optimize_for"))
+                        object.optimize_for = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimize_for] : message.optimize_for;
+                    if (message.java_multiple_files != null && message.hasOwnProperty("java_multiple_files"))
+                        object.java_multiple_files = message.java_multiple_files;
+                    if (message.go_package != null && message.hasOwnProperty("go_package"))
+                        object.go_package = message.go_package;
+                    if (message.cc_generic_services != null && message.hasOwnProperty("cc_generic_services"))
+                        object.cc_generic_services = message.cc_generic_services;
+                    if (message.java_generic_services != null && message.hasOwnProperty("java_generic_services"))
+                        object.java_generic_services = message.java_generic_services;
+                    if (message.py_generic_services != null && message.hasOwnProperty("py_generic_services"))
+                        object.py_generic_services = message.py_generic_services;
+                    if (message.java_generate_equals_and_hash != null && message.hasOwnProperty("java_generate_equals_and_hash"))
+                        object.java_generate_equals_and_hash = message.java_generate_equals_and_hash;
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.java_string_check_utf8 != null && message.hasOwnProperty("java_string_check_utf8"))
+                        object.java_string_check_utf8 = message.java_string_check_utf8;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FileOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FileOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * OptimizeMode enum.
+                 * @name google.protobuf.FileOptions.OptimizeMode
+                 * @enum {string}
+                 * @property {number} SPEED=1 SPEED value
+                 * @property {number} CODE_SIZE=2 CODE_SIZE value
+                 * @property {number} LITE_RUNTIME=3 LITE_RUNTIME value
+                 */
+                FileOptions.OptimizeMode = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[1] = "SPEED"] = 1;
+                    values[valuesById[2] = "CODE_SIZE"] = 2;
+                    values[valuesById[3] = "LITE_RUNTIME"] = 3;
+                    return values;
+                })();
+    
+                return FileOptions;
+            })();
+    
+            protobuf.MessageOptions = (function() {
+    
+                /**
+                 * Properties of a MessageOptions.
+                 * @memberof google.protobuf
+                 * @interface IMessageOptions
+                 * @property {boolean|null} [message_set_wire_format] MessageOptions message_set_wire_format
+                 * @property {boolean|null} [no_standard_descriptor_accessor] MessageOptions no_standard_descriptor_accessor
+                 * @property {boolean|null} [deprecated] MessageOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MessageOptions uninterpreted_option
+                 */
+    
+                /**
+                 * Constructs a new MessageOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a MessageOptions.
+                 * @implements IMessageOptions
+                 * @constructor
+                 * @param {google.protobuf.IMessageOptions=} [properties] Properties to set
+                 */
+                function MessageOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * MessageOptions message_set_wire_format.
+                 * @member {boolean} message_set_wire_format
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.message_set_wire_format = false;
+    
+                /**
+                 * MessageOptions no_standard_descriptor_accessor.
+                 * @member {boolean} no_standard_descriptor_accessor
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.no_standard_descriptor_accessor = false;
+    
+                /**
+                 * MessageOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.deprecated = false;
+    
+                /**
+                 * MessageOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * Creates a new MessageOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {google.protobuf.IMessageOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.MessageOptions} MessageOptions instance
+                 */
+                MessageOptions.create = function create(properties) {
+                    return new MessageOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified MessageOptions message. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {google.protobuf.IMessageOptions} message MessageOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MessageOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.message_set_wire_format);
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.no_standard_descriptor_accessor);
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified MessageOptions message, length delimited. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {google.protobuf.IMessageOptions} message MessageOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MessageOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a MessageOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.MessageOptions} MessageOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MessageOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.message_set_wire_format = reader.bool();
+                            break;
+                        case 2:
+                            message.no_standard_descriptor_accessor = reader.bool();
+                            break;
+                        case 3:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a MessageOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.MessageOptions} MessageOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MessageOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a MessageOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                MessageOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
+                        if (typeof message.message_set_wire_format !== "boolean")
+                            return "message_set_wire_format: boolean expected";
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
+                        if (typeof message.no_standard_descriptor_accessor !== "boolean")
+                            return "no_standard_descriptor_accessor: boolean expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a MessageOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.MessageOptions} MessageOptions
+                 */
+                MessageOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.MessageOptions)
+                        return object;
+                    var message = new $root.google.protobuf.MessageOptions();
+                    if (object.message_set_wire_format != null)
+                        message.message_set_wire_format = Boolean(object.message_set_wire_format);
+                    if (object.no_standard_descriptor_accessor != null)
+                        message.no_standard_descriptor_accessor = Boolean(object.no_standard_descriptor_accessor);
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.MessageOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a MessageOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.MessageOptions
+                 * @static
+                 * @param {google.protobuf.MessageOptions} message MessageOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                MessageOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.message_set_wire_format = false;
+                        object.no_standard_descriptor_accessor = false;
+                        object.deprecated = false;
+                    }
+                    if (message.message_set_wire_format != null && message.hasOwnProperty("message_set_wire_format"))
+                        object.message_set_wire_format = message.message_set_wire_format;
+                    if (message.no_standard_descriptor_accessor != null && message.hasOwnProperty("no_standard_descriptor_accessor"))
+                        object.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this MessageOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                MessageOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return MessageOptions;
+            })();
+    
+            protobuf.FieldOptions = (function() {
+    
+                /**
+                 * Properties of a FieldOptions.
+                 * @memberof google.protobuf
+                 * @interface IFieldOptions
+                 * @property {google.protobuf.FieldOptions.CType|null} [ctype] FieldOptions ctype
+                 * @property {boolean|null} [packed] FieldOptions packed
+                 * @property {boolean|null} [lazy] FieldOptions lazy
+                 * @property {boolean|null} [deprecated] FieldOptions deprecated
+                 * @property {string|null} [experimental_map_key] FieldOptions experimental_map_key
+                 * @property {boolean|null} [weak] FieldOptions weak
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] FieldOptions uninterpreted_option
+                 * @property {string|null} [".description"] FieldOptions .description
+                 */
+    
+                /**
+                 * Constructs a new FieldOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldOptions.
+                 * @implements IFieldOptions
+                 * @constructor
+                 * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
+                 */
+                function FieldOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldOptions ctype.
+                 * @member {google.protobuf.FieldOptions.CType} ctype
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.ctype = 0;
+    
+                /**
+                 * FieldOptions packed.
+                 * @member {boolean} packed
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.packed = false;
+    
+                /**
+                 * FieldOptions lazy.
+                 * @member {boolean} lazy
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.lazy = false;
+    
+                /**
+                 * FieldOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.deprecated = false;
+    
+                /**
+                 * FieldOptions experimental_map_key.
+                 * @member {string} experimental_map_key
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.experimental_map_key = "";
+    
+                /**
+                 * FieldOptions weak.
+                 * @member {boolean} weak
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.weak = false;
+    
+                /**
+                 * FieldOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .description.
+                 * @member {string} .description
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".description"] = "";
+    
+                /**
+                 * Creates a new FieldOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldOptions} FieldOptions instance
+                 */
+                FieldOptions.create = function create(properties) {
+                    return new FieldOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldOptions message. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {google.protobuf.IFieldOptions} message FieldOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ctype);
+                    if (message.packed != null && message.hasOwnProperty("packed"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.packed);
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.lazy);
+                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
+                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.experimental_map_key);
+                    if (message.weak != null && message.hasOwnProperty("weak"))
+                        writer.uint32(/* id 10, wireType 0 =*/80).bool(message.weak);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
+                        writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".description"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldOptions message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {google.protobuf.IFieldOptions} message FieldOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldOptions} FieldOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.ctype = reader.int32();
+                            break;
+                        case 2:
+                            message.packed = reader.bool();
+                            break;
+                        case 5:
+                            message.lazy = reader.bool();
+                            break;
+                        case 3:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 9:
+                            message.experimental_map_key = reader.string();
+                            break;
+                        case 10:
+                            message.weak = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 50000:
+                            message[".description"] = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldOptions} FieldOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                        switch (message.ctype) {
+                        default:
+                            return "ctype: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.packed != null && message.hasOwnProperty("packed"))
+                        if (typeof message.packed !== "boolean")
+                            return "packed: boolean expected";
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                        if (typeof message.lazy !== "boolean")
+                            return "lazy: boolean expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
+                        if (!$util.isString(message.experimental_map_key))
+                            return "experimental_map_key: string expected";
+                    if (message.weak != null && message.hasOwnProperty("weak"))
+                        if (typeof message.weak !== "boolean")
+                            return "weak: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
+                        if (!$util.isString(message[".description"]))
+                            return ".description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldOptions} FieldOptions
+                 */
+                FieldOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldOptions)
+                        return object;
+                    var message = new $root.google.protobuf.FieldOptions();
+                    switch (object.ctype) {
+                    case "STRING":
+                    case 0:
+                        message.ctype = 0;
+                        break;
+                    case "CORD":
+                    case 1:
+                        message.ctype = 1;
+                        break;
+                    case "STRING_PIECE":
+                    case 2:
+                        message.ctype = 2;
+                        break;
+                    }
+                    if (object.packed != null)
+                        message.packed = Boolean(object.packed);
+                    if (object.lazy != null)
+                        message.lazy = Boolean(object.lazy);
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.experimental_map_key != null)
+                        message.experimental_map_key = String(object.experimental_map_key);
+                    if (object.weak != null)
+                        message.weak = Boolean(object.weak);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.FieldOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.FieldOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    if (object[".description"] != null)
+                        message[".description"] = String(object[".description"]);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldOptions
+                 * @static
+                 * @param {google.protobuf.FieldOptions} message FieldOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.ctype = options.enums === String ? "STRING" : 0;
+                        object.packed = false;
+                        object.deprecated = false;
+                        object.lazy = false;
+                        object.experimental_map_key = "";
+                        object.weak = false;
+                        object[".description"] = "";
+                    }
+                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                    if (message.packed != null && message.hasOwnProperty("packed"))
+                        object.packed = message.packed;
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                        object.lazy = message.lazy;
+                    if (message.experimental_map_key != null && message.hasOwnProperty("experimental_map_key"))
+                        object.experimental_map_key = message.experimental_map_key;
+                    if (message.weak != null && message.hasOwnProperty("weak"))
+                        object.weak = message.weak;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    if (message[".description"] != null && message.hasOwnProperty(".description"))
+                        object[".description"] = message[".description"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * CType enum.
+                 * @name google.protobuf.FieldOptions.CType
+                 * @enum {string}
+                 * @property {number} STRING=0 STRING value
+                 * @property {number} CORD=1 CORD value
+                 * @property {number} STRING_PIECE=2 STRING_PIECE value
+                 */
+                FieldOptions.CType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STRING"] = 0;
+                    values[valuesById[1] = "CORD"] = 1;
+                    values[valuesById[2] = "STRING_PIECE"] = 2;
+                    return values;
+                })();
+    
+                return FieldOptions;
+            })();
+    
+            protobuf.EnumOptions = (function() {
+    
+                /**
+                 * Properties of an EnumOptions.
+                 * @memberof google.protobuf
+                 * @interface IEnumOptions
+                 * @property {boolean|null} [allow_alias] EnumOptions allow_alias
+                 * @property {boolean|null} [deprecated] EnumOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] EnumOptions uninterpreted_option
+                 * @property {string|null} [".enum_description"] EnumOptions .enum_description
+                 */
+    
+                /**
+                 * Constructs a new EnumOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an EnumOptions.
+                 * @implements IEnumOptions
+                 * @constructor
+                 * @param {google.protobuf.IEnumOptions=} [properties] Properties to set
+                 */
+                function EnumOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * EnumOptions allow_alias.
+                 * @member {boolean} allow_alias
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.allow_alias = false;
+    
+                /**
+                 * EnumOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * EnumOptions .enum_description.
+                 * @member {string} .enum_description
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype[".enum_description"] = "";
+    
+                /**
+                 * Creates a new EnumOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {google.protobuf.IEnumOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.EnumOptions} EnumOptions instance
+                 */
+                EnumOptions.create = function create(properties) {
+                    return new EnumOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified EnumOptions message. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {google.protobuf.IEnumOptions} message EnumOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allow_alias);
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
+                        writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_description"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified EnumOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {google.protobuf.IEnumOptions} message EnumOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an EnumOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.EnumOptions} EnumOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 2:
+                            message.allow_alias = reader.bool();
+                            break;
+                        case 3:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 50000:
+                            message[".enum_description"] = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an EnumOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.EnumOptions} EnumOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an EnumOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                EnumOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
+                        if (typeof message.allow_alias !== "boolean")
+                            return "allow_alias: boolean expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
+                        if (!$util.isString(message[".enum_description"]))
+                            return ".enum_description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an EnumOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.EnumOptions} EnumOptions
+                 */
+                EnumOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.EnumOptions)
+                        return object;
+                    var message = new $root.google.protobuf.EnumOptions();
+                    if (object.allow_alias != null)
+                        message.allow_alias = Boolean(object.allow_alias);
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.EnumOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.EnumOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    if (object[".enum_description"] != null)
+                        message[".enum_description"] = String(object[".enum_description"]);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an EnumOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.EnumOptions
+                 * @static
+                 * @param {google.protobuf.EnumOptions} message EnumOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                EnumOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.allow_alias = false;
+                        object.deprecated = false;
+                        object[".enum_description"] = "";
+                    }
+                    if (message.allow_alias != null && message.hasOwnProperty("allow_alias"))
+                        object.allow_alias = message.allow_alias;
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    if (message[".enum_description"] != null && message.hasOwnProperty(".enum_description"))
+                        object[".enum_description"] = message[".enum_description"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this EnumOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                EnumOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return EnumOptions;
+            })();
+    
+            protobuf.EnumValueOptions = (function() {
+    
+                /**
+                 * Properties of an EnumValueOptions.
+                 * @memberof google.protobuf
+                 * @interface IEnumValueOptions
+                 * @property {boolean|null} [deprecated] EnumValueOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] EnumValueOptions uninterpreted_option
+                 * @property {string|null} [".enum_value_description"] EnumValueOptions .enum_value_description
+                 */
+    
+                /**
+                 * Constructs a new EnumValueOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an EnumValueOptions.
+                 * @implements IEnumValueOptions
+                 * @constructor
+                 * @param {google.protobuf.IEnumValueOptions=} [properties] Properties to set
+                 */
+                function EnumValueOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * EnumValueOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumValueOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * EnumValueOptions .enum_value_description.
+                 * @member {string} .enum_value_description
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype[".enum_value_description"] = "";
+    
+                /**
+                 * Creates a new EnumValueOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {google.protobuf.IEnumValueOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.EnumValueOptions} EnumValueOptions instance
+                 */
+                EnumValueOptions.create = function create(properties) {
+                    return new EnumValueOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified EnumValueOptions message. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {google.protobuf.IEnumValueOptions} message EnumValueOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumValueOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
+                        writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".enum_value_description"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified EnumValueOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {google.protobuf.IEnumValueOptions} message EnumValueOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnumValueOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an EnumValueOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumValueOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 50000:
+                            message[".enum_value_description"] = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an EnumValueOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnumValueOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an EnumValueOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                EnumValueOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
+                        if (!$util.isString(message[".enum_value_description"]))
+                            return ".enum_value_description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an EnumValueOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
+                 */
+                EnumValueOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.EnumValueOptions)
+                        return object;
+                    var message = new $root.google.protobuf.EnumValueOptions();
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.EnumValueOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.EnumValueOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    if (object[".enum_value_description"] != null)
+                        message[".enum_value_description"] = String(object[".enum_value_description"]);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an EnumValueOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @static
+                 * @param {google.protobuf.EnumValueOptions} message EnumValueOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                EnumValueOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.deprecated = false;
+                        object[".enum_value_description"] = "";
+                    }
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    if (message[".enum_value_description"] != null && message.hasOwnProperty(".enum_value_description"))
+                        object[".enum_value_description"] = message[".enum_value_description"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this EnumValueOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                EnumValueOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return EnumValueOptions;
+            })();
+    
+            protobuf.ServiceOptions = (function() {
+    
+                /**
+                 * Properties of a ServiceOptions.
+                 * @memberof google.protobuf
+                 * @interface IServiceOptions
+                 * @property {boolean|null} [deprecated] ServiceOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] ServiceOptions uninterpreted_option
+                 * @property {string|null} [".service_description"] ServiceOptions .service_description
+                 * @property {EProtoExecutionSite|null} [".service_execution_site"] ServiceOptions .service_execution_site
+                 */
+    
+                /**
+                 * Constructs a new ServiceOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ServiceOptions.
+                 * @implements IServiceOptions
+                 * @constructor
+                 * @param {google.protobuf.IServiceOptions=} [properties] Properties to set
+                 */
+                function ServiceOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ServiceOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.deprecated = false;
+    
+                /**
+                 * ServiceOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * ServiceOptions .service_description.
+                 * @member {string} .service_description
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".service_description"] = "";
+    
+                /**
+                 * ServiceOptions .service_execution_site.
+                 * @member {EProtoExecutionSite} .service_execution_site
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".service_execution_site"] = 0;
+    
+                /**
+                 * Creates a new ServiceOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {google.protobuf.IServiceOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.ServiceOptions} ServiceOptions instance
+                 */
+                ServiceOptions.create = function create(properties) {
+                    return new ServiceOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified ServiceOptions message. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {google.protobuf.IServiceOptions} message ServiceOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ServiceOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
+                        writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".service_description"]);
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
+                        writer.uint32(/* id 50008, wireType 0 =*/400064).int32(message[".service_execution_site"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ServiceOptions message, length delimited. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {google.protobuf.IServiceOptions} message ServiceOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ServiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ServiceOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ServiceOptions} ServiceOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ServiceOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 33:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 50000:
+                            message[".service_description"] = reader.string();
+                            break;
+                        case 50008:
+                            message[".service_execution_site"] = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ServiceOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ServiceOptions} ServiceOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ServiceOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ServiceOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ServiceOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
+                        if (!$util.isString(message[".service_description"]))
+                            return ".service_description: string expected";
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
+                        switch (message[".service_execution_site"]) {
+                        default:
+                            return ".service_execution_site: enum value expected";
+                        case 0:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ServiceOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ServiceOptions} ServiceOptions
+                 */
+                ServiceOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ServiceOptions)
+                        return object;
+                    var message = new $root.google.protobuf.ServiceOptions();
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.ServiceOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.ServiceOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    if (object[".service_description"] != null)
+                        message[".service_description"] = String(object[".service_description"]);
+                    switch (object[".service_execution_site"]) {
+                    case "k_EProtoExecutionSiteUnknown":
+                    case 0:
+                        message[".service_execution_site"] = 0;
+                        break;
+                    case "k_EProtoExecutionSiteSteamClient":
+                    case 2:
+                        message[".service_execution_site"] = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ServiceOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ServiceOptions
+                 * @static
+                 * @param {google.protobuf.ServiceOptions} message ServiceOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ServiceOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.deprecated = false;
+                        object[".service_description"] = "";
+                        object[".service_execution_site"] = options.enums === String ? "k_EProtoExecutionSiteUnknown" : 0;
+                    }
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    if (message[".service_description"] != null && message.hasOwnProperty(".service_description"))
+                        object[".service_description"] = message[".service_description"];
+                    if (message[".service_execution_site"] != null && message.hasOwnProperty(".service_execution_site"))
+                        object[".service_execution_site"] = options.enums === String ? $root.EProtoExecutionSite[message[".service_execution_site"]] : message[".service_execution_site"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this ServiceOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ServiceOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ServiceOptions;
+            })();
+    
+            protobuf.MethodOptions = (function() {
+    
+                /**
+                 * Properties of a MethodOptions.
+                 * @memberof google.protobuf
+                 * @interface IMethodOptions
+                 * @property {boolean|null} [deprecated] MethodOptions deprecated
+                 * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpreted_option] MethodOptions uninterpreted_option
+                 * @property {string|null} [".method_description"] MethodOptions .method_description
+                 */
+    
+                /**
+                 * Constructs a new MethodOptions.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a MethodOptions.
+                 * @implements IMethodOptions
+                 * @constructor
+                 * @param {google.protobuf.IMethodOptions=} [properties] Properties to set
+                 */
+                function MethodOptions(properties) {
+                    this.uninterpreted_option = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * MethodOptions deprecated.
+                 * @member {boolean} deprecated
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.deprecated = false;
+    
+                /**
+                 * MethodOptions uninterpreted_option.
+                 * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpreted_option
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.uninterpreted_option = $util.emptyArray;
+    
+                /**
+                 * MethodOptions .method_description.
+                 * @member {string} .method_description
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".method_description"] = "";
+    
+                /**
+                 * Creates a new MethodOptions instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {google.protobuf.IMethodOptions=} [properties] Properties to set
+                 * @returns {google.protobuf.MethodOptions} MethodOptions instance
+                 */
+                MethodOptions.create = function create(properties) {
+                    return new MethodOptions(properties);
+                };
+    
+                /**
+                 * Encodes the specified MethodOptions message. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {google.protobuf.IMethodOptions} message MethodOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MethodOptions.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.uninterpreted_option != null && message.uninterpreted_option.length)
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.encode(message.uninterpreted_option[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
+                        writer.uint32(/* id 50000, wireType 2 =*/400002).string(message[".method_description"]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified MethodOptions message, length delimited. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {google.protobuf.IMethodOptions} message MethodOptions message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                MethodOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a MethodOptions message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.MethodOptions} MethodOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MethodOptions.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 33:
+                            message.deprecated = reader.bool();
+                            break;
+                        case 999:
+                            if (!(message.uninterpreted_option && message.uninterpreted_option.length))
+                                message.uninterpreted_option = [];
+                            message.uninterpreted_option.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 50000:
+                            message[".method_description"] = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a MethodOptions message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.MethodOptions} MethodOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                MethodOptions.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a MethodOptions message.
+                 * @function verify
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                MethodOptions.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        if (typeof message.deprecated !== "boolean")
+                            return "deprecated: boolean expected";
+                    if (message.uninterpreted_option != null && message.hasOwnProperty("uninterpreted_option")) {
+                        if (!Array.isArray(message.uninterpreted_option))
+                            return "uninterpreted_option: array expected";
+                        for (var i = 0; i < message.uninterpreted_option.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpreted_option[i]);
+                            if (error)
+                                return "uninterpreted_option." + error;
+                        }
+                    }
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
+                        if (!$util.isString(message[".method_description"]))
+                            return ".method_description: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a MethodOptions message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.MethodOptions} MethodOptions
+                 */
+                MethodOptions.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.MethodOptions)
+                        return object;
+                    var message = new $root.google.protobuf.MethodOptions();
+                    if (object.deprecated != null)
+                        message.deprecated = Boolean(object.deprecated);
+                    if (object.uninterpreted_option) {
+                        if (!Array.isArray(object.uninterpreted_option))
+                            throw TypeError(".google.protobuf.MethodOptions.uninterpreted_option: array expected");
+                        message.uninterpreted_option = [];
+                        for (var i = 0; i < object.uninterpreted_option.length; ++i) {
+                            if (typeof object.uninterpreted_option[i] !== "object")
+                                throw TypeError(".google.protobuf.MethodOptions.uninterpreted_option: object expected");
+                            message.uninterpreted_option[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpreted_option[i]);
+                        }
+                    }
+                    if (object[".method_description"] != null)
+                        message[".method_description"] = String(object[".method_description"]);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a MethodOptions message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.MethodOptions
+                 * @static
+                 * @param {google.protobuf.MethodOptions} message MethodOptions
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                MethodOptions.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.uninterpreted_option = [];
+                    if (options.defaults) {
+                        object.deprecated = false;
+                        object[".method_description"] = "";
+                    }
+                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                        object.deprecated = message.deprecated;
+                    if (message.uninterpreted_option && message.uninterpreted_option.length) {
+                        object.uninterpreted_option = [];
+                        for (var j = 0; j < message.uninterpreted_option.length; ++j)
+                            object.uninterpreted_option[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpreted_option[j], options);
+                    }
+                    if (message[".method_description"] != null && message.hasOwnProperty(".method_description"))
+                        object[".method_description"] = message[".method_description"];
+                    return object;
+                };
+    
+                /**
+                 * Converts this MethodOptions to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                MethodOptions.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return MethodOptions;
+            })();
+    
+            protobuf.UninterpretedOption = (function() {
+    
+                /**
+                 * Properties of an UninterpretedOption.
+                 * @memberof google.protobuf
+                 * @interface IUninterpretedOption
+                 * @property {Array.<google.protobuf.UninterpretedOption.INamePart>|null} [name] UninterpretedOption name
+                 * @property {string|null} [identifier_value] UninterpretedOption identifier_value
+                 * @property {number|Long|null} [positive_int_value] UninterpretedOption positive_int_value
+                 * @property {number|Long|null} [negative_int_value] UninterpretedOption negative_int_value
+                 * @property {number|null} [double_value] UninterpretedOption double_value
+                 * @property {Uint8Array|null} [string_value] UninterpretedOption string_value
+                 * @property {string|null} [aggregate_value] UninterpretedOption aggregate_value
+                 */
+    
+                /**
+                 * Constructs a new UninterpretedOption.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an UninterpretedOption.
+                 * @implements IUninterpretedOption
+                 * @constructor
+                 * @param {google.protobuf.IUninterpretedOption=} [properties] Properties to set
+                 */
+                function UninterpretedOption(properties) {
+                    this.name = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UninterpretedOption name.
+                 * @member {Array.<google.protobuf.UninterpretedOption.INamePart>} name
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.name = $util.emptyArray;
+    
+                /**
+                 * UninterpretedOption identifier_value.
+                 * @member {string} identifier_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.identifier_value = "";
+    
+                /**
+                 * UninterpretedOption positive_int_value.
+                 * @member {number|Long} positive_int_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.positive_int_value = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+                /**
+                 * UninterpretedOption negative_int_value.
+                 * @member {number|Long} negative_int_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.negative_int_value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * UninterpretedOption double_value.
+                 * @member {number} double_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.double_value = 0;
+    
+                /**
+                 * UninterpretedOption string_value.
+                 * @member {Uint8Array} string_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.string_value = $util.newBuffer([]);
+    
+                /**
+                 * UninterpretedOption aggregate_value.
+                 * @member {string} aggregate_value
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 */
+                UninterpretedOption.prototype.aggregate_value = "";
+    
+                /**
+                 * Creates a new UninterpretedOption instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {google.protobuf.IUninterpretedOption=} [properties] Properties to set
+                 * @returns {google.protobuf.UninterpretedOption} UninterpretedOption instance
+                 */
+                UninterpretedOption.create = function create(properties) {
+                    return new UninterpretedOption(properties);
+                };
+    
+                /**
+                 * Encodes the specified UninterpretedOption message. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {google.protobuf.IUninterpretedOption} message UninterpretedOption message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UninterpretedOption.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.name.length)
+                        for (var i = 0; i < message.name.length; ++i)
+                            $root.google.protobuf.UninterpretedOption.NamePart.encode(message.name[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.identifier_value);
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.positive_int_value);
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int64(message.negative_int_value);
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
+                        writer.uint32(/* id 6, wireType 1 =*/49).double(message.double_value);
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
+                        writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.string_value);
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.aggregate_value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UninterpretedOption message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {google.protobuf.IUninterpretedOption} message UninterpretedOption message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UninterpretedOption.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UninterpretedOption message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UninterpretedOption.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 2:
+                            if (!(message.name && message.name.length))
+                                message.name = [];
+                            message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            message.identifier_value = reader.string();
+                            break;
+                        case 4:
+                            message.positive_int_value = reader.uint64();
+                            break;
+                        case 5:
+                            message.negative_int_value = reader.int64();
+                            break;
+                        case 6:
+                            message.double_value = reader.double();
+                            break;
+                        case 7:
+                            message.string_value = reader.bytes();
+                            break;
+                        case 8:
+                            message.aggregate_value = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UninterpretedOption message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UninterpretedOption.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UninterpretedOption message.
+                 * @function verify
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UninterpretedOption.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name")) {
+                        if (!Array.isArray(message.name))
+                            return "name: array expected";
+                        for (var i = 0; i < message.name.length; ++i) {
+                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i]);
+                            if (error)
+                                return "name." + error;
+                        }
+                    }
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
+                        if (!$util.isString(message.identifier_value))
+                            return "identifier_value: string expected";
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
+                        if (!$util.isInteger(message.positive_int_value) && !(message.positive_int_value && $util.isInteger(message.positive_int_value.low) && $util.isInteger(message.positive_int_value.high)))
+                            return "positive_int_value: integer|Long expected";
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
+                        if (!$util.isInteger(message.negative_int_value) && !(message.negative_int_value && $util.isInteger(message.negative_int_value.low) && $util.isInteger(message.negative_int_value.high)))
+                            return "negative_int_value: integer|Long expected";
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
+                        if (typeof message.double_value !== "number")
+                            return "double_value: number expected";
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
+                        if (!(message.string_value && typeof message.string_value.length === "number" || $util.isString(message.string_value)))
+                            return "string_value: buffer expected";
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
+                        if (!$util.isString(message.aggregate_value))
+                            return "aggregate_value: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an UninterpretedOption message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
+                 */
+                UninterpretedOption.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UninterpretedOption)
+                        return object;
+                    var message = new $root.google.protobuf.UninterpretedOption();
+                    if (object.name) {
+                        if (!Array.isArray(object.name))
+                            throw TypeError(".google.protobuf.UninterpretedOption.name: array expected");
+                        message.name = [];
+                        for (var i = 0; i < object.name.length; ++i) {
+                            if (typeof object.name[i] !== "object")
+                                throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
+                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i]);
+                        }
+                    }
+                    if (object.identifier_value != null)
+                        message.identifier_value = String(object.identifier_value);
+                    if (object.positive_int_value != null)
+                        if ($util.Long)
+                            (message.positive_int_value = $util.Long.fromValue(object.positive_int_value)).unsigned = true;
+                        else if (typeof object.positive_int_value === "string")
+                            message.positive_int_value = parseInt(object.positive_int_value, 10);
+                        else if (typeof object.positive_int_value === "number")
+                            message.positive_int_value = object.positive_int_value;
+                        else if (typeof object.positive_int_value === "object")
+                            message.positive_int_value = new $util.LongBits(object.positive_int_value.low >>> 0, object.positive_int_value.high >>> 0).toNumber(true);
+                    if (object.negative_int_value != null)
+                        if ($util.Long)
+                            (message.negative_int_value = $util.Long.fromValue(object.negative_int_value)).unsigned = false;
+                        else if (typeof object.negative_int_value === "string")
+                            message.negative_int_value = parseInt(object.negative_int_value, 10);
+                        else if (typeof object.negative_int_value === "number")
+                            message.negative_int_value = object.negative_int_value;
+                        else if (typeof object.negative_int_value === "object")
+                            message.negative_int_value = new $util.LongBits(object.negative_int_value.low >>> 0, object.negative_int_value.high >>> 0).toNumber();
+                    if (object.double_value != null)
+                        message.double_value = Number(object.double_value);
+                    if (object.string_value != null)
+                        if (typeof object.string_value === "string")
+                            $util.base64.decode(object.string_value, message.string_value = $util.newBuffer($util.base64.length(object.string_value)), 0);
+                        else if (object.string_value.length)
+                            message.string_value = object.string_value;
+                    if (object.aggregate_value != null)
+                        message.aggregate_value = String(object.aggregate_value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UninterpretedOption message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @static
+                 * @param {google.protobuf.UninterpretedOption} message UninterpretedOption
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UninterpretedOption.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.name = [];
+                    if (options.defaults) {
+                        object.identifier_value = "";
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, true);
+                            object.positive_int_value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.positive_int_value = options.longs === String ? "0" : 0;
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.negative_int_value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.negative_int_value = options.longs === String ? "0" : 0;
+                        object.double_value = 0;
+                        if (options.bytes === String)
+                            object.string_value = "";
+                        else {
+                            object.string_value = [];
+                            if (options.bytes !== Array)
+                                object.string_value = $util.newBuffer(object.string_value);
+                        }
+                        object.aggregate_value = "";
+                    }
+                    if (message.name && message.name.length) {
+                        object.name = [];
+                        for (var j = 0; j < message.name.length; ++j)
+                            object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options);
+                    }
+                    if (message.identifier_value != null && message.hasOwnProperty("identifier_value"))
+                        object.identifier_value = message.identifier_value;
+                    if (message.positive_int_value != null && message.hasOwnProperty("positive_int_value"))
+                        if (typeof message.positive_int_value === "number")
+                            object.positive_int_value = options.longs === String ? String(message.positive_int_value) : message.positive_int_value;
+                        else
+                            object.positive_int_value = options.longs === String ? $util.Long.prototype.toString.call(message.positive_int_value) : options.longs === Number ? new $util.LongBits(message.positive_int_value.low >>> 0, message.positive_int_value.high >>> 0).toNumber(true) : message.positive_int_value;
+                    if (message.negative_int_value != null && message.hasOwnProperty("negative_int_value"))
+                        if (typeof message.negative_int_value === "number")
+                            object.negative_int_value = options.longs === String ? String(message.negative_int_value) : message.negative_int_value;
+                        else
+                            object.negative_int_value = options.longs === String ? $util.Long.prototype.toString.call(message.negative_int_value) : options.longs === Number ? new $util.LongBits(message.negative_int_value.low >>> 0, message.negative_int_value.high >>> 0).toNumber() : message.negative_int_value;
+                    if (message.double_value != null && message.hasOwnProperty("double_value"))
+                        object.double_value = options.json && !isFinite(message.double_value) ? String(message.double_value) : message.double_value;
+                    if (message.string_value != null && message.hasOwnProperty("string_value"))
+                        object.string_value = options.bytes === String ? $util.base64.encode(message.string_value, 0, message.string_value.length) : options.bytes === Array ? Array.prototype.slice.call(message.string_value) : message.string_value;
+                    if (message.aggregate_value != null && message.hasOwnProperty("aggregate_value"))
+                        object.aggregate_value = message.aggregate_value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UninterpretedOption to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UninterpretedOption
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UninterpretedOption.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                UninterpretedOption.NamePart = (function() {
+    
+                    /**
+                     * Properties of a NamePart.
+                     * @memberof google.protobuf.UninterpretedOption
+                     * @interface INamePart
+                     * @property {string} name_part NamePart name_part
+                     * @property {boolean} is_extension NamePart is_extension
+                     */
+    
+                    /**
+                     * Constructs a new NamePart.
+                     * @memberof google.protobuf.UninterpretedOption
+                     * @classdesc Represents a NamePart.
+                     * @implements INamePart
+                     * @constructor
+                     * @param {google.protobuf.UninterpretedOption.INamePart=} [properties] Properties to set
+                     */
+                    function NamePart(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NamePart name_part.
+                     * @member {string} name_part
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @instance
+                     */
+                    NamePart.prototype.name_part = "";
+    
+                    /**
+                     * NamePart is_extension.
+                     * @member {boolean} is_extension
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @instance
+                     */
+                    NamePart.prototype.is_extension = false;
+    
+                    /**
+                     * Creates a new NamePart instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {google.protobuf.UninterpretedOption.INamePart=} [properties] Properties to set
+                     * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart instance
+                     */
+                    NamePart.create = function create(properties) {
+                        return new NamePart(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NamePart message. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {google.protobuf.UninterpretedOption.INamePart} message NamePart message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NamePart.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name_part);
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.is_extension);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NamePart message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {google.protobuf.UninterpretedOption.INamePart} message NamePart message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NamePart.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NamePart message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NamePart.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name_part = reader.string();
+                                break;
+                            case 2:
+                                message.is_extension = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        if (!message.hasOwnProperty("name_part"))
+                            throw $util.ProtocolError("missing required 'name_part'", { instance: message });
+                        if (!message.hasOwnProperty("is_extension"))
+                            throw $util.ProtocolError("missing required 'is_extension'", { instance: message });
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NamePart message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NamePart.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NamePart message.
+                     * @function verify
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NamePart.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (!$util.isString(message.name_part))
+                            return "name_part: string expected";
+                        if (typeof message.is_extension !== "boolean")
+                            return "is_extension: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NamePart message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
+                     */
+                    NamePart.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
+                            return object;
+                        var message = new $root.google.protobuf.UninterpretedOption.NamePart();
+                        if (object.name_part != null)
+                            message.name_part = String(object.name_part);
+                        if (object.is_extension != null)
+                            message.is_extension = Boolean(object.is_extension);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NamePart message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @static
+                     * @param {google.protobuf.UninterpretedOption.NamePart} message NamePart
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NamePart.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name_part = "";
+                            object.is_extension = false;
+                        }
+                        if (message.name_part != null && message.hasOwnProperty("name_part"))
+                            object.name_part = message.name_part;
+                        if (message.is_extension != null && message.hasOwnProperty("is_extension"))
+                            object.is_extension = message.is_extension;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NamePart to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.UninterpretedOption.NamePart
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NamePart.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return NamePart;
+                })();
+    
+                return UninterpretedOption;
+            })();
+    
+            protobuf.SourceCodeInfo = (function() {
+    
+                /**
+                 * Properties of a SourceCodeInfo.
+                 * @memberof google.protobuf
+                 * @interface ISourceCodeInfo
+                 * @property {Array.<google.protobuf.SourceCodeInfo.ILocation>|null} [location] SourceCodeInfo location
+                 */
+    
+                /**
+                 * Constructs a new SourceCodeInfo.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a SourceCodeInfo.
+                 * @implements ISourceCodeInfo
+                 * @constructor
+                 * @param {google.protobuf.ISourceCodeInfo=} [properties] Properties to set
+                 */
+                function SourceCodeInfo(properties) {
+                    this.location = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SourceCodeInfo location.
+                 * @member {Array.<google.protobuf.SourceCodeInfo.ILocation>} location
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @instance
+                 */
+                SourceCodeInfo.prototype.location = $util.emptyArray;
+    
+                /**
+                 * Creates a new SourceCodeInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {google.protobuf.ISourceCodeInfo=} [properties] Properties to set
+                 * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo instance
+                 */
+                SourceCodeInfo.create = function create(properties) {
+                    return new SourceCodeInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified SourceCodeInfo message. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {google.protobuf.ISourceCodeInfo} message SourceCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SourceCodeInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.location != null && message.location.length)
+                        for (var i = 0; i < message.location.length; ++i)
+                            $root.google.protobuf.SourceCodeInfo.Location.encode(message.location[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SourceCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {google.protobuf.ISourceCodeInfo} message SourceCodeInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SourceCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SourceCodeInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SourceCodeInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.location && message.location.length))
+                                message.location = [];
+                            message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SourceCodeInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SourceCodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SourceCodeInfo message.
+                 * @function verify
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SourceCodeInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.location != null && message.hasOwnProperty("location")) {
+                        if (!Array.isArray(message.location))
+                            return "location: array expected";
+                        for (var i = 0; i < message.location.length; ++i) {
+                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i]);
+                            if (error)
+                                return "location." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a SourceCodeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
+                 */
+                SourceCodeInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.SourceCodeInfo)
+                        return object;
+                    var message = new $root.google.protobuf.SourceCodeInfo();
+                    if (object.location) {
+                        if (!Array.isArray(object.location))
+                            throw TypeError(".google.protobuf.SourceCodeInfo.location: array expected");
+                        message.location = [];
+                        for (var i = 0; i < object.location.length; ++i) {
+                            if (typeof object.location[i] !== "object")
+                                throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
+                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SourceCodeInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @static
+                 * @param {google.protobuf.SourceCodeInfo} message SourceCodeInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SourceCodeInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.location = [];
+                    if (message.location && message.location.length) {
+                        object.location = [];
+                        for (var j = 0; j < message.location.length; ++j)
+                            object.location[j] = $root.google.protobuf.SourceCodeInfo.Location.toObject(message.location[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this SourceCodeInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.SourceCodeInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SourceCodeInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                SourceCodeInfo.Location = (function() {
+    
+                    /**
+                     * Properties of a Location.
+                     * @memberof google.protobuf.SourceCodeInfo
+                     * @interface ILocation
+                     * @property {Array.<number>|null} [path] Location path
+                     * @property {Array.<number>|null} [span] Location span
+                     * @property {string|null} [leading_comments] Location leading_comments
+                     * @property {string|null} [trailing_comments] Location trailing_comments
+                     */
+    
+                    /**
+                     * Constructs a new Location.
+                     * @memberof google.protobuf.SourceCodeInfo
+                     * @classdesc Represents a Location.
+                     * @implements ILocation
+                     * @constructor
+                     * @param {google.protobuf.SourceCodeInfo.ILocation=} [properties] Properties to set
+                     */
+                    function Location(properties) {
+                        this.path = [];
+                        this.span = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Location path.
+                     * @member {Array.<number>} path
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Location span.
+                     * @member {Array.<number>} span
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.span = $util.emptyArray;
+    
+                    /**
+                     * Location leading_comments.
+                     * @member {string} leading_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.leading_comments = "";
+    
+                    /**
+                     * Location trailing_comments.
+                     * @member {string} trailing_comments
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     */
+                    Location.prototype.trailing_comments = "";
+    
+                    /**
+                     * Creates a new Location instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {google.protobuf.SourceCodeInfo.ILocation=} [properties] Properties to set
+                     * @returns {google.protobuf.SourceCodeInfo.Location} Location instance
+                     */
+                    Location.create = function create(properties) {
+                        return new Location(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Location message. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {google.protobuf.SourceCodeInfo.ILocation} message Location message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Location.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && message.path.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.path.length; ++i)
+                                writer.int32(message.path[i]);
+                            writer.ldelim();
+                        }
+                        if (message.span != null && message.span.length) {
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                            for (var i = 0; i < message.span.length; ++i)
+                                writer.int32(message.span[i]);
+                            writer.ldelim();
+                        }
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.leading_comments);
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.trailing_comments);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Location message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {google.protobuf.SourceCodeInfo.ILocation} message Location message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Location.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Location message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.SourceCodeInfo.Location} Location
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Location.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.path.push(reader.int32());
+                                } else
+                                    message.path.push(reader.int32());
+                                break;
+                            case 2:
+                                if (!(message.span && message.span.length))
+                                    message.span = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.span.push(reader.int32());
+                                } else
+                                    message.span.push(reader.int32());
+                                break;
+                            case 3:
+                                message.leading_comments = reader.string();
+                                break;
+                            case 4:
+                                message.trailing_comments = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Location message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.SourceCodeInfo.Location} Location
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Location.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Location message.
+                     * @function verify
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Location.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i)
+                                if (!$util.isInteger(message.path[i]))
+                                    return "path: integer[] expected";
+                        }
+                        if (message.span != null && message.hasOwnProperty("span")) {
+                            if (!Array.isArray(message.span))
+                                return "span: array expected";
+                            for (var i = 0; i < message.span.length; ++i)
+                                if (!$util.isInteger(message.span[i]))
+                                    return "span: integer[] expected";
+                        }
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
+                            if (!$util.isString(message.leading_comments))
+                                return "leading_comments: string expected";
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
+                            if (!$util.isString(message.trailing_comments))
+                                return "trailing_comments: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Location message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.SourceCodeInfo.Location} Location
+                     */
+                    Location.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
+                            return object;
+                        var message = new $root.google.protobuf.SourceCodeInfo.Location();
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i)
+                                message.path[i] = object.path[i] | 0;
+                        }
+                        if (object.span) {
+                            if (!Array.isArray(object.span))
+                                throw TypeError(".google.protobuf.SourceCodeInfo.Location.span: array expected");
+                            message.span = [];
+                            for (var i = 0; i < object.span.length; ++i)
+                                message.span[i] = object.span[i] | 0;
+                        }
+                        if (object.leading_comments != null)
+                            message.leading_comments = String(object.leading_comments);
+                        if (object.trailing_comments != null)
+                            message.trailing_comments = String(object.trailing_comments);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Location message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @static
+                     * @param {google.protobuf.SourceCodeInfo.Location} message Location
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Location.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.path = [];
+                            object.span = [];
+                        }
+                        if (options.defaults) {
+                            object.leading_comments = "";
+                            object.trailing_comments = "";
+                        }
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = message.path[j];
+                        }
+                        if (message.span && message.span.length) {
+                            object.span = [];
+                            for (var j = 0; j < message.span.length; ++j)
+                                object.span[j] = message.span[j];
+                        }
+                        if (message.leading_comments != null && message.hasOwnProperty("leading_comments"))
+                            object.leading_comments = message.leading_comments;
+                        if (message.trailing_comments != null && message.hasOwnProperty("trailing_comments"))
+                            object.trailing_comments = message.trailing_comments;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Location to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.SourceCodeInfo.Location
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Location.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Location;
+                })();
+    
+                return SourceCodeInfo;
+            })();
+    
+            return protobuf;
+        })();
+    
+        return google;
+    })();
+
+    return $root;
+});

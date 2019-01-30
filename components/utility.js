@@ -1,5 +1,4 @@
-var SteamUser = require('../index.js');
-var SteamTotp = require('steam-totp');
+const SteamUser = require('../index.js');
 
 SteamUser.formatCurrency = function(amount, currency) {
 	amount = amount.toFixed(2);
@@ -8,7 +7,7 @@ SteamUser.formatCurrency = function(amount, currency) {
 		return amount;
 	}
 
-	var data = SteamUser.CurrencyData[currency];
+	let data = SteamUser.CurrencyData[currency];
 
 	if (data.whole) {
 		amount = amount.replace('.00', '');
@@ -30,11 +29,3 @@ SteamUser.prototype._emitIdEvent = function() {
 	arguments[0] += '#' + arguments[1].getSteamID64();
 	this.emit.apply(this, arguments);
 };
-
-/**
- * Generate a Steam-style TOTP authentication code.
- * @param {Buffer|string} secret - Your TOTP secret as a Buffer, hex string, or base64 string
- * @param {number} [timeOffset=0] - If you know how far off your clock is from the Steam servers, put the offset here in seconds
- * @returns {string}
- */
-SteamUser.generateAuthCode = SteamTotp.generateAuthCode;

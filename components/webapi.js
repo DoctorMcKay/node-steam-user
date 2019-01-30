@@ -1,11 +1,9 @@
-const SteamUser = require('../index.js');
-const ProxyAgent = require('@doctormckay/proxy-agent');
-const HTTP = require('http');
 const HTTPS = require('https');
-const TLS = require('tls');
+const StdLib = require('@doctormckay/stdlib');
 const VDF = require('vdf');
-const URL = require('url');
 const Zlib = require('zlib');
+
+const SteamUser = require('../index.js');
 
 const USER_AGENT = "Valve/Steam HTTP Client 1.0";
 const HOSTNAME = "api.steampowered.com";
@@ -26,9 +24,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 
 	data.format = "vdf"; // for parity with the Steam client
 
-	var query = buildQueryString(data);
-	var headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
-	var path = "/" + iface + "/" + method + "/v" + version + "/";
+	let query = buildQueryString(data);
+	let headers = Object.assign(getDefaultHeaders(), this.options.additionalHeaders);
+	let path = "/" + iface + "/" + method + "/v" + version + "/";
 
 	if (httpMethod == "POST") {
 		headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -37,24 +35,23 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 		path += "?" + query;
 	}
 
-	var options = {
+	let options = {
 		"hostname": HOSTNAME,
 		"path": path,
 		"method": httpMethod,
 		"headers": headers
 	};
 
-	if (this.client.localAddress || this.client._localAddress) {
-		options.localAddress = this.client.localAddress || this.client._localAddress;
+	if (this.options.localAddress) {
+		options.localAddress = this.options.localAddress;
 	}
 
-	if (this.client.httpProxy || this.client._httpProxy) {
-		options.agent = ProxyAgent.getAgent(true, this.client.httpProxy || this.client._httpProxy);
+	if (this.options.httpProxy) {
+		options.agent = StdLib.HTTP.getProxyAgent(true, this.options.httpProxy);
 	}
 
-	var self = this;
-	var req = HTTPS.request(options, function(res) {
-		self.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
+	let req = HTTPS.request(options, (res) => {
+		this.emit('debug', "API " + options.method + " request to https://" + HOSTNAME + path + ": " + res.statusCode);
 
 		if (res.statusCode != 200) {
 			res.on('data', function() {}); // discard the response
@@ -62,9 +59,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 			return;
 		}
 
-		var responseData = "";
+		let responseData = "";
 
-		var stream = res;
+		let stream = res;
 		if (res.headers['content-encoding'] && res.headers['content-encoding'].toLowerCase() == 'gzip') {
 			stream = Zlib.createGunzip();
 			res.pipe(stream);
@@ -95,9 +92,9 @@ SteamUser.prototype._apiRequest = function(httpMethod, iface, method, version, d
 
 function buildQueryString(data) {
 	// We can't use the querystring module's encode because we want binary data to be completely percent-encoded
-	var str = "";
+	let str = "";
 
-	for (var i in data) {
+	for (let i in data) {
 		if (!data.hasOwnProperty(i)) {
 			continue;
 		}

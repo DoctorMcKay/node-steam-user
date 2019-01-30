@@ -1,7 +1,11 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var ByteBuffer = require('bytebuffer');
-var Helpers = require('./helpers.js');
+const ByteBuffer = require('bytebuffer');
+const StdLib = require('@doctormckay/stdlib');
+const SteamID = require('steamid');
+
+const Helpers = require('./helpers.js');
+const SteamUser = require('../index.js');
+
+let g_ProcessPersonaSemaphore = new StdLib.Concurrency.Semaphore();
 
 /**
  * Set your persona online state and optionally name.
@@ -29,17 +33,16 @@ SteamUser.prototype.setUIMode = function(mode) {
  * @param {function} [callback] - Optional. Called with `err` and `name` parameters on completion.
  */
 SteamUser.prototype.addFriend = function(steamID, callback) {
-	this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": Helpers.steamID(steamID).getSteamID64()}, function(body) {
-		if (!callback) {
-			return;
-		}
+	return StdLib.Promises.callbackPromise(['personaName'], callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.ClientAddFriend, {"steamid_to_add": Helpers.steamID(steamID).getSteamID64()}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
+			}
 
-		if (body.eresult != SteamUser.EResult.OK) {
-			callback(Helpers.eresultError(body.eresult));
-			return;
-		}
-
-		callback(null, body.persona_name_added);
+			accept({
+				"personaName": body.persona_name_added
+			});
+		});
 	});
 };
 
@@ -58,150 +61,174 @@ SteamUser.prototype.removeFriend = function(steamID) {
 /**
  * Block all communication with a user.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to block, or a string which can parse into one.
- * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ * @param {SteamUser~genericEResultCallback} [callback] - Optional. Called with an `err` parameter on completion.
+ * @return {Promise}
  */
 SteamUser.prototype.blockUser = function(steamID, callback) {
-	if (typeof steamID === 'string') {
-		steamID = new SteamID(steamID);
-	}
-
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
-	buffer.writeUint64(this.steamID.getSteamID64());
-	buffer.writeUint64(steamID.getSteamID64());
-	buffer.writeUint8(1);
-
-	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
-		if (!callback) {
-			return; // ignore
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		if (typeof steamID === 'string') {
+			steamID = new SteamID(steamID);
 		}
 
-		body.readUint64(); // unknown
-		callback(body.readUint32());
+		let buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
+		buffer.writeUint64(this.steamID.getSteamID64());
+		buffer.writeUint64(steamID.getSteamID64());
+		buffer.writeUint8(1);
+
+		this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), (body) => {
+			body.readUint64(); // unknown
+			let err = Helpers.eresultError(body.readUint32());
+			if (err) {
+				return reject(err);
+			} else {
+				return accept();
+			}
+		});
 	});
 };
 
 /**
  * Unblock all communication with a user.
  * @param {(SteamID|string)} steamID - Either a SteamID object of the user to unblock, or a string which can parse into one.
- * @param {function} [callback] - Optional. Called with an `eresult` parameter on completion.
+ * @param {SteamUser~genericEResultCallback} [callback] - Optional. Called with an `err` parameter on completion.
+ * @return {Promise}
  */
 SteamUser.prototype.unblockUser = function(steamID, callback) {
-	if (typeof steamID === 'string') {
-		steamID = new SteamID(steamID);
-	}
-
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
-	buffer.writeUint64(this.steamID.getSteamID64());
-	buffer.writeUint64(steamID.getSteamID64());
-	buffer.writeUint8(0);
-
-	this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), function(body) {
-		if (!callback) {
-			return; // ignore
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		if (typeof steamID === 'string') {
+			steamID = new SteamID(steamID);
 		}
 
-		body.readUint64(); // unknown
-		callback(body.readUint32());
+		let buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
+		buffer.writeUint64(this.steamID.getSteamID64());
+		buffer.writeUint64(steamID.getSteamID64());
+		buffer.writeUint8(0);
+
+		this._send(SteamUser.EMsg.ClientSetIgnoreFriend, buffer.flip(), (body) => {
+			body.readUint64(); // unknown
+			let err = Helpers.eresultError(body.readUint32());
+			if (err) {
+				return reject(err);
+			} else {
+				return accept();
+			}
+		});
 	});
 };
 
 /**
  * Requests information about one or more user profiles.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects or strings which can parse into them.
- * @param {function} [callback] - Optional. Called with an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
+ * @param {function} [callback] - Optional. Called with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.
+ * @return {Promise}
  */
 SteamUser.prototype.getPersonas = function(steamids, callback) {
-	var Flags = SteamUser.EClientPersonaStateFlag;
-	var flags = Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
-		Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
-		Flags.ClanTag | Flags.Facebook;
+	return StdLib.Promises.callbackPromise(['personas'], callback, true, (accept, reject) => {
+		const Flags = SteamUser.EClientPersonaStateFlag;
+		let flags = Flags.PlayerName | Flags.QueryPort | Flags.SourceID | Flags.Presence |
+			Flags.Metadata | Flags.LastSeen | Flags.ClanInfo | Flags.GameExtraInfo | Flags.GameDataBlob |
+			Flags.ClanTag | Flags.Facebook;
 
-	var ids = steamids.map(function(id) {
-		if (typeof id === 'string') {
-			return (new SteamID(id)).getSteamID64();
-		}
+		let ids = steamids.map((id) => {
+			if (typeof id === 'string') {
+				return (new SteamID(id)).getSteamID64();
+			}
 
-		return id.toString();
-	});
+			return id.toString();
+		});
 
-	this._send(SteamUser.EMsg.ClientRequestFriendData, {
-		"friends": ids,
-		"persona_state_requested": flags
-	});
+		this._send(SteamUser.EMsg.ClientRequestFriendData, {
+			"friends": ids,
+			"persona_state_requested": flags
+		});
 
-	if (callback) {
-		var output = {};
+		// Handle response
+		let output = {};
 
-		var self = this;
-		ids.forEach(function(id) {
-			self.once('user#' + id, receive);
+		ids.forEach((id) => {
+			this.once('user#' + id, receive);
 		});
 
 		function receive(sid, user) {
-			var sid64 = sid.getSteamID64();
+			let sid64 = sid.getSteamID64();
 			output[sid64] = user;
 
-			var index = ids.indexOf(sid64);
+			let index = ids.indexOf(sid64);
 			if (index != -1) {
 				ids.splice(index, 1);
 			}
 
 			if (ids.length === 0) {
-				callback(output);
+				accept({"personas": output});
 			}
 		}
-	}
+	});
 };
 
 /**
  * Gets the Steam Level of one or more Steam users.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects, or strings which can parse into one.
- * @param {function} callback - Called on completion with an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
+ * @param {function} [callback] - Called on completion with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are Steam Level numbers.
+ * @return {Promise}
  */
 SteamUser.prototype.getSteamLevels = function(steamids, callback) {
-	var accountids = steamids.map(function(steamID) {
-		if (typeof steamID === 'string') {
-			return (new SteamID(steamID)).accountid;
-		} else {
-			return steamID.accountid;
-		}
-	});
-
-	this._send(SteamUser.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, function(body) {
-		var output = {};
-
-		var sid = new SteamID();
-		sid.universe = SteamID.Universe.PUBLIC;
-		sid.type = SteamID.Type.INDIVIDUAL;
-		sid.instance = SteamID.Instance.DESKTOP;
-
-		(body.friends || []).forEach(function(user) {
-			sid.accountid = user.accountid;
-			output[sid.getSteamID64()] = user.level;
+	return StdLib.Promises.callbackPromise(['users'], callback, (accept, reject) => {
+		let accountids = steamids.map((steamID) => {
+			if (typeof steamID === 'string') {
+				return (new SteamID(steamID)).accountid;
+			} else {
+				return steamID.accountid;
+			}
 		});
 
-		callback(output);
+		this._send(SteamUser.EMsg.ClientFSGetFriendsSteamLevels, {"accountids": accountids}, (body) => {
+			let output = {};
+
+			let sid = new SteamID();
+			sid.universe = SteamID.Universe.PUBLIC;
+			sid.type = SteamID.Type.INDIVIDUAL;
+			sid.instance = SteamID.Instance.DESKTOP;
+
+			(body.friends || []).forEach((user) => {
+				sid.accountid = user.accountid;
+				output[sid.getSteamID64()] = user.level;
+			});
+
+			accept({"users": output});
+		});
 	});
 };
 
+/**
+ * Get the level of your game badge (and also your Steam level).
+ * @param {int} appid - AppID of game in question
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
 SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
-	this._sendUnified("Player.GetGameBadgeLevels#1", {"appid": appid}, false, function(body) {
-		var regular = 0;
-		var foil = 0;
+	return StdLib.Promises.callbackPromise(['steamLevel', 'regularBadgeLevel', 'foilBadgeLevel'], callback, (accept, reject) => {
+		this._sendUnified("Player.GetGameBadgeLevels#1", {appid}, (body) => {
+			let regular = 0;
+			let foil = 0;
 
-		(body.badges || []).forEach(function(badge) {
-			if (badge.series != 1) {
-				return;
-			}
+			(body.badges || []).forEach((badge) => {
+				if (badge.series != 1) {
+					return;
+				}
 
-			if (badge.border_color == 0) {
-				regular = badge.level;
-			} else if (badge.border_color == 1) {
-				foil = badge.level;
-			}
+				if (badge.border_color == 0) {
+					regular = badge.level;
+				} else if (badge.border_color == 1) {
+					foil = badge.level;
+				}
+			});
+
+			accept({
+				"playerLevel": body.player_level,
+				"regularBadgeLevel": regular,
+				"foilBadgeLevel": foil
+			});
 		});
-
-		callback(null, body.player_level, regular, foil);
 	});
 };
 
@@ -212,7 +239,7 @@ SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
  * @param {(SteamID|string)} groupSteamID - The SteamID of the group you're inviting the user to as a SteamID object, or a string that can parse into one
  */
 SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
-	var buffer = new ByteBuffer(17, ByteBuffer.LITTLE_ENDIAN);
+	let buffer = ByteBuffer.allocate(17, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(userSteamID).toString());
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(1); // unknown
@@ -226,7 +253,7 @@ SteamUser.prototype.inviteToGroup = function(userSteamID, groupSteamID) {
  * @param {boolean} accept - true to join the group, false to ignore invitation
  */
 SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
-	var buffer = new ByteBuffer(9, ByteBuffer.LITTLE_ENDIAN);
+	let buffer = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 	buffer.writeUint64(Helpers.steamID(groupSteamID).toString());
 	buffer.writeUint8(accept ? 1 : 0);
 
@@ -236,74 +263,71 @@ SteamUser.prototype.respondToGroupInvite = function(groupSteamID, accept) {
 /**
  * Creates a friends group (or tag)
  * @param {string} groupName - The name to create the friends group with
- * @param {function} callback 
+ * @param {function} [callback]
+ * @return {Promise}
  */
-SteamUser.prototype.createFriendsGroup = function (groupName, callback) {
-	this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
-		"groupname": groupName
-	}, (body) => {
-		if (body.eresult != SteamUser.EResult.OK) {
-			callback(Helpers.eresultError(body.eresult));
-			return;
-		}
+SteamUser.prototype.createFriendsGroup = function(groupName, callback) {
+	return StdLib.Promises.callbackPromise(['groupID'], callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.AMClientCreateFriendsGroup, {
+			"groupname": groupName
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
+			}
 
-		this.myFriendGroups[body.groupid] = {
-			name: groupName,
-			members: []
-		};
+			this.myFriendGroups[body.groupid] = {
+				name: groupName,
+				members: []
+			};
 
-		callback(null, body.groupid);
+			return accept({"groupID": body.groupid});
+		});
 	});
 };
 
 /**
  * Deletes a friends group (or tag)
  * @param {int} groupID - The friends group id
- * @param {function} callback 
+ * @param {function} [callback]
+ * @return {Promise}
  */
-SteamUser.prototype.deleteFriendsGroup = function (groupID, callback) {
-	this._send(SteamUser.EMsg.AMClientDeleteFriendsGroup, {
-		"groupid": groupID
-	}, (body) => {
-		if (body.eresult != SteamUser.EResult.OK) {
-			if (callback) {
-				callback(Helpers.eresultError(body.eresult));
+SteamUser.prototype.deleteFriendsGroup = function(groupID, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.AMClientDeleteFriendsGroup, {
+			"groupid": groupID
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return;
-		}
+			delete this.myFriendGroups[groupID];
 
-		delete this.myFriendGroups[groupID];
-
-		if (callback) {
-			callback(null);
-		}
+			return accept();
+		});
 	});
 };
 
 /**
  * Rename a friends group (tag)
- * @param {int} groupID - The friends group id 
+ * @param {int} groupID - The friends group id
  * @param {string} newName - The new name to update the friends group with
+ * @param {function} [callback]
+ * @return {Promise}
  */
-SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
-	this._send(SteamUser.EMsg.AMClientRenameFriendsGroup, {
-		"groupid": groupID,
-		"groupname": newName
-	}, (body) => {
-		if (body.eresult != SteamUser.EResult.OK) {
-			if (callback) {
-				callback(Helpers.eresultError(body.eresult));
+SteamUser.prototype.renameFriendsGroup = function(groupID, newName, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		this._send(SteamUser.EMsg.AMClientRenameFriendsGroup, {
+			"groupid": groupID,
+			"groupname": newName
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return;
-		}
+			this.myFriendGroups[groupID].name = newName;
 
-		this.myFriendGroups[groupID].name = newName;
-
-		if (callback) {
-			callback(null);
-		}
+			return accept();
+		});
 	});
 };
 
@@ -311,27 +335,25 @@ SteamUser.prototype.renameFriendsGroup = function (groupID, newName, callback) {
  * Add an user to friends group (tag)
  * @param {int} groupID - The friends group
  * @param {(SteamID|string)} userSteamID - The user to invite to the friends group with, as a SteamID object or a string which can parse into one
+ * @param {function} [callback]
+ * @return {Promise}
  */
-SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback) {
-	var sid = Helpers.steamID(userSteamID);
+SteamUser.prototype.addFriendToGroup = function(groupID, userSteamID, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		let sid = Helpers.steamID(userSteamID);
 
-	this._send(SteamUser.EMsg.AMClientAddFriendToGroup, {
-		"groupid": groupID,
-		"steamiduser": sid.getSteamID64()
-	}, (body) => {
-		if (body.eresult != SteamUser.EResult.OK) {
-			if (callback) {
-				callback(Helpers.eresultError(body.eresult));
+		this._send(SteamUser.EMsg.AMClientAddFriendToGroup, {
+			"groupid": groupID,
+			"steamiduser": sid.getSteamID64()
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return;
-		}
+			this.myFriendGroups[groupID].members.push(sid);
 
-		this.myFriendGroups[groupID].members.push(sid);
-
-		if (callback) {
-			callback(null);
-		}
+			return accept();
+		});
 	});
 };
 
@@ -339,167 +361,215 @@ SteamUser.prototype.addFriendToGroup = function (groupID, userSteamID, callback)
  * Remove an user to friends group (tag)
  * @param {int} groupID - The friends group
  * @param {(SteamID|string)} userSteamID - The user to remove from the friends group with, as a SteamID object or a string which can parse into one
+ * @param {function} [callback]
+ * @return {Promise}
  */
-SteamUser.prototype.removeFriendFromGroup = function (groupID, userSteamID, callback) {
-	var sid = Helpers.steamID(userSteamID);
-	
-	this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
-		"groupid": groupID,
-		"steamiduser": sid.getSteamID64()
-	}, (body) => {
-		if (body.eresult != SteamUser.EResult.OK) {
-			if (callback) {
-				callback(Helpers.eresultError(body.eresult));
+SteamUser.prototype.removeFriendFromGroup = function(groupID, userSteamID, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		let sid = Helpers.steamID(userSteamID);
+
+		this._send(SteamUser.EMsg.AMClientRemoveFriendFromGroup, {
+			"groupid": groupID,
+			"steamiduser": sid.getSteamID64()
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return;
-		}
+			let index = this.myFriendGroups[groupID].members.findIndex((element) => {
+				return element.getSteamID64() === sid.getSteamID64();
+			});
 
-		var index = this.myFriendGroups[groupID].members.findIndex((element) => {
-			return element.getSteamID64() === sid.getSteamID64();
+			if (index > -1) {
+				this.myFriendGroups[groupID].members.splice(index, 1);
+			}
+
+			return accept();
 		});
-
-		if (index > -1) {
-			this.myFriendGroups[groupID].members.splice(index, 1);
-		}
-
-		if (callback) {
-			callback(null);
-		}
 	});
-}
+};
 
 /**
  * Get persona name history for one or more users.
- * @param {{SteamID[]|string[]|SteamID|string}} userSteamIDs - SteamIDs of users to request aliases for
- * @param {function} callback
+ * @param {SteamID[]|string[]|SteamID|string} userSteamIDs - SteamIDs of users to request aliases for
+ * @param {function} [callback]
+ * @return {Promise}
  */
 SteamUser.prototype.getAliases = function(userSteamIDs, callback) {
-	if (!(userSteamIDs instanceof Array)) {
-		userSteamIDs = [userSteamIDs];
-	}
-
-	userSteamIDs = userSteamIDs.map(Helpers.steamID).map(function(id) {
-		return {"steamid": id.getSteamID64()};
-	});
-
-	this._send(SteamUser.EMsg.ClientAMGetPersonaNameHistory, {
-		"id_count": userSteamIDs.length,
-		"Ids": userSteamIDs
-	}, function(body) {
-		var ids = {};
-		body.responses = body.responses || [];
-		for (var i = 0; i < body.responses.length; i++) {
-			if (body.responses[i].eresult != SteamUser.EResult.OK) {
-				callback(Helpers.eresultError(body.responses[i].eresult));
-				return;
-			}
-
-			ids[body.responses[i].steamid.toString()] = (body.responses[i].names || []).map(function(name) {
-				name.name_since = new Date(name.name_since * 1000);
-				return name;
-			});
+	return StdLib.Promises.callbackPromise(['users'], callback, (accept, reject) => {
+		if (!(userSteamIDs instanceof Array)) {
+			userSteamIDs = [userSteamIDs];
 		}
 
-		callback(null, ids);
+		userSteamIDs = userSteamIDs.map(Helpers.steamID).map((id) => {
+			return {"steamid": id.getSteamID64()};
+		});
+
+		this._send(SteamUser.EMsg.ClientAMGetPersonaNameHistory, {
+			"id_count": userSteamIDs.length,
+			"Ids": userSteamIDs
+		}, (body) => {
+			let ids = {};
+			body.responses = body.responses || [];
+			for (let i = 0; i < body.responses.length; i++) {
+				if (body.responses[i].eresult != SteamUser.EResult.OK) {
+					return reject(Helpers.eresultError(body.responses[i].eresult));
+				}
+
+				ids[body.responses[i].steamid.toString()] = (body.responses[i].names || []).map((name) => {
+					name.name_since = new Date(name.name_since * 1000);
+					return name;
+				});
+			}
+
+			return accept({"users": ids});
+		});
 	});
 };
 
+/**
+ * Set a friend's private nickname.
+ * @param {(SteamID|string)} steamID
+ * @param {string} nickname
+ * @param {function} [callback]
+ * @return {Promise}
+ */
 SteamUser.prototype.setNickname = function(steamID, nickname, callback) {
-	steamID = Helpers.steamID(steamID);
-	var self = this;
-	this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {
-		"steamid": steamID.toString(),
-		"nickname": nickname
-	}, function(body) {
-		if (body.eresult != SteamUser.EResult.OK) {
-			if (callback) {
-				callback(Helpers.eresultError(body.eresult));
+	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+		steamID = Helpers.steamID(steamID);
+		this._send(SteamUser.EMsg.AMClientSetPlayerNickname, {
+			"steamid": steamID.toString(),
+			"nickname": nickname
+		}, (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return;
-		}
+			// Worked!
+			if (nickname.length == 0) {
+				delete this.myNicknames[steamID.toString()];
+			} else {
+				this.myNicknames[steamID.toString()] = nickname;
+			}
 
-		// Worked!
-		if (nickname.length == 0) {
-			delete self.myNicknames[steamID.toString()];
-		} else {
-			self.myNicknames[steamID.toString()] = nickname;
-		}
-
-		if (callback) {
-			callback(null);
-		}
+			return accept();
+		});
 	});
 };
 
+/**
+ * Get the list of nicknames you've given to other users.
+ * @param {function} [callback]
+ * @return {Promise}
+ */
 SteamUser.prototype.getNicknames = function(callback) {
-	this._sendUnified("Player.GetNicknameList#1", {}, false, (body) => {
-		var nicks = {};
-		body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
+	return StdLib.Promises.callbackPromise(['nicknames'], callback, true, (accept, reject) => {
+		this._sendUnified("Player.GetNicknameList#1", {}, (body) => {
+			let nicks = {};
+			body.nicknames.forEach(player => nicks[SteamID.fromIndividualAccountID(player.accountid).getSteamID64()] = player.nickname);
 
-		if (callback) {
-			callback(null, nicks);
-		}
+			accept({"nicknames": nicks});
 
-		this.emit('nicknameList', nicks);
-		this.myNicknames = nicks;
+			this.emit('nicknameList', nicks);
+			this.myNicknames = nicks;
+		});
+	});
+};
+
+/**
+ * Get the localization keys for rich presence for an app on Steam.
+ * @param {int} appID - The app you want rich presence localizations for
+ * @param {string} language - The full name of the language you want localizations for (e.g. "english" or "spanish")
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.getAppRichPresenceLocalization = function(appID, language, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+		this._sendUnified('Community.GetAppRichPresenceLocalization#1', {
+			"appid": appID,
+			language
+		}, (body) => {
+			if (body.appid != appID) {
+				return reject(new Error('Did not get localizations for requested app ' + appID + ' (' + body.appID + ')'));
+			}
+
+			let tokens = {};
+			let foundLanguage = false;
+			body.token_lists.forEach((list) => {
+				if (list.language == language) {
+					foundLanguage = true;
+					list.tokens.forEach((token) => {
+						tokens[token.name] = token.value;
+					});
+				}
+			});
+
+			if (!foundLanguage) {
+				return reject(new Error('Did not get localizations for requested language ' + language));
+			}
+
+			if (Object.keys(tokens).length > 0) {
+				this._richPresenceLocalization[appID] = {
+					"timestamp": Date.now(),
+					tokens
+				};
+			}
+
+			return accept({tokens});
+		});
 	});
 };
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientPersonaState] = function(body) {
-	var self = this;
-	body.friends.forEach(function(user) {
-		var sid = new SteamID(user.friendid.toString());
-		var sid64 = sid.getSteamID64();
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, function(body) {
+	body.friends.forEach((user) => {
+		let sid = new SteamID(user.friendid.toString());
+		let sid64 = sid.getSteamID64();
 		delete user.friendid;
 
-		var i;
-		if (!self.users[sid64]) {
-			self.users[sid64] = user;
-			processUser(self.users[sid64]);
+		if (!this.users[sid64]) {
+			this.users[sid64] = {};
 		} else {
 			// Replace unknown data in the received object with already-known data
-			for (i in self.users[sid64]) {
-				if (self.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
-					user[i] = self.users[sid64][i];
+			for (let i in this.users[sid64]) {
+				if (this.users[sid64].hasOwnProperty(i) && user.hasOwnProperty(i) && user[i] === null) {
+					user[i] = this.users[sid64][i];
 				}
 			}
 		}
 
-		processUser(user);
+		processUser(this, user).then((processedUser) => {
+			/**
+			 * Emitted when we receive persona info about a user.
+			 * You can also listen for user#steamid64 to get info only for a specific user.
+			 *
+			 * @event SteamUser#user
+			 * @param {SteamID} steamID - The SteamID of the user
+			 * @param {Object} user - An object containing the user's persona info
+			 */
 
-		/**
-		 * Emitted when we receive persona info about a user.
-		 * You can also listen for user#steamid64 to get info only for a specific user.
-		 *
-		 * @event SteamUser#user
-		 * @param {SteamID} steamID - The SteamID of the user
-		 * @param {Object} user - An object containing the user's persona info
-		 */
+			this._emitIdEvent('user', sid, processedUser);
 
-		self._emitIdEvent('user', sid, user);
-
-		if (user.gameid) {
-			self._addAppToCache(user.gameid);
-		}
-
-		for (i in user) {
-			if (user.hasOwnProperty(i) && user[i] !== null) {
-				self.users[sid][i] = user[i];
+			if (processedUser.gameid) {
+				this._addAppToCache(processedUser.gameid);
 			}
-		}
-	});
-};
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
-	var sid = new SteamID(body.steamid_clan.toString());
-	var sid64 = sid.getSteamID64();
+			for (let i in processedUser) {
+				if (processedUser.hasOwnProperty(i) && processedUser[i] !== null) {
+					this.users[sid][i] = processedUser[i];
+				}
+			}
+		});
+	});
+});
+
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function(body) {
+	let sid = new SteamID(body.steamid_clan.toString());
+	let sid64 = sid.getSteamID64();
 	delete body.steamid_clan;
 
-	var i;
+	let i;
 	if (!this.groups[sid64]) {
 		this.groups[sid64] = body;
 	} else {
@@ -528,8 +598,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		}
 	}
 
-	var self = this;
-	(body.events || []).forEach(function(event) {
+	(body.events || []).forEach((event) => {
 		if (!event.just_posted) {
 			return;
 		}
@@ -546,10 +615,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		 * @param {number} gameID - If this is an event for a game, this is the game's appid
 		 */
 
-		self._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
+		this._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
 	});
 
-	(body.announcements || []).forEach(function(announcement) {
+	(body.announcements || []).forEach((announcement) => {
 		if (!announcement.just_posted) {
 			return;
 		}
@@ -564,15 +633,14 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientClanState] = function(body) {
 		 * @param {string} gid - The announcement's GID
 		 */
 
-		self._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
+		this._emitIdEvent('groupAnnouncement', sid, announcement.headline, announcement.gid.toString());
 	});
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body) {
-	var self = this;
-	(body.friends || []).forEach(function(relationship) {
-		var sid = new SteamID(relationship.ulfriendid.toString());
-		var key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsList, function(body) {
+	(body.friends || []).forEach((relationship) => {
+		let sid = new SteamID(relationship.ulfriendid.toString());
+		let key = sid.type == SteamID.Type.CLAN ? 'myGroups' : 'myFriends';
 
 		if (body.bincremental) {
 			/**
@@ -592,13 +660,13 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 			 */
 
 			// This isn't an initial download of the friends list, something changed
-			self._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
+			this._emitIdEvent(key == 'myGroups' ? 'groupRelationship' : 'friendRelationship', sid, relationship.efriendrelationship);
 		}
 
 		if (relationship.efriendrelationship == SteamUser.EFriendRelationship.None) {
-			delete self[key][sid.getSteamID64()];
+			delete this[key][sid.getSteamID64()];
 		} else {
-			self[key][sid.getSteamID64()] = relationship.efriendrelationship;
+			this[key][sid.getSteamID64()] = relationship.efriendrelationship;
 		}
 	});
 
@@ -619,17 +687,17 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsList] = function(body)
 		this.emit('groupList');
 
 		// Request persona info for all our friends
-		var friends = Object.keys(this.myFriends).filter(function(steamID) { return self.myFriends[steamID] == SteamUser.EFriendRelationship.Friend; });
-		self.getPersonas(friends, function() {
-			process.nextTick(function() {
-				self.emit('friendPersonasLoaded');
+		let friends = Object.keys(this.myFriends).filter(steamID => this.myFriends[steamID] == SteamUser.EFriendRelationship.Friend);
+		this.getPersonas(friends, () => {
+			process.nextTick(() => {
+				this.emit('friendPersonasLoaded');
 			});
 		});
 	}
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function(body) {
-	var groupList = {};
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFriendsGroupsList, function(body) {
+	let groupList = {};
 
 	body.friendGroups.forEach(function(group) {
 		groupList[group.nGroupID] = {
@@ -639,7 +707,7 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function
 	});
 
 	body.memberships.forEach(function(friend) {
-		var sid = new SteamID(friend.ulSteamID.toString());
+		let sid = new SteamID(friend.ulSteamID.toString());
 
 		groupList[friend.nGroupID].members.push(sid);
 
@@ -659,10 +727,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientFriendsGroupsList] = function
 	}
 
 	this.myFriendGroups = groupList;
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = function(body) {
-	var myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPlayerNicknameList, function(body) {
+	let myNicknames = JSON.parse(JSON.stringify(this.myNicknames)); // clone
 
 	body.nicknames.forEach(function(user) {
 		if (body.removal) {
@@ -677,10 +745,10 @@ SteamUser.prototype._handlers[SteamUser.EMsg.ClientPlayerNicknameList] = functio
 	}
 
 	this.myNicknames = myNicknames;
-};
+});
 
-SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = function(body) {
-	var sid = SteamID.fromIndividualAccountID(body.accountid);
+SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChanged#1', function(body) {
+	let sid = SteamID.fromIndividualAccountID(body.accountid);
 	this.emit('nickname', sid, body.nickname || null);
 	if (!body.nickname) {
 		// removal
@@ -688,32 +756,105 @@ SteamUser.prototype._handlers['PlayerClient.NotifyFriendNicknameChanged#1'] = fu
 	} else {
 		this.myNicknames[sid.getSteamID64()] = body.nickname;
 	}
-};
+});
 
-function processUser(user) {
-	if (typeof user.gameid === 'object' && user.gameid !== null) {
-		user.gameid = user.gameid.toNumber();
-	}
+function processUser(steamUser, user) {
+	return new Promise((accept) => {
+		g_ProcessPersonaSemaphore.wait(async (release) => {
+			if (typeof user.gameid === 'object' && user.gameid !== null) {
+				user.gameid = user.gameid.toNumber();
+			}
 
-	if (typeof user.last_logoff === 'number') {
-		user.last_logoff = new Date(user.last_logoff * 1000);
-	}
+			if (typeof user.last_logoff === 'number') {
+				user.last_logoff = new Date(user.last_logoff * 1000);
+			}
 
-	if (typeof user.last_logon === 'number') {
-		user.last_logon = new Date(user.last_logon * 1000);
-	}
+			if (typeof user.last_logon === 'number') {
+				user.last_logon = new Date(user.last_logon * 1000);
+			}
 
-	if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
-		var hash = user.avatar_hash.toString('hex');
+			if (typeof user.last_seen_online === 'number') {
+				user.last_seen_online = new Date(user.last_seen_online * 1000);
+			}
 
-		// handle default avatar
-		if (hash === "0000000000000000000000000000000000000000") {
-			hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
-		}
+			if (typeof user.avatar_hash === 'object' && (Buffer.isBuffer(user.avatar_hash) || ByteBuffer.isByteBuffer(user.avatar_hash))) {
+				let hash = user.avatar_hash.toString('hex');
 
-		user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
-		user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
-		user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
-		user.avatar_url_icon += ".jpg";
-	}
+				// handle default avatar
+				if (hash === "0000000000000000000000000000000000000000") {
+					hash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
+				}
+
+				user.avatar_url_icon = "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + hash.substring(0, 2) + "/" + hash;
+				user.avatar_url_medium = user.avatar_url_icon + "_medium.jpg";
+				user.avatar_url_full = user.avatar_url_icon + "_full.jpg";
+				user.avatar_url_icon += ".jpg";
+			}
+
+			if (!user.rich_presence || user.rich_presence.length == 0 || !user.gameid) {
+				delete user.rich_presence_string;
+				release();
+				return accept(user);
+			}
+
+			let rpTokens = {};
+			user.rich_presence.forEach((token) => {
+				rpTokens[token.key] = token.value;
+			});
+
+			if (!rpTokens.steam_display) {
+				// Nothing to do here
+				release();
+				return accept(user);
+			}
+
+			let localizationTokens;
+			if (steamUser._richPresenceLocalization[user.gameid] && steamUser._richPresenceLocalization[user.gameid].timestamp > (Date.now() - (1000 * 60 * 60 * 24))) {
+				// We already have localization
+				localizationTokens = steamUser._richPresenceLocalization[user.gameid].tokens;
+			} else {
+				try {
+					localizationTokens = (await steamUser.getAppRichPresenceLocalization(user.gameid, steamUser.options.language || "english")).tokens;
+				} catch (ex) {
+					// Oh well
+					delete user.rich_presence_string;
+					release();
+					return accept(user);
+				}
+			}
+
+			for (let i in rpTokens) {
+				if (rpTokens.hasOwnProperty(i) && localizationTokens[rpTokens[i]]) {
+					rpTokens[i] = localizationTokens[rpTokens[i]];
+				}
+			}
+
+			let rpString = rpTokens.steam_display;
+			while (true) {
+				let newRpString = rpString;
+				for (let i in rpTokens) {
+					if (rpTokens.hasOwnProperty(i)) {
+						newRpString = newRpString.replace(new RegExp('%' + i + '%', 'gi'), rpTokens[i]);
+					}
+				}
+
+				(newRpString.match(/{#[^}]+}/g) || []).forEach((token) => {
+					token = token.substring(1, token.length - 1);
+					if (localizationTokens[token]) {
+						newRpString = newRpString.replace(new RegExp('{' + token + '}', 'gi'), localizationTokens[token]);
+					}
+				});
+
+				if (newRpString == rpString) {
+					break;
+				} else {
+					rpString = newRpString;
+				}
+			}
+
+			user.rich_presence_string = rpString;
+			release();
+			return accept(user);
+		});
+	});
 }

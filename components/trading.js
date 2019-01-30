@@ -1,5 +1,6 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
+const SteamID = require('steamid');
+
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.trade = function(steamID) {
 	if (typeof steamID === 'string') {
@@ -19,17 +20,16 @@ SteamUser.prototype.cancelTradeRequest = function(steamID) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeProposed] = function(body) {
-	var self = this;
-	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), function(accept) {
-		self._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_InitiateTradeProposed, function(body) {
+	this._emitIdEvent('tradeRequest', new SteamID(body.other_steamid.toString()), (accept) => {
+		this._send(SteamUser.EMsg.EconTrading_InitiateTradeResponse, {
 			"trade_request_id": body.trade_request_id,
 			"response": accept ? SteamUser.EEconTradeResponse.Accepted : SteamUser.EEconTradeResponse.Declined
 		});
 	});
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeResult] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_InitiateTradeResult, function(body) {
 	// Is trade ID meaningful here?
 	this._emitIdEvent('tradeResponse', new SteamID(body.other_steamid.toString()), body.response, {
 		"steamguardRequiredDays": body.steamguard_required_days,
@@ -39,8 +39,8 @@ SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_InitiateTradeResult] = 
 		"defaultEmailChangeProbationDays": body.default_email_change_probation_days,
 		"emailChangeProbationDays": body.email_change_probation_days
 	});
-};
+});
 
-SteamUser.prototype._handlers[SteamUser.EMsg.EconTrading_StartSession] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.EconTrading_StartSession, function(body) {
 	this._emitIdEvent('tradeStarted', new SteamID(body.other_steamid.toString()));
-};
+});

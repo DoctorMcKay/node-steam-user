@@ -35,9 +35,9 @@ enum EStreamControlMessage {
 	k_EStreamControlInputMouseUp = 57;
 	k_EStreamControlInputKeyDown = 58;
 	k_EStreamControlInputKeyUp = 59;
-	k_EStreamControlInputGamepadAttached = 60;
-	k_EStreamControlInputGamepadEvent = 61;
-	k_EStreamControlInputGamepadDetached = 62;
+	k_EStreamControlInputGamepadAttached_OBSOLETE = 60;
+	k_EStreamControlInputGamepadEvent_OBSOLETE = 61;
+	k_EStreamControlInputGamepadDetached_OBSOLETE = 62;
 	k_EStreamControlShowCursor = 63;
 	k_EStreamControlHideCursor = 64;
 	k_EStreamControlSetCursor = 65;
@@ -46,7 +46,7 @@ enum EStreamControlMessage {
 	k_EStreamControlDeleteCursor = 68;
 	k_EStreamControlSetTargetFramerate = 69;
 	k_EStreamControlInputLatencyTest = 70;
-	k_EStreamControlGamepadRumble = 71;
+	k_EStreamControlGamepadRumble_OBSOLETE = 71;
 	k_EStreamControlOverlayEnabled = 74;
 	k_EStreamControlInputControllerAttached_OBSOLETE = 75;
 	k_EStreamControlInputControllerState_OBSOLETE = 76;
@@ -77,6 +77,13 @@ enum EStreamControlMessage {
 	k_EStreamControlStartMicrophoneData = 107;
 	k_EStreamControlStopMicrophoneData = 108;
 	k_EStreamControlInputText = 109;
+	k_EStreamControlTouchConfigActive = 110;
+	k_EStreamControlGetTouchConfigData = 111;
+	k_EStreamControlSetTouchConfigData = 112;
+	k_EStreamControlSaveTouchConfigLayout = 113;
+	k_EStreamControlTouchActionSetActive = 114;
+	k_EStreamControlGetTouchIconData = 115;
+	k_EStreamControlSetTouchIconData = 116;
 }
 
 enum EStreamVersion {
@@ -331,6 +338,10 @@ message CStreamingClientCaps {
 	optional int32 maximum_burst_bitrate_kbps = 4;
 	optional bool supports_video_hevc = 5;
 	optional bool disable_steam_store = 6;
+	optional bool disable_client_cursor = 7;
+	optional bool disable_intel_hardware_encoding = 8;
+	optional bool disable_amd_hardware_encoding = 9;
+	optional bool disable_nvidia_hardware_encoding = 10;
 }
 
 message CStreamingClientConfig {
@@ -449,29 +460,6 @@ message CInputTextMsg {
 	required string text_utf8 = 2;
 }
 
-message CInputGamepadAttachedMsg {
-	required int32 controller_id = 1;
-	optional uint32 controller_type = 2;
-	optional uint32 controller_subtype = 3;
-}
-
-message CInputGamepadEventMsg {
-	optional uint32 input_mark = 1;
-	required int32 controller_id = 2;
-	required .EStreamGamepadInputType input = 3 [default = k_EStreamGamepadInputInvalid];
-	required float value = 4;
-}
-
-message CInputGamepadDetachedMsg {
-	required int32 controller_id = 1;
-}
-
-message CGamepadRumbleMsg {
-	required int32 controller_id = 1;
-	optional int32 left_motor_speed = 2;
-	optional int32 right_motor_speed = 3;
-}
-
 message CSetTitleMsg {
 	optional string text = 1;
 }
@@ -577,6 +565,43 @@ message CRemoteHIDMsg {
 	optional bytes data = 1;
 }
 
+message CTouchConfigActiveMsg {
+	optional uint32 appid = 1;
+	optional uint32 revision = 2;
+}
+
+message CGetTouchConfigDataMsg {
+	optional uint32 appid = 1;
+}
+
+message CSetTouchConfigDataMsg {
+	optional uint32 appid = 1;
+	optional uint32 revision = 2;
+	optional bytes data = 3;
+	optional bytes layout = 4;
+}
+
+message CSaveTouchConfigLayoutMsg {
+	optional uint32 appid = 1;
+	optional bytes layout = 4;
+}
+
+message CTouchActionSetActiveMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CGetTouchIconDataMsg {
+	optional uint32 appid = 1;
+	optional string icon = 2;
+}
+
+message CSetTouchIconDataMsg {
+	optional uint32 appid = 1;
+	optional string icon = 2;
+	optional bytes data = 3;
+}
+
 message CStreamDataLostMsg {
 	repeated uint32 packets = 1;
 }
@@ -625,6 +650,12 @@ message CFrameStatsListMsg {
 	repeated .CFrameStats stats = 2;
 	repeated .CFrameStatAccumulatedValue accumulated_stats = 3;
 	required int32 latest_frame_id = 4;
+}
+
+message CStreamingSessionStats {
+	optional float frame_loss_percentage = 1;
+	optional float average_network_time_ms = 2;
+	optional float stddev_network_time_ms = 3;
 }
 
 message CDebugDumpMsg {

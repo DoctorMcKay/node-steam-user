@@ -1,7 +1,8 @@
-var SteamUser = require('../index.js');
-var SteamID = require('steamid');
-var Crypto = require('crypto');
-var SteamCrypto = require('@doctormckay/steam-crypto');
+const Crypto = require('crypto');
+const SteamCrypto = require('@doctormckay/steam-crypto');
+const SteamID = require('steamid');
+
+const SteamUser = require('../index.js');
 
 SteamUser.prototype.webLogOn = function() {
 	// Verify logged on
@@ -28,32 +29,36 @@ SteamUser.prototype._webLogOn = function() {
 
 SteamUser.prototype._webAuthenticate = function(nonce) {
 	// Encrypt the nonce. I don't know if the client uses HMAC IV here, but there's no harm in it...
-	var sessionKey = SteamCrypto.generateSessionKey();
-	var encryptedNonce = SteamCrypto.symmetricEncryptWithHmacIv(nonce, sessionKey.plain);
+	let sessionKey = SteamCrypto.generateSessionKey();
+	let encryptedNonce = SteamCrypto.symmetricEncryptWithHmacIv(nonce, sessionKey.plain);
 
-	var data = {
+	let data = {
 		"steamid": this.steamID.toString(),
 		"sessionkey": sessionKey.encrypted,
 		"encrypted_loginkey": encryptedNonce
 	};
 
-	var self = this;
+	let self = this;
 
-	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, function(err, res) {
+	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, (err, res) => {
 		if (err) {
-			self.emit('debug', 'Error in AuthenticateUser: ' + err.message);
+			this.emit('debug', 'Error in AuthenticateUser: ' + err.message);
 			fail();
-		} else if (!res.authenticateuser || !res.authenticateuser.token || !res.authenticateuser.tokensecure) {
-			self.emit('debug', 'Error in AuthenticateUser: malformed response');
+		} else if (!res.authenticateuser || (!res.authenticateuser.token && !res.authenticateuser.tokensecure)) {
+			this.emit('debug', 'Error in AuthenticateUser: malformed response');
 			fail();
 		} else {
 			// Generate a random sessionid (CSRF token)
-			var sessionid = Crypto.randomBytes(12).toString('hex');
-			self.emit('webSession', sessionid, [
-				'sessionid=' + sessionid,
-				'steamLogin=' + res.authenticateuser.token,
-				'steamLoginSecure=' + res.authenticateuser.tokensecure
-			]);
+			let sessionid = Crypto.randomBytes(12).toString('hex');
+			let cookies = ['sessionid=' + sessionid];
+			if (res.authenticateuser.token) {
+				cookies.push('steamLogin=' + res.authenticateuser.token);
+			}
+			if (res.authenticateuser.tokensecure) {
+				cookies.push('steamLoginSecure=' + res.authenticateuser.tokensecure);
+			}
+
+			this.emit('webSession', sessionid, cookies);
 		}
 	});
 
@@ -70,11 +75,11 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 
 // Handlers
 
-SteamUser.prototype._handlers[SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse] = function(body) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, function(body) {
 	if (body.eresult != SteamUser.EResult.OK) {
 		this.emit('debug', 'Got response ' + body.eresult + ' from ClientRequestWebAPIAuthenticateUserNonceResponse, retrying');
 		setTimeout(this._webLogOn.bind(this), 500);
 	} else {
 		this._webAuthenticate(body.webapi_authenticate_user_nonce);
 	}
-};
+});

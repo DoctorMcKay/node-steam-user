@@ -23,7 +23,7 @@ module.exports = {
 	"ASBOBSOLETE": 14, // removed
 	"PICS": 14,
 	"Client": 15,
-	"BootstrapOBSOLETE": 16, // removed;
+	"BootstrapOBSOLETE": 16, // removed
 	"DP": 17,
 	"WG": 18,
 	"SM": 19,

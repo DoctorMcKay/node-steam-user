@@ -525,6 +525,8 @@ message CMsgClientUpdateAppJobReport {
 	optional bool is_borrowed = 17;
 	optional bool is_free_weekend = 18;
 	optional uint64 total_bytes_legacy = 19;
+	optional uint64 total_bytes_patched = 20;
+	optional uint64 total_bytes_saved = 21;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -719,6 +721,7 @@ message CMsgGCClient {
 	optional bytes payload = 3;
 	optional fixed64 steamid = 4;
 	optional string gcname = 5;
+	optional uint32 ip = 6;
 }
 
 message CMsgClientRequestFreeLicense {

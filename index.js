@@ -1,35 +1,27 @@
 require('@doctormckay/stats-reporter').setup(require('./package.json'));
 
-var Steam = require('steam-client');
-var AppDirectory = require('appdirectory');
-var FileStorage = require('file-manager');
+const AppDirectory = require('appdirectory');
+const FileStorage = require('file-manager');
+
+const HandlerManager = require('./components/classes/HandlerManager.js');
+const SteamChatRoomClient = require('./components/chatroom.js');
 
 require('util').inherits(SteamUser, require('events').EventEmitter);
 
 module.exports = SteamUser;
 
-SteamUser.Steam = Steam;
 SteamUser.CurrencyData = require('./resources/CurrencyData.js');
+SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
+SteamUser.EConnectionProtocol = require('./resources/EConnectionProtocol.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
-SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
 
 require('./resources/enums.js');
 
-try {
-	SteamUser.Steam.servers = require('./resources/servers.json');
-} catch (e) {
-	// It's okay if it isn't there
-}
-
-function SteamUser(client, options) {
-	if (client && client.constructor.name !== 'SteamClient' && client.constructor.name !== 'CMClient') {
-		options = client;
-		client = null;
-	}
-
-	this.client = client ? client : new Steam.CMClient();
+function SteamUser(options) {
 	this.steamID = null;
+
+	this.chat = new SteamChatRoomClient(this);
 
 	// Account info
 	this.limitations = null;
@@ -55,12 +47,16 @@ function SteamUser(client, options) {
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;
 	this._connectionCount = 0;
+	this._connectTimeout = 1000;
 	this._authSeqMe = 0;
 	this._authSeqThem = 0;
 	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 	this._contentServers = [];
 	this._contentServerTokens = {};
 	this._lastNotificationCounts = {};
+	this._sessionID = 0;
+	this._jobs = {};
+	this._richPresenceLocalization = {};
 
 	// App and package cache
 	this._changelistUpdateTimer = null;
@@ -75,9 +71,12 @@ function SteamUser(client, options) {
 	this.options = options || {};
 
 	var defaultOptions = {
+		"protocol": SteamUser.EConnectionProtocol.Auto,
+		"httpProxy": null,
+		"localAddress": null,
+		"localPort": null,
 		"autoRelogin": true,
 		"singleSentryfile": false,
-		"promptSteamGuardCode": true,
 		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
 		"machineIdFormat": ["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"],
 		"enablePicsCache": false,
@@ -86,6 +85,7 @@ function SteamUser(client, options) {
 		"saveAppTickets": true,
 		"debug": false,
 		"additionalHeaders": {},
+		"language": "english"
 	};
 
 	for (var i in defaultOptions) {
@@ -112,28 +112,6 @@ function SteamUser(client, options) {
 	if (this.options.dataDirectory) {
 		this.storage = new FileStorage(this.options.dataDirectory);
 	}
-
-	this.client.on('message', this._handleMessage.bind(this));
-
-	var self = this;
-	this.client.on('error', function(e) {
-		if (!self.steamID && e.eresult != SteamUser.EResult.ConnectFailed) {
-			return; // We've already handled this
-		}
-
-		self._handleLogOff(e.eresult || SteamUser.EResult.NoConnection, e.message || "NoConnection");
-	});
-
-	this.client.on('servers', function(servers) {
-		if (self.storage) {
-			self.storage.writeFile('servers.json', JSON.stringify(servers, null, "\t"));
-		}
-
-		if (!client) {
-			// It's an internal client, so we know that our Steam has an up-to-date server list
-			Steam['__SteamUserServersSet__'] = true;
-		}
-	});
 }
 
 SteamUser.prototype.setOption = function(option, value) {
@@ -171,6 +149,10 @@ SteamUser.prototype.setOptions = function(options) {
 	}
 };
 
+SteamUser.prototype._handlers = {};
+SteamUser.prototype._handlerManager = new HandlerManager();
+
+require('./components/connection.js');
 require('./components/messages.js');
 require('./components/webapi.js');
 require('./components/logon.js');
@@ -194,5 +176,5 @@ require('./components/store.js');
 /**
  * Called when the request completes.
  * @callback SteamUser~genericEResultCallback
- * @param {EResult} eresult - The result of the operation
+ * @param {Error|null} err - Error object on failure (with eresult property), null on success (represents EResult 1 - OK)
  */

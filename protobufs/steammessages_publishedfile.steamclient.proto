@@ -188,13 +188,9 @@ message PublishedFileDetails {
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
 	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
 	optional string metadata = 58 [(description) = "Metadata associated with the item"];
-	optional fixed64 incompatible_actor = 59;
-	optional uint32 incompatible_timestamp = 60;
 	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
-	optional bool app_has_adult_content = 65;
-	optional bool app_has_adult_content_sex = 66;
-	optional bool app_has_adult_content_violence = 67;
-	optional bool maybe_inappropriate = 68;
+	optional bool maybe_inappropriate_sex = 65;
+	optional bool maybe_inappropriate_violence = 66;
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -339,6 +335,7 @@ message CPublishedFile_QueryFiles_Request {
 
 	optional uint32 query_type = 1 [(description) = "enumeration EPublishedFileQueryType in clientenums.h"];
 	optional uint32 page = 2 [(description) = "Current page"];
+	optional string cursor = 39 [(description) = "Cursor to paginate through the results (set to '*' for the first request).  Prefer this over using the page parameter, as it will allow you to do deep pagination.  When used, the page parameter will be ignored."];
 	optional uint32 numperpage = 3 [default = 1, (description) = "(Optional) The number of results, per page to return."];
 	optional uint32 creator_appid = 4 [(description) = "App that created the files"];
 	optional uint32 appid = 5 [(description) = "App that consumes the files"];
@@ -373,6 +370,7 @@ message CPublishedFile_QueryFiles_Request {
 message CPublishedFile_QueryFiles_Response {
 	optional uint32 total = 1 [(description) = "Number of matches found, not necessarily number of items returned"];
 	repeated .PublishedFileDetails publishedfiledetails = 2 [(description) = "Each file details will be populated, depending on what return values were requested."];
+	optional string next_cursor = 3 [(description) = "If a paging cursor was used, then this will be the next cursor to use for paging through results"];
 }
 
 message CPublishedFile_AddAppRelationship_Request {

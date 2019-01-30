@@ -8,15 +8,13 @@ download("https://api.steampowered.com/ISteamDirectory/GetCMList/v1/?format=json
 		throw new Error("Cannot get CM list");
 	}
 
-	var servers = json.response.serverlist.map(function(server) {
-		var parts = server.split(':');
-		return {
-			"host": parts[0],
-			"port": parseInt(parts[1], 10)
-		};
-	});
+	var servers = {
+		"tcp_servers": json.response.serverlist,
+		"websocket_servers": json.response.serverlist_websockets,
+		"time": Date.now()
+	};
 
-	console.log("Got list of " + servers.length + " CMs from WebAPI");
+	console.log("Got list of " + servers.tcp_servers.length + " TCP CMs and " + servers.websocket_servers.length + " WebSocket CMs from WebAPI");
 	require('fs').writeFileSync(__dirname + '/../resources/servers.json', JSON.stringify(servers, null, "\t"));
 });
 

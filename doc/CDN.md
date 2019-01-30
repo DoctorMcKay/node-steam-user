@@ -104,9 +104,9 @@ Performs the following:
 - `depotID` - The ID of the depot from which you want a file
 - `fileManifest` - Should be an object from the `files` array of a manifest, as-is
 - `outputFilePath` - Optional. If you want to write this file to disk, this should be a string containing the desired destination path (all directories must exist). If the file already exists, it will be overwritten. If omitted, then the downloaded file will be stored in memory.
-- `callback` - Called when the download is complete
+- `callback` - See below
     - `err` - An `Error` object on failure, or `null` on success
-    - `data` - If `outputFilePath` was omitted, this is a `Buffer` containing the downloaded file on success
+    - `response` - The response object
 
 Downloads a particular file from the CDN. Retrieves the content server list (via `getContentServers`) and chooses 4
 servers at random. Then, downloads up to 4 chunks concurrently from the chosen servers (one chunk per server) via
@@ -126,9 +126,20 @@ The file's checksum is validated with the one in the `fileManifest` before succe
 Note that on failure, any allocated disk space will not be automatically cleaned up. The garbage collector will reclaim
 any memory, however.
 
-This method returns an EventEmitter which emits `progress` events as chunks finish downloading. Each `progress` event has these arguments:
-- `bytesDownloaded` - How many bytes have finished downloading
-- `totalSize` - The total file size in bytes
+**This method has a special callback that can be called multiple times.** The callback, if provided, will be invoked
+with an `err` argument and a `response` object argument. The callback will be emitted during the download to report
+progress, and again at the end when the download completes. Check the `type` property of the `response` object to know
+what type of event has occurred. Possible events are:
+
+- `progress` - If the callback is invoked with this type of event, the following properties are also defined:
+	- `bytesDownloaded` - How many bytes have been downloaded so far
+	- `totalSizeBytes` - The total size of the file in bytes
+- `complete` - If the callback is invoked with this type of event, the download is complete. No more progress events will be emitted. These properties are defined:
+	- `file` - Iff you aren't streaming this download to a file on disk, this is a `Buffer` containing the downloaded file
+	
+The `Promise` returned by this method will also be fulfilled for a `complete` event, with the same data as the callback.
+If an error occurs, the `Promise` will be rejected and the callback (if provided) will be invoked with an `Error` event
+as its first argument.
 
 ### getAppBetaDecryptionKeys(appID, password, callback)
 - `appID` - The AppID of the app for which you want beta decryption keys

@@ -1,0 +1,358 @@
+import "steammessages_unified_base.steamclient.proto";
+import "steammessages_base.proto";
+import "steammessages_clientserver_friends.proto";
+
+message CCommunity_GetApps_Request {
+	repeated int32 appids = 1;
+}
+
+message CCommunity_GetApps_Response {
+	repeated .CCDDBAppDetailCommon apps = 1;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Request {
+	optional int32 appid = 1;
+	optional string language = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response {
+	optional int32 appid = 1;
+	repeated .CCommunity_GetAppRichPresenceLocalization_Response_TokenList token_lists = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response_Token {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CCommunity_GetAppRichPresenceLocalization_Response_TokenList {
+	optional string language = 1;
+	repeated .CCommunity_GetAppRichPresenceLocalization_Response_Token tokens = 2;
+}
+
+message CWebRTCClient_InitiateWebRTCConnection_Request {
+	optional string sdp = 1;
+}
+
+message CWebRTCClient_InitiateWebRTCConnection_Response {
+	optional string remote_description = 1;
+}
+
+message CWebRTC_WebRTCSessionConnected_Notification {
+	optional uint32 ssrc = 1;
+	optional uint32 client_ip = 2;
+	optional uint32 client_port = 3;
+	optional uint32 server_ip = 4;
+	optional uint32 server_port = 5;
+}
+
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification {
+	optional string remote_description = 1;
+	optional uint64 remote_description_version = 2;
+	repeated .CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping ssrcs_to_accountids = 3;
+}
+
+message CWebRTC_WebRTCUpdateRemoteDescription_Notification_CSSRCToAccountIDMapping {
+	optional uint32 ssrc = 1;
+	optional uint32 accountid = 2;
+}
+
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request {
+	optional uint32 ip_webrtc_server = 1;
+	optional uint32 port_webrtc_server = 2;
+	optional uint32 ip_webrtc_session_client = 3;
+	optional uint32 port_webrtc_session_client = 4;
+	optional uint64 remote_description_version = 5;
+}
+
+message CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response {
+}
+
+message CVoiceChat_RequestOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+}
+
+message CVoiceChat_RequestOneOnOneChat_Response {
+	optional fixed64 voice_chatid = 1;
+}
+
+message CVoiceChat_OneOnOneChatRequested_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 steamid_partner = 2;
+}
+
+message CVoiceChat_AnswerOneOnOneChat_Request {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 steamid_partner = 2;
+	optional bool accepted_request = 3;
+}
+
+message CVoiceChat_AnswerOneOnOneChat_Response {
+}
+
+message CVoiceChat_OneOnOneChatRequestResponse_Notification {
+	optional fixed64 voicechat_id = 1;
+	optional fixed64 steamid_partner = 2;
+	optional bool accepted_request = 3;
+}
+
+message CVoiceChat_EndOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+}
+
+message CVoiceChat_EndOneOnOneChat_Response {
+}
+
+message CVoiceChat_LeaveOneOnOneChat_Request {
+	optional fixed64 steamid_partner = 1;
+	optional fixed64 voice_chatid = 2;
+}
+
+message CVoiceChat_LeaveOneOnOneChat_Response {
+}
+
+message CVoiceChat_UserJoinedVoiceChat_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional uint64 chatid = 3;
+	optional fixed64 one_on_one_steamid_lower = 4;
+	optional fixed64 one_on_one_steamid_higher = 5;
+	optional uint64 chat_group_id = 6;
+	optional uint32 user_sessionid = 7;
+}
+
+message CVoiceChat_UserVoiceStatus_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional bool user_muted_mic_locally = 3;
+	optional bool user_muted_output_locally = 4;
+	optional bool user_has_no_mic_for_session = 5;
+	optional int32 user_webaudio_sample_rate = 6;
+}
+
+message CVoiceChat_AllMembersStatus_Notification {
+	optional fixed64 voice_chatid = 1;
+	repeated .CVoiceChat_UserVoiceStatus_Notification users = 2;
+}
+
+message CVoiceChat_UpdateVoiceChatWebRTCData_Request {
+	optional fixed64 voice_chatid = 1;
+	optional uint32 ip_webrtc_server = 2;
+	optional uint32 port_webrtc_server = 3;
+	optional uint32 ip_webrtc_client = 4;
+	optional uint32 port_webrtc_client = 5;
+	optional uint32 ssrc_my_sending_stream = 6;
+	optional string user_agent = 7;
+	optional bool has_audio_worklets_support = 8;
+}
+
+message CVoiceChat_UpdateVoiceChatWebRTCData_Response {
+	optional bool send_client_voice_logs = 1;
+}
+
+message CVoiceChat_UploadClientVoiceChatLogs_Request {
+	optional fixed64 voice_chatid = 1;
+	optional string client_voice_logs_new_lines = 2;
+}
+
+message CVoiceChat_UploadClientVoiceChatLogs_Response {
+}
+
+message CVoiceChat_LeaveVoiceChat_Response {
+}
+
+message CVoiceChat_UserLeftVoiceChat_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 user_steamid = 2;
+	optional uint64 chatid = 3;
+	optional fixed64 one_on_one_steamid_lower = 4;
+	optional fixed64 one_on_one_steamid_higher = 5;
+	optional uint64 chat_group_id = 6;
+	optional uint32 user_sessionid = 7;
+}
+
+message CVoiceChat_VoiceChatEnded_Notification {
+	optional fixed64 voice_chatid = 1;
+	optional fixed64 one_on_one_steamid_lower = 2;
+	optional fixed64 one_on_one_steamid_higher = 3;
+	optional uint64 chatid = 4;
+	optional uint64 chat_group_id = 5;
+}
+
+message CFriendsListCategory {
+	optional uint32 groupid = 1;
+	optional string name = 2;
+	repeated uint32 accountid_members = 3;
+}
+
+message CFriendsList_GetCategories_Request {
+}
+
+message CFriendsList_GetCategories_Response {
+	repeated .CFriendsListCategory categories = 1;
+}
+
+message CFriendsListFavoriteEntry {
+	optional uint32 accountid = 1;
+	optional uint32 clanid = 2;
+	optional uint64 chat_group_id = 3;
+}
+
+message CFriendsList_GetFavorites_Request {
+}
+
+message CFriendsList_GetFavorites_Response {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_SetFavorites_Request {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_SetFavorites_Response {
+}
+
+message CFriendsList_FavoritesChanged_Notification {
+	repeated .CFriendsListFavoriteEntry favorites = 1;
+}
+
+message CFriendsList_GetFriendsList_Request {
+}
+
+message CFriendsList_GetFriendsList_Response {
+	optional .CMsgClientFriendsList friendslist = 1;
+}
+
+message CStore_UserPreferences {
+	optional uint32 primary_language = 1;
+	optional uint32 secondary_languages = 2;
+	optional bool platform_windows = 3;
+	optional bool platform_mac = 4;
+	optional bool platform_linux = 5;
+	optional bool hide_adult_content_violence = 6;
+	optional bool hide_adult_content_sex = 7;
+	optional uint32 timestamp_updated = 8;
+	optional bool hide_store_broadcast = 9;
+	optional int32 timestamp_content_descriptor_preferences_updated = 10;
+}
+
+message CStore_UserTagPreferences {
+	repeated .CStore_UserTagPreferences_Tag tags_to_exclude = 1;
+}
+
+message CStore_UserTagPreferences_Tag {
+	optional uint32 tagid = 1;
+	optional string name = 2;
+	optional uint32 timestamp_added = 3;
+}
+
+message CStore_UserContentDescriptorPreferences {
+	repeated .CStore_UserContentDescriptorPreferences_ContentDescriptor content_descriptors_to_exclude = 1;
+}
+
+message CStore_UserContentDescriptorPreferences_ContentDescriptor {
+	optional uint32 content_descriptorid = 1;
+	optional uint32 timestamp_added = 2;
+}
+
+message CStore_GetStorePreferences_Request {
+}
+
+message CStore_GetStorePreferences_Response {
+	optional .CStore_UserPreferences preferences = 1;
+	optional .CStore_UserTagPreferences tag_preferences = 2;
+	optional .CStore_UserContentDescriptorPreferences content_descriptor_preferences = 3;
+}
+
+message CClan_RespondToClanInvite_Request {
+	optional fixed64 steamid = 1;
+	optional bool accept = 2;
+}
+
+message CClan_RespondToClanInvite_Response {
+}
+
+message CBroadcast_SetRTMPInfo_Response {
+}
+
+message CBroadcast_GetRTMPInfo_Response {
+	optional int32 broadcast_permission = 1;
+	optional string rtmp_host = 2;
+	optional string rtmp_token = 3;
+	optional int32 broadcast_delay = 4;
+	optional uint32 app_id = 5;
+	optional uint32 required_app_id = 6;
+	optional int32 broadcast_chat_permission = 7 [(description) = "enum"];
+	optional int32 broadcast_buffer = 8;
+	optional fixed64 steamid = 9;
+	optional uint32 chat_rate_limit = 10;
+}
+
+message CProductImpressionsFromClient_Notification {
+	repeated .CProductImpressionsFromClient_Notification_Impression impressions = 1;
+}
+
+message CProductImpressionsFromClient_Notification_Impression {
+	optional int32 type = 1 [(description) = "enum"];
+	optional uint32 appid = 2;
+	optional uint32 num_impressions = 3;
+}
+
+message NotImplemented {
+}
+
+service Community {
+	rpc GetApps (.CCommunity_GetApps_Request) returns (.CCommunity_GetApps_Response);
+	rpc GetAppRichPresenceLocalization (.CCommunity_GetAppRichPresenceLocalization_Request) returns (.CCommunity_GetAppRichPresenceLocalization_Response);
+}
+
+service WebRTCClient {
+	rpc InitiateWebRTCConnection (.CWebRTCClient_InitiateWebRTCConnection_Request) returns (.CWebRTCClient_InitiateWebRTCConnection_Response);
+	rpc AcknowledgeUpdatedRemoteDescription (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Request) returns (.CWebRTCClient_AcknowledgeUpdatedRemoteDescription_Response);
+}
+
+service WebRTCClientNotifications {
+	rpc NotifyWebRTCSessionConnected (.CWebRTC_WebRTCSessionConnected_Notification) returns (.NoResponse);
+	rpc NotifyWebRTCUpdateRemoteDescription (.CWebRTC_WebRTCUpdateRemoteDescription_Notification) returns (.NoResponse);
+}
+
+service VoiceChat {
+	rpc UpdateVoiceChatWebRTCData (.CVoiceChat_UpdateVoiceChatWebRTCData_Request) returns (.CVoiceChat_UpdateVoiceChatWebRTCData_Response);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc UploadClientVoiceChatLogs (.CVoiceChat_UploadClientVoiceChatLogs_Request) returns (.CVoiceChat_UploadClientVoiceChatLogs_Response);
+	rpc LeaveVoiceChat (.NotImplemented) returns (.CVoiceChat_LeaveVoiceChat_Response);
+	rpc RequestOneOnOneChat (.CVoiceChat_RequestOneOnOneChat_Request) returns (.CVoiceChat_RequestOneOnOneChat_Response);
+	rpc AnswerOneOnOneChat (.CVoiceChat_AnswerOneOnOneChat_Request) returns (.CVoiceChat_AnswerOneOnOneChat_Response);
+	rpc EndOneOnOneChat (.CVoiceChat_EndOneOnOneChat_Request) returns (.CVoiceChat_EndOneOnOneChat_Response);
+	rpc LeaveOneOnOneChat (.CVoiceChat_LeaveOneOnOneChat_Request) returns (.CVoiceChat_LeaveOneOnOneChat_Response);
+}
+
+service VoiceChatClient {
+	rpc NotifyUserJoinedVoiceChat (.CVoiceChat_UserJoinedVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyUserLeftVoiceChat (.CVoiceChat_UserLeftVoiceChat_Notification) returns (.NoResponse);
+	rpc NotifyVoiceChatEnded (.CVoiceChat_VoiceChatEnded_Notification) returns (.NoResponse);
+	rpc NotifyUserVoiceStatus (.CVoiceChat_UserVoiceStatus_Notification) returns (.NoResponse);
+	rpc NotifyAllUsersVoiceStatus (.CVoiceChat_AllMembersStatus_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatRequested (.CVoiceChat_OneOnOneChatRequested_Notification) returns (.NoResponse);
+	rpc NotifyOneOnOneChatResponse (.CVoiceChat_OneOnOneChatRequestResponse_Notification) returns (.NoResponse);
+}
+
+service FriendsList {
+	rpc GetCategories (.CFriendsList_GetCategories_Request) returns (.CFriendsList_GetCategories_Response);
+	rpc GetFriendsList (.CFriendsList_GetFriendsList_Request) returns (.CFriendsList_GetFriendsList_Response);
+	rpc GetFavorites (.CFriendsList_GetFavorites_Request) returns (.CFriendsList_GetFavorites_Response);
+	rpc SetFavorites (.CFriendsList_SetFavorites_Request) returns (.CFriendsList_SetFavorites_Response);
+}
+
+service FriendsListClient {
+	rpc FavoritesChanged (.CFriendsList_FavoritesChanged_Notification) returns (.NoResponse);
+}
+
+service Clan {
+	rpc RespondToClanInvite (.CClan_RespondToClanInvite_Request) returns (.CClan_RespondToClanInvite_Response);
+}
+
+service ExperimentService {
+	rpc ReportProductImpressionsFromClient (.NotImplemented) returns (.NoResponse);
+}
+

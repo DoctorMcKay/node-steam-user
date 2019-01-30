@@ -1,7 +1,9 @@
-var ByteBuffer = require('bytebuffer');
-var Crypto = require('crypto');
-var SteamCrypto = require('@doctormckay/steam-crypto');
-var Protos = require('./protobufs.js');
+const ByteBuffer = require('bytebuffer');
+const Crypto = require('crypto');
+const SteamCrypto = require('@doctormckay/steam-crypto');
+
+const Messages = require('./messages.js');
+const Schema = require('../protobufs/generated/_load.js');
 
 const PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0;
 const PROTOBUF_METADATA_MAGIC = 0x1F4812BE;
@@ -14,29 +16,29 @@ exports.parse = function(buffer) {
 		buffer = ByteBuffer.wrap(buffer, ByteBuffer.LITTLE_ENDIAN);
 	}
 
-	var manifest = {};
-	var magic;
-	var meta;
-	var length;
+	let manifest = {};
+	let magic;
+	let meta;
+	let length;
 
 	while (buffer.remaining() > 0) {
 		magic = buffer.readUint32();
 		switch (magic) {
 			case PROTOBUF_PAYLOAD_MAGIC:
 				length = buffer.readUint32();
-				manifest.files = Protos.ContentManifestPayload.decode(buffer.slice(buffer.offset, buffer.offset + length)).mappings;
+				manifest.files = Messages.decodeProto(Schema.ContentManifestPayload, buffer.slice(buffer.offset, buffer.offset + length)).mappings;
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_METADATA_MAGIC:
 				length = buffer.readUint32();
-				meta = Protos.ContentManifestMetadata.decode(buffer.slice(buffer.offset, buffer.offset + length));
+				meta = Messages.decodeProto(Schema.ContentManifestMetadata, buffer.slice(buffer.offset, buffer.offset + length));
 				buffer.skip(length);
 				break;
 
 			case PROTOBUF_SIGNATURE_MAGIC:
 				length = buffer.readUint32();
-				//manifest.signature = Protos.ContentManifestSignature.decode(buffer.slice(buffer.offset, buffer.offset + length)).signature.toBuffer();
+				//manifest.signature = Messages.decodeProto(Schema.ContentManifestSignature, buffer.slice(buffer.offset, buffer.offset + length)).signature;
 				buffer.skip(length);
 				// maybe at some point we should verify this signature, but for now I can't figure out how
 				break;
@@ -54,7 +56,7 @@ exports.parse = function(buffer) {
 	}
 
 	(manifest.files || []).forEach(function process(file) {
-		for (var i in file) {
+		for (let i in file) {
 			if (!file.hasOwnProperty(i)) {
 				continue;
 			}
@@ -72,7 +74,7 @@ exports.parse = function(buffer) {
 	});
 
 	if (meta) {
-		for (var i in meta) {
+		for (let i in meta) {
 			if (meta.hasOwnProperty(i)) {
 				manifest[i] = meta[i] instanceof ByteBuffer.Long ? meta[i].toString() : meta[i];
 			}
@@ -93,7 +95,7 @@ exports.decryptFilenames = function(manifest, key) {
 
 		// Verify the sha1
 		/*if (file.sha_filename) {
-			var hash = Crypto.createHash('sha1');
+			let hash = Crypto.createHash('sha1');
 			hash.update(file.filename, 'ascii');
 			if (hash.digest('hex') != file.sha_filename) {
 				throw new Error("Filename hash did not validate; is the decryption key correct?");

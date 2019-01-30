@@ -30,6 +30,8 @@ message CHIDDeviceInfo {
 	optional bool is_generic_gamepad = 13;
 	optional bool is_generic_joystick = 14;
 	optional uint32 caps_bits = 15;
+	optional uint32 session_id = 16;
+	optional uint32 eControllerType = 17 [default = 0];
 }
 
 message CHIDDeviceInputReport {
