@@ -1,6 +1,6 @@
 {
 	"name": "steam-user",
-	"version": "4.0.0-beta.5",
+	"version": "4.0.0",
 	"description": "Steam client for Individual and AnonUser Steam account types",
 	"keywords": [
 		"steam",
