@@ -1,3 +1,5 @@
+const BBCode = require('@bbob/parser');
+const Crypto = require('crypto');
 const EventEmitter = require('events').EventEmitter;
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
@@ -20,6 +22,7 @@ function SteamChatRoomClient(user) {
 		body.ordinal = body.ordinal || 0;
 		body.server_timestamp = body.rtime32_server_timestamp;
 		body.message_no_bbcode = body.message_no_bbcode || body.message;
+		body.message_bbcode_parsed = parseBbCode(body.message);
 		delete body.rtime32_server_timestamp;
 
 		const EChatEntryType = require('../index.js').EChatEntryType;
@@ -60,6 +63,7 @@ function SteamChatRoomClient(user) {
 		delete body.timestamp;
 		body.ordinal = body.ordinal || 0;
 		body.message_no_bbcode = body.message_no_bbcode || body.message;
+		body.message_bbcode_parsed = parseBbCode(body.message);
 
 		if (body.mentions) {
 			body.mentions = processChatMentions(body.mentions);
@@ -242,6 +246,7 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
 			body.modified_message = body.modified_message || message;
+			body.message_bbcode_parsed = parseBbCode(body.modified_message);
 			accept(body);
 		});
 	});
@@ -276,6 +281,7 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
 			body.modified_message = body.modified_message || message;
+			body.message_bbcode_parsed = parseBbCode(body.modified_message);
 			accept(body);
 		});
 	});
@@ -553,5 +559,83 @@ function convertDateToUnix(date) {
 		return Math.floor(date / 1000);
 	} else {
 		return date;
+	}
+}
+
+function parseBbCode(str) {
+	// Steam will put a backslash in front of a bracket for a BBCode tag that shouldn't be parsed as BBCode, but our
+	// parser doesn't ignore those. Let's just replace "\\[" with some string that's very improbable to exist in a Steam
+	// chat message, then replace it again later.
+
+	let replacement = Crypto.randomBytes(32).toString('hex');
+	str = str.replace(/\\\[/g, replacement);
+
+	let parsed = BBCode.parse(str, {
+		"onlyAllowTags": [
+			"emoticon",
+			"code",
+			"pre",
+			"img",
+			"url",
+			"spoiler",
+			"quote",
+			"random",
+			"flip",
+			"tradeofferlink",
+			"tradeoffer"
+		]
+	});
+
+	return collapseStrings(parsed.map(processTagNode));
+
+	function processTagNode(node) {
+		if (node.tag == 'url') {
+			// we only need to post-process attributes in url tags
+			for (let i in node.attrs) {
+				if (node.attrs[i] == i) {
+					// The URL argument gets parsed with the name as its value
+					node.attrs.url = node.attrs[i];
+					delete node.attrs[i];
+				}
+			}
+		}
+
+		if (node.content) {
+			node.content = collapseStrings(node.content.map(processTagNode));
+		}
+
+		return node;
+	}
+
+	function collapseStrings(arr) {
+		// Turn sequences of strings into single strings
+		let strStart = null;
+		let newContent = [];
+		for (let i = 0; i < arr.length; i++) {
+			if (typeof arr[i] === 'string') {
+				arr[i] = arr[i].replace(new RegExp(replacement, 'g'), '['); // only put in the bracket without the backslash because this is now "parsed"
+				if (strStart === null) {
+					// This is a string item and we haven't found the start of a string yet
+					strStart = i;
+				}
+			}
+
+			if (typeof arr[i] !== 'string') {
+				// This is not a string item
+				if (strStart !== null) {
+					// We found the end of a string
+					newContent.push(arr.slice(strStart, i).join(''));
+				}
+
+				newContent.push(arr[i]); // push this item (probably a TagNode)
+				strStart = null;
+			}
+		}
+
+		if (strStart !== null) {
+			newContent.push(arr.slice(strStart, arr.length).join(''));
+		}
+
+		return newContent;
 	}
 }
