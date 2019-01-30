@@ -17,6 +17,8 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 
 - [Concepts](#concepts)
 	- [Ordinal](#ordinal)
+	- [Chat Rooms vs. Chat Room Groups vs. Steam Groups](#chat-rooms-vs-chat-room-groups-vs-steam-groups)
+	- [Parsed BBCode](#parsed-bbcode)
 - [Standard Objects](#standard-objects)
 	- [Chat Room Group Summary](#chat-room-group-summary)
 	- [Chat Room Group State](#chat-room-group-state)
@@ -64,6 +66,91 @@ button on a Steam group's overview page to join a chat room group which is linke
 Steam groups and chat room groups are entirely separate things, linked only by
 [getClanChatGroupInfo(clanSteamID, callback)](#getclanchatgroupinfoclansteamid-callback) and by the `clanid` property in
 [Chat Room Group Header State](#chat-room-group-header-state).
+
+### Parsed BBCode
+
+As of v4.1.0, BBCode is automatically parsed in incoming chat messages and modified outgoing messages. The parsed BBCode
+is available as a `message_bbcode_parsed` property of relevant objects. That property contains an array. Each element in
+the array is either a string or an object with these properties:
+
+- `tag` - A string containing the name of this BBCode tag (e.g. `url`)
+- `attrs` - An object containing the BBCode tag's attributes (stuff that goes inside the brackets, e.g. `[url=https://example.com]`)
+- `content` - An array of the same format as the root `message_bbcode_parsed` property
+
+#### Examples
+
+BBCode:
+
+```js
+'Lorem ipsum dolor sit [emoticon]steamhappy[/emoticon] amet, consectetur adipiscing elit. Vivamus imperdiet.'
+```
+
+Parses into:
+
+```json
+[
+	"Lorem ipsum dolor sit ",
+	{
+		"tag": "emoticon",
+		"attrs": {},
+		"content": ["steamhappy"]
+	},
+	" amet, consectetur adipiscing elit. Vivamus imperdiet."
+]
+```
+
+BBCode:
+
+```js
+'[random min="1" max="1000" result="333"][/random]'
+```
+
+Parses into:
+
+```json
+[
+	{
+		"tag": "random",
+		"attrs": {
+			"min": "1",
+			"max": "1000",
+			"result": "333"
+		},
+		"content": []
+	}
+]
+```
+
+BBCode:
+
+```js
+'[img src="https://giphy.com/gifs/test-gw3IWyGkC0rsazTi" thumbnail_src="https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif" height="199" width="265" giphy_search="test" title="test GIF"][url=https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif]https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif[/url][/img]'
+```
+
+Parses into:
+
+```json
+[
+	{
+		"tag": "img",
+		"attrs": {
+			"src": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+			"thumbnail_src": "https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif",
+			"height": "199",
+			"width": "265",
+			"giphy_search": "test",
+			"title": "test GIF"
+		},
+		"content": [
+			{
+				"tag": "url",
+				"attrs": {"url": "https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif"},
+				"content": ["https://media0.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif"]
+			}
+		]
+	}
+]
+```
 
 ## Standard Objects
 
@@ -173,6 +260,7 @@ Steam groups and chat room groups are entirely separate things, linked only by
 - `from_limited_account` - This is `true` if the message sender is a limited Steam account
 - `message` - The message text
 - `message_no_bbcode` - The message text without BBCode tags (if possible; may still contain BBCode for text that has no plaintext alternative, e.g. [flip])
+- `message_bbcode_parsed` - The [parsed BBCode](#parsed-bbcode) from this message
 - `server_timestamp` - A `Date` object for this message's timestamp
 - `ordinal` - This message's ordinal
 - `local_echo` - This is `true` if this is a message you sent on another client that is being "echoed" to another client instance
@@ -272,6 +360,7 @@ Always returns success, even if you don't have permission to send this invite.
 	- `err` - An `Error` object on failure, or `null` on success
 	- `response` - The response object
 		- `modified_message` - A string containing the message as it will be broadcast to the other user. If any /commands got parsed and turned into BBCode, you'll see that BBCode here.
+		- `message_bbcode_parsed` - The [parsed BBCode](#parsed-bbcode) for this message
 		- `server_timestamp` - A `Date` object containing the timestamp the server gave to this message.
 		- `ordinal` - This message's [ordinal](#ordinal)
 
@@ -292,6 +381,7 @@ Notifies a friend that you are typing a chat message to them.
 	- `err` - An `Error` object on failure, or `null` on success
 	- `response` - The response object
 		- `modified_message` - A string containing the message as it will be broadcast to the other user. If any /commands got parsed and turned into BBCode, you'll see that BBCode here.
+		- `message_bbcode_parsed` - The [parsed BBCode](#parsed-bbcode) for this message
 		- `server_timestamp` - A `Date` object containing the timestamp the server gave to this message.
 		- `ordinal` - This message's [ordinal](#ordinal)
 
