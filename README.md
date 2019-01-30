@@ -224,7 +224,7 @@ Added in 4.0.0.
 
 ### protocol
 
-A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/v4/resources/EConnectionProtocol.js).
+A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EConnectionProtocol.js).
 
 Added in 4.0.0.
 
