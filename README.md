@@ -401,12 +401,10 @@ This is a `SteamChatRoomClient` instance. Use this object to chat with friends a
 
 # Methods [^](#contents)
 
-### Constructor([client][, options])
-- `client` - An optional `SteamClient` to use to connect to Steam. If not provided, one will be created automatically.
+### Constructor(options)
 - `options` - An optional object containing zero or more [options](#options-) to set for this `SteamUser`.
 
-Constructs a new `SteamUser`. If you allow `SteamUser` to create its own `SteamClient`, then `SteamUser` will
-automatically save and reload the CM server list.
+Constructs a new `SteamUser`.
 
 ### setOption(option, value)
 - `option` - The name of the option to set
