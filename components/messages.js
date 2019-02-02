@@ -379,6 +379,10 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		}
 	}
 
+	if (emsg == EMsg.ServiceMethodCallFromClient && header.proto && header.proto.target_job_name) {
+		emsgName = header.proto.target_job_name;
+	}
+
 	this.emit(VERBOSE_EMSG_LIST.includes(emsg) ? 'debug-verbose' : 'debug', 'Sending message: ' + emsgName);
 
 	// Make the header
