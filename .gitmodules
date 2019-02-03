@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = ssh://git@github.com/DoctorMcKay/node-steam-user.wiki.git
