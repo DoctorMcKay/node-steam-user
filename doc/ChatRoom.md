@@ -17,6 +17,7 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 
 - [Concepts](#concepts)
 	- [Ordinal](#ordinal)
+	- [Chat Rooms vs. Chat Room Groups vs. Steam Groups](#chat-rooms-vs-chat-room-groups-vs-steam-groups)
 - [Standard Objects](#standard-objects)
 	- [Chat Room Group Summary](#chat-room-group-summary)
 	- [Chat Room Group State](#chat-room-group-state)
