@@ -42,7 +42,16 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 	- [sendChatMessage(groupId, chatId, message\[, callback\])](#sendchatmessagegroupid-chatid-message-callback)
 	- [deleteChatMessages(groupId, chatId, messages\[, callback\])](#deletechatmessagesgroupid-chatid-messages-callback)
 	- [kickUserFromGroup(groupId, steamId\[, expireTime\]\[, callback\])](#kickuserfromgroupgroupid-steamid-expiretime-callback)
+	- [getChatMessageHistory(groupId, chatId\[, options\], callback)](#getchatmessagehistorygroupid-chatid-options-callback)
 - [Events](#events)
+	- [friendMessage](#friendmessage)
+	- [friendMessageEcho](#friendmessageecho)
+	- [friendTyping](#friendtyping)
+	- [friendTypingEcho](#friendtypingecho)
+	- [friendLeftConversation](#friendleftconversation)
+	- [friendLeftConversationEcho](#friendleftconversationecho)
+	- [chatMessage](#chatmessage)
+	- [chatMessagesModified](#chatmessagesmodified)
 
 ## Concepts
 
@@ -376,7 +385,7 @@ Emitted when a friend has closed their direct chat window with you.
 
 **This has not been tested and may not be emitted.**
 
-### friendLeftConversation
+### friendLeftConversationEcho
 - `message` - An [Incoming Friend Message](#incoming-friend-message) object
 
 Emitted when you close your direct chat window with a friend on another instance.
