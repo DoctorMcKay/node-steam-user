@@ -15,10 +15,10 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 
 ## Table of Contents
 
-- [Concepts](#concepts)
+- [Concepts](#concepts-)
 	- [Ordinal](#ordinal)
 	- [Chat Rooms vs. Chat Room Groups vs. Steam Groups](#chat-rooms-vs-chat-room-groups-vs-steam-groups)
-- [Standard Objects](#standard-objects)
+- [Standard Objects](#standard-objects-)
 	- [Chat Room Group Summary](#chat-room-group-summary)
 	- [Chat Room Group State](#chat-room-group-state)
 	- [User Chat Room Group State](#user-chat-room-group-state)
@@ -32,7 +32,7 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 	- [Incoming Chat Message](#incoming-chat-message)
 	- [Chat Mentions](#chat-mentions)
 	- [Server Message](#server-message)
-- [Methods](#methods)
+- [Methods](#methods-)
 	- [getGroups(callback)](#getgroupscallback)
 	- [getInviteLinkInfo(linkUrl, callback)](#getinvitelinkinfolinkurl-callback)
 	- [getClanChatGroupInfo(clanSteamID, callback)](#getclanchatgroupinfoclansteamid-callback)
@@ -44,7 +44,7 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 	- [deleteChatMessages(groupId, chatId, messages\[, callback\])](#deletechatmessagesgroupid-chatid-messages-callback)
 	- [kickUserFromGroup(groupId, steamId\[, expireTime\]\[, callback\])](#kickuserfromgroupgroupid-steamid-expiretime-callback)
 	- [getChatMessageHistory(groupId, chatId\[, options\], callback)](#getchatmessagehistorygroupid-chatid-options-callback)
-- [Events](#events)
+- [Events](#events-)
 	- [friendMessage](#friendmessage)
 	- [friendMessageEcho](#friendmessageecho)
 	- [friendTyping](#friendtyping)
@@ -54,7 +54,7 @@ user.chat.sendFriendMessage("[U:1:46143802]", "Hello, world!");
 	- [chatMessage](#chatmessage)
 	- [chatMessagesModified](#chatmessagesmodified)
 
-## Concepts
+## Concepts [^](#table-of-contents)
 
 ### Ordinal
 
@@ -75,7 +75,7 @@ Steam groups and chat room groups are entirely separate things, linked only by
 [getClanChatGroupInfo(clanSteamID, callback)](#getclanchatgroupinfoclansteamid-callback) and by the `clanid` property in
 [Chat Room Group Header State](#chat-room-group-header-state).
 
-## Standard Objects
+## Standard Objects [^](#table-of-contents)
 
 "Standard objects" are objects that are reused across multiple methods and events in the `SteamChatRoomClient`.
 
@@ -212,7 +212,7 @@ Steam groups and chat room groups are entirely separate things, linked only by
 - `string_param` - An optional string parameter
 - `steamid_param` - An optional `SteamID` object
 
-## Methods
+## Methods [^](#table-of-contents)
 
 ### getGroups(callback)
 - `callback` - Called when the request completes
@@ -355,7 +355,7 @@ Always returns success, even if you don't have permission to kick the user in qu
 
 Retrieves chat message history from a chat room group.
 
-## Events
+## Events [^](#table-of-contents)
 
 ### friendMessage
 - `message` - An [Incoming Friend Message](#incoming-friend-message) object
