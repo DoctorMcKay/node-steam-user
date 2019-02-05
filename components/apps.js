@@ -334,11 +334,6 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 						accept(response);
 					}
 				}
-			} else {
-				if (!callbackFired) {
-					callbackFired = true;
-					accept(response);
-				}
 			}
 		});
 	});
