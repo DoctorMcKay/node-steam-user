@@ -78,5 +78,6 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFromGC, function(bo
 		setTimeout(() => delete this._jobsGC[targetJobID], 1000 * 60 * 5);
 	} else {
 		this.emit('receivedFromGC', body.appid, msgType, payload);
+		this.emit('recievedFromGC', body.appid, msgType, payload);
 	}
 });
