@@ -7,21 +7,22 @@
 const SteamUser = require('../index.js'); // Replace this with `require('steam-user');` if used outside of the module directory
 const FS = require('fs');
 
-var client = new SteamUser();
+let client = new SteamUser();
 client.logOn(); // Log onto Steam anonymously
 
-client.on('loggedOn', function(details) {
-	console.log("Logged onto Steam as " + client.steamID.getSteam3RenderedID());
+client.on('loggedOn', async (details) => {
+	console.log("Logged onto Steam as " + client.steamID.steam3());
 
 	console.log("Requesting appinfo for TF2 and CS:GO...");
-	client.getProductInfo([440, 730], [], function(apps, packages, unknownApps, unknownPackages) {
-		console.log("Got app info, writing to files");
+	let result = await client.getProductInfo([440, 730], []);
 
-		for (var appid in apps) {
-			FS.writeFileSync(appid + '.json', JSON.stringify(apps[appid].appinfo, null, "\t"));
-		}
+	console.log("Got app info, writing to files");
+	console.log(result);
 
-		console.log("Logging off of Steam");
-		client.logOff();
-	});
+	for (let appid in result.apps) {
+		FS.writeFileSync(appid + '.json', JSON.stringify(result.apps[appid].appinfo, null, "\t"));
+	}
+
+	console.log("Logging off of Steam");
+	client.logOff();
 });
