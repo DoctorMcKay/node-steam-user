@@ -1261,6 +1261,12 @@ not work if encrypted tickets haven't been set up for the AppID you request a ti
 encrypted app ticket, nor can you view anything it contains. It is for all intents and purposes an opaque blob of binary
 data which only the developer/publisher of the game can do anything with.
 
+### sendToGC(appid, msgType, protoBufHeader, payload[, callback])
+
+**v4.1.0 or later is required to use this method**
+
+[Please see documentation for GC interaction on the GitHub wiki.](https://github.com/DoctorMcKay/node-steam-user/wiki/Game-Coordinator)
+
 # Events [^](#contents)
 
 ## ID Events
@@ -2062,3 +2068,26 @@ of each `SteamUser` instance.
 
 Emitted when we're invited to a Steam lobby. The inviter should be currently playing the game associated with this
 lobby, so you can get the AppID of the associated game from their user persona data.
+
+### appLaunched
+- `appid`
+
+**v4.1.0 or later is required to use this event**
+
+[Please see documentation for GC interaction on the GitHub wiki.](https://github.com/DoctorMcKay/node-steam-user/wiki/Game-Coordinator)
+
+### appQuit
+- `appid`
+
+**v4.1.0 or later is required to use this event**
+
+[Please see documentation for GC interaction on the GitHub wiki.](https://github.com/DoctorMcKay/node-steam-user/wiki/Game-Coordinator)
+
+### receivedFromGC
+- `appid`
+- `msgType`
+- `payload`
+
+**v4.1.0 or later is required to use this event**
+
+[Please see documentation for GC interaction on the GitHub wiki.](https://github.com/DoctorMcKay/node-steam-user/wiki/Game-Coordinator)
