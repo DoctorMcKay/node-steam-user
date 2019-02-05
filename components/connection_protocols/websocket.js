@@ -1,4 +1,3 @@
-const Async = require('async');
 const EventEmitter = require('events').EventEmitter;
 const HTTPS = require('https');
 const StdLib = require('@doctormckay/stdlib');
