@@ -121,6 +121,8 @@ protobufs[EMsg.ClientCheckAppBetaPassword] = Schema.CMsgClientCheckAppBetaPasswo
 protobufs[EMsg.ClientCheckAppBetaPasswordResponse] = Schema.CMsgClientCheckAppBetaPasswordResponse;
 protobufs[EMsg.ClientKickPlayingSession] = Schema.CMsgClientKickPlayingSession;
 protobufs[EMsg.ClientPlayingSessionState] = Schema.CMsgClientPlayingSessionState;
+protobufs[EMsg.ClientToGC] = Schema.CMsgGCClient;
+protobufs[EMsg.ClientFromGC] = Schema.CMsgGCClient;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;

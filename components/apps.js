@@ -32,7 +32,7 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 	}
 
 	function doTheThing() {
-		self._send(SteamUser.EMsg.ClientGamesPlayedWithDataBlob, {"games_played": apps.map((app) => {
+		let processedApps = apps.map((app) => {
 			if (typeof app === 'string') {
 				return {
 					"game_id": "15190414816125648896",
@@ -45,7 +45,29 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 			}
 
 			return {"game_id": app};
-		})});
+		});
+
+		self._send(SteamUser.EMsg.ClientGamesPlayedWithDataBlob, {"games_played": processedApps});
+
+		processedApps.forEach((app) => {
+			if (app.game_id > Math.pow(2, 32)) {
+				// It's a non-Steam game.
+				return;
+			}
+
+			let appid = parseInt(app.game_id, 10);
+			if (!self._playingAppIds.includes(appid)) {
+				self.emit('appLaunched', appid);
+			}
+		});
+
+		self._playingAppIds.forEach((appid) => {
+			if (!processedApps.some(app => app.game_id == appid)) {
+				self.emit('appQuit', appid);
+			}
+		});
+
+		self._playingAppIds = processedApps.filter(app => app.game_id < Math.pow(2, 32)).map(app => parseInt(app.game_id, 10));
 	}
 };
 

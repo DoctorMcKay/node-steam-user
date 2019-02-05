@@ -324,7 +324,9 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			this._gcTokens = [];
 			this._contentServerTokens = {};
 			this._currentJobID = 0;
+			this._currentGCJobID = 0;
 			this._jobs = {};
+			this._jobsGC = {};
 
 			if (this._logOnDetails.login_key) {
 				// Steam doesn't send a new loginkey all the time if you're using a persistent one (remember password). Let's manually emit it on a timer to handle any edge cases.

@@ -43,6 +43,7 @@ function SteamUser(options) {
 	this.contentServersReady = false;
 	this.playingState = {"blocked": false, "appid": 0};
 	this._playingBlocked = false;
+	this._playingAppIds = [];
 
 	this._gcTokens = []; // game connect tokens
 	this._connectTime = 0;
@@ -172,6 +173,7 @@ require('./components/pubfiles.js');
 require('./components/cdn.js');
 require('./components/econ.js');
 require('./components/store.js');
+require('./components/gamecoordinator.js');
 
 /**
  * Called when the request completes.
