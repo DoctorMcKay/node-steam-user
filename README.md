@@ -224,7 +224,7 @@ Added in 4.0.0.
 
 ### protocol
 
-A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/v4/resources/EConnectionProtocol.js).
+A value from [`EConnectionProtocol`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EConnectionProtocol.js).
 
 Added in 4.0.0.
 
@@ -397,16 +397,14 @@ An object containing cached data about known apps and packages. Only useful if t
 
 This is a `SteamChatRoomClient` instance. Use this object to chat with friends and chat rooms.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 # Methods [^](#contents)
 
-### Constructor([client][, options])
-- `client` - An optional `SteamClient` to use to connect to Steam. If not provided, one will be created automatically.
+### Constructor(options)
 - `options` - An optional object containing zero or more [options](#options-) to set for this `SteamUser`.
 
-Constructs a new `SteamUser`. If you allow `SteamUser` to create its own `SteamClient`, then `SteamUser` will
-automatically save and reload the CM server list.
+Constructs a new `SteamUser`.
 
 ### setOption(option, value)
 - `option` - The name of the option to set
@@ -1037,7 +1035,7 @@ Sends a chat message to a friend or a legacy chat room.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatTyping(recipient)
 - `recipient` - Either a `SteamID` object or a string which can parse into one
@@ -1049,7 +1047,7 @@ Tells the `recipient` that you're typing a chat message.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### getChatHistory(steamID[, callback])
 - `steamID` - Either a `SteamID` object or a string which can parse into one
@@ -1068,7 +1066,7 @@ Requests our chat history with a user. The results will arrive either in the cal
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### joinChat(steamID[, callback])
 - `steamID` - The SteamID of the chat to join (as a `SteamID` object or a string which can parse into one)
@@ -1082,7 +1080,7 @@ Joins a legacy chat room. To join a group chat, use the group's SteamID.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### leaveChat(steamID)
 - `steamID` - The SteamID of the chat room to leave (as a `SteamID` object or a string which can parse into one)
@@ -1094,7 +1092,7 @@ Leaves a legacy chat room we're in.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### setChatPrivate(steamID)
 - `steamID` - The SteamID of the chat room to lock (as a `SteamID` object or a string which can parse into one)
@@ -1106,7 +1104,7 @@ Locks a legacy chat room so that only group members and invited users can join.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### setChatPublic(steamID)
 - `steamID` - The SteamID of the chat room to unlock (as a `SteamID` object or a string which can parse into one)
@@ -1118,7 +1116,7 @@ Unlocks a legacy chat room so anyone can join.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### setChatOfficersOnly(steamID)
 - `steamID` - The SteamID of the chat room to set officers-only (as a `SteamID` object or a string which can parse into one)
@@ -1130,7 +1128,7 @@ Sets a legacy chat room so that only group officers can chat.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### unsetChatOfficersOnly(steamID)
 - `steamID` - The SteamID of the chat room to unset officers-only (as a `SteamID` object or a string which can parse into one)
@@ -1142,7 +1140,7 @@ Sets a legacy chat room so that anyone can chat.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### kickFromChat(chatID, userID)
 - `chatID` - The SteamID of the chat room to kick the user from (as a `SteamID` object or a string which can parse into one)
@@ -1155,7 +1153,7 @@ Kicks a user from a legacy chat room.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### banFromChat(chatID, userID)
 - `chatID` - The SteamID of the chat room to ban the user from (as a `SteamID` object or a string which can parse into one)
@@ -1168,7 +1166,7 @@ Bans a user from a legacy chat room.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### unbanFromChat(chatID, userID)
 - `chatID` - The SteamID of the chat room to unban the user from (as a `SteamID` object or a string which can parse into one)
@@ -1181,7 +1179,7 @@ Unbans a banned user from a legacy chat room.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### inviteToChat(chatID, userID)
 - `chatID` - The SteamID of the chat room to invite to (as a `SteamID` object or a string which can parse into one)
@@ -1194,7 +1192,7 @@ Invites a user to a legacy chat room.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### createChatRoom([convertUserID, ][inviteUserID, ][callback])
 - `convertUserID` - If the user with the SteamID passed here has a chat window open with us, their window will be converted to the new chat room and they'll join it automatically. If they don't have a window open, they'll get an invite.
@@ -1211,7 +1209,7 @@ Creates a new multi-user legacy chat room.
 newer chat system. You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property of
 each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### redeemKey(key[, callback])
 - `key` - Steam formatted game key
@@ -1710,7 +1708,7 @@ Emitted when we receive either a friend message or a legacy chat room message, a
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### friendMessage
 - `senderID` - The message sender, as a `SteamID` object
@@ -1725,7 +1723,7 @@ Emitted when we receive a direct friend message (that is, not through a chat roo
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### friendTyping
 - `senderID` - The `SteamID` of the friend who's typing
@@ -1739,7 +1737,7 @@ Emitted when Steam notifies us that one of our friends is typing a message to us
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### friendLeftConversation
 - `senderID` - The `SteamID` of the friend who closed our chat window
@@ -1754,7 +1752,7 @@ long as we're [online](#setpersonastate-name).
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### friendMessageEcho
 - `recipientID` - The `SteamID` of the user who rececived this message
@@ -1769,7 +1767,7 @@ Emitted when Steam echos us a message that we sent to a friend on another login.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### friendTypingEcho
 - `recipientID` - The `SteamID` of the user who we're typing to
@@ -1783,7 +1781,7 @@ Emitted when Steam echos us a notification that we're typing to a friend on anot
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatMessage
 - `room` - The `SteamID` of the chat room
@@ -1804,7 +1802,7 @@ This is a special ID event. Any of the following are acceptable:
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatHistory
 - `steamID` - The `SteamID` of the user with whom we got chat history
@@ -1820,7 +1818,7 @@ With the exception of the `steamID` argument, this is identical to the callback 
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatInvite
 - `inviterID` - The `SteamID` of the user who invited us
@@ -1840,7 +1838,7 @@ Emitted when we're invited to join a legacy chat room. This is a special ID even
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatCreated
 - `friendID` - The `SteamID` of the friend with whom we were creating this legacy chat room
@@ -1856,7 +1854,7 @@ With the exception of the `friendID` argument, this event is identical to the ca
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatEnter
 - `chatID` - The `SteamID` of the legacy chat room that we either entered or failed to enter
@@ -1871,7 +1869,7 @@ With the exception of the `chatID` argument, this event is identical to the call
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatLeft
 - `chatID` - The `SteamID` of the legacy chat room that we left
@@ -1885,7 +1883,7 @@ Emitted when we leave a legacy chat room for any reason (we left, kicked, banned
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserJoined
 - `chatID` - The `SteamID` of the legacy chat room that the user joined
@@ -1900,7 +1898,7 @@ Emitted when a user joins a legacy chat room we're in.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserLeft
 - `chatID` - The `SteamID` of the legacy chat room that the user left
@@ -1915,7 +1913,7 @@ Emitted when a user leaves a legacy chat room we're in.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserDisconnected
 - `chatID` - The `SteamID` of the legacy chat room that the user disconnected from
@@ -1930,7 +1928,7 @@ Emitted when a user in a legacy chat room we're in disconnects from Steam.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserKicked
 - `chatID` - The `SteamID` of the legacy chat room that the user was kicked from
@@ -1946,7 +1944,7 @@ Emitted when a user is kicked from a legacy chat room we're in.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserBanned
 - `chatID` - The `SteamID` of the legacy chat room that the user was banned from
@@ -1962,7 +1960,7 @@ Emitted when a user is banned from a legacy chat room we're in.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserSpeaking
 - `chatID` - The `SteamID` of the legacy chat room that the user is speaking in
@@ -1977,7 +1975,7 @@ Emitted when a user in a legacy chat room we're in starts speaking over voice ch
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatUserDoneSpeaking
 - `chatID` - The `SteamID` of the legacy chat room that the user is done speaking in
@@ -1992,7 +1990,7 @@ Emitted when a user in a legacy chat room we're in stops speaking over voice cha
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatSetPublic
 - `chatID` - The `SteamID` of the legacy chat room that was unlocked
@@ -2007,7 +2005,7 @@ Emitted when a legacy chat room we're in is unlocked so that anyone can join.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatSetPrivate
 - `chatID` - The `SteamID` of the legacy chat room that was locked
@@ -2022,7 +2020,7 @@ Emitted when a legacy chat room we're in is locked so that only group members ca
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatSetOfficersOnly
 - `chatID` - The `SteamID` of the legacy chat room that was set officers-only
@@ -2037,7 +2035,7 @@ Emitted when a legacy chat room we're in is set so that only group officers can 
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### chatSetPrivate
 - `chatID` - The `SteamID` of the legacy chat room that was unset officers-only
@@ -2052,7 +2050,7 @@ Emitted when a legacy chat room we're in is set so that everyone can chat.
 **This is deprecated.** You should use `SteamChatRoomClient` instead, which is available as the [chat](#chat) property
 of each `SteamUser` instance.
 
-[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/blob/master/doc/ChatRoom.md)
+[Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
 ### lobbyInvite
 - `inviterID` - The `SteamID` of the user who invited us to a Steam lobby
