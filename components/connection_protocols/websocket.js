@@ -27,37 +27,43 @@ function WebSocketConnection(user) {
 	}
 
 	// Only allow one CM ping to happen at once
-	g_BootstrapSemaphore.wait((callback) => {
+	g_BootstrapSemaphore.wait(async (release) => {
 		if (Date.now() - g_LastWebsocketPing < (1000 * 60 * 30)) {
 			// Last ping was less than 30 minutes ago
-			callback();
+			release();
 			this._chooseAndConnect();
 			return;
 		}
 
 		// Ping 'em
-		Async.map(this.user._cmList.websocket_servers, (addr, callback) => this._pingCM(addr, callback), (err, result) => {
-			callback(); // pinging is done
+		let promises = [];
+		let pingResults = [];
+		this.user._cmList.websocket_servers.forEach((addr) => {
+			promises.push(new Promise((resolve, reject) => {
+				this._pingCM(addr, (err, result) => {
+					if (!err && result) {
+						pingResults.push(result);
+					}
 
-			if (err) {
-				// shouldn't be possible, but handle it anyway
-				this._chooseAndConnect();
-				return;
-			}
-
-			let filtered = result.filter(r => !!r);
-			if (filtered.length < 20) {
-				// Less than 20 responded? Assume Steam is down and just pick a random one.
-				this.user.emit('debug-verbose', `Only ${filtered.length} CMs responded to ping; choosing a random one`);
-				this._chooseAndConnect();
-				return;
-			}
-
-			filtered.sort((a, b) => ((a.load * 2) + a.latency) < ((b.load * 2) + b.latency) ? -1 : 1);
-			g_PingedServers = filtered.map(cm => cm.addr).slice(0, 20); // save the top 20, we'll randomly pick from there
-			g_LastWebsocketPing = Date.now();
-			this._chooseAndConnect();
+					resolve();
+				})
+			}));
 		});
+
+		await Promise.all(promises);
+		release(); // pinging is done
+
+		if (pingResults.length < 20) {
+			// Less than 20 responded? Assume Steam is down and just pick a random one.
+			this.user.emit('debug-verbose', `Only ${pingResults.length} CMs responded to ping; choosing a random one`);
+			this._chooseAndConnect();
+			return;
+		}
+
+		pingResults.sort((a, b) => ((a.load * 2) + a.latency) < ((b.load * 2) + b.latency) ? -1 : 1);
+		g_PingedServers = pingResults.map(cm => cm.addr).slice(0, 20); // save the top 20, we'll randomly pick from there
+		g_LastWebsocketPing = Date.now();
+		this._chooseAndConnect();
 	});
 }
 
@@ -68,6 +74,7 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 	}
 
 	let addr = servers[Math.floor(Math.random() * servers.length)];
+	this.user.emit('debug-verbose', `Randomly chose WebSocket CM ${addr}`);
 	this.stream = new WS13.WebSocket("wss://" + addr + "/cmsocket/", {
 		"pingInterval": 30000,
 		"httpProxy": this.user.options.httpProxy,
@@ -117,7 +124,7 @@ WebSocketConnection.prototype.end = function(andIgnore) {
 			this.stream.removeAllListeners();
 			this.stream.on('error', () => {});
 		}
-		
+
 		this.stream.disconnect();
 	}
 };
@@ -158,7 +165,7 @@ WebSocketConnection.prototype._pingCM = function(addr, callback) {
 		}
 
 		this.user.emit('debug-verbose', 'CM ' + addr + ' timed out');
-		callback(null, null);
+		callback(new Error(`CM ${addr} timed out`));
 		finished = true;
 	}, 700);
 
@@ -176,18 +183,18 @@ WebSocketConnection.prototype._pingCM = function(addr, callback) {
 		if (res.statusCode != 200) {
 			// CM is disqualified
 			this.user.emit('debug-verbose', 'CM ' + addr + ' disqualified: HTTP error ' + res.statusCode);
-			callback(null, null);
+			callback(new Error(`CM ${addr} disqualified: HTTP error ${res.statusCode}`));
 			return;
 		}
 
 		let load = parseInt(res.headers['x-steam-cmload'], 10) || 999;
 		this.user.emit('debug-verbose', 'CM ' + addr + ' latency ' + latency + ' ms + load ' + load);
-		callback(null, {"addr": addr, "load": load, "latency": latency});
+		callback(null, {addr, load, latency});
 	}).on('error', (err) => {
 		clearTimeout(timeout);
 		if (!finished) {
 			this.user.emit('debug-verbose', 'CM ' + addr + ' disqualified: ' + err.message);
-			callback(null, null); // if error, this CM is disqualified
+			callback(new Error(`CM ${addr} disqualified: ${err.message}`)); // if error, this CM is disqualified
 		}
 	});
 };

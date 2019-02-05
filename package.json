@@ -28,7 +28,6 @@
 		"@bbob/parser": "^2.2.0",
 		"adm-zip": "^0.4.13",
 		"appdirectory": "^0.1.0",
-		"async": "^2.5.0",
 		"binarykvparser": "^2.2.0",
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^1.0.1",

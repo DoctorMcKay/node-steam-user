@@ -1,6 +1,5 @@
 const AdmZip = require('adm-zip');
 const ByteBuffer = require('bytebuffer');
-const EventEmitter = require('events').EventEmitter;
 const FS = require('fs');
 const LZMA = require('lzma');
 const StdLib = require('@doctormckay/stdlib');
@@ -361,7 +360,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 
 		function beginDownload() {
 			let self = this;
-			let queue = require('async').queue(function dlChunk(chunk, cb) {
+			let queue = new StdLib.DataStructures.AsyncQueue(function dlChunk(chunk, cb) {
 				let serverIdx;
 
 				while (true) {
