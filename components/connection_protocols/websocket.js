@@ -90,11 +90,21 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 	this.stream.on('message', this._readMessage.bind(this));
 
 	this.stream.on('disconnected', (code, reason) => {
+		if (this._disconnected) {
+			return;
+		}
+
+		this._disconnected = true;
 		this.user.emit('debug', 'WebSocket disconnected with code ' + code + ' and reason: ' + reason);
 		this.user._handleConnectionClose();
 	});
 
 	this.stream.on('error', (err) => {
+		if (this._disconnected) {
+			return;
+		}
+
+		this._disconnected = true;
 		this.user.emit('debug', 'WebSocket disconnected with error: ' + err.message);
 		this.user._handleConnectionClose();
 	});
@@ -106,6 +116,11 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 	});
 
 	this.stream.on('timeout', () => {
+		if (this._disconnected) {
+			return;
+		}
+
+		this._disconnected = true;
 		this.user.emit('debug', 'WS connection timed out');
 		this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
 		this.stream.disconnect();
