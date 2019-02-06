@@ -148,7 +148,22 @@ WebSocketConnection.prototype.end = function(andIgnore) {
  * @param {Buffer} data
  */
 WebSocketConnection.prototype.send = function(data) {
-	this.stream.send(data);
+	if (this._disconnected) {
+		return;
+	}
+
+	try {
+		this.stream.send(data);
+	} catch (ex) {
+		this.user.emit('debug', 'WebSocket send error: ' + ex.message);
+		try {
+			this._disconnected = true;
+			this.stream.disconnect(WS13.StatusCode.AbnormalTermination);
+			this.user._handleConnectionClose();
+		} catch (ex) {
+			this.user.emit('debug', 'WebSocket teardown error: ' + ex.message);
+		}
+	}
 };
 
 WebSocketConnection.prototype._readMessage = function(type, msg) {
