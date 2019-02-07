@@ -115,6 +115,7 @@ function SteamUser(options) {
 	}
 }
 
+SteamUser.prototype.packageName = require('./package.json').name;
 SteamUser.prototype.packageVersion = require('./package.json').version;
 
 SteamUser.prototype.setOption = function(option, value) {
