@@ -399,6 +399,18 @@ This is a `SteamChatRoomClient` instance. Use this object to chat with friends a
 
 [Read SteamChatRoomClient docs here.](https://github.com/DoctorMcKay/node-steam-user/wiki/SteamChatRoomClient)
 
+### packageName
+
+**v4.2.0 or later is required to use this property**
+
+Contains the name of this package. The value is always `"steam-user"`. This allows other modules to verify interoperability.
+
+### packageVersion
+
+**v4.2.0 or later is required to use this property**
+
+Contains the version of this page. For example, `"4.2.0"`. This allows other modules to verify interoperability.
+
 # Methods [^](#contents)
 
 ### Constructor(options)
