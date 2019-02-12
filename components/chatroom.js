@@ -563,6 +563,11 @@ function convertDateToUnix(date) {
 }
 
 function parseBbCode(str) {
+	if (typeof str != 'string') {
+		// Don't try to process non-string values, e.g. null
+		return str;
+
+	}
 	// Steam will put a backslash in front of a bracket for a BBCode tag that shouldn't be parsed as BBCode, but our
 	// parser doesn't ignore those. Let's just replace "\\[" with some string that's very improbable to exist in a Steam
 	// chat message, then replace it again later.
