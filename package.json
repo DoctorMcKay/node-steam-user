@@ -22,10 +22,10 @@
 		"url": "https://github.com/DoctorMcKay/node-steam-user.git"
 	},
 	"dependencies": {
+		"@bbob/parser": "^2.2.0",
 		"@doctormckay/stats-reporter": "^1.0.3",
 		"@doctormckay/stdlib": "^1.6.0",
 		"@doctormckay/steam-crypto": "^1.2.0",
-		"@bbob/parser": "^2.2.0",
 		"adm-zip": "^0.4.13",
 		"appdirectory": "^0.1.0",
 		"binarykvparser": "^2.2.0",
@@ -38,6 +38,9 @@
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2",
 		"websocket13": "^2.0.1"
+	},
+	"devDependencies": {
+		"steamcommunity": "^3.39.0"
 	},
 	"scripts": {
 		"prepublishOnly": "node scripts/prepublish.js",

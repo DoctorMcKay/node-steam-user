@@ -51,8 +51,31 @@ SteamUser.prototype.logOn = function(details) {
 			"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
 			"anon_user_target_account_name": details.accountName ? "" : "anonymous",
 			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine),
-			"chat_mode": 2 // enable new chat
+			"ui_mode": undefined,
+			"chat_mode": 2, // enable new chat
+			"web_logon_nonce": details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
+			"_steamid": details.steamID
 		};
+	}
+
+	if (this._logOnDetails.web_logon_nonce) {
+		this._logOnDetails.client_os_type = 4294966596;
+		this._logOnDetails.ui_mode = 4;
+		delete this._logOnDetails.obfustucated_private_ip;
+		delete this._logOnDetails.cell_id;
+		delete this._logOnDetails.client_language;
+		delete this._logOnDetails.should_remember_password;
+		delete this._logOnDetails.ping_ms_from_cell_search;
+		delete this._logOnDetails.machine_id;
+		delete this._logOnDetails.password;
+		delete this._logOnDetails.login_key;
+		delete this._logOnDetails.sha_sentryfile;
+		delete this._logOnDetails.auth_code;
+		delete this._logOnDetails.steamguard_dont_remember_computer;
+		delete this._logOnDetails.machine_name;
+		delete this._logOnDetails.machine_name_userchosen;
+		delete this._logOnDetails.two_factor_code;
+		delete this._logOnDetails.supports_rate_limit_response;
 	}
 
 	let anonLogin = !this._logOnDetails.account_name;
@@ -166,12 +189,21 @@ SteamUser.prototype.logOn = function(details) {
 			}
 
 			// Do the login
-			let sid = new SteamID();
-			sid.universe = SteamID.Universe.PUBLIC;
-			sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
-			sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
-			sid.accountid = 0;
-			self._tempSteamID = sid;
+			if (self._logOnDetails._steamid) {
+				let sid = self._logOnDetails._steamid;
+				if (typeof sid == 'string') {
+					sid = new SteamID(sid);
+				}
+
+				self._tempSteamID = sid;
+			} else {
+				let sid = new SteamID();
+				sid.universe = SteamID.Universe.PUBLIC;
+				sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
+				sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
+				sid.accountid = 0;
+				self._tempSteamID = sid;
+			}
 
 			if (anonLogin && self._logOnDetails.password) {
 				process.stderr.write("[steam-user] Warning: Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?\n");
