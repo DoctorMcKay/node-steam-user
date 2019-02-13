@@ -440,19 +440,74 @@ You can provide either an entire sentryfile (preferred), or a Buffer containing 
 ### logOn([details])
 - `details` - An object containing details for this logon
 	- `accountName` - If logging into a user account, the account's name
-	- `password` - If logging into an account without a login key, the account's password
+	- `password` - If logging into an account without a login key or a web logon token, the account's password
+	- `loginKey` - If logging into an account with a login key, this is the account's login key
+	- `webLogonToken` - If logging into an account with a [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback), this is the token
+	- `steamID` - If logging into an account with a client logon token obtained from the web, this is your account's SteamID, as a string or a `SteamID` object
 	- `authCode` - If you have a Steam Guard email code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
 	- `twoFactorCode` - If you have a Steam Guard mobile two-factor authentication code, you can provide it here. You might not need to, see the [`steamGuard`](#steamguard) event. (Added in 1.9.0)
-	- `loginKey` - If logging into an account with a login key, this is the account's login key
 	- `rememberPassword` - `true` if you want to get a login key which can be used in lieu of a password for subsequent logins. `false` or omitted otherwise.
 	- `logonID` - A number to identify this login. The official Steam client derives this from your machine's private IP (it's the `obfustucated_private_ip` field in `CMsgClientLogOn`). If you try to logon twice to the same account from the same public IP with the same `logonID`, the first session will be kicked with reason `SteamUser.EResult.LogonSessionReplaced`. Defaults to `0` if not specified.
 	- `machineName` - A string containing the name of this machine that you want to report to Steam. This will be displayed on steamcommunity.com when you view your games list (when logged in).
 	- `clientOS` - A [number](https://github.com/DoctorMcKay/node-steam-user/blob/master/enums/EOSType.js) to identify your client OS. Auto-detected if you don't provide one.
 	- `dontRememberMachine` - If you're providing an `authCode` but you don't want Steam to remember this sentryfile, pass `true` here.
 
-**v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**
+**v3.11.0 or later is required to use `machineName` or `dontRememberMachine`.**  
+**v4.3.0 or later is required to use `webLogonToken`.**
 
 Logs onto Steam. Omit the `details` object if you wish to login to an anonymous user account.
+
+There are four ways to log onto Steam:
+
+- Anonymously
+	- Omit `accountName` (or the `details` object entirely) and you will log onto an anonymous user account.
+- Individually using account name and password
+	- These properties are required:
+		- `accountName`
+		- `password`
+	- These properties are optional:
+		- `authCode` - Specify if you are using an email Steam Guard code.
+		- `twoFactorCode` - Specify if you are using a TOTP two-factor code (required if your account has 2FA enabled).
+		- `rememberPassword` - Specify if you want to get a login key for subsequent logins.
+		- `logonID` - Defaults to 0 if not specified.
+		- `machineName` - Defaults to empty string if not specified.
+		- `clientOS` - Defaults to an auto-detected value if not specified.
+		- `dontRememberMachine` - Only relevant if using an `authCode`. Defaults to `false` if not specified.
+	- These properties must not be provided:
+		- `loginKey`
+		- `webLogonToken`
+		- `steamID`
+- Individually using account name and login key
+	- These properties are required:
+		- `accountName`
+		- `loginKey`
+	- These properties are optional:
+		- `rememberPassword` - Specify if you want to get a new login key for subsequent logins.
+		- `logonID` - Defaults to 0 if not specified.
+		- `machineName` - Defaults to empty string if not specified.
+		- `clientOS` - Defaults to an auto-detected value if not specified.
+	- These properties must not be provided:
+		- `password`
+		- `authCode`
+		- `twoFactorCode`
+		- `dontRememberMachine`
+		- `webLogonToken`
+		- `steamID`
+- Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback)
+	- These properties are required:
+		- `accountName`
+		- `webLogonToken`
+		- `steamID`
+	- These properties must not be provided:
+		- `password`
+		- `authCode`
+		- `twoFactorCode`
+		- `dontRememberMachine`
+		- `loginKey`
+		- `rememberPassword`
+		- `logonID`
+		- `machineName`
+		- `clientOS` 
 
 ### logOff()
 
