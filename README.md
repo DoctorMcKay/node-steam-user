@@ -494,6 +494,7 @@ There are four ways to log onto Steam:
 		- `webLogonToken`
 		- `steamID`
 - Individually using account name and [client logon token obtained from the web](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#getclientlogontokencallback)
+	- **NOTE:** If you log on this way, [`webSession`](#websession) will **NOT** be emitted automatically, and you will need to use [`webLogOn()`](#weblogon) to get a web session.
 	- These properties are required:
 		- `accountName`
 		- `webLogonToken`
@@ -1416,7 +1417,9 @@ Emitted when Steam sends us a new sentry file. By default, `SteamUser` will auto
 - `sessionID` - The value of the `sessionid` cookie
 - `cookies` - An array of cookies, as `name=value` strings
 
-Emitted when a steamcommunity.com web session is successfully negotiated. This will automatically be emitted on logon and in response to [`webLogOn`](#weblogon) calls.
+Emitted when a steamcommunity.com web session is successfully negotiated.
+This will automatically be emitted on logon (**unless** you used a `webLogonToken` to log on) and in response to
+[`webLogOn`](#weblogon) calls.
 
 Some libraries require you to provide your `sessionID`, others don't. If your library doesn't, you can safely ignore it.
 
