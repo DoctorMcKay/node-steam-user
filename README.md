@@ -332,11 +332,17 @@ An array containing gifts and guest passes you've received but haven't accepted 
 
 ### users
 
-An object containing persona data about all Steam users we've encountered or requested data for. Key are 64-bit SteamIDs, values are identical to the objects received in the [`user`](#user) event.
+An object containing persona data about all Steam users we've encountered or requested data for. Key are 64-bit SteamIDs,
+and values are identical to the objects received in the [`user`](#user) event.
+
+This property may not be updated unless you set your instance to [online](#setpersonastate-name).
 
 ### groups
 
-An object containing information about all Steam groups we've encountered. Keys are 64-bit SteamIDs, values are identical to those received in the [`group`](#group) event.
+An object containing information about all Steam groups we've encountered. Keys are 64-bit SteamIDs, and values are
+identical to those received in the [`group`](#group) event.
+
+This property may not be updated unless you set your instance to [online](#setpersonastate-name).
 
 ### chats
 
