@@ -840,7 +840,7 @@ available.
 **v1.9.0 or later is required to use this method**
 
 Changes our online status, and optionally your profile name. You need to call this after you logon or else you'll show up as offline.
-You won't receive any chat messages or persona data about your friends if you don't go online.
+You won't receive any persona data about your friends if you don't go online.
 
 ### setUIMode(mode)
 - `mode` - A value from [`EClientUIMode`](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EClientUIMode.js)
@@ -1662,7 +1662,9 @@ Emitted under these conditions:
 
 *This is an [ID event](#id-events).*
 
-Emitted when Steam sends us persona information about a user. The [`users`](#users) property isn't yet updated when this is emitted, so you can compare to see what changed.
+Emitted when Steam sends us persona information about a user, which will only happen if this client instance's persona
+state is [online](#setpersonastate-name). The [`users`](#users) property isn't yet updated when this is emitted, so you
+can compare to see what changed.
 
 ### group
 - `sid` - A `SteamID` object for the group whose data we just received
