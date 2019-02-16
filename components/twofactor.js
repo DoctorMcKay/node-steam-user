@@ -67,7 +67,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 				"activation_code": activationCode
 			}, (body) => {
 				if (body.server_time) {
-					diff = body.server_time.toNumber() - Math.floor(Date.now() / 1000);
+					diff = parseInt(body.server_time, 10) - Math.floor(Date.now() / 1000);
 				}
 
 				if (body.status == 89) {

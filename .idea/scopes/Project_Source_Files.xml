@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Project Source Files" pattern="file[steam-user]:*/&amp;&amp;!file[steam-user]:.idea//*&amp;&amp;!file[steam-user]:protobufs//*" />
+</component>

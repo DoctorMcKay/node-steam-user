@@ -615,7 +615,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientClanState, function
 		 * @param {number} gameID - If this is an event for a game, this is the game's appid
 		 */
 
-		this._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid.toString(), event.game_id.toNumber());
+		this._emitIdEvent('groupEvent', sid, event.headline, new Date(event.event_time * 1000), event.gid, event.game_id);
 	});
 
 	(body.announcements || []).forEach((announcement) => {
@@ -761,10 +761,6 @@ SteamUser.prototype._handlerManager.add('PlayerClient.NotifyFriendNicknameChange
 function processUser(steamUser, user) {
 	return new Promise((accept) => {
 		g_ProcessPersonaSemaphore.wait(async (release) => {
-			if (typeof user.gameid === 'object' && user.gameid !== null) {
-				user.gameid = user.gameid.toNumber();
-			}
-
 			if (typeof user.last_logoff === 'number') {
 				user.last_logoff = new Date(user.last_logoff * 1000);
 			}
