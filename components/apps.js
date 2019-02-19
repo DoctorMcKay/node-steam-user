@@ -1,4 +1,5 @@
 const BinaryKVParser = require('binarykvparser');
+const ByteBuffer = require('bytebuffer');
 const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 const VDF = require('vdf');
@@ -86,6 +87,38 @@ SteamUser.prototype.kickPlayingSession = function(callback) {
 				accept();
 			}
 		});
+	});
+};
+
+/**
+ * Upload some rich presence data to Steam.
+ * @param {int} appid
+ * @param {{steam_display?, connect?}} richPresence
+ */
+SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
+	 // Maybe someday in the future we'll have a proper binary KV encoder. For now, just do it by hand.
+	let buf = new ByteBuffer(1024, ByteBuffer.LITTLE_ENDIAN);
+	buf.writeByte(0);
+	buf.writeCString('RP');
+	for (let i in richPresence) {
+		if (!richPresence.hasOwnProperty(i)) {
+			continue;
+		}
+
+		buf.writeByte(1); // type string
+		buf.writeCString(i);
+		buf.writeCString(richPresence[i]);
+	}
+	buf.writeByte(8); // end
+	buf.writeByte(8); // end again
+
+	this._send({
+		"msg": SteamUser.EMsg.ClientRichPresenceUpload,
+		"proto": {
+			"routing_appid": appid
+		}
+	}, {
+		"rich_presence_kv": buf.flip().toBuffer()
 	});
 };
 
