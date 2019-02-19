@@ -787,7 +787,7 @@ function processUser(steamUser, user) {
 				user.avatar_url_icon += ".jpg";
 			}
 
-			if (!user.rich_presence || user.rich_presence.length == 0 || !user.gameid) {
+			if ((user.rich_presence && user.rich_presence.length == 0) || user.gameid === '0') {
 				delete user.rich_presence_string;
 				release();
 				return accept(user);
