@@ -787,8 +787,15 @@ function processUser(steamUser, user) {
 				user.avatar_url_icon += ".jpg";
 			}
 
+			// only delete rich_presence_string if we have confirmation that the user isn't in-game
 			if ((user.rich_presence && user.rich_presence.length == 0) || user.gameid === '0') {
 				delete user.rich_presence_string;
+				release();
+				return accept(user);
+			}
+
+			if (!user.rich_presence) {
+				// if we don't have rich_presence data right now, there's nothing to parse
 				release();
 				return accept(user);
 			}

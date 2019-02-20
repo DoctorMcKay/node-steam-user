@@ -904,6 +904,34 @@ Unblocks all communication with a specified user.
 
 Requests persona data for one or more users from Steam. The response will arrive in the [`user`](#user) event, or in the callback if provided.
 
+### uploadRichPresence(appID, richPresence)
+- `appID` - The ID of the app for which you want to upload rich presence data. You should be [playing](#gamesplayedapps-force) this app.
+- `richPresence` - An object containing your rich presence data. All values should be strings.
+
+**v4.4.0 or later is required to use this method**
+
+Uploads rich presence data to Steam. In order to display text in the Steam friends list, you need a key named `steam_display`,
+which **must** be a rich presence localization key (you can see RP keys for apps [on SteamDB](https://steamdb.info/app/440/localization/)).
+
+`%placeholders%` in the rich presence localization value will be replaced with the value of the corresponding key that
+you upload. For example, to get a TF2 RP string of "Special Event - Hello, World!", then you should upload:
+
+```json
+{
+	"steam_display": "#TF_RichPresence_Display",
+	"state": "PlayingMatchGroup",
+	"matchgrouploc": "SpecialEvent",
+	"currentmap": "Hello, World!"
+}
+```
+
+This will subsequently be parsed like this:
+
+1. `#TF_RichPresence_Display` = `{#TF_RichPresence_State_%state%}`
+2. `{#TF_RichPresence_State_PlayingMatchGroup}` = `{#TF_RichPresence_MatchGroup_%matchgrouploc%} - %currentmap%`
+3. `{#TF_RichPresence_MatchGroup_SpecialEvent} - Hello, World!`
+4. `Special Event - Hello, World!`
+
 ### getAppRichPresenceLocalization(appID, language, callback)
 - `appID` - The ID of the app for which you want rich presence localizations
 - `language` - The full name of the language you want, e.g. "english" or "spanish"
