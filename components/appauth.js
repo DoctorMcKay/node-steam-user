@@ -82,7 +82,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				buffer.writeUint32(24); // length of the session header, which is always 24 bytes
 				buffer.writeUint32(1); // unknown 1
 				buffer.writeUint32(2); // unknown 2
-				buffer.writeUint32(Helpers.ipStringToInt(this.publicIP)); // external IP
+				buffer.writeUint32(StdLib.IPv4.stringToInt(this.publicIP)); // external IP
 				buffer.writeUint32(0); // filler
 				buffer.writeUint32(Date.now() - this._connectTime); // timestamp
 				buffer.writeUint32(++this._connectionCount); // connection count
