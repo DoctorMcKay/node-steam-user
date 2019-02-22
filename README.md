@@ -1322,7 +1322,8 @@ each `SteamUser` instance.
 
 **v3.2.0 or later is required to use this method**
 
-Redeems a game code (CD key) on your account.
+Redeems a game code (CD key) on your account. If this request fails, the `Error` object will have `purchaseResultDetails`
+and `packageList` properties, and you should access this data via the `Error` object and not via the callback arguments.
 
 ### requestFreeLicense(appIDs[, callback])
 - `appIDs` - An array of AppIDs for which you want licenses
