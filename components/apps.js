@@ -712,9 +712,9 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
 			let packageList = {};
 
-			let recipeDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
-			if (recipeDetails.LineItemCount > 0) {
-				recipeDetails.lineitems.forEach((pkg) => {
+			let receiptDetails = BinaryKVParser.parse(body.purchase_receipt_info).MessageObject;
+			if (receiptDetails.LineItemCount > 0) {
+				receiptDetails.lineitems.forEach((pkg) => {
 					let packageID = pkg.PackageID || pkg.packageID || pkg.packageid;
 					packageList[packageID] = pkg.ItemDescription;
 				});
@@ -722,6 +722,8 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 
 			let err = Helpers.eresultError(body.eresult);
 			if (err) {
+				err.purchaseResultDetails = body.purchase_result_details;
+				err.packageList = packageList;
 				reject(err);
 			} else {
 				accept({
