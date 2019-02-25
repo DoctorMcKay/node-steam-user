@@ -21,6 +21,9 @@ SteamUser.prototype.sendToGC = function(appid, msgType, protoBufHeader, payload,
 	if (typeof callback === 'function') {
 		sourceJobId = ++this._currentGCJobID;
 		this._jobsGC[sourceJobId] = callback;
+
+		// Clean up job callbacks after 2 minutes
+		setTimeout(() => delete this._jobsGC[sourceJobId], 1000 * 60 * 2);
 	}
 
 	this.emit('debug', `Sending ${appid} GC message ${msgType}`);
@@ -75,7 +78,6 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFromGC, function(bo
 
 	if (targetJobID && this._jobsGC[targetJobID]) {
 		this._jobsGC[targetJobID].call(this, body.appid, msgType, payload);
-		setTimeout(() => delete this._jobsGC[targetJobID], 1000 * 60 * 5);
 	} else {
 		this.emit('receivedFromGC', body.appid, msgType, payload);
 		this.emit('recievedFromGC', body.appid, msgType, payload);
