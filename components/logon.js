@@ -339,11 +339,11 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 		case SteamUser.EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
 
-			//this.steamID = new SteamID(body.client_supplied_steamid.toString());
-
 			this._logOnDetails.last_session_id = this._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
 			this._logOnDetails.cell_id = body.cell_id;
+			delete this._logOnDetails.auth_code;
+			delete this._logOnDetails.two_factor_code;
 			this.logOnResult = body;
 
 			this.publicIP = StdLib.IPv4.intToString(body.public_ip);
