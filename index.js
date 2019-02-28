@@ -71,7 +71,7 @@ function SteamUser(options) {
 
 	this.options = options || {};
 
-	var defaultOptions = {
+	let defaultOptions = {
 		"protocol": SteamUser.EConnectionProtocol.Auto,
 		"httpProxy": null,
 		"localAddress": null,
@@ -88,7 +88,7 @@ function SteamUser(options) {
 		"language": "english"
 	};
 
-	for (var i in defaultOptions) {
+	for (let i in defaultOptions) {
 		if (!defaultOptions.hasOwnProperty(i)) {
 			continue;
 		}
@@ -143,7 +143,7 @@ SteamUser.prototype.setOption = function(option, value) {
 };
 
 SteamUser.prototype.setOptions = function(options) {
-	for (var i in options) {
+	for (let i in options) {
 		if (!options.hasOwnProperty(i)) {
 			continue;
 		}
