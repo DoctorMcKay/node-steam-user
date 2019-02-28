@@ -234,7 +234,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
  */
 SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, callback) {
 	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
-		return this.user._sendUnified("ChatRoom.InviteFriendToChatRoomGroup#1", {
+		this.user._sendUnified("ChatRoom.InviteFriendToChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString()
 		}, (body, hdr) => {
@@ -244,6 +244,96 @@ SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, cal
 			}
 
 			accept();
+		});
+	});
+};
+
+/**
+ * Create an invite link for a given chat group.
+ * @param {int} groupId
+ * @param {{secondsValid?: int, voiceChatId?: int}} [options]
+ * @param {function} [callback]
+ * @returns {Promise<{invite_code: string, invite_url: string, seconds_valid: int}>}
+ */
+SteamChatRoomClient.prototype.createInviteLink = function(groupId, options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		this.user._sendUnified('ChatRoom.CreateInviteLink#1', {
+			"chat_group_id": groupId,
+			"seconds_valid": options.secondsValid || 60 * 60,
+			"chat_id": options.voiceChatId
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			body.invite_url = 'https://s.team/chat/' + body.invite_code;
+			resolve(body);
+		});
+	});
+};
+
+/**
+ * Get all active invite links for a given chat group.
+ * @param {int} groupId
+ * @param {function} [callback]
+ * @returns {Promise<{invite_links: {invite_code: string, invite_url: string, steamid_creator: SteamID, time_expires: Date|null, chat_id: string}[]}>}
+ */
+SteamChatRoomClient.prototype.getGroupInviteLinks = function(groupId, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		this.user._sendUnified('ChatRoom.GetInviteLinksForGroup#1', {
+			"chat_group_id": groupId
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			body.invite_links = body.invite_links.map(v => preProcessObject(v)).map((link) => {
+				if (Math.floor(link.time_expires / 1000) == Math.pow(2, 31) - 1) {
+					link.time_expires = null;
+				}
+
+				if (link.chat_id == 0) {
+					link.chat_id = null;
+				}
+
+				link.invite_url = 'https://s.team/chat/' + link.invite_code;
+				return link;
+			});
+
+			resolve(body);
+		});
+	});
+};
+
+/**
+ * Revoke and delete an active invite link.
+ * @param {string} linkUrl
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.deleteInviteLink = function(linkUrl, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, async (resolve, reject) => {
+		let details = await this.getInviteLinkInfo(linkUrl);
+
+		this.user._sendUnified('ChatRoom.DeleteInviteLink#1', {
+			"chat_group_id": details.group_summary.chat_group_id,
+			"invite_code": details.invite_code
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
 		});
 	});
 };
