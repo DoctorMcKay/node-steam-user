@@ -84,7 +84,6 @@ function SteamUser(options) {
 		"picsCacheAll": false,
 		"changelistUpdateInterval": 60000,
 		"saveAppTickets": true,
-		"debug": false,
 		"additionalHeaders": {},
 		"language": "english"
 	};

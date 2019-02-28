@@ -375,16 +375,7 @@ SteamUser.prototype._send = function(emsgOrHeader, body, callback) {
 		setTimeout(() => delete this._jobs[jobIdSource], 1000 * 60 * 2);
 	}
 
-	let emsgName = emsg;
-	if (this.options.debug) {
-		for (let i in EMsg) {
-			if (EMsg.hasOwnProperty(i) && EMsg[i] == emsg) {
-				emsgName = i;
-				break;
-			}
-		}
-	}
-
+	let emsgName = EMsg[emsg] || emsg;
 	if (emsg == EMsg.ServiceMethodCallFromClient && header.proto && header.proto.target_job_name) {
 		emsgName = header.proto.target_job_name;
 	}
@@ -481,17 +472,8 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
  * @private
  */
 SteamUser.prototype._handleMessage = function(header, bodyBuf) {
-	let msgName = header.msg;
+	let msgName = EMsg[header.msg] || header.msg;
 	let handlerName = header.msg;
-
-	if (this.options.debug) {
-		for (let i in EMsg) {
-			if (EMsg.hasOwnProperty(i) && EMsg[i] == header.msg) {
-				msgName = i;
-				break;
-			}
-		}
-	}
 
 	let isServiceMethodMsg = [EMsg.ServiceMethod, EMsg.ServiceMethodResponse].includes(header.msg);
 	if (isServiceMethodMsg) {
