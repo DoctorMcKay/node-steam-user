@@ -225,7 +225,7 @@ protobufs['ChatRoom.GetChatRoomGroupState#1_Request'] = Schema.NotImplemented;
 protobufs['ChatRoom.GetChatRoomGroupState#1_Response'] = Schema.CChatRoom_GetChatRoomGroupState_Response;
 protobufs['ChatRoom.GetChatRoomGroupSummary#1_Request'] = Schema.NotImplemented;
 protobufs['ChatRoom.GetChatRoomGroupSummary#1_Response'] = Schema.CChatRoom_GetChatRoomGroupSummary_Response;
-protobufs['ChatRoom.AckChatMessage#1_Request'] = Schema.CChatRoom_AckChatMessage_Notification;
+protobufs['ChatRoom.AckChatMessage#1'] = Schema.CChatRoom_AckChatMessage_Notification;
 protobufs['ChatRoom.CreateInviteLink#1_Request'] = Schema.CChatRoom_CreateInviteLink_Request;
 protobufs['ChatRoom.CreateInviteLink#1_Response'] = Schema.CChatRoom_CreateInviteLink_Response;
 protobufs['ChatRoom.GetInviteLinkInfo#1_Request'] = Schema.CChatRoom_GetInviteLinkInfo_Request;
@@ -572,7 +572,7 @@ SteamUser.prototype._handlerManager.add(EMsg.Multi, function(body) {
  * @private
  */
 SteamUser.prototype._sendUnified = function(methodName, methodData, callback) {
-	let Proto = protobufs[methodName + '_Request'];
+	let Proto = protobufs[methodName + (callback ? '_Request' : '')];
 	let header = {
 		"msg": EMsg.ServiceMethodCallFromClient,
 		"proto": {

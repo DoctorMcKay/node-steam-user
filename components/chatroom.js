@@ -436,6 +436,32 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 };
 
 /**
+ * Acknowledge (mark as read) a friend message
+ * @param {SteamID|string} friendSteamId - The SteamID of the friend whose message(s) you want to acknowledge
+ * @param {Date|int} timestamp - The timestamp of the newest message you're acknowledging (will ack all older messages)
+ */
+SteamChatRoomClient.prototype.ackFriendMessage = function(friendSteamId, timestamp) {
+	this.user._sendUnified('FriendMessages.AckMessage#1', {
+		"steamid_partner": Helpers.steamID(friendSteamId).toString(),
+		"timestamp": convertDateToUnix(timestamp)
+	});
+};
+
+/**
+ * Acknowledge (mark as read) a chat room.
+ * @param {int} chatGroupId
+ * @param {int} chatId
+ * @param {Date|int} timestamp - The timestamp of the newest message you're acknowledging (will ack all older messages)
+ */
+SteamChatRoomClient.prototype.ackChatMessage = function(chatGroupId, chatId, timestamp) {
+	this.user._sendUnified('ChatRoom.AckChatMessage#1', {
+		"chat_group_id": chatGroupId,
+		"chat_id": chatId,
+		"timestamp": convertDateToUnix(timestamp)
+	});
+};
+
+/**
  * Delete one or more messages from a chat channel.
  * @param {int|string} groupId
  * @param {int|string} chatId
