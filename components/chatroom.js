@@ -288,6 +288,59 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 };
 
 /**
+ * Get your chat message history with a Steam friend.
+ * @param {SteamID|string} friendSteamId
+ * @param {{maxCount?: int, wantBbcode?: boolean, startTime?: Date|int, startOrdinal?: int, lastTime?: Date|int, lastOrdinal?: int}} [options]
+ * @param {function} [callback]
+ * @returns {Promise<{messages: {steamid: SteamID, timestamp: Date, ordinal: int, message: string, message_bbcode_parsed?: Array}[], more_available: boolean}>}
+ */
+SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		let count = options.maxCount || 100;
+		let bbcode_format = options.wantBbcode !== false;
+		let rtime32_start_time = options.startTime ? convertDateToUnix(options.startTime) : undefined;
+		let start_ordinal = rtime32_start_time ? options.startOrdinal : undefined;
+		let time_last = options.lastTime ? convertDateToUnix(options.lastTime) : Math.pow(2, 31) - 1;
+		let ordinal_last = time_last ? options.lastOrdinal : undefined;
+
+		this.user._sendUnified("FriendMessages.GetRecentMessages#1", {
+			"steamid1": this.user.steamID.toString(),
+			"steamid2": Helpers.steamID(friendSteamId).toString(),
+			count,
+			"most_recent_conversation": false,
+			rtime32_start_time,
+			bbcode_format,
+			start_ordinal,
+			time_last,
+			ordinal_last
+		}, (body) => {
+			body.messages = body.messages.map((msg) => {
+				msg.steamid = SteamID.fromIndividualAccountID(msg.accountid);
+				msg.timestamp = new Date(msg.timestamp * 1000);
+				msg.ordinal = msg.ordinal || 0;
+
+				if (bbcode_format) {
+					msg.message_bbcode_parsed = parseBbCode(msg.message);
+				}
+
+				delete msg.accountid;
+				return msg;
+			});
+
+			body.more_available = !!body.more_available;
+			resolve(body);
+		});
+	});
+};
+
+/**
  * Get message history for a chat (channel).
  * @param {int|string} groupId
  * @param {int|string} chatId
