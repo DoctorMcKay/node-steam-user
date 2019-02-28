@@ -1125,6 +1125,21 @@ Gets your account's trade token and URL.
 
 Asks the Steam server to generate a new trade token for your account, and returns the new token and URL.
 
+### getEmoticonList(callback)
+- `callback` - Called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `emoticons` - An object where keys are emoticon names (with colons, e.g. `":steamhappy:"`) and values are objects with these properties:
+			- `name` - The name of this emoticon, with colons (e.g. `":steamhappy:"`)
+			- `count` - A count of how many of this emoticon you own
+			- `time_last_used` - A `Date` object representing when you last used this emoticon (`null` if never used)
+			- `use_count` - A count of how many times you have used this emoticon
+			- `time_received` - A `Date` object representing when you received this emoticon (`null` if not applicable, e.g. the default Steam emoticons)
+			
+**v4.5.0 or later is required to use this method**
+
+Requests a list of emoticons that your account is entitled to use.
+
 ### chatMessage(recipient, message[, type])
 - `recipient` - Either a `SteamID` object or a string which can parse into one for the recipient of your message
 - `message` - The chat message that you're sending to them

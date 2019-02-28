@@ -124,6 +124,8 @@ protobufs[EMsg.ClientPlayingSessionState] = Schema.CMsgClientPlayingSessionState
 protobufs[EMsg.ClientToGC] = Schema.CMsgGCClient;
 protobufs[EMsg.ClientFromGC] = Schema.CMsgGCClient;
 protobufs[EMsg.ClientRichPresenceUpload] = Schema.CMsgClientRichPresenceUpload;
+protobufs[EMsg.ClientGetEmoticonList] = Schema.CMsgClientGetEmoticonList;
+protobufs[EMsg.ClientEmoticonList] = Schema.CMsgClientEmoticonList;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
