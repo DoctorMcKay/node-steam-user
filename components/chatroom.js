@@ -136,6 +136,10 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 			}
 
 			body = preProcessObject(body);
+			if (Math.floor(body.time_expires / 1000) == Math.pow(2, 31) - 1) {
+				body.time_expires = null;
+			}
+
 			body.group_summary = processChatGroupSummary(body.group_summary, true);
 			body.user_chat_group_state = processUserChatGroupState(body.user_chat_group_state, true);
 			body.banned = !!body.banned;
