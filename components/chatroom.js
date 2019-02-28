@@ -5,6 +5,9 @@ const StdLib = require('@doctormckay/stdlib');
 const SteamID = require('steamid');
 const Util = require('util');
 
+const EChatEntryType = require('../enums/EChatEntryType.js');
+const EResult = require('../enums/EResult.js');
+
 const Helpers = require('./helpers.js');
 
 Util.inherits(SteamChatRoomClient, EventEmitter);
@@ -25,7 +28,6 @@ function SteamChatRoomClient(user) {
 		body.message_bbcode_parsed = parseBbCode(body.message);
 		delete body.rtime32_server_timestamp;
 
-		const EChatEntryType = require('../index.js').EChatEntryType;
 		let eventName = "";
 		switch (body.chat_entry_type) {
 			case EChatEntryType.ChatMsg:
@@ -90,7 +92,12 @@ function SteamChatRoomClient(user) {
  */
 SteamChatRoomClient.prototype.getGroups = function(callback) {
 	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
-		this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body) => {
+		this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			body.chat_room_groups = body.chat_room_groups.map(processChatRoomSummaryPair);
 			let groups = {};
 			body.chat_room_groups.forEach((group) => {
@@ -116,9 +123,16 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 			return reject(new Error("Invalid invite link"));
 		}
 
-		this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body) => {
-			if (!body || (!body.steamid_sender && !body.chat_id && !body.group_summary)) {
-				return reject(new Error("Invalid invite link"));
+		this.user._sendUnified("ChatRoom.GetInviteLinkInfo#1", {"invite_code": match[1]}, (body, hdr) => {
+			if (hdr.proto.eresult == EResult.InvalidParam) {
+				let err = new Error('Invalid invite link');
+				err.eresult = hdr.proto.eresult;
+				return reject(err);
+			}
+
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
 			}
 
 			body = preProcessObject(body);
@@ -151,9 +165,17 @@ SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callb
 		this.user._sendUnified("ClanChatRooms.GetClanChatRoomInfo#1", {
 			"steamid": clanSteamID.toString(),
 			"autocreate": true
-		}, (body) => {
-			if (!body.chat_group_summary) {
-				return reject(new Error("Invalid clan ID"));
+		}, (body, hdr) => {
+			if (hdr.proto.eresult == EResult.Busy) {
+				// Why "Busy"? Because Valve.
+				let err = new Error("Invalid clan ID");
+				err.eresult = hdr.proto.eresult;
+				return reject(err);
+			}
+
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
 			}
 
 			body.chat_group_summary = processChatGroupSummary(body.chat_group_summary);
@@ -179,9 +201,16 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 		this.user._sendUnified("ChatRoom.JoinChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"invite_code": inviteCode
-		}, (body) => {
-			if (!body.state && !body.user_chat_state) {
-				return reject(new Error("Invalid group ID or invite code"));
+		}, (body, hdr) => {
+			if (hdr.proto.eresult == EResult.InvalidParam) {
+				let err = new Error("Invalid group ID or invite code");
+				err.eresult = hdr.proto.eresult;
+				return reject(err);
+			}
+
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
 			}
 
 			body = preProcessObject(body);
@@ -204,7 +233,12 @@ SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, cal
 		return this.user._sendUnified("ChatRoom.InviteFriendToChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString()
-		}, (body) => {
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			accept();
 		});
 	});
@@ -219,8 +253,6 @@ SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, cal
  * @return Promise
  */
 SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, options, callback) {
-	const EChatEntryType = require('../index.js').EChatEntryType;
-
 	if (typeof options === 'function') {
 		callback = options;
 		options = {};
@@ -242,7 +274,12 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 			"chat_entry_type": options.chatEntryType,
 			"message": message,
 			"contains_bbcode": options.containsBbCode
-		}, (body) => {
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
 			body.modified_message = body.modified_message || message;
@@ -259,7 +296,6 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
  * @return Promise
  */
 SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
-	const EChatEntryType = require('../index.js').EChatEntryType;
 	return this.sendFriendMessage(steamId, "", {"chatEntryType": EChatEntryType.Typing}, callback);
 };
 
@@ -277,7 +313,12 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 			"chat_group_id": groupId,
 			"chat_id": chatId,
 			"message": message
-		}, (body) => {
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			body = preProcessObject(body);
 			body.ordinal = body.ordinal || 0;
 			body.modified_message = body.modified_message || message;
@@ -320,19 +361,19 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 			start_ordinal,
 			time_last,
 			ordinal_last
-		}, (body) => {
-			body.messages = body.messages.map((msg) => {
-				msg.steamid = SteamID.fromIndividualAccountID(msg.accountid);
-				msg.timestamp = new Date(msg.timestamp * 1000);
-				msg.ordinal = msg.ordinal || 0;
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
 
-				if (bbcode_format) {
-					msg.message_bbcode_parsed = parseBbCode(msg.message);
-				}
-
-				delete msg.accountid;
-				return msg;
-			});
+			body.messages = body.messages.map(msg => ({
+				"sender": SteamID.fromIndividualAccountID(msg.accountid),
+				"server_timestamp": new Date(msg.timestamp * 1000),
+				"ordinal": msg.ordinal || 0,
+				"message": msg.message,
+				"message_bbcode_parsed": bbcode_format ? parseBbCode(msg.message) : null
+			}));
 
 			body.more_available = !!body.more_available;
 			resolve(body);
@@ -369,12 +410,26 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 			start_time,
 			start_ordinal,
 			max_count
-		}, (body) => {
-			body = preProcessObject(body);
-			if (body.messages) {
-				body.messages = processChatMessageHistory(body.messages);
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
 			}
 
+			body.messages = body.messages.map((msg) => {
+				msg.sender = SteamID.fromIndividualAccountID(msg.sender);
+				msg.server_timestamp = new Date(msg.server_timestamp * 1000);
+				msg.ordinal = msg.ordinal || 0;
+				msg.message_bbcode_parsed = parseBbCode(msg.message);
+				msg.deleted = !!msg.deleted;
+				if (msg.server_message) {
+					msg.server_message.steamid_param = msg.server_message.accountid_param ? SteamID.fromIndividualAccountID(msg.server_message.accountid_param) : null;
+					delete msg.server_message.accountid_param;
+				}
+				return msg;
+			});
+
+			body.more_available = !!body.more_available;
 			accept(body);
 		});
 	});
@@ -421,7 +476,12 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
 			"chat_group_id": groupId,
 			"chat_id": chatId,
 			"messages": messages
-		}, (body) => {
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			accept();
 		});
 	});
@@ -441,7 +501,12 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString(),
 			"expiration": expireTime ? convertDateToUnix(expireTime) : Math.floor(Date.now() / 1000)
-		}, (body) => {
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
 			accept();
 		});
 	});
@@ -536,13 +601,6 @@ function processChatMentions(mentions) {
 	}
 
 	return mentions;
-}
-
-function processChatMessageHistory(messages) {
-	return messages.map((msg) => {
-		msg.sender = SteamID.fromIndividualAccountID(msg.sender);
-		return msg;
-	});
 }
 
 /**
