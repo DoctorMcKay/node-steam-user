@@ -98,7 +98,7 @@ SteamChatRoomClient.prototype.getGroups = function(callback) {
 				return reject(err);
 			}
 
-			body.chat_room_groups = body.chat_room_groups.map(processChatRoomSummaryPair);
+			body.chat_room_groups = body.chat_room_groups.map(v => processChatRoomSummaryPair(v));
 			let groups = {};
 			body.chat_room_groups.forEach((group) => {
 				groups[group.group_summary.chat_group_id] = group;
@@ -333,7 +333,7 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
  * @param {SteamID|string} friendSteamId
  * @param {{maxCount?: int, wantBbcode?: boolean, startTime?: Date|int, startOrdinal?: int, lastTime?: Date|int, lastOrdinal?: int}} [options]
  * @param {function} [callback]
- * @returns {Promise<{messages: {steamid: SteamID, timestamp: Date, ordinal: int, message: string, message_bbcode_parsed?: Array}[], more_available: boolean}>}
+ * @returns {Promise<{messages: {sender: SteamID, server_timestamp: Date, ordinal: int, message: string, message_bbcode_parsed: null|Array}[], more_available: boolean}>}
  */
 SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, options, callback) {
 	if (typeof options == 'function') {
@@ -557,7 +557,7 @@ function processChatGroupState(state, preProcessed) {
 		state = preProcessObject(state);
 	}
 
-	state.chat_rooms = state.chat_rooms.map(processChatRoomState, true);
+	state.chat_rooms = state.chat_rooms.map(v => processChatRoomState(v, true));
 	return state;
 }
 
@@ -650,7 +650,7 @@ function preProcessObject(obj) {
 		} else if (isDataObject(val)) {
 			obj[key] = preProcessObject(val);
 		} else if (Array.isArray(val) && val.every(isDataObject)) {
-			obj[key] = val.map(preProcessObject);
+			obj[key] = val.map(v => preProcessObject(v));
 		}
 	}
 
