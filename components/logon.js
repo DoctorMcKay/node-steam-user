@@ -10,6 +10,8 @@ const SteamUser = require('../index.js');
 const TCPConnection = require('./connection_protocols/tcp.js');
 const WebSocketConnection = require('./connection_protocols/websocket.js');
 
+const EResult = SteamUser.EResult;
+
 const PROTOCOL_VERSION = 65580;
 
 SteamUser.prototype.logOn = function(details) {
@@ -336,7 +338,7 @@ SteamUser.prototype.relog = function() {
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, function(body) {
 	switch (body.eresult) {
-		case SteamUser.EResult.OK:
+		case EResult.OK:
 			delete this._logonTimeout; // success, so reset reconnect timer
 
 			this._logOnDetails.last_session_id = this._sessionID;
@@ -401,16 +403,16 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 
 			break;
 
-		case SteamUser.EResult.AccountLogonDenied:
-		case SteamUser.EResult.AccountLoginDeniedNeedTwoFactor:
-		case SteamUser.EResult.TwoFactorCodeMismatch:
+		case EResult.AccountLogonDenied:
+		case EResult.AccountLoginDeniedNeedTwoFactor:
+		case EResult.TwoFactorCodeMismatch:
 			// server is up, so reset logon timer
 			delete this._logonTimeout;
 
 			this._disconnect(true);
 
-			let isEmailCode = body.eresult == SteamUser.EResult.AccountLogonDenied;
-			let lastCodeWrong = body.eresult == SteamUser.EResult.TwoFactorCodeMismatch;
+			let isEmailCode = body.eresult == EResult.AccountLogonDenied;
+			let lastCodeWrong = body.eresult == EResult.TwoFactorCodeMismatch;
 
 			this._steamGuardPrompt(isEmailCode ? body.email_domain : null, lastCodeWrong, (code) => {
 				this._logOnDetails[isEmailCode ? 'auth_code' : 'two_factor_code'] = code;
@@ -419,10 +421,10 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 
 			break;
 
-		case SteamUser.EResult.Fail:
-		case SteamUser.EResult.ServiceUnavailable:
-		case SteamUser.EResult.TryAnotherCM:
-			this.emit('debug', 'Log on response: ' + SteamUser.EResult[body.eresult]);
+		case EResult.Fail:
+		case EResult.ServiceUnavailable:
+		case EResult.TryAnotherCM:
+			this.emit('debug', 'Log on response: ' + EResult[body.eresult]);
 			this._disconnect(true);
 
 			let timer = this._logonTimeout || 1000;
@@ -438,7 +440,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			// server is up, so reset logon timer
 			delete this._logonTimeout;
 
-			let error = new Error(SteamUser.EResult[body.eresult] || body.eresult);
+			let error = new Error(EResult[body.eresult] || body.eresult);
 			error.eresult = body.eresult;
 			this._disconnect(true);
 			this.emit('error', error);
@@ -447,8 +449,8 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function(body) {
 	let msg = body.eresult;
-	for (let i in SteamUser.EResult) {
-		if (SteamUser.EResult.hasOwnProperty(i) && SteamUser.EResult[i] == body.eresult) {
+	for (let i in EResult) {
+		if (EResult.hasOwnProperty(i) && EResult[i] == body.eresult) {
 			msg = i;
 			break;
 		}
@@ -461,7 +463,15 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLoggedOff, function
 SteamUser.prototype._handleLogOff = function(result, msg) {
 	let fatal = true;
 
-	if (this.options.autoRelogin && [0, SteamUser.EResult.Fail, SteamUser.EResult.NoConnection, SteamUser.EResult.ServiceUnavailable, SteamUser.EResult.TryAnotherCM].indexOf(result) != -1) {
+	let nonFatalLogOffResults = [
+		0,
+		EResult.Fail,
+		EResult.NoConnection,
+		EResult.ServiceUnavailable,
+		EResult.TryAnotherCM
+	];
+
+	if (this.options.autoRelogin && nonFatalLogOffResults.includes(result)) {
 		fatal = false;
 	}
 
