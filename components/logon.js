@@ -15,205 +15,209 @@ const EResult = SteamUser.EResult;
 const PROTOCOL_VERSION = 65580;
 
 SteamUser.prototype.logOn = function(details) {
-	if (this.steamID) {
-		throw new Error("Already logged on, cannot log on again");
-	}
-
-	this.steamID = null;
-	this.limitations = null;
-	this.wallet = null;
-	this.emailInfo = null;
-	this.licenses = null;
-
-	this._loggingOff = false;
-
-	this.users = {};
-	this.groups = {};
-	this.chats = {};
-	this.myFriends = {};
-	this.myGroups = {};
-
-	if (details !== true) {
-		// We're not logging on with saved details
-		details = details || {};
-
-		this._logOnDetails = {
-			"account_name": details.accountName,
-			"password": details.password,
-			"login_key": details.loginKey,
-			"auth_code": details.authCode,
-			"two_factor_code": details.twoFactorCode,
-			"should_remember_password": !!details.rememberPassword,
-			"obfustucated_private_ip": details.logonID || 0,
-			"protocol_version": PROTOCOL_VERSION,
-			"supports_rate_limit_response": !!details.accountName,
-			"machine_name": details.accountName ? (details.machineName || "") : "",
-			"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
-			"client_language": details.accountName ? "english" : "",
-			"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
-			"anon_user_target_account_name": details.accountName ? "" : "anonymous",
-			"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine),
-			"ui_mode": undefined,
-			"chat_mode": 2, // enable new chat
-			"web_logon_nonce": details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
-			"_steamid": details.steamID
-		};
-	}
-
-	if (this._logOnDetails.web_logon_nonce) {
-		this._logOnDetails.client_os_type = 4294966596;
-		this._logOnDetails.ui_mode = 4;
-		delete this._logOnDetails.obfustucated_private_ip;
-		delete this._logOnDetails.cell_id;
-		delete this._logOnDetails.client_language;
-		delete this._logOnDetails.should_remember_password;
-		delete this._logOnDetails.ping_ms_from_cell_search;
-		delete this._logOnDetails.machine_id;
-		delete this._logOnDetails.password;
-		delete this._logOnDetails.login_key;
-		delete this._logOnDetails.sha_sentryfile;
-		delete this._logOnDetails.auth_code;
-		delete this._logOnDetails.steamguard_dont_remember_computer;
-		delete this._logOnDetails.machine_name;
-		delete this._logOnDetails.machine_name_userchosen;
-		delete this._logOnDetails.two_factor_code;
-		delete this._logOnDetails.supports_rate_limit_response;
-	}
-
-	let anonLogin = !this._logOnDetails.account_name;
-
-	// Read the required files
-	let filenames = [];
-
-	if (!this._cmList) {
-		filenames.push('cm_list.json');
-	}
-
-	if (!this._logOnDetails.cell_id) {
-		// Some people might be redirecting their storage to a database and running across multiple servers in multiple regions
-		// Let's account for this by saving cellid by a "machine ID" so different boxes will store different cellids
-		filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
-	}
-
-	let sentry = this._sentry;
-	let machineID;
-
-	if (!anonLogin) {
-		if (!this._logOnDetails.sha_sentryfile && !sentry) {
-			filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
+	// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
+	// they appear to be already logged on (the steamID property is set to null only *after* the error event is emitted)
+	process.nextTick(() => {
+		if (this.steamID) {
+			throw new Error("Already logged on, cannot log on again");
 		}
 
-		if (!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
-			filenames.push('machineid.bin');
+		this.steamID = null;
+		this.limitations = null;
+		this.wallet = null;
+		this.emailInfo = null;
+		this.licenses = null;
+
+		this._loggingOff = false;
+
+		this.users = {};
+		this.groups = {};
+		this.chats = {};
+		this.myFriends = {};
+		this.myGroups = {};
+
+		if (details !== true) {
+			// We're not logging on with saved details
+			details = details || {};
+
+			this._logOnDetails = {
+				"account_name": details.accountName,
+				"password": details.password,
+				"login_key": details.loginKey,
+				"auth_code": details.authCode,
+				"two_factor_code": details.twoFactorCode,
+				"should_remember_password": !!details.rememberPassword,
+				"obfustucated_private_ip": details.logonID || 0,
+				"protocol_version": PROTOCOL_VERSION,
+				"supports_rate_limit_response": !!details.accountName,
+				"machine_name": details.accountName ? (details.machineName || "") : "",
+				"ping_ms_from_cell_search": details.accountName ? 4 + Math.floor(Math.random() * 30) : 0, // fake ping value
+				"client_language": details.accountName ? "english" : "",
+				"client_os_type": Number.isInteger(details.clientOS) ? details.clientOS : Helpers.getOsType(),
+				"anon_user_target_account_name": details.accountName ? "" : "anonymous",
+				"steamguard_dont_remember_computer": !!(details.accountName && details.authCode && details.dontRememberMachine),
+				"ui_mode": undefined,
+				"chat_mode": 2, // enable new chat
+				"web_logon_nonce": details.webLogonToken && details.steamID ? details.webLogonToken : undefined,
+				"_steamid": details.steamID
+			};
 		}
-	}
 
-	let self = this;
+		if (this._logOnDetails.web_logon_nonce) {
+			this._logOnDetails.client_os_type = 4294966596;
+			this._logOnDetails.ui_mode = 4;
+			delete this._logOnDetails.obfustucated_private_ip;
+			delete this._logOnDetails.cell_id;
+			delete this._logOnDetails.client_language;
+			delete this._logOnDetails.should_remember_password;
+			delete this._logOnDetails.ping_ms_from_cell_search;
+			delete this._logOnDetails.machine_id;
+			delete this._logOnDetails.password;
+			delete this._logOnDetails.login_key;
+			delete this._logOnDetails.sha_sentryfile;
+			delete this._logOnDetails.auth_code;
+			delete this._logOnDetails.steamguard_dont_remember_computer;
+			delete this._logOnDetails.machine_name;
+			delete this._logOnDetails.machine_name_userchosen;
+			delete this._logOnDetails.two_factor_code;
+			delete this._logOnDetails.supports_rate_limit_response;
+		}
 
-	if (this.storage) {
-		this.storage.readFiles(filenames, readFileCallback);
-	} else {
-		readFileCallback(null, []);
-	}
+		let anonLogin = !this._logOnDetails.account_name;
 
-	function readFileCallback(err, files) {
-		files = files || [];
+		// Read the required files
+		let filenames = [];
 
-		files.forEach(function(file) {
-			if (file.filename == 'cm_list.json' && file.contents) {
-				try {
-					self._cmList = JSON.parse(file.contents.toString('utf8'));
-				} catch (e) {
-					// don't care
-				}
+		if (!this._cmList) {
+			filenames.push('cm_list.json');
+		}
+
+		if (!this._logOnDetails.cell_id) {
+			// Some people might be redirecting their storage to a database and running across multiple servers in multiple regions
+			// Let's account for this by saving cellid by a "machine ID" so different boxes will store different cellids
+			filenames.push('cellid-' + Helpers.getInternalMachineID() + '.txt');
+		}
+
+		let sentry = this._sentry;
+		let machineID;
+
+		if (!anonLogin) {
+			if (!this._logOnDetails.sha_sentryfile && !sentry) {
+				filenames.push(this.options.singleSentryfile ? 'sentry.bin' : 'sentry.' + this._logOnDetails.account_name + '.bin');
 			}
 
-			if (file.filename.match(/^cellid/) && file.contents) {
-				let cellID = parseInt(file.contents.toString('utf8'), 10);
-				if (!isNaN(cellID)) {
-					self._logOnDetails.cell_id = cellID;
-				}
+			if (!this._logOnDetails.machine_id && this.options.machineIdType == SteamUser.EMachineIDType.PersistentRandom) {
+				filenames.push('machineid.bin');
 			}
+		}
 
-			if (file.filename.match(/^sentry/) && file.contents) {
-				sentry = file.contents;
-			}
+		let self = this;
 
-			if (file.filename == 'machineid.bin' && file.contents) {
-				machineID = file.contents;
-			}
-		});
-
-		if (self._cmList && (!self._cmList.time || Date.now() - self._cmList.time < (1000 * 60 * 60 * 24 * 7))) {
-			// proceed if we have a CM list already and it's less than 7 days old
-			gotCMList();
+		if (this.storage) {
+			this.storage.readFiles(filenames, readFileCallback);
 		} else {
-			// Get the CM list from the API
-			self.emit('debug', "Getting CM list from WebAPI");
-			self._apiRequest("GET", "ISteamDirectory", "GetCMList", 1, {"cellid": self._logOnDetails.cell_id || 0}, function(err, res) {
-				if (err || !res.response || res.response.result != 1 || !res.response.serverlist) {
-					gotCMList(); // just fallback to the built-in list
-				} else {
-					self._cmList = {
-						"tcp_servers": Helpers.fixVdfArray(res.response.serverlist),
-						"websocket_servers": Helpers.fixVdfArray(res.response.serverlist_websockets),
-						"time": Date.now()
-					};
+			readFileCallback(null, []);
+		}
 
-					self._saveCMList();
-					gotCMList();
+		function readFileCallback(err, files) {
+			files = files || [];
+
+			files.forEach(function(file) {
+				if (file.filename == 'cm_list.json' && file.contents) {
+					try {
+						self._cmList = JSON.parse(file.contents.toString('utf8'));
+					} catch (e) {
+						// don't care
+					}
+				}
+
+				if (file.filename.match(/^cellid/) && file.contents) {
+					let cellID = parseInt(file.contents.toString('utf8'), 10);
+					if (!isNaN(cellID)) {
+						self._logOnDetails.cell_id = cellID;
+					}
+				}
+
+				if (file.filename.match(/^sentry/) && file.contents) {
+					sentry = file.contents;
+				}
+
+				if (file.filename == 'machineid.bin' && file.contents) {
+					machineID = file.contents;
 				}
 			});
-		}
 
-		function gotCMList() {
-			if (!self._cmList) {
-				// Get built-in list as a last resort
-				self._cmList = require('../resources/servers.json');
-			}
-
-			// Sentry file
-			if (!self._logOnDetails.sha_sentryfile) {
-				if (sentry && sentry.length > 20) {
-					// Hash the sentry
-					let hash = Crypto.createHash('sha1');
-					hash.update(sentry);
-					sentry = hash.digest();
-				}
-
-				self._logOnDetails.sha_sentryfile = sentry;
-				self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
-			}
-
-			// Machine ID
-			if (!anonLogin && !self._logOnDetails.machine_id) {
-				self._logOnDetails.machine_id = self._getMachineID(machineID);
-			}
-
-			// Do the login
-			if (self._logOnDetails._steamid) {
-				let sid = self._logOnDetails._steamid;
-				if (typeof sid == 'string') {
-					sid = new SteamID(sid);
-				}
-
-				self._tempSteamID = sid;
+			if (self._cmList && (!self._cmList.time || Date.now() - self._cmList.time < (1000 * 60 * 60 * 24 * 7))) {
+				// proceed if we have a CM list already and it's less than 7 days old
+				gotCMList();
 			} else {
-				let sid = new SteamID();
-				sid.universe = SteamID.Universe.PUBLIC;
-				sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
-				sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
-				sid.accountid = 0;
-				self._tempSteamID = sid;
+				// Get the CM list from the API
+				self.emit('debug', "Getting CM list from WebAPI");
+				self._apiRequest("GET", "ISteamDirectory", "GetCMList", 1, {"cellid": self._logOnDetails.cell_id || 0}, function(err, res) {
+					if (err || !res.response || res.response.result != 1 || !res.response.serverlist) {
+						gotCMList(); // just fallback to the built-in list
+					} else {
+						self._cmList = {
+							"tcp_servers": Helpers.fixVdfArray(res.response.serverlist),
+							"websocket_servers": Helpers.fixVdfArray(res.response.serverlist_websockets),
+							"time": Date.now()
+						};
+
+						self._saveCMList();
+						gotCMList();
+					}
+				});
 			}
 
-			if (anonLogin && self._logOnDetails.password) {
-				process.stderr.write("[steam-user] Warning: Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?\n");
-			}
+			function gotCMList() {
+				if (!self._cmList) {
+					// Get built-in list as a last resort
+					self._cmList = require('../resources/servers.json');
+				}
 
-			self._doConnection();
+				// Sentry file
+				if (!self._logOnDetails.sha_sentryfile) {
+					if (sentry && sentry.length > 20) {
+						// Hash the sentry
+						let hash = Crypto.createHash('sha1');
+						hash.update(sentry);
+						sentry = hash.digest();
+					}
+
+					self._logOnDetails.sha_sentryfile = sentry;
+					self._logOnDetails.eresult_sentryfile = sentry ? 1 : 0;
+				}
+
+				// Machine ID
+				if (!anonLogin && !self._logOnDetails.machine_id) {
+					self._logOnDetails.machine_id = self._getMachineID(machineID);
+				}
+
+				// Do the login
+				if (self._logOnDetails._steamid) {
+					let sid = self._logOnDetails._steamid;
+					if (typeof sid == 'string') {
+						sid = new SteamID(sid);
+					}
+
+					self._tempSteamID = sid;
+				} else {
+					let sid = new SteamID();
+					sid.universe = SteamID.Universe.PUBLIC;
+					sid.type = anonLogin ? SteamID.Type.ANON_USER : SteamID.Type.INDIVIDUAL;
+					sid.instance = anonLogin ? SteamID.Instance.ALL : SteamID.Instance.DESKTOP;
+					sid.accountid = 0;
+					self._tempSteamID = sid;
+				}
+
+				if (anonLogin && self._logOnDetails.password) {
+					process.stderr.write("[steam-user] Warning: Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?\n");
+				}
+
+				self._doConnection();
+			}
 		}
-	}
+	});
 };
 
 SteamUser.prototype._doConnection = function() {
