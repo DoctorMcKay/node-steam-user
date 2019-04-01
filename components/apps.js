@@ -307,6 +307,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 				}
 			});
 
+			// appids and packageids contain the list of IDs that we're still waiting on data for
 			if (appids.length === 0 && packageids.length === 0) {
 				if (inclTokens) {
 					let tokenlessAppids = [];
@@ -360,6 +361,12 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 								}
 							});
 						});
+					} else {
+						// No tokenless apps or packages
+						if (!callbackFired) {
+							callbackFired = true;
+							accept(response);
+						}
 					}
 				} else {
 					if (!callbackFired) {
