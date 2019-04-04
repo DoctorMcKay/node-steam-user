@@ -40,6 +40,12 @@ SteamUser.prototype.logOn = function(details) {
 			// We're not logging on with saved details
 			details = details || {};
 
+			let maxUint32 = Math.pow(2, 32) - 1;
+			if (details.logonID && details.logonID > maxUint32) {
+				process.stderr.write("[steam-user] Warning: logonID " + details.logonID + " is greater than " + maxUint32 + " and has been truncated.\n");
+				details.logonID = maxUint32;
+			}
+
 			this._logOnDetails = {
 				"account_name": details.accountName,
 				"password": details.password,
