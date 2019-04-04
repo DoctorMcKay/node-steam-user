@@ -239,6 +239,16 @@ Added in 4.0.0.
 
 Defaults to `english`.
 
+### webCompatibilityMode
+
+If you're having trouble connecting to Steam (e.g. through a firewall or a proxy), set this to `true`. When in web
+compatibility mode, connections to Steam will always use WebSockets (the `protocol` option will be ignored, and you
+will get a warning if you set it to `TCP`), and only Steam servers listening on port 443 will be considered.
+
+Added in 4.6.0.
+
+Defaults to `false`.
+
 # Properties [^](#contents)
 
 ### steamID

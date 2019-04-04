@@ -85,7 +85,8 @@ function SteamUser(options) {
 		"changelistUpdateInterval": 60000,
 		"saveAppTickets": true,
 		"additionalHeaders": {},
-		"language": "english"
+		"language": "english",
+		"webCompatibilityMode": false
 	};
 
 	for (let i in defaultOptions) {
@@ -111,6 +112,10 @@ function SteamUser(options) {
 
 	if (this.options.dataDirectory) {
 		this.storage = new FileStorage(this.options.dataDirectory);
+	}
+
+	if (this.options.webCompatibilityMode && this.options.protocol == SteamUser.EConnectionProtocol.TCP) {
+		process.stderr.write("[steam-user] Warning: webCompatibilityMode is enabled so connection protocol is being forced to WebSocket\n");
 	}
 }
 
@@ -138,6 +143,16 @@ SteamUser.prototype.setOption = function(option, value) {
 
 		case 'changelistUpdateInterval':
 			this._resetChangelistUpdateTimer();
+			break;
+
+		case 'webCompatibilityMode':
+		case 'protocol':
+			if (
+				(option == 'webCompatibilityMode' && value && this.options.protocol == SteamUser.EConnectionProtocol.TCP) ||
+				(option == 'protocol' && value == SteamUser.EConnectionProtocol.TCP && this.options.webCompatibilityMode)
+			) {
+				process.stderr.write("[steam-user] Warning: webCompatibilityMode is enabled so connection protocol is being forced to WebSocket\n");
+			}
 			break;
 	}
 };

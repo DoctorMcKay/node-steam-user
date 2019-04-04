@@ -227,24 +227,25 @@ SteamUser.prototype.logOn = function(details) {
 };
 
 SteamUser.prototype._doConnection = function() {
-	let thisProtocol = this.options.protocol;
+	const EConnectionProtocol = SteamUser.EConnectionProtocol;
+	let thisProtocol = this.options.webCompatibilityMode ? EConnectionProtocol.WebSocket : this.options.protocol;
 
-	if (thisProtocol == SteamUser.EConnectionProtocol.Auto) {
+	if (thisProtocol == EConnectionProtocol.Auto) {
 		if (this._cmList.auto_pct_websocket) {
 			let roll = Math.floor(Math.random() * 100);
-			thisProtocol = roll <= this._cmList.auto_pct_websocket ? SteamUser.EConnectionProtocol.WebSocket : SteamUser.EConnectionProtocol.TCP;
-			this.emit('debug', 'Using ' + (thisProtocol == SteamUser.EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP') + '; we rolled ' + roll + ' and percent to use WS is ' + this._cmList.auto_pct_websocket);
+			thisProtocol = roll <= this._cmList.auto_pct_websocket ? EConnectionProtocol.WebSocket : EConnectionProtocol.TCP;
+			this.emit('debug', 'Using ' + (thisProtocol == EConnectionProtocol.WebSocket ? 'WebSocket' : 'TCP') + '; we rolled ' + roll + ' and percent to use WS is ' + this._cmList.auto_pct_websocket);
 		} else {
-			thisProtocol = SteamUser.EConnectionProtocol.TCP;
+			thisProtocol = EConnectionProtocol.TCP;
 		}
 	}
 
 	switch (thisProtocol) {
-		case SteamUser.EConnectionProtocol.TCP:
+		case EConnectionProtocol.TCP:
 			this._connection = new TCPConnection(this);
 			break;
 
-		case SteamUser.EConnectionProtocol.WebSocket:
+		case EConnectionProtocol.WebSocket:
 			this._connection = new WebSocketConnection(this);
 			break;
 

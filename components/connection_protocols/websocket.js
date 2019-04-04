@@ -38,6 +38,11 @@ function WebSocketConnection(user) {
 		let promises = [];
 		let pingResults = [];
 		this.user._cmList.websocket_servers.forEach((addr) => {
+			if (user.options.webCompatibilityMode && !addr.match(/:443$/)) {
+				// In web compatibility mode, we don't want any CMs on ports other than 443
+				return;
+			}
+
 			promises.push(new Promise((resolve, reject) => {
 				this._pingCM(addr, (err, result) => {
 					if (!err && result) {
@@ -73,7 +78,7 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 	}
 
 	let addr = servers[Math.floor(Math.random() * servers.length)];
-	this.user.emit('debug-verbose', `Randomly chose WebSocket CM ${addr}`);
+	this.user.emit('debug', `Randomly chose WebSocket CM ${addr}`);
 	this.stream = new WS13.WebSocket("wss://" + addr + "/cmsocket/", {
 		"pingInterval": 30000,
 		"httpProxy": this.user.options.httpProxy,
