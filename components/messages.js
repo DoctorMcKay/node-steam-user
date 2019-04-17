@@ -458,7 +458,7 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 
 	let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
 	let steamID = (header.proto && header.proto.steamid) || header.steamID;
-	if (sessionID && sessionID != this._sessionID) {
+	if (steamID && sessionID && sessionID != this._sessionID) {
 		this._sessionID = sessionID;
 		this.steamID = new SteamID(steamID.toString());
 		delete this._tempSteamID;
