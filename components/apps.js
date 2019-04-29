@@ -676,11 +676,14 @@ SteamUser.prototype.ownsDepot = function(depotid) {
  * @returns {int[]}
  */
 SteamUser.prototype.getOwnedPackages = function() {
-	if (this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
+	let steamid = this.steamID;
+	if (steamid.type != SteamID.Type.ANON_USER && !this.licenses) {
 		throw new Error("We don't have our license list yet.");
 	}
 
-	let packages = this.steamID.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.map(function(license) {
+	let packages = steamid.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.filter(function(license) {
+		return license.owner_id === steamid.accountid;
+	}).map(function(license) {
 		return license.package_id;
 	});
 
