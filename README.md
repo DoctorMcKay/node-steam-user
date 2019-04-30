@@ -773,53 +773,65 @@ If you have the PICS cache enabled and the risk of getting stale data is accepta
 
 Access tokens are global. That is, everyone who has access to an app receives the same token. Tokens do not seem to expire.
 
-### getOwnedApps()
+### getOwnedApps([excludeSharedLicenses])
+- `excludeSharedLicenses` - Pass `true` to exclude apps that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns an array of AppIDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### ownsApp(appid)
+### ownsApp(appid[, excludeSharedLicenses])
 - `appid` - A numeric AppID
+- `excludeSharedLicenses` - Pass `true` to exclude apps that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns `true` if your account owns the specified AppID, or `false` if not. This cannot be safely called until
 `appOwnershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### getOwnedDepots()
+### getOwnedDepots([excludeSharedLicenses])
+- `excludeSharedLicenses` - Pass `true` to exclude depots that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns an array of depot IDs which your account owns. This cannot be safely called until `appOwnershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### ownsDepot(depotid)
+### ownsDepot(depotid[, excludeSharedLicenses])
 - `depotid` - A numeric depot ID
+- `excludeSharedLicenses` - Pass `true` to exclude depots that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns `true` if your account owns the specified depot, or `false` if not. This cannot be safely called until
 `appOwnershipCached` is emitted.
 
 `enablePicsCache` must be `true` to use this method. Otherwise, an `Error` will be thrown.
 
-### getOwnedPackages()
+### getOwnedPackages([excludeSharedLicenses])
+- `excludeSharedLicenses` - Pass `true` to exclude packages that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns an array of package IDs which your account owns. If you logged in anonymously, this can be safely called
 immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
 
-### ownsPackage(packageid)
+### ownsPackage(packageid[, excludeSharedLicenses])
 - `packageid` - A numeric package ID
+- `excludeSharedLicenses` - Pass `true` to exclude packages that are owned via a shared license, and not directly on this account (default `false`)
 
-**v3.3.0 or later is required to use this method**
+**v3.3.0 or later is required to use this method**  
+**v4.7.0 or later is required to use `excludeSharedLicenses`**
 
 Returns `true` if your account owns the specified package ID, or `false` if not. If you logged in anonymously, this can
 be safely called immediately following logon. Otherwise, this cannot be safely called until `licenses` is emitted.
