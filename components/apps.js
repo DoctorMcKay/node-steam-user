@@ -563,9 +563,10 @@ SteamUser.prototype._getLicenseInfo = function() {
 /**
  * Get list of appids this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedApps = function() {
+SteamUser.prototype.getOwnedApps = function(excludeSharedLicenses) {
 	if (!this.options.enablePicsCache) {
 		throw new Error("PICS cache is not enabled.");
 	}
@@ -574,7 +575,7 @@ SteamUser.prototype.getOwnedApps = function() {
 		throw new Error("No data in PICS package cache yet.");
 	}
 
-	let ownedPackages = this.getOwnedPackages();
+	let ownedPackages = this.getOwnedPackages(excludeSharedLicenses);
 	let appids = {};
 
 	ownedPackages.forEach((pkg) => {
@@ -609,18 +610,20 @@ SteamUser.prototype.getOwnedApps = function() {
  * Check if this account owns an app. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} appid
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {boolean}
  */
-SteamUser.prototype.ownsApp = function(appid) {
-	return this.getOwnedApps().indexOf(parseInt(appid, 10)) != -1;
+SteamUser.prototype.ownsApp = function(appid, excludeSharedLicenses) {
+	return this.getOwnedApps(excludeSharedLicenses).indexOf(parseInt(appid, 10)) != -1;
 };
 
 /**
  * Returns an array of depot IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedDepots = function() {
+SteamUser.prototype.getOwnedDepots = function(excludeSharedLicenses) {
 	if (!this.options.enablePicsCache) {
 		throw new Error("PICS cache is not enabled.");
 	}
@@ -629,7 +632,7 @@ SteamUser.prototype.getOwnedDepots = function() {
 		throw new Error("No data in PICS package cache yet.");
 	}
 
-	let ownedPackages = this.getOwnedPackages();
+	let ownedPackages = this.getOwnedPackages(excludeSharedLicenses);
 	let depotids = {};
 
 	ownedPackages.forEach((pkg) => {
@@ -664,29 +667,34 @@ SteamUser.prototype.getOwnedDepots = function() {
  * Check if this account owns a depot. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int} depotid
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {boolean}
  */
-SteamUser.prototype.ownsDepot = function(depotid) {
-	return this.getOwnedDepots().indexOf(parseInt(depotid, 10)) != -1;
+SteamUser.prototype.ownsDepot = function(depotid, excludeSharedLicenses) {
+	return this.getOwnedDepots(excludeSharedLicenses).indexOf(parseInt(depotid, 10)) != -1;
 };
 
 /**
  * Returns an array of package IDs this account owns. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {int[]}
  */
-SteamUser.prototype.getOwnedPackages = function() {
-	let steamid = this.steamID;
-	if (steamid.type != SteamID.Type.ANON_USER && !this.licenses) {
+SteamUser.prototype.getOwnedPackages = function(excludeSharedLicenses) {
+	if (this.steamID.type != SteamID.Type.ANON_USER && !this.licenses) {
 		throw new Error("We don't have our license list yet.");
 	}
 
-	let packages = steamid.type == SteamID.Type.ANON_USER ? [17906] : this.licenses.filter(function(license) {
-		return license.owner_id === steamid.accountid;
-	}).map(function(license) {
-		return license.package_id;
-	});
+	if (this.steamID.type == SteamID.Type.ANON_USER) {
+		return [17906];
+	}
 
+	// We're an individual user
+	let packages = this.licenses;
+	if (excludeSharedLicenses) {
+		packages = packages.filter(license => license.owner_id == this.steamID.accountid);
+	}
+	packages = packages.map(license => license.package_id);
 	packages.sort(sortNumeric);
 	return packages;
 };
@@ -695,10 +703,11 @@ SteamUser.prototype.getOwnedPackages = function() {
  * Check if this account owns a package. Only works if enablePicsCache option is enabled and appOwnershipCached event
  * has been emitted.
  * @param {int|string} packageid
+ * @param {boolean} [excludeSharedLicenses=false] - Pass true to exclude licenses that we have through family sharing
  * @returns {boolean}
  */
-SteamUser.prototype.ownsPackage = function(packageid) {
-	return this.getOwnedPackages().indexOf(parseInt(packageid, 10)) != -1;
+SteamUser.prototype.ownsPackage = function(packageid, excludeSharedLicenses) {
+	return this.getOwnedPackages(excludeSharedLicenses).indexOf(parseInt(packageid, 10)) != -1;
 };
 
 function sortNumeric(a, b) {
