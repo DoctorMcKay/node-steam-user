@@ -111,6 +111,38 @@ SteamChatRoomClient.prototype.getGroups = function(callback) {
 };
 
 /**
+ * Set which groups are actively being chatted in by this session. It's unclear what effect this has on the chatting
+ * experience, other than retrieving chat room group states.
+ * @param {int[]|string[]|int|string} groupIDs - Array of group IDs you want data for
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callback) {
+	if (!Array.isArray(groupIDs)) {
+		groupIDs = [groupIDs];
+	}
+
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
+			"chat_group_ids": groupIDs,
+			"chat_groups_data_requested": groupIDs
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			let groups = {};
+			body.chat_states.forEach((group) => {
+				groups[group.header_state.chat_group_id] = processChatGroupState(group);
+			});
+
+			resolve({"chat_room_groups": groups});
+		});
+	});
+};
+
+/**
  * Get details from a chat group invite link.
  * @param {string} linkUrl
  * @param {function} [callback]
