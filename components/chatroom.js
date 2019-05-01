@@ -782,9 +782,9 @@ function preProcessObject(obj) {
 			id.instance = SteamID.Instance.ALL;
 			id.accountid = val;
 			obj[key] = id;
-		} else if ((key == 'accountid' || key.match(/^accountid_/) || key.match(/_accountid$/)) && typeof val === 'number') {
+		} else if ((key == 'accountid' || key.match(/^accountid_/) || key.match(/_accountid$/)) && (typeof val === 'number' || val === null)) {
 			let newKey = key == 'accountid' ? 'steamid' : key.replace('accountid_', 'steamid_').replace('_accountid', '_steamid');
-			obj[newKey] = val === 0 ? null : SteamID.fromIndividualAccountID(val);
+			obj[newKey] = val === 0 || val === null ? null : SteamID.fromIndividualAccountID(val);
 			delete obj[key];
 		} else if (key.includes('avatar_sha')) {
 			let url = null;
