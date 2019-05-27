@@ -460,7 +460,7 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
  * @param {function} [callback]
  * @returns {Promise<{sessions: {steamid_friend: SteamID, time_last_message: Date, time_last_view: Date, unread_message_count: int}[], timestamp: Date}>}
  */
-SteamChatRoomClient.prototype.getActiveMessageSessions = function(options, callback) {
+SteamChatRoomClient.prototype.getActiveFriendMessageSessions = function(options, callback) {
 	if (typeof options === 'function') {
 		callback = options;
 		options = {};
@@ -524,7 +524,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 
 		let userLastViewed = 0;
 		try {
-			let activeSessions = await this.getActiveMessageSessions();
+			let activeSessions = await this.getActiveFriendMessageSessions();
 			let friendSess;
 			if (
 				activeSessions.sessions &&
