@@ -533,7 +533,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 				userLastViewed = friendSess.time_last_view;
 			}
 		} catch (ex) {
-			this.user.emit('debug', `Exception reported calling getActiveMessageSessions() inside of getFriendMessageHistory(): ${ex.message}`);
+			this.user.emit('debug', `Exception reported calling getActiveFriendMessageSessions() inside of getFriendMessageHistory(): ${ex.message}`);
 		}
 
 		this.user._sendUnified("FriendMessages.GetRecentMessages#1", {
@@ -558,7 +558,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 				"ordinal": msg.ordinal || 0,
 				"message": msg.message,
 				"message_bbcode_parsed": bbcode_format ? parseBbCode(msg.message) : null,
-				"unread": (msg.timestamp * 1000) > userLastViewed
+				"unread": msg.accountid != this.user.steamID.accountid && (msg.timestamp * 1000) > userLastViewed
 			}));
 
 			body.more_available = !!body.more_available;
