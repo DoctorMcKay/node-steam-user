@@ -513,7 +513,8 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 
 	options = options || {};
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(null, callback, async (resolve, reject) => {
+		let steamid2 = Helpers.steamID(friendSteamId).toString();
 		let count = options.maxCount || 100;
 		let bbcode_format = options.wantBbcode !== false;
 		let rtime32_start_time = options.startTime ? convertDateToUnix(options.startTime) : undefined;
@@ -521,9 +522,23 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 		let time_last = options.lastTime ? convertDateToUnix(options.lastTime) : Math.pow(2, 31) - 1;
 		let ordinal_last = time_last ? options.lastOrdinal : undefined;
 
+		let userLastViewed = 0;
+		try {
+			let activeSessions = await this.getActiveMessageSessions();
+			let friendSess;
+			if (
+				activeSessions.sessions &&
+				(friendSess = activeSessions.sessions.find(sess => sess.steamid_friend.toString() == steamid2))
+			) {
+				userLastViewed = friendSess.time_last_view;
+			}
+		} catch (ex) {
+			this.user.emit('debug', `Exception reported calling getActiveMessageSessions() inside of getFriendMessageHistory(): ${ex.message}`);
+		}
+
 		this.user._sendUnified("FriendMessages.GetRecentMessages#1", {
 			"steamid1": this.user.steamID.toString(),
-			"steamid2": Helpers.steamID(friendSteamId).toString(),
+			steamid2,
 			count,
 			"most_recent_conversation": false,
 			rtime32_start_time,
@@ -542,7 +557,8 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 				"server_timestamp": new Date(msg.timestamp * 1000),
 				"ordinal": msg.ordinal || 0,
 				"message": msg.message,
-				"message_bbcode_parsed": bbcode_format ? parseBbCode(msg.message) : null
+				"message_bbcode_parsed": bbcode_format ? parseBbCode(msg.message) : null,
+				"unread": (msg.timestamp * 1000) > userLastViewed
 			}));
 
 			body.more_available = !!body.more_available;
