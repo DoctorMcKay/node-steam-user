@@ -455,6 +455,50 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 };
 
 /**
+ * Get a list of which friends we have "active" (recent) message sessions with.
+ * @param {{conversationsSince?: Date|int}} [options]
+ * @param {function} [callback]
+ * @returns {Promise<{sessions: {steamid_friend: SteamID, time_last_message: Date, time_last_view: Date, unread_message_count: int}[], timestamp: Date}>}
+ */
+SteamChatRoomClient.prototype.getActiveMessageSessions = function(options, callback) {
+	if (typeof options === 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		let lastmessage_since = options.conversationsSince ? convertDateToUnix(options.conversationsSince) : undefined;
+
+		this.user._sendUnified("FriendMessages.GetActiveMessageSessions#1", {
+			lastmessage_since
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			let output = {
+				"sessions": body.message_sessions || [],
+				"timestamp": body.timestamp ? new Date(body.timestamp * 1000) : null
+			};
+
+			output.sessions = output.sessions.map((session) => {
+				return {
+					"steamid_friend": SteamID.fromIndividualAccountID(session.accountid_friend),
+					"time_last_message": session.last_message ? new Date(session.last_message * 1000) : null,
+					"time_last_view": session.last_view ? new Date(session.last_view * 1000) : null,
+					"unread_message_count": session.unread_message_count
+				};
+			});
+
+			resolve(output);
+		});
+	});
+};
+
+/**
  * Get your chat message history with a Steam friend.
  * @param {SteamID|string} friendSteamId
  * @param {{maxCount?: int, wantBbcode?: boolean, startTime?: Date|int, startOrdinal?: int, lastTime?: Date|int, lastOrdinal?: int}} [options]
