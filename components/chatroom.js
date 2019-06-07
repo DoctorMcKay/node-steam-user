@@ -93,7 +93,7 @@ function SteamChatRoomClient(user) {
 SteamChatRoomClient.prototype.getGroups = function(callback) {
 	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
 		this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -127,7 +127,7 @@ SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callba
 			"chat_group_ids": groupIDs,
 			"chat_groups_data_requested": groupIDs
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -162,7 +162,7 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
 				return reject(err);
 			}
 
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -209,7 +209,7 @@ SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callb
 				return reject(err);
 			}
 
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -244,7 +244,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 				return reject(err);
 			}
 
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -270,7 +270,7 @@ SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, cal
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString()
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -301,7 +301,7 @@ SteamChatRoomClient.prototype.createInviteLink = function(groupId, options, call
 			"seconds_valid": options.secondsValid || 60 * 60,
 			"chat_id": options.voiceChatId
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -323,7 +323,7 @@ SteamChatRoomClient.prototype.getGroupInviteLinks = function(groupId, callback) 
 		this.user._sendUnified('ChatRoom.GetInviteLinksForGroup#1', {
 			"chat_group_id": groupId
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -360,7 +360,7 @@ SteamChatRoomClient.prototype.deleteInviteLink = function(linkUrl, callback) {
 			"chat_group_id": details.group_summary.chat_group_id,
 			"invite_code": details.invite_code
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -401,7 +401,7 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 			"message": message,
 			"contains_bbcode": options.containsBbCode
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -440,7 +440,7 @@ SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, messag
 			"chat_id": chatId,
 			"message": message
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -474,7 +474,7 @@ SteamChatRoomClient.prototype.getActiveFriendMessageSessions = function(options,
 		this.user._sendUnified("FriendMessages.GetActiveMessageSessions#1", {
 			lastmessage_since
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -547,7 +547,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 			time_last,
 			ordinal_last
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -597,7 +597,7 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 			start_ordinal,
 			max_count
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -689,7 +689,7 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
 			"chat_id": chatId,
 			"messages": messages
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
@@ -714,7 +714,7 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
 			"steamid": Helpers.steamID(steamId).toString(),
 			"expiration": expireTime ? convertDateToUnix(expireTime) : Math.floor(Date.now() / 1000)
 		}, (body, hdr) => {
-			let err = Helpers.eresultError(hdr.proto.eresult);
+			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
 				return reject(err);
 			}
