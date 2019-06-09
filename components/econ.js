@@ -59,27 +59,14 @@ SteamUser.prototype.changeTradeURL = function(callback) {
  */
 SteamUser.prototype.getEmoticonList = function(callback) {
 	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
-		this._send(SteamUser.EMsg.ClientGetEmoticonList, {});
-		let resolved = false;
-		let timeout = setTimeout(() => {
-			if (resolved) {
-				return;
+		this._sendUnified("Player.GetEmoticonList#1", {}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
 			}
-
-			resolved = true;
-			reject(new Error('Request timed out'));
-		}, 5000);
-
-		this.once('_emoticonList', (emoticons) => {
-			if (resolved) {
-				return;
-			}
-
-			resolved = true;
-			clearTimeout(timeout);
 
 			let out = {};
-			emoticons.forEach((emoticon) => {
+			body.emoticons.forEach((emoticon) => {
 				for (let i in emoticon) {
 					if (i.match(/^time_/)) {
 						emoticon[i] = emoticon[i] ? new Date(emoticon[i] * 1000) : null;
@@ -95,9 +82,3 @@ SteamUser.prototype.getEmoticonList = function(callback) {
 		});
 	});
 };
-
-// Handlers
-
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientEmoticonList, function(body) {
-	this.emit('_emoticonList', body.emoticons);
-});
