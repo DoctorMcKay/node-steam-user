@@ -204,6 +204,20 @@ SteamUser.prototype.revokeQuickInviteLink = function(linkOrToken, callback) {
 };
 
 /**
+ * Get the SteamID to whom a quick-invite link belongs.
+ * @param {string} link
+ * @returns {SteamID|null} - null if the link isn't well-formed
+ */
+SteamUser.prototype.getQuickInviteLinkSteamID = function(link) {
+	let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+	if (!match) {
+		return null;
+	}
+
+	return Helpers.parseFriendCode(match[1]);
+};
+
+/**
  * Check whether a given quick-invite link is valid.
  * @param {string} link
  * @param {function} [callback]
