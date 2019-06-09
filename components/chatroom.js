@@ -731,7 +731,7 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, false, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.GetBanList#1", {
 			"chat_group_id": groupId
 		}, (body, hdr) => {
@@ -741,8 +741,34 @@ SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
 			}
 
 			preProcessObject(body);
-			accept(body);
+			resolve(body);
 		})
+	});
+};
+
+/**
+ * Ban or unban a user from a chat room group, provided you have the appropriate permissions.
+ * @param {int|string} groupId
+ * @param {string|SteamID} userSteamId
+ * @param {boolean} banState - True to ban, false to unban
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.setGroupUserBanState = function(groupId, userSteamId, banState, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		this.user._sendUnified("ChatRoom.SetUserBanState#1", {
+			"chat_group_id": groupId,
+			"steamid": Helpers.steamID(userSteamId).toString(),
+			"ban_state": banState
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			// No data in the response
+			resolve();
+		});
 	});
 };
 
