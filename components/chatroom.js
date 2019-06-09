@@ -724,6 +724,28 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
 	});
 };
 
+/**
+ * Get the ban list for a chat room group, provided you have the appropriate permissions.
+ * @param {int|string} groupId
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, false, (accept, reject) => {
+		this.user._sendUnified("ChatRoom.GetBanList#1", {
+			"chat_group_id": groupId
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			preProcessObject(body);
+			accept(body);
+		})
+	});
+};
+
 
 
 
