@@ -1,68 +1,70 @@
-enum EControllerLayoutType {
-	k_EControllerLayoutTypePhone = 0;
-	k_EControllerLayoutTypeTablet = 1;
+enum EInputMode {
+	k_EInputModeUnknown = 0;
+	k_EInputModeMouse = 1;
+	k_EInputModeController = 2;
+	k_EInputModeMouseAndController = 3;
+}
+
+enum EMouseMode {
+	k_EMouseModeUnknown = 0;
+	k_EMouseModeRelative = 1;
+	k_EMouseModeAbsolute = 2;
+	k_EMouseModeTouch = 3;
+}
+
+enum EControllerElementType {
+	k_EControllerElementTypeNone = -1;
+	k_EControllerElementTypeThumb = 0;
+	k_EControllerElementTypeButtonSteam = 1;
+	k_EControllerElementTypeJoystickLeft = 2;
+	k_EControllerElementTypeButtonJoystickLeft = 3;
+	k_EControllerElementTypeJoystickRight = 4;
+	k_EControllerElementTypeButtonJoystickRight = 5;
+	k_EControllerElementTypeDPad = 6;
+	k_EControllerElementTypeButtonA = 7;
+	k_EControllerElementTypeButtonB = 8;
+	k_EControllerElementTypeButtonX = 9;
+	k_EControllerElementTypeButtonY = 10;
+	k_EControllerElementTypeButtonSelect = 11;
+	k_EControllerElementTypeButtonStart = 12;
+	k_EControllerElementTypeButtonTriggerLeft = 13;
+	k_EControllerElementTypeButtonTriggerRight = 14;
+	k_EControllerElementTypeButtonBumperLeft = 15;
+	k_EControllerElementTypeButtonBumperRight = 16;
+	k_EControllerElementTypeButtonMacro0 = 17;
+	k_EControllerElementTypeButtonMacro1 = 18;
+	k_EControllerElementTypeButtonMacro2 = 19;
+	k_EControllerElementTypeButtonMacro3 = 20;
+	k_EControllerElementTypeButtonMacro4 = 21;
+	k_EControllerElementTypeButtonMacro5 = 22;
+	k_EControllerElementTypeButtonMacro6 = 23;
+	k_EControllerElementTypeButtonMacro7 = 24;
+	k_EControllerElementTypeTrackpadCenter = 25;
+	k_EControllerElementTypeTrackpadLeft = 26;
+	k_EControllerElementTypeTrackpadRight = 27;
+	k_EControllerElementTypeKeyboard = 28;
+	k_EControllerElementTypeMax = 29;
 }
 
 message CVirtualControllerElement {
-	message JoyStickControl {
-		optional string label = 1;
-		optional uint32 x_axis_id = 2;
-		optional uint32 y_axis_id = 3;
-		optional uint32 x_axis_range = 4;
-		optional uint32 y_axis_range = 5;
-	}
-
-	message JoyButtonControl {
-		optional string label = 1;
-		optional uint32 button_id = 2;
-	}
-
-	message JoyPadControl {
-		optional string label = 1;
-		optional uint32 up_button_id = 2;
-		optional uint32 down_button_id = 3;
-		optional uint32 left_button_id = 4;
-		optional uint32 right_button_id = 5;
-	}
-
-	message MacroButtonControl {
-		optional string label = 1;
-		optional uint32 button_id = 2;
-	}
-
-	message TrackpadControl {
-		optional string label = 1;
-		optional uint32 x_axis_range = 2;
-		optional uint32 y_axis_range = 3;
-	}
-
-	message AxisButtonControl {
-		optional string label = 1;
-		optional uint32 axis_id = 2;
-		optional uint32 axis_pressed_value = 3;
-	}
-
-	optional uint32 x_position = 1;
-	optional uint32 y_position = 2;
-	optional uint32 width = 3;
-	optional uint32 height = 4;
-	oneof control {
-		.CVirtualControllerElement.JoyStickControl joy_stick = 5;
-		.CVirtualControllerElement.JoyButtonControl joy_button = 6;
-		.CVirtualControllerElement.JoyPadControl joy_pad = 7;
-		.CVirtualControllerElement.MacroButtonControl macro_button = 8;
-		.CVirtualControllerElement.TrackpadControl trackpad = 9;
-		.CVirtualControllerElement.AxisButtonControl axis_button = 10;
-	}
+	optional .EControllerElementType type = 1 [default = k_EControllerElementTypeNone];
+	optional bool visible = 2;
+	optional float x_position = 3;
+	optional float y_position = 4;
+	optional float x_scale = 5 [default = 1];
+	optional float y_scale = 6 [default = 1];
 }
 
 message CVirtualControllerLayout {
-	optional .EControllerLayoutType layout_type = 1 [default = k_EControllerLayoutTypePhone];
-	repeated .CVirtualControllerElement elements = 2;
+	optional int32 layout_version = 1;
+	optional int32 actionset_id = 2;
+	repeated .CVirtualControllerElement elements = 4;
 }
 
 message CVirtualControllerLayouts {
 	repeated .CVirtualControllerLayout layouts = 1;
+	optional .EInputMode input_mode = 2 [default = k_EInputModeController];
+	optional .EMouseMode mouse_mode = 3 [default = k_EMouseModeUnknown];
 }
 
 message CVirtualControllerConfig {
@@ -88,6 +90,7 @@ message CVirtualControllerConfig {
 
 	optional string name = 1;
 	repeated .CVirtualControllerConfig.ActionSet actionsets = 2;
+	optional .EMouseMode default_mouse_mode = 3 [default = k_EMouseModeRelative];
 }
 
 message CVirtualControllerLayoutPackage {
@@ -95,5 +98,9 @@ message CVirtualControllerLayoutPackage {
 	optional uint32 revision = 2;
 	optional .CVirtualControllerConfig config = 3;
 	optional .CVirtualControllerLayouts layouts = 4;
+}
+
+message CVirtualControllerGlobalConfig {
+	optional bool feedback_enabled = 1;
 }
 

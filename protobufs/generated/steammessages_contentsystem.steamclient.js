@@ -16,42 +16,27 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
-    /**
-     * EUserReviewScorePreference enum.
-     * @exports EUserReviewScorePreference
-     * @enum {string}
-     * @property {number} k_EUserReviewScorePreference_Unset=0 k_EUserReviewScorePreference_Unset value
-     * @property {number} k_EUserReviewScorePreference_IncludeAll=1 k_EUserReviewScorePreference_IncludeAll value
-     * @property {number} k_EUserReviewScorePreference_ExcludeBombs=2 k_EUserReviewScorePreference_ExcludeBombs value
-     */
-    $root.EUserReviewScorePreference = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "k_EUserReviewScorePreference_Unset"] = 0;
-        values[valuesById[1] = "k_EUserReviewScorePreference_IncludeAll"] = 1;
-        values[valuesById[2] = "k_EUserReviewScorePreference_ExcludeBombs"] = 2;
-        return values;
-    })();
-    
-    $root.CStore_GetLocalizedNameForTags_Request = (function() {
+    $root.CContentServerDirectory_GetServersForSteamPipe_Request = (function() {
     
         /**
-         * Properties of a CStore_GetLocalizedNameForTags_Request.
-         * @exports ICStore_GetLocalizedNameForTags_Request
-         * @interface ICStore_GetLocalizedNameForTags_Request
-         * @property {string|null} [language] CStore_GetLocalizedNameForTags_Request language
-         * @property {Array.<number>|null} [tagids] CStore_GetLocalizedNameForTags_Request tagids
+         * Properties of a CContentServerDirectory_GetServersForSteamPipe_Request.
+         * @exports ICContentServerDirectory_GetServersForSteamPipe_Request
+         * @interface ICContentServerDirectory_GetServersForSteamPipe_Request
+         * @property {number|null} [cell_id] CContentServerDirectory_GetServersForSteamPipe_Request cell_id
+         * @property {number|null} [max_servers] CContentServerDirectory_GetServersForSteamPipe_Request max_servers
+         * @property {string|null} [ip_override] CContentServerDirectory_GetServersForSteamPipe_Request ip_override
+         * @property {number|null} [launcher_type] CContentServerDirectory_GetServersForSteamPipe_Request launcher_type
          */
     
         /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Request.
-         * @exports CStore_GetLocalizedNameForTags_Request
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Request.
-         * @implements ICStore_GetLocalizedNameForTags_Request
+         * Constructs a new CContentServerDirectory_GetServersForSteamPipe_Request.
+         * @exports CContentServerDirectory_GetServersForSteamPipe_Request
+         * @classdesc Represents a CContentServerDirectory_GetServersForSteamPipe_Request.
+         * @implements ICContentServerDirectory_GetServersForSteamPipe_Request
          * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request=} [properties] Properties to set
          */
-        function CStore_GetLocalizedNameForTags_Request(properties) {
-            this.tagids = [];
+        function CContentServerDirectory_GetServersForSteamPipe_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -59,96 +44,503 @@
         }
     
         /**
-         * CStore_GetLocalizedNameForTags_Request language.
-         * @member {string} language
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * CContentServerDirectory_GetServersForSteamPipe_Request cell_id.
+         * @member {number} cell_id
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.language = "";
+        CContentServerDirectory_GetServersForSteamPipe_Request.prototype.cell_id = 0;
     
         /**
-         * CStore_GetLocalizedNameForTags_Request tagids.
-         * @member {Array.<number>} tagids
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * CContentServerDirectory_GetServersForSteamPipe_Request max_servers.
+         * @member {number} max_servers
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.tagids = $util.emptyArray;
+        CContentServerDirectory_GetServersForSteamPipe_Request.prototype.max_servers = 20;
     
         /**
-         * Creates a new CStore_GetLocalizedNameForTags_Request instance using the specified properties.
+         * CContentServerDirectory_GetServersForSteamPipe_Request ip_override.
+         * @member {string} ip_override
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @instance
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.prototype.ip_override = "";
+    
+        /**
+         * CContentServerDirectory_GetServersForSteamPipe_Request launcher_type.
+         * @member {number} launcher_type
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @instance
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.prototype.launcher_type = 0;
+    
+        /**
+         * Creates a new CContentServerDirectory_GetServersForSteamPipe_Request instance using the specified properties.
          * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request instance
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request=} [properties] Properties to set
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Request} CContentServerDirectory_GetServersForSteamPipe_Request instance
          */
-        CStore_GetLocalizedNameForTags_Request.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Request(properties);
+        CContentServerDirectory_GetServersForSteamPipe_Request.create = function create(properties) {
+            return new CContentServerDirectory_GetServersForSteamPipe_Request(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetServersForSteamPipe_Request message. Does not implicitly {@link CContentServerDirectory_GetServersForSteamPipe_Request.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request} message CContentServerDirectory_GetServersForSteamPipe_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encode = function encode(message, writer) {
+        CContentServerDirectory_GetServersForSteamPipe_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
-            if (message.tagids != null && message.tagids.length)
-                for (var i = 0; i < message.tagids.length; ++i)
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.tagids[i]);
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cell_id);
+            if (message.max_servers != null && message.hasOwnProperty("max_servers"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.max_servers);
+            if (message.ip_override != null && message.hasOwnProperty("ip_override"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ip_override);
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.launcher_type);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetServersForSteamPipe_Request message, length delimited. Does not implicitly {@link CContentServerDirectory_GetServersForSteamPipe_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request} message CContentServerDirectory_GetServersForSteamPipe_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CContentServerDirectory_GetServersForSteamPipe_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer.
+         * Decodes a CContentServerDirectory_GetServersForSteamPipe_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Request} CContentServerDirectory_GetServersForSteamPipe_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decode = function decode(reader, length) {
+        CContentServerDirectory_GetServersForSteamPipe_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CContentServerDirectory_GetServersForSteamPipe_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.language = reader.string();
+                    message.cell_id = reader.uint32();
                     break;
                 case 2:
-                    if (!(message.tagids && message.tagids.length))
-                        message.tagids = [];
+                    message.max_servers = reader.uint32();
+                    break;
+                case 3:
+                    message.ip_override = reader.string();
+                    break;
+                case 4:
+                    message.launcher_type = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CContentServerDirectory_GetServersForSteamPipe_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Request} CContentServerDirectory_GetServersForSteamPipe_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CContentServerDirectory_GetServersForSteamPipe_Request message.
+         * @function verify
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                if (!$util.isInteger(message.cell_id))
+                    return "cell_id: integer expected";
+            if (message.max_servers != null && message.hasOwnProperty("max_servers"))
+                if (!$util.isInteger(message.max_servers))
+                    return "max_servers: integer expected";
+            if (message.ip_override != null && message.hasOwnProperty("ip_override"))
+                if (!$util.isString(message.ip_override))
+                    return "ip_override: string expected";
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                if (!$util.isInteger(message.launcher_type))
+                    return "launcher_type: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CContentServerDirectory_GetServersForSteamPipe_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Request} CContentServerDirectory_GetServersForSteamPipe_Request
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CContentServerDirectory_GetServersForSteamPipe_Request)
+                return object;
+            var message = new $root.CContentServerDirectory_GetServersForSteamPipe_Request();
+            if (object.cell_id != null)
+                message.cell_id = object.cell_id >>> 0;
+            if (object.max_servers != null)
+                message.max_servers = object.max_servers >>> 0;
+            if (object.ip_override != null)
+                message.ip_override = String(object.ip_override);
+            if (object.launcher_type != null)
+                message.launcher_type = object.launcher_type | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CContentServerDirectory_GetServersForSteamPipe_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @static
+         * @param {CContentServerDirectory_GetServersForSteamPipe_Request} message CContentServerDirectory_GetServersForSteamPipe_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cell_id = 0;
+                object.max_servers = 20;
+                object.ip_override = "";
+                object.launcher_type = 0;
+            }
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                object.cell_id = message.cell_id;
+            if (message.max_servers != null && message.hasOwnProperty("max_servers"))
+                object.max_servers = message.max_servers;
+            if (message.ip_override != null && message.hasOwnProperty("ip_override"))
+                object.ip_override = message.ip_override;
+            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
+                object.launcher_type = message.launcher_type;
+            return object;
+        };
+    
+        /**
+         * Converts this CContentServerDirectory_GetServersForSteamPipe_Request to JSON.
+         * @function toJSON
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CContentServerDirectory_GetServersForSteamPipe_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CContentServerDirectory_GetServersForSteamPipe_Request;
+    })();
+    
+    $root.CContentServerDirectory_ServerInfo = (function() {
+    
+        /**
+         * Properties of a CContentServerDirectory_ServerInfo.
+         * @exports ICContentServerDirectory_ServerInfo
+         * @interface ICContentServerDirectory_ServerInfo
+         * @property {string|null} [type] CContentServerDirectory_ServerInfo type
+         * @property {number|null} [source_id] CContentServerDirectory_ServerInfo source_id
+         * @property {number|null} [cell_id] CContentServerDirectory_ServerInfo cell_id
+         * @property {number|null} [load] CContentServerDirectory_ServerInfo load
+         * @property {number|null} [weighted_load] CContentServerDirectory_ServerInfo weighted_load
+         * @property {number|null} [num_entries_in_client_list] CContentServerDirectory_ServerInfo num_entries_in_client_list
+         * @property {boolean|null} [steam_china_only] CContentServerDirectory_ServerInfo steam_china_only
+         * @property {string|null} [host] CContentServerDirectory_ServerInfo host
+         * @property {string|null} [vhost] CContentServerDirectory_ServerInfo vhost
+         * @property {boolean|null} [use_as_proxy] CContentServerDirectory_ServerInfo use_as_proxy
+         * @property {string|null} [proxy_request_path_template] CContentServerDirectory_ServerInfo proxy_request_path_template
+         * @property {string|null} [https_support] CContentServerDirectory_ServerInfo https_support
+         * @property {Array.<number>|null} [allowed_app_ids] CContentServerDirectory_ServerInfo allowed_app_ids
+         */
+    
+        /**
+         * Constructs a new CContentServerDirectory_ServerInfo.
+         * @exports CContentServerDirectory_ServerInfo
+         * @classdesc Represents a CContentServerDirectory_ServerInfo.
+         * @implements ICContentServerDirectory_ServerInfo
+         * @constructor
+         * @param {ICContentServerDirectory_ServerInfo=} [properties] Properties to set
+         */
+        function CContentServerDirectory_ServerInfo(properties) {
+            this.allowed_app_ids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CContentServerDirectory_ServerInfo type.
+         * @member {string} type
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.type = "";
+    
+        /**
+         * CContentServerDirectory_ServerInfo source_id.
+         * @member {number} source_id
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.source_id = 0;
+    
+        /**
+         * CContentServerDirectory_ServerInfo cell_id.
+         * @member {number} cell_id
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.cell_id = 0;
+    
+        /**
+         * CContentServerDirectory_ServerInfo load.
+         * @member {number} load
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.load = 0;
+    
+        /**
+         * CContentServerDirectory_ServerInfo weighted_load.
+         * @member {number} weighted_load
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.weighted_load = 0;
+    
+        /**
+         * CContentServerDirectory_ServerInfo num_entries_in_client_list.
+         * @member {number} num_entries_in_client_list
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.num_entries_in_client_list = 0;
+    
+        /**
+         * CContentServerDirectory_ServerInfo steam_china_only.
+         * @member {boolean} steam_china_only
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.steam_china_only = false;
+    
+        /**
+         * CContentServerDirectory_ServerInfo host.
+         * @member {string} host
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.host = "";
+    
+        /**
+         * CContentServerDirectory_ServerInfo vhost.
+         * @member {string} vhost
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.vhost = "";
+    
+        /**
+         * CContentServerDirectory_ServerInfo use_as_proxy.
+         * @member {boolean} use_as_proxy
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.use_as_proxy = false;
+    
+        /**
+         * CContentServerDirectory_ServerInfo proxy_request_path_template.
+         * @member {string} proxy_request_path_template
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.proxy_request_path_template = "";
+    
+        /**
+         * CContentServerDirectory_ServerInfo https_support.
+         * @member {string} https_support
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.https_support = "";
+    
+        /**
+         * CContentServerDirectory_ServerInfo allowed_app_ids.
+         * @member {Array.<number>} allowed_app_ids
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.allowed_app_ids = $util.emptyArray;
+    
+        /**
+         * Creates a new CContentServerDirectory_ServerInfo instance using the specified properties.
+         * @function create
+         * @memberof CContentServerDirectory_ServerInfo
+         * @static
+         * @param {ICContentServerDirectory_ServerInfo=} [properties] Properties to set
+         * @returns {CContentServerDirectory_ServerInfo} CContentServerDirectory_ServerInfo instance
+         */
+        CContentServerDirectory_ServerInfo.create = function create(properties) {
+            return new CContentServerDirectory_ServerInfo(properties);
+        };
+    
+        /**
+         * Encodes the specified CContentServerDirectory_ServerInfo message. Does not implicitly {@link CContentServerDirectory_ServerInfo.verify|verify} messages.
+         * @function encode
+         * @memberof CContentServerDirectory_ServerInfo
+         * @static
+         * @param {ICContentServerDirectory_ServerInfo} message CContentServerDirectory_ServerInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CContentServerDirectory_ServerInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+            if (message.source_id != null && message.hasOwnProperty("source_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.source_id);
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cell_id);
+            if (message.load != null && message.hasOwnProperty("load"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.load);
+            if (message.weighted_load != null && message.hasOwnProperty("weighted_load"))
+                writer.uint32(/* id 5, wireType 5 =*/45).float(message.weighted_load);
+            if (message.num_entries_in_client_list != null && message.hasOwnProperty("num_entries_in_client_list"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.num_entries_in_client_list);
+            if (message.steam_china_only != null && message.hasOwnProperty("steam_china_only"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.steam_china_only);
+            if (message.host != null && message.hasOwnProperty("host"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.host);
+            if (message.vhost != null && message.hasOwnProperty("vhost"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.vhost);
+            if (message.use_as_proxy != null && message.hasOwnProperty("use_as_proxy"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.use_as_proxy);
+            if (message.proxy_request_path_template != null && message.hasOwnProperty("proxy_request_path_template"))
+                writer.uint32(/* id 11, wireType 2 =*/90).string(message.proxy_request_path_template);
+            if (message.https_support != null && message.hasOwnProperty("https_support"))
+                writer.uint32(/* id 12, wireType 2 =*/98).string(message.https_support);
+            if (message.allowed_app_ids != null && message.allowed_app_ids.length)
+                for (var i = 0; i < message.allowed_app_ids.length; ++i)
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.allowed_app_ids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CContentServerDirectory_ServerInfo message, length delimited. Does not implicitly {@link CContentServerDirectory_ServerInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CContentServerDirectory_ServerInfo
+         * @static
+         * @param {ICContentServerDirectory_ServerInfo} message CContentServerDirectory_ServerInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CContentServerDirectory_ServerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CContentServerDirectory_ServerInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof CContentServerDirectory_ServerInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CContentServerDirectory_ServerInfo} CContentServerDirectory_ServerInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CContentServerDirectory_ServerInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CContentServerDirectory_ServerInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.type = reader.string();
+                    break;
+                case 2:
+                    message.source_id = reader.int32();
+                    break;
+                case 3:
+                    message.cell_id = reader.int32();
+                    break;
+                case 4:
+                    message.load = reader.int32();
+                    break;
+                case 5:
+                    message.weighted_load = reader.float();
+                    break;
+                case 6:
+                    message.num_entries_in_client_list = reader.int32();
+                    break;
+                case 7:
+                    message.steam_china_only = reader.bool();
+                    break;
+                case 8:
+                    message.host = reader.string();
+                    break;
+                case 9:
+                    message.vhost = reader.string();
+                    break;
+                case 10:
+                    message.use_as_proxy = reader.bool();
+                    break;
+                case 11:
+                    message.proxy_request_path_template = reader.string();
+                    break;
+                case 12:
+                    message.https_support = reader.string();
+                    break;
+                case 13:
+                    if (!(message.allowed_app_ids && message.allowed_app_ids.length))
+                        message.allowed_app_ids = [];
                     if ((tag & 7) === 2) {
                         var end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2)
-                            message.tagids.push(reader.uint32());
+                            message.allowed_app_ids.push(reader.uint32());
                     } else
-                        message.tagids.push(reader.uint32());
+                        message.allowed_app_ids.push(reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -159,129 +551,218 @@
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CContentServerDirectory_ServerInfo message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_ServerInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CContentServerDirectory_ServerInfo} CContentServerDirectory_ServerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decodeDelimited = function decodeDelimited(reader) {
+        CContentServerDirectory_ServerInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_GetLocalizedNameForTags_Request message.
+         * Verifies a CContentServerDirectory_ServerInfo message.
          * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_ServerInfo
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_GetLocalizedNameForTags_Request.verify = function verify(message) {
+        CContentServerDirectory_ServerInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isString(message.language))
-                    return "language: string expected";
-            if (message.tagids != null && message.hasOwnProperty("tagids")) {
-                if (!Array.isArray(message.tagids))
-                    return "tagids: array expected";
-                for (var i = 0; i < message.tagids.length; ++i)
-                    if (!$util.isInteger(message.tagids[i]))
-                        return "tagids: integer[] expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                if (!$util.isString(message.type))
+                    return "type: string expected";
+            if (message.source_id != null && message.hasOwnProperty("source_id"))
+                if (!$util.isInteger(message.source_id))
+                    return "source_id: integer expected";
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                if (!$util.isInteger(message.cell_id))
+                    return "cell_id: integer expected";
+            if (message.load != null && message.hasOwnProperty("load"))
+                if (!$util.isInteger(message.load))
+                    return "load: integer expected";
+            if (message.weighted_load != null && message.hasOwnProperty("weighted_load"))
+                if (typeof message.weighted_load !== "number")
+                    return "weighted_load: number expected";
+            if (message.num_entries_in_client_list != null && message.hasOwnProperty("num_entries_in_client_list"))
+                if (!$util.isInteger(message.num_entries_in_client_list))
+                    return "num_entries_in_client_list: integer expected";
+            if (message.steam_china_only != null && message.hasOwnProperty("steam_china_only"))
+                if (typeof message.steam_china_only !== "boolean")
+                    return "steam_china_only: boolean expected";
+            if (message.host != null && message.hasOwnProperty("host"))
+                if (!$util.isString(message.host))
+                    return "host: string expected";
+            if (message.vhost != null && message.hasOwnProperty("vhost"))
+                if (!$util.isString(message.vhost))
+                    return "vhost: string expected";
+            if (message.use_as_proxy != null && message.hasOwnProperty("use_as_proxy"))
+                if (typeof message.use_as_proxy !== "boolean")
+                    return "use_as_proxy: boolean expected";
+            if (message.proxy_request_path_template != null && message.hasOwnProperty("proxy_request_path_template"))
+                if (!$util.isString(message.proxy_request_path_template))
+                    return "proxy_request_path_template: string expected";
+            if (message.https_support != null && message.hasOwnProperty("https_support"))
+                if (!$util.isString(message.https_support))
+                    return "https_support: string expected";
+            if (message.allowed_app_ids != null && message.hasOwnProperty("allowed_app_ids")) {
+                if (!Array.isArray(message.allowed_app_ids))
+                    return "allowed_app_ids: array expected";
+                for (var i = 0; i < message.allowed_app_ids.length; ++i)
+                    if (!$util.isInteger(message.allowed_app_ids[i]))
+                        return "allowed_app_ids: integer[] expected";
             }
             return null;
         };
     
         /**
-         * Creates a CStore_GetLocalizedNameForTags_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CContentServerDirectory_ServerInfo message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_ServerInfo
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CContentServerDirectory_ServerInfo} CContentServerDirectory_ServerInfo
          */
-        CStore_GetLocalizedNameForTags_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Request)
+        CContentServerDirectory_ServerInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.CContentServerDirectory_ServerInfo)
                 return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Request();
-            if (object.language != null)
-                message.language = String(object.language);
-            if (object.tagids) {
-                if (!Array.isArray(object.tagids))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Request.tagids: array expected");
-                message.tagids = [];
-                for (var i = 0; i < object.tagids.length; ++i)
-                    message.tagids[i] = object.tagids[i] >>> 0;
+            var message = new $root.CContentServerDirectory_ServerInfo();
+            if (object.type != null)
+                message.type = String(object.type);
+            if (object.source_id != null)
+                message.source_id = object.source_id | 0;
+            if (object.cell_id != null)
+                message.cell_id = object.cell_id | 0;
+            if (object.load != null)
+                message.load = object.load | 0;
+            if (object.weighted_load != null)
+                message.weighted_load = Number(object.weighted_load);
+            if (object.num_entries_in_client_list != null)
+                message.num_entries_in_client_list = object.num_entries_in_client_list | 0;
+            if (object.steam_china_only != null)
+                message.steam_china_only = Boolean(object.steam_china_only);
+            if (object.host != null)
+                message.host = String(object.host);
+            if (object.vhost != null)
+                message.vhost = String(object.vhost);
+            if (object.use_as_proxy != null)
+                message.use_as_proxy = Boolean(object.use_as_proxy);
+            if (object.proxy_request_path_template != null)
+                message.proxy_request_path_template = String(object.proxy_request_path_template);
+            if (object.https_support != null)
+                message.https_support = String(object.https_support);
+            if (object.allowed_app_ids) {
+                if (!Array.isArray(object.allowed_app_ids))
+                    throw TypeError(".CContentServerDirectory_ServerInfo.allowed_app_ids: array expected");
+                message.allowed_app_ids = [];
+                for (var i = 0; i < object.allowed_app_ids.length; ++i)
+                    message.allowed_app_ids[i] = object.allowed_app_ids[i] >>> 0;
             }
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CContentServerDirectory_ServerInfo message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_ServerInfo
          * @static
-         * @param {CStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request
+         * @param {CContentServerDirectory_ServerInfo} message CContentServerDirectory_ServerInfo
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_GetLocalizedNameForTags_Request.toObject = function toObject(message, options) {
+        CContentServerDirectory_ServerInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
-                object.tagids = [];
-            if (options.defaults)
-                object.language = "";
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.tagids && message.tagids.length) {
-                object.tagids = [];
-                for (var j = 0; j < message.tagids.length; ++j)
-                    object.tagids[j] = message.tagids[j];
+                object.allowed_app_ids = [];
+            if (options.defaults) {
+                object.type = "";
+                object.source_id = 0;
+                object.cell_id = 0;
+                object.load = 0;
+                object.weighted_load = 0;
+                object.num_entries_in_client_list = 0;
+                object.steam_china_only = false;
+                object.host = "";
+                object.vhost = "";
+                object.use_as_proxy = false;
+                object.proxy_request_path_template = "";
+                object.https_support = "";
+            }
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = message.type;
+            if (message.source_id != null && message.hasOwnProperty("source_id"))
+                object.source_id = message.source_id;
+            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
+                object.cell_id = message.cell_id;
+            if (message.load != null && message.hasOwnProperty("load"))
+                object.load = message.load;
+            if (message.weighted_load != null && message.hasOwnProperty("weighted_load"))
+                object.weighted_load = options.json && !isFinite(message.weighted_load) ? String(message.weighted_load) : message.weighted_load;
+            if (message.num_entries_in_client_list != null && message.hasOwnProperty("num_entries_in_client_list"))
+                object.num_entries_in_client_list = message.num_entries_in_client_list;
+            if (message.steam_china_only != null && message.hasOwnProperty("steam_china_only"))
+                object.steam_china_only = message.steam_china_only;
+            if (message.host != null && message.hasOwnProperty("host"))
+                object.host = message.host;
+            if (message.vhost != null && message.hasOwnProperty("vhost"))
+                object.vhost = message.vhost;
+            if (message.use_as_proxy != null && message.hasOwnProperty("use_as_proxy"))
+                object.use_as_proxy = message.use_as_proxy;
+            if (message.proxy_request_path_template != null && message.hasOwnProperty("proxy_request_path_template"))
+                object.proxy_request_path_template = message.proxy_request_path_template;
+            if (message.https_support != null && message.hasOwnProperty("https_support"))
+                object.https_support = message.https_support;
+            if (message.allowed_app_ids && message.allowed_app_ids.length) {
+                object.allowed_app_ids = [];
+                for (var j = 0; j < message.allowed_app_ids.length; ++j)
+                    object.allowed_app_ids[j] = message.allowed_app_ids[j];
             }
             return object;
         };
     
         /**
-         * Converts this CStore_GetLocalizedNameForTags_Request to JSON.
+         * Converts this CContentServerDirectory_ServerInfo to JSON.
          * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CContentServerDirectory_ServerInfo
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.toJSON = function toJSON() {
+        CContentServerDirectory_ServerInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_GetLocalizedNameForTags_Request;
+        return CContentServerDirectory_ServerInfo;
     })();
     
-    $root.CStore_GetLocalizedNameForTags_Response = (function() {
+    $root.CContentServerDirectory_GetServersForSteamPipe_Response = (function() {
     
         /**
-         * Properties of a CStore_GetLocalizedNameForTags_Response.
-         * @exports ICStore_GetLocalizedNameForTags_Response
-         * @interface ICStore_GetLocalizedNameForTags_Response
-         * @property {Array.<CStore_GetLocalizedNameForTags_Response.ITag>|null} [tags] CStore_GetLocalizedNameForTags_Response tags
+         * Properties of a CContentServerDirectory_GetServersForSteamPipe_Response.
+         * @exports ICContentServerDirectory_GetServersForSteamPipe_Response
+         * @interface ICContentServerDirectory_GetServersForSteamPipe_Response
+         * @property {Array.<ICContentServerDirectory_ServerInfo>|null} [servers] CContentServerDirectory_GetServersForSteamPipe_Response servers
          */
     
         /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Response.
-         * @exports CStore_GetLocalizedNameForTags_Response
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Response.
-         * @implements ICStore_GetLocalizedNameForTags_Response
+         * Constructs a new CContentServerDirectory_GetServersForSteamPipe_Response.
+         * @exports CContentServerDirectory_GetServersForSteamPipe_Response
+         * @classdesc Represents a CContentServerDirectory_GetServersForSteamPipe_Response.
+         * @implements ICContentServerDirectory_GetServersForSteamPipe_Response
          * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Response=} [properties] Properties to set
          */
-        function CStore_GetLocalizedNameForTags_Response(properties) {
-            this.tags = [];
+        function CContentServerDirectory_GetServersForSteamPipe_Response(properties) {
+            this.servers = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -289,78 +770,78 @@
         }
     
         /**
-         * CStore_GetLocalizedNameForTags_Response tags.
-         * @member {Array.<CStore_GetLocalizedNameForTags_Response.ITag>} tags
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * CContentServerDirectory_GetServersForSteamPipe_Response servers.
+         * @member {Array.<ICContentServerDirectory_ServerInfo>} servers
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Response.prototype.tags = $util.emptyArray;
+        CContentServerDirectory_GetServersForSteamPipe_Response.prototype.servers = $util.emptyArray;
     
         /**
-         * Creates a new CStore_GetLocalizedNameForTags_Response instance using the specified properties.
+         * Creates a new CContentServerDirectory_GetServersForSteamPipe_Response instance using the specified properties.
          * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response instance
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Response=} [properties] Properties to set
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Response} CContentServerDirectory_GetServersForSteamPipe_Response instance
          */
-        CStore_GetLocalizedNameForTags_Response.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Response(properties);
+        CContentServerDirectory_GetServersForSteamPipe_Response.create = function create(properties) {
+            return new CContentServerDirectory_GetServersForSteamPipe_Response(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetServersForSteamPipe_Response message. Does not implicitly {@link CContentServerDirectory_GetServersForSteamPipe_Response.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Response} message CContentServerDirectory_GetServersForSteamPipe_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Response.encode = function encode(message, writer) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.tags != null && message.tags.length)
-                for (var i = 0; i < message.tags.length; ++i)
-                    $root.CStore_GetLocalizedNameForTags_Response.Tag.encode(message.tags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.servers != null && message.servers.length)
+                for (var i = 0; i < message.servers.length; ++i)
+                    $root.CContentServerDirectory_ServerInfo.encode(message.servers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetServersForSteamPipe_Response message, length delimited. Does not implicitly {@link CContentServerDirectory_GetServersForSteamPipe_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Response} message CContentServerDirectory_GetServersForSteamPipe_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer.
+         * Decodes a CContentServerDirectory_GetServersForSteamPipe_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Response} CContentServerDirectory_GetServersForSteamPipe_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Response.decode = function decode(reader, length) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CContentServerDirectory_GetServersForSteamPipe_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.tags && message.tags.length))
-                        message.tags = [];
-                    message.tags.push($root.CStore_GetLocalizedNameForTags_Response.Tag.decode(reader, reader.uint32()));
+                    if (!(message.servers && message.servers.length))
+                        message.servers = [];
+                    message.servers.push($root.CContentServerDirectory_ServerInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -371,355 +852,127 @@
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CContentServerDirectory_GetServersForSteamPipe_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Response} CContentServerDirectory_GetServersForSteamPipe_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Response.decodeDelimited = function decodeDelimited(reader) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_GetLocalizedNameForTags_Response message.
+         * Verifies a CContentServerDirectory_GetServersForSteamPipe_Response message.
          * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_GetLocalizedNameForTags_Response.verify = function verify(message) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.tags != null && message.hasOwnProperty("tags")) {
-                if (!Array.isArray(message.tags))
-                    return "tags: array expected";
-                for (var i = 0; i < message.tags.length; ++i) {
-                    var error = $root.CStore_GetLocalizedNameForTags_Response.Tag.verify(message.tags[i]);
+            if (message.servers != null && message.hasOwnProperty("servers")) {
+                if (!Array.isArray(message.servers))
+                    return "servers: array expected";
+                for (var i = 0; i < message.servers.length; ++i) {
+                    var error = $root.CContentServerDirectory_ServerInfo.verify(message.servers[i]);
                     if (error)
-                        return "tags." + error;
+                        return "servers." + error;
                 }
             }
             return null;
         };
     
         /**
-         * Creates a CStore_GetLocalizedNameForTags_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CContentServerDirectory_GetServersForSteamPipe_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
+         * @returns {CContentServerDirectory_GetServersForSteamPipe_Response} CContentServerDirectory_GetServersForSteamPipe_Response
          */
-        CStore_GetLocalizedNameForTags_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Response)
+        CContentServerDirectory_GetServersForSteamPipe_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CContentServerDirectory_GetServersForSteamPipe_Response)
                 return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Response();
-            if (object.tags) {
-                if (!Array.isArray(object.tags))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: array expected");
-                message.tags = [];
-                for (var i = 0; i < object.tags.length; ++i) {
-                    if (typeof object.tags[i] !== "object")
-                        throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: object expected");
-                    message.tags[i] = $root.CStore_GetLocalizedNameForTags_Response.Tag.fromObject(object.tags[i]);
+            var message = new $root.CContentServerDirectory_GetServersForSteamPipe_Response();
+            if (object.servers) {
+                if (!Array.isArray(object.servers))
+                    throw TypeError(".CContentServerDirectory_GetServersForSteamPipe_Response.servers: array expected");
+                message.servers = [];
+                for (var i = 0; i < object.servers.length; ++i) {
+                    if (typeof object.servers[i] !== "object")
+                        throw TypeError(".CContentServerDirectory_GetServersForSteamPipe_Response.servers: object expected");
+                    message.servers[i] = $root.CContentServerDirectory_ServerInfo.fromObject(object.servers[i]);
                 }
             }
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Response message. Also converts values to other types if specified.
+         * Creates a plain object from a CContentServerDirectory_GetServersForSteamPipe_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @static
-         * @param {CStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response
+         * @param {CContentServerDirectory_GetServersForSteamPipe_Response} message CContentServerDirectory_GetServersForSteamPipe_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_GetLocalizedNameForTags_Response.toObject = function toObject(message, options) {
+        CContentServerDirectory_GetServersForSteamPipe_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
-                object.tags = [];
-            if (message.tags && message.tags.length) {
-                object.tags = [];
-                for (var j = 0; j < message.tags.length; ++j)
-                    object.tags[j] = $root.CStore_GetLocalizedNameForTags_Response.Tag.toObject(message.tags[j], options);
+                object.servers = [];
+            if (message.servers && message.servers.length) {
+                object.servers = [];
+                for (var j = 0; j < message.servers.length; ++j)
+                    object.servers[j] = $root.CContentServerDirectory_ServerInfo.toObject(message.servers[j], options);
             }
             return object;
         };
     
         /**
-         * Converts this CStore_GetLocalizedNameForTags_Response to JSON.
+         * Converts this CContentServerDirectory_GetServersForSteamPipe_Response to JSON.
          * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CContentServerDirectory_GetServersForSteamPipe_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_GetLocalizedNameForTags_Response.prototype.toJSON = function toJSON() {
+        CContentServerDirectory_GetServersForSteamPipe_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CStore_GetLocalizedNameForTags_Response.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [english_name] Tag english_name
-             * @property {string|null} [name] Tag name
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag english_name.
-             * @member {string} english_name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.english_name = "";
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.english_name);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.english_name = reader.string();
-                        break;
-                    case 3:
-                        message.name = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    if (!$util.isString(message.english_name))
-                        return "english_name: string expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_GetLocalizedNameForTags_Response.Tag)
-                    return object;
-                var message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.english_name != null)
-                    message.english_name = String(object.english_name);
-                if (object.name != null)
-                    message.name = String(object.name);
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.english_name = "";
-                    object.name = "";
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    object.english_name = message.english_name;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
-                return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_GetLocalizedNameForTags_Response;
+        return CContentServerDirectory_GetServersForSteamPipe_Response;
     })();
     
-    $root.CStore_GetStorePreferences_Request = (function() {
+    $root.CContentServerDirectory_GetDepotPatchInfo_Request = (function() {
     
         /**
-         * Properties of a CStore_GetStorePreferences_Request.
-         * @exports ICStore_GetStorePreferences_Request
-         * @interface ICStore_GetStorePreferences_Request
+         * Properties of a CContentServerDirectory_GetDepotPatchInfo_Request.
+         * @exports ICContentServerDirectory_GetDepotPatchInfo_Request
+         * @interface ICContentServerDirectory_GetDepotPatchInfo_Request
+         * @property {number|null} [appid] CContentServerDirectory_GetDepotPatchInfo_Request appid
+         * @property {number|null} [depotid] CContentServerDirectory_GetDepotPatchInfo_Request depotid
+         * @property {number|Long|null} [source_manifestid] CContentServerDirectory_GetDepotPatchInfo_Request source_manifestid
+         * @property {number|Long|null} [target_manifestid] CContentServerDirectory_GetDepotPatchInfo_Request target_manifestid
          */
     
         /**
-         * Constructs a new CStore_GetStorePreferences_Request.
-         * @exports CStore_GetStorePreferences_Request
-         * @classdesc Represents a CStore_GetStorePreferences_Request.
-         * @implements ICStore_GetStorePreferences_Request
+         * Constructs a new CContentServerDirectory_GetDepotPatchInfo_Request.
+         * @exports CContentServerDirectory_GetDepotPatchInfo_Request
+         * @classdesc Represents a CContentServerDirectory_GetDepotPatchInfo_Request.
+         * @implements ICContentServerDirectory_GetDepotPatchInfo_Request
          * @constructor
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request=} [properties] Properties to set
          */
-        function CStore_GetStorePreferences_Request(properties) {
+        function CContentServerDirectory_GetDepotPatchInfo_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -727,376 +980,114 @@
         }
     
         /**
-         * Creates a new CStore_GetStorePreferences_Request instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request instance
+         * CContentServerDirectory_GetDepotPatchInfo_Request appid.
+         * @member {number} appid
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
+         * @instance
          */
-        CStore_GetStorePreferences_Request.create = function create(properties) {
-            return new CStore_GetStorePreferences_Request(properties);
+        CContentServerDirectory_GetDepotPatchInfo_Request.prototype.appid = 0;
+    
+        /**
+         * CContentServerDirectory_GetDepotPatchInfo_Request depotid.
+         * @member {number} depotid
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
+         * @instance
+         */
+        CContentServerDirectory_GetDepotPatchInfo_Request.prototype.depotid = 0;
+    
+        /**
+         * CContentServerDirectory_GetDepotPatchInfo_Request source_manifestid.
+         * @member {number|Long} source_manifestid
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
+         * @instance
+         */
+        CContentServerDirectory_GetDepotPatchInfo_Request.prototype.source_manifestid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CContentServerDirectory_GetDepotPatchInfo_Request target_manifestid.
+         * @member {number|Long} target_manifestid
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
+         * @instance
+         */
+        CContentServerDirectory_GetDepotPatchInfo_Request.prototype.target_manifestid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CContentServerDirectory_GetDepotPatchInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
+         * @static
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request=} [properties] Properties to set
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Request} CContentServerDirectory_GetDepotPatchInfo_Request instance
+         */
+        CContentServerDirectory_GetDepotPatchInfo_Request.create = function create(properties) {
+            return new CContentServerDirectory_GetDepotPatchInfo_Request(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetStorePreferences_Request message. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetDepotPatchInfo_Request message. Does not implicitly {@link CContentServerDirectory_GetDepotPatchInfo_Request.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetStorePreferences_Request
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request} message CContentServerDirectory_GetDepotPatchInfo_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetStorePreferences_Request.encode = function encode(message, writer) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.depotid != null && message.hasOwnProperty("depotid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.depotid);
+            if (message.source_manifestid != null && message.hasOwnProperty("source_manifestid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.source_manifestid);
+            if (message.target_manifestid != null && message.hasOwnProperty("target_manifestid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.target_manifestid);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetStorePreferences_Request message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetDepotPatchInfo_Request message, length delimited. Does not implicitly {@link CContentServerDirectory_GetDepotPatchInfo_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request} message CContentServerDirectory_GetDepotPatchInfo_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetStorePreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer.
+         * Decodes a CContentServerDirectory_GetDepotPatchInfo_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetStorePreferences_Request
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Request} CContentServerDirectory_GetDepotPatchInfo_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetStorePreferences_Request.decode = function decode(reader, length) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Request message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         */
-        CStore_GetStorePreferences_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Request)
-                return object;
-            return new $root.CStore_GetStorePreferences_Request();
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {CStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Request.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Request to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Request;
-    })();
-    
-    $root.CStore_UserPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserPreferences.
-         * @exports ICStore_UserPreferences
-         * @interface ICStore_UserPreferences
-         * @property {number|null} [primary_language] CStore_UserPreferences primary_language
-         * @property {number|null} [secondary_languages] CStore_UserPreferences secondary_languages
-         * @property {boolean|null} [platform_windows] CStore_UserPreferences platform_windows
-         * @property {boolean|null} [platform_mac] CStore_UserPreferences platform_mac
-         * @property {boolean|null} [platform_linux] CStore_UserPreferences platform_linux
-         * @property {boolean|null} [hide_adult_content_violence] CStore_UserPreferences hide_adult_content_violence
-         * @property {boolean|null} [hide_adult_content_sex] CStore_UserPreferences hide_adult_content_sex
-         * @property {number|null} [timestamp_updated] CStore_UserPreferences timestamp_updated
-         * @property {boolean|null} [hide_store_broadcast] CStore_UserPreferences hide_store_broadcast
-         * @property {EUserReviewScorePreference|null} [review_score_preference] CStore_UserPreferences review_score_preference
-         * @property {number|null} [timestamp_content_descriptor_preferences_updated] CStore_UserPreferences timestamp_content_descriptor_preferences_updated
-         */
-    
-        /**
-         * Constructs a new CStore_UserPreferences.
-         * @exports CStore_UserPreferences
-         * @classdesc Represents a CStore_UserPreferences.
-         * @implements ICStore_UserPreferences
-         * @constructor
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         */
-        function CStore_UserPreferences(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserPreferences primary_language.
-         * @member {number} primary_language
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.primary_language = 0;
-    
-        /**
-         * CStore_UserPreferences secondary_languages.
-         * @member {number} secondary_languages
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.secondary_languages = 0;
-    
-        /**
-         * CStore_UserPreferences platform_windows.
-         * @member {boolean} platform_windows
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_windows = false;
-    
-        /**
-         * CStore_UserPreferences platform_mac.
-         * @member {boolean} platform_mac
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_mac = false;
-    
-        /**
-         * CStore_UserPreferences platform_linux.
-         * @member {boolean} platform_linux
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_linux = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_violence.
-         * @member {boolean} hide_adult_content_violence
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_violence = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_sex.
-         * @member {boolean} hide_adult_content_sex
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_sex = false;
-    
-        /**
-         * CStore_UserPreferences timestamp_updated.
-         * @member {number} timestamp_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_updated = 0;
-    
-        /**
-         * CStore_UserPreferences hide_store_broadcast.
-         * @member {boolean} hide_store_broadcast
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_store_broadcast = false;
-    
-        /**
-         * CStore_UserPreferences review_score_preference.
-         * @member {EUserReviewScorePreference} review_score_preference
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.review_score_preference = 0;
-    
-        /**
-         * CStore_UserPreferences timestamp_content_descriptor_preferences_updated.
-         * @member {number} timestamp_content_descriptor_preferences_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_content_descriptor_preferences_updated = 0;
-    
-        /**
-         * Creates a new CStore_UserPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         * @returns {CStore_UserPreferences} CStore_UserPreferences instance
-         */
-        CStore_UserPreferences.create = function create(properties) {
-            return new CStore_UserPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserPreferences message. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.primary_language);
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.secondary_languages);
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.platform_windows);
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.platform_mac);
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.platform_linux);
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hide_adult_content_violence);
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hide_adult_content_sex);
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.timestamp_updated);
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.hide_store_broadcast);
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.review_score_preference);
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.timestamp_content_descriptor_preferences_updated);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserPreferences message, length delimited. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserPreferences();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CContentServerDirectory_GetDepotPatchInfo_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.primary_language = reader.uint32();
+                    message.appid = reader.uint32();
                     break;
                 case 2:
-                    message.secondary_languages = reader.uint32();
+                    message.depotid = reader.uint32();
                     break;
                 case 3:
-                    message.platform_windows = reader.bool();
+                    message.source_manifestid = reader.uint64();
                     break;
                 case 4:
-                    message.platform_mac = reader.bool();
-                    break;
-                case 5:
-                    message.platform_linux = reader.bool();
-                    break;
-                case 6:
-                    message.hide_adult_content_violence = reader.bool();
-                    break;
-                case 7:
-                    message.hide_adult_content_sex = reader.bool();
-                    break;
-                case 8:
-                    message.timestamp_updated = reader.uint32();
-                    break;
-                case 9:
-                    message.hide_store_broadcast = reader.bool();
-                    break;
-                case 10:
-                    message.review_score_preference = reader.int32();
-                    break;
-                case 11:
-                    message.timestamp_content_descriptor_preferences_updated = reader.int32();
+                    message.target_manifestid = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1107,207 +1098,160 @@
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer, length delimited.
+         * Decodes a CContentServerDirectory_GetDepotPatchInfo_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Request} CContentServerDirectory_GetDepotPatchInfo_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decodeDelimited = function decodeDelimited(reader) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_UserPreferences message.
+         * Verifies a CContentServerDirectory_GetDepotPatchInfo_Request message.
          * @function verify
-         * @memberof CStore_UserPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_UserPreferences.verify = function verify(message) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                if (!$util.isInteger(message.primary_language))
-                    return "primary_language: integer expected";
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                if (!$util.isInteger(message.secondary_languages))
-                    return "secondary_languages: integer expected";
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                if (typeof message.platform_windows !== "boolean")
-                    return "platform_windows: boolean expected";
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                if (typeof message.platform_mac !== "boolean")
-                    return "platform_mac: boolean expected";
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                if (typeof message.platform_linux !== "boolean")
-                    return "platform_linux: boolean expected";
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                if (typeof message.hide_adult_content_violence !== "boolean")
-                    return "hide_adult_content_violence: boolean expected";
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                if (typeof message.hide_adult_content_sex !== "boolean")
-                    return "hide_adult_content_sex: boolean expected";
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                if (!$util.isInteger(message.timestamp_updated))
-                    return "timestamp_updated: integer expected";
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                if (typeof message.hide_store_broadcast !== "boolean")
-                    return "hide_store_broadcast: boolean expected";
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                switch (message.review_score_preference) {
-                default:
-                    return "review_score_preference: enum value expected";
-                case 0:
-                case 1:
-                case 2:
-                    break;
-                }
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                if (!$util.isInteger(message.timestamp_content_descriptor_preferences_updated))
-                    return "timestamp_content_descriptor_preferences_updated: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.depotid != null && message.hasOwnProperty("depotid"))
+                if (!$util.isInteger(message.depotid))
+                    return "depotid: integer expected";
+            if (message.source_manifestid != null && message.hasOwnProperty("source_manifestid"))
+                if (!$util.isInteger(message.source_manifestid) && !(message.source_manifestid && $util.isInteger(message.source_manifestid.low) && $util.isInteger(message.source_manifestid.high)))
+                    return "source_manifestid: integer|Long expected";
+            if (message.target_manifestid != null && message.hasOwnProperty("target_manifestid"))
+                if (!$util.isInteger(message.target_manifestid) && !(message.target_manifestid && $util.isInteger(message.target_manifestid.low) && $util.isInteger(message.target_manifestid.high)))
+                    return "target_manifestid: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CStore_UserPreferences message from a plain object. Also converts values to their respective internal types.
+         * Creates a CContentServerDirectory_GetDepotPatchInfo_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_UserPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Request} CContentServerDirectory_GetDepotPatchInfo_Request
          */
-        CStore_UserPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserPreferences)
+        CContentServerDirectory_GetDepotPatchInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CContentServerDirectory_GetDepotPatchInfo_Request)
                 return object;
-            var message = new $root.CStore_UserPreferences();
-            if (object.primary_language != null)
-                message.primary_language = object.primary_language >>> 0;
-            if (object.secondary_languages != null)
-                message.secondary_languages = object.secondary_languages >>> 0;
-            if (object.platform_windows != null)
-                message.platform_windows = Boolean(object.platform_windows);
-            if (object.platform_mac != null)
-                message.platform_mac = Boolean(object.platform_mac);
-            if (object.platform_linux != null)
-                message.platform_linux = Boolean(object.platform_linux);
-            if (object.hide_adult_content_violence != null)
-                message.hide_adult_content_violence = Boolean(object.hide_adult_content_violence);
-            if (object.hide_adult_content_sex != null)
-                message.hide_adult_content_sex = Boolean(object.hide_adult_content_sex);
-            if (object.timestamp_updated != null)
-                message.timestamp_updated = object.timestamp_updated >>> 0;
-            if (object.hide_store_broadcast != null)
-                message.hide_store_broadcast = Boolean(object.hide_store_broadcast);
-            switch (object.review_score_preference) {
-            case "k_EUserReviewScorePreference_Unset":
-            case 0:
-                message.review_score_preference = 0;
-                break;
-            case "k_EUserReviewScorePreference_IncludeAll":
-            case 1:
-                message.review_score_preference = 1;
-                break;
-            case "k_EUserReviewScorePreference_ExcludeBombs":
-            case 2:
-                message.review_score_preference = 2;
-                break;
-            }
-            if (object.timestamp_content_descriptor_preferences_updated != null)
-                message.timestamp_content_descriptor_preferences_updated = object.timestamp_content_descriptor_preferences_updated | 0;
+            var message = new $root.CContentServerDirectory_GetDepotPatchInfo_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.depotid != null)
+                message.depotid = object.depotid >>> 0;
+            if (object.source_manifestid != null)
+                if ($util.Long)
+                    (message.source_manifestid = $util.Long.fromValue(object.source_manifestid)).unsigned = true;
+                else if (typeof object.source_manifestid === "string")
+                    message.source_manifestid = parseInt(object.source_manifestid, 10);
+                else if (typeof object.source_manifestid === "number")
+                    message.source_manifestid = object.source_manifestid;
+                else if (typeof object.source_manifestid === "object")
+                    message.source_manifestid = new $util.LongBits(object.source_manifestid.low >>> 0, object.source_manifestid.high >>> 0).toNumber(true);
+            if (object.target_manifestid != null)
+                if ($util.Long)
+                    (message.target_manifestid = $util.Long.fromValue(object.target_manifestid)).unsigned = true;
+                else if (typeof object.target_manifestid === "string")
+                    message.target_manifestid = parseInt(object.target_manifestid, 10);
+                else if (typeof object.target_manifestid === "number")
+                    message.target_manifestid = object.target_manifestid;
+                else if (typeof object.target_manifestid === "object")
+                    message.target_manifestid = new $util.LongBits(object.target_manifestid.low >>> 0, object.target_manifestid.high >>> 0).toNumber(true);
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_UserPreferences message. Also converts values to other types if specified.
+         * Creates a plain object from a CContentServerDirectory_GetDepotPatchInfo_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_UserPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @static
-         * @param {CStore_UserPreferences} message CStore_UserPreferences
+         * @param {CContentServerDirectory_GetDepotPatchInfo_Request} message CContentServerDirectory_GetDepotPatchInfo_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_UserPreferences.toObject = function toObject(message, options) {
+        CContentServerDirectory_GetDepotPatchInfo_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.primary_language = 0;
-                object.secondary_languages = 0;
-                object.platform_windows = false;
-                object.platform_mac = false;
-                object.platform_linux = false;
-                object.hide_adult_content_violence = false;
-                object.hide_adult_content_sex = false;
-                object.timestamp_updated = 0;
-                object.hide_store_broadcast = false;
-                object.review_score_preference = options.enums === String ? "k_EUserReviewScorePreference_Unset" : 0;
-                object.timestamp_content_descriptor_preferences_updated = 0;
+                object.appid = 0;
+                object.depotid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.source_manifestid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.source_manifestid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.target_manifestid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.target_manifestid = options.longs === String ? "0" : 0;
             }
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                object.primary_language = message.primary_language;
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                object.secondary_languages = message.secondary_languages;
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                object.platform_windows = message.platform_windows;
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                object.platform_mac = message.platform_mac;
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                object.platform_linux = message.platform_linux;
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                object.hide_adult_content_violence = message.hide_adult_content_violence;
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                object.hide_adult_content_sex = message.hide_adult_content_sex;
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                object.timestamp_updated = message.timestamp_updated;
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                object.hide_store_broadcast = message.hide_store_broadcast;
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                object.review_score_preference = options.enums === String ? $root.EUserReviewScorePreference[message.review_score_preference] : message.review_score_preference;
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                object.timestamp_content_descriptor_preferences_updated = message.timestamp_content_descriptor_preferences_updated;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.depotid != null && message.hasOwnProperty("depotid"))
+                object.depotid = message.depotid;
+            if (message.source_manifestid != null && message.hasOwnProperty("source_manifestid"))
+                if (typeof message.source_manifestid === "number")
+                    object.source_manifestid = options.longs === String ? String(message.source_manifestid) : message.source_manifestid;
+                else
+                    object.source_manifestid = options.longs === String ? $util.Long.prototype.toString.call(message.source_manifestid) : options.longs === Number ? new $util.LongBits(message.source_manifestid.low >>> 0, message.source_manifestid.high >>> 0).toNumber(true) : message.source_manifestid;
+            if (message.target_manifestid != null && message.hasOwnProperty("target_manifestid"))
+                if (typeof message.target_manifestid === "number")
+                    object.target_manifestid = options.longs === String ? String(message.target_manifestid) : message.target_manifestid;
+                else
+                    object.target_manifestid = options.longs === String ? $util.Long.prototype.toString.call(message.target_manifestid) : options.longs === Number ? new $util.LongBits(message.target_manifestid.low >>> 0, message.target_manifestid.high >>> 0).toNumber(true) : message.target_manifestid;
             return object;
         };
     
         /**
-         * Converts this CStore_UserPreferences to JSON.
+         * Converts this CContentServerDirectory_GetDepotPatchInfo_Request to JSON.
          * @function toJSON
-         * @memberof CStore_UserPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_UserPreferences.prototype.toJSON = function toJSON() {
+        CContentServerDirectory_GetDepotPatchInfo_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_UserPreferences;
+        return CContentServerDirectory_GetDepotPatchInfo_Request;
     })();
     
-    $root.CStore_UserTagPreferences = (function() {
+    $root.CContentServerDirectory_GetDepotPatchInfo_Response = (function() {
     
         /**
-         * Properties of a CStore_UserTagPreferences.
-         * @exports ICStore_UserTagPreferences
-         * @interface ICStore_UserTagPreferences
-         * @property {Array.<CStore_UserTagPreferences.ITag>|null} [tags_to_exclude] CStore_UserTagPreferences tags_to_exclude
+         * Properties of a CContentServerDirectory_GetDepotPatchInfo_Response.
+         * @exports ICContentServerDirectory_GetDepotPatchInfo_Response
+         * @interface ICContentServerDirectory_GetDepotPatchInfo_Response
+         * @property {boolean|null} [is_available] CContentServerDirectory_GetDepotPatchInfo_Response is_available
          */
     
         /**
-         * Constructs a new CStore_UserTagPreferences.
-         * @exports CStore_UserTagPreferences
-         * @classdesc Represents a CStore_UserTagPreferences.
-         * @implements ICStore_UserTagPreferences
+         * Constructs a new CContentServerDirectory_GetDepotPatchInfo_Response.
+         * @exports CContentServerDirectory_GetDepotPatchInfo_Response
+         * @classdesc Represents a CContentServerDirectory_GetDepotPatchInfo_Response.
+         * @implements ICContentServerDirectory_GetDepotPatchInfo_Response
          * @constructor
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Response=} [properties] Properties to set
          */
-        function CStore_UserTagPreferences(properties) {
-            this.tags_to_exclude = [];
+        function CContentServerDirectory_GetDepotPatchInfo_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1315,78 +1259,75 @@
         }
     
         /**
-         * CStore_UserTagPreferences tags_to_exclude.
-         * @member {Array.<CStore_UserTagPreferences.ITag>} tags_to_exclude
-         * @memberof CStore_UserTagPreferences
+         * CContentServerDirectory_GetDepotPatchInfo_Response is_available.
+         * @member {boolean} is_available
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @instance
          */
-        CStore_UserTagPreferences.prototype.tags_to_exclude = $util.emptyArray;
+        CContentServerDirectory_GetDepotPatchInfo_Response.prototype.is_available = false;
     
         /**
-         * Creates a new CStore_UserTagPreferences instance using the specified properties.
+         * Creates a new CContentServerDirectory_GetDepotPatchInfo_Response instance using the specified properties.
          * @function create
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences instance
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Response=} [properties] Properties to set
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Response} CContentServerDirectory_GetDepotPatchInfo_Response instance
          */
-        CStore_UserTagPreferences.create = function create(properties) {
-            return new CStore_UserTagPreferences(properties);
+        CContentServerDirectory_GetDepotPatchInfo_Response.create = function create(properties) {
+            return new CContentServerDirectory_GetDepotPatchInfo_Response(properties);
         };
     
         /**
-         * Encodes the specified CStore_UserTagPreferences message. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetDepotPatchInfo_Response message. Does not implicitly {@link CContentServerDirectory_GetDepotPatchInfo_Response.verify|verify} messages.
          * @function encode
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Response} message CContentServerDirectory_GetDepotPatchInfo_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserTagPreferences.encode = function encode(message, writer) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.tags_to_exclude != null && message.tags_to_exclude.length)
-                for (var i = 0; i < message.tags_to_exclude.length; ++i)
-                    $root.CStore_UserTagPreferences.Tag.encode(message.tags_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.is_available != null && message.hasOwnProperty("is_available"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_available);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_UserTagPreferences message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
+         * Encodes the specified CContentServerDirectory_GetDepotPatchInfo_Response message, length delimited. Does not implicitly {@link CContentServerDirectory_GetDepotPatchInfo_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Response} message CContentServerDirectory_GetDepotPatchInfo_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserTagPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer.
+         * Decodes a CContentServerDirectory_GetDepotPatchInfo_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Response} CContentServerDirectory_GetDepotPatchInfo_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserTagPreferences.decode = function decode(reader, length) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CContentServerDirectory_GetDepotPatchInfo_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.tags_to_exclude && message.tags_to_exclude.length))
-                        message.tags_to_exclude = [];
-                    message.tags_to_exclude.push($root.CStore_UserTagPreferences.Tag.decode(reader, reader.uint32()));
+                    message.is_available = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1397,1102 +1338,188 @@
         };
     
         /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer, length delimited.
+         * Decodes a CContentServerDirectory_GetDepotPatchInfo_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Response} CContentServerDirectory_GetDepotPatchInfo_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserTagPreferences.decodeDelimited = function decodeDelimited(reader) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_UserTagPreferences message.
+         * Verifies a CContentServerDirectory_GetDepotPatchInfo_Response message.
          * @function verify
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_UserTagPreferences.verify = function verify(message) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.tags_to_exclude != null && message.hasOwnProperty("tags_to_exclude")) {
-                if (!Array.isArray(message.tags_to_exclude))
-                    return "tags_to_exclude: array expected";
-                for (var i = 0; i < message.tags_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserTagPreferences.Tag.verify(message.tags_to_exclude[i]);
-                    if (error)
-                        return "tags_to_exclude." + error;
-                }
-            }
+            if (message.is_available != null && message.hasOwnProperty("is_available"))
+                if (typeof message.is_available !== "boolean")
+                    return "is_available: boolean expected";
             return null;
         };
     
         /**
-         * Creates a CStore_UserTagPreferences message from a plain object. Also converts values to their respective internal types.
+         * Creates a CContentServerDirectory_GetDepotPatchInfo_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
+         * @returns {CContentServerDirectory_GetDepotPatchInfo_Response} CContentServerDirectory_GetDepotPatchInfo_Response
          */
-        CStore_UserTagPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserTagPreferences)
+        CContentServerDirectory_GetDepotPatchInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CContentServerDirectory_GetDepotPatchInfo_Response)
                 return object;
-            var message = new $root.CStore_UserTagPreferences();
-            if (object.tags_to_exclude) {
-                if (!Array.isArray(object.tags_to_exclude))
-                    throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: array expected");
-                message.tags_to_exclude = [];
-                for (var i = 0; i < object.tags_to_exclude.length; ++i) {
-                    if (typeof object.tags_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: object expected");
-                    message.tags_to_exclude[i] = $root.CStore_UserTagPreferences.Tag.fromObject(object.tags_to_exclude[i]);
-                }
-            }
+            var message = new $root.CContentServerDirectory_GetDepotPatchInfo_Response();
+            if (object.is_available != null)
+                message.is_available = Boolean(object.is_available);
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_UserTagPreferences message. Also converts values to other types if specified.
+         * Creates a plain object from a CContentServerDirectory_GetDepotPatchInfo_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @static
-         * @param {CStore_UserTagPreferences} message CStore_UserTagPreferences
+         * @param {CContentServerDirectory_GetDepotPatchInfo_Response} message CContentServerDirectory_GetDepotPatchInfo_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_UserTagPreferences.toObject = function toObject(message, options) {
+        CContentServerDirectory_GetDepotPatchInfo_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.tags_to_exclude = [];
-            if (message.tags_to_exclude && message.tags_to_exclude.length) {
-                object.tags_to_exclude = [];
-                for (var j = 0; j < message.tags_to_exclude.length; ++j)
-                    object.tags_to_exclude[j] = $root.CStore_UserTagPreferences.Tag.toObject(message.tags_to_exclude[j], options);
-            }
+            if (options.defaults)
+                object.is_available = false;
+            if (message.is_available != null && message.hasOwnProperty("is_available"))
+                object.is_available = message.is_available;
             return object;
         };
     
         /**
-         * Converts this CStore_UserTagPreferences to JSON.
+         * Converts this CContentServerDirectory_GetDepotPatchInfo_Response to JSON.
          * @function toJSON
-         * @memberof CStore_UserTagPreferences
+         * @memberof CContentServerDirectory_GetDepotPatchInfo_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_UserTagPreferences.prototype.toJSON = function toJSON() {
+        CContentServerDirectory_GetDepotPatchInfo_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CStore_UserTagPreferences.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_UserTagPreferences
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [name] Tag name
-             * @property {number|null} [timestamp_added] Tag timestamp_added
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_UserTagPreferences
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Tag timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             * @returns {CStore_UserTagPreferences.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.name = reader.string();
-                        break;
-                    case 3:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserTagPreferences.Tag)
-                    return object;
-                var message = new $root.CStore_UserTagPreferences.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.name != null)
-                    message.name = String(object.name);
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.name = "";
-                    object.timestamp_added = 0;
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_UserTagPreferences;
+        return CContentServerDirectory_GetDepotPatchInfo_Response;
     })();
     
-    $root.CStore_UserContentDescriptorPreferences = (function() {
+    $root.ContentServerDirectory = (function() {
     
         /**
-         * Properties of a CStore_UserContentDescriptorPreferences.
-         * @exports ICStore_UserContentDescriptorPreferences
-         * @interface ICStore_UserContentDescriptorPreferences
-         * @property {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>|null} [content_descriptors_to_exclude] CStore_UserContentDescriptorPreferences content_descriptors_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserContentDescriptorPreferences.
-         * @exports CStore_UserContentDescriptorPreferences
-         * @classdesc Represents a CStore_UserContentDescriptorPreferences.
-         * @implements ICStore_UserContentDescriptorPreferences
-         * @constructor
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         */
-        function CStore_UserContentDescriptorPreferences(properties) {
-            this.content_descriptors_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserContentDescriptorPreferences content_descriptors_to_exclude.
-         * @member {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>} content_descriptors_to_exclude
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences.prototype.content_descriptors_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserContentDescriptorPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences instance
-         */
-        CStore_UserContentDescriptorPreferences.create = function create(properties) {
-            return new CStore_UserContentDescriptorPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content_descriptors_to_exclude != null && message.content_descriptors_to_exclude.length)
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i)
-                    $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.encode(message.content_descriptors_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length))
-                        message.content_descriptors_to_exclude = [];
-                    message.content_descriptors_to_exclude.push($root.CStore_UserContentDescriptorPreferences.ContentDescriptor.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserContentDescriptorPreferences message.
-         * @function verify
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserContentDescriptorPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content_descriptors_to_exclude != null && message.hasOwnProperty("content_descriptors_to_exclude")) {
-                if (!Array.isArray(message.content_descriptors_to_exclude))
-                    return "content_descriptors_to_exclude: array expected";
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.verify(message.content_descriptors_to_exclude[i]);
-                    if (error)
-                        return "content_descriptors_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserContentDescriptorPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         */
-        CStore_UserContentDescriptorPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserContentDescriptorPreferences)
-                return object;
-            var message = new $root.CStore_UserContentDescriptorPreferences();
-            if (object.content_descriptors_to_exclude) {
-                if (!Array.isArray(object.content_descriptors_to_exclude))
-                    throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: array expected");
-                message.content_descriptors_to_exclude = [];
-                for (var i = 0; i < object.content_descriptors_to_exclude.length; ++i) {
-                    if (typeof object.content_descriptors_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: object expected");
-                    message.content_descriptors_to_exclude[i] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.fromObject(object.content_descriptors_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserContentDescriptorPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {CStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserContentDescriptorPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.content_descriptors_to_exclude = [];
-            if (message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length) {
-                object.content_descriptors_to_exclude = [];
-                for (var j = 0; j < message.content_descriptors_to_exclude.length; ++j)
-                    object.content_descriptors_to_exclude[j] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.toObject(message.content_descriptors_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserContentDescriptorPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserContentDescriptorPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_UserContentDescriptorPreferences.ContentDescriptor = (function() {
-    
-            /**
-             * Properties of a ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @interface IContentDescriptor
-             * @property {number|null} [content_descriptorid] ContentDescriptor content_descriptorid
-             * @property {number|null} [timestamp_added] ContentDescriptor timestamp_added
-             */
-    
-            /**
-             * Constructs a new ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @classdesc Represents a ContentDescriptor.
-             * @implements IContentDescriptor
-             * @constructor
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             */
-            function ContentDescriptor(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * ContentDescriptor content_descriptorid.
-             * @member {number} content_descriptorid
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.content_descriptorid = 0;
-    
-            /**
-             * ContentDescriptor timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new ContentDescriptor instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor instance
-             */
-            ContentDescriptor.create = function create(properties) {
-                return new ContentDescriptor(properties);
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.content_descriptorid);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.content_descriptorid = reader.uint32();
-                        break;
-                    case 2:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a ContentDescriptor message.
-             * @function verify
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ContentDescriptor.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    if (!$util.isInteger(message.content_descriptorid))
-                        return "content_descriptorid: integer expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a ContentDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             */
-            ContentDescriptor.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserContentDescriptorPreferences.ContentDescriptor)
-                    return object;
-                var message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                if (object.content_descriptorid != null)
-                    message.content_descriptorid = object.content_descriptorid >>> 0;
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a ContentDescriptor message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.ContentDescriptor} message ContentDescriptor
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            ContentDescriptor.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.content_descriptorid = 0;
-                    object.timestamp_added = 0;
-                }
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    object.content_descriptorid = message.content_descriptorid;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this ContentDescriptor to JSON.
-             * @function toJSON
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            ContentDescriptor.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return ContentDescriptor;
-        })();
-    
-        return CStore_UserContentDescriptorPreferences;
-    })();
-    
-    $root.CStore_GetStorePreferences_Response = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Response.
-         * @exports ICStore_GetStorePreferences_Response
-         * @interface ICStore_GetStorePreferences_Response
-         * @property {ICStore_UserPreferences|null} [preferences] CStore_GetStorePreferences_Response preferences
-         * @property {ICStore_UserTagPreferences|null} [tag_preferences] CStore_GetStorePreferences_Response tag_preferences
-         * @property {ICStore_UserContentDescriptorPreferences|null} [content_descriptor_preferences] CStore_GetStorePreferences_Response content_descriptor_preferences
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Response.
-         * @exports CStore_GetStorePreferences_Response
-         * @classdesc Represents a CStore_GetStorePreferences_Response.
-         * @implements ICStore_GetStorePreferences_Response
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_GetStorePreferences_Response preferences.
-         * @member {ICStore_UserPreferences|null|undefined} preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response tag_preferences.
-         * @member {ICStore_UserTagPreferences|null|undefined} tag_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.tag_preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response content_descriptor_preferences.
-         * @member {ICStore_UserContentDescriptorPreferences|null|undefined} content_descriptor_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.content_descriptor_preferences = null;
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response instance
-         */
-        CStore_GetStorePreferences_Response.create = function create(properties) {
-            return new CStore_GetStorePreferences_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                $root.CStore_UserPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                $root.CStore_UserTagPreferences.encode(message.tag_preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                $root.CStore_UserContentDescriptorPreferences.encode(message.content_descriptor_preferences, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.preferences = $root.CStore_UserPreferences.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.tag_preferences = $root.CStore_UserTagPreferences.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Response message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.preferences != null && message.hasOwnProperty("preferences")) {
-                var error = $root.CStore_UserPreferences.verify(message.preferences);
-                if (error)
-                    return "preferences." + error;
-            }
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences")) {
-                var error = $root.CStore_UserTagPreferences.verify(message.tag_preferences);
-                if (error)
-                    return "tag_preferences." + error;
-            }
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences")) {
-                var error = $root.CStore_UserContentDescriptorPreferences.verify(message.content_descriptor_preferences);
-                if (error)
-                    return "content_descriptor_preferences." + error;
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         */
-        CStore_GetStorePreferences_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Response)
-                return object;
-            var message = new $root.CStore_GetStorePreferences_Response();
-            if (object.preferences != null) {
-                if (typeof object.preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.preferences: object expected");
-                message.preferences = $root.CStore_UserPreferences.fromObject(object.preferences);
-            }
-            if (object.tag_preferences != null) {
-                if (typeof object.tag_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.tag_preferences: object expected");
-                message.tag_preferences = $root.CStore_UserTagPreferences.fromObject(object.tag_preferences);
-            }
-            if (object.content_descriptor_preferences != null) {
-                if (typeof object.content_descriptor_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.content_descriptor_preferences: object expected");
-                message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.fromObject(object.content_descriptor_preferences);
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {CStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.preferences = null;
-                object.tag_preferences = null;
-                object.content_descriptor_preferences = null;
-            }
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                object.preferences = $root.CStore_UserPreferences.toObject(message.preferences, options);
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                object.tag_preferences = $root.CStore_UserTagPreferences.toObject(message.tag_preferences, options);
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                object.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.toObject(message.content_descriptor_preferences, options);
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Response to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Response;
-    })();
-    
-    $root.Store = (function() {
-    
-        /**
-         * Constructs a new Store service.
-         * @exports Store
-         * @classdesc Represents a Store
+         * Constructs a new ContentServerDirectory service.
+         * @exports ContentServerDirectory
+         * @classdesc Represents a ContentServerDirectory
          * @extends $protobuf.rpc.Service
          * @constructor
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function Store(rpcImpl, requestDelimited, responseDelimited) {
+        function ContentServerDirectory(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
     
-        (Store.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Store;
+        (ContentServerDirectory.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ContentServerDirectory;
     
         /**
-         * Creates new Store service using the specified rpc implementation.
+         * Creates new ContentServerDirectory service using the specified rpc implementation.
          * @function create
-         * @memberof Store
+         * @memberof ContentServerDirectory
          * @static
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Store} RPC service. Useful where requests and/or responses are streamed.
+         * @returns {ContentServerDirectory} RPC service. Useful where requests and/or responses are streamed.
          */
-        Store.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+        ContentServerDirectory.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
     
         /**
-         * Callback as used by {@link Store#getLocalizedNameForTags}.
-         * @memberof Store
-         * @typedef GetLocalizedNameForTagsCallback
+         * Callback as used by {@link ContentServerDirectory#getServersForSteamPipe}.
+         * @memberof ContentServerDirectory
+         * @typedef GetServersForSteamPipeCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CStore_GetLocalizedNameForTags_Response} [response] CStore_GetLocalizedNameForTags_Response
+         * @param {CContentServerDirectory_GetServersForSteamPipe_Response} [response] CContentServerDirectory_GetServersForSteamPipe_Response
          */
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls GetServersForSteamPipe.
+         * @function getServersForSteamPipe
+         * @memberof ContentServerDirectory
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @param {Store.GetLocalizedNameForTagsCallback} callback Node-style callback called with the error, if any, and CStore_GetLocalizedNameForTags_Response
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request} request CContentServerDirectory_GetServersForSteamPipe_Request message or plain object
+         * @param {ContentServerDirectory.GetServersForSteamPipeCallback} callback Node-style callback called with the error, if any, and CContentServerDirectory_GetServersForSteamPipe_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Store.prototype.getLocalizedNameForTags = function getLocalizedNameForTags(request, callback) {
-            return this.rpcCall(getLocalizedNameForTags, $root.CStore_GetLocalizedNameForTags_Request, $root.CStore_GetLocalizedNameForTags_Response, request, callback);
-        }, "name", { value: "GetLocalizedNameForTags" });
+        Object.defineProperty(ContentServerDirectory.prototype.getServersForSteamPipe = function getServersForSteamPipe(request, callback) {
+            return this.rpcCall(getServersForSteamPipe, $root.CContentServerDirectory_GetServersForSteamPipe_Request, $root.CContentServerDirectory_GetServersForSteamPipe_Response, request, callback);
+        }, "name", { value: "GetServersForSteamPipe" });
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls GetServersForSteamPipe.
+         * @function getServersForSteamPipe
+         * @memberof ContentServerDirectory
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @returns {Promise<CStore_GetLocalizedNameForTags_Response>} Promise
+         * @param {ICContentServerDirectory_GetServersForSteamPipe_Request} request CContentServerDirectory_GetServersForSteamPipe_Request message or plain object
+         * @returns {Promise<CContentServerDirectory_GetServersForSteamPipe_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Store#getStorePreferences}.
-         * @memberof Store
-         * @typedef GetStorePreferencesCallback
+         * Callback as used by {@link ContentServerDirectory#getDepotPatchInfo}.
+         * @memberof ContentServerDirectory
+         * @typedef GetDepotPatchInfoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CStore_GetStorePreferences_Response} [response] CStore_GetStorePreferences_Response
+         * @param {CContentServerDirectory_GetDepotPatchInfo_Response} [response] CContentServerDirectory_GetDepotPatchInfo_Response
          */
     
         /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
+         * Calls GetDepotPatchInfo.
+         * @function getDepotPatchInfo
+         * @memberof ContentServerDirectory
          * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @param {Store.GetStorePreferencesCallback} callback Node-style callback called with the error, if any, and CStore_GetStorePreferences_Response
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request} request CContentServerDirectory_GetDepotPatchInfo_Request message or plain object
+         * @param {ContentServerDirectory.GetDepotPatchInfoCallback} callback Node-style callback called with the error, if any, and CContentServerDirectory_GetDepotPatchInfo_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Store.prototype.getStorePreferences = function getStorePreferences(request, callback) {
-            return this.rpcCall(getStorePreferences, $root.CStore_GetStorePreferences_Request, $root.CStore_GetStorePreferences_Response, request, callback);
-        }, "name", { value: "GetStorePreferences" });
+        Object.defineProperty(ContentServerDirectory.prototype.getDepotPatchInfo = function getDepotPatchInfo(request, callback) {
+            return this.rpcCall(getDepotPatchInfo, $root.CContentServerDirectory_GetDepotPatchInfo_Request, $root.CContentServerDirectory_GetDepotPatchInfo_Response, request, callback);
+        }, "name", { value: "GetDepotPatchInfo" });
     
         /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
+         * Calls GetDepotPatchInfo.
+         * @function getDepotPatchInfo
+         * @memberof ContentServerDirectory
          * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @returns {Promise<CStore_GetStorePreferences_Response>} Promise
+         * @param {ICContentServerDirectory_GetDepotPatchInfo_Request} request CContentServerDirectory_GetDepotPatchInfo_Request message or plain object
+         * @returns {Promise<CContentServerDirectory_GetDepotPatchInfo_Response>} Promise
          * @variation 2
          */
     
-        return Store;
+        return ContentServerDirectory;
     })();
     
     /**

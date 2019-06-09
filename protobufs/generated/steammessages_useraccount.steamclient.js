@@ -16,6 +16,50 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    /**
+     * EInternalAccountType enum.
+     * @exports EInternalAccountType
+     * @enum {string}
+     * @property {number} k_EInternalSteamAccountType=1 k_EInternalSteamAccountType value
+     * @property {number} k_EInternalClanType=2 k_EInternalClanType value
+     * @property {number} k_EInternalAppType=3 k_EInternalAppType value
+     * @property {number} k_EInternalBroadcastChannelType=4 k_EInternalBroadcastChannelType value
+     */
+    $root.EInternalAccountType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[1] = "k_EInternalSteamAccountType"] = 1;
+        values[valuesById[2] = "k_EInternalClanType"] = 2;
+        values[valuesById[3] = "k_EInternalAppType"] = 3;
+        values[valuesById[4] = "k_EInternalBroadcastChannelType"] = 4;
+        return values;
+    })();
+    
+    /**
+     * EExternalAccountType enum.
+     * @exports EExternalAccountType
+     * @enum {string}
+     * @property {number} k_EExternalNone=0 k_EExternalNone value
+     * @property {number} k_EExternalSteamAccount=1 k_EExternalSteamAccount value
+     * @property {number} k_EExternalGoogleAccount=2 k_EExternalGoogleAccount value
+     * @property {number} k_EExternalFacebookAccount=3 k_EExternalFacebookAccount value
+     * @property {number} k_EExternalTwitterAccount=4 k_EExternalTwitterAccount value
+     * @property {number} k_EExternalTwitchAccount=5 k_EExternalTwitchAccount value
+     * @property {number} k_EExternalYouTubeChannelAccount=6 k_EExternalYouTubeChannelAccount value
+     * @property {number} k_EExternalFacebookPage=7 k_EExternalFacebookPage value
+     */
+    $root.EExternalAccountType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EExternalNone"] = 0;
+        values[valuesById[1] = "k_EExternalSteamAccount"] = 1;
+        values[valuesById[2] = "k_EExternalGoogleAccount"] = 2;
+        values[valuesById[3] = "k_EExternalFacebookAccount"] = 3;
+        values[valuesById[4] = "k_EExternalTwitterAccount"] = 4;
+        values[valuesById[5] = "k_EExternalTwitchAccount"] = 5;
+        values[valuesById[6] = "k_EExternalYouTubeChannelAccount"] = 6;
+        values[valuesById[7] = "k_EExternalFacebookPage"] = 7;
+        return values;
+    })();
+    
     $root.CUserAccount_GetAccountLinkStatus_Request = (function() {
     
         /**
@@ -386,6 +430,2125 @@
         return CUserAccount_GetAccountLinkStatus_Response;
     })();
     
+    $root.CUserAccount_CreateFriendInviteToken_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_CreateFriendInviteToken_Request.
+         * @exports ICUserAccount_CreateFriendInviteToken_Request
+         * @interface ICUserAccount_CreateFriendInviteToken_Request
+         * @property {number|null} [invite_limit] CUserAccount_CreateFriendInviteToken_Request invite_limit
+         * @property {number|null} [invite_duration] CUserAccount_CreateFriendInviteToken_Request invite_duration
+         * @property {string|null} [invite_note] CUserAccount_CreateFriendInviteToken_Request invite_note
+         */
+    
+        /**
+         * Constructs a new CUserAccount_CreateFriendInviteToken_Request.
+         * @exports CUserAccount_CreateFriendInviteToken_Request
+         * @classdesc Represents a CUserAccount_CreateFriendInviteToken_Request.
+         * @implements ICUserAccount_CreateFriendInviteToken_Request
+         * @constructor
+         * @param {ICUserAccount_CreateFriendInviteToken_Request=} [properties] Properties to set
+         */
+        function CUserAccount_CreateFriendInviteToken_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Request invite_limit.
+         * @member {number} invite_limit
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Request.prototype.invite_limit = 0;
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Request invite_duration.
+         * @member {number} invite_duration
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Request.prototype.invite_duration = 0;
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Request invite_note.
+         * @member {string} invite_note
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Request.prototype.invite_note = "";
+    
+        /**
+         * Creates a new CUserAccount_CreateFriendInviteToken_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Request=} [properties] Properties to set
+         * @returns {CUserAccount_CreateFriendInviteToken_Request} CUserAccount_CreateFriendInviteToken_Request instance
+         */
+        CUserAccount_CreateFriendInviteToken_Request.create = function create(properties) {
+            return new CUserAccount_CreateFriendInviteToken_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CreateFriendInviteToken_Request message. Does not implicitly {@link CUserAccount_CreateFriendInviteToken_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Request} message CUserAccount_CreateFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CreateFriendInviteToken_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.invite_limit);
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.invite_duration);
+            if (message.invite_note != null && message.hasOwnProperty("invite_note"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.invite_note);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CreateFriendInviteToken_Request message, length delimited. Does not implicitly {@link CUserAccount_CreateFriendInviteToken_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Request} message CUserAccount_CreateFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CreateFriendInviteToken_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_CreateFriendInviteToken_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_CreateFriendInviteToken_Request} CUserAccount_CreateFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CreateFriendInviteToken_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_CreateFriendInviteToken_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invite_limit = reader.uint32();
+                    break;
+                case 2:
+                    message.invite_duration = reader.uint32();
+                    break;
+                case 3:
+                    message.invite_note = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_CreateFriendInviteToken_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_CreateFriendInviteToken_Request} CUserAccount_CreateFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CreateFriendInviteToken_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_CreateFriendInviteToken_Request message.
+         * @function verify
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_CreateFriendInviteToken_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                if (!$util.isInteger(message.invite_limit))
+                    return "invite_limit: integer expected";
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                if (!$util.isInteger(message.invite_duration))
+                    return "invite_duration: integer expected";
+            if (message.invite_note != null && message.hasOwnProperty("invite_note"))
+                if (!$util.isString(message.invite_note))
+                    return "invite_note: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_CreateFriendInviteToken_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_CreateFriendInviteToken_Request} CUserAccount_CreateFriendInviteToken_Request
+         */
+        CUserAccount_CreateFriendInviteToken_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_CreateFriendInviteToken_Request)
+                return object;
+            var message = new $root.CUserAccount_CreateFriendInviteToken_Request();
+            if (object.invite_limit != null)
+                message.invite_limit = object.invite_limit >>> 0;
+            if (object.invite_duration != null)
+                message.invite_duration = object.invite_duration >>> 0;
+            if (object.invite_note != null)
+                message.invite_note = String(object.invite_note);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_CreateFriendInviteToken_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @static
+         * @param {CUserAccount_CreateFriendInviteToken_Request} message CUserAccount_CreateFriendInviteToken_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_CreateFriendInviteToken_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.invite_limit = 0;
+                object.invite_duration = 0;
+                object.invite_note = "";
+            }
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                object.invite_limit = message.invite_limit;
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                object.invite_duration = message.invite_duration;
+            if (message.invite_note != null && message.hasOwnProperty("invite_note"))
+                object.invite_note = message.invite_note;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_CreateFriendInviteToken_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_CreateFriendInviteToken_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_CreateFriendInviteToken_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_CreateFriendInviteToken_Request;
+    })();
+    
+    $root.CUserAccount_CreateFriendInviteToken_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_CreateFriendInviteToken_Response.
+         * @exports ICUserAccount_CreateFriendInviteToken_Response
+         * @interface ICUserAccount_CreateFriendInviteToken_Response
+         * @property {string|null} [invite_token] CUserAccount_CreateFriendInviteToken_Response invite_token
+         * @property {number|Long|null} [invite_limit] CUserAccount_CreateFriendInviteToken_Response invite_limit
+         * @property {number|Long|null} [invite_duration] CUserAccount_CreateFriendInviteToken_Response invite_duration
+         * @property {number|null} [time_created] CUserAccount_CreateFriendInviteToken_Response time_created
+         * @property {boolean|null} [valid] CUserAccount_CreateFriendInviteToken_Response valid
+         */
+    
+        /**
+         * Constructs a new CUserAccount_CreateFriendInviteToken_Response.
+         * @exports CUserAccount_CreateFriendInviteToken_Response
+         * @classdesc Represents a CUserAccount_CreateFriendInviteToken_Response.
+         * @implements ICUserAccount_CreateFriendInviteToken_Response
+         * @constructor
+         * @param {ICUserAccount_CreateFriendInviteToken_Response=} [properties] Properties to set
+         */
+        function CUserAccount_CreateFriendInviteToken_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Response invite_token.
+         * @member {string} invite_token
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.invite_token = "";
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Response invite_limit.
+         * @member {number|Long} invite_limit
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.invite_limit = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Response invite_duration.
+         * @member {number|Long} invite_duration
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.invite_duration = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Response time_created.
+         * @member {number} time_created
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.time_created = 0;
+    
+        /**
+         * CUserAccount_CreateFriendInviteToken_Response valid.
+         * @member {boolean} valid
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.valid = false;
+    
+        /**
+         * Creates a new CUserAccount_CreateFriendInviteToken_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Response=} [properties] Properties to set
+         * @returns {CUserAccount_CreateFriendInviteToken_Response} CUserAccount_CreateFriendInviteToken_Response instance
+         */
+        CUserAccount_CreateFriendInviteToken_Response.create = function create(properties) {
+            return new CUserAccount_CreateFriendInviteToken_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CreateFriendInviteToken_Response message. Does not implicitly {@link CUserAccount_CreateFriendInviteToken_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Response} message CUserAccount_CreateFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CreateFriendInviteToken_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invite_token);
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.invite_limit);
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.invite_duration);
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                writer.uint32(/* id 4, wireType 5 =*/37).fixed32(message.time_created);
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.valid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_CreateFriendInviteToken_Response message, length delimited. Does not implicitly {@link CUserAccount_CreateFriendInviteToken_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_CreateFriendInviteToken_Response} message CUserAccount_CreateFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_CreateFriendInviteToken_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_CreateFriendInviteToken_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_CreateFriendInviteToken_Response} CUserAccount_CreateFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CreateFriendInviteToken_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_CreateFriendInviteToken_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invite_token = reader.string();
+                    break;
+                case 2:
+                    message.invite_limit = reader.uint64();
+                    break;
+                case 3:
+                    message.invite_duration = reader.uint64();
+                    break;
+                case 4:
+                    message.time_created = reader.fixed32();
+                    break;
+                case 5:
+                    message.valid = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_CreateFriendInviteToken_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_CreateFriendInviteToken_Response} CUserAccount_CreateFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_CreateFriendInviteToken_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_CreateFriendInviteToken_Response message.
+         * @function verify
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_CreateFriendInviteToken_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                if (!$util.isString(message.invite_token))
+                    return "invite_token: string expected";
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                if (!$util.isInteger(message.invite_limit) && !(message.invite_limit && $util.isInteger(message.invite_limit.low) && $util.isInteger(message.invite_limit.high)))
+                    return "invite_limit: integer|Long expected";
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                if (!$util.isInteger(message.invite_duration) && !(message.invite_duration && $util.isInteger(message.invite_duration.low) && $util.isInteger(message.invite_duration.high)))
+                    return "invite_duration: integer|Long expected";
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                if (!$util.isInteger(message.time_created))
+                    return "time_created: integer expected";
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                if (typeof message.valid !== "boolean")
+                    return "valid: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_CreateFriendInviteToken_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_CreateFriendInviteToken_Response} CUserAccount_CreateFriendInviteToken_Response
+         */
+        CUserAccount_CreateFriendInviteToken_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_CreateFriendInviteToken_Response)
+                return object;
+            var message = new $root.CUserAccount_CreateFriendInviteToken_Response();
+            if (object.invite_token != null)
+                message.invite_token = String(object.invite_token);
+            if (object.invite_limit != null)
+                if ($util.Long)
+                    (message.invite_limit = $util.Long.fromValue(object.invite_limit)).unsigned = true;
+                else if (typeof object.invite_limit === "string")
+                    message.invite_limit = parseInt(object.invite_limit, 10);
+                else if (typeof object.invite_limit === "number")
+                    message.invite_limit = object.invite_limit;
+                else if (typeof object.invite_limit === "object")
+                    message.invite_limit = new $util.LongBits(object.invite_limit.low >>> 0, object.invite_limit.high >>> 0).toNumber(true);
+            if (object.invite_duration != null)
+                if ($util.Long)
+                    (message.invite_duration = $util.Long.fromValue(object.invite_duration)).unsigned = true;
+                else if (typeof object.invite_duration === "string")
+                    message.invite_duration = parseInt(object.invite_duration, 10);
+                else if (typeof object.invite_duration === "number")
+                    message.invite_duration = object.invite_duration;
+                else if (typeof object.invite_duration === "object")
+                    message.invite_duration = new $util.LongBits(object.invite_duration.low >>> 0, object.invite_duration.high >>> 0).toNumber(true);
+            if (object.time_created != null)
+                message.time_created = object.time_created >>> 0;
+            if (object.valid != null)
+                message.valid = Boolean(object.valid);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_CreateFriendInviteToken_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @static
+         * @param {CUserAccount_CreateFriendInviteToken_Response} message CUserAccount_CreateFriendInviteToken_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_CreateFriendInviteToken_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.invite_token = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.invite_limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.invite_limit = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.invite_duration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.invite_duration = options.longs === String ? "0" : 0;
+                object.time_created = 0;
+                object.valid = false;
+            }
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                object.invite_token = message.invite_token;
+            if (message.invite_limit != null && message.hasOwnProperty("invite_limit"))
+                if (typeof message.invite_limit === "number")
+                    object.invite_limit = options.longs === String ? String(message.invite_limit) : message.invite_limit;
+                else
+                    object.invite_limit = options.longs === String ? $util.Long.prototype.toString.call(message.invite_limit) : options.longs === Number ? new $util.LongBits(message.invite_limit.low >>> 0, message.invite_limit.high >>> 0).toNumber(true) : message.invite_limit;
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                if (typeof message.invite_duration === "number")
+                    object.invite_duration = options.longs === String ? String(message.invite_duration) : message.invite_duration;
+                else
+                    object.invite_duration = options.longs === String ? $util.Long.prototype.toString.call(message.invite_duration) : options.longs === Number ? new $util.LongBits(message.invite_duration.low >>> 0, message.invite_duration.high >>> 0).toNumber(true) : message.invite_duration;
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                object.time_created = message.time_created;
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                object.valid = message.valid;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_CreateFriendInviteToken_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_CreateFriendInviteToken_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_CreateFriendInviteToken_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_CreateFriendInviteToken_Response;
+    })();
+    
+    $root.CUserAccount_GetFriendInviteTokens_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_GetFriendInviteTokens_Request.
+         * @exports ICUserAccount_GetFriendInviteTokens_Request
+         * @interface ICUserAccount_GetFriendInviteTokens_Request
+         */
+    
+        /**
+         * Constructs a new CUserAccount_GetFriendInviteTokens_Request.
+         * @exports CUserAccount_GetFriendInviteTokens_Request
+         * @classdesc Represents a CUserAccount_GetFriendInviteTokens_Request.
+         * @implements ICUserAccount_GetFriendInviteTokens_Request
+         * @constructor
+         * @param {ICUserAccount_GetFriendInviteTokens_Request=} [properties] Properties to set
+         */
+        function CUserAccount_GetFriendInviteTokens_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CUserAccount_GetFriendInviteTokens_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Request=} [properties] Properties to set
+         * @returns {CUserAccount_GetFriendInviteTokens_Request} CUserAccount_GetFriendInviteTokens_Request instance
+         */
+        CUserAccount_GetFriendInviteTokens_Request.create = function create(properties) {
+            return new CUserAccount_GetFriendInviteTokens_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetFriendInviteTokens_Request message. Does not implicitly {@link CUserAccount_GetFriendInviteTokens_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Request} message CUserAccount_GetFriendInviteTokens_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetFriendInviteTokens_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetFriendInviteTokens_Request message, length delimited. Does not implicitly {@link CUserAccount_GetFriendInviteTokens_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Request} message CUserAccount_GetFriendInviteTokens_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetFriendInviteTokens_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetFriendInviteTokens_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_GetFriendInviteTokens_Request} CUserAccount_GetFriendInviteTokens_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetFriendInviteTokens_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_GetFriendInviteTokens_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetFriendInviteTokens_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_GetFriendInviteTokens_Request} CUserAccount_GetFriendInviteTokens_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetFriendInviteTokens_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_GetFriendInviteTokens_Request message.
+         * @function verify
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_GetFriendInviteTokens_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_GetFriendInviteTokens_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_GetFriendInviteTokens_Request} CUserAccount_GetFriendInviteTokens_Request
+         */
+        CUserAccount_GetFriendInviteTokens_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_GetFriendInviteTokens_Request)
+                return object;
+            return new $root.CUserAccount_GetFriendInviteTokens_Request();
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_GetFriendInviteTokens_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @static
+         * @param {CUserAccount_GetFriendInviteTokens_Request} message CUserAccount_GetFriendInviteTokens_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_GetFriendInviteTokens_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CUserAccount_GetFriendInviteTokens_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_GetFriendInviteTokens_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_GetFriendInviteTokens_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_GetFriendInviteTokens_Request;
+    })();
+    
+    $root.CUserAccount_GetFriendInviteTokens_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_GetFriendInviteTokens_Response.
+         * @exports ICUserAccount_GetFriendInviteTokens_Response
+         * @interface ICUserAccount_GetFriendInviteTokens_Response
+         * @property {Array.<ICUserAccount_CreateFriendInviteToken_Response>|null} [tokens] CUserAccount_GetFriendInviteTokens_Response tokens
+         */
+    
+        /**
+         * Constructs a new CUserAccount_GetFriendInviteTokens_Response.
+         * @exports CUserAccount_GetFriendInviteTokens_Response
+         * @classdesc Represents a CUserAccount_GetFriendInviteTokens_Response.
+         * @implements ICUserAccount_GetFriendInviteTokens_Response
+         * @constructor
+         * @param {ICUserAccount_GetFriendInviteTokens_Response=} [properties] Properties to set
+         */
+        function CUserAccount_GetFriendInviteTokens_Response(properties) {
+            this.tokens = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_GetFriendInviteTokens_Response tokens.
+         * @member {Array.<ICUserAccount_CreateFriendInviteToken_Response>} tokens
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @instance
+         */
+        CUserAccount_GetFriendInviteTokens_Response.prototype.tokens = $util.emptyArray;
+    
+        /**
+         * Creates a new CUserAccount_GetFriendInviteTokens_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Response=} [properties] Properties to set
+         * @returns {CUserAccount_GetFriendInviteTokens_Response} CUserAccount_GetFriendInviteTokens_Response instance
+         */
+        CUserAccount_GetFriendInviteTokens_Response.create = function create(properties) {
+            return new CUserAccount_GetFriendInviteTokens_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetFriendInviteTokens_Response message. Does not implicitly {@link CUserAccount_GetFriendInviteTokens_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Response} message CUserAccount_GetFriendInviteTokens_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetFriendInviteTokens_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.tokens != null && message.tokens.length)
+                for (var i = 0; i < message.tokens.length; ++i)
+                    $root.CUserAccount_CreateFriendInviteToken_Response.encode(message.tokens[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_GetFriendInviteTokens_Response message, length delimited. Does not implicitly {@link CUserAccount_GetFriendInviteTokens_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {ICUserAccount_GetFriendInviteTokens_Response} message CUserAccount_GetFriendInviteTokens_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_GetFriendInviteTokens_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetFriendInviteTokens_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_GetFriendInviteTokens_Response} CUserAccount_GetFriendInviteTokens_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetFriendInviteTokens_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_GetFriendInviteTokens_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.tokens && message.tokens.length))
+                        message.tokens = [];
+                    message.tokens.push($root.CUserAccount_CreateFriendInviteToken_Response.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_GetFriendInviteTokens_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_GetFriendInviteTokens_Response} CUserAccount_GetFriendInviteTokens_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_GetFriendInviteTokens_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_GetFriendInviteTokens_Response message.
+         * @function verify
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_GetFriendInviteTokens_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.tokens != null && message.hasOwnProperty("tokens")) {
+                if (!Array.isArray(message.tokens))
+                    return "tokens: array expected";
+                for (var i = 0; i < message.tokens.length; ++i) {
+                    var error = $root.CUserAccount_CreateFriendInviteToken_Response.verify(message.tokens[i]);
+                    if (error)
+                        return "tokens." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_GetFriendInviteTokens_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_GetFriendInviteTokens_Response} CUserAccount_GetFriendInviteTokens_Response
+         */
+        CUserAccount_GetFriendInviteTokens_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_GetFriendInviteTokens_Response)
+                return object;
+            var message = new $root.CUserAccount_GetFriendInviteTokens_Response();
+            if (object.tokens) {
+                if (!Array.isArray(object.tokens))
+                    throw TypeError(".CUserAccount_GetFriendInviteTokens_Response.tokens: array expected");
+                message.tokens = [];
+                for (var i = 0; i < object.tokens.length; ++i) {
+                    if (typeof object.tokens[i] !== "object")
+                        throw TypeError(".CUserAccount_GetFriendInviteTokens_Response.tokens: object expected");
+                    message.tokens[i] = $root.CUserAccount_CreateFriendInviteToken_Response.fromObject(object.tokens[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_GetFriendInviteTokens_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @static
+         * @param {CUserAccount_GetFriendInviteTokens_Response} message CUserAccount_GetFriendInviteTokens_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_GetFriendInviteTokens_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.tokens = [];
+            if (message.tokens && message.tokens.length) {
+                object.tokens = [];
+                for (var j = 0; j < message.tokens.length; ++j)
+                    object.tokens[j] = $root.CUserAccount_CreateFriendInviteToken_Response.toObject(message.tokens[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_GetFriendInviteTokens_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_GetFriendInviteTokens_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_GetFriendInviteTokens_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_GetFriendInviteTokens_Response;
+    })();
+    
+    $root.CUserAccount_ViewFriendInviteToken_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_ViewFriendInviteToken_Request.
+         * @exports ICUserAccount_ViewFriendInviteToken_Request
+         * @interface ICUserAccount_ViewFriendInviteToken_Request
+         * @property {number|Long|null} [steamid] CUserAccount_ViewFriendInviteToken_Request steamid
+         * @property {string|null} [invite_token] CUserAccount_ViewFriendInviteToken_Request invite_token
+         */
+    
+        /**
+         * Constructs a new CUserAccount_ViewFriendInviteToken_Request.
+         * @exports CUserAccount_ViewFriendInviteToken_Request
+         * @classdesc Represents a CUserAccount_ViewFriendInviteToken_Request.
+         * @implements ICUserAccount_ViewFriendInviteToken_Request
+         * @constructor
+         * @param {ICUserAccount_ViewFriendInviteToken_Request=} [properties] Properties to set
+         */
+        function CUserAccount_ViewFriendInviteToken_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_ViewFriendInviteToken_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_ViewFriendInviteToken_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CUserAccount_ViewFriendInviteToken_Request invite_token.
+         * @member {string} invite_token
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_ViewFriendInviteToken_Request.prototype.invite_token = "";
+    
+        /**
+         * Creates a new CUserAccount_ViewFriendInviteToken_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Request=} [properties] Properties to set
+         * @returns {CUserAccount_ViewFriendInviteToken_Request} CUserAccount_ViewFriendInviteToken_Request instance
+         */
+        CUserAccount_ViewFriendInviteToken_Request.create = function create(properties) {
+            return new CUserAccount_ViewFriendInviteToken_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_ViewFriendInviteToken_Request message. Does not implicitly {@link CUserAccount_ViewFriendInviteToken_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Request} message CUserAccount_ViewFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_ViewFriendInviteToken_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.invite_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_ViewFriendInviteToken_Request message, length delimited. Does not implicitly {@link CUserAccount_ViewFriendInviteToken_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Request} message CUserAccount_ViewFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_ViewFriendInviteToken_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_ViewFriendInviteToken_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_ViewFriendInviteToken_Request} CUserAccount_ViewFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_ViewFriendInviteToken_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_ViewFriendInviteToken_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.invite_token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_ViewFriendInviteToken_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_ViewFriendInviteToken_Request} CUserAccount_ViewFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_ViewFriendInviteToken_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_ViewFriendInviteToken_Request message.
+         * @function verify
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_ViewFriendInviteToken_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                if (!$util.isString(message.invite_token))
+                    return "invite_token: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_ViewFriendInviteToken_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_ViewFriendInviteToken_Request} CUserAccount_ViewFriendInviteToken_Request
+         */
+        CUserAccount_ViewFriendInviteToken_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_ViewFriendInviteToken_Request)
+                return object;
+            var message = new $root.CUserAccount_ViewFriendInviteToken_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.invite_token != null)
+                message.invite_token = String(object.invite_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_ViewFriendInviteToken_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @static
+         * @param {CUserAccount_ViewFriendInviteToken_Request} message CUserAccount_ViewFriendInviteToken_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_ViewFriendInviteToken_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.invite_token = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                object.invite_token = message.invite_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_ViewFriendInviteToken_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_ViewFriendInviteToken_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_ViewFriendInviteToken_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_ViewFriendInviteToken_Request;
+    })();
+    
+    $root.CUserAccount_ViewFriendInviteToken_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_ViewFriendInviteToken_Response.
+         * @exports ICUserAccount_ViewFriendInviteToken_Response
+         * @interface ICUserAccount_ViewFriendInviteToken_Response
+         * @property {boolean|null} [valid] CUserAccount_ViewFriendInviteToken_Response valid
+         * @property {number|Long|null} [steamid] CUserAccount_ViewFriendInviteToken_Response steamid
+         * @property {number|Long|null} [invite_duration] CUserAccount_ViewFriendInviteToken_Response invite_duration
+         */
+    
+        /**
+         * Constructs a new CUserAccount_ViewFriendInviteToken_Response.
+         * @exports CUserAccount_ViewFriendInviteToken_Response
+         * @classdesc Represents a CUserAccount_ViewFriendInviteToken_Response.
+         * @implements ICUserAccount_ViewFriendInviteToken_Response
+         * @constructor
+         * @param {ICUserAccount_ViewFriendInviteToken_Response=} [properties] Properties to set
+         */
+        function CUserAccount_ViewFriendInviteToken_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_ViewFriendInviteToken_Response valid.
+         * @member {boolean} valid
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_ViewFriendInviteToken_Response.prototype.valid = false;
+    
+        /**
+         * CUserAccount_ViewFriendInviteToken_Response steamid.
+         * @member {number|Long} steamid
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_ViewFriendInviteToken_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CUserAccount_ViewFriendInviteToken_Response invite_duration.
+         * @member {number|Long} invite_duration
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @instance
+         */
+        CUserAccount_ViewFriendInviteToken_Response.prototype.invite_duration = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CUserAccount_ViewFriendInviteToken_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Response=} [properties] Properties to set
+         * @returns {CUserAccount_ViewFriendInviteToken_Response} CUserAccount_ViewFriendInviteToken_Response instance
+         */
+        CUserAccount_ViewFriendInviteToken_Response.create = function create(properties) {
+            return new CUserAccount_ViewFriendInviteToken_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_ViewFriendInviteToken_Response message. Does not implicitly {@link CUserAccount_ViewFriendInviteToken_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Response} message CUserAccount_ViewFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_ViewFriendInviteToken_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.valid);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.invite_duration);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_ViewFriendInviteToken_Response message, length delimited. Does not implicitly {@link CUserAccount_ViewFriendInviteToken_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_ViewFriendInviteToken_Response} message CUserAccount_ViewFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_ViewFriendInviteToken_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_ViewFriendInviteToken_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_ViewFriendInviteToken_Response} CUserAccount_ViewFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_ViewFriendInviteToken_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_ViewFriendInviteToken_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.valid = reader.bool();
+                    break;
+                case 2:
+                    message.steamid = reader.uint64();
+                    break;
+                case 3:
+                    message.invite_duration = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_ViewFriendInviteToken_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_ViewFriendInviteToken_Response} CUserAccount_ViewFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_ViewFriendInviteToken_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_ViewFriendInviteToken_Response message.
+         * @function verify
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_ViewFriendInviteToken_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                if (typeof message.valid !== "boolean")
+                    return "valid: boolean expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                if (!$util.isInteger(message.invite_duration) && !(message.invite_duration && $util.isInteger(message.invite_duration.low) && $util.isInteger(message.invite_duration.high)))
+                    return "invite_duration: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_ViewFriendInviteToken_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_ViewFriendInviteToken_Response} CUserAccount_ViewFriendInviteToken_Response
+         */
+        CUserAccount_ViewFriendInviteToken_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_ViewFriendInviteToken_Response)
+                return object;
+            var message = new $root.CUserAccount_ViewFriendInviteToken_Response();
+            if (object.valid != null)
+                message.valid = Boolean(object.valid);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+            if (object.invite_duration != null)
+                if ($util.Long)
+                    (message.invite_duration = $util.Long.fromValue(object.invite_duration)).unsigned = true;
+                else if (typeof object.invite_duration === "string")
+                    message.invite_duration = parseInt(object.invite_duration, 10);
+                else if (typeof object.invite_duration === "number")
+                    message.invite_duration = object.invite_duration;
+                else if (typeof object.invite_duration === "object")
+                    message.invite_duration = new $util.LongBits(object.invite_duration.low >>> 0, object.invite_duration.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_ViewFriendInviteToken_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @static
+         * @param {CUserAccount_ViewFriendInviteToken_Response} message CUserAccount_ViewFriendInviteToken_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_ViewFriendInviteToken_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.valid = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.invite_duration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.invite_duration = options.longs === String ? "0" : 0;
+            }
+            if (message.valid != null && message.hasOwnProperty("valid"))
+                object.valid = message.valid;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+            if (message.invite_duration != null && message.hasOwnProperty("invite_duration"))
+                if (typeof message.invite_duration === "number")
+                    object.invite_duration = options.longs === String ? String(message.invite_duration) : message.invite_duration;
+                else
+                    object.invite_duration = options.longs === String ? $util.Long.prototype.toString.call(message.invite_duration) : options.longs === Number ? new $util.LongBits(message.invite_duration.low >>> 0, message.invite_duration.high >>> 0).toNumber(true) : message.invite_duration;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_ViewFriendInviteToken_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_ViewFriendInviteToken_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_ViewFriendInviteToken_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_ViewFriendInviteToken_Response;
+    })();
+    
+    $root.CUserAccount_RedeemFriendInviteToken_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_RedeemFriendInviteToken_Request.
+         * @exports ICUserAccount_RedeemFriendInviteToken_Request
+         * @interface ICUserAccount_RedeemFriendInviteToken_Request
+         * @property {number|Long|null} [steamid] CUserAccount_RedeemFriendInviteToken_Request steamid
+         * @property {string|null} [invite_token] CUserAccount_RedeemFriendInviteToken_Request invite_token
+         */
+    
+        /**
+         * Constructs a new CUserAccount_RedeemFriendInviteToken_Request.
+         * @exports CUserAccount_RedeemFriendInviteToken_Request
+         * @classdesc Represents a CUserAccount_RedeemFriendInviteToken_Request.
+         * @implements ICUserAccount_RedeemFriendInviteToken_Request
+         * @constructor
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request=} [properties] Properties to set
+         */
+        function CUserAccount_RedeemFriendInviteToken_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_RedeemFriendInviteToken_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CUserAccount_RedeemFriendInviteToken_Request invite_token.
+         * @member {string} invite_token
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.prototype.invite_token = "";
+    
+        /**
+         * Creates a new CUserAccount_RedeemFriendInviteToken_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request=} [properties] Properties to set
+         * @returns {CUserAccount_RedeemFriendInviteToken_Request} CUserAccount_RedeemFriendInviteToken_Request instance
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.create = function create(properties) {
+            return new CUserAccount_RedeemFriendInviteToken_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RedeemFriendInviteToken_Request message. Does not implicitly {@link CUserAccount_RedeemFriendInviteToken_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request} message CUserAccount_RedeemFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.invite_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RedeemFriendInviteToken_Request message, length delimited. Does not implicitly {@link CUserAccount_RedeemFriendInviteToken_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request} message CUserAccount_RedeemFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_RedeemFriendInviteToken_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_RedeemFriendInviteToken_Request} CUserAccount_RedeemFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_RedeemFriendInviteToken_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.invite_token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_RedeemFriendInviteToken_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_RedeemFriendInviteToken_Request} CUserAccount_RedeemFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_RedeemFriendInviteToken_Request message.
+         * @function verify
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                if (!$util.isString(message.invite_token))
+                    return "invite_token: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_RedeemFriendInviteToken_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_RedeemFriendInviteToken_Request} CUserAccount_RedeemFriendInviteToken_Request
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_RedeemFriendInviteToken_Request)
+                return object;
+            var message = new $root.CUserAccount_RedeemFriendInviteToken_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.invite_token != null)
+                message.invite_token = String(object.invite_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_RedeemFriendInviteToken_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @static
+         * @param {CUserAccount_RedeemFriendInviteToken_Request} message CUserAccount_RedeemFriendInviteToken_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.invite_token = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                object.invite_token = message.invite_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_RedeemFriendInviteToken_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_RedeemFriendInviteToken_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_RedeemFriendInviteToken_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_RedeemFriendInviteToken_Request;
+    })();
+    
+    $root.CUserAccount_RedeemFriendInviteToken_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_RedeemFriendInviteToken_Response.
+         * @exports ICUserAccount_RedeemFriendInviteToken_Response
+         * @interface ICUserAccount_RedeemFriendInviteToken_Response
+         */
+    
+        /**
+         * Constructs a new CUserAccount_RedeemFriendInviteToken_Response.
+         * @exports CUserAccount_RedeemFriendInviteToken_Response
+         * @classdesc Represents a CUserAccount_RedeemFriendInviteToken_Response.
+         * @implements ICUserAccount_RedeemFriendInviteToken_Response
+         * @constructor
+         * @param {ICUserAccount_RedeemFriendInviteToken_Response=} [properties] Properties to set
+         */
+        function CUserAccount_RedeemFriendInviteToken_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CUserAccount_RedeemFriendInviteToken_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Response=} [properties] Properties to set
+         * @returns {CUserAccount_RedeemFriendInviteToken_Response} CUserAccount_RedeemFriendInviteToken_Response instance
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.create = function create(properties) {
+            return new CUserAccount_RedeemFriendInviteToken_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RedeemFriendInviteToken_Response message. Does not implicitly {@link CUserAccount_RedeemFriendInviteToken_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Response} message CUserAccount_RedeemFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RedeemFriendInviteToken_Response message, length delimited. Does not implicitly {@link CUserAccount_RedeemFriendInviteToken_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RedeemFriendInviteToken_Response} message CUserAccount_RedeemFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_RedeemFriendInviteToken_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_RedeemFriendInviteToken_Response} CUserAccount_RedeemFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_RedeemFriendInviteToken_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_RedeemFriendInviteToken_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_RedeemFriendInviteToken_Response} CUserAccount_RedeemFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_RedeemFriendInviteToken_Response message.
+         * @function verify
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_RedeemFriendInviteToken_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_RedeemFriendInviteToken_Response} CUserAccount_RedeemFriendInviteToken_Response
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_RedeemFriendInviteToken_Response)
+                return object;
+            return new $root.CUserAccount_RedeemFriendInviteToken_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_RedeemFriendInviteToken_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @static
+         * @param {CUserAccount_RedeemFriendInviteToken_Response} message CUserAccount_RedeemFriendInviteToken_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CUserAccount_RedeemFriendInviteToken_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_RedeemFriendInviteToken_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_RedeemFriendInviteToken_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_RedeemFriendInviteToken_Response;
+    })();
+    
+    $root.CUserAccount_RevokeFriendInviteToken_Request = (function() {
+    
+        /**
+         * Properties of a CUserAccount_RevokeFriendInviteToken_Request.
+         * @exports ICUserAccount_RevokeFriendInviteToken_Request
+         * @interface ICUserAccount_RevokeFriendInviteToken_Request
+         * @property {string|null} [invite_token] CUserAccount_RevokeFriendInviteToken_Request invite_token
+         */
+    
+        /**
+         * Constructs a new CUserAccount_RevokeFriendInviteToken_Request.
+         * @exports CUserAccount_RevokeFriendInviteToken_Request
+         * @classdesc Represents a CUserAccount_RevokeFriendInviteToken_Request.
+         * @implements ICUserAccount_RevokeFriendInviteToken_Request
+         * @constructor
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request=} [properties] Properties to set
+         */
+        function CUserAccount_RevokeFriendInviteToken_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CUserAccount_RevokeFriendInviteToken_Request invite_token.
+         * @member {string} invite_token
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @instance
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.prototype.invite_token = "";
+    
+        /**
+         * Creates a new CUserAccount_RevokeFriendInviteToken_Request instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request=} [properties] Properties to set
+         * @returns {CUserAccount_RevokeFriendInviteToken_Request} CUserAccount_RevokeFriendInviteToken_Request instance
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.create = function create(properties) {
+            return new CUserAccount_RevokeFriendInviteToken_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RevokeFriendInviteToken_Request message. Does not implicitly {@link CUserAccount_RevokeFriendInviteToken_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request} message CUserAccount_RevokeFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.invite_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RevokeFriendInviteToken_Request message, length delimited. Does not implicitly {@link CUserAccount_RevokeFriendInviteToken_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request} message CUserAccount_RevokeFriendInviteToken_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_RevokeFriendInviteToken_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_RevokeFriendInviteToken_Request} CUserAccount_RevokeFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_RevokeFriendInviteToken_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.invite_token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_RevokeFriendInviteToken_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_RevokeFriendInviteToken_Request} CUserAccount_RevokeFriendInviteToken_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_RevokeFriendInviteToken_Request message.
+         * @function verify
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                if (!$util.isString(message.invite_token))
+                    return "invite_token: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_RevokeFriendInviteToken_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_RevokeFriendInviteToken_Request} CUserAccount_RevokeFriendInviteToken_Request
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_RevokeFriendInviteToken_Request)
+                return object;
+            var message = new $root.CUserAccount_RevokeFriendInviteToken_Request();
+            if (object.invite_token != null)
+                message.invite_token = String(object.invite_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_RevokeFriendInviteToken_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @static
+         * @param {CUserAccount_RevokeFriendInviteToken_Request} message CUserAccount_RevokeFriendInviteToken_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.invite_token = "";
+            if (message.invite_token != null && message.hasOwnProperty("invite_token"))
+                object.invite_token = message.invite_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CUserAccount_RevokeFriendInviteToken_Request to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_RevokeFriendInviteToken_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_RevokeFriendInviteToken_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_RevokeFriendInviteToken_Request;
+    })();
+    
+    $root.CUserAccount_RevokeFriendInviteToken_Response = (function() {
+    
+        /**
+         * Properties of a CUserAccount_RevokeFriendInviteToken_Response.
+         * @exports ICUserAccount_RevokeFriendInviteToken_Response
+         * @interface ICUserAccount_RevokeFriendInviteToken_Response
+         */
+    
+        /**
+         * Constructs a new CUserAccount_RevokeFriendInviteToken_Response.
+         * @exports CUserAccount_RevokeFriendInviteToken_Response
+         * @classdesc Represents a CUserAccount_RevokeFriendInviteToken_Response.
+         * @implements ICUserAccount_RevokeFriendInviteToken_Response
+         * @constructor
+         * @param {ICUserAccount_RevokeFriendInviteToken_Response=} [properties] Properties to set
+         */
+        function CUserAccount_RevokeFriendInviteToken_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CUserAccount_RevokeFriendInviteToken_Response instance using the specified properties.
+         * @function create
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Response=} [properties] Properties to set
+         * @returns {CUserAccount_RevokeFriendInviteToken_Response} CUserAccount_RevokeFriendInviteToken_Response instance
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.create = function create(properties) {
+            return new CUserAccount_RevokeFriendInviteToken_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RevokeFriendInviteToken_Response message. Does not implicitly {@link CUserAccount_RevokeFriendInviteToken_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Response} message CUserAccount_RevokeFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CUserAccount_RevokeFriendInviteToken_Response message, length delimited. Does not implicitly {@link CUserAccount_RevokeFriendInviteToken_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {ICUserAccount_RevokeFriendInviteToken_Response} message CUserAccount_RevokeFriendInviteToken_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CUserAccount_RevokeFriendInviteToken_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CUserAccount_RevokeFriendInviteToken_Response} CUserAccount_RevokeFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CUserAccount_RevokeFriendInviteToken_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CUserAccount_RevokeFriendInviteToken_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CUserAccount_RevokeFriendInviteToken_Response} CUserAccount_RevokeFriendInviteToken_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CUserAccount_RevokeFriendInviteToken_Response message.
+         * @function verify
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CUserAccount_RevokeFriendInviteToken_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CUserAccount_RevokeFriendInviteToken_Response} CUserAccount_RevokeFriendInviteToken_Response
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CUserAccount_RevokeFriendInviteToken_Response)
+                return object;
+            return new $root.CUserAccount_RevokeFriendInviteToken_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CUserAccount_RevokeFriendInviteToken_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @static
+         * @param {CUserAccount_RevokeFriendInviteToken_Response} message CUserAccount_RevokeFriendInviteToken_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CUserAccount_RevokeFriendInviteToken_Response to JSON.
+         * @function toJSON
+         * @memberof CUserAccount_RevokeFriendInviteToken_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CUserAccount_RevokeFriendInviteToken_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CUserAccount_RevokeFriendInviteToken_Response;
+    })();
+    
     $root.CUserAccount_RegisterCompatTool_Request = (function() {
     
         /**
@@ -733,6 +2896,911 @@
         return CUserAccount_RegisterCompatTool_Response;
     })();
     
+    $root.CAccountLinking_GetLinkedAccountInfo_Request = (function() {
+    
+        /**
+         * Properties of a CAccountLinking_GetLinkedAccountInfo_Request.
+         * @exports ICAccountLinking_GetLinkedAccountInfo_Request
+         * @interface ICAccountLinking_GetLinkedAccountInfo_Request
+         * @property {EInternalAccountType|null} [account_type] CAccountLinking_GetLinkedAccountInfo_Request account_type
+         * @property {number|Long|null} [account_id] CAccountLinking_GetLinkedAccountInfo_Request account_id
+         * @property {EExternalAccountType|null} [filter] CAccountLinking_GetLinkedAccountInfo_Request filter
+         * @property {boolean|null} [return_access_token] CAccountLinking_GetLinkedAccountInfo_Request return_access_token
+         */
+    
+        /**
+         * Constructs a new CAccountLinking_GetLinkedAccountInfo_Request.
+         * @exports CAccountLinking_GetLinkedAccountInfo_Request
+         * @classdesc Represents a CAccountLinking_GetLinkedAccountInfo_Request.
+         * @implements ICAccountLinking_GetLinkedAccountInfo_Request
+         * @constructor
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request=} [properties] Properties to set
+         */
+        function CAccountLinking_GetLinkedAccountInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAccountLinking_GetLinkedAccountInfo_Request account_type.
+         * @member {EInternalAccountType} account_type
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.prototype.account_type = 1;
+    
+        /**
+         * CAccountLinking_GetLinkedAccountInfo_Request account_id.
+         * @member {number|Long} account_id
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.prototype.account_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAccountLinking_GetLinkedAccountInfo_Request filter.
+         * @member {EExternalAccountType} filter
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.prototype.filter = 0;
+    
+        /**
+         * CAccountLinking_GetLinkedAccountInfo_Request return_access_token.
+         * @member {boolean} return_access_token
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.prototype.return_access_token = false;
+    
+        /**
+         * Creates a new CAccountLinking_GetLinkedAccountInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request=} [properties] Properties to set
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Request} CAccountLinking_GetLinkedAccountInfo_Request instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.create = function create(properties) {
+            return new CAccountLinking_GetLinkedAccountInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountLinking_GetLinkedAccountInfo_Request message. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request} message CAccountLinking_GetLinkedAccountInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.account_type != null && message.hasOwnProperty("account_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.account_type);
+            if (message.account_id != null && message.hasOwnProperty("account_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.account_id);
+            if (message.filter != null && message.hasOwnProperty("filter"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.filter);
+            if (message.return_access_token != null && message.hasOwnProperty("return_access_token"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.return_access_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountLinking_GetLinkedAccountInfo_Request message, length delimited. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request} message CAccountLinking_GetLinkedAccountInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountLinking_GetLinkedAccountInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Request} CAccountLinking_GetLinkedAccountInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountLinking_GetLinkedAccountInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.account_type = reader.int32();
+                    break;
+                case 2:
+                    message.account_id = reader.uint64();
+                    break;
+                case 3:
+                    message.filter = reader.int32();
+                    break;
+                case 4:
+                    message.return_access_token = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountLinking_GetLinkedAccountInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Request} CAccountLinking_GetLinkedAccountInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountLinking_GetLinkedAccountInfo_Request message.
+         * @function verify
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.account_type != null && message.hasOwnProperty("account_type"))
+                switch (message.account_type) {
+                default:
+                    return "account_type: enum value expected";
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
+            if (message.account_id != null && message.hasOwnProperty("account_id"))
+                if (!$util.isInteger(message.account_id) && !(message.account_id && $util.isInteger(message.account_id.low) && $util.isInteger(message.account_id.high)))
+                    return "account_id: integer|Long expected";
+            if (message.filter != null && message.hasOwnProperty("filter"))
+                switch (message.filter) {
+                default:
+                    return "filter: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    break;
+                }
+            if (message.return_access_token != null && message.hasOwnProperty("return_access_token"))
+                if (typeof message.return_access_token !== "boolean")
+                    return "return_access_token: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountLinking_GetLinkedAccountInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Request} CAccountLinking_GetLinkedAccountInfo_Request
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountLinking_GetLinkedAccountInfo_Request)
+                return object;
+            var message = new $root.CAccountLinking_GetLinkedAccountInfo_Request();
+            switch (object.account_type) {
+            case "k_EInternalSteamAccountType":
+            case 1:
+                message.account_type = 1;
+                break;
+            case "k_EInternalClanType":
+            case 2:
+                message.account_type = 2;
+                break;
+            case "k_EInternalAppType":
+            case 3:
+                message.account_type = 3;
+                break;
+            case "k_EInternalBroadcastChannelType":
+            case 4:
+                message.account_type = 4;
+                break;
+            }
+            if (object.account_id != null)
+                if ($util.Long)
+                    (message.account_id = $util.Long.fromValue(object.account_id)).unsigned = true;
+                else if (typeof object.account_id === "string")
+                    message.account_id = parseInt(object.account_id, 10);
+                else if (typeof object.account_id === "number")
+                    message.account_id = object.account_id;
+                else if (typeof object.account_id === "object")
+                    message.account_id = new $util.LongBits(object.account_id.low >>> 0, object.account_id.high >>> 0).toNumber(true);
+            switch (object.filter) {
+            case "k_EExternalNone":
+            case 0:
+                message.filter = 0;
+                break;
+            case "k_EExternalSteamAccount":
+            case 1:
+                message.filter = 1;
+                break;
+            case "k_EExternalGoogleAccount":
+            case 2:
+                message.filter = 2;
+                break;
+            case "k_EExternalFacebookAccount":
+            case 3:
+                message.filter = 3;
+                break;
+            case "k_EExternalTwitterAccount":
+            case 4:
+                message.filter = 4;
+                break;
+            case "k_EExternalTwitchAccount":
+            case 5:
+                message.filter = 5;
+                break;
+            case "k_EExternalYouTubeChannelAccount":
+            case 6:
+                message.filter = 6;
+                break;
+            case "k_EExternalFacebookPage":
+            case 7:
+                message.filter = 7;
+                break;
+            }
+            if (object.return_access_token != null)
+                message.return_access_token = Boolean(object.return_access_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAccountLinking_GetLinkedAccountInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @static
+         * @param {CAccountLinking_GetLinkedAccountInfo_Request} message CAccountLinking_GetLinkedAccountInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.account_type = options.enums === String ? "k_EInternalSteamAccountType" : 1;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.account_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.account_id = options.longs === String ? "0" : 0;
+                object.filter = options.enums === String ? "k_EExternalNone" : 0;
+                object.return_access_token = false;
+            }
+            if (message.account_type != null && message.hasOwnProperty("account_type"))
+                object.account_type = options.enums === String ? $root.EInternalAccountType[message.account_type] : message.account_type;
+            if (message.account_id != null && message.hasOwnProperty("account_id"))
+                if (typeof message.account_id === "number")
+                    object.account_id = options.longs === String ? String(message.account_id) : message.account_id;
+                else
+                    object.account_id = options.longs === String ? $util.Long.prototype.toString.call(message.account_id) : options.longs === Number ? new $util.LongBits(message.account_id.low >>> 0, message.account_id.high >>> 0).toNumber(true) : message.account_id;
+            if (message.filter != null && message.hasOwnProperty("filter"))
+                object.filter = options.enums === String ? $root.EExternalAccountType[message.filter] : message.filter;
+            if (message.return_access_token != null && message.hasOwnProperty("return_access_token"))
+                object.return_access_token = message.return_access_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CAccountLinking_GetLinkedAccountInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountLinking_GetLinkedAccountInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAccountLinking_GetLinkedAccountInfo_Request;
+    })();
+    
+    $root.CAccountLinking_GetLinkedAccountInfo_Response = (function() {
+    
+        /**
+         * Properties of a CAccountLinking_GetLinkedAccountInfo_Response.
+         * @exports ICAccountLinking_GetLinkedAccountInfo_Response
+         * @interface ICAccountLinking_GetLinkedAccountInfo_Response
+         * @property {Array.<CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response>|null} [external_accounts] CAccountLinking_GetLinkedAccountInfo_Response external_accounts
+         */
+    
+        /**
+         * Constructs a new CAccountLinking_GetLinkedAccountInfo_Response.
+         * @exports CAccountLinking_GetLinkedAccountInfo_Response
+         * @classdesc Represents a CAccountLinking_GetLinkedAccountInfo_Response.
+         * @implements ICAccountLinking_GetLinkedAccountInfo_Response
+         * @constructor
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Response=} [properties] Properties to set
+         */
+        function CAccountLinking_GetLinkedAccountInfo_Response(properties) {
+            this.external_accounts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAccountLinking_GetLinkedAccountInfo_Response external_accounts.
+         * @member {Array.<CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response>} external_accounts
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.prototype.external_accounts = $util.emptyArray;
+    
+        /**
+         * Creates a new CAccountLinking_GetLinkedAccountInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Response=} [properties] Properties to set
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Response} CAccountLinking_GetLinkedAccountInfo_Response instance
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.create = function create(properties) {
+            return new CAccountLinking_GetLinkedAccountInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountLinking_GetLinkedAccountInfo_Response message. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Response} message CAccountLinking_GetLinkedAccountInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.external_accounts != null && message.external_accounts.length)
+                for (var i = 0; i < message.external_accounts.length; ++i)
+                    $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.encode(message.external_accounts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountLinking_GetLinkedAccountInfo_Response message, length delimited. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Response} message CAccountLinking_GetLinkedAccountInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountLinking_GetLinkedAccountInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Response} CAccountLinking_GetLinkedAccountInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountLinking_GetLinkedAccountInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.external_accounts && message.external_accounts.length))
+                        message.external_accounts = [];
+                    message.external_accounts.push($root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountLinking_GetLinkedAccountInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Response} CAccountLinking_GetLinkedAccountInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountLinking_GetLinkedAccountInfo_Response message.
+         * @function verify
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.external_accounts != null && message.hasOwnProperty("external_accounts")) {
+                if (!Array.isArray(message.external_accounts))
+                    return "external_accounts: array expected";
+                for (var i = 0; i < message.external_accounts.length; ++i) {
+                    var error = $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.verify(message.external_accounts[i]);
+                    if (error)
+                        return "external_accounts." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountLinking_GetLinkedAccountInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountLinking_GetLinkedAccountInfo_Response} CAccountLinking_GetLinkedAccountInfo_Response
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountLinking_GetLinkedAccountInfo_Response)
+                return object;
+            var message = new $root.CAccountLinking_GetLinkedAccountInfo_Response();
+            if (object.external_accounts) {
+                if (!Array.isArray(object.external_accounts))
+                    throw TypeError(".CAccountLinking_GetLinkedAccountInfo_Response.external_accounts: array expected");
+                message.external_accounts = [];
+                for (var i = 0; i < object.external_accounts.length; ++i) {
+                    if (typeof object.external_accounts[i] !== "object")
+                        throw TypeError(".CAccountLinking_GetLinkedAccountInfo_Response.external_accounts: object expected");
+                    message.external_accounts[i] = $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.fromObject(object.external_accounts[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAccountLinking_GetLinkedAccountInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @static
+         * @param {CAccountLinking_GetLinkedAccountInfo_Response} message CAccountLinking_GetLinkedAccountInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.external_accounts = [];
+            if (message.external_accounts && message.external_accounts.length) {
+                object.external_accounts = [];
+                for (var j = 0; j < message.external_accounts.length; ++j)
+                    object.external_accounts[j] = $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.toObject(message.external_accounts[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CAccountLinking_GetLinkedAccountInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountLinking_GetLinkedAccountInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response = (function() {
+    
+            /**
+             * Properties of a CExternalAccountTuple_Response.
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+             * @interface ICExternalAccountTuple_Response
+             * @property {EExternalAccountType|null} [external_type] CExternalAccountTuple_Response external_type
+             * @property {string|null} [external_id] CExternalAccountTuple_Response external_id
+             * @property {string|null} [external_user_name] CExternalAccountTuple_Response external_user_name
+             * @property {string|null} [external_url] CExternalAccountTuple_Response external_url
+             * @property {string|null} [access_token] CExternalAccountTuple_Response access_token
+             * @property {string|null} [access_token_secret] CExternalAccountTuple_Response access_token_secret
+             * @property {boolean|null} [is_valid] CExternalAccountTuple_Response is_valid
+             */
+    
+            /**
+             * Constructs a new CExternalAccountTuple_Response.
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response
+             * @classdesc Represents a CExternalAccountTuple_Response.
+             * @implements ICExternalAccountTuple_Response
+             * @constructor
+             * @param {CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response=} [properties] Properties to set
+             */
+            function CExternalAccountTuple_Response(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * CExternalAccountTuple_Response external_type.
+             * @member {EExternalAccountType} external_type
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.external_type = 0;
+    
+            /**
+             * CExternalAccountTuple_Response external_id.
+             * @member {string} external_id
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.external_id = "";
+    
+            /**
+             * CExternalAccountTuple_Response external_user_name.
+             * @member {string} external_user_name
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.external_user_name = "";
+    
+            /**
+             * CExternalAccountTuple_Response external_url.
+             * @member {string} external_url
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.external_url = "";
+    
+            /**
+             * CExternalAccountTuple_Response access_token.
+             * @member {string} access_token
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.access_token = "";
+    
+            /**
+             * CExternalAccountTuple_Response access_token_secret.
+             * @member {string} access_token_secret
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.access_token_secret = "";
+    
+            /**
+             * CExternalAccountTuple_Response is_valid.
+             * @member {boolean} is_valid
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             */
+            CExternalAccountTuple_Response.prototype.is_valid = false;
+    
+            /**
+             * Creates a new CExternalAccountTuple_Response instance using the specified properties.
+             * @function create
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response=} [properties] Properties to set
+             * @returns {CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response} CExternalAccountTuple_Response instance
+             */
+            CExternalAccountTuple_Response.create = function create(properties) {
+                return new CExternalAccountTuple_Response(properties);
+            };
+    
+            /**
+             * Encodes the specified CExternalAccountTuple_Response message. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.verify|verify} messages.
+             * @function encode
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response} message CExternalAccountTuple_Response message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CExternalAccountTuple_Response.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.external_type != null && message.hasOwnProperty("external_type"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.external_type);
+                if (message.external_id != null && message.hasOwnProperty("external_id"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.external_id);
+                if (message.external_user_name != null && message.hasOwnProperty("external_user_name"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.external_user_name);
+                if (message.external_url != null && message.hasOwnProperty("external_url"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.external_url);
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.access_token);
+                if (message.access_token_secret != null && message.hasOwnProperty("access_token_secret"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.access_token_secret);
+                if (message.is_valid != null && message.hasOwnProperty("is_valid"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_valid);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified CExternalAccountTuple_Response message, length delimited. Does not implicitly {@link CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {CAccountLinking_GetLinkedAccountInfo_Response.ICExternalAccountTuple_Response} message CExternalAccountTuple_Response message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CExternalAccountTuple_Response.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a CExternalAccountTuple_Response message from the specified reader or buffer.
+             * @function decode
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response} CExternalAccountTuple_Response
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CExternalAccountTuple_Response.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.external_type = reader.int32();
+                        break;
+                    case 2:
+                        message.external_id = reader.string();
+                        break;
+                    case 3:
+                        message.external_user_name = reader.string();
+                        break;
+                    case 4:
+                        message.external_url = reader.string();
+                        break;
+                    case 5:
+                        message.access_token = reader.string();
+                        break;
+                    case 6:
+                        message.access_token_secret = reader.string();
+                        break;
+                    case 7:
+                        message.is_valid = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a CExternalAccountTuple_Response message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response} CExternalAccountTuple_Response
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CExternalAccountTuple_Response.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a CExternalAccountTuple_Response message.
+             * @function verify
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CExternalAccountTuple_Response.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.external_type != null && message.hasOwnProperty("external_type"))
+                    switch (message.external_type) {
+                    default:
+                        return "external_type: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        break;
+                    }
+                if (message.external_id != null && message.hasOwnProperty("external_id"))
+                    if (!$util.isString(message.external_id))
+                        return "external_id: string expected";
+                if (message.external_user_name != null && message.hasOwnProperty("external_user_name"))
+                    if (!$util.isString(message.external_user_name))
+                        return "external_user_name: string expected";
+                if (message.external_url != null && message.hasOwnProperty("external_url"))
+                    if (!$util.isString(message.external_url))
+                        return "external_url: string expected";
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    if (!$util.isString(message.access_token))
+                        return "access_token: string expected";
+                if (message.access_token_secret != null && message.hasOwnProperty("access_token_secret"))
+                    if (!$util.isString(message.access_token_secret))
+                        return "access_token_secret: string expected";
+                if (message.is_valid != null && message.hasOwnProperty("is_valid"))
+                    if (typeof message.is_valid !== "boolean")
+                        return "is_valid: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates a CExternalAccountTuple_Response message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response} CExternalAccountTuple_Response
+             */
+            CExternalAccountTuple_Response.fromObject = function fromObject(object) {
+                if (object instanceof $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response)
+                    return object;
+                var message = new $root.CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response();
+                switch (object.external_type) {
+                case "k_EExternalNone":
+                case 0:
+                    message.external_type = 0;
+                    break;
+                case "k_EExternalSteamAccount":
+                case 1:
+                    message.external_type = 1;
+                    break;
+                case "k_EExternalGoogleAccount":
+                case 2:
+                    message.external_type = 2;
+                    break;
+                case "k_EExternalFacebookAccount":
+                case 3:
+                    message.external_type = 3;
+                    break;
+                case "k_EExternalTwitterAccount":
+                case 4:
+                    message.external_type = 4;
+                    break;
+                case "k_EExternalTwitchAccount":
+                case 5:
+                    message.external_type = 5;
+                    break;
+                case "k_EExternalYouTubeChannelAccount":
+                case 6:
+                    message.external_type = 6;
+                    break;
+                case "k_EExternalFacebookPage":
+                case 7:
+                    message.external_type = 7;
+                    break;
+                }
+                if (object.external_id != null)
+                    message.external_id = String(object.external_id);
+                if (object.external_user_name != null)
+                    message.external_user_name = String(object.external_user_name);
+                if (object.external_url != null)
+                    message.external_url = String(object.external_url);
+                if (object.access_token != null)
+                    message.access_token = String(object.access_token);
+                if (object.access_token_secret != null)
+                    message.access_token_secret = String(object.access_token_secret);
+                if (object.is_valid != null)
+                    message.is_valid = Boolean(object.is_valid);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a CExternalAccountTuple_Response message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @static
+             * @param {CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response} message CExternalAccountTuple_Response
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CExternalAccountTuple_Response.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.external_type = options.enums === String ? "k_EExternalNone" : 0;
+                    object.external_id = "";
+                    object.external_user_name = "";
+                    object.external_url = "";
+                    object.access_token = "";
+                    object.access_token_secret = "";
+                    object.is_valid = false;
+                }
+                if (message.external_type != null && message.hasOwnProperty("external_type"))
+                    object.external_type = options.enums === String ? $root.EExternalAccountType[message.external_type] : message.external_type;
+                if (message.external_id != null && message.hasOwnProperty("external_id"))
+                    object.external_id = message.external_id;
+                if (message.external_user_name != null && message.hasOwnProperty("external_user_name"))
+                    object.external_user_name = message.external_user_name;
+                if (message.external_url != null && message.hasOwnProperty("external_url"))
+                    object.external_url = message.external_url;
+                if (message.access_token != null && message.hasOwnProperty("access_token"))
+                    object.access_token = message.access_token;
+                if (message.access_token_secret != null && message.hasOwnProperty("access_token_secret"))
+                    object.access_token_secret = message.access_token_secret;
+                if (message.is_valid != null && message.hasOwnProperty("is_valid"))
+                    object.is_valid = message.is_valid;
+                return object;
+            };
+    
+            /**
+             * Converts this CExternalAccountTuple_Response to JSON.
+             * @function toJSON
+             * @memberof CAccountLinking_GetLinkedAccountInfo_Response.CExternalAccountTuple_Response
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CExternalAccountTuple_Response.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return CExternalAccountTuple_Response;
+        })();
+    
+        return CAccountLinking_GetLinkedAccountInfo_Response;
+    })();
+    
     $root.UserAccount = (function() {
     
         /**
@@ -799,6 +3867,171 @@
          */
     
         /**
+         * Callback as used by {@link UserAccount#createFriendInviteToken}.
+         * @memberof UserAccount
+         * @typedef CreateFriendInviteTokenCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_CreateFriendInviteToken_Response} [response] CUserAccount_CreateFriendInviteToken_Response
+         */
+    
+        /**
+         * Calls CreateFriendInviteToken.
+         * @function createFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_CreateFriendInviteToken_Request} request CUserAccount_CreateFriendInviteToken_Request message or plain object
+         * @param {UserAccount.CreateFriendInviteTokenCallback} callback Node-style callback called with the error, if any, and CUserAccount_CreateFriendInviteToken_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.createFriendInviteToken = function createFriendInviteToken(request, callback) {
+            return this.rpcCall(createFriendInviteToken, $root.CUserAccount_CreateFriendInviteToken_Request, $root.CUserAccount_CreateFriendInviteToken_Response, request, callback);
+        }, "name", { value: "CreateFriendInviteToken" });
+    
+        /**
+         * Calls CreateFriendInviteToken.
+         * @function createFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_CreateFriendInviteToken_Request} request CUserAccount_CreateFriendInviteToken_Request message or plain object
+         * @returns {Promise<CUserAccount_CreateFriendInviteToken_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link UserAccount#getFriendInviteTokens}.
+         * @memberof UserAccount
+         * @typedef GetFriendInviteTokensCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_GetFriendInviteTokens_Response} [response] CUserAccount_GetFriendInviteTokens_Response
+         */
+    
+        /**
+         * Calls GetFriendInviteTokens.
+         * @function getFriendInviteTokens
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_GetFriendInviteTokens_Request} request CUserAccount_GetFriendInviteTokens_Request message or plain object
+         * @param {UserAccount.GetFriendInviteTokensCallback} callback Node-style callback called with the error, if any, and CUserAccount_GetFriendInviteTokens_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.getFriendInviteTokens = function getFriendInviteTokens(request, callback) {
+            return this.rpcCall(getFriendInviteTokens, $root.CUserAccount_GetFriendInviteTokens_Request, $root.CUserAccount_GetFriendInviteTokens_Response, request, callback);
+        }, "name", { value: "GetFriendInviteTokens" });
+    
+        /**
+         * Calls GetFriendInviteTokens.
+         * @function getFriendInviteTokens
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_GetFriendInviteTokens_Request} request CUserAccount_GetFriendInviteTokens_Request message or plain object
+         * @returns {Promise<CUserAccount_GetFriendInviteTokens_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link UserAccount#viewFriendInviteToken}.
+         * @memberof UserAccount
+         * @typedef ViewFriendInviteTokenCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_ViewFriendInviteToken_Response} [response] CUserAccount_ViewFriendInviteToken_Response
+         */
+    
+        /**
+         * Calls ViewFriendInviteToken.
+         * @function viewFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_ViewFriendInviteToken_Request} request CUserAccount_ViewFriendInviteToken_Request message or plain object
+         * @param {UserAccount.ViewFriendInviteTokenCallback} callback Node-style callback called with the error, if any, and CUserAccount_ViewFriendInviteToken_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.viewFriendInviteToken = function viewFriendInviteToken(request, callback) {
+            return this.rpcCall(viewFriendInviteToken, $root.CUserAccount_ViewFriendInviteToken_Request, $root.CUserAccount_ViewFriendInviteToken_Response, request, callback);
+        }, "name", { value: "ViewFriendInviteToken" });
+    
+        /**
+         * Calls ViewFriendInviteToken.
+         * @function viewFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_ViewFriendInviteToken_Request} request CUserAccount_ViewFriendInviteToken_Request message or plain object
+         * @returns {Promise<CUserAccount_ViewFriendInviteToken_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link UserAccount#redeemFriendInviteToken}.
+         * @memberof UserAccount
+         * @typedef RedeemFriendInviteTokenCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_RedeemFriendInviteToken_Response} [response] CUserAccount_RedeemFriendInviteToken_Response
+         */
+    
+        /**
+         * Calls RedeemFriendInviteToken.
+         * @function redeemFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request} request CUserAccount_RedeemFriendInviteToken_Request message or plain object
+         * @param {UserAccount.RedeemFriendInviteTokenCallback} callback Node-style callback called with the error, if any, and CUserAccount_RedeemFriendInviteToken_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.redeemFriendInviteToken = function redeemFriendInviteToken(request, callback) {
+            return this.rpcCall(redeemFriendInviteToken, $root.CUserAccount_RedeemFriendInviteToken_Request, $root.CUserAccount_RedeemFriendInviteToken_Response, request, callback);
+        }, "name", { value: "RedeemFriendInviteToken" });
+    
+        /**
+         * Calls RedeemFriendInviteToken.
+         * @function redeemFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_RedeemFriendInviteToken_Request} request CUserAccount_RedeemFriendInviteToken_Request message or plain object
+         * @returns {Promise<CUserAccount_RedeemFriendInviteToken_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link UserAccount#revokeFriendInviteToken}.
+         * @memberof UserAccount
+         * @typedef RevokeFriendInviteTokenCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CUserAccount_RevokeFriendInviteToken_Response} [response] CUserAccount_RevokeFriendInviteToken_Response
+         */
+    
+        /**
+         * Calls RevokeFriendInviteToken.
+         * @function revokeFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request} request CUserAccount_RevokeFriendInviteToken_Request message or plain object
+         * @param {UserAccount.RevokeFriendInviteTokenCallback} callback Node-style callback called with the error, if any, and CUserAccount_RevokeFriendInviteToken_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserAccount.prototype.revokeFriendInviteToken = function revokeFriendInviteToken(request, callback) {
+            return this.rpcCall(revokeFriendInviteToken, $root.CUserAccount_RevokeFriendInviteToken_Request, $root.CUserAccount_RevokeFriendInviteToken_Response, request, callback);
+        }, "name", { value: "RevokeFriendInviteToken" });
+    
+        /**
+         * Calls RevokeFriendInviteToken.
+         * @function revokeFriendInviteToken
+         * @memberof UserAccount
+         * @instance
+         * @param {ICUserAccount_RevokeFriendInviteToken_Request} request CUserAccount_RevokeFriendInviteToken_Request message or plain object
+         * @returns {Promise<CUserAccount_RevokeFriendInviteToken_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link UserAccount#registerCompatTool}.
          * @memberof UserAccount
          * @typedef RegisterCompatToolCallback
@@ -832,6 +4065,74 @@
          */
     
         return UserAccount;
+    })();
+    
+    $root.AccountLinking = (function() {
+    
+        /**
+         * Constructs a new AccountLinking service.
+         * @exports AccountLinking
+         * @classdesc Represents an AccountLinking
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function AccountLinking(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (AccountLinking.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AccountLinking;
+    
+        /**
+         * Creates new AccountLinking service using the specified rpc implementation.
+         * @function create
+         * @memberof AccountLinking
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {AccountLinking} RPC service. Useful where requests and/or responses are streamed.
+         */
+        AccountLinking.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link AccountLinking#getLinkedAccountInfo}.
+         * @memberof AccountLinking
+         * @typedef GetLinkedAccountInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAccountLinking_GetLinkedAccountInfo_Response} [response] CAccountLinking_GetLinkedAccountInfo_Response
+         */
+    
+        /**
+         * Calls GetLinkedAccountInfo.
+         * @function getLinkedAccountInfo
+         * @memberof AccountLinking
+         * @instance
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request} request CAccountLinking_GetLinkedAccountInfo_Request message or plain object
+         * @param {AccountLinking.GetLinkedAccountInfoCallback} callback Node-style callback called with the error, if any, and CAccountLinking_GetLinkedAccountInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(AccountLinking.prototype.getLinkedAccountInfo = function getLinkedAccountInfo(request, callback) {
+            return this.rpcCall(getLinkedAccountInfo, $root.CAccountLinking_GetLinkedAccountInfo_Request, $root.CAccountLinking_GetLinkedAccountInfo_Response, request, callback);
+        }, "name", { value: "GetLinkedAccountInfo" });
+    
+        /**
+         * Calls GetLinkedAccountInfo.
+         * @function getLinkedAccountInfo
+         * @memberof AccountLinking
+         * @instance
+         * @param {ICAccountLinking_GetLinkedAccountInfo_Request} request CAccountLinking_GetLinkedAccountInfo_Request message or plain object
+         * @returns {Promise<CAccountLinking_GetLinkedAccountInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        return AccountLinking;
     })();
     
     /**

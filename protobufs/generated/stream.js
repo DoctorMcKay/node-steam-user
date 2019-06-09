@@ -123,6 +123,10 @@
      * @property {number} k_EStreamControlTouchActionSetActive=114 k_EStreamControlTouchActionSetActive value
      * @property {number} k_EStreamControlGetTouchIconData=115 k_EStreamControlGetTouchIconData value
      * @property {number} k_EStreamControlSetTouchIconData=116 k_EStreamControlSetTouchIconData value
+     * @property {number} k_EStreamControlInputTouchFingerDown=117 k_EStreamControlInputTouchFingerDown value
+     * @property {number} k_EStreamControlInputTouchFingerMotion=118 k_EStreamControlInputTouchFingerMotion value
+     * @property {number} k_EStreamControlInputTouchFingerUp=119 k_EStreamControlInputTouchFingerUp value
+     * @property {number} k_EStreamControlSetCaptureSize=120 k_EStreamControlSetCaptureSize value
      */
     $root.EStreamControlMessage = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -195,6 +199,10 @@
         values[valuesById[114] = "k_EStreamControlTouchActionSetActive"] = 114;
         values[valuesById[115] = "k_EStreamControlGetTouchIconData"] = 115;
         values[valuesById[116] = "k_EStreamControlSetTouchIconData"] = 116;
+        values[valuesById[117] = "k_EStreamControlInputTouchFingerDown"] = 117;
+        values[valuesById[118] = "k_EStreamControlInputTouchFingerMotion"] = 118;
+        values[valuesById[119] = "k_EStreamControlInputTouchFingerUp"] = 119;
+        values[valuesById[120] = "k_EStreamControlSetCaptureSize"] = 120;
         return values;
     })();
     
@@ -287,6 +295,20 @@
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[-1] = "k_EStreamBitrateAutodetect"] = -1;
         values[valuesById[0] = "k_EStreamBitrateUnlimited"] = 0;
+        return values;
+    })();
+    
+    /**
+     * EStreamHostPlayAudioPreference enum.
+     * @exports EStreamHostPlayAudioPreference
+     * @enum {string}
+     * @property {number} k_EStreamHostPlayAudioDefault=0 k_EStreamHostPlayAudioDefault value
+     * @property {number} k_EStreamHostPlayAudioAlways=1 k_EStreamHostPlayAudioAlways value
+     */
+    $root.EStreamHostPlayAudioPreference = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EStreamHostPlayAudioDefault"] = 0;
+        values[valuesById[1] = "k_EStreamHostPlayAudioAlways"] = 1;
         return values;
     })();
     
@@ -2478,6 +2500,7 @@
          * @property {number|null} [framerate] CStartNetworkTestMsg framerate
          * @property {number|null} [bitrate_kbps] CStartNetworkTestMsg bitrate_kbps
          * @property {number|null} [burst_bitrate_kbps] CStartNetworkTestMsg burst_bitrate_kbps
+         * @property {boolean|null} [bandwidth_test] CStartNetworkTestMsg bandwidth_test
          */
     
         /**
@@ -2528,6 +2551,14 @@
         CStartNetworkTestMsg.prototype.burst_bitrate_kbps = 0;
     
         /**
+         * CStartNetworkTestMsg bandwidth_test.
+         * @member {boolean} bandwidth_test
+         * @memberof CStartNetworkTestMsg
+         * @instance
+         */
+        CStartNetworkTestMsg.prototype.bandwidth_test = false;
+    
+        /**
          * Creates a new CStartNetworkTestMsg instance using the specified properties.
          * @function create
          * @memberof CStartNetworkTestMsg
@@ -2559,6 +2590,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.bitrate_kbps);
             if (message.burst_bitrate_kbps != null && message.hasOwnProperty("burst_bitrate_kbps"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.burst_bitrate_kbps);
+            if (message.bandwidth_test != null && message.hasOwnProperty("bandwidth_test"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.bandwidth_test);
             return writer;
         };
     
@@ -2604,6 +2637,9 @@
                     break;
                 case 4:
                     message.burst_bitrate_kbps = reader.uint32();
+                    break;
+                case 5:
+                    message.bandwidth_test = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2652,6 +2688,9 @@
             if (message.burst_bitrate_kbps != null && message.hasOwnProperty("burst_bitrate_kbps"))
                 if (!$util.isInteger(message.burst_bitrate_kbps))
                     return "burst_bitrate_kbps: integer expected";
+            if (message.bandwidth_test != null && message.hasOwnProperty("bandwidth_test"))
+                if (typeof message.bandwidth_test !== "boolean")
+                    return "bandwidth_test: boolean expected";
             return null;
         };
     
@@ -2675,6 +2714,8 @@
                 message.bitrate_kbps = object.bitrate_kbps >>> 0;
             if (object.burst_bitrate_kbps != null)
                 message.burst_bitrate_kbps = object.burst_bitrate_kbps >>> 0;
+            if (object.bandwidth_test != null)
+                message.bandwidth_test = Boolean(object.bandwidth_test);
             return message;
         };
     
@@ -2696,6 +2737,7 @@
                 object.framerate = 0;
                 object.bitrate_kbps = 0;
                 object.burst_bitrate_kbps = 0;
+                object.bandwidth_test = false;
             }
             if (message.frames != null && message.hasOwnProperty("frames"))
                 object.frames = message.frames;
@@ -2705,6 +2747,8 @@
                 object.bitrate_kbps = message.bitrate_kbps;
             if (message.burst_bitrate_kbps != null && message.hasOwnProperty("burst_bitrate_kbps"))
                 object.burst_bitrate_kbps = message.burst_bitrate_kbps;
+            if (message.bandwidth_test != null && message.hasOwnProperty("bandwidth_test"))
+                object.bandwidth_test = message.bandwidth_test;
             return object;
         };
     
@@ -3868,6 +3912,7 @@
          * @property {boolean|null} [enable_hardware_encoding_intel] CStreamingServerConfig enable_hardware_encoding_intel
          * @property {number|null} [software_encoding_threads] CStreamingServerConfig software_encoding_threads
          * @property {boolean|null} [enable_traffic_priority] CStreamingServerConfig enable_traffic_priority
+         * @property {EStreamHostPlayAudioPreference|null} [host_play_audio] CStreamingServerConfig host_play_audio
          */
     
         /**
@@ -3950,6 +3995,14 @@
         CStreamingServerConfig.prototype.enable_traffic_priority = false;
     
         /**
+         * CStreamingServerConfig host_play_audio.
+         * @member {EStreamHostPlayAudioPreference} host_play_audio
+         * @memberof CStreamingServerConfig
+         * @instance
+         */
+        CStreamingServerConfig.prototype.host_play_audio = 0;
+    
+        /**
          * Creates a new CStreamingServerConfig instance using the specified properties.
          * @function create
          * @memberof CStreamingServerConfig
@@ -3989,6 +4042,8 @@
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.software_encoding_threads);
             if (message.enable_traffic_priority != null && message.hasOwnProperty("enable_traffic_priority"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.enable_traffic_priority);
+            if (message.host_play_audio != null && message.hasOwnProperty("host_play_audio"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.host_play_audio);
             return writer;
         };
     
@@ -4046,6 +4101,9 @@
                     break;
                 case 8:
                     message.enable_traffic_priority = reader.bool();
+                    break;
+                case 9:
+                    message.host_play_audio = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4106,6 +4164,14 @@
             if (message.enable_traffic_priority != null && message.hasOwnProperty("enable_traffic_priority"))
                 if (typeof message.enable_traffic_priority !== "boolean")
                     return "enable_traffic_priority: boolean expected";
+            if (message.host_play_audio != null && message.hasOwnProperty("host_play_audio"))
+                switch (message.host_play_audio) {
+                default:
+                    return "host_play_audio: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
             return null;
         };
     
@@ -4137,6 +4203,16 @@
                 message.software_encoding_threads = object.software_encoding_threads | 0;
             if (object.enable_traffic_priority != null)
                 message.enable_traffic_priority = Boolean(object.enable_traffic_priority);
+            switch (object.host_play_audio) {
+            case "k_EStreamHostPlayAudioDefault":
+            case 0:
+                message.host_play_audio = 0;
+                break;
+            case "k_EStreamHostPlayAudioAlways":
+            case 1:
+                message.host_play_audio = 1;
+                break;
+            }
             return message;
         };
     
@@ -4162,6 +4238,7 @@
                 object.enable_hardware_encoding_intel = false;
                 object.software_encoding_threads = 0;
                 object.enable_traffic_priority = false;
+                object.host_play_audio = options.enums === String ? "k_EStreamHostPlayAudioDefault" : 0;
             }
             if (message.change_desktop_resolution != null && message.hasOwnProperty("change_desktop_resolution"))
                 object.change_desktop_resolution = message.change_desktop_resolution;
@@ -4179,6 +4256,8 @@
                 object.software_encoding_threads = message.software_encoding_threads;
             if (message.enable_traffic_priority != null && message.hasOwnProperty("enable_traffic_priority"))
                 object.enable_traffic_priority = message.enable_traffic_priority;
+            if (message.host_play_audio != null && message.hasOwnProperty("host_play_audio"))
+                object.host_play_audio = options.enums === String ? $root.EStreamHostPlayAudioPreference[message.host_play_audio] : message.host_play_audio;
             return object;
         };
     
@@ -4207,6 +4286,7 @@
          * @property {EStreamVideoCodec|null} [selected_video_codec] CNegotiatedConfig selected_video_codec
          * @property {Array.<ICStreamVideoMode>|null} [available_video_modes] CNegotiatedConfig available_video_modes
          * @property {boolean|null} [enable_remote_hid] CNegotiatedConfig enable_remote_hid
+         * @property {boolean|null} [enable_touch_input] CNegotiatedConfig enable_touch_input
          */
     
         /**
@@ -4266,6 +4346,14 @@
         CNegotiatedConfig.prototype.enable_remote_hid = false;
     
         /**
+         * CNegotiatedConfig enable_touch_input.
+         * @member {boolean} enable_touch_input
+         * @memberof CNegotiatedConfig
+         * @instance
+         */
+        CNegotiatedConfig.prototype.enable_touch_input = false;
+    
+        /**
          * Creates a new CNegotiatedConfig instance using the specified properties.
          * @function create
          * @memberof CNegotiatedConfig
@@ -4300,6 +4388,8 @@
                     $root.CStreamVideoMode.encode(message.available_video_modes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.enable_remote_hid != null && message.hasOwnProperty("enable_remote_hid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enable_remote_hid);
+            if (message.enable_touch_input != null && message.hasOwnProperty("enable_touch_input"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enable_touch_input);
             return writer;
         };
     
@@ -4350,6 +4440,9 @@
                     break;
                 case 5:
                     message.enable_remote_hid = reader.bool();
+                    break;
+                case 6:
+                    message.enable_touch_input = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4427,6 +4520,9 @@
             if (message.enable_remote_hid != null && message.hasOwnProperty("enable_remote_hid"))
                 if (typeof message.enable_remote_hid !== "boolean")
                     return "enable_remote_hid: boolean expected";
+            if (message.enable_touch_input != null && message.hasOwnProperty("enable_touch_input"))
+                if (typeof message.enable_touch_input !== "boolean")
+                    return "enable_touch_input: boolean expected";
             return null;
         };
     
@@ -4516,6 +4612,8 @@
             }
             if (object.enable_remote_hid != null)
                 message.enable_remote_hid = Boolean(object.enable_remote_hid);
+            if (object.enable_touch_input != null)
+                message.enable_touch_input = Boolean(object.enable_touch_input);
             return message;
         };
     
@@ -4539,6 +4637,7 @@
                 object.selected_audio_codec = options.enums === String ? "k_EStreamAudioCodecNone" : 0;
                 object.selected_video_codec = options.enums === String ? "k_EStreamVideoCodecNone" : 0;
                 object.enable_remote_hid = false;
+                object.enable_touch_input = false;
             }
             if (message.reliable_data != null && message.hasOwnProperty("reliable_data"))
                 object.reliable_data = message.reliable_data;
@@ -4553,6 +4652,8 @@
             }
             if (message.enable_remote_hid != null && message.hasOwnProperty("enable_remote_hid"))
                 object.enable_remote_hid = message.enable_remote_hid;
+            if (message.enable_touch_input != null && message.hasOwnProperty("enable_touch_input"))
+                object.enable_touch_input = message.enable_touch_input;
             return object;
         };
     
@@ -4580,6 +4681,7 @@
          * @property {Array.<EStreamAudioCodec>|null} [supported_audio_codecs] CNegotiationInitMsg supported_audio_codecs
          * @property {Array.<EStreamVideoCodec>|null} [supported_video_codecs] CNegotiationInitMsg supported_video_codecs
          * @property {boolean|null} [supports_remote_hid] CNegotiationInitMsg supports_remote_hid
+         * @property {boolean|null} [supports_touch_input] CNegotiationInitMsg supports_touch_input
          */
     
         /**
@@ -4632,6 +4734,14 @@
         CNegotiationInitMsg.prototype.supports_remote_hid = false;
     
         /**
+         * CNegotiationInitMsg supports_touch_input.
+         * @member {boolean} supports_touch_input
+         * @memberof CNegotiationInitMsg
+         * @instance
+         */
+        CNegotiationInitMsg.prototype.supports_touch_input = false;
+    
+        /**
          * Creates a new CNegotiationInitMsg instance using the specified properties.
          * @function create
          * @memberof CNegotiationInitMsg
@@ -4665,6 +4775,8 @@
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.supported_video_codecs[i]);
             if (message.supports_remote_hid != null && message.hasOwnProperty("supports_remote_hid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.supports_remote_hid);
+            if (message.supports_touch_input != null && message.hasOwnProperty("supports_touch_input"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.supports_touch_input);
             return writer;
         };
     
@@ -4724,6 +4836,9 @@
                     break;
                 case 4:
                     message.supports_remote_hid = reader.bool();
+                    break;
+                case 5:
+                    message.supports_touch_input = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4800,6 +4915,9 @@
             if (message.supports_remote_hid != null && message.hasOwnProperty("supports_remote_hid"))
                 if (typeof message.supports_remote_hid !== "boolean")
                     return "supports_remote_hid: boolean expected";
+            if (message.supports_touch_input != null && message.hasOwnProperty("supports_touch_input"))
+                if (typeof message.supports_touch_input !== "boolean")
+                    return "supports_touch_input: boolean expected";
             return null;
         };
     
@@ -4893,6 +5011,8 @@
             }
             if (object.supports_remote_hid != null)
                 message.supports_remote_hid = Boolean(object.supports_remote_hid);
+            if (object.supports_touch_input != null)
+                message.supports_touch_input = Boolean(object.supports_touch_input);
             return message;
         };
     
@@ -4916,6 +5036,7 @@
             if (options.defaults) {
                 object.reliable_data = false;
                 object.supports_remote_hid = false;
+                object.supports_touch_input = false;
             }
             if (message.reliable_data != null && message.hasOwnProperty("reliable_data"))
                 object.reliable_data = message.reliable_data;
@@ -4931,6 +5052,8 @@
             }
             if (message.supports_remote_hid != null && message.hasOwnProperty("supports_remote_hid"))
                 object.supports_remote_hid = message.supports_remote_hid;
+            if (message.supports_touch_input != null && message.hasOwnProperty("supports_touch_input"))
+                object.supports_touch_input = message.supports_touch_input;
             return object;
         };
     
@@ -6530,6 +6653,810 @@
         };
     
         return CInputLatencyTestMsg;
+    })();
+    
+    $root.CInputTouchFingerDownMsg = (function() {
+    
+        /**
+         * Properties of a CInputTouchFingerDownMsg.
+         * @exports ICInputTouchFingerDownMsg
+         * @interface ICInputTouchFingerDownMsg
+         * @property {number|null} [input_mark] CInputTouchFingerDownMsg input_mark
+         * @property {number|Long|null} [fingerid] CInputTouchFingerDownMsg fingerid
+         * @property {number|null} [x_normalized] CInputTouchFingerDownMsg x_normalized
+         * @property {number|null} [y_normalized] CInputTouchFingerDownMsg y_normalized
+         */
+    
+        /**
+         * Constructs a new CInputTouchFingerDownMsg.
+         * @exports CInputTouchFingerDownMsg
+         * @classdesc Represents a CInputTouchFingerDownMsg.
+         * @implements ICInputTouchFingerDownMsg
+         * @constructor
+         * @param {ICInputTouchFingerDownMsg=} [properties] Properties to set
+         */
+        function CInputTouchFingerDownMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CInputTouchFingerDownMsg input_mark.
+         * @member {number} input_mark
+         * @memberof CInputTouchFingerDownMsg
+         * @instance
+         */
+        CInputTouchFingerDownMsg.prototype.input_mark = 0;
+    
+        /**
+         * CInputTouchFingerDownMsg fingerid.
+         * @member {number|Long} fingerid
+         * @memberof CInputTouchFingerDownMsg
+         * @instance
+         */
+        CInputTouchFingerDownMsg.prototype.fingerid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CInputTouchFingerDownMsg x_normalized.
+         * @member {number} x_normalized
+         * @memberof CInputTouchFingerDownMsg
+         * @instance
+         */
+        CInputTouchFingerDownMsg.prototype.x_normalized = 0;
+    
+        /**
+         * CInputTouchFingerDownMsg y_normalized.
+         * @member {number} y_normalized
+         * @memberof CInputTouchFingerDownMsg
+         * @instance
+         */
+        CInputTouchFingerDownMsg.prototype.y_normalized = 0;
+    
+        /**
+         * Creates a new CInputTouchFingerDownMsg instance using the specified properties.
+         * @function create
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {ICInputTouchFingerDownMsg=} [properties] Properties to set
+         * @returns {CInputTouchFingerDownMsg} CInputTouchFingerDownMsg instance
+         */
+        CInputTouchFingerDownMsg.create = function create(properties) {
+            return new CInputTouchFingerDownMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerDownMsg message. Does not implicitly {@link CInputTouchFingerDownMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {ICInputTouchFingerDownMsg} message CInputTouchFingerDownMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerDownMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.input_mark);
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.fingerid);
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.x_normalized);
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.y_normalized);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerDownMsg message, length delimited. Does not implicitly {@link CInputTouchFingerDownMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {ICInputTouchFingerDownMsg} message CInputTouchFingerDownMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerDownMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerDownMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CInputTouchFingerDownMsg} CInputTouchFingerDownMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerDownMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputTouchFingerDownMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.input_mark = reader.uint32();
+                    break;
+                case 2:
+                    message.fingerid = reader.uint64();
+                    break;
+                case 3:
+                    message.x_normalized = reader.float();
+                    break;
+                case 4:
+                    message.y_normalized = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerDownMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CInputTouchFingerDownMsg} CInputTouchFingerDownMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerDownMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CInputTouchFingerDownMsg message.
+         * @function verify
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CInputTouchFingerDownMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                if (!$util.isInteger(message.input_mark))
+                    return "input_mark: integer expected";
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (!$util.isInteger(message.fingerid) && !(message.fingerid && $util.isInteger(message.fingerid.low) && $util.isInteger(message.fingerid.high)))
+                    return "fingerid: integer|Long expected";
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                if (typeof message.x_normalized !== "number")
+                    return "x_normalized: number expected";
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                if (typeof message.y_normalized !== "number")
+                    return "y_normalized: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CInputTouchFingerDownMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CInputTouchFingerDownMsg} CInputTouchFingerDownMsg
+         */
+        CInputTouchFingerDownMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CInputTouchFingerDownMsg)
+                return object;
+            var message = new $root.CInputTouchFingerDownMsg();
+            if (object.input_mark != null)
+                message.input_mark = object.input_mark >>> 0;
+            if (object.fingerid != null)
+                if ($util.Long)
+                    (message.fingerid = $util.Long.fromValue(object.fingerid)).unsigned = true;
+                else if (typeof object.fingerid === "string")
+                    message.fingerid = parseInt(object.fingerid, 10);
+                else if (typeof object.fingerid === "number")
+                    message.fingerid = object.fingerid;
+                else if (typeof object.fingerid === "object")
+                    message.fingerid = new $util.LongBits(object.fingerid.low >>> 0, object.fingerid.high >>> 0).toNumber(true);
+            if (object.x_normalized != null)
+                message.x_normalized = Number(object.x_normalized);
+            if (object.y_normalized != null)
+                message.y_normalized = Number(object.y_normalized);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CInputTouchFingerDownMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CInputTouchFingerDownMsg
+         * @static
+         * @param {CInputTouchFingerDownMsg} message CInputTouchFingerDownMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CInputTouchFingerDownMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.input_mark = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.fingerid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.fingerid = options.longs === String ? "0" : 0;
+                object.x_normalized = 0;
+                object.y_normalized = 0;
+            }
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                object.input_mark = message.input_mark;
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (typeof message.fingerid === "number")
+                    object.fingerid = options.longs === String ? String(message.fingerid) : message.fingerid;
+                else
+                    object.fingerid = options.longs === String ? $util.Long.prototype.toString.call(message.fingerid) : options.longs === Number ? new $util.LongBits(message.fingerid.low >>> 0, message.fingerid.high >>> 0).toNumber(true) : message.fingerid;
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                object.x_normalized = options.json && !isFinite(message.x_normalized) ? String(message.x_normalized) : message.x_normalized;
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                object.y_normalized = options.json && !isFinite(message.y_normalized) ? String(message.y_normalized) : message.y_normalized;
+            return object;
+        };
+    
+        /**
+         * Converts this CInputTouchFingerDownMsg to JSON.
+         * @function toJSON
+         * @memberof CInputTouchFingerDownMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CInputTouchFingerDownMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CInputTouchFingerDownMsg;
+    })();
+    
+    $root.CInputTouchFingerMotionMsg = (function() {
+    
+        /**
+         * Properties of a CInputTouchFingerMotionMsg.
+         * @exports ICInputTouchFingerMotionMsg
+         * @interface ICInputTouchFingerMotionMsg
+         * @property {number|null} [input_mark] CInputTouchFingerMotionMsg input_mark
+         * @property {number|Long|null} [fingerid] CInputTouchFingerMotionMsg fingerid
+         * @property {number|null} [x_normalized] CInputTouchFingerMotionMsg x_normalized
+         * @property {number|null} [y_normalized] CInputTouchFingerMotionMsg y_normalized
+         */
+    
+        /**
+         * Constructs a new CInputTouchFingerMotionMsg.
+         * @exports CInputTouchFingerMotionMsg
+         * @classdesc Represents a CInputTouchFingerMotionMsg.
+         * @implements ICInputTouchFingerMotionMsg
+         * @constructor
+         * @param {ICInputTouchFingerMotionMsg=} [properties] Properties to set
+         */
+        function CInputTouchFingerMotionMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CInputTouchFingerMotionMsg input_mark.
+         * @member {number} input_mark
+         * @memberof CInputTouchFingerMotionMsg
+         * @instance
+         */
+        CInputTouchFingerMotionMsg.prototype.input_mark = 0;
+    
+        /**
+         * CInputTouchFingerMotionMsg fingerid.
+         * @member {number|Long} fingerid
+         * @memberof CInputTouchFingerMotionMsg
+         * @instance
+         */
+        CInputTouchFingerMotionMsg.prototype.fingerid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CInputTouchFingerMotionMsg x_normalized.
+         * @member {number} x_normalized
+         * @memberof CInputTouchFingerMotionMsg
+         * @instance
+         */
+        CInputTouchFingerMotionMsg.prototype.x_normalized = 0;
+    
+        /**
+         * CInputTouchFingerMotionMsg y_normalized.
+         * @member {number} y_normalized
+         * @memberof CInputTouchFingerMotionMsg
+         * @instance
+         */
+        CInputTouchFingerMotionMsg.prototype.y_normalized = 0;
+    
+        /**
+         * Creates a new CInputTouchFingerMotionMsg instance using the specified properties.
+         * @function create
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {ICInputTouchFingerMotionMsg=} [properties] Properties to set
+         * @returns {CInputTouchFingerMotionMsg} CInputTouchFingerMotionMsg instance
+         */
+        CInputTouchFingerMotionMsg.create = function create(properties) {
+            return new CInputTouchFingerMotionMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerMotionMsg message. Does not implicitly {@link CInputTouchFingerMotionMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {ICInputTouchFingerMotionMsg} message CInputTouchFingerMotionMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerMotionMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.input_mark);
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.fingerid);
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.x_normalized);
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.y_normalized);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerMotionMsg message, length delimited. Does not implicitly {@link CInputTouchFingerMotionMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {ICInputTouchFingerMotionMsg} message CInputTouchFingerMotionMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerMotionMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerMotionMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CInputTouchFingerMotionMsg} CInputTouchFingerMotionMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerMotionMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputTouchFingerMotionMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.input_mark = reader.uint32();
+                    break;
+                case 2:
+                    message.fingerid = reader.uint64();
+                    break;
+                case 3:
+                    message.x_normalized = reader.float();
+                    break;
+                case 4:
+                    message.y_normalized = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerMotionMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CInputTouchFingerMotionMsg} CInputTouchFingerMotionMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerMotionMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CInputTouchFingerMotionMsg message.
+         * @function verify
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CInputTouchFingerMotionMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                if (!$util.isInteger(message.input_mark))
+                    return "input_mark: integer expected";
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (!$util.isInteger(message.fingerid) && !(message.fingerid && $util.isInteger(message.fingerid.low) && $util.isInteger(message.fingerid.high)))
+                    return "fingerid: integer|Long expected";
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                if (typeof message.x_normalized !== "number")
+                    return "x_normalized: number expected";
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                if (typeof message.y_normalized !== "number")
+                    return "y_normalized: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CInputTouchFingerMotionMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CInputTouchFingerMotionMsg} CInputTouchFingerMotionMsg
+         */
+        CInputTouchFingerMotionMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CInputTouchFingerMotionMsg)
+                return object;
+            var message = new $root.CInputTouchFingerMotionMsg();
+            if (object.input_mark != null)
+                message.input_mark = object.input_mark >>> 0;
+            if (object.fingerid != null)
+                if ($util.Long)
+                    (message.fingerid = $util.Long.fromValue(object.fingerid)).unsigned = true;
+                else if (typeof object.fingerid === "string")
+                    message.fingerid = parseInt(object.fingerid, 10);
+                else if (typeof object.fingerid === "number")
+                    message.fingerid = object.fingerid;
+                else if (typeof object.fingerid === "object")
+                    message.fingerid = new $util.LongBits(object.fingerid.low >>> 0, object.fingerid.high >>> 0).toNumber(true);
+            if (object.x_normalized != null)
+                message.x_normalized = Number(object.x_normalized);
+            if (object.y_normalized != null)
+                message.y_normalized = Number(object.y_normalized);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CInputTouchFingerMotionMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CInputTouchFingerMotionMsg
+         * @static
+         * @param {CInputTouchFingerMotionMsg} message CInputTouchFingerMotionMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CInputTouchFingerMotionMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.input_mark = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.fingerid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.fingerid = options.longs === String ? "0" : 0;
+                object.x_normalized = 0;
+                object.y_normalized = 0;
+            }
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                object.input_mark = message.input_mark;
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (typeof message.fingerid === "number")
+                    object.fingerid = options.longs === String ? String(message.fingerid) : message.fingerid;
+                else
+                    object.fingerid = options.longs === String ? $util.Long.prototype.toString.call(message.fingerid) : options.longs === Number ? new $util.LongBits(message.fingerid.low >>> 0, message.fingerid.high >>> 0).toNumber(true) : message.fingerid;
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                object.x_normalized = options.json && !isFinite(message.x_normalized) ? String(message.x_normalized) : message.x_normalized;
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                object.y_normalized = options.json && !isFinite(message.y_normalized) ? String(message.y_normalized) : message.y_normalized;
+            return object;
+        };
+    
+        /**
+         * Converts this CInputTouchFingerMotionMsg to JSON.
+         * @function toJSON
+         * @memberof CInputTouchFingerMotionMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CInputTouchFingerMotionMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CInputTouchFingerMotionMsg;
+    })();
+    
+    $root.CInputTouchFingerUpMsg = (function() {
+    
+        /**
+         * Properties of a CInputTouchFingerUpMsg.
+         * @exports ICInputTouchFingerUpMsg
+         * @interface ICInputTouchFingerUpMsg
+         * @property {number|null} [input_mark] CInputTouchFingerUpMsg input_mark
+         * @property {number|Long|null} [fingerid] CInputTouchFingerUpMsg fingerid
+         * @property {number|null} [x_normalized] CInputTouchFingerUpMsg x_normalized
+         * @property {number|null} [y_normalized] CInputTouchFingerUpMsg y_normalized
+         */
+    
+        /**
+         * Constructs a new CInputTouchFingerUpMsg.
+         * @exports CInputTouchFingerUpMsg
+         * @classdesc Represents a CInputTouchFingerUpMsg.
+         * @implements ICInputTouchFingerUpMsg
+         * @constructor
+         * @param {ICInputTouchFingerUpMsg=} [properties] Properties to set
+         */
+        function CInputTouchFingerUpMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CInputTouchFingerUpMsg input_mark.
+         * @member {number} input_mark
+         * @memberof CInputTouchFingerUpMsg
+         * @instance
+         */
+        CInputTouchFingerUpMsg.prototype.input_mark = 0;
+    
+        /**
+         * CInputTouchFingerUpMsg fingerid.
+         * @member {number|Long} fingerid
+         * @memberof CInputTouchFingerUpMsg
+         * @instance
+         */
+        CInputTouchFingerUpMsg.prototype.fingerid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CInputTouchFingerUpMsg x_normalized.
+         * @member {number} x_normalized
+         * @memberof CInputTouchFingerUpMsg
+         * @instance
+         */
+        CInputTouchFingerUpMsg.prototype.x_normalized = 0;
+    
+        /**
+         * CInputTouchFingerUpMsg y_normalized.
+         * @member {number} y_normalized
+         * @memberof CInputTouchFingerUpMsg
+         * @instance
+         */
+        CInputTouchFingerUpMsg.prototype.y_normalized = 0;
+    
+        /**
+         * Creates a new CInputTouchFingerUpMsg instance using the specified properties.
+         * @function create
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {ICInputTouchFingerUpMsg=} [properties] Properties to set
+         * @returns {CInputTouchFingerUpMsg} CInputTouchFingerUpMsg instance
+         */
+        CInputTouchFingerUpMsg.create = function create(properties) {
+            return new CInputTouchFingerUpMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerUpMsg message. Does not implicitly {@link CInputTouchFingerUpMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {ICInputTouchFingerUpMsg} message CInputTouchFingerUpMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerUpMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.input_mark);
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.fingerid);
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.x_normalized);
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.y_normalized);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CInputTouchFingerUpMsg message, length delimited. Does not implicitly {@link CInputTouchFingerUpMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {ICInputTouchFingerUpMsg} message CInputTouchFingerUpMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CInputTouchFingerUpMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerUpMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CInputTouchFingerUpMsg} CInputTouchFingerUpMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerUpMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CInputTouchFingerUpMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.input_mark = reader.uint32();
+                    break;
+                case 2:
+                    message.fingerid = reader.uint64();
+                    break;
+                case 3:
+                    message.x_normalized = reader.float();
+                    break;
+                case 4:
+                    message.y_normalized = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CInputTouchFingerUpMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CInputTouchFingerUpMsg} CInputTouchFingerUpMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CInputTouchFingerUpMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CInputTouchFingerUpMsg message.
+         * @function verify
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CInputTouchFingerUpMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                if (!$util.isInteger(message.input_mark))
+                    return "input_mark: integer expected";
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (!$util.isInteger(message.fingerid) && !(message.fingerid && $util.isInteger(message.fingerid.low) && $util.isInteger(message.fingerid.high)))
+                    return "fingerid: integer|Long expected";
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                if (typeof message.x_normalized !== "number")
+                    return "x_normalized: number expected";
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                if (typeof message.y_normalized !== "number")
+                    return "y_normalized: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CInputTouchFingerUpMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CInputTouchFingerUpMsg} CInputTouchFingerUpMsg
+         */
+        CInputTouchFingerUpMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CInputTouchFingerUpMsg)
+                return object;
+            var message = new $root.CInputTouchFingerUpMsg();
+            if (object.input_mark != null)
+                message.input_mark = object.input_mark >>> 0;
+            if (object.fingerid != null)
+                if ($util.Long)
+                    (message.fingerid = $util.Long.fromValue(object.fingerid)).unsigned = true;
+                else if (typeof object.fingerid === "string")
+                    message.fingerid = parseInt(object.fingerid, 10);
+                else if (typeof object.fingerid === "number")
+                    message.fingerid = object.fingerid;
+                else if (typeof object.fingerid === "object")
+                    message.fingerid = new $util.LongBits(object.fingerid.low >>> 0, object.fingerid.high >>> 0).toNumber(true);
+            if (object.x_normalized != null)
+                message.x_normalized = Number(object.x_normalized);
+            if (object.y_normalized != null)
+                message.y_normalized = Number(object.y_normalized);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CInputTouchFingerUpMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CInputTouchFingerUpMsg
+         * @static
+         * @param {CInputTouchFingerUpMsg} message CInputTouchFingerUpMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CInputTouchFingerUpMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.input_mark = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.fingerid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.fingerid = options.longs === String ? "0" : 0;
+                object.x_normalized = 0;
+                object.y_normalized = 0;
+            }
+            if (message.input_mark != null && message.hasOwnProperty("input_mark"))
+                object.input_mark = message.input_mark;
+            if (message.fingerid != null && message.hasOwnProperty("fingerid"))
+                if (typeof message.fingerid === "number")
+                    object.fingerid = options.longs === String ? String(message.fingerid) : message.fingerid;
+                else
+                    object.fingerid = options.longs === String ? $util.Long.prototype.toString.call(message.fingerid) : options.longs === Number ? new $util.LongBits(message.fingerid.low >>> 0, message.fingerid.high >>> 0).toNumber(true) : message.fingerid;
+            if (message.x_normalized != null && message.hasOwnProperty("x_normalized"))
+                object.x_normalized = options.json && !isFinite(message.x_normalized) ? String(message.x_normalized) : message.x_normalized;
+            if (message.y_normalized != null && message.hasOwnProperty("y_normalized"))
+                object.y_normalized = options.json && !isFinite(message.y_normalized) ? String(message.y_normalized) : message.y_normalized;
+            return object;
+        };
+    
+        /**
+         * Converts this CInputTouchFingerUpMsg to JSON.
+         * @function toJSON
+         * @memberof CInputTouchFingerUpMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CInputTouchFingerUpMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CInputTouchFingerUpMsg;
     })();
     
     $root.CInputMouseMotionMsg = (function() {
@@ -8342,6 +9269,216 @@
         };
     
         return CSetTitleMsg;
+    })();
+    
+    $root.CSetCaptureSizeMsg = (function() {
+    
+        /**
+         * Properties of a CSetCaptureSizeMsg.
+         * @exports ICSetCaptureSizeMsg
+         * @interface ICSetCaptureSizeMsg
+         * @property {number|null} [width] CSetCaptureSizeMsg width
+         * @property {number|null} [height] CSetCaptureSizeMsg height
+         */
+    
+        /**
+         * Constructs a new CSetCaptureSizeMsg.
+         * @exports CSetCaptureSizeMsg
+         * @classdesc Represents a CSetCaptureSizeMsg.
+         * @implements ICSetCaptureSizeMsg
+         * @constructor
+         * @param {ICSetCaptureSizeMsg=} [properties] Properties to set
+         */
+        function CSetCaptureSizeMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSetCaptureSizeMsg width.
+         * @member {number} width
+         * @memberof CSetCaptureSizeMsg
+         * @instance
+         */
+        CSetCaptureSizeMsg.prototype.width = 0;
+    
+        /**
+         * CSetCaptureSizeMsg height.
+         * @member {number} height
+         * @memberof CSetCaptureSizeMsg
+         * @instance
+         */
+        CSetCaptureSizeMsg.prototype.height = 0;
+    
+        /**
+         * Creates a new CSetCaptureSizeMsg instance using the specified properties.
+         * @function create
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {ICSetCaptureSizeMsg=} [properties] Properties to set
+         * @returns {CSetCaptureSizeMsg} CSetCaptureSizeMsg instance
+         */
+        CSetCaptureSizeMsg.create = function create(properties) {
+            return new CSetCaptureSizeMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CSetCaptureSizeMsg message. Does not implicitly {@link CSetCaptureSizeMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {ICSetCaptureSizeMsg} message CSetCaptureSizeMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetCaptureSizeMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.width != null && message.hasOwnProperty("width"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.width);
+            if (message.height != null && message.hasOwnProperty("height"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.height);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSetCaptureSizeMsg message, length delimited. Does not implicitly {@link CSetCaptureSizeMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {ICSetCaptureSizeMsg} message CSetCaptureSizeMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetCaptureSizeMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSetCaptureSizeMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSetCaptureSizeMsg} CSetCaptureSizeMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetCaptureSizeMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSetCaptureSizeMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.width = reader.int32();
+                    break;
+                case 2:
+                    message.height = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSetCaptureSizeMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSetCaptureSizeMsg} CSetCaptureSizeMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetCaptureSizeMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSetCaptureSizeMsg message.
+         * @function verify
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSetCaptureSizeMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.width != null && message.hasOwnProperty("width"))
+                if (!$util.isInteger(message.width))
+                    return "width: integer expected";
+            if (message.height != null && message.hasOwnProperty("height"))
+                if (!$util.isInteger(message.height))
+                    return "height: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSetCaptureSizeMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSetCaptureSizeMsg} CSetCaptureSizeMsg
+         */
+        CSetCaptureSizeMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSetCaptureSizeMsg)
+                return object;
+            var message = new $root.CSetCaptureSizeMsg();
+            if (object.width != null)
+                message.width = object.width | 0;
+            if (object.height != null)
+                message.height = object.height | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSetCaptureSizeMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSetCaptureSizeMsg
+         * @static
+         * @param {CSetCaptureSizeMsg} message CSetCaptureSizeMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSetCaptureSizeMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.width = 0;
+                object.height = 0;
+            }
+            if (message.width != null && message.hasOwnProperty("width"))
+                object.width = message.width;
+            if (message.height != null && message.hasOwnProperty("height"))
+                object.height = message.height;
+            return object;
+        };
+    
+        /**
+         * Converts this CSetCaptureSizeMsg to JSON.
+         * @function toJSON
+         * @memberof CSetCaptureSizeMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSetCaptureSizeMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSetCaptureSizeMsg;
     })();
     
     $root.CSetIconMsg = (function() {
@@ -17550,6 +18687,725 @@
         };
     
         return CLogUploadMsg;
+    })();
+    
+    $root.CTransportSignalMsg = (function() {
+    
+        /**
+         * Properties of a CTransportSignalMsg.
+         * @exports ICTransportSignalMsg
+         * @interface ICTransportSignalMsg
+         * @property {CTransportSignalMsg.IWebRTCMessage|null} [webrtc] CTransportSignalMsg webrtc
+         */
+    
+        /**
+         * Constructs a new CTransportSignalMsg.
+         * @exports CTransportSignalMsg
+         * @classdesc Represents a CTransportSignalMsg.
+         * @implements ICTransportSignalMsg
+         * @constructor
+         * @param {ICTransportSignalMsg=} [properties] Properties to set
+         */
+        function CTransportSignalMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CTransportSignalMsg webrtc.
+         * @member {CTransportSignalMsg.IWebRTCMessage|null|undefined} webrtc
+         * @memberof CTransportSignalMsg
+         * @instance
+         */
+        CTransportSignalMsg.prototype.webrtc = null;
+    
+        /**
+         * Creates a new CTransportSignalMsg instance using the specified properties.
+         * @function create
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {ICTransportSignalMsg=} [properties] Properties to set
+         * @returns {CTransportSignalMsg} CTransportSignalMsg instance
+         */
+        CTransportSignalMsg.create = function create(properties) {
+            return new CTransportSignalMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CTransportSignalMsg message. Does not implicitly {@link CTransportSignalMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {ICTransportSignalMsg} message CTransportSignalMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTransportSignalMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.webrtc != null && message.hasOwnProperty("webrtc"))
+                $root.CTransportSignalMsg.WebRTCMessage.encode(message.webrtc, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CTransportSignalMsg message, length delimited. Does not implicitly {@link CTransportSignalMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {ICTransportSignalMsg} message CTransportSignalMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CTransportSignalMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CTransportSignalMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CTransportSignalMsg} CTransportSignalMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTransportSignalMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CTransportSignalMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.webrtc = $root.CTransportSignalMsg.WebRTCMessage.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CTransportSignalMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CTransportSignalMsg} CTransportSignalMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CTransportSignalMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CTransportSignalMsg message.
+         * @function verify
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CTransportSignalMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.webrtc != null && message.hasOwnProperty("webrtc")) {
+                var error = $root.CTransportSignalMsg.WebRTCMessage.verify(message.webrtc);
+                if (error)
+                    return "webrtc." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CTransportSignalMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CTransportSignalMsg} CTransportSignalMsg
+         */
+        CTransportSignalMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CTransportSignalMsg)
+                return object;
+            var message = new $root.CTransportSignalMsg();
+            if (object.webrtc != null) {
+                if (typeof object.webrtc !== "object")
+                    throw TypeError(".CTransportSignalMsg.webrtc: object expected");
+                message.webrtc = $root.CTransportSignalMsg.WebRTCMessage.fromObject(object.webrtc);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CTransportSignalMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CTransportSignalMsg
+         * @static
+         * @param {CTransportSignalMsg} message CTransportSignalMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CTransportSignalMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.webrtc = null;
+            if (message.webrtc != null && message.hasOwnProperty("webrtc"))
+                object.webrtc = $root.CTransportSignalMsg.WebRTCMessage.toObject(message.webrtc, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CTransportSignalMsg to JSON.
+         * @function toJSON
+         * @memberof CTransportSignalMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CTransportSignalMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CTransportSignalMsg.WebRTCMessage = (function() {
+    
+            /**
+             * Properties of a WebRTCMessage.
+             * @memberof CTransportSignalMsg
+             * @interface IWebRTCMessage
+             * @property {boolean|null} [greeting] WebRTCMessage greeting
+             * @property {string|null} [offer] WebRTCMessage offer
+             * @property {string|null} [answer] WebRTCMessage answer
+             * @property {CTransportSignalMsg.WebRTCMessage.ICandidate|null} [candidate] WebRTCMessage candidate
+             */
+    
+            /**
+             * Constructs a new WebRTCMessage.
+             * @memberof CTransportSignalMsg
+             * @classdesc Represents a WebRTCMessage.
+             * @implements IWebRTCMessage
+             * @constructor
+             * @param {CTransportSignalMsg.IWebRTCMessage=} [properties] Properties to set
+             */
+            function WebRTCMessage(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * WebRTCMessage greeting.
+             * @member {boolean} greeting
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             */
+            WebRTCMessage.prototype.greeting = false;
+    
+            /**
+             * WebRTCMessage offer.
+             * @member {string} offer
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             */
+            WebRTCMessage.prototype.offer = "";
+    
+            /**
+             * WebRTCMessage answer.
+             * @member {string} answer
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             */
+            WebRTCMessage.prototype.answer = "";
+    
+            /**
+             * WebRTCMessage candidate.
+             * @member {CTransportSignalMsg.WebRTCMessage.ICandidate|null|undefined} candidate
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             */
+            WebRTCMessage.prototype.candidate = null;
+    
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+    
+            /**
+             * WebRTCMessage msg.
+             * @member {"greeting"|"offer"|"answer"|"candidate"|undefined} msg
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             */
+            Object.defineProperty(WebRTCMessage.prototype, "msg", {
+                get: $util.oneOfGetter($oneOfFields = ["greeting", "offer", "answer", "candidate"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+    
+            /**
+             * Creates a new WebRTCMessage instance using the specified properties.
+             * @function create
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {CTransportSignalMsg.IWebRTCMessage=} [properties] Properties to set
+             * @returns {CTransportSignalMsg.WebRTCMessage} WebRTCMessage instance
+             */
+            WebRTCMessage.create = function create(properties) {
+                return new WebRTCMessage(properties);
+            };
+    
+            /**
+             * Encodes the specified WebRTCMessage message. Does not implicitly {@link CTransportSignalMsg.WebRTCMessage.verify|verify} messages.
+             * @function encode
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {CTransportSignalMsg.IWebRTCMessage} message WebRTCMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            WebRTCMessage.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.greeting != null && message.hasOwnProperty("greeting"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.greeting);
+                if (message.offer != null && message.hasOwnProperty("offer"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.offer);
+                if (message.answer != null && message.hasOwnProperty("answer"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.answer);
+                if (message.candidate != null && message.hasOwnProperty("candidate"))
+                    $root.CTransportSignalMsg.WebRTCMessage.Candidate.encode(message.candidate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified WebRTCMessage message, length delimited. Does not implicitly {@link CTransportSignalMsg.WebRTCMessage.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {CTransportSignalMsg.IWebRTCMessage} message WebRTCMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            WebRTCMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a WebRTCMessage message from the specified reader or buffer.
+             * @function decode
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CTransportSignalMsg.WebRTCMessage} WebRTCMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            WebRTCMessage.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CTransportSignalMsg.WebRTCMessage();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.greeting = reader.bool();
+                        break;
+                    case 2:
+                        message.offer = reader.string();
+                        break;
+                    case 3:
+                        message.answer = reader.string();
+                        break;
+                    case 4:
+                        message.candidate = $root.CTransportSignalMsg.WebRTCMessage.Candidate.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a WebRTCMessage message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CTransportSignalMsg.WebRTCMessage} WebRTCMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            WebRTCMessage.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a WebRTCMessage message.
+             * @function verify
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            WebRTCMessage.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.greeting != null && message.hasOwnProperty("greeting")) {
+                    properties.msg = 1;
+                    if (typeof message.greeting !== "boolean")
+                        return "greeting: boolean expected";
+                }
+                if (message.offer != null && message.hasOwnProperty("offer")) {
+                    if (properties.msg === 1)
+                        return "msg: multiple values";
+                    properties.msg = 1;
+                    if (!$util.isString(message.offer))
+                        return "offer: string expected";
+                }
+                if (message.answer != null && message.hasOwnProperty("answer")) {
+                    if (properties.msg === 1)
+                        return "msg: multiple values";
+                    properties.msg = 1;
+                    if (!$util.isString(message.answer))
+                        return "answer: string expected";
+                }
+                if (message.candidate != null && message.hasOwnProperty("candidate")) {
+                    if (properties.msg === 1)
+                        return "msg: multiple values";
+                    properties.msg = 1;
+                    {
+                        var error = $root.CTransportSignalMsg.WebRTCMessage.Candidate.verify(message.candidate);
+                        if (error)
+                            return "candidate." + error;
+                    }
+                }
+                return null;
+            };
+    
+            /**
+             * Creates a WebRTCMessage message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CTransportSignalMsg.WebRTCMessage} WebRTCMessage
+             */
+            WebRTCMessage.fromObject = function fromObject(object) {
+                if (object instanceof $root.CTransportSignalMsg.WebRTCMessage)
+                    return object;
+                var message = new $root.CTransportSignalMsg.WebRTCMessage();
+                if (object.greeting != null)
+                    message.greeting = Boolean(object.greeting);
+                if (object.offer != null)
+                    message.offer = String(object.offer);
+                if (object.answer != null)
+                    message.answer = String(object.answer);
+                if (object.candidate != null) {
+                    if (typeof object.candidate !== "object")
+                        throw TypeError(".CTransportSignalMsg.WebRTCMessage.candidate: object expected");
+                    message.candidate = $root.CTransportSignalMsg.WebRTCMessage.Candidate.fromObject(object.candidate);
+                }
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a WebRTCMessage message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @static
+             * @param {CTransportSignalMsg.WebRTCMessage} message WebRTCMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            WebRTCMessage.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.greeting != null && message.hasOwnProperty("greeting")) {
+                    object.greeting = message.greeting;
+                    if (options.oneofs)
+                        object.msg = "greeting";
+                }
+                if (message.offer != null && message.hasOwnProperty("offer")) {
+                    object.offer = message.offer;
+                    if (options.oneofs)
+                        object.msg = "offer";
+                }
+                if (message.answer != null && message.hasOwnProperty("answer")) {
+                    object.answer = message.answer;
+                    if (options.oneofs)
+                        object.msg = "answer";
+                }
+                if (message.candidate != null && message.hasOwnProperty("candidate")) {
+                    object.candidate = $root.CTransportSignalMsg.WebRTCMessage.Candidate.toObject(message.candidate, options);
+                    if (options.oneofs)
+                        object.msg = "candidate";
+                }
+                return object;
+            };
+    
+            /**
+             * Converts this WebRTCMessage to JSON.
+             * @function toJSON
+             * @memberof CTransportSignalMsg.WebRTCMessage
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            WebRTCMessage.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            WebRTCMessage.Candidate = (function() {
+    
+                /**
+                 * Properties of a Candidate.
+                 * @memberof CTransportSignalMsg.WebRTCMessage
+                 * @interface ICandidate
+                 * @property {string|null} [sdp_mid] Candidate sdp_mid
+                 * @property {number|null} [sdp_mline_index] Candidate sdp_mline_index
+                 * @property {string|null} [candidate] Candidate candidate
+                 */
+    
+                /**
+                 * Constructs a new Candidate.
+                 * @memberof CTransportSignalMsg.WebRTCMessage
+                 * @classdesc Represents a Candidate.
+                 * @implements ICandidate
+                 * @constructor
+                 * @param {CTransportSignalMsg.WebRTCMessage.ICandidate=} [properties] Properties to set
+                 */
+                function Candidate(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Candidate sdp_mid.
+                 * @member {string} sdp_mid
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @instance
+                 */
+                Candidate.prototype.sdp_mid = "";
+    
+                /**
+                 * Candidate sdp_mline_index.
+                 * @member {number} sdp_mline_index
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @instance
+                 */
+                Candidate.prototype.sdp_mline_index = 0;
+    
+                /**
+                 * Candidate candidate.
+                 * @member {string} candidate
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @instance
+                 */
+                Candidate.prototype.candidate = "";
+    
+                /**
+                 * Creates a new Candidate instance using the specified properties.
+                 * @function create
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {CTransportSignalMsg.WebRTCMessage.ICandidate=} [properties] Properties to set
+                 * @returns {CTransportSignalMsg.WebRTCMessage.Candidate} Candidate instance
+                 */
+                Candidate.create = function create(properties) {
+                    return new Candidate(properties);
+                };
+    
+                /**
+                 * Encodes the specified Candidate message. Does not implicitly {@link CTransportSignalMsg.WebRTCMessage.Candidate.verify|verify} messages.
+                 * @function encode
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {CTransportSignalMsg.WebRTCMessage.ICandidate} message Candidate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Candidate.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.sdp_mid);
+                    if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sdp_mline_index);
+                    if (message.candidate != null && message.hasOwnProperty("candidate"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Candidate message, length delimited. Does not implicitly {@link CTransportSignalMsg.WebRTCMessage.Candidate.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {CTransportSignalMsg.WebRTCMessage.ICandidate} message Candidate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Candidate.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Candidate message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {CTransportSignalMsg.WebRTCMessage.Candidate} Candidate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Candidate.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CTransportSignalMsg.WebRTCMessage.Candidate();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.sdp_mid = reader.string();
+                            break;
+                        case 2:
+                            message.sdp_mline_index = reader.int32();
+                            break;
+                        case 3:
+                            message.candidate = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Candidate message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {CTransportSignalMsg.WebRTCMessage.Candidate} Candidate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Candidate.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Candidate message.
+                 * @function verify
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Candidate.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                        if (!$util.isString(message.sdp_mid))
+                            return "sdp_mid: string expected";
+                    if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                        if (!$util.isInteger(message.sdp_mline_index))
+                            return "sdp_mline_index: integer expected";
+                    if (message.candidate != null && message.hasOwnProperty("candidate"))
+                        if (!$util.isString(message.candidate))
+                            return "candidate: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Candidate message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {CTransportSignalMsg.WebRTCMessage.Candidate} Candidate
+                 */
+                Candidate.fromObject = function fromObject(object) {
+                    if (object instanceof $root.CTransportSignalMsg.WebRTCMessage.Candidate)
+                        return object;
+                    var message = new $root.CTransportSignalMsg.WebRTCMessage.Candidate();
+                    if (object.sdp_mid != null)
+                        message.sdp_mid = String(object.sdp_mid);
+                    if (object.sdp_mline_index != null)
+                        message.sdp_mline_index = object.sdp_mline_index | 0;
+                    if (object.candidate != null)
+                        message.candidate = String(object.candidate);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Candidate message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @static
+                 * @param {CTransportSignalMsg.WebRTCMessage.Candidate} message Candidate
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Candidate.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.sdp_mid = "";
+                        object.sdp_mline_index = 0;
+                        object.candidate = "";
+                    }
+                    if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                        object.sdp_mid = message.sdp_mid;
+                    if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                        object.sdp_mline_index = message.sdp_mline_index;
+                    if (message.candidate != null && message.hasOwnProperty("candidate"))
+                        object.candidate = message.candidate;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Candidate to JSON.
+                 * @function toJSON
+                 * @memberof CTransportSignalMsg.WebRTCMessage.Candidate
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Candidate.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Candidate;
+            })();
+    
+            return WebRTCMessage;
+        })();
+    
+        return CTransportSignalMsg;
     })();
 
     return $root;

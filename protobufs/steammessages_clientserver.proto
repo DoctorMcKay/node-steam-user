@@ -4,6 +4,13 @@ import "encrypted_app_ticket.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+enum EMMSLobbyStatus {
+	k_EMMSLobbyStatusInvalid = 0;
+	k_EMMSLobbyStatusExists = 1;
+	k_EMMSLobbyStatusDoesNotExist = 2;
+	k_EMMSLobbyStatusNotAMember = 3;
+}
+
 message CMsgClientUDSP2PSessionStarted {
 	optional fixed64 steamid_remote = 1;
 	optional int32 appid = 2;
@@ -328,6 +335,13 @@ message CMsgClientStat2 {
 	repeated .CMsgClientStat2.StatDetail stat_detail = 1;
 }
 
+message CMsgClientMMSSetRatelimitPolicyOnClient {
+	optional uint32 app_id = 1;
+	optional bool enable_rate_limits = 2;
+	optional int32 seconds_per_message = 3;
+	optional int32 milliseconds_per_data_update = 4;
+}
+
 message CMsgClientMMSCreateLobby {
 	optional uint32 app_id = 1;
 	optional int32 max_members = 2;
@@ -450,6 +464,7 @@ message CMsgClientMMSLobbyData {
 	optional bytes metadata = 8;
 	repeated .CMsgClientMMSLobbyData.Member members = 9;
 	optional uint32 lobby_cellid = 10;
+	optional bool owner_should_accept_changes = 11;
 }
 
 message CMsgClientMMSSendLobbyChatMsg {
@@ -518,6 +533,19 @@ message CMsgClientMMSInviteToLobby {
 	optional uint32 app_id = 1;
 	optional fixed64 steam_id_lobby = 2;
 	optional fixed64 steam_id_user_invited = 3;
+}
+
+message CMsgClientMMSGetLobbyStatus {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional bool claim_membership = 3;
+	optional bool claim_ownership = 4;
+}
+
+message CMsgClientMMSGetLobbyStatusResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional .EMMSLobbyStatus lobby_status = 3 [default = k_EMMSLobbyStatusInvalid];
 }
 
 message CMsgClientInviteToGame {
@@ -1170,5 +1198,15 @@ message CMsgClientClanState {
 	repeated .CMsgClientClanState.Event events = 6;
 	repeated .CMsgClientClanState.Event announcements = 7;
 	optional bool chat_room_private = 8;
+}
+
+message CMsgClientUnsignedInstallScript {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional uint32 file_size = 3;
+	optional bool signature_broken = 4;
+	optional uint32 depot_id = 5;
+	optional uint64 manifest_id = 6;
+	optional uint32 file_flags = 7;
 }
 

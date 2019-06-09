@@ -43,6 +43,7 @@
          * @property {number|null} [browser_handle] CMsgKeyUp browser_handle
          * @property {number|null} [keyCode] CMsgKeyUp keyCode
          * @property {number|null} [modifiers] CMsgKeyUp modifiers
+         * @property {number|null} [nativeKeyCode] CMsgKeyUp nativeKeyCode
          */
     
         /**
@@ -85,6 +86,14 @@
         CMsgKeyUp.prototype.modifiers = 0;
     
         /**
+         * CMsgKeyUp nativeKeyCode.
+         * @member {number} nativeKeyCode
+         * @memberof CMsgKeyUp
+         * @instance
+         */
+        CMsgKeyUp.prototype.nativeKeyCode = 0;
+    
+        /**
          * Creates a new CMsgKeyUp instance using the specified properties.
          * @function create
          * @memberof CMsgKeyUp
@@ -114,6 +123,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.keyCode);
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.nativeKeyCode);
             return writer;
         };
     
@@ -156,6 +167,9 @@
                     break;
                 case 3:
                     message.modifiers = reader.uint32();
+                    break;
+                case 4:
+                    message.nativeKeyCode = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -201,6 +215,9 @@
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 if (!$util.isInteger(message.modifiers))
                     return "modifiers: integer expected";
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                if (!$util.isInteger(message.nativeKeyCode))
+                    return "nativeKeyCode: integer expected";
             return null;
         };
     
@@ -222,6 +239,8 @@
                 message.keyCode = object.keyCode >>> 0;
             if (object.modifiers != null)
                 message.modifiers = object.modifiers >>> 0;
+            if (object.nativeKeyCode != null)
+                message.nativeKeyCode = object.nativeKeyCode >>> 0;
             return message;
         };
     
@@ -242,6 +261,7 @@
                 object.browser_handle = 0;
                 object.keyCode = 0;
                 object.modifiers = 0;
+                object.nativeKeyCode = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -249,6 +269,8 @@
                 object.keyCode = message.keyCode;
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 object.modifiers = message.modifiers;
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                object.nativeKeyCode = message.nativeKeyCode;
             return object;
         };
     
@@ -276,6 +298,7 @@
          * @property {number|null} [keyCode] CMsgKeyDown keyCode
          * @property {number|null} [modifiers] CMsgKeyDown modifiers
          * @property {boolean|null} [is_system_key] CMsgKeyDown is_system_key
+         * @property {number|null} [nativeKeyCode] CMsgKeyDown nativeKeyCode
          */
     
         /**
@@ -326,6 +349,14 @@
         CMsgKeyDown.prototype.is_system_key = false;
     
         /**
+         * CMsgKeyDown nativeKeyCode.
+         * @member {number} nativeKeyCode
+         * @memberof CMsgKeyDown
+         * @instance
+         */
+        CMsgKeyDown.prototype.nativeKeyCode = 0;
+    
+        /**
          * Creates a new CMsgKeyDown instance using the specified properties.
          * @function create
          * @memberof CMsgKeyDown
@@ -357,6 +388,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
             if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.is_system_key);
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.nativeKeyCode);
             return writer;
         };
     
@@ -402,6 +435,9 @@
                     break;
                 case 4:
                     message.is_system_key = reader.bool();
+                    break;
+                case 5:
+                    message.nativeKeyCode = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -450,6 +486,9 @@
             if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
                 if (typeof message.is_system_key !== "boolean")
                     return "is_system_key: boolean expected";
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                if (!$util.isInteger(message.nativeKeyCode))
+                    return "nativeKeyCode: integer expected";
             return null;
         };
     
@@ -473,6 +512,8 @@
                 message.modifiers = object.modifiers >>> 0;
             if (object.is_system_key != null)
                 message.is_system_key = Boolean(object.is_system_key);
+            if (object.nativeKeyCode != null)
+                message.nativeKeyCode = object.nativeKeyCode >>> 0;
             return message;
         };
     
@@ -494,6 +535,7 @@
                 object.keyCode = 0;
                 object.modifiers = 0;
                 object.is_system_key = false;
+                object.nativeKeyCode = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -503,6 +545,8 @@
                 object.modifiers = message.modifiers;
             if (message.is_system_key != null && message.hasOwnProperty("is_system_key"))
                 object.is_system_key = message.is_system_key;
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                object.nativeKeyCode = message.nativeKeyCode;
             return object;
         };
     
@@ -529,6 +573,8 @@
          * @property {number|null} [browser_handle] CMsgKeyChar browser_handle
          * @property {number|null} [unichar] CMsgKeyChar unichar
          * @property {number|null} [modifiers] CMsgKeyChar modifiers
+         * @property {number|null} [keyCode] CMsgKeyChar keyCode
+         * @property {number|null} [nativeKeyCode] CMsgKeyChar nativeKeyCode
          */
     
         /**
@@ -571,6 +617,22 @@
         CMsgKeyChar.prototype.modifiers = 0;
     
         /**
+         * CMsgKeyChar keyCode.
+         * @member {number} keyCode
+         * @memberof CMsgKeyChar
+         * @instance
+         */
+        CMsgKeyChar.prototype.keyCode = 0;
+    
+        /**
+         * CMsgKeyChar nativeKeyCode.
+         * @member {number} nativeKeyCode
+         * @memberof CMsgKeyChar
+         * @instance
+         */
+        CMsgKeyChar.prototype.nativeKeyCode = 0;
+    
+        /**
          * Creates a new CMsgKeyChar instance using the specified properties.
          * @function create
          * @memberof CMsgKeyChar
@@ -600,6 +662,10 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.unichar);
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modifiers);
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.keyCode);
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.nativeKeyCode);
             return writer;
         };
     
@@ -642,6 +708,12 @@
                     break;
                 case 3:
                     message.modifiers = reader.uint32();
+                    break;
+                case 4:
+                    message.keyCode = reader.uint32();
+                    break;
+                case 5:
+                    message.nativeKeyCode = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -687,6 +759,12 @@
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 if (!$util.isInteger(message.modifiers))
                     return "modifiers: integer expected";
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
+                if (!$util.isInteger(message.keyCode))
+                    return "keyCode: integer expected";
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                if (!$util.isInteger(message.nativeKeyCode))
+                    return "nativeKeyCode: integer expected";
             return null;
         };
     
@@ -708,6 +786,10 @@
                 message.unichar = object.unichar >>> 0;
             if (object.modifiers != null)
                 message.modifiers = object.modifiers >>> 0;
+            if (object.keyCode != null)
+                message.keyCode = object.keyCode >>> 0;
+            if (object.nativeKeyCode != null)
+                message.nativeKeyCode = object.nativeKeyCode >>> 0;
             return message;
         };
     
@@ -728,6 +810,8 @@
                 object.browser_handle = 0;
                 object.unichar = 0;
                 object.modifiers = 0;
+                object.keyCode = 0;
+                object.nativeKeyCode = 0;
             }
             if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
                 object.browser_handle = message.browser_handle;
@@ -735,6 +819,10 @@
                 object.unichar = message.unichar;
             if (message.modifiers != null && message.hasOwnProperty("modifiers"))
                 object.modifiers = message.modifiers;
+            if (message.keyCode != null && message.hasOwnProperty("keyCode"))
+                object.keyCode = message.keyCode;
+            if (message.nativeKeyCode != null && message.hasOwnProperty("nativeKeyCode"))
+                object.nativeKeyCode = message.nativeKeyCode;
             return object;
         };
     
@@ -32648,6 +32736,193 @@
         return CMsgBringWindowToFront;
     })();
     
+    $root.CMsgSetForegroundWindow = (function() {
+    
+        /**
+         * Properties of a CMsgSetForegroundWindow.
+         * @exports ICMsgSetForegroundWindow
+         * @interface ICMsgSetForegroundWindow
+         * @property {number|null} [browser_handle] CMsgSetForegroundWindow browser_handle
+         */
+    
+        /**
+         * Constructs a new CMsgSetForegroundWindow.
+         * @exports CMsgSetForegroundWindow
+         * @classdesc Represents a CMsgSetForegroundWindow.
+         * @implements ICMsgSetForegroundWindow
+         * @constructor
+         * @param {ICMsgSetForegroundWindow=} [properties] Properties to set
+         */
+        function CMsgSetForegroundWindow(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSetForegroundWindow browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgSetForegroundWindow
+         * @instance
+         */
+        CMsgSetForegroundWindow.prototype.browser_handle = 0;
+    
+        /**
+         * Creates a new CMsgSetForegroundWindow instance using the specified properties.
+         * @function create
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {ICMsgSetForegroundWindow=} [properties] Properties to set
+         * @returns {CMsgSetForegroundWindow} CMsgSetForegroundWindow instance
+         */
+        CMsgSetForegroundWindow.create = function create(properties) {
+            return new CMsgSetForegroundWindow(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSetForegroundWindow message. Does not implicitly {@link CMsgSetForegroundWindow.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {ICMsgSetForegroundWindow} message CMsgSetForegroundWindow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetForegroundWindow.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSetForegroundWindow message, length delimited. Does not implicitly {@link CMsgSetForegroundWindow.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {ICMsgSetForegroundWindow} message CMsgSetForegroundWindow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSetForegroundWindow.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSetForegroundWindow message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSetForegroundWindow} CMsgSetForegroundWindow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetForegroundWindow.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSetForegroundWindow();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSetForegroundWindow message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSetForegroundWindow} CMsgSetForegroundWindow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSetForegroundWindow.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSetForegroundWindow message.
+         * @function verify
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSetForegroundWindow.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSetForegroundWindow message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSetForegroundWindow} CMsgSetForegroundWindow
+         */
+        CMsgSetForegroundWindow.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSetForegroundWindow)
+                return object;
+            var message = new $root.CMsgSetForegroundWindow();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSetForegroundWindow message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSetForegroundWindow
+         * @static
+         * @param {CMsgSetForegroundWindow} message CMsgSetForegroundWindow
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSetForegroundWindow.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.browser_handle = 0;
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSetForegroundWindow to JSON.
+         * @function toJSON
+         * @memberof CMsgSetForegroundWindow
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSetForegroundWindow.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSetForegroundWindow;
+    })();
+    
     $root.CMsgMaximizeRestoreWindow = (function() {
     
         /**
@@ -34046,6 +34321,238 @@
         };
     
         return CMsgImeCompositionRangeChanged;
+    })();
+    
+    $root.CMsgInspectElement = (function() {
+    
+        /**
+         * Properties of a CMsgInspectElement.
+         * @exports ICMsgInspectElement
+         * @interface ICMsgInspectElement
+         * @property {number|null} [browser_handle] CMsgInspectElement browser_handle
+         * @property {number|null} [x] CMsgInspectElement x
+         * @property {number|null} [y] CMsgInspectElement y
+         */
+    
+        /**
+         * Constructs a new CMsgInspectElement.
+         * @exports CMsgInspectElement
+         * @classdesc Represents a CMsgInspectElement.
+         * @implements ICMsgInspectElement
+         * @constructor
+         * @param {ICMsgInspectElement=} [properties] Properties to set
+         */
+        function CMsgInspectElement(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgInspectElement browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgInspectElement
+         * @instance
+         */
+        CMsgInspectElement.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgInspectElement x.
+         * @member {number} x
+         * @memberof CMsgInspectElement
+         * @instance
+         */
+        CMsgInspectElement.prototype.x = 0;
+    
+        /**
+         * CMsgInspectElement y.
+         * @member {number} y
+         * @memberof CMsgInspectElement
+         * @instance
+         */
+        CMsgInspectElement.prototype.y = 0;
+    
+        /**
+         * Creates a new CMsgInspectElement instance using the specified properties.
+         * @function create
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {ICMsgInspectElement=} [properties] Properties to set
+         * @returns {CMsgInspectElement} CMsgInspectElement instance
+         */
+        CMsgInspectElement.create = function create(properties) {
+            return new CMsgInspectElement(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgInspectElement message. Does not implicitly {@link CMsgInspectElement.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {ICMsgInspectElement} message CMsgInspectElement message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgInspectElement.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.x != null && message.hasOwnProperty("x"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x);
+            if (message.y != null && message.hasOwnProperty("y"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgInspectElement message, length delimited. Does not implicitly {@link CMsgInspectElement.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {ICMsgInspectElement} message CMsgInspectElement message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgInspectElement.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgInspectElement message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgInspectElement} CMsgInspectElement
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgInspectElement.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgInspectElement();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.x = reader.uint32();
+                    break;
+                case 3:
+                    message.y = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgInspectElement message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgInspectElement} CMsgInspectElement
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgInspectElement.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgInspectElement message.
+         * @function verify
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgInspectElement.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (!$util.isInteger(message.x))
+                    return "x: integer expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (!$util.isInteger(message.y))
+                    return "y: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgInspectElement message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgInspectElement} CMsgInspectElement
+         */
+        CMsgInspectElement.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgInspectElement)
+                return object;
+            var message = new $root.CMsgInspectElement();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.x != null)
+                message.x = object.x >>> 0;
+            if (object.y != null)
+                message.y = object.y >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgInspectElement message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgInspectElement
+         * @static
+         * @param {CMsgInspectElement} message CMsgInspectElement
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgInspectElement.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = message.y;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgInspectElement to JSON.
+         * @function toJSON
+         * @memberof CMsgInspectElement
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgInspectElement.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgInspectElement;
     })();
 
     return $root;

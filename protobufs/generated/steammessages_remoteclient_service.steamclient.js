@@ -16,42 +16,24 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
-    /**
-     * EUserReviewScorePreference enum.
-     * @exports EUserReviewScorePreference
-     * @enum {string}
-     * @property {number} k_EUserReviewScorePreference_Unset=0 k_EUserReviewScorePreference_Unset value
-     * @property {number} k_EUserReviewScorePreference_IncludeAll=1 k_EUserReviewScorePreference_IncludeAll value
-     * @property {number} k_EUserReviewScorePreference_ExcludeBombs=2 k_EUserReviewScorePreference_ExcludeBombs value
-     */
-    $root.EUserReviewScorePreference = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "k_EUserReviewScorePreference_Unset"] = 0;
-        values[valuesById[1] = "k_EUserReviewScorePreference_IncludeAll"] = 1;
-        values[valuesById[2] = "k_EUserReviewScorePreference_ExcludeBombs"] = 2;
-        return values;
-    })();
-    
-    $root.CStore_GetLocalizedNameForTags_Request = (function() {
+    $root.CRemoteClient_GetPairingInfo_Request = (function() {
     
         /**
-         * Properties of a CStore_GetLocalizedNameForTags_Request.
-         * @exports ICStore_GetLocalizedNameForTags_Request
-         * @interface ICStore_GetLocalizedNameForTags_Request
-         * @property {string|null} [language] CStore_GetLocalizedNameForTags_Request language
-         * @property {Array.<number>|null} [tagids] CStore_GetLocalizedNameForTags_Request tagids
+         * Properties of a CRemoteClient_GetPairingInfo_Request.
+         * @exports ICRemoteClient_GetPairingInfo_Request
+         * @interface ICRemoteClient_GetPairingInfo_Request
+         * @property {number|null} [pin] CRemoteClient_GetPairingInfo_Request pin
          */
     
         /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Request.
-         * @exports CStore_GetLocalizedNameForTags_Request
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Request.
-         * @implements ICStore_GetLocalizedNameForTags_Request
+         * Constructs a new CRemoteClient_GetPairingInfo_Request.
+         * @exports CRemoteClient_GetPairingInfo_Request
+         * @classdesc Represents a CRemoteClient_GetPairingInfo_Request.
+         * @implements ICRemoteClient_GetPairingInfo_Request
          * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
+         * @param {ICRemoteClient_GetPairingInfo_Request=} [properties] Properties to set
          */
-        function CStore_GetLocalizedNameForTags_Request(properties) {
-            this.tagids = [];
+        function CRemoteClient_GetPairingInfo_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -59,96 +41,75 @@
         }
     
         /**
-         * CStore_GetLocalizedNameForTags_Request language.
-         * @member {string} language
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * CRemoteClient_GetPairingInfo_Request pin.
+         * @member {number} pin
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.language = "";
+        CRemoteClient_GetPairingInfo_Request.prototype.pin = 0;
     
         /**
-         * CStore_GetLocalizedNameForTags_Request tagids.
-         * @member {Array.<number>} tagids
-         * @memberof CStore_GetLocalizedNameForTags_Request
-         * @instance
-         */
-        CStore_GetLocalizedNameForTags_Request.prototype.tagids = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_GetLocalizedNameForTags_Request instance using the specified properties.
+         * Creates a new CRemoteClient_GetPairingInfo_Request instance using the specified properties.
          * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request instance
+         * @param {ICRemoteClient_GetPairingInfo_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_GetPairingInfo_Request} CRemoteClient_GetPairingInfo_Request instance
          */
-        CStore_GetLocalizedNameForTags_Request.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Request(properties);
+        CRemoteClient_GetPairingInfo_Request.create = function create(properties) {
+            return new CRemoteClient_GetPairingInfo_Request(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CRemoteClient_GetPairingInfo_Request message. Does not implicitly {@link CRemoteClient_GetPairingInfo_Request.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICRemoteClient_GetPairingInfo_Request} message CRemoteClient_GetPairingInfo_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encode = function encode(message, writer) {
+        CRemoteClient_GetPairingInfo_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
-            if (message.tagids != null && message.tagids.length)
-                for (var i = 0; i < message.tagids.length; ++i)
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.tagids[i]);
+            if (message.pin != null && message.hasOwnProperty("pin"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.pin);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CRemoteClient_GetPairingInfo_Request message, length delimited. Does not implicitly {@link CRemoteClient_GetPairingInfo_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICRemoteClient_GetPairingInfo_Request} message CRemoteClient_GetPairingInfo_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CRemoteClient_GetPairingInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer.
+         * Decodes a CRemoteClient_GetPairingInfo_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CRemoteClient_GetPairingInfo_Request} CRemoteClient_GetPairingInfo_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decode = function decode(reader, length) {
+        CRemoteClient_GetPairingInfo_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_GetPairingInfo_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.language = reader.string();
-                    break;
-                case 2:
-                    if (!(message.tagids && message.tagids.length))
-                        message.tagids = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.tagids.push(reader.uint32());
-                    } else
-                        message.tagids.push(reader.uint32());
+                    message.pin = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -159,129 +120,109 @@
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CRemoteClient_GetPairingInfo_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CRemoteClient_GetPairingInfo_Request} CRemoteClient_GetPairingInfo_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decodeDelimited = function decodeDelimited(reader) {
+        CRemoteClient_GetPairingInfo_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_GetLocalizedNameForTags_Request message.
+         * Verifies a CRemoteClient_GetPairingInfo_Request message.
          * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_GetLocalizedNameForTags_Request.verify = function verify(message) {
+        CRemoteClient_GetPairingInfo_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isString(message.language))
-                    return "language: string expected";
-            if (message.tagids != null && message.hasOwnProperty("tagids")) {
-                if (!Array.isArray(message.tagids))
-                    return "tagids: array expected";
-                for (var i = 0; i < message.tagids.length; ++i)
-                    if (!$util.isInteger(message.tagids[i]))
-                        return "tagids: integer[] expected";
-            }
+            if (message.pin != null && message.hasOwnProperty("pin"))
+                if (!$util.isInteger(message.pin))
+                    return "pin: integer expected";
             return null;
         };
     
         /**
-         * Creates a CStore_GetLocalizedNameForTags_Request message from a plain object. Also converts values to their respective internal types.
+         * Creates a CRemoteClient_GetPairingInfo_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CRemoteClient_GetPairingInfo_Request} CRemoteClient_GetPairingInfo_Request
          */
-        CStore_GetLocalizedNameForTags_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Request)
+        CRemoteClient_GetPairingInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_GetPairingInfo_Request)
                 return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Request();
-            if (object.language != null)
-                message.language = String(object.language);
-            if (object.tagids) {
-                if (!Array.isArray(object.tagids))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Request.tagids: array expected");
-                message.tagids = [];
-                for (var i = 0; i < object.tagids.length; ++i)
-                    message.tagids[i] = object.tagids[i] >>> 0;
-            }
+            var message = new $root.CRemoteClient_GetPairingInfo_Request();
+            if (object.pin != null)
+                message.pin = object.pin >>> 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CRemoteClient_GetPairingInfo_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @static
-         * @param {CStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request
+         * @param {CRemoteClient_GetPairingInfo_Request} message CRemoteClient_GetPairingInfo_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_GetLocalizedNameForTags_Request.toObject = function toObject(message, options) {
+        CRemoteClient_GetPairingInfo_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.tagids = [];
             if (options.defaults)
-                object.language = "";
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.tagids && message.tagids.length) {
-                object.tagids = [];
-                for (var j = 0; j < message.tagids.length; ++j)
-                    object.tagids[j] = message.tagids[j];
-            }
+                object.pin = 0;
+            if (message.pin != null && message.hasOwnProperty("pin"))
+                object.pin = message.pin;
             return object;
         };
     
         /**
-         * Converts this CStore_GetLocalizedNameForTags_Request to JSON.
+         * Converts this CRemoteClient_GetPairingInfo_Request to JSON.
          * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CRemoteClient_GetPairingInfo_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.toJSON = function toJSON() {
+        CRemoteClient_GetPairingInfo_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_GetLocalizedNameForTags_Request;
+        return CRemoteClient_GetPairingInfo_Request;
     })();
     
-    $root.CStore_GetLocalizedNameForTags_Response = (function() {
+    $root.CRemoteClient_GetPairingInfo_Response = (function() {
     
         /**
-         * Properties of a CStore_GetLocalizedNameForTags_Response.
-         * @exports ICStore_GetLocalizedNameForTags_Response
-         * @interface ICStore_GetLocalizedNameForTags_Response
-         * @property {Array.<CStore_GetLocalizedNameForTags_Response.ITag>|null} [tags] CStore_GetLocalizedNameForTags_Response tags
+         * Properties of a CRemoteClient_GetPairingInfo_Response.
+         * @exports ICRemoteClient_GetPairingInfo_Response
+         * @interface ICRemoteClient_GetPairingInfo_Response
+         * @property {number|Long|null} [session_id] CRemoteClient_GetPairingInfo_Response session_id
+         * @property {number|Long|null} [device_id] CRemoteClient_GetPairingInfo_Response device_id
+         * @property {Uint8Array|null} [request] CRemoteClient_GetPairingInfo_Response request
          */
     
         /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Response.
-         * @exports CStore_GetLocalizedNameForTags_Response
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Response.
-         * @implements ICStore_GetLocalizedNameForTags_Response
+         * Constructs a new CRemoteClient_GetPairingInfo_Response.
+         * @exports CRemoteClient_GetPairingInfo_Response
+         * @classdesc Represents a CRemoteClient_GetPairingInfo_Response.
+         * @implements ICRemoteClient_GetPairingInfo_Response
          * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
+         * @param {ICRemoteClient_GetPairingInfo_Response=} [properties] Properties to set
          */
-        function CStore_GetLocalizedNameForTags_Response(properties) {
-            this.tags = [];
+        function CRemoteClient_GetPairingInfo_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -289,814 +230,1895 @@
         }
     
         /**
-         * CStore_GetLocalizedNameForTags_Response tags.
-         * @member {Array.<CStore_GetLocalizedNameForTags_Response.ITag>} tags
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * CRemoteClient_GetPairingInfo_Response session_id.
+         * @member {number|Long} session_id
+         * @memberof CRemoteClient_GetPairingInfo_Response
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Response.prototype.tags = $util.emptyArray;
+        CRemoteClient_GetPairingInfo_Response.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * Creates a new CStore_GetLocalizedNameForTags_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response instance
+         * CRemoteClient_GetPairingInfo_Response device_id.
+         * @member {number|Long} device_id
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @instance
          */
-        CStore_GetLocalizedNameForTags_Response.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Response(properties);
+        CRemoteClient_GetPairingInfo_Response.prototype.device_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_GetPairingInfo_Response request.
+         * @member {Uint8Array} request
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @instance
+         */
+        CRemoteClient_GetPairingInfo_Response.prototype.request = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CRemoteClient_GetPairingInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @static
+         * @param {ICRemoteClient_GetPairingInfo_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_GetPairingInfo_Response} CRemoteClient_GetPairingInfo_Response instance
+         */
+        CRemoteClient_GetPairingInfo_Response.create = function create(properties) {
+            return new CRemoteClient_GetPairingInfo_Response(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
+         * Encodes the specified CRemoteClient_GetPairingInfo_Response message. Does not implicitly {@link CRemoteClient_GetPairingInfo_Response.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CRemoteClient_GetPairingInfo_Response
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
+         * @param {ICRemoteClient_GetPairingInfo_Response} message CRemoteClient_GetPairingInfo_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Response.encode = function encode(message, writer) {
+        CRemoteClient_GetPairingInfo_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.tags != null && message.tags.length)
-                for (var i = 0; i < message.tags.length; ++i)
-                    $root.CStore_GetLocalizedNameForTags_Response.Tag.encode(message.tags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.device_id);
+            if (message.request != null && message.hasOwnProperty("request"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.request);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
+         * Encodes the specified CRemoteClient_GetPairingInfo_Response message, length delimited. Does not implicitly {@link CRemoteClient_GetPairingInfo_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CRemoteClient_GetPairingInfo_Response
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
+         * @param {ICRemoteClient_GetPairingInfo_Response} message CRemoteClient_GetPairingInfo_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CRemoteClient_GetPairingInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer.
+         * Decodes a CRemoteClient_GetPairingInfo_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Response
+         * @memberof CRemoteClient_GetPairingInfo_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
+         * @returns {CRemoteClient_GetPairingInfo_Response} CRemoteClient_GetPairingInfo_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Response.decode = function decode(reader, length) {
+        CRemoteClient_GetPairingInfo_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_GetPairingInfo_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.tags && message.tags.length))
-                        message.tags = [];
-                    message.tags.push($root.CStore_GetLocalizedNameForTags_Response.Tag.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetLocalizedNameForTags_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetLocalizedNameForTags_Response message.
-         * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetLocalizedNameForTags_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tags != null && message.hasOwnProperty("tags")) {
-                if (!Array.isArray(message.tags))
-                    return "tags: array expected";
-                for (var i = 0; i < message.tags.length; ++i) {
-                    var error = $root.CStore_GetLocalizedNameForTags_Response.Tag.verify(message.tags[i]);
-                    if (error)
-                        return "tags." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetLocalizedNameForTags_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
-         */
-        CStore_GetLocalizedNameForTags_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Response)
-                return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Response();
-            if (object.tags) {
-                if (!Array.isArray(object.tags))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: array expected");
-                message.tags = [];
-                for (var i = 0; i < object.tags.length; ++i) {
-                    if (typeof object.tags[i] !== "object")
-                        throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: object expected");
-                    message.tags[i] = $root.CStore_GetLocalizedNameForTags_Response.Tag.fromObject(object.tags[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {CStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetLocalizedNameForTags_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tags = [];
-            if (message.tags && message.tags.length) {
-                object.tags = [];
-                for (var j = 0; j < message.tags.length; ++j)
-                    object.tags[j] = $root.CStore_GetLocalizedNameForTags_Response.Tag.toObject(message.tags[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetLocalizedNameForTags_Response to JSON.
-         * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetLocalizedNameForTags_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_GetLocalizedNameForTags_Response.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [english_name] Tag english_name
-             * @property {string|null} [name] Tag name
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag english_name.
-             * @member {string} english_name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.english_name = "";
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.english_name);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.english_name = reader.string();
-                        break;
-                    case 3:
-                        message.name = reader.string();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    if (!$util.isString(message.english_name))
-                        return "english_name: string expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_GetLocalizedNameForTags_Response.Tag)
-                    return object;
-                var message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.english_name != null)
-                    message.english_name = String(object.english_name);
-                if (object.name != null)
-                    message.name = String(object.name);
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.english_name = "";
-                    object.name = "";
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    object.english_name = message.english_name;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
-                return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_GetLocalizedNameForTags_Response;
-    })();
-    
-    $root.CStore_GetStorePreferences_Request = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Request.
-         * @exports ICStore_GetStorePreferences_Request
-         * @interface ICStore_GetStorePreferences_Request
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Request.
-         * @exports CStore_GetStorePreferences_Request
-         * @classdesc Represents a CStore_GetStorePreferences_Request.
-         * @implements ICStore_GetStorePreferences_Request
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Request instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request instance
-         */
-        CStore_GetStorePreferences_Request.create = function create(properties) {
-            return new CStore_GetStorePreferences_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Request message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         */
-        CStore_GetStorePreferences_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Request)
-                return object;
-            return new $root.CStore_GetStorePreferences_Request();
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {CStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Request.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Request to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Request;
-    })();
-    
-    $root.CStore_UserPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserPreferences.
-         * @exports ICStore_UserPreferences
-         * @interface ICStore_UserPreferences
-         * @property {number|null} [primary_language] CStore_UserPreferences primary_language
-         * @property {number|null} [secondary_languages] CStore_UserPreferences secondary_languages
-         * @property {boolean|null} [platform_windows] CStore_UserPreferences platform_windows
-         * @property {boolean|null} [platform_mac] CStore_UserPreferences platform_mac
-         * @property {boolean|null} [platform_linux] CStore_UserPreferences platform_linux
-         * @property {boolean|null} [hide_adult_content_violence] CStore_UserPreferences hide_adult_content_violence
-         * @property {boolean|null} [hide_adult_content_sex] CStore_UserPreferences hide_adult_content_sex
-         * @property {number|null} [timestamp_updated] CStore_UserPreferences timestamp_updated
-         * @property {boolean|null} [hide_store_broadcast] CStore_UserPreferences hide_store_broadcast
-         * @property {EUserReviewScorePreference|null} [review_score_preference] CStore_UserPreferences review_score_preference
-         * @property {number|null} [timestamp_content_descriptor_preferences_updated] CStore_UserPreferences timestamp_content_descriptor_preferences_updated
-         */
-    
-        /**
-         * Constructs a new CStore_UserPreferences.
-         * @exports CStore_UserPreferences
-         * @classdesc Represents a CStore_UserPreferences.
-         * @implements ICStore_UserPreferences
-         * @constructor
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         */
-        function CStore_UserPreferences(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserPreferences primary_language.
-         * @member {number} primary_language
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.primary_language = 0;
-    
-        /**
-         * CStore_UserPreferences secondary_languages.
-         * @member {number} secondary_languages
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.secondary_languages = 0;
-    
-        /**
-         * CStore_UserPreferences platform_windows.
-         * @member {boolean} platform_windows
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_windows = false;
-    
-        /**
-         * CStore_UserPreferences platform_mac.
-         * @member {boolean} platform_mac
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_mac = false;
-    
-        /**
-         * CStore_UserPreferences platform_linux.
-         * @member {boolean} platform_linux
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_linux = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_violence.
-         * @member {boolean} hide_adult_content_violence
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_violence = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_sex.
-         * @member {boolean} hide_adult_content_sex
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_sex = false;
-    
-        /**
-         * CStore_UserPreferences timestamp_updated.
-         * @member {number} timestamp_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_updated = 0;
-    
-        /**
-         * CStore_UserPreferences hide_store_broadcast.
-         * @member {boolean} hide_store_broadcast
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_store_broadcast = false;
-    
-        /**
-         * CStore_UserPreferences review_score_preference.
-         * @member {EUserReviewScorePreference} review_score_preference
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.review_score_preference = 0;
-    
-        /**
-         * CStore_UserPreferences timestamp_content_descriptor_preferences_updated.
-         * @member {number} timestamp_content_descriptor_preferences_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_content_descriptor_preferences_updated = 0;
-    
-        /**
-         * Creates a new CStore_UserPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         * @returns {CStore_UserPreferences} CStore_UserPreferences instance
-         */
-        CStore_UserPreferences.create = function create(properties) {
-            return new CStore_UserPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserPreferences message. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.primary_language);
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.secondary_languages);
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.platform_windows);
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.platform_mac);
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.platform_linux);
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hide_adult_content_violence);
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hide_adult_content_sex);
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.timestamp_updated);
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.hide_store_broadcast);
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.review_score_preference);
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.timestamp_content_descriptor_preferences_updated);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserPreferences message, length delimited. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.primary_language = reader.uint32();
+                    message.session_id = reader.fixed64();
                     break;
                 case 2:
-                    message.secondary_languages = reader.uint32();
+                    message.device_id = reader.fixed64();
                     break;
                 case 3:
-                    message.platform_windows = reader.bool();
+                    message.request = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_GetPairingInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_GetPairingInfo_Response} CRemoteClient_GetPairingInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_GetPairingInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_GetPairingInfo_Response message.
+         * @function verify
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_GetPairingInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                if (!$util.isInteger(message.device_id) && !(message.device_id && $util.isInteger(message.device_id.low) && $util.isInteger(message.device_id.high)))
+                    return "device_id: integer|Long expected";
+            if (message.request != null && message.hasOwnProperty("request"))
+                if (!(message.request && typeof message.request.length === "number" || $util.isString(message.request)))
+                    return "request: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_GetPairingInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_GetPairingInfo_Response} CRemoteClient_GetPairingInfo_Response
+         */
+        CRemoteClient_GetPairingInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_GetPairingInfo_Response)
+                return object;
+            var message = new $root.CRemoteClient_GetPairingInfo_Response();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = false;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber();
+            if (object.device_id != null)
+                if ($util.Long)
+                    (message.device_id = $util.Long.fromValue(object.device_id)).unsigned = false;
+                else if (typeof object.device_id === "string")
+                    message.device_id = parseInt(object.device_id, 10);
+                else if (typeof object.device_id === "number")
+                    message.device_id = object.device_id;
+                else if (typeof object.device_id === "object")
+                    message.device_id = new $util.LongBits(object.device_id.low >>> 0, object.device_id.high >>> 0).toNumber();
+            if (object.request != null)
+                if (typeof object.request === "string")
+                    $util.base64.decode(object.request, message.request = $util.newBuffer($util.base64.length(object.request)), 0);
+                else if (object.request.length)
+                    message.request = object.request;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_GetPairingInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @static
+         * @param {CRemoteClient_GetPairingInfo_Response} message CRemoteClient_GetPairingInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_GetPairingInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.device_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.device_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.request = "";
+                else {
+                    object.request = [];
+                    if (options.bytes !== Array)
+                        object.request = $util.newBuffer(object.request);
+                }
+            }
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber() : message.session_id;
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                if (typeof message.device_id === "number")
+                    object.device_id = options.longs === String ? String(message.device_id) : message.device_id;
+                else
+                    object.device_id = options.longs === String ? $util.Long.prototype.toString.call(message.device_id) : options.longs === Number ? new $util.LongBits(message.device_id.low >>> 0, message.device_id.high >>> 0).toNumber() : message.device_id;
+            if (message.request != null && message.hasOwnProperty("request"))
+                object.request = options.bytes === String ? $util.base64.encode(message.request, 0, message.request.length) : options.bytes === Array ? Array.prototype.slice.call(message.request) : message.request;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_GetPairingInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_GetPairingInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_GetPairingInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_GetPairingInfo_Response;
+    })();
+    
+    $root.CRemoteClient_Online_Notification = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_Online_Notification.
+         * @exports ICRemoteClient_Online_Notification
+         * @interface ICRemoteClient_Online_Notification
+         * @property {number|Long|null} [steamid] CRemoteClient_Online_Notification steamid
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_Online_Notification.
+         * @exports CRemoteClient_Online_Notification
+         * @classdesc Represents a CRemoteClient_Online_Notification.
+         * @implements ICRemoteClient_Online_Notification
+         * @constructor
+         * @param {ICRemoteClient_Online_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_Online_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_Online_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_Online_Notification
+         * @instance
+         */
+        CRemoteClient_Online_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CRemoteClient_Online_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {ICRemoteClient_Online_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_Online_Notification} CRemoteClient_Online_Notification instance
+         */
+        CRemoteClient_Online_Notification.create = function create(properties) {
+            return new CRemoteClient_Online_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_Online_Notification message. Does not implicitly {@link CRemoteClient_Online_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {ICRemoteClient_Online_Notification} message CRemoteClient_Online_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_Online_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_Online_Notification message, length delimited. Does not implicitly {@link CRemoteClient_Online_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {ICRemoteClient_Online_Notification} message CRemoteClient_Online_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_Online_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_Online_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_Online_Notification} CRemoteClient_Online_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_Online_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_Online_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_Online_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_Online_Notification} CRemoteClient_Online_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_Online_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_Online_Notification message.
+         * @function verify
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_Online_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_Online_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_Online_Notification} CRemoteClient_Online_Notification
+         */
+        CRemoteClient_Online_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_Online_Notification)
+                return object;
+            var message = new $root.CRemoteClient_Online_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_Online_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_Online_Notification
+         * @static
+         * @param {CRemoteClient_Online_Notification} message CRemoteClient_Online_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_Online_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_Online_Notification to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_Online_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_Online_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_Online_Notification;
+    })();
+    
+    $root.CRemoteClient_ReplyPacket_Notification = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_ReplyPacket_Notification.
+         * @exports ICRemoteClient_ReplyPacket_Notification
+         * @interface ICRemoteClient_ReplyPacket_Notification
+         * @property {number|Long|null} [session_id] CRemoteClient_ReplyPacket_Notification session_id
+         * @property {Uint8Array|null} [payload] CRemoteClient_ReplyPacket_Notification payload
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_ReplyPacket_Notification.
+         * @exports CRemoteClient_ReplyPacket_Notification
+         * @classdesc Represents a CRemoteClient_ReplyPacket_Notification.
+         * @implements ICRemoteClient_ReplyPacket_Notification
+         * @constructor
+         * @param {ICRemoteClient_ReplyPacket_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_ReplyPacket_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_ReplyPacket_Notification session_id.
+         * @member {number|Long} session_id
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @instance
+         */
+        CRemoteClient_ReplyPacket_Notification.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_ReplyPacket_Notification payload.
+         * @member {Uint8Array} payload
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @instance
+         */
+        CRemoteClient_ReplyPacket_Notification.prototype.payload = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CRemoteClient_ReplyPacket_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {ICRemoteClient_ReplyPacket_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_ReplyPacket_Notification} CRemoteClient_ReplyPacket_Notification instance
+         */
+        CRemoteClient_ReplyPacket_Notification.create = function create(properties) {
+            return new CRemoteClient_ReplyPacket_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_ReplyPacket_Notification message. Does not implicitly {@link CRemoteClient_ReplyPacket_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {ICRemoteClient_ReplyPacket_Notification} message CRemoteClient_ReplyPacket_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_ReplyPacket_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.payload);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_ReplyPacket_Notification message, length delimited. Does not implicitly {@link CRemoteClient_ReplyPacket_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {ICRemoteClient_ReplyPacket_Notification} message CRemoteClient_ReplyPacket_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_ReplyPacket_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_ReplyPacket_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_ReplyPacket_Notification} CRemoteClient_ReplyPacket_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_ReplyPacket_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_ReplyPacket_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.payload = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_ReplyPacket_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_ReplyPacket_Notification} CRemoteClient_ReplyPacket_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_ReplyPacket_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_ReplyPacket_Notification message.
+         * @function verify
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_ReplyPacket_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
+                    return "payload: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_ReplyPacket_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_ReplyPacket_Notification} CRemoteClient_ReplyPacket_Notification
+         */
+        CRemoteClient_ReplyPacket_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_ReplyPacket_Notification)
+                return object;
+            var message = new $root.CRemoteClient_ReplyPacket_Notification();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = false;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber();
+            if (object.payload != null)
+                if (typeof object.payload === "string")
+                    $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                else if (object.payload.length)
+                    message.payload = object.payload;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_ReplyPacket_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @static
+         * @param {CRemoteClient_ReplyPacket_Notification} message CRemoteClient_ReplyPacket_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_ReplyPacket_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.payload = "";
+                else {
+                    object.payload = [];
+                    if (options.bytes !== Array)
+                        object.payload = $util.newBuffer(object.payload);
+                }
+            }
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber() : message.session_id;
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_ReplyPacket_Notification to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_ReplyPacket_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_ReplyPacket_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_ReplyPacket_Notification;
+    })();
+    
+    $root.CRemoteClient_AllocateTURNServer_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_AllocateTURNServer_Request.
+         * @exports ICRemoteClient_AllocateTURNServer_Request
+         * @interface ICRemoteClient_AllocateTURNServer_Request
+         * @property {number|null} [cellid] CRemoteClient_AllocateTURNServer_Request cellid
+         * @property {string|null} [credentials] CRemoteClient_AllocateTURNServer_Request credentials
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_AllocateTURNServer_Request.
+         * @exports CRemoteClient_AllocateTURNServer_Request
+         * @classdesc Represents a CRemoteClient_AllocateTURNServer_Request.
+         * @implements ICRemoteClient_AllocateTURNServer_Request
+         * @constructor
+         * @param {ICRemoteClient_AllocateTURNServer_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_AllocateTURNServer_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_AllocateTURNServer_Request cellid.
+         * @member {number} cellid
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @instance
+         */
+        CRemoteClient_AllocateTURNServer_Request.prototype.cellid = 0;
+    
+        /**
+         * CRemoteClient_AllocateTURNServer_Request credentials.
+         * @member {string} credentials
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @instance
+         */
+        CRemoteClient_AllocateTURNServer_Request.prototype.credentials = "";
+    
+        /**
+         * Creates a new CRemoteClient_AllocateTURNServer_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_AllocateTURNServer_Request} CRemoteClient_AllocateTURNServer_Request instance
+         */
+        CRemoteClient_AllocateTURNServer_Request.create = function create(properties) {
+            return new CRemoteClient_AllocateTURNServer_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateTURNServer_Request message. Does not implicitly {@link CRemoteClient_AllocateTURNServer_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Request} message CRemoteClient_AllocateTURNServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateTURNServer_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateTURNServer_Request message, length delimited. Does not implicitly {@link CRemoteClient_AllocateTURNServer_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Request} message CRemoteClient_AllocateTURNServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateTURNServer_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateTURNServer_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_AllocateTURNServer_Request} CRemoteClient_AllocateTURNServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateTURNServer_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_AllocateTURNServer_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cellid = reader.uint32();
+                    break;
+                case 2:
+                    message.credentials = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateTURNServer_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_AllocateTURNServer_Request} CRemoteClient_AllocateTURNServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateTURNServer_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_AllocateTURNServer_Request message.
+         * @function verify
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_AllocateTURNServer_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                if (!$util.isInteger(message.cellid))
+                    return "cellid: integer expected";
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                if (!$util.isString(message.credentials))
+                    return "credentials: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_AllocateTURNServer_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_AllocateTURNServer_Request} CRemoteClient_AllocateTURNServer_Request
+         */
+        CRemoteClient_AllocateTURNServer_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_AllocateTURNServer_Request)
+                return object;
+            var message = new $root.CRemoteClient_AllocateTURNServer_Request();
+            if (object.cellid != null)
+                message.cellid = object.cellid >>> 0;
+            if (object.credentials != null)
+                message.credentials = String(object.credentials);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_AllocateTURNServer_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @static
+         * @param {CRemoteClient_AllocateTURNServer_Request} message CRemoteClient_AllocateTURNServer_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_AllocateTURNServer_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cellid = 0;
+                object.credentials = "";
+            }
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                object.cellid = message.cellid;
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                object.credentials = message.credentials;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_AllocateTURNServer_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_AllocateTURNServer_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_AllocateTURNServer_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_AllocateTURNServer_Request;
+    })();
+    
+    $root.CRemoteClient_AllocateTURNServer_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_AllocateTURNServer_Response.
+         * @exports ICRemoteClient_AllocateTURNServer_Response
+         * @interface ICRemoteClient_AllocateTURNServer_Response
+         * @property {string|null} [turn_server] CRemoteClient_AllocateTURNServer_Response turn_server
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_AllocateTURNServer_Response.
+         * @exports CRemoteClient_AllocateTURNServer_Response
+         * @classdesc Represents a CRemoteClient_AllocateTURNServer_Response.
+         * @implements ICRemoteClient_AllocateTURNServer_Response
+         * @constructor
+         * @param {ICRemoteClient_AllocateTURNServer_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_AllocateTURNServer_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_AllocateTURNServer_Response turn_server.
+         * @member {string} turn_server
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @instance
+         */
+        CRemoteClient_AllocateTURNServer_Response.prototype.turn_server = "";
+    
+        /**
+         * Creates a new CRemoteClient_AllocateTURNServer_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_AllocateTURNServer_Response} CRemoteClient_AllocateTURNServer_Response instance
+         */
+        CRemoteClient_AllocateTURNServer_Response.create = function create(properties) {
+            return new CRemoteClient_AllocateTURNServer_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateTURNServer_Response message. Does not implicitly {@link CRemoteClient_AllocateTURNServer_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Response} message CRemoteClient_AllocateTURNServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateTURNServer_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.turn_server);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateTURNServer_Response message, length delimited. Does not implicitly {@link CRemoteClient_AllocateTURNServer_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateTURNServer_Response} message CRemoteClient_AllocateTURNServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateTURNServer_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateTURNServer_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_AllocateTURNServer_Response} CRemoteClient_AllocateTURNServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateTURNServer_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_AllocateTURNServer_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.turn_server = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateTURNServer_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_AllocateTURNServer_Response} CRemoteClient_AllocateTURNServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateTURNServer_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_AllocateTURNServer_Response message.
+         * @function verify
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_AllocateTURNServer_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                if (!$util.isString(message.turn_server))
+                    return "turn_server: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_AllocateTURNServer_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_AllocateTURNServer_Response} CRemoteClient_AllocateTURNServer_Response
+         */
+        CRemoteClient_AllocateTURNServer_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_AllocateTURNServer_Response)
+                return object;
+            var message = new $root.CRemoteClient_AllocateTURNServer_Response();
+            if (object.turn_server != null)
+                message.turn_server = String(object.turn_server);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_AllocateTURNServer_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @static
+         * @param {CRemoteClient_AllocateTURNServer_Response} message CRemoteClient_AllocateTURNServer_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_AllocateTURNServer_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.turn_server = "";
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                object.turn_server = message.turn_server;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_AllocateTURNServer_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_AllocateTURNServer_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_AllocateTURNServer_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_AllocateTURNServer_Response;
+    })();
+    
+    $root.CRemoteClient_AllocateRelayServer_Request = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_AllocateRelayServer_Request.
+         * @exports ICRemoteClient_AllocateRelayServer_Request
+         * @interface ICRemoteClient_AllocateRelayServer_Request
+         * @property {number|null} [cellid] CRemoteClient_AllocateRelayServer_Request cellid
+         * @property {string|null} [credentials] CRemoteClient_AllocateRelayServer_Request credentials
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_AllocateRelayServer_Request.
+         * @exports CRemoteClient_AllocateRelayServer_Request
+         * @classdesc Represents a CRemoteClient_AllocateRelayServer_Request.
+         * @implements ICRemoteClient_AllocateRelayServer_Request
+         * @constructor
+         * @param {ICRemoteClient_AllocateRelayServer_Request=} [properties] Properties to set
+         */
+        function CRemoteClient_AllocateRelayServer_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_AllocateRelayServer_Request cellid.
+         * @member {number} cellid
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @instance
+         */
+        CRemoteClient_AllocateRelayServer_Request.prototype.cellid = 0;
+    
+        /**
+         * CRemoteClient_AllocateRelayServer_Request credentials.
+         * @member {string} credentials
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @instance
+         */
+        CRemoteClient_AllocateRelayServer_Request.prototype.credentials = "";
+    
+        /**
+         * Creates a new CRemoteClient_AllocateRelayServer_Request instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Request=} [properties] Properties to set
+         * @returns {CRemoteClient_AllocateRelayServer_Request} CRemoteClient_AllocateRelayServer_Request instance
+         */
+        CRemoteClient_AllocateRelayServer_Request.create = function create(properties) {
+            return new CRemoteClient_AllocateRelayServer_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateRelayServer_Request message. Does not implicitly {@link CRemoteClient_AllocateRelayServer_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Request} message CRemoteClient_AllocateRelayServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateRelayServer_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.credentials);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateRelayServer_Request message, length delimited. Does not implicitly {@link CRemoteClient_AllocateRelayServer_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Request} message CRemoteClient_AllocateRelayServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateRelayServer_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateRelayServer_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_AllocateRelayServer_Request} CRemoteClient_AllocateRelayServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateRelayServer_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_AllocateRelayServer_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cellid = reader.uint32();
+                    break;
+                case 2:
+                    message.credentials = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateRelayServer_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_AllocateRelayServer_Request} CRemoteClient_AllocateRelayServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateRelayServer_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_AllocateRelayServer_Request message.
+         * @function verify
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_AllocateRelayServer_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                if (!$util.isInteger(message.cellid))
+                    return "cellid: integer expected";
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                if (!$util.isString(message.credentials))
+                    return "credentials: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_AllocateRelayServer_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_AllocateRelayServer_Request} CRemoteClient_AllocateRelayServer_Request
+         */
+        CRemoteClient_AllocateRelayServer_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_AllocateRelayServer_Request)
+                return object;
+            var message = new $root.CRemoteClient_AllocateRelayServer_Request();
+            if (object.cellid != null)
+                message.cellid = object.cellid >>> 0;
+            if (object.credentials != null)
+                message.credentials = String(object.credentials);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_AllocateRelayServer_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @static
+         * @param {CRemoteClient_AllocateRelayServer_Request} message CRemoteClient_AllocateRelayServer_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_AllocateRelayServer_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cellid = 0;
+                object.credentials = "";
+            }
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                object.cellid = message.cellid;
+            if (message.credentials != null && message.hasOwnProperty("credentials"))
+                object.credentials = message.credentials;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_AllocateRelayServer_Request to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_AllocateRelayServer_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_AllocateRelayServer_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_AllocateRelayServer_Request;
+    })();
+    
+    $root.CRemoteClient_AllocateRelayServer_Response = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_AllocateRelayServer_Response.
+         * @exports ICRemoteClient_AllocateRelayServer_Response
+         * @interface ICRemoteClient_AllocateRelayServer_Response
+         * @property {string|null} [relay_server] CRemoteClient_AllocateRelayServer_Response relay_server
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_AllocateRelayServer_Response.
+         * @exports CRemoteClient_AllocateRelayServer_Response
+         * @classdesc Represents a CRemoteClient_AllocateRelayServer_Response.
+         * @implements ICRemoteClient_AllocateRelayServer_Response
+         * @constructor
+         * @param {ICRemoteClient_AllocateRelayServer_Response=} [properties] Properties to set
+         */
+        function CRemoteClient_AllocateRelayServer_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_AllocateRelayServer_Response relay_server.
+         * @member {string} relay_server
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @instance
+         */
+        CRemoteClient_AllocateRelayServer_Response.prototype.relay_server = "";
+    
+        /**
+         * Creates a new CRemoteClient_AllocateRelayServer_Response instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Response=} [properties] Properties to set
+         * @returns {CRemoteClient_AllocateRelayServer_Response} CRemoteClient_AllocateRelayServer_Response instance
+         */
+        CRemoteClient_AllocateRelayServer_Response.create = function create(properties) {
+            return new CRemoteClient_AllocateRelayServer_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateRelayServer_Response message. Does not implicitly {@link CRemoteClient_AllocateRelayServer_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Response} message CRemoteClient_AllocateRelayServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateRelayServer_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.relay_server != null && message.hasOwnProperty("relay_server"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.relay_server);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_AllocateRelayServer_Response message, length delimited. Does not implicitly {@link CRemoteClient_AllocateRelayServer_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {ICRemoteClient_AllocateRelayServer_Response} message CRemoteClient_AllocateRelayServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_AllocateRelayServer_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateRelayServer_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_AllocateRelayServer_Response} CRemoteClient_AllocateRelayServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateRelayServer_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_AllocateRelayServer_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.relay_server = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_AllocateRelayServer_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_AllocateRelayServer_Response} CRemoteClient_AllocateRelayServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_AllocateRelayServer_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_AllocateRelayServer_Response message.
+         * @function verify
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_AllocateRelayServer_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.relay_server != null && message.hasOwnProperty("relay_server"))
+                if (!$util.isString(message.relay_server))
+                    return "relay_server: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_AllocateRelayServer_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_AllocateRelayServer_Response} CRemoteClient_AllocateRelayServer_Response
+         */
+        CRemoteClient_AllocateRelayServer_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_AllocateRelayServer_Response)
+                return object;
+            var message = new $root.CRemoteClient_AllocateRelayServer_Response();
+            if (object.relay_server != null)
+                message.relay_server = String(object.relay_server);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_AllocateRelayServer_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @static
+         * @param {CRemoteClient_AllocateRelayServer_Response} message CRemoteClient_AllocateRelayServer_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_AllocateRelayServer_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.relay_server = "";
+            if (message.relay_server != null && message.hasOwnProperty("relay_server"))
+                object.relay_server = message.relay_server;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_AllocateRelayServer_Response to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_AllocateRelayServer_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_AllocateRelayServer_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_AllocateRelayServer_Response;
+    })();
+    
+    $root.CRemoteClient_SteamBroadcast_Notification = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_SteamBroadcast_Notification.
+         * @exports ICRemoteClient_SteamBroadcast_Notification
+         * @interface ICRemoteClient_SteamBroadcast_Notification
+         * @property {number|Long|null} [steamid] CRemoteClient_SteamBroadcast_Notification steamid
+         * @property {number|Long|null} [clientid] CRemoteClient_SteamBroadcast_Notification clientid
+         * @property {Uint8Array|null} [payload] CRemoteClient_SteamBroadcast_Notification payload
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_SteamBroadcast_Notification.
+         * @exports CRemoteClient_SteamBroadcast_Notification
+         * @classdesc Represents a CRemoteClient_SteamBroadcast_Notification.
+         * @implements ICRemoteClient_SteamBroadcast_Notification
+         * @constructor
+         * @param {ICRemoteClient_SteamBroadcast_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_SteamBroadcast_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_SteamBroadcast_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @instance
+         */
+        CRemoteClient_SteamBroadcast_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_SteamBroadcast_Notification clientid.
+         * @member {number|Long} clientid
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @instance
+         */
+        CRemoteClient_SteamBroadcast_Notification.prototype.clientid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_SteamBroadcast_Notification payload.
+         * @member {Uint8Array} payload
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @instance
+         */
+        CRemoteClient_SteamBroadcast_Notification.prototype.payload = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CRemoteClient_SteamBroadcast_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {ICRemoteClient_SteamBroadcast_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_SteamBroadcast_Notification} CRemoteClient_SteamBroadcast_Notification instance
+         */
+        CRemoteClient_SteamBroadcast_Notification.create = function create(properties) {
+            return new CRemoteClient_SteamBroadcast_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_SteamBroadcast_Notification message. Does not implicitly {@link CRemoteClient_SteamBroadcast_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {ICRemoteClient_SteamBroadcast_Notification} message CRemoteClient_SteamBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_SteamBroadcast_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.clientid);
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.payload);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_SteamBroadcast_Notification message, length delimited. Does not implicitly {@link CRemoteClient_SteamBroadcast_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {ICRemoteClient_SteamBroadcast_Notification} message CRemoteClient_SteamBroadcast_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_SteamBroadcast_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_SteamBroadcast_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_SteamBroadcast_Notification} CRemoteClient_SteamBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_SteamBroadcast_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_SteamBroadcast_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.clientid = reader.fixed64();
+                    break;
+                case 3:
+                    message.payload = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_SteamBroadcast_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_SteamBroadcast_Notification} CRemoteClient_SteamBroadcast_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_SteamBroadcast_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_SteamBroadcast_Notification message.
+         * @function verify
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_SteamBroadcast_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                if (!$util.isInteger(message.clientid) && !(message.clientid && $util.isInteger(message.clientid.low) && $util.isInteger(message.clientid.high)))
+                    return "clientid: integer|Long expected";
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
+                    return "payload: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_SteamBroadcast_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_SteamBroadcast_Notification} CRemoteClient_SteamBroadcast_Notification
+         */
+        CRemoteClient_SteamBroadcast_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_SteamBroadcast_Notification)
+                return object;
+            var message = new $root.CRemoteClient_SteamBroadcast_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.clientid != null)
+                if ($util.Long)
+                    (message.clientid = $util.Long.fromValue(object.clientid)).unsigned = false;
+                else if (typeof object.clientid === "string")
+                    message.clientid = parseInt(object.clientid, 10);
+                else if (typeof object.clientid === "number")
+                    message.clientid = object.clientid;
+                else if (typeof object.clientid === "object")
+                    message.clientid = new $util.LongBits(object.clientid.low >>> 0, object.clientid.high >>> 0).toNumber();
+            if (object.payload != null)
+                if (typeof object.payload === "string")
+                    $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                else if (object.payload.length)
+                    message.payload = object.payload;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_SteamBroadcast_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @static
+         * @param {CRemoteClient_SteamBroadcast_Notification} message CRemoteClient_SteamBroadcast_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_SteamBroadcast_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.clientid = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.payload = "";
+                else {
+                    object.payload = [];
+                    if (options.bytes !== Array)
+                        object.payload = $util.newBuffer(object.payload);
+                }
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                if (typeof message.clientid === "number")
+                    object.clientid = options.longs === String ? String(message.clientid) : message.clientid;
+                else
+                    object.clientid = options.longs === String ? $util.Long.prototype.toString.call(message.clientid) : options.longs === Number ? new $util.LongBits(message.clientid.low >>> 0, message.clientid.high >>> 0).toNumber() : message.clientid;
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_SteamBroadcast_Notification to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_SteamBroadcast_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_SteamBroadcast_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_SteamBroadcast_Notification;
+    })();
+    
+    $root.CRemoteClient_SteamToSteam_Notification = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_SteamToSteam_Notification.
+         * @exports ICRemoteClient_SteamToSteam_Notification
+         * @interface ICRemoteClient_SteamToSteam_Notification
+         * @property {number|Long|null} [steamid] CRemoteClient_SteamToSteam_Notification steamid
+         * @property {number|Long|null} [src_clientid] CRemoteClient_SteamToSteam_Notification src_clientid
+         * @property {number|Long|null} [dst_clientid] CRemoteClient_SteamToSteam_Notification dst_clientid
+         * @property {number|null} [secretid] CRemoteClient_SteamToSteam_Notification secretid
+         * @property {Uint8Array|null} [encrypted_payload] CRemoteClient_SteamToSteam_Notification encrypted_payload
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_SteamToSteam_Notification.
+         * @exports CRemoteClient_SteamToSteam_Notification
+         * @classdesc Represents a CRemoteClient_SteamToSteam_Notification.
+         * @implements ICRemoteClient_SteamToSteam_Notification
+         * @constructor
+         * @param {ICRemoteClient_SteamToSteam_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_SteamToSteam_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_SteamToSteam_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @instance
+         */
+        CRemoteClient_SteamToSteam_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_SteamToSteam_Notification src_clientid.
+         * @member {number|Long} src_clientid
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @instance
+         */
+        CRemoteClient_SteamToSteam_Notification.prototype.src_clientid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_SteamToSteam_Notification dst_clientid.
+         * @member {number|Long} dst_clientid
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @instance
+         */
+        CRemoteClient_SteamToSteam_Notification.prototype.dst_clientid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_SteamToSteam_Notification secretid.
+         * @member {number} secretid
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @instance
+         */
+        CRemoteClient_SteamToSteam_Notification.prototype.secretid = 0;
+    
+        /**
+         * CRemoteClient_SteamToSteam_Notification encrypted_payload.
+         * @member {Uint8Array} encrypted_payload
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @instance
+         */
+        CRemoteClient_SteamToSteam_Notification.prototype.encrypted_payload = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CRemoteClient_SteamToSteam_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @static
+         * @param {ICRemoteClient_SteamToSteam_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_SteamToSteam_Notification} CRemoteClient_SteamToSteam_Notification instance
+         */
+        CRemoteClient_SteamToSteam_Notification.create = function create(properties) {
+            return new CRemoteClient_SteamToSteam_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_SteamToSteam_Notification message. Does not implicitly {@link CRemoteClient_SteamToSteam_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @static
+         * @param {ICRemoteClient_SteamToSteam_Notification} message CRemoteClient_SteamToSteam_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_SteamToSteam_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.src_clientid != null && message.hasOwnProperty("src_clientid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.src_clientid);
+            if (message.dst_clientid != null && message.hasOwnProperty("dst_clientid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.dst_clientid);
+            if (message.secretid != null && message.hasOwnProperty("secretid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.secretid);
+            if (message.encrypted_payload != null && message.hasOwnProperty("encrypted_payload"))
+                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encrypted_payload);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_SteamToSteam_Notification message, length delimited. Does not implicitly {@link CRemoteClient_SteamToSteam_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @static
+         * @param {ICRemoteClient_SteamToSteam_Notification} message CRemoteClient_SteamToSteam_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_SteamToSteam_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_SteamToSteam_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_SteamToSteam_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_SteamToSteam_Notification} CRemoteClient_SteamToSteam_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_SteamToSteam_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_SteamToSteam_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.src_clientid = reader.fixed64();
+                    break;
+                case 3:
+                    message.dst_clientid = reader.fixed64();
                     break;
                 case 4:
-                    message.platform_mac = reader.bool();
+                    message.secretid = reader.uint32();
                     break;
                 case 5:
-                    message.platform_linux = reader.bool();
-                    break;
-                case 6:
-                    message.hide_adult_content_violence = reader.bool();
-                    break;
-                case 7:
-                    message.hide_adult_content_sex = reader.bool();
-                    break;
-                case 8:
-                    message.timestamp_updated = reader.uint32();
-                    break;
-                case 9:
-                    message.hide_store_broadcast = reader.bool();
-                    break;
-                case 10:
-                    message.review_score_preference = reader.int32();
-                    break;
-                case 11:
-                    message.timestamp_content_descriptor_preferences_updated = reader.int32();
+                    message.encrypted_payload = reader.bytes();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1107,207 +2129,193 @@
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer, length delimited.
+         * Decodes a CRemoteClient_SteamToSteam_Notification message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CRemoteClient_SteamToSteam_Notification
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CRemoteClient_SteamToSteam_Notification} CRemoteClient_SteamToSteam_Notification
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decodeDelimited = function decodeDelimited(reader) {
+        CRemoteClient_SteamToSteam_Notification.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_UserPreferences message.
+         * Verifies a CRemoteClient_SteamToSteam_Notification message.
          * @function verify
-         * @memberof CStore_UserPreferences
+         * @memberof CRemoteClient_SteamToSteam_Notification
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_UserPreferences.verify = function verify(message) {
+        CRemoteClient_SteamToSteam_Notification.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                if (!$util.isInteger(message.primary_language))
-                    return "primary_language: integer expected";
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                if (!$util.isInteger(message.secondary_languages))
-                    return "secondary_languages: integer expected";
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                if (typeof message.platform_windows !== "boolean")
-                    return "platform_windows: boolean expected";
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                if (typeof message.platform_mac !== "boolean")
-                    return "platform_mac: boolean expected";
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                if (typeof message.platform_linux !== "boolean")
-                    return "platform_linux: boolean expected";
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                if (typeof message.hide_adult_content_violence !== "boolean")
-                    return "hide_adult_content_violence: boolean expected";
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                if (typeof message.hide_adult_content_sex !== "boolean")
-                    return "hide_adult_content_sex: boolean expected";
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                if (!$util.isInteger(message.timestamp_updated))
-                    return "timestamp_updated: integer expected";
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                if (typeof message.hide_store_broadcast !== "boolean")
-                    return "hide_store_broadcast: boolean expected";
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                switch (message.review_score_preference) {
-                default:
-                    return "review_score_preference: enum value expected";
-                case 0:
-                case 1:
-                case 2:
-                    break;
-                }
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                if (!$util.isInteger(message.timestamp_content_descriptor_preferences_updated))
-                    return "timestamp_content_descriptor_preferences_updated: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.src_clientid != null && message.hasOwnProperty("src_clientid"))
+                if (!$util.isInteger(message.src_clientid) && !(message.src_clientid && $util.isInteger(message.src_clientid.low) && $util.isInteger(message.src_clientid.high)))
+                    return "src_clientid: integer|Long expected";
+            if (message.dst_clientid != null && message.hasOwnProperty("dst_clientid"))
+                if (!$util.isInteger(message.dst_clientid) && !(message.dst_clientid && $util.isInteger(message.dst_clientid.low) && $util.isInteger(message.dst_clientid.high)))
+                    return "dst_clientid: integer|Long expected";
+            if (message.secretid != null && message.hasOwnProperty("secretid"))
+                if (!$util.isInteger(message.secretid))
+                    return "secretid: integer expected";
+            if (message.encrypted_payload != null && message.hasOwnProperty("encrypted_payload"))
+                if (!(message.encrypted_payload && typeof message.encrypted_payload.length === "number" || $util.isString(message.encrypted_payload)))
+                    return "encrypted_payload: buffer expected";
             return null;
         };
     
         /**
-         * Creates a CStore_UserPreferences message from a plain object. Also converts values to their respective internal types.
+         * Creates a CRemoteClient_SteamToSteam_Notification message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_UserPreferences
+         * @memberof CRemoteClient_SteamToSteam_Notification
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CRemoteClient_SteamToSteam_Notification} CRemoteClient_SteamToSteam_Notification
          */
-        CStore_UserPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserPreferences)
+        CRemoteClient_SteamToSteam_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_SteamToSteam_Notification)
                 return object;
-            var message = new $root.CStore_UserPreferences();
-            if (object.primary_language != null)
-                message.primary_language = object.primary_language >>> 0;
-            if (object.secondary_languages != null)
-                message.secondary_languages = object.secondary_languages >>> 0;
-            if (object.platform_windows != null)
-                message.platform_windows = Boolean(object.platform_windows);
-            if (object.platform_mac != null)
-                message.platform_mac = Boolean(object.platform_mac);
-            if (object.platform_linux != null)
-                message.platform_linux = Boolean(object.platform_linux);
-            if (object.hide_adult_content_violence != null)
-                message.hide_adult_content_violence = Boolean(object.hide_adult_content_violence);
-            if (object.hide_adult_content_sex != null)
-                message.hide_adult_content_sex = Boolean(object.hide_adult_content_sex);
-            if (object.timestamp_updated != null)
-                message.timestamp_updated = object.timestamp_updated >>> 0;
-            if (object.hide_store_broadcast != null)
-                message.hide_store_broadcast = Boolean(object.hide_store_broadcast);
-            switch (object.review_score_preference) {
-            case "k_EUserReviewScorePreference_Unset":
-            case 0:
-                message.review_score_preference = 0;
-                break;
-            case "k_EUserReviewScorePreference_IncludeAll":
-            case 1:
-                message.review_score_preference = 1;
-                break;
-            case "k_EUserReviewScorePreference_ExcludeBombs":
-            case 2:
-                message.review_score_preference = 2;
-                break;
-            }
-            if (object.timestamp_content_descriptor_preferences_updated != null)
-                message.timestamp_content_descriptor_preferences_updated = object.timestamp_content_descriptor_preferences_updated | 0;
+            var message = new $root.CRemoteClient_SteamToSteam_Notification();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.src_clientid != null)
+                if ($util.Long)
+                    (message.src_clientid = $util.Long.fromValue(object.src_clientid)).unsigned = false;
+                else if (typeof object.src_clientid === "string")
+                    message.src_clientid = parseInt(object.src_clientid, 10);
+                else if (typeof object.src_clientid === "number")
+                    message.src_clientid = object.src_clientid;
+                else if (typeof object.src_clientid === "object")
+                    message.src_clientid = new $util.LongBits(object.src_clientid.low >>> 0, object.src_clientid.high >>> 0).toNumber();
+            if (object.dst_clientid != null)
+                if ($util.Long)
+                    (message.dst_clientid = $util.Long.fromValue(object.dst_clientid)).unsigned = false;
+                else if (typeof object.dst_clientid === "string")
+                    message.dst_clientid = parseInt(object.dst_clientid, 10);
+                else if (typeof object.dst_clientid === "number")
+                    message.dst_clientid = object.dst_clientid;
+                else if (typeof object.dst_clientid === "object")
+                    message.dst_clientid = new $util.LongBits(object.dst_clientid.low >>> 0, object.dst_clientid.high >>> 0).toNumber();
+            if (object.secretid != null)
+                message.secretid = object.secretid >>> 0;
+            if (object.encrypted_payload != null)
+                if (typeof object.encrypted_payload === "string")
+                    $util.base64.decode(object.encrypted_payload, message.encrypted_payload = $util.newBuffer($util.base64.length(object.encrypted_payload)), 0);
+                else if (object.encrypted_payload.length)
+                    message.encrypted_payload = object.encrypted_payload;
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_UserPreferences message. Also converts values to other types if specified.
+         * Creates a plain object from a CRemoteClient_SteamToSteam_Notification message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_UserPreferences
+         * @memberof CRemoteClient_SteamToSteam_Notification
          * @static
-         * @param {CStore_UserPreferences} message CStore_UserPreferences
+         * @param {CRemoteClient_SteamToSteam_Notification} message CRemoteClient_SteamToSteam_Notification
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_UserPreferences.toObject = function toObject(message, options) {
+        CRemoteClient_SteamToSteam_Notification.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.primary_language = 0;
-                object.secondary_languages = 0;
-                object.platform_windows = false;
-                object.platform_mac = false;
-                object.platform_linux = false;
-                object.hide_adult_content_violence = false;
-                object.hide_adult_content_sex = false;
-                object.timestamp_updated = 0;
-                object.hide_store_broadcast = false;
-                object.review_score_preference = options.enums === String ? "k_EUserReviewScorePreference_Unset" : 0;
-                object.timestamp_content_descriptor_preferences_updated = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.src_clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.src_clientid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.dst_clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.dst_clientid = options.longs === String ? "0" : 0;
+                object.secretid = 0;
+                if (options.bytes === String)
+                    object.encrypted_payload = "";
+                else {
+                    object.encrypted_payload = [];
+                    if (options.bytes !== Array)
+                        object.encrypted_payload = $util.newBuffer(object.encrypted_payload);
+                }
             }
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                object.primary_language = message.primary_language;
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                object.secondary_languages = message.secondary_languages;
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                object.platform_windows = message.platform_windows;
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                object.platform_mac = message.platform_mac;
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                object.platform_linux = message.platform_linux;
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                object.hide_adult_content_violence = message.hide_adult_content_violence;
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                object.hide_adult_content_sex = message.hide_adult_content_sex;
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                object.timestamp_updated = message.timestamp_updated;
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                object.hide_store_broadcast = message.hide_store_broadcast;
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                object.review_score_preference = options.enums === String ? $root.EUserReviewScorePreference[message.review_score_preference] : message.review_score_preference;
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                object.timestamp_content_descriptor_preferences_updated = message.timestamp_content_descriptor_preferences_updated;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.src_clientid != null && message.hasOwnProperty("src_clientid"))
+                if (typeof message.src_clientid === "number")
+                    object.src_clientid = options.longs === String ? String(message.src_clientid) : message.src_clientid;
+                else
+                    object.src_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.src_clientid) : options.longs === Number ? new $util.LongBits(message.src_clientid.low >>> 0, message.src_clientid.high >>> 0).toNumber() : message.src_clientid;
+            if (message.dst_clientid != null && message.hasOwnProperty("dst_clientid"))
+                if (typeof message.dst_clientid === "number")
+                    object.dst_clientid = options.longs === String ? String(message.dst_clientid) : message.dst_clientid;
+                else
+                    object.dst_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.dst_clientid) : options.longs === Number ? new $util.LongBits(message.dst_clientid.low >>> 0, message.dst_clientid.high >>> 0).toNumber() : message.dst_clientid;
+            if (message.secretid != null && message.hasOwnProperty("secretid"))
+                object.secretid = message.secretid;
+            if (message.encrypted_payload != null && message.hasOwnProperty("encrypted_payload"))
+                object.encrypted_payload = options.bytes === String ? $util.base64.encode(message.encrypted_payload, 0, message.encrypted_payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.encrypted_payload) : message.encrypted_payload;
             return object;
         };
     
         /**
-         * Converts this CStore_UserPreferences to JSON.
+         * Converts this CRemoteClient_SteamToSteam_Notification to JSON.
          * @function toJSON
-         * @memberof CStore_UserPreferences
+         * @memberof CRemoteClient_SteamToSteam_Notification
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_UserPreferences.prototype.toJSON = function toJSON() {
+        CRemoteClient_SteamToSteam_Notification.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_UserPreferences;
+        return CRemoteClient_SteamToSteam_Notification;
     })();
     
-    $root.CStore_UserTagPreferences = (function() {
+    $root.CRemoteClient_RegisterStatusUpdate_Notification = (function() {
     
         /**
-         * Properties of a CStore_UserTagPreferences.
-         * @exports ICStore_UserTagPreferences
-         * @interface ICStore_UserTagPreferences
-         * @property {Array.<CStore_UserTagPreferences.ITag>|null} [tags_to_exclude] CStore_UserTagPreferences tags_to_exclude
+         * Properties of a CRemoteClient_RegisterStatusUpdate_Notification.
+         * @exports ICRemoteClient_RegisterStatusUpdate_Notification
+         * @interface ICRemoteClient_RegisterStatusUpdate_Notification
+         * @property {number|Long|null} [session_id] CRemoteClient_RegisterStatusUpdate_Notification session_id
+         * @property {number|Long|null} [steamid] CRemoteClient_RegisterStatusUpdate_Notification steamid
+         * @property {number|Long|null} [device_id] CRemoteClient_RegisterStatusUpdate_Notification device_id
          */
     
         /**
-         * Constructs a new CStore_UserTagPreferences.
-         * @exports CStore_UserTagPreferences
-         * @classdesc Represents a CStore_UserTagPreferences.
-         * @implements ICStore_UserTagPreferences
+         * Constructs a new CRemoteClient_RegisterStatusUpdate_Notification.
+         * @exports CRemoteClient_RegisterStatusUpdate_Notification
+         * @classdesc Represents a CRemoteClient_RegisterStatusUpdate_Notification.
+         * @implements ICRemoteClient_RegisterStatusUpdate_Notification
          * @constructor
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification=} [properties] Properties to set
          */
-        function CStore_UserTagPreferences(properties) {
-            this.tags_to_exclude = [];
+        function CRemoteClient_RegisterStatusUpdate_Notification(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1315,960 +2323,101 @@
         }
     
         /**
-         * CStore_UserTagPreferences tags_to_exclude.
-         * @member {Array.<CStore_UserTagPreferences.ITag>} tags_to_exclude
-         * @memberof CStore_UserTagPreferences
+         * CRemoteClient_RegisterStatusUpdate_Notification session_id.
+         * @member {number|Long} session_id
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @instance
          */
-        CStore_UserTagPreferences.prototype.tags_to_exclude = $util.emptyArray;
+        CRemoteClient_RegisterStatusUpdate_Notification.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * Creates a new CStore_UserTagPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences instance
+         * CRemoteClient_RegisterStatusUpdate_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
+         * @instance
          */
-        CStore_UserTagPreferences.create = function create(properties) {
-            return new CStore_UserTagPreferences(properties);
+        CRemoteClient_RegisterStatusUpdate_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_RegisterStatusUpdate_Notification device_id.
+         * @member {number|Long} device_id
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
+         * @instance
+         */
+        CRemoteClient_RegisterStatusUpdate_Notification.prototype.device_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CRemoteClient_RegisterStatusUpdate_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
+         * @static
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_RegisterStatusUpdate_Notification} CRemoteClient_RegisterStatusUpdate_Notification instance
+         */
+        CRemoteClient_RegisterStatusUpdate_Notification.create = function create(properties) {
+            return new CRemoteClient_RegisterStatusUpdate_Notification(properties);
         };
     
         /**
-         * Encodes the specified CStore_UserTagPreferences message. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
+         * Encodes the specified CRemoteClient_RegisterStatusUpdate_Notification message. Does not implicitly {@link CRemoteClient_RegisterStatusUpdate_Notification.verify|verify} messages.
          * @function encode
-         * @memberof CStore_UserTagPreferences
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification} message CRemoteClient_RegisterStatusUpdate_Notification message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserTagPreferences.encode = function encode(message, writer) {
+        CRemoteClient_RegisterStatusUpdate_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.tags_to_exclude != null && message.tags_to_exclude.length)
-                for (var i = 0; i < message.tags_to_exclude.length; ++i)
-                    $root.CStore_UserTagPreferences.Tag.encode(message.tags_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.device_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_UserTagPreferences message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
+         * Encodes the specified CRemoteClient_RegisterStatusUpdate_Notification message, length delimited. Does not implicitly {@link CRemoteClient_RegisterStatusUpdate_Notification.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_UserTagPreferences
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification} message CRemoteClient_RegisterStatusUpdate_Notification message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserTagPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+        CRemoteClient_RegisterStatusUpdate_Notification.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer.
+         * Decodes a CRemoteClient_RegisterStatusUpdate_Notification message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_UserTagPreferences
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
+         * @returns {CRemoteClient_RegisterStatusUpdate_Notification} CRemoteClient_RegisterStatusUpdate_Notification
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserTagPreferences.decode = function decode(reader, length) {
+        CRemoteClient_RegisterStatusUpdate_Notification.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_RegisterStatusUpdate_Notification();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.tags_to_exclude && message.tags_to_exclude.length))
-                        message.tags_to_exclude = [];
-                    message.tags_to_exclude.push($root.CStore_UserTagPreferences.Tag.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserTagPreferences message.
-         * @function verify
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserTagPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tags_to_exclude != null && message.hasOwnProperty("tags_to_exclude")) {
-                if (!Array.isArray(message.tags_to_exclude))
-                    return "tags_to_exclude: array expected";
-                for (var i = 0; i < message.tags_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserTagPreferences.Tag.verify(message.tags_to_exclude[i]);
-                    if (error)
-                        return "tags_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserTagPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         */
-        CStore_UserTagPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserTagPreferences)
-                return object;
-            var message = new $root.CStore_UserTagPreferences();
-            if (object.tags_to_exclude) {
-                if (!Array.isArray(object.tags_to_exclude))
-                    throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: array expected");
-                message.tags_to_exclude = [];
-                for (var i = 0; i < object.tags_to_exclude.length; ++i) {
-                    if (typeof object.tags_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: object expected");
-                    message.tags_to_exclude[i] = $root.CStore_UserTagPreferences.Tag.fromObject(object.tags_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserTagPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {CStore_UserTagPreferences} message CStore_UserTagPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserTagPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tags_to_exclude = [];
-            if (message.tags_to_exclude && message.tags_to_exclude.length) {
-                object.tags_to_exclude = [];
-                for (var j = 0; j < message.tags_to_exclude.length; ++j)
-                    object.tags_to_exclude[j] = $root.CStore_UserTagPreferences.Tag.toObject(message.tags_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserTagPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserTagPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserTagPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_UserTagPreferences.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_UserTagPreferences
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [name] Tag name
-             * @property {number|null} [timestamp_added] Tag timestamp_added
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_UserTagPreferences
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Tag timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             * @returns {CStore_UserTagPreferences.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.name = reader.string();
-                        break;
-                    case 3:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserTagPreferences.Tag)
-                    return object;
-                var message = new $root.CStore_UserTagPreferences.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.name != null)
-                    message.name = String(object.name);
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.name = "";
-                    object.timestamp_added = 0;
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_UserTagPreferences;
-    })();
-    
-    $root.CStore_UserContentDescriptorPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserContentDescriptorPreferences.
-         * @exports ICStore_UserContentDescriptorPreferences
-         * @interface ICStore_UserContentDescriptorPreferences
-         * @property {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>|null} [content_descriptors_to_exclude] CStore_UserContentDescriptorPreferences content_descriptors_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserContentDescriptorPreferences.
-         * @exports CStore_UserContentDescriptorPreferences
-         * @classdesc Represents a CStore_UserContentDescriptorPreferences.
-         * @implements ICStore_UserContentDescriptorPreferences
-         * @constructor
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         */
-        function CStore_UserContentDescriptorPreferences(properties) {
-            this.content_descriptors_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserContentDescriptorPreferences content_descriptors_to_exclude.
-         * @member {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>} content_descriptors_to_exclude
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences.prototype.content_descriptors_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserContentDescriptorPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences instance
-         */
-        CStore_UserContentDescriptorPreferences.create = function create(properties) {
-            return new CStore_UserContentDescriptorPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content_descriptors_to_exclude != null && message.content_descriptors_to_exclude.length)
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i)
-                    $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.encode(message.content_descriptors_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length))
-                        message.content_descriptors_to_exclude = [];
-                    message.content_descriptors_to_exclude.push($root.CStore_UserContentDescriptorPreferences.ContentDescriptor.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserContentDescriptorPreferences message.
-         * @function verify
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserContentDescriptorPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content_descriptors_to_exclude != null && message.hasOwnProperty("content_descriptors_to_exclude")) {
-                if (!Array.isArray(message.content_descriptors_to_exclude))
-                    return "content_descriptors_to_exclude: array expected";
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.verify(message.content_descriptors_to_exclude[i]);
-                    if (error)
-                        return "content_descriptors_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserContentDescriptorPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         */
-        CStore_UserContentDescriptorPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserContentDescriptorPreferences)
-                return object;
-            var message = new $root.CStore_UserContentDescriptorPreferences();
-            if (object.content_descriptors_to_exclude) {
-                if (!Array.isArray(object.content_descriptors_to_exclude))
-                    throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: array expected");
-                message.content_descriptors_to_exclude = [];
-                for (var i = 0; i < object.content_descriptors_to_exclude.length; ++i) {
-                    if (typeof object.content_descriptors_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: object expected");
-                    message.content_descriptors_to_exclude[i] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.fromObject(object.content_descriptors_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserContentDescriptorPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {CStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserContentDescriptorPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.content_descriptors_to_exclude = [];
-            if (message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length) {
-                object.content_descriptors_to_exclude = [];
-                for (var j = 0; j < message.content_descriptors_to_exclude.length; ++j)
-                    object.content_descriptors_to_exclude[j] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.toObject(message.content_descriptors_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserContentDescriptorPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserContentDescriptorPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_UserContentDescriptorPreferences.ContentDescriptor = (function() {
-    
-            /**
-             * Properties of a ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @interface IContentDescriptor
-             * @property {number|null} [content_descriptorid] ContentDescriptor content_descriptorid
-             * @property {number|null} [timestamp_added] ContentDescriptor timestamp_added
-             */
-    
-            /**
-             * Constructs a new ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @classdesc Represents a ContentDescriptor.
-             * @implements IContentDescriptor
-             * @constructor
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             */
-            function ContentDescriptor(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * ContentDescriptor content_descriptorid.
-             * @member {number} content_descriptorid
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.content_descriptorid = 0;
-    
-            /**
-             * ContentDescriptor timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new ContentDescriptor instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor instance
-             */
-            ContentDescriptor.create = function create(properties) {
-                return new ContentDescriptor(properties);
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.content_descriptorid);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.content_descriptorid = reader.uint32();
-                        break;
-                    case 2:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a ContentDescriptor message.
-             * @function verify
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ContentDescriptor.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    if (!$util.isInteger(message.content_descriptorid))
-                        return "content_descriptorid: integer expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a ContentDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             */
-            ContentDescriptor.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserContentDescriptorPreferences.ContentDescriptor)
-                    return object;
-                var message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                if (object.content_descriptorid != null)
-                    message.content_descriptorid = object.content_descriptorid >>> 0;
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a ContentDescriptor message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.ContentDescriptor} message ContentDescriptor
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            ContentDescriptor.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.content_descriptorid = 0;
-                    object.timestamp_added = 0;
-                }
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    object.content_descriptorid = message.content_descriptorid;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this ContentDescriptor to JSON.
-             * @function toJSON
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            ContentDescriptor.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return ContentDescriptor;
-        })();
-    
-        return CStore_UserContentDescriptorPreferences;
-    })();
-    
-    $root.CStore_GetStorePreferences_Response = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Response.
-         * @exports ICStore_GetStorePreferences_Response
-         * @interface ICStore_GetStorePreferences_Response
-         * @property {ICStore_UserPreferences|null} [preferences] CStore_GetStorePreferences_Response preferences
-         * @property {ICStore_UserTagPreferences|null} [tag_preferences] CStore_GetStorePreferences_Response tag_preferences
-         * @property {ICStore_UserContentDescriptorPreferences|null} [content_descriptor_preferences] CStore_GetStorePreferences_Response content_descriptor_preferences
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Response.
-         * @exports CStore_GetStorePreferences_Response
-         * @classdesc Represents a CStore_GetStorePreferences_Response.
-         * @implements ICStore_GetStorePreferences_Response
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_GetStorePreferences_Response preferences.
-         * @member {ICStore_UserPreferences|null|undefined} preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response tag_preferences.
-         * @member {ICStore_UserTagPreferences|null|undefined} tag_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.tag_preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response content_descriptor_preferences.
-         * @member {ICStore_UserContentDescriptorPreferences|null|undefined} content_descriptor_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.content_descriptor_preferences = null;
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response instance
-         */
-        CStore_GetStorePreferences_Response.create = function create(properties) {
-            return new CStore_GetStorePreferences_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                $root.CStore_UserPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                $root.CStore_UserTagPreferences.encode(message.tag_preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                $root.CStore_UserContentDescriptorPreferences.encode(message.content_descriptor_preferences, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.preferences = $root.CStore_UserPreferences.decode(reader, reader.uint32());
+                    message.session_id = reader.fixed64();
                     break;
                 case 2:
-                    message.tag_preferences = $root.CStore_UserTagPreferences.decode(reader, reader.uint32());
+                    message.steamid = reader.fixed64();
                     break;
                 case 3:
-                    message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.decode(reader, reader.uint32());
+                    message.device_id = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2279,220 +2428,1119 @@
         };
     
         /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CRemoteClient_RegisterStatusUpdate_Notification message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
+         * @returns {CRemoteClient_RegisterStatusUpdate_Notification} CRemoteClient_RegisterStatusUpdate_Notification
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetStorePreferences_Response.decodeDelimited = function decodeDelimited(reader) {
+        CRemoteClient_RegisterStatusUpdate_Notification.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_GetStorePreferences_Response message.
+         * Verifies a CRemoteClient_RegisterStatusUpdate_Notification message.
          * @function verify
-         * @memberof CStore_GetStorePreferences_Response
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_GetStorePreferences_Response.verify = function verify(message) {
+        CRemoteClient_RegisterStatusUpdate_Notification.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.preferences != null && message.hasOwnProperty("preferences")) {
-                var error = $root.CStore_UserPreferences.verify(message.preferences);
-                if (error)
-                    return "preferences." + error;
-            }
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences")) {
-                var error = $root.CStore_UserTagPreferences.verify(message.tag_preferences);
-                if (error)
-                    return "tag_preferences." + error;
-            }
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences")) {
-                var error = $root.CStore_UserContentDescriptorPreferences.verify(message.content_descriptor_preferences);
-                if (error)
-                    return "content_descriptor_preferences." + error;
-            }
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                if (!$util.isInteger(message.device_id) && !(message.device_id && $util.isInteger(message.device_id.low) && $util.isInteger(message.device_id.high)))
+                    return "device_id: integer|Long expected";
             return null;
         };
     
         /**
-         * Creates a CStore_GetStorePreferences_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CRemoteClient_RegisterStatusUpdate_Notification message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_GetStorePreferences_Response
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
+         * @returns {CRemoteClient_RegisterStatusUpdate_Notification} CRemoteClient_RegisterStatusUpdate_Notification
          */
-        CStore_GetStorePreferences_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Response)
+        CRemoteClient_RegisterStatusUpdate_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_RegisterStatusUpdate_Notification)
                 return object;
-            var message = new $root.CStore_GetStorePreferences_Response();
-            if (object.preferences != null) {
-                if (typeof object.preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.preferences: object expected");
-                message.preferences = $root.CStore_UserPreferences.fromObject(object.preferences);
+            var message = new $root.CRemoteClient_RegisterStatusUpdate_Notification();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = false;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.device_id != null)
+                if ($util.Long)
+                    (message.device_id = $util.Long.fromValue(object.device_id)).unsigned = false;
+                else if (typeof object.device_id === "string")
+                    message.device_id = parseInt(object.device_id, 10);
+                else if (typeof object.device_id === "number")
+                    message.device_id = object.device_id;
+                else if (typeof object.device_id === "object")
+                    message.device_id = new $util.LongBits(object.device_id.low >>> 0, object.device_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_RegisterStatusUpdate_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
+         * @static
+         * @param {CRemoteClient_RegisterStatusUpdate_Notification} message CRemoteClient_RegisterStatusUpdate_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_RegisterStatusUpdate_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.device_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.device_id = options.longs === String ? "0" : 0;
             }
-            if (object.tag_preferences != null) {
-                if (typeof object.tag_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.tag_preferences: object expected");
-                message.tag_preferences = $root.CStore_UserTagPreferences.fromObject(object.tag_preferences);
-            }
-            if (object.content_descriptor_preferences != null) {
-                if (typeof object.content_descriptor_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.content_descriptor_preferences: object expected");
-                message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.fromObject(object.content_descriptor_preferences);
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber() : message.session_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.device_id != null && message.hasOwnProperty("device_id"))
+                if (typeof message.device_id === "number")
+                    object.device_id = options.longs === String ? String(message.device_id) : message.device_id;
+                else
+                    object.device_id = options.longs === String ? $util.Long.prototype.toString.call(message.device_id) : options.longs === Number ? new $util.LongBits(message.device_id.low >>> 0, message.device_id.high >>> 0).toNumber() : message.device_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_RegisterStatusUpdate_Notification to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_RegisterStatusUpdate_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_RegisterStatusUpdate_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_RegisterStatusUpdate_Notification;
+    })();
+    
+    $root.CRemoteClient_UnregisterStatusUpdate_Notification = (function() {
+    
+        /**
+         * Properties of a CRemoteClient_UnregisterStatusUpdate_Notification.
+         * @exports ICRemoteClient_UnregisterStatusUpdate_Notification
+         * @interface ICRemoteClient_UnregisterStatusUpdate_Notification
+         * @property {number|Long|null} [session_id] CRemoteClient_UnregisterStatusUpdate_Notification session_id
+         * @property {number|Long|null} [steamid] CRemoteClient_UnregisterStatusUpdate_Notification steamid
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_UnregisterStatusUpdate_Notification.
+         * @exports CRemoteClient_UnregisterStatusUpdate_Notification
+         * @classdesc Represents a CRemoteClient_UnregisterStatusUpdate_Notification.
+         * @implements ICRemoteClient_UnregisterStatusUpdate_Notification
+         * @constructor
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_UnregisterStatusUpdate_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_UnregisterStatusUpdate_Notification session_id.
+         * @member {number|Long} session_id
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @instance
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_UnregisterStatusUpdate_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @instance
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CRemoteClient_UnregisterStatusUpdate_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_UnregisterStatusUpdate_Notification} CRemoteClient_UnregisterStatusUpdate_Notification instance
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.create = function create(properties) {
+            return new CRemoteClient_UnregisterStatusUpdate_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_UnregisterStatusUpdate_Notification message. Does not implicitly {@link CRemoteClient_UnregisterStatusUpdate_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification} message CRemoteClient_UnregisterStatusUpdate_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_UnregisterStatusUpdate_Notification message, length delimited. Does not implicitly {@link CRemoteClient_UnregisterStatusUpdate_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification} message CRemoteClient_UnregisterStatusUpdate_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_UnregisterStatusUpdate_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_UnregisterStatusUpdate_Notification} CRemoteClient_UnregisterStatusUpdate_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_UnregisterStatusUpdate_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
             }
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_GetStorePreferences_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Response
+         * Decodes a CRemoteClient_UnregisterStatusUpdate_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
          * @static
-         * @param {CStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_UnregisterStatusUpdate_Notification} CRemoteClient_UnregisterStatusUpdate_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_UnregisterStatusUpdate_Notification message.
+         * @function verify
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_UnregisterStatusUpdate_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_UnregisterStatusUpdate_Notification} CRemoteClient_UnregisterStatusUpdate_Notification
+         */
+        CRemoteClient_UnregisterStatusUpdate_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_UnregisterStatusUpdate_Notification)
+                return object;
+            var message = new $root.CRemoteClient_UnregisterStatusUpdate_Notification();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = false;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_UnregisterStatusUpdate_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
+         * @static
+         * @param {CRemoteClient_UnregisterStatusUpdate_Notification} message CRemoteClient_UnregisterStatusUpdate_Notification
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_GetStorePreferences_Response.toObject = function toObject(message, options) {
+        CRemoteClient_UnregisterStatusUpdate_Notification.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.preferences = null;
-                object.tag_preferences = null;
-                object.content_descriptor_preferences = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
             }
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                object.preferences = $root.CStore_UserPreferences.toObject(message.preferences, options);
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                object.tag_preferences = $root.CStore_UserTagPreferences.toObject(message.tag_preferences, options);
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                object.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.toObject(message.content_descriptor_preferences, options);
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber() : message.session_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
             return object;
         };
     
         /**
-         * Converts this CStore_GetStorePreferences_Response to JSON.
+         * Converts this CRemoteClient_UnregisterStatusUpdate_Notification to JSON.
          * @function toJSON
-         * @memberof CStore_GetStorePreferences_Response
+         * @memberof CRemoteClient_UnregisterStatusUpdate_Notification
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_GetStorePreferences_Response.prototype.toJSON = function toJSON() {
+        CRemoteClient_UnregisterStatusUpdate_Notification.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_GetStorePreferences_Response;
+        return CRemoteClient_UnregisterStatusUpdate_Notification;
     })();
     
-    $root.Store = (function() {
+    $root.CRemoteClient_RemotePacket_Notification = (function() {
     
         /**
-         * Constructs a new Store service.
-         * @exports Store
-         * @classdesc Represents a Store
+         * Properties of a CRemoteClient_RemotePacket_Notification.
+         * @exports ICRemoteClient_RemotePacket_Notification
+         * @interface ICRemoteClient_RemotePacket_Notification
+         * @property {number|Long|null} [session_id] CRemoteClient_RemotePacket_Notification session_id
+         * @property {number|Long|null} [steamid] CRemoteClient_RemotePacket_Notification steamid
+         * @property {Uint8Array|null} [payload] CRemoteClient_RemotePacket_Notification payload
+         */
+    
+        /**
+         * Constructs a new CRemoteClient_RemotePacket_Notification.
+         * @exports CRemoteClient_RemotePacket_Notification
+         * @classdesc Represents a CRemoteClient_RemotePacket_Notification.
+         * @implements ICRemoteClient_RemotePacket_Notification
+         * @constructor
+         * @param {ICRemoteClient_RemotePacket_Notification=} [properties] Properties to set
+         */
+        function CRemoteClient_RemotePacket_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CRemoteClient_RemotePacket_Notification session_id.
+         * @member {number|Long} session_id
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @instance
+         */
+        CRemoteClient_RemotePacket_Notification.prototype.session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_RemotePacket_Notification steamid.
+         * @member {number|Long} steamid
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @instance
+         */
+        CRemoteClient_RemotePacket_Notification.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CRemoteClient_RemotePacket_Notification payload.
+         * @member {Uint8Array} payload
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @instance
+         */
+        CRemoteClient_RemotePacket_Notification.prototype.payload = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CRemoteClient_RemotePacket_Notification instance using the specified properties.
+         * @function create
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {ICRemoteClient_RemotePacket_Notification=} [properties] Properties to set
+         * @returns {CRemoteClient_RemotePacket_Notification} CRemoteClient_RemotePacket_Notification instance
+         */
+        CRemoteClient_RemotePacket_Notification.create = function create(properties) {
+            return new CRemoteClient_RemotePacket_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_RemotePacket_Notification message. Does not implicitly {@link CRemoteClient_RemotePacket_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {ICRemoteClient_RemotePacket_Notification} message CRemoteClient_RemotePacket_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_RemotePacket_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.session_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.payload);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CRemoteClient_RemotePacket_Notification message, length delimited. Does not implicitly {@link CRemoteClient_RemotePacket_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {ICRemoteClient_RemotePacket_Notification} message CRemoteClient_RemotePacket_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CRemoteClient_RemotePacket_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CRemoteClient_RemotePacket_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CRemoteClient_RemotePacket_Notification} CRemoteClient_RemotePacket_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_RemotePacket_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CRemoteClient_RemotePacket_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 4:
+                    message.payload = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CRemoteClient_RemotePacket_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CRemoteClient_RemotePacket_Notification} CRemoteClient_RemotePacket_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CRemoteClient_RemotePacket_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CRemoteClient_RemotePacket_Notification message.
+         * @function verify
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CRemoteClient_RemotePacket_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (!$util.isInteger(message.session_id) && !(message.session_id && $util.isInteger(message.session_id.low) && $util.isInteger(message.session_id.high)))
+                    return "session_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
+                    return "payload: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CRemoteClient_RemotePacket_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CRemoteClient_RemotePacket_Notification} CRemoteClient_RemotePacket_Notification
+         */
+        CRemoteClient_RemotePacket_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CRemoteClient_RemotePacket_Notification)
+                return object;
+            var message = new $root.CRemoteClient_RemotePacket_Notification();
+            if (object.session_id != null)
+                if ($util.Long)
+                    (message.session_id = $util.Long.fromValue(object.session_id)).unsigned = false;
+                else if (typeof object.session_id === "string")
+                    message.session_id = parseInt(object.session_id, 10);
+                else if (typeof object.session_id === "number")
+                    message.session_id = object.session_id;
+                else if (typeof object.session_id === "object")
+                    message.session_id = new $util.LongBits(object.session_id.low >>> 0, object.session_id.high >>> 0).toNumber();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.payload != null)
+                if (typeof object.payload === "string")
+                    $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                else if (object.payload.length)
+                    message.payload = object.payload;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CRemoteClient_RemotePacket_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @static
+         * @param {CRemoteClient_RemotePacket_Notification} message CRemoteClient_RemotePacket_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CRemoteClient_RemotePacket_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.payload = "";
+                else {
+                    object.payload = [];
+                    if (options.bytes !== Array)
+                        object.payload = $util.newBuffer(object.payload);
+                }
+            }
+            if (message.session_id != null && message.hasOwnProperty("session_id"))
+                if (typeof message.session_id === "number")
+                    object.session_id = options.longs === String ? String(message.session_id) : message.session_id;
+                else
+                    object.session_id = options.longs === String ? $util.Long.prototype.toString.call(message.session_id) : options.longs === Number ? new $util.LongBits(message.session_id.low >>> 0, message.session_id.high >>> 0).toNumber() : message.session_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.payload != null && message.hasOwnProperty("payload"))
+                object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+            return object;
+        };
+    
+        /**
+         * Converts this CRemoteClient_RemotePacket_Notification to JSON.
+         * @function toJSON
+         * @memberof CRemoteClient_RemotePacket_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CRemoteClient_RemotePacket_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CRemoteClient_RemotePacket_Notification;
+    })();
+    
+    $root.RemoteClient = (function() {
+    
+        /**
+         * Constructs a new RemoteClient service.
+         * @exports RemoteClient
+         * @classdesc Represents a RemoteClient
          * @extends $protobuf.rpc.Service
          * @constructor
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function Store(rpcImpl, requestDelimited, responseDelimited) {
+        function RemoteClient(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
     
-        (Store.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Store;
+        (RemoteClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = RemoteClient;
     
         /**
-         * Creates new Store service using the specified rpc implementation.
+         * Creates new RemoteClient service using the specified rpc implementation.
          * @function create
-         * @memberof Store
+         * @memberof RemoteClient
          * @static
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Store} RPC service. Useful where requests and/or responses are streamed.
+         * @returns {RemoteClient} RPC service. Useful where requests and/or responses are streamed.
          */
-        Store.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+        RemoteClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
     
         /**
-         * Callback as used by {@link Store#getLocalizedNameForTags}.
-         * @memberof Store
-         * @typedef GetLocalizedNameForTagsCallback
+         * Callback as used by {@link RemoteClient#getPairingInfo}.
+         * @memberof RemoteClient
+         * @typedef GetPairingInfoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CStore_GetLocalizedNameForTags_Response} [response] CStore_GetLocalizedNameForTags_Response
+         * @param {CRemoteClient_GetPairingInfo_Response} [response] CRemoteClient_GetPairingInfo_Response
          */
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls GetPairingInfo.
+         * @function getPairingInfo
+         * @memberof RemoteClient
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @param {Store.GetLocalizedNameForTagsCallback} callback Node-style callback called with the error, if any, and CStore_GetLocalizedNameForTags_Response
+         * @param {ICRemoteClient_GetPairingInfo_Request} request CRemoteClient_GetPairingInfo_Request message or plain object
+         * @param {RemoteClient.GetPairingInfoCallback} callback Node-style callback called with the error, if any, and CRemoteClient_GetPairingInfo_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Store.prototype.getLocalizedNameForTags = function getLocalizedNameForTags(request, callback) {
-            return this.rpcCall(getLocalizedNameForTags, $root.CStore_GetLocalizedNameForTags_Request, $root.CStore_GetLocalizedNameForTags_Response, request, callback);
-        }, "name", { value: "GetLocalizedNameForTags" });
+        Object.defineProperty(RemoteClient.prototype.getPairingInfo = function getPairingInfo(request, callback) {
+            return this.rpcCall(getPairingInfo, $root.CRemoteClient_GetPairingInfo_Request, $root.CRemoteClient_GetPairingInfo_Response, request, callback);
+        }, "name", { value: "GetPairingInfo" });
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls GetPairingInfo.
+         * @function getPairingInfo
+         * @memberof RemoteClient
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @returns {Promise<CStore_GetLocalizedNameForTags_Response>} Promise
+         * @param {ICRemoteClient_GetPairingInfo_Request} request CRemoteClient_GetPairingInfo_Request message or plain object
+         * @returns {Promise<CRemoteClient_GetPairingInfo_Response>} Promise
          * @variation 2
          */
     
         /**
-         * Callback as used by {@link Store#getStorePreferences}.
-         * @memberof Store
-         * @typedef GetStorePreferencesCallback
+         * Callback as used by {@link RemoteClient#notifyOnline}.
+         * @memberof RemoteClient
+         * @typedef NotifyOnlineCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CStore_GetStorePreferences_Response} [response] CStore_GetStorePreferences_Response
+         * @param {NoResponse} [response] NoResponse
          */
     
         /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
+         * Calls NotifyOnline.
+         * @function notifyOnline
+         * @memberof RemoteClient
          * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @param {Store.GetStorePreferencesCallback} callback Node-style callback called with the error, if any, and CStore_GetStorePreferences_Response
+         * @param {ICRemoteClient_Online_Notification} request CRemoteClient_Online_Notification message or plain object
+         * @param {RemoteClient.NotifyOnlineCallback} callback Node-style callback called with the error, if any, and NoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Store.prototype.getStorePreferences = function getStorePreferences(request, callback) {
-            return this.rpcCall(getStorePreferences, $root.CStore_GetStorePreferences_Request, $root.CStore_GetStorePreferences_Response, request, callback);
-        }, "name", { value: "GetStorePreferences" });
+        Object.defineProperty(RemoteClient.prototype.notifyOnline = function notifyOnline(request, callback) {
+            return this.rpcCall(notifyOnline, $root.CRemoteClient_Online_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyOnline" });
     
         /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
+         * Calls NotifyOnline.
+         * @function notifyOnline
+         * @memberof RemoteClient
          * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @returns {Promise<CStore_GetStorePreferences_Response>} Promise
+         * @param {ICRemoteClient_Online_Notification} request CRemoteClient_Online_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */
     
-        return Store;
+        /**
+         * Callback as used by {@link RemoteClient#notifyReplyPacket}.
+         * @memberof RemoteClient
+         * @typedef NotifyReplyPacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyReplyPacket.
+         * @function notifyReplyPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_ReplyPacket_Notification} request CRemoteClient_ReplyPacket_Notification message or plain object
+         * @param {RemoteClient.NotifyReplyPacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.notifyReplyPacket = function notifyReplyPacket(request, callback) {
+            return this.rpcCall(notifyReplyPacket, $root.CRemoteClient_ReplyPacket_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyReplyPacket" });
+    
+        /**
+         * Calls NotifyReplyPacket.
+         * @function notifyReplyPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_ReplyPacket_Notification} request CRemoteClient_ReplyPacket_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClient#allocateTURNServer}.
+         * @memberof RemoteClient
+         * @typedef AllocateTURNServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CRemoteClient_AllocateTURNServer_Response} [response] CRemoteClient_AllocateTURNServer_Response
+         */
+    
+        /**
+         * Calls AllocateTURNServer.
+         * @function allocateTURNServer
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_AllocateTURNServer_Request} request CRemoteClient_AllocateTURNServer_Request message or plain object
+         * @param {RemoteClient.AllocateTURNServerCallback} callback Node-style callback called with the error, if any, and CRemoteClient_AllocateTURNServer_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.allocateTURNServer = function allocateTURNServer(request, callback) {
+            return this.rpcCall(allocateTURNServer, $root.CRemoteClient_AllocateTURNServer_Request, $root.CRemoteClient_AllocateTURNServer_Response, request, callback);
+        }, "name", { value: "AllocateTURNServer" });
+    
+        /**
+         * Calls AllocateTURNServer.
+         * @function allocateTURNServer
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_AllocateTURNServer_Request} request CRemoteClient_AllocateTURNServer_Request message or plain object
+         * @returns {Promise<CRemoteClient_AllocateTURNServer_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClient#allocateRelayServer}.
+         * @memberof RemoteClient
+         * @typedef AllocateRelayServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CRemoteClient_AllocateRelayServer_Response} [response] CRemoteClient_AllocateRelayServer_Response
+         */
+    
+        /**
+         * Calls AllocateRelayServer.
+         * @function allocateRelayServer
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_AllocateRelayServer_Request} request CRemoteClient_AllocateRelayServer_Request message or plain object
+         * @param {RemoteClient.AllocateRelayServerCallback} callback Node-style callback called with the error, if any, and CRemoteClient_AllocateRelayServer_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.allocateRelayServer = function allocateRelayServer(request, callback) {
+            return this.rpcCall(allocateRelayServer, $root.CRemoteClient_AllocateRelayServer_Request, $root.CRemoteClient_AllocateRelayServer_Response, request, callback);
+        }, "name", { value: "AllocateRelayServer" });
+    
+        /**
+         * Calls AllocateRelayServer.
+         * @function allocateRelayServer
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_AllocateRelayServer_Request} request CRemoteClient_AllocateRelayServer_Request message or plain object
+         * @returns {Promise<CRemoteClient_AllocateRelayServer_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClient#sendSteamBroadcastPacket}.
+         * @memberof RemoteClient
+         * @typedef SendSteamBroadcastPacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls SendSteamBroadcastPacket.
+         * @function sendSteamBroadcastPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_SteamBroadcast_Notification} request CRemoteClient_SteamBroadcast_Notification message or plain object
+         * @param {RemoteClient.SendSteamBroadcastPacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.sendSteamBroadcastPacket = function sendSteamBroadcastPacket(request, callback) {
+            return this.rpcCall(sendSteamBroadcastPacket, $root.CRemoteClient_SteamBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "SendSteamBroadcastPacket" });
+    
+        /**
+         * Calls SendSteamBroadcastPacket.
+         * @function sendSteamBroadcastPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_SteamBroadcast_Notification} request CRemoteClient_SteamBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClient#sendSteamToSteamPacket}.
+         * @memberof RemoteClient
+         * @typedef SendSteamToSteamPacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls SendSteamToSteamPacket.
+         * @function sendSteamToSteamPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_SteamToSteam_Notification} request CRemoteClient_SteamToSteam_Notification message or plain object
+         * @param {RemoteClient.SendSteamToSteamPacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClient.prototype.sendSteamToSteamPacket = function sendSteamToSteamPacket(request, callback) {
+            return this.rpcCall(sendSteamToSteamPacket, $root.CRemoteClient_SteamToSteam_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "SendSteamToSteamPacket" });
+    
+        /**
+         * Calls SendSteamToSteamPacket.
+         * @function sendSteamToSteamPacket
+         * @memberof RemoteClient
+         * @instance
+         * @param {ICRemoteClient_SteamToSteam_Notification} request CRemoteClient_SteamToSteam_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        return RemoteClient;
+    })();
+    
+    $root.RemoteClientSteamClient = (function() {
+    
+        /**
+         * Constructs a new RemoteClientSteamClient service.
+         * @exports RemoteClientSteamClient
+         * @classdesc Represents a RemoteClientSteamClient
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function RemoteClientSteamClient(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (RemoteClientSteamClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = RemoteClientSteamClient;
+    
+        /**
+         * Creates new RemoteClientSteamClient service using the specified rpc implementation.
+         * @function create
+         * @memberof RemoteClientSteamClient
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {RemoteClientSteamClient} RPC service. Useful where requests and/or responses are streamed.
+         */
+        RemoteClientSteamClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link RemoteClientSteamClient#notifyRegisterStatusUpdate}.
+         * @memberof RemoteClientSteamClient
+         * @typedef NotifyRegisterStatusUpdateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyRegisterStatusUpdate.
+         * @function notifyRegisterStatusUpdate
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification} request CRemoteClient_RegisterStatusUpdate_Notification message or plain object
+         * @param {RemoteClientSteamClient.NotifyRegisterStatusUpdateCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClientSteamClient.prototype.notifyRegisterStatusUpdate = function notifyRegisterStatusUpdate(request, callback) {
+            return this.rpcCall(notifyRegisterStatusUpdate, $root.CRemoteClient_RegisterStatusUpdate_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyRegisterStatusUpdate" });
+    
+        /**
+         * Calls NotifyRegisterStatusUpdate.
+         * @function notifyRegisterStatusUpdate
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_RegisterStatusUpdate_Notification} request CRemoteClient_RegisterStatusUpdate_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClientSteamClient#notifyUnregisterStatusUpdate}.
+         * @memberof RemoteClientSteamClient
+         * @typedef NotifyUnregisterStatusUpdateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyUnregisterStatusUpdate.
+         * @function notifyUnregisterStatusUpdate
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification} request CRemoteClient_UnregisterStatusUpdate_Notification message or plain object
+         * @param {RemoteClientSteamClient.NotifyUnregisterStatusUpdateCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClientSteamClient.prototype.notifyUnregisterStatusUpdate = function notifyUnregisterStatusUpdate(request, callback) {
+            return this.rpcCall(notifyUnregisterStatusUpdate, $root.CRemoteClient_UnregisterStatusUpdate_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyUnregisterStatusUpdate" });
+    
+        /**
+         * Calls NotifyUnregisterStatusUpdate.
+         * @function notifyUnregisterStatusUpdate
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_UnregisterStatusUpdate_Notification} request CRemoteClient_UnregisterStatusUpdate_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClientSteamClient#notifyRemotePacket}.
+         * @memberof RemoteClientSteamClient
+         * @typedef NotifyRemotePacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyRemotePacket.
+         * @function notifyRemotePacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_RemotePacket_Notification} request CRemoteClient_RemotePacket_Notification message or plain object
+         * @param {RemoteClientSteamClient.NotifyRemotePacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClientSteamClient.prototype.notifyRemotePacket = function notifyRemotePacket(request, callback) {
+            return this.rpcCall(notifyRemotePacket, $root.CRemoteClient_RemotePacket_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyRemotePacket" });
+    
+        /**
+         * Calls NotifyRemotePacket.
+         * @function notifyRemotePacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_RemotePacket_Notification} request CRemoteClient_RemotePacket_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClientSteamClient#notifySteamBroadcastPacket}.
+         * @memberof RemoteClientSteamClient
+         * @typedef NotifySteamBroadcastPacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifySteamBroadcastPacket.
+         * @function notifySteamBroadcastPacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_SteamBroadcast_Notification} request CRemoteClient_SteamBroadcast_Notification message or plain object
+         * @param {RemoteClientSteamClient.NotifySteamBroadcastPacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClientSteamClient.prototype.notifySteamBroadcastPacket = function notifySteamBroadcastPacket(request, callback) {
+            return this.rpcCall(notifySteamBroadcastPacket, $root.CRemoteClient_SteamBroadcast_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifySteamBroadcastPacket" });
+    
+        /**
+         * Calls NotifySteamBroadcastPacket.
+         * @function notifySteamBroadcastPacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_SteamBroadcast_Notification} request CRemoteClient_SteamBroadcast_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link RemoteClientSteamClient#notifySteamToSteamPacket}.
+         * @memberof RemoteClientSteamClient
+         * @typedef NotifySteamToSteamPacketCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifySteamToSteamPacket.
+         * @function notifySteamToSteamPacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_SteamToSteam_Notification} request CRemoteClient_SteamToSteam_Notification message or plain object
+         * @param {RemoteClientSteamClient.NotifySteamToSteamPacketCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(RemoteClientSteamClient.prototype.notifySteamToSteamPacket = function notifySteamToSteamPacket(request, callback) {
+            return this.rpcCall(notifySteamToSteamPacket, $root.CRemoteClient_SteamToSteam_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifySteamToSteamPacket" });
+    
+        /**
+         * Calls NotifySteamToSteamPacket.
+         * @function notifySteamToSteamPacket
+         * @memberof RemoteClientSteamClient
+         * @instance
+         * @param {ICRemoteClient_SteamToSteam_Notification} request CRemoteClient_SteamToSteam_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        return RemoteClientSteamClient;
     })();
     
     /**

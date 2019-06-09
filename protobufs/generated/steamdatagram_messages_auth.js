@@ -34,7 +34,6 @@
          * @property {number|Long|null} [legacy_gameserver_steam_id] CMsgSteamDatagramRelayAuthTicket legacy_gameserver_steam_id
          * @property {number|Long|null} [legacy_gameserver_net_id] CMsgSteamDatagramRelayAuthTicket legacy_gameserver_net_id
          * @property {number|null} [legacy_gameserver_pop_id] CMsgSteamDatagramRelayAuthTicket legacy_gameserver_pop_id
-         * @property {Uint8Array|null} [DELETED_signature] CMsgSteamDatagramRelayAuthTicket DELETED_signature
          */
     
         /**
@@ -150,14 +149,6 @@
         CMsgSteamDatagramRelayAuthTicket.prototype.legacy_gameserver_pop_id = 0;
     
         /**
-         * CMsgSteamDatagramRelayAuthTicket DELETED_signature.
-         * @member {Uint8Array} DELETED_signature
-         * @memberof CMsgSteamDatagramRelayAuthTicket
-         * @instance
-         */
-        CMsgSteamDatagramRelayAuthTicket.prototype.DELETED_signature = $util.newBuffer([]);
-    
-        /**
          * Creates a new CMsgSteamDatagramRelayAuthTicket instance using the specified properties.
          * @function create
          * @memberof CMsgSteamDatagramRelayAuthTicket
@@ -191,8 +182,6 @@
                 writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_gameserver_steam_id);
             if (message.legacy_gameserver_net_id != null && message.hasOwnProperty("legacy_gameserver_net_id"))
                 writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.legacy_gameserver_net_id);
-            if (message.DELETED_signature != null && message.hasOwnProperty("DELETED_signature"))
-                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.DELETED_signature);
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.app_id);
             if (message.extra_fields != null && message.extra_fields.length)
@@ -280,9 +269,6 @@
                 case 9:
                     message.legacy_gameserver_pop_id = reader.fixed32();
                     break;
-                case 6:
-                    message.DELETED_signature = reader.bytes();
-                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -360,9 +346,6 @@
             if (message.legacy_gameserver_pop_id != null && message.hasOwnProperty("legacy_gameserver_pop_id"))
                 if (!$util.isInteger(message.legacy_gameserver_pop_id))
                     return "legacy_gameserver_pop_id: integer expected";
-            if (message.DELETED_signature != null && message.hasOwnProperty("DELETED_signature"))
-                if (!(message.DELETED_signature && typeof message.DELETED_signature.length === "number" || $util.isString(message.DELETED_signature)))
-                    return "DELETED_signature: buffer expected";
             return null;
         };
     
@@ -440,11 +423,6 @@
                     message.legacy_gameserver_net_id = new $util.LongBits(object.legacy_gameserver_net_id.low >>> 0, object.legacy_gameserver_net_id.high >>> 0).toNumber();
             if (object.legacy_gameserver_pop_id != null)
                 message.legacy_gameserver_pop_id = object.legacy_gameserver_pop_id >>> 0;
-            if (object.DELETED_signature != null)
-                if (typeof object.DELETED_signature === "string")
-                    $util.base64.decode(object.DELETED_signature, message.DELETED_signature = $util.newBuffer($util.base64.length(object.DELETED_signature)), 0);
-                else if (object.DELETED_signature.length)
-                    message.DELETED_signature = object.DELETED_signature;
             return message;
         };
     
@@ -481,13 +459,6 @@
                     object.legacy_gameserver_net_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.legacy_gameserver_net_id = options.longs === String ? "0" : 0;
-                if (options.bytes === String)
-                    object.DELETED_signature = "";
-                else {
-                    object.DELETED_signature = [];
-                    if (options.bytes !== Array)
-                        object.DELETED_signature = $util.newBuffer(object.DELETED_signature);
-                }
                 object.app_id = 0;
                 object.legacy_gameserver_pop_id = 0;
                 object.virtual_port = 0;
@@ -532,8 +503,6 @@
                     object.legacy_gameserver_net_id = options.longs === String ? String(message.legacy_gameserver_net_id) : message.legacy_gameserver_net_id;
                 else
                     object.legacy_gameserver_net_id = options.longs === String ? $util.Long.prototype.toString.call(message.legacy_gameserver_net_id) : options.longs === Number ? new $util.LongBits(message.legacy_gameserver_net_id.low >>> 0, message.legacy_gameserver_net_id.high >>> 0).toNumber() : message.legacy_gameserver_net_id;
-            if (message.DELETED_signature != null && message.hasOwnProperty("DELETED_signature"))
-                object.DELETED_signature = options.bytes === String ? $util.base64.encode(message.DELETED_signature, 0, message.DELETED_signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.DELETED_signature) : message.DELETED_signature;
             if (message.app_id != null && message.hasOwnProperty("app_id"))
                 object.app_id = message.app_id;
             if (message.extra_fields && message.extra_fields.length) {
@@ -1418,6 +1387,1854 @@
         };
     
         return CMsgSteamDatagramCachedCredentialsForApp;
+    })();
+    
+    $root.CMsgSteamDatagramGameCoordinatorServerLogin = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramGameCoordinatorServerLogin.
+         * @exports ICMsgSteamDatagramGameCoordinatorServerLogin
+         * @interface ICMsgSteamDatagramGameCoordinatorServerLogin
+         * @property {number|null} [time_generated] CMsgSteamDatagramGameCoordinatorServerLogin time_generated
+         * @property {number|null} [appid] CMsgSteamDatagramGameCoordinatorServerLogin appid
+         * @property {Uint8Array|null} [routing] CMsgSteamDatagramGameCoordinatorServerLogin routing
+         * @property {Uint8Array|null} [appdata] CMsgSteamDatagramGameCoordinatorServerLogin appdata
+         * @property {Uint8Array|null} [identity] CMsgSteamDatagramGameCoordinatorServerLogin identity
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramGameCoordinatorServerLogin.
+         * @exports CMsgSteamDatagramGameCoordinatorServerLogin
+         * @classdesc Represents a CMsgSteamDatagramGameCoordinatorServerLogin.
+         * @implements ICMsgSteamDatagramGameCoordinatorServerLogin
+         * @constructor
+         * @param {ICMsgSteamDatagramGameCoordinatorServerLogin=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramGameCoordinatorServerLogin(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramGameCoordinatorServerLogin time_generated.
+         * @member {number} time_generated
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.time_generated = 0;
+    
+        /**
+         * CMsgSteamDatagramGameCoordinatorServerLogin appid.
+         * @member {number} appid
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.appid = 0;
+    
+        /**
+         * CMsgSteamDatagramGameCoordinatorServerLogin routing.
+         * @member {Uint8Array} routing
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.routing = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramGameCoordinatorServerLogin appdata.
+         * @member {Uint8Array} appdata
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.appdata = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramGameCoordinatorServerLogin identity.
+         * @member {Uint8Array} identity
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.identity = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamDatagramGameCoordinatorServerLogin instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramGameCoordinatorServerLogin=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramGameCoordinatorServerLogin} CMsgSteamDatagramGameCoordinatorServerLogin instance
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.create = function create(properties) {
+            return new CMsgSteamDatagramGameCoordinatorServerLogin(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramGameCoordinatorServerLogin message. Does not implicitly {@link CMsgSteamDatagramGameCoordinatorServerLogin.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramGameCoordinatorServerLogin} message CMsgSteamDatagramGameCoordinatorServerLogin message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.time_generated != null && message.hasOwnProperty("time_generated"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.time_generated);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
+            if (message.routing != null && message.hasOwnProperty("routing"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.routing);
+            if (message.appdata != null && message.hasOwnProperty("appdata"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.appdata);
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.identity);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramGameCoordinatorServerLogin message, length delimited. Does not implicitly {@link CMsgSteamDatagramGameCoordinatorServerLogin.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramGameCoordinatorServerLogin} message CMsgSteamDatagramGameCoordinatorServerLogin message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramGameCoordinatorServerLogin message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramGameCoordinatorServerLogin} CMsgSteamDatagramGameCoordinatorServerLogin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramGameCoordinatorServerLogin();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.time_generated = reader.uint32();
+                    break;
+                case 2:
+                    message.appid = reader.uint32();
+                    break;
+                case 3:
+                    message.routing = reader.bytes();
+                    break;
+                case 4:
+                    message.appdata = reader.bytes();
+                    break;
+                case 5:
+                    message.identity = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramGameCoordinatorServerLogin message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramGameCoordinatorServerLogin} CMsgSteamDatagramGameCoordinatorServerLogin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramGameCoordinatorServerLogin message.
+         * @function verify
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.time_generated != null && message.hasOwnProperty("time_generated"))
+                if (!$util.isInteger(message.time_generated))
+                    return "time_generated: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.routing != null && message.hasOwnProperty("routing"))
+                if (!(message.routing && typeof message.routing.length === "number" || $util.isString(message.routing)))
+                    return "routing: buffer expected";
+            if (message.appdata != null && message.hasOwnProperty("appdata"))
+                if (!(message.appdata && typeof message.appdata.length === "number" || $util.isString(message.appdata)))
+                    return "appdata: buffer expected";
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                if (!(message.identity && typeof message.identity.length === "number" || $util.isString(message.identity)))
+                    return "identity: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramGameCoordinatorServerLogin message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramGameCoordinatorServerLogin} CMsgSteamDatagramGameCoordinatorServerLogin
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramGameCoordinatorServerLogin)
+                return object;
+            var message = new $root.CMsgSteamDatagramGameCoordinatorServerLogin();
+            if (object.time_generated != null)
+                message.time_generated = object.time_generated >>> 0;
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.routing != null)
+                if (typeof object.routing === "string")
+                    $util.base64.decode(object.routing, message.routing = $util.newBuffer($util.base64.length(object.routing)), 0);
+                else if (object.routing.length)
+                    message.routing = object.routing;
+            if (object.appdata != null)
+                if (typeof object.appdata === "string")
+                    $util.base64.decode(object.appdata, message.appdata = $util.newBuffer($util.base64.length(object.appdata)), 0);
+                else if (object.appdata.length)
+                    message.appdata = object.appdata;
+            if (object.identity != null)
+                if (typeof object.identity === "string")
+                    $util.base64.decode(object.identity, message.identity = $util.newBuffer($util.base64.length(object.identity)), 0);
+                else if (object.identity.length)
+                    message.identity = object.identity;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramGameCoordinatorServerLogin message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @static
+         * @param {CMsgSteamDatagramGameCoordinatorServerLogin} message CMsgSteamDatagramGameCoordinatorServerLogin
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.time_generated = 0;
+                object.appid = 0;
+                if (options.bytes === String)
+                    object.routing = "";
+                else {
+                    object.routing = [];
+                    if (options.bytes !== Array)
+                        object.routing = $util.newBuffer(object.routing);
+                }
+                if (options.bytes === String)
+                    object.appdata = "";
+                else {
+                    object.appdata = [];
+                    if (options.bytes !== Array)
+                        object.appdata = $util.newBuffer(object.appdata);
+                }
+                if (options.bytes === String)
+                    object.identity = "";
+                else {
+                    object.identity = [];
+                    if (options.bytes !== Array)
+                        object.identity = $util.newBuffer(object.identity);
+                }
+            }
+            if (message.time_generated != null && message.hasOwnProperty("time_generated"))
+                object.time_generated = message.time_generated;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.routing != null && message.hasOwnProperty("routing"))
+                object.routing = options.bytes === String ? $util.base64.encode(message.routing, 0, message.routing.length) : options.bytes === Array ? Array.prototype.slice.call(message.routing) : message.routing;
+            if (message.appdata != null && message.hasOwnProperty("appdata"))
+                object.appdata = options.bytes === String ? $util.base64.encode(message.appdata, 0, message.appdata.length) : options.bytes === Array ? Array.prototype.slice.call(message.appdata) : message.appdata;
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                object.identity = options.bytes === String ? $util.base64.encode(message.identity, 0, message.identity.length) : options.bytes === Array ? Array.prototype.slice.call(message.identity) : message.identity;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramGameCoordinatorServerLogin to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramGameCoordinatorServerLogin
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramGameCoordinatorServerLogin.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramGameCoordinatorServerLogin;
+    })();
+    
+    $root.CMsgSteamDatagramSignedGameCoordinatorServerLogin = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramSignedGameCoordinatorServerLogin.
+         * @exports ICMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @interface ICMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @property {ICMsgSteamDatagramCertificateSigned|null} [cert] CMsgSteamDatagramSignedGameCoordinatorServerLogin cert
+         * @property {Uint8Array|null} [login] CMsgSteamDatagramSignedGameCoordinatorServerLogin login
+         * @property {Uint8Array|null} [signature] CMsgSteamDatagramSignedGameCoordinatorServerLogin signature
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramSignedGameCoordinatorServerLogin.
+         * @exports CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @classdesc Represents a CMsgSteamDatagramSignedGameCoordinatorServerLogin.
+         * @implements ICMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @constructor
+         * @param {ICMsgSteamDatagramSignedGameCoordinatorServerLogin=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramSignedGameCoordinatorServerLogin(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramSignedGameCoordinatorServerLogin cert.
+         * @member {ICMsgSteamDatagramCertificateSigned|null|undefined} cert
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.prototype.cert = null;
+    
+        /**
+         * CMsgSteamDatagramSignedGameCoordinatorServerLogin login.
+         * @member {Uint8Array} login
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.prototype.login = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramSignedGameCoordinatorServerLogin signature.
+         * @member {Uint8Array} signature
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @instance
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.prototype.signature = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamDatagramSignedGameCoordinatorServerLogin instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramSignedGameCoordinatorServerLogin=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramSignedGameCoordinatorServerLogin} CMsgSteamDatagramSignedGameCoordinatorServerLogin instance
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.create = function create(properties) {
+            return new CMsgSteamDatagramSignedGameCoordinatorServerLogin(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramSignedGameCoordinatorServerLogin message. Does not implicitly {@link CMsgSteamDatagramSignedGameCoordinatorServerLogin.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramSignedGameCoordinatorServerLogin} message CMsgSteamDatagramSignedGameCoordinatorServerLogin message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                $root.CMsgSteamDatagramCertificateSigned.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.login != null && message.hasOwnProperty("login"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.login);
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.signature);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramSignedGameCoordinatorServerLogin message, length delimited. Does not implicitly {@link CMsgSteamDatagramSignedGameCoordinatorServerLogin.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {ICMsgSteamDatagramSignedGameCoordinatorServerLogin} message CMsgSteamDatagramSignedGameCoordinatorServerLogin message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramSignedGameCoordinatorServerLogin message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramSignedGameCoordinatorServerLogin} CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramSignedGameCoordinatorServerLogin();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cert = $root.CMsgSteamDatagramCertificateSigned.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.login = reader.bytes();
+                    break;
+                case 3:
+                    message.signature = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramSignedGameCoordinatorServerLogin message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramSignedGameCoordinatorServerLogin} CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramSignedGameCoordinatorServerLogin message.
+         * @function verify
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cert != null && message.hasOwnProperty("cert")) {
+                var error = $root.CMsgSteamDatagramCertificateSigned.verify(message.cert);
+                if (error)
+                    return "cert." + error;
+            }
+            if (message.login != null && message.hasOwnProperty("login"))
+                if (!(message.login && typeof message.login.length === "number" || $util.isString(message.login)))
+                    return "login: buffer expected";
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
+                    return "signature: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramSignedGameCoordinatorServerLogin message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramSignedGameCoordinatorServerLogin} CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramSignedGameCoordinatorServerLogin)
+                return object;
+            var message = new $root.CMsgSteamDatagramSignedGameCoordinatorServerLogin();
+            if (object.cert != null) {
+                if (typeof object.cert !== "object")
+                    throw TypeError(".CMsgSteamDatagramSignedGameCoordinatorServerLogin.cert: object expected");
+                message.cert = $root.CMsgSteamDatagramCertificateSigned.fromObject(object.cert);
+            }
+            if (object.login != null)
+                if (typeof object.login === "string")
+                    $util.base64.decode(object.login, message.login = $util.newBuffer($util.base64.length(object.login)), 0);
+                else if (object.login.length)
+                    message.login = object.login;
+            if (object.signature != null)
+                if (typeof object.signature === "string")
+                    $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
+                else if (object.signature.length)
+                    message.signature = object.signature;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramSignedGameCoordinatorServerLogin message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @static
+         * @param {CMsgSteamDatagramSignedGameCoordinatorServerLogin} message CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.cert = null;
+                if (options.bytes === String)
+                    object.login = "";
+                else {
+                    object.login = [];
+                    if (options.bytes !== Array)
+                        object.login = $util.newBuffer(object.login);
+                }
+                if (options.bytes === String)
+                    object.signature = "";
+                else {
+                    object.signature = [];
+                    if (options.bytes !== Array)
+                        object.signature = $util.newBuffer(object.signature);
+                }
+            }
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                object.cert = $root.CMsgSteamDatagramCertificateSigned.toObject(message.cert, options);
+            if (message.login != null && message.hasOwnProperty("login"))
+                object.login = options.bytes === String ? $util.base64.encode(message.login, 0, message.login.length) : options.bytes === Array ? Array.prototype.slice.call(message.login) : message.login;
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramSignedGameCoordinatorServerLogin to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramSignedGameCoordinatorServerLogin
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramSignedGameCoordinatorServerLogin.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramSignedGameCoordinatorServerLogin;
+    })();
+    
+    $root.CMsgSteamDatagramHostedServerAddressPlaintext = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramHostedServerAddressPlaintext.
+         * @exports ICMsgSteamDatagramHostedServerAddressPlaintext
+         * @interface ICMsgSteamDatagramHostedServerAddressPlaintext
+         * @property {number|null} [ipv4] CMsgSteamDatagramHostedServerAddressPlaintext ipv4
+         * @property {Uint8Array|null} [ipv6] CMsgSteamDatagramHostedServerAddressPlaintext ipv6
+         * @property {number|null} [port] CMsgSteamDatagramHostedServerAddressPlaintext port
+         * @property {number|Long|null} [routing_secret] CMsgSteamDatagramHostedServerAddressPlaintext routing_secret
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramHostedServerAddressPlaintext.
+         * @exports CMsgSteamDatagramHostedServerAddressPlaintext
+         * @classdesc Represents a CMsgSteamDatagramHostedServerAddressPlaintext.
+         * @implements ICMsgSteamDatagramHostedServerAddressPlaintext
+         * @constructor
+         * @param {ICMsgSteamDatagramHostedServerAddressPlaintext=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramHostedServerAddressPlaintext(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramHostedServerAddressPlaintext ipv4.
+         * @member {number} ipv4
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @instance
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.prototype.ipv4 = 0;
+    
+        /**
+         * CMsgSteamDatagramHostedServerAddressPlaintext ipv6.
+         * @member {Uint8Array} ipv6
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @instance
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.prototype.ipv6 = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramHostedServerAddressPlaintext port.
+         * @member {number} port
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @instance
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.prototype.port = 0;
+    
+        /**
+         * CMsgSteamDatagramHostedServerAddressPlaintext routing_secret.
+         * @member {number|Long} routing_secret
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @instance
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.prototype.routing_secret = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CMsgSteamDatagramHostedServerAddressPlaintext instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {ICMsgSteamDatagramHostedServerAddressPlaintext=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramHostedServerAddressPlaintext} CMsgSteamDatagramHostedServerAddressPlaintext instance
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.create = function create(properties) {
+            return new CMsgSteamDatagramHostedServerAddressPlaintext(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramHostedServerAddressPlaintext message. Does not implicitly {@link CMsgSteamDatagramHostedServerAddressPlaintext.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {ICMsgSteamDatagramHostedServerAddressPlaintext} message CMsgSteamDatagramHostedServerAddressPlaintext message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.ipv4);
+            if (message.ipv6 != null && message.hasOwnProperty("ipv6"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ipv6);
+            if (message.port != null && message.hasOwnProperty("port"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.port);
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.routing_secret);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramHostedServerAddressPlaintext message, length delimited. Does not implicitly {@link CMsgSteamDatagramHostedServerAddressPlaintext.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {ICMsgSteamDatagramHostedServerAddressPlaintext} message CMsgSteamDatagramHostedServerAddressPlaintext message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramHostedServerAddressPlaintext message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramHostedServerAddressPlaintext} CMsgSteamDatagramHostedServerAddressPlaintext
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramHostedServerAddressPlaintext();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ipv4 = reader.fixed32();
+                    break;
+                case 2:
+                    message.ipv6 = reader.bytes();
+                    break;
+                case 3:
+                    message.port = reader.uint32();
+                    break;
+                case 4:
+                    message.routing_secret = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramHostedServerAddressPlaintext message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramHostedServerAddressPlaintext} CMsgSteamDatagramHostedServerAddressPlaintext
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramHostedServerAddressPlaintext message.
+         * @function verify
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                if (!$util.isInteger(message.ipv4))
+                    return "ipv4: integer expected";
+            if (message.ipv6 != null && message.hasOwnProperty("ipv6"))
+                if (!(message.ipv6 && typeof message.ipv6.length === "number" || $util.isString(message.ipv6)))
+                    return "ipv6: buffer expected";
+            if (message.port != null && message.hasOwnProperty("port"))
+                if (!$util.isInteger(message.port))
+                    return "port: integer expected";
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
+                if (!$util.isInteger(message.routing_secret) && !(message.routing_secret && $util.isInteger(message.routing_secret.low) && $util.isInteger(message.routing_secret.high)))
+                    return "routing_secret: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramHostedServerAddressPlaintext message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramHostedServerAddressPlaintext} CMsgSteamDatagramHostedServerAddressPlaintext
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramHostedServerAddressPlaintext)
+                return object;
+            var message = new $root.CMsgSteamDatagramHostedServerAddressPlaintext();
+            if (object.ipv4 != null)
+                message.ipv4 = object.ipv4 >>> 0;
+            if (object.ipv6 != null)
+                if (typeof object.ipv6 === "string")
+                    $util.base64.decode(object.ipv6, message.ipv6 = $util.newBuffer($util.base64.length(object.ipv6)), 0);
+                else if (object.ipv6.length)
+                    message.ipv6 = object.ipv6;
+            if (object.port != null)
+                message.port = object.port >>> 0;
+            if (object.routing_secret != null)
+                if ($util.Long)
+                    (message.routing_secret = $util.Long.fromValue(object.routing_secret)).unsigned = false;
+                else if (typeof object.routing_secret === "string")
+                    message.routing_secret = parseInt(object.routing_secret, 10);
+                else if (typeof object.routing_secret === "number")
+                    message.routing_secret = object.routing_secret;
+                else if (typeof object.routing_secret === "object")
+                    message.routing_secret = new $util.LongBits(object.routing_secret.low >>> 0, object.routing_secret.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramHostedServerAddressPlaintext message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @static
+         * @param {CMsgSteamDatagramHostedServerAddressPlaintext} message CMsgSteamDatagramHostedServerAddressPlaintext
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ipv4 = 0;
+                if (options.bytes === String)
+                    object.ipv6 = "";
+                else {
+                    object.ipv6 = [];
+                    if (options.bytes !== Array)
+                        object.ipv6 = $util.newBuffer(object.ipv6);
+                }
+                object.port = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.routing_secret = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.routing_secret = options.longs === String ? "0" : 0;
+            }
+            if (message.ipv4 != null && message.hasOwnProperty("ipv4"))
+                object.ipv4 = message.ipv4;
+            if (message.ipv6 != null && message.hasOwnProperty("ipv6"))
+                object.ipv6 = options.bytes === String ? $util.base64.encode(message.ipv6, 0, message.ipv6.length) : options.bytes === Array ? Array.prototype.slice.call(message.ipv6) : message.ipv6;
+            if (message.port != null && message.hasOwnProperty("port"))
+                object.port = message.port;
+            if (message.routing_secret != null && message.hasOwnProperty("routing_secret"))
+                if (typeof message.routing_secret === "number")
+                    object.routing_secret = options.longs === String ? String(message.routing_secret) : message.routing_secret;
+                else
+                    object.routing_secret = options.longs === String ? $util.Long.prototype.toString.call(message.routing_secret) : options.longs === Number ? new $util.LongBits(message.routing_secret.low >>> 0, message.routing_secret.high >>> 0).toNumber() : message.routing_secret;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramHostedServerAddressPlaintext to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramHostedServerAddressPlaintext
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramHostedServerAddressPlaintext.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramHostedServerAddressPlaintext;
+    })();
+    
+    $root.CMsgSteamNetworkingIdentity = (function() {
+    
+        /**
+         * Properties of a CMsgSteamNetworkingIdentity.
+         * @exports ICMsgSteamNetworkingIdentity
+         * @interface ICMsgSteamNetworkingIdentity
+         * @property {number|Long|null} [steam_id] CMsgSteamNetworkingIdentity steam_id
+         * @property {string|null} [xbox_pairwise_id] CMsgSteamNetworkingIdentity xbox_pairwise_id
+         * @property {Uint8Array|null} [generic_bytes] CMsgSteamNetworkingIdentity generic_bytes
+         * @property {string|null} [generic_string] CMsgSteamNetworkingIdentity generic_string
+         * @property {Uint8Array|null} [ipv6_and_port] CMsgSteamNetworkingIdentity ipv6_and_port
+         */
+    
+        /**
+         * Constructs a new CMsgSteamNetworkingIdentity.
+         * @exports CMsgSteamNetworkingIdentity
+         * @classdesc Represents a CMsgSteamNetworkingIdentity.
+         * @implements ICMsgSteamNetworkingIdentity
+         * @constructor
+         * @param {ICMsgSteamNetworkingIdentity=} [properties] Properties to set
+         */
+        function CMsgSteamNetworkingIdentity(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamNetworkingIdentity steam_id.
+         * @member {number|Long} steam_id
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamNetworkingIdentity xbox_pairwise_id.
+         * @member {string} xbox_pairwise_id
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.xbox_pairwise_id = "";
+    
+        /**
+         * CMsgSteamNetworkingIdentity generic_bytes.
+         * @member {Uint8Array} generic_bytes
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.generic_bytes = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamNetworkingIdentity generic_string.
+         * @member {string} generic_string
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.generic_string = "";
+    
+        /**
+         * CMsgSteamNetworkingIdentity ipv6_and_port.
+         * @member {Uint8Array} ipv6_and_port
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         */
+        CMsgSteamNetworkingIdentity.prototype.ipv6_and_port = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamNetworkingIdentity instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity=} [properties] Properties to set
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity instance
+         */
+        CMsgSteamNetworkingIdentity.create = function create(properties) {
+            return new CMsgSteamNetworkingIdentity(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingIdentity message. Does not implicitly {@link CMsgSteamNetworkingIdentity.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingIdentity.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.generic_bytes);
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.generic_string);
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ipv6_and_port);
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                writer.uint32(/* id 16, wireType 1 =*/129).fixed64(message.steam_id);
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                writer.uint32(/* id 17, wireType 2 =*/138).string(message.xbox_pairwise_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamNetworkingIdentity message, length delimited. Does not implicitly {@link CMsgSteamNetworkingIdentity.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {ICMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamNetworkingIdentity.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingIdentity message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingIdentity.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamNetworkingIdentity();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 16:
+                    message.steam_id = reader.fixed64();
+                    break;
+                case 17:
+                    message.xbox_pairwise_id = reader.string();
+                    break;
+                case 2:
+                    message.generic_bytes = reader.bytes();
+                    break;
+                case 3:
+                    message.generic_string = reader.string();
+                    break;
+                case 4:
+                    message.ipv6_and_port = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamNetworkingIdentity message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamNetworkingIdentity.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamNetworkingIdentity message.
+         * @function verify
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamNetworkingIdentity.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
+                    return "steam_id: integer|Long expected";
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                if (!$util.isString(message.xbox_pairwise_id))
+                    return "xbox_pairwise_id: string expected";
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                if (!(message.generic_bytes && typeof message.generic_bytes.length === "number" || $util.isString(message.generic_bytes)))
+                    return "generic_bytes: buffer expected";
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                if (!$util.isString(message.generic_string))
+                    return "generic_string: string expected";
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                if (!(message.ipv6_and_port && typeof message.ipv6_and_port.length === "number" || $util.isString(message.ipv6_and_port)))
+                    return "ipv6_and_port: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamNetworkingIdentity message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamNetworkingIdentity} CMsgSteamNetworkingIdentity
+         */
+        CMsgSteamNetworkingIdentity.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamNetworkingIdentity)
+                return object;
+            var message = new $root.CMsgSteamNetworkingIdentity();
+            if (object.steam_id != null)
+                if ($util.Long)
+                    (message.steam_id = $util.Long.fromValue(object.steam_id)).unsigned = false;
+                else if (typeof object.steam_id === "string")
+                    message.steam_id = parseInt(object.steam_id, 10);
+                else if (typeof object.steam_id === "number")
+                    message.steam_id = object.steam_id;
+                else if (typeof object.steam_id === "object")
+                    message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber();
+            if (object.xbox_pairwise_id != null)
+                message.xbox_pairwise_id = String(object.xbox_pairwise_id);
+            if (object.generic_bytes != null)
+                if (typeof object.generic_bytes === "string")
+                    $util.base64.decode(object.generic_bytes, message.generic_bytes = $util.newBuffer($util.base64.length(object.generic_bytes)), 0);
+                else if (object.generic_bytes.length)
+                    message.generic_bytes = object.generic_bytes;
+            if (object.generic_string != null)
+                message.generic_string = String(object.generic_string);
+            if (object.ipv6_and_port != null)
+                if (typeof object.ipv6_and_port === "string")
+                    $util.base64.decode(object.ipv6_and_port, message.ipv6_and_port = $util.newBuffer($util.base64.length(object.ipv6_and_port)), 0);
+                else if (object.ipv6_and_port.length)
+                    message.ipv6_and_port = object.ipv6_and_port;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamNetworkingIdentity message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamNetworkingIdentity
+         * @static
+         * @param {CMsgSteamNetworkingIdentity} message CMsgSteamNetworkingIdentity
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamNetworkingIdentity.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.generic_bytes = "";
+                else {
+                    object.generic_bytes = [];
+                    if (options.bytes !== Array)
+                        object.generic_bytes = $util.newBuffer(object.generic_bytes);
+                }
+                object.generic_string = "";
+                if (options.bytes === String)
+                    object.ipv6_and_port = "";
+                else {
+                    object.ipv6_and_port = [];
+                    if (options.bytes !== Array)
+                        object.ipv6_and_port = $util.newBuffer(object.ipv6_and_port);
+                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steam_id = options.longs === String ? "0" : 0;
+                object.xbox_pairwise_id = "";
+            }
+            if (message.generic_bytes != null && message.hasOwnProperty("generic_bytes"))
+                object.generic_bytes = options.bytes === String ? $util.base64.encode(message.generic_bytes, 0, message.generic_bytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.generic_bytes) : message.generic_bytes;
+            if (message.generic_string != null && message.hasOwnProperty("generic_string"))
+                object.generic_string = message.generic_string;
+            if (message.ipv6_and_port != null && message.hasOwnProperty("ipv6_and_port"))
+                object.ipv6_and_port = options.bytes === String ? $util.base64.encode(message.ipv6_and_port, 0, message.ipv6_and_port.length) : options.bytes === Array ? Array.prototype.slice.call(message.ipv6_and_port) : message.ipv6_and_port;
+            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
+                if (typeof message.steam_id === "number")
+                    object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
+                else
+                    object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber() : message.steam_id;
+            if (message.xbox_pairwise_id != null && message.hasOwnProperty("xbox_pairwise_id"))
+                object.xbox_pairwise_id = message.xbox_pairwise_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamNetworkingIdentity to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamNetworkingIdentity
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamNetworkingIdentity.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamNetworkingIdentity;
+    })();
+    
+    $root.CMsgSteamDatagramCertificate = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramCertificate.
+         * @exports ICMsgSteamDatagramCertificate
+         * @interface ICMsgSteamDatagramCertificate
+         * @property {CMsgSteamDatagramCertificate.EKeyType|null} [key_type] CMsgSteamDatagramCertificate key_type
+         * @property {Uint8Array|null} [key_data] CMsgSteamDatagramCertificate key_data
+         * @property {number|Long|null} [legacy_steam_id] CMsgSteamDatagramCertificate legacy_steam_id
+         * @property {ICMsgSteamNetworkingIdentity|null} [identity] CMsgSteamDatagramCertificate identity
+         * @property {Array.<number>|null} [gameserver_datacenter_ids] CMsgSteamDatagramCertificate gameserver_datacenter_ids
+         * @property {number|null} [time_created] CMsgSteamDatagramCertificate time_created
+         * @property {number|null} [time_expiry] CMsgSteamDatagramCertificate time_expiry
+         * @property {Array.<number>|null} [app_ids] CMsgSteamDatagramCertificate app_ids
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramCertificate.
+         * @exports CMsgSteamDatagramCertificate
+         * @classdesc Represents a CMsgSteamDatagramCertificate.
+         * @implements ICMsgSteamDatagramCertificate
+         * @constructor
+         * @param {ICMsgSteamDatagramCertificate=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramCertificate(properties) {
+            this.gameserver_datacenter_ids = [];
+            this.app_ids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramCertificate key_type.
+         * @member {CMsgSteamDatagramCertificate.EKeyType} key_type
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.key_type = 0;
+    
+        /**
+         * CMsgSteamDatagramCertificate key_data.
+         * @member {Uint8Array} key_data
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.key_data = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramCertificate legacy_steam_id.
+         * @member {number|Long} legacy_steam_id
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.legacy_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramCertificate identity.
+         * @member {ICMsgSteamNetworkingIdentity|null|undefined} identity
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.identity = null;
+    
+        /**
+         * CMsgSteamDatagramCertificate gameserver_datacenter_ids.
+         * @member {Array.<number>} gameserver_datacenter_ids
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.gameserver_datacenter_ids = $util.emptyArray;
+    
+        /**
+         * CMsgSteamDatagramCertificate time_created.
+         * @member {number} time_created
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.time_created = 0;
+    
+        /**
+         * CMsgSteamDatagramCertificate time_expiry.
+         * @member {number} time_expiry
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.time_expiry = 0;
+    
+        /**
+         * CMsgSteamDatagramCertificate app_ids.
+         * @member {Array.<number>} app_ids
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.app_ids = $util.emptyArray;
+    
+        /**
+         * Creates a new CMsgSteamDatagramCertificate instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {ICMsgSteamDatagramCertificate=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramCertificate} CMsgSteamDatagramCertificate instance
+         */
+        CMsgSteamDatagramCertificate.create = function create(properties) {
+            return new CMsgSteamDatagramCertificate(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramCertificate message. Does not implicitly {@link CMsgSteamDatagramCertificate.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {ICMsgSteamDatagramCertificate} message CMsgSteamDatagramCertificate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramCertificate.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_steam_id);
+            if (message.gameserver_datacenter_ids != null && message.gameserver_datacenter_ids.length)
+                for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
+                    writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.gameserver_datacenter_ids[i]);
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.time_created);
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
+                writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.time_expiry);
+            if (message.app_ids != null && message.app_ids.length)
+                for (var i = 0; i < message.app_ids.length; ++i)
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_ids[i]);
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                $root.CMsgSteamNetworkingIdentity.encode(message.identity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramCertificate message, length delimited. Does not implicitly {@link CMsgSteamDatagramCertificate.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {ICMsgSteamDatagramCertificate} message CMsgSteamDatagramCertificate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramCertificate.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramCertificate message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramCertificate} CMsgSteamDatagramCertificate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramCertificate.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramCertificate();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.key_type = reader.int32();
+                    break;
+                case 2:
+                    message.key_data = reader.bytes();
+                    break;
+                case 4:
+                    message.legacy_steam_id = reader.fixed64();
+                    break;
+                case 11:
+                    message.identity = $root.CMsgSteamNetworkingIdentity.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    if (!(message.gameserver_datacenter_ids && message.gameserver_datacenter_ids.length))
+                        message.gameserver_datacenter_ids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.gameserver_datacenter_ids.push(reader.fixed32());
+                    } else
+                        message.gameserver_datacenter_ids.push(reader.fixed32());
+                    break;
+                case 8:
+                    message.time_created = reader.fixed32();
+                    break;
+                case 9:
+                    message.time_expiry = reader.fixed32();
+                    break;
+                case 10:
+                    if (!(message.app_ids && message.app_ids.length))
+                        message.app_ids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.app_ids.push(reader.uint32());
+                    } else
+                        message.app_ids.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramCertificate message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramCertificate} CMsgSteamDatagramCertificate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramCertificate.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramCertificate message.
+         * @function verify
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramCertificate.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
+                switch (message.key_type) {
+                default:
+                    return "key_type: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
+                if (!(message.key_data && typeof message.key_data.length === "number" || $util.isString(message.key_data)))
+                    return "key_data: buffer expected";
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                if (!$util.isInteger(message.legacy_steam_id) && !(message.legacy_steam_id && $util.isInteger(message.legacy_steam_id.low) && $util.isInteger(message.legacy_steam_id.high)))
+                    return "legacy_steam_id: integer|Long expected";
+            if (message.identity != null && message.hasOwnProperty("identity")) {
+                var error = $root.CMsgSteamNetworkingIdentity.verify(message.identity);
+                if (error)
+                    return "identity." + error;
+            }
+            if (message.gameserver_datacenter_ids != null && message.hasOwnProperty("gameserver_datacenter_ids")) {
+                if (!Array.isArray(message.gameserver_datacenter_ids))
+                    return "gameserver_datacenter_ids: array expected";
+                for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
+                    if (!$util.isInteger(message.gameserver_datacenter_ids[i]))
+                        return "gameserver_datacenter_ids: integer[] expected";
+            }
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                if (!$util.isInteger(message.time_created))
+                    return "time_created: integer expected";
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
+                if (!$util.isInteger(message.time_expiry))
+                    return "time_expiry: integer expected";
+            if (message.app_ids != null && message.hasOwnProperty("app_ids")) {
+                if (!Array.isArray(message.app_ids))
+                    return "app_ids: array expected";
+                for (var i = 0; i < message.app_ids.length; ++i)
+                    if (!$util.isInteger(message.app_ids[i]))
+                        return "app_ids: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramCertificate message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramCertificate} CMsgSteamDatagramCertificate
+         */
+        CMsgSteamDatagramCertificate.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramCertificate)
+                return object;
+            var message = new $root.CMsgSteamDatagramCertificate();
+            switch (object.key_type) {
+            case "INVALID":
+            case 0:
+                message.key_type = 0;
+                break;
+            case "ED25519":
+            case 1:
+                message.key_type = 1;
+                break;
+            }
+            if (object.key_data != null)
+                if (typeof object.key_data === "string")
+                    $util.base64.decode(object.key_data, message.key_data = $util.newBuffer($util.base64.length(object.key_data)), 0);
+                else if (object.key_data.length)
+                    message.key_data = object.key_data;
+            if (object.legacy_steam_id != null)
+                if ($util.Long)
+                    (message.legacy_steam_id = $util.Long.fromValue(object.legacy_steam_id)).unsigned = false;
+                else if (typeof object.legacy_steam_id === "string")
+                    message.legacy_steam_id = parseInt(object.legacy_steam_id, 10);
+                else if (typeof object.legacy_steam_id === "number")
+                    message.legacy_steam_id = object.legacy_steam_id;
+                else if (typeof object.legacy_steam_id === "object")
+                    message.legacy_steam_id = new $util.LongBits(object.legacy_steam_id.low >>> 0, object.legacy_steam_id.high >>> 0).toNumber();
+            if (object.identity != null) {
+                if (typeof object.identity !== "object")
+                    throw TypeError(".CMsgSteamDatagramCertificate.identity: object expected");
+                message.identity = $root.CMsgSteamNetworkingIdentity.fromObject(object.identity);
+            }
+            if (object.gameserver_datacenter_ids) {
+                if (!Array.isArray(object.gameserver_datacenter_ids))
+                    throw TypeError(".CMsgSteamDatagramCertificate.gameserver_datacenter_ids: array expected");
+                message.gameserver_datacenter_ids = [];
+                for (var i = 0; i < object.gameserver_datacenter_ids.length; ++i)
+                    message.gameserver_datacenter_ids[i] = object.gameserver_datacenter_ids[i] >>> 0;
+            }
+            if (object.time_created != null)
+                message.time_created = object.time_created >>> 0;
+            if (object.time_expiry != null)
+                message.time_expiry = object.time_expiry >>> 0;
+            if (object.app_ids) {
+                if (!Array.isArray(object.app_ids))
+                    throw TypeError(".CMsgSteamDatagramCertificate.app_ids: array expected");
+                message.app_ids = [];
+                for (var i = 0; i < object.app_ids.length; ++i)
+                    message.app_ids[i] = object.app_ids[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramCertificate message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramCertificate
+         * @static
+         * @param {CMsgSteamDatagramCertificate} message CMsgSteamDatagramCertificate
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramCertificate.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.gameserver_datacenter_ids = [];
+                object.app_ids = [];
+            }
+            if (options.defaults) {
+                object.key_type = options.enums === String ? "INVALID" : 0;
+                if (options.bytes === String)
+                    object.key_data = "";
+                else {
+                    object.key_data = [];
+                    if (options.bytes !== Array)
+                        object.key_data = $util.newBuffer(object.key_data);
+                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.legacy_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.legacy_steam_id = options.longs === String ? "0" : 0;
+                object.time_created = 0;
+                object.time_expiry = 0;
+                object.identity = null;
+            }
+            if (message.key_type != null && message.hasOwnProperty("key_type"))
+                object.key_type = options.enums === String ? $root.CMsgSteamDatagramCertificate.EKeyType[message.key_type] : message.key_type;
+            if (message.key_data != null && message.hasOwnProperty("key_data"))
+                object.key_data = options.bytes === String ? $util.base64.encode(message.key_data, 0, message.key_data.length) : options.bytes === Array ? Array.prototype.slice.call(message.key_data) : message.key_data;
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                if (typeof message.legacy_steam_id === "number")
+                    object.legacy_steam_id = options.longs === String ? String(message.legacy_steam_id) : message.legacy_steam_id;
+                else
+                    object.legacy_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.legacy_steam_id) : options.longs === Number ? new $util.LongBits(message.legacy_steam_id.low >>> 0, message.legacy_steam_id.high >>> 0).toNumber() : message.legacy_steam_id;
+            if (message.gameserver_datacenter_ids && message.gameserver_datacenter_ids.length) {
+                object.gameserver_datacenter_ids = [];
+                for (var j = 0; j < message.gameserver_datacenter_ids.length; ++j)
+                    object.gameserver_datacenter_ids[j] = message.gameserver_datacenter_ids[j];
+            }
+            if (message.time_created != null && message.hasOwnProperty("time_created"))
+                object.time_created = message.time_created;
+            if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
+                object.time_expiry = message.time_expiry;
+            if (message.app_ids && message.app_ids.length) {
+                object.app_ids = [];
+                for (var j = 0; j < message.app_ids.length; ++j)
+                    object.app_ids[j] = message.app_ids[j];
+            }
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                object.identity = $root.CMsgSteamNetworkingIdentity.toObject(message.identity, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramCertificate to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramCertificate.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * EKeyType enum.
+         * @name CMsgSteamDatagramCertificate.EKeyType
+         * @enum {string}
+         * @property {number} INVALID=0 INVALID value
+         * @property {number} ED25519=1 ED25519 value
+         */
+        CMsgSteamDatagramCertificate.EKeyType = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "INVALID"] = 0;
+            values[valuesById[1] = "ED25519"] = 1;
+            return values;
+        })();
+    
+        return CMsgSteamDatagramCertificate;
+    })();
+    
+    $root.CMsgSteamDatagramCertificateSigned = (function() {
+    
+        /**
+         * Properties of a CMsgSteamDatagramCertificateSigned.
+         * @exports ICMsgSteamDatagramCertificateSigned
+         * @interface ICMsgSteamDatagramCertificateSigned
+         * @property {Uint8Array|null} [cert] CMsgSteamDatagramCertificateSigned cert
+         * @property {number|Long|null} [ca_key_id] CMsgSteamDatagramCertificateSigned ca_key_id
+         * @property {Uint8Array|null} [ca_signature] CMsgSteamDatagramCertificateSigned ca_signature
+         */
+    
+        /**
+         * Constructs a new CMsgSteamDatagramCertificateSigned.
+         * @exports CMsgSteamDatagramCertificateSigned
+         * @classdesc Represents a CMsgSteamDatagramCertificateSigned.
+         * @implements ICMsgSteamDatagramCertificateSigned
+         * @constructor
+         * @param {ICMsgSteamDatagramCertificateSigned=} [properties] Properties to set
+         */
+        function CMsgSteamDatagramCertificateSigned(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgSteamDatagramCertificateSigned cert.
+         * @member {Uint8Array} cert
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.cert = $util.newBuffer([]);
+    
+        /**
+         * CMsgSteamDatagramCertificateSigned ca_key_id.
+         * @member {number|Long} ca_key_id
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.ca_key_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramCertificateSigned ca_signature.
+         * @member {Uint8Array} ca_signature
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.ca_signature = $util.newBuffer([]);
+    
+        /**
+         * Creates a new CMsgSteamDatagramCertificateSigned instance using the specified properties.
+         * @function create
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {ICMsgSteamDatagramCertificateSigned=} [properties] Properties to set
+         * @returns {CMsgSteamDatagramCertificateSigned} CMsgSteamDatagramCertificateSigned instance
+         */
+        CMsgSteamDatagramCertificateSigned.create = function create(properties) {
+            return new CMsgSteamDatagramCertificateSigned(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramCertificateSigned message. Does not implicitly {@link CMsgSteamDatagramCertificateSigned.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {ICMsgSteamDatagramCertificateSigned} message CMsgSteamDatagramCertificateSigned message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramCertificateSigned.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.cert);
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
+                writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.ca_key_id);
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
+                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.ca_signature);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgSteamDatagramCertificateSigned message, length delimited. Does not implicitly {@link CMsgSteamDatagramCertificateSigned.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {ICMsgSteamDatagramCertificateSigned} message CMsgSteamDatagramCertificateSigned message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgSteamDatagramCertificateSigned.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramCertificateSigned message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgSteamDatagramCertificateSigned} CMsgSteamDatagramCertificateSigned
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramCertificateSigned.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgSteamDatagramCertificateSigned();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 4:
+                    message.cert = reader.bytes();
+                    break;
+                case 5:
+                    message.ca_key_id = reader.fixed64();
+                    break;
+                case 6:
+                    message.ca_signature = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgSteamDatagramCertificateSigned message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgSteamDatagramCertificateSigned} CMsgSteamDatagramCertificateSigned
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgSteamDatagramCertificateSigned.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgSteamDatagramCertificateSigned message.
+         * @function verify
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgSteamDatagramCertificateSigned.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                if (!(message.cert && typeof message.cert.length === "number" || $util.isString(message.cert)))
+                    return "cert: buffer expected";
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
+                if (!$util.isInteger(message.ca_key_id) && !(message.ca_key_id && $util.isInteger(message.ca_key_id.low) && $util.isInteger(message.ca_key_id.high)))
+                    return "ca_key_id: integer|Long expected";
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
+                if (!(message.ca_signature && typeof message.ca_signature.length === "number" || $util.isString(message.ca_signature)))
+                    return "ca_signature: buffer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgSteamDatagramCertificateSigned message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgSteamDatagramCertificateSigned} CMsgSteamDatagramCertificateSigned
+         */
+        CMsgSteamDatagramCertificateSigned.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgSteamDatagramCertificateSigned)
+                return object;
+            var message = new $root.CMsgSteamDatagramCertificateSigned();
+            if (object.cert != null)
+                if (typeof object.cert === "string")
+                    $util.base64.decode(object.cert, message.cert = $util.newBuffer($util.base64.length(object.cert)), 0);
+                else if (object.cert.length)
+                    message.cert = object.cert;
+            if (object.ca_key_id != null)
+                if ($util.Long)
+                    (message.ca_key_id = $util.Long.fromValue(object.ca_key_id)).unsigned = false;
+                else if (typeof object.ca_key_id === "string")
+                    message.ca_key_id = parseInt(object.ca_key_id, 10);
+                else if (typeof object.ca_key_id === "number")
+                    message.ca_key_id = object.ca_key_id;
+                else if (typeof object.ca_key_id === "object")
+                    message.ca_key_id = new $util.LongBits(object.ca_key_id.low >>> 0, object.ca_key_id.high >>> 0).toNumber();
+            if (object.ca_signature != null)
+                if (typeof object.ca_signature === "string")
+                    $util.base64.decode(object.ca_signature, message.ca_signature = $util.newBuffer($util.base64.length(object.ca_signature)), 0);
+                else if (object.ca_signature.length)
+                    message.ca_signature = object.ca_signature;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgSteamDatagramCertificateSigned message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @static
+         * @param {CMsgSteamDatagramCertificateSigned} message CMsgSteamDatagramCertificateSigned
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgSteamDatagramCertificateSigned.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.cert = "";
+                else {
+                    object.cert = [];
+                    if (options.bytes !== Array)
+                        object.cert = $util.newBuffer(object.cert);
+                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ca_key_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ca_key_id = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.ca_signature = "";
+                else {
+                    object.ca_signature = [];
+                    if (options.bytes !== Array)
+                        object.ca_signature = $util.newBuffer(object.ca_signature);
+                }
+            }
+            if (message.cert != null && message.hasOwnProperty("cert"))
+                object.cert = options.bytes === String ? $util.base64.encode(message.cert, 0, message.cert.length) : options.bytes === Array ? Array.prototype.slice.call(message.cert) : message.cert;
+            if (message.ca_key_id != null && message.hasOwnProperty("ca_key_id"))
+                if (typeof message.ca_key_id === "number")
+                    object.ca_key_id = options.longs === String ? String(message.ca_key_id) : message.ca_key_id;
+                else
+                    object.ca_key_id = options.longs === String ? $util.Long.prototype.toString.call(message.ca_key_id) : options.longs === Number ? new $util.LongBits(message.ca_key_id.low >>> 0, message.ca_key_id.high >>> 0).toNumber() : message.ca_key_id;
+            if (message.ca_signature != null && message.hasOwnProperty("ca_signature"))
+                object.ca_signature = options.bytes === String ? $util.base64.encode(message.ca_signature, 0, message.ca_signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.ca_signature) : message.ca_signature;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgSteamDatagramCertificateSigned to JSON.
+         * @function toJSON
+         * @memberof CMsgSteamDatagramCertificateSigned
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgSteamDatagramCertificateSigned.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgSteamDatagramCertificateSigned;
     })();
 
     return $root;

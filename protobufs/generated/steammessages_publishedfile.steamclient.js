@@ -8939,6 +8939,746 @@
         return CPublishedFile_GetUserFiles_Response;
     })();
     
+    $root.CPublishedFile_AreFilesInSubscriptionList_Request = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_AreFilesInSubscriptionList_Request.
+         * @exports ICPublishedFile_AreFilesInSubscriptionList_Request
+         * @interface ICPublishedFile_AreFilesInSubscriptionList_Request
+         * @property {number|null} [appid] CPublishedFile_AreFilesInSubscriptionList_Request appid
+         * @property {Array.<number|Long>|null} [publishedfileids] CPublishedFile_AreFilesInSubscriptionList_Request publishedfileids
+         * @property {number|null} [listtype] CPublishedFile_AreFilesInSubscriptionList_Request listtype
+         * @property {number|null} [filetype] CPublishedFile_AreFilesInSubscriptionList_Request filetype
+         * @property {number|null} [workshopfiletype] CPublishedFile_AreFilesInSubscriptionList_Request workshopfiletype
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_AreFilesInSubscriptionList_Request.
+         * @exports CPublishedFile_AreFilesInSubscriptionList_Request
+         * @classdesc Represents a CPublishedFile_AreFilesInSubscriptionList_Request.
+         * @implements ICPublishedFile_AreFilesInSubscriptionList_Request
+         * @constructor
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request=} [properties] Properties to set
+         */
+        function CPublishedFile_AreFilesInSubscriptionList_Request(properties) {
+            this.publishedfileids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Request appid.
+         * @member {number} appid
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.appid = 0;
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Request publishedfileids.
+         * @member {Array.<number|Long>} publishedfileids
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.publishedfileids = $util.emptyArray;
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Request listtype.
+         * @member {number} listtype
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.listtype = 0;
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Request filetype.
+         * @member {number} filetype
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.filetype = 0;
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Request workshopfiletype.
+         * @member {number} workshopfiletype
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.workshopfiletype = 0;
+    
+        /**
+         * Creates a new CPublishedFile_AreFilesInSubscriptionList_Request instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request=} [properties] Properties to set
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Request} CPublishedFile_AreFilesInSubscriptionList_Request instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.create = function create(properties) {
+            return new CPublishedFile_AreFilesInSubscriptionList_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_AreFilesInSubscriptionList_Request message. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request} message CPublishedFile_AreFilesInSubscriptionList_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.publishedfileids != null && message.publishedfileids.length)
+                for (var i = 0; i < message.publishedfileids.length; ++i)
+                    writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.publishedfileids[i]);
+            if (message.listtype != null && message.hasOwnProperty("listtype"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.listtype);
+            if (message.filetype != null && message.hasOwnProperty("filetype"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.filetype);
+            if (message.workshopfiletype != null && message.hasOwnProperty("workshopfiletype"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.workshopfiletype);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_AreFilesInSubscriptionList_Request message, length delimited. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request} message CPublishedFile_AreFilesInSubscriptionList_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_AreFilesInSubscriptionList_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Request} CPublishedFile_AreFilesInSubscriptionList_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_AreFilesInSubscriptionList_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.publishedfileids && message.publishedfileids.length))
+                        message.publishedfileids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.publishedfileids.push(reader.fixed64());
+                    } else
+                        message.publishedfileids.push(reader.fixed64());
+                    break;
+                case 3:
+                    message.listtype = reader.uint32();
+                    break;
+                case 4:
+                    message.filetype = reader.uint32();
+                    break;
+                case 5:
+                    message.workshopfiletype = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_AreFilesInSubscriptionList_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Request} CPublishedFile_AreFilesInSubscriptionList_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_AreFilesInSubscriptionList_Request message.
+         * @function verify
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.publishedfileids != null && message.hasOwnProperty("publishedfileids")) {
+                if (!Array.isArray(message.publishedfileids))
+                    return "publishedfileids: array expected";
+                for (var i = 0; i < message.publishedfileids.length; ++i)
+                    if (!$util.isInteger(message.publishedfileids[i]) && !(message.publishedfileids[i] && $util.isInteger(message.publishedfileids[i].low) && $util.isInteger(message.publishedfileids[i].high)))
+                        return "publishedfileids: integer|Long[] expected";
+            }
+            if (message.listtype != null && message.hasOwnProperty("listtype"))
+                if (!$util.isInteger(message.listtype))
+                    return "listtype: integer expected";
+            if (message.filetype != null && message.hasOwnProperty("filetype"))
+                if (!$util.isInteger(message.filetype))
+                    return "filetype: integer expected";
+            if (message.workshopfiletype != null && message.hasOwnProperty("workshopfiletype"))
+                if (!$util.isInteger(message.workshopfiletype))
+                    return "workshopfiletype: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_AreFilesInSubscriptionList_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Request} CPublishedFile_AreFilesInSubscriptionList_Request
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_AreFilesInSubscriptionList_Request)
+                return object;
+            var message = new $root.CPublishedFile_AreFilesInSubscriptionList_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.publishedfileids) {
+                if (!Array.isArray(object.publishedfileids))
+                    throw TypeError(".CPublishedFile_AreFilesInSubscriptionList_Request.publishedfileids: array expected");
+                message.publishedfileids = [];
+                for (var i = 0; i < object.publishedfileids.length; ++i)
+                    if ($util.Long)
+                        (message.publishedfileids[i] = $util.Long.fromValue(object.publishedfileids[i])).unsigned = false;
+                    else if (typeof object.publishedfileids[i] === "string")
+                        message.publishedfileids[i] = parseInt(object.publishedfileids[i], 10);
+                    else if (typeof object.publishedfileids[i] === "number")
+                        message.publishedfileids[i] = object.publishedfileids[i];
+                    else if (typeof object.publishedfileids[i] === "object")
+                        message.publishedfileids[i] = new $util.LongBits(object.publishedfileids[i].low >>> 0, object.publishedfileids[i].high >>> 0).toNumber();
+            }
+            if (object.listtype != null)
+                message.listtype = object.listtype >>> 0;
+            if (object.filetype != null)
+                message.filetype = object.filetype >>> 0;
+            if (object.workshopfiletype != null)
+                message.workshopfiletype = object.workshopfiletype >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_AreFilesInSubscriptionList_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @static
+         * @param {CPublishedFile_AreFilesInSubscriptionList_Request} message CPublishedFile_AreFilesInSubscriptionList_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.publishedfileids = [];
+            if (options.defaults) {
+                object.appid = 0;
+                object.listtype = 0;
+                object.filetype = 0;
+                object.workshopfiletype = 0;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.publishedfileids && message.publishedfileids.length) {
+                object.publishedfileids = [];
+                for (var j = 0; j < message.publishedfileids.length; ++j)
+                    if (typeof message.publishedfileids[j] === "number")
+                        object.publishedfileids[j] = options.longs === String ? String(message.publishedfileids[j]) : message.publishedfileids[j];
+                    else
+                        object.publishedfileids[j] = options.longs === String ? $util.Long.prototype.toString.call(message.publishedfileids[j]) : options.longs === Number ? new $util.LongBits(message.publishedfileids[j].low >>> 0, message.publishedfileids[j].high >>> 0).toNumber() : message.publishedfileids[j];
+            }
+            if (message.listtype != null && message.hasOwnProperty("listtype"))
+                object.listtype = message.listtype;
+            if (message.filetype != null && message.hasOwnProperty("filetype"))
+                object.filetype = message.filetype;
+            if (message.workshopfiletype != null && message.hasOwnProperty("workshopfiletype"))
+                object.workshopfiletype = message.workshopfiletype;
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_AreFilesInSubscriptionList_Request to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPublishedFile_AreFilesInSubscriptionList_Request;
+    })();
+    
+    $root.CPublishedFile_AreFilesInSubscriptionList_Response = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_AreFilesInSubscriptionList_Response.
+         * @exports ICPublishedFile_AreFilesInSubscriptionList_Response
+         * @interface ICPublishedFile_AreFilesInSubscriptionList_Response
+         * @property {Array.<CPublishedFile_AreFilesInSubscriptionList_Response.IInList>|null} [files] CPublishedFile_AreFilesInSubscriptionList_Response files
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_AreFilesInSubscriptionList_Response.
+         * @exports CPublishedFile_AreFilesInSubscriptionList_Response
+         * @classdesc Represents a CPublishedFile_AreFilesInSubscriptionList_Response.
+         * @implements ICPublishedFile_AreFilesInSubscriptionList_Response
+         * @constructor
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Response=} [properties] Properties to set
+         */
+        function CPublishedFile_AreFilesInSubscriptionList_Response(properties) {
+            this.files = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_AreFilesInSubscriptionList_Response files.
+         * @member {Array.<CPublishedFile_AreFilesInSubscriptionList_Response.IInList>} files
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.prototype.files = $util.emptyArray;
+    
+        /**
+         * Creates a new CPublishedFile_AreFilesInSubscriptionList_Response instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Response=} [properties] Properties to set
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Response} CPublishedFile_AreFilesInSubscriptionList_Response instance
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.create = function create(properties) {
+            return new CPublishedFile_AreFilesInSubscriptionList_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_AreFilesInSubscriptionList_Response message. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Response} message CPublishedFile_AreFilesInSubscriptionList_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.files != null && message.files.length)
+                for (var i = 0; i < message.files.length; ++i)
+                    $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList.encode(message.files[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_AreFilesInSubscriptionList_Response message, length delimited. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Response} message CPublishedFile_AreFilesInSubscriptionList_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_AreFilesInSubscriptionList_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Response} CPublishedFile_AreFilesInSubscriptionList_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_AreFilesInSubscriptionList_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.files && message.files.length))
+                        message.files = [];
+                    message.files.push($root.CPublishedFile_AreFilesInSubscriptionList_Response.InList.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_AreFilesInSubscriptionList_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Response} CPublishedFile_AreFilesInSubscriptionList_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_AreFilesInSubscriptionList_Response message.
+         * @function verify
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.files != null && message.hasOwnProperty("files")) {
+                if (!Array.isArray(message.files))
+                    return "files: array expected";
+                for (var i = 0; i < message.files.length; ++i) {
+                    var error = $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList.verify(message.files[i]);
+                    if (error)
+                        return "files." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_AreFilesInSubscriptionList_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_AreFilesInSubscriptionList_Response} CPublishedFile_AreFilesInSubscriptionList_Response
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_AreFilesInSubscriptionList_Response)
+                return object;
+            var message = new $root.CPublishedFile_AreFilesInSubscriptionList_Response();
+            if (object.files) {
+                if (!Array.isArray(object.files))
+                    throw TypeError(".CPublishedFile_AreFilesInSubscriptionList_Response.files: array expected");
+                message.files = [];
+                for (var i = 0; i < object.files.length; ++i) {
+                    if (typeof object.files[i] !== "object")
+                        throw TypeError(".CPublishedFile_AreFilesInSubscriptionList_Response.files: object expected");
+                    message.files[i] = $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList.fromObject(object.files[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_AreFilesInSubscriptionList_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @static
+         * @param {CPublishedFile_AreFilesInSubscriptionList_Response} message CPublishedFile_AreFilesInSubscriptionList_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.files = [];
+            if (message.files && message.files.length) {
+                object.files = [];
+                for (var j = 0; j < message.files.length; ++j)
+                    object.files[j] = $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList.toObject(message.files[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_AreFilesInSubscriptionList_Response to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_AreFilesInSubscriptionList_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPublishedFile_AreFilesInSubscriptionList_Response.InList = (function() {
+    
+            /**
+             * Properties of an InList.
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+             * @interface IInList
+             * @property {number|Long|null} [publishedfileid] InList publishedfileid
+             * @property {boolean|null} [inlist] InList inlist
+             */
+    
+            /**
+             * Constructs a new InList.
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response
+             * @classdesc Represents an InList.
+             * @implements IInList
+             * @constructor
+             * @param {CPublishedFile_AreFilesInSubscriptionList_Response.IInList=} [properties] Properties to set
+             */
+            function InList(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * InList publishedfileid.
+             * @member {number|Long} publishedfileid
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @instance
+             */
+            InList.prototype.publishedfileid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * InList inlist.
+             * @member {boolean} inlist
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @instance
+             */
+            InList.prototype.inlist = false;
+    
+            /**
+             * Creates a new InList instance using the specified properties.
+             * @function create
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {CPublishedFile_AreFilesInSubscriptionList_Response.IInList=} [properties] Properties to set
+             * @returns {CPublishedFile_AreFilesInSubscriptionList_Response.InList} InList instance
+             */
+            InList.create = function create(properties) {
+                return new InList(properties);
+            };
+    
+            /**
+             * Encodes the specified InList message. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Response.InList.verify|verify} messages.
+             * @function encode
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {CPublishedFile_AreFilesInSubscriptionList_Response.IInList} message InList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InList.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.publishedfileid);
+                if (message.inlist != null && message.hasOwnProperty("inlist"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inlist);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified InList message, length delimited. Does not implicitly {@link CPublishedFile_AreFilesInSubscriptionList_Response.InList.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {CPublishedFile_AreFilesInSubscriptionList_Response.IInList} message InList message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            InList.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an InList message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPublishedFile_AreFilesInSubscriptionList_Response.InList} InList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InList.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.publishedfileid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.inlist = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an InList message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPublishedFile_AreFilesInSubscriptionList_Response.InList} InList
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            InList.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an InList message.
+             * @function verify
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            InList.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    if (!$util.isInteger(message.publishedfileid) && !(message.publishedfileid && $util.isInteger(message.publishedfileid.low) && $util.isInteger(message.publishedfileid.high)))
+                        return "publishedfileid: integer|Long expected";
+                if (message.inlist != null && message.hasOwnProperty("inlist"))
+                    if (typeof message.inlist !== "boolean")
+                        return "inlist: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates an InList message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPublishedFile_AreFilesInSubscriptionList_Response.InList} InList
+             */
+            InList.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList)
+                    return object;
+                var message = new $root.CPublishedFile_AreFilesInSubscriptionList_Response.InList();
+                if (object.publishedfileid != null)
+                    if ($util.Long)
+                        (message.publishedfileid = $util.Long.fromValue(object.publishedfileid)).unsigned = false;
+                    else if (typeof object.publishedfileid === "string")
+                        message.publishedfileid = parseInt(object.publishedfileid, 10);
+                    else if (typeof object.publishedfileid === "number")
+                        message.publishedfileid = object.publishedfileid;
+                    else if (typeof object.publishedfileid === "object")
+                        message.publishedfileid = new $util.LongBits(object.publishedfileid.low >>> 0, object.publishedfileid.high >>> 0).toNumber();
+                if (object.inlist != null)
+                    message.inlist = Boolean(object.inlist);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an InList message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @static
+             * @param {CPublishedFile_AreFilesInSubscriptionList_Response.InList} message InList
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            InList.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.publishedfileid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.publishedfileid = options.longs === String ? "0" : 0;
+                    object.inlist = false;
+                }
+                if (message.publishedfileid != null && message.hasOwnProperty("publishedfileid"))
+                    if (typeof message.publishedfileid === "number")
+                        object.publishedfileid = options.longs === String ? String(message.publishedfileid) : message.publishedfileid;
+                    else
+                        object.publishedfileid = options.longs === String ? $util.Long.prototype.toString.call(message.publishedfileid) : options.longs === Number ? new $util.LongBits(message.publishedfileid.low >>> 0, message.publishedfileid.high >>> 0).toNumber() : message.publishedfileid;
+                if (message.inlist != null && message.hasOwnProperty("inlist"))
+                    object.inlist = message.inlist;
+                return object;
+            };
+    
+            /**
+             * Converts this InList to JSON.
+             * @function toJSON
+             * @memberof CPublishedFile_AreFilesInSubscriptionList_Response.InList
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            InList.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return InList;
+        })();
+    
+        return CPublishedFile_AreFilesInSubscriptionList_Response;
+    })();
+    
     $root.CPublishedFile_Update_Request = (function() {
     
         /**
@@ -16643,6 +17383,802 @@
         return CPublishedFile_RemoveChild_Response;
     })();
     
+    $root.CPublishedFile_FileSubscribed_Notification = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_FileSubscribed_Notification.
+         * @exports ICPublishedFile_FileSubscribed_Notification
+         * @interface ICPublishedFile_FileSubscribed_Notification
+         * @property {number|Long|null} [published_file_id] CPublishedFile_FileSubscribed_Notification published_file_id
+         * @property {number|null} [app_id] CPublishedFile_FileSubscribed_Notification app_id
+         * @property {number|Long|null} [file_hcontent] CPublishedFile_FileSubscribed_Notification file_hcontent
+         * @property {number|null} [file_size] CPublishedFile_FileSubscribed_Notification file_size
+         * @property {number|null} [rtime_subscribed] CPublishedFile_FileSubscribed_Notification rtime_subscribed
+         * @property {boolean|null} [is_depot_content] CPublishedFile_FileSubscribed_Notification is_depot_content
+         * @property {number|null} [rtime_updated] CPublishedFile_FileSubscribed_Notification rtime_updated
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_FileSubscribed_Notification.
+         * @exports CPublishedFile_FileSubscribed_Notification
+         * @classdesc Represents a CPublishedFile_FileSubscribed_Notification.
+         * @implements ICPublishedFile_FileSubscribed_Notification
+         * @constructor
+         * @param {ICPublishedFile_FileSubscribed_Notification=} [properties] Properties to set
+         */
+        function CPublishedFile_FileSubscribed_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification published_file_id.
+         * @member {number|Long} published_file_id
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.published_file_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification app_id.
+         * @member {number} app_id
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.app_id = 0;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification file_hcontent.
+         * @member {number|Long} file_hcontent
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.file_hcontent = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification file_size.
+         * @member {number} file_size
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.file_size = 0;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification rtime_subscribed.
+         * @member {number} rtime_subscribed
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.rtime_subscribed = 0;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification is_depot_content.
+         * @member {boolean} is_depot_content
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.is_depot_content = false;
+    
+        /**
+         * CPublishedFile_FileSubscribed_Notification rtime_updated.
+         * @member {number} rtime_updated
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.rtime_updated = 0;
+    
+        /**
+         * Creates a new CPublishedFile_FileSubscribed_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileSubscribed_Notification=} [properties] Properties to set
+         * @returns {CPublishedFile_FileSubscribed_Notification} CPublishedFile_FileSubscribed_Notification instance
+         */
+        CPublishedFile_FileSubscribed_Notification.create = function create(properties) {
+            return new CPublishedFile_FileSubscribed_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileSubscribed_Notification message. Does not implicitly {@link CPublishedFile_FileSubscribed_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileSubscribed_Notification} message CPublishedFile_FileSubscribed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileSubscribed_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
+            if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.file_hcontent);
+            if (message.file_size != null && message.hasOwnProperty("file_size"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.file_size);
+            if (message.rtime_subscribed != null && message.hasOwnProperty("rtime_subscribed"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.rtime_subscribed);
+            if (message.is_depot_content != null && message.hasOwnProperty("is_depot_content"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.is_depot_content);
+            if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.rtime_updated);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileSubscribed_Notification message, length delimited. Does not implicitly {@link CPublishedFile_FileSubscribed_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileSubscribed_Notification} message CPublishedFile_FileSubscribed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileSubscribed_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileSubscribed_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_FileSubscribed_Notification} CPublishedFile_FileSubscribed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileSubscribed_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_FileSubscribed_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.published_file_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.app_id = reader.uint32();
+                    break;
+                case 3:
+                    message.file_hcontent = reader.fixed64();
+                    break;
+                case 4:
+                    message.file_size = reader.uint32();
+                    break;
+                case 5:
+                    message.rtime_subscribed = reader.uint32();
+                    break;
+                case 6:
+                    message.is_depot_content = reader.bool();
+                    break;
+                case 7:
+                    message.rtime_updated = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileSubscribed_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_FileSubscribed_Notification} CPublishedFile_FileSubscribed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileSubscribed_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_FileSubscribed_Notification message.
+         * @function verify
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_FileSubscribed_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (!$util.isInteger(message.published_file_id) && !(message.published_file_id && $util.isInteger(message.published_file_id.low) && $util.isInteger(message.published_file_id.high)))
+                    return "published_file_id: integer|Long expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                if (!$util.isInteger(message.file_hcontent) && !(message.file_hcontent && $util.isInteger(message.file_hcontent.low) && $util.isInteger(message.file_hcontent.high)))
+                    return "file_hcontent: integer|Long expected";
+            if (message.file_size != null && message.hasOwnProperty("file_size"))
+                if (!$util.isInteger(message.file_size))
+                    return "file_size: integer expected";
+            if (message.rtime_subscribed != null && message.hasOwnProperty("rtime_subscribed"))
+                if (!$util.isInteger(message.rtime_subscribed))
+                    return "rtime_subscribed: integer expected";
+            if (message.is_depot_content != null && message.hasOwnProperty("is_depot_content"))
+                if (typeof message.is_depot_content !== "boolean")
+                    return "is_depot_content: boolean expected";
+            if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                if (!$util.isInteger(message.rtime_updated))
+                    return "rtime_updated: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_FileSubscribed_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_FileSubscribed_Notification} CPublishedFile_FileSubscribed_Notification
+         */
+        CPublishedFile_FileSubscribed_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_FileSubscribed_Notification)
+                return object;
+            var message = new $root.CPublishedFile_FileSubscribed_Notification();
+            if (object.published_file_id != null)
+                if ($util.Long)
+                    (message.published_file_id = $util.Long.fromValue(object.published_file_id)).unsigned = false;
+                else if (typeof object.published_file_id === "string")
+                    message.published_file_id = parseInt(object.published_file_id, 10);
+                else if (typeof object.published_file_id === "number")
+                    message.published_file_id = object.published_file_id;
+                else if (typeof object.published_file_id === "object")
+                    message.published_file_id = new $util.LongBits(object.published_file_id.low >>> 0, object.published_file_id.high >>> 0).toNumber();
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.file_hcontent != null)
+                if ($util.Long)
+                    (message.file_hcontent = $util.Long.fromValue(object.file_hcontent)).unsigned = false;
+                else if (typeof object.file_hcontent === "string")
+                    message.file_hcontent = parseInt(object.file_hcontent, 10);
+                else if (typeof object.file_hcontent === "number")
+                    message.file_hcontent = object.file_hcontent;
+                else if (typeof object.file_hcontent === "object")
+                    message.file_hcontent = new $util.LongBits(object.file_hcontent.low >>> 0, object.file_hcontent.high >>> 0).toNumber();
+            if (object.file_size != null)
+                message.file_size = object.file_size >>> 0;
+            if (object.rtime_subscribed != null)
+                message.rtime_subscribed = object.rtime_subscribed >>> 0;
+            if (object.is_depot_content != null)
+                message.is_depot_content = Boolean(object.is_depot_content);
+            if (object.rtime_updated != null)
+                message.rtime_updated = object.rtime_updated >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_FileSubscribed_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @static
+         * @param {CPublishedFile_FileSubscribed_Notification} message CPublishedFile_FileSubscribed_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_FileSubscribed_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.published_file_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.published_file_id = options.longs === String ? "0" : 0;
+                object.app_id = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.file_hcontent = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.file_hcontent = options.longs === String ? "0" : 0;
+                object.file_size = 0;
+                object.rtime_subscribed = 0;
+                object.is_depot_content = false;
+                object.rtime_updated = 0;
+            }
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (typeof message.published_file_id === "number")
+                    object.published_file_id = options.longs === String ? String(message.published_file_id) : message.published_file_id;
+                else
+                    object.published_file_id = options.longs === String ? $util.Long.prototype.toString.call(message.published_file_id) : options.longs === Number ? new $util.LongBits(message.published_file_id.low >>> 0, message.published_file_id.high >>> 0).toNumber() : message.published_file_id;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.file_hcontent != null && message.hasOwnProperty("file_hcontent"))
+                if (typeof message.file_hcontent === "number")
+                    object.file_hcontent = options.longs === String ? String(message.file_hcontent) : message.file_hcontent;
+                else
+                    object.file_hcontent = options.longs === String ? $util.Long.prototype.toString.call(message.file_hcontent) : options.longs === Number ? new $util.LongBits(message.file_hcontent.low >>> 0, message.file_hcontent.high >>> 0).toNumber() : message.file_hcontent;
+            if (message.file_size != null && message.hasOwnProperty("file_size"))
+                object.file_size = message.file_size;
+            if (message.rtime_subscribed != null && message.hasOwnProperty("rtime_subscribed"))
+                object.rtime_subscribed = message.rtime_subscribed;
+            if (message.is_depot_content != null && message.hasOwnProperty("is_depot_content"))
+                object.is_depot_content = message.is_depot_content;
+            if (message.rtime_updated != null && message.hasOwnProperty("rtime_updated"))
+                object.rtime_updated = message.rtime_updated;
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_FileSubscribed_Notification to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_FileSubscribed_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_FileSubscribed_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPublishedFile_FileSubscribed_Notification;
+    })();
+    
+    $root.CPublishedFile_FileUnsubscribed_Notification = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_FileUnsubscribed_Notification.
+         * @exports ICPublishedFile_FileUnsubscribed_Notification
+         * @interface ICPublishedFile_FileUnsubscribed_Notification
+         * @property {number|Long|null} [published_file_id] CPublishedFile_FileUnsubscribed_Notification published_file_id
+         * @property {number|null} [app_id] CPublishedFile_FileUnsubscribed_Notification app_id
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_FileUnsubscribed_Notification.
+         * @exports CPublishedFile_FileUnsubscribed_Notification
+         * @classdesc Represents a CPublishedFile_FileUnsubscribed_Notification.
+         * @implements ICPublishedFile_FileUnsubscribed_Notification
+         * @constructor
+         * @param {ICPublishedFile_FileUnsubscribed_Notification=} [properties] Properties to set
+         */
+        function CPublishedFile_FileUnsubscribed_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_FileUnsubscribed_Notification published_file_id.
+         * @member {number|Long} published_file_id
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileUnsubscribed_Notification.prototype.published_file_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPublishedFile_FileUnsubscribed_Notification app_id.
+         * @member {number} app_id
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @instance
+         */
+        CPublishedFile_FileUnsubscribed_Notification.prototype.app_id = 0;
+    
+        /**
+         * Creates a new CPublishedFile_FileUnsubscribed_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileUnsubscribed_Notification=} [properties] Properties to set
+         * @returns {CPublishedFile_FileUnsubscribed_Notification} CPublishedFile_FileUnsubscribed_Notification instance
+         */
+        CPublishedFile_FileUnsubscribed_Notification.create = function create(properties) {
+            return new CPublishedFile_FileUnsubscribed_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileUnsubscribed_Notification message. Does not implicitly {@link CPublishedFile_FileUnsubscribed_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileUnsubscribed_Notification} message CPublishedFile_FileUnsubscribed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileUnsubscribed_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileUnsubscribed_Notification message, length delimited. Does not implicitly {@link CPublishedFile_FileUnsubscribed_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {ICPublishedFile_FileUnsubscribed_Notification} message CPublishedFile_FileUnsubscribed_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileUnsubscribed_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileUnsubscribed_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_FileUnsubscribed_Notification} CPublishedFile_FileUnsubscribed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileUnsubscribed_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_FileUnsubscribed_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.published_file_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.app_id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileUnsubscribed_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_FileUnsubscribed_Notification} CPublishedFile_FileUnsubscribed_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileUnsubscribed_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_FileUnsubscribed_Notification message.
+         * @function verify
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_FileUnsubscribed_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (!$util.isInteger(message.published_file_id) && !(message.published_file_id && $util.isInteger(message.published_file_id.low) && $util.isInteger(message.published_file_id.high)))
+                    return "published_file_id: integer|Long expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_FileUnsubscribed_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_FileUnsubscribed_Notification} CPublishedFile_FileUnsubscribed_Notification
+         */
+        CPublishedFile_FileUnsubscribed_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_FileUnsubscribed_Notification)
+                return object;
+            var message = new $root.CPublishedFile_FileUnsubscribed_Notification();
+            if (object.published_file_id != null)
+                if ($util.Long)
+                    (message.published_file_id = $util.Long.fromValue(object.published_file_id)).unsigned = false;
+                else if (typeof object.published_file_id === "string")
+                    message.published_file_id = parseInt(object.published_file_id, 10);
+                else if (typeof object.published_file_id === "number")
+                    message.published_file_id = object.published_file_id;
+                else if (typeof object.published_file_id === "object")
+                    message.published_file_id = new $util.LongBits(object.published_file_id.low >>> 0, object.published_file_id.high >>> 0).toNumber();
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_FileUnsubscribed_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @static
+         * @param {CPublishedFile_FileUnsubscribed_Notification} message CPublishedFile_FileUnsubscribed_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_FileUnsubscribed_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.published_file_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.published_file_id = options.longs === String ? "0" : 0;
+                object.app_id = 0;
+            }
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (typeof message.published_file_id === "number")
+                    object.published_file_id = options.longs === String ? String(message.published_file_id) : message.published_file_id;
+                else
+                    object.published_file_id = options.longs === String ? $util.Long.prototype.toString.call(message.published_file_id) : options.longs === Number ? new $util.LongBits(message.published_file_id.low >>> 0, message.published_file_id.high >>> 0).toNumber() : message.published_file_id;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_FileUnsubscribed_Notification to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_FileUnsubscribed_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_FileUnsubscribed_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPublishedFile_FileUnsubscribed_Notification;
+    })();
+    
+    $root.CPublishedFile_FileDeleted_Client_Notification = (function() {
+    
+        /**
+         * Properties of a CPublishedFile_FileDeleted_Client_Notification.
+         * @exports ICPublishedFile_FileDeleted_Client_Notification
+         * @interface ICPublishedFile_FileDeleted_Client_Notification
+         * @property {number|Long|null} [published_file_id] CPublishedFile_FileDeleted_Client_Notification published_file_id
+         * @property {number|null} [app_id] CPublishedFile_FileDeleted_Client_Notification app_id
+         */
+    
+        /**
+         * Constructs a new CPublishedFile_FileDeleted_Client_Notification.
+         * @exports CPublishedFile_FileDeleted_Client_Notification
+         * @classdesc Represents a CPublishedFile_FileDeleted_Client_Notification.
+         * @implements ICPublishedFile_FileDeleted_Client_Notification
+         * @constructor
+         * @param {ICPublishedFile_FileDeleted_Client_Notification=} [properties] Properties to set
+         */
+        function CPublishedFile_FileDeleted_Client_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPublishedFile_FileDeleted_Client_Notification published_file_id.
+         * @member {number|Long} published_file_id
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @instance
+         */
+        CPublishedFile_FileDeleted_Client_Notification.prototype.published_file_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CPublishedFile_FileDeleted_Client_Notification app_id.
+         * @member {number} app_id
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @instance
+         */
+        CPublishedFile_FileDeleted_Client_Notification.prototype.app_id = 0;
+    
+        /**
+         * Creates a new CPublishedFile_FileDeleted_Client_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {ICPublishedFile_FileDeleted_Client_Notification=} [properties] Properties to set
+         * @returns {CPublishedFile_FileDeleted_Client_Notification} CPublishedFile_FileDeleted_Client_Notification instance
+         */
+        CPublishedFile_FileDeleted_Client_Notification.create = function create(properties) {
+            return new CPublishedFile_FileDeleted_Client_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileDeleted_Client_Notification message. Does not implicitly {@link CPublishedFile_FileDeleted_Client_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {ICPublishedFile_FileDeleted_Client_Notification} message CPublishedFile_FileDeleted_Client_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileDeleted_Client_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.published_file_id);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.app_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPublishedFile_FileDeleted_Client_Notification message, length delimited. Does not implicitly {@link CPublishedFile_FileDeleted_Client_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {ICPublishedFile_FileDeleted_Client_Notification} message CPublishedFile_FileDeleted_Client_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPublishedFile_FileDeleted_Client_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileDeleted_Client_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPublishedFile_FileDeleted_Client_Notification} CPublishedFile_FileDeleted_Client_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileDeleted_Client_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPublishedFile_FileDeleted_Client_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.published_file_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.app_id = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPublishedFile_FileDeleted_Client_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPublishedFile_FileDeleted_Client_Notification} CPublishedFile_FileDeleted_Client_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPublishedFile_FileDeleted_Client_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPublishedFile_FileDeleted_Client_Notification message.
+         * @function verify
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPublishedFile_FileDeleted_Client_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (!$util.isInteger(message.published_file_id) && !(message.published_file_id && $util.isInteger(message.published_file_id.low) && $util.isInteger(message.published_file_id.high)))
+                    return "published_file_id: integer|Long expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPublishedFile_FileDeleted_Client_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPublishedFile_FileDeleted_Client_Notification} CPublishedFile_FileDeleted_Client_Notification
+         */
+        CPublishedFile_FileDeleted_Client_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPublishedFile_FileDeleted_Client_Notification)
+                return object;
+            var message = new $root.CPublishedFile_FileDeleted_Client_Notification();
+            if (object.published_file_id != null)
+                if ($util.Long)
+                    (message.published_file_id = $util.Long.fromValue(object.published_file_id)).unsigned = false;
+                else if (typeof object.published_file_id === "string")
+                    message.published_file_id = parseInt(object.published_file_id, 10);
+                else if (typeof object.published_file_id === "number")
+                    message.published_file_id = object.published_file_id;
+                else if (typeof object.published_file_id === "object")
+                    message.published_file_id = new $util.LongBits(object.published_file_id.low >>> 0, object.published_file_id.high >>> 0).toNumber();
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPublishedFile_FileDeleted_Client_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @static
+         * @param {CPublishedFile_FileDeleted_Client_Notification} message CPublishedFile_FileDeleted_Client_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPublishedFile_FileDeleted_Client_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.published_file_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.published_file_id = options.longs === String ? "0" : 0;
+                object.app_id = 0;
+            }
+            if (message.published_file_id != null && message.hasOwnProperty("published_file_id"))
+                if (typeof message.published_file_id === "number")
+                    object.published_file_id = options.longs === String ? String(message.published_file_id) : message.published_file_id;
+                else
+                    object.published_file_id = options.longs === String ? $util.Long.prototype.toString.call(message.published_file_id) : options.longs === Number ? new $util.LongBits(message.published_file_id.low >>> 0, message.published_file_id.high >>> 0).toNumber() : message.published_file_id;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CPublishedFile_FileDeleted_Client_Notification to JSON.
+         * @function toJSON
+         * @memberof CPublishedFile_FileDeleted_Client_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPublishedFile_FileDeleted_Client_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPublishedFile_FileDeleted_Client_Notification;
+    })();
+    
     $root.PublishedFile = (function() {
     
         /**
@@ -16903,6 +18439,39 @@
          * @instance
          * @param {ICPublishedFile_GetUserFiles_Request} request CPublishedFile_GetUserFiles_Request message or plain object
          * @returns {Promise<CPublishedFile_GetUserFiles_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PublishedFile#areFilesInSubscriptionList}.
+         * @memberof PublishedFile
+         * @typedef AreFilesInSubscriptionListCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPublishedFile_AreFilesInSubscriptionList_Response} [response] CPublishedFile_AreFilesInSubscriptionList_Response
+         */
+    
+        /**
+         * Calls AreFilesInSubscriptionList.
+         * @function areFilesInSubscriptionList
+         * @memberof PublishedFile
+         * @instance
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request} request CPublishedFile_AreFilesInSubscriptionList_Request message or plain object
+         * @param {PublishedFile.AreFilesInSubscriptionListCallback} callback Node-style callback called with the error, if any, and CPublishedFile_AreFilesInSubscriptionList_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PublishedFile.prototype.areFilesInSubscriptionList = function areFilesInSubscriptionList(request, callback) {
+            return this.rpcCall(areFilesInSubscriptionList, $root.CPublishedFile_AreFilesInSubscriptionList_Request, $root.CPublishedFile_AreFilesInSubscriptionList_Response, request, callback);
+        }, "name", { value: "AreFilesInSubscriptionList" });
+    
+        /**
+         * Calls AreFilesInSubscriptionList.
+         * @function areFilesInSubscriptionList
+         * @memberof PublishedFile
+         * @instance
+         * @param {ICPublishedFile_AreFilesInSubscriptionList_Request} request CPublishedFile_AreFilesInSubscriptionList_Request message or plain object
+         * @returns {Promise<CPublishedFile_AreFilesInSubscriptionList_Response>} Promise
          * @variation 2
          */
     
@@ -17369,6 +18938,140 @@
          */
     
         return PublishedFile;
+    })();
+    
+    $root.PublishedFileClient = (function() {
+    
+        /**
+         * Constructs a new PublishedFileClient service.
+         * @exports PublishedFileClient
+         * @classdesc Represents a PublishedFileClient
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function PublishedFileClient(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (PublishedFileClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PublishedFileClient;
+    
+        /**
+         * Creates new PublishedFileClient service using the specified rpc implementation.
+         * @function create
+         * @memberof PublishedFileClient
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {PublishedFileClient} RPC service. Useful where requests and/or responses are streamed.
+         */
+        PublishedFileClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link PublishedFileClient#notifyFileSubscribed}.
+         * @memberof PublishedFileClient
+         * @typedef NotifyFileSubscribedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyFileSubscribed.
+         * @function notifyFileSubscribed
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileSubscribed_Notification} request CPublishedFile_FileSubscribed_Notification message or plain object
+         * @param {PublishedFileClient.NotifyFileSubscribedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PublishedFileClient.prototype.notifyFileSubscribed = function notifyFileSubscribed(request, callback) {
+            return this.rpcCall(notifyFileSubscribed, $root.CPublishedFile_FileSubscribed_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyFileSubscribed" });
+    
+        /**
+         * Calls NotifyFileSubscribed.
+         * @function notifyFileSubscribed
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileSubscribed_Notification} request CPublishedFile_FileSubscribed_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PublishedFileClient#notifyFileUnsubscribed}.
+         * @memberof PublishedFileClient
+         * @typedef NotifyFileUnsubscribedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyFileUnsubscribed.
+         * @function notifyFileUnsubscribed
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileUnsubscribed_Notification} request CPublishedFile_FileUnsubscribed_Notification message or plain object
+         * @param {PublishedFileClient.NotifyFileUnsubscribedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PublishedFileClient.prototype.notifyFileUnsubscribed = function notifyFileUnsubscribed(request, callback) {
+            return this.rpcCall(notifyFileUnsubscribed, $root.CPublishedFile_FileUnsubscribed_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyFileUnsubscribed" });
+    
+        /**
+         * Calls NotifyFileUnsubscribed.
+         * @function notifyFileUnsubscribed
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileUnsubscribed_Notification} request CPublishedFile_FileUnsubscribed_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PublishedFileClient#notifyFileDeleted}.
+         * @memberof PublishedFileClient
+         * @typedef NotifyFileDeletedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyFileDeleted.
+         * @function notifyFileDeleted
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileDeleted_Client_Notification} request CPublishedFile_FileDeleted_Client_Notification message or plain object
+         * @param {PublishedFileClient.NotifyFileDeletedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PublishedFileClient.prototype.notifyFileDeleted = function notifyFileDeleted(request, callback) {
+            return this.rpcCall(notifyFileDeleted, $root.CPublishedFile_FileDeleted_Client_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyFileDeleted" });
+    
+        /**
+         * Calls NotifyFileDeleted.
+         * @function notifyFileDeleted
+         * @memberof PublishedFileClient
+         * @instance
+         * @param {ICPublishedFile_FileDeleted_Client_Notification} request CPublishedFile_FileDeleted_Client_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        return PublishedFileClient;
     })();
     
     /**

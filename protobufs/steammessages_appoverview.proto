@@ -1,0 +1,138 @@
+option optimize_for = SPEED;
+option cc_generic_services = true;
+
+enum EDisplayStatus {
+	k_EDisplayStatusLaunching = 1;
+	k_EDisplayStatusUninstalling = 2;
+	k_EDisplayStatusInstalling = 3;
+	k_EDisplayStatusRunning = 4;
+	k_EDisplayStatusValidating = 5;
+	k_EDisplayStatusUpdating = 6;
+	k_EDisplayStatusDownloading = 7;
+	k_EDisplayStatusSynchronizing = 8;
+	k_EDisplayStatusReadyToInstall = 9;
+	k_EDisplayStatusReadyToPreload = 10;
+	k_EDisplayStatusReadyToLaunch = 11;
+	k_EDisplayStatusRegionRestricted = 12;
+	k_EDisplayStatusPresaleOnly = 13;
+	k_EDisplayStatusInvalidPlatform = 14;
+	k_EDisplayStatusParentalBlocked = 15;
+	k_EDisplayStatusPreloadOnly = 16;
+	k_EDisplayStatusBorrowerLocked = 17;
+	k_EDisplayStatusUpdatePaused = 18;
+	k_EDisplayStatusUpdateQueued = 19;
+	k_EDisplayStatusUpdateRequired = 20;
+	k_EDisplayStatusUpdateDisabled = 21;
+	k_EDisplayStatusDownloadPaused = 22;
+	k_EDisplayStatusDownloadQueued = 23;
+	k_EDisplayStatusDownloadRequired = 24;
+	k_EDisplayStatusDownloadDisabled = 25;
+	k_EDisplayStatusLicensePending = 26;
+	k_EDisplayStatusLicenseExpired = 27;
+	k_EDisplayStatusAvailForFree = 28;
+	k_EDisplayStatusAvailToBorrow = 29;
+	k_EDisplayStatusAvailGuestPass = 30;
+	k_EDisplayStatusPurchase = 31;
+}
+
+enum EProtoAppType {
+	k_EAppTypeInvalid = 0;
+	k_EAppTypeGame = 1;
+	k_EAppTypeApplication = 2;
+	k_EAppTypeTool = 4;
+	k_EAppTypeDemo = 8;
+	k_EAppTypeDeprected = 16;
+	k_EAppTypeDLC = 32;
+	k_EAppTypeGuide = 64;
+	k_EAppTypeDriver = 128;
+	k_EAppTypeConfig = 256;
+	k_EAppTypeHardware = 512;
+	k_EAppTypeFranchise = 1024;
+	k_EAppTypeVideo = 2048;
+	k_EAppTypePlugin = 4096;
+	k_EAppTypeMusic = 8192;
+	k_EAppTypeSeries = 16384;
+	k_EAppTypeComic = 32768;
+	k_EAppTypeBeta = 65536;
+	k_EAppTypeShortcut = 1073741824;
+	k_EAppTypeDepotOnly = -2147483648;
+}
+
+enum EAppAssociationType {
+	k_EAppAssociationTypeInvalid = 0;
+	k_EAppAssociationTypePublisher = 1;
+	k_EAppAssociationTypeDeveloper = 2;
+	k_EAppAssociationTypeFranchise = 3;
+}
+
+enum EAppControllerSupportLevel {
+	k_EAppControllerSupportLevelNone = 0;
+	k_EAppControllerSupportLevelPartial = 1;
+	k_EAppControllerSupportLevelFull = 2;
+}
+
+message CAppOverview_AppAssociation {
+	optional .EAppAssociationType type = 1 [default = k_EAppAssociationTypeInvalid];
+	optional string name = 2;
+}
+
+message CAppOverview_AppLanguageFeatures {
+	optional string language = 1;
+	optional bool supported = 2;
+	optional bool full_audio = 3;
+	optional bool subtitles = 4;
+}
+
+message CAppOverview_PlayAreaDimensions {
+	optional float width = 1;
+	optional float height = 2;
+}
+
+message CAppOverview {
+	optional uint32 appid = 1;
+	optional string display_name = 2;
+	optional .EDisplayStatus display_status = 3 [default = k_EDisplayStatusLaunching];
+	optional bool visible_in_game_list = 4;
+	optional uint32 status_percentage = 5 [default = 0];
+	optional string sort_as = 6;
+	optional .EProtoAppType app_type = 7 [default = k_EAppTypeInvalid];
+	optional string active_beta = 8;
+	optional bool subscribed = 9;
+	optional bool installed = 10;
+	optional bool favorite = 11;
+	optional bool hidden = 12;
+	optional uint32 mru_index = 13;
+	optional uint32 rt_recent_activity_time = 14 [default = 0];
+	repeated string user_tag = 15;
+	optional uint32 minutes_playtime_forever = 16 [default = 0];
+	optional uint32 minutes_playtime_last_two_weeks = 17 [default = 0];
+	optional uint32 rt_last_time_played = 18 [default = 0];
+	repeated uint32 store_tag = 19;
+	repeated .CAppOverview_AppAssociation association = 20;
+	optional uint32 primary_genre = 21;
+	repeated uint32 genre = 22;
+	repeated uint32 store_category = 23;
+	repeated .CAppOverview_AppLanguageFeatures language_feature = 24;
+	optional uint32 rt_original_release_date = 25 [default = 0];
+	optional uint32 rt_steam_release_date = 26 [default = 0];
+	optional string icon_hash = 27;
+	optional string icon_path = 28;
+	optional string logo_hash = 30;
+	optional .EAppControllerSupportLevel controller_support = 31 [default = k_EAppControllerSupportLevelNone];
+	optional bool vr_supported = 32;
+	optional uint32 vr_controller_support = 33;
+	optional uint32 vr_play_area_support = 34;
+	optional .CAppOverview_PlayAreaDimensions vr_play_area_dimensions = 35;
+	optional uint32 metacritic_score = 36;
+	optional uint64 size_on_disk = 37;
+	optional bool third_party_mod = 38;
+	optional string icon_data = 39;
+	optional string icon_data_format = 40;
+	optional string gameid = 41;
+}
+
+message CAppOverview_Change {
+	repeated .CAppOverview app_overview = 1;
+	repeated uint32 removed_appid = 2;
+}
+

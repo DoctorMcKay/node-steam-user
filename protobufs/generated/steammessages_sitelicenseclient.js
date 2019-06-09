@@ -24,6 +24,7 @@
          * @interface ICMsgClientSiteInfo
          * @property {number|Long|null} [site_id] CMsgClientSiteInfo site_id
          * @property {string|null} [site_name] CMsgClientSiteInfo site_name
+         * @property {boolean|null} [allow_cached_credentials] CMsgClientSiteInfo allow_cached_credentials
          */
     
         /**
@@ -58,6 +59,14 @@
         CMsgClientSiteInfo.prototype.site_name = "";
     
         /**
+         * CMsgClientSiteInfo allow_cached_credentials.
+         * @member {boolean} allow_cached_credentials
+         * @memberof CMsgClientSiteInfo
+         * @instance
+         */
+        CMsgClientSiteInfo.prototype.allow_cached_credentials = false;
+    
+        /**
          * Creates a new CMsgClientSiteInfo instance using the specified properties.
          * @function create
          * @memberof CMsgClientSiteInfo
@@ -85,6 +94,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.site_id);
             if (message.site_name != null && message.hasOwnProperty("site_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.site_name);
+            if (message.allow_cached_credentials != null && message.hasOwnProperty("allow_cached_credentials"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allow_cached_credentials);
             return writer;
         };
     
@@ -124,6 +135,9 @@
                     break;
                 case 2:
                     message.site_name = reader.string();
+                    break;
+                case 3:
+                    message.allow_cached_credentials = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -166,6 +180,9 @@
             if (message.site_name != null && message.hasOwnProperty("site_name"))
                 if (!$util.isString(message.site_name))
                     return "site_name: string expected";
+            if (message.allow_cached_credentials != null && message.hasOwnProperty("allow_cached_credentials"))
+                if (typeof message.allow_cached_credentials !== "boolean")
+                    return "allow_cached_credentials: boolean expected";
             return null;
         };
     
@@ -192,6 +209,8 @@
                     message.site_id = new $util.LongBits(object.site_id.low >>> 0, object.site_id.high >>> 0).toNumber(true);
             if (object.site_name != null)
                 message.site_name = String(object.site_name);
+            if (object.allow_cached_credentials != null)
+                message.allow_cached_credentials = Boolean(object.allow_cached_credentials);
             return message;
         };
     
@@ -215,6 +234,7 @@
                 } else
                     object.site_id = options.longs === String ? "0" : 0;
                 object.site_name = "";
+                object.allow_cached_credentials = false;
             }
             if (message.site_id != null && message.hasOwnProperty("site_id"))
                 if (typeof message.site_id === "number")
@@ -223,6 +243,8 @@
                     object.site_id = options.longs === String ? $util.Long.prototype.toString.call(message.site_id) : options.longs === Number ? new $util.LongBits(message.site_id.low >>> 0, message.site_id.high >>> 0).toNumber(true) : message.site_id;
             if (message.site_name != null && message.hasOwnProperty("site_name"))
                 object.site_name = message.site_name;
+            if (message.allow_cached_credentials != null && message.hasOwnProperty("allow_cached_credentials"))
+                object.allow_cached_credentials = message.allow_cached_credentials;
             return object;
         };
     
@@ -1181,6 +1203,7 @@
          * @property {number|null} [ipv4_address] CMsgClientSiteLicenseGetContentCacheInfoResponse ipv4_address
          * @property {number|null} [port_number] CMsgClientSiteLicenseGetContentCacheInfoResponse port_number
          * @property {number|null} [p2p_group] CMsgClientSiteLicenseGetContentCacheInfoResponse p2p_group
+         * @property {string|null} [ip_address] CMsgClientSiteLicenseGetContentCacheInfoResponse ip_address
          */
     
         /**
@@ -1231,6 +1254,14 @@
         CMsgClientSiteLicenseGetContentCacheInfoResponse.prototype.p2p_group = 0;
     
         /**
+         * CMsgClientSiteLicenseGetContentCacheInfoResponse ip_address.
+         * @member {string} ip_address
+         * @memberof CMsgClientSiteLicenseGetContentCacheInfoResponse
+         * @instance
+         */
+        CMsgClientSiteLicenseGetContentCacheInfoResponse.prototype.ip_address = "";
+    
+        /**
          * Creates a new CMsgClientSiteLicenseGetContentCacheInfoResponse instance using the specified properties.
          * @function create
          * @memberof CMsgClientSiteLicenseGetContentCacheInfoResponse
@@ -1262,6 +1293,8 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.port_number);
             if (message.p2p_group != null && message.hasOwnProperty("p2p_group"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.p2p_group);
+            if (message.ip_address != null && message.hasOwnProperty("ip_address"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.ip_address);
             return writer;
         };
     
@@ -1307,6 +1340,9 @@
                     break;
                 case 4:
                     message.p2p_group = reader.uint32();
+                    break;
+                case 5:
+                    message.ip_address = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1355,6 +1391,9 @@
             if (message.p2p_group != null && message.hasOwnProperty("p2p_group"))
                 if (!$util.isInteger(message.p2p_group))
                     return "p2p_group: integer expected";
+            if (message.ip_address != null && message.hasOwnProperty("ip_address"))
+                if (!$util.isString(message.ip_address))
+                    return "ip_address: string expected";
             return null;
         };
     
@@ -1378,6 +1417,8 @@
                 message.port_number = object.port_number >>> 0;
             if (object.p2p_group != null)
                 message.p2p_group = object.p2p_group >>> 0;
+            if (object.ip_address != null)
+                message.ip_address = String(object.ip_address);
             return message;
         };
     
@@ -1399,6 +1440,7 @@
                 object.ipv4_address = 0;
                 object.port_number = 0;
                 object.p2p_group = 0;
+                object.ip_address = "";
             }
             if (message.use_cache != null && message.hasOwnProperty("use_cache"))
                 object.use_cache = message.use_cache;
@@ -1408,6 +1450,8 @@
                 object.port_number = message.port_number;
             if (message.p2p_group != null && message.hasOwnProperty("p2p_group"))
                 object.p2p_group = message.p2p_group;
+            if (message.ip_address != null && message.hasOwnProperty("ip_address"))
+                object.ip_address = message.ip_address;
             return object;
         };
     
@@ -1425,6 +1469,242 @@
         return CMsgClientSiteLicenseGetContentCacheInfoResponse;
     })();
     
+    $root.CMsgIPAddress = (function() {
+    
+        /**
+         * Properties of a CMsgIPAddress.
+         * @exports ICMsgIPAddress
+         * @interface ICMsgIPAddress
+         * @property {number|null} [v4] CMsgIPAddress v4
+         * @property {Uint8Array|null} [v6] CMsgIPAddress v6
+         */
+    
+        /**
+         * Constructs a new CMsgIPAddress.
+         * @exports CMsgIPAddress
+         * @classdesc Represents a CMsgIPAddress.
+         * @implements ICMsgIPAddress
+         * @constructor
+         * @param {ICMsgIPAddress=} [properties] Properties to set
+         */
+        function CMsgIPAddress(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgIPAddress v4.
+         * @member {number} v4
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        CMsgIPAddress.prototype.v4 = 0;
+    
+        /**
+         * CMsgIPAddress v6.
+         * @member {Uint8Array} v6
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        CMsgIPAddress.prototype.v6 = $util.newBuffer([]);
+    
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+    
+        /**
+         * CMsgIPAddress ip.
+         * @member {"v4"|"v6"|undefined} ip
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        Object.defineProperty(CMsgIPAddress.prototype, "ip", {
+            get: $util.oneOfGetter($oneOfFields = ["v4", "v6"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+    
+        /**
+         * Creates a new CMsgIPAddress instance using the specified properties.
+         * @function create
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress=} [properties] Properties to set
+         * @returns {CMsgIPAddress} CMsgIPAddress instance
+         */
+        CMsgIPAddress.create = function create(properties) {
+            return new CMsgIPAddress(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddress message. Does not implicitly {@link CMsgIPAddress.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress} message CMsgIPAddress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddress.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.v4 != null && message.hasOwnProperty("v4"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.v4);
+            if (message.v6 != null && message.hasOwnProperty("v6"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.v6);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddress message, length delimited. Does not implicitly {@link CMsgIPAddress.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress} message CMsgIPAddress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddress.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgIPAddress message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddress.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgIPAddress();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.v4 = reader.fixed32();
+                    break;
+                case 2:
+                    message.v6 = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgIPAddress message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddress.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgIPAddress message.
+         * @function verify
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgIPAddress.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.v4 != null && message.hasOwnProperty("v4")) {
+                properties.ip = 1;
+                if (!$util.isInteger(message.v4))
+                    return "v4: integer expected";
+            }
+            if (message.v6 != null && message.hasOwnProperty("v6")) {
+                if (properties.ip === 1)
+                    return "ip: multiple values";
+                properties.ip = 1;
+                if (!(message.v6 && typeof message.v6.length === "number" || $util.isString(message.v6)))
+                    return "v6: buffer expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgIPAddress message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         */
+        CMsgIPAddress.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgIPAddress)
+                return object;
+            var message = new $root.CMsgIPAddress();
+            if (object.v4 != null)
+                message.v4 = object.v4 >>> 0;
+            if (object.v6 != null)
+                if (typeof object.v6 === "string")
+                    $util.base64.decode(object.v6, message.v6 = $util.newBuffer($util.base64.length(object.v6)), 0);
+                else if (object.v6.length)
+                    message.v6 = object.v6;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgIPAddress message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {CMsgIPAddress} message CMsgIPAddress
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgIPAddress.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (message.v4 != null && message.hasOwnProperty("v4")) {
+                object.v4 = message.v4;
+                if (options.oneofs)
+                    object.ip = "v4";
+            }
+            if (message.v6 != null && message.hasOwnProperty("v6")) {
+                object.v6 = options.bytes === String ? $util.base64.encode(message.v6, 0, message.v6.length) : options.bytes === Array ? Array.prototype.slice.call(message.v6) : message.v6;
+                if (options.oneofs)
+                    object.ip = "v6";
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgIPAddress to JSON.
+         * @function toJSON
+         * @memberof CMsgIPAddress
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgIPAddress.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgIPAddress;
+    })();
+    
     $root.CMsgProtoBufHeader = (function() {
     
         /**
@@ -1440,7 +1720,6 @@
          * @property {number|null} [seq_num] CMsgProtoBufHeader seq_num
          * @property {number|null} [eresult] CMsgProtoBufHeader eresult
          * @property {string|null} [error_message] CMsgProtoBufHeader error_message
-         * @property {number|null} [ip] CMsgProtoBufHeader ip
          * @property {number|null} [auth_account_flags] CMsgProtoBufHeader auth_account_flags
          * @property {number|null} [token_source] CMsgProtoBufHeader token_source
          * @property {boolean|null} [admin_spoofing_user] CMsgProtoBufHeader admin_spoofing_user
@@ -1453,6 +1732,9 @@
          * @property {boolean|null} [is_from_external_source] CMsgProtoBufHeader is_from_external_source
          * @property {Array.<number>|null} [forward_to_sysid] CMsgProtoBufHeader forward_to_sysid
          * @property {number|null} [cm_sysid] CMsgProtoBufHeader cm_sysid
+         * @property {string|null} [wg_token] CMsgProtoBufHeader wg_token
+         * @property {number|null} [ip] CMsgProtoBufHeader ip
+         * @property {Uint8Array|null} [ip_v6] CMsgProtoBufHeader ip_v6
          */
     
         /**
@@ -1542,14 +1824,6 @@
          * @instance
          */
         CMsgProtoBufHeader.prototype.error_message = "";
-    
-        /**
-         * CMsgProtoBufHeader ip.
-         * @member {number} ip
-         * @memberof CMsgProtoBufHeader
-         * @instance
-         */
-        CMsgProtoBufHeader.prototype.ip = 0;
     
         /**
          * CMsgProtoBufHeader auth_account_flags.
@@ -1648,6 +1922,44 @@
         CMsgProtoBufHeader.prototype.cm_sysid = 0;
     
         /**
+         * CMsgProtoBufHeader wg_token.
+         * @member {string} wg_token
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.wg_token = "";
+    
+        /**
+         * CMsgProtoBufHeader ip.
+         * @member {number} ip
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.ip = 0;
+    
+        /**
+         * CMsgProtoBufHeader ip_v6.
+         * @member {Uint8Array} ip_v6
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.ip_v6 = $util.newBuffer([]);
+    
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+    
+        /**
+         * CMsgProtoBufHeader ip_addr.
+         * @member {"ip"|"ip_v6"|undefined} ip_addr
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        Object.defineProperty(CMsgProtoBufHeader.prototype, "ip_addr", {
+            get: $util.oneOfGetter($oneOfFields = ["ip", "ip_v6"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+    
+        /**
          * Creates a new CMsgProtoBufHeader instance using the specified properties.
          * @function create
          * @memberof CMsgProtoBufHeader
@@ -1716,6 +2028,10 @@
                     writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.forward_to_sysid[i]);
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 writer.uint32(/* id 28, wireType 0 =*/224).uint32(message.cm_sysid);
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6"))
+                writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
             return writer;
         };
     
@@ -1777,9 +2093,6 @@
                 case 14:
                     message.error_message = reader.string();
                     break;
-                case 15:
-                    message.ip = reader.uint32();
-                    break;
                 case 16:
                     message.auth_account_flags = reader.uint32();
                     break;
@@ -1823,6 +2136,15 @@
                 case 28:
                     message.cm_sysid = reader.uint32();
                     break;
+                case 30:
+                    message.wg_token = reader.string();
+                    break;
+                case 15:
+                    message.ip = reader.uint32();
+                    break;
+                case 29:
+                    message.ip_v6 = reader.bytes();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1858,6 +2180,7 @@
         CMsgProtoBufHeader.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            var properties = {};
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
                     return "steamid: integer|Long expected";
@@ -1885,9 +2208,6 @@
             if (message.error_message != null && message.hasOwnProperty("error_message"))
                 if (!$util.isString(message.error_message))
                     return "error_message: string expected";
-            if (message.ip != null && message.hasOwnProperty("ip"))
-                if (!$util.isInteger(message.ip))
-                    return "ip: integer expected";
             if (message.auth_account_flags != null && message.hasOwnProperty("auth_account_flags"))
                 if (!$util.isInteger(message.auth_account_flags))
                     return "auth_account_flags: integer expected";
@@ -1928,6 +2248,21 @@
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 if (!$util.isInteger(message.cm_sysid))
                     return "cm_sysid: integer expected";
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                if (!$util.isString(message.wg_token))
+                    return "wg_token: string expected";
+            if (message.ip != null && message.hasOwnProperty("ip")) {
+                properties.ip_addr = 1;
+                if (!$util.isInteger(message.ip))
+                    return "ip: integer expected";
+            }
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6")) {
+                if (properties.ip_addr === 1)
+                    return "ip_addr: multiple values";
+                properties.ip_addr = 1;
+                if (!(message.ip_v6 && typeof message.ip_v6.length === "number" || $util.isString(message.ip_v6)))
+                    return "ip_v6: buffer expected";
+            }
             return null;
         };
     
@@ -1982,8 +2317,6 @@
                 message.eresult = object.eresult | 0;
             if (object.error_message != null)
                 message.error_message = String(object.error_message);
-            if (object.ip != null)
-                message.ip = object.ip >>> 0;
             if (object.auth_account_flags != null)
                 message.auth_account_flags = object.auth_account_flags >>> 0;
             if (object.token_source != null)
@@ -2027,6 +2360,15 @@
             }
             if (object.cm_sysid != null)
                 message.cm_sysid = object.cm_sysid >>> 0;
+            if (object.wg_token != null)
+                message.wg_token = String(object.wg_token);
+            if (object.ip != null)
+                message.ip = object.ip >>> 0;
+            if (object.ip_v6 != null)
+                if (typeof object.ip_v6 === "string")
+                    $util.base64.decode(object.ip_v6, message.ip_v6 = $util.newBuffer($util.base64.length(object.ip_v6)), 0);
+                else if (object.ip_v6.length)
+                    message.ip_v6 = object.ip_v6;
             return message;
         };
     
@@ -2066,7 +2408,6 @@
                 object.target_job_name = "";
                 object.eresult = 2;
                 object.error_message = "";
-                object.ip = 0;
                 object.auth_account_flags = 0;
                 object.transport_error = 1;
                 if ($util.Long) {
@@ -2087,6 +2428,7 @@
                 object.webapi_key_id = 0;
                 object.is_from_external_source = false;
                 object.cm_sysid = 0;
+                object.wg_token = "";
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -2113,8 +2455,11 @@
                 object.eresult = message.eresult;
             if (message.error_message != null && message.hasOwnProperty("error_message"))
                 object.error_message = message.error_message;
-            if (message.ip != null && message.hasOwnProperty("ip"))
+            if (message.ip != null && message.hasOwnProperty("ip")) {
                 object.ip = message.ip;
+                if (options.oneofs)
+                    object.ip_addr = "ip";
+            }
             if (message.auth_account_flags != null && message.hasOwnProperty("auth_account_flags"))
                 object.auth_account_flags = message.auth_account_flags;
             if (message.transport_error != null && message.hasOwnProperty("transport_error"))
@@ -2150,6 +2495,13 @@
             }
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 object.cm_sysid = message.cm_sysid;
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6")) {
+                object.ip_v6 = options.bytes === String ? $util.base64.encode(message.ip_v6, 0, message.ip_v6.length) : options.bytes === Array ? Array.prototype.slice.call(message.ip_v6) : message.ip_v6;
+                if (options.oneofs)
+                    object.ip_addr = "ip_v6";
+            }
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                object.wg_token = message.wg_token;
             return object;
         };
     
@@ -4591,6 +4943,674 @@
         };
     
         return CLocalizationToken;
+    })();
+    
+    $root.CClanEventUserNewsTuple = (function() {
+    
+        /**
+         * Properties of a CClanEventUserNewsTuple.
+         * @exports ICClanEventUserNewsTuple
+         * @interface ICClanEventUserNewsTuple
+         * @property {number|null} [clanid] CClanEventUserNewsTuple clanid
+         * @property {number|Long|null} [event_gid] CClanEventUserNewsTuple event_gid
+         * @property {number|Long|null} [announcement_gid] CClanEventUserNewsTuple announcement_gid
+         * @property {number|null} [rtime_start] CClanEventUserNewsTuple rtime_start
+         * @property {number|null} [rtime_end] CClanEventUserNewsTuple rtime_end
+         * @property {number|null} [priority_score] CClanEventUserNewsTuple priority_score
+         * @property {number|null} [type] CClanEventUserNewsTuple type
+         * @property {number|null} [clamp_range_slot] CClanEventUserNewsTuple clamp_range_slot
+         * @property {number|null} [appid] CClanEventUserNewsTuple appid
+         */
+    
+        /**
+         * Constructs a new CClanEventUserNewsTuple.
+         * @exports CClanEventUserNewsTuple
+         * @classdesc Represents a CClanEventUserNewsTuple.
+         * @implements ICClanEventUserNewsTuple
+         * @constructor
+         * @param {ICClanEventUserNewsTuple=} [properties] Properties to set
+         */
+        function CClanEventUserNewsTuple(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClanEventUserNewsTuple clanid.
+         * @member {number} clanid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.clanid = 0;
+    
+        /**
+         * CClanEventUserNewsTuple event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventUserNewsTuple announcement_gid.
+         * @member {number|Long} announcement_gid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.announcement_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventUserNewsTuple rtime_start.
+         * @member {number} rtime_start
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.rtime_start = 0;
+    
+        /**
+         * CClanEventUserNewsTuple rtime_end.
+         * @member {number} rtime_end
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.rtime_end = 0;
+    
+        /**
+         * CClanEventUserNewsTuple priority_score.
+         * @member {number} priority_score
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.priority_score = 0;
+    
+        /**
+         * CClanEventUserNewsTuple type.
+         * @member {number} type
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.type = 0;
+    
+        /**
+         * CClanEventUserNewsTuple clamp_range_slot.
+         * @member {number} clamp_range_slot
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.clamp_range_slot = 0;
+    
+        /**
+         * CClanEventUserNewsTuple appid.
+         * @member {number} appid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.appid = 0;
+    
+        /**
+         * Creates a new CClanEventUserNewsTuple instance using the specified properties.
+         * @function create
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple=} [properties] Properties to set
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple instance
+         */
+        CClanEventUserNewsTuple.create = function create(properties) {
+            return new CClanEventUserNewsTuple(properties);
+        };
+    
+        /**
+         * Encodes the specified CClanEventUserNewsTuple message. Does not implicitly {@link CClanEventUserNewsTuple.verify|verify} messages.
+         * @function encode
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple} message CClanEventUserNewsTuple message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanEventUserNewsTuple.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.clanid);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.event_gid);
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.announcement_gid);
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.rtime_start);
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.rtime_end);
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.priority_score);
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.type);
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.clamp_range_slot);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClanEventUserNewsTuple message, length delimited. Does not implicitly {@link CClanEventUserNewsTuple.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple} message CClanEventUserNewsTuple message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanEventUserNewsTuple.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClanEventUserNewsTuple message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanEventUserNewsTuple.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClanEventUserNewsTuple();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.clanid = reader.uint32();
+                    break;
+                case 2:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 3:
+                    message.announcement_gid = reader.fixed64();
+                    break;
+                case 4:
+                    message.rtime_start = reader.uint32();
+                    break;
+                case 5:
+                    message.rtime_end = reader.uint32();
+                    break;
+                case 6:
+                    message.priority_score = reader.uint32();
+                    break;
+                case 7:
+                    message.type = reader.uint32();
+                    break;
+                case 8:
+                    message.clamp_range_slot = reader.uint32();
+                    break;
+                case 9:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClanEventUserNewsTuple message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanEventUserNewsTuple.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClanEventUserNewsTuple message.
+         * @function verify
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClanEventUserNewsTuple.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                if (!$util.isInteger(message.clanid))
+                    return "clanid: integer expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (!$util.isInteger(message.announcement_gid) && !(message.announcement_gid && $util.isInteger(message.announcement_gid.low) && $util.isInteger(message.announcement_gid.high)))
+                    return "announcement_gid: integer|Long expected";
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                if (!$util.isInteger(message.rtime_start))
+                    return "rtime_start: integer expected";
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                if (!$util.isInteger(message.rtime_end))
+                    return "rtime_end: integer expected";
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                if (!$util.isInteger(message.priority_score))
+                    return "priority_score: integer expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                if (!$util.isInteger(message.type))
+                    return "type: integer expected";
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                if (!$util.isInteger(message.clamp_range_slot))
+                    return "clamp_range_slot: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClanEventUserNewsTuple message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         */
+        CClanEventUserNewsTuple.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClanEventUserNewsTuple)
+                return object;
+            var message = new $root.CClanEventUserNewsTuple();
+            if (object.clanid != null)
+                message.clanid = object.clanid >>> 0;
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.announcement_gid != null)
+                if ($util.Long)
+                    (message.announcement_gid = $util.Long.fromValue(object.announcement_gid)).unsigned = false;
+                else if (typeof object.announcement_gid === "string")
+                    message.announcement_gid = parseInt(object.announcement_gid, 10);
+                else if (typeof object.announcement_gid === "number")
+                    message.announcement_gid = object.announcement_gid;
+                else if (typeof object.announcement_gid === "object")
+                    message.announcement_gid = new $util.LongBits(object.announcement_gid.low >>> 0, object.announcement_gid.high >>> 0).toNumber();
+            if (object.rtime_start != null)
+                message.rtime_start = object.rtime_start >>> 0;
+            if (object.rtime_end != null)
+                message.rtime_end = object.rtime_end >>> 0;
+            if (object.priority_score != null)
+                message.priority_score = object.priority_score >>> 0;
+            if (object.type != null)
+                message.type = object.type >>> 0;
+            if (object.clamp_range_slot != null)
+                message.clamp_range_slot = object.clamp_range_slot >>> 0;
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClanEventUserNewsTuple message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {CClanEventUserNewsTuple} message CClanEventUserNewsTuple
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClanEventUserNewsTuple.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.clanid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.announcement_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.announcement_gid = options.longs === String ? "0" : 0;
+                object.rtime_start = 0;
+                object.rtime_end = 0;
+                object.priority_score = 0;
+                object.type = 0;
+                object.clamp_range_slot = 0;
+                object.appid = 0;
+            }
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                object.clanid = message.clanid;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (typeof message.announcement_gid === "number")
+                    object.announcement_gid = options.longs === String ? String(message.announcement_gid) : message.announcement_gid;
+                else
+                    object.announcement_gid = options.longs === String ? $util.Long.prototype.toString.call(message.announcement_gid) : options.longs === Number ? new $util.LongBits(message.announcement_gid.low >>> 0, message.announcement_gid.high >>> 0).toNumber() : message.announcement_gid;
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                object.rtime_start = message.rtime_start;
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                object.rtime_end = message.rtime_end;
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                object.priority_score = message.priority_score;
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = message.type;
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                object.clamp_range_slot = message.clamp_range_slot;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CClanEventUserNewsTuple to JSON.
+         * @function toJSON
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClanEventUserNewsTuple.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClanEventUserNewsTuple;
+    })();
+    
+    $root.CClanMatchEventByRange = (function() {
+    
+        /**
+         * Properties of a CClanMatchEventByRange.
+         * @exports ICClanMatchEventByRange
+         * @interface ICClanMatchEventByRange
+         * @property {number|null} [rtime_before] CClanMatchEventByRange rtime_before
+         * @property {number|null} [rtime_after] CClanMatchEventByRange rtime_after
+         * @property {number|null} [qualified] CClanMatchEventByRange qualified
+         * @property {Array.<ICClanEventUserNewsTuple>|null} [events] CClanMatchEventByRange events
+         */
+    
+        /**
+         * Constructs a new CClanMatchEventByRange.
+         * @exports CClanMatchEventByRange
+         * @classdesc Represents a CClanMatchEventByRange.
+         * @implements ICClanMatchEventByRange
+         * @constructor
+         * @param {ICClanMatchEventByRange=} [properties] Properties to set
+         */
+        function CClanMatchEventByRange(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClanMatchEventByRange rtime_before.
+         * @member {number} rtime_before
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.rtime_before = 0;
+    
+        /**
+         * CClanMatchEventByRange rtime_after.
+         * @member {number} rtime_after
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.rtime_after = 0;
+    
+        /**
+         * CClanMatchEventByRange qualified.
+         * @member {number} qualified
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.qualified = 0;
+    
+        /**
+         * CClanMatchEventByRange events.
+         * @member {Array.<ICClanEventUserNewsTuple>} events
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.events = $util.emptyArray;
+    
+        /**
+         * Creates a new CClanMatchEventByRange instance using the specified properties.
+         * @function create
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange=} [properties] Properties to set
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange instance
+         */
+        CClanMatchEventByRange.create = function create(properties) {
+            return new CClanMatchEventByRange(properties);
+        };
+    
+        /**
+         * Encodes the specified CClanMatchEventByRange message. Does not implicitly {@link CClanMatchEventByRange.verify|verify} messages.
+         * @function encode
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange} message CClanMatchEventByRange message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanMatchEventByRange.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rtime_before);
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.rtime_after);
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.qualified);
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.CClanEventUserNewsTuple.encode(message.events[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClanMatchEventByRange message, length delimited. Does not implicitly {@link CClanMatchEventByRange.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange} message CClanMatchEventByRange message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanMatchEventByRange.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClanMatchEventByRange message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanMatchEventByRange.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClanMatchEventByRange();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.rtime_before = reader.uint32();
+                    break;
+                case 2:
+                    message.rtime_after = reader.uint32();
+                    break;
+                case 3:
+                    message.qualified = reader.uint32();
+                    break;
+                case 4:
+                    if (!(message.events && message.events.length))
+                        message.events = [];
+                    message.events.push($root.CClanEventUserNewsTuple.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClanMatchEventByRange message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanMatchEventByRange.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClanMatchEventByRange message.
+         * @function verify
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClanMatchEventByRange.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                if (!$util.isInteger(message.rtime_before))
+                    return "rtime_before: integer expected";
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                if (!$util.isInteger(message.rtime_after))
+                    return "rtime_after: integer expected";
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                if (!$util.isInteger(message.qualified))
+                    return "qualified: integer expected";
+            if (message.events != null && message.hasOwnProperty("events")) {
+                if (!Array.isArray(message.events))
+                    return "events: array expected";
+                for (var i = 0; i < message.events.length; ++i) {
+                    var error = $root.CClanEventUserNewsTuple.verify(message.events[i]);
+                    if (error)
+                        return "events." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClanMatchEventByRange message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         */
+        CClanMatchEventByRange.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClanMatchEventByRange)
+                return object;
+            var message = new $root.CClanMatchEventByRange();
+            if (object.rtime_before != null)
+                message.rtime_before = object.rtime_before >>> 0;
+            if (object.rtime_after != null)
+                message.rtime_after = object.rtime_after >>> 0;
+            if (object.qualified != null)
+                message.qualified = object.qualified >>> 0;
+            if (object.events) {
+                if (!Array.isArray(object.events))
+                    throw TypeError(".CClanMatchEventByRange.events: array expected");
+                message.events = [];
+                for (var i = 0; i < object.events.length; ++i) {
+                    if (typeof object.events[i] !== "object")
+                        throw TypeError(".CClanMatchEventByRange.events: object expected");
+                    message.events[i] = $root.CClanEventUserNewsTuple.fromObject(object.events[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClanMatchEventByRange message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {CClanMatchEventByRange} message CClanMatchEventByRange
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClanMatchEventByRange.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.events = [];
+            if (options.defaults) {
+                object.rtime_before = 0;
+                object.rtime_after = 0;
+                object.qualified = 0;
+            }
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                object.rtime_before = message.rtime_before;
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                object.rtime_after = message.rtime_after;
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                object.qualified = message.qualified;
+            if (message.events && message.events.length) {
+                object.events = [];
+                for (var j = 0; j < message.events.length; ++j)
+                    object.events[j] = $root.CClanEventUserNewsTuple.toObject(message.events[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CClanMatchEventByRange to JSON.
+         * @function toJSON
+         * @memberof CClanMatchEventByRange
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClanMatchEventByRange.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClanMatchEventByRange;
     })();
     
     $root.google = (function() {

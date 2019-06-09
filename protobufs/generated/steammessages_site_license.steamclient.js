@@ -677,6 +677,679 @@
         return CSiteLicense_ClientSeatCheckout_Notification;
     })();
     
+    $root.CSiteManagerClient_TrackedPayments_Notification = (function() {
+    
+        /**
+         * Properties of a CSiteManagerClient_TrackedPayments_Notification.
+         * @exports ICSiteManagerClient_TrackedPayments_Notification
+         * @interface ICSiteManagerClient_TrackedPayments_Notification
+         * @property {number|Long|null} [site_id] CSiteManagerClient_TrackedPayments_Notification site_id
+         * @property {Array.<CSiteManagerClient_TrackedPayments_Notification.IPayment>|null} [payments] CSiteManagerClient_TrackedPayments_Notification payments
+         */
+    
+        /**
+         * Constructs a new CSiteManagerClient_TrackedPayments_Notification.
+         * @exports CSiteManagerClient_TrackedPayments_Notification
+         * @classdesc Represents a CSiteManagerClient_TrackedPayments_Notification.
+         * @implements ICSiteManagerClient_TrackedPayments_Notification
+         * @constructor
+         * @param {ICSiteManagerClient_TrackedPayments_Notification=} [properties] Properties to set
+         */
+        function CSiteManagerClient_TrackedPayments_Notification(properties) {
+            this.payments = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSiteManagerClient_TrackedPayments_Notification site_id.
+         * @member {number|Long} site_id
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @instance
+         */
+        CSiteManagerClient_TrackedPayments_Notification.prototype.site_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSiteManagerClient_TrackedPayments_Notification payments.
+         * @member {Array.<CSiteManagerClient_TrackedPayments_Notification.IPayment>} payments
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @instance
+         */
+        CSiteManagerClient_TrackedPayments_Notification.prototype.payments = $util.emptyArray;
+    
+        /**
+         * Creates a new CSiteManagerClient_TrackedPayments_Notification instance using the specified properties.
+         * @function create
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {ICSiteManagerClient_TrackedPayments_Notification=} [properties] Properties to set
+         * @returns {CSiteManagerClient_TrackedPayments_Notification} CSiteManagerClient_TrackedPayments_Notification instance
+         */
+        CSiteManagerClient_TrackedPayments_Notification.create = function create(properties) {
+            return new CSiteManagerClient_TrackedPayments_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CSiteManagerClient_TrackedPayments_Notification message. Does not implicitly {@link CSiteManagerClient_TrackedPayments_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {ICSiteManagerClient_TrackedPayments_Notification} message CSiteManagerClient_TrackedPayments_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSiteManagerClient_TrackedPayments_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.site_id != null && message.hasOwnProperty("site_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.site_id);
+            if (message.payments != null && message.payments.length)
+                for (var i = 0; i < message.payments.length; ++i)
+                    $root.CSiteManagerClient_TrackedPayments_Notification.Payment.encode(message.payments[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSiteManagerClient_TrackedPayments_Notification message, length delimited. Does not implicitly {@link CSiteManagerClient_TrackedPayments_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {ICSiteManagerClient_TrackedPayments_Notification} message CSiteManagerClient_TrackedPayments_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSiteManagerClient_TrackedPayments_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSiteManagerClient_TrackedPayments_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSiteManagerClient_TrackedPayments_Notification} CSiteManagerClient_TrackedPayments_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSiteManagerClient_TrackedPayments_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSiteManagerClient_TrackedPayments_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.site_id = reader.fixed64();
+                    break;
+                case 2:
+                    if (!(message.payments && message.payments.length))
+                        message.payments = [];
+                    message.payments.push($root.CSiteManagerClient_TrackedPayments_Notification.Payment.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSiteManagerClient_TrackedPayments_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSiteManagerClient_TrackedPayments_Notification} CSiteManagerClient_TrackedPayments_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSiteManagerClient_TrackedPayments_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSiteManagerClient_TrackedPayments_Notification message.
+         * @function verify
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSiteManagerClient_TrackedPayments_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.site_id != null && message.hasOwnProperty("site_id"))
+                if (!$util.isInteger(message.site_id) && !(message.site_id && $util.isInteger(message.site_id.low) && $util.isInteger(message.site_id.high)))
+                    return "site_id: integer|Long expected";
+            if (message.payments != null && message.hasOwnProperty("payments")) {
+                if (!Array.isArray(message.payments))
+                    return "payments: array expected";
+                for (var i = 0; i < message.payments.length; ++i) {
+                    var error = $root.CSiteManagerClient_TrackedPayments_Notification.Payment.verify(message.payments[i]);
+                    if (error)
+                        return "payments." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSiteManagerClient_TrackedPayments_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSiteManagerClient_TrackedPayments_Notification} CSiteManagerClient_TrackedPayments_Notification
+         */
+        CSiteManagerClient_TrackedPayments_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSiteManagerClient_TrackedPayments_Notification)
+                return object;
+            var message = new $root.CSiteManagerClient_TrackedPayments_Notification();
+            if (object.site_id != null)
+                if ($util.Long)
+                    (message.site_id = $util.Long.fromValue(object.site_id)).unsigned = false;
+                else if (typeof object.site_id === "string")
+                    message.site_id = parseInt(object.site_id, 10);
+                else if (typeof object.site_id === "number")
+                    message.site_id = object.site_id;
+                else if (typeof object.site_id === "object")
+                    message.site_id = new $util.LongBits(object.site_id.low >>> 0, object.site_id.high >>> 0).toNumber();
+            if (object.payments) {
+                if (!Array.isArray(object.payments))
+                    throw TypeError(".CSiteManagerClient_TrackedPayments_Notification.payments: array expected");
+                message.payments = [];
+                for (var i = 0; i < object.payments.length; ++i) {
+                    if (typeof object.payments[i] !== "object")
+                        throw TypeError(".CSiteManagerClient_TrackedPayments_Notification.payments: object expected");
+                    message.payments[i] = $root.CSiteManagerClient_TrackedPayments_Notification.Payment.fromObject(object.payments[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSiteManagerClient_TrackedPayments_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @static
+         * @param {CSiteManagerClient_TrackedPayments_Notification} message CSiteManagerClient_TrackedPayments_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSiteManagerClient_TrackedPayments_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.payments = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.site_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.site_id = options.longs === String ? "0" : 0;
+            if (message.site_id != null && message.hasOwnProperty("site_id"))
+                if (typeof message.site_id === "number")
+                    object.site_id = options.longs === String ? String(message.site_id) : message.site_id;
+                else
+                    object.site_id = options.longs === String ? $util.Long.prototype.toString.call(message.site_id) : options.longs === Number ? new $util.LongBits(message.site_id.low >>> 0, message.site_id.high >>> 0).toNumber() : message.site_id;
+            if (message.payments && message.payments.length) {
+                object.payments = [];
+                for (var j = 0; j < message.payments.length; ++j)
+                    object.payments[j] = $root.CSiteManagerClient_TrackedPayments_Notification.Payment.toObject(message.payments[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSiteManagerClient_TrackedPayments_Notification to JSON.
+         * @function toJSON
+         * @memberof CSiteManagerClient_TrackedPayments_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSiteManagerClient_TrackedPayments_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CSiteManagerClient_TrackedPayments_Notification.Payment = (function() {
+    
+            /**
+             * Properties of a Payment.
+             * @memberof CSiteManagerClient_TrackedPayments_Notification
+             * @interface IPayment
+             * @property {number|Long|null} [transid] Payment transid
+             * @property {number|Long|null} [steamid] Payment steamid
+             * @property {number|Long|null} [amount] Payment amount
+             * @property {number|null} [ecurrency] Payment ecurrency
+             * @property {number|null} [time_created] Payment time_created
+             * @property {number|null} [purchase_status] Payment purchase_status
+             * @property {string|null} [machine_name] Payment machine_name
+             * @property {string|null} [persona_name] Payment persona_name
+             * @property {string|null} [profile_url] Payment profile_url
+             * @property {string|null} [avatar_url] Payment avatar_url
+             */
+    
+            /**
+             * Constructs a new Payment.
+             * @memberof CSiteManagerClient_TrackedPayments_Notification
+             * @classdesc Represents a Payment.
+             * @implements IPayment
+             * @constructor
+             * @param {CSiteManagerClient_TrackedPayments_Notification.IPayment=} [properties] Properties to set
+             */
+            function Payment(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Payment transid.
+             * @member {number|Long} transid
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.transid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * Payment steamid.
+             * @member {number|Long} steamid
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * Payment amount.
+             * @member {number|Long} amount
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * Payment ecurrency.
+             * @member {number} ecurrency
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.ecurrency = 0;
+    
+            /**
+             * Payment time_created.
+             * @member {number} time_created
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.time_created = 0;
+    
+            /**
+             * Payment purchase_status.
+             * @member {number} purchase_status
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.purchase_status = 0;
+    
+            /**
+             * Payment machine_name.
+             * @member {string} machine_name
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.machine_name = "";
+    
+            /**
+             * Payment persona_name.
+             * @member {string} persona_name
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.persona_name = "";
+    
+            /**
+             * Payment profile_url.
+             * @member {string} profile_url
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.profile_url = "";
+    
+            /**
+             * Payment avatar_url.
+             * @member {string} avatar_url
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             */
+            Payment.prototype.avatar_url = "";
+    
+            /**
+             * Creates a new Payment instance using the specified properties.
+             * @function create
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {CSiteManagerClient_TrackedPayments_Notification.IPayment=} [properties] Properties to set
+             * @returns {CSiteManagerClient_TrackedPayments_Notification.Payment} Payment instance
+             */
+            Payment.create = function create(properties) {
+                return new Payment(properties);
+            };
+    
+            /**
+             * Encodes the specified Payment message. Does not implicitly {@link CSiteManagerClient_TrackedPayments_Notification.Payment.verify|verify} messages.
+             * @function encode
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {CSiteManagerClient_TrackedPayments_Notification.IPayment} message Payment message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Payment.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.transid);
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.amount);
+                if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.ecurrency);
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.time_created);
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.purchase_status);
+                if (message.machine_name != null && message.hasOwnProperty("machine_name"))
+                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.machine_name);
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.persona_name);
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.profile_url);
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.avatar_url);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Payment message, length delimited. Does not implicitly {@link CSiteManagerClient_TrackedPayments_Notification.Payment.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {CSiteManagerClient_TrackedPayments_Notification.IPayment} message Payment message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Payment.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Payment message from the specified reader or buffer.
+             * @function decode
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CSiteManagerClient_TrackedPayments_Notification.Payment} Payment
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Payment.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSiteManagerClient_TrackedPayments_Notification.Payment();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.transid = reader.uint64();
+                        break;
+                    case 2:
+                        message.steamid = reader.uint64();
+                        break;
+                    case 3:
+                        message.amount = reader.int64();
+                        break;
+                    case 4:
+                        message.ecurrency = reader.uint32();
+                        break;
+                    case 5:
+                        message.time_created = reader.int32();
+                        break;
+                    case 6:
+                        message.purchase_status = reader.int32();
+                        break;
+                    case 7:
+                        message.machine_name = reader.string();
+                        break;
+                    case 8:
+                        message.persona_name = reader.string();
+                        break;
+                    case 9:
+                        message.profile_url = reader.string();
+                        break;
+                    case 10:
+                        message.avatar_url = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Payment message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CSiteManagerClient_TrackedPayments_Notification.Payment} Payment
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Payment.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Payment message.
+             * @function verify
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Payment.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    if (!$util.isInteger(message.transid) && !(message.transid && $util.isInteger(message.transid.low) && $util.isInteger(message.transid.high)))
+                        return "transid: integer|Long expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    if (!$util.isInteger(message.amount) && !(message.amount && $util.isInteger(message.amount.low) && $util.isInteger(message.amount.high)))
+                        return "amount: integer|Long expected";
+                if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
+                    if (!$util.isInteger(message.ecurrency))
+                        return "ecurrency: integer expected";
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    if (!$util.isInteger(message.time_created))
+                        return "time_created: integer expected";
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    if (!$util.isInteger(message.purchase_status))
+                        return "purchase_status: integer expected";
+                if (message.machine_name != null && message.hasOwnProperty("machine_name"))
+                    if (!$util.isString(message.machine_name))
+                        return "machine_name: string expected";
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    if (!$util.isString(message.persona_name))
+                        return "persona_name: string expected";
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    if (!$util.isString(message.profile_url))
+                        return "profile_url: string expected";
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    if (!$util.isString(message.avatar_url))
+                        return "avatar_url: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Payment message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CSiteManagerClient_TrackedPayments_Notification.Payment} Payment
+             */
+            Payment.fromObject = function fromObject(object) {
+                if (object instanceof $root.CSiteManagerClient_TrackedPayments_Notification.Payment)
+                    return object;
+                var message = new $root.CSiteManagerClient_TrackedPayments_Notification.Payment();
+                if (object.transid != null)
+                    if ($util.Long)
+                        (message.transid = $util.Long.fromValue(object.transid)).unsigned = true;
+                    else if (typeof object.transid === "string")
+                        message.transid = parseInt(object.transid, 10);
+                    else if (typeof object.transid === "number")
+                        message.transid = object.transid;
+                    else if (typeof object.transid === "object")
+                        message.transid = new $util.LongBits(object.transid.low >>> 0, object.transid.high >>> 0).toNumber(true);
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+                if (object.amount != null)
+                    if ($util.Long)
+                        (message.amount = $util.Long.fromValue(object.amount)).unsigned = false;
+                    else if (typeof object.amount === "string")
+                        message.amount = parseInt(object.amount, 10);
+                    else if (typeof object.amount === "number")
+                        message.amount = object.amount;
+                    else if (typeof object.amount === "object")
+                        message.amount = new $util.LongBits(object.amount.low >>> 0, object.amount.high >>> 0).toNumber();
+                if (object.ecurrency != null)
+                    message.ecurrency = object.ecurrency >>> 0;
+                if (object.time_created != null)
+                    message.time_created = object.time_created | 0;
+                if (object.purchase_status != null)
+                    message.purchase_status = object.purchase_status | 0;
+                if (object.machine_name != null)
+                    message.machine_name = String(object.machine_name);
+                if (object.persona_name != null)
+                    message.persona_name = String(object.persona_name);
+                if (object.profile_url != null)
+                    message.profile_url = String(object.profile_url);
+                if (object.avatar_url != null)
+                    message.avatar_url = String(object.avatar_url);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Payment message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @static
+             * @param {CSiteManagerClient_TrackedPayments_Notification.Payment} message Payment
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Payment.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.transid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.transid = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.amount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.amount = options.longs === String ? "0" : 0;
+                    object.ecurrency = 0;
+                    object.time_created = 0;
+                    object.purchase_status = 0;
+                    object.machine_name = "";
+                    object.persona_name = "";
+                    object.profile_url = "";
+                    object.avatar_url = "";
+                }
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    if (typeof message.transid === "number")
+                        object.transid = options.longs === String ? String(message.transid) : message.transid;
+                    else
+                        object.transid = options.longs === String ? $util.Long.prototype.toString.call(message.transid) : options.longs === Number ? new $util.LongBits(message.transid.low >>> 0, message.transid.high >>> 0).toNumber(true) : message.transid;
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    if (typeof message.amount === "number")
+                        object.amount = options.longs === String ? String(message.amount) : message.amount;
+                    else
+                        object.amount = options.longs === String ? $util.Long.prototype.toString.call(message.amount) : options.longs === Number ? new $util.LongBits(message.amount.low >>> 0, message.amount.high >>> 0).toNumber() : message.amount;
+                if (message.ecurrency != null && message.hasOwnProperty("ecurrency"))
+                    object.ecurrency = message.ecurrency;
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    object.time_created = message.time_created;
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    object.purchase_status = message.purchase_status;
+                if (message.machine_name != null && message.hasOwnProperty("machine_name"))
+                    object.machine_name = message.machine_name;
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    object.persona_name = message.persona_name;
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    object.profile_url = message.profile_url;
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    object.avatar_url = message.avatar_url;
+                return object;
+            };
+    
+            /**
+             * Converts this Payment to JSON.
+             * @function toJSON
+             * @memberof CSiteManagerClient_TrackedPayments_Notification.Payment
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Payment.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Payment;
+        })();
+    
+        return CSiteManagerClient_TrackedPayments_Notification;
+    })();
+    
     $root.CSiteLicense_InitiateAssociation_Request = (function() {
     
         /**
@@ -3005,6 +3678,39 @@
          * @memberof SiteManagerClient
          * @instance
          * @param {ICSiteLicense_ClientSeatCheckout_Notification} request CSiteLicense_ClientSeatCheckout_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SiteManagerClient#trackedPaymentsNotification}.
+         * @memberof SiteManagerClient
+         * @typedef TrackedPaymentsNotificationCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls TrackedPaymentsNotification.
+         * @function trackedPaymentsNotification
+         * @memberof SiteManagerClient
+         * @instance
+         * @param {ICSiteManagerClient_TrackedPayments_Notification} request CSiteManagerClient_TrackedPayments_Notification message or plain object
+         * @param {SiteManagerClient.TrackedPaymentsNotificationCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SiteManagerClient.prototype.trackedPaymentsNotification = function trackedPaymentsNotification(request, callback) {
+            return this.rpcCall(trackedPaymentsNotification, $root.CSiteManagerClient_TrackedPayments_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "TrackedPaymentsNotification" });
+    
+        /**
+         * Calls TrackedPaymentsNotification.
+         * @function trackedPaymentsNotification
+         * @memberof SiteManagerClient
+         * @instance
+         * @param {ICSiteManagerClient_TrackedPayments_Notification} request CSiteManagerClient_TrackedPayments_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */

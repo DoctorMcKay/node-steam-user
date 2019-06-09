@@ -16,23 +16,27 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
-    $root.CMsgClientHeartBeat = (function() {
+    $root.SiteServerUI_Login_Request = (function() {
     
         /**
-         * Properties of a CMsgClientHeartBeat.
-         * @exports ICMsgClientHeartBeat
-         * @interface ICMsgClientHeartBeat
+         * Properties of a SiteServerUI_Login_Request.
+         * @exports ISiteServerUI_Login_Request
+         * @interface ISiteServerUI_Login_Request
+         * @property {string|null} [username] SiteServerUI_Login_Request username
+         * @property {string|null} [password] SiteServerUI_Login_Request password
+         * @property {string|null} [steamguardcode] SiteServerUI_Login_Request steamguardcode
+         * @property {boolean|null} [remember_password] SiteServerUI_Login_Request remember_password
          */
     
         /**
-         * Constructs a new CMsgClientHeartBeat.
-         * @exports CMsgClientHeartBeat
-         * @classdesc Represents a CMsgClientHeartBeat.
-         * @implements ICMsgClientHeartBeat
+         * Constructs a new SiteServerUI_Login_Request.
+         * @exports SiteServerUI_Login_Request
+         * @classdesc Represents a SiteServerUI_Login_Request.
+         * @implements ISiteServerUI_Login_Request
          * @constructor
-         * @param {ICMsgClientHeartBeat=} [properties] Properties to set
+         * @param {ISiteServerUI_Login_Request=} [properties] Properties to set
          */
-        function CMsgClientHeartBeat(properties) {
+        function SiteServerUI_Login_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -40,1347 +44,114 @@
         }
     
         /**
-         * Creates a new CMsgClientHeartBeat instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {ICMsgClientHeartBeat=} [properties] Properties to set
-         * @returns {CMsgClientHeartBeat} CMsgClientHeartBeat instance
-         */
-        CMsgClientHeartBeat.create = function create(properties) {
-            return new CMsgClientHeartBeat(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientHeartBeat message. Does not implicitly {@link CMsgClientHeartBeat.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {ICMsgClientHeartBeat} message CMsgClientHeartBeat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientHeartBeat.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientHeartBeat message, length delimited. Does not implicitly {@link CMsgClientHeartBeat.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {ICMsgClientHeartBeat} message CMsgClientHeartBeat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientHeartBeat.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientHeartBeat message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientHeartBeat} CMsgClientHeartBeat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientHeartBeat.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientHeartBeat();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientHeartBeat message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientHeartBeat} CMsgClientHeartBeat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientHeartBeat.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientHeartBeat message.
-         * @function verify
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientHeartBeat.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientHeartBeat message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientHeartBeat} CMsgClientHeartBeat
-         */
-        CMsgClientHeartBeat.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientHeartBeat)
-                return object;
-            return new $root.CMsgClientHeartBeat();
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientHeartBeat message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientHeartBeat
-         * @static
-         * @param {CMsgClientHeartBeat} message CMsgClientHeartBeat
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientHeartBeat.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CMsgClientHeartBeat to JSON.
-         * @function toJSON
-         * @memberof CMsgClientHeartBeat
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientHeartBeat.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientHeartBeat;
-    })();
-    
-    $root.CMsgClientServerTimestampRequest = (function() {
-    
-        /**
-         * Properties of a CMsgClientServerTimestampRequest.
-         * @exports ICMsgClientServerTimestampRequest
-         * @interface ICMsgClientServerTimestampRequest
-         * @property {number|Long|null} [client_request_timestamp] CMsgClientServerTimestampRequest client_request_timestamp
-         */
-    
-        /**
-         * Constructs a new CMsgClientServerTimestampRequest.
-         * @exports CMsgClientServerTimestampRequest
-         * @classdesc Represents a CMsgClientServerTimestampRequest.
-         * @implements ICMsgClientServerTimestampRequest
-         * @constructor
-         * @param {ICMsgClientServerTimestampRequest=} [properties] Properties to set
-         */
-        function CMsgClientServerTimestampRequest(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientServerTimestampRequest client_request_timestamp.
-         * @member {number|Long} client_request_timestamp
-         * @memberof CMsgClientServerTimestampRequest
+         * SiteServerUI_Login_Request username.
+         * @member {string} username
+         * @memberof SiteServerUI_Login_Request
          * @instance
          */
-        CMsgClientServerTimestampRequest.prototype.client_request_timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SiteServerUI_Login_Request.prototype.username = "";
     
         /**
-         * Creates a new CMsgClientServerTimestampRequest instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {ICMsgClientServerTimestampRequest=} [properties] Properties to set
-         * @returns {CMsgClientServerTimestampRequest} CMsgClientServerTimestampRequest instance
-         */
-        CMsgClientServerTimestampRequest.create = function create(properties) {
-            return new CMsgClientServerTimestampRequest(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientServerTimestampRequest message. Does not implicitly {@link CMsgClientServerTimestampRequest.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {ICMsgClientServerTimestampRequest} message CMsgClientServerTimestampRequest message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientServerTimestampRequest.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_request_timestamp);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientServerTimestampRequest message, length delimited. Does not implicitly {@link CMsgClientServerTimestampRequest.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {ICMsgClientServerTimestampRequest} message CMsgClientServerTimestampRequest message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientServerTimestampRequest.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientServerTimestampRequest message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientServerTimestampRequest} CMsgClientServerTimestampRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientServerTimestampRequest.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientServerTimestampRequest();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.client_request_timestamp = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientServerTimestampRequest message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientServerTimestampRequest} CMsgClientServerTimestampRequest
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientServerTimestampRequest.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientServerTimestampRequest message.
-         * @function verify
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientServerTimestampRequest.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                if (!$util.isInteger(message.client_request_timestamp) && !(message.client_request_timestamp && $util.isInteger(message.client_request_timestamp.low) && $util.isInteger(message.client_request_timestamp.high)))
-                    return "client_request_timestamp: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientServerTimestampRequest message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientServerTimestampRequest} CMsgClientServerTimestampRequest
-         */
-        CMsgClientServerTimestampRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientServerTimestampRequest)
-                return object;
-            var message = new $root.CMsgClientServerTimestampRequest();
-            if (object.client_request_timestamp != null)
-                if ($util.Long)
-                    (message.client_request_timestamp = $util.Long.fromValue(object.client_request_timestamp)).unsigned = true;
-                else if (typeof object.client_request_timestamp === "string")
-                    message.client_request_timestamp = parseInt(object.client_request_timestamp, 10);
-                else if (typeof object.client_request_timestamp === "number")
-                    message.client_request_timestamp = object.client_request_timestamp;
-                else if (typeof object.client_request_timestamp === "object")
-                    message.client_request_timestamp = new $util.LongBits(object.client_request_timestamp.low >>> 0, object.client_request_timestamp.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientServerTimestampRequest message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientServerTimestampRequest
-         * @static
-         * @param {CMsgClientServerTimestampRequest} message CMsgClientServerTimestampRequest
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientServerTimestampRequest.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.client_request_timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_request_timestamp = options.longs === String ? "0" : 0;
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                if (typeof message.client_request_timestamp === "number")
-                    object.client_request_timestamp = options.longs === String ? String(message.client_request_timestamp) : message.client_request_timestamp;
-                else
-                    object.client_request_timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.client_request_timestamp) : options.longs === Number ? new $util.LongBits(message.client_request_timestamp.low >>> 0, message.client_request_timestamp.high >>> 0).toNumber(true) : message.client_request_timestamp;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientServerTimestampRequest to JSON.
-         * @function toJSON
-         * @memberof CMsgClientServerTimestampRequest
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientServerTimestampRequest.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientServerTimestampRequest;
-    })();
-    
-    $root.CMsgClientServerTimestampResponse = (function() {
-    
-        /**
-         * Properties of a CMsgClientServerTimestampResponse.
-         * @exports ICMsgClientServerTimestampResponse
-         * @interface ICMsgClientServerTimestampResponse
-         * @property {number|Long|null} [client_request_timestamp] CMsgClientServerTimestampResponse client_request_timestamp
-         * @property {number|Long|null} [server_timestamp_ms] CMsgClientServerTimestampResponse server_timestamp_ms
-         */
-    
-        /**
-         * Constructs a new CMsgClientServerTimestampResponse.
-         * @exports CMsgClientServerTimestampResponse
-         * @classdesc Represents a CMsgClientServerTimestampResponse.
-         * @implements ICMsgClientServerTimestampResponse
-         * @constructor
-         * @param {ICMsgClientServerTimestampResponse=} [properties] Properties to set
-         */
-        function CMsgClientServerTimestampResponse(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientServerTimestampResponse client_request_timestamp.
-         * @member {number|Long} client_request_timestamp
-         * @memberof CMsgClientServerTimestampResponse
-         * @instance
-         */
-        CMsgClientServerTimestampResponse.prototype.client_request_timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CMsgClientServerTimestampResponse server_timestamp_ms.
-         * @member {number|Long} server_timestamp_ms
-         * @memberof CMsgClientServerTimestampResponse
-         * @instance
-         */
-        CMsgClientServerTimestampResponse.prototype.server_timestamp_ms = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * Creates a new CMsgClientServerTimestampResponse instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {ICMsgClientServerTimestampResponse=} [properties] Properties to set
-         * @returns {CMsgClientServerTimestampResponse} CMsgClientServerTimestampResponse instance
-         */
-        CMsgClientServerTimestampResponse.create = function create(properties) {
-            return new CMsgClientServerTimestampResponse(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientServerTimestampResponse message. Does not implicitly {@link CMsgClientServerTimestampResponse.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {ICMsgClientServerTimestampResponse} message CMsgClientServerTimestampResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientServerTimestampResponse.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.client_request_timestamp);
-            if (message.server_timestamp_ms != null && message.hasOwnProperty("server_timestamp_ms"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.server_timestamp_ms);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientServerTimestampResponse message, length delimited. Does not implicitly {@link CMsgClientServerTimestampResponse.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {ICMsgClientServerTimestampResponse} message CMsgClientServerTimestampResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientServerTimestampResponse.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientServerTimestampResponse message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientServerTimestampResponse} CMsgClientServerTimestampResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientServerTimestampResponse.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientServerTimestampResponse();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.client_request_timestamp = reader.uint64();
-                    break;
-                case 2:
-                    message.server_timestamp_ms = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientServerTimestampResponse message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientServerTimestampResponse} CMsgClientServerTimestampResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientServerTimestampResponse.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientServerTimestampResponse message.
-         * @function verify
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientServerTimestampResponse.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                if (!$util.isInteger(message.client_request_timestamp) && !(message.client_request_timestamp && $util.isInteger(message.client_request_timestamp.low) && $util.isInteger(message.client_request_timestamp.high)))
-                    return "client_request_timestamp: integer|Long expected";
-            if (message.server_timestamp_ms != null && message.hasOwnProperty("server_timestamp_ms"))
-                if (!$util.isInteger(message.server_timestamp_ms) && !(message.server_timestamp_ms && $util.isInteger(message.server_timestamp_ms.low) && $util.isInteger(message.server_timestamp_ms.high)))
-                    return "server_timestamp_ms: integer|Long expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientServerTimestampResponse message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientServerTimestampResponse} CMsgClientServerTimestampResponse
-         */
-        CMsgClientServerTimestampResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientServerTimestampResponse)
-                return object;
-            var message = new $root.CMsgClientServerTimestampResponse();
-            if (object.client_request_timestamp != null)
-                if ($util.Long)
-                    (message.client_request_timestamp = $util.Long.fromValue(object.client_request_timestamp)).unsigned = true;
-                else if (typeof object.client_request_timestamp === "string")
-                    message.client_request_timestamp = parseInt(object.client_request_timestamp, 10);
-                else if (typeof object.client_request_timestamp === "number")
-                    message.client_request_timestamp = object.client_request_timestamp;
-                else if (typeof object.client_request_timestamp === "object")
-                    message.client_request_timestamp = new $util.LongBits(object.client_request_timestamp.low >>> 0, object.client_request_timestamp.high >>> 0).toNumber(true);
-            if (object.server_timestamp_ms != null)
-                if ($util.Long)
-                    (message.server_timestamp_ms = $util.Long.fromValue(object.server_timestamp_ms)).unsigned = true;
-                else if (typeof object.server_timestamp_ms === "string")
-                    message.server_timestamp_ms = parseInt(object.server_timestamp_ms, 10);
-                else if (typeof object.server_timestamp_ms === "number")
-                    message.server_timestamp_ms = object.server_timestamp_ms;
-                else if (typeof object.server_timestamp_ms === "object")
-                    message.server_timestamp_ms = new $util.LongBits(object.server_timestamp_ms.low >>> 0, object.server_timestamp_ms.high >>> 0).toNumber(true);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientServerTimestampResponse message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientServerTimestampResponse
-         * @static
-         * @param {CMsgClientServerTimestampResponse} message CMsgClientServerTimestampResponse
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientServerTimestampResponse.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.client_request_timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_request_timestamp = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.server_timestamp_ms = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.server_timestamp_ms = options.longs === String ? "0" : 0;
-            }
-            if (message.client_request_timestamp != null && message.hasOwnProperty("client_request_timestamp"))
-                if (typeof message.client_request_timestamp === "number")
-                    object.client_request_timestamp = options.longs === String ? String(message.client_request_timestamp) : message.client_request_timestamp;
-                else
-                    object.client_request_timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.client_request_timestamp) : options.longs === Number ? new $util.LongBits(message.client_request_timestamp.low >>> 0, message.client_request_timestamp.high >>> 0).toNumber(true) : message.client_request_timestamp;
-            if (message.server_timestamp_ms != null && message.hasOwnProperty("server_timestamp_ms"))
-                if (typeof message.server_timestamp_ms === "number")
-                    object.server_timestamp_ms = options.longs === String ? String(message.server_timestamp_ms) : message.server_timestamp_ms;
-                else
-                    object.server_timestamp_ms = options.longs === String ? $util.Long.prototype.toString.call(message.server_timestamp_ms) : options.longs === Number ? new $util.LongBits(message.server_timestamp_ms.low >>> 0, message.server_timestamp_ms.high >>> 0).toNumber(true) : message.server_timestamp_ms;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientServerTimestampResponse to JSON.
-         * @function toJSON
-         * @memberof CMsgClientServerTimestampResponse
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientServerTimestampResponse.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientServerTimestampResponse;
-    })();
-    
-    $root.CMsgClientLogon = (function() {
-    
-        /**
-         * Properties of a CMsgClientLogon.
-         * @exports ICMsgClientLogon
-         * @interface ICMsgClientLogon
-         * @property {number|null} [protocol_version] CMsgClientLogon protocol_version
-         * @property {number|null} [obfustucated_private_ip] CMsgClientLogon obfustucated_private_ip
-         * @property {number|null} [cell_id] CMsgClientLogon cell_id
-         * @property {number|null} [last_session_id] CMsgClientLogon last_session_id
-         * @property {number|null} [client_package_version] CMsgClientLogon client_package_version
-         * @property {string|null} [client_language] CMsgClientLogon client_language
-         * @property {number|null} [client_os_type] CMsgClientLogon client_os_type
-         * @property {boolean|null} [should_remember_password] CMsgClientLogon should_remember_password
-         * @property {string|null} [wine_version] CMsgClientLogon wine_version
-         * @property {number|null} [ping_ms_from_cell_search] CMsgClientLogon ping_ms_from_cell_search
-         * @property {number|null} [public_ip] CMsgClientLogon public_ip
-         * @property {number|null} [qos_level] CMsgClientLogon qos_level
-         * @property {number|Long|null} [client_supplied_steam_id] CMsgClientLogon client_supplied_steam_id
-         * @property {Uint8Array|null} [machine_id] CMsgClientLogon machine_id
-         * @property {number|null} [launcher_type] CMsgClientLogon launcher_type
-         * @property {number|null} [ui_mode] CMsgClientLogon ui_mode
-         * @property {number|null} [chat_mode] CMsgClientLogon chat_mode
-         * @property {Uint8Array|null} [steam2_auth_ticket] CMsgClientLogon steam2_auth_ticket
-         * @property {string|null} [email_address] CMsgClientLogon email_address
-         * @property {number|null} [rtime32_account_creation] CMsgClientLogon rtime32_account_creation
-         * @property {string|null} [account_name] CMsgClientLogon account_name
-         * @property {string|null} [password] CMsgClientLogon password
-         * @property {string|null} [game_server_token] CMsgClientLogon game_server_token
-         * @property {string|null} [login_key] CMsgClientLogon login_key
-         * @property {boolean|null} [was_converted_deprecated_msg] CMsgClientLogon was_converted_deprecated_msg
-         * @property {string|null} [anon_user_target_account_name] CMsgClientLogon anon_user_target_account_name
-         * @property {number|Long|null} [resolved_user_steam_id] CMsgClientLogon resolved_user_steam_id
-         * @property {number|null} [eresult_sentryfile] CMsgClientLogon eresult_sentryfile
-         * @property {Uint8Array|null} [sha_sentryfile] CMsgClientLogon sha_sentryfile
-         * @property {string|null} [auth_code] CMsgClientLogon auth_code
-         * @property {number|null} [otp_type] CMsgClientLogon otp_type
-         * @property {number|null} [otp_value] CMsgClientLogon otp_value
-         * @property {string|null} [otp_identifier] CMsgClientLogon otp_identifier
-         * @property {boolean|null} [steam2_ticket_request] CMsgClientLogon steam2_ticket_request
-         * @property {Uint8Array|null} [sony_psn_ticket] CMsgClientLogon sony_psn_ticket
-         * @property {string|null} [sony_psn_service_id] CMsgClientLogon sony_psn_service_id
-         * @property {boolean|null} [create_new_psn_linked_account_if_needed] CMsgClientLogon create_new_psn_linked_account_if_needed
-         * @property {string|null} [sony_psn_name] CMsgClientLogon sony_psn_name
-         * @property {number|null} [game_server_app_id] CMsgClientLogon game_server_app_id
-         * @property {boolean|null} [steamguard_dont_remember_computer] CMsgClientLogon steamguard_dont_remember_computer
-         * @property {string|null} [machine_name] CMsgClientLogon machine_name
-         * @property {string|null} [machine_name_userchosen] CMsgClientLogon machine_name_userchosen
-         * @property {string|null} [country_override] CMsgClientLogon country_override
-         * @property {boolean|null} [is_steam_box] CMsgClientLogon is_steam_box
-         * @property {number|Long|null} [client_instance_id] CMsgClientLogon client_instance_id
-         * @property {string|null} [two_factor_code] CMsgClientLogon two_factor_code
-         * @property {boolean|null} [supports_rate_limit_response] CMsgClientLogon supports_rate_limit_response
-         * @property {string|null} [web_logon_nonce] CMsgClientLogon web_logon_nonce
-         * @property {number|null} [priority_reason] CMsgClientLogon priority_reason
-         */
-    
-        /**
-         * Constructs a new CMsgClientLogon.
-         * @exports CMsgClientLogon
-         * @classdesc Represents a CMsgClientLogon.
-         * @implements ICMsgClientLogon
-         * @constructor
-         * @param {ICMsgClientLogon=} [properties] Properties to set
-         */
-        function CMsgClientLogon(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientLogon protocol_version.
-         * @member {number} protocol_version
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.protocol_version = 0;
-    
-        /**
-         * CMsgClientLogon obfustucated_private_ip.
-         * @member {number} obfustucated_private_ip
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.obfustucated_private_ip = 0;
-    
-        /**
-         * CMsgClientLogon cell_id.
-         * @member {number} cell_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.cell_id = 0;
-    
-        /**
-         * CMsgClientLogon last_session_id.
-         * @member {number} last_session_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.last_session_id = 0;
-    
-        /**
-         * CMsgClientLogon client_package_version.
-         * @member {number} client_package_version
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.client_package_version = 0;
-    
-        /**
-         * CMsgClientLogon client_language.
-         * @member {string} client_language
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.client_language = "";
-    
-        /**
-         * CMsgClientLogon client_os_type.
-         * @member {number} client_os_type
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.client_os_type = 0;
-    
-        /**
-         * CMsgClientLogon should_remember_password.
-         * @member {boolean} should_remember_password
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.should_remember_password = false;
-    
-        /**
-         * CMsgClientLogon wine_version.
-         * @member {string} wine_version
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.wine_version = "";
-    
-        /**
-         * CMsgClientLogon ping_ms_from_cell_search.
-         * @member {number} ping_ms_from_cell_search
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.ping_ms_from_cell_search = 0;
-    
-        /**
-         * CMsgClientLogon public_ip.
-         * @member {number} public_ip
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.public_ip = 0;
-    
-        /**
-         * CMsgClientLogon qos_level.
-         * @member {number} qos_level
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.qos_level = 0;
-    
-        /**
-         * CMsgClientLogon client_supplied_steam_id.
-         * @member {number|Long} client_supplied_steam_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.client_supplied_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CMsgClientLogon machine_id.
-         * @member {Uint8Array} machine_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.machine_id = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogon launcher_type.
-         * @member {number} launcher_type
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.launcher_type = 0;
-    
-        /**
-         * CMsgClientLogon ui_mode.
-         * @member {number} ui_mode
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.ui_mode = 0;
-    
-        /**
-         * CMsgClientLogon chat_mode.
-         * @member {number} chat_mode
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.chat_mode = 0;
-    
-        /**
-         * CMsgClientLogon steam2_auth_ticket.
-         * @member {Uint8Array} steam2_auth_ticket
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.steam2_auth_ticket = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogon email_address.
-         * @member {string} email_address
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.email_address = "";
-    
-        /**
-         * CMsgClientLogon rtime32_account_creation.
-         * @member {number} rtime32_account_creation
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.rtime32_account_creation = 0;
-    
-        /**
-         * CMsgClientLogon account_name.
-         * @member {string} account_name
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.account_name = "";
-    
-        /**
-         * CMsgClientLogon password.
+         * SiteServerUI_Login_Request password.
          * @member {string} password
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @instance
          */
-        CMsgClientLogon.prototype.password = "";
+        SiteServerUI_Login_Request.prototype.password = "";
     
         /**
-         * CMsgClientLogon game_server_token.
-         * @member {string} game_server_token
-         * @memberof CMsgClientLogon
+         * SiteServerUI_Login_Request steamguardcode.
+         * @member {string} steamguardcode
+         * @memberof SiteServerUI_Login_Request
          * @instance
          */
-        CMsgClientLogon.prototype.game_server_token = "";
+        SiteServerUI_Login_Request.prototype.steamguardcode = "";
     
         /**
-         * CMsgClientLogon login_key.
-         * @member {string} login_key
-         * @memberof CMsgClientLogon
+         * SiteServerUI_Login_Request remember_password.
+         * @member {boolean} remember_password
+         * @memberof SiteServerUI_Login_Request
          * @instance
          */
-        CMsgClientLogon.prototype.login_key = "";
+        SiteServerUI_Login_Request.prototype.remember_password = false;
     
         /**
-         * CMsgClientLogon was_converted_deprecated_msg.
-         * @member {boolean} was_converted_deprecated_msg
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.was_converted_deprecated_msg = false;
-    
-        /**
-         * CMsgClientLogon anon_user_target_account_name.
-         * @member {string} anon_user_target_account_name
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.anon_user_target_account_name = "";
-    
-        /**
-         * CMsgClientLogon resolved_user_steam_id.
-         * @member {number|Long} resolved_user_steam_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.resolved_user_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CMsgClientLogon eresult_sentryfile.
-         * @member {number} eresult_sentryfile
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.eresult_sentryfile = 0;
-    
-        /**
-         * CMsgClientLogon sha_sentryfile.
-         * @member {Uint8Array} sha_sentryfile
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.sha_sentryfile = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogon auth_code.
-         * @member {string} auth_code
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.auth_code = "";
-    
-        /**
-         * CMsgClientLogon otp_type.
-         * @member {number} otp_type
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.otp_type = 0;
-    
-        /**
-         * CMsgClientLogon otp_value.
-         * @member {number} otp_value
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.otp_value = 0;
-    
-        /**
-         * CMsgClientLogon otp_identifier.
-         * @member {string} otp_identifier
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.otp_identifier = "";
-    
-        /**
-         * CMsgClientLogon steam2_ticket_request.
-         * @member {boolean} steam2_ticket_request
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.steam2_ticket_request = false;
-    
-        /**
-         * CMsgClientLogon sony_psn_ticket.
-         * @member {Uint8Array} sony_psn_ticket
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.sony_psn_ticket = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogon sony_psn_service_id.
-         * @member {string} sony_psn_service_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.sony_psn_service_id = "";
-    
-        /**
-         * CMsgClientLogon create_new_psn_linked_account_if_needed.
-         * @member {boolean} create_new_psn_linked_account_if_needed
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.create_new_psn_linked_account_if_needed = false;
-    
-        /**
-         * CMsgClientLogon sony_psn_name.
-         * @member {string} sony_psn_name
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.sony_psn_name = "";
-    
-        /**
-         * CMsgClientLogon game_server_app_id.
-         * @member {number} game_server_app_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.game_server_app_id = 0;
-    
-        /**
-         * CMsgClientLogon steamguard_dont_remember_computer.
-         * @member {boolean} steamguard_dont_remember_computer
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.steamguard_dont_remember_computer = false;
-    
-        /**
-         * CMsgClientLogon machine_name.
-         * @member {string} machine_name
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.machine_name = "";
-    
-        /**
-         * CMsgClientLogon machine_name_userchosen.
-         * @member {string} machine_name_userchosen
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.machine_name_userchosen = "";
-    
-        /**
-         * CMsgClientLogon country_override.
-         * @member {string} country_override
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.country_override = "";
-    
-        /**
-         * CMsgClientLogon is_steam_box.
-         * @member {boolean} is_steam_box
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.is_steam_box = false;
-    
-        /**
-         * CMsgClientLogon client_instance_id.
-         * @member {number|Long} client_instance_id
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.client_instance_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CMsgClientLogon two_factor_code.
-         * @member {string} two_factor_code
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.two_factor_code = "";
-    
-        /**
-         * CMsgClientLogon supports_rate_limit_response.
-         * @member {boolean} supports_rate_limit_response
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.supports_rate_limit_response = false;
-    
-        /**
-         * CMsgClientLogon web_logon_nonce.
-         * @member {string} web_logon_nonce
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.web_logon_nonce = "";
-    
-        /**
-         * CMsgClientLogon priority_reason.
-         * @member {number} priority_reason
-         * @memberof CMsgClientLogon
-         * @instance
-         */
-        CMsgClientLogon.prototype.priority_reason = 0;
-    
-        /**
-         * Creates a new CMsgClientLogon instance using the specified properties.
+         * Creates a new SiteServerUI_Login_Request instance using the specified properties.
          * @function create
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
-         * @param {ICMsgClientLogon=} [properties] Properties to set
-         * @returns {CMsgClientLogon} CMsgClientLogon instance
+         * @param {ISiteServerUI_Login_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_Login_Request} SiteServerUI_Login_Request instance
          */
-        CMsgClientLogon.create = function create(properties) {
-            return new CMsgClientLogon(properties);
+        SiteServerUI_Login_Request.create = function create(properties) {
+            return new SiteServerUI_Login_Request(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientLogon message. Does not implicitly {@link CMsgClientLogon.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Login_Request message. Does not implicitly {@link SiteServerUI_Login_Request.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
-         * @param {ICMsgClientLogon} message CMsgClientLogon message or plain object to encode
+         * @param {ISiteServerUI_Login_Request} message SiteServerUI_Login_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLogon.encode = function encode(message, writer) {
+        SiteServerUI_Login_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.protocol_version);
-            if (message.obfustucated_private_ip != null && message.hasOwnProperty("obfustucated_private_ip"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.obfustucated_private_ip);
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.cell_id);
-            if (message.last_session_id != null && message.hasOwnProperty("last_session_id"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.last_session_id);
-            if (message.client_package_version != null && message.hasOwnProperty("client_package_version"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.client_package_version);
-            if (message.client_language != null && message.hasOwnProperty("client_language"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.client_language);
-            if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.client_os_type);
-            if (message.should_remember_password != null && message.hasOwnProperty("should_remember_password"))
-                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.should_remember_password);
-            if (message.wine_version != null && message.hasOwnProperty("wine_version"))
-                writer.uint32(/* id 9, wireType 2 =*/74).string(message.wine_version);
-            if (message.ping_ms_from_cell_search != null && message.hasOwnProperty("ping_ms_from_cell_search"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.ping_ms_from_cell_search);
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                writer.uint32(/* id 20, wireType 0 =*/160).uint32(message.public_ip);
-            if (message.qos_level != null && message.hasOwnProperty("qos_level"))
-                writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.qos_level);
-            if (message.client_supplied_steam_id != null && message.hasOwnProperty("client_supplied_steam_id"))
-                writer.uint32(/* id 22, wireType 1 =*/177).fixed64(message.client_supplied_steam_id);
-            if (message.machine_id != null && message.hasOwnProperty("machine_id"))
-                writer.uint32(/* id 30, wireType 2 =*/242).bytes(message.machine_id);
-            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
-                writer.uint32(/* id 31, wireType 0 =*/248).uint32(message.launcher_type);
-            if (message.ui_mode != null && message.hasOwnProperty("ui_mode"))
-                writer.uint32(/* id 32, wireType 0 =*/256).uint32(message.ui_mode);
-            if (message.chat_mode != null && message.hasOwnProperty("chat_mode"))
-                writer.uint32(/* id 33, wireType 0 =*/264).uint32(message.chat_mode);
-            if (message.steam2_auth_ticket != null && message.hasOwnProperty("steam2_auth_ticket"))
-                writer.uint32(/* id 41, wireType 2 =*/330).bytes(message.steam2_auth_ticket);
-            if (message.email_address != null && message.hasOwnProperty("email_address"))
-                writer.uint32(/* id 42, wireType 2 =*/338).string(message.email_address);
-            if (message.rtime32_account_creation != null && message.hasOwnProperty("rtime32_account_creation"))
-                writer.uint32(/* id 43, wireType 5 =*/349).fixed32(message.rtime32_account_creation);
-            if (message.account_name != null && message.hasOwnProperty("account_name"))
-                writer.uint32(/* id 50, wireType 2 =*/402).string(message.account_name);
+            if (message.username != null && message.hasOwnProperty("username"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
             if (message.password != null && message.hasOwnProperty("password"))
-                writer.uint32(/* id 51, wireType 2 =*/410).string(message.password);
-            if (message.game_server_token != null && message.hasOwnProperty("game_server_token"))
-                writer.uint32(/* id 52, wireType 2 =*/418).string(message.game_server_token);
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                writer.uint32(/* id 60, wireType 2 =*/482).string(message.login_key);
-            if (message.was_converted_deprecated_msg != null && message.hasOwnProperty("was_converted_deprecated_msg"))
-                writer.uint32(/* id 70, wireType 0 =*/560).bool(message.was_converted_deprecated_msg);
-            if (message.anon_user_target_account_name != null && message.hasOwnProperty("anon_user_target_account_name"))
-                writer.uint32(/* id 80, wireType 2 =*/642).string(message.anon_user_target_account_name);
-            if (message.resolved_user_steam_id != null && message.hasOwnProperty("resolved_user_steam_id"))
-                writer.uint32(/* id 81, wireType 1 =*/649).fixed64(message.resolved_user_steam_id);
-            if (message.eresult_sentryfile != null && message.hasOwnProperty("eresult_sentryfile"))
-                writer.uint32(/* id 82, wireType 0 =*/656).int32(message.eresult_sentryfile);
-            if (message.sha_sentryfile != null && message.hasOwnProperty("sha_sentryfile"))
-                writer.uint32(/* id 83, wireType 2 =*/666).bytes(message.sha_sentryfile);
-            if (message.auth_code != null && message.hasOwnProperty("auth_code"))
-                writer.uint32(/* id 84, wireType 2 =*/674).string(message.auth_code);
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
-                writer.uint32(/* id 85, wireType 0 =*/680).int32(message.otp_type);
-            if (message.otp_value != null && message.hasOwnProperty("otp_value"))
-                writer.uint32(/* id 86, wireType 0 =*/688).uint32(message.otp_value);
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
-                writer.uint32(/* id 87, wireType 2 =*/698).string(message.otp_identifier);
-            if (message.steam2_ticket_request != null && message.hasOwnProperty("steam2_ticket_request"))
-                writer.uint32(/* id 88, wireType 0 =*/704).bool(message.steam2_ticket_request);
-            if (message.sony_psn_ticket != null && message.hasOwnProperty("sony_psn_ticket"))
-                writer.uint32(/* id 90, wireType 2 =*/722).bytes(message.sony_psn_ticket);
-            if (message.sony_psn_service_id != null && message.hasOwnProperty("sony_psn_service_id"))
-                writer.uint32(/* id 91, wireType 2 =*/730).string(message.sony_psn_service_id);
-            if (message.create_new_psn_linked_account_if_needed != null && message.hasOwnProperty("create_new_psn_linked_account_if_needed"))
-                writer.uint32(/* id 92, wireType 0 =*/736).bool(message.create_new_psn_linked_account_if_needed);
-            if (message.sony_psn_name != null && message.hasOwnProperty("sony_psn_name"))
-                writer.uint32(/* id 93, wireType 2 =*/746).string(message.sony_psn_name);
-            if (message.game_server_app_id != null && message.hasOwnProperty("game_server_app_id"))
-                writer.uint32(/* id 94, wireType 0 =*/752).int32(message.game_server_app_id);
-            if (message.steamguard_dont_remember_computer != null && message.hasOwnProperty("steamguard_dont_remember_computer"))
-                writer.uint32(/* id 95, wireType 0 =*/760).bool(message.steamguard_dont_remember_computer);
-            if (message.machine_name != null && message.hasOwnProperty("machine_name"))
-                writer.uint32(/* id 96, wireType 2 =*/770).string(message.machine_name);
-            if (message.machine_name_userchosen != null && message.hasOwnProperty("machine_name_userchosen"))
-                writer.uint32(/* id 97, wireType 2 =*/778).string(message.machine_name_userchosen);
-            if (message.country_override != null && message.hasOwnProperty("country_override"))
-                writer.uint32(/* id 98, wireType 2 =*/786).string(message.country_override);
-            if (message.is_steam_box != null && message.hasOwnProperty("is_steam_box"))
-                writer.uint32(/* id 99, wireType 0 =*/792).bool(message.is_steam_box);
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                writer.uint32(/* id 100, wireType 0 =*/800).uint64(message.client_instance_id);
-            if (message.two_factor_code != null && message.hasOwnProperty("two_factor_code"))
-                writer.uint32(/* id 101, wireType 2 =*/810).string(message.two_factor_code);
-            if (message.supports_rate_limit_response != null && message.hasOwnProperty("supports_rate_limit_response"))
-                writer.uint32(/* id 102, wireType 0 =*/816).bool(message.supports_rate_limit_response);
-            if (message.web_logon_nonce != null && message.hasOwnProperty("web_logon_nonce"))
-                writer.uint32(/* id 103, wireType 2 =*/826).string(message.web_logon_nonce);
-            if (message.priority_reason != null && message.hasOwnProperty("priority_reason"))
-                writer.uint32(/* id 104, wireType 0 =*/832).int32(message.priority_reason);
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
+            if (message.steamguardcode != null && message.hasOwnProperty("steamguardcode"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.steamguardcode);
+            if (message.remember_password != null && message.hasOwnProperty("remember_password"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.remember_password);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientLogon message, length delimited. Does not implicitly {@link CMsgClientLogon.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Login_Request message, length delimited. Does not implicitly {@link SiteServerUI_Login_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
-         * @param {ICMsgClientLogon} message CMsgClientLogon message or plain object to encode
+         * @param {ISiteServerUI_Login_Request} message SiteServerUI_Login_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLogon.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_Login_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientLogon message from the specified reader or buffer.
+         * Decodes a SiteServerUI_Login_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientLogon} CMsgClientLogon
+         * @returns {SiteServerUI_Login_Request} SiteServerUI_Login_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogon.decode = function decode(reader, length) {
+        SiteServerUI_Login_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientLogon();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Login_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.protocol_version = reader.uint32();
+                    message.username = reader.string();
                     break;
                 case 2:
-                    message.obfustucated_private_ip = reader.uint32();
-                    break;
-                case 3:
-                    message.cell_id = reader.uint32();
-                    break;
-                case 4:
-                    message.last_session_id = reader.uint32();
-                    break;
-                case 5:
-                    message.client_package_version = reader.uint32();
-                    break;
-                case 6:
-                    message.client_language = reader.string();
-                    break;
-                case 7:
-                    message.client_os_type = reader.uint32();
-                    break;
-                case 8:
-                    message.should_remember_password = reader.bool();
-                    break;
-                case 9:
-                    message.wine_version = reader.string();
-                    break;
-                case 10:
-                    message.ping_ms_from_cell_search = reader.uint32();
-                    break;
-                case 20:
-                    message.public_ip = reader.uint32();
-                    break;
-                case 21:
-                    message.qos_level = reader.uint32();
-                    break;
-                case 22:
-                    message.client_supplied_steam_id = reader.fixed64();
-                    break;
-                case 30:
-                    message.machine_id = reader.bytes();
-                    break;
-                case 31:
-                    message.launcher_type = reader.uint32();
-                    break;
-                case 32:
-                    message.ui_mode = reader.uint32();
-                    break;
-                case 33:
-                    message.chat_mode = reader.uint32();
-                    break;
-                case 41:
-                    message.steam2_auth_ticket = reader.bytes();
-                    break;
-                case 42:
-                    message.email_address = reader.string();
-                    break;
-                case 43:
-                    message.rtime32_account_creation = reader.fixed32();
-                    break;
-                case 50:
-                    message.account_name = reader.string();
-                    break;
-                case 51:
                     message.password = reader.string();
                     break;
-                case 52:
-                    message.game_server_token = reader.string();
+                case 3:
+                    message.steamguardcode = reader.string();
                     break;
-                case 60:
-                    message.login_key = reader.string();
-                    break;
-                case 70:
-                    message.was_converted_deprecated_msg = reader.bool();
-                    break;
-                case 80:
-                    message.anon_user_target_account_name = reader.string();
-                    break;
-                case 81:
-                    message.resolved_user_steam_id = reader.fixed64();
-                    break;
-                case 82:
-                    message.eresult_sentryfile = reader.int32();
-                    break;
-                case 83:
-                    message.sha_sentryfile = reader.bytes();
-                    break;
-                case 84:
-                    message.auth_code = reader.string();
-                    break;
-                case 85:
-                    message.otp_type = reader.int32();
-                    break;
-                case 86:
-                    message.otp_value = reader.uint32();
-                    break;
-                case 87:
-                    message.otp_identifier = reader.string();
-                    break;
-                case 88:
-                    message.steam2_ticket_request = reader.bool();
-                    break;
-                case 90:
-                    message.sony_psn_ticket = reader.bytes();
-                    break;
-                case 91:
-                    message.sony_psn_service_id = reader.string();
-                    break;
-                case 92:
-                    message.create_new_psn_linked_account_if_needed = reader.bool();
-                    break;
-                case 93:
-                    message.sony_psn_name = reader.string();
-                    break;
-                case 94:
-                    message.game_server_app_id = reader.int32();
-                    break;
-                case 95:
-                    message.steamguard_dont_remember_computer = reader.bool();
-                    break;
-                case 96:
-                    message.machine_name = reader.string();
-                    break;
-                case 97:
-                    message.machine_name_userchosen = reader.string();
-                    break;
-                case 98:
-                    message.country_override = reader.string();
-                    break;
-                case 99:
-                    message.is_steam_box = reader.bool();
-                    break;
-                case 100:
-                    message.client_instance_id = reader.uint64();
-                    break;
-                case 101:
-                    message.two_factor_code = reader.string();
-                    break;
-                case 102:
-                    message.supports_rate_limit_response = reader.bool();
-                    break;
-                case 103:
-                    message.web_logon_nonce = reader.string();
-                    break;
-                case 104:
-                    message.priority_reason = reader.int32();
+                case 4:
+                    message.remember_password = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1391,592 +162,133 @@
         };
     
         /**
-         * Decodes a CMsgClientLogon message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_Login_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientLogon} CMsgClientLogon
+         * @returns {SiteServerUI_Login_Request} SiteServerUI_Login_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogon.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_Login_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientLogon message.
+         * Verifies a SiteServerUI_Login_Request message.
          * @function verify
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientLogon.verify = function verify(message) {
+        SiteServerUI_Login_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
-                if (!$util.isInteger(message.protocol_version))
-                    return "protocol_version: integer expected";
-            if (message.obfustucated_private_ip != null && message.hasOwnProperty("obfustucated_private_ip"))
-                if (!$util.isInteger(message.obfustucated_private_ip))
-                    return "obfustucated_private_ip: integer expected";
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                if (!$util.isInteger(message.cell_id))
-                    return "cell_id: integer expected";
-            if (message.last_session_id != null && message.hasOwnProperty("last_session_id"))
-                if (!$util.isInteger(message.last_session_id))
-                    return "last_session_id: integer expected";
-            if (message.client_package_version != null && message.hasOwnProperty("client_package_version"))
-                if (!$util.isInteger(message.client_package_version))
-                    return "client_package_version: integer expected";
-            if (message.client_language != null && message.hasOwnProperty("client_language"))
-                if (!$util.isString(message.client_language))
-                    return "client_language: string expected";
-            if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
-                if (!$util.isInteger(message.client_os_type))
-                    return "client_os_type: integer expected";
-            if (message.should_remember_password != null && message.hasOwnProperty("should_remember_password"))
-                if (typeof message.should_remember_password !== "boolean")
-                    return "should_remember_password: boolean expected";
-            if (message.wine_version != null && message.hasOwnProperty("wine_version"))
-                if (!$util.isString(message.wine_version))
-                    return "wine_version: string expected";
-            if (message.ping_ms_from_cell_search != null && message.hasOwnProperty("ping_ms_from_cell_search"))
-                if (!$util.isInteger(message.ping_ms_from_cell_search))
-                    return "ping_ms_from_cell_search: integer expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
-            if (message.qos_level != null && message.hasOwnProperty("qos_level"))
-                if (!$util.isInteger(message.qos_level))
-                    return "qos_level: integer expected";
-            if (message.client_supplied_steam_id != null && message.hasOwnProperty("client_supplied_steam_id"))
-                if (!$util.isInteger(message.client_supplied_steam_id) && !(message.client_supplied_steam_id && $util.isInteger(message.client_supplied_steam_id.low) && $util.isInteger(message.client_supplied_steam_id.high)))
-                    return "client_supplied_steam_id: integer|Long expected";
-            if (message.machine_id != null && message.hasOwnProperty("machine_id"))
-                if (!(message.machine_id && typeof message.machine_id.length === "number" || $util.isString(message.machine_id)))
-                    return "machine_id: buffer expected";
-            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
-                if (!$util.isInteger(message.launcher_type))
-                    return "launcher_type: integer expected";
-            if (message.ui_mode != null && message.hasOwnProperty("ui_mode"))
-                if (!$util.isInteger(message.ui_mode))
-                    return "ui_mode: integer expected";
-            if (message.chat_mode != null && message.hasOwnProperty("chat_mode"))
-                if (!$util.isInteger(message.chat_mode))
-                    return "chat_mode: integer expected";
-            if (message.steam2_auth_ticket != null && message.hasOwnProperty("steam2_auth_ticket"))
-                if (!(message.steam2_auth_ticket && typeof message.steam2_auth_ticket.length === "number" || $util.isString(message.steam2_auth_ticket)))
-                    return "steam2_auth_ticket: buffer expected";
-            if (message.email_address != null && message.hasOwnProperty("email_address"))
-                if (!$util.isString(message.email_address))
-                    return "email_address: string expected";
-            if (message.rtime32_account_creation != null && message.hasOwnProperty("rtime32_account_creation"))
-                if (!$util.isInteger(message.rtime32_account_creation))
-                    return "rtime32_account_creation: integer expected";
-            if (message.account_name != null && message.hasOwnProperty("account_name"))
-                if (!$util.isString(message.account_name))
-                    return "account_name: string expected";
+            if (message.username != null && message.hasOwnProperty("username"))
+                if (!$util.isString(message.username))
+                    return "username: string expected";
             if (message.password != null && message.hasOwnProperty("password"))
                 if (!$util.isString(message.password))
                     return "password: string expected";
-            if (message.game_server_token != null && message.hasOwnProperty("game_server_token"))
-                if (!$util.isString(message.game_server_token))
-                    return "game_server_token: string expected";
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                if (!$util.isString(message.login_key))
-                    return "login_key: string expected";
-            if (message.was_converted_deprecated_msg != null && message.hasOwnProperty("was_converted_deprecated_msg"))
-                if (typeof message.was_converted_deprecated_msg !== "boolean")
-                    return "was_converted_deprecated_msg: boolean expected";
-            if (message.anon_user_target_account_name != null && message.hasOwnProperty("anon_user_target_account_name"))
-                if (!$util.isString(message.anon_user_target_account_name))
-                    return "anon_user_target_account_name: string expected";
-            if (message.resolved_user_steam_id != null && message.hasOwnProperty("resolved_user_steam_id"))
-                if (!$util.isInteger(message.resolved_user_steam_id) && !(message.resolved_user_steam_id && $util.isInteger(message.resolved_user_steam_id.low) && $util.isInteger(message.resolved_user_steam_id.high)))
-                    return "resolved_user_steam_id: integer|Long expected";
-            if (message.eresult_sentryfile != null && message.hasOwnProperty("eresult_sentryfile"))
-                if (!$util.isInteger(message.eresult_sentryfile))
-                    return "eresult_sentryfile: integer expected";
-            if (message.sha_sentryfile != null && message.hasOwnProperty("sha_sentryfile"))
-                if (!(message.sha_sentryfile && typeof message.sha_sentryfile.length === "number" || $util.isString(message.sha_sentryfile)))
-                    return "sha_sentryfile: buffer expected";
-            if (message.auth_code != null && message.hasOwnProperty("auth_code"))
-                if (!$util.isString(message.auth_code))
-                    return "auth_code: string expected";
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
-                if (!$util.isInteger(message.otp_type))
-                    return "otp_type: integer expected";
-            if (message.otp_value != null && message.hasOwnProperty("otp_value"))
-                if (!$util.isInteger(message.otp_value))
-                    return "otp_value: integer expected";
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
-                if (!$util.isString(message.otp_identifier))
-                    return "otp_identifier: string expected";
-            if (message.steam2_ticket_request != null && message.hasOwnProperty("steam2_ticket_request"))
-                if (typeof message.steam2_ticket_request !== "boolean")
-                    return "steam2_ticket_request: boolean expected";
-            if (message.sony_psn_ticket != null && message.hasOwnProperty("sony_psn_ticket"))
-                if (!(message.sony_psn_ticket && typeof message.sony_psn_ticket.length === "number" || $util.isString(message.sony_psn_ticket)))
-                    return "sony_psn_ticket: buffer expected";
-            if (message.sony_psn_service_id != null && message.hasOwnProperty("sony_psn_service_id"))
-                if (!$util.isString(message.sony_psn_service_id))
-                    return "sony_psn_service_id: string expected";
-            if (message.create_new_psn_linked_account_if_needed != null && message.hasOwnProperty("create_new_psn_linked_account_if_needed"))
-                if (typeof message.create_new_psn_linked_account_if_needed !== "boolean")
-                    return "create_new_psn_linked_account_if_needed: boolean expected";
-            if (message.sony_psn_name != null && message.hasOwnProperty("sony_psn_name"))
-                if (!$util.isString(message.sony_psn_name))
-                    return "sony_psn_name: string expected";
-            if (message.game_server_app_id != null && message.hasOwnProperty("game_server_app_id"))
-                if (!$util.isInteger(message.game_server_app_id))
-                    return "game_server_app_id: integer expected";
-            if (message.steamguard_dont_remember_computer != null && message.hasOwnProperty("steamguard_dont_remember_computer"))
-                if (typeof message.steamguard_dont_remember_computer !== "boolean")
-                    return "steamguard_dont_remember_computer: boolean expected";
-            if (message.machine_name != null && message.hasOwnProperty("machine_name"))
-                if (!$util.isString(message.machine_name))
-                    return "machine_name: string expected";
-            if (message.machine_name_userchosen != null && message.hasOwnProperty("machine_name_userchosen"))
-                if (!$util.isString(message.machine_name_userchosen))
-                    return "machine_name_userchosen: string expected";
-            if (message.country_override != null && message.hasOwnProperty("country_override"))
-                if (!$util.isString(message.country_override))
-                    return "country_override: string expected";
-            if (message.is_steam_box != null && message.hasOwnProperty("is_steam_box"))
-                if (typeof message.is_steam_box !== "boolean")
-                    return "is_steam_box: boolean expected";
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                if (!$util.isInteger(message.client_instance_id) && !(message.client_instance_id && $util.isInteger(message.client_instance_id.low) && $util.isInteger(message.client_instance_id.high)))
-                    return "client_instance_id: integer|Long expected";
-            if (message.two_factor_code != null && message.hasOwnProperty("two_factor_code"))
-                if (!$util.isString(message.two_factor_code))
-                    return "two_factor_code: string expected";
-            if (message.supports_rate_limit_response != null && message.hasOwnProperty("supports_rate_limit_response"))
-                if (typeof message.supports_rate_limit_response !== "boolean")
-                    return "supports_rate_limit_response: boolean expected";
-            if (message.web_logon_nonce != null && message.hasOwnProperty("web_logon_nonce"))
-                if (!$util.isString(message.web_logon_nonce))
-                    return "web_logon_nonce: string expected";
-            if (message.priority_reason != null && message.hasOwnProperty("priority_reason"))
-                if (!$util.isInteger(message.priority_reason))
-                    return "priority_reason: integer expected";
+            if (message.steamguardcode != null && message.hasOwnProperty("steamguardcode"))
+                if (!$util.isString(message.steamguardcode))
+                    return "steamguardcode: string expected";
+            if (message.remember_password != null && message.hasOwnProperty("remember_password"))
+                if (typeof message.remember_password !== "boolean")
+                    return "remember_password: boolean expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientLogon message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_Login_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientLogon} CMsgClientLogon
+         * @returns {SiteServerUI_Login_Request} SiteServerUI_Login_Request
          */
-        CMsgClientLogon.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientLogon)
+        SiteServerUI_Login_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Login_Request)
                 return object;
-            var message = new $root.CMsgClientLogon();
-            if (object.protocol_version != null)
-                message.protocol_version = object.protocol_version >>> 0;
-            if (object.obfustucated_private_ip != null)
-                message.obfustucated_private_ip = object.obfustucated_private_ip >>> 0;
-            if (object.cell_id != null)
-                message.cell_id = object.cell_id >>> 0;
-            if (object.last_session_id != null)
-                message.last_session_id = object.last_session_id >>> 0;
-            if (object.client_package_version != null)
-                message.client_package_version = object.client_package_version >>> 0;
-            if (object.client_language != null)
-                message.client_language = String(object.client_language);
-            if (object.client_os_type != null)
-                message.client_os_type = object.client_os_type >>> 0;
-            if (object.should_remember_password != null)
-                message.should_remember_password = Boolean(object.should_remember_password);
-            if (object.wine_version != null)
-                message.wine_version = String(object.wine_version);
-            if (object.ping_ms_from_cell_search != null)
-                message.ping_ms_from_cell_search = object.ping_ms_from_cell_search >>> 0;
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
-            if (object.qos_level != null)
-                message.qos_level = object.qos_level >>> 0;
-            if (object.client_supplied_steam_id != null)
-                if ($util.Long)
-                    (message.client_supplied_steam_id = $util.Long.fromValue(object.client_supplied_steam_id)).unsigned = false;
-                else if (typeof object.client_supplied_steam_id === "string")
-                    message.client_supplied_steam_id = parseInt(object.client_supplied_steam_id, 10);
-                else if (typeof object.client_supplied_steam_id === "number")
-                    message.client_supplied_steam_id = object.client_supplied_steam_id;
-                else if (typeof object.client_supplied_steam_id === "object")
-                    message.client_supplied_steam_id = new $util.LongBits(object.client_supplied_steam_id.low >>> 0, object.client_supplied_steam_id.high >>> 0).toNumber();
-            if (object.machine_id != null)
-                if (typeof object.machine_id === "string")
-                    $util.base64.decode(object.machine_id, message.machine_id = $util.newBuffer($util.base64.length(object.machine_id)), 0);
-                else if (object.machine_id.length)
-                    message.machine_id = object.machine_id;
-            if (object.launcher_type != null)
-                message.launcher_type = object.launcher_type >>> 0;
-            if (object.ui_mode != null)
-                message.ui_mode = object.ui_mode >>> 0;
-            if (object.chat_mode != null)
-                message.chat_mode = object.chat_mode >>> 0;
-            if (object.steam2_auth_ticket != null)
-                if (typeof object.steam2_auth_ticket === "string")
-                    $util.base64.decode(object.steam2_auth_ticket, message.steam2_auth_ticket = $util.newBuffer($util.base64.length(object.steam2_auth_ticket)), 0);
-                else if (object.steam2_auth_ticket.length)
-                    message.steam2_auth_ticket = object.steam2_auth_ticket;
-            if (object.email_address != null)
-                message.email_address = String(object.email_address);
-            if (object.rtime32_account_creation != null)
-                message.rtime32_account_creation = object.rtime32_account_creation >>> 0;
-            if (object.account_name != null)
-                message.account_name = String(object.account_name);
+            var message = new $root.SiteServerUI_Login_Request();
+            if (object.username != null)
+                message.username = String(object.username);
             if (object.password != null)
                 message.password = String(object.password);
-            if (object.game_server_token != null)
-                message.game_server_token = String(object.game_server_token);
-            if (object.login_key != null)
-                message.login_key = String(object.login_key);
-            if (object.was_converted_deprecated_msg != null)
-                message.was_converted_deprecated_msg = Boolean(object.was_converted_deprecated_msg);
-            if (object.anon_user_target_account_name != null)
-                message.anon_user_target_account_name = String(object.anon_user_target_account_name);
-            if (object.resolved_user_steam_id != null)
-                if ($util.Long)
-                    (message.resolved_user_steam_id = $util.Long.fromValue(object.resolved_user_steam_id)).unsigned = false;
-                else if (typeof object.resolved_user_steam_id === "string")
-                    message.resolved_user_steam_id = parseInt(object.resolved_user_steam_id, 10);
-                else if (typeof object.resolved_user_steam_id === "number")
-                    message.resolved_user_steam_id = object.resolved_user_steam_id;
-                else if (typeof object.resolved_user_steam_id === "object")
-                    message.resolved_user_steam_id = new $util.LongBits(object.resolved_user_steam_id.low >>> 0, object.resolved_user_steam_id.high >>> 0).toNumber();
-            if (object.eresult_sentryfile != null)
-                message.eresult_sentryfile = object.eresult_sentryfile | 0;
-            if (object.sha_sentryfile != null)
-                if (typeof object.sha_sentryfile === "string")
-                    $util.base64.decode(object.sha_sentryfile, message.sha_sentryfile = $util.newBuffer($util.base64.length(object.sha_sentryfile)), 0);
-                else if (object.sha_sentryfile.length)
-                    message.sha_sentryfile = object.sha_sentryfile;
-            if (object.auth_code != null)
-                message.auth_code = String(object.auth_code);
-            if (object.otp_type != null)
-                message.otp_type = object.otp_type | 0;
-            if (object.otp_value != null)
-                message.otp_value = object.otp_value >>> 0;
-            if (object.otp_identifier != null)
-                message.otp_identifier = String(object.otp_identifier);
-            if (object.steam2_ticket_request != null)
-                message.steam2_ticket_request = Boolean(object.steam2_ticket_request);
-            if (object.sony_psn_ticket != null)
-                if (typeof object.sony_psn_ticket === "string")
-                    $util.base64.decode(object.sony_psn_ticket, message.sony_psn_ticket = $util.newBuffer($util.base64.length(object.sony_psn_ticket)), 0);
-                else if (object.sony_psn_ticket.length)
-                    message.sony_psn_ticket = object.sony_psn_ticket;
-            if (object.sony_psn_service_id != null)
-                message.sony_psn_service_id = String(object.sony_psn_service_id);
-            if (object.create_new_psn_linked_account_if_needed != null)
-                message.create_new_psn_linked_account_if_needed = Boolean(object.create_new_psn_linked_account_if_needed);
-            if (object.sony_psn_name != null)
-                message.sony_psn_name = String(object.sony_psn_name);
-            if (object.game_server_app_id != null)
-                message.game_server_app_id = object.game_server_app_id | 0;
-            if (object.steamguard_dont_remember_computer != null)
-                message.steamguard_dont_remember_computer = Boolean(object.steamguard_dont_remember_computer);
-            if (object.machine_name != null)
-                message.machine_name = String(object.machine_name);
-            if (object.machine_name_userchosen != null)
-                message.machine_name_userchosen = String(object.machine_name_userchosen);
-            if (object.country_override != null)
-                message.country_override = String(object.country_override);
-            if (object.is_steam_box != null)
-                message.is_steam_box = Boolean(object.is_steam_box);
-            if (object.client_instance_id != null)
-                if ($util.Long)
-                    (message.client_instance_id = $util.Long.fromValue(object.client_instance_id)).unsigned = true;
-                else if (typeof object.client_instance_id === "string")
-                    message.client_instance_id = parseInt(object.client_instance_id, 10);
-                else if (typeof object.client_instance_id === "number")
-                    message.client_instance_id = object.client_instance_id;
-                else if (typeof object.client_instance_id === "object")
-                    message.client_instance_id = new $util.LongBits(object.client_instance_id.low >>> 0, object.client_instance_id.high >>> 0).toNumber(true);
-            if (object.two_factor_code != null)
-                message.two_factor_code = String(object.two_factor_code);
-            if (object.supports_rate_limit_response != null)
-                message.supports_rate_limit_response = Boolean(object.supports_rate_limit_response);
-            if (object.web_logon_nonce != null)
-                message.web_logon_nonce = String(object.web_logon_nonce);
-            if (object.priority_reason != null)
-                message.priority_reason = object.priority_reason | 0;
+            if (object.steamguardcode != null)
+                message.steamguardcode = String(object.steamguardcode);
+            if (object.remember_password != null)
+                message.remember_password = Boolean(object.remember_password);
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgClientLogon message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_Login_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @static
-         * @param {CMsgClientLogon} message CMsgClientLogon
+         * @param {SiteServerUI_Login_Request} message SiteServerUI_Login_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientLogon.toObject = function toObject(message, options) {
+        SiteServerUI_Login_Request.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.protocol_version = 0;
-                object.obfustucated_private_ip = 0;
-                object.cell_id = 0;
-                object.last_session_id = 0;
-                object.client_package_version = 0;
-                object.client_language = "";
-                object.client_os_type = 0;
-                object.should_remember_password = false;
-                object.wine_version = "";
-                object.ping_ms_from_cell_search = 0;
-                object.public_ip = 0;
-                object.qos_level = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.client_supplied_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_supplied_steam_id = options.longs === String ? "0" : 0;
-                if (options.bytes === String)
-                    object.machine_id = "";
-                else {
-                    object.machine_id = [];
-                    if (options.bytes !== Array)
-                        object.machine_id = $util.newBuffer(object.machine_id);
-                }
-                object.launcher_type = 0;
-                object.ui_mode = 0;
-                object.chat_mode = 0;
-                if (options.bytes === String)
-                    object.steam2_auth_ticket = "";
-                else {
-                    object.steam2_auth_ticket = [];
-                    if (options.bytes !== Array)
-                        object.steam2_auth_ticket = $util.newBuffer(object.steam2_auth_ticket);
-                }
-                object.email_address = "";
-                object.rtime32_account_creation = 0;
-                object.account_name = "";
+                object.username = "";
                 object.password = "";
-                object.game_server_token = "";
-                object.login_key = "";
-                object.was_converted_deprecated_msg = false;
-                object.anon_user_target_account_name = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.resolved_user_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.resolved_user_steam_id = options.longs === String ? "0" : 0;
-                object.eresult_sentryfile = 0;
-                if (options.bytes === String)
-                    object.sha_sentryfile = "";
-                else {
-                    object.sha_sentryfile = [];
-                    if (options.bytes !== Array)
-                        object.sha_sentryfile = $util.newBuffer(object.sha_sentryfile);
-                }
-                object.auth_code = "";
-                object.otp_type = 0;
-                object.otp_value = 0;
-                object.otp_identifier = "";
-                object.steam2_ticket_request = false;
-                if (options.bytes === String)
-                    object.sony_psn_ticket = "";
-                else {
-                    object.sony_psn_ticket = [];
-                    if (options.bytes !== Array)
-                        object.sony_psn_ticket = $util.newBuffer(object.sony_psn_ticket);
-                }
-                object.sony_psn_service_id = "";
-                object.create_new_psn_linked_account_if_needed = false;
-                object.sony_psn_name = "";
-                object.game_server_app_id = 0;
-                object.steamguard_dont_remember_computer = false;
-                object.machine_name = "";
-                object.machine_name_userchosen = "";
-                object.country_override = "";
-                object.is_steam_box = false;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.client_instance_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_instance_id = options.longs === String ? "0" : 0;
-                object.two_factor_code = "";
-                object.supports_rate_limit_response = false;
-                object.web_logon_nonce = "";
-                object.priority_reason = 0;
+                object.steamguardcode = "";
+                object.remember_password = false;
             }
-            if (message.protocol_version != null && message.hasOwnProperty("protocol_version"))
-                object.protocol_version = message.protocol_version;
-            if (message.obfustucated_private_ip != null && message.hasOwnProperty("obfustucated_private_ip"))
-                object.obfustucated_private_ip = message.obfustucated_private_ip;
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                object.cell_id = message.cell_id;
-            if (message.last_session_id != null && message.hasOwnProperty("last_session_id"))
-                object.last_session_id = message.last_session_id;
-            if (message.client_package_version != null && message.hasOwnProperty("client_package_version"))
-                object.client_package_version = message.client_package_version;
-            if (message.client_language != null && message.hasOwnProperty("client_language"))
-                object.client_language = message.client_language;
-            if (message.client_os_type != null && message.hasOwnProperty("client_os_type"))
-                object.client_os_type = message.client_os_type;
-            if (message.should_remember_password != null && message.hasOwnProperty("should_remember_password"))
-                object.should_remember_password = message.should_remember_password;
-            if (message.wine_version != null && message.hasOwnProperty("wine_version"))
-                object.wine_version = message.wine_version;
-            if (message.ping_ms_from_cell_search != null && message.hasOwnProperty("ping_ms_from_cell_search"))
-                object.ping_ms_from_cell_search = message.ping_ms_from_cell_search;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
-            if (message.qos_level != null && message.hasOwnProperty("qos_level"))
-                object.qos_level = message.qos_level;
-            if (message.client_supplied_steam_id != null && message.hasOwnProperty("client_supplied_steam_id"))
-                if (typeof message.client_supplied_steam_id === "number")
-                    object.client_supplied_steam_id = options.longs === String ? String(message.client_supplied_steam_id) : message.client_supplied_steam_id;
-                else
-                    object.client_supplied_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_supplied_steam_id) : options.longs === Number ? new $util.LongBits(message.client_supplied_steam_id.low >>> 0, message.client_supplied_steam_id.high >>> 0).toNumber() : message.client_supplied_steam_id;
-            if (message.machine_id != null && message.hasOwnProperty("machine_id"))
-                object.machine_id = options.bytes === String ? $util.base64.encode(message.machine_id, 0, message.machine_id.length) : options.bytes === Array ? Array.prototype.slice.call(message.machine_id) : message.machine_id;
-            if (message.launcher_type != null && message.hasOwnProperty("launcher_type"))
-                object.launcher_type = message.launcher_type;
-            if (message.ui_mode != null && message.hasOwnProperty("ui_mode"))
-                object.ui_mode = message.ui_mode;
-            if (message.chat_mode != null && message.hasOwnProperty("chat_mode"))
-                object.chat_mode = message.chat_mode;
-            if (message.steam2_auth_ticket != null && message.hasOwnProperty("steam2_auth_ticket"))
-                object.steam2_auth_ticket = options.bytes === String ? $util.base64.encode(message.steam2_auth_ticket, 0, message.steam2_auth_ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.steam2_auth_ticket) : message.steam2_auth_ticket;
-            if (message.email_address != null && message.hasOwnProperty("email_address"))
-                object.email_address = message.email_address;
-            if (message.rtime32_account_creation != null && message.hasOwnProperty("rtime32_account_creation"))
-                object.rtime32_account_creation = message.rtime32_account_creation;
-            if (message.account_name != null && message.hasOwnProperty("account_name"))
-                object.account_name = message.account_name;
+            if (message.username != null && message.hasOwnProperty("username"))
+                object.username = message.username;
             if (message.password != null && message.hasOwnProperty("password"))
                 object.password = message.password;
-            if (message.game_server_token != null && message.hasOwnProperty("game_server_token"))
-                object.game_server_token = message.game_server_token;
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                object.login_key = message.login_key;
-            if (message.was_converted_deprecated_msg != null && message.hasOwnProperty("was_converted_deprecated_msg"))
-                object.was_converted_deprecated_msg = message.was_converted_deprecated_msg;
-            if (message.anon_user_target_account_name != null && message.hasOwnProperty("anon_user_target_account_name"))
-                object.anon_user_target_account_name = message.anon_user_target_account_name;
-            if (message.resolved_user_steam_id != null && message.hasOwnProperty("resolved_user_steam_id"))
-                if (typeof message.resolved_user_steam_id === "number")
-                    object.resolved_user_steam_id = options.longs === String ? String(message.resolved_user_steam_id) : message.resolved_user_steam_id;
-                else
-                    object.resolved_user_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.resolved_user_steam_id) : options.longs === Number ? new $util.LongBits(message.resolved_user_steam_id.low >>> 0, message.resolved_user_steam_id.high >>> 0).toNumber() : message.resolved_user_steam_id;
-            if (message.eresult_sentryfile != null && message.hasOwnProperty("eresult_sentryfile"))
-                object.eresult_sentryfile = message.eresult_sentryfile;
-            if (message.sha_sentryfile != null && message.hasOwnProperty("sha_sentryfile"))
-                object.sha_sentryfile = options.bytes === String ? $util.base64.encode(message.sha_sentryfile, 0, message.sha_sentryfile.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha_sentryfile) : message.sha_sentryfile;
-            if (message.auth_code != null && message.hasOwnProperty("auth_code"))
-                object.auth_code = message.auth_code;
-            if (message.otp_type != null && message.hasOwnProperty("otp_type"))
-                object.otp_type = message.otp_type;
-            if (message.otp_value != null && message.hasOwnProperty("otp_value"))
-                object.otp_value = message.otp_value;
-            if (message.otp_identifier != null && message.hasOwnProperty("otp_identifier"))
-                object.otp_identifier = message.otp_identifier;
-            if (message.steam2_ticket_request != null && message.hasOwnProperty("steam2_ticket_request"))
-                object.steam2_ticket_request = message.steam2_ticket_request;
-            if (message.sony_psn_ticket != null && message.hasOwnProperty("sony_psn_ticket"))
-                object.sony_psn_ticket = options.bytes === String ? $util.base64.encode(message.sony_psn_ticket, 0, message.sony_psn_ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.sony_psn_ticket) : message.sony_psn_ticket;
-            if (message.sony_psn_service_id != null && message.hasOwnProperty("sony_psn_service_id"))
-                object.sony_psn_service_id = message.sony_psn_service_id;
-            if (message.create_new_psn_linked_account_if_needed != null && message.hasOwnProperty("create_new_psn_linked_account_if_needed"))
-                object.create_new_psn_linked_account_if_needed = message.create_new_psn_linked_account_if_needed;
-            if (message.sony_psn_name != null && message.hasOwnProperty("sony_psn_name"))
-                object.sony_psn_name = message.sony_psn_name;
-            if (message.game_server_app_id != null && message.hasOwnProperty("game_server_app_id"))
-                object.game_server_app_id = message.game_server_app_id;
-            if (message.steamguard_dont_remember_computer != null && message.hasOwnProperty("steamguard_dont_remember_computer"))
-                object.steamguard_dont_remember_computer = message.steamguard_dont_remember_computer;
-            if (message.machine_name != null && message.hasOwnProperty("machine_name"))
-                object.machine_name = message.machine_name;
-            if (message.machine_name_userchosen != null && message.hasOwnProperty("machine_name_userchosen"))
-                object.machine_name_userchosen = message.machine_name_userchosen;
-            if (message.country_override != null && message.hasOwnProperty("country_override"))
-                object.country_override = message.country_override;
-            if (message.is_steam_box != null && message.hasOwnProperty("is_steam_box"))
-                object.is_steam_box = message.is_steam_box;
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                if (typeof message.client_instance_id === "number")
-                    object.client_instance_id = options.longs === String ? String(message.client_instance_id) : message.client_instance_id;
-                else
-                    object.client_instance_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_instance_id) : options.longs === Number ? new $util.LongBits(message.client_instance_id.low >>> 0, message.client_instance_id.high >>> 0).toNumber(true) : message.client_instance_id;
-            if (message.two_factor_code != null && message.hasOwnProperty("two_factor_code"))
-                object.two_factor_code = message.two_factor_code;
-            if (message.supports_rate_limit_response != null && message.hasOwnProperty("supports_rate_limit_response"))
-                object.supports_rate_limit_response = message.supports_rate_limit_response;
-            if (message.web_logon_nonce != null && message.hasOwnProperty("web_logon_nonce"))
-                object.web_logon_nonce = message.web_logon_nonce;
-            if (message.priority_reason != null && message.hasOwnProperty("priority_reason"))
-                object.priority_reason = message.priority_reason;
+            if (message.steamguardcode != null && message.hasOwnProperty("steamguardcode"))
+                object.steamguardcode = message.steamguardcode;
+            if (message.remember_password != null && message.hasOwnProperty("remember_password"))
+                object.remember_password = message.remember_password;
             return object;
         };
     
         /**
-         * Converts this CMsgClientLogon to JSON.
+         * Converts this SiteServerUI_Login_Request to JSON.
          * @function toJSON
-         * @memberof CMsgClientLogon
+         * @memberof SiteServerUI_Login_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientLogon.prototype.toJSON = function toJSON() {
+        SiteServerUI_Login_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientLogon;
+        return SiteServerUI_Login_Request;
     })();
     
-    $root.CMsgClientLogonResponse = (function() {
+    $root.SiteServerUI_Login_Response = (function() {
     
         /**
-         * Properties of a CMsgClientLogonResponse.
-         * @exports ICMsgClientLogonResponse
-         * @interface ICMsgClientLogonResponse
-         * @property {number|null} [eresult] CMsgClientLogonResponse eresult
-         * @property {number|null} [out_of_game_heartbeat_seconds] CMsgClientLogonResponse out_of_game_heartbeat_seconds
-         * @property {number|null} [in_game_heartbeat_seconds] CMsgClientLogonResponse in_game_heartbeat_seconds
-         * @property {number|null} [public_ip] CMsgClientLogonResponse public_ip
-         * @property {number|null} [rtime32_server_time] CMsgClientLogonResponse rtime32_server_time
-         * @property {number|null} [account_flags] CMsgClientLogonResponse account_flags
-         * @property {number|null} [cell_id] CMsgClientLogonResponse cell_id
-         * @property {string|null} [email_domain] CMsgClientLogonResponse email_domain
-         * @property {Uint8Array|null} [steam2_ticket] CMsgClientLogonResponse steam2_ticket
-         * @property {number|null} [eresult_extended] CMsgClientLogonResponse eresult_extended
-         * @property {string|null} [webapi_authenticate_user_nonce] CMsgClientLogonResponse webapi_authenticate_user_nonce
-         * @property {number|null} [cell_id_ping_threshold] CMsgClientLogonResponse cell_id_ping_threshold
-         * @property {boolean|null} [use_pics] CMsgClientLogonResponse use_pics
-         * @property {string|null} [vanity_url] CMsgClientLogonResponse vanity_url
-         * @property {number|Long|null} [client_supplied_steamid] CMsgClientLogonResponse client_supplied_steamid
-         * @property {string|null} [ip_country_code] CMsgClientLogonResponse ip_country_code
-         * @property {Uint8Array|null} [parental_settings] CMsgClientLogonResponse parental_settings
-         * @property {Uint8Array|null} [parental_setting_signature] CMsgClientLogonResponse parental_setting_signature
-         * @property {number|null} [count_loginfailures_to_migrate] CMsgClientLogonResponse count_loginfailures_to_migrate
-         * @property {number|null} [count_disconnects_to_migrate] CMsgClientLogonResponse count_disconnects_to_migrate
-         * @property {number|null} [ogs_data_report_time_window] CMsgClientLogonResponse ogs_data_report_time_window
-         * @property {number|Long|null} [client_instance_id] CMsgClientLogonResponse client_instance_id
-         * @property {boolean|null} [force_client_update_check] CMsgClientLogonResponse force_client_update_check
+         * Properties of a SiteServerUI_Login_Response.
+         * @exports ISiteServerUI_Login_Response
+         * @interface ISiteServerUI_Login_Response
+         * @property {number|null} [logon_state] SiteServerUI_Login_Response logon_state
+         * @property {number|null} [logon_eresult] SiteServerUI_Login_Response logon_eresult
          */
     
         /**
-         * Constructs a new CMsgClientLogonResponse.
-         * @exports CMsgClientLogonResponse
-         * @classdesc Represents a CMsgClientLogonResponse.
-         * @implements ICMsgClientLogonResponse
+         * Constructs a new SiteServerUI_Login_Response.
+         * @exports SiteServerUI_Login_Response
+         * @classdesc Represents a SiteServerUI_Login_Response.
+         * @implements ISiteServerUI_Login_Response
          * @constructor
-         * @param {ICMsgClientLogonResponse=} [properties] Properties to set
+         * @param {ISiteServerUI_Login_Response=} [properties] Properties to set
          */
-        function CMsgClientLogonResponse(properties) {
+        function SiteServerUI_Login_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1984,361 +296,88 @@
         }
     
         /**
-         * CMsgClientLogonResponse eresult.
-         * @member {number} eresult
-         * @memberof CMsgClientLogonResponse
+         * SiteServerUI_Login_Response logon_state.
+         * @member {number} logon_state
+         * @memberof SiteServerUI_Login_Response
          * @instance
          */
-        CMsgClientLogonResponse.prototype.eresult = 2;
+        SiteServerUI_Login_Response.prototype.logon_state = 0;
     
         /**
-         * CMsgClientLogonResponse out_of_game_heartbeat_seconds.
-         * @member {number} out_of_game_heartbeat_seconds
-         * @memberof CMsgClientLogonResponse
+         * SiteServerUI_Login_Response logon_eresult.
+         * @member {number} logon_eresult
+         * @memberof SiteServerUI_Login_Response
          * @instance
          */
-        CMsgClientLogonResponse.prototype.out_of_game_heartbeat_seconds = 0;
+        SiteServerUI_Login_Response.prototype.logon_eresult = 0;
     
         /**
-         * CMsgClientLogonResponse in_game_heartbeat_seconds.
-         * @member {number} in_game_heartbeat_seconds
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.in_game_heartbeat_seconds = 0;
-    
-        /**
-         * CMsgClientLogonResponse public_ip.
-         * @member {number} public_ip
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.public_ip = 0;
-    
-        /**
-         * CMsgClientLogonResponse rtime32_server_time.
-         * @member {number} rtime32_server_time
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.rtime32_server_time = 0;
-    
-        /**
-         * CMsgClientLogonResponse account_flags.
-         * @member {number} account_flags
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.account_flags = 0;
-    
-        /**
-         * CMsgClientLogonResponse cell_id.
-         * @member {number} cell_id
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.cell_id = 0;
-    
-        /**
-         * CMsgClientLogonResponse email_domain.
-         * @member {string} email_domain
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.email_domain = "";
-    
-        /**
-         * CMsgClientLogonResponse steam2_ticket.
-         * @member {Uint8Array} steam2_ticket
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.steam2_ticket = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogonResponse eresult_extended.
-         * @member {number} eresult_extended
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.eresult_extended = 0;
-    
-        /**
-         * CMsgClientLogonResponse webapi_authenticate_user_nonce.
-         * @member {string} webapi_authenticate_user_nonce
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.webapi_authenticate_user_nonce = "";
-    
-        /**
-         * CMsgClientLogonResponse cell_id_ping_threshold.
-         * @member {number} cell_id_ping_threshold
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.cell_id_ping_threshold = 0;
-    
-        /**
-         * CMsgClientLogonResponse use_pics.
-         * @member {boolean} use_pics
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.use_pics = false;
-    
-        /**
-         * CMsgClientLogonResponse vanity_url.
-         * @member {string} vanity_url
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.vanity_url = "";
-    
-        /**
-         * CMsgClientLogonResponse client_supplied_steamid.
-         * @member {number|Long} client_supplied_steamid
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.client_supplied_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CMsgClientLogonResponse ip_country_code.
-         * @member {string} ip_country_code
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.ip_country_code = "";
-    
-        /**
-         * CMsgClientLogonResponse parental_settings.
-         * @member {Uint8Array} parental_settings
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.parental_settings = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogonResponse parental_setting_signature.
-         * @member {Uint8Array} parental_setting_signature
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.parental_setting_signature = $util.newBuffer([]);
-    
-        /**
-         * CMsgClientLogonResponse count_loginfailures_to_migrate.
-         * @member {number} count_loginfailures_to_migrate
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.count_loginfailures_to_migrate = 0;
-    
-        /**
-         * CMsgClientLogonResponse count_disconnects_to_migrate.
-         * @member {number} count_disconnects_to_migrate
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.count_disconnects_to_migrate = 0;
-    
-        /**
-         * CMsgClientLogonResponse ogs_data_report_time_window.
-         * @member {number} ogs_data_report_time_window
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.ogs_data_report_time_window = 0;
-    
-        /**
-         * CMsgClientLogonResponse client_instance_id.
-         * @member {number|Long} client_instance_id
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.client_instance_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CMsgClientLogonResponse force_client_update_check.
-         * @member {boolean} force_client_update_check
-         * @memberof CMsgClientLogonResponse
-         * @instance
-         */
-        CMsgClientLogonResponse.prototype.force_client_update_check = false;
-    
-        /**
-         * Creates a new CMsgClientLogonResponse instance using the specified properties.
+         * Creates a new SiteServerUI_Login_Response instance using the specified properties.
          * @function create
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
-         * @param {ICMsgClientLogonResponse=} [properties] Properties to set
-         * @returns {CMsgClientLogonResponse} CMsgClientLogonResponse instance
+         * @param {ISiteServerUI_Login_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_Login_Response} SiteServerUI_Login_Response instance
          */
-        CMsgClientLogonResponse.create = function create(properties) {
-            return new CMsgClientLogonResponse(properties);
+        SiteServerUI_Login_Response.create = function create(properties) {
+            return new SiteServerUI_Login_Response(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientLogonResponse message. Does not implicitly {@link CMsgClientLogonResponse.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Login_Response message. Does not implicitly {@link SiteServerUI_Login_Response.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
-         * @param {ICMsgClientLogonResponse} message CMsgClientLogonResponse message or plain object to encode
+         * @param {ISiteServerUI_Login_Response} message SiteServerUI_Login_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLogonResponse.encode = function encode(message, writer) {
+        SiteServerUI_Login_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.out_of_game_heartbeat_seconds != null && message.hasOwnProperty("out_of_game_heartbeat_seconds"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.out_of_game_heartbeat_seconds);
-            if (message.in_game_heartbeat_seconds != null && message.hasOwnProperty("in_game_heartbeat_seconds"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.in_game_heartbeat_seconds);
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.public_ip);
-            if (message.rtime32_server_time != null && message.hasOwnProperty("rtime32_server_time"))
-                writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.rtime32_server_time);
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.account_flags);
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.cell_id);
-            if (message.email_domain != null && message.hasOwnProperty("email_domain"))
-                writer.uint32(/* id 8, wireType 2 =*/66).string(message.email_domain);
-            if (message.steam2_ticket != null && message.hasOwnProperty("steam2_ticket"))
-                writer.uint32(/* id 9, wireType 2 =*/74).bytes(message.steam2_ticket);
-            if (message.eresult_extended != null && message.hasOwnProperty("eresult_extended"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.eresult_extended);
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                writer.uint32(/* id 11, wireType 2 =*/90).string(message.webapi_authenticate_user_nonce);
-            if (message.cell_id_ping_threshold != null && message.hasOwnProperty("cell_id_ping_threshold"))
-                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.cell_id_ping_threshold);
-            if (message.use_pics != null && message.hasOwnProperty("use_pics"))
-                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.use_pics);
-            if (message.vanity_url != null && message.hasOwnProperty("vanity_url"))
-                writer.uint32(/* id 14, wireType 2 =*/114).string(message.vanity_url);
-            if (message.client_supplied_steamid != null && message.hasOwnProperty("client_supplied_steamid"))
-                writer.uint32(/* id 20, wireType 1 =*/161).fixed64(message.client_supplied_steamid);
-            if (message.ip_country_code != null && message.hasOwnProperty("ip_country_code"))
-                writer.uint32(/* id 21, wireType 2 =*/170).string(message.ip_country_code);
-            if (message.parental_settings != null && message.hasOwnProperty("parental_settings"))
-                writer.uint32(/* id 22, wireType 2 =*/178).bytes(message.parental_settings);
-            if (message.parental_setting_signature != null && message.hasOwnProperty("parental_setting_signature"))
-                writer.uint32(/* id 23, wireType 2 =*/186).bytes(message.parental_setting_signature);
-            if (message.count_loginfailures_to_migrate != null && message.hasOwnProperty("count_loginfailures_to_migrate"))
-                writer.uint32(/* id 24, wireType 0 =*/192).int32(message.count_loginfailures_to_migrate);
-            if (message.count_disconnects_to_migrate != null && message.hasOwnProperty("count_disconnects_to_migrate"))
-                writer.uint32(/* id 25, wireType 0 =*/200).int32(message.count_disconnects_to_migrate);
-            if (message.ogs_data_report_time_window != null && message.hasOwnProperty("ogs_data_report_time_window"))
-                writer.uint32(/* id 26, wireType 0 =*/208).int32(message.ogs_data_report_time_window);
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                writer.uint32(/* id 27, wireType 0 =*/216).uint64(message.client_instance_id);
-            if (message.force_client_update_check != null && message.hasOwnProperty("force_client_update_check"))
-                writer.uint32(/* id 28, wireType 0 =*/224).bool(message.force_client_update_check);
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logon_state);
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.logon_eresult);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientLogonResponse message, length delimited. Does not implicitly {@link CMsgClientLogonResponse.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Login_Response message, length delimited. Does not implicitly {@link SiteServerUI_Login_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
-         * @param {ICMsgClientLogonResponse} message CMsgClientLogonResponse message or plain object to encode
+         * @param {ISiteServerUI_Login_Response} message SiteServerUI_Login_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLogonResponse.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_Login_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientLogonResponse message from the specified reader or buffer.
+         * Decodes a SiteServerUI_Login_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientLogonResponse} CMsgClientLogonResponse
+         * @returns {SiteServerUI_Login_Response} SiteServerUI_Login_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogonResponse.decode = function decode(reader, length) {
+        SiteServerUI_Login_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientLogonResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Login_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.eresult = reader.int32();
+                    message.logon_state = reader.int32();
                     break;
                 case 2:
-                    message.out_of_game_heartbeat_seconds = reader.int32();
-                    break;
-                case 3:
-                    message.in_game_heartbeat_seconds = reader.int32();
-                    break;
-                case 4:
-                    message.public_ip = reader.uint32();
-                    break;
-                case 5:
-                    message.rtime32_server_time = reader.fixed32();
-                    break;
-                case 6:
-                    message.account_flags = reader.uint32();
-                    break;
-                case 7:
-                    message.cell_id = reader.uint32();
-                    break;
-                case 8:
-                    message.email_domain = reader.string();
-                    break;
-                case 9:
-                    message.steam2_ticket = reader.bytes();
-                    break;
-                case 10:
-                    message.eresult_extended = reader.int32();
-                    break;
-                case 11:
-                    message.webapi_authenticate_user_nonce = reader.string();
-                    break;
-                case 12:
-                    message.cell_id_ping_threshold = reader.uint32();
-                    break;
-                case 13:
-                    message.use_pics = reader.bool();
-                    break;
-                case 14:
-                    message.vanity_url = reader.string();
-                    break;
-                case 20:
-                    message.client_supplied_steamid = reader.fixed64();
-                    break;
-                case 21:
-                    message.ip_country_code = reader.string();
-                    break;
-                case 22:
-                    message.parental_settings = reader.bytes();
-                    break;
-                case 23:
-                    message.parental_setting_signature = reader.bytes();
-                    break;
-                case 24:
-                    message.count_loginfailures_to_migrate = reader.int32();
-                    break;
-                case 25:
-                    message.count_disconnects_to_migrate = reader.int32();
-                    break;
-                case 26:
-                    message.ogs_data_report_time_window = reader.int32();
-                    break;
-                case 27:
-                    message.client_instance_id = reader.uint64();
-                    break;
-                case 28:
-                    message.force_client_update_check = reader.bool();
+                    message.logon_eresult = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2349,339 +388,115 @@
         };
     
         /**
-         * Decodes a CMsgClientLogonResponse message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_Login_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientLogonResponse} CMsgClientLogonResponse
+         * @returns {SiteServerUI_Login_Response} SiteServerUI_Login_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogonResponse.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_Login_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientLogonResponse message.
+         * Verifies a SiteServerUI_Login_Response message.
          * @function verify
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientLogonResponse.verify = function verify(message) {
+        SiteServerUI_Login_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                if (!$util.isInteger(message.eresult))
-                    return "eresult: integer expected";
-            if (message.out_of_game_heartbeat_seconds != null && message.hasOwnProperty("out_of_game_heartbeat_seconds"))
-                if (!$util.isInteger(message.out_of_game_heartbeat_seconds))
-                    return "out_of_game_heartbeat_seconds: integer expected";
-            if (message.in_game_heartbeat_seconds != null && message.hasOwnProperty("in_game_heartbeat_seconds"))
-                if (!$util.isInteger(message.in_game_heartbeat_seconds))
-                    return "in_game_heartbeat_seconds: integer expected";
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                if (!$util.isInteger(message.public_ip))
-                    return "public_ip: integer expected";
-            if (message.rtime32_server_time != null && message.hasOwnProperty("rtime32_server_time"))
-                if (!$util.isInteger(message.rtime32_server_time))
-                    return "rtime32_server_time: integer expected";
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                if (!$util.isInteger(message.account_flags))
-                    return "account_flags: integer expected";
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                if (!$util.isInteger(message.cell_id))
-                    return "cell_id: integer expected";
-            if (message.email_domain != null && message.hasOwnProperty("email_domain"))
-                if (!$util.isString(message.email_domain))
-                    return "email_domain: string expected";
-            if (message.steam2_ticket != null && message.hasOwnProperty("steam2_ticket"))
-                if (!(message.steam2_ticket && typeof message.steam2_ticket.length === "number" || $util.isString(message.steam2_ticket)))
-                    return "steam2_ticket: buffer expected";
-            if (message.eresult_extended != null && message.hasOwnProperty("eresult_extended"))
-                if (!$util.isInteger(message.eresult_extended))
-                    return "eresult_extended: integer expected";
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                if (!$util.isString(message.webapi_authenticate_user_nonce))
-                    return "webapi_authenticate_user_nonce: string expected";
-            if (message.cell_id_ping_threshold != null && message.hasOwnProperty("cell_id_ping_threshold"))
-                if (!$util.isInteger(message.cell_id_ping_threshold))
-                    return "cell_id_ping_threshold: integer expected";
-            if (message.use_pics != null && message.hasOwnProperty("use_pics"))
-                if (typeof message.use_pics !== "boolean")
-                    return "use_pics: boolean expected";
-            if (message.vanity_url != null && message.hasOwnProperty("vanity_url"))
-                if (!$util.isString(message.vanity_url))
-                    return "vanity_url: string expected";
-            if (message.client_supplied_steamid != null && message.hasOwnProperty("client_supplied_steamid"))
-                if (!$util.isInteger(message.client_supplied_steamid) && !(message.client_supplied_steamid && $util.isInteger(message.client_supplied_steamid.low) && $util.isInteger(message.client_supplied_steamid.high)))
-                    return "client_supplied_steamid: integer|Long expected";
-            if (message.ip_country_code != null && message.hasOwnProperty("ip_country_code"))
-                if (!$util.isString(message.ip_country_code))
-                    return "ip_country_code: string expected";
-            if (message.parental_settings != null && message.hasOwnProperty("parental_settings"))
-                if (!(message.parental_settings && typeof message.parental_settings.length === "number" || $util.isString(message.parental_settings)))
-                    return "parental_settings: buffer expected";
-            if (message.parental_setting_signature != null && message.hasOwnProperty("parental_setting_signature"))
-                if (!(message.parental_setting_signature && typeof message.parental_setting_signature.length === "number" || $util.isString(message.parental_setting_signature)))
-                    return "parental_setting_signature: buffer expected";
-            if (message.count_loginfailures_to_migrate != null && message.hasOwnProperty("count_loginfailures_to_migrate"))
-                if (!$util.isInteger(message.count_loginfailures_to_migrate))
-                    return "count_loginfailures_to_migrate: integer expected";
-            if (message.count_disconnects_to_migrate != null && message.hasOwnProperty("count_disconnects_to_migrate"))
-                if (!$util.isInteger(message.count_disconnects_to_migrate))
-                    return "count_disconnects_to_migrate: integer expected";
-            if (message.ogs_data_report_time_window != null && message.hasOwnProperty("ogs_data_report_time_window"))
-                if (!$util.isInteger(message.ogs_data_report_time_window))
-                    return "ogs_data_report_time_window: integer expected";
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                if (!$util.isInteger(message.client_instance_id) && !(message.client_instance_id && $util.isInteger(message.client_instance_id.low) && $util.isInteger(message.client_instance_id.high)))
-                    return "client_instance_id: integer|Long expected";
-            if (message.force_client_update_check != null && message.hasOwnProperty("force_client_update_check"))
-                if (typeof message.force_client_update_check !== "boolean")
-                    return "force_client_update_check: boolean expected";
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                if (!$util.isInteger(message.logon_state))
+                    return "logon_state: integer expected";
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                if (!$util.isInteger(message.logon_eresult))
+                    return "logon_eresult: integer expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientLogonResponse message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_Login_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientLogonResponse} CMsgClientLogonResponse
+         * @returns {SiteServerUI_Login_Response} SiteServerUI_Login_Response
          */
-        CMsgClientLogonResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientLogonResponse)
+        SiteServerUI_Login_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Login_Response)
                 return object;
-            var message = new $root.CMsgClientLogonResponse();
-            if (object.eresult != null)
-                message.eresult = object.eresult | 0;
-            if (object.out_of_game_heartbeat_seconds != null)
-                message.out_of_game_heartbeat_seconds = object.out_of_game_heartbeat_seconds | 0;
-            if (object.in_game_heartbeat_seconds != null)
-                message.in_game_heartbeat_seconds = object.in_game_heartbeat_seconds | 0;
-            if (object.public_ip != null)
-                message.public_ip = object.public_ip >>> 0;
-            if (object.rtime32_server_time != null)
-                message.rtime32_server_time = object.rtime32_server_time >>> 0;
-            if (object.account_flags != null)
-                message.account_flags = object.account_flags >>> 0;
-            if (object.cell_id != null)
-                message.cell_id = object.cell_id >>> 0;
-            if (object.email_domain != null)
-                message.email_domain = String(object.email_domain);
-            if (object.steam2_ticket != null)
-                if (typeof object.steam2_ticket === "string")
-                    $util.base64.decode(object.steam2_ticket, message.steam2_ticket = $util.newBuffer($util.base64.length(object.steam2_ticket)), 0);
-                else if (object.steam2_ticket.length)
-                    message.steam2_ticket = object.steam2_ticket;
-            if (object.eresult_extended != null)
-                message.eresult_extended = object.eresult_extended | 0;
-            if (object.webapi_authenticate_user_nonce != null)
-                message.webapi_authenticate_user_nonce = String(object.webapi_authenticate_user_nonce);
-            if (object.cell_id_ping_threshold != null)
-                message.cell_id_ping_threshold = object.cell_id_ping_threshold >>> 0;
-            if (object.use_pics != null)
-                message.use_pics = Boolean(object.use_pics);
-            if (object.vanity_url != null)
-                message.vanity_url = String(object.vanity_url);
-            if (object.client_supplied_steamid != null)
-                if ($util.Long)
-                    (message.client_supplied_steamid = $util.Long.fromValue(object.client_supplied_steamid)).unsigned = false;
-                else if (typeof object.client_supplied_steamid === "string")
-                    message.client_supplied_steamid = parseInt(object.client_supplied_steamid, 10);
-                else if (typeof object.client_supplied_steamid === "number")
-                    message.client_supplied_steamid = object.client_supplied_steamid;
-                else if (typeof object.client_supplied_steamid === "object")
-                    message.client_supplied_steamid = new $util.LongBits(object.client_supplied_steamid.low >>> 0, object.client_supplied_steamid.high >>> 0).toNumber();
-            if (object.ip_country_code != null)
-                message.ip_country_code = String(object.ip_country_code);
-            if (object.parental_settings != null)
-                if (typeof object.parental_settings === "string")
-                    $util.base64.decode(object.parental_settings, message.parental_settings = $util.newBuffer($util.base64.length(object.parental_settings)), 0);
-                else if (object.parental_settings.length)
-                    message.parental_settings = object.parental_settings;
-            if (object.parental_setting_signature != null)
-                if (typeof object.parental_setting_signature === "string")
-                    $util.base64.decode(object.parental_setting_signature, message.parental_setting_signature = $util.newBuffer($util.base64.length(object.parental_setting_signature)), 0);
-                else if (object.parental_setting_signature.length)
-                    message.parental_setting_signature = object.parental_setting_signature;
-            if (object.count_loginfailures_to_migrate != null)
-                message.count_loginfailures_to_migrate = object.count_loginfailures_to_migrate | 0;
-            if (object.count_disconnects_to_migrate != null)
-                message.count_disconnects_to_migrate = object.count_disconnects_to_migrate | 0;
-            if (object.ogs_data_report_time_window != null)
-                message.ogs_data_report_time_window = object.ogs_data_report_time_window | 0;
-            if (object.client_instance_id != null)
-                if ($util.Long)
-                    (message.client_instance_id = $util.Long.fromValue(object.client_instance_id)).unsigned = true;
-                else if (typeof object.client_instance_id === "string")
-                    message.client_instance_id = parseInt(object.client_instance_id, 10);
-                else if (typeof object.client_instance_id === "number")
-                    message.client_instance_id = object.client_instance_id;
-                else if (typeof object.client_instance_id === "object")
-                    message.client_instance_id = new $util.LongBits(object.client_instance_id.low >>> 0, object.client_instance_id.high >>> 0).toNumber(true);
-            if (object.force_client_update_check != null)
-                message.force_client_update_check = Boolean(object.force_client_update_check);
+            var message = new $root.SiteServerUI_Login_Response();
+            if (object.logon_state != null)
+                message.logon_state = object.logon_state | 0;
+            if (object.logon_eresult != null)
+                message.logon_eresult = object.logon_eresult | 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgClientLogonResponse message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_Login_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @static
-         * @param {CMsgClientLogonResponse} message CMsgClientLogonResponse
+         * @param {SiteServerUI_Login_Response} message SiteServerUI_Login_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientLogonResponse.toObject = function toObject(message, options) {
+        SiteServerUI_Login_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.eresult = 2;
-                object.out_of_game_heartbeat_seconds = 0;
-                object.in_game_heartbeat_seconds = 0;
-                object.public_ip = 0;
-                object.rtime32_server_time = 0;
-                object.account_flags = 0;
-                object.cell_id = 0;
-                object.email_domain = "";
-                if (options.bytes === String)
-                    object.steam2_ticket = "";
-                else {
-                    object.steam2_ticket = [];
-                    if (options.bytes !== Array)
-                        object.steam2_ticket = $util.newBuffer(object.steam2_ticket);
-                }
-                object.eresult_extended = 0;
-                object.webapi_authenticate_user_nonce = "";
-                object.cell_id_ping_threshold = 0;
-                object.use_pics = false;
-                object.vanity_url = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.client_supplied_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_supplied_steamid = options.longs === String ? "0" : 0;
-                object.ip_country_code = "";
-                if (options.bytes === String)
-                    object.parental_settings = "";
-                else {
-                    object.parental_settings = [];
-                    if (options.bytes !== Array)
-                        object.parental_settings = $util.newBuffer(object.parental_settings);
-                }
-                if (options.bytes === String)
-                    object.parental_setting_signature = "";
-                else {
-                    object.parental_setting_signature = [];
-                    if (options.bytes !== Array)
-                        object.parental_setting_signature = $util.newBuffer(object.parental_setting_signature);
-                }
-                object.count_loginfailures_to_migrate = 0;
-                object.count_disconnects_to_migrate = 0;
-                object.ogs_data_report_time_window = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.client_instance_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.client_instance_id = options.longs === String ? "0" : 0;
-                object.force_client_update_check = false;
+                object.logon_state = 0;
+                object.logon_eresult = 0;
             }
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                object.eresult = message.eresult;
-            if (message.out_of_game_heartbeat_seconds != null && message.hasOwnProperty("out_of_game_heartbeat_seconds"))
-                object.out_of_game_heartbeat_seconds = message.out_of_game_heartbeat_seconds;
-            if (message.in_game_heartbeat_seconds != null && message.hasOwnProperty("in_game_heartbeat_seconds"))
-                object.in_game_heartbeat_seconds = message.in_game_heartbeat_seconds;
-            if (message.public_ip != null && message.hasOwnProperty("public_ip"))
-                object.public_ip = message.public_ip;
-            if (message.rtime32_server_time != null && message.hasOwnProperty("rtime32_server_time"))
-                object.rtime32_server_time = message.rtime32_server_time;
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                object.account_flags = message.account_flags;
-            if (message.cell_id != null && message.hasOwnProperty("cell_id"))
-                object.cell_id = message.cell_id;
-            if (message.email_domain != null && message.hasOwnProperty("email_domain"))
-                object.email_domain = message.email_domain;
-            if (message.steam2_ticket != null && message.hasOwnProperty("steam2_ticket"))
-                object.steam2_ticket = options.bytes === String ? $util.base64.encode(message.steam2_ticket, 0, message.steam2_ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.steam2_ticket) : message.steam2_ticket;
-            if (message.eresult_extended != null && message.hasOwnProperty("eresult_extended"))
-                object.eresult_extended = message.eresult_extended;
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                object.webapi_authenticate_user_nonce = message.webapi_authenticate_user_nonce;
-            if (message.cell_id_ping_threshold != null && message.hasOwnProperty("cell_id_ping_threshold"))
-                object.cell_id_ping_threshold = message.cell_id_ping_threshold;
-            if (message.use_pics != null && message.hasOwnProperty("use_pics"))
-                object.use_pics = message.use_pics;
-            if (message.vanity_url != null && message.hasOwnProperty("vanity_url"))
-                object.vanity_url = message.vanity_url;
-            if (message.client_supplied_steamid != null && message.hasOwnProperty("client_supplied_steamid"))
-                if (typeof message.client_supplied_steamid === "number")
-                    object.client_supplied_steamid = options.longs === String ? String(message.client_supplied_steamid) : message.client_supplied_steamid;
-                else
-                    object.client_supplied_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.client_supplied_steamid) : options.longs === Number ? new $util.LongBits(message.client_supplied_steamid.low >>> 0, message.client_supplied_steamid.high >>> 0).toNumber() : message.client_supplied_steamid;
-            if (message.ip_country_code != null && message.hasOwnProperty("ip_country_code"))
-                object.ip_country_code = message.ip_country_code;
-            if (message.parental_settings != null && message.hasOwnProperty("parental_settings"))
-                object.parental_settings = options.bytes === String ? $util.base64.encode(message.parental_settings, 0, message.parental_settings.length) : options.bytes === Array ? Array.prototype.slice.call(message.parental_settings) : message.parental_settings;
-            if (message.parental_setting_signature != null && message.hasOwnProperty("parental_setting_signature"))
-                object.parental_setting_signature = options.bytes === String ? $util.base64.encode(message.parental_setting_signature, 0, message.parental_setting_signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.parental_setting_signature) : message.parental_setting_signature;
-            if (message.count_loginfailures_to_migrate != null && message.hasOwnProperty("count_loginfailures_to_migrate"))
-                object.count_loginfailures_to_migrate = message.count_loginfailures_to_migrate;
-            if (message.count_disconnects_to_migrate != null && message.hasOwnProperty("count_disconnects_to_migrate"))
-                object.count_disconnects_to_migrate = message.count_disconnects_to_migrate;
-            if (message.ogs_data_report_time_window != null && message.hasOwnProperty("ogs_data_report_time_window"))
-                object.ogs_data_report_time_window = message.ogs_data_report_time_window;
-            if (message.client_instance_id != null && message.hasOwnProperty("client_instance_id"))
-                if (typeof message.client_instance_id === "number")
-                    object.client_instance_id = options.longs === String ? String(message.client_instance_id) : message.client_instance_id;
-                else
-                    object.client_instance_id = options.longs === String ? $util.Long.prototype.toString.call(message.client_instance_id) : options.longs === Number ? new $util.LongBits(message.client_instance_id.low >>> 0, message.client_instance_id.high >>> 0).toNumber(true) : message.client_instance_id;
-            if (message.force_client_update_check != null && message.hasOwnProperty("force_client_update_check"))
-                object.force_client_update_check = message.force_client_update_check;
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                object.logon_state = message.logon_state;
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                object.logon_eresult = message.logon_eresult;
             return object;
         };
     
         /**
-         * Converts this CMsgClientLogonResponse to JSON.
+         * Converts this SiteServerUI_Login_Response to JSON.
          * @function toJSON
-         * @memberof CMsgClientLogonResponse
+         * @memberof SiteServerUI_Login_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientLogonResponse.prototype.toJSON = function toJSON() {
+        SiteServerUI_Login_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientLogonResponse;
+        return SiteServerUI_Login_Response;
     })();
     
-    $root.CMsgClientRequestWebAPIAuthenticateUserNonce = (function() {
+    $root.SiteServerUI_LoginStatus_Request = (function() {
     
         /**
-         * Properties of a CMsgClientRequestWebAPIAuthenticateUserNonce.
-         * @exports ICMsgClientRequestWebAPIAuthenticateUserNonce
-         * @interface ICMsgClientRequestWebAPIAuthenticateUserNonce
-         * @property {number|null} [token_type] CMsgClientRequestWebAPIAuthenticateUserNonce token_type
+         * Properties of a SiteServerUI_LoginStatus_Request.
+         * @exports ISiteServerUI_LoginStatus_Request
+         * @interface ISiteServerUI_LoginStatus_Request
          */
     
         /**
-         * Constructs a new CMsgClientRequestWebAPIAuthenticateUserNonce.
-         * @exports CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @classdesc Represents a CMsgClientRequestWebAPIAuthenticateUserNonce.
-         * @implements ICMsgClientRequestWebAPIAuthenticateUserNonce
+         * Constructs a new SiteServerUI_LoginStatus_Request.
+         * @exports SiteServerUI_LoginStatus_Request
+         * @classdesc Represents a SiteServerUI_LoginStatus_Request.
+         * @implements ISiteServerUI_LoginStatus_Request
          * @constructor
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonce=} [properties] Properties to set
+         * @param {ISiteServerUI_LoginStatus_Request=} [properties] Properties to set
          */
-        function CMsgClientRequestWebAPIAuthenticateUserNonce(properties) {
+        function SiteServerUI_LoginStatus_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2689,478 +504,60 @@
         }
     
         /**
-         * CMsgClientRequestWebAPIAuthenticateUserNonce token_type.
-         * @member {number} token_type
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @instance
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.prototype.token_type = -1;
-    
-        /**
-         * Creates a new CMsgClientRequestWebAPIAuthenticateUserNonce instance using the specified properties.
+         * Creates a new SiteServerUI_LoginStatus_Request instance using the specified properties.
          * @function create
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonce=} [properties] Properties to set
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonce} CMsgClientRequestWebAPIAuthenticateUserNonce instance
+         * @param {ISiteServerUI_LoginStatus_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_LoginStatus_Request} SiteServerUI_LoginStatus_Request instance
          */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.create = function create(properties) {
-            return new CMsgClientRequestWebAPIAuthenticateUserNonce(properties);
+        SiteServerUI_LoginStatus_Request.create = function create(properties) {
+            return new SiteServerUI_LoginStatus_Request(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientRequestWebAPIAuthenticateUserNonce message. Does not implicitly {@link CMsgClientRequestWebAPIAuthenticateUserNonce.verify|verify} messages.
+         * Encodes the specified SiteServerUI_LoginStatus_Request message. Does not implicitly {@link SiteServerUI_LoginStatus_Request.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonce} message CMsgClientRequestWebAPIAuthenticateUserNonce message or plain object to encode
+         * @param {ISiteServerUI_LoginStatus_Request} message SiteServerUI_LoginStatus_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.token_type);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientRequestWebAPIAuthenticateUserNonce message, length delimited. Does not implicitly {@link CMsgClientRequestWebAPIAuthenticateUserNonce.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonce} message CMsgClientRequestWebAPIAuthenticateUserNonce message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientRequestWebAPIAuthenticateUserNonce message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonce} CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientRequestWebAPIAuthenticateUserNonce();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.token_type = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientRequestWebAPIAuthenticateUserNonce message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonce} CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientRequestWebAPIAuthenticateUserNonce message.
-         * @function verify
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                if (!$util.isInteger(message.token_type))
-                    return "token_type: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientRequestWebAPIAuthenticateUserNonce message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonce} CMsgClientRequestWebAPIAuthenticateUserNonce
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientRequestWebAPIAuthenticateUserNonce)
-                return object;
-            var message = new $root.CMsgClientRequestWebAPIAuthenticateUserNonce();
-            if (object.token_type != null)
-                message.token_type = object.token_type | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientRequestWebAPIAuthenticateUserNonce message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @static
-         * @param {CMsgClientRequestWebAPIAuthenticateUserNonce} message CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.token_type = -1;
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                object.token_type = message.token_type;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientRequestWebAPIAuthenticateUserNonce to JSON.
-         * @function toJSON
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonce
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonce.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientRequestWebAPIAuthenticateUserNonce;
-    })();
-    
-    $root.CMsgClientRequestWebAPIAuthenticateUserNonceResponse = (function() {
-    
-        /**
-         * Properties of a CMsgClientRequestWebAPIAuthenticateUserNonceResponse.
-         * @exports ICMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @interface ICMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @property {number|null} [eresult] CMsgClientRequestWebAPIAuthenticateUserNonceResponse eresult
-         * @property {string|null} [webapi_authenticate_user_nonce] CMsgClientRequestWebAPIAuthenticateUserNonceResponse webapi_authenticate_user_nonce
-         * @property {number|null} [token_type] CMsgClientRequestWebAPIAuthenticateUserNonceResponse token_type
-         */
-    
-        /**
-         * Constructs a new CMsgClientRequestWebAPIAuthenticateUserNonceResponse.
-         * @exports CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @classdesc Represents a CMsgClientRequestWebAPIAuthenticateUserNonceResponse.
-         * @implements ICMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @constructor
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonceResponse=} [properties] Properties to set
-         */
-        function CMsgClientRequestWebAPIAuthenticateUserNonceResponse(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientRequestWebAPIAuthenticateUserNonceResponse eresult.
-         * @member {number} eresult
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @instance
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.prototype.eresult = 2;
-    
-        /**
-         * CMsgClientRequestWebAPIAuthenticateUserNonceResponse webapi_authenticate_user_nonce.
-         * @member {string} webapi_authenticate_user_nonce
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @instance
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.prototype.webapi_authenticate_user_nonce = "";
-    
-        /**
-         * CMsgClientRequestWebAPIAuthenticateUserNonceResponse token_type.
-         * @member {number} token_type
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @instance
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.prototype.token_type = -1;
-    
-        /**
-         * Creates a new CMsgClientRequestWebAPIAuthenticateUserNonceResponse instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonceResponse=} [properties] Properties to set
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonceResponse} CMsgClientRequestWebAPIAuthenticateUserNonceResponse instance
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.create = function create(properties) {
-            return new CMsgClientRequestWebAPIAuthenticateUserNonceResponse(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientRequestWebAPIAuthenticateUserNonceResponse message. Does not implicitly {@link CMsgClientRequestWebAPIAuthenticateUserNonceResponse.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonceResponse} message CMsgClientRequestWebAPIAuthenticateUserNonceResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.token_type);
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                writer.uint32(/* id 11, wireType 2 =*/90).string(message.webapi_authenticate_user_nonce);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientRequestWebAPIAuthenticateUserNonceResponse message, length delimited. Does not implicitly {@link CMsgClientRequestWebAPIAuthenticateUserNonceResponse.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {ICMsgClientRequestWebAPIAuthenticateUserNonceResponse} message CMsgClientRequestWebAPIAuthenticateUserNonceResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientRequestWebAPIAuthenticateUserNonceResponse message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonceResponse} CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientRequestWebAPIAuthenticateUserNonceResponse();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.eresult = reader.int32();
-                    break;
-                case 11:
-                    message.webapi_authenticate_user_nonce = reader.string();
-                    break;
-                case 3:
-                    message.token_type = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientRequestWebAPIAuthenticateUserNonceResponse message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonceResponse} CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientRequestWebAPIAuthenticateUserNonceResponse message.
-         * @function verify
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                if (!$util.isInteger(message.eresult))
-                    return "eresult: integer expected";
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                if (!$util.isString(message.webapi_authenticate_user_nonce))
-                    return "webapi_authenticate_user_nonce: string expected";
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                if (!$util.isInteger(message.token_type))
-                    return "token_type: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientRequestWebAPIAuthenticateUserNonceResponse message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientRequestWebAPIAuthenticateUserNonceResponse} CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientRequestWebAPIAuthenticateUserNonceResponse)
-                return object;
-            var message = new $root.CMsgClientRequestWebAPIAuthenticateUserNonceResponse();
-            if (object.eresult != null)
-                message.eresult = object.eresult | 0;
-            if (object.webapi_authenticate_user_nonce != null)
-                message.webapi_authenticate_user_nonce = String(object.webapi_authenticate_user_nonce);
-            if (object.token_type != null)
-                message.token_type = object.token_type | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientRequestWebAPIAuthenticateUserNonceResponse message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @static
-         * @param {CMsgClientRequestWebAPIAuthenticateUserNonceResponse} message CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.eresult = 2;
-                object.token_type = -1;
-                object.webapi_authenticate_user_nonce = "";
-            }
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                object.eresult = message.eresult;
-            if (message.token_type != null && message.hasOwnProperty("token_type"))
-                object.token_type = message.token_type;
-            if (message.webapi_authenticate_user_nonce != null && message.hasOwnProperty("webapi_authenticate_user_nonce"))
-                object.webapi_authenticate_user_nonce = message.webapi_authenticate_user_nonce;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientRequestWebAPIAuthenticateUserNonceResponse to JSON.
-         * @function toJSON
-         * @memberof CMsgClientRequestWebAPIAuthenticateUserNonceResponse
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientRequestWebAPIAuthenticateUserNonceResponse.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientRequestWebAPIAuthenticateUserNonceResponse;
-    })();
-    
-    $root.CMsgClientLogOff = (function() {
-    
-        /**
-         * Properties of a CMsgClientLogOff.
-         * @exports ICMsgClientLogOff
-         * @interface ICMsgClientLogOff
-         */
-    
-        /**
-         * Constructs a new CMsgClientLogOff.
-         * @exports CMsgClientLogOff
-         * @classdesc Represents a CMsgClientLogOff.
-         * @implements ICMsgClientLogOff
-         * @constructor
-         * @param {ICMsgClientLogOff=} [properties] Properties to set
-         */
-        function CMsgClientLogOff(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Creates a new CMsgClientLogOff instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientLogOff
-         * @static
-         * @param {ICMsgClientLogOff=} [properties] Properties to set
-         * @returns {CMsgClientLogOff} CMsgClientLogOff instance
-         */
-        CMsgClientLogOff.create = function create(properties) {
-            return new CMsgClientLogOff(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientLogOff message. Does not implicitly {@link CMsgClientLogOff.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientLogOff
-         * @static
-         * @param {ICMsgClientLogOff} message CMsgClientLogOff message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientLogOff.encode = function encode(message, writer) {
+        SiteServerUI_LoginStatus_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientLogOff message, length delimited. Does not implicitly {@link CMsgClientLogOff.verify|verify} messages.
+         * Encodes the specified SiteServerUI_LoginStatus_Request message, length delimited. Does not implicitly {@link SiteServerUI_LoginStatus_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
-         * @param {ICMsgClientLogOff} message CMsgClientLogOff message or plain object to encode
+         * @param {ISiteServerUI_LoginStatus_Request} message SiteServerUI_LoginStatus_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLogOff.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_LoginStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientLogOff message from the specified reader or buffer.
+         * Decodes a SiteServerUI_LoginStatus_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientLogOff} CMsgClientLogOff
+         * @returns {SiteServerUI_LoginStatus_Request} SiteServerUI_LoginStatus_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogOff.decode = function decode(reader, length) {
+        SiteServerUI_LoginStatus_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientLogOff();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_LoginStatus_Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3173,94 +570,97 @@
         };
     
         /**
-         * Decodes a CMsgClientLogOff message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_LoginStatus_Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientLogOff} CMsgClientLogOff
+         * @returns {SiteServerUI_LoginStatus_Request} SiteServerUI_LoginStatus_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLogOff.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_LoginStatus_Request.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientLogOff message.
+         * Verifies a SiteServerUI_LoginStatus_Request message.
          * @function verify
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientLogOff.verify = function verify(message) {
+        SiteServerUI_LoginStatus_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientLogOff message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_LoginStatus_Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientLogOff} CMsgClientLogOff
+         * @returns {SiteServerUI_LoginStatus_Request} SiteServerUI_LoginStatus_Request
          */
-        CMsgClientLogOff.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientLogOff)
+        SiteServerUI_LoginStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_LoginStatus_Request)
                 return object;
-            return new $root.CMsgClientLogOff();
+            return new $root.SiteServerUI_LoginStatus_Request();
         };
     
         /**
-         * Creates a plain object from a CMsgClientLogOff message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_LoginStatus_Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @static
-         * @param {CMsgClientLogOff} message CMsgClientLogOff
+         * @param {SiteServerUI_LoginStatus_Request} message SiteServerUI_LoginStatus_Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientLogOff.toObject = function toObject() {
+        SiteServerUI_LoginStatus_Request.toObject = function toObject() {
             return {};
         };
     
         /**
-         * Converts this CMsgClientLogOff to JSON.
+         * Converts this SiteServerUI_LoginStatus_Request to JSON.
          * @function toJSON
-         * @memberof CMsgClientLogOff
+         * @memberof SiteServerUI_LoginStatus_Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientLogOff.prototype.toJSON = function toJSON() {
+        SiteServerUI_LoginStatus_Request.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientLogOff;
+        return SiteServerUI_LoginStatus_Request;
     })();
     
-    $root.CMsgClientLoggedOff = (function() {
+    $root.SiteServerUI_LoginStatus_Response = (function() {
     
         /**
-         * Properties of a CMsgClientLoggedOff.
-         * @exports ICMsgClientLoggedOff
-         * @interface ICMsgClientLoggedOff
-         * @property {number|null} [eresult] CMsgClientLoggedOff eresult
+         * Properties of a SiteServerUI_LoginStatus_Response.
+         * @exports ISiteServerUI_LoginStatus_Response
+         * @interface ISiteServerUI_LoginStatus_Response
+         * @property {string|null} [username] SiteServerUI_LoginStatus_Response username
+         * @property {boolean|null} [cached_credentials] SiteServerUI_LoginStatus_Response cached_credentials
+         * @property {number|null} [logon_state] SiteServerUI_LoginStatus_Response logon_state
+         * @property {number|null} [logon_eresult] SiteServerUI_LoginStatus_Response logon_eresult
          */
     
         /**
-         * Constructs a new CMsgClientLoggedOff.
-         * @exports CMsgClientLoggedOff
-         * @classdesc Represents a CMsgClientLoggedOff.
-         * @implements ICMsgClientLoggedOff
+         * Constructs a new SiteServerUI_LoginStatus_Response.
+         * @exports SiteServerUI_LoginStatus_Response
+         * @classdesc Represents a SiteServerUI_LoginStatus_Response.
+         * @implements ISiteServerUI_LoginStatus_Response
          * @constructor
-         * @param {ICMsgClientLoggedOff=} [properties] Properties to set
+         * @param {ISiteServerUI_LoginStatus_Response=} [properties] Properties to set
          */
-        function CMsgClientLoggedOff(properties) {
+        function SiteServerUI_LoginStatus_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3268,276 +668,114 @@
         }
     
         /**
-         * CMsgClientLoggedOff eresult.
-         * @member {number} eresult
-         * @memberof CMsgClientLoggedOff
+         * SiteServerUI_LoginStatus_Response username.
+         * @member {string} username
+         * @memberof SiteServerUI_LoginStatus_Response
          * @instance
          */
-        CMsgClientLoggedOff.prototype.eresult = 2;
+        SiteServerUI_LoginStatus_Response.prototype.username = "";
     
         /**
-         * Creates a new CMsgClientLoggedOff instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientLoggedOff
-         * @static
-         * @param {ICMsgClientLoggedOff=} [properties] Properties to set
-         * @returns {CMsgClientLoggedOff} CMsgClientLoggedOff instance
+         * SiteServerUI_LoginStatus_Response cached_credentials.
+         * @member {boolean} cached_credentials
+         * @memberof SiteServerUI_LoginStatus_Response
+         * @instance
          */
-        CMsgClientLoggedOff.create = function create(properties) {
-            return new CMsgClientLoggedOff(properties);
+        SiteServerUI_LoginStatus_Response.prototype.cached_credentials = false;
+    
+        /**
+         * SiteServerUI_LoginStatus_Response logon_state.
+         * @member {number} logon_state
+         * @memberof SiteServerUI_LoginStatus_Response
+         * @instance
+         */
+        SiteServerUI_LoginStatus_Response.prototype.logon_state = 0;
+    
+        /**
+         * SiteServerUI_LoginStatus_Response logon_eresult.
+         * @member {number} logon_eresult
+         * @memberof SiteServerUI_LoginStatus_Response
+         * @instance
+         */
+        SiteServerUI_LoginStatus_Response.prototype.logon_eresult = 0;
+    
+        /**
+         * Creates a new SiteServerUI_LoginStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_LoginStatus_Response
+         * @static
+         * @param {ISiteServerUI_LoginStatus_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_LoginStatus_Response} SiteServerUI_LoginStatus_Response instance
+         */
+        SiteServerUI_LoginStatus_Response.create = function create(properties) {
+            return new SiteServerUI_LoginStatus_Response(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientLoggedOff message. Does not implicitly {@link CMsgClientLoggedOff.verify|verify} messages.
+         * Encodes the specified SiteServerUI_LoginStatus_Response message. Does not implicitly {@link SiteServerUI_LoginStatus_Response.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientLoggedOff
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
-         * @param {ICMsgClientLoggedOff} message CMsgClientLoggedOff message or plain object to encode
+         * @param {ISiteServerUI_LoginStatus_Response} message SiteServerUI_LoginStatus_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLoggedOff.encode = function encode(message, writer) {
+        SiteServerUI_LoginStatus_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eresult);
+            if (message.username != null && message.hasOwnProperty("username"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+            if (message.cached_credentials != null && message.hasOwnProperty("cached_credentials"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.cached_credentials);
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.logon_state);
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.logon_eresult);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientLoggedOff message, length delimited. Does not implicitly {@link CMsgClientLoggedOff.verify|verify} messages.
+         * Encodes the specified SiteServerUI_LoginStatus_Response message, length delimited. Does not implicitly {@link SiteServerUI_LoginStatus_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientLoggedOff
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
-         * @param {ICMsgClientLoggedOff} message CMsgClientLoggedOff message or plain object to encode
+         * @param {ISiteServerUI_LoginStatus_Response} message SiteServerUI_LoginStatus_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientLoggedOff.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_LoginStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientLoggedOff message from the specified reader or buffer.
+         * Decodes a SiteServerUI_LoginStatus_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientLoggedOff
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientLoggedOff} CMsgClientLoggedOff
+         * @returns {SiteServerUI_LoginStatus_Response} SiteServerUI_LoginStatus_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientLoggedOff.decode = function decode(reader, length) {
+        SiteServerUI_LoginStatus_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientLoggedOff();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_LoginStatus_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.eresult = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CMsgClientLoggedOff message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CMsgClientLoggedOff
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientLoggedOff} CMsgClientLoggedOff
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientLoggedOff.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CMsgClientLoggedOff message.
-         * @function verify
-         * @memberof CMsgClientLoggedOff
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CMsgClientLoggedOff.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                if (!$util.isInteger(message.eresult))
-                    return "eresult: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CMsgClientLoggedOff message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CMsgClientLoggedOff
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientLoggedOff} CMsgClientLoggedOff
-         */
-        CMsgClientLoggedOff.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientLoggedOff)
-                return object;
-            var message = new $root.CMsgClientLoggedOff();
-            if (object.eresult != null)
-                message.eresult = object.eresult | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CMsgClientLoggedOff message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CMsgClientLoggedOff
-         * @static
-         * @param {CMsgClientLoggedOff} message CMsgClientLoggedOff
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CMsgClientLoggedOff.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.eresult = 2;
-            if (message.eresult != null && message.hasOwnProperty("eresult"))
-                object.eresult = message.eresult;
-            return object;
-        };
-    
-        /**
-         * Converts this CMsgClientLoggedOff to JSON.
-         * @function toJSON
-         * @memberof CMsgClientLoggedOff
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CMsgClientLoggedOff.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CMsgClientLoggedOff;
-    })();
-    
-    $root.CMsgClientNewLoginKey = (function() {
-    
-        /**
-         * Properties of a CMsgClientNewLoginKey.
-         * @exports ICMsgClientNewLoginKey
-         * @interface ICMsgClientNewLoginKey
-         * @property {number|null} [unique_id] CMsgClientNewLoginKey unique_id
-         * @property {string|null} [login_key] CMsgClientNewLoginKey login_key
-         */
-    
-        /**
-         * Constructs a new CMsgClientNewLoginKey.
-         * @exports CMsgClientNewLoginKey
-         * @classdesc Represents a CMsgClientNewLoginKey.
-         * @implements ICMsgClientNewLoginKey
-         * @constructor
-         * @param {ICMsgClientNewLoginKey=} [properties] Properties to set
-         */
-        function CMsgClientNewLoginKey(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CMsgClientNewLoginKey unique_id.
-         * @member {number} unique_id
-         * @memberof CMsgClientNewLoginKey
-         * @instance
-         */
-        CMsgClientNewLoginKey.prototype.unique_id = 0;
-    
-        /**
-         * CMsgClientNewLoginKey login_key.
-         * @member {string} login_key
-         * @memberof CMsgClientNewLoginKey
-         * @instance
-         */
-        CMsgClientNewLoginKey.prototype.login_key = "";
-    
-        /**
-         * Creates a new CMsgClientNewLoginKey instance using the specified properties.
-         * @function create
-         * @memberof CMsgClientNewLoginKey
-         * @static
-         * @param {ICMsgClientNewLoginKey=} [properties] Properties to set
-         * @returns {CMsgClientNewLoginKey} CMsgClientNewLoginKey instance
-         */
-        CMsgClientNewLoginKey.create = function create(properties) {
-            return new CMsgClientNewLoginKey(properties);
-        };
-    
-        /**
-         * Encodes the specified CMsgClientNewLoginKey message. Does not implicitly {@link CMsgClientNewLoginKey.verify|verify} messages.
-         * @function encode
-         * @memberof CMsgClientNewLoginKey
-         * @static
-         * @param {ICMsgClientNewLoginKey} message CMsgClientNewLoginKey message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientNewLoginKey.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.unique_id);
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.login_key);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CMsgClientNewLoginKey message, length delimited. Does not implicitly {@link CMsgClientNewLoginKey.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CMsgClientNewLoginKey
-         * @static
-         * @param {ICMsgClientNewLoginKey} message CMsgClientNewLoginKey message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CMsgClientNewLoginKey.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CMsgClientNewLoginKey message from the specified reader or buffer.
-         * @function decode
-         * @memberof CMsgClientNewLoginKey
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientNewLoginKey} CMsgClientNewLoginKey
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CMsgClientNewLoginKey.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientNewLoginKey();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.unique_id = reader.uint32();
+                    message.username = reader.string();
                     break;
                 case 2:
-                    message.login_key = reader.string();
+                    message.cached_credentials = reader.bool();
+                    break;
+                case 3:
+                    message.logon_state = reader.int32();
+                    break;
+                case 4:
+                    message.logon_eresult = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3548,116 +786,131 @@
         };
     
         /**
-         * Decodes a CMsgClientNewLoginKey message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_LoginStatus_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientNewLoginKey
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientNewLoginKey} CMsgClientNewLoginKey
+         * @returns {SiteServerUI_LoginStatus_Response} SiteServerUI_LoginStatus_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientNewLoginKey.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_LoginStatus_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientNewLoginKey message.
+         * Verifies a SiteServerUI_LoginStatus_Response message.
          * @function verify
-         * @memberof CMsgClientNewLoginKey
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientNewLoginKey.verify = function verify(message) {
+        SiteServerUI_LoginStatus_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                if (!$util.isInteger(message.unique_id))
-                    return "unique_id: integer expected";
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                if (!$util.isString(message.login_key))
-                    return "login_key: string expected";
+            if (message.username != null && message.hasOwnProperty("username"))
+                if (!$util.isString(message.username))
+                    return "username: string expected";
+            if (message.cached_credentials != null && message.hasOwnProperty("cached_credentials"))
+                if (typeof message.cached_credentials !== "boolean")
+                    return "cached_credentials: boolean expected";
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                if (!$util.isInteger(message.logon_state))
+                    return "logon_state: integer expected";
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                if (!$util.isInteger(message.logon_eresult))
+                    return "logon_eresult: integer expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientNewLoginKey message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_LoginStatus_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientNewLoginKey
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientNewLoginKey} CMsgClientNewLoginKey
+         * @returns {SiteServerUI_LoginStatus_Response} SiteServerUI_LoginStatus_Response
          */
-        CMsgClientNewLoginKey.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientNewLoginKey)
+        SiteServerUI_LoginStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_LoginStatus_Response)
                 return object;
-            var message = new $root.CMsgClientNewLoginKey();
-            if (object.unique_id != null)
-                message.unique_id = object.unique_id >>> 0;
-            if (object.login_key != null)
-                message.login_key = String(object.login_key);
+            var message = new $root.SiteServerUI_LoginStatus_Response();
+            if (object.username != null)
+                message.username = String(object.username);
+            if (object.cached_credentials != null)
+                message.cached_credentials = Boolean(object.cached_credentials);
+            if (object.logon_state != null)
+                message.logon_state = object.logon_state | 0;
+            if (object.logon_eresult != null)
+                message.logon_eresult = object.logon_eresult | 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgClientNewLoginKey message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_LoginStatus_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientNewLoginKey
+         * @memberof SiteServerUI_LoginStatus_Response
          * @static
-         * @param {CMsgClientNewLoginKey} message CMsgClientNewLoginKey
+         * @param {SiteServerUI_LoginStatus_Response} message SiteServerUI_LoginStatus_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientNewLoginKey.toObject = function toObject(message, options) {
+        SiteServerUI_LoginStatus_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.unique_id = 0;
-                object.login_key = "";
+                object.username = "";
+                object.cached_credentials = false;
+                object.logon_state = 0;
+                object.logon_eresult = 0;
             }
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                object.unique_id = message.unique_id;
-            if (message.login_key != null && message.hasOwnProperty("login_key"))
-                object.login_key = message.login_key;
+            if (message.username != null && message.hasOwnProperty("username"))
+                object.username = message.username;
+            if (message.cached_credentials != null && message.hasOwnProperty("cached_credentials"))
+                object.cached_credentials = message.cached_credentials;
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                object.logon_state = message.logon_state;
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                object.logon_eresult = message.logon_eresult;
             return object;
         };
     
         /**
-         * Converts this CMsgClientNewLoginKey to JSON.
+         * Converts this SiteServerUI_LoginStatus_Response to JSON.
          * @function toJSON
-         * @memberof CMsgClientNewLoginKey
+         * @memberof SiteServerUI_LoginStatus_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientNewLoginKey.prototype.toJSON = function toJSON() {
+        SiteServerUI_LoginStatus_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientNewLoginKey;
+        return SiteServerUI_LoginStatus_Response;
     })();
     
-    $root.CMsgClientNewLoginKeyAccepted = (function() {
+    $root.SiteServerUI_CancelLogin_Request = (function() {
     
         /**
-         * Properties of a CMsgClientNewLoginKeyAccepted.
-         * @exports ICMsgClientNewLoginKeyAccepted
-         * @interface ICMsgClientNewLoginKeyAccepted
-         * @property {number|null} [unique_id] CMsgClientNewLoginKeyAccepted unique_id
+         * Properties of a SiteServerUI_CancelLogin_Request.
+         * @exports ISiteServerUI_CancelLogin_Request
+         * @interface ISiteServerUI_CancelLogin_Request
          */
     
         /**
-         * Constructs a new CMsgClientNewLoginKeyAccepted.
-         * @exports CMsgClientNewLoginKeyAccepted
-         * @classdesc Represents a CMsgClientNewLoginKeyAccepted.
-         * @implements ICMsgClientNewLoginKeyAccepted
+         * Constructs a new SiteServerUI_CancelLogin_Request.
+         * @exports SiteServerUI_CancelLogin_Request
+         * @classdesc Represents a SiteServerUI_CancelLogin_Request.
+         * @implements ISiteServerUI_CancelLogin_Request
          * @constructor
-         * @param {ICMsgClientNewLoginKeyAccepted=} [properties] Properties to set
+         * @param {ISiteServerUI_CancelLogin_Request=} [properties] Properties to set
          */
-        function CMsgClientNewLoginKeyAccepted(properties) {
+        function SiteServerUI_CancelLogin_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3665,75 +918,250 @@
         }
     
         /**
-         * CMsgClientNewLoginKeyAccepted unique_id.
-         * @member {number} unique_id
-         * @memberof CMsgClientNewLoginKeyAccepted
-         * @instance
-         */
-        CMsgClientNewLoginKeyAccepted.prototype.unique_id = 0;
-    
-        /**
-         * Creates a new CMsgClientNewLoginKeyAccepted instance using the specified properties.
+         * Creates a new SiteServerUI_CancelLogin_Request instance using the specified properties.
          * @function create
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Request
          * @static
-         * @param {ICMsgClientNewLoginKeyAccepted=} [properties] Properties to set
-         * @returns {CMsgClientNewLoginKeyAccepted} CMsgClientNewLoginKeyAccepted instance
+         * @param {ISiteServerUI_CancelLogin_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_CancelLogin_Request} SiteServerUI_CancelLogin_Request instance
          */
-        CMsgClientNewLoginKeyAccepted.create = function create(properties) {
-            return new CMsgClientNewLoginKeyAccepted(properties);
+        SiteServerUI_CancelLogin_Request.create = function create(properties) {
+            return new SiteServerUI_CancelLogin_Request(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientNewLoginKeyAccepted message. Does not implicitly {@link CMsgClientNewLoginKeyAccepted.verify|verify} messages.
+         * Encodes the specified SiteServerUI_CancelLogin_Request message. Does not implicitly {@link SiteServerUI_CancelLogin_Request.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Request
          * @static
-         * @param {ICMsgClientNewLoginKeyAccepted} message CMsgClientNewLoginKeyAccepted message or plain object to encode
+         * @param {ISiteServerUI_CancelLogin_Request} message SiteServerUI_CancelLogin_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientNewLoginKeyAccepted.encode = function encode(message, writer) {
+        SiteServerUI_CancelLogin_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.unique_id);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientNewLoginKeyAccepted message, length delimited. Does not implicitly {@link CMsgClientNewLoginKeyAccepted.verify|verify} messages.
+         * Encodes the specified SiteServerUI_CancelLogin_Request message, length delimited. Does not implicitly {@link SiteServerUI_CancelLogin_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Request
          * @static
-         * @param {ICMsgClientNewLoginKeyAccepted} message CMsgClientNewLoginKeyAccepted message or plain object to encode
+         * @param {ISiteServerUI_CancelLogin_Request} message SiteServerUI_CancelLogin_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientNewLoginKeyAccepted.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_CancelLogin_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientNewLoginKeyAccepted message from the specified reader or buffer.
+         * Decodes a SiteServerUI_CancelLogin_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientNewLoginKeyAccepted} CMsgClientNewLoginKeyAccepted
+         * @returns {SiteServerUI_CancelLogin_Request} SiteServerUI_CancelLogin_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientNewLoginKeyAccepted.decode = function decode(reader, length) {
+        SiteServerUI_CancelLogin_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientNewLoginKeyAccepted();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_CancelLogin_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_CancelLogin_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_CancelLogin_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_CancelLogin_Request} SiteServerUI_CancelLogin_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_CancelLogin_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_CancelLogin_Request message.
+         * @function verify
+         * @memberof SiteServerUI_CancelLogin_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_CancelLogin_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_CancelLogin_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_CancelLogin_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_CancelLogin_Request} SiteServerUI_CancelLogin_Request
+         */
+        SiteServerUI_CancelLogin_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_CancelLogin_Request)
+                return object;
+            return new $root.SiteServerUI_CancelLogin_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_CancelLogin_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_CancelLogin_Request
+         * @static
+         * @param {SiteServerUI_CancelLogin_Request} message SiteServerUI_CancelLogin_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_CancelLogin_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_CancelLogin_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_CancelLogin_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_CancelLogin_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_CancelLogin_Request;
+    })();
+    
+    $root.SiteServerUI_CancelLogin_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_CancelLogin_Response.
+         * @exports ISiteServerUI_CancelLogin_Response
+         * @interface ISiteServerUI_CancelLogin_Response
+         * @property {number|null} [logon_state] SiteServerUI_CancelLogin_Response logon_state
+         * @property {number|null} [logon_eresult] SiteServerUI_CancelLogin_Response logon_eresult
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_CancelLogin_Response.
+         * @exports SiteServerUI_CancelLogin_Response
+         * @classdesc Represents a SiteServerUI_CancelLogin_Response.
+         * @implements ISiteServerUI_CancelLogin_Response
+         * @constructor
+         * @param {ISiteServerUI_CancelLogin_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_CancelLogin_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_CancelLogin_Response logon_state.
+         * @member {number} logon_state
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @instance
+         */
+        SiteServerUI_CancelLogin_Response.prototype.logon_state = 0;
+    
+        /**
+         * SiteServerUI_CancelLogin_Response logon_eresult.
+         * @member {number} logon_eresult
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @instance
+         */
+        SiteServerUI_CancelLogin_Response.prototype.logon_eresult = 0;
+    
+        /**
+         * Creates a new SiteServerUI_CancelLogin_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @static
+         * @param {ISiteServerUI_CancelLogin_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_CancelLogin_Response} SiteServerUI_CancelLogin_Response instance
+         */
+        SiteServerUI_CancelLogin_Response.create = function create(properties) {
+            return new SiteServerUI_CancelLogin_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_CancelLogin_Response message. Does not implicitly {@link SiteServerUI_CancelLogin_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @static
+         * @param {ISiteServerUI_CancelLogin_Response} message SiteServerUI_CancelLogin_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_CancelLogin_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logon_state);
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.logon_eresult);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_CancelLogin_Response message, length delimited. Does not implicitly {@link SiteServerUI_CancelLogin_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @static
+         * @param {ISiteServerUI_CancelLogin_Response} message SiteServerUI_CancelLogin_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_CancelLogin_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_CancelLogin_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_CancelLogin_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_CancelLogin_Response} SiteServerUI_CancelLogin_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_CancelLogin_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_CancelLogin_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.unique_id = reader.uint32();
+                    message.logon_state = reader.int32();
+                    break;
+                case 2:
+                    message.logon_eresult = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3744,118 +1172,115 @@
         };
     
         /**
-         * Decodes a CMsgClientNewLoginKeyAccepted message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_CancelLogin_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientNewLoginKeyAccepted} CMsgClientNewLoginKeyAccepted
+         * @returns {SiteServerUI_CancelLogin_Response} SiteServerUI_CancelLogin_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientNewLoginKeyAccepted.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_CancelLogin_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientNewLoginKeyAccepted message.
+         * Verifies a SiteServerUI_CancelLogin_Response message.
          * @function verify
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientNewLoginKeyAccepted.verify = function verify(message) {
+        SiteServerUI_CancelLogin_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                if (!$util.isInteger(message.unique_id))
-                    return "unique_id: integer expected";
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                if (!$util.isInteger(message.logon_state))
+                    return "logon_state: integer expected";
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                if (!$util.isInteger(message.logon_eresult))
+                    return "logon_eresult: integer expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientNewLoginKeyAccepted message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_CancelLogin_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientNewLoginKeyAccepted} CMsgClientNewLoginKeyAccepted
+         * @returns {SiteServerUI_CancelLogin_Response} SiteServerUI_CancelLogin_Response
          */
-        CMsgClientNewLoginKeyAccepted.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientNewLoginKeyAccepted)
+        SiteServerUI_CancelLogin_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_CancelLogin_Response)
                 return object;
-            var message = new $root.CMsgClientNewLoginKeyAccepted();
-            if (object.unique_id != null)
-                message.unique_id = object.unique_id >>> 0;
+            var message = new $root.SiteServerUI_CancelLogin_Response();
+            if (object.logon_state != null)
+                message.logon_state = object.logon_state | 0;
+            if (object.logon_eresult != null)
+                message.logon_eresult = object.logon_eresult | 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgClientNewLoginKeyAccepted message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_CancelLogin_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Response
          * @static
-         * @param {CMsgClientNewLoginKeyAccepted} message CMsgClientNewLoginKeyAccepted
+         * @param {SiteServerUI_CancelLogin_Response} message SiteServerUI_CancelLogin_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientNewLoginKeyAccepted.toObject = function toObject(message, options) {
+        SiteServerUI_CancelLogin_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.unique_id = 0;
-            if (message.unique_id != null && message.hasOwnProperty("unique_id"))
-                object.unique_id = message.unique_id;
+            if (options.defaults) {
+                object.logon_state = 0;
+                object.logon_eresult = 0;
+            }
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                object.logon_state = message.logon_state;
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                object.logon_eresult = message.logon_eresult;
             return object;
         };
     
         /**
-         * Converts this CMsgClientNewLoginKeyAccepted to JSON.
+         * Converts this SiteServerUI_CancelLogin_Response to JSON.
          * @function toJSON
-         * @memberof CMsgClientNewLoginKeyAccepted
+         * @memberof SiteServerUI_CancelLogin_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientNewLoginKeyAccepted.prototype.toJSON = function toJSON() {
+        SiteServerUI_CancelLogin_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientNewLoginKeyAccepted;
+        return SiteServerUI_CancelLogin_Response;
     })();
     
-    $root.CMsgClientAccountInfo = (function() {
+    $root.SiteServerUI_Logout_Request = (function() {
     
         /**
-         * Properties of a CMsgClientAccountInfo.
-         * @exports ICMsgClientAccountInfo
-         * @interface ICMsgClientAccountInfo
-         * @property {string|null} [persona_name] CMsgClientAccountInfo persona_name
-         * @property {string|null} [ip_country] CMsgClientAccountInfo ip_country
-         * @property {number|null} [count_authed_computers] CMsgClientAccountInfo count_authed_computers
-         * @property {number|null} [account_flags] CMsgClientAccountInfo account_flags
-         * @property {number|Long|null} [facebook_id] CMsgClientAccountInfo facebook_id
-         * @property {string|null} [facebook_name] CMsgClientAccountInfo facebook_name
-         * @property {boolean|null} [steamguard_notify_newmachines] CMsgClientAccountInfo steamguard_notify_newmachines
-         * @property {string|null} [steamguard_machine_name_user_chosen] CMsgClientAccountInfo steamguard_machine_name_user_chosen
-         * @property {boolean|null} [is_phone_verified] CMsgClientAccountInfo is_phone_verified
-         * @property {number|null} [two_factor_state] CMsgClientAccountInfo two_factor_state
-         * @property {boolean|null} [is_phone_identifying] CMsgClientAccountInfo is_phone_identifying
-         * @property {boolean|null} [is_phone_needing_reverify] CMsgClientAccountInfo is_phone_needing_reverify
+         * Properties of a SiteServerUI_Logout_Request.
+         * @exports ISiteServerUI_Logout_Request
+         * @interface ISiteServerUI_Logout_Request
          */
     
         /**
-         * Constructs a new CMsgClientAccountInfo.
-         * @exports CMsgClientAccountInfo
-         * @classdesc Represents a CMsgClientAccountInfo.
-         * @implements ICMsgClientAccountInfo
+         * Constructs a new SiteServerUI_Logout_Request.
+         * @exports SiteServerUI_Logout_Request
+         * @classdesc Represents a SiteServerUI_Logout_Request.
+         * @implements ISiteServerUI_Logout_Request
          * @constructor
-         * @param {ICMsgClientAccountInfo=} [properties] Properties to set
+         * @param {ISiteServerUI_Logout_Request=} [properties] Properties to set
          */
-        function CMsgClientAccountInfo(properties) {
+        function SiteServerUI_Logout_Request(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3863,218 +1288,1009 @@
         }
     
         /**
-         * CMsgClientAccountInfo persona_name.
-         * @member {string} persona_name
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.persona_name = "";
-    
-        /**
-         * CMsgClientAccountInfo ip_country.
-         * @member {string} ip_country
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.ip_country = "";
-    
-        /**
-         * CMsgClientAccountInfo count_authed_computers.
-         * @member {number} count_authed_computers
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.count_authed_computers = 0;
-    
-        /**
-         * CMsgClientAccountInfo account_flags.
-         * @member {number} account_flags
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.account_flags = 0;
-    
-        /**
-         * CMsgClientAccountInfo facebook_id.
-         * @member {number|Long} facebook_id
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.facebook_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-        /**
-         * CMsgClientAccountInfo facebook_name.
-         * @member {string} facebook_name
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.facebook_name = "";
-    
-        /**
-         * CMsgClientAccountInfo steamguard_notify_newmachines.
-         * @member {boolean} steamguard_notify_newmachines
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.steamguard_notify_newmachines = false;
-    
-        /**
-         * CMsgClientAccountInfo steamguard_machine_name_user_chosen.
-         * @member {string} steamguard_machine_name_user_chosen
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.steamguard_machine_name_user_chosen = "";
-    
-        /**
-         * CMsgClientAccountInfo is_phone_verified.
-         * @member {boolean} is_phone_verified
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.is_phone_verified = false;
-    
-        /**
-         * CMsgClientAccountInfo two_factor_state.
-         * @member {number} two_factor_state
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.two_factor_state = 0;
-    
-        /**
-         * CMsgClientAccountInfo is_phone_identifying.
-         * @member {boolean} is_phone_identifying
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.is_phone_identifying = false;
-    
-        /**
-         * CMsgClientAccountInfo is_phone_needing_reverify.
-         * @member {boolean} is_phone_needing_reverify
-         * @memberof CMsgClientAccountInfo
-         * @instance
-         */
-        CMsgClientAccountInfo.prototype.is_phone_needing_reverify = false;
-    
-        /**
-         * Creates a new CMsgClientAccountInfo instance using the specified properties.
+         * Creates a new SiteServerUI_Logout_Request instance using the specified properties.
          * @function create
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Logout_Request
          * @static
-         * @param {ICMsgClientAccountInfo=} [properties] Properties to set
-         * @returns {CMsgClientAccountInfo} CMsgClientAccountInfo instance
+         * @param {ISiteServerUI_Logout_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_Logout_Request} SiteServerUI_Logout_Request instance
          */
-        CMsgClientAccountInfo.create = function create(properties) {
-            return new CMsgClientAccountInfo(properties);
+        SiteServerUI_Logout_Request.create = function create(properties) {
+            return new SiteServerUI_Logout_Request(properties);
         };
     
         /**
-         * Encodes the specified CMsgClientAccountInfo message. Does not implicitly {@link CMsgClientAccountInfo.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Logout_Request message. Does not implicitly {@link SiteServerUI_Logout_Request.verify|verify} messages.
          * @function encode
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Logout_Request
          * @static
-         * @param {ICMsgClientAccountInfo} message CMsgClientAccountInfo message or plain object to encode
+         * @param {ISiteServerUI_Logout_Request} message SiteServerUI_Logout_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientAccountInfo.encode = function encode(message, writer) {
+        SiteServerUI_Logout_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.persona_name);
-            if (message.ip_country != null && message.hasOwnProperty("ip_country"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ip_country);
-            if (message.count_authed_computers != null && message.hasOwnProperty("count_authed_computers"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.count_authed_computers);
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.account_flags);
-            if (message.facebook_id != null && message.hasOwnProperty("facebook_id"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.facebook_id);
-            if (message.facebook_name != null && message.hasOwnProperty("facebook_name"))
-                writer.uint32(/* id 9, wireType 2 =*/74).string(message.facebook_name);
-            if (message.steamguard_notify_newmachines != null && message.hasOwnProperty("steamguard_notify_newmachines"))
-                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.steamguard_notify_newmachines);
-            if (message.steamguard_machine_name_user_chosen != null && message.hasOwnProperty("steamguard_machine_name_user_chosen"))
-                writer.uint32(/* id 15, wireType 2 =*/122).string(message.steamguard_machine_name_user_chosen);
-            if (message.is_phone_verified != null && message.hasOwnProperty("is_phone_verified"))
-                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.is_phone_verified);
-            if (message.two_factor_state != null && message.hasOwnProperty("two_factor_state"))
-                writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.two_factor_state);
-            if (message.is_phone_identifying != null && message.hasOwnProperty("is_phone_identifying"))
-                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_phone_identifying);
-            if (message.is_phone_needing_reverify != null && message.hasOwnProperty("is_phone_needing_reverify"))
-                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.is_phone_needing_reverify);
             return writer;
         };
     
         /**
-         * Encodes the specified CMsgClientAccountInfo message, length delimited. Does not implicitly {@link CMsgClientAccountInfo.verify|verify} messages.
+         * Encodes the specified SiteServerUI_Logout_Request message, length delimited. Does not implicitly {@link SiteServerUI_Logout_Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Logout_Request
          * @static
-         * @param {ICMsgClientAccountInfo} message CMsgClientAccountInfo message or plain object to encode
+         * @param {ISiteServerUI_Logout_Request} message SiteServerUI_Logout_Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CMsgClientAccountInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        SiteServerUI_Logout_Request.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CMsgClientAccountInfo message from the specified reader or buffer.
+         * Decodes a SiteServerUI_Logout_Request message from the specified reader or buffer.
          * @function decode
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Logout_Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CMsgClientAccountInfo} CMsgClientAccountInfo
+         * @returns {SiteServerUI_Logout_Request} SiteServerUI_Logout_Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientAccountInfo.decode = function decode(reader, length) {
+        SiteServerUI_Logout_Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientAccountInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Logout_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Logout_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_Logout_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_Logout_Request} SiteServerUI_Logout_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Logout_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_Logout_Request message.
+         * @function verify
+         * @memberof SiteServerUI_Logout_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_Logout_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_Logout_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_Logout_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_Logout_Request} SiteServerUI_Logout_Request
+         */
+        SiteServerUI_Logout_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Logout_Request)
+                return object;
+            return new $root.SiteServerUI_Logout_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_Logout_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_Logout_Request
+         * @static
+         * @param {SiteServerUI_Logout_Request} message SiteServerUI_Logout_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_Logout_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_Logout_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_Logout_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_Logout_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_Logout_Request;
+    })();
+    
+    $root.SiteServerUI_Logout_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_Logout_Response.
+         * @exports ISiteServerUI_Logout_Response
+         * @interface ISiteServerUI_Logout_Response
+         * @property {number|null} [logon_state] SiteServerUI_Logout_Response logon_state
+         * @property {number|null} [logout_eresult] SiteServerUI_Logout_Response logout_eresult
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_Logout_Response.
+         * @exports SiteServerUI_Logout_Response
+         * @classdesc Represents a SiteServerUI_Logout_Response.
+         * @implements ISiteServerUI_Logout_Response
+         * @constructor
+         * @param {ISiteServerUI_Logout_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_Logout_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_Logout_Response logon_state.
+         * @member {number} logon_state
+         * @memberof SiteServerUI_Logout_Response
+         * @instance
+         */
+        SiteServerUI_Logout_Response.prototype.logon_state = 0;
+    
+        /**
+         * SiteServerUI_Logout_Response logout_eresult.
+         * @member {number} logout_eresult
+         * @memberof SiteServerUI_Logout_Response
+         * @instance
+         */
+        SiteServerUI_Logout_Response.prototype.logout_eresult = 0;
+    
+        /**
+         * Creates a new SiteServerUI_Logout_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {ISiteServerUI_Logout_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_Logout_Response} SiteServerUI_Logout_Response instance
+         */
+        SiteServerUI_Logout_Response.create = function create(properties) {
+            return new SiteServerUI_Logout_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Logout_Response message. Does not implicitly {@link SiteServerUI_Logout_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {ISiteServerUI_Logout_Response} message SiteServerUI_Logout_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Logout_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logon_state);
+            if (message.logout_eresult != null && message.hasOwnProperty("logout_eresult"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.logout_eresult);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Logout_Response message, length delimited. Does not implicitly {@link SiteServerUI_Logout_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {ISiteServerUI_Logout_Response} message SiteServerUI_Logout_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Logout_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Logout_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_Logout_Response} SiteServerUI_Logout_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Logout_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Logout_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.persona_name = reader.string();
+                    message.logon_state = reader.int32();
                     break;
                 case 2:
-                    message.ip_country = reader.string();
+                    message.logout_eresult = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Logout_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_Logout_Response} SiteServerUI_Logout_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Logout_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_Logout_Response message.
+         * @function verify
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_Logout_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                if (!$util.isInteger(message.logon_state))
+                    return "logon_state: integer expected";
+            if (message.logout_eresult != null && message.hasOwnProperty("logout_eresult"))
+                if (!$util.isInteger(message.logout_eresult))
+                    return "logout_eresult: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_Logout_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_Logout_Response} SiteServerUI_Logout_Response
+         */
+        SiteServerUI_Logout_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Logout_Response)
+                return object;
+            var message = new $root.SiteServerUI_Logout_Response();
+            if (object.logon_state != null)
+                message.logon_state = object.logon_state | 0;
+            if (object.logout_eresult != null)
+                message.logout_eresult = object.logout_eresult | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_Logout_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_Logout_Response
+         * @static
+         * @param {SiteServerUI_Logout_Response} message SiteServerUI_Logout_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_Logout_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.logon_state = 0;
+                object.logout_eresult = 0;
+            }
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                object.logon_state = message.logon_state;
+            if (message.logout_eresult != null && message.hasOwnProperty("logout_eresult"))
+                object.logout_eresult = message.logout_eresult;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_Logout_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_Logout_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_Logout_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_Logout_Response;
+    })();
+    
+    $root.SiteServerUI_Quit_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_Quit_Request.
+         * @exports ISiteServerUI_Quit_Request
+         * @interface ISiteServerUI_Quit_Request
+         * @property {boolean|null} [restart] SiteServerUI_Quit_Request restart
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_Quit_Request.
+         * @exports SiteServerUI_Quit_Request
+         * @classdesc Represents a SiteServerUI_Quit_Request.
+         * @implements ISiteServerUI_Quit_Request
+         * @constructor
+         * @param {ISiteServerUI_Quit_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_Quit_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_Quit_Request restart.
+         * @member {boolean} restart
+         * @memberof SiteServerUI_Quit_Request
+         * @instance
+         */
+        SiteServerUI_Quit_Request.prototype.restart = false;
+    
+        /**
+         * Creates a new SiteServerUI_Quit_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {ISiteServerUI_Quit_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_Quit_Request} SiteServerUI_Quit_Request instance
+         */
+        SiteServerUI_Quit_Request.create = function create(properties) {
+            return new SiteServerUI_Quit_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Quit_Request message. Does not implicitly {@link SiteServerUI_Quit_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {ISiteServerUI_Quit_Request} message SiteServerUI_Quit_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Quit_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.restart != null && message.hasOwnProperty("restart"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restart);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Quit_Request message, length delimited. Does not implicitly {@link SiteServerUI_Quit_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {ISiteServerUI_Quit_Request} message SiteServerUI_Quit_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Quit_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Quit_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_Quit_Request} SiteServerUI_Quit_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Quit_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Quit_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.restart = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Quit_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_Quit_Request} SiteServerUI_Quit_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Quit_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_Quit_Request message.
+         * @function verify
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_Quit_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.restart != null && message.hasOwnProperty("restart"))
+                if (typeof message.restart !== "boolean")
+                    return "restart: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_Quit_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_Quit_Request} SiteServerUI_Quit_Request
+         */
+        SiteServerUI_Quit_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Quit_Request)
+                return object;
+            var message = new $root.SiteServerUI_Quit_Request();
+            if (object.restart != null)
+                message.restart = Boolean(object.restart);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_Quit_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_Quit_Request
+         * @static
+         * @param {SiteServerUI_Quit_Request} message SiteServerUI_Quit_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_Quit_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.restart = false;
+            if (message.restart != null && message.hasOwnProperty("restart"))
+                object.restart = message.restart;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_Quit_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_Quit_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_Quit_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_Quit_Request;
+    })();
+    
+    $root.SiteServerUI_Quit_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_Quit_Response.
+         * @exports ISiteServerUI_Quit_Response
+         * @interface ISiteServerUI_Quit_Response
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_Quit_Response.
+         * @exports SiteServerUI_Quit_Response
+         * @classdesc Represents a SiteServerUI_Quit_Response.
+         * @implements ISiteServerUI_Quit_Response
+         * @constructor
+         * @param {ISiteServerUI_Quit_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_Quit_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_Quit_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {ISiteServerUI_Quit_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_Quit_Response} SiteServerUI_Quit_Response instance
+         */
+        SiteServerUI_Quit_Response.create = function create(properties) {
+            return new SiteServerUI_Quit_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Quit_Response message. Does not implicitly {@link SiteServerUI_Quit_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {ISiteServerUI_Quit_Response} message SiteServerUI_Quit_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Quit_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Quit_Response message, length delimited. Does not implicitly {@link SiteServerUI_Quit_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {ISiteServerUI_Quit_Response} message SiteServerUI_Quit_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Quit_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Quit_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_Quit_Response} SiteServerUI_Quit_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Quit_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Quit_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Quit_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_Quit_Response} SiteServerUI_Quit_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Quit_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_Quit_Response message.
+         * @function verify
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_Quit_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_Quit_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_Quit_Response} SiteServerUI_Quit_Response
+         */
+        SiteServerUI_Quit_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Quit_Response)
+                return object;
+            return new $root.SiteServerUI_Quit_Response();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_Quit_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_Quit_Response
+         * @static
+         * @param {SiteServerUI_Quit_Response} message SiteServerUI_Quit_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_Quit_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_Quit_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_Quit_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_Quit_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_Quit_Response;
+    })();
+    
+    $root.SiteServerUI_Status_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_Status_Request.
+         * @exports ISiteServerUI_Status_Request
+         * @interface ISiteServerUI_Status_Request
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_Status_Request.
+         * @exports SiteServerUI_Status_Request
+         * @classdesc Represents a SiteServerUI_Status_Request.
+         * @implements ISiteServerUI_Status_Request
+         * @constructor
+         * @param {ISiteServerUI_Status_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_Status_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_Status_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {ISiteServerUI_Status_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_Status_Request} SiteServerUI_Status_Request instance
+         */
+        SiteServerUI_Status_Request.create = function create(properties) {
+            return new SiteServerUI_Status_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Status_Request message. Does not implicitly {@link SiteServerUI_Status_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {ISiteServerUI_Status_Request} message SiteServerUI_Status_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Status_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Status_Request message, length delimited. Does not implicitly {@link SiteServerUI_Status_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {ISiteServerUI_Status_Request} message SiteServerUI_Status_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Status_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Status_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_Status_Request} SiteServerUI_Status_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Status_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Status_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Status_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_Status_Request} SiteServerUI_Status_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Status_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_Status_Request message.
+         * @function verify
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_Status_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_Status_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_Status_Request} SiteServerUI_Status_Request
+         */
+        SiteServerUI_Status_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Status_Request)
+                return object;
+            return new $root.SiteServerUI_Status_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_Status_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_Status_Request
+         * @static
+         * @param {SiteServerUI_Status_Request} message SiteServerUI_Status_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_Status_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_Status_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_Status_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_Status_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_Status_Request;
+    })();
+    
+    $root.SiteServerUI_Status_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_Status_Response.
+         * @exports ISiteServerUI_Status_Response
+         * @interface ISiteServerUI_Status_Response
+         * @property {number|null} [logon_state] SiteServerUI_Status_Response logon_state
+         * @property {number|null} [logon_eresult] SiteServerUI_Status_Response logon_eresult
+         * @property {boolean|null} [connected] SiteServerUI_Status_Response connected
+         * @property {boolean|null} [cache_enabled] SiteServerUI_Status_Response cache_enabled
+         * @property {number|null} [acct_status] SiteServerUI_Status_Response acct_status
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_Status_Response.
+         * @exports SiteServerUI_Status_Response
+         * @classdesc Represents a SiteServerUI_Status_Response.
+         * @implements ISiteServerUI_Status_Response
+         * @constructor
+         * @param {ISiteServerUI_Status_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_Status_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_Status_Response logon_state.
+         * @member {number} logon_state
+         * @memberof SiteServerUI_Status_Response
+         * @instance
+         */
+        SiteServerUI_Status_Response.prototype.logon_state = 0;
+    
+        /**
+         * SiteServerUI_Status_Response logon_eresult.
+         * @member {number} logon_eresult
+         * @memberof SiteServerUI_Status_Response
+         * @instance
+         */
+        SiteServerUI_Status_Response.prototype.logon_eresult = 0;
+    
+        /**
+         * SiteServerUI_Status_Response connected.
+         * @member {boolean} connected
+         * @memberof SiteServerUI_Status_Response
+         * @instance
+         */
+        SiteServerUI_Status_Response.prototype.connected = false;
+    
+        /**
+         * SiteServerUI_Status_Response cache_enabled.
+         * @member {boolean} cache_enabled
+         * @memberof SiteServerUI_Status_Response
+         * @instance
+         */
+        SiteServerUI_Status_Response.prototype.cache_enabled = false;
+    
+        /**
+         * SiteServerUI_Status_Response acct_status.
+         * @member {number} acct_status
+         * @memberof SiteServerUI_Status_Response
+         * @instance
+         */
+        SiteServerUI_Status_Response.prototype.acct_status = 0;
+    
+        /**
+         * Creates a new SiteServerUI_Status_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_Status_Response
+         * @static
+         * @param {ISiteServerUI_Status_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_Status_Response} SiteServerUI_Status_Response instance
+         */
+        SiteServerUI_Status_Response.create = function create(properties) {
+            return new SiteServerUI_Status_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Status_Response message. Does not implicitly {@link SiteServerUI_Status_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_Status_Response
+         * @static
+         * @param {ISiteServerUI_Status_Response} message SiteServerUI_Status_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Status_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logon_state);
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.logon_eresult);
+            if (message.connected != null && message.hasOwnProperty("connected"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.connected);
+            if (message.cache_enabled != null && message.hasOwnProperty("cache_enabled"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.cache_enabled);
+            if (message.acct_status != null && message.hasOwnProperty("acct_status"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.acct_status);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_Status_Response message, length delimited. Does not implicitly {@link SiteServerUI_Status_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_Status_Response
+         * @static
+         * @param {ISiteServerUI_Status_Response} message SiteServerUI_Status_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_Status_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_Status_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_Status_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_Status_Response} SiteServerUI_Status_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_Status_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_Status_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.logon_state = reader.int32();
+                    break;
+                case 2:
+                    message.logon_eresult = reader.int32();
+                    break;
+                case 3:
+                    message.connected = reader.bool();
+                    break;
+                case 4:
+                    message.cache_enabled = reader.bool();
                     break;
                 case 5:
-                    message.count_authed_computers = reader.int32();
-                    break;
-                case 7:
-                    message.account_flags = reader.uint32();
-                    break;
-                case 8:
-                    message.facebook_id = reader.uint64();
-                    break;
-                case 9:
-                    message.facebook_name = reader.string();
-                    break;
-                case 14:
-                    message.steamguard_notify_newmachines = reader.bool();
-                    break;
-                case 15:
-                    message.steamguard_machine_name_user_chosen = reader.string();
-                    break;
-                case 16:
-                    message.is_phone_verified = reader.bool();
-                    break;
-                case 17:
-                    message.two_factor_state = reader.uint32();
-                    break;
-                case 18:
-                    message.is_phone_identifying = reader.bool();
-                    break;
-                case 19:
-                    message.is_phone_needing_reverify = reader.bool();
+                    message.acct_status = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4085,190 +2301,2940 @@
         };
     
         /**
-         * Decodes a CMsgClientAccountInfo message from the specified reader or buffer, length delimited.
+         * Decodes a SiteServerUI_Status_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Status_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CMsgClientAccountInfo} CMsgClientAccountInfo
+         * @returns {SiteServerUI_Status_Response} SiteServerUI_Status_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CMsgClientAccountInfo.decodeDelimited = function decodeDelimited(reader) {
+        SiteServerUI_Status_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CMsgClientAccountInfo message.
+         * Verifies a SiteServerUI_Status_Response message.
          * @function verify
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Status_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CMsgClientAccountInfo.verify = function verify(message) {
+        SiteServerUI_Status_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
-                if (!$util.isString(message.persona_name))
-                    return "persona_name: string expected";
-            if (message.ip_country != null && message.hasOwnProperty("ip_country"))
-                if (!$util.isString(message.ip_country))
-                    return "ip_country: string expected";
-            if (message.count_authed_computers != null && message.hasOwnProperty("count_authed_computers"))
-                if (!$util.isInteger(message.count_authed_computers))
-                    return "count_authed_computers: integer expected";
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                if (!$util.isInteger(message.account_flags))
-                    return "account_flags: integer expected";
-            if (message.facebook_id != null && message.hasOwnProperty("facebook_id"))
-                if (!$util.isInteger(message.facebook_id) && !(message.facebook_id && $util.isInteger(message.facebook_id.low) && $util.isInteger(message.facebook_id.high)))
-                    return "facebook_id: integer|Long expected";
-            if (message.facebook_name != null && message.hasOwnProperty("facebook_name"))
-                if (!$util.isString(message.facebook_name))
-                    return "facebook_name: string expected";
-            if (message.steamguard_notify_newmachines != null && message.hasOwnProperty("steamguard_notify_newmachines"))
-                if (typeof message.steamguard_notify_newmachines !== "boolean")
-                    return "steamguard_notify_newmachines: boolean expected";
-            if (message.steamguard_machine_name_user_chosen != null && message.hasOwnProperty("steamguard_machine_name_user_chosen"))
-                if (!$util.isString(message.steamguard_machine_name_user_chosen))
-                    return "steamguard_machine_name_user_chosen: string expected";
-            if (message.is_phone_verified != null && message.hasOwnProperty("is_phone_verified"))
-                if (typeof message.is_phone_verified !== "boolean")
-                    return "is_phone_verified: boolean expected";
-            if (message.two_factor_state != null && message.hasOwnProperty("two_factor_state"))
-                if (!$util.isInteger(message.two_factor_state))
-                    return "two_factor_state: integer expected";
-            if (message.is_phone_identifying != null && message.hasOwnProperty("is_phone_identifying"))
-                if (typeof message.is_phone_identifying !== "boolean")
-                    return "is_phone_identifying: boolean expected";
-            if (message.is_phone_needing_reverify != null && message.hasOwnProperty("is_phone_needing_reverify"))
-                if (typeof message.is_phone_needing_reverify !== "boolean")
-                    return "is_phone_needing_reverify: boolean expected";
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                if (!$util.isInteger(message.logon_state))
+                    return "logon_state: integer expected";
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                if (!$util.isInteger(message.logon_eresult))
+                    return "logon_eresult: integer expected";
+            if (message.connected != null && message.hasOwnProperty("connected"))
+                if (typeof message.connected !== "boolean")
+                    return "connected: boolean expected";
+            if (message.cache_enabled != null && message.hasOwnProperty("cache_enabled"))
+                if (typeof message.cache_enabled !== "boolean")
+                    return "cache_enabled: boolean expected";
+            if (message.acct_status != null && message.hasOwnProperty("acct_status"))
+                if (!$util.isInteger(message.acct_status))
+                    return "acct_status: integer expected";
             return null;
         };
     
         /**
-         * Creates a CMsgClientAccountInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a SiteServerUI_Status_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Status_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CMsgClientAccountInfo} CMsgClientAccountInfo
+         * @returns {SiteServerUI_Status_Response} SiteServerUI_Status_Response
          */
-        CMsgClientAccountInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.CMsgClientAccountInfo)
+        SiteServerUI_Status_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_Status_Response)
                 return object;
-            var message = new $root.CMsgClientAccountInfo();
-            if (object.persona_name != null)
-                message.persona_name = String(object.persona_name);
-            if (object.ip_country != null)
-                message.ip_country = String(object.ip_country);
-            if (object.count_authed_computers != null)
-                message.count_authed_computers = object.count_authed_computers | 0;
-            if (object.account_flags != null)
-                message.account_flags = object.account_flags >>> 0;
-            if (object.facebook_id != null)
-                if ($util.Long)
-                    (message.facebook_id = $util.Long.fromValue(object.facebook_id)).unsigned = true;
-                else if (typeof object.facebook_id === "string")
-                    message.facebook_id = parseInt(object.facebook_id, 10);
-                else if (typeof object.facebook_id === "number")
-                    message.facebook_id = object.facebook_id;
-                else if (typeof object.facebook_id === "object")
-                    message.facebook_id = new $util.LongBits(object.facebook_id.low >>> 0, object.facebook_id.high >>> 0).toNumber(true);
-            if (object.facebook_name != null)
-                message.facebook_name = String(object.facebook_name);
-            if (object.steamguard_notify_newmachines != null)
-                message.steamguard_notify_newmachines = Boolean(object.steamguard_notify_newmachines);
-            if (object.steamguard_machine_name_user_chosen != null)
-                message.steamguard_machine_name_user_chosen = String(object.steamguard_machine_name_user_chosen);
-            if (object.is_phone_verified != null)
-                message.is_phone_verified = Boolean(object.is_phone_verified);
-            if (object.two_factor_state != null)
-                message.two_factor_state = object.two_factor_state >>> 0;
-            if (object.is_phone_identifying != null)
-                message.is_phone_identifying = Boolean(object.is_phone_identifying);
-            if (object.is_phone_needing_reverify != null)
-                message.is_phone_needing_reverify = Boolean(object.is_phone_needing_reverify);
+            var message = new $root.SiteServerUI_Status_Response();
+            if (object.logon_state != null)
+                message.logon_state = object.logon_state | 0;
+            if (object.logon_eresult != null)
+                message.logon_eresult = object.logon_eresult | 0;
+            if (object.connected != null)
+                message.connected = Boolean(object.connected);
+            if (object.cache_enabled != null)
+                message.cache_enabled = Boolean(object.cache_enabled);
+            if (object.acct_status != null)
+                message.acct_status = object.acct_status | 0;
             return message;
         };
     
         /**
-         * Creates a plain object from a CMsgClientAccountInfo message. Also converts values to other types if specified.
+         * Creates a plain object from a SiteServerUI_Status_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Status_Response
          * @static
-         * @param {CMsgClientAccountInfo} message CMsgClientAccountInfo
+         * @param {SiteServerUI_Status_Response} message SiteServerUI_Status_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CMsgClientAccountInfo.toObject = function toObject(message, options) {
+        SiteServerUI_Status_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.persona_name = "";
-                object.ip_country = "";
-                object.count_authed_computers = 0;
-                object.account_flags = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.facebook_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.facebook_id = options.longs === String ? "0" : 0;
-                object.facebook_name = "";
-                object.steamguard_notify_newmachines = false;
-                object.steamguard_machine_name_user_chosen = "";
-                object.is_phone_verified = false;
-                object.two_factor_state = 0;
-                object.is_phone_identifying = false;
-                object.is_phone_needing_reverify = false;
+                object.logon_state = 0;
+                object.logon_eresult = 0;
+                object.connected = false;
+                object.cache_enabled = false;
+                object.acct_status = 0;
             }
-            if (message.persona_name != null && message.hasOwnProperty("persona_name"))
-                object.persona_name = message.persona_name;
-            if (message.ip_country != null && message.hasOwnProperty("ip_country"))
-                object.ip_country = message.ip_country;
-            if (message.count_authed_computers != null && message.hasOwnProperty("count_authed_computers"))
-                object.count_authed_computers = message.count_authed_computers;
-            if (message.account_flags != null && message.hasOwnProperty("account_flags"))
-                object.account_flags = message.account_flags;
-            if (message.facebook_id != null && message.hasOwnProperty("facebook_id"))
-                if (typeof message.facebook_id === "number")
-                    object.facebook_id = options.longs === String ? String(message.facebook_id) : message.facebook_id;
-                else
-                    object.facebook_id = options.longs === String ? $util.Long.prototype.toString.call(message.facebook_id) : options.longs === Number ? new $util.LongBits(message.facebook_id.low >>> 0, message.facebook_id.high >>> 0).toNumber(true) : message.facebook_id;
-            if (message.facebook_name != null && message.hasOwnProperty("facebook_name"))
-                object.facebook_name = message.facebook_name;
-            if (message.steamguard_notify_newmachines != null && message.hasOwnProperty("steamguard_notify_newmachines"))
-                object.steamguard_notify_newmachines = message.steamguard_notify_newmachines;
-            if (message.steamguard_machine_name_user_chosen != null && message.hasOwnProperty("steamguard_machine_name_user_chosen"))
-                object.steamguard_machine_name_user_chosen = message.steamguard_machine_name_user_chosen;
-            if (message.is_phone_verified != null && message.hasOwnProperty("is_phone_verified"))
-                object.is_phone_verified = message.is_phone_verified;
-            if (message.two_factor_state != null && message.hasOwnProperty("two_factor_state"))
-                object.two_factor_state = message.two_factor_state;
-            if (message.is_phone_identifying != null && message.hasOwnProperty("is_phone_identifying"))
-                object.is_phone_identifying = message.is_phone_identifying;
-            if (message.is_phone_needing_reverify != null && message.hasOwnProperty("is_phone_needing_reverify"))
-                object.is_phone_needing_reverify = message.is_phone_needing_reverify;
+            if (message.logon_state != null && message.hasOwnProperty("logon_state"))
+                object.logon_state = message.logon_state;
+            if (message.logon_eresult != null && message.hasOwnProperty("logon_eresult"))
+                object.logon_eresult = message.logon_eresult;
+            if (message.connected != null && message.hasOwnProperty("connected"))
+                object.connected = message.connected;
+            if (message.cache_enabled != null && message.hasOwnProperty("cache_enabled"))
+                object.cache_enabled = message.cache_enabled;
+            if (message.acct_status != null && message.hasOwnProperty("acct_status"))
+                object.acct_status = message.acct_status;
             return object;
         };
     
         /**
-         * Converts this CMsgClientAccountInfo to JSON.
+         * Converts this SiteServerUI_Status_Response to JSON.
          * @function toJSON
-         * @memberof CMsgClientAccountInfo
+         * @memberof SiteServerUI_Status_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CMsgClientAccountInfo.prototype.toJSON = function toJSON() {
+        SiteServerUI_Status_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CMsgClientAccountInfo;
+        return SiteServerUI_Status_Response;
+    })();
+    
+    $root.SiteServerUI_GetLanguage_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_GetLanguage_Request.
+         * @exports ISiteServerUI_GetLanguage_Request
+         * @interface ISiteServerUI_GetLanguage_Request
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_GetLanguage_Request.
+         * @exports SiteServerUI_GetLanguage_Request
+         * @classdesc Represents a SiteServerUI_GetLanguage_Request.
+         * @implements ISiteServerUI_GetLanguage_Request
+         * @constructor
+         * @param {ISiteServerUI_GetLanguage_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_GetLanguage_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_GetLanguage_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_GetLanguage_Request} SiteServerUI_GetLanguage_Request instance
+         */
+        SiteServerUI_GetLanguage_Request.create = function create(properties) {
+            return new SiteServerUI_GetLanguage_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_GetLanguage_Request message. Does not implicitly {@link SiteServerUI_GetLanguage_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Request} message SiteServerUI_GetLanguage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_GetLanguage_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_GetLanguage_Request message, length delimited. Does not implicitly {@link SiteServerUI_GetLanguage_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Request} message SiteServerUI_GetLanguage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_GetLanguage_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_GetLanguage_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_GetLanguage_Request} SiteServerUI_GetLanguage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_GetLanguage_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_GetLanguage_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_GetLanguage_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_GetLanguage_Request} SiteServerUI_GetLanguage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_GetLanguage_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_GetLanguage_Request message.
+         * @function verify
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_GetLanguage_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_GetLanguage_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_GetLanguage_Request} SiteServerUI_GetLanguage_Request
+         */
+        SiteServerUI_GetLanguage_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_GetLanguage_Request)
+                return object;
+            return new $root.SiteServerUI_GetLanguage_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_GetLanguage_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @static
+         * @param {SiteServerUI_GetLanguage_Request} message SiteServerUI_GetLanguage_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_GetLanguage_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_GetLanguage_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_GetLanguage_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_GetLanguage_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_GetLanguage_Request;
+    })();
+    
+    $root.SiteServerUI_GetLanguage_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_GetLanguage_Response.
+         * @exports ISiteServerUI_GetLanguage_Response
+         * @interface ISiteServerUI_GetLanguage_Response
+         * @property {string|null} [language] SiteServerUI_GetLanguage_Response language
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_GetLanguage_Response.
+         * @exports SiteServerUI_GetLanguage_Response
+         * @classdesc Represents a SiteServerUI_GetLanguage_Response.
+         * @implements ISiteServerUI_GetLanguage_Response
+         * @constructor
+         * @param {ISiteServerUI_GetLanguage_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_GetLanguage_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_GetLanguage_Response language.
+         * @member {string} language
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @instance
+         */
+        SiteServerUI_GetLanguage_Response.prototype.language = "";
+    
+        /**
+         * Creates a new SiteServerUI_GetLanguage_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_GetLanguage_Response} SiteServerUI_GetLanguage_Response instance
+         */
+        SiteServerUI_GetLanguage_Response.create = function create(properties) {
+            return new SiteServerUI_GetLanguage_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_GetLanguage_Response message. Does not implicitly {@link SiteServerUI_GetLanguage_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Response} message SiteServerUI_GetLanguage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_GetLanguage_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_GetLanguage_Response message, length delimited. Does not implicitly {@link SiteServerUI_GetLanguage_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_GetLanguage_Response} message SiteServerUI_GetLanguage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_GetLanguage_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_GetLanguage_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_GetLanguage_Response} SiteServerUI_GetLanguage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_GetLanguage_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_GetLanguage_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_GetLanguage_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_GetLanguage_Response} SiteServerUI_GetLanguage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_GetLanguage_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_GetLanguage_Response message.
+         * @function verify
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_GetLanguage_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_GetLanguage_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_GetLanguage_Response} SiteServerUI_GetLanguage_Response
+         */
+        SiteServerUI_GetLanguage_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_GetLanguage_Response)
+                return object;
+            var message = new $root.SiteServerUI_GetLanguage_Response();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_GetLanguage_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @static
+         * @param {SiteServerUI_GetLanguage_Response} message SiteServerUI_GetLanguage_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_GetLanguage_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.language = "";
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_GetLanguage_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_GetLanguage_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_GetLanguage_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_GetLanguage_Response;
+    })();
+    
+    $root.SiteServerUI_SetLanguage_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_SetLanguage_Request.
+         * @exports ISiteServerUI_SetLanguage_Request
+         * @interface ISiteServerUI_SetLanguage_Request
+         * @property {string|null} [language] SiteServerUI_SetLanguage_Request language
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_SetLanguage_Request.
+         * @exports SiteServerUI_SetLanguage_Request
+         * @classdesc Represents a SiteServerUI_SetLanguage_Request.
+         * @implements ISiteServerUI_SetLanguage_Request
+         * @constructor
+         * @param {ISiteServerUI_SetLanguage_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_SetLanguage_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_SetLanguage_Request language.
+         * @member {string} language
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @instance
+         */
+        SiteServerUI_SetLanguage_Request.prototype.language = "";
+    
+        /**
+         * Creates a new SiteServerUI_SetLanguage_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_SetLanguage_Request} SiteServerUI_SetLanguage_Request instance
+         */
+        SiteServerUI_SetLanguage_Request.create = function create(properties) {
+            return new SiteServerUI_SetLanguage_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_SetLanguage_Request message. Does not implicitly {@link SiteServerUI_SetLanguage_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Request} message SiteServerUI_SetLanguage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_SetLanguage_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_SetLanguage_Request message, length delimited. Does not implicitly {@link SiteServerUI_SetLanguage_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Request} message SiteServerUI_SetLanguage_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_SetLanguage_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_SetLanguage_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_SetLanguage_Request} SiteServerUI_SetLanguage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_SetLanguage_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_SetLanguage_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.language = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_SetLanguage_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_SetLanguage_Request} SiteServerUI_SetLanguage_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_SetLanguage_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_SetLanguage_Request message.
+         * @function verify
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_SetLanguage_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_SetLanguage_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_SetLanguage_Request} SiteServerUI_SetLanguage_Request
+         */
+        SiteServerUI_SetLanguage_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_SetLanguage_Request)
+                return object;
+            var message = new $root.SiteServerUI_SetLanguage_Request();
+            if (object.language != null)
+                message.language = String(object.language);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_SetLanguage_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @static
+         * @param {SiteServerUI_SetLanguage_Request} message SiteServerUI_SetLanguage_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_SetLanguage_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.language = "";
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_SetLanguage_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_SetLanguage_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_SetLanguage_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_SetLanguage_Request;
+    })();
+    
+    $root.SiteServerUI_SetLanguage_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_SetLanguage_Response.
+         * @exports ISiteServerUI_SetLanguage_Response
+         * @interface ISiteServerUI_SetLanguage_Response
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_SetLanguage_Response.
+         * @exports SiteServerUI_SetLanguage_Response
+         * @classdesc Represents a SiteServerUI_SetLanguage_Response.
+         * @implements ISiteServerUI_SetLanguage_Response
+         * @constructor
+         * @param {ISiteServerUI_SetLanguage_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_SetLanguage_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_SetLanguage_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_SetLanguage_Response} SiteServerUI_SetLanguage_Response instance
+         */
+        SiteServerUI_SetLanguage_Response.create = function create(properties) {
+            return new SiteServerUI_SetLanguage_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_SetLanguage_Response message. Does not implicitly {@link SiteServerUI_SetLanguage_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Response} message SiteServerUI_SetLanguage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_SetLanguage_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_SetLanguage_Response message, length delimited. Does not implicitly {@link SiteServerUI_SetLanguage_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {ISiteServerUI_SetLanguage_Response} message SiteServerUI_SetLanguage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_SetLanguage_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_SetLanguage_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_SetLanguage_Response} SiteServerUI_SetLanguage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_SetLanguage_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_SetLanguage_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_SetLanguage_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_SetLanguage_Response} SiteServerUI_SetLanguage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_SetLanguage_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_SetLanguage_Response message.
+         * @function verify
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_SetLanguage_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_SetLanguage_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_SetLanguage_Response} SiteServerUI_SetLanguage_Response
+         */
+        SiteServerUI_SetLanguage_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_SetLanguage_Response)
+                return object;
+            return new $root.SiteServerUI_SetLanguage_Response();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_SetLanguage_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @static
+         * @param {SiteServerUI_SetLanguage_Response} message SiteServerUI_SetLanguage_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_SetLanguage_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_SetLanguage_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_SetLanguage_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_SetLanguage_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_SetLanguage_Response;
+    })();
+    
+    $root.SiteServerUI_ClientStatus_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ClientStatus_Request.
+         * @exports ISiteServerUI_ClientStatus_Request
+         * @interface ISiteServerUI_ClientStatus_Request
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ClientStatus_Request.
+         * @exports SiteServerUI_ClientStatus_Request
+         * @classdesc Represents a SiteServerUI_ClientStatus_Request.
+         * @implements ISiteServerUI_ClientStatus_Request
+         * @constructor
+         * @param {ISiteServerUI_ClientStatus_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_ClientStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_ClientStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_ClientStatus_Request} SiteServerUI_ClientStatus_Request instance
+         */
+        SiteServerUI_ClientStatus_Request.create = function create(properties) {
+            return new SiteServerUI_ClientStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ClientStatus_Request message. Does not implicitly {@link SiteServerUI_ClientStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Request} message SiteServerUI_ClientStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ClientStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ClientStatus_Request message, length delimited. Does not implicitly {@link SiteServerUI_ClientStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Request} message SiteServerUI_ClientStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ClientStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ClientStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ClientStatus_Request} SiteServerUI_ClientStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ClientStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ClientStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ClientStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ClientStatus_Request} SiteServerUI_ClientStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ClientStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ClientStatus_Request message.
+         * @function verify
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ClientStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ClientStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ClientStatus_Request} SiteServerUI_ClientStatus_Request
+         */
+        SiteServerUI_ClientStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ClientStatus_Request)
+                return object;
+            return new $root.SiteServerUI_ClientStatus_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ClientStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @static
+         * @param {SiteServerUI_ClientStatus_Request} message SiteServerUI_ClientStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ClientStatus_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_ClientStatus_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ClientStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ClientStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_ClientStatus_Request;
+    })();
+    
+    $root.SiteServerUI_ClientStatus_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ClientStatus_Response.
+         * @exports ISiteServerUI_ClientStatus_Response
+         * @interface ISiteServerUI_ClientStatus_Response
+         * @property {Array.<SiteServerUI_ClientStatus_Response.IClientInfo>|null} [clients] SiteServerUI_ClientStatus_Response clients
+         * @property {Array.<SiteServerUI_ClientStatus_Response.IPayment>|null} [payments] SiteServerUI_ClientStatus_Response payments
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ClientStatus_Response.
+         * @exports SiteServerUI_ClientStatus_Response
+         * @classdesc Represents a SiteServerUI_ClientStatus_Response.
+         * @implements ISiteServerUI_ClientStatus_Response
+         * @constructor
+         * @param {ISiteServerUI_ClientStatus_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_ClientStatus_Response(properties) {
+            this.clients = [];
+            this.payments = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_ClientStatus_Response clients.
+         * @member {Array.<SiteServerUI_ClientStatus_Response.IClientInfo>} clients
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @instance
+         */
+        SiteServerUI_ClientStatus_Response.prototype.clients = $util.emptyArray;
+    
+        /**
+         * SiteServerUI_ClientStatus_Response payments.
+         * @member {Array.<SiteServerUI_ClientStatus_Response.IPayment>} payments
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @instance
+         */
+        SiteServerUI_ClientStatus_Response.prototype.payments = $util.emptyArray;
+    
+        /**
+         * Creates a new SiteServerUI_ClientStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_ClientStatus_Response} SiteServerUI_ClientStatus_Response instance
+         */
+        SiteServerUI_ClientStatus_Response.create = function create(properties) {
+            return new SiteServerUI_ClientStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ClientStatus_Response message. Does not implicitly {@link SiteServerUI_ClientStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Response} message SiteServerUI_ClientStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ClientStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clients != null && message.clients.length)
+                for (var i = 0; i < message.clients.length; ++i)
+                    $root.SiteServerUI_ClientStatus_Response.ClientInfo.encode(message.clients[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.payments != null && message.payments.length)
+                for (var i = 0; i < message.payments.length; ++i)
+                    $root.SiteServerUI_ClientStatus_Response.Payment.encode(message.payments[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ClientStatus_Response message, length delimited. Does not implicitly {@link SiteServerUI_ClientStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {ISiteServerUI_ClientStatus_Response} message SiteServerUI_ClientStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ClientStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ClientStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ClientStatus_Response} SiteServerUI_ClientStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ClientStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ClientStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 4:
+                    if (!(message.clients && message.clients.length))
+                        message.clients = [];
+                    message.clients.push($root.SiteServerUI_ClientStatus_Response.ClientInfo.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    if (!(message.payments && message.payments.length))
+                        message.payments = [];
+                    message.payments.push($root.SiteServerUI_ClientStatus_Response.Payment.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ClientStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ClientStatus_Response} SiteServerUI_ClientStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ClientStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ClientStatus_Response message.
+         * @function verify
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ClientStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clients != null && message.hasOwnProperty("clients")) {
+                if (!Array.isArray(message.clients))
+                    return "clients: array expected";
+                for (var i = 0; i < message.clients.length; ++i) {
+                    var error = $root.SiteServerUI_ClientStatus_Response.ClientInfo.verify(message.clients[i]);
+                    if (error)
+                        return "clients." + error;
+                }
+            }
+            if (message.payments != null && message.hasOwnProperty("payments")) {
+                if (!Array.isArray(message.payments))
+                    return "payments: array expected";
+                for (var i = 0; i < message.payments.length; ++i) {
+                    var error = $root.SiteServerUI_ClientStatus_Response.Payment.verify(message.payments[i]);
+                    if (error)
+                        return "payments." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ClientStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ClientStatus_Response} SiteServerUI_ClientStatus_Response
+         */
+        SiteServerUI_ClientStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ClientStatus_Response)
+                return object;
+            var message = new $root.SiteServerUI_ClientStatus_Response();
+            if (object.clients) {
+                if (!Array.isArray(object.clients))
+                    throw TypeError(".SiteServerUI_ClientStatus_Response.clients: array expected");
+                message.clients = [];
+                for (var i = 0; i < object.clients.length; ++i) {
+                    if (typeof object.clients[i] !== "object")
+                        throw TypeError(".SiteServerUI_ClientStatus_Response.clients: object expected");
+                    message.clients[i] = $root.SiteServerUI_ClientStatus_Response.ClientInfo.fromObject(object.clients[i]);
+                }
+            }
+            if (object.payments) {
+                if (!Array.isArray(object.payments))
+                    throw TypeError(".SiteServerUI_ClientStatus_Response.payments: array expected");
+                message.payments = [];
+                for (var i = 0; i < object.payments.length; ++i) {
+                    if (typeof object.payments[i] !== "object")
+                        throw TypeError(".SiteServerUI_ClientStatus_Response.payments: object expected");
+                    message.payments[i] = $root.SiteServerUI_ClientStatus_Response.Payment.fromObject(object.payments[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ClientStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @static
+         * @param {SiteServerUI_ClientStatus_Response} message SiteServerUI_ClientStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ClientStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.clients = [];
+                object.payments = [];
+            }
+            if (message.clients && message.clients.length) {
+                object.clients = [];
+                for (var j = 0; j < message.clients.length; ++j)
+                    object.clients[j] = $root.SiteServerUI_ClientStatus_Response.ClientInfo.toObject(message.clients[j], options);
+            }
+            if (message.payments && message.payments.length) {
+                object.payments = [];
+                for (var j = 0; j < message.payments.length; ++j)
+                    object.payments[j] = $root.SiteServerUI_ClientStatus_Response.Payment.toObject(message.payments[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_ClientStatus_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ClientStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ClientStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        SiteServerUI_ClientStatus_Response.ClientInfo = (function() {
+    
+            /**
+             * Properties of a ClientInfo.
+             * @memberof SiteServerUI_ClientStatus_Response
+             * @interface IClientInfo
+             * @property {number|null} [ip] ClientInfo ip
+             * @property {string|null} [hostname] ClientInfo hostname
+             * @property {boolean|null} [connected] ClientInfo connected
+             * @property {number|Long|null} [instance_id] ClientInfo instance_id
+             */
+    
+            /**
+             * Constructs a new ClientInfo.
+             * @memberof SiteServerUI_ClientStatus_Response
+             * @classdesc Represents a ClientInfo.
+             * @implements IClientInfo
+             * @constructor
+             * @param {SiteServerUI_ClientStatus_Response.IClientInfo=} [properties] Properties to set
+             */
+            function ClientInfo(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ClientInfo ip.
+             * @member {number} ip
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @instance
+             */
+            ClientInfo.prototype.ip = 0;
+    
+            /**
+             * ClientInfo hostname.
+             * @member {string} hostname
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @instance
+             */
+            ClientInfo.prototype.hostname = "";
+    
+            /**
+             * ClientInfo connected.
+             * @member {boolean} connected
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @instance
+             */
+            ClientInfo.prototype.connected = false;
+    
+            /**
+             * ClientInfo instance_id.
+             * @member {number|Long} instance_id
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @instance
+             */
+            ClientInfo.prototype.instance_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * Creates a new ClientInfo instance using the specified properties.
+             * @function create
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IClientInfo=} [properties] Properties to set
+             * @returns {SiteServerUI_ClientStatus_Response.ClientInfo} ClientInfo instance
+             */
+            ClientInfo.create = function create(properties) {
+                return new ClientInfo(properties);
+            };
+    
+            /**
+             * Encodes the specified ClientInfo message. Does not implicitly {@link SiteServerUI_ClientStatus_Response.ClientInfo.verify|verify} messages.
+             * @function encode
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IClientInfo} message ClientInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ClientInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.ip != null && message.hasOwnProperty("ip"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.ip);
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.hostname);
+                if (message.connected != null && message.hasOwnProperty("connected"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.connected);
+                if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.instance_id);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ClientInfo message, length delimited. Does not implicitly {@link SiteServerUI_ClientStatus_Response.ClientInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IClientInfo} message ClientInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ClientInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ClientInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {SiteServerUI_ClientStatus_Response.ClientInfo} ClientInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ClientInfo.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ClientStatus_Response.ClientInfo();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.ip = reader.uint32();
+                        break;
+                    case 2:
+                        message.hostname = reader.string();
+                        break;
+                    case 3:
+                        message.connected = reader.bool();
+                        break;
+                    case 4:
+                        message.instance_id = reader.uint64();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ClientInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {SiteServerUI_ClientStatus_Response.ClientInfo} ClientInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ClientInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ClientInfo message.
+             * @function verify
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ClientInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.ip != null && message.hasOwnProperty("ip"))
+                    if (!$util.isInteger(message.ip))
+                        return "ip: integer expected";
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    if (!$util.isString(message.hostname))
+                        return "hostname: string expected";
+                if (message.connected != null && message.hasOwnProperty("connected"))
+                    if (typeof message.connected !== "boolean")
+                        return "connected: boolean expected";
+                if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                    if (!$util.isInteger(message.instance_id) && !(message.instance_id && $util.isInteger(message.instance_id.low) && $util.isInteger(message.instance_id.high)))
+                        return "instance_id: integer|Long expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ClientInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {SiteServerUI_ClientStatus_Response.ClientInfo} ClientInfo
+             */
+            ClientInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.SiteServerUI_ClientStatus_Response.ClientInfo)
+                    return object;
+                var message = new $root.SiteServerUI_ClientStatus_Response.ClientInfo();
+                if (object.ip != null)
+                    message.ip = object.ip >>> 0;
+                if (object.hostname != null)
+                    message.hostname = String(object.hostname);
+                if (object.connected != null)
+                    message.connected = Boolean(object.connected);
+                if (object.instance_id != null)
+                    if ($util.Long)
+                        (message.instance_id = $util.Long.fromValue(object.instance_id)).unsigned = true;
+                    else if (typeof object.instance_id === "string")
+                        message.instance_id = parseInt(object.instance_id, 10);
+                    else if (typeof object.instance_id === "number")
+                        message.instance_id = object.instance_id;
+                    else if (typeof object.instance_id === "object")
+                        message.instance_id = new $util.LongBits(object.instance_id.low >>> 0, object.instance_id.high >>> 0).toNumber(true);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ClientInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.ClientInfo} message ClientInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ClientInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.ip = 0;
+                    object.hostname = "";
+                    object.connected = false;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.instance_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.instance_id = options.longs === String ? "0" : 0;
+                }
+                if (message.ip != null && message.hasOwnProperty("ip"))
+                    object.ip = message.ip;
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    object.hostname = message.hostname;
+                if (message.connected != null && message.hasOwnProperty("connected"))
+                    object.connected = message.connected;
+                if (message.instance_id != null && message.hasOwnProperty("instance_id"))
+                    if (typeof message.instance_id === "number")
+                        object.instance_id = options.longs === String ? String(message.instance_id) : message.instance_id;
+                    else
+                        object.instance_id = options.longs === String ? $util.Long.prototype.toString.call(message.instance_id) : options.longs === Number ? new $util.LongBits(message.instance_id.low >>> 0, message.instance_id.high >>> 0).toNumber(true) : message.instance_id;
+                return object;
+            };
+    
+            /**
+             * Converts this ClientInfo to JSON.
+             * @function toJSON
+             * @memberof SiteServerUI_ClientStatus_Response.ClientInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ClientInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ClientInfo;
+        })();
+    
+        SiteServerUI_ClientStatus_Response.Payment = (function() {
+    
+            /**
+             * Properties of a Payment.
+             * @memberof SiteServerUI_ClientStatus_Response
+             * @interface IPayment
+             * @property {number|Long|null} [transid] Payment transid
+             * @property {number|Long|null} [steamid] Payment steamid
+             * @property {string|null} [amount] Payment amount
+             * @property {number|null} [time_created] Payment time_created
+             * @property {number|null} [purchase_status] Payment purchase_status
+             * @property {string|null} [hostname] Payment hostname
+             * @property {string|null} [persona_name] Payment persona_name
+             * @property {string|null} [profile_url] Payment profile_url
+             * @property {string|null} [avatar_url] Payment avatar_url
+             */
+    
+            /**
+             * Constructs a new Payment.
+             * @memberof SiteServerUI_ClientStatus_Response
+             * @classdesc Represents a Payment.
+             * @implements IPayment
+             * @constructor
+             * @param {SiteServerUI_ClientStatus_Response.IPayment=} [properties] Properties to set
+             */
+            function Payment(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Payment transid.
+             * @member {number|Long} transid
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.transid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * Payment steamid.
+             * @member {number|Long} steamid
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * Payment amount.
+             * @member {string} amount
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.amount = "";
+    
+            /**
+             * Payment time_created.
+             * @member {number} time_created
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.time_created = 0;
+    
+            /**
+             * Payment purchase_status.
+             * @member {number} purchase_status
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.purchase_status = 0;
+    
+            /**
+             * Payment hostname.
+             * @member {string} hostname
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.hostname = "";
+    
+            /**
+             * Payment persona_name.
+             * @member {string} persona_name
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.persona_name = "";
+    
+            /**
+             * Payment profile_url.
+             * @member {string} profile_url
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.profile_url = "";
+    
+            /**
+             * Payment avatar_url.
+             * @member {string} avatar_url
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             */
+            Payment.prototype.avatar_url = "";
+    
+            /**
+             * Creates a new Payment instance using the specified properties.
+             * @function create
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IPayment=} [properties] Properties to set
+             * @returns {SiteServerUI_ClientStatus_Response.Payment} Payment instance
+             */
+            Payment.create = function create(properties) {
+                return new Payment(properties);
+            };
+    
+            /**
+             * Encodes the specified Payment message. Does not implicitly {@link SiteServerUI_ClientStatus_Response.Payment.verify|verify} messages.
+             * @function encode
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IPayment} message Payment message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Payment.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.transid);
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.steamid);
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.amount);
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.time_created);
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.purchase_status);
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.hostname);
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.persona_name);
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.profile_url);
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.avatar_url);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Payment message, length delimited. Does not implicitly {@link SiteServerUI_ClientStatus_Response.Payment.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.IPayment} message Payment message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Payment.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Payment message from the specified reader or buffer.
+             * @function decode
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {SiteServerUI_ClientStatus_Response.Payment} Payment
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Payment.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ClientStatus_Response.Payment();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.transid = reader.uint64();
+                        break;
+                    case 2:
+                        message.steamid = reader.uint64();
+                        break;
+                    case 3:
+                        message.amount = reader.string();
+                        break;
+                    case 4:
+                        message.time_created = reader.int32();
+                        break;
+                    case 5:
+                        message.purchase_status = reader.int32();
+                        break;
+                    case 6:
+                        message.hostname = reader.string();
+                        break;
+                    case 7:
+                        message.persona_name = reader.string();
+                        break;
+                    case 8:
+                        message.profile_url = reader.string();
+                        break;
+                    case 9:
+                        message.avatar_url = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Payment message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {SiteServerUI_ClientStatus_Response.Payment} Payment
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Payment.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Payment message.
+             * @function verify
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Payment.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    if (!$util.isInteger(message.transid) && !(message.transid && $util.isInteger(message.transid.low) && $util.isInteger(message.transid.high)))
+                        return "transid: integer|Long expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    if (!$util.isString(message.amount))
+                        return "amount: string expected";
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    if (!$util.isInteger(message.time_created))
+                        return "time_created: integer expected";
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    if (!$util.isInteger(message.purchase_status))
+                        return "purchase_status: integer expected";
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    if (!$util.isString(message.hostname))
+                        return "hostname: string expected";
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    if (!$util.isString(message.persona_name))
+                        return "persona_name: string expected";
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    if (!$util.isString(message.profile_url))
+                        return "profile_url: string expected";
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    if (!$util.isString(message.avatar_url))
+                        return "avatar_url: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Payment message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {SiteServerUI_ClientStatus_Response.Payment} Payment
+             */
+            Payment.fromObject = function fromObject(object) {
+                if (object instanceof $root.SiteServerUI_ClientStatus_Response.Payment)
+                    return object;
+                var message = new $root.SiteServerUI_ClientStatus_Response.Payment();
+                if (object.transid != null)
+                    if ($util.Long)
+                        (message.transid = $util.Long.fromValue(object.transid)).unsigned = true;
+                    else if (typeof object.transid === "string")
+                        message.transid = parseInt(object.transid, 10);
+                    else if (typeof object.transid === "number")
+                        message.transid = object.transid;
+                    else if (typeof object.transid === "object")
+                        message.transid = new $util.LongBits(object.transid.low >>> 0, object.transid.high >>> 0).toNumber(true);
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+                if (object.amount != null)
+                    message.amount = String(object.amount);
+                if (object.time_created != null)
+                    message.time_created = object.time_created | 0;
+                if (object.purchase_status != null)
+                    message.purchase_status = object.purchase_status | 0;
+                if (object.hostname != null)
+                    message.hostname = String(object.hostname);
+                if (object.persona_name != null)
+                    message.persona_name = String(object.persona_name);
+                if (object.profile_url != null)
+                    message.profile_url = String(object.profile_url);
+                if (object.avatar_url != null)
+                    message.avatar_url = String(object.avatar_url);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Payment message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @static
+             * @param {SiteServerUI_ClientStatus_Response.Payment} message Payment
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Payment.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.transid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.transid = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.amount = "";
+                    object.time_created = 0;
+                    object.purchase_status = 0;
+                    object.hostname = "";
+                    object.persona_name = "";
+                    object.profile_url = "";
+                    object.avatar_url = "";
+                }
+                if (message.transid != null && message.hasOwnProperty("transid"))
+                    if (typeof message.transid === "number")
+                        object.transid = options.longs === String ? String(message.transid) : message.transid;
+                    else
+                        object.transid = options.longs === String ? $util.Long.prototype.toString.call(message.transid) : options.longs === Number ? new $util.LongBits(message.transid.low >>> 0, message.transid.high >>> 0).toNumber(true) : message.transid;
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+                if (message.amount != null && message.hasOwnProperty("amount"))
+                    object.amount = message.amount;
+                if (message.time_created != null && message.hasOwnProperty("time_created"))
+                    object.time_created = message.time_created;
+                if (message.purchase_status != null && message.hasOwnProperty("purchase_status"))
+                    object.purchase_status = message.purchase_status;
+                if (message.hostname != null && message.hasOwnProperty("hostname"))
+                    object.hostname = message.hostname;
+                if (message.persona_name != null && message.hasOwnProperty("persona_name"))
+                    object.persona_name = message.persona_name;
+                if (message.profile_url != null && message.hasOwnProperty("profile_url"))
+                    object.profile_url = message.profile_url;
+                if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                    object.avatar_url = message.avatar_url;
+                return object;
+            };
+    
+            /**
+             * Converts this Payment to JSON.
+             * @function toJSON
+             * @memberof SiteServerUI_ClientStatus_Response.Payment
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Payment.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Payment;
+        })();
+    
+        return SiteServerUI_ClientStatus_Response;
+    })();
+    
+    $root.SiteServerUI_ContentCacheStatus_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ContentCacheStatus_Request.
+         * @exports ISiteServerUI_ContentCacheStatus_Request
+         * @interface ISiteServerUI_ContentCacheStatus_Request
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ContentCacheStatus_Request.
+         * @exports SiteServerUI_ContentCacheStatus_Request
+         * @classdesc Represents a SiteServerUI_ContentCacheStatus_Request.
+         * @implements ISiteServerUI_ContentCacheStatus_Request
+         * @constructor
+         * @param {ISiteServerUI_ContentCacheStatus_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_ContentCacheStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_ContentCacheStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_ContentCacheStatus_Request} SiteServerUI_ContentCacheStatus_Request instance
+         */
+        SiteServerUI_ContentCacheStatus_Request.create = function create(properties) {
+            return new SiteServerUI_ContentCacheStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheStatus_Request message. Does not implicitly {@link SiteServerUI_ContentCacheStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Request} message SiteServerUI_ContentCacheStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheStatus_Request message, length delimited. Does not implicitly {@link SiteServerUI_ContentCacheStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Request} message SiteServerUI_ContentCacheStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ContentCacheStatus_Request} SiteServerUI_ContentCacheStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ContentCacheStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ContentCacheStatus_Request} SiteServerUI_ContentCacheStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ContentCacheStatus_Request message.
+         * @function verify
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ContentCacheStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ContentCacheStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ContentCacheStatus_Request} SiteServerUI_ContentCacheStatus_Request
+         */
+        SiteServerUI_ContentCacheStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ContentCacheStatus_Request)
+                return object;
+            return new $root.SiteServerUI_ContentCacheStatus_Request();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ContentCacheStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @static
+         * @param {SiteServerUI_ContentCacheStatus_Request} message SiteServerUI_ContentCacheStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ContentCacheStatus_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_ContentCacheStatus_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ContentCacheStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ContentCacheStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_ContentCacheStatus_Request;
+    })();
+    
+    $root.SiteServerUI_ContentCacheStatus_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ContentCacheStatus_Response.
+         * @exports ISiteServerUI_ContentCacheStatus_Response
+         * @interface ISiteServerUI_ContentCacheStatus_Response
+         * @property {boolean|null} [enabled] SiteServerUI_ContentCacheStatus_Response enabled
+         * @property {number|null} [port] SiteServerUI_ContentCacheStatus_Response port
+         * @property {string|null} [cache_location] SiteServerUI_ContentCacheStatus_Response cache_location
+         * @property {number|null} [max_size_gb] SiteServerUI_ContentCacheStatus_Response max_size_gb
+         * @property {boolean|null} [p2p_enabled] SiteServerUI_ContentCacheStatus_Response p2p_enabled
+         * @property {string|null} [explicit_ip_address] SiteServerUI_ContentCacheStatus_Response explicit_ip_address
+         * @property {boolean|null} [external_process] SiteServerUI_ContentCacheStatus_Response external_process
+         * @property {number|null} [current_size_gb] SiteServerUI_ContentCacheStatus_Response current_size_gb
+         * @property {number|Long|null} [current_bw] SiteServerUI_ContentCacheStatus_Response current_bw
+         * @property {number|Long|null} [total_bytes_served] SiteServerUI_ContentCacheStatus_Response total_bytes_served
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ContentCacheStatus_Response.
+         * @exports SiteServerUI_ContentCacheStatus_Response
+         * @classdesc Represents a SiteServerUI_ContentCacheStatus_Response.
+         * @implements ISiteServerUI_ContentCacheStatus_Response
+         * @constructor
+         * @param {ISiteServerUI_ContentCacheStatus_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_ContentCacheStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response enabled.
+         * @member {boolean} enabled
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.enabled = false;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response port.
+         * @member {number} port
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.port = 0;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response cache_location.
+         * @member {string} cache_location
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.cache_location = "";
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response max_size_gb.
+         * @member {number} max_size_gb
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.max_size_gb = 0;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response p2p_enabled.
+         * @member {boolean} p2p_enabled
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.p2p_enabled = false;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response explicit_ip_address.
+         * @member {string} explicit_ip_address
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.explicit_ip_address = "";
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response external_process.
+         * @member {boolean} external_process
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.external_process = false;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response current_size_gb.
+         * @member {number} current_size_gb
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.current_size_gb = 0;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response current_bw.
+         * @member {number|Long} current_bw
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.current_bw = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * SiteServerUI_ContentCacheStatus_Response total_bytes_served.
+         * @member {number|Long} total_bytes_served
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.total_bytes_served = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new SiteServerUI_ContentCacheStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_ContentCacheStatus_Response} SiteServerUI_ContentCacheStatus_Response instance
+         */
+        SiteServerUI_ContentCacheStatus_Response.create = function create(properties) {
+            return new SiteServerUI_ContentCacheStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheStatus_Response message. Does not implicitly {@link SiteServerUI_ContentCacheStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Response} message SiteServerUI_ContentCacheStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+            if (message.port != null && message.hasOwnProperty("port"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.port);
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.cache_location);
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.max_size_gb);
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.p2p_enabled);
+            if (message.current_size_gb != null && message.hasOwnProperty("current_size_gb"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.current_size_gb);
+            if (message.current_bw != null && message.hasOwnProperty("current_bw"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.current_bw);
+            if (message.total_bytes_served != null && message.hasOwnProperty("total_bytes_served"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.total_bytes_served);
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.explicit_ip_address);
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.external_process);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheStatus_Response message, length delimited. Does not implicitly {@link SiteServerUI_ContentCacheStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheStatus_Response} message SiteServerUI_ContentCacheStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ContentCacheStatus_Response} SiteServerUI_ContentCacheStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ContentCacheStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.enabled = reader.bool();
+                    break;
+                case 2:
+                    message.port = reader.uint32();
+                    break;
+                case 3:
+                    message.cache_location = reader.string();
+                    break;
+                case 4:
+                    message.max_size_gb = reader.uint32();
+                    break;
+                case 5:
+                    message.p2p_enabled = reader.bool();
+                    break;
+                case 9:
+                    message.explicit_ip_address = reader.string();
+                    break;
+                case 10:
+                    message.external_process = reader.bool();
+                    break;
+                case 6:
+                    message.current_size_gb = reader.uint32();
+                    break;
+                case 7:
+                    message.current_bw = reader.uint64();
+                    break;
+                case 8:
+                    message.total_bytes_served = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ContentCacheStatus_Response} SiteServerUI_ContentCacheStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ContentCacheStatus_Response message.
+         * @function verify
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ContentCacheStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                if (typeof message.enabled !== "boolean")
+                    return "enabled: boolean expected";
+            if (message.port != null && message.hasOwnProperty("port"))
+                if (!$util.isInteger(message.port))
+                    return "port: integer expected";
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                if (!$util.isString(message.cache_location))
+                    return "cache_location: string expected";
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                if (!$util.isInteger(message.max_size_gb))
+                    return "max_size_gb: integer expected";
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                if (typeof message.p2p_enabled !== "boolean")
+                    return "p2p_enabled: boolean expected";
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                if (!$util.isString(message.explicit_ip_address))
+                    return "explicit_ip_address: string expected";
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                if (typeof message.external_process !== "boolean")
+                    return "external_process: boolean expected";
+            if (message.current_size_gb != null && message.hasOwnProperty("current_size_gb"))
+                if (!$util.isInteger(message.current_size_gb))
+                    return "current_size_gb: integer expected";
+            if (message.current_bw != null && message.hasOwnProperty("current_bw"))
+                if (!$util.isInteger(message.current_bw) && !(message.current_bw && $util.isInteger(message.current_bw.low) && $util.isInteger(message.current_bw.high)))
+                    return "current_bw: integer|Long expected";
+            if (message.total_bytes_served != null && message.hasOwnProperty("total_bytes_served"))
+                if (!$util.isInteger(message.total_bytes_served) && !(message.total_bytes_served && $util.isInteger(message.total_bytes_served.low) && $util.isInteger(message.total_bytes_served.high)))
+                    return "total_bytes_served: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ContentCacheStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ContentCacheStatus_Response} SiteServerUI_ContentCacheStatus_Response
+         */
+        SiteServerUI_ContentCacheStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ContentCacheStatus_Response)
+                return object;
+            var message = new $root.SiteServerUI_ContentCacheStatus_Response();
+            if (object.enabled != null)
+                message.enabled = Boolean(object.enabled);
+            if (object.port != null)
+                message.port = object.port >>> 0;
+            if (object.cache_location != null)
+                message.cache_location = String(object.cache_location);
+            if (object.max_size_gb != null)
+                message.max_size_gb = object.max_size_gb >>> 0;
+            if (object.p2p_enabled != null)
+                message.p2p_enabled = Boolean(object.p2p_enabled);
+            if (object.explicit_ip_address != null)
+                message.explicit_ip_address = String(object.explicit_ip_address);
+            if (object.external_process != null)
+                message.external_process = Boolean(object.external_process);
+            if (object.current_size_gb != null)
+                message.current_size_gb = object.current_size_gb >>> 0;
+            if (object.current_bw != null)
+                if ($util.Long)
+                    (message.current_bw = $util.Long.fromValue(object.current_bw)).unsigned = true;
+                else if (typeof object.current_bw === "string")
+                    message.current_bw = parseInt(object.current_bw, 10);
+                else if (typeof object.current_bw === "number")
+                    message.current_bw = object.current_bw;
+                else if (typeof object.current_bw === "object")
+                    message.current_bw = new $util.LongBits(object.current_bw.low >>> 0, object.current_bw.high >>> 0).toNumber(true);
+            if (object.total_bytes_served != null)
+                if ($util.Long)
+                    (message.total_bytes_served = $util.Long.fromValue(object.total_bytes_served)).unsigned = true;
+                else if (typeof object.total_bytes_served === "string")
+                    message.total_bytes_served = parseInt(object.total_bytes_served, 10);
+                else if (typeof object.total_bytes_served === "number")
+                    message.total_bytes_served = object.total_bytes_served;
+                else if (typeof object.total_bytes_served === "object")
+                    message.total_bytes_served = new $util.LongBits(object.total_bytes_served.low >>> 0, object.total_bytes_served.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ContentCacheStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @static
+         * @param {SiteServerUI_ContentCacheStatus_Response} message SiteServerUI_ContentCacheStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ContentCacheStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.enabled = false;
+                object.port = 0;
+                object.cache_location = "";
+                object.max_size_gb = 0;
+                object.p2p_enabled = false;
+                object.current_size_gb = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.current_bw = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.current_bw = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.total_bytes_served = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.total_bytes_served = options.longs === String ? "0" : 0;
+                object.explicit_ip_address = "";
+                object.external_process = false;
+            }
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                object.enabled = message.enabled;
+            if (message.port != null && message.hasOwnProperty("port"))
+                object.port = message.port;
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                object.cache_location = message.cache_location;
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                object.max_size_gb = message.max_size_gb;
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                object.p2p_enabled = message.p2p_enabled;
+            if (message.current_size_gb != null && message.hasOwnProperty("current_size_gb"))
+                object.current_size_gb = message.current_size_gb;
+            if (message.current_bw != null && message.hasOwnProperty("current_bw"))
+                if (typeof message.current_bw === "number")
+                    object.current_bw = options.longs === String ? String(message.current_bw) : message.current_bw;
+                else
+                    object.current_bw = options.longs === String ? $util.Long.prototype.toString.call(message.current_bw) : options.longs === Number ? new $util.LongBits(message.current_bw.low >>> 0, message.current_bw.high >>> 0).toNumber(true) : message.current_bw;
+            if (message.total_bytes_served != null && message.hasOwnProperty("total_bytes_served"))
+                if (typeof message.total_bytes_served === "number")
+                    object.total_bytes_served = options.longs === String ? String(message.total_bytes_served) : message.total_bytes_served;
+                else
+                    object.total_bytes_served = options.longs === String ? $util.Long.prototype.toString.call(message.total_bytes_served) : options.longs === Number ? new $util.LongBits(message.total_bytes_served.low >>> 0, message.total_bytes_served.high >>> 0).toNumber(true) : message.total_bytes_served;
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                object.explicit_ip_address = message.explicit_ip_address;
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                object.external_process = message.external_process;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_ContentCacheStatus_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ContentCacheStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ContentCacheStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_ContentCacheStatus_Response;
+    })();
+    
+    $root.SiteServerUI_ContentCacheConfig_Request = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ContentCacheConfig_Request.
+         * @exports ISiteServerUI_ContentCacheConfig_Request
+         * @interface ISiteServerUI_ContentCacheConfig_Request
+         * @property {boolean|null} [enabled] SiteServerUI_ContentCacheConfig_Request enabled
+         * @property {number|null} [port] SiteServerUI_ContentCacheConfig_Request port
+         * @property {string|null} [cache_location] SiteServerUI_ContentCacheConfig_Request cache_location
+         * @property {number|null} [max_size_gb] SiteServerUI_ContentCacheConfig_Request max_size_gb
+         * @property {boolean|null} [p2p_enabled] SiteServerUI_ContentCacheConfig_Request p2p_enabled
+         * @property {boolean|null} [external_process] SiteServerUI_ContentCacheConfig_Request external_process
+         * @property {string|null} [explicit_ip_address] SiteServerUI_ContentCacheConfig_Request explicit_ip_address
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ContentCacheConfig_Request.
+         * @exports SiteServerUI_ContentCacheConfig_Request
+         * @classdesc Represents a SiteServerUI_ContentCacheConfig_Request.
+         * @implements ISiteServerUI_ContentCacheConfig_Request
+         * @constructor
+         * @param {ISiteServerUI_ContentCacheConfig_Request=} [properties] Properties to set
+         */
+        function SiteServerUI_ContentCacheConfig_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request enabled.
+         * @member {boolean} enabled
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.enabled = false;
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request port.
+         * @member {number} port
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.port = 0;
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request cache_location.
+         * @member {string} cache_location
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.cache_location = "";
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request max_size_gb.
+         * @member {number} max_size_gb
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.max_size_gb = 0;
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request p2p_enabled.
+         * @member {boolean} p2p_enabled
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.p2p_enabled = false;
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request external_process.
+         * @member {boolean} external_process
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.external_process = false;
+    
+        /**
+         * SiteServerUI_ContentCacheConfig_Request explicit_ip_address.
+         * @member {string} explicit_ip_address
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.explicit_ip_address = "";
+    
+        /**
+         * Creates a new SiteServerUI_ContentCacheConfig_Request instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Request=} [properties] Properties to set
+         * @returns {SiteServerUI_ContentCacheConfig_Request} SiteServerUI_ContentCacheConfig_Request instance
+         */
+        SiteServerUI_ContentCacheConfig_Request.create = function create(properties) {
+            return new SiteServerUI_ContentCacheConfig_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheConfig_Request message. Does not implicitly {@link SiteServerUI_ContentCacheConfig_Request.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Request} message SiteServerUI_ContentCacheConfig_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheConfig_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+            if (message.port != null && message.hasOwnProperty("port"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.port);
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.cache_location);
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.max_size_gb);
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.p2p_enabled);
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.external_process);
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.explicit_ip_address);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheConfig_Request message, length delimited. Does not implicitly {@link SiteServerUI_ContentCacheConfig_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Request} message SiteServerUI_ContentCacheConfig_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheConfig_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheConfig_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ContentCacheConfig_Request} SiteServerUI_ContentCacheConfig_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheConfig_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ContentCacheConfig_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.enabled = reader.bool();
+                    break;
+                case 2:
+                    message.port = reader.uint32();
+                    break;
+                case 3:
+                    message.cache_location = reader.string();
+                    break;
+                case 4:
+                    message.max_size_gb = reader.uint32();
+                    break;
+                case 5:
+                    message.p2p_enabled = reader.bool();
+                    break;
+                case 6:
+                    message.external_process = reader.bool();
+                    break;
+                case 7:
+                    message.explicit_ip_address = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheConfig_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ContentCacheConfig_Request} SiteServerUI_ContentCacheConfig_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheConfig_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ContentCacheConfig_Request message.
+         * @function verify
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ContentCacheConfig_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                if (typeof message.enabled !== "boolean")
+                    return "enabled: boolean expected";
+            if (message.port != null && message.hasOwnProperty("port"))
+                if (!$util.isInteger(message.port))
+                    return "port: integer expected";
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                if (!$util.isString(message.cache_location))
+                    return "cache_location: string expected";
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                if (!$util.isInteger(message.max_size_gb))
+                    return "max_size_gb: integer expected";
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                if (typeof message.p2p_enabled !== "boolean")
+                    return "p2p_enabled: boolean expected";
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                if (typeof message.external_process !== "boolean")
+                    return "external_process: boolean expected";
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                if (!$util.isString(message.explicit_ip_address))
+                    return "explicit_ip_address: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ContentCacheConfig_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ContentCacheConfig_Request} SiteServerUI_ContentCacheConfig_Request
+         */
+        SiteServerUI_ContentCacheConfig_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ContentCacheConfig_Request)
+                return object;
+            var message = new $root.SiteServerUI_ContentCacheConfig_Request();
+            if (object.enabled != null)
+                message.enabled = Boolean(object.enabled);
+            if (object.port != null)
+                message.port = object.port >>> 0;
+            if (object.cache_location != null)
+                message.cache_location = String(object.cache_location);
+            if (object.max_size_gb != null)
+                message.max_size_gb = object.max_size_gb >>> 0;
+            if (object.p2p_enabled != null)
+                message.p2p_enabled = Boolean(object.p2p_enabled);
+            if (object.external_process != null)
+                message.external_process = Boolean(object.external_process);
+            if (object.explicit_ip_address != null)
+                message.explicit_ip_address = String(object.explicit_ip_address);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ContentCacheConfig_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @static
+         * @param {SiteServerUI_ContentCacheConfig_Request} message SiteServerUI_ContentCacheConfig_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ContentCacheConfig_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.enabled = false;
+                object.port = 0;
+                object.cache_location = "";
+                object.max_size_gb = 0;
+                object.p2p_enabled = false;
+                object.external_process = false;
+                object.explicit_ip_address = "";
+            }
+            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                object.enabled = message.enabled;
+            if (message.port != null && message.hasOwnProperty("port"))
+                object.port = message.port;
+            if (message.cache_location != null && message.hasOwnProperty("cache_location"))
+                object.cache_location = message.cache_location;
+            if (message.max_size_gb != null && message.hasOwnProperty("max_size_gb"))
+                object.max_size_gb = message.max_size_gb;
+            if (message.p2p_enabled != null && message.hasOwnProperty("p2p_enabled"))
+                object.p2p_enabled = message.p2p_enabled;
+            if (message.external_process != null && message.hasOwnProperty("external_process"))
+                object.external_process = message.external_process;
+            if (message.explicit_ip_address != null && message.hasOwnProperty("explicit_ip_address"))
+                object.explicit_ip_address = message.explicit_ip_address;
+            return object;
+        };
+    
+        /**
+         * Converts this SiteServerUI_ContentCacheConfig_Request to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ContentCacheConfig_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ContentCacheConfig_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_ContentCacheConfig_Request;
+    })();
+    
+    $root.SiteServerUI_ContentCacheConfig_Response = (function() {
+    
+        /**
+         * Properties of a SiteServerUI_ContentCacheConfig_Response.
+         * @exports ISiteServerUI_ContentCacheConfig_Response
+         * @interface ISiteServerUI_ContentCacheConfig_Response
+         */
+    
+        /**
+         * Constructs a new SiteServerUI_ContentCacheConfig_Response.
+         * @exports SiteServerUI_ContentCacheConfig_Response
+         * @classdesc Represents a SiteServerUI_ContentCacheConfig_Response.
+         * @implements ISiteServerUI_ContentCacheConfig_Response
+         * @constructor
+         * @param {ISiteServerUI_ContentCacheConfig_Response=} [properties] Properties to set
+         */
+        function SiteServerUI_ContentCacheConfig_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new SiteServerUI_ContentCacheConfig_Response instance using the specified properties.
+         * @function create
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Response=} [properties] Properties to set
+         * @returns {SiteServerUI_ContentCacheConfig_Response} SiteServerUI_ContentCacheConfig_Response instance
+         */
+        SiteServerUI_ContentCacheConfig_Response.create = function create(properties) {
+            return new SiteServerUI_ContentCacheConfig_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheConfig_Response message. Does not implicitly {@link SiteServerUI_ContentCacheConfig_Response.verify|verify} messages.
+         * @function encode
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Response} message SiteServerUI_ContentCacheConfig_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheConfig_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified SiteServerUI_ContentCacheConfig_Response message, length delimited. Does not implicitly {@link SiteServerUI_ContentCacheConfig_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {ISiteServerUI_ContentCacheConfig_Response} message SiteServerUI_ContentCacheConfig_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SiteServerUI_ContentCacheConfig_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheConfig_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SiteServerUI_ContentCacheConfig_Response} SiteServerUI_ContentCacheConfig_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheConfig_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SiteServerUI_ContentCacheConfig_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a SiteServerUI_ContentCacheConfig_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SiteServerUI_ContentCacheConfig_Response} SiteServerUI_ContentCacheConfig_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SiteServerUI_ContentCacheConfig_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a SiteServerUI_ContentCacheConfig_Response message.
+         * @function verify
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SiteServerUI_ContentCacheConfig_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a SiteServerUI_ContentCacheConfig_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SiteServerUI_ContentCacheConfig_Response} SiteServerUI_ContentCacheConfig_Response
+         */
+        SiteServerUI_ContentCacheConfig_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.SiteServerUI_ContentCacheConfig_Response)
+                return object;
+            return new $root.SiteServerUI_ContentCacheConfig_Response();
+        };
+    
+        /**
+         * Creates a plain object from a SiteServerUI_ContentCacheConfig_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @static
+         * @param {SiteServerUI_ContentCacheConfig_Response} message SiteServerUI_ContentCacheConfig_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SiteServerUI_ContentCacheConfig_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this SiteServerUI_ContentCacheConfig_Response to JSON.
+         * @function toJSON
+         * @memberof SiteServerUI_ContentCacheConfig_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SiteServerUI_ContentCacheConfig_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return SiteServerUI_ContentCacheConfig_Response;
     })();
     
     $root.CMsgIPAddress = (function() {

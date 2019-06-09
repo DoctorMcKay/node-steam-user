@@ -17,16 +17,110 @@
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
     /**
-     * EControllerLayoutType enum.
-     * @exports EControllerLayoutType
+     * EInputMode enum.
+     * @exports EInputMode
      * @enum {string}
-     * @property {number} k_EControllerLayoutTypePhone=0 k_EControllerLayoutTypePhone value
-     * @property {number} k_EControllerLayoutTypeTablet=1 k_EControllerLayoutTypeTablet value
+     * @property {number} k_EInputModeUnknown=0 k_EInputModeUnknown value
+     * @property {number} k_EInputModeMouse=1 k_EInputModeMouse value
+     * @property {number} k_EInputModeController=2 k_EInputModeController value
+     * @property {number} k_EInputModeMouseAndController=3 k_EInputModeMouseAndController value
      */
-    $root.EControllerLayoutType = (function() {
+    $root.EInputMode = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "k_EControllerLayoutTypePhone"] = 0;
-        values[valuesById[1] = "k_EControllerLayoutTypeTablet"] = 1;
+        values[valuesById[0] = "k_EInputModeUnknown"] = 0;
+        values[valuesById[1] = "k_EInputModeMouse"] = 1;
+        values[valuesById[2] = "k_EInputModeController"] = 2;
+        values[valuesById[3] = "k_EInputModeMouseAndController"] = 3;
+        return values;
+    })();
+    
+    /**
+     * EMouseMode enum.
+     * @exports EMouseMode
+     * @enum {string}
+     * @property {number} k_EMouseModeUnknown=0 k_EMouseModeUnknown value
+     * @property {number} k_EMouseModeRelative=1 k_EMouseModeRelative value
+     * @property {number} k_EMouseModeAbsolute=2 k_EMouseModeAbsolute value
+     * @property {number} k_EMouseModeTouch=3 k_EMouseModeTouch value
+     */
+    $root.EMouseMode = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EMouseModeUnknown"] = 0;
+        values[valuesById[1] = "k_EMouseModeRelative"] = 1;
+        values[valuesById[2] = "k_EMouseModeAbsolute"] = 2;
+        values[valuesById[3] = "k_EMouseModeTouch"] = 3;
+        return values;
+    })();
+    
+    /**
+     * EControllerElementType enum.
+     * @exports EControllerElementType
+     * @enum {string}
+     * @property {number} k_EControllerElementTypeNone=-1 k_EControllerElementTypeNone value
+     * @property {number} k_EControllerElementTypeThumb=0 k_EControllerElementTypeThumb value
+     * @property {number} k_EControllerElementTypeButtonSteam=1 k_EControllerElementTypeButtonSteam value
+     * @property {number} k_EControllerElementTypeJoystickLeft=2 k_EControllerElementTypeJoystickLeft value
+     * @property {number} k_EControllerElementTypeButtonJoystickLeft=3 k_EControllerElementTypeButtonJoystickLeft value
+     * @property {number} k_EControllerElementTypeJoystickRight=4 k_EControllerElementTypeJoystickRight value
+     * @property {number} k_EControllerElementTypeButtonJoystickRight=5 k_EControllerElementTypeButtonJoystickRight value
+     * @property {number} k_EControllerElementTypeDPad=6 k_EControllerElementTypeDPad value
+     * @property {number} k_EControllerElementTypeButtonA=7 k_EControllerElementTypeButtonA value
+     * @property {number} k_EControllerElementTypeButtonB=8 k_EControllerElementTypeButtonB value
+     * @property {number} k_EControllerElementTypeButtonX=9 k_EControllerElementTypeButtonX value
+     * @property {number} k_EControllerElementTypeButtonY=10 k_EControllerElementTypeButtonY value
+     * @property {number} k_EControllerElementTypeButtonSelect=11 k_EControllerElementTypeButtonSelect value
+     * @property {number} k_EControllerElementTypeButtonStart=12 k_EControllerElementTypeButtonStart value
+     * @property {number} k_EControllerElementTypeButtonTriggerLeft=13 k_EControllerElementTypeButtonTriggerLeft value
+     * @property {number} k_EControllerElementTypeButtonTriggerRight=14 k_EControllerElementTypeButtonTriggerRight value
+     * @property {number} k_EControllerElementTypeButtonBumperLeft=15 k_EControllerElementTypeButtonBumperLeft value
+     * @property {number} k_EControllerElementTypeButtonBumperRight=16 k_EControllerElementTypeButtonBumperRight value
+     * @property {number} k_EControllerElementTypeButtonMacro0=17 k_EControllerElementTypeButtonMacro0 value
+     * @property {number} k_EControllerElementTypeButtonMacro1=18 k_EControllerElementTypeButtonMacro1 value
+     * @property {number} k_EControllerElementTypeButtonMacro2=19 k_EControllerElementTypeButtonMacro2 value
+     * @property {number} k_EControllerElementTypeButtonMacro3=20 k_EControllerElementTypeButtonMacro3 value
+     * @property {number} k_EControllerElementTypeButtonMacro4=21 k_EControllerElementTypeButtonMacro4 value
+     * @property {number} k_EControllerElementTypeButtonMacro5=22 k_EControllerElementTypeButtonMacro5 value
+     * @property {number} k_EControllerElementTypeButtonMacro6=23 k_EControllerElementTypeButtonMacro6 value
+     * @property {number} k_EControllerElementTypeButtonMacro7=24 k_EControllerElementTypeButtonMacro7 value
+     * @property {number} k_EControllerElementTypeTrackpadCenter=25 k_EControllerElementTypeTrackpadCenter value
+     * @property {number} k_EControllerElementTypeTrackpadLeft=26 k_EControllerElementTypeTrackpadLeft value
+     * @property {number} k_EControllerElementTypeTrackpadRight=27 k_EControllerElementTypeTrackpadRight value
+     * @property {number} k_EControllerElementTypeKeyboard=28 k_EControllerElementTypeKeyboard value
+     * @property {number} k_EControllerElementTypeMax=29 k_EControllerElementTypeMax value
+     */
+    $root.EControllerElementType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[-1] = "k_EControllerElementTypeNone"] = -1;
+        values[valuesById[0] = "k_EControllerElementTypeThumb"] = 0;
+        values[valuesById[1] = "k_EControllerElementTypeButtonSteam"] = 1;
+        values[valuesById[2] = "k_EControllerElementTypeJoystickLeft"] = 2;
+        values[valuesById[3] = "k_EControllerElementTypeButtonJoystickLeft"] = 3;
+        values[valuesById[4] = "k_EControllerElementTypeJoystickRight"] = 4;
+        values[valuesById[5] = "k_EControllerElementTypeButtonJoystickRight"] = 5;
+        values[valuesById[6] = "k_EControllerElementTypeDPad"] = 6;
+        values[valuesById[7] = "k_EControllerElementTypeButtonA"] = 7;
+        values[valuesById[8] = "k_EControllerElementTypeButtonB"] = 8;
+        values[valuesById[9] = "k_EControllerElementTypeButtonX"] = 9;
+        values[valuesById[10] = "k_EControllerElementTypeButtonY"] = 10;
+        values[valuesById[11] = "k_EControllerElementTypeButtonSelect"] = 11;
+        values[valuesById[12] = "k_EControllerElementTypeButtonStart"] = 12;
+        values[valuesById[13] = "k_EControllerElementTypeButtonTriggerLeft"] = 13;
+        values[valuesById[14] = "k_EControllerElementTypeButtonTriggerRight"] = 14;
+        values[valuesById[15] = "k_EControllerElementTypeButtonBumperLeft"] = 15;
+        values[valuesById[16] = "k_EControllerElementTypeButtonBumperRight"] = 16;
+        values[valuesById[17] = "k_EControllerElementTypeButtonMacro0"] = 17;
+        values[valuesById[18] = "k_EControllerElementTypeButtonMacro1"] = 18;
+        values[valuesById[19] = "k_EControllerElementTypeButtonMacro2"] = 19;
+        values[valuesById[20] = "k_EControllerElementTypeButtonMacro3"] = 20;
+        values[valuesById[21] = "k_EControllerElementTypeButtonMacro4"] = 21;
+        values[valuesById[22] = "k_EControllerElementTypeButtonMacro5"] = 22;
+        values[valuesById[23] = "k_EControllerElementTypeButtonMacro6"] = 23;
+        values[valuesById[24] = "k_EControllerElementTypeButtonMacro7"] = 24;
+        values[valuesById[25] = "k_EControllerElementTypeTrackpadCenter"] = 25;
+        values[valuesById[26] = "k_EControllerElementTypeTrackpadLeft"] = 26;
+        values[valuesById[27] = "k_EControllerElementTypeTrackpadRight"] = 27;
+        values[valuesById[28] = "k_EControllerElementTypeKeyboard"] = 28;
+        values[valuesById[29] = "k_EControllerElementTypeMax"] = 29;
         return values;
     })();
     
@@ -36,16 +130,12 @@
          * Properties of a CVirtualControllerElement.
          * @exports ICVirtualControllerElement
          * @interface ICVirtualControllerElement
+         * @property {EControllerElementType|null} [type] CVirtualControllerElement type
+         * @property {boolean|null} [visible] CVirtualControllerElement visible
          * @property {number|null} [x_position] CVirtualControllerElement x_position
          * @property {number|null} [y_position] CVirtualControllerElement y_position
-         * @property {number|null} [width] CVirtualControllerElement width
-         * @property {number|null} [height] CVirtualControllerElement height
-         * @property {CVirtualControllerElement.IJoyStickControl|null} [joy_stick] CVirtualControllerElement joy_stick
-         * @property {CVirtualControllerElement.IJoyButtonControl|null} [joy_button] CVirtualControllerElement joy_button
-         * @property {CVirtualControllerElement.IJoyPadControl|null} [joy_pad] CVirtualControllerElement joy_pad
-         * @property {CVirtualControllerElement.IMacroButtonControl|null} [macro_button] CVirtualControllerElement macro_button
-         * @property {CVirtualControllerElement.ITrackpadControl|null} [trackpad] CVirtualControllerElement trackpad
-         * @property {CVirtualControllerElement.IAxisButtonControl|null} [axis_button] CVirtualControllerElement axis_button
+         * @property {number|null} [x_scale] CVirtualControllerElement x_scale
+         * @property {number|null} [y_scale] CVirtualControllerElement y_scale
          */
     
         /**
@@ -64,6 +154,22 @@
         }
     
         /**
+         * CVirtualControllerElement type.
+         * @member {EControllerElementType} type
+         * @memberof CVirtualControllerElement
+         * @instance
+         */
+        CVirtualControllerElement.prototype.type = -1;
+    
+        /**
+         * CVirtualControllerElement visible.
+         * @member {boolean} visible
+         * @memberof CVirtualControllerElement
+         * @instance
+         */
+        CVirtualControllerElement.prototype.visible = false;
+    
+        /**
          * CVirtualControllerElement x_position.
          * @member {number} x_position
          * @memberof CVirtualControllerElement
@@ -80,82 +186,20 @@
         CVirtualControllerElement.prototype.y_position = 0;
     
         /**
-         * CVirtualControllerElement width.
-         * @member {number} width
+         * CVirtualControllerElement x_scale.
+         * @member {number} x_scale
          * @memberof CVirtualControllerElement
          * @instance
          */
-        CVirtualControllerElement.prototype.width = 0;
+        CVirtualControllerElement.prototype.x_scale = 1;
     
         /**
-         * CVirtualControllerElement height.
-         * @member {number} height
+         * CVirtualControllerElement y_scale.
+         * @member {number} y_scale
          * @memberof CVirtualControllerElement
          * @instance
          */
-        CVirtualControllerElement.prototype.height = 0;
-    
-        /**
-         * CVirtualControllerElement joy_stick.
-         * @member {CVirtualControllerElement.IJoyStickControl|null|undefined} joy_stick
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.joy_stick = null;
-    
-        /**
-         * CVirtualControllerElement joy_button.
-         * @member {CVirtualControllerElement.IJoyButtonControl|null|undefined} joy_button
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.joy_button = null;
-    
-        /**
-         * CVirtualControllerElement joy_pad.
-         * @member {CVirtualControllerElement.IJoyPadControl|null|undefined} joy_pad
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.joy_pad = null;
-    
-        /**
-         * CVirtualControllerElement macro_button.
-         * @member {CVirtualControllerElement.IMacroButtonControl|null|undefined} macro_button
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.macro_button = null;
-    
-        /**
-         * CVirtualControllerElement trackpad.
-         * @member {CVirtualControllerElement.ITrackpadControl|null|undefined} trackpad
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.trackpad = null;
-    
-        /**
-         * CVirtualControllerElement axis_button.
-         * @member {CVirtualControllerElement.IAxisButtonControl|null|undefined} axis_button
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        CVirtualControllerElement.prototype.axis_button = null;
-    
-        // OneOf field names bound to virtual getters and setters
-        var $oneOfFields;
-    
-        /**
-         * CVirtualControllerElement control.
-         * @member {"joy_stick"|"joy_button"|"joy_pad"|"macro_button"|"trackpad"|"axis_button"|undefined} control
-         * @memberof CVirtualControllerElement
-         * @instance
-         */
-        Object.defineProperty(CVirtualControllerElement.prototype, "control", {
-            get: $util.oneOfGetter($oneOfFields = ["joy_stick", "joy_button", "joy_pad", "macro_button", "trackpad", "axis_button"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
+        CVirtualControllerElement.prototype.y_scale = 1;
     
         /**
          * Creates a new CVirtualControllerElement instance using the specified properties.
@@ -181,26 +225,18 @@
         CVirtualControllerElement.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.visible);
             if (message.x_position != null && message.hasOwnProperty("x_position"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.x_position);
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.x_position);
             if (message.y_position != null && message.hasOwnProperty("y_position"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.y_position);
-            if (message.width != null && message.hasOwnProperty("width"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.width);
-            if (message.height != null && message.hasOwnProperty("height"))
-                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.height);
-            if (message.joy_stick != null && message.hasOwnProperty("joy_stick"))
-                $root.CVirtualControllerElement.JoyStickControl.encode(message.joy_stick, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-            if (message.joy_button != null && message.hasOwnProperty("joy_button"))
-                $root.CVirtualControllerElement.JoyButtonControl.encode(message.joy_button, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-            if (message.joy_pad != null && message.hasOwnProperty("joy_pad"))
-                $root.CVirtualControllerElement.JoyPadControl.encode(message.joy_pad, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-            if (message.macro_button != null && message.hasOwnProperty("macro_button"))
-                $root.CVirtualControllerElement.MacroButtonControl.encode(message.macro_button, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-            if (message.trackpad != null && message.hasOwnProperty("trackpad"))
-                $root.CVirtualControllerElement.TrackpadControl.encode(message.trackpad, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-            if (message.axis_button != null && message.hasOwnProperty("axis_button"))
-                $root.CVirtualControllerElement.AxisButtonControl.encode(message.axis_button, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.y_position);
+            if (message.x_scale != null && message.hasOwnProperty("x_scale"))
+                writer.uint32(/* id 5, wireType 5 =*/45).float(message.x_scale);
+            if (message.y_scale != null && message.hasOwnProperty("y_scale"))
+                writer.uint32(/* id 6, wireType 5 =*/53).float(message.y_scale);
             return writer;
         };
     
@@ -236,34 +272,22 @@
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.x_position = reader.uint32();
+                    message.type = reader.int32();
                     break;
                 case 2:
-                    message.y_position = reader.uint32();
+                    message.visible = reader.bool();
                     break;
                 case 3:
-                    message.width = reader.uint32();
+                    message.x_position = reader.float();
                     break;
                 case 4:
-                    message.height = reader.uint32();
+                    message.y_position = reader.float();
                     break;
                 case 5:
-                    message.joy_stick = $root.CVirtualControllerElement.JoyStickControl.decode(reader, reader.uint32());
+                    message.x_scale = reader.float();
                     break;
                 case 6:
-                    message.joy_button = $root.CVirtualControllerElement.JoyButtonControl.decode(reader, reader.uint32());
-                    break;
-                case 7:
-                    message.joy_pad = $root.CVirtualControllerElement.JoyPadControl.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.macro_button = $root.CVirtualControllerElement.MacroButtonControl.decode(reader, reader.uint32());
-                    break;
-                case 9:
-                    message.trackpad = $root.CVirtualControllerElement.TrackpadControl.decode(reader, reader.uint32());
-                    break;
-                case 10:
-                    message.axis_button = $root.CVirtualControllerElement.AxisButtonControl.decode(reader, reader.uint32());
+                    message.y_scale = reader.float();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -300,77 +324,58 @@
         CVirtualControllerElement.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            var properties = {};
+            if (message.type != null && message.hasOwnProperty("type"))
+                switch (message.type) {
+                default:
+                    return "type: enum value expected";
+                case -1:
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                    break;
+                }
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                if (typeof message.visible !== "boolean")
+                    return "visible: boolean expected";
             if (message.x_position != null && message.hasOwnProperty("x_position"))
-                if (!$util.isInteger(message.x_position))
-                    return "x_position: integer expected";
+                if (typeof message.x_position !== "number")
+                    return "x_position: number expected";
             if (message.y_position != null && message.hasOwnProperty("y_position"))
-                if (!$util.isInteger(message.y_position))
-                    return "y_position: integer expected";
-            if (message.width != null && message.hasOwnProperty("width"))
-                if (!$util.isInteger(message.width))
-                    return "width: integer expected";
-            if (message.height != null && message.hasOwnProperty("height"))
-                if (!$util.isInteger(message.height))
-                    return "height: integer expected";
-            if (message.joy_stick != null && message.hasOwnProperty("joy_stick")) {
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.JoyStickControl.verify(message.joy_stick);
-                    if (error)
-                        return "joy_stick." + error;
-                }
-            }
-            if (message.joy_button != null && message.hasOwnProperty("joy_button")) {
-                if (properties.control === 1)
-                    return "control: multiple values";
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.JoyButtonControl.verify(message.joy_button);
-                    if (error)
-                        return "joy_button." + error;
-                }
-            }
-            if (message.joy_pad != null && message.hasOwnProperty("joy_pad")) {
-                if (properties.control === 1)
-                    return "control: multiple values";
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.JoyPadControl.verify(message.joy_pad);
-                    if (error)
-                        return "joy_pad." + error;
-                }
-            }
-            if (message.macro_button != null && message.hasOwnProperty("macro_button")) {
-                if (properties.control === 1)
-                    return "control: multiple values";
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.MacroButtonControl.verify(message.macro_button);
-                    if (error)
-                        return "macro_button." + error;
-                }
-            }
-            if (message.trackpad != null && message.hasOwnProperty("trackpad")) {
-                if (properties.control === 1)
-                    return "control: multiple values";
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.TrackpadControl.verify(message.trackpad);
-                    if (error)
-                        return "trackpad." + error;
-                }
-            }
-            if (message.axis_button != null && message.hasOwnProperty("axis_button")) {
-                if (properties.control === 1)
-                    return "control: multiple values";
-                properties.control = 1;
-                {
-                    var error = $root.CVirtualControllerElement.AxisButtonControl.verify(message.axis_button);
-                    if (error)
-                        return "axis_button." + error;
-                }
-            }
+                if (typeof message.y_position !== "number")
+                    return "y_position: number expected";
+            if (message.x_scale != null && message.hasOwnProperty("x_scale"))
+                if (typeof message.x_scale !== "number")
+                    return "x_scale: number expected";
+            if (message.y_scale != null && message.hasOwnProperty("y_scale"))
+                if (typeof message.y_scale !== "number")
+                    return "y_scale: number expected";
             return null;
         };
     
@@ -386,44 +391,142 @@
             if (object instanceof $root.CVirtualControllerElement)
                 return object;
             var message = new $root.CVirtualControllerElement();
+            switch (object.type) {
+            case "k_EControllerElementTypeNone":
+            case -1:
+                message.type = -1;
+                break;
+            case "k_EControllerElementTypeThumb":
+            case 0:
+                message.type = 0;
+                break;
+            case "k_EControllerElementTypeButtonSteam":
+            case 1:
+                message.type = 1;
+                break;
+            case "k_EControllerElementTypeJoystickLeft":
+            case 2:
+                message.type = 2;
+                break;
+            case "k_EControllerElementTypeButtonJoystickLeft":
+            case 3:
+                message.type = 3;
+                break;
+            case "k_EControllerElementTypeJoystickRight":
+            case 4:
+                message.type = 4;
+                break;
+            case "k_EControllerElementTypeButtonJoystickRight":
+            case 5:
+                message.type = 5;
+                break;
+            case "k_EControllerElementTypeDPad":
+            case 6:
+                message.type = 6;
+                break;
+            case "k_EControllerElementTypeButtonA":
+            case 7:
+                message.type = 7;
+                break;
+            case "k_EControllerElementTypeButtonB":
+            case 8:
+                message.type = 8;
+                break;
+            case "k_EControllerElementTypeButtonX":
+            case 9:
+                message.type = 9;
+                break;
+            case "k_EControllerElementTypeButtonY":
+            case 10:
+                message.type = 10;
+                break;
+            case "k_EControllerElementTypeButtonSelect":
+            case 11:
+                message.type = 11;
+                break;
+            case "k_EControllerElementTypeButtonStart":
+            case 12:
+                message.type = 12;
+                break;
+            case "k_EControllerElementTypeButtonTriggerLeft":
+            case 13:
+                message.type = 13;
+                break;
+            case "k_EControllerElementTypeButtonTriggerRight":
+            case 14:
+                message.type = 14;
+                break;
+            case "k_EControllerElementTypeButtonBumperLeft":
+            case 15:
+                message.type = 15;
+                break;
+            case "k_EControllerElementTypeButtonBumperRight":
+            case 16:
+                message.type = 16;
+                break;
+            case "k_EControllerElementTypeButtonMacro0":
+            case 17:
+                message.type = 17;
+                break;
+            case "k_EControllerElementTypeButtonMacro1":
+            case 18:
+                message.type = 18;
+                break;
+            case "k_EControllerElementTypeButtonMacro2":
+            case 19:
+                message.type = 19;
+                break;
+            case "k_EControllerElementTypeButtonMacro3":
+            case 20:
+                message.type = 20;
+                break;
+            case "k_EControllerElementTypeButtonMacro4":
+            case 21:
+                message.type = 21;
+                break;
+            case "k_EControllerElementTypeButtonMacro5":
+            case 22:
+                message.type = 22;
+                break;
+            case "k_EControllerElementTypeButtonMacro6":
+            case 23:
+                message.type = 23;
+                break;
+            case "k_EControllerElementTypeButtonMacro7":
+            case 24:
+                message.type = 24;
+                break;
+            case "k_EControllerElementTypeTrackpadCenter":
+            case 25:
+                message.type = 25;
+                break;
+            case "k_EControllerElementTypeTrackpadLeft":
+            case 26:
+                message.type = 26;
+                break;
+            case "k_EControllerElementTypeTrackpadRight":
+            case 27:
+                message.type = 27;
+                break;
+            case "k_EControllerElementTypeKeyboard":
+            case 28:
+                message.type = 28;
+                break;
+            case "k_EControllerElementTypeMax":
+            case 29:
+                message.type = 29;
+                break;
+            }
+            if (object.visible != null)
+                message.visible = Boolean(object.visible);
             if (object.x_position != null)
-                message.x_position = object.x_position >>> 0;
+                message.x_position = Number(object.x_position);
             if (object.y_position != null)
-                message.y_position = object.y_position >>> 0;
-            if (object.width != null)
-                message.width = object.width >>> 0;
-            if (object.height != null)
-                message.height = object.height >>> 0;
-            if (object.joy_stick != null) {
-                if (typeof object.joy_stick !== "object")
-                    throw TypeError(".CVirtualControllerElement.joy_stick: object expected");
-                message.joy_stick = $root.CVirtualControllerElement.JoyStickControl.fromObject(object.joy_stick);
-            }
-            if (object.joy_button != null) {
-                if (typeof object.joy_button !== "object")
-                    throw TypeError(".CVirtualControllerElement.joy_button: object expected");
-                message.joy_button = $root.CVirtualControllerElement.JoyButtonControl.fromObject(object.joy_button);
-            }
-            if (object.joy_pad != null) {
-                if (typeof object.joy_pad !== "object")
-                    throw TypeError(".CVirtualControllerElement.joy_pad: object expected");
-                message.joy_pad = $root.CVirtualControllerElement.JoyPadControl.fromObject(object.joy_pad);
-            }
-            if (object.macro_button != null) {
-                if (typeof object.macro_button !== "object")
-                    throw TypeError(".CVirtualControllerElement.macro_button: object expected");
-                message.macro_button = $root.CVirtualControllerElement.MacroButtonControl.fromObject(object.macro_button);
-            }
-            if (object.trackpad != null) {
-                if (typeof object.trackpad !== "object")
-                    throw TypeError(".CVirtualControllerElement.trackpad: object expected");
-                message.trackpad = $root.CVirtualControllerElement.TrackpadControl.fromObject(object.trackpad);
-            }
-            if (object.axis_button != null) {
-                if (typeof object.axis_button !== "object")
-                    throw TypeError(".CVirtualControllerElement.axis_button: object expected");
-                message.axis_button = $root.CVirtualControllerElement.AxisButtonControl.fromObject(object.axis_button);
-            }
+                message.y_position = Number(object.y_position);
+            if (object.x_scale != null)
+                message.x_scale = Number(object.x_scale);
+            if (object.y_scale != null)
+                message.y_scale = Number(object.y_scale);
             return message;
         };
     
@@ -441,49 +544,25 @@
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.type = options.enums === String ? "k_EControllerElementTypeNone" : -1;
+                object.visible = false;
                 object.x_position = 0;
                 object.y_position = 0;
-                object.width = 0;
-                object.height = 0;
+                object.x_scale = 1;
+                object.y_scale = 1;
             }
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = options.enums === String ? $root.EControllerElementType[message.type] : message.type;
+            if (message.visible != null && message.hasOwnProperty("visible"))
+                object.visible = message.visible;
             if (message.x_position != null && message.hasOwnProperty("x_position"))
-                object.x_position = message.x_position;
+                object.x_position = options.json && !isFinite(message.x_position) ? String(message.x_position) : message.x_position;
             if (message.y_position != null && message.hasOwnProperty("y_position"))
-                object.y_position = message.y_position;
-            if (message.width != null && message.hasOwnProperty("width"))
-                object.width = message.width;
-            if (message.height != null && message.hasOwnProperty("height"))
-                object.height = message.height;
-            if (message.joy_stick != null && message.hasOwnProperty("joy_stick")) {
-                object.joy_stick = $root.CVirtualControllerElement.JoyStickControl.toObject(message.joy_stick, options);
-                if (options.oneofs)
-                    object.control = "joy_stick";
-            }
-            if (message.joy_button != null && message.hasOwnProperty("joy_button")) {
-                object.joy_button = $root.CVirtualControllerElement.JoyButtonControl.toObject(message.joy_button, options);
-                if (options.oneofs)
-                    object.control = "joy_button";
-            }
-            if (message.joy_pad != null && message.hasOwnProperty("joy_pad")) {
-                object.joy_pad = $root.CVirtualControllerElement.JoyPadControl.toObject(message.joy_pad, options);
-                if (options.oneofs)
-                    object.control = "joy_pad";
-            }
-            if (message.macro_button != null && message.hasOwnProperty("macro_button")) {
-                object.macro_button = $root.CVirtualControllerElement.MacroButtonControl.toObject(message.macro_button, options);
-                if (options.oneofs)
-                    object.control = "macro_button";
-            }
-            if (message.trackpad != null && message.hasOwnProperty("trackpad")) {
-                object.trackpad = $root.CVirtualControllerElement.TrackpadControl.toObject(message.trackpad, options);
-                if (options.oneofs)
-                    object.control = "trackpad";
-            }
-            if (message.axis_button != null && message.hasOwnProperty("axis_button")) {
-                object.axis_button = $root.CVirtualControllerElement.AxisButtonControl.toObject(message.axis_button, options);
-                if (options.oneofs)
-                    object.control = "axis_button";
-            }
+                object.y_position = options.json && !isFinite(message.y_position) ? String(message.y_position) : message.y_position;
+            if (message.x_scale != null && message.hasOwnProperty("x_scale"))
+                object.x_scale = options.json && !isFinite(message.x_scale) ? String(message.x_scale) : message.x_scale;
+            if (message.y_scale != null && message.hasOwnProperty("y_scale"))
+                object.y_scale = options.json && !isFinite(message.y_scale) ? String(message.y_scale) : message.y_scale;
             return object;
         };
     
@@ -498,1442 +577,6 @@
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        CVirtualControllerElement.JoyStickControl = (function() {
-    
-            /**
-             * Properties of a JoyStickControl.
-             * @memberof CVirtualControllerElement
-             * @interface IJoyStickControl
-             * @property {string|null} [label] JoyStickControl label
-             * @property {number|null} [x_axis_id] JoyStickControl x_axis_id
-             * @property {number|null} [y_axis_id] JoyStickControl y_axis_id
-             * @property {number|null} [x_axis_range] JoyStickControl x_axis_range
-             * @property {number|null} [y_axis_range] JoyStickControl y_axis_range
-             */
-    
-            /**
-             * Constructs a new JoyStickControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents a JoyStickControl.
-             * @implements IJoyStickControl
-             * @constructor
-             * @param {CVirtualControllerElement.IJoyStickControl=} [properties] Properties to set
-             */
-            function JoyStickControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * JoyStickControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             */
-            JoyStickControl.prototype.label = "";
-    
-            /**
-             * JoyStickControl x_axis_id.
-             * @member {number} x_axis_id
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             */
-            JoyStickControl.prototype.x_axis_id = 0;
-    
-            /**
-             * JoyStickControl y_axis_id.
-             * @member {number} y_axis_id
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             */
-            JoyStickControl.prototype.y_axis_id = 0;
-    
-            /**
-             * JoyStickControl x_axis_range.
-             * @member {number} x_axis_range
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             */
-            JoyStickControl.prototype.x_axis_range = 0;
-    
-            /**
-             * JoyStickControl y_axis_range.
-             * @member {number} y_axis_range
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             */
-            JoyStickControl.prototype.y_axis_range = 0;
-    
-            /**
-             * Creates a new JoyStickControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyStickControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.JoyStickControl} JoyStickControl instance
-             */
-            JoyStickControl.create = function create(properties) {
-                return new JoyStickControl(properties);
-            };
-    
-            /**
-             * Encodes the specified JoyStickControl message. Does not implicitly {@link CVirtualControllerElement.JoyStickControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyStickControl} message JoyStickControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyStickControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.x_axis_id != null && message.hasOwnProperty("x_axis_id"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x_axis_id);
-                if (message.y_axis_id != null && message.hasOwnProperty("y_axis_id"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y_axis_id);
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.x_axis_range);
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.y_axis_range);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified JoyStickControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.JoyStickControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyStickControl} message JoyStickControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyStickControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a JoyStickControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.JoyStickControl} JoyStickControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyStickControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.JoyStickControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.x_axis_id = reader.uint32();
-                        break;
-                    case 3:
-                        message.y_axis_id = reader.uint32();
-                        break;
-                    case 4:
-                        message.x_axis_range = reader.uint32();
-                        break;
-                    case 5:
-                        message.y_axis_range = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a JoyStickControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.JoyStickControl} JoyStickControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyStickControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a JoyStickControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            JoyStickControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.x_axis_id != null && message.hasOwnProperty("x_axis_id"))
-                    if (!$util.isInteger(message.x_axis_id))
-                        return "x_axis_id: integer expected";
-                if (message.y_axis_id != null && message.hasOwnProperty("y_axis_id"))
-                    if (!$util.isInteger(message.y_axis_id))
-                        return "y_axis_id: integer expected";
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    if (!$util.isInteger(message.x_axis_range))
-                        return "x_axis_range: integer expected";
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    if (!$util.isInteger(message.y_axis_range))
-                        return "y_axis_range: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a JoyStickControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.JoyStickControl} JoyStickControl
-             */
-            JoyStickControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.JoyStickControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.JoyStickControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.x_axis_id != null)
-                    message.x_axis_id = object.x_axis_id >>> 0;
-                if (object.y_axis_id != null)
-                    message.y_axis_id = object.y_axis_id >>> 0;
-                if (object.x_axis_range != null)
-                    message.x_axis_range = object.x_axis_range >>> 0;
-                if (object.y_axis_range != null)
-                    message.y_axis_range = object.y_axis_range >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a JoyStickControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @static
-             * @param {CVirtualControllerElement.JoyStickControl} message JoyStickControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            JoyStickControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.x_axis_id = 0;
-                    object.y_axis_id = 0;
-                    object.x_axis_range = 0;
-                    object.y_axis_range = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.x_axis_id != null && message.hasOwnProperty("x_axis_id"))
-                    object.x_axis_id = message.x_axis_id;
-                if (message.y_axis_id != null && message.hasOwnProperty("y_axis_id"))
-                    object.y_axis_id = message.y_axis_id;
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    object.x_axis_range = message.x_axis_range;
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    object.y_axis_range = message.y_axis_range;
-                return object;
-            };
-    
-            /**
-             * Converts this JoyStickControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.JoyStickControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            JoyStickControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return JoyStickControl;
-        })();
-    
-        CVirtualControllerElement.JoyButtonControl = (function() {
-    
-            /**
-             * Properties of a JoyButtonControl.
-             * @memberof CVirtualControllerElement
-             * @interface IJoyButtonControl
-             * @property {string|null} [label] JoyButtonControl label
-             * @property {number|null} [button_id] JoyButtonControl button_id
-             */
-    
-            /**
-             * Constructs a new JoyButtonControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents a JoyButtonControl.
-             * @implements IJoyButtonControl
-             * @constructor
-             * @param {CVirtualControllerElement.IJoyButtonControl=} [properties] Properties to set
-             */
-            function JoyButtonControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * JoyButtonControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @instance
-             */
-            JoyButtonControl.prototype.label = "";
-    
-            /**
-             * JoyButtonControl button_id.
-             * @member {number} button_id
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @instance
-             */
-            JoyButtonControl.prototype.button_id = 0;
-    
-            /**
-             * Creates a new JoyButtonControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyButtonControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.JoyButtonControl} JoyButtonControl instance
-             */
-            JoyButtonControl.create = function create(properties) {
-                return new JoyButtonControl(properties);
-            };
-    
-            /**
-             * Encodes the specified JoyButtonControl message. Does not implicitly {@link CVirtualControllerElement.JoyButtonControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyButtonControl} message JoyButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyButtonControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.button_id);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified JoyButtonControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.JoyButtonControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyButtonControl} message JoyButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyButtonControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a JoyButtonControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.JoyButtonControl} JoyButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyButtonControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.JoyButtonControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.button_id = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a JoyButtonControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.JoyButtonControl} JoyButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyButtonControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a JoyButtonControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            JoyButtonControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    if (!$util.isInteger(message.button_id))
-                        return "button_id: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a JoyButtonControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.JoyButtonControl} JoyButtonControl
-             */
-            JoyButtonControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.JoyButtonControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.JoyButtonControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.button_id != null)
-                    message.button_id = object.button_id >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a JoyButtonControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @static
-             * @param {CVirtualControllerElement.JoyButtonControl} message JoyButtonControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            JoyButtonControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.button_id = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    object.button_id = message.button_id;
-                return object;
-            };
-    
-            /**
-             * Converts this JoyButtonControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.JoyButtonControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            JoyButtonControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return JoyButtonControl;
-        })();
-    
-        CVirtualControllerElement.JoyPadControl = (function() {
-    
-            /**
-             * Properties of a JoyPadControl.
-             * @memberof CVirtualControllerElement
-             * @interface IJoyPadControl
-             * @property {string|null} [label] JoyPadControl label
-             * @property {number|null} [up_button_id] JoyPadControl up_button_id
-             * @property {number|null} [down_button_id] JoyPadControl down_button_id
-             * @property {number|null} [left_button_id] JoyPadControl left_button_id
-             * @property {number|null} [right_button_id] JoyPadControl right_button_id
-             */
-    
-            /**
-             * Constructs a new JoyPadControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents a JoyPadControl.
-             * @implements IJoyPadControl
-             * @constructor
-             * @param {CVirtualControllerElement.IJoyPadControl=} [properties] Properties to set
-             */
-            function JoyPadControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * JoyPadControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             */
-            JoyPadControl.prototype.label = "";
-    
-            /**
-             * JoyPadControl up_button_id.
-             * @member {number} up_button_id
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             */
-            JoyPadControl.prototype.up_button_id = 0;
-    
-            /**
-             * JoyPadControl down_button_id.
-             * @member {number} down_button_id
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             */
-            JoyPadControl.prototype.down_button_id = 0;
-    
-            /**
-             * JoyPadControl left_button_id.
-             * @member {number} left_button_id
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             */
-            JoyPadControl.prototype.left_button_id = 0;
-    
-            /**
-             * JoyPadControl right_button_id.
-             * @member {number} right_button_id
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             */
-            JoyPadControl.prototype.right_button_id = 0;
-    
-            /**
-             * Creates a new JoyPadControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyPadControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.JoyPadControl} JoyPadControl instance
-             */
-            JoyPadControl.create = function create(properties) {
-                return new JoyPadControl(properties);
-            };
-    
-            /**
-             * Encodes the specified JoyPadControl message. Does not implicitly {@link CVirtualControllerElement.JoyPadControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyPadControl} message JoyPadControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyPadControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.up_button_id != null && message.hasOwnProperty("up_button_id"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.up_button_id);
-                if (message.down_button_id != null && message.hasOwnProperty("down_button_id"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.down_button_id);
-                if (message.left_button_id != null && message.hasOwnProperty("left_button_id"))
-                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.left_button_id);
-                if (message.right_button_id != null && message.hasOwnProperty("right_button_id"))
-                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.right_button_id);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified JoyPadControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.JoyPadControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {CVirtualControllerElement.IJoyPadControl} message JoyPadControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            JoyPadControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a JoyPadControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.JoyPadControl} JoyPadControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyPadControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.JoyPadControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.up_button_id = reader.uint32();
-                        break;
-                    case 3:
-                        message.down_button_id = reader.uint32();
-                        break;
-                    case 4:
-                        message.left_button_id = reader.uint32();
-                        break;
-                    case 5:
-                        message.right_button_id = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a JoyPadControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.JoyPadControl} JoyPadControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            JoyPadControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a JoyPadControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            JoyPadControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.up_button_id != null && message.hasOwnProperty("up_button_id"))
-                    if (!$util.isInteger(message.up_button_id))
-                        return "up_button_id: integer expected";
-                if (message.down_button_id != null && message.hasOwnProperty("down_button_id"))
-                    if (!$util.isInteger(message.down_button_id))
-                        return "down_button_id: integer expected";
-                if (message.left_button_id != null && message.hasOwnProperty("left_button_id"))
-                    if (!$util.isInteger(message.left_button_id))
-                        return "left_button_id: integer expected";
-                if (message.right_button_id != null && message.hasOwnProperty("right_button_id"))
-                    if (!$util.isInteger(message.right_button_id))
-                        return "right_button_id: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a JoyPadControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.JoyPadControl} JoyPadControl
-             */
-            JoyPadControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.JoyPadControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.JoyPadControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.up_button_id != null)
-                    message.up_button_id = object.up_button_id >>> 0;
-                if (object.down_button_id != null)
-                    message.down_button_id = object.down_button_id >>> 0;
-                if (object.left_button_id != null)
-                    message.left_button_id = object.left_button_id >>> 0;
-                if (object.right_button_id != null)
-                    message.right_button_id = object.right_button_id >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a JoyPadControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @static
-             * @param {CVirtualControllerElement.JoyPadControl} message JoyPadControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            JoyPadControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.up_button_id = 0;
-                    object.down_button_id = 0;
-                    object.left_button_id = 0;
-                    object.right_button_id = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.up_button_id != null && message.hasOwnProperty("up_button_id"))
-                    object.up_button_id = message.up_button_id;
-                if (message.down_button_id != null && message.hasOwnProperty("down_button_id"))
-                    object.down_button_id = message.down_button_id;
-                if (message.left_button_id != null && message.hasOwnProperty("left_button_id"))
-                    object.left_button_id = message.left_button_id;
-                if (message.right_button_id != null && message.hasOwnProperty("right_button_id"))
-                    object.right_button_id = message.right_button_id;
-                return object;
-            };
-    
-            /**
-             * Converts this JoyPadControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.JoyPadControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            JoyPadControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return JoyPadControl;
-        })();
-    
-        CVirtualControllerElement.MacroButtonControl = (function() {
-    
-            /**
-             * Properties of a MacroButtonControl.
-             * @memberof CVirtualControllerElement
-             * @interface IMacroButtonControl
-             * @property {string|null} [label] MacroButtonControl label
-             * @property {number|null} [button_id] MacroButtonControl button_id
-             */
-    
-            /**
-             * Constructs a new MacroButtonControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents a MacroButtonControl.
-             * @implements IMacroButtonControl
-             * @constructor
-             * @param {CVirtualControllerElement.IMacroButtonControl=} [properties] Properties to set
-             */
-            function MacroButtonControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * MacroButtonControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @instance
-             */
-            MacroButtonControl.prototype.label = "";
-    
-            /**
-             * MacroButtonControl button_id.
-             * @member {number} button_id
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @instance
-             */
-            MacroButtonControl.prototype.button_id = 0;
-    
-            /**
-             * Creates a new MacroButtonControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IMacroButtonControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.MacroButtonControl} MacroButtonControl instance
-             */
-            MacroButtonControl.create = function create(properties) {
-                return new MacroButtonControl(properties);
-            };
-    
-            /**
-             * Encodes the specified MacroButtonControl message. Does not implicitly {@link CVirtualControllerElement.MacroButtonControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IMacroButtonControl} message MacroButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            MacroButtonControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.button_id);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified MacroButtonControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.MacroButtonControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IMacroButtonControl} message MacroButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            MacroButtonControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a MacroButtonControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.MacroButtonControl} MacroButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            MacroButtonControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.MacroButtonControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.button_id = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a MacroButtonControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.MacroButtonControl} MacroButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            MacroButtonControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a MacroButtonControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            MacroButtonControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    if (!$util.isInteger(message.button_id))
-                        return "button_id: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a MacroButtonControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.MacroButtonControl} MacroButtonControl
-             */
-            MacroButtonControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.MacroButtonControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.MacroButtonControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.button_id != null)
-                    message.button_id = object.button_id >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a MacroButtonControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @static
-             * @param {CVirtualControllerElement.MacroButtonControl} message MacroButtonControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            MacroButtonControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.button_id = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.button_id != null && message.hasOwnProperty("button_id"))
-                    object.button_id = message.button_id;
-                return object;
-            };
-    
-            /**
-             * Converts this MacroButtonControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.MacroButtonControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            MacroButtonControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return MacroButtonControl;
-        })();
-    
-        CVirtualControllerElement.TrackpadControl = (function() {
-    
-            /**
-             * Properties of a TrackpadControl.
-             * @memberof CVirtualControllerElement
-             * @interface ITrackpadControl
-             * @property {string|null} [label] TrackpadControl label
-             * @property {number|null} [x_axis_range] TrackpadControl x_axis_range
-             * @property {number|null} [y_axis_range] TrackpadControl y_axis_range
-             */
-    
-            /**
-             * Constructs a new TrackpadControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents a TrackpadControl.
-             * @implements ITrackpadControl
-             * @constructor
-             * @param {CVirtualControllerElement.ITrackpadControl=} [properties] Properties to set
-             */
-            function TrackpadControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * TrackpadControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @instance
-             */
-            TrackpadControl.prototype.label = "";
-    
-            /**
-             * TrackpadControl x_axis_range.
-             * @member {number} x_axis_range
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @instance
-             */
-            TrackpadControl.prototype.x_axis_range = 0;
-    
-            /**
-             * TrackpadControl y_axis_range.
-             * @member {number} y_axis_range
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @instance
-             */
-            TrackpadControl.prototype.y_axis_range = 0;
-    
-            /**
-             * Creates a new TrackpadControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {CVirtualControllerElement.ITrackpadControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.TrackpadControl} TrackpadControl instance
-             */
-            TrackpadControl.create = function create(properties) {
-                return new TrackpadControl(properties);
-            };
-    
-            /**
-             * Encodes the specified TrackpadControl message. Does not implicitly {@link CVirtualControllerElement.TrackpadControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {CVirtualControllerElement.ITrackpadControl} message TrackpadControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TrackpadControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.x_axis_range);
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.y_axis_range);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified TrackpadControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.TrackpadControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {CVirtualControllerElement.ITrackpadControl} message TrackpadControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            TrackpadControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a TrackpadControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.TrackpadControl} TrackpadControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TrackpadControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.TrackpadControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.x_axis_range = reader.uint32();
-                        break;
-                    case 3:
-                        message.y_axis_range = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a TrackpadControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.TrackpadControl} TrackpadControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            TrackpadControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a TrackpadControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            TrackpadControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    if (!$util.isInteger(message.x_axis_range))
-                        return "x_axis_range: integer expected";
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    if (!$util.isInteger(message.y_axis_range))
-                        return "y_axis_range: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a TrackpadControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.TrackpadControl} TrackpadControl
-             */
-            TrackpadControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.TrackpadControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.TrackpadControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.x_axis_range != null)
-                    message.x_axis_range = object.x_axis_range >>> 0;
-                if (object.y_axis_range != null)
-                    message.y_axis_range = object.y_axis_range >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a TrackpadControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @static
-             * @param {CVirtualControllerElement.TrackpadControl} message TrackpadControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            TrackpadControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.x_axis_range = 0;
-                    object.y_axis_range = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.x_axis_range != null && message.hasOwnProperty("x_axis_range"))
-                    object.x_axis_range = message.x_axis_range;
-                if (message.y_axis_range != null && message.hasOwnProperty("y_axis_range"))
-                    object.y_axis_range = message.y_axis_range;
-                return object;
-            };
-    
-            /**
-             * Converts this TrackpadControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.TrackpadControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            TrackpadControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return TrackpadControl;
-        })();
-    
-        CVirtualControllerElement.AxisButtonControl = (function() {
-    
-            /**
-             * Properties of an AxisButtonControl.
-             * @memberof CVirtualControllerElement
-             * @interface IAxisButtonControl
-             * @property {string|null} [label] AxisButtonControl label
-             * @property {number|null} [axis_id] AxisButtonControl axis_id
-             * @property {number|null} [axis_pressed_value] AxisButtonControl axis_pressed_value
-             */
-    
-            /**
-             * Constructs a new AxisButtonControl.
-             * @memberof CVirtualControllerElement
-             * @classdesc Represents an AxisButtonControl.
-             * @implements IAxisButtonControl
-             * @constructor
-             * @param {CVirtualControllerElement.IAxisButtonControl=} [properties] Properties to set
-             */
-            function AxisButtonControl(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * AxisButtonControl label.
-             * @member {string} label
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @instance
-             */
-            AxisButtonControl.prototype.label = "";
-    
-            /**
-             * AxisButtonControl axis_id.
-             * @member {number} axis_id
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @instance
-             */
-            AxisButtonControl.prototype.axis_id = 0;
-    
-            /**
-             * AxisButtonControl axis_pressed_value.
-             * @member {number} axis_pressed_value
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @instance
-             */
-            AxisButtonControl.prototype.axis_pressed_value = 0;
-    
-            /**
-             * Creates a new AxisButtonControl instance using the specified properties.
-             * @function create
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IAxisButtonControl=} [properties] Properties to set
-             * @returns {CVirtualControllerElement.AxisButtonControl} AxisButtonControl instance
-             */
-            AxisButtonControl.create = function create(properties) {
-                return new AxisButtonControl(properties);
-            };
-    
-            /**
-             * Encodes the specified AxisButtonControl message. Does not implicitly {@link CVirtualControllerElement.AxisButtonControl.verify|verify} messages.
-             * @function encode
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IAxisButtonControl} message AxisButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AxisButtonControl.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.label != null && message.hasOwnProperty("label"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
-                if (message.axis_id != null && message.hasOwnProperty("axis_id"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.axis_id);
-                if (message.axis_pressed_value != null && message.hasOwnProperty("axis_pressed_value"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.axis_pressed_value);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified AxisButtonControl message, length delimited. Does not implicitly {@link CVirtualControllerElement.AxisButtonControl.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {CVirtualControllerElement.IAxisButtonControl} message AxisButtonControl message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            AxisButtonControl.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes an AxisButtonControl message from the specified reader or buffer.
-             * @function decode
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CVirtualControllerElement.AxisButtonControl} AxisButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AxisButtonControl.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerElement.AxisButtonControl();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.label = reader.string();
-                        break;
-                    case 2:
-                        message.axis_id = reader.uint32();
-                        break;
-                    case 3:
-                        message.axis_pressed_value = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes an AxisButtonControl message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CVirtualControllerElement.AxisButtonControl} AxisButtonControl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            AxisButtonControl.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies an AxisButtonControl message.
-             * @function verify
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            AxisButtonControl.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.label != null && message.hasOwnProperty("label"))
-                    if (!$util.isString(message.label))
-                        return "label: string expected";
-                if (message.axis_id != null && message.hasOwnProperty("axis_id"))
-                    if (!$util.isInteger(message.axis_id))
-                        return "axis_id: integer expected";
-                if (message.axis_pressed_value != null && message.hasOwnProperty("axis_pressed_value"))
-                    if (!$util.isInteger(message.axis_pressed_value))
-                        return "axis_pressed_value: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates an AxisButtonControl message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CVirtualControllerElement.AxisButtonControl} AxisButtonControl
-             */
-            AxisButtonControl.fromObject = function fromObject(object) {
-                if (object instanceof $root.CVirtualControllerElement.AxisButtonControl)
-                    return object;
-                var message = new $root.CVirtualControllerElement.AxisButtonControl();
-                if (object.label != null)
-                    message.label = String(object.label);
-                if (object.axis_id != null)
-                    message.axis_id = object.axis_id >>> 0;
-                if (object.axis_pressed_value != null)
-                    message.axis_pressed_value = object.axis_pressed_value >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from an AxisButtonControl message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @static
-             * @param {CVirtualControllerElement.AxisButtonControl} message AxisButtonControl
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            AxisButtonControl.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.label = "";
-                    object.axis_id = 0;
-                    object.axis_pressed_value = 0;
-                }
-                if (message.label != null && message.hasOwnProperty("label"))
-                    object.label = message.label;
-                if (message.axis_id != null && message.hasOwnProperty("axis_id"))
-                    object.axis_id = message.axis_id;
-                if (message.axis_pressed_value != null && message.hasOwnProperty("axis_pressed_value"))
-                    object.axis_pressed_value = message.axis_pressed_value;
-                return object;
-            };
-    
-            /**
-             * Converts this AxisButtonControl to JSON.
-             * @function toJSON
-             * @memberof CVirtualControllerElement.AxisButtonControl
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            AxisButtonControl.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return AxisButtonControl;
-        })();
-    
         return CVirtualControllerElement;
     })();
     
@@ -1943,7 +586,8 @@
          * Properties of a CVirtualControllerLayout.
          * @exports ICVirtualControllerLayout
          * @interface ICVirtualControllerLayout
-         * @property {EControllerLayoutType|null} [layout_type] CVirtualControllerLayout layout_type
+         * @property {number|null} [layout_version] CVirtualControllerLayout layout_version
+         * @property {number|null} [actionset_id] CVirtualControllerLayout actionset_id
          * @property {Array.<ICVirtualControllerElement>|null} [elements] CVirtualControllerLayout elements
          */
     
@@ -1964,12 +608,20 @@
         }
     
         /**
-         * CVirtualControllerLayout layout_type.
-         * @member {EControllerLayoutType} layout_type
+         * CVirtualControllerLayout layout_version.
+         * @member {number} layout_version
          * @memberof CVirtualControllerLayout
          * @instance
          */
-        CVirtualControllerLayout.prototype.layout_type = 0;
+        CVirtualControllerLayout.prototype.layout_version = 0;
+    
+        /**
+         * CVirtualControllerLayout actionset_id.
+         * @member {number} actionset_id
+         * @memberof CVirtualControllerLayout
+         * @instance
+         */
+        CVirtualControllerLayout.prototype.actionset_id = 0;
     
         /**
          * CVirtualControllerLayout elements.
@@ -2003,11 +655,13 @@
         CVirtualControllerLayout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.layout_type != null && message.hasOwnProperty("layout_type"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.layout_type);
+            if (message.layout_version != null && message.hasOwnProperty("layout_version"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.layout_version);
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.actionset_id);
             if (message.elements != null && message.elements.length)
                 for (var i = 0; i < message.elements.length; ++i)
-                    $root.CVirtualControllerElement.encode(message.elements[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    $root.CVirtualControllerElement.encode(message.elements[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
     
@@ -2043,9 +697,12 @@
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.layout_type = reader.int32();
+                    message.layout_version = reader.int32();
                     break;
                 case 2:
+                    message.actionset_id = reader.int32();
+                    break;
+                case 4:
                     if (!(message.elements && message.elements.length))
                         message.elements = [];
                     message.elements.push($root.CVirtualControllerElement.decode(reader, reader.uint32()));
@@ -2085,14 +742,12 @@
         CVirtualControllerLayout.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.layout_type != null && message.hasOwnProperty("layout_type"))
-                switch (message.layout_type) {
-                default:
-                    return "layout_type: enum value expected";
-                case 0:
-                case 1:
-                    break;
-                }
+            if (message.layout_version != null && message.hasOwnProperty("layout_version"))
+                if (!$util.isInteger(message.layout_version))
+                    return "layout_version: integer expected";
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                if (!$util.isInteger(message.actionset_id))
+                    return "actionset_id: integer expected";
             if (message.elements != null && message.hasOwnProperty("elements")) {
                 if (!Array.isArray(message.elements))
                     return "elements: array expected";
@@ -2117,16 +772,10 @@
             if (object instanceof $root.CVirtualControllerLayout)
                 return object;
             var message = new $root.CVirtualControllerLayout();
-            switch (object.layout_type) {
-            case "k_EControllerLayoutTypePhone":
-            case 0:
-                message.layout_type = 0;
-                break;
-            case "k_EControllerLayoutTypeTablet":
-            case 1:
-                message.layout_type = 1;
-                break;
-            }
+            if (object.layout_version != null)
+                message.layout_version = object.layout_version | 0;
+            if (object.actionset_id != null)
+                message.actionset_id = object.actionset_id | 0;
             if (object.elements) {
                 if (!Array.isArray(object.elements))
                     throw TypeError(".CVirtualControllerLayout.elements: array expected");
@@ -2155,10 +804,14 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.elements = [];
-            if (options.defaults)
-                object.layout_type = options.enums === String ? "k_EControllerLayoutTypePhone" : 0;
-            if (message.layout_type != null && message.hasOwnProperty("layout_type"))
-                object.layout_type = options.enums === String ? $root.EControllerLayoutType[message.layout_type] : message.layout_type;
+            if (options.defaults) {
+                object.layout_version = 0;
+                object.actionset_id = 0;
+            }
+            if (message.layout_version != null && message.hasOwnProperty("layout_version"))
+                object.layout_version = message.layout_version;
+            if (message.actionset_id != null && message.hasOwnProperty("actionset_id"))
+                object.actionset_id = message.actionset_id;
             if (message.elements && message.elements.length) {
                 object.elements = [];
                 for (var j = 0; j < message.elements.length; ++j)
@@ -2188,6 +841,8 @@
          * @exports ICVirtualControllerLayouts
          * @interface ICVirtualControllerLayouts
          * @property {Array.<ICVirtualControllerLayout>|null} [layouts] CVirtualControllerLayouts layouts
+         * @property {EInputMode|null} [input_mode] CVirtualControllerLayouts input_mode
+         * @property {EMouseMode|null} [mouse_mode] CVirtualControllerLayouts mouse_mode
          */
     
         /**
@@ -2213,6 +868,22 @@
          * @instance
          */
         CVirtualControllerLayouts.prototype.layouts = $util.emptyArray;
+    
+        /**
+         * CVirtualControllerLayouts input_mode.
+         * @member {EInputMode} input_mode
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.input_mode = 2;
+    
+        /**
+         * CVirtualControllerLayouts mouse_mode.
+         * @member {EMouseMode} mouse_mode
+         * @memberof CVirtualControllerLayouts
+         * @instance
+         */
+        CVirtualControllerLayouts.prototype.mouse_mode = 0;
     
         /**
          * Creates a new CVirtualControllerLayouts instance using the specified properties.
@@ -2241,6 +912,10 @@
             if (message.layouts != null && message.layouts.length)
                 for (var i = 0; i < message.layouts.length; ++i)
                     $root.CVirtualControllerLayout.encode(message.layouts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.input_mode != null && message.hasOwnProperty("input_mode"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.input_mode);
+            if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mouse_mode);
             return writer;
         };
     
@@ -2279,6 +954,12 @@
                     if (!(message.layouts && message.layouts.length))
                         message.layouts = [];
                     message.layouts.push($root.CVirtualControllerLayout.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.input_mode = reader.int32();
+                    break;
+                case 3:
+                    message.mouse_mode = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2324,6 +1005,26 @@
                         return "layouts." + error;
                 }
             }
+            if (message.input_mode != null && message.hasOwnProperty("input_mode"))
+                switch (message.input_mode) {
+                default:
+                    return "input_mode: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
+                switch (message.mouse_mode) {
+                default:
+                    return "mouse_mode: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
             return null;
         };
     
@@ -2349,6 +1050,42 @@
                     message.layouts[i] = $root.CVirtualControllerLayout.fromObject(object.layouts[i]);
                 }
             }
+            switch (object.input_mode) {
+            case "k_EInputModeUnknown":
+            case 0:
+                message.input_mode = 0;
+                break;
+            case "k_EInputModeMouse":
+            case 1:
+                message.input_mode = 1;
+                break;
+            case "k_EInputModeController":
+            case 2:
+                message.input_mode = 2;
+                break;
+            case "k_EInputModeMouseAndController":
+            case 3:
+                message.input_mode = 3;
+                break;
+            }
+            switch (object.mouse_mode) {
+            case "k_EMouseModeUnknown":
+            case 0:
+                message.mouse_mode = 0;
+                break;
+            case "k_EMouseModeRelative":
+            case 1:
+                message.mouse_mode = 1;
+                break;
+            case "k_EMouseModeAbsolute":
+            case 2:
+                message.mouse_mode = 2;
+                break;
+            case "k_EMouseModeTouch":
+            case 3:
+                message.mouse_mode = 3;
+                break;
+            }
             return message;
         };
     
@@ -2367,11 +1104,19 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.layouts = [];
+            if (options.defaults) {
+                object.input_mode = options.enums === String ? "k_EInputModeController" : 2;
+                object.mouse_mode = options.enums === String ? "k_EMouseModeUnknown" : 0;
+            }
             if (message.layouts && message.layouts.length) {
                 object.layouts = [];
                 for (var j = 0; j < message.layouts.length; ++j)
                     object.layouts[j] = $root.CVirtualControllerLayout.toObject(message.layouts[j], options);
             }
+            if (message.input_mode != null && message.hasOwnProperty("input_mode"))
+                object.input_mode = options.enums === String ? $root.EInputMode[message.input_mode] : message.input_mode;
+            if (message.mouse_mode != null && message.hasOwnProperty("mouse_mode"))
+                object.mouse_mode = options.enums === String ? $root.EMouseMode[message.mouse_mode] : message.mouse_mode;
             return object;
         };
     
@@ -2397,6 +1142,7 @@
          * @interface ICVirtualControllerConfig
          * @property {string|null} [name] CVirtualControllerConfig name
          * @property {Array.<CVirtualControllerConfig.IActionSet>|null} [actionsets] CVirtualControllerConfig actionsets
+         * @property {EMouseMode|null} [default_mouse_mode] CVirtualControllerConfig default_mouse_mode
          */
     
         /**
@@ -2432,6 +1178,14 @@
         CVirtualControllerConfig.prototype.actionsets = $util.emptyArray;
     
         /**
+         * CVirtualControllerConfig default_mouse_mode.
+         * @member {EMouseMode} default_mouse_mode
+         * @memberof CVirtualControllerConfig
+         * @instance
+         */
+        CVirtualControllerConfig.prototype.default_mouse_mode = 1;
+    
+        /**
          * Creates a new CVirtualControllerConfig instance using the specified properties.
          * @function create
          * @memberof CVirtualControllerConfig
@@ -2460,6 +1214,8 @@
             if (message.actionsets != null && message.actionsets.length)
                 for (var i = 0; i < message.actionsets.length; ++i)
                     $root.CVirtualControllerConfig.ActionSet.encode(message.actionsets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.default_mouse_mode != null && message.hasOwnProperty("default_mouse_mode"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.default_mouse_mode);
             return writer;
         };
     
@@ -2501,6 +1257,9 @@
                     if (!(message.actionsets && message.actionsets.length))
                         message.actionsets = [];
                     message.actionsets.push($root.CVirtualControllerConfig.ActionSet.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.default_mouse_mode = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2549,6 +1308,16 @@
                         return "actionsets." + error;
                 }
             }
+            if (message.default_mouse_mode != null && message.hasOwnProperty("default_mouse_mode"))
+                switch (message.default_mouse_mode) {
+                default:
+                    return "default_mouse_mode: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
             return null;
         };
     
@@ -2576,6 +1345,24 @@
                     message.actionsets[i] = $root.CVirtualControllerConfig.ActionSet.fromObject(object.actionsets[i]);
                 }
             }
+            switch (object.default_mouse_mode) {
+            case "k_EMouseModeUnknown":
+            case 0:
+                message.default_mouse_mode = 0;
+                break;
+            case "k_EMouseModeRelative":
+            case 1:
+                message.default_mouse_mode = 1;
+                break;
+            case "k_EMouseModeAbsolute":
+            case 2:
+                message.default_mouse_mode = 2;
+                break;
+            case "k_EMouseModeTouch":
+            case 3:
+                message.default_mouse_mode = 3;
+                break;
+            }
             return message;
         };
     
@@ -2594,8 +1381,10 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.actionsets = [];
-            if (options.defaults)
+            if (options.defaults) {
                 object.name = "";
+                object.default_mouse_mode = options.enums === String ? "k_EMouseModeRelative" : 1;
+            }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.actionsets && message.actionsets.length) {
@@ -2603,6 +1392,8 @@
                 for (var j = 0; j < message.actionsets.length; ++j)
                     object.actionsets[j] = $root.CVirtualControllerConfig.ActionSet.toObject(message.actionsets[j], options);
             }
+            if (message.default_mouse_mode != null && message.hasOwnProperty("default_mouse_mode"))
+                object.default_mouse_mode = options.enums === String ? $root.EMouseMode[message.default_mouse_mode] : message.default_mouse_mode;
             return object;
         };
     
@@ -3544,6 +2335,193 @@
         };
     
         return CVirtualControllerLayoutPackage;
+    })();
+    
+    $root.CVirtualControllerGlobalConfig = (function() {
+    
+        /**
+         * Properties of a CVirtualControllerGlobalConfig.
+         * @exports ICVirtualControllerGlobalConfig
+         * @interface ICVirtualControllerGlobalConfig
+         * @property {boolean|null} [feedback_enabled] CVirtualControllerGlobalConfig feedback_enabled
+         */
+    
+        /**
+         * Constructs a new CVirtualControllerGlobalConfig.
+         * @exports CVirtualControllerGlobalConfig
+         * @classdesc Represents a CVirtualControllerGlobalConfig.
+         * @implements ICVirtualControllerGlobalConfig
+         * @constructor
+         * @param {ICVirtualControllerGlobalConfig=} [properties] Properties to set
+         */
+        function CVirtualControllerGlobalConfig(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CVirtualControllerGlobalConfig feedback_enabled.
+         * @member {boolean} feedback_enabled
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         */
+        CVirtualControllerGlobalConfig.prototype.feedback_enabled = false;
+    
+        /**
+         * Creates a new CVirtualControllerGlobalConfig instance using the specified properties.
+         * @function create
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {ICVirtualControllerGlobalConfig=} [properties] Properties to set
+         * @returns {CVirtualControllerGlobalConfig} CVirtualControllerGlobalConfig instance
+         */
+        CVirtualControllerGlobalConfig.create = function create(properties) {
+            return new CVirtualControllerGlobalConfig(properties);
+        };
+    
+        /**
+         * Encodes the specified CVirtualControllerGlobalConfig message. Does not implicitly {@link CVirtualControllerGlobalConfig.verify|verify} messages.
+         * @function encode
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {ICVirtualControllerGlobalConfig} message CVirtualControllerGlobalConfig message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CVirtualControllerGlobalConfig.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.feedback_enabled);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CVirtualControllerGlobalConfig message, length delimited. Does not implicitly {@link CVirtualControllerGlobalConfig.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {ICVirtualControllerGlobalConfig} message CVirtualControllerGlobalConfig message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CVirtualControllerGlobalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CVirtualControllerGlobalConfig message from the specified reader or buffer.
+         * @function decode
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CVirtualControllerGlobalConfig} CVirtualControllerGlobalConfig
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CVirtualControllerGlobalConfig.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CVirtualControllerGlobalConfig();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.feedback_enabled = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CVirtualControllerGlobalConfig message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CVirtualControllerGlobalConfig} CVirtualControllerGlobalConfig
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CVirtualControllerGlobalConfig.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CVirtualControllerGlobalConfig message.
+         * @function verify
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CVirtualControllerGlobalConfig.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
+                if (typeof message.feedback_enabled !== "boolean")
+                    return "feedback_enabled: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CVirtualControllerGlobalConfig message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CVirtualControllerGlobalConfig} CVirtualControllerGlobalConfig
+         */
+        CVirtualControllerGlobalConfig.fromObject = function fromObject(object) {
+            if (object instanceof $root.CVirtualControllerGlobalConfig)
+                return object;
+            var message = new $root.CVirtualControllerGlobalConfig();
+            if (object.feedback_enabled != null)
+                message.feedback_enabled = Boolean(object.feedback_enabled);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CVirtualControllerGlobalConfig message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CVirtualControllerGlobalConfig
+         * @static
+         * @param {CVirtualControllerGlobalConfig} message CVirtualControllerGlobalConfig
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CVirtualControllerGlobalConfig.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.feedback_enabled = false;
+            if (message.feedback_enabled != null && message.hasOwnProperty("feedback_enabled"))
+                object.feedback_enabled = message.feedback_enabled;
+            return object;
+        };
+    
+        /**
+         * Converts this CVirtualControllerGlobalConfig to JSON.
+         * @function toJSON
+         * @memberof CVirtualControllerGlobalConfig
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CVirtualControllerGlobalConfig.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CVirtualControllerGlobalConfig;
     })();
 
     return $root;

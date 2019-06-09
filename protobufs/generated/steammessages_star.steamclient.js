@@ -17,41 +17,42 @@
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
     /**
-     * EUserReviewScorePreference enum.
-     * @exports EUserReviewScorePreference
+     * E_STAR_GlyphWriteResult enum.
+     * @exports E_STAR_GlyphWriteResult
      * @enum {string}
-     * @property {number} k_EUserReviewScorePreference_Unset=0 k_EUserReviewScorePreference_Unset value
-     * @property {number} k_EUserReviewScorePreference_IncludeAll=1 k_EUserReviewScorePreference_IncludeAll value
-     * @property {number} k_EUserReviewScorePreference_ExcludeBombs=2 k_EUserReviewScorePreference_ExcludeBombs value
+     * @property {number} k_E_STAR_GlyphWriteResult_Success=0 k_E_STAR_GlyphWriteResult_Success value
+     * @property {number} k_E_STAR_GlyphWriteResult_InvalidMessage=1 k_E_STAR_GlyphWriteResult_InvalidMessage value
+     * @property {number} k_E_STAR_GlyphWriteResult_InvalidJSON=2 k_E_STAR_GlyphWriteResult_InvalidJSON value
+     * @property {number} k_E_STAR_GlyphWriteResult_SQLError=3 k_E_STAR_GlyphWriteResult_SQLError value
      */
-    $root.EUserReviewScorePreference = (function() {
+    $root.E_STAR_GlyphWriteResult = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "k_EUserReviewScorePreference_Unset"] = 0;
-        values[valuesById[1] = "k_EUserReviewScorePreference_IncludeAll"] = 1;
-        values[valuesById[2] = "k_EUserReviewScorePreference_ExcludeBombs"] = 2;
+        values[valuesById[0] = "k_E_STAR_GlyphWriteResult_Success"] = 0;
+        values[valuesById[1] = "k_E_STAR_GlyphWriteResult_InvalidMessage"] = 1;
+        values[valuesById[2] = "k_E_STAR_GlyphWriteResult_InvalidJSON"] = 2;
+        values[valuesById[3] = "k_E_STAR_GlyphWriteResult_SQLError"] = 3;
         return values;
     })();
     
-    $root.CStore_GetLocalizedNameForTags_Request = (function() {
+    $root.CSTAR_KeyValueQuery = (function() {
     
         /**
-         * Properties of a CStore_GetLocalizedNameForTags_Request.
-         * @exports ICStore_GetLocalizedNameForTags_Request
-         * @interface ICStore_GetLocalizedNameForTags_Request
-         * @property {string|null} [language] CStore_GetLocalizedNameForTags_Request language
-         * @property {Array.<number>|null} [tagids] CStore_GetLocalizedNameForTags_Request tagids
+         * Properties of a CSTAR_KeyValueQuery.
+         * @exports ICSTAR_KeyValueQuery
+         * @interface ICSTAR_KeyValueQuery
+         * @property {string|null} [key] CSTAR_KeyValueQuery key
+         * @property {string|null} [value] CSTAR_KeyValueQuery value
          */
     
         /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Request.
-         * @exports CStore_GetLocalizedNameForTags_Request
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Request.
-         * @implements ICStore_GetLocalizedNameForTags_Request
+         * Constructs a new CSTAR_KeyValueQuery.
+         * @exports CSTAR_KeyValueQuery
+         * @classdesc Represents a CSTAR_KeyValueQuery.
+         * @implements ICSTAR_KeyValueQuery
          * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
+         * @param {ICSTAR_KeyValueQuery=} [properties] Properties to set
          */
-        function CStore_GetLocalizedNameForTags_Request(properties) {
-            this.tagids = [];
+        function CSTAR_KeyValueQuery(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -59,96 +60,1704 @@
         }
     
         /**
-         * CStore_GetLocalizedNameForTags_Request language.
-         * @member {string} language
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * CSTAR_KeyValueQuery key.
+         * @member {string} key
+         * @memberof CSTAR_KeyValueQuery
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.language = "";
+        CSTAR_KeyValueQuery.prototype.key = "";
     
         /**
-         * CStore_GetLocalizedNameForTags_Request tagids.
-         * @member {Array.<number>} tagids
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * CSTAR_KeyValueQuery value.
+         * @member {string} value
+         * @memberof CSTAR_KeyValueQuery
          * @instance
          */
-        CStore_GetLocalizedNameForTags_Request.prototype.tagids = $util.emptyArray;
+        CSTAR_KeyValueQuery.prototype.value = "";
     
         /**
-         * Creates a new CStore_GetLocalizedNameForTags_Request instance using the specified properties.
+         * Creates a new CSTAR_KeyValueQuery instance using the specified properties.
          * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_KeyValueQuery
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request instance
+         * @param {ICSTAR_KeyValueQuery=} [properties] Properties to set
+         * @returns {CSTAR_KeyValueQuery} CSTAR_KeyValueQuery instance
          */
-        CStore_GetLocalizedNameForTags_Request.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Request(properties);
+        CSTAR_KeyValueQuery.create = function create(properties) {
+            return new CSTAR_KeyValueQuery(properties);
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CSTAR_KeyValueQuery message. Does not implicitly {@link CSTAR_KeyValueQuery.verify|verify} messages.
          * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_KeyValueQuery
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICSTAR_KeyValueQuery} message CSTAR_KeyValueQuery message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encode = function encode(message, writer) {
+        CSTAR_KeyValueQuery.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.language != null && message.hasOwnProperty("language"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.language);
-            if (message.tagids != null && message.tagids.length)
-                for (var i = 0; i < message.tagids.length; ++i)
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.tagids[i]);
+            if (message.key != null && message.hasOwnProperty("key"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+            if (message.value != null && message.hasOwnProperty("value"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Request message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Request.verify|verify} messages.
+         * Encodes the specified CSTAR_KeyValueQuery message, length delimited. Does not implicitly {@link CSTAR_KeyValueQuery.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_KeyValueQuery
          * @static
-         * @param {ICStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request message or plain object to encode
+         * @param {ICSTAR_KeyValueQuery} message CSTAR_KeyValueQuery message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_GetLocalizedNameForTags_Request.encodeDelimited = function encodeDelimited(message, writer) {
+        CSTAR_KeyValueQuery.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer.
+         * Decodes a CSTAR_KeyValueQuery message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_KeyValueQuery
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CSTAR_KeyValueQuery} CSTAR_KeyValueQuery
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decode = function decode(reader, length) {
+        CSTAR_KeyValueQuery.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_KeyValueQuery();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.language = reader.string();
+                    message.key = reader.string();
                     break;
                 case 2:
-                    if (!(message.tagids && message.tagids.length))
-                        message.tagids = [];
+                    message.value = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_KeyValueQuery message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_KeyValueQuery
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_KeyValueQuery} CSTAR_KeyValueQuery
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_KeyValueQuery.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_KeyValueQuery message.
+         * @function verify
+         * @memberof CSTAR_KeyValueQuery
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_KeyValueQuery.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.key != null && message.hasOwnProperty("key"))
+                if (!$util.isString(message.key))
+                    return "key: string expected";
+            if (message.value != null && message.hasOwnProperty("value"))
+                if (!$util.isString(message.value))
+                    return "value: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_KeyValueQuery message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_KeyValueQuery
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_KeyValueQuery} CSTAR_KeyValueQuery
+         */
+        CSTAR_KeyValueQuery.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_KeyValueQuery)
+                return object;
+            var message = new $root.CSTAR_KeyValueQuery();
+            if (object.key != null)
+                message.key = String(object.key);
+            if (object.value != null)
+                message.value = String(object.value);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_KeyValueQuery message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_KeyValueQuery
+         * @static
+         * @param {CSTAR_KeyValueQuery} message CSTAR_KeyValueQuery
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_KeyValueQuery.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.key = "";
+                object.value = "";
+            }
+            if (message.key != null && message.hasOwnProperty("key"))
+                object.key = message.key;
+            if (message.value != null && message.hasOwnProperty("value"))
+                object.value = message.value;
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_KeyValueQuery to JSON.
+         * @function toJSON
+         * @memberof CSTAR_KeyValueQuery
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_KeyValueQuery.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_KeyValueQuery;
+    })();
+    
+    $root.CSTAR_GlyphQueryParams = (function() {
+    
+        /**
+         * Properties of a CSTAR_GlyphQueryParams.
+         * @exports ICSTAR_GlyphQueryParams
+         * @interface ICSTAR_GlyphQueryParams
+         * @property {number|Long|null} [bundle_id] CSTAR_GlyphQueryParams bundle_id
+         * @property {Array.<ICSTAR_KeyValueQuery>|null} [queries] CSTAR_GlyphQueryParams queries
+         */
+    
+        /**
+         * Constructs a new CSTAR_GlyphQueryParams.
+         * @exports CSTAR_GlyphQueryParams
+         * @classdesc Represents a CSTAR_GlyphQueryParams.
+         * @implements ICSTAR_GlyphQueryParams
+         * @constructor
+         * @param {ICSTAR_GlyphQueryParams=} [properties] Properties to set
+         */
+        function CSTAR_GlyphQueryParams(properties) {
+            this.queries = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_GlyphQueryParams bundle_id.
+         * @member {number|Long} bundle_id
+         * @memberof CSTAR_GlyphQueryParams
+         * @instance
+         */
+        CSTAR_GlyphQueryParams.prototype.bundle_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSTAR_GlyphQueryParams queries.
+         * @member {Array.<ICSTAR_KeyValueQuery>} queries
+         * @memberof CSTAR_GlyphQueryParams
+         * @instance
+         */
+        CSTAR_GlyphQueryParams.prototype.queries = $util.emptyArray;
+    
+        /**
+         * Creates a new CSTAR_GlyphQueryParams instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {ICSTAR_GlyphQueryParams=} [properties] Properties to set
+         * @returns {CSTAR_GlyphQueryParams} CSTAR_GlyphQueryParams instance
+         */
+        CSTAR_GlyphQueryParams.create = function create(properties) {
+            return new CSTAR_GlyphQueryParams(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_GlyphQueryParams message. Does not implicitly {@link CSTAR_GlyphQueryParams.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {ICSTAR_GlyphQueryParams} message CSTAR_GlyphQueryParams message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_GlyphQueryParams.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.bundle_id);
+            if (message.queries != null && message.queries.length)
+                for (var i = 0; i < message.queries.length; ++i)
+                    $root.CSTAR_KeyValueQuery.encode(message.queries[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_GlyphQueryParams message, length delimited. Does not implicitly {@link CSTAR_GlyphQueryParams.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {ICSTAR_GlyphQueryParams} message CSTAR_GlyphQueryParams message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_GlyphQueryParams.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_GlyphQueryParams message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_GlyphQueryParams} CSTAR_GlyphQueryParams
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_GlyphQueryParams.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_GlyphQueryParams();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.bundle_id = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.queries && message.queries.length))
+                        message.queries = [];
+                    message.queries.push($root.CSTAR_KeyValueQuery.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_GlyphQueryParams message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_GlyphQueryParams} CSTAR_GlyphQueryParams
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_GlyphQueryParams.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_GlyphQueryParams message.
+         * @function verify
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_GlyphQueryParams.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (!$util.isInteger(message.bundle_id) && !(message.bundle_id && $util.isInteger(message.bundle_id.low) && $util.isInteger(message.bundle_id.high)))
+                    return "bundle_id: integer|Long expected";
+            if (message.queries != null && message.hasOwnProperty("queries")) {
+                if (!Array.isArray(message.queries))
+                    return "queries: array expected";
+                for (var i = 0; i < message.queries.length; ++i) {
+                    var error = $root.CSTAR_KeyValueQuery.verify(message.queries[i]);
+                    if (error)
+                        return "queries." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_GlyphQueryParams message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_GlyphQueryParams} CSTAR_GlyphQueryParams
+         */
+        CSTAR_GlyphQueryParams.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_GlyphQueryParams)
+                return object;
+            var message = new $root.CSTAR_GlyphQueryParams();
+            if (object.bundle_id != null)
+                if ($util.Long)
+                    (message.bundle_id = $util.Long.fromValue(object.bundle_id)).unsigned = true;
+                else if (typeof object.bundle_id === "string")
+                    message.bundle_id = parseInt(object.bundle_id, 10);
+                else if (typeof object.bundle_id === "number")
+                    message.bundle_id = object.bundle_id;
+                else if (typeof object.bundle_id === "object")
+                    message.bundle_id = new $util.LongBits(object.bundle_id.low >>> 0, object.bundle_id.high >>> 0).toNumber(true);
+            if (object.queries) {
+                if (!Array.isArray(object.queries))
+                    throw TypeError(".CSTAR_GlyphQueryParams.queries: array expected");
+                message.queries = [];
+                for (var i = 0; i < object.queries.length; ++i) {
+                    if (typeof object.queries[i] !== "object")
+                        throw TypeError(".CSTAR_GlyphQueryParams.queries: object expected");
+                    message.queries[i] = $root.CSTAR_KeyValueQuery.fromObject(object.queries[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_GlyphQueryParams message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_GlyphQueryParams
+         * @static
+         * @param {CSTAR_GlyphQueryParams} message CSTAR_GlyphQueryParams
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_GlyphQueryParams.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.queries = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bundle_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bundle_id = options.longs === String ? "0" : 0;
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (typeof message.bundle_id === "number")
+                    object.bundle_id = options.longs === String ? String(message.bundle_id) : message.bundle_id;
+                else
+                    object.bundle_id = options.longs === String ? $util.Long.prototype.toString.call(message.bundle_id) : options.longs === Number ? new $util.LongBits(message.bundle_id.low >>> 0, message.bundle_id.high >>> 0).toNumber(true) : message.bundle_id;
+            if (message.queries && message.queries.length) {
+                object.queries = [];
+                for (var j = 0; j < message.queries.length; ++j)
+                    object.queries[j] = $root.CSTAR_KeyValueQuery.toObject(message.queries[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_GlyphQueryParams to JSON.
+         * @function toJSON
+         * @memberof CSTAR_GlyphQueryParams
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_GlyphQueryParams.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_GlyphQueryParams;
+    })();
+    
+    $root.CSTAR_ReadGlyphData_Request = (function() {
+    
+        /**
+         * Properties of a CSTAR_ReadGlyphData_Request.
+         * @exports ICSTAR_ReadGlyphData_Request
+         * @interface ICSTAR_ReadGlyphData_Request
+         * @property {ICSTAR_GlyphQueryParams|null} [query_params] CSTAR_ReadGlyphData_Request query_params
+         * @property {string|null} [last_modified_time_lower_limit] CSTAR_ReadGlyphData_Request last_modified_time_lower_limit
+         */
+    
+        /**
+         * Constructs a new CSTAR_ReadGlyphData_Request.
+         * @exports CSTAR_ReadGlyphData_Request
+         * @classdesc Represents a CSTAR_ReadGlyphData_Request.
+         * @implements ICSTAR_ReadGlyphData_Request
+         * @constructor
+         * @param {ICSTAR_ReadGlyphData_Request=} [properties] Properties to set
+         */
+        function CSTAR_ReadGlyphData_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_ReadGlyphData_Request query_params.
+         * @member {ICSTAR_GlyphQueryParams|null|undefined} query_params
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @instance
+         */
+        CSTAR_ReadGlyphData_Request.prototype.query_params = null;
+    
+        /**
+         * CSTAR_ReadGlyphData_Request last_modified_time_lower_limit.
+         * @member {string} last_modified_time_lower_limit
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @instance
+         */
+        CSTAR_ReadGlyphData_Request.prototype.last_modified_time_lower_limit = "";
+    
+        /**
+         * Creates a new CSTAR_ReadGlyphData_Request instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Request=} [properties] Properties to set
+         * @returns {CSTAR_ReadGlyphData_Request} CSTAR_ReadGlyphData_Request instance
+         */
+        CSTAR_ReadGlyphData_Request.create = function create(properties) {
+            return new CSTAR_ReadGlyphData_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_ReadGlyphData_Request message. Does not implicitly {@link CSTAR_ReadGlyphData_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Request} message CSTAR_ReadGlyphData_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_ReadGlyphData_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.query_params != null && message.hasOwnProperty("query_params"))
+                $root.CSTAR_GlyphQueryParams.encode(message.query_params, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.last_modified_time_lower_limit != null && message.hasOwnProperty("last_modified_time_lower_limit"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.last_modified_time_lower_limit);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_ReadGlyphData_Request message, length delimited. Does not implicitly {@link CSTAR_ReadGlyphData_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Request} message CSTAR_ReadGlyphData_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_ReadGlyphData_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_ReadGlyphData_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_ReadGlyphData_Request} CSTAR_ReadGlyphData_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_ReadGlyphData_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_ReadGlyphData_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.query_params = $root.CSTAR_GlyphQueryParams.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.last_modified_time_lower_limit = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_ReadGlyphData_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_ReadGlyphData_Request} CSTAR_ReadGlyphData_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_ReadGlyphData_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_ReadGlyphData_Request message.
+         * @function verify
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_ReadGlyphData_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.query_params != null && message.hasOwnProperty("query_params")) {
+                var error = $root.CSTAR_GlyphQueryParams.verify(message.query_params);
+                if (error)
+                    return "query_params." + error;
+            }
+            if (message.last_modified_time_lower_limit != null && message.hasOwnProperty("last_modified_time_lower_limit"))
+                if (!$util.isString(message.last_modified_time_lower_limit))
+                    return "last_modified_time_lower_limit: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_ReadGlyphData_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_ReadGlyphData_Request} CSTAR_ReadGlyphData_Request
+         */
+        CSTAR_ReadGlyphData_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_ReadGlyphData_Request)
+                return object;
+            var message = new $root.CSTAR_ReadGlyphData_Request();
+            if (object.query_params != null) {
+                if (typeof object.query_params !== "object")
+                    throw TypeError(".CSTAR_ReadGlyphData_Request.query_params: object expected");
+                message.query_params = $root.CSTAR_GlyphQueryParams.fromObject(object.query_params);
+            }
+            if (object.last_modified_time_lower_limit != null)
+                message.last_modified_time_lower_limit = String(object.last_modified_time_lower_limit);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_ReadGlyphData_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @static
+         * @param {CSTAR_ReadGlyphData_Request} message CSTAR_ReadGlyphData_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_ReadGlyphData_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.query_params = null;
+                object.last_modified_time_lower_limit = "";
+            }
+            if (message.query_params != null && message.hasOwnProperty("query_params"))
+                object.query_params = $root.CSTAR_GlyphQueryParams.toObject(message.query_params, options);
+            if (message.last_modified_time_lower_limit != null && message.hasOwnProperty("last_modified_time_lower_limit"))
+                object.last_modified_time_lower_limit = message.last_modified_time_lower_limit;
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_ReadGlyphData_Request to JSON.
+         * @function toJSON
+         * @memberof CSTAR_ReadGlyphData_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_ReadGlyphData_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_ReadGlyphData_Request;
+    })();
+    
+    $root.CSTAR_GlyphData = (function() {
+    
+        /**
+         * Properties of a CSTAR_GlyphData.
+         * @exports ICSTAR_GlyphData
+         * @interface ICSTAR_GlyphData
+         * @property {Uint8Array|null} [glyph_guid] CSTAR_GlyphData glyph_guid
+         * @property {string|null} [glyph_last_modified] CSTAR_GlyphData glyph_last_modified
+         * @property {string|null} [glyph_json_data] CSTAR_GlyphData glyph_json_data
+         */
+    
+        /**
+         * Constructs a new CSTAR_GlyphData.
+         * @exports CSTAR_GlyphData
+         * @classdesc Represents a CSTAR_GlyphData.
+         * @implements ICSTAR_GlyphData
+         * @constructor
+         * @param {ICSTAR_GlyphData=} [properties] Properties to set
+         */
+        function CSTAR_GlyphData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_GlyphData glyph_guid.
+         * @member {Uint8Array} glyph_guid
+         * @memberof CSTAR_GlyphData
+         * @instance
+         */
+        CSTAR_GlyphData.prototype.glyph_guid = $util.newBuffer([]);
+    
+        /**
+         * CSTAR_GlyphData glyph_last_modified.
+         * @member {string} glyph_last_modified
+         * @memberof CSTAR_GlyphData
+         * @instance
+         */
+        CSTAR_GlyphData.prototype.glyph_last_modified = "";
+    
+        /**
+         * CSTAR_GlyphData glyph_json_data.
+         * @member {string} glyph_json_data
+         * @memberof CSTAR_GlyphData
+         * @instance
+         */
+        CSTAR_GlyphData.prototype.glyph_json_data = "";
+    
+        /**
+         * Creates a new CSTAR_GlyphData instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {ICSTAR_GlyphData=} [properties] Properties to set
+         * @returns {CSTAR_GlyphData} CSTAR_GlyphData instance
+         */
+        CSTAR_GlyphData.create = function create(properties) {
+            return new CSTAR_GlyphData(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_GlyphData message. Does not implicitly {@link CSTAR_GlyphData.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {ICSTAR_GlyphData} message CSTAR_GlyphData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_GlyphData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.glyph_guid != null && message.hasOwnProperty("glyph_guid"))
+                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.glyph_guid);
+            if (message.glyph_last_modified != null && message.hasOwnProperty("glyph_last_modified"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.glyph_last_modified);
+            if (message.glyph_json_data != null && message.hasOwnProperty("glyph_json_data"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.glyph_json_data);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_GlyphData message, length delimited. Does not implicitly {@link CSTAR_GlyphData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {ICSTAR_GlyphData} message CSTAR_GlyphData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_GlyphData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_GlyphData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_GlyphData} CSTAR_GlyphData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_GlyphData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_GlyphData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.glyph_guid = reader.bytes();
+                    break;
+                case 2:
+                    message.glyph_last_modified = reader.string();
+                    break;
+                case 3:
+                    message.glyph_json_data = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_GlyphData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_GlyphData} CSTAR_GlyphData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_GlyphData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_GlyphData message.
+         * @function verify
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_GlyphData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.glyph_guid != null && message.hasOwnProperty("glyph_guid"))
+                if (!(message.glyph_guid && typeof message.glyph_guid.length === "number" || $util.isString(message.glyph_guid)))
+                    return "glyph_guid: buffer expected";
+            if (message.glyph_last_modified != null && message.hasOwnProperty("glyph_last_modified"))
+                if (!$util.isString(message.glyph_last_modified))
+                    return "glyph_last_modified: string expected";
+            if (message.glyph_json_data != null && message.hasOwnProperty("glyph_json_data"))
+                if (!$util.isString(message.glyph_json_data))
+                    return "glyph_json_data: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_GlyphData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_GlyphData} CSTAR_GlyphData
+         */
+        CSTAR_GlyphData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_GlyphData)
+                return object;
+            var message = new $root.CSTAR_GlyphData();
+            if (object.glyph_guid != null)
+                if (typeof object.glyph_guid === "string")
+                    $util.base64.decode(object.glyph_guid, message.glyph_guid = $util.newBuffer($util.base64.length(object.glyph_guid)), 0);
+                else if (object.glyph_guid.length)
+                    message.glyph_guid = object.glyph_guid;
+            if (object.glyph_last_modified != null)
+                message.glyph_last_modified = String(object.glyph_last_modified);
+            if (object.glyph_json_data != null)
+                message.glyph_json_data = String(object.glyph_json_data);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_GlyphData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_GlyphData
+         * @static
+         * @param {CSTAR_GlyphData} message CSTAR_GlyphData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_GlyphData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.glyph_guid = "";
+                else {
+                    object.glyph_guid = [];
+                    if (options.bytes !== Array)
+                        object.glyph_guid = $util.newBuffer(object.glyph_guid);
+                }
+                object.glyph_last_modified = "";
+                object.glyph_json_data = "";
+            }
+            if (message.glyph_guid != null && message.hasOwnProperty("glyph_guid"))
+                object.glyph_guid = options.bytes === String ? $util.base64.encode(message.glyph_guid, 0, message.glyph_guid.length) : options.bytes === Array ? Array.prototype.slice.call(message.glyph_guid) : message.glyph_guid;
+            if (message.glyph_last_modified != null && message.hasOwnProperty("glyph_last_modified"))
+                object.glyph_last_modified = message.glyph_last_modified;
+            if (message.glyph_json_data != null && message.hasOwnProperty("glyph_json_data"))
+                object.glyph_json_data = message.glyph_json_data;
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_GlyphData to JSON.
+         * @function toJSON
+         * @memberof CSTAR_GlyphData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_GlyphData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_GlyphData;
+    })();
+    
+    $root.CSTAR_WriteGlyphData_Request = (function() {
+    
+        /**
+         * Properties of a CSTAR_WriteGlyphData_Request.
+         * @exports ICSTAR_WriteGlyphData_Request
+         * @interface ICSTAR_WriteGlyphData_Request
+         * @property {number|Long|null} [bundle_id] CSTAR_WriteGlyphData_Request bundle_id
+         * @property {Array.<ICSTAR_GlyphData>|null} [glyph_data] CSTAR_WriteGlyphData_Request glyph_data
+         */
+    
+        /**
+         * Constructs a new CSTAR_WriteGlyphData_Request.
+         * @exports CSTAR_WriteGlyphData_Request
+         * @classdesc Represents a CSTAR_WriteGlyphData_Request.
+         * @implements ICSTAR_WriteGlyphData_Request
+         * @constructor
+         * @param {ICSTAR_WriteGlyphData_Request=} [properties] Properties to set
+         */
+        function CSTAR_WriteGlyphData_Request(properties) {
+            this.glyph_data = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_WriteGlyphData_Request bundle_id.
+         * @member {number|Long} bundle_id
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @instance
+         */
+        CSTAR_WriteGlyphData_Request.prototype.bundle_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSTAR_WriteGlyphData_Request glyph_data.
+         * @member {Array.<ICSTAR_GlyphData>} glyph_data
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @instance
+         */
+        CSTAR_WriteGlyphData_Request.prototype.glyph_data = $util.emptyArray;
+    
+        /**
+         * Creates a new CSTAR_WriteGlyphData_Request instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Request=} [properties] Properties to set
+         * @returns {CSTAR_WriteGlyphData_Request} CSTAR_WriteGlyphData_Request instance
+         */
+        CSTAR_WriteGlyphData_Request.create = function create(properties) {
+            return new CSTAR_WriteGlyphData_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_WriteGlyphData_Request message. Does not implicitly {@link CSTAR_WriteGlyphData_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Request} message CSTAR_WriteGlyphData_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_WriteGlyphData_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.bundle_id);
+            if (message.glyph_data != null && message.glyph_data.length)
+                for (var i = 0; i < message.glyph_data.length; ++i)
+                    $root.CSTAR_GlyphData.encode(message.glyph_data[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_WriteGlyphData_Request message, length delimited. Does not implicitly {@link CSTAR_WriteGlyphData_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Request} message CSTAR_WriteGlyphData_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_WriteGlyphData_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_WriteGlyphData_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_WriteGlyphData_Request} CSTAR_WriteGlyphData_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_WriteGlyphData_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_WriteGlyphData_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.bundle_id = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.glyph_data && message.glyph_data.length))
+                        message.glyph_data = [];
+                    message.glyph_data.push($root.CSTAR_GlyphData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_WriteGlyphData_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_WriteGlyphData_Request} CSTAR_WriteGlyphData_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_WriteGlyphData_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_WriteGlyphData_Request message.
+         * @function verify
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_WriteGlyphData_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (!$util.isInteger(message.bundle_id) && !(message.bundle_id && $util.isInteger(message.bundle_id.low) && $util.isInteger(message.bundle_id.high)))
+                    return "bundle_id: integer|Long expected";
+            if (message.glyph_data != null && message.hasOwnProperty("glyph_data")) {
+                if (!Array.isArray(message.glyph_data))
+                    return "glyph_data: array expected";
+                for (var i = 0; i < message.glyph_data.length; ++i) {
+                    var error = $root.CSTAR_GlyphData.verify(message.glyph_data[i]);
+                    if (error)
+                        return "glyph_data." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_WriteGlyphData_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_WriteGlyphData_Request} CSTAR_WriteGlyphData_Request
+         */
+        CSTAR_WriteGlyphData_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_WriteGlyphData_Request)
+                return object;
+            var message = new $root.CSTAR_WriteGlyphData_Request();
+            if (object.bundle_id != null)
+                if ($util.Long)
+                    (message.bundle_id = $util.Long.fromValue(object.bundle_id)).unsigned = true;
+                else if (typeof object.bundle_id === "string")
+                    message.bundle_id = parseInt(object.bundle_id, 10);
+                else if (typeof object.bundle_id === "number")
+                    message.bundle_id = object.bundle_id;
+                else if (typeof object.bundle_id === "object")
+                    message.bundle_id = new $util.LongBits(object.bundle_id.low >>> 0, object.bundle_id.high >>> 0).toNumber(true);
+            if (object.glyph_data) {
+                if (!Array.isArray(object.glyph_data))
+                    throw TypeError(".CSTAR_WriteGlyphData_Request.glyph_data: array expected");
+                message.glyph_data = [];
+                for (var i = 0; i < object.glyph_data.length; ++i) {
+                    if (typeof object.glyph_data[i] !== "object")
+                        throw TypeError(".CSTAR_WriteGlyphData_Request.glyph_data: object expected");
+                    message.glyph_data[i] = $root.CSTAR_GlyphData.fromObject(object.glyph_data[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_WriteGlyphData_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @static
+         * @param {CSTAR_WriteGlyphData_Request} message CSTAR_WriteGlyphData_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_WriteGlyphData_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.glyph_data = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bundle_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bundle_id = options.longs === String ? "0" : 0;
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (typeof message.bundle_id === "number")
+                    object.bundle_id = options.longs === String ? String(message.bundle_id) : message.bundle_id;
+                else
+                    object.bundle_id = options.longs === String ? $util.Long.prototype.toString.call(message.bundle_id) : options.longs === Number ? new $util.LongBits(message.bundle_id.low >>> 0, message.bundle_id.high >>> 0).toNumber(true) : message.bundle_id;
+            if (message.glyph_data && message.glyph_data.length) {
+                object.glyph_data = [];
+                for (var j = 0; j < message.glyph_data.length; ++j)
+                    object.glyph_data[j] = $root.CSTAR_GlyphData.toObject(message.glyph_data[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_WriteGlyphData_Request to JSON.
+         * @function toJSON
+         * @memberof CSTAR_WriteGlyphData_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_WriteGlyphData_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_WriteGlyphData_Request;
+    })();
+    
+    $root.CSTAR_Request = (function() {
+    
+        /**
+         * Properties of a CSTAR_Request.
+         * @exports ICSTAR_Request
+         * @interface ICSTAR_Request
+         * @property {ICSTAR_ReadGlyphData_Request|null} [read_glyph_data] CSTAR_Request read_glyph_data
+         * @property {ICSTAR_WriteGlyphData_Request|null} [write_glyph_data] CSTAR_Request write_glyph_data
+         */
+    
+        /**
+         * Constructs a new CSTAR_Request.
+         * @exports CSTAR_Request
+         * @classdesc Represents a CSTAR_Request.
+         * @implements ICSTAR_Request
+         * @constructor
+         * @param {ICSTAR_Request=} [properties] Properties to set
+         */
+        function CSTAR_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_Request read_glyph_data.
+         * @member {ICSTAR_ReadGlyphData_Request|null|undefined} read_glyph_data
+         * @memberof CSTAR_Request
+         * @instance
+         */
+        CSTAR_Request.prototype.read_glyph_data = null;
+    
+        /**
+         * CSTAR_Request write_glyph_data.
+         * @member {ICSTAR_WriteGlyphData_Request|null|undefined} write_glyph_data
+         * @memberof CSTAR_Request
+         * @instance
+         */
+        CSTAR_Request.prototype.write_glyph_data = null;
+    
+        /**
+         * Creates a new CSTAR_Request instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_Request
+         * @static
+         * @param {ICSTAR_Request=} [properties] Properties to set
+         * @returns {CSTAR_Request} CSTAR_Request instance
+         */
+        CSTAR_Request.create = function create(properties) {
+            return new CSTAR_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_Request message. Does not implicitly {@link CSTAR_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_Request
+         * @static
+         * @param {ICSTAR_Request} message CSTAR_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data"))
+                $root.CSTAR_ReadGlyphData_Request.encode(message.read_glyph_data, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data"))
+                $root.CSTAR_WriteGlyphData_Request.encode(message.write_glyph_data, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_Request message, length delimited. Does not implicitly {@link CSTAR_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_Request
+         * @static
+         * @param {ICSTAR_Request} message CSTAR_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_Request} CSTAR_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.read_glyph_data = $root.CSTAR_ReadGlyphData_Request.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.write_glyph_data = $root.CSTAR_WriteGlyphData_Request.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_Request} CSTAR_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_Request message.
+         * @function verify
+         * @memberof CSTAR_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data")) {
+                var error = $root.CSTAR_ReadGlyphData_Request.verify(message.read_glyph_data);
+                if (error)
+                    return "read_glyph_data." + error;
+            }
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data")) {
+                var error = $root.CSTAR_WriteGlyphData_Request.verify(message.write_glyph_data);
+                if (error)
+                    return "write_glyph_data." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_Request} CSTAR_Request
+         */
+        CSTAR_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_Request)
+                return object;
+            var message = new $root.CSTAR_Request();
+            if (object.read_glyph_data != null) {
+                if (typeof object.read_glyph_data !== "object")
+                    throw TypeError(".CSTAR_Request.read_glyph_data: object expected");
+                message.read_glyph_data = $root.CSTAR_ReadGlyphData_Request.fromObject(object.read_glyph_data);
+            }
+            if (object.write_glyph_data != null) {
+                if (typeof object.write_glyph_data !== "object")
+                    throw TypeError(".CSTAR_Request.write_glyph_data: object expected");
+                message.write_glyph_data = $root.CSTAR_WriteGlyphData_Request.fromObject(object.write_glyph_data);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_Request
+         * @static
+         * @param {CSTAR_Request} message CSTAR_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.read_glyph_data = null;
+                object.write_glyph_data = null;
+            }
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data"))
+                object.read_glyph_data = $root.CSTAR_ReadGlyphData_Request.toObject(message.read_glyph_data, options);
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data"))
+                object.write_glyph_data = $root.CSTAR_WriteGlyphData_Request.toObject(message.write_glyph_data, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_Request to JSON.
+         * @function toJSON
+         * @memberof CSTAR_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_Request;
+    })();
+    
+    $root.CSTAR_ReadGlyphData_Response = (function() {
+    
+        /**
+         * Properties of a CSTAR_ReadGlyphData_Response.
+         * @exports ICSTAR_ReadGlyphData_Response
+         * @interface ICSTAR_ReadGlyphData_Response
+         * @property {number|Long|null} [bundle_id] CSTAR_ReadGlyphData_Response bundle_id
+         * @property {Array.<ICSTAR_GlyphData>|null} [glyph_data] CSTAR_ReadGlyphData_Response glyph_data
+         */
+    
+        /**
+         * Constructs a new CSTAR_ReadGlyphData_Response.
+         * @exports CSTAR_ReadGlyphData_Response
+         * @classdesc Represents a CSTAR_ReadGlyphData_Response.
+         * @implements ICSTAR_ReadGlyphData_Response
+         * @constructor
+         * @param {ICSTAR_ReadGlyphData_Response=} [properties] Properties to set
+         */
+        function CSTAR_ReadGlyphData_Response(properties) {
+            this.glyph_data = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_ReadGlyphData_Response bundle_id.
+         * @member {number|Long} bundle_id
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @instance
+         */
+        CSTAR_ReadGlyphData_Response.prototype.bundle_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSTAR_ReadGlyphData_Response glyph_data.
+         * @member {Array.<ICSTAR_GlyphData>} glyph_data
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @instance
+         */
+        CSTAR_ReadGlyphData_Response.prototype.glyph_data = $util.emptyArray;
+    
+        /**
+         * Creates a new CSTAR_ReadGlyphData_Response instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Response=} [properties] Properties to set
+         * @returns {CSTAR_ReadGlyphData_Response} CSTAR_ReadGlyphData_Response instance
+         */
+        CSTAR_ReadGlyphData_Response.create = function create(properties) {
+            return new CSTAR_ReadGlyphData_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_ReadGlyphData_Response message. Does not implicitly {@link CSTAR_ReadGlyphData_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Response} message CSTAR_ReadGlyphData_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_ReadGlyphData_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.bundle_id);
+            if (message.glyph_data != null && message.glyph_data.length)
+                for (var i = 0; i < message.glyph_data.length; ++i)
+                    $root.CSTAR_GlyphData.encode(message.glyph_data[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_ReadGlyphData_Response message, length delimited. Does not implicitly {@link CSTAR_ReadGlyphData_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {ICSTAR_ReadGlyphData_Response} message CSTAR_ReadGlyphData_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_ReadGlyphData_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_ReadGlyphData_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_ReadGlyphData_Response} CSTAR_ReadGlyphData_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_ReadGlyphData_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_ReadGlyphData_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.bundle_id = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.glyph_data && message.glyph_data.length))
+                        message.glyph_data = [];
+                    message.glyph_data.push($root.CSTAR_GlyphData.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSTAR_ReadGlyphData_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSTAR_ReadGlyphData_Response} CSTAR_ReadGlyphData_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_ReadGlyphData_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSTAR_ReadGlyphData_Response message.
+         * @function verify
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSTAR_ReadGlyphData_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (!$util.isInteger(message.bundle_id) && !(message.bundle_id && $util.isInteger(message.bundle_id.low) && $util.isInteger(message.bundle_id.high)))
+                    return "bundle_id: integer|Long expected";
+            if (message.glyph_data != null && message.hasOwnProperty("glyph_data")) {
+                if (!Array.isArray(message.glyph_data))
+                    return "glyph_data: array expected";
+                for (var i = 0; i < message.glyph_data.length; ++i) {
+                    var error = $root.CSTAR_GlyphData.verify(message.glyph_data[i]);
+                    if (error)
+                        return "glyph_data." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSTAR_ReadGlyphData_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_ReadGlyphData_Response} CSTAR_ReadGlyphData_Response
+         */
+        CSTAR_ReadGlyphData_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_ReadGlyphData_Response)
+                return object;
+            var message = new $root.CSTAR_ReadGlyphData_Response();
+            if (object.bundle_id != null)
+                if ($util.Long)
+                    (message.bundle_id = $util.Long.fromValue(object.bundle_id)).unsigned = true;
+                else if (typeof object.bundle_id === "string")
+                    message.bundle_id = parseInt(object.bundle_id, 10);
+                else if (typeof object.bundle_id === "number")
+                    message.bundle_id = object.bundle_id;
+                else if (typeof object.bundle_id === "object")
+                    message.bundle_id = new $util.LongBits(object.bundle_id.low >>> 0, object.bundle_id.high >>> 0).toNumber(true);
+            if (object.glyph_data) {
+                if (!Array.isArray(object.glyph_data))
+                    throw TypeError(".CSTAR_ReadGlyphData_Response.glyph_data: array expected");
+                message.glyph_data = [];
+                for (var i = 0; i < object.glyph_data.length; ++i) {
+                    if (typeof object.glyph_data[i] !== "object")
+                        throw TypeError(".CSTAR_ReadGlyphData_Response.glyph_data: object expected");
+                    message.glyph_data[i] = $root.CSTAR_GlyphData.fromObject(object.glyph_data[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSTAR_ReadGlyphData_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @static
+         * @param {CSTAR_ReadGlyphData_Response} message CSTAR_ReadGlyphData_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSTAR_ReadGlyphData_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.glyph_data = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bundle_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bundle_id = options.longs === String ? "0" : 0;
+            if (message.bundle_id != null && message.hasOwnProperty("bundle_id"))
+                if (typeof message.bundle_id === "number")
+                    object.bundle_id = options.longs === String ? String(message.bundle_id) : message.bundle_id;
+                else
+                    object.bundle_id = options.longs === String ? $util.Long.prototype.toString.call(message.bundle_id) : options.longs === Number ? new $util.LongBits(message.bundle_id.low >>> 0, message.bundle_id.high >>> 0).toNumber(true) : message.bundle_id;
+            if (message.glyph_data && message.glyph_data.length) {
+                object.glyph_data = [];
+                for (var j = 0; j < message.glyph_data.length; ++j)
+                    object.glyph_data[j] = $root.CSTAR_GlyphData.toObject(message.glyph_data[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSTAR_ReadGlyphData_Response to JSON.
+         * @function toJSON
+         * @memberof CSTAR_ReadGlyphData_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSTAR_ReadGlyphData_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSTAR_ReadGlyphData_Response;
+    })();
+    
+    $root.CSTAR_WriteGlyphData_Response = (function() {
+    
+        /**
+         * Properties of a CSTAR_WriteGlyphData_Response.
+         * @exports ICSTAR_WriteGlyphData_Response
+         * @interface ICSTAR_WriteGlyphData_Response
+         * @property {Array.<E_STAR_GlyphWriteResult>|null} [result] CSTAR_WriteGlyphData_Response result
+         */
+    
+        /**
+         * Constructs a new CSTAR_WriteGlyphData_Response.
+         * @exports CSTAR_WriteGlyphData_Response
+         * @classdesc Represents a CSTAR_WriteGlyphData_Response.
+         * @implements ICSTAR_WriteGlyphData_Response
+         * @constructor
+         * @param {ICSTAR_WriteGlyphData_Response=} [properties] Properties to set
+         */
+        function CSTAR_WriteGlyphData_Response(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSTAR_WriteGlyphData_Response result.
+         * @member {Array.<E_STAR_GlyphWriteResult>} result
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @instance
+         */
+        CSTAR_WriteGlyphData_Response.prototype.result = $util.emptyArray;
+    
+        /**
+         * Creates a new CSTAR_WriteGlyphData_Response instance using the specified properties.
+         * @function create
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Response=} [properties] Properties to set
+         * @returns {CSTAR_WriteGlyphData_Response} CSTAR_WriteGlyphData_Response instance
+         */
+        CSTAR_WriteGlyphData_Response.create = function create(properties) {
+            return new CSTAR_WriteGlyphData_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSTAR_WriteGlyphData_Response message. Does not implicitly {@link CSTAR_WriteGlyphData_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Response} message CSTAR_WriteGlyphData_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_WriteGlyphData_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSTAR_WriteGlyphData_Response message, length delimited. Does not implicitly {@link CSTAR_WriteGlyphData_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @static
+         * @param {ICSTAR_WriteGlyphData_Response} message CSTAR_WriteGlyphData_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSTAR_WriteGlyphData_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSTAR_WriteGlyphData_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSTAR_WriteGlyphData_Response} CSTAR_WriteGlyphData_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSTAR_WriteGlyphData_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_WriteGlyphData_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
                     if ((tag & 7) === 2) {
                         var end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2)
-                            message.tagids.push(reader.uint32());
+                            message.result.push(reader.int32());
                     } else
-                        message.tagids.push(reader.uint32());
+                        message.result.push(reader.int32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -159,738 +1768,145 @@
         };
     
         /**
-         * Decodes a CStore_GetLocalizedNameForTags_Request message from the specified reader or buffer, length delimited.
+         * Decodes a CSTAR_WriteGlyphData_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_WriteGlyphData_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
+         * @returns {CSTAR_WriteGlyphData_Response} CSTAR_WriteGlyphData_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_GetLocalizedNameForTags_Request.decodeDelimited = function decodeDelimited(reader) {
+        CSTAR_WriteGlyphData_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_GetLocalizedNameForTags_Request message.
+         * Verifies a CSTAR_WriteGlyphData_Response message.
          * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Request
+         * @memberof CSTAR_WriteGlyphData_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_GetLocalizedNameForTags_Request.verify = function verify(message) {
+        CSTAR_WriteGlyphData_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.language != null && message.hasOwnProperty("language"))
-                if (!$util.isString(message.language))
-                    return "language: string expected";
-            if (message.tagids != null && message.hasOwnProperty("tagids")) {
-                if (!Array.isArray(message.tagids))
-                    return "tagids: array expected";
-                for (var i = 0; i < message.tagids.length; ++i)
-                    if (!$util.isInteger(message.tagids[i]))
-                        return "tagids: integer[] expected";
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetLocalizedNameForTags_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Request} CStore_GetLocalizedNameForTags_Request
-         */
-        CStore_GetLocalizedNameForTags_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Request)
-                return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Request();
-            if (object.language != null)
-                message.language = String(object.language);
-            if (object.tagids) {
-                if (!Array.isArray(object.tagids))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Request.tagids: array expected");
-                message.tagids = [];
-                for (var i = 0; i < object.tagids.length; ++i)
-                    message.tagids[i] = object.tagids[i] >>> 0;
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Request
-         * @static
-         * @param {CStore_GetLocalizedNameForTags_Request} message CStore_GetLocalizedNameForTags_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetLocalizedNameForTags_Request.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tagids = [];
-            if (options.defaults)
-                object.language = "";
-            if (message.language != null && message.hasOwnProperty("language"))
-                object.language = message.language;
-            if (message.tagids && message.tagids.length) {
-                object.tagids = [];
-                for (var j = 0; j < message.tagids.length; ++j)
-                    object.tagids[j] = message.tagids[j];
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetLocalizedNameForTags_Request to JSON.
-         * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetLocalizedNameForTags_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetLocalizedNameForTags_Request;
-    })();
-    
-    $root.CStore_GetLocalizedNameForTags_Response = (function() {
-    
-        /**
-         * Properties of a CStore_GetLocalizedNameForTags_Response.
-         * @exports ICStore_GetLocalizedNameForTags_Response
-         * @interface ICStore_GetLocalizedNameForTags_Response
-         * @property {Array.<CStore_GetLocalizedNameForTags_Response.ITag>|null} [tags] CStore_GetLocalizedNameForTags_Response tags
-         */
-    
-        /**
-         * Constructs a new CStore_GetLocalizedNameForTags_Response.
-         * @exports CStore_GetLocalizedNameForTags_Response
-         * @classdesc Represents a CStore_GetLocalizedNameForTags_Response.
-         * @implements ICStore_GetLocalizedNameForTags_Response
-         * @constructor
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
-         */
-        function CStore_GetLocalizedNameForTags_Response(properties) {
-            this.tags = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_GetLocalizedNameForTags_Response tags.
-         * @member {Array.<CStore_GetLocalizedNameForTags_Response.ITag>} tags
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @instance
-         */
-        CStore_GetLocalizedNameForTags_Response.prototype.tags = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_GetLocalizedNameForTags_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response=} [properties] Properties to set
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response instance
-         */
-        CStore_GetLocalizedNameForTags_Response.create = function create(properties) {
-            return new CStore_GetLocalizedNameForTags_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetLocalizedNameForTags_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tags != null && message.tags.length)
-                for (var i = 0; i < message.tags.length; ++i)
-                    $root.CStore_GetLocalizedNameForTags_Response.Tag.encode(message.tags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetLocalizedNameForTags_Response message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {ICStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetLocalizedNameForTags_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetLocalizedNameForTags_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.tags && message.tags.length))
-                        message.tags = [];
-                    message.tags.push($root.CStore_GetLocalizedNameForTags_Response.Tag.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetLocalizedNameForTags_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetLocalizedNameForTags_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetLocalizedNameForTags_Response message.
-         * @function verify
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetLocalizedNameForTags_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tags != null && message.hasOwnProperty("tags")) {
-                if (!Array.isArray(message.tags))
-                    return "tags: array expected";
-                for (var i = 0; i < message.tags.length; ++i) {
-                    var error = $root.CStore_GetLocalizedNameForTags_Response.Tag.verify(message.tags[i]);
-                    if (error)
-                        return "tags." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetLocalizedNameForTags_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetLocalizedNameForTags_Response} CStore_GetLocalizedNameForTags_Response
-         */
-        CStore_GetLocalizedNameForTags_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetLocalizedNameForTags_Response)
-                return object;
-            var message = new $root.CStore_GetLocalizedNameForTags_Response();
-            if (object.tags) {
-                if (!Array.isArray(object.tags))
-                    throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: array expected");
-                message.tags = [];
-                for (var i = 0; i < object.tags.length; ++i) {
-                    if (typeof object.tags[i] !== "object")
-                        throw TypeError(".CStore_GetLocalizedNameForTags_Response.tags: object expected");
-                    message.tags[i] = $root.CStore_GetLocalizedNameForTags_Response.Tag.fromObject(object.tags[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetLocalizedNameForTags_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @static
-         * @param {CStore_GetLocalizedNameForTags_Response} message CStore_GetLocalizedNameForTags_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetLocalizedNameForTags_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tags = [];
-            if (message.tags && message.tags.length) {
-                object.tags = [];
-                for (var j = 0; j < message.tags.length; ++j)
-                    object.tags[j] = $root.CStore_GetLocalizedNameForTags_Response.Tag.toObject(message.tags[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetLocalizedNameForTags_Response to JSON.
-         * @function toJSON
-         * @memberof CStore_GetLocalizedNameForTags_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetLocalizedNameForTags_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_GetLocalizedNameForTags_Response.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [english_name] Tag english_name
-             * @property {string|null} [name] Tag name
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_GetLocalizedNameForTags_Response
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag english_name.
-             * @member {string} english_name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.english_name = "";
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag=} [properties] Properties to set
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.english_name);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_GetLocalizedNameForTags_Response.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.english_name = reader.string();
-                        break;
-                    case 3:
-                        message.name = reader.string();
-                        break;
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i)
+                    switch (message.result[i]) {
                     default:
-                        reader.skipType(tag & 7);
+                        return "result: enum value[] expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
                         break;
                     }
-                }
-                return message;
-            };
+            }
+            return null;
+        };
     
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    if (!$util.isString(message.english_name))
-                        return "english_name: string expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_GetLocalizedNameForTags_Response.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_GetLocalizedNameForTags_Response.Tag)
-                    return object;
-                var message = new $root.CStore_GetLocalizedNameForTags_Response.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.english_name != null)
-                    message.english_name = String(object.english_name);
-                if (object.name != null)
-                    message.name = String(object.name);
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @static
-             * @param {CStore_GetLocalizedNameForTags_Response.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.english_name = "";
-                    object.name = "";
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.english_name != null && message.hasOwnProperty("english_name"))
-                    object.english_name = message.english_name;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
+        /**
+         * Creates a CSTAR_WriteGlyphData_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSTAR_WriteGlyphData_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSTAR_WriteGlyphData_Response} CSTAR_WriteGlyphData_Response
+         */
+        CSTAR_WriteGlyphData_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_WriteGlyphData_Response)
                 return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_GetLocalizedNameForTags_Response.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_GetLocalizedNameForTags_Response;
-    })();
-    
-    $root.CStore_GetStorePreferences_Request = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Request.
-         * @exports ICStore_GetStorePreferences_Request
-         * @interface ICStore_GetStorePreferences_Request
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Request.
-         * @exports CStore_GetStorePreferences_Request
-         * @classdesc Represents a CStore_GetStorePreferences_Request.
-         * @implements ICStore_GetStorePreferences_Request
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Request instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request instance
-         */
-        CStore_GetStorePreferences_Request.create = function create(properties) {
-            return new CStore_GetStorePreferences_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
+            var message = new $root.CSTAR_WriteGlyphData_Response();
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".CSTAR_WriteGlyphData_Response.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i)
+                    switch (object.result[i]) {
+                    default:
+                    case "k_E_STAR_GlyphWriteResult_Success":
+                    case 0:
+                        message.result[i] = 0;
+                        break;
+                    case "k_E_STAR_GlyphWriteResult_InvalidMessage":
+                    case 1:
+                        message.result[i] = 1;
+                        break;
+                    case "k_E_STAR_GlyphWriteResult_InvalidJSON":
+                    case 2:
+                        message.result[i] = 2;
+                        break;
+                    case "k_E_STAR_GlyphWriteResult_SQLError":
+                    case 3:
+                        message.result[i] = 3;
+                        break;
+                    }
             }
             return message;
         };
     
         /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Request message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         */
-        CStore_GetStorePreferences_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Request)
-                return object;
-            return new $root.CStore_GetStorePreferences_Request();
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Request message. Also converts values to other types if specified.
+         * Creates a plain object from a CSTAR_WriteGlyphData_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_GetStorePreferences_Request
+         * @memberof CSTAR_WriteGlyphData_Response
          * @static
-         * @param {CStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request
+         * @param {CSTAR_WriteGlyphData_Response} message CSTAR_WriteGlyphData_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_GetStorePreferences_Request.toObject = function toObject() {
-            return {};
+        CSTAR_WriteGlyphData_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = options.enums === String ? $root.E_STAR_GlyphWriteResult[message.result[j]] : message.result[j];
+            }
+            return object;
         };
     
         /**
-         * Converts this CStore_GetStorePreferences_Request to JSON.
+         * Converts this CSTAR_WriteGlyphData_Response to JSON.
          * @function toJSON
-         * @memberof CStore_GetStorePreferences_Request
+         * @memberof CSTAR_WriteGlyphData_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_GetStorePreferences_Request.prototype.toJSON = function toJSON() {
+        CSTAR_WriteGlyphData_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_GetStorePreferences_Request;
+        return CSTAR_WriteGlyphData_Response;
     })();
     
-    $root.CStore_UserPreferences = (function() {
+    $root.CSTAR_Response = (function() {
     
         /**
-         * Properties of a CStore_UserPreferences.
-         * @exports ICStore_UserPreferences
-         * @interface ICStore_UserPreferences
-         * @property {number|null} [primary_language] CStore_UserPreferences primary_language
-         * @property {number|null} [secondary_languages] CStore_UserPreferences secondary_languages
-         * @property {boolean|null} [platform_windows] CStore_UserPreferences platform_windows
-         * @property {boolean|null} [platform_mac] CStore_UserPreferences platform_mac
-         * @property {boolean|null} [platform_linux] CStore_UserPreferences platform_linux
-         * @property {boolean|null} [hide_adult_content_violence] CStore_UserPreferences hide_adult_content_violence
-         * @property {boolean|null} [hide_adult_content_sex] CStore_UserPreferences hide_adult_content_sex
-         * @property {number|null} [timestamp_updated] CStore_UserPreferences timestamp_updated
-         * @property {boolean|null} [hide_store_broadcast] CStore_UserPreferences hide_store_broadcast
-         * @property {EUserReviewScorePreference|null} [review_score_preference] CStore_UserPreferences review_score_preference
-         * @property {number|null} [timestamp_content_descriptor_preferences_updated] CStore_UserPreferences timestamp_content_descriptor_preferences_updated
+         * Properties of a CSTAR_Response.
+         * @exports ICSTAR_Response
+         * @interface ICSTAR_Response
+         * @property {ICSTAR_ReadGlyphData_Response|null} [read_glyph_data] CSTAR_Response read_glyph_data
+         * @property {ICSTAR_WriteGlyphData_Response|null} [write_glyph_data] CSTAR_Response write_glyph_data
          */
     
         /**
-         * Constructs a new CStore_UserPreferences.
-         * @exports CStore_UserPreferences
-         * @classdesc Represents a CStore_UserPreferences.
-         * @implements ICStore_UserPreferences
+         * Constructs a new CSTAR_Response.
+         * @exports CSTAR_Response
+         * @classdesc Represents a CSTAR_Response.
+         * @implements ICSTAR_Response
          * @constructor
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
+         * @param {ICSTAR_Response=} [properties] Properties to set
          */
-        function CStore_UserPreferences(properties) {
+        function CSTAR_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -898,205 +1914,88 @@
         }
     
         /**
-         * CStore_UserPreferences primary_language.
-         * @member {number} primary_language
-         * @memberof CStore_UserPreferences
+         * CSTAR_Response read_glyph_data.
+         * @member {ICSTAR_ReadGlyphData_Response|null|undefined} read_glyph_data
+         * @memberof CSTAR_Response
          * @instance
          */
-        CStore_UserPreferences.prototype.primary_language = 0;
+        CSTAR_Response.prototype.read_glyph_data = null;
     
         /**
-         * CStore_UserPreferences secondary_languages.
-         * @member {number} secondary_languages
-         * @memberof CStore_UserPreferences
+         * CSTAR_Response write_glyph_data.
+         * @member {ICSTAR_WriteGlyphData_Response|null|undefined} write_glyph_data
+         * @memberof CSTAR_Response
          * @instance
          */
-        CStore_UserPreferences.prototype.secondary_languages = 0;
+        CSTAR_Response.prototype.write_glyph_data = null;
     
         /**
-         * CStore_UserPreferences platform_windows.
-         * @member {boolean} platform_windows
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_windows = false;
-    
-        /**
-         * CStore_UserPreferences platform_mac.
-         * @member {boolean} platform_mac
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_mac = false;
-    
-        /**
-         * CStore_UserPreferences platform_linux.
-         * @member {boolean} platform_linux
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.platform_linux = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_violence.
-         * @member {boolean} hide_adult_content_violence
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_violence = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_sex.
-         * @member {boolean} hide_adult_content_sex
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_sex = false;
-    
-        /**
-         * CStore_UserPreferences timestamp_updated.
-         * @member {number} timestamp_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_updated = 0;
-    
-        /**
-         * CStore_UserPreferences hide_store_broadcast.
-         * @member {boolean} hide_store_broadcast
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_store_broadcast = false;
-    
-        /**
-         * CStore_UserPreferences review_score_preference.
-         * @member {EUserReviewScorePreference} review_score_preference
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.review_score_preference = 0;
-    
-        /**
-         * CStore_UserPreferences timestamp_content_descriptor_preferences_updated.
-         * @member {number} timestamp_content_descriptor_preferences_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_content_descriptor_preferences_updated = 0;
-    
-        /**
-         * Creates a new CStore_UserPreferences instance using the specified properties.
+         * Creates a new CSTAR_Response instance using the specified properties.
          * @function create
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         * @returns {CStore_UserPreferences} CStore_UserPreferences instance
+         * @param {ICSTAR_Response=} [properties] Properties to set
+         * @returns {CSTAR_Response} CSTAR_Response instance
          */
-        CStore_UserPreferences.create = function create(properties) {
-            return new CStore_UserPreferences(properties);
+        CSTAR_Response.create = function create(properties) {
+            return new CSTAR_Response(properties);
         };
     
         /**
-         * Encodes the specified CStore_UserPreferences message. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
+         * Encodes the specified CSTAR_Response message. Does not implicitly {@link CSTAR_Response.verify|verify} messages.
          * @function encode
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
+         * @param {ICSTAR_Response} message CSTAR_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserPreferences.encode = function encode(message, writer) {
+        CSTAR_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.primary_language);
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.secondary_languages);
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.platform_windows);
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.platform_mac);
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.platform_linux);
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hide_adult_content_violence);
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hide_adult_content_sex);
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.timestamp_updated);
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.hide_store_broadcast);
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.review_score_preference);
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.timestamp_content_descriptor_preferences_updated);
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data"))
+                $root.CSTAR_ReadGlyphData_Response.encode(message.read_glyph_data, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data"))
+                $root.CSTAR_WriteGlyphData_Response.encode(message.write_glyph_data, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_UserPreferences message, length delimited. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
+         * Encodes the specified CSTAR_Response message, length delimited. Does not implicitly {@link CSTAR_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
+         * @param {ICSTAR_Response} message CSTAR_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+        CSTAR_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer.
+         * Decodes a CSTAR_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CSTAR_Response} CSTAR_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decode = function decode(reader, length) {
+        CSTAR_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserPreferences();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSTAR_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.primary_language = reader.uint32();
+                    message.read_glyph_data = $root.CSTAR_ReadGlyphData_Response.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.secondary_languages = reader.uint32();
-                    break;
-                case 3:
-                    message.platform_windows = reader.bool();
-                    break;
-                case 4:
-                    message.platform_mac = reader.bool();
-                    break;
-                case 5:
-                    message.platform_linux = reader.bool();
-                    break;
-                case 6:
-                    message.hide_adult_content_violence = reader.bool();
-                    break;
-                case 7:
-                    message.hide_adult_content_sex = reader.bool();
-                    break;
-                case 8:
-                    message.timestamp_updated = reader.uint32();
-                    break;
-                case 9:
-                    message.hide_store_broadcast = reader.bool();
-                    break;
-                case 10:
-                    message.review_score_preference = reader.int32();
-                    break;
-                case 11:
-                    message.timestamp_content_descriptor_preferences_updated = reader.int32();
+                    message.write_glyph_data = $root.CSTAR_WriteGlyphData_Response.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1107,1392 +2006,174 @@
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer, length delimited.
+         * Decodes a CSTAR_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CSTAR_Response} CSTAR_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decodeDelimited = function decodeDelimited(reader) {
+        CSTAR_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_UserPreferences message.
+         * Verifies a CSTAR_Response message.
          * @function verify
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_UserPreferences.verify = function verify(message) {
+        CSTAR_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                if (!$util.isInteger(message.primary_language))
-                    return "primary_language: integer expected";
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                if (!$util.isInteger(message.secondary_languages))
-                    return "secondary_languages: integer expected";
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                if (typeof message.platform_windows !== "boolean")
-                    return "platform_windows: boolean expected";
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                if (typeof message.platform_mac !== "boolean")
-                    return "platform_mac: boolean expected";
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                if (typeof message.platform_linux !== "boolean")
-                    return "platform_linux: boolean expected";
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                if (typeof message.hide_adult_content_violence !== "boolean")
-                    return "hide_adult_content_violence: boolean expected";
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                if (typeof message.hide_adult_content_sex !== "boolean")
-                    return "hide_adult_content_sex: boolean expected";
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                if (!$util.isInteger(message.timestamp_updated))
-                    return "timestamp_updated: integer expected";
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                if (typeof message.hide_store_broadcast !== "boolean")
-                    return "hide_store_broadcast: boolean expected";
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                switch (message.review_score_preference) {
-                default:
-                    return "review_score_preference: enum value expected";
-                case 0:
-                case 1:
-                case 2:
-                    break;
-                }
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                if (!$util.isInteger(message.timestamp_content_descriptor_preferences_updated))
-                    return "timestamp_content_descriptor_preferences_updated: integer expected";
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data")) {
+                var error = $root.CSTAR_ReadGlyphData_Response.verify(message.read_glyph_data);
+                if (error)
+                    return "read_glyph_data." + error;
+            }
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data")) {
+                var error = $root.CSTAR_WriteGlyphData_Response.verify(message.write_glyph_data);
+                if (error)
+                    return "write_glyph_data." + error;
+            }
             return null;
         };
     
         /**
-         * Creates a CStore_UserPreferences message from a plain object. Also converts values to their respective internal types.
+         * Creates a CSTAR_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CSTAR_Response} CSTAR_Response
          */
-        CStore_UserPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserPreferences)
+        CSTAR_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSTAR_Response)
                 return object;
-            var message = new $root.CStore_UserPreferences();
-            if (object.primary_language != null)
-                message.primary_language = object.primary_language >>> 0;
-            if (object.secondary_languages != null)
-                message.secondary_languages = object.secondary_languages >>> 0;
-            if (object.platform_windows != null)
-                message.platform_windows = Boolean(object.platform_windows);
-            if (object.platform_mac != null)
-                message.platform_mac = Boolean(object.platform_mac);
-            if (object.platform_linux != null)
-                message.platform_linux = Boolean(object.platform_linux);
-            if (object.hide_adult_content_violence != null)
-                message.hide_adult_content_violence = Boolean(object.hide_adult_content_violence);
-            if (object.hide_adult_content_sex != null)
-                message.hide_adult_content_sex = Boolean(object.hide_adult_content_sex);
-            if (object.timestamp_updated != null)
-                message.timestamp_updated = object.timestamp_updated >>> 0;
-            if (object.hide_store_broadcast != null)
-                message.hide_store_broadcast = Boolean(object.hide_store_broadcast);
-            switch (object.review_score_preference) {
-            case "k_EUserReviewScorePreference_Unset":
-            case 0:
-                message.review_score_preference = 0;
-                break;
-            case "k_EUserReviewScorePreference_IncludeAll":
-            case 1:
-                message.review_score_preference = 1;
-                break;
-            case "k_EUserReviewScorePreference_ExcludeBombs":
-            case 2:
-                message.review_score_preference = 2;
-                break;
+            var message = new $root.CSTAR_Response();
+            if (object.read_glyph_data != null) {
+                if (typeof object.read_glyph_data !== "object")
+                    throw TypeError(".CSTAR_Response.read_glyph_data: object expected");
+                message.read_glyph_data = $root.CSTAR_ReadGlyphData_Response.fromObject(object.read_glyph_data);
             }
-            if (object.timestamp_content_descriptor_preferences_updated != null)
-                message.timestamp_content_descriptor_preferences_updated = object.timestamp_content_descriptor_preferences_updated | 0;
+            if (object.write_glyph_data != null) {
+                if (typeof object.write_glyph_data !== "object")
+                    throw TypeError(".CSTAR_Response.write_glyph_data: object expected");
+                message.write_glyph_data = $root.CSTAR_WriteGlyphData_Response.fromObject(object.write_glyph_data);
+            }
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_UserPreferences message. Also converts values to other types if specified.
+         * Creates a plain object from a CSTAR_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @static
-         * @param {CStore_UserPreferences} message CStore_UserPreferences
+         * @param {CSTAR_Response} message CSTAR_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_UserPreferences.toObject = function toObject(message, options) {
+        CSTAR_Response.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.primary_language = 0;
-                object.secondary_languages = 0;
-                object.platform_windows = false;
-                object.platform_mac = false;
-                object.platform_linux = false;
-                object.hide_adult_content_violence = false;
-                object.hide_adult_content_sex = false;
-                object.timestamp_updated = 0;
-                object.hide_store_broadcast = false;
-                object.review_score_preference = options.enums === String ? "k_EUserReviewScorePreference_Unset" : 0;
-                object.timestamp_content_descriptor_preferences_updated = 0;
+                object.read_glyph_data = null;
+                object.write_glyph_data = null;
             }
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                object.primary_language = message.primary_language;
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                object.secondary_languages = message.secondary_languages;
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                object.platform_windows = message.platform_windows;
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                object.platform_mac = message.platform_mac;
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                object.platform_linux = message.platform_linux;
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                object.hide_adult_content_violence = message.hide_adult_content_violence;
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                object.hide_adult_content_sex = message.hide_adult_content_sex;
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                object.timestamp_updated = message.timestamp_updated;
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                object.hide_store_broadcast = message.hide_store_broadcast;
-            if (message.review_score_preference != null && message.hasOwnProperty("review_score_preference"))
-                object.review_score_preference = options.enums === String ? $root.EUserReviewScorePreference[message.review_score_preference] : message.review_score_preference;
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                object.timestamp_content_descriptor_preferences_updated = message.timestamp_content_descriptor_preferences_updated;
+            if (message.read_glyph_data != null && message.hasOwnProperty("read_glyph_data"))
+                object.read_glyph_data = $root.CSTAR_ReadGlyphData_Response.toObject(message.read_glyph_data, options);
+            if (message.write_glyph_data != null && message.hasOwnProperty("write_glyph_data"))
+                object.write_glyph_data = $root.CSTAR_WriteGlyphData_Response.toObject(message.write_glyph_data, options);
             return object;
         };
     
         /**
-         * Converts this CStore_UserPreferences to JSON.
+         * Converts this CSTAR_Response to JSON.
          * @function toJSON
-         * @memberof CStore_UserPreferences
+         * @memberof CSTAR_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_UserPreferences.prototype.toJSON = function toJSON() {
+        CSTAR_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_UserPreferences;
+        return CSTAR_Response;
     })();
     
-    $root.CStore_UserTagPreferences = (function() {
+    $root.STAR = (function() {
     
         /**
-         * Properties of a CStore_UserTagPreferences.
-         * @exports ICStore_UserTagPreferences
-         * @interface ICStore_UserTagPreferences
-         * @property {Array.<CStore_UserTagPreferences.ITag>|null} [tags_to_exclude] CStore_UserTagPreferences tags_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserTagPreferences.
-         * @exports CStore_UserTagPreferences
-         * @classdesc Represents a CStore_UserTagPreferences.
-         * @implements ICStore_UserTagPreferences
-         * @constructor
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         */
-        function CStore_UserTagPreferences(properties) {
-            this.tags_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserTagPreferences tags_to_exclude.
-         * @member {Array.<CStore_UserTagPreferences.ITag>} tags_to_exclude
-         * @memberof CStore_UserTagPreferences
-         * @instance
-         */
-        CStore_UserTagPreferences.prototype.tags_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserTagPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences instance
-         */
-        CStore_UserTagPreferences.create = function create(properties) {
-            return new CStore_UserTagPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences message. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tags_to_exclude != null && message.tags_to_exclude.length)
-                for (var i = 0; i < message.tags_to_exclude.length; ++i)
-                    $root.CStore_UserTagPreferences.Tag.encode(message.tags_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.tags_to_exclude && message.tags_to_exclude.length))
-                        message.tags_to_exclude = [];
-                    message.tags_to_exclude.push($root.CStore_UserTagPreferences.Tag.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserTagPreferences message.
-         * @function verify
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserTagPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tags_to_exclude != null && message.hasOwnProperty("tags_to_exclude")) {
-                if (!Array.isArray(message.tags_to_exclude))
-                    return "tags_to_exclude: array expected";
-                for (var i = 0; i < message.tags_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserTagPreferences.Tag.verify(message.tags_to_exclude[i]);
-                    if (error)
-                        return "tags_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserTagPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         */
-        CStore_UserTagPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserTagPreferences)
-                return object;
-            var message = new $root.CStore_UserTagPreferences();
-            if (object.tags_to_exclude) {
-                if (!Array.isArray(object.tags_to_exclude))
-                    throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: array expected");
-                message.tags_to_exclude = [];
-                for (var i = 0; i < object.tags_to_exclude.length; ++i) {
-                    if (typeof object.tags_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: object expected");
-                    message.tags_to_exclude[i] = $root.CStore_UserTagPreferences.Tag.fromObject(object.tags_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserTagPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {CStore_UserTagPreferences} message CStore_UserTagPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserTagPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tags_to_exclude = [];
-            if (message.tags_to_exclude && message.tags_to_exclude.length) {
-                object.tags_to_exclude = [];
-                for (var j = 0; j < message.tags_to_exclude.length; ++j)
-                    object.tags_to_exclude[j] = $root.CStore_UserTagPreferences.Tag.toObject(message.tags_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserTagPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserTagPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserTagPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_UserTagPreferences.Tag = (function() {
-    
-            /**
-             * Properties of a Tag.
-             * @memberof CStore_UserTagPreferences
-             * @interface ITag
-             * @property {number|null} [tagid] Tag tagid
-             * @property {string|null} [name] Tag name
-             * @property {number|null} [timestamp_added] Tag timestamp_added
-             */
-    
-            /**
-             * Constructs a new Tag.
-             * @memberof CStore_UserTagPreferences
-             * @classdesc Represents a Tag.
-             * @implements ITag
-             * @constructor
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             */
-            function Tag(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * Tag tagid.
-             * @member {number} tagid
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.tagid = 0;
-    
-            /**
-             * Tag name.
-             * @member {string} name
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.name = "";
-    
-            /**
-             * Tag timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             */
-            Tag.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new Tag instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag=} [properties] Properties to set
-             * @returns {CStore_UserTagPreferences.Tag} Tag instance
-             */
-            Tag.create = function create(properties) {
-                return new Tag(properties);
-            };
-    
-            /**
-             * Encodes the specified Tag message. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-                if (message.name != null && message.hasOwnProperty("name"))
-                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified Tag message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.Tag.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.ITag} message Tag message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences.Tag();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.tagid = reader.uint32();
-                        break;
-                    case 2:
-                        message.name = reader.string();
-                        break;
-                    case 3:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a Tag message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            Tag.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a Tag message.
-             * @function verify
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Tag.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    if (!$util.isInteger(message.tagid))
-                        return "tagid: integer expected";
-                if (message.name != null && message.hasOwnProperty("name"))
-                    if (!$util.isString(message.name))
-                        return "name: string expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserTagPreferences.Tag} Tag
-             */
-            Tag.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserTagPreferences.Tag)
-                    return object;
-                var message = new $root.CStore_UserTagPreferences.Tag();
-                if (object.tagid != null)
-                    message.tagid = object.tagid >>> 0;
-                if (object.name != null)
-                    message.name = String(object.name);
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a Tag message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserTagPreferences.Tag
-             * @static
-             * @param {CStore_UserTagPreferences.Tag} message Tag
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Tag.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.tagid = 0;
-                    object.name = "";
-                    object.timestamp_added = 0;
-                }
-                if (message.tagid != null && message.hasOwnProperty("tagid"))
-                    object.tagid = message.tagid;
-                if (message.name != null && message.hasOwnProperty("name"))
-                    object.name = message.name;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this Tag to JSON.
-             * @function toJSON
-             * @memberof CStore_UserTagPreferences.Tag
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Tag.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return Tag;
-        })();
-    
-        return CStore_UserTagPreferences;
-    })();
-    
-    $root.CStore_UserContentDescriptorPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserContentDescriptorPreferences.
-         * @exports ICStore_UserContentDescriptorPreferences
-         * @interface ICStore_UserContentDescriptorPreferences
-         * @property {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>|null} [content_descriptors_to_exclude] CStore_UserContentDescriptorPreferences content_descriptors_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserContentDescriptorPreferences.
-         * @exports CStore_UserContentDescriptorPreferences
-         * @classdesc Represents a CStore_UserContentDescriptorPreferences.
-         * @implements ICStore_UserContentDescriptorPreferences
-         * @constructor
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         */
-        function CStore_UserContentDescriptorPreferences(properties) {
-            this.content_descriptors_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserContentDescriptorPreferences content_descriptors_to_exclude.
-         * @member {Array.<CStore_UserContentDescriptorPreferences.IContentDescriptor>} content_descriptors_to_exclude
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences.prototype.content_descriptors_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserContentDescriptorPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences instance
-         */
-        CStore_UserContentDescriptorPreferences.create = function create(properties) {
-            return new CStore_UserContentDescriptorPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content_descriptors_to_exclude != null && message.content_descriptors_to_exclude.length)
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i)
-                    $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.encode(message.content_descriptors_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length))
-                        message.content_descriptors_to_exclude = [];
-                    message.content_descriptors_to_exclude.push($root.CStore_UserContentDescriptorPreferences.ContentDescriptor.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserContentDescriptorPreferences message.
-         * @function verify
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserContentDescriptorPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content_descriptors_to_exclude != null && message.hasOwnProperty("content_descriptors_to_exclude")) {
-                if (!Array.isArray(message.content_descriptors_to_exclude))
-                    return "content_descriptors_to_exclude: array expected";
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.verify(message.content_descriptors_to_exclude[i]);
-                    if (error)
-                        return "content_descriptors_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserContentDescriptorPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         */
-        CStore_UserContentDescriptorPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserContentDescriptorPreferences)
-                return object;
-            var message = new $root.CStore_UserContentDescriptorPreferences();
-            if (object.content_descriptors_to_exclude) {
-                if (!Array.isArray(object.content_descriptors_to_exclude))
-                    throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: array expected");
-                message.content_descriptors_to_exclude = [];
-                for (var i = 0; i < object.content_descriptors_to_exclude.length; ++i) {
-                    if (typeof object.content_descriptors_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: object expected");
-                    message.content_descriptors_to_exclude[i] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.fromObject(object.content_descriptors_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserContentDescriptorPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {CStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserContentDescriptorPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.content_descriptors_to_exclude = [];
-            if (message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length) {
-                object.content_descriptors_to_exclude = [];
-                for (var j = 0; j < message.content_descriptors_to_exclude.length; ++j)
-                    object.content_descriptors_to_exclude[j] = $root.CStore_UserContentDescriptorPreferences.ContentDescriptor.toObject(message.content_descriptors_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserContentDescriptorPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserContentDescriptorPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        CStore_UserContentDescriptorPreferences.ContentDescriptor = (function() {
-    
-            /**
-             * Properties of a ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @interface IContentDescriptor
-             * @property {number|null} [content_descriptorid] ContentDescriptor content_descriptorid
-             * @property {number|null} [timestamp_added] ContentDescriptor timestamp_added
-             */
-    
-            /**
-             * Constructs a new ContentDescriptor.
-             * @memberof CStore_UserContentDescriptorPreferences
-             * @classdesc Represents a ContentDescriptor.
-             * @implements IContentDescriptor
-             * @constructor
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             */
-            function ContentDescriptor(properties) {
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-    
-            /**
-             * ContentDescriptor content_descriptorid.
-             * @member {number} content_descriptorid
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.content_descriptorid = 0;
-    
-            /**
-             * ContentDescriptor timestamp_added.
-             * @member {number} timestamp_added
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             */
-            ContentDescriptor.prototype.timestamp_added = 0;
-    
-            /**
-             * Creates a new ContentDescriptor instance using the specified properties.
-             * @function create
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor=} [properties] Properties to set
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor instance
-             */
-            ContentDescriptor.create = function create(properties) {
-                return new ContentDescriptor(properties);
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.content_descriptorid);
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp_added);
-                return writer;
-            };
-    
-            /**
-             * Encodes the specified ContentDescriptor message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.ContentDescriptor.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.IContentDescriptor} message ContentDescriptor message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            ContentDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer.
-             * @function decode
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decode = function decode(reader, length) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1:
-                        message.content_descriptorid = reader.uint32();
-                        break;
-                    case 2:
-                        message.timestamp_added = reader.uint32();
-                        break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-    
-            /**
-             * Decodes a ContentDescriptor message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            ContentDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-    
-            /**
-             * Verifies a ContentDescriptor message.
-             * @function verify
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            ContentDescriptor.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    if (!$util.isInteger(message.content_descriptorid))
-                        return "content_descriptorid: integer expected";
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    if (!$util.isInteger(message.timestamp_added))
-                        return "timestamp_added: integer expected";
-                return null;
-            };
-    
-            /**
-             * Creates a ContentDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {CStore_UserContentDescriptorPreferences.ContentDescriptor} ContentDescriptor
-             */
-            ContentDescriptor.fromObject = function fromObject(object) {
-                if (object instanceof $root.CStore_UserContentDescriptorPreferences.ContentDescriptor)
-                    return object;
-                var message = new $root.CStore_UserContentDescriptorPreferences.ContentDescriptor();
-                if (object.content_descriptorid != null)
-                    message.content_descriptorid = object.content_descriptorid >>> 0;
-                if (object.timestamp_added != null)
-                    message.timestamp_added = object.timestamp_added >>> 0;
-                return message;
-            };
-    
-            /**
-             * Creates a plain object from a ContentDescriptor message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @static
-             * @param {CStore_UserContentDescriptorPreferences.ContentDescriptor} message ContentDescriptor
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            ContentDescriptor.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.defaults) {
-                    object.content_descriptorid = 0;
-                    object.timestamp_added = 0;
-                }
-                if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                    object.content_descriptorid = message.content_descriptorid;
-                if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                    object.timestamp_added = message.timestamp_added;
-                return object;
-            };
-    
-            /**
-             * Converts this ContentDescriptor to JSON.
-             * @function toJSON
-             * @memberof CStore_UserContentDescriptorPreferences.ContentDescriptor
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            ContentDescriptor.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-    
-            return ContentDescriptor;
-        })();
-    
-        return CStore_UserContentDescriptorPreferences;
-    })();
-    
-    $root.CStore_GetStorePreferences_Response = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Response.
-         * @exports ICStore_GetStorePreferences_Response
-         * @interface ICStore_GetStorePreferences_Response
-         * @property {ICStore_UserPreferences|null} [preferences] CStore_GetStorePreferences_Response preferences
-         * @property {ICStore_UserTagPreferences|null} [tag_preferences] CStore_GetStorePreferences_Response tag_preferences
-         * @property {ICStore_UserContentDescriptorPreferences|null} [content_descriptor_preferences] CStore_GetStorePreferences_Response content_descriptor_preferences
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Response.
-         * @exports CStore_GetStorePreferences_Response
-         * @classdesc Represents a CStore_GetStorePreferences_Response.
-         * @implements ICStore_GetStorePreferences_Response
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_GetStorePreferences_Response preferences.
-         * @member {ICStore_UserPreferences|null|undefined} preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response tag_preferences.
-         * @member {ICStore_UserTagPreferences|null|undefined} tag_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.tag_preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response content_descriptor_preferences.
-         * @member {ICStore_UserContentDescriptorPreferences|null|undefined} content_descriptor_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.content_descriptor_preferences = null;
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response instance
-         */
-        CStore_GetStorePreferences_Response.create = function create(properties) {
-            return new CStore_GetStorePreferences_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                $root.CStore_UserPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                $root.CStore_UserTagPreferences.encode(message.tag_preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                $root.CStore_UserContentDescriptorPreferences.encode(message.content_descriptor_preferences, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.preferences = $root.CStore_UserPreferences.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.tag_preferences = $root.CStore_UserTagPreferences.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Response message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.preferences != null && message.hasOwnProperty("preferences")) {
-                var error = $root.CStore_UserPreferences.verify(message.preferences);
-                if (error)
-                    return "preferences." + error;
-            }
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences")) {
-                var error = $root.CStore_UserTagPreferences.verify(message.tag_preferences);
-                if (error)
-                    return "tag_preferences." + error;
-            }
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences")) {
-                var error = $root.CStore_UserContentDescriptorPreferences.verify(message.content_descriptor_preferences);
-                if (error)
-                    return "content_descriptor_preferences." + error;
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         */
-        CStore_GetStorePreferences_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Response)
-                return object;
-            var message = new $root.CStore_GetStorePreferences_Response();
-            if (object.preferences != null) {
-                if (typeof object.preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.preferences: object expected");
-                message.preferences = $root.CStore_UserPreferences.fromObject(object.preferences);
-            }
-            if (object.tag_preferences != null) {
-                if (typeof object.tag_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.tag_preferences: object expected");
-                message.tag_preferences = $root.CStore_UserTagPreferences.fromObject(object.tag_preferences);
-            }
-            if (object.content_descriptor_preferences != null) {
-                if (typeof object.content_descriptor_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.content_descriptor_preferences: object expected");
-                message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.fromObject(object.content_descriptor_preferences);
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {CStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.preferences = null;
-                object.tag_preferences = null;
-                object.content_descriptor_preferences = null;
-            }
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                object.preferences = $root.CStore_UserPreferences.toObject(message.preferences, options);
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                object.tag_preferences = $root.CStore_UserTagPreferences.toObject(message.tag_preferences, options);
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                object.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.toObject(message.content_descriptor_preferences, options);
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Response to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Response;
-    })();
-    
-    $root.Store = (function() {
-    
-        /**
-         * Constructs a new Store service.
-         * @exports Store
-         * @classdesc Represents a Store
+         * Constructs a new STAR service.
+         * @exports STAR
+         * @classdesc Represents a STAR
          * @extends $protobuf.rpc.Service
          * @constructor
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function Store(rpcImpl, requestDelimited, responseDelimited) {
+        function STAR(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
     
-        (Store.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Store;
+        (STAR.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = STAR;
     
         /**
-         * Creates new Store service using the specified rpc implementation.
+         * Creates new STAR service using the specified rpc implementation.
          * @function create
-         * @memberof Store
+         * @memberof STAR
          * @static
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Store} RPC service. Useful where requests and/or responses are streamed.
+         * @returns {STAR} RPC service. Useful where requests and/or responses are streamed.
          */
-        Store.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+        STAR.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
     
         /**
-         * Callback as used by {@link Store#getLocalizedNameForTags}.
-         * @memberof Store
-         * @typedef GetLocalizedNameForTagsCallback
+         * Callback as used by {@link STAR#processMessage}.
+         * @memberof STAR
+         * @typedef ProcessMessageCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {CStore_GetLocalizedNameForTags_Response} [response] CStore_GetLocalizedNameForTags_Response
+         * @param {CSTAR_Response} [response] CSTAR_Response
          */
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls ProcessMessage.
+         * @function processMessage
+         * @memberof STAR
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @param {Store.GetLocalizedNameForTagsCallback} callback Node-style callback called with the error, if any, and CStore_GetLocalizedNameForTags_Response
+         * @param {ICSTAR_Request} request CSTAR_Request message or plain object
+         * @param {STAR.ProcessMessageCallback} callback Node-style callback called with the error, if any, and CSTAR_Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Store.prototype.getLocalizedNameForTags = function getLocalizedNameForTags(request, callback) {
-            return this.rpcCall(getLocalizedNameForTags, $root.CStore_GetLocalizedNameForTags_Request, $root.CStore_GetLocalizedNameForTags_Response, request, callback);
-        }, "name", { value: "GetLocalizedNameForTags" });
+        Object.defineProperty(STAR.prototype.processMessage = function processMessage(request, callback) {
+            return this.rpcCall(processMessage, $root.CSTAR_Request, $root.CSTAR_Response, request, callback);
+        }, "name", { value: "ProcessMessage" });
     
         /**
-         * Calls GetLocalizedNameForTags.
-         * @function getLocalizedNameForTags
-         * @memberof Store
+         * Calls ProcessMessage.
+         * @function processMessage
+         * @memberof STAR
          * @instance
-         * @param {ICStore_GetLocalizedNameForTags_Request} request CStore_GetLocalizedNameForTags_Request message or plain object
-         * @returns {Promise<CStore_GetLocalizedNameForTags_Response>} Promise
+         * @param {ICSTAR_Request} request CSTAR_Request message or plain object
+         * @returns {Promise<CSTAR_Response>} Promise
          * @variation 2
          */
     
-        /**
-         * Callback as used by {@link Store#getStorePreferences}.
-         * @memberof Store
-         * @typedef GetStorePreferencesCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {CStore_GetStorePreferences_Response} [response] CStore_GetStorePreferences_Response
-         */
-    
-        /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
-         * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @param {Store.GetStorePreferencesCallback} callback Node-style callback called with the error, if any, and CStore_GetStorePreferences_Response
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Store.prototype.getStorePreferences = function getStorePreferences(request, callback) {
-            return this.rpcCall(getStorePreferences, $root.CStore_GetStorePreferences_Request, $root.CStore_GetStorePreferences_Response, request, callback);
-        }, "name", { value: "GetStorePreferences" });
-    
-        /**
-         * Calls GetStorePreferences.
-         * @function getStorePreferences
-         * @memberof Store
-         * @instance
-         * @param {ICStore_GetStorePreferences_Request} request CStore_GetStorePreferences_Request message or plain object
-         * @returns {Promise<CStore_GetStorePreferences_Response>} Promise
-         * @variation 2
-         */
-    
-        return Store;
+        return STAR;
     })();
     
     /**

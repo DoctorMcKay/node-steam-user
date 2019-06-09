@@ -23,6 +23,7 @@
          * @exports ICCommunity_GetApps_Request
          * @interface ICCommunity_GetApps_Request
          * @property {Array.<number>|null} [appids] CCommunity_GetApps_Request appids
+         * @property {number|null} [language] CCommunity_GetApps_Request language
          */
     
         /**
@@ -48,6 +49,14 @@
          * @instance
          */
         CCommunity_GetApps_Request.prototype.appids = $util.emptyArray;
+    
+        /**
+         * CCommunity_GetApps_Request language.
+         * @member {number} language
+         * @memberof CCommunity_GetApps_Request
+         * @instance
+         */
+        CCommunity_GetApps_Request.prototype.language = 0;
     
         /**
          * Creates a new CCommunity_GetApps_Request instance using the specified properties.
@@ -76,6 +85,8 @@
             if (message.appids != null && message.appids.length)
                 for (var i = 0; i < message.appids.length; ++i)
                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.appids[i]);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.language);
             return writer;
         };
     
@@ -120,6 +131,9 @@
                     } else
                         message.appids.push(reader.int32());
                     break;
+                case 2:
+                    message.language = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -162,6 +176,9 @@
                     if (!$util.isInteger(message.appids[i]))
                         return "appids: integer[] expected";
             }
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isInteger(message.language))
+                    return "language: integer expected";
             return null;
         };
     
@@ -184,6 +201,8 @@
                 for (var i = 0; i < object.appids.length; ++i)
                     message.appids[i] = object.appids[i] | 0;
             }
+            if (object.language != null)
+                message.language = object.language >>> 0;
             return message;
         };
     
@@ -202,11 +221,15 @@
             var object = {};
             if (options.arrays || options.defaults)
                 object.appids = [];
+            if (options.defaults)
+                object.language = 0;
             if (message.appids && message.appids.length) {
                 object.appids = [];
                 for (var j = 0; j < message.appids.length; ++j)
                     object.appids[j] = message.appids[j];
             }
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
             return object;
         };
     
@@ -1312,6 +1335,895 @@
         };
     
         return CCommunity_GetAppRichPresenceLocalization_Response_TokenList;
+    })();
+    
+    $root.CAppPriority = (function() {
+    
+        /**
+         * Properties of a CAppPriority.
+         * @exports ICAppPriority
+         * @interface ICAppPriority
+         * @property {number|null} [priority] CAppPriority priority
+         * @property {Array.<number>|null} [appid] CAppPriority appid
+         */
+    
+        /**
+         * Constructs a new CAppPriority.
+         * @exports CAppPriority
+         * @classdesc Represents a CAppPriority.
+         * @implements ICAppPriority
+         * @constructor
+         * @param {ICAppPriority=} [properties] Properties to set
+         */
+        function CAppPriority(properties) {
+            this.appid = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAppPriority priority.
+         * @member {number} priority
+         * @memberof CAppPriority
+         * @instance
+         */
+        CAppPriority.prototype.priority = 0;
+    
+        /**
+         * CAppPriority appid.
+         * @member {Array.<number>} appid
+         * @memberof CAppPriority
+         * @instance
+         */
+        CAppPriority.prototype.appid = $util.emptyArray;
+    
+        /**
+         * Creates a new CAppPriority instance using the specified properties.
+         * @function create
+         * @memberof CAppPriority
+         * @static
+         * @param {ICAppPriority=} [properties] Properties to set
+         * @returns {CAppPriority} CAppPriority instance
+         */
+        CAppPriority.create = function create(properties) {
+            return new CAppPriority(properties);
+        };
+    
+        /**
+         * Encodes the specified CAppPriority message. Does not implicitly {@link CAppPriority.verify|verify} messages.
+         * @function encode
+         * @memberof CAppPriority
+         * @static
+         * @param {ICAppPriority} message CAppPriority message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppPriority.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.priority != null && message.hasOwnProperty("priority"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.priority);
+            if (message.appid != null && message.appid.length)
+                for (var i = 0; i < message.appid.length; ++i)
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAppPriority message, length delimited. Does not implicitly {@link CAppPriority.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAppPriority
+         * @static
+         * @param {ICAppPriority} message CAppPriority message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppPriority.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAppPriority message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAppPriority
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAppPriority} CAppPriority
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppPriority.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAppPriority();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.priority = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.appid && message.appid.length))
+                        message.appid = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.appid.push(reader.uint32());
+                    } else
+                        message.appid.push(reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAppPriority message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAppPriority
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAppPriority} CAppPriority
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppPriority.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAppPriority message.
+         * @function verify
+         * @memberof CAppPriority
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAppPriority.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.priority != null && message.hasOwnProperty("priority"))
+                if (!$util.isInteger(message.priority))
+                    return "priority: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid")) {
+                if (!Array.isArray(message.appid))
+                    return "appid: array expected";
+                for (var i = 0; i < message.appid.length; ++i)
+                    if (!$util.isInteger(message.appid[i]))
+                        return "appid: integer[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CAppPriority message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAppPriority
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAppPriority} CAppPriority
+         */
+        CAppPriority.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAppPriority)
+                return object;
+            var message = new $root.CAppPriority();
+            if (object.priority != null)
+                message.priority = object.priority >>> 0;
+            if (object.appid) {
+                if (!Array.isArray(object.appid))
+                    throw TypeError(".CAppPriority.appid: array expected");
+                message.appid = [];
+                for (var i = 0; i < object.appid.length; ++i)
+                    message.appid[i] = object.appid[i] >>> 0;
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAppPriority message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAppPriority
+         * @static
+         * @param {CAppPriority} message CAppPriority
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAppPriority.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.appid = [];
+            if (options.defaults)
+                object.priority = 0;
+            if (message.priority != null && message.hasOwnProperty("priority"))
+                object.priority = message.priority;
+            if (message.appid && message.appid.length) {
+                object.appid = [];
+                for (var j = 0; j < message.appid.length; ++j)
+                    object.appid[j] = message.appid[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CAppPriority to JSON.
+         * @function toJSON
+         * @memberof CAppPriority
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAppPriority.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAppPriority;
+    })();
+    
+    $root.CCommunity_GetUserPartnerEventNews_Response = (function() {
+    
+        /**
+         * Properties of a CCommunity_GetUserPartnerEventNews_Response.
+         * @exports ICCommunity_GetUserPartnerEventNews_Response
+         * @interface ICCommunity_GetUserPartnerEventNews_Response
+         * @property {Array.<ICClanMatchEventByRange>|null} [results] CCommunity_GetUserPartnerEventNews_Response results
+         */
+    
+        /**
+         * Constructs a new CCommunity_GetUserPartnerEventNews_Response.
+         * @exports CCommunity_GetUserPartnerEventNews_Response
+         * @classdesc Represents a CCommunity_GetUserPartnerEventNews_Response.
+         * @implements ICCommunity_GetUserPartnerEventNews_Response
+         * @constructor
+         * @param {ICCommunity_GetUserPartnerEventNews_Response=} [properties] Properties to set
+         */
+        function CCommunity_GetUserPartnerEventNews_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CCommunity_GetUserPartnerEventNews_Response results.
+         * @member {Array.<ICClanMatchEventByRange>} results
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @instance
+         */
+        CCommunity_GetUserPartnerEventNews_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CCommunity_GetUserPartnerEventNews_Response instance using the specified properties.
+         * @function create
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventNews_Response=} [properties] Properties to set
+         * @returns {CCommunity_GetUserPartnerEventNews_Response} CCommunity_GetUserPartnerEventNews_Response instance
+         */
+        CCommunity_GetUserPartnerEventNews_Response.create = function create(properties) {
+            return new CCommunity_GetUserPartnerEventNews_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventNews_Response message. Does not implicitly {@link CCommunity_GetUserPartnerEventNews_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventNews_Response} message CCommunity_GetUserPartnerEventNews_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventNews_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.CClanMatchEventByRange.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CCommunity_GetUserPartnerEventNews_Response message, length delimited. Does not implicitly {@link CCommunity_GetUserPartnerEventNews_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {ICCommunity_GetUserPartnerEventNews_Response} message CCommunity_GetUserPartnerEventNews_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CCommunity_GetUserPartnerEventNews_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventNews_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CCommunity_GetUserPartnerEventNews_Response} CCommunity_GetUserPartnerEventNews_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventNews_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CCommunity_GetUserPartnerEventNews_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.CClanMatchEventByRange.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CCommunity_GetUserPartnerEventNews_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CCommunity_GetUserPartnerEventNews_Response} CCommunity_GetUserPartnerEventNews_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CCommunity_GetUserPartnerEventNews_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CCommunity_GetUserPartnerEventNews_Response message.
+         * @function verify
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CCommunity_GetUserPartnerEventNews_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.CClanMatchEventByRange.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CCommunity_GetUserPartnerEventNews_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CCommunity_GetUserPartnerEventNews_Response} CCommunity_GetUserPartnerEventNews_Response
+         */
+        CCommunity_GetUserPartnerEventNews_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CCommunity_GetUserPartnerEventNews_Response)
+                return object;
+            var message = new $root.CCommunity_GetUserPartnerEventNews_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CCommunity_GetUserPartnerEventNews_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CCommunity_GetUserPartnerEventNews_Response.results: object expected");
+                    message.results[i] = $root.CClanMatchEventByRange.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CCommunity_GetUserPartnerEventNews_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @static
+         * @param {CCommunity_GetUserPartnerEventNews_Response} message CCommunity_GetUserPartnerEventNews_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CCommunity_GetUserPartnerEventNews_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.CClanMatchEventByRange.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CCommunity_GetUserPartnerEventNews_Response to JSON.
+         * @function toJSON
+         * @memberof CCommunity_GetUserPartnerEventNews_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CCommunity_GetUserPartnerEventNews_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CCommunity_GetUserPartnerEventNews_Response;
+    })();
+    
+    $root.CPlayer_PostStatusToFriends_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_PostStatusToFriends_Response.
+         * @exports ICPlayer_PostStatusToFriends_Response
+         * @interface ICPlayer_PostStatusToFriends_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_PostStatusToFriends_Response.
+         * @exports CPlayer_PostStatusToFriends_Response
+         * @classdesc Represents a CPlayer_PostStatusToFriends_Response.
+         * @implements ICPlayer_PostStatusToFriends_Response
+         * @constructor
+         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
+         */
+        function CPlayer_PostStatusToFriends_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_PostStatusToFriends_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response instance
+         */
+        CPlayer_PostStatusToFriends_Response.create = function create(properties) {
+            return new CPlayer_PostStatusToFriends_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Response message. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Response message, length delimited. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PostStatusToFriends_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_PostStatusToFriends_Response message.
+         * @function verify
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_PostStatusToFriends_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_PostStatusToFriends_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         */
+        CPlayer_PostStatusToFriends_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_PostStatusToFriends_Response)
+                return object;
+            return new $root.CPlayer_PostStatusToFriends_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_PostStatusToFriends_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {CPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_PostStatusToFriends_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_PostStatusToFriends_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_PostStatusToFriends_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_PostStatusToFriends_Response;
+    })();
+    
+    $root.CPlayer_GetPostedStatus_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPostedStatus_Response.
+         * @exports ICPlayer_GetPostedStatus_Response
+         * @interface ICPlayer_GetPostedStatus_Response
+         * @property {number|null} [accountid] CPlayer_GetPostedStatus_Response accountid
+         * @property {number|Long|null} [postid] CPlayer_GetPostedStatus_Response postid
+         * @property {string|null} [status_text] CPlayer_GetPostedStatus_Response status_text
+         * @property {boolean|null} [deleted] CPlayer_GetPostedStatus_Response deleted
+         * @property {number|null} [appid] CPlayer_GetPostedStatus_Response appid
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPostedStatus_Response.
+         * @exports CPlayer_GetPostedStatus_Response
+         * @classdesc Represents a CPlayer_GetPostedStatus_Response.
+         * @implements ICPlayer_GetPostedStatus_Response
+         * @constructor
+         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetPostedStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPostedStatus_Response accountid.
+         * @member {number} accountid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.accountid = 0;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response postid.
+         * @member {number|Long} postid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.postid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response status_text.
+         * @member {string} status_text
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.status_text = "";
+    
+        /**
+         * CPlayer_GetPostedStatus_Response deleted.
+         * @member {boolean} deleted
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.deleted = false;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response appid.
+         * @member {number} appid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.appid = 0;
+    
+        /**
+         * Creates a new CPlayer_GetPostedStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response instance
+         */
+        CPlayer_GetPostedStatus_Response.create = function create(properties) {
+            return new CPlayer_GetPostedStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Response message. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.accountid);
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.postid);
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.status_text);
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deleted);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Response message, length delimited. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPostedStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.accountid = reader.uint32();
+                    break;
+                case 2:
+                    message.postid = reader.uint64();
+                    break;
+                case 3:
+                    message.status_text = reader.string();
+                    break;
+                case 4:
+                    message.deleted = reader.bool();
+                    break;
+                case 5:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPostedStatus_Response message.
+         * @function verify
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPostedStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (!$util.isInteger(message.accountid))
+                    return "accountid: integer expected";
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (!$util.isInteger(message.postid) && !(message.postid && $util.isInteger(message.postid.low) && $util.isInteger(message.postid.high)))
+                    return "postid: integer|Long expected";
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                if (!$util.isString(message.status_text))
+                    return "status_text: string expected";
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                if (typeof message.deleted !== "boolean")
+                    return "deleted: boolean expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPostedStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         */
+        CPlayer_GetPostedStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPostedStatus_Response)
+                return object;
+            var message = new $root.CPlayer_GetPostedStatus_Response();
+            if (object.accountid != null)
+                message.accountid = object.accountid >>> 0;
+            if (object.postid != null)
+                if ($util.Long)
+                    (message.postid = $util.Long.fromValue(object.postid)).unsigned = true;
+                else if (typeof object.postid === "string")
+                    message.postid = parseInt(object.postid, 10);
+                else if (typeof object.postid === "number")
+                    message.postid = object.postid;
+                else if (typeof object.postid === "object")
+                    message.postid = new $util.LongBits(object.postid.low >>> 0, object.postid.high >>> 0).toNumber(true);
+            if (object.status_text != null)
+                message.status_text = String(object.status_text);
+            if (object.deleted != null)
+                message.deleted = Boolean(object.deleted);
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPostedStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {CPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPostedStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.accountid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.postid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.postid = options.longs === String ? "0" : 0;
+                object.status_text = "";
+                object.deleted = false;
+                object.appid = 0;
+            }
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                object.accountid = message.accountid;
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (typeof message.postid === "number")
+                    object.postid = options.longs === String ? String(message.postid) : message.postid;
+                else
+                    object.postid = options.longs === String ? $util.Long.prototype.toString.call(message.postid) : options.longs === Number ? new $util.LongBits(message.postid.low >>> 0, message.postid.high >>> 0).toNumber(true) : message.postid;
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                object.status_text = message.status_text;
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                object.deleted = message.deleted;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPostedStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPostedStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPostedStatus_Response;
     })();
     
     $root.CWebRTCClient_InitiateWebRTCConnection_Request = (function() {
@@ -7783,6 +8695,12981 @@
         return CVoiceChat_VoiceChatEnded_Notification;
     })();
     
+    $root.CSteamTV_CreateBroadcastChannel_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_CreateBroadcastChannel_Response.
+         * @exports ICSteamTV_CreateBroadcastChannel_Response
+         * @interface ICSteamTV_CreateBroadcastChannel_Response
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_CreateBroadcastChannel_Response broadcast_channel_id
+         */
+    
+        /**
+         * Constructs a new CSteamTV_CreateBroadcastChannel_Response.
+         * @exports CSteamTV_CreateBroadcastChannel_Response
+         * @classdesc Represents a CSteamTV_CreateBroadcastChannel_Response.
+         * @implements ICSteamTV_CreateBroadcastChannel_Response
+         * @constructor
+         * @param {ICSteamTV_CreateBroadcastChannel_Response=} [properties] Properties to set
+         */
+        function CSteamTV_CreateBroadcastChannel_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_CreateBroadcastChannel_Response broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @instance
+         */
+        CSteamTV_CreateBroadcastChannel_Response.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CSteamTV_CreateBroadcastChannel_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_CreateBroadcastChannel_Response=} [properties] Properties to set
+         * @returns {CSteamTV_CreateBroadcastChannel_Response} CSteamTV_CreateBroadcastChannel_Response instance
+         */
+        CSteamTV_CreateBroadcastChannel_Response.create = function create(properties) {
+            return new CSteamTV_CreateBroadcastChannel_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_CreateBroadcastChannel_Response message. Does not implicitly {@link CSteamTV_CreateBroadcastChannel_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_CreateBroadcastChannel_Response} message CSteamTV_CreateBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_CreateBroadcastChannel_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_CreateBroadcastChannel_Response message, length delimited. Does not implicitly {@link CSteamTV_CreateBroadcastChannel_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_CreateBroadcastChannel_Response} message CSteamTV_CreateBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_CreateBroadcastChannel_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_CreateBroadcastChannel_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_CreateBroadcastChannel_Response} CSteamTV_CreateBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_CreateBroadcastChannel_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_CreateBroadcastChannel_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_CreateBroadcastChannel_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_CreateBroadcastChannel_Response} CSteamTV_CreateBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_CreateBroadcastChannel_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_CreateBroadcastChannel_Response message.
+         * @function verify
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_CreateBroadcastChannel_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_CreateBroadcastChannel_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_CreateBroadcastChannel_Response} CSteamTV_CreateBroadcastChannel_Response
+         */
+        CSteamTV_CreateBroadcastChannel_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_CreateBroadcastChannel_Response)
+                return object;
+            var message = new $root.CSteamTV_CreateBroadcastChannel_Response();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_CreateBroadcastChannel_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @static
+         * @param {CSteamTV_CreateBroadcastChannel_Response} message CSteamTV_CreateBroadcastChannel_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_CreateBroadcastChannel_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_CreateBroadcastChannel_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_CreateBroadcastChannel_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_CreateBroadcastChannel_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_CreateBroadcastChannel_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelID_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelID_Response.
+         * @exports ICSteamTV_GetBroadcastChannelID_Response
+         * @interface ICSteamTV_GetBroadcastChannelID_Response
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_GetBroadcastChannelID_Response broadcast_channel_id
+         * @property {string|null} [unique_name] CSteamTV_GetBroadcastChannelID_Response unique_name
+         * @property {number|Long|null} [steamid] CSteamTV_GetBroadcastChannelID_Response steamid
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelID_Response.
+         * @exports CSteamTV_GetBroadcastChannelID_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelID_Response.
+         * @implements ICSteamTV_GetBroadcastChannelID_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelID_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelID_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelID_Response broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelID_Response.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelID_Response unique_name.
+         * @member {string} unique_name
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelID_Response.prototype.unique_name = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelID_Response steamid.
+         * @member {number|Long} steamid
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelID_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelID_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelID_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelID_Response} CSteamTV_GetBroadcastChannelID_Response instance
+         */
+        CSteamTV_GetBroadcastChannelID_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelID_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelID_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelID_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelID_Response} message CSteamTV_GetBroadcastChannelID_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelID_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.unique_name);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelID_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelID_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelID_Response} message CSteamTV_GetBroadcastChannelID_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelID_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelID_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelID_Response} CSteamTV_GetBroadcastChannelID_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelID_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelID_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.unique_name = reader.string();
+                    break;
+                case 3:
+                    message.steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelID_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelID_Response} CSteamTV_GetBroadcastChannelID_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelID_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelID_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelID_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                if (!$util.isString(message.unique_name))
+                    return "unique_name: string expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelID_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelID_Response} CSteamTV_GetBroadcastChannelID_Response
+         */
+        CSteamTV_GetBroadcastChannelID_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelID_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelID_Response();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            if (object.unique_name != null)
+                message.unique_name = String(object.unique_name);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelID_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelID_Response} message CSteamTV_GetBroadcastChannelID_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelID_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+                object.unique_name = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+            }
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                object.unique_name = message.unique_name;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelID_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelID_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelID_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelID_Response;
+    })();
+    
+    $root.CSteamTV_SetBroadcastChannelProfile_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SetBroadcastChannelProfile_Response.
+         * @exports ICSteamTV_SetBroadcastChannelProfile_Response
+         * @interface ICSteamTV_SetBroadcastChannelProfile_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SetBroadcastChannelProfile_Response.
+         * @exports CSteamTV_SetBroadcastChannelProfile_Response
+         * @classdesc Represents a CSteamTV_SetBroadcastChannelProfile_Response.
+         * @implements ICSteamTV_SetBroadcastChannelProfile_Response
+         * @constructor
+         * @param {ICSteamTV_SetBroadcastChannelProfile_Response=} [properties] Properties to set
+         */
+        function CSteamTV_SetBroadcastChannelProfile_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_SetBroadcastChannelProfile_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelProfile_Response=} [properties] Properties to set
+         * @returns {CSteamTV_SetBroadcastChannelProfile_Response} CSteamTV_SetBroadcastChannelProfile_Response instance
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.create = function create(properties) {
+            return new CSteamTV_SetBroadcastChannelProfile_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelProfile_Response message. Does not implicitly {@link CSteamTV_SetBroadcastChannelProfile_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelProfile_Response} message CSteamTV_SetBroadcastChannelProfile_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelProfile_Response message, length delimited. Does not implicitly {@link CSteamTV_SetBroadcastChannelProfile_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelProfile_Response} message CSteamTV_SetBroadcastChannelProfile_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelProfile_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SetBroadcastChannelProfile_Response} CSteamTV_SetBroadcastChannelProfile_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SetBroadcastChannelProfile_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelProfile_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SetBroadcastChannelProfile_Response} CSteamTV_SetBroadcastChannelProfile_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SetBroadcastChannelProfile_Response message.
+         * @function verify
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SetBroadcastChannelProfile_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SetBroadcastChannelProfile_Response} CSteamTV_SetBroadcastChannelProfile_Response
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SetBroadcastChannelProfile_Response)
+                return object;
+            return new $root.CSteamTV_SetBroadcastChannelProfile_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SetBroadcastChannelProfile_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @static
+         * @param {CSteamTV_SetBroadcastChannelProfile_Response} message CSteamTV_SetBroadcastChannelProfile_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_SetBroadcastChannelProfile_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SetBroadcastChannelProfile_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SetBroadcastChannelProfile_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SetBroadcastChannelProfile_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelProfile_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelProfile_Response.
+         * @exports ICSteamTV_GetBroadcastChannelProfile_Response
+         * @interface ICSteamTV_GetBroadcastChannelProfile_Response
+         * @property {string|null} [unique_name] CSteamTV_GetBroadcastChannelProfile_Response unique_name
+         * @property {number|Long|null} [owner_steamid] CSteamTV_GetBroadcastChannelProfile_Response owner_steamid
+         * @property {string|null} [name] CSteamTV_GetBroadcastChannelProfile_Response name
+         * @property {string|null} [language] CSteamTV_GetBroadcastChannelProfile_Response language
+         * @property {string|null} [headline] CSteamTV_GetBroadcastChannelProfile_Response headline
+         * @property {string|null} [summary] CSteamTV_GetBroadcastChannelProfile_Response summary
+         * @property {string|null} [schedule] CSteamTV_GetBroadcastChannelProfile_Response schedule
+         * @property {string|null} [rules] CSteamTV_GetBroadcastChannelProfile_Response rules
+         * @property {string|null} [panels] CSteamTV_GetBroadcastChannelProfile_Response panels
+         * @property {boolean|null} [is_partnered] CSteamTV_GetBroadcastChannelProfile_Response is_partnered
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelProfile_Response.
+         * @exports CSteamTV_GetBroadcastChannelProfile_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelProfile_Response.
+         * @implements ICSteamTV_GetBroadcastChannelProfile_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelProfile_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelProfile_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response unique_name.
+         * @member {string} unique_name
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.unique_name = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response owner_steamid.
+         * @member {number|Long} owner_steamid
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.owner_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response name.
+         * @member {string} name
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.name = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response language.
+         * @member {string} language
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.language = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response headline.
+         * @member {string} headline
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.headline = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response summary.
+         * @member {string} summary
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.summary = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response schedule.
+         * @member {string} schedule
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.schedule = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response rules.
+         * @member {string} rules
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.rules = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response panels.
+         * @member {string} panels
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.panels = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelProfile_Response is_partnered.
+         * @member {boolean} is_partnered
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.is_partnered = false;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelProfile_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelProfile_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelProfile_Response} CSteamTV_GetBroadcastChannelProfile_Response instance
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelProfile_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelProfile_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelProfile_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelProfile_Response} message CSteamTV_GetBroadcastChannelProfile_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.unique_name);
+            if (message.owner_steamid != null && message.hasOwnProperty("owner_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.owner_steamid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.language);
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.headline);
+            if (message.summary != null && message.hasOwnProperty("summary"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.summary);
+            if (message.schedule != null && message.hasOwnProperty("schedule"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.schedule);
+            if (message.rules != null && message.hasOwnProperty("rules"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.rules);
+            if (message.panels != null && message.hasOwnProperty("panels"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.panels);
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_partnered);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelProfile_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelProfile_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelProfile_Response} message CSteamTV_GetBroadcastChannelProfile_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelProfile_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelProfile_Response} CSteamTV_GetBroadcastChannelProfile_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelProfile_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.unique_name = reader.string();
+                    break;
+                case 2:
+                    message.owner_steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.name = reader.string();
+                    break;
+                case 4:
+                    message.language = reader.string();
+                    break;
+                case 5:
+                    message.headline = reader.string();
+                    break;
+                case 6:
+                    message.summary = reader.string();
+                    break;
+                case 7:
+                    message.schedule = reader.string();
+                    break;
+                case 8:
+                    message.rules = reader.string();
+                    break;
+                case 9:
+                    message.panels = reader.string();
+                    break;
+                case 10:
+                    message.is_partnered = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelProfile_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelProfile_Response} CSteamTV_GetBroadcastChannelProfile_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelProfile_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                if (!$util.isString(message.unique_name))
+                    return "unique_name: string expected";
+            if (message.owner_steamid != null && message.hasOwnProperty("owner_steamid"))
+                if (!$util.isInteger(message.owner_steamid) && !(message.owner_steamid && $util.isInteger(message.owner_steamid.low) && $util.isInteger(message.owner_steamid.high)))
+                    return "owner_steamid: integer|Long expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                if (!$util.isString(message.headline))
+                    return "headline: string expected";
+            if (message.summary != null && message.hasOwnProperty("summary"))
+                if (!$util.isString(message.summary))
+                    return "summary: string expected";
+            if (message.schedule != null && message.hasOwnProperty("schedule"))
+                if (!$util.isString(message.schedule))
+                    return "schedule: string expected";
+            if (message.rules != null && message.hasOwnProperty("rules"))
+                if (!$util.isString(message.rules))
+                    return "rules: string expected";
+            if (message.panels != null && message.hasOwnProperty("panels"))
+                if (!$util.isString(message.panels))
+                    return "panels: string expected";
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                if (typeof message.is_partnered !== "boolean")
+                    return "is_partnered: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelProfile_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelProfile_Response} CSteamTV_GetBroadcastChannelProfile_Response
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelProfile_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelProfile_Response();
+            if (object.unique_name != null)
+                message.unique_name = String(object.unique_name);
+            if (object.owner_steamid != null)
+                if ($util.Long)
+                    (message.owner_steamid = $util.Long.fromValue(object.owner_steamid)).unsigned = false;
+                else if (typeof object.owner_steamid === "string")
+                    message.owner_steamid = parseInt(object.owner_steamid, 10);
+                else if (typeof object.owner_steamid === "number")
+                    message.owner_steamid = object.owner_steamid;
+                else if (typeof object.owner_steamid === "object")
+                    message.owner_steamid = new $util.LongBits(object.owner_steamid.low >>> 0, object.owner_steamid.high >>> 0).toNumber();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.language != null)
+                message.language = String(object.language);
+            if (object.headline != null)
+                message.headline = String(object.headline);
+            if (object.summary != null)
+                message.summary = String(object.summary);
+            if (object.schedule != null)
+                message.schedule = String(object.schedule);
+            if (object.rules != null)
+                message.rules = String(object.rules);
+            if (object.panels != null)
+                message.panels = String(object.panels);
+            if (object.is_partnered != null)
+                message.is_partnered = Boolean(object.is_partnered);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelProfile_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelProfile_Response} message CSteamTV_GetBroadcastChannelProfile_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.unique_name = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.owner_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.owner_steamid = options.longs === String ? "0" : 0;
+                object.name = "";
+                object.language = "";
+                object.headline = "";
+                object.summary = "";
+                object.schedule = "";
+                object.rules = "";
+                object.panels = "";
+                object.is_partnered = false;
+            }
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                object.unique_name = message.unique_name;
+            if (message.owner_steamid != null && message.hasOwnProperty("owner_steamid"))
+                if (typeof message.owner_steamid === "number")
+                    object.owner_steamid = options.longs === String ? String(message.owner_steamid) : message.owner_steamid;
+                else
+                    object.owner_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.owner_steamid) : options.longs === Number ? new $util.LongBits(message.owner_steamid.low >>> 0, message.owner_steamid.high >>> 0).toNumber() : message.owner_steamid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                object.headline = message.headline;
+            if (message.summary != null && message.hasOwnProperty("summary"))
+                object.summary = message.summary;
+            if (message.schedule != null && message.hasOwnProperty("schedule"))
+                object.schedule = message.schedule;
+            if (message.rules != null && message.hasOwnProperty("rules"))
+                object.rules = message.rules;
+            if (message.panels != null && message.hasOwnProperty("panels"))
+                object.panels = message.panels;
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                object.is_partnered = message.is_partnered;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelProfile_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelProfile_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelProfile_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelProfile_Response;
+    })();
+    
+    $root.CSteamTV_SetBroadcastChannelImage_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SetBroadcastChannelImage_Response.
+         * @exports ICSteamTV_SetBroadcastChannelImage_Response
+         * @interface ICSteamTV_SetBroadcastChannelImage_Response
+         * @property {string|null} [replace_image_hash] CSteamTV_SetBroadcastChannelImage_Response replace_image_hash
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SetBroadcastChannelImage_Response.
+         * @exports CSteamTV_SetBroadcastChannelImage_Response
+         * @classdesc Represents a CSteamTV_SetBroadcastChannelImage_Response.
+         * @implements ICSteamTV_SetBroadcastChannelImage_Response
+         * @constructor
+         * @param {ICSteamTV_SetBroadcastChannelImage_Response=} [properties] Properties to set
+         */
+        function CSteamTV_SetBroadcastChannelImage_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_SetBroadcastChannelImage_Response replace_image_hash.
+         * @member {string} replace_image_hash
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.prototype.replace_image_hash = "";
+    
+        /**
+         * Creates a new CSteamTV_SetBroadcastChannelImage_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelImage_Response=} [properties] Properties to set
+         * @returns {CSteamTV_SetBroadcastChannelImage_Response} CSteamTV_SetBroadcastChannelImage_Response instance
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.create = function create(properties) {
+            return new CSteamTV_SetBroadcastChannelImage_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelImage_Response message. Does not implicitly {@link CSteamTV_SetBroadcastChannelImage_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelImage_Response} message CSteamTV_SetBroadcastChannelImage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.replace_image_hash != null && message.hasOwnProperty("replace_image_hash"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.replace_image_hash);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelImage_Response message, length delimited. Does not implicitly {@link CSteamTV_SetBroadcastChannelImage_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelImage_Response} message CSteamTV_SetBroadcastChannelImage_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelImage_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SetBroadcastChannelImage_Response} CSteamTV_SetBroadcastChannelImage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SetBroadcastChannelImage_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.replace_image_hash = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelImage_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SetBroadcastChannelImage_Response} CSteamTV_SetBroadcastChannelImage_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SetBroadcastChannelImage_Response message.
+         * @function verify
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.replace_image_hash != null && message.hasOwnProperty("replace_image_hash"))
+                if (!$util.isString(message.replace_image_hash))
+                    return "replace_image_hash: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SetBroadcastChannelImage_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SetBroadcastChannelImage_Response} CSteamTV_SetBroadcastChannelImage_Response
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SetBroadcastChannelImage_Response)
+                return object;
+            var message = new $root.CSteamTV_SetBroadcastChannelImage_Response();
+            if (object.replace_image_hash != null)
+                message.replace_image_hash = String(object.replace_image_hash);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SetBroadcastChannelImage_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @static
+         * @param {CSteamTV_SetBroadcastChannelImage_Response} message CSteamTV_SetBroadcastChannelImage_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.replace_image_hash = "";
+            if (message.replace_image_hash != null && message.hasOwnProperty("replace_image_hash"))
+                object.replace_image_hash = message.replace_image_hash;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_SetBroadcastChannelImage_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SetBroadcastChannelImage_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SetBroadcastChannelImage_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SetBroadcastChannelImage_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelImages_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelImages_Response.
+         * @exports ICSteamTV_GetBroadcastChannelImages_Response
+         * @interface ICSteamTV_GetBroadcastChannelImages_Response
+         * @property {Array.<ICSteamTV_GetBroadcastChannelImages_Response_Images>|null} [images] CSteamTV_GetBroadcastChannelImages_Response images
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelImages_Response.
+         * @exports CSteamTV_GetBroadcastChannelImages_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelImages_Response.
+         * @implements ICSteamTV_GetBroadcastChannelImages_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelImages_Response(properties) {
+            this.images = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelImages_Response images.
+         * @member {Array.<ICSteamTV_GetBroadcastChannelImages_Response_Images>} images
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.prototype.images = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelImages_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response} CSteamTV_GetBroadcastChannelImages_Response instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelImages_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelImages_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelImages_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response} message CSteamTV_GetBroadcastChannelImages_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.images != null && message.images.length)
+                for (var i = 0; i < message.images.length; ++i)
+                    $root.CSteamTV_GetBroadcastChannelImages_Response_Images.encode(message.images[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelImages_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelImages_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response} message CSteamTV_GetBroadcastChannelImages_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelImages_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response} CSteamTV_GetBroadcastChannelImages_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelImages_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.images && message.images.length))
+                        message.images = [];
+                    message.images.push($root.CSteamTV_GetBroadcastChannelImages_Response_Images.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelImages_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response} CSteamTV_GetBroadcastChannelImages_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelImages_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.images != null && message.hasOwnProperty("images")) {
+                if (!Array.isArray(message.images))
+                    return "images: array expected";
+                for (var i = 0; i < message.images.length; ++i) {
+                    var error = $root.CSteamTV_GetBroadcastChannelImages_Response_Images.verify(message.images[i]);
+                    if (error)
+                        return "images." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelImages_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response} CSteamTV_GetBroadcastChannelImages_Response
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelImages_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelImages_Response();
+            if (object.images) {
+                if (!Array.isArray(object.images))
+                    throw TypeError(".CSteamTV_GetBroadcastChannelImages_Response.images: array expected");
+                message.images = [];
+                for (var i = 0; i < object.images.length; ++i) {
+                    if (typeof object.images[i] !== "object")
+                        throw TypeError(".CSteamTV_GetBroadcastChannelImages_Response.images: object expected");
+                    message.images[i] = $root.CSteamTV_GetBroadcastChannelImages_Response_Images.fromObject(object.images[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelImages_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelImages_Response} message CSteamTV_GetBroadcastChannelImages_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.images = [];
+            if (message.images && message.images.length) {
+                object.images = [];
+                for (var j = 0; j < message.images.length; ++j)
+                    object.images[j] = $root.CSteamTV_GetBroadcastChannelImages_Response_Images.toObject(message.images[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelImages_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelImages_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelImages_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelImages_Response_Images = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelImages_Response_Images.
+         * @exports ICSteamTV_GetBroadcastChannelImages_Response_Images
+         * @interface ICSteamTV_GetBroadcastChannelImages_Response_Images
+         * @property {number|null} [image_type] CSteamTV_GetBroadcastChannelImages_Response_Images image_type
+         * @property {string|null} [image_path] CSteamTV_GetBroadcastChannelImages_Response_Images image_path
+         * @property {number|null} [image_index] CSteamTV_GetBroadcastChannelImages_Response_Images image_index
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelImages_Response_Images.
+         * @exports CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelImages_Response_Images.
+         * @implements ICSteamTV_GetBroadcastChannelImages_Response_Images
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response_Images=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelImages_Response_Images(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelImages_Response_Images image_type.
+         * @member {number} image_type
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.prototype.image_type = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelImages_Response_Images image_path.
+         * @member {string} image_path
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.prototype.image_path = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelImages_Response_Images image_index.
+         * @member {number} image_index
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.prototype.image_index = 0;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelImages_Response_Images instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response_Images=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response_Images} CSteamTV_GetBroadcastChannelImages_Response_Images instance
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelImages_Response_Images(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelImages_Response_Images message. Does not implicitly {@link CSteamTV_GetBroadcastChannelImages_Response_Images.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response_Images} message CSteamTV_GetBroadcastChannelImages_Response_Images message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.image_type != null && message.hasOwnProperty("image_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.image_type);
+            if (message.image_path != null && message.hasOwnProperty("image_path"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.image_path);
+            if (message.image_index != null && message.hasOwnProperty("image_index"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.image_index);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelImages_Response_Images message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelImages_Response_Images.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelImages_Response_Images} message CSteamTV_GetBroadcastChannelImages_Response_Images message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelImages_Response_Images message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response_Images} CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelImages_Response_Images();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.image_type = reader.int32();
+                    break;
+                case 2:
+                    message.image_path = reader.string();
+                    break;
+                case 3:
+                    message.image_index = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelImages_Response_Images message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response_Images} CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelImages_Response_Images message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.image_type != null && message.hasOwnProperty("image_type"))
+                if (!$util.isInteger(message.image_type))
+                    return "image_type: integer expected";
+            if (message.image_path != null && message.hasOwnProperty("image_path"))
+                if (!$util.isString(message.image_path))
+                    return "image_path: string expected";
+            if (message.image_index != null && message.hasOwnProperty("image_index"))
+                if (!$util.isInteger(message.image_index))
+                    return "image_index: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelImages_Response_Images message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelImages_Response_Images} CSteamTV_GetBroadcastChannelImages_Response_Images
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelImages_Response_Images)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelImages_Response_Images();
+            if (object.image_type != null)
+                message.image_type = object.image_type | 0;
+            if (object.image_path != null)
+                message.image_path = String(object.image_path);
+            if (object.image_index != null)
+                message.image_index = object.image_index >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelImages_Response_Images message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelImages_Response_Images} message CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.image_type = 0;
+                object.image_path = "";
+                object.image_index = 0;
+            }
+            if (message.image_type != null && message.hasOwnProperty("image_type"))
+                object.image_type = message.image_type;
+            if (message.image_path != null && message.hasOwnProperty("image_path"))
+                object.image_path = message.image_path;
+            if (message.image_index != null && message.hasOwnProperty("image_index"))
+                object.image_index = message.image_index;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelImages_Response_Images to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelImages_Response_Images
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelImages_Response_Images.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelImages_Response_Images;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelLinks_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelLinks_Response.
+         * @exports ICSteamTV_GetBroadcastChannelLinks_Response
+         * @interface ICSteamTV_GetBroadcastChannelLinks_Response
+         * @property {Array.<ICSteamTV_GetBroadcastChannelLinks_Response_Links>|null} [links] CSteamTV_GetBroadcastChannelLinks_Response links
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelLinks_Response.
+         * @exports CSteamTV_GetBroadcastChannelLinks_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelLinks_Response.
+         * @implements ICSteamTV_GetBroadcastChannelLinks_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelLinks_Response(properties) {
+            this.links = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response links.
+         * @member {Array.<ICSteamTV_GetBroadcastChannelLinks_Response_Links>} links
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.prototype.links = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelLinks_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response} CSteamTV_GetBroadcastChannelLinks_Response instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelLinks_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelLinks_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelLinks_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response} message CSteamTV_GetBroadcastChannelLinks_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.links != null && message.links.length)
+                for (var i = 0; i < message.links.length; ++i)
+                    $root.CSteamTV_GetBroadcastChannelLinks_Response_Links.encode(message.links[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelLinks_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelLinks_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response} message CSteamTV_GetBroadcastChannelLinks_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelLinks_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response} CSteamTV_GetBroadcastChannelLinks_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelLinks_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.links && message.links.length))
+                        message.links = [];
+                    message.links.push($root.CSteamTV_GetBroadcastChannelLinks_Response_Links.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelLinks_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response} CSteamTV_GetBroadcastChannelLinks_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelLinks_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.links != null && message.hasOwnProperty("links")) {
+                if (!Array.isArray(message.links))
+                    return "links: array expected";
+                for (var i = 0; i < message.links.length; ++i) {
+                    var error = $root.CSteamTV_GetBroadcastChannelLinks_Response_Links.verify(message.links[i]);
+                    if (error)
+                        return "links." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelLinks_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response} CSteamTV_GetBroadcastChannelLinks_Response
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelLinks_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelLinks_Response();
+            if (object.links) {
+                if (!Array.isArray(object.links))
+                    throw TypeError(".CSteamTV_GetBroadcastChannelLinks_Response.links: array expected");
+                message.links = [];
+                for (var i = 0; i < object.links.length; ++i) {
+                    if (typeof object.links[i] !== "object")
+                        throw TypeError(".CSteamTV_GetBroadcastChannelLinks_Response.links: object expected");
+                    message.links[i] = $root.CSteamTV_GetBroadcastChannelLinks_Response_Links.fromObject(object.links[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelLinks_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelLinks_Response} message CSteamTV_GetBroadcastChannelLinks_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.links = [];
+            if (message.links && message.links.length) {
+                object.links = [];
+                for (var j = 0; j < message.links.length; ++j)
+                    object.links[j] = $root.CSteamTV_GetBroadcastChannelLinks_Response_Links.toObject(message.links[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelLinks_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelLinks_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelLinks_Response_Links = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelLinks_Response_Links.
+         * @exports ICSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @interface ICSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @property {number|null} [link_index] CSteamTV_GetBroadcastChannelLinks_Response_Links link_index
+         * @property {string|null} [url] CSteamTV_GetBroadcastChannelLinks_Response_Links url
+         * @property {string|null} [link_description] CSteamTV_GetBroadcastChannelLinks_Response_Links link_description
+         * @property {number|null} [left] CSteamTV_GetBroadcastChannelLinks_Response_Links left
+         * @property {number|null} [top] CSteamTV_GetBroadcastChannelLinks_Response_Links top
+         * @property {number|null} [width] CSteamTV_GetBroadcastChannelLinks_Response_Links width
+         * @property {number|null} [height] CSteamTV_GetBroadcastChannelLinks_Response_Links height
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelLinks_Response_Links.
+         * @exports CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelLinks_Response_Links.
+         * @implements ICSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response_Links=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelLinks_Response_Links(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links link_index.
+         * @member {number} link_index
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.link_index = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links url.
+         * @member {string} url
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.url = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links link_description.
+         * @member {string} link_description
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.link_description = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links left.
+         * @member {number} left
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.left = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links top.
+         * @member {number} top
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.top = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links width.
+         * @member {number} width
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.width = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelLinks_Response_Links height.
+         * @member {number} height
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.height = 0;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelLinks_Response_Links instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response_Links=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response_Links} CSteamTV_GetBroadcastChannelLinks_Response_Links instance
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelLinks_Response_Links(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelLinks_Response_Links message. Does not implicitly {@link CSteamTV_GetBroadcastChannelLinks_Response_Links.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response_Links} message CSteamTV_GetBroadcastChannelLinks_Response_Links message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.link_index);
+            if (message.url != null && message.hasOwnProperty("url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.link_description);
+            if (message.left != null && message.hasOwnProperty("left"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.left);
+            if (message.top != null && message.hasOwnProperty("top"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.top);
+            if (message.width != null && message.hasOwnProperty("width"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.width);
+            if (message.height != null && message.hasOwnProperty("height"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.height);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelLinks_Response_Links message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelLinks_Response_Links.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelLinks_Response_Links} message CSteamTV_GetBroadcastChannelLinks_Response_Links message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelLinks_Response_Links message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response_Links} CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelLinks_Response_Links();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.link_index = reader.uint32();
+                    break;
+                case 2:
+                    message.url = reader.string();
+                    break;
+                case 3:
+                    message.link_description = reader.string();
+                    break;
+                case 4:
+                    message.left = reader.uint32();
+                    break;
+                case 5:
+                    message.top = reader.uint32();
+                    break;
+                case 6:
+                    message.width = reader.uint32();
+                    break;
+                case 7:
+                    message.height = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelLinks_Response_Links message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response_Links} CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelLinks_Response_Links message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                if (!$util.isInteger(message.link_index))
+                    return "link_index: integer expected";
+            if (message.url != null && message.hasOwnProperty("url"))
+                if (!$util.isString(message.url))
+                    return "url: string expected";
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                if (!$util.isString(message.link_description))
+                    return "link_description: string expected";
+            if (message.left != null && message.hasOwnProperty("left"))
+                if (!$util.isInteger(message.left))
+                    return "left: integer expected";
+            if (message.top != null && message.hasOwnProperty("top"))
+                if (!$util.isInteger(message.top))
+                    return "top: integer expected";
+            if (message.width != null && message.hasOwnProperty("width"))
+                if (!$util.isInteger(message.width))
+                    return "width: integer expected";
+            if (message.height != null && message.hasOwnProperty("height"))
+                if (!$util.isInteger(message.height))
+                    return "height: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelLinks_Response_Links message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelLinks_Response_Links} CSteamTV_GetBroadcastChannelLinks_Response_Links
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelLinks_Response_Links)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelLinks_Response_Links();
+            if (object.link_index != null)
+                message.link_index = object.link_index >>> 0;
+            if (object.url != null)
+                message.url = String(object.url);
+            if (object.link_description != null)
+                message.link_description = String(object.link_description);
+            if (object.left != null)
+                message.left = object.left >>> 0;
+            if (object.top != null)
+                message.top = object.top >>> 0;
+            if (object.width != null)
+                message.width = object.width >>> 0;
+            if (object.height != null)
+                message.height = object.height >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelLinks_Response_Links message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelLinks_Response_Links} message CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.link_index = 0;
+                object.url = "";
+                object.link_description = "";
+                object.left = 0;
+                object.top = 0;
+                object.width = 0;
+                object.height = 0;
+            }
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                object.link_index = message.link_index;
+            if (message.url != null && message.hasOwnProperty("url"))
+                object.url = message.url;
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                object.link_description = message.link_description;
+            if (message.left != null && message.hasOwnProperty("left"))
+                object.left = message.left;
+            if (message.top != null && message.hasOwnProperty("top"))
+                object.top = message.top;
+            if (message.width != null && message.hasOwnProperty("width"))
+                object.width = message.width;
+            if (message.height != null && message.hasOwnProperty("height"))
+                object.height = message.height;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelLinks_Response_Links to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelLinks_Response_Links
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelLinks_Response_Links.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelLinks_Response_Links;
+    })();
+    
+    $root.CSteamTV_SetBroadcastChannelLinkRegions_Request_Links = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.
+         * @exports ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @interface ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @property {number|null} [link_index] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links link_index
+         * @property {string|null} [url] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links url
+         * @property {string|null} [link_description] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links link_description
+         * @property {number|null} [left] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links left
+         * @property {number|null} [top] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links top
+         * @property {number|null} [width] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links width
+         * @property {number|null} [height] CSteamTV_SetBroadcastChannelLinkRegions_Request_Links height
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.
+         * @exports CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @classdesc Represents a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.
+         * @implements ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @constructor
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links=} [properties] Properties to set
+         */
+        function CSteamTV_SetBroadcastChannelLinkRegions_Request_Links(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links link_index.
+         * @member {number} link_index
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.link_index = 0;
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links url.
+         * @member {string} url
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.url = "";
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links link_description.
+         * @member {string} link_description
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.link_description = "";
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links left.
+         * @member {number} left
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.left = 0;
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links top.
+         * @member {number} top
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.top = 0;
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links width.
+         * @member {number} width
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.width = 0;
+    
+        /**
+         * CSteamTV_SetBroadcastChannelLinkRegions_Request_Links height.
+         * @member {number} height
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.height = 0;
+    
+        /**
+         * Creates a new CSteamTV_SetBroadcastChannelLinkRegions_Request_Links instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links=} [properties] Properties to set
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Request_Links} CSteamTV_SetBroadcastChannelLinkRegions_Request_Links instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.create = function create(properties) {
+            return new CSteamTV_SetBroadcastChannelLinkRegions_Request_Links(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message. Does not implicitly {@link CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links} message CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.link_index);
+            if (message.url != null && message.hasOwnProperty("url"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.link_description);
+            if (message.left != null && message.hasOwnProperty("left"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.left);
+            if (message.top != null && message.hasOwnProperty("top"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.top);
+            if (message.width != null && message.hasOwnProperty("width"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.width);
+            if (message.height != null && message.hasOwnProperty("height"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.height);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message, length delimited. Does not implicitly {@link CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Request_Links} message CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Request_Links} CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SetBroadcastChannelLinkRegions_Request_Links();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.link_index = reader.uint32();
+                    break;
+                case 2:
+                    message.url = reader.string();
+                    break;
+                case 3:
+                    message.link_description = reader.string();
+                    break;
+                case 4:
+                    message.left = reader.uint32();
+                    break;
+                case 5:
+                    message.top = reader.uint32();
+                    break;
+                case 6:
+                    message.width = reader.uint32();
+                    break;
+                case 7:
+                    message.height = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Request_Links} CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message.
+         * @function verify
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                if (!$util.isInteger(message.link_index))
+                    return "link_index: integer expected";
+            if (message.url != null && message.hasOwnProperty("url"))
+                if (!$util.isString(message.url))
+                    return "url: string expected";
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                if (!$util.isString(message.link_description))
+                    return "link_description: string expected";
+            if (message.left != null && message.hasOwnProperty("left"))
+                if (!$util.isInteger(message.left))
+                    return "left: integer expected";
+            if (message.top != null && message.hasOwnProperty("top"))
+                if (!$util.isInteger(message.top))
+                    return "top: integer expected";
+            if (message.width != null && message.hasOwnProperty("width"))
+                if (!$util.isInteger(message.width))
+                    return "width: integer expected";
+            if (message.height != null && message.hasOwnProperty("height"))
+                if (!$util.isInteger(message.height))
+                    return "height: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Request_Links} CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SetBroadcastChannelLinkRegions_Request_Links)
+                return object;
+            var message = new $root.CSteamTV_SetBroadcastChannelLinkRegions_Request_Links();
+            if (object.link_index != null)
+                message.link_index = object.link_index >>> 0;
+            if (object.url != null)
+                message.url = String(object.url);
+            if (object.link_description != null)
+                message.link_description = String(object.link_description);
+            if (object.left != null)
+                message.left = object.left >>> 0;
+            if (object.top != null)
+                message.top = object.top >>> 0;
+            if (object.width != null)
+                message.width = object.width >>> 0;
+            if (object.height != null)
+                message.height = object.height >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SetBroadcastChannelLinkRegions_Request_Links message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @static
+         * @param {CSteamTV_SetBroadcastChannelLinkRegions_Request_Links} message CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.link_index = 0;
+                object.url = "";
+                object.link_description = "";
+                object.left = 0;
+                object.top = 0;
+                object.width = 0;
+                object.height = 0;
+            }
+            if (message.link_index != null && message.hasOwnProperty("link_index"))
+                object.link_index = message.link_index;
+            if (message.url != null && message.hasOwnProperty("url"))
+                object.url = message.url;
+            if (message.link_description != null && message.hasOwnProperty("link_description"))
+                object.link_description = message.link_description;
+            if (message.left != null && message.hasOwnProperty("left"))
+                object.left = message.left;
+            if (message.top != null && message.hasOwnProperty("top"))
+                object.top = message.top;
+            if (message.width != null && message.hasOwnProperty("width"))
+                object.width = message.width;
+            if (message.height != null && message.hasOwnProperty("height"))
+                object.height = message.height;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_SetBroadcastChannelLinkRegions_Request_Links to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Request_Links
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Request_Links.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SetBroadcastChannelLinkRegions_Request_Links;
+    })();
+    
+    $root.CSteamTV_SetBroadcastChannelLinkRegions_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SetBroadcastChannelLinkRegions_Response.
+         * @exports ICSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @interface ICSteamTV_SetBroadcastChannelLinkRegions_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SetBroadcastChannelLinkRegions_Response.
+         * @exports CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @classdesc Represents a CSteamTV_SetBroadcastChannelLinkRegions_Response.
+         * @implements ICSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @constructor
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Response=} [properties] Properties to set
+         */
+        function CSteamTV_SetBroadcastChannelLinkRegions_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_SetBroadcastChannelLinkRegions_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Response=} [properties] Properties to set
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Response} CSteamTV_SetBroadcastChannelLinkRegions_Response instance
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.create = function create(properties) {
+            return new CSteamTV_SetBroadcastChannelLinkRegions_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelLinkRegions_Response message. Does not implicitly {@link CSteamTV_SetBroadcastChannelLinkRegions_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Response} message CSteamTV_SetBroadcastChannelLinkRegions_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetBroadcastChannelLinkRegions_Response message, length delimited. Does not implicitly {@link CSteamTV_SetBroadcastChannelLinkRegions_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {ICSteamTV_SetBroadcastChannelLinkRegions_Response} message CSteamTV_SetBroadcastChannelLinkRegions_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelLinkRegions_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Response} CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SetBroadcastChannelLinkRegions_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetBroadcastChannelLinkRegions_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Response} CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SetBroadcastChannelLinkRegions_Response message.
+         * @function verify
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SetBroadcastChannelLinkRegions_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SetBroadcastChannelLinkRegions_Response} CSteamTV_SetBroadcastChannelLinkRegions_Response
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SetBroadcastChannelLinkRegions_Response)
+                return object;
+            return new $root.CSteamTV_SetBroadcastChannelLinkRegions_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SetBroadcastChannelLinkRegions_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @static
+         * @param {CSteamTV_SetBroadcastChannelLinkRegions_Response} message CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_SetBroadcastChannelLinkRegions_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SetBroadcastChannelLinkRegions_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SetBroadcastChannelLinkRegions_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelStatus_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelStatus_Response.
+         * @exports ICSteamTV_GetBroadcastChannelStatus_Response
+         * @interface ICSteamTV_GetBroadcastChannelStatus_Response
+         * @property {boolean|null} [is_live] CSteamTV_GetBroadcastChannelStatus_Response is_live
+         * @property {boolean|null} [is_disabled] CSteamTV_GetBroadcastChannelStatus_Response is_disabled
+         * @property {number|null} [appid] CSteamTV_GetBroadcastChannelStatus_Response appid
+         * @property {number|Long|null} [viewers] CSteamTV_GetBroadcastChannelStatus_Response viewers
+         * @property {number|Long|null} [views] CSteamTV_GetBroadcastChannelStatus_Response views
+         * @property {number|Long|null} [broadcaster_steamid] CSteamTV_GetBroadcastChannelStatus_Response broadcaster_steamid
+         * @property {string|null} [thumbnail_url] CSteamTV_GetBroadcastChannelStatus_Response thumbnail_url
+         * @property {number|Long|null} [followers] CSteamTV_GetBroadcastChannelStatus_Response followers
+         * @property {number|Long|null} [subscribers] CSteamTV_GetBroadcastChannelStatus_Response subscribers
+         * @property {string|null} [unique_name] CSteamTV_GetBroadcastChannelStatus_Response unique_name
+         * @property {number|Long|null} [broadcast_session_id] CSteamTV_GetBroadcastChannelStatus_Response broadcast_session_id
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelStatus_Response.
+         * @exports CSteamTV_GetBroadcastChannelStatus_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelStatus_Response.
+         * @implements ICSteamTV_GetBroadcastChannelStatus_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelStatus_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response is_live.
+         * @member {boolean} is_live
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.is_live = false;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response is_disabled.
+         * @member {boolean} is_disabled
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.is_disabled = false;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response appid.
+         * @member {number} appid
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.appid = 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response viewers.
+         * @member {number|Long} viewers
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.viewers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response views.
+         * @member {number|Long} views
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.views = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.thumbnail_url = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response followers.
+         * @member {number|Long} followers
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.followers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response subscribers.
+         * @member {number|Long} subscribers
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.subscribers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response unique_name.
+         * @member {string} unique_name
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.unique_name = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelStatus_Response broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelStatus_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelStatus_Response} CSteamTV_GetBroadcastChannelStatus_Response instance
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelStatus_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelStatus_Response} message CSteamTV_GetBroadcastChannelStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_live);
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.is_disabled);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.appid);
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.viewers);
+            if (message.views != null && message.hasOwnProperty("views"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.views);
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 6, wireType 1 =*/49).fixed64(message.broadcaster_steamid);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.thumbnail_url);
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.followers);
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint64(message.subscribers);
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.unique_name);
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.broadcast_session_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelStatus_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelStatus_Response} message CSteamTV_GetBroadcastChannelStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelStatus_Response} CSteamTV_GetBroadcastChannelStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.is_live = reader.bool();
+                    break;
+                case 2:
+                    message.is_disabled = reader.bool();
+                    break;
+                case 3:
+                    message.appid = reader.uint32();
+                    break;
+                case 4:
+                    message.viewers = reader.uint64();
+                    break;
+                case 5:
+                    message.views = reader.uint64();
+                    break;
+                case 6:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 7:
+                    message.thumbnail_url = reader.string();
+                    break;
+                case 8:
+                    message.followers = reader.uint64();
+                    break;
+                case 9:
+                    message.subscribers = reader.uint64();
+                    break;
+                case 10:
+                    message.unique_name = reader.string();
+                    break;
+                case 11:
+                    message.broadcast_session_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelStatus_Response} CSteamTV_GetBroadcastChannelStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelStatus_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                if (typeof message.is_live !== "boolean")
+                    return "is_live: boolean expected";
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                if (typeof message.is_disabled !== "boolean")
+                    return "is_disabled: boolean expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (!$util.isInteger(message.viewers) && !(message.viewers && $util.isInteger(message.viewers.low) && $util.isInteger(message.viewers.high)))
+                    return "viewers: integer|Long expected";
+            if (message.views != null && message.hasOwnProperty("views"))
+                if (!$util.isInteger(message.views) && !(message.views && $util.isInteger(message.views.low) && $util.isInteger(message.views.high)))
+                    return "views: integer|Long expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                if (!$util.isInteger(message.followers) && !(message.followers && $util.isInteger(message.followers.low) && $util.isInteger(message.followers.high)))
+                    return "followers: integer|Long expected";
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                if (!$util.isInteger(message.subscribers) && !(message.subscribers && $util.isInteger(message.subscribers.low) && $util.isInteger(message.subscribers.high)))
+                    return "subscribers: integer|Long expected";
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                if (!$util.isString(message.unique_name))
+                    return "unique_name: string expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelStatus_Response} CSteamTV_GetBroadcastChannelStatus_Response
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelStatus_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelStatus_Response();
+            if (object.is_live != null)
+                message.is_live = Boolean(object.is_live);
+            if (object.is_disabled != null)
+                message.is_disabled = Boolean(object.is_disabled);
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.viewers != null)
+                if ($util.Long)
+                    (message.viewers = $util.Long.fromValue(object.viewers)).unsigned = true;
+                else if (typeof object.viewers === "string")
+                    message.viewers = parseInt(object.viewers, 10);
+                else if (typeof object.viewers === "number")
+                    message.viewers = object.viewers;
+                else if (typeof object.viewers === "object")
+                    message.viewers = new $util.LongBits(object.viewers.low >>> 0, object.viewers.high >>> 0).toNumber(true);
+            if (object.views != null)
+                if ($util.Long)
+                    (message.views = $util.Long.fromValue(object.views)).unsigned = true;
+                else if (typeof object.views === "string")
+                    message.views = parseInt(object.views, 10);
+                else if (typeof object.views === "number")
+                    message.views = object.views;
+                else if (typeof object.views === "object")
+                    message.views = new $util.LongBits(object.views.low >>> 0, object.views.high >>> 0).toNumber(true);
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            if (object.followers != null)
+                if ($util.Long)
+                    (message.followers = $util.Long.fromValue(object.followers)).unsigned = true;
+                else if (typeof object.followers === "string")
+                    message.followers = parseInt(object.followers, 10);
+                else if (typeof object.followers === "number")
+                    message.followers = object.followers;
+                else if (typeof object.followers === "object")
+                    message.followers = new $util.LongBits(object.followers.low >>> 0, object.followers.high >>> 0).toNumber(true);
+            if (object.subscribers != null)
+                if ($util.Long)
+                    (message.subscribers = $util.Long.fromValue(object.subscribers)).unsigned = true;
+                else if (typeof object.subscribers === "string")
+                    message.subscribers = parseInt(object.subscribers, 10);
+                else if (typeof object.subscribers === "number")
+                    message.subscribers = object.subscribers;
+                else if (typeof object.subscribers === "object")
+                    message.subscribers = new $util.LongBits(object.subscribers.low >>> 0, object.subscribers.high >>> 0).toNumber(true);
+            if (object.unique_name != null)
+                message.unique_name = String(object.unique_name);
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = true;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelStatus_Response} message CSteamTV_GetBroadcastChannelStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.is_live = false;
+                object.is_disabled = false;
+                object.appid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.viewers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewers = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.views = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.views = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                object.thumbnail_url = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.followers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.followers = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.subscribers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.subscribers = options.longs === String ? "0" : 0;
+                object.unique_name = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+            }
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                object.is_live = message.is_live;
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                object.is_disabled = message.is_disabled;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (typeof message.viewers === "number")
+                    object.viewers = options.longs === String ? String(message.viewers) : message.viewers;
+                else
+                    object.viewers = options.longs === String ? $util.Long.prototype.toString.call(message.viewers) : options.longs === Number ? new $util.LongBits(message.viewers.low >>> 0, message.viewers.high >>> 0).toNumber(true) : message.viewers;
+            if (message.views != null && message.hasOwnProperty("views"))
+                if (typeof message.views === "number")
+                    object.views = options.longs === String ? String(message.views) : message.views;
+                else
+                    object.views = options.longs === String ? $util.Long.prototype.toString.call(message.views) : options.longs === Number ? new $util.LongBits(message.views.low >>> 0, message.views.high >>> 0).toNumber(true) : message.views;
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                if (typeof message.followers === "number")
+                    object.followers = options.longs === String ? String(message.followers) : message.followers;
+                else
+                    object.followers = options.longs === String ? $util.Long.prototype.toString.call(message.followers) : options.longs === Number ? new $util.LongBits(message.followers.low >>> 0, message.followers.high >>> 0).toNumber(true) : message.followers;
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                if (typeof message.subscribers === "number")
+                    object.subscribers = options.longs === String ? String(message.subscribers) : message.subscribers;
+                else
+                    object.subscribers = options.longs === String ? $util.Long.prototype.toString.call(message.subscribers) : options.longs === Number ? new $util.LongBits(message.subscribers.low >>> 0, message.subscribers.high >>> 0).toNumber(true) : message.subscribers;
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                object.unique_name = message.unique_name;
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber(true) : message.broadcast_session_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelStatus_Response;
+    })();
+    
+    $root.GetBroadcastChannelEntry = (function() {
+    
+        /**
+         * Properties of a GetBroadcastChannelEntry.
+         * @exports IGetBroadcastChannelEntry
+         * @interface IGetBroadcastChannelEntry
+         * @property {number|Long|null} [broadcast_channel_id] GetBroadcastChannelEntry broadcast_channel_id
+         * @property {string|null} [unique_name] GetBroadcastChannelEntry unique_name
+         * @property {string|null} [name] GetBroadcastChannelEntry name
+         * @property {number|null} [appid] GetBroadcastChannelEntry appid
+         * @property {number|Long|null} [viewers] GetBroadcastChannelEntry viewers
+         * @property {number|Long|null} [views] GetBroadcastChannelEntry views
+         * @property {string|null} [thumbnail_url] GetBroadcastChannelEntry thumbnail_url
+         * @property {number|Long|null} [followers] GetBroadcastChannelEntry followers
+         * @property {string|null} [headline] GetBroadcastChannelEntry headline
+         * @property {string|null} [avatar_url] GetBroadcastChannelEntry avatar_url
+         * @property {number|Long|null} [broadcaster_steamid] GetBroadcastChannelEntry broadcaster_steamid
+         * @property {number|Long|null} [subscribers] GetBroadcastChannelEntry subscribers
+         * @property {string|null} [background_url] GetBroadcastChannelEntry background_url
+         * @property {boolean|null} [is_featured] GetBroadcastChannelEntry is_featured
+         * @property {boolean|null} [is_disabled] GetBroadcastChannelEntry is_disabled
+         * @property {boolean|null} [is_live] GetBroadcastChannelEntry is_live
+         * @property {string|null} [language] GetBroadcastChannelEntry language
+         * @property {number|null} [reports] GetBroadcastChannelEntry reports
+         * @property {boolean|null} [is_partnered] GetBroadcastChannelEntry is_partnered
+         */
+    
+        /**
+         * Constructs a new GetBroadcastChannelEntry.
+         * @exports GetBroadcastChannelEntry
+         * @classdesc Represents a GetBroadcastChannelEntry.
+         * @implements IGetBroadcastChannelEntry
+         * @constructor
+         * @param {IGetBroadcastChannelEntry=} [properties] Properties to set
+         */
+        function GetBroadcastChannelEntry(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * GetBroadcastChannelEntry broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry unique_name.
+         * @member {string} unique_name
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.unique_name = "";
+    
+        /**
+         * GetBroadcastChannelEntry name.
+         * @member {string} name
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.name = "";
+    
+        /**
+         * GetBroadcastChannelEntry appid.
+         * @member {number} appid
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.appid = 0;
+    
+        /**
+         * GetBroadcastChannelEntry viewers.
+         * @member {number|Long} viewers
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.viewers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry views.
+         * @member {number|Long} views
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.views = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry thumbnail_url.
+         * @member {string} thumbnail_url
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.thumbnail_url = "";
+    
+        /**
+         * GetBroadcastChannelEntry followers.
+         * @member {number|Long} followers
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.followers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry headline.
+         * @member {string} headline
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.headline = "";
+    
+        /**
+         * GetBroadcastChannelEntry avatar_url.
+         * @member {string} avatar_url
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.avatar_url = "";
+    
+        /**
+         * GetBroadcastChannelEntry broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry subscribers.
+         * @member {number|Long} subscribers
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.subscribers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * GetBroadcastChannelEntry background_url.
+         * @member {string} background_url
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.background_url = "";
+    
+        /**
+         * GetBroadcastChannelEntry is_featured.
+         * @member {boolean} is_featured
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.is_featured = false;
+    
+        /**
+         * GetBroadcastChannelEntry is_disabled.
+         * @member {boolean} is_disabled
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.is_disabled = false;
+    
+        /**
+         * GetBroadcastChannelEntry is_live.
+         * @member {boolean} is_live
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.is_live = false;
+    
+        /**
+         * GetBroadcastChannelEntry language.
+         * @member {string} language
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.language = "";
+    
+        /**
+         * GetBroadcastChannelEntry reports.
+         * @member {number} reports
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.reports = 0;
+    
+        /**
+         * GetBroadcastChannelEntry is_partnered.
+         * @member {boolean} is_partnered
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         */
+        GetBroadcastChannelEntry.prototype.is_partnered = false;
+    
+        /**
+         * Creates a new GetBroadcastChannelEntry instance using the specified properties.
+         * @function create
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {IGetBroadcastChannelEntry=} [properties] Properties to set
+         * @returns {GetBroadcastChannelEntry} GetBroadcastChannelEntry instance
+         */
+        GetBroadcastChannelEntry.create = function create(properties) {
+            return new GetBroadcastChannelEntry(properties);
+        };
+    
+        /**
+         * Encodes the specified GetBroadcastChannelEntry message. Does not implicitly {@link GetBroadcastChannelEntry.verify|verify} messages.
+         * @function encode
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {IGetBroadcastChannelEntry} message GetBroadcastChannelEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetBroadcastChannelEntry.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.unique_name);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.appid);
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.viewers);
+            if (message.views != null && message.hasOwnProperty("views"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.views);
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.thumbnail_url);
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.followers);
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.headline);
+            if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.avatar_url);
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 11, wireType 1 =*/89).fixed64(message.broadcaster_steamid);
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint64(message.subscribers);
+            if (message.background_url != null && message.hasOwnProperty("background_url"))
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.background_url);
+            if (message.is_featured != null && message.hasOwnProperty("is_featured"))
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_featured);
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.is_disabled);
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.is_live);
+            if (message.language != null && message.hasOwnProperty("language"))
+                writer.uint32(/* id 17, wireType 2 =*/138).string(message.language);
+            if (message.reports != null && message.hasOwnProperty("reports"))
+                writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.reports);
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.is_partnered);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified GetBroadcastChannelEntry message, length delimited. Does not implicitly {@link GetBroadcastChannelEntry.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {IGetBroadcastChannelEntry} message GetBroadcastChannelEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetBroadcastChannelEntry.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a GetBroadcastChannelEntry message from the specified reader or buffer.
+         * @function decode
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GetBroadcastChannelEntry} GetBroadcastChannelEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetBroadcastChannelEntry.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GetBroadcastChannelEntry();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.unique_name = reader.string();
+                    break;
+                case 3:
+                    message.name = reader.string();
+                    break;
+                case 4:
+                    message.appid = reader.uint32();
+                    break;
+                case 5:
+                    message.viewers = reader.uint64();
+                    break;
+                case 6:
+                    message.views = reader.uint64();
+                    break;
+                case 7:
+                    message.thumbnail_url = reader.string();
+                    break;
+                case 8:
+                    message.followers = reader.uint64();
+                    break;
+                case 9:
+                    message.headline = reader.string();
+                    break;
+                case 10:
+                    message.avatar_url = reader.string();
+                    break;
+                case 11:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 12:
+                    message.subscribers = reader.uint64();
+                    break;
+                case 13:
+                    message.background_url = reader.string();
+                    break;
+                case 14:
+                    message.is_featured = reader.bool();
+                    break;
+                case 15:
+                    message.is_disabled = reader.bool();
+                    break;
+                case 16:
+                    message.is_live = reader.bool();
+                    break;
+                case 17:
+                    message.language = reader.string();
+                    break;
+                case 18:
+                    message.reports = reader.uint32();
+                    break;
+                case 19:
+                    message.is_partnered = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a GetBroadcastChannelEntry message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GetBroadcastChannelEntry} GetBroadcastChannelEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetBroadcastChannelEntry.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a GetBroadcastChannelEntry message.
+         * @function verify
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetBroadcastChannelEntry.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                if (!$util.isString(message.unique_name))
+                    return "unique_name: string expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (!$util.isInteger(message.viewers) && !(message.viewers && $util.isInteger(message.viewers.low) && $util.isInteger(message.viewers.high)))
+                    return "viewers: integer|Long expected";
+            if (message.views != null && message.hasOwnProperty("views"))
+                if (!$util.isInteger(message.views) && !(message.views && $util.isInteger(message.views.low) && $util.isInteger(message.views.high)))
+                    return "views: integer|Long expected";
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                if (!$util.isString(message.thumbnail_url))
+                    return "thumbnail_url: string expected";
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                if (!$util.isInteger(message.followers) && !(message.followers && $util.isInteger(message.followers.low) && $util.isInteger(message.followers.high)))
+                    return "followers: integer|Long expected";
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                if (!$util.isString(message.headline))
+                    return "headline: string expected";
+            if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                if (!$util.isString(message.avatar_url))
+                    return "avatar_url: string expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                if (!$util.isInteger(message.subscribers) && !(message.subscribers && $util.isInteger(message.subscribers.low) && $util.isInteger(message.subscribers.high)))
+                    return "subscribers: integer|Long expected";
+            if (message.background_url != null && message.hasOwnProperty("background_url"))
+                if (!$util.isString(message.background_url))
+                    return "background_url: string expected";
+            if (message.is_featured != null && message.hasOwnProperty("is_featured"))
+                if (typeof message.is_featured !== "boolean")
+                    return "is_featured: boolean expected";
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                if (typeof message.is_disabled !== "boolean")
+                    return "is_disabled: boolean expected";
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                if (typeof message.is_live !== "boolean")
+                    return "is_live: boolean expected";
+            if (message.language != null && message.hasOwnProperty("language"))
+                if (!$util.isString(message.language))
+                    return "language: string expected";
+            if (message.reports != null && message.hasOwnProperty("reports"))
+                if (!$util.isInteger(message.reports))
+                    return "reports: integer expected";
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                if (typeof message.is_partnered !== "boolean")
+                    return "is_partnered: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a GetBroadcastChannelEntry message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GetBroadcastChannelEntry} GetBroadcastChannelEntry
+         */
+        GetBroadcastChannelEntry.fromObject = function fromObject(object) {
+            if (object instanceof $root.GetBroadcastChannelEntry)
+                return object;
+            var message = new $root.GetBroadcastChannelEntry();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            if (object.unique_name != null)
+                message.unique_name = String(object.unique_name);
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.viewers != null)
+                if ($util.Long)
+                    (message.viewers = $util.Long.fromValue(object.viewers)).unsigned = true;
+                else if (typeof object.viewers === "string")
+                    message.viewers = parseInt(object.viewers, 10);
+                else if (typeof object.viewers === "number")
+                    message.viewers = object.viewers;
+                else if (typeof object.viewers === "object")
+                    message.viewers = new $util.LongBits(object.viewers.low >>> 0, object.viewers.high >>> 0).toNumber(true);
+            if (object.views != null)
+                if ($util.Long)
+                    (message.views = $util.Long.fromValue(object.views)).unsigned = true;
+                else if (typeof object.views === "string")
+                    message.views = parseInt(object.views, 10);
+                else if (typeof object.views === "number")
+                    message.views = object.views;
+                else if (typeof object.views === "object")
+                    message.views = new $util.LongBits(object.views.low >>> 0, object.views.high >>> 0).toNumber(true);
+            if (object.thumbnail_url != null)
+                message.thumbnail_url = String(object.thumbnail_url);
+            if (object.followers != null)
+                if ($util.Long)
+                    (message.followers = $util.Long.fromValue(object.followers)).unsigned = true;
+                else if (typeof object.followers === "string")
+                    message.followers = parseInt(object.followers, 10);
+                else if (typeof object.followers === "number")
+                    message.followers = object.followers;
+                else if (typeof object.followers === "object")
+                    message.followers = new $util.LongBits(object.followers.low >>> 0, object.followers.high >>> 0).toNumber(true);
+            if (object.headline != null)
+                message.headline = String(object.headline);
+            if (object.avatar_url != null)
+                message.avatar_url = String(object.avatar_url);
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.subscribers != null)
+                if ($util.Long)
+                    (message.subscribers = $util.Long.fromValue(object.subscribers)).unsigned = true;
+                else if (typeof object.subscribers === "string")
+                    message.subscribers = parseInt(object.subscribers, 10);
+                else if (typeof object.subscribers === "number")
+                    message.subscribers = object.subscribers;
+                else if (typeof object.subscribers === "object")
+                    message.subscribers = new $util.LongBits(object.subscribers.low >>> 0, object.subscribers.high >>> 0).toNumber(true);
+            if (object.background_url != null)
+                message.background_url = String(object.background_url);
+            if (object.is_featured != null)
+                message.is_featured = Boolean(object.is_featured);
+            if (object.is_disabled != null)
+                message.is_disabled = Boolean(object.is_disabled);
+            if (object.is_live != null)
+                message.is_live = Boolean(object.is_live);
+            if (object.language != null)
+                message.language = String(object.language);
+            if (object.reports != null)
+                message.reports = object.reports >>> 0;
+            if (object.is_partnered != null)
+                message.is_partnered = Boolean(object.is_partnered);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a GetBroadcastChannelEntry message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GetBroadcastChannelEntry
+         * @static
+         * @param {GetBroadcastChannelEntry} message GetBroadcastChannelEntry
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetBroadcastChannelEntry.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+                object.unique_name = "";
+                object.name = "";
+                object.appid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.viewers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewers = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.views = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.views = options.longs === String ? "0" : 0;
+                object.thumbnail_url = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.followers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.followers = options.longs === String ? "0" : 0;
+                object.headline = "";
+                object.avatar_url = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.subscribers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.subscribers = options.longs === String ? "0" : 0;
+                object.background_url = "";
+                object.is_featured = false;
+                object.is_disabled = false;
+                object.is_live = false;
+                object.language = "";
+                object.reports = 0;
+                object.is_partnered = false;
+            }
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            if (message.unique_name != null && message.hasOwnProperty("unique_name"))
+                object.unique_name = message.unique_name;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (typeof message.viewers === "number")
+                    object.viewers = options.longs === String ? String(message.viewers) : message.viewers;
+                else
+                    object.viewers = options.longs === String ? $util.Long.prototype.toString.call(message.viewers) : options.longs === Number ? new $util.LongBits(message.viewers.low >>> 0, message.viewers.high >>> 0).toNumber(true) : message.viewers;
+            if (message.views != null && message.hasOwnProperty("views"))
+                if (typeof message.views === "number")
+                    object.views = options.longs === String ? String(message.views) : message.views;
+                else
+                    object.views = options.longs === String ? $util.Long.prototype.toString.call(message.views) : options.longs === Number ? new $util.LongBits(message.views.low >>> 0, message.views.high >>> 0).toNumber(true) : message.views;
+            if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
+                object.thumbnail_url = message.thumbnail_url;
+            if (message.followers != null && message.hasOwnProperty("followers"))
+                if (typeof message.followers === "number")
+                    object.followers = options.longs === String ? String(message.followers) : message.followers;
+                else
+                    object.followers = options.longs === String ? $util.Long.prototype.toString.call(message.followers) : options.longs === Number ? new $util.LongBits(message.followers.low >>> 0, message.followers.high >>> 0).toNumber(true) : message.followers;
+            if (message.headline != null && message.hasOwnProperty("headline"))
+                object.headline = message.headline;
+            if (message.avatar_url != null && message.hasOwnProperty("avatar_url"))
+                object.avatar_url = message.avatar_url;
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.subscribers != null && message.hasOwnProperty("subscribers"))
+                if (typeof message.subscribers === "number")
+                    object.subscribers = options.longs === String ? String(message.subscribers) : message.subscribers;
+                else
+                    object.subscribers = options.longs === String ? $util.Long.prototype.toString.call(message.subscribers) : options.longs === Number ? new $util.LongBits(message.subscribers.low >>> 0, message.subscribers.high >>> 0).toNumber(true) : message.subscribers;
+            if (message.background_url != null && message.hasOwnProperty("background_url"))
+                object.background_url = message.background_url;
+            if (message.is_featured != null && message.hasOwnProperty("is_featured"))
+                object.is_featured = message.is_featured;
+            if (message.is_disabled != null && message.hasOwnProperty("is_disabled"))
+                object.is_disabled = message.is_disabled;
+            if (message.is_live != null && message.hasOwnProperty("is_live"))
+                object.is_live = message.is_live;
+            if (message.language != null && message.hasOwnProperty("language"))
+                object.language = message.language;
+            if (message.reports != null && message.hasOwnProperty("reports"))
+                object.reports = message.reports;
+            if (message.is_partnered != null && message.hasOwnProperty("is_partnered"))
+                object.is_partnered = message.is_partnered;
+            return object;
+        };
+    
+        /**
+         * Converts this GetBroadcastChannelEntry to JSON.
+         * @function toJSON
+         * @memberof GetBroadcastChannelEntry
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetBroadcastChannelEntry.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return GetBroadcastChannelEntry;
+    })();
+    
+    $root.CSteamTV_GetFollowedChannels_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetFollowedChannels_Response.
+         * @exports ICSteamTV_GetFollowedChannels_Response
+         * @interface ICSteamTV_GetFollowedChannels_Response
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [results] CSteamTV_GetFollowedChannels_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetFollowedChannels_Response.
+         * @exports CSteamTV_GetFollowedChannels_Response
+         * @classdesc Represents a CSteamTV_GetFollowedChannels_Response.
+         * @implements ICSteamTV_GetFollowedChannels_Response
+         * @constructor
+         * @param {ICSteamTV_GetFollowedChannels_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetFollowedChannels_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetFollowedChannels_Response results.
+         * @member {Array.<IGetBroadcastChannelEntry>} results
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @instance
+         */
+        CSteamTV_GetFollowedChannels_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetFollowedChannels_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetFollowedChannels_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetFollowedChannels_Response} CSteamTV_GetFollowedChannels_Response instance
+         */
+        CSteamTV_GetFollowedChannels_Response.create = function create(properties) {
+            return new CSteamTV_GetFollowedChannels_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetFollowedChannels_Response message. Does not implicitly {@link CSteamTV_GetFollowedChannels_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetFollowedChannels_Response} message CSteamTV_GetFollowedChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetFollowedChannels_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetFollowedChannels_Response message, length delimited. Does not implicitly {@link CSteamTV_GetFollowedChannels_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetFollowedChannels_Response} message CSteamTV_GetFollowedChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetFollowedChannels_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetFollowedChannels_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetFollowedChannels_Response} CSteamTV_GetFollowedChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetFollowedChannels_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetFollowedChannels_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetFollowedChannels_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetFollowedChannels_Response} CSteamTV_GetFollowedChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetFollowedChannels_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetFollowedChannels_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetFollowedChannels_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetFollowedChannels_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetFollowedChannels_Response} CSteamTV_GetFollowedChannels_Response
+         */
+        CSteamTV_GetFollowedChannels_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetFollowedChannels_Response)
+                return object;
+            var message = new $root.CSteamTV_GetFollowedChannels_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetFollowedChannels_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetFollowedChannels_Response.results: object expected");
+                    message.results[i] = $root.GetBroadcastChannelEntry.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetFollowedChannels_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @static
+         * @param {CSteamTV_GetFollowedChannels_Response} message CSteamTV_GetFollowedChannels_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetFollowedChannels_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.GetBroadcastChannelEntry.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetFollowedChannels_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetFollowedChannels_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetFollowedChannels_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetFollowedChannels_Response;
+    })();
+    
+    $root.CSteamTV_GetSubscribedChannels_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetSubscribedChannels_Response.
+         * @exports ICSteamTV_GetSubscribedChannels_Response
+         * @interface ICSteamTV_GetSubscribedChannels_Response
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [results] CSteamTV_GetSubscribedChannels_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetSubscribedChannels_Response.
+         * @exports CSteamTV_GetSubscribedChannels_Response
+         * @classdesc Represents a CSteamTV_GetSubscribedChannels_Response.
+         * @implements ICSteamTV_GetSubscribedChannels_Response
+         * @constructor
+         * @param {ICSteamTV_GetSubscribedChannels_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetSubscribedChannels_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetSubscribedChannels_Response results.
+         * @member {Array.<IGetBroadcastChannelEntry>} results
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @instance
+         */
+        CSteamTV_GetSubscribedChannels_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetSubscribedChannels_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetSubscribedChannels_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetSubscribedChannels_Response} CSteamTV_GetSubscribedChannels_Response instance
+         */
+        CSteamTV_GetSubscribedChannels_Response.create = function create(properties) {
+            return new CSteamTV_GetSubscribedChannels_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetSubscribedChannels_Response message. Does not implicitly {@link CSteamTV_GetSubscribedChannels_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetSubscribedChannels_Response} message CSteamTV_GetSubscribedChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetSubscribedChannels_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetSubscribedChannels_Response message, length delimited. Does not implicitly {@link CSteamTV_GetSubscribedChannels_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {ICSteamTV_GetSubscribedChannels_Response} message CSteamTV_GetSubscribedChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetSubscribedChannels_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetSubscribedChannels_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetSubscribedChannels_Response} CSteamTV_GetSubscribedChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetSubscribedChannels_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetSubscribedChannels_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetSubscribedChannels_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetSubscribedChannels_Response} CSteamTV_GetSubscribedChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetSubscribedChannels_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetSubscribedChannels_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetSubscribedChannels_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetSubscribedChannels_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetSubscribedChannels_Response} CSteamTV_GetSubscribedChannels_Response
+         */
+        CSteamTV_GetSubscribedChannels_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetSubscribedChannels_Response)
+                return object;
+            var message = new $root.CSteamTV_GetSubscribedChannels_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetSubscribedChannels_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetSubscribedChannels_Response.results: object expected");
+                    message.results[i] = $root.GetBroadcastChannelEntry.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetSubscribedChannels_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @static
+         * @param {CSteamTV_GetSubscribedChannels_Response} message CSteamTV_GetSubscribedChannels_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetSubscribedChannels_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.GetBroadcastChannelEntry.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetSubscribedChannels_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetSubscribedChannels_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetSubscribedChannels_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetSubscribedChannels_Response;
+    })();
+    
+    $root.CSteamTV_FollowBroadcastChannel_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_FollowBroadcastChannel_Response.
+         * @exports ICSteamTV_FollowBroadcastChannel_Response
+         * @interface ICSteamTV_FollowBroadcastChannel_Response
+         * @property {boolean|null} [is_followed] CSteamTV_FollowBroadcastChannel_Response is_followed
+         */
+    
+        /**
+         * Constructs a new CSteamTV_FollowBroadcastChannel_Response.
+         * @exports CSteamTV_FollowBroadcastChannel_Response
+         * @classdesc Represents a CSteamTV_FollowBroadcastChannel_Response.
+         * @implements ICSteamTV_FollowBroadcastChannel_Response
+         * @constructor
+         * @param {ICSteamTV_FollowBroadcastChannel_Response=} [properties] Properties to set
+         */
+        function CSteamTV_FollowBroadcastChannel_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_FollowBroadcastChannel_Response is_followed.
+         * @member {boolean} is_followed
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @instance
+         */
+        CSteamTV_FollowBroadcastChannel_Response.prototype.is_followed = false;
+    
+        /**
+         * Creates a new CSteamTV_FollowBroadcastChannel_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_FollowBroadcastChannel_Response=} [properties] Properties to set
+         * @returns {CSteamTV_FollowBroadcastChannel_Response} CSteamTV_FollowBroadcastChannel_Response instance
+         */
+        CSteamTV_FollowBroadcastChannel_Response.create = function create(properties) {
+            return new CSteamTV_FollowBroadcastChannel_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_FollowBroadcastChannel_Response message. Does not implicitly {@link CSteamTV_FollowBroadcastChannel_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_FollowBroadcastChannel_Response} message CSteamTV_FollowBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_FollowBroadcastChannel_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_followed);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_FollowBroadcastChannel_Response message, length delimited. Does not implicitly {@link CSteamTV_FollowBroadcastChannel_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_FollowBroadcastChannel_Response} message CSteamTV_FollowBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_FollowBroadcastChannel_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_FollowBroadcastChannel_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_FollowBroadcastChannel_Response} CSteamTV_FollowBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_FollowBroadcastChannel_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_FollowBroadcastChannel_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.is_followed = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_FollowBroadcastChannel_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_FollowBroadcastChannel_Response} CSteamTV_FollowBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_FollowBroadcastChannel_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_FollowBroadcastChannel_Response message.
+         * @function verify
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_FollowBroadcastChannel_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                if (typeof message.is_followed !== "boolean")
+                    return "is_followed: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_FollowBroadcastChannel_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_FollowBroadcastChannel_Response} CSteamTV_FollowBroadcastChannel_Response
+         */
+        CSteamTV_FollowBroadcastChannel_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_FollowBroadcastChannel_Response)
+                return object;
+            var message = new $root.CSteamTV_FollowBroadcastChannel_Response();
+            if (object.is_followed != null)
+                message.is_followed = Boolean(object.is_followed);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_FollowBroadcastChannel_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @static
+         * @param {CSteamTV_FollowBroadcastChannel_Response} message CSteamTV_FollowBroadcastChannel_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_FollowBroadcastChannel_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.is_followed = false;
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                object.is_followed = message.is_followed;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_FollowBroadcastChannel_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_FollowBroadcastChannel_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_FollowBroadcastChannel_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_FollowBroadcastChannel_Response;
+    })();
+    
+    $root.CSteamTV_SubscribeBroadcastChannel_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SubscribeBroadcastChannel_Response.
+         * @exports ICSteamTV_SubscribeBroadcastChannel_Response
+         * @interface ICSteamTV_SubscribeBroadcastChannel_Response
+         * @property {boolean|null} [is_subscribed] CSteamTV_SubscribeBroadcastChannel_Response is_subscribed
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SubscribeBroadcastChannel_Response.
+         * @exports CSteamTV_SubscribeBroadcastChannel_Response
+         * @classdesc Represents a CSteamTV_SubscribeBroadcastChannel_Response.
+         * @implements ICSteamTV_SubscribeBroadcastChannel_Response
+         * @constructor
+         * @param {ICSteamTV_SubscribeBroadcastChannel_Response=} [properties] Properties to set
+         */
+        function CSteamTV_SubscribeBroadcastChannel_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_SubscribeBroadcastChannel_Response is_subscribed.
+         * @member {boolean} is_subscribed
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @instance
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.prototype.is_subscribed = false;
+    
+        /**
+         * Creates a new CSteamTV_SubscribeBroadcastChannel_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_SubscribeBroadcastChannel_Response=} [properties] Properties to set
+         * @returns {CSteamTV_SubscribeBroadcastChannel_Response} CSteamTV_SubscribeBroadcastChannel_Response instance
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.create = function create(properties) {
+            return new CSteamTV_SubscribeBroadcastChannel_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SubscribeBroadcastChannel_Response message. Does not implicitly {@link CSteamTV_SubscribeBroadcastChannel_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_SubscribeBroadcastChannel_Response} message CSteamTV_SubscribeBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_subscribed);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SubscribeBroadcastChannel_Response message, length delimited. Does not implicitly {@link CSteamTV_SubscribeBroadcastChannel_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_SubscribeBroadcastChannel_Response} message CSteamTV_SubscribeBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SubscribeBroadcastChannel_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SubscribeBroadcastChannel_Response} CSteamTV_SubscribeBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SubscribeBroadcastChannel_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.is_subscribed = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SubscribeBroadcastChannel_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SubscribeBroadcastChannel_Response} CSteamTV_SubscribeBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SubscribeBroadcastChannel_Response message.
+         * @function verify
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                if (typeof message.is_subscribed !== "boolean")
+                    return "is_subscribed: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SubscribeBroadcastChannel_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SubscribeBroadcastChannel_Response} CSteamTV_SubscribeBroadcastChannel_Response
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SubscribeBroadcastChannel_Response)
+                return object;
+            var message = new $root.CSteamTV_SubscribeBroadcastChannel_Response();
+            if (object.is_subscribed != null)
+                message.is_subscribed = Boolean(object.is_subscribed);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SubscribeBroadcastChannel_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @static
+         * @param {CSteamTV_SubscribeBroadcastChannel_Response} message CSteamTV_SubscribeBroadcastChannel_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.is_subscribed = false;
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                object.is_subscribed = message.is_subscribed;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_SubscribeBroadcastChannel_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SubscribeBroadcastChannel_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SubscribeBroadcastChannel_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SubscribeBroadcastChannel_Response;
+    })();
+    
+    $root.CSteamTV_ReportBroadcastChannel_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_ReportBroadcastChannel_Response.
+         * @exports ICSteamTV_ReportBroadcastChannel_Response
+         * @interface ICSteamTV_ReportBroadcastChannel_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_ReportBroadcastChannel_Response.
+         * @exports CSteamTV_ReportBroadcastChannel_Response
+         * @classdesc Represents a CSteamTV_ReportBroadcastChannel_Response.
+         * @implements ICSteamTV_ReportBroadcastChannel_Response
+         * @constructor
+         * @param {ICSteamTV_ReportBroadcastChannel_Response=} [properties] Properties to set
+         */
+        function CSteamTV_ReportBroadcastChannel_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_ReportBroadcastChannel_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_ReportBroadcastChannel_Response=} [properties] Properties to set
+         * @returns {CSteamTV_ReportBroadcastChannel_Response} CSteamTV_ReportBroadcastChannel_Response instance
+         */
+        CSteamTV_ReportBroadcastChannel_Response.create = function create(properties) {
+            return new CSteamTV_ReportBroadcastChannel_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ReportBroadcastChannel_Response message. Does not implicitly {@link CSteamTV_ReportBroadcastChannel_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_ReportBroadcastChannel_Response} message CSteamTV_ReportBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ReportBroadcastChannel_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ReportBroadcastChannel_Response message, length delimited. Does not implicitly {@link CSteamTV_ReportBroadcastChannel_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {ICSteamTV_ReportBroadcastChannel_Response} message CSteamTV_ReportBroadcastChannel_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ReportBroadcastChannel_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_ReportBroadcastChannel_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_ReportBroadcastChannel_Response} CSteamTV_ReportBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ReportBroadcastChannel_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_ReportBroadcastChannel_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_ReportBroadcastChannel_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_ReportBroadcastChannel_Response} CSteamTV_ReportBroadcastChannel_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ReportBroadcastChannel_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_ReportBroadcastChannel_Response message.
+         * @function verify
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_ReportBroadcastChannel_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_ReportBroadcastChannel_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_ReportBroadcastChannel_Response} CSteamTV_ReportBroadcastChannel_Response
+         */
+        CSteamTV_ReportBroadcastChannel_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_ReportBroadcastChannel_Response)
+                return object;
+            return new $root.CSteamTV_ReportBroadcastChannel_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_ReportBroadcastChannel_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @static
+         * @param {CSteamTV_ReportBroadcastChannel_Response} message CSteamTV_ReportBroadcastChannel_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_ReportBroadcastChannel_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_ReportBroadcastChannel_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_ReportBroadcastChannel_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_ReportBroadcastChannel_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_ReportBroadcastChannel_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelInteraction_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelInteraction_Response.
+         * @exports ICSteamTV_GetBroadcastChannelInteraction_Response
+         * @interface ICSteamTV_GetBroadcastChannelInteraction_Response
+         * @property {boolean|null} [is_followed] CSteamTV_GetBroadcastChannelInteraction_Response is_followed
+         * @property {boolean|null} [is_subscribed] CSteamTV_GetBroadcastChannelInteraction_Response is_subscribed
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelInteraction_Response.
+         * @exports CSteamTV_GetBroadcastChannelInteraction_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelInteraction_Response.
+         * @implements ICSteamTV_GetBroadcastChannelInteraction_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelInteraction_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelInteraction_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelInteraction_Response is_followed.
+         * @member {boolean} is_followed
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.prototype.is_followed = false;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelInteraction_Response is_subscribed.
+         * @member {boolean} is_subscribed
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.prototype.is_subscribed = false;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelInteraction_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelInteraction_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelInteraction_Response} CSteamTV_GetBroadcastChannelInteraction_Response instance
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelInteraction_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelInteraction_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelInteraction_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelInteraction_Response} message CSteamTV_GetBroadcastChannelInteraction_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_followed);
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.is_subscribed);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelInteraction_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelInteraction_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelInteraction_Response} message CSteamTV_GetBroadcastChannelInteraction_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelInteraction_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelInteraction_Response} CSteamTV_GetBroadcastChannelInteraction_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelInteraction_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.is_followed = reader.bool();
+                    break;
+                case 2:
+                    message.is_subscribed = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelInteraction_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelInteraction_Response} CSteamTV_GetBroadcastChannelInteraction_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelInteraction_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                if (typeof message.is_followed !== "boolean")
+                    return "is_followed: boolean expected";
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                if (typeof message.is_subscribed !== "boolean")
+                    return "is_subscribed: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelInteraction_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelInteraction_Response} CSteamTV_GetBroadcastChannelInteraction_Response
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelInteraction_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelInteraction_Response();
+            if (object.is_followed != null)
+                message.is_followed = Boolean(object.is_followed);
+            if (object.is_subscribed != null)
+                message.is_subscribed = Boolean(object.is_subscribed);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelInteraction_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelInteraction_Response} message CSteamTV_GetBroadcastChannelInteraction_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.is_followed = false;
+                object.is_subscribed = false;
+            }
+            if (message.is_followed != null && message.hasOwnProperty("is_followed"))
+                object.is_followed = message.is_followed;
+            if (message.is_subscribed != null && message.hasOwnProperty("is_subscribed"))
+                object.is_subscribed = message.is_subscribed;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelInteraction_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelInteraction_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelInteraction_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelInteraction_Response;
+    })();
+    
+    $root.CSteamTV_Game = (function() {
+    
+        /**
+         * Properties of a CSteamTV_Game.
+         * @exports ICSteamTV_Game
+         * @interface ICSteamTV_Game
+         * @property {number|null} [appid] CSteamTV_Game appid
+         * @property {string|null} [name] CSteamTV_Game name
+         * @property {string|null} [image] CSteamTV_Game image
+         * @property {number|Long|null} [viewers] CSteamTV_Game viewers
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [channels] CSteamTV_Game channels
+         * @property {string|null} [release_date] CSteamTV_Game release_date
+         * @property {string|null} [developer] CSteamTV_Game developer
+         * @property {string|null} [publisher] CSteamTV_Game publisher
+         */
+    
+        /**
+         * Constructs a new CSteamTV_Game.
+         * @exports CSteamTV_Game
+         * @classdesc Represents a CSteamTV_Game.
+         * @implements ICSteamTV_Game
+         * @constructor
+         * @param {ICSteamTV_Game=} [properties] Properties to set
+         */
+        function CSteamTV_Game(properties) {
+            this.channels = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_Game appid.
+         * @member {number} appid
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.appid = 0;
+    
+        /**
+         * CSteamTV_Game name.
+         * @member {string} name
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.name = "";
+    
+        /**
+         * CSteamTV_Game image.
+         * @member {string} image
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.image = "";
+    
+        /**
+         * CSteamTV_Game viewers.
+         * @member {number|Long} viewers
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.viewers = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_Game channels.
+         * @member {Array.<IGetBroadcastChannelEntry>} channels
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.channels = $util.emptyArray;
+    
+        /**
+         * CSteamTV_Game release_date.
+         * @member {string} release_date
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.release_date = "";
+    
+        /**
+         * CSteamTV_Game developer.
+         * @member {string} developer
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.developer = "";
+    
+        /**
+         * CSteamTV_Game publisher.
+         * @member {string} publisher
+         * @memberof CSteamTV_Game
+         * @instance
+         */
+        CSteamTV_Game.prototype.publisher = "";
+    
+        /**
+         * Creates a new CSteamTV_Game instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {ICSteamTV_Game=} [properties] Properties to set
+         * @returns {CSteamTV_Game} CSteamTV_Game instance
+         */
+        CSteamTV_Game.create = function create(properties) {
+            return new CSteamTV_Game(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_Game message. Does not implicitly {@link CSteamTV_Game.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {ICSteamTV_Game} message CSteamTV_Game message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_Game.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.image != null && message.hasOwnProperty("image"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.image);
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.viewers);
+            if (message.channels != null && message.channels.length)
+                for (var i = 0; i < message.channels.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.channels[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.release_date != null && message.hasOwnProperty("release_date"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.release_date);
+            if (message.developer != null && message.hasOwnProperty("developer"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.developer);
+            if (message.publisher != null && message.hasOwnProperty("publisher"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.publisher);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_Game message, length delimited. Does not implicitly {@link CSteamTV_Game.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {ICSteamTV_Game} message CSteamTV_Game message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_Game.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_Game message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_Game} CSteamTV_Game
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_Game.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_Game();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.image = reader.string();
+                    break;
+                case 4:
+                    message.viewers = reader.uint64();
+                    break;
+                case 5:
+                    if (!(message.channels && message.channels.length))
+                        message.channels = [];
+                    message.channels.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    message.release_date = reader.string();
+                    break;
+                case 7:
+                    message.developer = reader.string();
+                    break;
+                case 8:
+                    message.publisher = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_Game message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_Game} CSteamTV_Game
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_Game.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_Game message.
+         * @function verify
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_Game.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.image != null && message.hasOwnProperty("image"))
+                if (!$util.isString(message.image))
+                    return "image: string expected";
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (!$util.isInteger(message.viewers) && !(message.viewers && $util.isInteger(message.viewers.low) && $util.isInteger(message.viewers.high)))
+                    return "viewers: integer|Long expected";
+            if (message.channels != null && message.hasOwnProperty("channels")) {
+                if (!Array.isArray(message.channels))
+                    return "channels: array expected";
+                for (var i = 0; i < message.channels.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.channels[i]);
+                    if (error)
+                        return "channels." + error;
+                }
+            }
+            if (message.release_date != null && message.hasOwnProperty("release_date"))
+                if (!$util.isString(message.release_date))
+                    return "release_date: string expected";
+            if (message.developer != null && message.hasOwnProperty("developer"))
+                if (!$util.isString(message.developer))
+                    return "developer: string expected";
+            if (message.publisher != null && message.hasOwnProperty("publisher"))
+                if (!$util.isString(message.publisher))
+                    return "publisher: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_Game message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_Game} CSteamTV_Game
+         */
+        CSteamTV_Game.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_Game)
+                return object;
+            var message = new $root.CSteamTV_Game();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.image != null)
+                message.image = String(object.image);
+            if (object.viewers != null)
+                if ($util.Long)
+                    (message.viewers = $util.Long.fromValue(object.viewers)).unsigned = true;
+                else if (typeof object.viewers === "string")
+                    message.viewers = parseInt(object.viewers, 10);
+                else if (typeof object.viewers === "number")
+                    message.viewers = object.viewers;
+                else if (typeof object.viewers === "object")
+                    message.viewers = new $util.LongBits(object.viewers.low >>> 0, object.viewers.high >>> 0).toNumber(true);
+            if (object.channels) {
+                if (!Array.isArray(object.channels))
+                    throw TypeError(".CSteamTV_Game.channels: array expected");
+                message.channels = [];
+                for (var i = 0; i < object.channels.length; ++i) {
+                    if (typeof object.channels[i] !== "object")
+                        throw TypeError(".CSteamTV_Game.channels: object expected");
+                    message.channels[i] = $root.GetBroadcastChannelEntry.fromObject(object.channels[i]);
+                }
+            }
+            if (object.release_date != null)
+                message.release_date = String(object.release_date);
+            if (object.developer != null)
+                message.developer = String(object.developer);
+            if (object.publisher != null)
+                message.publisher = String(object.publisher);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_Game message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_Game
+         * @static
+         * @param {CSteamTV_Game} message CSteamTV_Game
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_Game.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.channels = [];
+            if (options.defaults) {
+                object.appid = 0;
+                object.name = "";
+                object.image = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.viewers = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewers = options.longs === String ? "0" : 0;
+                object.release_date = "";
+                object.developer = "";
+                object.publisher = "";
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.image != null && message.hasOwnProperty("image"))
+                object.image = message.image;
+            if (message.viewers != null && message.hasOwnProperty("viewers"))
+                if (typeof message.viewers === "number")
+                    object.viewers = options.longs === String ? String(message.viewers) : message.viewers;
+                else
+                    object.viewers = options.longs === String ? $util.Long.prototype.toString.call(message.viewers) : options.longs === Number ? new $util.LongBits(message.viewers.low >>> 0, message.viewers.high >>> 0).toNumber(true) : message.viewers;
+            if (message.channels && message.channels.length) {
+                object.channels = [];
+                for (var j = 0; j < message.channels.length; ++j)
+                    object.channels[j] = $root.GetBroadcastChannelEntry.toObject(message.channels[j], options);
+            }
+            if (message.release_date != null && message.hasOwnProperty("release_date"))
+                object.release_date = message.release_date;
+            if (message.developer != null && message.hasOwnProperty("developer"))
+                object.developer = message.developer;
+            if (message.publisher != null && message.hasOwnProperty("publisher"))
+                object.publisher = message.publisher;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_Game to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_Game
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_Game.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_Game;
+    })();
+    
+    $root.CSteamTV_GetGames_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetGames_Response.
+         * @exports ICSteamTV_GetGames_Response
+         * @interface ICSteamTV_GetGames_Response
+         * @property {Array.<ICSteamTV_Game>|null} [results] CSteamTV_GetGames_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetGames_Response.
+         * @exports CSteamTV_GetGames_Response
+         * @classdesc Represents a CSteamTV_GetGames_Response.
+         * @implements ICSteamTV_GetGames_Response
+         * @constructor
+         * @param {ICSteamTV_GetGames_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetGames_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetGames_Response results.
+         * @member {Array.<ICSteamTV_Game>} results
+         * @memberof CSteamTV_GetGames_Response
+         * @instance
+         */
+        CSteamTV_GetGames_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetGames_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {ICSteamTV_GetGames_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetGames_Response} CSteamTV_GetGames_Response instance
+         */
+        CSteamTV_GetGames_Response.create = function create(properties) {
+            return new CSteamTV_GetGames_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetGames_Response message. Does not implicitly {@link CSteamTV_GetGames_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {ICSteamTV_GetGames_Response} message CSteamTV_GetGames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetGames_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.CSteamTV_Game.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetGames_Response message, length delimited. Does not implicitly {@link CSteamTV_GetGames_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {ICSteamTV_GetGames_Response} message CSteamTV_GetGames_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetGames_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetGames_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetGames_Response} CSteamTV_GetGames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetGames_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetGames_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.CSteamTV_Game.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetGames_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetGames_Response} CSteamTV_GetGames_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetGames_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetGames_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetGames_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.CSteamTV_Game.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetGames_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetGames_Response} CSteamTV_GetGames_Response
+         */
+        CSteamTV_GetGames_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetGames_Response)
+                return object;
+            var message = new $root.CSteamTV_GetGames_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetGames_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetGames_Response.results: object expected");
+                    message.results[i] = $root.CSteamTV_Game.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetGames_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetGames_Response
+         * @static
+         * @param {CSteamTV_GetGames_Response} message CSteamTV_GetGames_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetGames_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.CSteamTV_Game.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetGames_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetGames_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetGames_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetGames_Response;
+    })();
+    
+    $root.CSteamTV_GetChannels_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetChannels_Response.
+         * @exports ICSteamTV_GetChannels_Response
+         * @interface ICSteamTV_GetChannels_Response
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [results] CSteamTV_GetChannels_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetChannels_Response.
+         * @exports CSteamTV_GetChannels_Response
+         * @classdesc Represents a CSteamTV_GetChannels_Response.
+         * @implements ICSteamTV_GetChannels_Response
+         * @constructor
+         * @param {ICSteamTV_GetChannels_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetChannels_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetChannels_Response results.
+         * @member {Array.<IGetBroadcastChannelEntry>} results
+         * @memberof CSteamTV_GetChannels_Response
+         * @instance
+         */
+        CSteamTV_GetChannels_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetChannels_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {ICSteamTV_GetChannels_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetChannels_Response} CSteamTV_GetChannels_Response instance
+         */
+        CSteamTV_GetChannels_Response.create = function create(properties) {
+            return new CSteamTV_GetChannels_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChannels_Response message. Does not implicitly {@link CSteamTV_GetChannels_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {ICSteamTV_GetChannels_Response} message CSteamTV_GetChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChannels_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChannels_Response message, length delimited. Does not implicitly {@link CSteamTV_GetChannels_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {ICSteamTV_GetChannels_Response} message CSteamTV_GetChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChannels_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChannels_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetChannels_Response} CSteamTV_GetChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChannels_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetChannels_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChannels_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetChannels_Response} CSteamTV_GetChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChannels_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetChannels_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetChannels_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetChannels_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetChannels_Response} CSteamTV_GetChannels_Response
+         */
+        CSteamTV_GetChannels_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetChannels_Response)
+                return object;
+            var message = new $root.CSteamTV_GetChannels_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetChannels_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetChannels_Response.results: object expected");
+                    message.results[i] = $root.GetBroadcastChannelEntry.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetChannels_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetChannels_Response
+         * @static
+         * @param {CSteamTV_GetChannels_Response} message CSteamTV_GetChannels_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetChannels_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.GetBroadcastChannelEntry.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetChannels_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetChannels_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetChannels_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetChannels_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelBroadcasters_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelBroadcasters_Response.
+         * @exports ICSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @interface ICSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @property {Array.<ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster>|null} [broadcasters] CSteamTV_GetBroadcastChannelBroadcasters_Response broadcasters
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelBroadcasters_Response.
+         * @exports CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelBroadcasters_Response.
+         * @implements ICSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelBroadcasters_Response(properties) {
+            this.broadcasters = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelBroadcasters_Response broadcasters.
+         * @member {Array.<ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster>} broadcasters
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.prototype.broadcasters = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelBroadcasters_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response} CSteamTV_GetBroadcastChannelBroadcasters_Response instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelBroadcasters_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelBroadcasters_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelBroadcasters_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response} message CSteamTV_GetBroadcastChannelBroadcasters_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcasters != null && message.broadcasters.length)
+                for (var i = 0; i < message.broadcasters.length; ++i)
+                    $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.encode(message.broadcasters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelBroadcasters_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelBroadcasters_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response} message CSteamTV_GetBroadcastChannelBroadcasters_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelBroadcasters_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response} CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelBroadcasters_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.broadcasters && message.broadcasters.length))
+                        message.broadcasters = [];
+                    message.broadcasters.push($root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelBroadcasters_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response} CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelBroadcasters_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcasters != null && message.hasOwnProperty("broadcasters")) {
+                if (!Array.isArray(message.broadcasters))
+                    return "broadcasters: array expected";
+                for (var i = 0; i < message.broadcasters.length; ++i) {
+                    var error = $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.verify(message.broadcasters[i]);
+                    if (error)
+                        return "broadcasters." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelBroadcasters_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response} CSteamTV_GetBroadcastChannelBroadcasters_Response
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelBroadcasters_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelBroadcasters_Response();
+            if (object.broadcasters) {
+                if (!Array.isArray(object.broadcasters))
+                    throw TypeError(".CSteamTV_GetBroadcastChannelBroadcasters_Response.broadcasters: array expected");
+                message.broadcasters = [];
+                for (var i = 0; i < object.broadcasters.length; ++i) {
+                    if (typeof object.broadcasters[i] !== "object")
+                        throw TypeError(".CSteamTV_GetBroadcastChannelBroadcasters_Response.broadcasters: object expected");
+                    message.broadcasters[i] = $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.fromObject(object.broadcasters[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelBroadcasters_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelBroadcasters_Response} message CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.broadcasters = [];
+            if (message.broadcasters && message.broadcasters.length) {
+                object.broadcasters = [];
+                for (var j = 0; j < message.broadcasters.length; ++j)
+                    object.broadcasters[j] = $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.toObject(message.broadcasters[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelBroadcasters_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelBroadcasters_Response;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.
+         * @exports ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @interface ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @property {number|Long|null} [steamid] CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster steamid
+         * @property {string|null} [name] CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster name
+         * @property {string|null} [rtmp_token] CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster rtmp_token
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.
+         * @exports CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.
+         * @implements ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster steamid.
+         * @member {number|Long} steamid
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster name.
+         * @member {string} name
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.prototype.name = "";
+    
+        /**
+         * CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster rtmp_token.
+         * @member {string} rtmp_token
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.prototype.rtmp_token = "";
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster instance
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message. Does not implicitly {@link CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} message CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rtmp_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} message CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.rtmp_token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (!$util.isString(message.rtmp_token))
+                    return "rtmp_token: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.rtmp_token != null)
+                message.rtmp_token = String(object.rtmp_token);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster} message CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.name = "";
+                object.rtmp_token = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                object.rtmp_token = message.rtmp_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelBroadcasters_Response_Broadcaster;
+    })();
+    
+    $root.CSteamTV_ChatBan = (function() {
+    
+        /**
+         * Properties of a CSteamTV_ChatBan.
+         * @exports ICSteamTV_ChatBan
+         * @interface ICSteamTV_ChatBan
+         * @property {number|Long|null} [issuer_steamid] CSteamTV_ChatBan issuer_steamid
+         * @property {number|Long|null} [chatter_steamid] CSteamTV_ChatBan chatter_steamid
+         * @property {string|null} [time_expires] CSteamTV_ChatBan time_expires
+         * @property {boolean|null} [permanent] CSteamTV_ChatBan permanent
+         * @property {string|null} [name] CSteamTV_ChatBan name
+         */
+    
+        /**
+         * Constructs a new CSteamTV_ChatBan.
+         * @exports CSteamTV_ChatBan
+         * @classdesc Represents a CSteamTV_ChatBan.
+         * @implements ICSteamTV_ChatBan
+         * @constructor
+         * @param {ICSteamTV_ChatBan=} [properties] Properties to set
+         */
+        function CSteamTV_ChatBan(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_ChatBan issuer_steamid.
+         * @member {number|Long} issuer_steamid
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         */
+        CSteamTV_ChatBan.prototype.issuer_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_ChatBan chatter_steamid.
+         * @member {number|Long} chatter_steamid
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         */
+        CSteamTV_ChatBan.prototype.chatter_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_ChatBan time_expires.
+         * @member {string} time_expires
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         */
+        CSteamTV_ChatBan.prototype.time_expires = "";
+    
+        /**
+         * CSteamTV_ChatBan permanent.
+         * @member {boolean} permanent
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         */
+        CSteamTV_ChatBan.prototype.permanent = false;
+    
+        /**
+         * CSteamTV_ChatBan name.
+         * @member {string} name
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         */
+        CSteamTV_ChatBan.prototype.name = "";
+    
+        /**
+         * Creates a new CSteamTV_ChatBan instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {ICSteamTV_ChatBan=} [properties] Properties to set
+         * @returns {CSteamTV_ChatBan} CSteamTV_ChatBan instance
+         */
+        CSteamTV_ChatBan.create = function create(properties) {
+            return new CSteamTV_ChatBan(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ChatBan message. Does not implicitly {@link CSteamTV_ChatBan.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {ICSteamTV_ChatBan} message CSteamTV_ChatBan message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ChatBan.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.issuer_steamid != null && message.hasOwnProperty("issuer_steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.issuer_steamid);
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.chatter_steamid);
+            if (message.time_expires != null && message.hasOwnProperty("time_expires"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.time_expires);
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.permanent);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ChatBan message, length delimited. Does not implicitly {@link CSteamTV_ChatBan.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {ICSteamTV_ChatBan} message CSteamTV_ChatBan message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ChatBan.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_ChatBan message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_ChatBan} CSteamTV_ChatBan
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ChatBan.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_ChatBan();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.issuer_steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.chatter_steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.time_expires = reader.string();
+                    break;
+                case 4:
+                    message.permanent = reader.bool();
+                    break;
+                case 5:
+                    message.name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_ChatBan message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_ChatBan} CSteamTV_ChatBan
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ChatBan.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_ChatBan message.
+         * @function verify
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_ChatBan.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.issuer_steamid != null && message.hasOwnProperty("issuer_steamid"))
+                if (!$util.isInteger(message.issuer_steamid) && !(message.issuer_steamid && $util.isInteger(message.issuer_steamid.low) && $util.isInteger(message.issuer_steamid.high)))
+                    return "issuer_steamid: integer|Long expected";
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                if (!$util.isInteger(message.chatter_steamid) && !(message.chatter_steamid && $util.isInteger(message.chatter_steamid.low) && $util.isInteger(message.chatter_steamid.high)))
+                    return "chatter_steamid: integer|Long expected";
+            if (message.time_expires != null && message.hasOwnProperty("time_expires"))
+                if (!$util.isString(message.time_expires))
+                    return "time_expires: string expected";
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                if (typeof message.permanent !== "boolean")
+                    return "permanent: boolean expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_ChatBan message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_ChatBan} CSteamTV_ChatBan
+         */
+        CSteamTV_ChatBan.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_ChatBan)
+                return object;
+            var message = new $root.CSteamTV_ChatBan();
+            if (object.issuer_steamid != null)
+                if ($util.Long)
+                    (message.issuer_steamid = $util.Long.fromValue(object.issuer_steamid)).unsigned = false;
+                else if (typeof object.issuer_steamid === "string")
+                    message.issuer_steamid = parseInt(object.issuer_steamid, 10);
+                else if (typeof object.issuer_steamid === "number")
+                    message.issuer_steamid = object.issuer_steamid;
+                else if (typeof object.issuer_steamid === "object")
+                    message.issuer_steamid = new $util.LongBits(object.issuer_steamid.low >>> 0, object.issuer_steamid.high >>> 0).toNumber();
+            if (object.chatter_steamid != null)
+                if ($util.Long)
+                    (message.chatter_steamid = $util.Long.fromValue(object.chatter_steamid)).unsigned = false;
+                else if (typeof object.chatter_steamid === "string")
+                    message.chatter_steamid = parseInt(object.chatter_steamid, 10);
+                else if (typeof object.chatter_steamid === "number")
+                    message.chatter_steamid = object.chatter_steamid;
+                else if (typeof object.chatter_steamid === "object")
+                    message.chatter_steamid = new $util.LongBits(object.chatter_steamid.low >>> 0, object.chatter_steamid.high >>> 0).toNumber();
+            if (object.time_expires != null)
+                message.time_expires = String(object.time_expires);
+            if (object.permanent != null)
+                message.permanent = Boolean(object.permanent);
+            if (object.name != null)
+                message.name = String(object.name);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_ChatBan message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_ChatBan
+         * @static
+         * @param {CSteamTV_ChatBan} message CSteamTV_ChatBan
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_ChatBan.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.issuer_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.issuer_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chatter_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chatter_steamid = options.longs === String ? "0" : 0;
+                object.time_expires = "";
+                object.permanent = false;
+                object.name = "";
+            }
+            if (message.issuer_steamid != null && message.hasOwnProperty("issuer_steamid"))
+                if (typeof message.issuer_steamid === "number")
+                    object.issuer_steamid = options.longs === String ? String(message.issuer_steamid) : message.issuer_steamid;
+                else
+                    object.issuer_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.issuer_steamid) : options.longs === Number ? new $util.LongBits(message.issuer_steamid.low >>> 0, message.issuer_steamid.high >>> 0).toNumber() : message.issuer_steamid;
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                if (typeof message.chatter_steamid === "number")
+                    object.chatter_steamid = options.longs === String ? String(message.chatter_steamid) : message.chatter_steamid;
+                else
+                    object.chatter_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.chatter_steamid) : options.longs === Number ? new $util.LongBits(message.chatter_steamid.low >>> 0, message.chatter_steamid.high >>> 0).toNumber() : message.chatter_steamid;
+            if (message.time_expires != null && message.hasOwnProperty("time_expires"))
+                object.time_expires = message.time_expires;
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                object.permanent = message.permanent;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_ChatBan to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_ChatBan
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_ChatBan.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_ChatBan;
+    })();
+    
+    $root.CSteamTV_AddChatBan_Request = (function() {
+    
+        /**
+         * Properties of a CSteamTV_AddChatBan_Request.
+         * @exports ICSteamTV_AddChatBan_Request
+         * @interface ICSteamTV_AddChatBan_Request
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_AddChatBan_Request broadcast_channel_id
+         * @property {number|Long|null} [chatter_steamid] CSteamTV_AddChatBan_Request chatter_steamid
+         * @property {number|null} [duration] CSteamTV_AddChatBan_Request duration
+         * @property {boolean|null} [permanent] CSteamTV_AddChatBan_Request permanent
+         * @property {boolean|null} [undo] CSteamTV_AddChatBan_Request undo
+         */
+    
+        /**
+         * Constructs a new CSteamTV_AddChatBan_Request.
+         * @exports CSteamTV_AddChatBan_Request
+         * @classdesc Represents a CSteamTV_AddChatBan_Request.
+         * @implements ICSteamTV_AddChatBan_Request
+         * @constructor
+         * @param {ICSteamTV_AddChatBan_Request=} [properties] Properties to set
+         */
+        function CSteamTV_AddChatBan_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_AddChatBan_Request broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         */
+        CSteamTV_AddChatBan_Request.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_AddChatBan_Request chatter_steamid.
+         * @member {number|Long} chatter_steamid
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         */
+        CSteamTV_AddChatBan_Request.prototype.chatter_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_AddChatBan_Request duration.
+         * @member {number} duration
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         */
+        CSteamTV_AddChatBan_Request.prototype.duration = 0;
+    
+        /**
+         * CSteamTV_AddChatBan_Request permanent.
+         * @member {boolean} permanent
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         */
+        CSteamTV_AddChatBan_Request.prototype.permanent = false;
+    
+        /**
+         * CSteamTV_AddChatBan_Request undo.
+         * @member {boolean} undo
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         */
+        CSteamTV_AddChatBan_Request.prototype.undo = false;
+    
+        /**
+         * Creates a new CSteamTV_AddChatBan_Request instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {ICSteamTV_AddChatBan_Request=} [properties] Properties to set
+         * @returns {CSteamTV_AddChatBan_Request} CSteamTV_AddChatBan_Request instance
+         */
+        CSteamTV_AddChatBan_Request.create = function create(properties) {
+            return new CSteamTV_AddChatBan_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatBan_Request message. Does not implicitly {@link CSteamTV_AddChatBan_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {ICSteamTV_AddChatBan_Request} message CSteamTV_AddChatBan_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatBan_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.chatter_steamid);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.duration);
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.permanent);
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.undo);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatBan_Request message, length delimited. Does not implicitly {@link CSteamTV_AddChatBan_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {ICSteamTV_AddChatBan_Request} message CSteamTV_AddChatBan_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatBan_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatBan_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_AddChatBan_Request} CSteamTV_AddChatBan_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatBan_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_AddChatBan_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.chatter_steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.duration = reader.uint32();
+                    break;
+                case 4:
+                    message.permanent = reader.bool();
+                    break;
+                case 5:
+                    message.undo = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatBan_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_AddChatBan_Request} CSteamTV_AddChatBan_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatBan_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_AddChatBan_Request message.
+         * @function verify
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_AddChatBan_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                if (!$util.isInteger(message.chatter_steamid) && !(message.chatter_steamid && $util.isInteger(message.chatter_steamid.low) && $util.isInteger(message.chatter_steamid.high)))
+                    return "chatter_steamid: integer|Long expected";
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                if (typeof message.permanent !== "boolean")
+                    return "permanent: boolean expected";
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                if (typeof message.undo !== "boolean")
+                    return "undo: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_AddChatBan_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_AddChatBan_Request} CSteamTV_AddChatBan_Request
+         */
+        CSteamTV_AddChatBan_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_AddChatBan_Request)
+                return object;
+            var message = new $root.CSteamTV_AddChatBan_Request();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            if (object.chatter_steamid != null)
+                if ($util.Long)
+                    (message.chatter_steamid = $util.Long.fromValue(object.chatter_steamid)).unsigned = false;
+                else if (typeof object.chatter_steamid === "string")
+                    message.chatter_steamid = parseInt(object.chatter_steamid, 10);
+                else if (typeof object.chatter_steamid === "number")
+                    message.chatter_steamid = object.chatter_steamid;
+                else if (typeof object.chatter_steamid === "object")
+                    message.chatter_steamid = new $util.LongBits(object.chatter_steamid.low >>> 0, object.chatter_steamid.high >>> 0).toNumber();
+            if (object.duration != null)
+                message.duration = object.duration >>> 0;
+            if (object.permanent != null)
+                message.permanent = Boolean(object.permanent);
+            if (object.undo != null)
+                message.undo = Boolean(object.undo);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_AddChatBan_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_AddChatBan_Request
+         * @static
+         * @param {CSteamTV_AddChatBan_Request} message CSteamTV_AddChatBan_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_AddChatBan_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chatter_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chatter_steamid = options.longs === String ? "0" : 0;
+                object.duration = 0;
+                object.permanent = false;
+                object.undo = false;
+            }
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            if (message.chatter_steamid != null && message.hasOwnProperty("chatter_steamid"))
+                if (typeof message.chatter_steamid === "number")
+                    object.chatter_steamid = options.longs === String ? String(message.chatter_steamid) : message.chatter_steamid;
+                else
+                    object.chatter_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.chatter_steamid) : options.longs === Number ? new $util.LongBits(message.chatter_steamid.low >>> 0, message.chatter_steamid.high >>> 0).toNumber() : message.chatter_steamid;
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
+            if (message.permanent != null && message.hasOwnProperty("permanent"))
+                object.permanent = message.permanent;
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                object.undo = message.undo;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_AddChatBan_Request to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_AddChatBan_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_AddChatBan_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_AddChatBan_Request;
+    })();
+    
+    $root.CSteamTV_AddChatBan_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_AddChatBan_Response.
+         * @exports ICSteamTV_AddChatBan_Response
+         * @interface ICSteamTV_AddChatBan_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_AddChatBan_Response.
+         * @exports CSteamTV_AddChatBan_Response
+         * @classdesc Represents a CSteamTV_AddChatBan_Response.
+         * @implements ICSteamTV_AddChatBan_Response
+         * @constructor
+         * @param {ICSteamTV_AddChatBan_Response=} [properties] Properties to set
+         */
+        function CSteamTV_AddChatBan_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_AddChatBan_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {ICSteamTV_AddChatBan_Response=} [properties] Properties to set
+         * @returns {CSteamTV_AddChatBan_Response} CSteamTV_AddChatBan_Response instance
+         */
+        CSteamTV_AddChatBan_Response.create = function create(properties) {
+            return new CSteamTV_AddChatBan_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatBan_Response message. Does not implicitly {@link CSteamTV_AddChatBan_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {ICSteamTV_AddChatBan_Response} message CSteamTV_AddChatBan_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatBan_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatBan_Response message, length delimited. Does not implicitly {@link CSteamTV_AddChatBan_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {ICSteamTV_AddChatBan_Response} message CSteamTV_AddChatBan_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatBan_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatBan_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_AddChatBan_Response} CSteamTV_AddChatBan_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatBan_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_AddChatBan_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatBan_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_AddChatBan_Response} CSteamTV_AddChatBan_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatBan_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_AddChatBan_Response message.
+         * @function verify
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_AddChatBan_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_AddChatBan_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_AddChatBan_Response} CSteamTV_AddChatBan_Response
+         */
+        CSteamTV_AddChatBan_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_AddChatBan_Response)
+                return object;
+            return new $root.CSteamTV_AddChatBan_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_AddChatBan_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_AddChatBan_Response
+         * @static
+         * @param {CSteamTV_AddChatBan_Response} message CSteamTV_AddChatBan_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_AddChatBan_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_AddChatBan_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_AddChatBan_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_AddChatBan_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_AddChatBan_Response;
+    })();
+    
+    $root.CSteamTV_GetChatBans_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetChatBans_Response.
+         * @exports ICSteamTV_GetChatBans_Response
+         * @interface ICSteamTV_GetChatBans_Response
+         * @property {Array.<ICSteamTV_ChatBan>|null} [results] CSteamTV_GetChatBans_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetChatBans_Response.
+         * @exports CSteamTV_GetChatBans_Response
+         * @classdesc Represents a CSteamTV_GetChatBans_Response.
+         * @implements ICSteamTV_GetChatBans_Response
+         * @constructor
+         * @param {ICSteamTV_GetChatBans_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetChatBans_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetChatBans_Response results.
+         * @member {Array.<ICSteamTV_ChatBan>} results
+         * @memberof CSteamTV_GetChatBans_Response
+         * @instance
+         */
+        CSteamTV_GetChatBans_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetChatBans_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {ICSteamTV_GetChatBans_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetChatBans_Response} CSteamTV_GetChatBans_Response instance
+         */
+        CSteamTV_GetChatBans_Response.create = function create(properties) {
+            return new CSteamTV_GetChatBans_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatBans_Response message. Does not implicitly {@link CSteamTV_GetChatBans_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {ICSteamTV_GetChatBans_Response} message CSteamTV_GetChatBans_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatBans_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.CSteamTV_ChatBan.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatBans_Response message, length delimited. Does not implicitly {@link CSteamTV_GetChatBans_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {ICSteamTV_GetChatBans_Response} message CSteamTV_GetChatBans_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatBans_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatBans_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetChatBans_Response} CSteamTV_GetChatBans_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatBans_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetChatBans_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.CSteamTV_ChatBan.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatBans_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetChatBans_Response} CSteamTV_GetChatBans_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatBans_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetChatBans_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetChatBans_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.CSteamTV_ChatBan.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetChatBans_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetChatBans_Response} CSteamTV_GetChatBans_Response
+         */
+        CSteamTV_GetChatBans_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetChatBans_Response)
+                return object;
+            var message = new $root.CSteamTV_GetChatBans_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetChatBans_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetChatBans_Response.results: object expected");
+                    message.results[i] = $root.CSteamTV_ChatBan.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetChatBans_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetChatBans_Response
+         * @static
+         * @param {CSteamTV_GetChatBans_Response} message CSteamTV_GetChatBans_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetChatBans_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.CSteamTV_ChatBan.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetChatBans_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetChatBans_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetChatBans_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetChatBans_Response;
+    })();
+    
+    $root.CSteamTV_AddChatModerator_Request = (function() {
+    
+        /**
+         * Properties of a CSteamTV_AddChatModerator_Request.
+         * @exports ICSteamTV_AddChatModerator_Request
+         * @interface ICSteamTV_AddChatModerator_Request
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_AddChatModerator_Request broadcast_channel_id
+         * @property {number|Long|null} [moderator_steamid] CSteamTV_AddChatModerator_Request moderator_steamid
+         * @property {boolean|null} [undo] CSteamTV_AddChatModerator_Request undo
+         */
+    
+        /**
+         * Constructs a new CSteamTV_AddChatModerator_Request.
+         * @exports CSteamTV_AddChatModerator_Request
+         * @classdesc Represents a CSteamTV_AddChatModerator_Request.
+         * @implements ICSteamTV_AddChatModerator_Request
+         * @constructor
+         * @param {ICSteamTV_AddChatModerator_Request=} [properties] Properties to set
+         */
+        function CSteamTV_AddChatModerator_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_AddChatModerator_Request broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @instance
+         */
+        CSteamTV_AddChatModerator_Request.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_AddChatModerator_Request moderator_steamid.
+         * @member {number|Long} moderator_steamid
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @instance
+         */
+        CSteamTV_AddChatModerator_Request.prototype.moderator_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_AddChatModerator_Request undo.
+         * @member {boolean} undo
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @instance
+         */
+        CSteamTV_AddChatModerator_Request.prototype.undo = false;
+    
+        /**
+         * Creates a new CSteamTV_AddChatModerator_Request instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Request=} [properties] Properties to set
+         * @returns {CSteamTV_AddChatModerator_Request} CSteamTV_AddChatModerator_Request instance
+         */
+        CSteamTV_AddChatModerator_Request.create = function create(properties) {
+            return new CSteamTV_AddChatModerator_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatModerator_Request message. Does not implicitly {@link CSteamTV_AddChatModerator_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Request} message CSteamTV_AddChatModerator_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatModerator_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            if (message.moderator_steamid != null && message.hasOwnProperty("moderator_steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.moderator_steamid);
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.undo);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatModerator_Request message, length delimited. Does not implicitly {@link CSteamTV_AddChatModerator_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Request} message CSteamTV_AddChatModerator_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatModerator_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatModerator_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_AddChatModerator_Request} CSteamTV_AddChatModerator_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatModerator_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_AddChatModerator_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.moderator_steamid = reader.fixed64();
+                    break;
+                case 3:
+                    message.undo = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatModerator_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_AddChatModerator_Request} CSteamTV_AddChatModerator_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatModerator_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_AddChatModerator_Request message.
+         * @function verify
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_AddChatModerator_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            if (message.moderator_steamid != null && message.hasOwnProperty("moderator_steamid"))
+                if (!$util.isInteger(message.moderator_steamid) && !(message.moderator_steamid && $util.isInteger(message.moderator_steamid.low) && $util.isInteger(message.moderator_steamid.high)))
+                    return "moderator_steamid: integer|Long expected";
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                if (typeof message.undo !== "boolean")
+                    return "undo: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_AddChatModerator_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_AddChatModerator_Request} CSteamTV_AddChatModerator_Request
+         */
+        CSteamTV_AddChatModerator_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_AddChatModerator_Request)
+                return object;
+            var message = new $root.CSteamTV_AddChatModerator_Request();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            if (object.moderator_steamid != null)
+                if ($util.Long)
+                    (message.moderator_steamid = $util.Long.fromValue(object.moderator_steamid)).unsigned = false;
+                else if (typeof object.moderator_steamid === "string")
+                    message.moderator_steamid = parseInt(object.moderator_steamid, 10);
+                else if (typeof object.moderator_steamid === "number")
+                    message.moderator_steamid = object.moderator_steamid;
+                else if (typeof object.moderator_steamid === "object")
+                    message.moderator_steamid = new $util.LongBits(object.moderator_steamid.low >>> 0, object.moderator_steamid.high >>> 0).toNumber();
+            if (object.undo != null)
+                message.undo = Boolean(object.undo);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_AddChatModerator_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @static
+         * @param {CSteamTV_AddChatModerator_Request} message CSteamTV_AddChatModerator_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_AddChatModerator_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.moderator_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.moderator_steamid = options.longs === String ? "0" : 0;
+                object.undo = false;
+            }
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            if (message.moderator_steamid != null && message.hasOwnProperty("moderator_steamid"))
+                if (typeof message.moderator_steamid === "number")
+                    object.moderator_steamid = options.longs === String ? String(message.moderator_steamid) : message.moderator_steamid;
+                else
+                    object.moderator_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.moderator_steamid) : options.longs === Number ? new $util.LongBits(message.moderator_steamid.low >>> 0, message.moderator_steamid.high >>> 0).toNumber() : message.moderator_steamid;
+            if (message.undo != null && message.hasOwnProperty("undo"))
+                object.undo = message.undo;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_AddChatModerator_Request to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_AddChatModerator_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_AddChatModerator_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_AddChatModerator_Request;
+    })();
+    
+    $root.CSteamTV_AddChatModerator_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_AddChatModerator_Response.
+         * @exports ICSteamTV_AddChatModerator_Response
+         * @interface ICSteamTV_AddChatModerator_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_AddChatModerator_Response.
+         * @exports CSteamTV_AddChatModerator_Response
+         * @classdesc Represents a CSteamTV_AddChatModerator_Response.
+         * @implements ICSteamTV_AddChatModerator_Response
+         * @constructor
+         * @param {ICSteamTV_AddChatModerator_Response=} [properties] Properties to set
+         */
+        function CSteamTV_AddChatModerator_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_AddChatModerator_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Response=} [properties] Properties to set
+         * @returns {CSteamTV_AddChatModerator_Response} CSteamTV_AddChatModerator_Response instance
+         */
+        CSteamTV_AddChatModerator_Response.create = function create(properties) {
+            return new CSteamTV_AddChatModerator_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatModerator_Response message. Does not implicitly {@link CSteamTV_AddChatModerator_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Response} message CSteamTV_AddChatModerator_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatModerator_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddChatModerator_Response message, length delimited. Does not implicitly {@link CSteamTV_AddChatModerator_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {ICSteamTV_AddChatModerator_Response} message CSteamTV_AddChatModerator_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddChatModerator_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatModerator_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_AddChatModerator_Response} CSteamTV_AddChatModerator_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatModerator_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_AddChatModerator_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddChatModerator_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_AddChatModerator_Response} CSteamTV_AddChatModerator_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddChatModerator_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_AddChatModerator_Response message.
+         * @function verify
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_AddChatModerator_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_AddChatModerator_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_AddChatModerator_Response} CSteamTV_AddChatModerator_Response
+         */
+        CSteamTV_AddChatModerator_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_AddChatModerator_Response)
+                return object;
+            return new $root.CSteamTV_AddChatModerator_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_AddChatModerator_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @static
+         * @param {CSteamTV_AddChatModerator_Response} message CSteamTV_AddChatModerator_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_AddChatModerator_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_AddChatModerator_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_AddChatModerator_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_AddChatModerator_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_AddChatModerator_Response;
+    })();
+    
+    $root.CSteamTV_GetChatModerators_Request = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetChatModerators_Request.
+         * @exports ICSteamTV_GetChatModerators_Request
+         * @interface ICSteamTV_GetChatModerators_Request
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_GetChatModerators_Request broadcast_channel_id
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetChatModerators_Request.
+         * @exports CSteamTV_GetChatModerators_Request
+         * @classdesc Represents a CSteamTV_GetChatModerators_Request.
+         * @implements ICSteamTV_GetChatModerators_Request
+         * @constructor
+         * @param {ICSteamTV_GetChatModerators_Request=} [properties] Properties to set
+         */
+        function CSteamTV_GetChatModerators_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetChatModerators_Request broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @instance
+         */
+        CSteamTV_GetChatModerators_Request.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CSteamTV_GetChatModerators_Request instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Request=} [properties] Properties to set
+         * @returns {CSteamTV_GetChatModerators_Request} CSteamTV_GetChatModerators_Request instance
+         */
+        CSteamTV_GetChatModerators_Request.create = function create(properties) {
+            return new CSteamTV_GetChatModerators_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatModerators_Request message. Does not implicitly {@link CSteamTV_GetChatModerators_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Request} message CSteamTV_GetChatModerators_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatModerators_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatModerators_Request message, length delimited. Does not implicitly {@link CSteamTV_GetChatModerators_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Request} message CSteamTV_GetChatModerators_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatModerators_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatModerators_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetChatModerators_Request} CSteamTV_GetChatModerators_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatModerators_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetChatModerators_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatModerators_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetChatModerators_Request} CSteamTV_GetChatModerators_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatModerators_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetChatModerators_Request message.
+         * @function verify
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetChatModerators_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetChatModerators_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetChatModerators_Request} CSteamTV_GetChatModerators_Request
+         */
+        CSteamTV_GetChatModerators_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetChatModerators_Request)
+                return object;
+            var message = new $root.CSteamTV_GetChatModerators_Request();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetChatModerators_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @static
+         * @param {CSteamTV_GetChatModerators_Request} message CSteamTV_GetChatModerators_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetChatModerators_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetChatModerators_Request to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetChatModerators_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetChatModerators_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetChatModerators_Request;
+    })();
+    
+    $root.CSteamTV_ChatModerator = (function() {
+    
+        /**
+         * Properties of a CSteamTV_ChatModerator.
+         * @exports ICSteamTV_ChatModerator
+         * @interface ICSteamTV_ChatModerator
+         * @property {number|Long|null} [steamid] CSteamTV_ChatModerator steamid
+         * @property {string|null} [name] CSteamTV_ChatModerator name
+         */
+    
+        /**
+         * Constructs a new CSteamTV_ChatModerator.
+         * @exports CSteamTV_ChatModerator
+         * @classdesc Represents a CSteamTV_ChatModerator.
+         * @implements ICSteamTV_ChatModerator
+         * @constructor
+         * @param {ICSteamTV_ChatModerator=} [properties] Properties to set
+         */
+        function CSteamTV_ChatModerator(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_ChatModerator steamid.
+         * @member {number|Long} steamid
+         * @memberof CSteamTV_ChatModerator
+         * @instance
+         */
+        CSteamTV_ChatModerator.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_ChatModerator name.
+         * @member {string} name
+         * @memberof CSteamTV_ChatModerator
+         * @instance
+         */
+        CSteamTV_ChatModerator.prototype.name = "";
+    
+        /**
+         * Creates a new CSteamTV_ChatModerator instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {ICSteamTV_ChatModerator=} [properties] Properties to set
+         * @returns {CSteamTV_ChatModerator} CSteamTV_ChatModerator instance
+         */
+        CSteamTV_ChatModerator.create = function create(properties) {
+            return new CSteamTV_ChatModerator(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ChatModerator message. Does not implicitly {@link CSteamTV_ChatModerator.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {ICSteamTV_ChatModerator} message CSteamTV_ChatModerator message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ChatModerator.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_ChatModerator message, length delimited. Does not implicitly {@link CSteamTV_ChatModerator.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {ICSteamTV_ChatModerator} message CSteamTV_ChatModerator message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_ChatModerator.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_ChatModerator message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_ChatModerator} CSteamTV_ChatModerator
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ChatModerator.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_ChatModerator();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_ChatModerator message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_ChatModerator} CSteamTV_ChatModerator
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_ChatModerator.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_ChatModerator message.
+         * @function verify
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_ChatModerator.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_ChatModerator message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_ChatModerator} CSteamTV_ChatModerator
+         */
+        CSteamTV_ChatModerator.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_ChatModerator)
+                return object;
+            var message = new $root.CSteamTV_ChatModerator();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.name != null)
+                message.name = String(object.name);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_ChatModerator message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_ChatModerator
+         * @static
+         * @param {CSteamTV_ChatModerator} message CSteamTV_ChatModerator
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_ChatModerator.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.name = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_ChatModerator to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_ChatModerator
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_ChatModerator.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_ChatModerator;
+    })();
+    
+    $root.CSteamTV_GetChatModerators_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetChatModerators_Response.
+         * @exports ICSteamTV_GetChatModerators_Response
+         * @interface ICSteamTV_GetChatModerators_Response
+         * @property {Array.<ICSteamTV_ChatModerator>|null} [results] CSteamTV_GetChatModerators_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetChatModerators_Response.
+         * @exports CSteamTV_GetChatModerators_Response
+         * @classdesc Represents a CSteamTV_GetChatModerators_Response.
+         * @implements ICSteamTV_GetChatModerators_Response
+         * @constructor
+         * @param {ICSteamTV_GetChatModerators_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetChatModerators_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetChatModerators_Response results.
+         * @member {Array.<ICSteamTV_ChatModerator>} results
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @instance
+         */
+        CSteamTV_GetChatModerators_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetChatModerators_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetChatModerators_Response} CSteamTV_GetChatModerators_Response instance
+         */
+        CSteamTV_GetChatModerators_Response.create = function create(properties) {
+            return new CSteamTV_GetChatModerators_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatModerators_Response message. Does not implicitly {@link CSteamTV_GetChatModerators_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Response} message CSteamTV_GetChatModerators_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatModerators_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.CSteamTV_ChatModerator.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetChatModerators_Response message, length delimited. Does not implicitly {@link CSteamTV_GetChatModerators_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {ICSteamTV_GetChatModerators_Response} message CSteamTV_GetChatModerators_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetChatModerators_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatModerators_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetChatModerators_Response} CSteamTV_GetChatModerators_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatModerators_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetChatModerators_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.CSteamTV_ChatModerator.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetChatModerators_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetChatModerators_Response} CSteamTV_GetChatModerators_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetChatModerators_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetChatModerators_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetChatModerators_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.CSteamTV_ChatModerator.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetChatModerators_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetChatModerators_Response} CSteamTV_GetChatModerators_Response
+         */
+        CSteamTV_GetChatModerators_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetChatModerators_Response)
+                return object;
+            var message = new $root.CSteamTV_GetChatModerators_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetChatModerators_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetChatModerators_Response.results: object expected");
+                    message.results[i] = $root.CSteamTV_ChatModerator.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetChatModerators_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @static
+         * @param {CSteamTV_GetChatModerators_Response} message CSteamTV_GetChatModerators_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetChatModerators_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.CSteamTV_ChatModerator.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetChatModerators_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetChatModerators_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetChatModerators_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetChatModerators_Response;
+    })();
+    
+    $root.CSteamTV_AddWordBan_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_AddWordBan_Response.
+         * @exports ICSteamTV_AddWordBan_Response
+         * @interface ICSteamTV_AddWordBan_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_AddWordBan_Response.
+         * @exports CSteamTV_AddWordBan_Response
+         * @classdesc Represents a CSteamTV_AddWordBan_Response.
+         * @implements ICSteamTV_AddWordBan_Response
+         * @constructor
+         * @param {ICSteamTV_AddWordBan_Response=} [properties] Properties to set
+         */
+        function CSteamTV_AddWordBan_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_AddWordBan_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {ICSteamTV_AddWordBan_Response=} [properties] Properties to set
+         * @returns {CSteamTV_AddWordBan_Response} CSteamTV_AddWordBan_Response instance
+         */
+        CSteamTV_AddWordBan_Response.create = function create(properties) {
+            return new CSteamTV_AddWordBan_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddWordBan_Response message. Does not implicitly {@link CSteamTV_AddWordBan_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {ICSteamTV_AddWordBan_Response} message CSteamTV_AddWordBan_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddWordBan_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_AddWordBan_Response message, length delimited. Does not implicitly {@link CSteamTV_AddWordBan_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {ICSteamTV_AddWordBan_Response} message CSteamTV_AddWordBan_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_AddWordBan_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddWordBan_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_AddWordBan_Response} CSteamTV_AddWordBan_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddWordBan_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_AddWordBan_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_AddWordBan_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_AddWordBan_Response} CSteamTV_AddWordBan_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_AddWordBan_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_AddWordBan_Response message.
+         * @function verify
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_AddWordBan_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_AddWordBan_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_AddWordBan_Response} CSteamTV_AddWordBan_Response
+         */
+        CSteamTV_AddWordBan_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_AddWordBan_Response)
+                return object;
+            return new $root.CSteamTV_AddWordBan_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_AddWordBan_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_AddWordBan_Response
+         * @static
+         * @param {CSteamTV_AddWordBan_Response} message CSteamTV_AddWordBan_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_AddWordBan_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_AddWordBan_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_AddWordBan_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_AddWordBan_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_AddWordBan_Response;
+    })();
+    
+    $root.CSteamTV_GetWordBans_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetWordBans_Response.
+         * @exports ICSteamTV_GetWordBans_Response
+         * @interface ICSteamTV_GetWordBans_Response
+         * @property {Array.<string>|null} [results] CSteamTV_GetWordBans_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetWordBans_Response.
+         * @exports CSteamTV_GetWordBans_Response
+         * @classdesc Represents a CSteamTV_GetWordBans_Response.
+         * @implements ICSteamTV_GetWordBans_Response
+         * @constructor
+         * @param {ICSteamTV_GetWordBans_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetWordBans_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetWordBans_Response results.
+         * @member {Array.<string>} results
+         * @memberof CSteamTV_GetWordBans_Response
+         * @instance
+         */
+        CSteamTV_GetWordBans_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetWordBans_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {ICSteamTV_GetWordBans_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetWordBans_Response} CSteamTV_GetWordBans_Response instance
+         */
+        CSteamTV_GetWordBans_Response.create = function create(properties) {
+            return new CSteamTV_GetWordBans_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetWordBans_Response message. Does not implicitly {@link CSteamTV_GetWordBans_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {ICSteamTV_GetWordBans_Response} message CSteamTV_GetWordBans_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetWordBans_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.results[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetWordBans_Response message, length delimited. Does not implicitly {@link CSteamTV_GetWordBans_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {ICSteamTV_GetWordBans_Response} message CSteamTV_GetWordBans_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetWordBans_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetWordBans_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetWordBans_Response} CSteamTV_GetWordBans_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetWordBans_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetWordBans_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push(reader.string());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetWordBans_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetWordBans_Response} CSteamTV_GetWordBans_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetWordBans_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetWordBans_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetWordBans_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i)
+                    if (!$util.isString(message.results[i]))
+                        return "results: string[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetWordBans_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetWordBans_Response} CSteamTV_GetWordBans_Response
+         */
+        CSteamTV_GetWordBans_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetWordBans_Response)
+                return object;
+            var message = new $root.CSteamTV_GetWordBans_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetWordBans_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i)
+                    message.results[i] = String(object.results[i]);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetWordBans_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetWordBans_Response
+         * @static
+         * @param {CSteamTV_GetWordBans_Response} message CSteamTV_GetWordBans_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetWordBans_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = message.results[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetWordBans_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetWordBans_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetWordBans_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetWordBans_Response;
+    })();
+    
+    $root.CSteamTV_JoinChat_Request = (function() {
+    
+        /**
+         * Properties of a CSteamTV_JoinChat_Request.
+         * @exports ICSteamTV_JoinChat_Request
+         * @interface ICSteamTV_JoinChat_Request
+         * @property {number|Long|null} [broadcast_channel_id] CSteamTV_JoinChat_Request broadcast_channel_id
+         */
+    
+        /**
+         * Constructs a new CSteamTV_JoinChat_Request.
+         * @exports CSteamTV_JoinChat_Request
+         * @classdesc Represents a CSteamTV_JoinChat_Request.
+         * @implements ICSteamTV_JoinChat_Request
+         * @constructor
+         * @param {ICSteamTV_JoinChat_Request=} [properties] Properties to set
+         */
+        function CSteamTV_JoinChat_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_JoinChat_Request broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CSteamTV_JoinChat_Request
+         * @instance
+         */
+        CSteamTV_JoinChat_Request.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CSteamTV_JoinChat_Request instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {ICSteamTV_JoinChat_Request=} [properties] Properties to set
+         * @returns {CSteamTV_JoinChat_Request} CSteamTV_JoinChat_Request instance
+         */
+        CSteamTV_JoinChat_Request.create = function create(properties) {
+            return new CSteamTV_JoinChat_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_JoinChat_Request message. Does not implicitly {@link CSteamTV_JoinChat_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {ICSteamTV_JoinChat_Request} message CSteamTV_JoinChat_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_JoinChat_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_JoinChat_Request message, length delimited. Does not implicitly {@link CSteamTV_JoinChat_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {ICSteamTV_JoinChat_Request} message CSteamTV_JoinChat_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_JoinChat_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_JoinChat_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_JoinChat_Request} CSteamTV_JoinChat_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_JoinChat_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_JoinChat_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_JoinChat_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_JoinChat_Request} CSteamTV_JoinChat_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_JoinChat_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_JoinChat_Request message.
+         * @function verify
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_JoinChat_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_JoinChat_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_JoinChat_Request} CSteamTV_JoinChat_Request
+         */
+        CSteamTV_JoinChat_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_JoinChat_Request)
+                return object;
+            var message = new $root.CSteamTV_JoinChat_Request();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_JoinChat_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_JoinChat_Request
+         * @static
+         * @param {CSteamTV_JoinChat_Request} message CSteamTV_JoinChat_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_JoinChat_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_JoinChat_Request to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_JoinChat_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_JoinChat_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_JoinChat_Request;
+    })();
+    
+    $root.CSteamTV_JoinChat_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_JoinChat_Response.
+         * @exports ICSteamTV_JoinChat_Response
+         * @interface ICSteamTV_JoinChat_Response
+         * @property {number|Long|null} [chat_id] CSteamTV_JoinChat_Response chat_id
+         * @property {string|null} [view_url_template] CSteamTV_JoinChat_Response view_url_template
+         * @property {Array.<number|Long>|null} [flair_group_ids] CSteamTV_JoinChat_Response flair_group_ids
+         */
+    
+        /**
+         * Constructs a new CSteamTV_JoinChat_Response.
+         * @exports CSteamTV_JoinChat_Response
+         * @classdesc Represents a CSteamTV_JoinChat_Response.
+         * @implements ICSteamTV_JoinChat_Response
+         * @constructor
+         * @param {ICSteamTV_JoinChat_Response=} [properties] Properties to set
+         */
+        function CSteamTV_JoinChat_Response(properties) {
+            this.flair_group_ids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_JoinChat_Response chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CSteamTV_JoinChat_Response
+         * @instance
+         */
+        CSteamTV_JoinChat_Response.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_JoinChat_Response view_url_template.
+         * @member {string} view_url_template
+         * @memberof CSteamTV_JoinChat_Response
+         * @instance
+         */
+        CSteamTV_JoinChat_Response.prototype.view_url_template = "";
+    
+        /**
+         * CSteamTV_JoinChat_Response flair_group_ids.
+         * @member {Array.<number|Long>} flair_group_ids
+         * @memberof CSteamTV_JoinChat_Response
+         * @instance
+         */
+        CSteamTV_JoinChat_Response.prototype.flair_group_ids = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_JoinChat_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {ICSteamTV_JoinChat_Response=} [properties] Properties to set
+         * @returns {CSteamTV_JoinChat_Response} CSteamTV_JoinChat_Response instance
+         */
+        CSteamTV_JoinChat_Response.create = function create(properties) {
+            return new CSteamTV_JoinChat_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_JoinChat_Response message. Does not implicitly {@link CSteamTV_JoinChat_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {ICSteamTV_JoinChat_Response} message CSteamTV_JoinChat_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_JoinChat_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.view_url_template);
+            if (message.flair_group_ids != null && message.flair_group_ids.length)
+                for (var i = 0; i < message.flair_group_ids.length; ++i)
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.flair_group_ids[i]);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_JoinChat_Response message, length delimited. Does not implicitly {@link CSteamTV_JoinChat_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {ICSteamTV_JoinChat_Response} message CSteamTV_JoinChat_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_JoinChat_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_JoinChat_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_JoinChat_Response} CSteamTV_JoinChat_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_JoinChat_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_JoinChat_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.view_url_template = reader.string();
+                    break;
+                case 3:
+                    if (!(message.flair_group_ids && message.flair_group_ids.length))
+                        message.flair_group_ids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.flair_group_ids.push(reader.uint64());
+                    } else
+                        message.flair_group_ids.push(reader.uint64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_JoinChat_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_JoinChat_Response} CSteamTV_JoinChat_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_JoinChat_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_JoinChat_Response message.
+         * @function verify
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_JoinChat_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                if (!$util.isString(message.view_url_template))
+                    return "view_url_template: string expected";
+            if (message.flair_group_ids != null && message.hasOwnProperty("flair_group_ids")) {
+                if (!Array.isArray(message.flair_group_ids))
+                    return "flair_group_ids: array expected";
+                for (var i = 0; i < message.flair_group_ids.length; ++i)
+                    if (!$util.isInteger(message.flair_group_ids[i]) && !(message.flair_group_ids[i] && $util.isInteger(message.flair_group_ids[i].low) && $util.isInteger(message.flair_group_ids[i].high)))
+                        return "flair_group_ids: integer|Long[] expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_JoinChat_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_JoinChat_Response} CSteamTV_JoinChat_Response
+         */
+        CSteamTV_JoinChat_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_JoinChat_Response)
+                return object;
+            var message = new $root.CSteamTV_JoinChat_Response();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.view_url_template != null)
+                message.view_url_template = String(object.view_url_template);
+            if (object.flair_group_ids) {
+                if (!Array.isArray(object.flair_group_ids))
+                    throw TypeError(".CSteamTV_JoinChat_Response.flair_group_ids: array expected");
+                message.flair_group_ids = [];
+                for (var i = 0; i < object.flair_group_ids.length; ++i)
+                    if ($util.Long)
+                        (message.flair_group_ids[i] = $util.Long.fromValue(object.flair_group_ids[i])).unsigned = true;
+                    else if (typeof object.flair_group_ids[i] === "string")
+                        message.flair_group_ids[i] = parseInt(object.flair_group_ids[i], 10);
+                    else if (typeof object.flair_group_ids[i] === "number")
+                        message.flair_group_ids[i] = object.flair_group_ids[i];
+                    else if (typeof object.flair_group_ids[i] === "object")
+                        message.flair_group_ids[i] = new $util.LongBits(object.flair_group_ids[i].low >>> 0, object.flair_group_ids[i].high >>> 0).toNumber(true);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_JoinChat_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_JoinChat_Response
+         * @static
+         * @param {CSteamTV_JoinChat_Response} message CSteamTV_JoinChat_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_JoinChat_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.flair_group_ids = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                object.view_url_template = "";
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
+                object.view_url_template = message.view_url_template;
+            if (message.flair_group_ids && message.flair_group_ids.length) {
+                object.flair_group_ids = [];
+                for (var j = 0; j < message.flair_group_ids.length; ++j)
+                    if (typeof message.flair_group_ids[j] === "number")
+                        object.flair_group_ids[j] = options.longs === String ? String(message.flair_group_ids[j]) : message.flair_group_ids[j];
+                    else
+                        object.flair_group_ids[j] = options.longs === String ? $util.Long.prototype.toString.call(message.flair_group_ids[j]) : options.longs === Number ? new $util.LongBits(message.flair_group_ids[j].low >>> 0, message.flair_group_ids[j].high >>> 0).toNumber(true) : message.flair_group_ids[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_JoinChat_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_JoinChat_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_JoinChat_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_JoinChat_Response;
+    })();
+    
+    $root.CSteamTV_Search_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_Search_Response.
+         * @exports ICSteamTV_Search_Response
+         * @interface ICSteamTV_Search_Response
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [results] CSteamTV_Search_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_Search_Response.
+         * @exports CSteamTV_Search_Response
+         * @classdesc Represents a CSteamTV_Search_Response.
+         * @implements ICSteamTV_Search_Response
+         * @constructor
+         * @param {ICSteamTV_Search_Response=} [properties] Properties to set
+         */
+        function CSteamTV_Search_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_Search_Response results.
+         * @member {Array.<IGetBroadcastChannelEntry>} results
+         * @memberof CSteamTV_Search_Response
+         * @instance
+         */
+        CSteamTV_Search_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_Search_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {ICSteamTV_Search_Response=} [properties] Properties to set
+         * @returns {CSteamTV_Search_Response} CSteamTV_Search_Response instance
+         */
+        CSteamTV_Search_Response.create = function create(properties) {
+            return new CSteamTV_Search_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_Search_Response message. Does not implicitly {@link CSteamTV_Search_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {ICSteamTV_Search_Response} message CSteamTV_Search_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_Search_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_Search_Response message, length delimited. Does not implicitly {@link CSteamTV_Search_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {ICSteamTV_Search_Response} message CSteamTV_Search_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_Search_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_Search_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_Search_Response} CSteamTV_Search_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_Search_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_Search_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_Search_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_Search_Response} CSteamTV_Search_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_Search_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_Search_Response message.
+         * @function verify
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_Search_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_Search_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_Search_Response} CSteamTV_Search_Response
+         */
+        CSteamTV_Search_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_Search_Response)
+                return object;
+            var message = new $root.CSteamTV_Search_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_Search_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_Search_Response.results: object expected");
+                    message.results[i] = $root.GetBroadcastChannelEntry.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_Search_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_Search_Response
+         * @static
+         * @param {CSteamTV_Search_Response} message CSteamTV_Search_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_Search_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.GetBroadcastChannelEntry.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_Search_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_Search_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_Search_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_Search_Response;
+    })();
+    
+    $root.CSteamTV_GetSteamTVUserSettings_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetSteamTVUserSettings_Response.
+         * @exports ICSteamTV_GetSteamTVUserSettings_Response
+         * @interface ICSteamTV_GetSteamTVUserSettings_Response
+         * @property {boolean|null} [stream_live_email] CSteamTV_GetSteamTVUserSettings_Response stream_live_email
+         * @property {boolean|null} [stream_live_notification] CSteamTV_GetSteamTVUserSettings_Response stream_live_notification
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetSteamTVUserSettings_Response.
+         * @exports CSteamTV_GetSteamTVUserSettings_Response
+         * @classdesc Represents a CSteamTV_GetSteamTVUserSettings_Response.
+         * @implements ICSteamTV_GetSteamTVUserSettings_Response
+         * @constructor
+         * @param {ICSteamTV_GetSteamTVUserSettings_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetSteamTVUserSettings_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetSteamTVUserSettings_Response stream_live_email.
+         * @member {boolean} stream_live_email
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @instance
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.prototype.stream_live_email = false;
+    
+        /**
+         * CSteamTV_GetSteamTVUserSettings_Response stream_live_notification.
+         * @member {boolean} stream_live_notification
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @instance
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.prototype.stream_live_notification = false;
+    
+        /**
+         * Creates a new CSteamTV_GetSteamTVUserSettings_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_GetSteamTVUserSettings_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetSteamTVUserSettings_Response} CSteamTV_GetSteamTVUserSettings_Response instance
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.create = function create(properties) {
+            return new CSteamTV_GetSteamTVUserSettings_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetSteamTVUserSettings_Response message. Does not implicitly {@link CSteamTV_GetSteamTVUserSettings_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_GetSteamTVUserSettings_Response} message CSteamTV_GetSteamTVUserSettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.stream_live_email != null && message.hasOwnProperty("stream_live_email"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.stream_live_email);
+            if (message.stream_live_notification != null && message.hasOwnProperty("stream_live_notification"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.stream_live_notification);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetSteamTVUserSettings_Response message, length delimited. Does not implicitly {@link CSteamTV_GetSteamTVUserSettings_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_GetSteamTVUserSettings_Response} message CSteamTV_GetSteamTVUserSettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetSteamTVUserSettings_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetSteamTVUserSettings_Response} CSteamTV_GetSteamTVUserSettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetSteamTVUserSettings_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.stream_live_email = reader.bool();
+                    break;
+                case 2:
+                    message.stream_live_notification = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetSteamTVUserSettings_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetSteamTVUserSettings_Response} CSteamTV_GetSteamTVUserSettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetSteamTVUserSettings_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.stream_live_email != null && message.hasOwnProperty("stream_live_email"))
+                if (typeof message.stream_live_email !== "boolean")
+                    return "stream_live_email: boolean expected";
+            if (message.stream_live_notification != null && message.hasOwnProperty("stream_live_notification"))
+                if (typeof message.stream_live_notification !== "boolean")
+                    return "stream_live_notification: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetSteamTVUserSettings_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetSteamTVUserSettings_Response} CSteamTV_GetSteamTVUserSettings_Response
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetSteamTVUserSettings_Response)
+                return object;
+            var message = new $root.CSteamTV_GetSteamTVUserSettings_Response();
+            if (object.stream_live_email != null)
+                message.stream_live_email = Boolean(object.stream_live_email);
+            if (object.stream_live_notification != null)
+                message.stream_live_notification = Boolean(object.stream_live_notification);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetSteamTVUserSettings_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @static
+         * @param {CSteamTV_GetSteamTVUserSettings_Response} message CSteamTV_GetSteamTVUserSettings_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.stream_live_email = false;
+                object.stream_live_notification = false;
+            }
+            if (message.stream_live_email != null && message.hasOwnProperty("stream_live_email"))
+                object.stream_live_email = message.stream_live_email;
+            if (message.stream_live_notification != null && message.hasOwnProperty("stream_live_notification"))
+                object.stream_live_notification = message.stream_live_notification;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetSteamTVUserSettings_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetSteamTVUserSettings_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetSteamTVUserSettings_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetSteamTVUserSettings_Response;
+    })();
+    
+    $root.CSteamTV_SetSteamTVUserSettings_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_SetSteamTVUserSettings_Response.
+         * @exports ICSteamTV_SetSteamTVUserSettings_Response
+         * @interface ICSteamTV_SetSteamTVUserSettings_Response
+         */
+    
+        /**
+         * Constructs a new CSteamTV_SetSteamTVUserSettings_Response.
+         * @exports CSteamTV_SetSteamTVUserSettings_Response
+         * @classdesc Represents a CSteamTV_SetSteamTVUserSettings_Response.
+         * @implements ICSteamTV_SetSteamTVUserSettings_Response
+         * @constructor
+         * @param {ICSteamTV_SetSteamTVUserSettings_Response=} [properties] Properties to set
+         */
+        function CSteamTV_SetSteamTVUserSettings_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CSteamTV_SetSteamTVUserSettings_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_SetSteamTVUserSettings_Response=} [properties] Properties to set
+         * @returns {CSteamTV_SetSteamTVUserSettings_Response} CSteamTV_SetSteamTVUserSettings_Response instance
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.create = function create(properties) {
+            return new CSteamTV_SetSteamTVUserSettings_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetSteamTVUserSettings_Response message. Does not implicitly {@link CSteamTV_SetSteamTVUserSettings_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_SetSteamTVUserSettings_Response} message CSteamTV_SetSteamTVUserSettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_SetSteamTVUserSettings_Response message, length delimited. Does not implicitly {@link CSteamTV_SetSteamTVUserSettings_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {ICSteamTV_SetSteamTVUserSettings_Response} message CSteamTV_SetSteamTVUserSettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetSteamTVUserSettings_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_SetSteamTVUserSettings_Response} CSteamTV_SetSteamTVUserSettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_SetSteamTVUserSettings_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_SetSteamTVUserSettings_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_SetSteamTVUserSettings_Response} CSteamTV_SetSteamTVUserSettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_SetSteamTVUserSettings_Response message.
+         * @function verify
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_SetSteamTVUserSettings_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_SetSteamTVUserSettings_Response} CSteamTV_SetSteamTVUserSettings_Response
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_SetSteamTVUserSettings_Response)
+                return object;
+            return new $root.CSteamTV_SetSteamTVUserSettings_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_SetSteamTVUserSettings_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @static
+         * @param {CSteamTV_SetSteamTVUserSettings_Response} message CSteamTV_SetSteamTVUserSettings_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CSteamTV_SetSteamTVUserSettings_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_SetSteamTVUserSettings_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_SetSteamTVUserSettings_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_SetSteamTVUserSettings_Response;
+    })();
+    
+    $root.CSteamTV_GetMyBroadcastChannels_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetMyBroadcastChannels_Response.
+         * @exports ICSteamTV_GetMyBroadcastChannels_Response
+         * @interface ICSteamTV_GetMyBroadcastChannels_Response
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [results] CSteamTV_GetMyBroadcastChannels_Response results
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetMyBroadcastChannels_Response.
+         * @exports CSteamTV_GetMyBroadcastChannels_Response
+         * @classdesc Represents a CSteamTV_GetMyBroadcastChannels_Response.
+         * @implements ICSteamTV_GetMyBroadcastChannels_Response
+         * @constructor
+         * @param {ICSteamTV_GetMyBroadcastChannels_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetMyBroadcastChannels_Response(properties) {
+            this.results = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetMyBroadcastChannels_Response results.
+         * @member {Array.<IGetBroadcastChannelEntry>} results
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @instance
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.prototype.results = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetMyBroadcastChannels_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {ICSteamTV_GetMyBroadcastChannels_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetMyBroadcastChannels_Response} CSteamTV_GetMyBroadcastChannels_Response instance
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.create = function create(properties) {
+            return new CSteamTV_GetMyBroadcastChannels_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetMyBroadcastChannels_Response message. Does not implicitly {@link CSteamTV_GetMyBroadcastChannels_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {ICSteamTV_GetMyBroadcastChannels_Response} message CSteamTV_GetMyBroadcastChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.results != null && message.results.length)
+                for (var i = 0; i < message.results.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetMyBroadcastChannels_Response message, length delimited. Does not implicitly {@link CSteamTV_GetMyBroadcastChannels_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {ICSteamTV_GetMyBroadcastChannels_Response} message CSteamTV_GetMyBroadcastChannels_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetMyBroadcastChannels_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetMyBroadcastChannels_Response} CSteamTV_GetMyBroadcastChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetMyBroadcastChannels_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.results && message.results.length))
+                        message.results = [];
+                    message.results.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetMyBroadcastChannels_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetMyBroadcastChannels_Response} CSteamTV_GetMyBroadcastChannels_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetMyBroadcastChannels_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.results != null && message.hasOwnProperty("results")) {
+                if (!Array.isArray(message.results))
+                    return "results: array expected";
+                for (var i = 0; i < message.results.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.results[i]);
+                    if (error)
+                        return "results." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetMyBroadcastChannels_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetMyBroadcastChannels_Response} CSteamTV_GetMyBroadcastChannels_Response
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetMyBroadcastChannels_Response)
+                return object;
+            var message = new $root.CSteamTV_GetMyBroadcastChannels_Response();
+            if (object.results) {
+                if (!Array.isArray(object.results))
+                    throw TypeError(".CSteamTV_GetMyBroadcastChannels_Response.results: array expected");
+                message.results = [];
+                for (var i = 0; i < object.results.length; ++i) {
+                    if (typeof object.results[i] !== "object")
+                        throw TypeError(".CSteamTV_GetMyBroadcastChannels_Response.results: object expected");
+                    message.results[i] = $root.GetBroadcastChannelEntry.fromObject(object.results[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetMyBroadcastChannels_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @static
+         * @param {CSteamTV_GetMyBroadcastChannels_Response} message CSteamTV_GetMyBroadcastChannels_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.results = [];
+            if (message.results && message.results.length) {
+                object.results = [];
+                for (var j = 0; j < message.results.length; ++j)
+                    object.results[j] = $root.GetBroadcastChannelEntry.toObject(message.results[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetMyBroadcastChannels_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetMyBroadcastChannels_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetMyBroadcastChannels_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetMyBroadcastChannels_Response;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_Takeover = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_Takeover.
+         * @exports ICSteamTV_HomePageTemplate_Takeover
+         * @interface ICSteamTV_HomePageTemplate_Takeover
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [broadcasts] CSteamTV_HomePageTemplate_Takeover broadcasts
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_Takeover.
+         * @exports CSteamTV_HomePageTemplate_Takeover
+         * @classdesc Represents a CSteamTV_HomePageTemplate_Takeover.
+         * @implements ICSteamTV_HomePageTemplate_Takeover
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_Takeover=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_Takeover(properties) {
+            this.broadcasts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_Takeover broadcasts.
+         * @member {Array.<IGetBroadcastChannelEntry>} broadcasts
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_Takeover.prototype.broadcasts = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_Takeover instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Takeover=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_Takeover} CSteamTV_HomePageTemplate_Takeover instance
+         */
+        CSteamTV_HomePageTemplate_Takeover.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_Takeover(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Takeover message. Does not implicitly {@link CSteamTV_HomePageTemplate_Takeover.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Takeover} message CSteamTV_HomePageTemplate_Takeover message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Takeover.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcasts != null && message.broadcasts.length)
+                for (var i = 0; i < message.broadcasts.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.broadcasts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Takeover message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_Takeover.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Takeover} message CSteamTV_HomePageTemplate_Takeover message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Takeover.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Takeover message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_Takeover} CSteamTV_HomePageTemplate_Takeover
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Takeover.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_Takeover();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.broadcasts && message.broadcasts.length))
+                        message.broadcasts = [];
+                    message.broadcasts.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Takeover message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_Takeover} CSteamTV_HomePageTemplate_Takeover
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Takeover.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_Takeover message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_Takeover.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcasts != null && message.hasOwnProperty("broadcasts")) {
+                if (!Array.isArray(message.broadcasts))
+                    return "broadcasts: array expected";
+                for (var i = 0; i < message.broadcasts.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.broadcasts[i]);
+                    if (error)
+                        return "broadcasts." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_Takeover message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_Takeover} CSteamTV_HomePageTemplate_Takeover
+         */
+        CSteamTV_HomePageTemplate_Takeover.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_Takeover)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_Takeover();
+            if (object.broadcasts) {
+                if (!Array.isArray(object.broadcasts))
+                    throw TypeError(".CSteamTV_HomePageTemplate_Takeover.broadcasts: array expected");
+                message.broadcasts = [];
+                for (var i = 0; i < object.broadcasts.length; ++i) {
+                    if (typeof object.broadcasts[i] !== "object")
+                        throw TypeError(".CSteamTV_HomePageTemplate_Takeover.broadcasts: object expected");
+                    message.broadcasts[i] = $root.GetBroadcastChannelEntry.fromObject(object.broadcasts[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_Takeover message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @static
+         * @param {CSteamTV_HomePageTemplate_Takeover} message CSteamTV_HomePageTemplate_Takeover
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_Takeover.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.broadcasts = [];
+            if (message.broadcasts && message.broadcasts.length) {
+                object.broadcasts = [];
+                for (var j = 0; j < message.broadcasts.length; ++j)
+                    object.broadcasts[j] = $root.GetBroadcastChannelEntry.toObject(message.broadcasts[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_Takeover to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_Takeover
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_Takeover.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_Takeover;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_SingleGame = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_SingleGame.
+         * @exports ICSteamTV_HomePageTemplate_SingleGame
+         * @interface ICSteamTV_HomePageTemplate_SingleGame
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [broadcasts] CSteamTV_HomePageTemplate_SingleGame broadcasts
+         * @property {number|null} [appid] CSteamTV_HomePageTemplate_SingleGame appid
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_SingleGame title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_SingleGame.
+         * @exports CSteamTV_HomePageTemplate_SingleGame
+         * @classdesc Represents a CSteamTV_HomePageTemplate_SingleGame.
+         * @implements ICSteamTV_HomePageTemplate_SingleGame
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_SingleGame=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_SingleGame(properties) {
+            this.broadcasts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_SingleGame broadcasts.
+         * @member {Array.<IGetBroadcastChannelEntry>} broadcasts
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_SingleGame.prototype.broadcasts = $util.emptyArray;
+    
+        /**
+         * CSteamTV_HomePageTemplate_SingleGame appid.
+         * @member {number} appid
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_SingleGame.prototype.appid = 0;
+    
+        /**
+         * CSteamTV_HomePageTemplate_SingleGame title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_SingleGame.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_SingleGame instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_SingleGame=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_SingleGame} CSteamTV_HomePageTemplate_SingleGame instance
+         */
+        CSteamTV_HomePageTemplate_SingleGame.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_SingleGame(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_SingleGame message. Does not implicitly {@link CSteamTV_HomePageTemplate_SingleGame.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_SingleGame} message CSteamTV_HomePageTemplate_SingleGame message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_SingleGame.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcasts != null && message.broadcasts.length)
+                for (var i = 0; i < message.broadcasts.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.broadcasts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_SingleGame message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_SingleGame.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_SingleGame} message CSteamTV_HomePageTemplate_SingleGame message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_SingleGame.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_SingleGame message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_SingleGame} CSteamTV_HomePageTemplate_SingleGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_SingleGame.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_SingleGame();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.broadcasts && message.broadcasts.length))
+                        message.broadcasts = [];
+                    message.broadcasts.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.appid = reader.uint32();
+                    break;
+                case 3:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_SingleGame message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_SingleGame} CSteamTV_HomePageTemplate_SingleGame
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_SingleGame.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_SingleGame message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_SingleGame.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcasts != null && message.hasOwnProperty("broadcasts")) {
+                if (!Array.isArray(message.broadcasts))
+                    return "broadcasts: array expected";
+                for (var i = 0; i < message.broadcasts.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.broadcasts[i]);
+                    if (error)
+                        return "broadcasts." + error;
+                }
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_SingleGame message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_SingleGame} CSteamTV_HomePageTemplate_SingleGame
+         */
+        CSteamTV_HomePageTemplate_SingleGame.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_SingleGame)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_SingleGame();
+            if (object.broadcasts) {
+                if (!Array.isArray(object.broadcasts))
+                    throw TypeError(".CSteamTV_HomePageTemplate_SingleGame.broadcasts: array expected");
+                message.broadcasts = [];
+                for (var i = 0; i < object.broadcasts.length; ++i) {
+                    if (typeof object.broadcasts[i] !== "object")
+                        throw TypeError(".CSteamTV_HomePageTemplate_SingleGame.broadcasts: object expected");
+                    message.broadcasts[i] = $root.GetBroadcastChannelEntry.fromObject(object.broadcasts[i]);
+                }
+            }
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_SingleGame message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @static
+         * @param {CSteamTV_HomePageTemplate_SingleGame} message CSteamTV_HomePageTemplate_SingleGame
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_SingleGame.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.broadcasts = [];
+            if (options.defaults) {
+                object.appid = 0;
+                object.title = "";
+            }
+            if (message.broadcasts && message.broadcasts.length) {
+                object.broadcasts = [];
+                for (var j = 0; j < message.broadcasts.length; ++j)
+                    object.broadcasts[j] = $root.GetBroadcastChannelEntry.toObject(message.broadcasts[j], options);
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_SingleGame to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_SingleGame
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_SingleGame.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_SingleGame;
+    })();
+    
+    $root.GameListEntry = (function() {
+    
+        /**
+         * Properties of a GameListEntry.
+         * @exports IGameListEntry
+         * @interface IGameListEntry
+         * @property {number|null} [appid] GameListEntry appid
+         * @property {string|null} [game_name] GameListEntry game_name
+         * @property {IGetBroadcastChannelEntry|null} [broadcast] GameListEntry broadcast
+         */
+    
+        /**
+         * Constructs a new GameListEntry.
+         * @exports GameListEntry
+         * @classdesc Represents a GameListEntry.
+         * @implements IGameListEntry
+         * @constructor
+         * @param {IGameListEntry=} [properties] Properties to set
+         */
+        function GameListEntry(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * GameListEntry appid.
+         * @member {number} appid
+         * @memberof GameListEntry
+         * @instance
+         */
+        GameListEntry.prototype.appid = 0;
+    
+        /**
+         * GameListEntry game_name.
+         * @member {string} game_name
+         * @memberof GameListEntry
+         * @instance
+         */
+        GameListEntry.prototype.game_name = "";
+    
+        /**
+         * GameListEntry broadcast.
+         * @member {IGetBroadcastChannelEntry|null|undefined} broadcast
+         * @memberof GameListEntry
+         * @instance
+         */
+        GameListEntry.prototype.broadcast = null;
+    
+        /**
+         * Creates a new GameListEntry instance using the specified properties.
+         * @function create
+         * @memberof GameListEntry
+         * @static
+         * @param {IGameListEntry=} [properties] Properties to set
+         * @returns {GameListEntry} GameListEntry instance
+         */
+        GameListEntry.create = function create(properties) {
+            return new GameListEntry(properties);
+        };
+    
+        /**
+         * Encodes the specified GameListEntry message. Does not implicitly {@link GameListEntry.verify|verify} messages.
+         * @function encode
+         * @memberof GameListEntry
+         * @static
+         * @param {IGameListEntry} message GameListEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameListEntry.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.game_name != null && message.hasOwnProperty("game_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.game_name);
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                $root.GetBroadcastChannelEntry.encode(message.broadcast, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified GameListEntry message, length delimited. Does not implicitly {@link GameListEntry.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameListEntry
+         * @static
+         * @param {IGameListEntry} message GameListEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameListEntry.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a GameListEntry message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameListEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameListEntry} GameListEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameListEntry.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameListEntry();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.game_name = reader.string();
+                    break;
+                case 3:
+                    message.broadcast = $root.GetBroadcastChannelEntry.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a GameListEntry message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameListEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameListEntry} GameListEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameListEntry.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a GameListEntry message.
+         * @function verify
+         * @memberof GameListEntry
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameListEntry.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.game_name != null && message.hasOwnProperty("game_name"))
+                if (!$util.isString(message.game_name))
+                    return "game_name: string expected";
+            if (message.broadcast != null && message.hasOwnProperty("broadcast")) {
+                var error = $root.GetBroadcastChannelEntry.verify(message.broadcast);
+                if (error)
+                    return "broadcast." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a GameListEntry message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameListEntry
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameListEntry} GameListEntry
+         */
+        GameListEntry.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameListEntry)
+                return object;
+            var message = new $root.GameListEntry();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.game_name != null)
+                message.game_name = String(object.game_name);
+            if (object.broadcast != null) {
+                if (typeof object.broadcast !== "object")
+                    throw TypeError(".GameListEntry.broadcast: object expected");
+                message.broadcast = $root.GetBroadcastChannelEntry.fromObject(object.broadcast);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a GameListEntry message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameListEntry
+         * @static
+         * @param {GameListEntry} message GameListEntry
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameListEntry.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.game_name = "";
+                object.broadcast = null;
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.game_name != null && message.hasOwnProperty("game_name"))
+                object.game_name = message.game_name;
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                object.broadcast = $root.GetBroadcastChannelEntry.toObject(message.broadcast, options);
+            return object;
+        };
+    
+        /**
+         * Converts this GameListEntry to JSON.
+         * @function toJSON
+         * @memberof GameListEntry
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameListEntry.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return GameListEntry;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_GameList = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_GameList.
+         * @exports ICSteamTV_HomePageTemplate_GameList
+         * @interface ICSteamTV_HomePageTemplate_GameList
+         * @property {Array.<IGameListEntry>|null} [entries] CSteamTV_HomePageTemplate_GameList entries
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_GameList title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_GameList.
+         * @exports CSteamTV_HomePageTemplate_GameList
+         * @classdesc Represents a CSteamTV_HomePageTemplate_GameList.
+         * @implements ICSteamTV_HomePageTemplate_GameList
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_GameList=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_GameList(properties) {
+            this.entries = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_GameList entries.
+         * @member {Array.<IGameListEntry>} entries
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_GameList.prototype.entries = $util.emptyArray;
+    
+        /**
+         * CSteamTV_HomePageTemplate_GameList title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_GameList.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_GameList instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_GameList=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_GameList} CSteamTV_HomePageTemplate_GameList instance
+         */
+        CSteamTV_HomePageTemplate_GameList.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_GameList(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_GameList message. Does not implicitly {@link CSteamTV_HomePageTemplate_GameList.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_GameList} message CSteamTV_HomePageTemplate_GameList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_GameList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.entries != null && message.entries.length)
+                for (var i = 0; i < message.entries.length; ++i)
+                    $root.GameListEntry.encode(message.entries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_GameList message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_GameList.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_GameList} message CSteamTV_HomePageTemplate_GameList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_GameList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_GameList message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_GameList} CSteamTV_HomePageTemplate_GameList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_GameList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_GameList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.entries && message.entries.length))
+                        message.entries = [];
+                    message.entries.push($root.GameListEntry.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_GameList message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_GameList} CSteamTV_HomePageTemplate_GameList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_GameList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_GameList message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_GameList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.entries != null && message.hasOwnProperty("entries")) {
+                if (!Array.isArray(message.entries))
+                    return "entries: array expected";
+                for (var i = 0; i < message.entries.length; ++i) {
+                    var error = $root.GameListEntry.verify(message.entries[i]);
+                    if (error)
+                        return "entries." + error;
+                }
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_GameList message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_GameList} CSteamTV_HomePageTemplate_GameList
+         */
+        CSteamTV_HomePageTemplate_GameList.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_GameList)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_GameList();
+            if (object.entries) {
+                if (!Array.isArray(object.entries))
+                    throw TypeError(".CSteamTV_HomePageTemplate_GameList.entries: array expected");
+                message.entries = [];
+                for (var i = 0; i < object.entries.length; ++i) {
+                    if (typeof object.entries[i] !== "object")
+                        throw TypeError(".CSteamTV_HomePageTemplate_GameList.entries: object expected");
+                    message.entries[i] = $root.GameListEntry.fromObject(object.entries[i]);
+                }
+            }
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_GameList message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @static
+         * @param {CSteamTV_HomePageTemplate_GameList} message CSteamTV_HomePageTemplate_GameList
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_GameList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.entries = [];
+            if (options.defaults)
+                object.title = "";
+            if (message.entries && message.entries.length) {
+                object.entries = [];
+                for (var j = 0; j < message.entries.length; ++j)
+                    object.entries[j] = $root.GameListEntry.toObject(message.entries[j], options);
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_GameList to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_GameList
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_GameList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_GameList;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_QuickExplore = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_QuickExplore.
+         * @exports ICSteamTV_HomePageTemplate_QuickExplore
+         * @interface ICSteamTV_HomePageTemplate_QuickExplore
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [broadcasts] CSteamTV_HomePageTemplate_QuickExplore broadcasts
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_QuickExplore title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_QuickExplore.
+         * @exports CSteamTV_HomePageTemplate_QuickExplore
+         * @classdesc Represents a CSteamTV_HomePageTemplate_QuickExplore.
+         * @implements ICSteamTV_HomePageTemplate_QuickExplore
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_QuickExplore=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_QuickExplore(properties) {
+            this.broadcasts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_QuickExplore broadcasts.
+         * @member {Array.<IGetBroadcastChannelEntry>} broadcasts
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.prototype.broadcasts = $util.emptyArray;
+    
+        /**
+         * CSteamTV_HomePageTemplate_QuickExplore title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_QuickExplore instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_QuickExplore=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_QuickExplore} CSteamTV_HomePageTemplate_QuickExplore instance
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_QuickExplore(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_QuickExplore message. Does not implicitly {@link CSteamTV_HomePageTemplate_QuickExplore.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_QuickExplore} message CSteamTV_HomePageTemplate_QuickExplore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcasts != null && message.broadcasts.length)
+                for (var i = 0; i < message.broadcasts.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.broadcasts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_QuickExplore message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_QuickExplore.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_QuickExplore} message CSteamTV_HomePageTemplate_QuickExplore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_QuickExplore message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_QuickExplore} CSteamTV_HomePageTemplate_QuickExplore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_QuickExplore();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.broadcasts && message.broadcasts.length))
+                        message.broadcasts = [];
+                    message.broadcasts.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_QuickExplore message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_QuickExplore} CSteamTV_HomePageTemplate_QuickExplore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_QuickExplore message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcasts != null && message.hasOwnProperty("broadcasts")) {
+                if (!Array.isArray(message.broadcasts))
+                    return "broadcasts: array expected";
+                for (var i = 0; i < message.broadcasts.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.broadcasts[i]);
+                    if (error)
+                        return "broadcasts." + error;
+                }
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_QuickExplore message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_QuickExplore} CSteamTV_HomePageTemplate_QuickExplore
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_QuickExplore)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_QuickExplore();
+            if (object.broadcasts) {
+                if (!Array.isArray(object.broadcasts))
+                    throw TypeError(".CSteamTV_HomePageTemplate_QuickExplore.broadcasts: array expected");
+                message.broadcasts = [];
+                for (var i = 0; i < object.broadcasts.length; ++i) {
+                    if (typeof object.broadcasts[i] !== "object")
+                        throw TypeError(".CSteamTV_HomePageTemplate_QuickExplore.broadcasts: object expected");
+                    message.broadcasts[i] = $root.GetBroadcastChannelEntry.fromObject(object.broadcasts[i]);
+                }
+            }
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_QuickExplore message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @static
+         * @param {CSteamTV_HomePageTemplate_QuickExplore} message CSteamTV_HomePageTemplate_QuickExplore
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.broadcasts = [];
+            if (options.defaults)
+                object.title = "";
+            if (message.broadcasts && message.broadcasts.length) {
+                object.broadcasts = [];
+                for (var j = 0; j < message.broadcasts.length; ++j)
+                    object.broadcasts[j] = $root.GetBroadcastChannelEntry.toObject(message.broadcasts[j], options);
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_QuickExplore to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_QuickExplore
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_QuickExplore.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_QuickExplore;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_ConveyorBelt = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_ConveyorBelt.
+         * @exports ICSteamTV_HomePageTemplate_ConveyorBelt
+         * @interface ICSteamTV_HomePageTemplate_ConveyorBelt
+         * @property {Array.<IGetBroadcastChannelEntry>|null} [broadcasts] CSteamTV_HomePageTemplate_ConveyorBelt broadcasts
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_ConveyorBelt title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_ConveyorBelt.
+         * @exports CSteamTV_HomePageTemplate_ConveyorBelt
+         * @classdesc Represents a CSteamTV_HomePageTemplate_ConveyorBelt.
+         * @implements ICSteamTV_HomePageTemplate_ConveyorBelt
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_ConveyorBelt=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_ConveyorBelt(properties) {
+            this.broadcasts = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_ConveyorBelt broadcasts.
+         * @member {Array.<IGetBroadcastChannelEntry>} broadcasts
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.prototype.broadcasts = $util.emptyArray;
+    
+        /**
+         * CSteamTV_HomePageTemplate_ConveyorBelt title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_ConveyorBelt instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_ConveyorBelt=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_ConveyorBelt} CSteamTV_HomePageTemplate_ConveyorBelt instance
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_ConveyorBelt(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_ConveyorBelt message. Does not implicitly {@link CSteamTV_HomePageTemplate_ConveyorBelt.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_ConveyorBelt} message CSteamTV_HomePageTemplate_ConveyorBelt message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcasts != null && message.broadcasts.length)
+                for (var i = 0; i < message.broadcasts.length; ++i)
+                    $root.GetBroadcastChannelEntry.encode(message.broadcasts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_ConveyorBelt message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_ConveyorBelt.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_ConveyorBelt} message CSteamTV_HomePageTemplate_ConveyorBelt message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_ConveyorBelt message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_ConveyorBelt} CSteamTV_HomePageTemplate_ConveyorBelt
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_ConveyorBelt();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.broadcasts && message.broadcasts.length))
+                        message.broadcasts = [];
+                    message.broadcasts.push($root.GetBroadcastChannelEntry.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_ConveyorBelt message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_ConveyorBelt} CSteamTV_HomePageTemplate_ConveyorBelt
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_ConveyorBelt message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcasts != null && message.hasOwnProperty("broadcasts")) {
+                if (!Array.isArray(message.broadcasts))
+                    return "broadcasts: array expected";
+                for (var i = 0; i < message.broadcasts.length; ++i) {
+                    var error = $root.GetBroadcastChannelEntry.verify(message.broadcasts[i]);
+                    if (error)
+                        return "broadcasts." + error;
+                }
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_ConveyorBelt message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_ConveyorBelt} CSteamTV_HomePageTemplate_ConveyorBelt
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_ConveyorBelt)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_ConveyorBelt();
+            if (object.broadcasts) {
+                if (!Array.isArray(object.broadcasts))
+                    throw TypeError(".CSteamTV_HomePageTemplate_ConveyorBelt.broadcasts: array expected");
+                message.broadcasts = [];
+                for (var i = 0; i < object.broadcasts.length; ++i) {
+                    if (typeof object.broadcasts[i] !== "object")
+                        throw TypeError(".CSteamTV_HomePageTemplate_ConveyorBelt.broadcasts: object expected");
+                    message.broadcasts[i] = $root.GetBroadcastChannelEntry.fromObject(object.broadcasts[i]);
+                }
+            }
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_ConveyorBelt message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @static
+         * @param {CSteamTV_HomePageTemplate_ConveyorBelt} message CSteamTV_HomePageTemplate_ConveyorBelt
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.broadcasts = [];
+            if (options.defaults)
+                object.title = "";
+            if (message.broadcasts && message.broadcasts.length) {
+                object.broadcasts = [];
+                for (var j = 0; j < message.broadcasts.length; ++j)
+                    object.broadcasts[j] = $root.GetBroadcastChannelEntry.toObject(message.broadcasts[j], options);
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_ConveyorBelt to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_ConveyorBelt
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_ConveyorBelt.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_ConveyorBelt;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_WatchParty = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_WatchParty.
+         * @exports ICSteamTV_HomePageTemplate_WatchParty
+         * @interface ICSteamTV_HomePageTemplate_WatchParty
+         * @property {IGetBroadcastChannelEntry|null} [broadcast] CSteamTV_HomePageTemplate_WatchParty broadcast
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_WatchParty title
+         * @property {number|Long|null} [chat_group_id] CSteamTV_HomePageTemplate_WatchParty chat_group_id
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_WatchParty.
+         * @exports CSteamTV_HomePageTemplate_WatchParty
+         * @classdesc Represents a CSteamTV_HomePageTemplate_WatchParty.
+         * @implements ICSteamTV_HomePageTemplate_WatchParty
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_WatchParty=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_WatchParty(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_WatchParty broadcast.
+         * @member {IGetBroadcastChannelEntry|null|undefined} broadcast
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_WatchParty.prototype.broadcast = null;
+    
+        /**
+         * CSteamTV_HomePageTemplate_WatchParty title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_WatchParty.prototype.title = "";
+    
+        /**
+         * CSteamTV_HomePageTemplate_WatchParty chat_group_id.
+         * @member {number|Long} chat_group_id
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_WatchParty.prototype.chat_group_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_WatchParty instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_WatchParty=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_WatchParty} CSteamTV_HomePageTemplate_WatchParty instance
+         */
+        CSteamTV_HomePageTemplate_WatchParty.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_WatchParty(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_WatchParty message. Does not implicitly {@link CSteamTV_HomePageTemplate_WatchParty.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_WatchParty} message CSteamTV_HomePageTemplate_WatchParty message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_WatchParty.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                $root.GetBroadcastChannelEntry.encode(message.broadcast, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.chat_group_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_WatchParty message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_WatchParty.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_WatchParty} message CSteamTV_HomePageTemplate_WatchParty message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_WatchParty.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_WatchParty message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_WatchParty} CSteamTV_HomePageTemplate_WatchParty
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_WatchParty.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_WatchParty();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast = $root.GetBroadcastChannelEntry.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                case 3:
+                    message.chat_group_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_WatchParty message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_WatchParty} CSteamTV_HomePageTemplate_WatchParty
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_WatchParty.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_WatchParty message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_WatchParty.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast != null && message.hasOwnProperty("broadcast")) {
+                var error = $root.GetBroadcastChannelEntry.verify(message.broadcast);
+                if (error)
+                    return "broadcast." + error;
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
+                if (!$util.isInteger(message.chat_group_id) && !(message.chat_group_id && $util.isInteger(message.chat_group_id.low) && $util.isInteger(message.chat_group_id.high)))
+                    return "chat_group_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_WatchParty message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_WatchParty} CSteamTV_HomePageTemplate_WatchParty
+         */
+        CSteamTV_HomePageTemplate_WatchParty.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_WatchParty)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_WatchParty();
+            if (object.broadcast != null) {
+                if (typeof object.broadcast !== "object")
+                    throw TypeError(".CSteamTV_HomePageTemplate_WatchParty.broadcast: object expected");
+                message.broadcast = $root.GetBroadcastChannelEntry.fromObject(object.broadcast);
+            }
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.chat_group_id != null)
+                if ($util.Long)
+                    (message.chat_group_id = $util.Long.fromValue(object.chat_group_id)).unsigned = true;
+                else if (typeof object.chat_group_id === "string")
+                    message.chat_group_id = parseInt(object.chat_group_id, 10);
+                else if (typeof object.chat_group_id === "number")
+                    message.chat_group_id = object.chat_group_id;
+                else if (typeof object.chat_group_id === "object")
+                    message.chat_group_id = new $util.LongBits(object.chat_group_id.low >>> 0, object.chat_group_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_WatchParty message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @static
+         * @param {CSteamTV_HomePageTemplate_WatchParty} message CSteamTV_HomePageTemplate_WatchParty
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_WatchParty.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.broadcast = null;
+                object.title = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.chat_group_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_group_id = options.longs === String ? "0" : 0;
+            }
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                object.broadcast = $root.GetBroadcastChannelEntry.toObject(message.broadcast, options);
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
+                if (typeof message.chat_group_id === "number")
+                    object.chat_group_id = options.longs === String ? String(message.chat_group_id) : message.chat_group_id;
+                else
+                    object.chat_group_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_group_id) : options.longs === Number ? new $util.LongBits(message.chat_group_id.low >>> 0, message.chat_group_id.high >>> 0).toNumber(true) : message.chat_group_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_WatchParty to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_WatchParty
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_WatchParty.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_WatchParty;
+    })();
+    
+    $root.CSteamTV_HomePageTemplate_Developer = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageTemplate_Developer.
+         * @exports ICSteamTV_HomePageTemplate_Developer
+         * @interface ICSteamTV_HomePageTemplate_Developer
+         * @property {IGetBroadcastChannelEntry|null} [broadcast] CSteamTV_HomePageTemplate_Developer broadcast
+         * @property {string|null} [title] CSteamTV_HomePageTemplate_Developer title
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageTemplate_Developer.
+         * @exports CSteamTV_HomePageTemplate_Developer
+         * @classdesc Represents a CSteamTV_HomePageTemplate_Developer.
+         * @implements ICSteamTV_HomePageTemplate_Developer
+         * @constructor
+         * @param {ICSteamTV_HomePageTemplate_Developer=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageTemplate_Developer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageTemplate_Developer broadcast.
+         * @member {IGetBroadcastChannelEntry|null|undefined} broadcast
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_Developer.prototype.broadcast = null;
+    
+        /**
+         * CSteamTV_HomePageTemplate_Developer title.
+         * @member {string} title
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @instance
+         */
+        CSteamTV_HomePageTemplate_Developer.prototype.title = "";
+    
+        /**
+         * Creates a new CSteamTV_HomePageTemplate_Developer instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Developer=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageTemplate_Developer} CSteamTV_HomePageTemplate_Developer instance
+         */
+        CSteamTV_HomePageTemplate_Developer.create = function create(properties) {
+            return new CSteamTV_HomePageTemplate_Developer(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Developer message. Does not implicitly {@link CSteamTV_HomePageTemplate_Developer.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Developer} message CSteamTV_HomePageTemplate_Developer message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Developer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                $root.GetBroadcastChannelEntry.encode(message.broadcast, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageTemplate_Developer message, length delimited. Does not implicitly {@link CSteamTV_HomePageTemplate_Developer.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {ICSteamTV_HomePageTemplate_Developer} message CSteamTV_HomePageTemplate_Developer message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageTemplate_Developer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Developer message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageTemplate_Developer} CSteamTV_HomePageTemplate_Developer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Developer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageTemplate_Developer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast = $root.GetBroadcastChannelEntry.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageTemplate_Developer message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageTemplate_Developer} CSteamTV_HomePageTemplate_Developer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageTemplate_Developer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageTemplate_Developer message.
+         * @function verify
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageTemplate_Developer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast != null && message.hasOwnProperty("broadcast")) {
+                var error = $root.GetBroadcastChannelEntry.verify(message.broadcast);
+                if (error)
+                    return "broadcast." + error;
+            }
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageTemplate_Developer message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageTemplate_Developer} CSteamTV_HomePageTemplate_Developer
+         */
+        CSteamTV_HomePageTemplate_Developer.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageTemplate_Developer)
+                return object;
+            var message = new $root.CSteamTV_HomePageTemplate_Developer();
+            if (object.broadcast != null) {
+                if (typeof object.broadcast !== "object")
+                    throw TypeError(".CSteamTV_HomePageTemplate_Developer.broadcast: object expected");
+                message.broadcast = $root.GetBroadcastChannelEntry.fromObject(object.broadcast);
+            }
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageTemplate_Developer message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @static
+         * @param {CSteamTV_HomePageTemplate_Developer} message CSteamTV_HomePageTemplate_Developer
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageTemplate_Developer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.broadcast = null;
+                object.title = "";
+            }
+            if (message.broadcast != null && message.hasOwnProperty("broadcast"))
+                object.broadcast = $root.GetBroadcastChannelEntry.toObject(message.broadcast, options);
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageTemplate_Developer to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageTemplate_Developer
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageTemplate_Developer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageTemplate_Developer;
+    })();
+    
+    $root.CSteamTV_HomePageContentRow = (function() {
+    
+        /**
+         * Properties of a CSteamTV_HomePageContentRow.
+         * @exports ICSteamTV_HomePageContentRow
+         * @interface ICSteamTV_HomePageContentRow
+         * @property {number|null} [template_type] CSteamTV_HomePageContentRow template_type
+         * @property {ICSteamTV_HomePageTemplate_Takeover|null} [takeover] CSteamTV_HomePageContentRow takeover
+         * @property {ICSteamTV_HomePageTemplate_SingleGame|null} [single_game] CSteamTV_HomePageContentRow single_game
+         * @property {ICSteamTV_HomePageTemplate_GameList|null} [game_list] CSteamTV_HomePageContentRow game_list
+         * @property {ICSteamTV_HomePageTemplate_QuickExplore|null} [quick_explore] CSteamTV_HomePageContentRow quick_explore
+         * @property {ICSteamTV_HomePageTemplate_ConveyorBelt|null} [conveyor_belt] CSteamTV_HomePageContentRow conveyor_belt
+         * @property {ICSteamTV_HomePageTemplate_WatchParty|null} [watch_party] CSteamTV_HomePageContentRow watch_party
+         * @property {ICSteamTV_HomePageTemplate_Developer|null} [developer] CSteamTV_HomePageContentRow developer
+         */
+    
+        /**
+         * Constructs a new CSteamTV_HomePageContentRow.
+         * @exports CSteamTV_HomePageContentRow
+         * @classdesc Represents a CSteamTV_HomePageContentRow.
+         * @implements ICSteamTV_HomePageContentRow
+         * @constructor
+         * @param {ICSteamTV_HomePageContentRow=} [properties] Properties to set
+         */
+        function CSteamTV_HomePageContentRow(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_HomePageContentRow template_type.
+         * @member {number} template_type
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.template_type = 0;
+    
+        /**
+         * CSteamTV_HomePageContentRow takeover.
+         * @member {ICSteamTV_HomePageTemplate_Takeover|null|undefined} takeover
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.takeover = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow single_game.
+         * @member {ICSteamTV_HomePageTemplate_SingleGame|null|undefined} single_game
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.single_game = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow game_list.
+         * @member {ICSteamTV_HomePageTemplate_GameList|null|undefined} game_list
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.game_list = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow quick_explore.
+         * @member {ICSteamTV_HomePageTemplate_QuickExplore|null|undefined} quick_explore
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.quick_explore = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow conveyor_belt.
+         * @member {ICSteamTV_HomePageTemplate_ConveyorBelt|null|undefined} conveyor_belt
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.conveyor_belt = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow watch_party.
+         * @member {ICSteamTV_HomePageTemplate_WatchParty|null|undefined} watch_party
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.watch_party = null;
+    
+        /**
+         * CSteamTV_HomePageContentRow developer.
+         * @member {ICSteamTV_HomePageTemplate_Developer|null|undefined} developer
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         */
+        CSteamTV_HomePageContentRow.prototype.developer = null;
+    
+        /**
+         * Creates a new CSteamTV_HomePageContentRow instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {ICSteamTV_HomePageContentRow=} [properties] Properties to set
+         * @returns {CSteamTV_HomePageContentRow} CSteamTV_HomePageContentRow instance
+         */
+        CSteamTV_HomePageContentRow.create = function create(properties) {
+            return new CSteamTV_HomePageContentRow(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageContentRow message. Does not implicitly {@link CSteamTV_HomePageContentRow.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {ICSteamTV_HomePageContentRow} message CSteamTV_HomePageContentRow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageContentRow.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.template_type != null && message.hasOwnProperty("template_type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.template_type);
+            if (message.takeover != null && message.hasOwnProperty("takeover"))
+                $root.CSteamTV_HomePageTemplate_Takeover.encode(message.takeover, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.single_game != null && message.hasOwnProperty("single_game"))
+                $root.CSteamTV_HomePageTemplate_SingleGame.encode(message.single_game, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.game_list != null && message.hasOwnProperty("game_list"))
+                $root.CSteamTV_HomePageTemplate_GameList.encode(message.game_list, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.quick_explore != null && message.hasOwnProperty("quick_explore"))
+                $root.CSteamTV_HomePageTemplate_QuickExplore.encode(message.quick_explore, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.conveyor_belt != null && message.hasOwnProperty("conveyor_belt"))
+                $root.CSteamTV_HomePageTemplate_ConveyorBelt.encode(message.conveyor_belt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.watch_party != null && message.hasOwnProperty("watch_party"))
+                $root.CSteamTV_HomePageTemplate_WatchParty.encode(message.watch_party, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.developer != null && message.hasOwnProperty("developer"))
+                $root.CSteamTV_HomePageTemplate_Developer.encode(message.developer, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_HomePageContentRow message, length delimited. Does not implicitly {@link CSteamTV_HomePageContentRow.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {ICSteamTV_HomePageContentRow} message CSteamTV_HomePageContentRow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_HomePageContentRow.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageContentRow message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_HomePageContentRow} CSteamTV_HomePageContentRow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageContentRow.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_HomePageContentRow();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.template_type = reader.int32();
+                    break;
+                case 2:
+                    message.takeover = $root.CSteamTV_HomePageTemplate_Takeover.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.single_game = $root.CSteamTV_HomePageTemplate_SingleGame.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.game_list = $root.CSteamTV_HomePageTemplate_GameList.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.quick_explore = $root.CSteamTV_HomePageTemplate_QuickExplore.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.conveyor_belt = $root.CSteamTV_HomePageTemplate_ConveyorBelt.decode(reader, reader.uint32());
+                    break;
+                case 7:
+                    message.watch_party = $root.CSteamTV_HomePageTemplate_WatchParty.decode(reader, reader.uint32());
+                    break;
+                case 8:
+                    message.developer = $root.CSteamTV_HomePageTemplate_Developer.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_HomePageContentRow message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_HomePageContentRow} CSteamTV_HomePageContentRow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_HomePageContentRow.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_HomePageContentRow message.
+         * @function verify
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_HomePageContentRow.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.template_type != null && message.hasOwnProperty("template_type"))
+                if (!$util.isInteger(message.template_type))
+                    return "template_type: integer expected";
+            if (message.takeover != null && message.hasOwnProperty("takeover")) {
+                var error = $root.CSteamTV_HomePageTemplate_Takeover.verify(message.takeover);
+                if (error)
+                    return "takeover." + error;
+            }
+            if (message.single_game != null && message.hasOwnProperty("single_game")) {
+                var error = $root.CSteamTV_HomePageTemplate_SingleGame.verify(message.single_game);
+                if (error)
+                    return "single_game." + error;
+            }
+            if (message.game_list != null && message.hasOwnProperty("game_list")) {
+                var error = $root.CSteamTV_HomePageTemplate_GameList.verify(message.game_list);
+                if (error)
+                    return "game_list." + error;
+            }
+            if (message.quick_explore != null && message.hasOwnProperty("quick_explore")) {
+                var error = $root.CSteamTV_HomePageTemplate_QuickExplore.verify(message.quick_explore);
+                if (error)
+                    return "quick_explore." + error;
+            }
+            if (message.conveyor_belt != null && message.hasOwnProperty("conveyor_belt")) {
+                var error = $root.CSteamTV_HomePageTemplate_ConveyorBelt.verify(message.conveyor_belt);
+                if (error)
+                    return "conveyor_belt." + error;
+            }
+            if (message.watch_party != null && message.hasOwnProperty("watch_party")) {
+                var error = $root.CSteamTV_HomePageTemplate_WatchParty.verify(message.watch_party);
+                if (error)
+                    return "watch_party." + error;
+            }
+            if (message.developer != null && message.hasOwnProperty("developer")) {
+                var error = $root.CSteamTV_HomePageTemplate_Developer.verify(message.developer);
+                if (error)
+                    return "developer." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_HomePageContentRow message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_HomePageContentRow} CSteamTV_HomePageContentRow
+         */
+        CSteamTV_HomePageContentRow.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_HomePageContentRow)
+                return object;
+            var message = new $root.CSteamTV_HomePageContentRow();
+            if (object.template_type != null)
+                message.template_type = object.template_type | 0;
+            if (object.takeover != null) {
+                if (typeof object.takeover !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.takeover: object expected");
+                message.takeover = $root.CSteamTV_HomePageTemplate_Takeover.fromObject(object.takeover);
+            }
+            if (object.single_game != null) {
+                if (typeof object.single_game !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.single_game: object expected");
+                message.single_game = $root.CSteamTV_HomePageTemplate_SingleGame.fromObject(object.single_game);
+            }
+            if (object.game_list != null) {
+                if (typeof object.game_list !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.game_list: object expected");
+                message.game_list = $root.CSteamTV_HomePageTemplate_GameList.fromObject(object.game_list);
+            }
+            if (object.quick_explore != null) {
+                if (typeof object.quick_explore !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.quick_explore: object expected");
+                message.quick_explore = $root.CSteamTV_HomePageTemplate_QuickExplore.fromObject(object.quick_explore);
+            }
+            if (object.conveyor_belt != null) {
+                if (typeof object.conveyor_belt !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.conveyor_belt: object expected");
+                message.conveyor_belt = $root.CSteamTV_HomePageTemplate_ConveyorBelt.fromObject(object.conveyor_belt);
+            }
+            if (object.watch_party != null) {
+                if (typeof object.watch_party !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.watch_party: object expected");
+                message.watch_party = $root.CSteamTV_HomePageTemplate_WatchParty.fromObject(object.watch_party);
+            }
+            if (object.developer != null) {
+                if (typeof object.developer !== "object")
+                    throw TypeError(".CSteamTV_HomePageContentRow.developer: object expected");
+                message.developer = $root.CSteamTV_HomePageTemplate_Developer.fromObject(object.developer);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_HomePageContentRow message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_HomePageContentRow
+         * @static
+         * @param {CSteamTV_HomePageContentRow} message CSteamTV_HomePageContentRow
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_HomePageContentRow.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.template_type = 0;
+                object.takeover = null;
+                object.single_game = null;
+                object.game_list = null;
+                object.quick_explore = null;
+                object.conveyor_belt = null;
+                object.watch_party = null;
+                object.developer = null;
+            }
+            if (message.template_type != null && message.hasOwnProperty("template_type"))
+                object.template_type = message.template_type;
+            if (message.takeover != null && message.hasOwnProperty("takeover"))
+                object.takeover = $root.CSteamTV_HomePageTemplate_Takeover.toObject(message.takeover, options);
+            if (message.single_game != null && message.hasOwnProperty("single_game"))
+                object.single_game = $root.CSteamTV_HomePageTemplate_SingleGame.toObject(message.single_game, options);
+            if (message.game_list != null && message.hasOwnProperty("game_list"))
+                object.game_list = $root.CSteamTV_HomePageTemplate_GameList.toObject(message.game_list, options);
+            if (message.quick_explore != null && message.hasOwnProperty("quick_explore"))
+                object.quick_explore = $root.CSteamTV_HomePageTemplate_QuickExplore.toObject(message.quick_explore, options);
+            if (message.conveyor_belt != null && message.hasOwnProperty("conveyor_belt"))
+                object.conveyor_belt = $root.CSteamTV_HomePageTemplate_ConveyorBelt.toObject(message.conveyor_belt, options);
+            if (message.watch_party != null && message.hasOwnProperty("watch_party"))
+                object.watch_party = $root.CSteamTV_HomePageTemplate_WatchParty.toObject(message.watch_party, options);
+            if (message.developer != null && message.hasOwnProperty("developer"))
+                object.developer = $root.CSteamTV_HomePageTemplate_Developer.toObject(message.developer, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_HomePageContentRow to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_HomePageContentRow
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_HomePageContentRow.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_HomePageContentRow;
+    })();
+    
+    $root.CSteamTV_GetHomePageContents_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetHomePageContents_Response.
+         * @exports ICSteamTV_GetHomePageContents_Response
+         * @interface ICSteamTV_GetHomePageContents_Response
+         * @property {Array.<ICSteamTV_HomePageContentRow>|null} [rows] CSteamTV_GetHomePageContents_Response rows
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetHomePageContents_Response.
+         * @exports CSteamTV_GetHomePageContents_Response
+         * @classdesc Represents a CSteamTV_GetHomePageContents_Response.
+         * @implements ICSteamTV_GetHomePageContents_Response
+         * @constructor
+         * @param {ICSteamTV_GetHomePageContents_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetHomePageContents_Response(properties) {
+            this.rows = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetHomePageContents_Response rows.
+         * @member {Array.<ICSteamTV_HomePageContentRow>} rows
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @instance
+         */
+        CSteamTV_GetHomePageContents_Response.prototype.rows = $util.emptyArray;
+    
+        /**
+         * Creates a new CSteamTV_GetHomePageContents_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {ICSteamTV_GetHomePageContents_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetHomePageContents_Response} CSteamTV_GetHomePageContents_Response instance
+         */
+        CSteamTV_GetHomePageContents_Response.create = function create(properties) {
+            return new CSteamTV_GetHomePageContents_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetHomePageContents_Response message. Does not implicitly {@link CSteamTV_GetHomePageContents_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {ICSteamTV_GetHomePageContents_Response} message CSteamTV_GetHomePageContents_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetHomePageContents_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rows != null && message.rows.length)
+                for (var i = 0; i < message.rows.length; ++i)
+                    $root.CSteamTV_HomePageContentRow.encode(message.rows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetHomePageContents_Response message, length delimited. Does not implicitly {@link CSteamTV_GetHomePageContents_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {ICSteamTV_GetHomePageContents_Response} message CSteamTV_GetHomePageContents_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetHomePageContents_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetHomePageContents_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetHomePageContents_Response} CSteamTV_GetHomePageContents_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetHomePageContents_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetHomePageContents_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.rows && message.rows.length))
+                        message.rows = [];
+                    message.rows.push($root.CSteamTV_HomePageContentRow.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetHomePageContents_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetHomePageContents_Response} CSteamTV_GetHomePageContents_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetHomePageContents_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetHomePageContents_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetHomePageContents_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rows != null && message.hasOwnProperty("rows")) {
+                if (!Array.isArray(message.rows))
+                    return "rows: array expected";
+                for (var i = 0; i < message.rows.length; ++i) {
+                    var error = $root.CSteamTV_HomePageContentRow.verify(message.rows[i]);
+                    if (error)
+                        return "rows." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetHomePageContents_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetHomePageContents_Response} CSteamTV_GetHomePageContents_Response
+         */
+        CSteamTV_GetHomePageContents_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetHomePageContents_Response)
+                return object;
+            var message = new $root.CSteamTV_GetHomePageContents_Response();
+            if (object.rows) {
+                if (!Array.isArray(object.rows))
+                    throw TypeError(".CSteamTV_GetHomePageContents_Response.rows: array expected");
+                message.rows = [];
+                for (var i = 0; i < object.rows.length; ++i) {
+                    if (typeof object.rows[i] !== "object")
+                        throw TypeError(".CSteamTV_GetHomePageContents_Response.rows: object expected");
+                    message.rows[i] = $root.CSteamTV_HomePageContentRow.fromObject(object.rows[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetHomePageContents_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @static
+         * @param {CSteamTV_GetHomePageContents_Response} message CSteamTV_GetHomePageContents_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetHomePageContents_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.rows = [];
+            if (message.rows && message.rows.length) {
+                object.rows = [];
+                for (var j = 0; j < message.rows.length; ++j)
+                    object.rows[j] = $root.CSteamTV_HomePageContentRow.toObject(message.rows[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetHomePageContents_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetHomePageContents_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetHomePageContents_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetHomePageContents_Response;
+    })();
+    
+    $root.CSteamTV_BroadcastClipInfo = (function() {
+    
+        /**
+         * Properties of a CSteamTV_BroadcastClipInfo.
+         * @exports ICSteamTV_BroadcastClipInfo
+         * @interface ICSteamTV_BroadcastClipInfo
+         * @property {number|Long|null} [broadcast_clip_id] CSteamTV_BroadcastClipInfo broadcast_clip_id
+         * @property {number|Long|null} [channel_id] CSteamTV_BroadcastClipInfo channel_id
+         * @property {number|null} [app_id] CSteamTV_BroadcastClipInfo app_id
+         * @property {number|Long|null} [broadcaster_steamid] CSteamTV_BroadcastClipInfo broadcaster_steamid
+         * @property {number|Long|null} [creator_steamid] CSteamTV_BroadcastClipInfo creator_steamid
+         * @property {string|null} [video_description] CSteamTV_BroadcastClipInfo video_description
+         * @property {number|null} [live_time] CSteamTV_BroadcastClipInfo live_time
+         * @property {number|null} [length_ms] CSteamTV_BroadcastClipInfo length_ms
+         * @property {string|null} [thumbnail_path] CSteamTV_BroadcastClipInfo thumbnail_path
+         */
+    
+        /**
+         * Constructs a new CSteamTV_BroadcastClipInfo.
+         * @exports CSteamTV_BroadcastClipInfo
+         * @classdesc Represents a CSteamTV_BroadcastClipInfo.
+         * @implements ICSteamTV_BroadcastClipInfo
+         * @constructor
+         * @param {ICSteamTV_BroadcastClipInfo=} [properties] Properties to set
+         */
+        function CSteamTV_BroadcastClipInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_BroadcastClipInfo broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo channel_id.
+         * @member {number|Long} channel_id
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo app_id.
+         * @member {number} app_id
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.app_id = 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo creator_steamid.
+         * @member {number|Long} creator_steamid
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.creator_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo video_description.
+         * @member {string} video_description
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.video_description = "";
+    
+        /**
+         * CSteamTV_BroadcastClipInfo live_time.
+         * @member {number} live_time
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.live_time = 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo length_ms.
+         * @member {number} length_ms
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.length_ms = 0;
+    
+        /**
+         * CSteamTV_BroadcastClipInfo thumbnail_path.
+         * @member {string} thumbnail_path
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         */
+        CSteamTV_BroadcastClipInfo.prototype.thumbnail_path = "";
+    
+        /**
+         * Creates a new CSteamTV_BroadcastClipInfo instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {ICSteamTV_BroadcastClipInfo=} [properties] Properties to set
+         * @returns {CSteamTV_BroadcastClipInfo} CSteamTV_BroadcastClipInfo instance
+         */
+        CSteamTV_BroadcastClipInfo.create = function create(properties) {
+            return new CSteamTV_BroadcastClipInfo(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_BroadcastClipInfo message. Does not implicitly {@link CSteamTV_BroadcastClipInfo.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {ICSteamTV_BroadcastClipInfo} message CSteamTV_BroadcastClipInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_BroadcastClipInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.channel_id);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.app_id);
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.broadcaster_steamid);
+            if (message.creator_steamid != null && message.hasOwnProperty("creator_steamid"))
+                writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.creator_steamid);
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.video_description);
+            if (message.live_time != null && message.hasOwnProperty("live_time"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.live_time);
+            if (message.length_ms != null && message.hasOwnProperty("length_ms"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.length_ms);
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.thumbnail_path);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_BroadcastClipInfo message, length delimited. Does not implicitly {@link CSteamTV_BroadcastClipInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {ICSteamTV_BroadcastClipInfo} message CSteamTV_BroadcastClipInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_BroadcastClipInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_BroadcastClipInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_BroadcastClipInfo} CSteamTV_BroadcastClipInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_BroadcastClipInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_BroadcastClipInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.uint64();
+                    break;
+                case 2:
+                    message.channel_id = reader.uint64();
+                    break;
+                case 3:
+                    message.app_id = reader.uint32();
+                    break;
+                case 4:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 5:
+                    message.creator_steamid = reader.fixed64();
+                    break;
+                case 6:
+                    message.video_description = reader.string();
+                    break;
+                case 7:
+                    message.live_time = reader.uint32();
+                    break;
+                case 8:
+                    message.length_ms = reader.uint32();
+                    break;
+                case 9:
+                    message.thumbnail_path = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_BroadcastClipInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_BroadcastClipInfo} CSteamTV_BroadcastClipInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_BroadcastClipInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_BroadcastClipInfo message.
+         * @function verify
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_BroadcastClipInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                if (!$util.isInteger(message.channel_id) && !(message.channel_id && $util.isInteger(message.channel_id.low) && $util.isInteger(message.channel_id.high)))
+                    return "channel_id: integer|Long expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.creator_steamid != null && message.hasOwnProperty("creator_steamid"))
+                if (!$util.isInteger(message.creator_steamid) && !(message.creator_steamid && $util.isInteger(message.creator_steamid.low) && $util.isInteger(message.creator_steamid.high)))
+                    return "creator_steamid: integer|Long expected";
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                if (!$util.isString(message.video_description))
+                    return "video_description: string expected";
+            if (message.live_time != null && message.hasOwnProperty("live_time"))
+                if (!$util.isInteger(message.live_time))
+                    return "live_time: integer expected";
+            if (message.length_ms != null && message.hasOwnProperty("length_ms"))
+                if (!$util.isInteger(message.length_ms))
+                    return "length_ms: integer expected";
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                if (!$util.isString(message.thumbnail_path))
+                    return "thumbnail_path: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_BroadcastClipInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_BroadcastClipInfo} CSteamTV_BroadcastClipInfo
+         */
+        CSteamTV_BroadcastClipInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_BroadcastClipInfo)
+                return object;
+            var message = new $root.CSteamTV_BroadcastClipInfo();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = true;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber(true);
+            if (object.channel_id != null)
+                if ($util.Long)
+                    (message.channel_id = $util.Long.fromValue(object.channel_id)).unsigned = true;
+                else if (typeof object.channel_id === "string")
+                    message.channel_id = parseInt(object.channel_id, 10);
+                else if (typeof object.channel_id === "number")
+                    message.channel_id = object.channel_id;
+                else if (typeof object.channel_id === "object")
+                    message.channel_id = new $util.LongBits(object.channel_id.low >>> 0, object.channel_id.high >>> 0).toNumber(true);
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.creator_steamid != null)
+                if ($util.Long)
+                    (message.creator_steamid = $util.Long.fromValue(object.creator_steamid)).unsigned = false;
+                else if (typeof object.creator_steamid === "string")
+                    message.creator_steamid = parseInt(object.creator_steamid, 10);
+                else if (typeof object.creator_steamid === "number")
+                    message.creator_steamid = object.creator_steamid;
+                else if (typeof object.creator_steamid === "object")
+                    message.creator_steamid = new $util.LongBits(object.creator_steamid.low >>> 0, object.creator_steamid.high >>> 0).toNumber();
+            if (object.video_description != null)
+                message.video_description = String(object.video_description);
+            if (object.live_time != null)
+                message.live_time = object.live_time >>> 0;
+            if (object.length_ms != null)
+                message.length_ms = object.length_ms >>> 0;
+            if (object.thumbnail_path != null)
+                message.thumbnail_path = String(object.thumbnail_path);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_BroadcastClipInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @static
+         * @param {CSteamTV_BroadcastClipInfo} message CSteamTV_BroadcastClipInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_BroadcastClipInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.channel_id = options.longs === String ? "0" : 0;
+                object.app_id = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.creator_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.creator_steamid = options.longs === String ? "0" : 0;
+                object.video_description = "";
+                object.live_time = 0;
+                object.length_ms = 0;
+                object.thumbnail_path = "";
+            }
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber(true) : message.broadcast_clip_id;
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                if (typeof message.channel_id === "number")
+                    object.channel_id = options.longs === String ? String(message.channel_id) : message.channel_id;
+                else
+                    object.channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.channel_id) : options.longs === Number ? new $util.LongBits(message.channel_id.low >>> 0, message.channel_id.high >>> 0).toNumber(true) : message.channel_id;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.creator_steamid != null && message.hasOwnProperty("creator_steamid"))
+                if (typeof message.creator_steamid === "number")
+                    object.creator_steamid = options.longs === String ? String(message.creator_steamid) : message.creator_steamid;
+                else
+                    object.creator_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.creator_steamid) : options.longs === Number ? new $util.LongBits(message.creator_steamid.low >>> 0, message.creator_steamid.high >>> 0).toNumber() : message.creator_steamid;
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                object.video_description = message.video_description;
+            if (message.live_time != null && message.hasOwnProperty("live_time"))
+                object.live_time = message.live_time;
+            if (message.length_ms != null && message.hasOwnProperty("length_ms"))
+                object.length_ms = message.length_ms;
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                object.thumbnail_path = message.thumbnail_path;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_BroadcastClipInfo to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_BroadcastClipInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_BroadcastClipInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_BroadcastClipInfo;
+    })();
+    
+    $root.CSteamTV_GetBroadcastChannelClips_Response = (function() {
+    
+        /**
+         * Properties of a CSteamTV_GetBroadcastChannelClips_Response.
+         * @exports ICSteamTV_GetBroadcastChannelClips_Response
+         * @interface ICSteamTV_GetBroadcastChannelClips_Response
+         * @property {Array.<ICSteamTV_BroadcastClipInfo>|null} [clips] CSteamTV_GetBroadcastChannelClips_Response clips
+         * @property {string|null} [thumbnail_host] CSteamTV_GetBroadcastChannelClips_Response thumbnail_host
+         */
+    
+        /**
+         * Constructs a new CSteamTV_GetBroadcastChannelClips_Response.
+         * @exports CSteamTV_GetBroadcastChannelClips_Response
+         * @classdesc Represents a CSteamTV_GetBroadcastChannelClips_Response.
+         * @implements ICSteamTV_GetBroadcastChannelClips_Response
+         * @constructor
+         * @param {ICSteamTV_GetBroadcastChannelClips_Response=} [properties] Properties to set
+         */
+        function CSteamTV_GetBroadcastChannelClips_Response(properties) {
+            this.clips = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSteamTV_GetBroadcastChannelClips_Response clips.
+         * @member {Array.<ICSteamTV_BroadcastClipInfo>} clips
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.prototype.clips = $util.emptyArray;
+    
+        /**
+         * CSteamTV_GetBroadcastChannelClips_Response thumbnail_host.
+         * @member {string} thumbnail_host
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @instance
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.prototype.thumbnail_host = "";
+    
+        /**
+         * Creates a new CSteamTV_GetBroadcastChannelClips_Response instance using the specified properties.
+         * @function create
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelClips_Response=} [properties] Properties to set
+         * @returns {CSteamTV_GetBroadcastChannelClips_Response} CSteamTV_GetBroadcastChannelClips_Response instance
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.create = function create(properties) {
+            return new CSteamTV_GetBroadcastChannelClips_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelClips_Response message. Does not implicitly {@link CSteamTV_GetBroadcastChannelClips_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelClips_Response} message CSteamTV_GetBroadcastChannelClips_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clips != null && message.clips.length)
+                for (var i = 0; i < message.clips.length; ++i)
+                    $root.CSteamTV_BroadcastClipInfo.encode(message.clips[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.thumbnail_host != null && message.hasOwnProperty("thumbnail_host"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.thumbnail_host);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSteamTV_GetBroadcastChannelClips_Response message, length delimited. Does not implicitly {@link CSteamTV_GetBroadcastChannelClips_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {ICSteamTV_GetBroadcastChannelClips_Response} message CSteamTV_GetBroadcastChannelClips_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelClips_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSteamTV_GetBroadcastChannelClips_Response} CSteamTV_GetBroadcastChannelClips_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSteamTV_GetBroadcastChannelClips_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.clips && message.clips.length))
+                        message.clips = [];
+                    message.clips.push($root.CSteamTV_BroadcastClipInfo.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.thumbnail_host = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSteamTV_GetBroadcastChannelClips_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSteamTV_GetBroadcastChannelClips_Response} CSteamTV_GetBroadcastChannelClips_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSteamTV_GetBroadcastChannelClips_Response message.
+         * @function verify
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clips != null && message.hasOwnProperty("clips")) {
+                if (!Array.isArray(message.clips))
+                    return "clips: array expected";
+                for (var i = 0; i < message.clips.length; ++i) {
+                    var error = $root.CSteamTV_BroadcastClipInfo.verify(message.clips[i]);
+                    if (error)
+                        return "clips." + error;
+                }
+            }
+            if (message.thumbnail_host != null && message.hasOwnProperty("thumbnail_host"))
+                if (!$util.isString(message.thumbnail_host))
+                    return "thumbnail_host: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSteamTV_GetBroadcastChannelClips_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSteamTV_GetBroadcastChannelClips_Response} CSteamTV_GetBroadcastChannelClips_Response
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSteamTV_GetBroadcastChannelClips_Response)
+                return object;
+            var message = new $root.CSteamTV_GetBroadcastChannelClips_Response();
+            if (object.clips) {
+                if (!Array.isArray(object.clips))
+                    throw TypeError(".CSteamTV_GetBroadcastChannelClips_Response.clips: array expected");
+                message.clips = [];
+                for (var i = 0; i < object.clips.length; ++i) {
+                    if (typeof object.clips[i] !== "object")
+                        throw TypeError(".CSteamTV_GetBroadcastChannelClips_Response.clips: object expected");
+                    message.clips[i] = $root.CSteamTV_BroadcastClipInfo.fromObject(object.clips[i]);
+                }
+            }
+            if (object.thumbnail_host != null)
+                message.thumbnail_host = String(object.thumbnail_host);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSteamTV_GetBroadcastChannelClips_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @static
+         * @param {CSteamTV_GetBroadcastChannelClips_Response} message CSteamTV_GetBroadcastChannelClips_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.clips = [];
+            if (options.defaults)
+                object.thumbnail_host = "";
+            if (message.clips && message.clips.length) {
+                object.clips = [];
+                for (var j = 0; j < message.clips.length; ++j)
+                    object.clips[j] = $root.CSteamTV_BroadcastClipInfo.toObject(message.clips[j], options);
+            }
+            if (message.thumbnail_host != null && message.hasOwnProperty("thumbnail_host"))
+                object.thumbnail_host = message.thumbnail_host;
+            return object;
+        };
+    
+        /**
+         * Converts this CSteamTV_GetBroadcastChannelClips_Response to JSON.
+         * @function toJSON
+         * @memberof CSteamTV_GetBroadcastChannelClips_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSteamTV_GetBroadcastChannelClips_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSteamTV_GetBroadcastChannelClips_Response;
+    })();
+    
     $root.CFriendsListCategory = (function() {
     
         /**
@@ -9947,33 +23834,28 @@
         return CFriendsList_GetFriendsList_Response;
     })();
     
-    $root.CStore_UserPreferences = (function() {
+    $root.CMsgClientSecret = (function() {
     
         /**
-         * Properties of a CStore_UserPreferences.
-         * @exports ICStore_UserPreferences
-         * @interface ICStore_UserPreferences
-         * @property {number|null} [primary_language] CStore_UserPreferences primary_language
-         * @property {number|null} [secondary_languages] CStore_UserPreferences secondary_languages
-         * @property {boolean|null} [platform_windows] CStore_UserPreferences platform_windows
-         * @property {boolean|null} [platform_mac] CStore_UserPreferences platform_mac
-         * @property {boolean|null} [platform_linux] CStore_UserPreferences platform_linux
-         * @property {boolean|null} [hide_adult_content_violence] CStore_UserPreferences hide_adult_content_violence
-         * @property {boolean|null} [hide_adult_content_sex] CStore_UserPreferences hide_adult_content_sex
-         * @property {number|null} [timestamp_updated] CStore_UserPreferences timestamp_updated
-         * @property {boolean|null} [hide_store_broadcast] CStore_UserPreferences hide_store_broadcast
-         * @property {number|null} [timestamp_content_descriptor_preferences_updated] CStore_UserPreferences timestamp_content_descriptor_preferences_updated
+         * Properties of a CMsgClientSecret.
+         * @exports ICMsgClientSecret
+         * @interface ICMsgClientSecret
+         * @property {number|null} [version] CMsgClientSecret version
+         * @property {number|null} [appid] CMsgClientSecret appid
+         * @property {number|null} [deviceid] CMsgClientSecret deviceid
+         * @property {number|Long|null} [nonce] CMsgClientSecret nonce
+         * @property {Uint8Array|null} [hmac] CMsgClientSecret hmac
          */
     
         /**
-         * Constructs a new CStore_UserPreferences.
-         * @exports CStore_UserPreferences
-         * @classdesc Represents a CStore_UserPreferences.
-         * @implements ICStore_UserPreferences
+         * Constructs a new CMsgClientSecret.
+         * @exports CMsgClientSecret
+         * @classdesc Represents a CMsgClientSecret.
+         * @implements ICMsgClientSecret
          * @constructor
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
+         * @param {ICMsgClientSecret=} [properties] Properties to set
          */
-        function CStore_UserPreferences(properties) {
+        function CMsgClientSecret(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -9981,192 +23863,127 @@
         }
     
         /**
-         * CStore_UserPreferences primary_language.
-         * @member {number} primary_language
-         * @memberof CStore_UserPreferences
+         * CMsgClientSecret version.
+         * @member {number} version
+         * @memberof CMsgClientSecret
          * @instance
          */
-        CStore_UserPreferences.prototype.primary_language = 0;
+        CMsgClientSecret.prototype.version = 0;
     
         /**
-         * CStore_UserPreferences secondary_languages.
-         * @member {number} secondary_languages
-         * @memberof CStore_UserPreferences
+         * CMsgClientSecret appid.
+         * @member {number} appid
+         * @memberof CMsgClientSecret
          * @instance
          */
-        CStore_UserPreferences.prototype.secondary_languages = 0;
+        CMsgClientSecret.prototype.appid = 0;
     
         /**
-         * CStore_UserPreferences platform_windows.
-         * @member {boolean} platform_windows
-         * @memberof CStore_UserPreferences
+         * CMsgClientSecret deviceid.
+         * @member {number} deviceid
+         * @memberof CMsgClientSecret
          * @instance
          */
-        CStore_UserPreferences.prototype.platform_windows = false;
+        CMsgClientSecret.prototype.deviceid = 0;
     
         /**
-         * CStore_UserPreferences platform_mac.
-         * @member {boolean} platform_mac
-         * @memberof CStore_UserPreferences
+         * CMsgClientSecret nonce.
+         * @member {number|Long} nonce
+         * @memberof CMsgClientSecret
          * @instance
          */
-        CStore_UserPreferences.prototype.platform_mac = false;
+        CMsgClientSecret.prototype.nonce = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CStore_UserPreferences platform_linux.
-         * @member {boolean} platform_linux
-         * @memberof CStore_UserPreferences
+         * CMsgClientSecret hmac.
+         * @member {Uint8Array} hmac
+         * @memberof CMsgClientSecret
          * @instance
          */
-        CStore_UserPreferences.prototype.platform_linux = false;
+        CMsgClientSecret.prototype.hmac = $util.newBuffer([]);
     
         /**
-         * CStore_UserPreferences hide_adult_content_violence.
-         * @member {boolean} hide_adult_content_violence
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_violence = false;
-    
-        /**
-         * CStore_UserPreferences hide_adult_content_sex.
-         * @member {boolean} hide_adult_content_sex
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_adult_content_sex = false;
-    
-        /**
-         * CStore_UserPreferences timestamp_updated.
-         * @member {number} timestamp_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_updated = 0;
-    
-        /**
-         * CStore_UserPreferences hide_store_broadcast.
-         * @member {boolean} hide_store_broadcast
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.hide_store_broadcast = false;
-    
-        /**
-         * CStore_UserPreferences timestamp_content_descriptor_preferences_updated.
-         * @member {number} timestamp_content_descriptor_preferences_updated
-         * @memberof CStore_UserPreferences
-         * @instance
-         */
-        CStore_UserPreferences.prototype.timestamp_content_descriptor_preferences_updated = 0;
-    
-        /**
-         * Creates a new CStore_UserPreferences instance using the specified properties.
+         * Creates a new CMsgClientSecret instance using the specified properties.
          * @function create
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
-         * @param {ICStore_UserPreferences=} [properties] Properties to set
-         * @returns {CStore_UserPreferences} CStore_UserPreferences instance
+         * @param {ICMsgClientSecret=} [properties] Properties to set
+         * @returns {CMsgClientSecret} CMsgClientSecret instance
          */
-        CStore_UserPreferences.create = function create(properties) {
-            return new CStore_UserPreferences(properties);
+        CMsgClientSecret.create = function create(properties) {
+            return new CMsgClientSecret(properties);
         };
     
         /**
-         * Encodes the specified CStore_UserPreferences message. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
+         * Encodes the specified CMsgClientSecret message. Does not implicitly {@link CMsgClientSecret.verify|verify} messages.
          * @function encode
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
+         * @param {ICMsgClientSecret} message CMsgClientSecret message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserPreferences.encode = function encode(message, writer) {
+        CMsgClientSecret.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.primary_language);
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.secondary_languages);
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.platform_windows);
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.platform_mac);
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.platform_linux);
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hide_adult_content_violence);
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hide_adult_content_sex);
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.timestamp_updated);
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.hide_store_broadcast);
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.timestamp_content_descriptor_preferences_updated);
+            if (message.version != null && message.hasOwnProperty("version"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.version);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.deviceid);
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.nonce);
+            if (message.hmac != null && message.hasOwnProperty("hmac"))
+                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.hmac);
             return writer;
         };
     
         /**
-         * Encodes the specified CStore_UserPreferences message, length delimited. Does not implicitly {@link CStore_UserPreferences.verify|verify} messages.
+         * Encodes the specified CMsgClientSecret message, length delimited. Does not implicitly {@link CMsgClientSecret.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
-         * @param {ICStore_UserPreferences} message CStore_UserPreferences message or plain object to encode
+         * @param {ICMsgClientSecret} message CMsgClientSecret message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CStore_UserPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+        CMsgClientSecret.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer.
+         * Decodes a CMsgClientSecret message from the specified reader or buffer.
          * @function decode
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CMsgClientSecret} CMsgClientSecret
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decode = function decode(reader, length) {
+        CMsgClientSecret.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserPreferences();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgClientSecret();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.primary_language = reader.uint32();
+                    message.version = reader.uint32();
                     break;
                 case 2:
-                    message.secondary_languages = reader.uint32();
+                    message.appid = reader.uint32();
                     break;
                 case 3:
-                    message.platform_windows = reader.bool();
+                    message.deviceid = reader.uint32();
                     break;
                 case 4:
-                    message.platform_mac = reader.bool();
+                    message.nonce = reader.fixed64();
                     break;
                 case 5:
-                    message.platform_linux = reader.bool();
-                    break;
-                case 6:
-                    message.hide_adult_content_violence = reader.bool();
-                    break;
-                case 7:
-                    message.hide_adult_content_sex = reader.bool();
-                    break;
-                case 8:
-                    message.timestamp_updated = reader.uint32();
-                    break;
-                case 9:
-                    message.hide_store_broadcast = reader.bool();
-                    break;
-                case 10:
-                    message.timestamp_content_descriptor_preferences_updated = reader.int32();
+                    message.hmac = reader.bytes();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -10177,1425 +23994,143 @@
         };
     
         /**
-         * Decodes a CStore_UserPreferences message from the specified reader or buffer, length delimited.
+         * Decodes a CMsgClientSecret message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CMsgClientSecret} CMsgClientSecret
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CStore_UserPreferences.decodeDelimited = function decodeDelimited(reader) {
+        CMsgClientSecret.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CStore_UserPreferences message.
+         * Verifies a CMsgClientSecret message.
          * @function verify
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CStore_UserPreferences.verify = function verify(message) {
+        CMsgClientSecret.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                if (!$util.isInteger(message.primary_language))
-                    return "primary_language: integer expected";
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                if (!$util.isInteger(message.secondary_languages))
-                    return "secondary_languages: integer expected";
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                if (typeof message.platform_windows !== "boolean")
-                    return "platform_windows: boolean expected";
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                if (typeof message.platform_mac !== "boolean")
-                    return "platform_mac: boolean expected";
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                if (typeof message.platform_linux !== "boolean")
-                    return "platform_linux: boolean expected";
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                if (typeof message.hide_adult_content_violence !== "boolean")
-                    return "hide_adult_content_violence: boolean expected";
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                if (typeof message.hide_adult_content_sex !== "boolean")
-                    return "hide_adult_content_sex: boolean expected";
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                if (!$util.isInteger(message.timestamp_updated))
-                    return "timestamp_updated: integer expected";
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                if (typeof message.hide_store_broadcast !== "boolean")
-                    return "hide_store_broadcast: boolean expected";
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                if (!$util.isInteger(message.timestamp_content_descriptor_preferences_updated))
-                    return "timestamp_content_descriptor_preferences_updated: integer expected";
+            if (message.version != null && message.hasOwnProperty("version"))
+                if (!$util.isInteger(message.version))
+                    return "version: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                if (!$util.isInteger(message.deviceid))
+                    return "deviceid: integer expected";
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                if (!$util.isInteger(message.nonce) && !(message.nonce && $util.isInteger(message.nonce.low) && $util.isInteger(message.nonce.high)))
+                    return "nonce: integer|Long expected";
+            if (message.hmac != null && message.hasOwnProperty("hmac"))
+                if (!(message.hmac && typeof message.hmac.length === "number" || $util.isString(message.hmac)))
+                    return "hmac: buffer expected";
             return null;
         };
     
         /**
-         * Creates a CStore_UserPreferences message from a plain object. Also converts values to their respective internal types.
+         * Creates a CMsgClientSecret message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserPreferences} CStore_UserPreferences
+         * @returns {CMsgClientSecret} CMsgClientSecret
          */
-        CStore_UserPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserPreferences)
+        CMsgClientSecret.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgClientSecret)
                 return object;
-            var message = new $root.CStore_UserPreferences();
-            if (object.primary_language != null)
-                message.primary_language = object.primary_language >>> 0;
-            if (object.secondary_languages != null)
-                message.secondary_languages = object.secondary_languages >>> 0;
-            if (object.platform_windows != null)
-                message.platform_windows = Boolean(object.platform_windows);
-            if (object.platform_mac != null)
-                message.platform_mac = Boolean(object.platform_mac);
-            if (object.platform_linux != null)
-                message.platform_linux = Boolean(object.platform_linux);
-            if (object.hide_adult_content_violence != null)
-                message.hide_adult_content_violence = Boolean(object.hide_adult_content_violence);
-            if (object.hide_adult_content_sex != null)
-                message.hide_adult_content_sex = Boolean(object.hide_adult_content_sex);
-            if (object.timestamp_updated != null)
-                message.timestamp_updated = object.timestamp_updated >>> 0;
-            if (object.hide_store_broadcast != null)
-                message.hide_store_broadcast = Boolean(object.hide_store_broadcast);
-            if (object.timestamp_content_descriptor_preferences_updated != null)
-                message.timestamp_content_descriptor_preferences_updated = object.timestamp_content_descriptor_preferences_updated | 0;
+            var message = new $root.CMsgClientSecret();
+            if (object.version != null)
+                message.version = object.version >>> 0;
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.deviceid != null)
+                message.deviceid = object.deviceid >>> 0;
+            if (object.nonce != null)
+                if ($util.Long)
+                    (message.nonce = $util.Long.fromValue(object.nonce)).unsigned = false;
+                else if (typeof object.nonce === "string")
+                    message.nonce = parseInt(object.nonce, 10);
+                else if (typeof object.nonce === "number")
+                    message.nonce = object.nonce;
+                else if (typeof object.nonce === "object")
+                    message.nonce = new $util.LongBits(object.nonce.low >>> 0, object.nonce.high >>> 0).toNumber();
+            if (object.hmac != null)
+                if (typeof object.hmac === "string")
+                    $util.base64.decode(object.hmac, message.hmac = $util.newBuffer($util.base64.length(object.hmac)), 0);
+                else if (object.hmac.length)
+                    message.hmac = object.hmac;
             return message;
         };
     
         /**
-         * Creates a plain object from a CStore_UserPreferences message. Also converts values to other types if specified.
+         * Creates a plain object from a CMsgClientSecret message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @static
-         * @param {CStore_UserPreferences} message CStore_UserPreferences
+         * @param {CMsgClientSecret} message CMsgClientSecret
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CStore_UserPreferences.toObject = function toObject(message, options) {
+        CMsgClientSecret.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.primary_language = 0;
-                object.secondary_languages = 0;
-                object.platform_windows = false;
-                object.platform_mac = false;
-                object.platform_linux = false;
-                object.hide_adult_content_violence = false;
-                object.hide_adult_content_sex = false;
-                object.timestamp_updated = 0;
-                object.hide_store_broadcast = false;
-                object.timestamp_content_descriptor_preferences_updated = 0;
+                object.version = 0;
+                object.appid = 0;
+                object.deviceid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.nonce = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.nonce = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.hmac = "";
+                else {
+                    object.hmac = [];
+                    if (options.bytes !== Array)
+                        object.hmac = $util.newBuffer(object.hmac);
+                }
             }
-            if (message.primary_language != null && message.hasOwnProperty("primary_language"))
-                object.primary_language = message.primary_language;
-            if (message.secondary_languages != null && message.hasOwnProperty("secondary_languages"))
-                object.secondary_languages = message.secondary_languages;
-            if (message.platform_windows != null && message.hasOwnProperty("platform_windows"))
-                object.platform_windows = message.platform_windows;
-            if (message.platform_mac != null && message.hasOwnProperty("platform_mac"))
-                object.platform_mac = message.platform_mac;
-            if (message.platform_linux != null && message.hasOwnProperty("platform_linux"))
-                object.platform_linux = message.platform_linux;
-            if (message.hide_adult_content_violence != null && message.hasOwnProperty("hide_adult_content_violence"))
-                object.hide_adult_content_violence = message.hide_adult_content_violence;
-            if (message.hide_adult_content_sex != null && message.hasOwnProperty("hide_adult_content_sex"))
-                object.hide_adult_content_sex = message.hide_adult_content_sex;
-            if (message.timestamp_updated != null && message.hasOwnProperty("timestamp_updated"))
-                object.timestamp_updated = message.timestamp_updated;
-            if (message.hide_store_broadcast != null && message.hasOwnProperty("hide_store_broadcast"))
-                object.hide_store_broadcast = message.hide_store_broadcast;
-            if (message.timestamp_content_descriptor_preferences_updated != null && message.hasOwnProperty("timestamp_content_descriptor_preferences_updated"))
-                object.timestamp_content_descriptor_preferences_updated = message.timestamp_content_descriptor_preferences_updated;
+            if (message.version != null && message.hasOwnProperty("version"))
+                object.version = message.version;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                object.deviceid = message.deviceid;
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                if (typeof message.nonce === "number")
+                    object.nonce = options.longs === String ? String(message.nonce) : message.nonce;
+                else
+                    object.nonce = options.longs === String ? $util.Long.prototype.toString.call(message.nonce) : options.longs === Number ? new $util.LongBits(message.nonce.low >>> 0, message.nonce.high >>> 0).toNumber() : message.nonce;
+            if (message.hmac != null && message.hasOwnProperty("hmac"))
+                object.hmac = options.bytes === String ? $util.base64.encode(message.hmac, 0, message.hmac.length) : options.bytes === Array ? Array.prototype.slice.call(message.hmac) : message.hmac;
             return object;
         };
     
         /**
-         * Converts this CStore_UserPreferences to JSON.
+         * Converts this CMsgClientSecret to JSON.
          * @function toJSON
-         * @memberof CStore_UserPreferences
+         * @memberof CMsgClientSecret
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CStore_UserPreferences.prototype.toJSON = function toJSON() {
+        CMsgClientSecret.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CStore_UserPreferences;
-    })();
-    
-    $root.CStore_UserTagPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserTagPreferences.
-         * @exports ICStore_UserTagPreferences
-         * @interface ICStore_UserTagPreferences
-         * @property {Array.<ICStore_UserTagPreferences_Tag>|null} [tags_to_exclude] CStore_UserTagPreferences tags_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserTagPreferences.
-         * @exports CStore_UserTagPreferences
-         * @classdesc Represents a CStore_UserTagPreferences.
-         * @implements ICStore_UserTagPreferences
-         * @constructor
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         */
-        function CStore_UserTagPreferences(properties) {
-            this.tags_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserTagPreferences tags_to_exclude.
-         * @member {Array.<ICStore_UserTagPreferences_Tag>} tags_to_exclude
-         * @memberof CStore_UserTagPreferences
-         * @instance
-         */
-        CStore_UserTagPreferences.prototype.tags_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserTagPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences=} [properties] Properties to set
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences instance
-         */
-        CStore_UserTagPreferences.create = function create(properties) {
-            return new CStore_UserTagPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences message. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tags_to_exclude != null && message.tags_to_exclude.length)
-                for (var i = 0; i < message.tags_to_exclude.length; ++i)
-                    $root.CStore_UserTagPreferences_Tag.encode(message.tags_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences message, length delimited. Does not implicitly {@link CStore_UserTagPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {ICStore_UserTagPreferences} message CStore_UserTagPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.tags_to_exclude && message.tags_to_exclude.length))
-                        message.tags_to_exclude = [];
-                    message.tags_to_exclude.push($root.CStore_UserTagPreferences_Tag.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserTagPreferences message.
-         * @function verify
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserTagPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tags_to_exclude != null && message.hasOwnProperty("tags_to_exclude")) {
-                if (!Array.isArray(message.tags_to_exclude))
-                    return "tags_to_exclude: array expected";
-                for (var i = 0; i < message.tags_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserTagPreferences_Tag.verify(message.tags_to_exclude[i]);
-                    if (error)
-                        return "tags_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserTagPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserTagPreferences} CStore_UserTagPreferences
-         */
-        CStore_UserTagPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserTagPreferences)
-                return object;
-            var message = new $root.CStore_UserTagPreferences();
-            if (object.tags_to_exclude) {
-                if (!Array.isArray(object.tags_to_exclude))
-                    throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: array expected");
-                message.tags_to_exclude = [];
-                for (var i = 0; i < object.tags_to_exclude.length; ++i) {
-                    if (typeof object.tags_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserTagPreferences.tags_to_exclude: object expected");
-                    message.tags_to_exclude[i] = $root.CStore_UserTagPreferences_Tag.fromObject(object.tags_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserTagPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserTagPreferences
-         * @static
-         * @param {CStore_UserTagPreferences} message CStore_UserTagPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserTagPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.tags_to_exclude = [];
-            if (message.tags_to_exclude && message.tags_to_exclude.length) {
-                object.tags_to_exclude = [];
-                for (var j = 0; j < message.tags_to_exclude.length; ++j)
-                    object.tags_to_exclude[j] = $root.CStore_UserTagPreferences_Tag.toObject(message.tags_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserTagPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserTagPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserTagPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_UserTagPreferences;
-    })();
-    
-    $root.CStore_UserTagPreferences_Tag = (function() {
-    
-        /**
-         * Properties of a CStore_UserTagPreferences_Tag.
-         * @exports ICStore_UserTagPreferences_Tag
-         * @interface ICStore_UserTagPreferences_Tag
-         * @property {number|null} [tagid] CStore_UserTagPreferences_Tag tagid
-         * @property {string|null} [name] CStore_UserTagPreferences_Tag name
-         * @property {number|null} [timestamp_added] CStore_UserTagPreferences_Tag timestamp_added
-         */
-    
-        /**
-         * Constructs a new CStore_UserTagPreferences_Tag.
-         * @exports CStore_UserTagPreferences_Tag
-         * @classdesc Represents a CStore_UserTagPreferences_Tag.
-         * @implements ICStore_UserTagPreferences_Tag
-         * @constructor
-         * @param {ICStore_UserTagPreferences_Tag=} [properties] Properties to set
-         */
-        function CStore_UserTagPreferences_Tag(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserTagPreferences_Tag tagid.
-         * @member {number} tagid
-         * @memberof CStore_UserTagPreferences_Tag
-         * @instance
-         */
-        CStore_UserTagPreferences_Tag.prototype.tagid = 0;
-    
-        /**
-         * CStore_UserTagPreferences_Tag name.
-         * @member {string} name
-         * @memberof CStore_UserTagPreferences_Tag
-         * @instance
-         */
-        CStore_UserTagPreferences_Tag.prototype.name = "";
-    
-        /**
-         * CStore_UserTagPreferences_Tag timestamp_added.
-         * @member {number} timestamp_added
-         * @memberof CStore_UserTagPreferences_Tag
-         * @instance
-         */
-        CStore_UserTagPreferences_Tag.prototype.timestamp_added = 0;
-    
-        /**
-         * Creates a new CStore_UserTagPreferences_Tag instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {ICStore_UserTagPreferences_Tag=} [properties] Properties to set
-         * @returns {CStore_UserTagPreferences_Tag} CStore_UserTagPreferences_Tag instance
-         */
-        CStore_UserTagPreferences_Tag.create = function create(properties) {
-            return new CStore_UserTagPreferences_Tag(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences_Tag message. Does not implicitly {@link CStore_UserTagPreferences_Tag.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {ICStore_UserTagPreferences_Tag} message CStore_UserTagPreferences_Tag message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences_Tag.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.tagid != null && message.hasOwnProperty("tagid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.tagid);
-            if (message.name != null && message.hasOwnProperty("name"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timestamp_added);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserTagPreferences_Tag message, length delimited. Does not implicitly {@link CStore_UserTagPreferences_Tag.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {ICStore_UserTagPreferences_Tag} message CStore_UserTagPreferences_Tag message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserTagPreferences_Tag.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences_Tag message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserTagPreferences_Tag} CStore_UserTagPreferences_Tag
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences_Tag.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserTagPreferences_Tag();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.tagid = reader.uint32();
-                    break;
-                case 2:
-                    message.name = reader.string();
-                    break;
-                case 3:
-                    message.timestamp_added = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserTagPreferences_Tag message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserTagPreferences_Tag} CStore_UserTagPreferences_Tag
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserTagPreferences_Tag.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserTagPreferences_Tag message.
-         * @function verify
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserTagPreferences_Tag.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.tagid != null && message.hasOwnProperty("tagid"))
-                if (!$util.isInteger(message.tagid))
-                    return "tagid: integer expected";
-            if (message.name != null && message.hasOwnProperty("name"))
-                if (!$util.isString(message.name))
-                    return "name: string expected";
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                if (!$util.isInteger(message.timestamp_added))
-                    return "timestamp_added: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserTagPreferences_Tag message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserTagPreferences_Tag} CStore_UserTagPreferences_Tag
-         */
-        CStore_UserTagPreferences_Tag.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserTagPreferences_Tag)
-                return object;
-            var message = new $root.CStore_UserTagPreferences_Tag();
-            if (object.tagid != null)
-                message.tagid = object.tagid >>> 0;
-            if (object.name != null)
-                message.name = String(object.name);
-            if (object.timestamp_added != null)
-                message.timestamp_added = object.timestamp_added >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserTagPreferences_Tag message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserTagPreferences_Tag
-         * @static
-         * @param {CStore_UserTagPreferences_Tag} message CStore_UserTagPreferences_Tag
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserTagPreferences_Tag.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.tagid = 0;
-                object.name = "";
-                object.timestamp_added = 0;
-            }
-            if (message.tagid != null && message.hasOwnProperty("tagid"))
-                object.tagid = message.tagid;
-            if (message.name != null && message.hasOwnProperty("name"))
-                object.name = message.name;
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                object.timestamp_added = message.timestamp_added;
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserTagPreferences_Tag to JSON.
-         * @function toJSON
-         * @memberof CStore_UserTagPreferences_Tag
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserTagPreferences_Tag.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_UserTagPreferences_Tag;
-    })();
-    
-    $root.CStore_UserContentDescriptorPreferences = (function() {
-    
-        /**
-         * Properties of a CStore_UserContentDescriptorPreferences.
-         * @exports ICStore_UserContentDescriptorPreferences
-         * @interface ICStore_UserContentDescriptorPreferences
-         * @property {Array.<ICStore_UserContentDescriptorPreferences_ContentDescriptor>|null} [content_descriptors_to_exclude] CStore_UserContentDescriptorPreferences content_descriptors_to_exclude
-         */
-    
-        /**
-         * Constructs a new CStore_UserContentDescriptorPreferences.
-         * @exports CStore_UserContentDescriptorPreferences
-         * @classdesc Represents a CStore_UserContentDescriptorPreferences.
-         * @implements ICStore_UserContentDescriptorPreferences
-         * @constructor
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         */
-        function CStore_UserContentDescriptorPreferences(properties) {
-            this.content_descriptors_to_exclude = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserContentDescriptorPreferences content_descriptors_to_exclude.
-         * @member {Array.<ICStore_UserContentDescriptorPreferences_ContentDescriptor>} content_descriptors_to_exclude
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences.prototype.content_descriptors_to_exclude = $util.emptyArray;
-    
-        /**
-         * Creates a new CStore_UserContentDescriptorPreferences instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences=} [properties] Properties to set
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences instance
-         */
-        CStore_UserContentDescriptorPreferences.create = function create(properties) {
-            return new CStore_UserContentDescriptorPreferences(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content_descriptors_to_exclude != null && message.content_descriptors_to_exclude.length)
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i)
-                    $root.CStore_UserContentDescriptorPreferences_ContentDescriptor.encode(message.content_descriptors_to_exclude[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length))
-                        message.content_descriptors_to_exclude = [];
-                    message.content_descriptors_to_exclude.push($root.CStore_UserContentDescriptorPreferences_ContentDescriptor.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserContentDescriptorPreferences message.
-         * @function verify
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserContentDescriptorPreferences.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content_descriptors_to_exclude != null && message.hasOwnProperty("content_descriptors_to_exclude")) {
-                if (!Array.isArray(message.content_descriptors_to_exclude))
-                    return "content_descriptors_to_exclude: array expected";
-                for (var i = 0; i < message.content_descriptors_to_exclude.length; ++i) {
-                    var error = $root.CStore_UserContentDescriptorPreferences_ContentDescriptor.verify(message.content_descriptors_to_exclude[i]);
-                    if (error)
-                        return "content_descriptors_to_exclude." + error;
-                }
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserContentDescriptorPreferences message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserContentDescriptorPreferences} CStore_UserContentDescriptorPreferences
-         */
-        CStore_UserContentDescriptorPreferences.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserContentDescriptorPreferences)
-                return object;
-            var message = new $root.CStore_UserContentDescriptorPreferences();
-            if (object.content_descriptors_to_exclude) {
-                if (!Array.isArray(object.content_descriptors_to_exclude))
-                    throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: array expected");
-                message.content_descriptors_to_exclude = [];
-                for (var i = 0; i < object.content_descriptors_to_exclude.length; ++i) {
-                    if (typeof object.content_descriptors_to_exclude[i] !== "object")
-                        throw TypeError(".CStore_UserContentDescriptorPreferences.content_descriptors_to_exclude: object expected");
-                    message.content_descriptors_to_exclude[i] = $root.CStore_UserContentDescriptorPreferences_ContentDescriptor.fromObject(object.content_descriptors_to_exclude[i]);
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserContentDescriptorPreferences message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @static
-         * @param {CStore_UserContentDescriptorPreferences} message CStore_UserContentDescriptorPreferences
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserContentDescriptorPreferences.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.content_descriptors_to_exclude = [];
-            if (message.content_descriptors_to_exclude && message.content_descriptors_to_exclude.length) {
-                object.content_descriptors_to_exclude = [];
-                for (var j = 0; j < message.content_descriptors_to_exclude.length; ++j)
-                    object.content_descriptors_to_exclude[j] = $root.CStore_UserContentDescriptorPreferences_ContentDescriptor.toObject(message.content_descriptors_to_exclude[j], options);
-            }
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserContentDescriptorPreferences to JSON.
-         * @function toJSON
-         * @memberof CStore_UserContentDescriptorPreferences
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserContentDescriptorPreferences.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_UserContentDescriptorPreferences;
-    })();
-    
-    $root.CStore_UserContentDescriptorPreferences_ContentDescriptor = (function() {
-    
-        /**
-         * Properties of a CStore_UserContentDescriptorPreferences_ContentDescriptor.
-         * @exports ICStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @interface ICStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @property {number|null} [content_descriptorid] CStore_UserContentDescriptorPreferences_ContentDescriptor content_descriptorid
-         * @property {number|null} [timestamp_added] CStore_UserContentDescriptorPreferences_ContentDescriptor timestamp_added
-         */
-    
-        /**
-         * Constructs a new CStore_UserContentDescriptorPreferences_ContentDescriptor.
-         * @exports CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @classdesc Represents a CStore_UserContentDescriptorPreferences_ContentDescriptor.
-         * @implements ICStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @constructor
-         * @param {ICStore_UserContentDescriptorPreferences_ContentDescriptor=} [properties] Properties to set
-         */
-        function CStore_UserContentDescriptorPreferences_ContentDescriptor(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_UserContentDescriptorPreferences_ContentDescriptor content_descriptorid.
-         * @member {number} content_descriptorid
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.prototype.content_descriptorid = 0;
-    
-        /**
-         * CStore_UserContentDescriptorPreferences_ContentDescriptor timestamp_added.
-         * @member {number} timestamp_added
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @instance
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.prototype.timestamp_added = 0;
-    
-        /**
-         * Creates a new CStore_UserContentDescriptorPreferences_ContentDescriptor instance using the specified properties.
-         * @function create
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences_ContentDescriptor=} [properties] Properties to set
-         * @returns {CStore_UserContentDescriptorPreferences_ContentDescriptor} CStore_UserContentDescriptorPreferences_ContentDescriptor instance
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.create = function create(properties) {
-            return new CStore_UserContentDescriptorPreferences_ContentDescriptor(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences_ContentDescriptor message. Does not implicitly {@link CStore_UserContentDescriptorPreferences_ContentDescriptor.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences_ContentDescriptor} message CStore_UserContentDescriptorPreferences_ContentDescriptor message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.content_descriptorid);
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp_added);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_UserContentDescriptorPreferences_ContentDescriptor message, length delimited. Does not implicitly {@link CStore_UserContentDescriptorPreferences_ContentDescriptor.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {ICStore_UserContentDescriptorPreferences_ContentDescriptor} message CStore_UserContentDescriptorPreferences_ContentDescriptor message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences_ContentDescriptor message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_UserContentDescriptorPreferences_ContentDescriptor} CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_UserContentDescriptorPreferences_ContentDescriptor();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.content_descriptorid = reader.uint32();
-                    break;
-                case 2:
-                    message.timestamp_added = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_UserContentDescriptorPreferences_ContentDescriptor message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_UserContentDescriptorPreferences_ContentDescriptor} CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_UserContentDescriptorPreferences_ContentDescriptor message.
-         * @function verify
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                if (!$util.isInteger(message.content_descriptorid))
-                    return "content_descriptorid: integer expected";
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                if (!$util.isInteger(message.timestamp_added))
-                    return "timestamp_added: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_UserContentDescriptorPreferences_ContentDescriptor message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_UserContentDescriptorPreferences_ContentDescriptor} CStore_UserContentDescriptorPreferences_ContentDescriptor
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_UserContentDescriptorPreferences_ContentDescriptor)
-                return object;
-            var message = new $root.CStore_UserContentDescriptorPreferences_ContentDescriptor();
-            if (object.content_descriptorid != null)
-                message.content_descriptorid = object.content_descriptorid >>> 0;
-            if (object.timestamp_added != null)
-                message.timestamp_added = object.timestamp_added >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_UserContentDescriptorPreferences_ContentDescriptor message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @static
-         * @param {CStore_UserContentDescriptorPreferences_ContentDescriptor} message CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.content_descriptorid = 0;
-                object.timestamp_added = 0;
-            }
-            if (message.content_descriptorid != null && message.hasOwnProperty("content_descriptorid"))
-                object.content_descriptorid = message.content_descriptorid;
-            if (message.timestamp_added != null && message.hasOwnProperty("timestamp_added"))
-                object.timestamp_added = message.timestamp_added;
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_UserContentDescriptorPreferences_ContentDescriptor to JSON.
-         * @function toJSON
-         * @memberof CStore_UserContentDescriptorPreferences_ContentDescriptor
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_UserContentDescriptorPreferences_ContentDescriptor.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_UserContentDescriptorPreferences_ContentDescriptor;
-    })();
-    
-    $root.CStore_GetStorePreferences_Request = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Request.
-         * @exports ICStore_GetStorePreferences_Request
-         * @interface ICStore_GetStorePreferences_Request
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Request.
-         * @exports CStore_GetStorePreferences_Request
-         * @classdesc Represents a CStore_GetStorePreferences_Request.
-         * @implements ICStore_GetStorePreferences_Request
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Request(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Request instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request instance
-         */
-        CStore_GetStorePreferences_Request.create = function create(properties) {
-            return new CStore_GetStorePreferences_Request(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Request message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Request.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {ICStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Request.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Request();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Request message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Request.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Request message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Request.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Request message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Request} CStore_GetStorePreferences_Request
-         */
-        CStore_GetStorePreferences_Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Request)
-                return object;
-            return new $root.CStore_GetStorePreferences_Request();
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Request message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Request
-         * @static
-         * @param {CStore_GetStorePreferences_Request} message CStore_GetStorePreferences_Request
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Request.toObject = function toObject() {
-            return {};
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Request to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Request
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Request.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Request;
-    })();
-    
-    $root.CStore_GetStorePreferences_Response = (function() {
-    
-        /**
-         * Properties of a CStore_GetStorePreferences_Response.
-         * @exports ICStore_GetStorePreferences_Response
-         * @interface ICStore_GetStorePreferences_Response
-         * @property {ICStore_UserPreferences|null} [preferences] CStore_GetStorePreferences_Response preferences
-         * @property {ICStore_UserTagPreferences|null} [tag_preferences] CStore_GetStorePreferences_Response tag_preferences
-         * @property {ICStore_UserContentDescriptorPreferences|null} [content_descriptor_preferences] CStore_GetStorePreferences_Response content_descriptor_preferences
-         */
-    
-        /**
-         * Constructs a new CStore_GetStorePreferences_Response.
-         * @exports CStore_GetStorePreferences_Response
-         * @classdesc Represents a CStore_GetStorePreferences_Response.
-         * @implements ICStore_GetStorePreferences_Response
-         * @constructor
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         */
-        function CStore_GetStorePreferences_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CStore_GetStorePreferences_Response preferences.
-         * @member {ICStore_UserPreferences|null|undefined} preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response tag_preferences.
-         * @member {ICStore_UserTagPreferences|null|undefined} tag_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.tag_preferences = null;
-    
-        /**
-         * CStore_GetStorePreferences_Response content_descriptor_preferences.
-         * @member {ICStore_UserContentDescriptorPreferences|null|undefined} content_descriptor_preferences
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         */
-        CStore_GetStorePreferences_Response.prototype.content_descriptor_preferences = null;
-    
-        /**
-         * Creates a new CStore_GetStorePreferences_Response instance using the specified properties.
-         * @function create
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response=} [properties] Properties to set
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response instance
-         */
-        CStore_GetStorePreferences_Response.create = function create(properties) {
-            return new CStore_GetStorePreferences_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                $root.CStore_UserPreferences.encode(message.preferences, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                $root.CStore_UserTagPreferences.encode(message.tag_preferences, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                $root.CStore_UserContentDescriptorPreferences.encode(message.content_descriptor_preferences, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CStore_GetStorePreferences_Response message, length delimited. Does not implicitly {@link CStore_GetStorePreferences_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {ICStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CStore_GetStorePreferences_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CStore_GetStorePreferences_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.preferences = $root.CStore_UserPreferences.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.tag_preferences = $root.CStore_UserTagPreferences.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CStore_GetStorePreferences_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CStore_GetStorePreferences_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CStore_GetStorePreferences_Response message.
-         * @function verify
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CStore_GetStorePreferences_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.preferences != null && message.hasOwnProperty("preferences")) {
-                var error = $root.CStore_UserPreferences.verify(message.preferences);
-                if (error)
-                    return "preferences." + error;
-            }
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences")) {
-                var error = $root.CStore_UserTagPreferences.verify(message.tag_preferences);
-                if (error)
-                    return "tag_preferences." + error;
-            }
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences")) {
-                var error = $root.CStore_UserContentDescriptorPreferences.verify(message.content_descriptor_preferences);
-                if (error)
-                    return "content_descriptor_preferences." + error;
-            }
-            return null;
-        };
-    
-        /**
-         * Creates a CStore_GetStorePreferences_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CStore_GetStorePreferences_Response} CStore_GetStorePreferences_Response
-         */
-        CStore_GetStorePreferences_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CStore_GetStorePreferences_Response)
-                return object;
-            var message = new $root.CStore_GetStorePreferences_Response();
-            if (object.preferences != null) {
-                if (typeof object.preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.preferences: object expected");
-                message.preferences = $root.CStore_UserPreferences.fromObject(object.preferences);
-            }
-            if (object.tag_preferences != null) {
-                if (typeof object.tag_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.tag_preferences: object expected");
-                message.tag_preferences = $root.CStore_UserTagPreferences.fromObject(object.tag_preferences);
-            }
-            if (object.content_descriptor_preferences != null) {
-                if (typeof object.content_descriptor_preferences !== "object")
-                    throw TypeError(".CStore_GetStorePreferences_Response.content_descriptor_preferences: object expected");
-                message.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.fromObject(object.content_descriptor_preferences);
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CStore_GetStorePreferences_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CStore_GetStorePreferences_Response
-         * @static
-         * @param {CStore_GetStorePreferences_Response} message CStore_GetStorePreferences_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CStore_GetStorePreferences_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.preferences = null;
-                object.tag_preferences = null;
-                object.content_descriptor_preferences = null;
-            }
-            if (message.preferences != null && message.hasOwnProperty("preferences"))
-                object.preferences = $root.CStore_UserPreferences.toObject(message.preferences, options);
-            if (message.tag_preferences != null && message.hasOwnProperty("tag_preferences"))
-                object.tag_preferences = $root.CStore_UserTagPreferences.toObject(message.tag_preferences, options);
-            if (message.content_descriptor_preferences != null && message.hasOwnProperty("content_descriptor_preferences"))
-                object.content_descriptor_preferences = $root.CStore_UserContentDescriptorPreferences.toObject(message.content_descriptor_preferences, options);
-            return object;
-        };
-    
-        /**
-         * Converts this CStore_GetStorePreferences_Response to JSON.
-         * @function toJSON
-         * @memberof CStore_GetStorePreferences_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CStore_GetStorePreferences_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CStore_GetStorePreferences_Response;
+        return CMsgClientSecret;
     })();
     
     $root.CClan_RespondToClanInvite_Request = (function() {
@@ -11982,23 +24517,23 @@
         return CClan_RespondToClanInvite_Response;
     })();
     
-    $root.CBroadcast_SetRTMPInfo_Response = (function() {
+    $root.CBroadcast_SetClipDetails_Response = (function() {
     
         /**
-         * Properties of a CBroadcast_SetRTMPInfo_Response.
-         * @exports ICBroadcast_SetRTMPInfo_Response
-         * @interface ICBroadcast_SetRTMPInfo_Response
+         * Properties of a CBroadcast_SetClipDetails_Response.
+         * @exports ICBroadcast_SetClipDetails_Response
+         * @interface ICBroadcast_SetClipDetails_Response
          */
     
         /**
-         * Constructs a new CBroadcast_SetRTMPInfo_Response.
-         * @exports CBroadcast_SetRTMPInfo_Response
-         * @classdesc Represents a CBroadcast_SetRTMPInfo_Response.
-         * @implements ICBroadcast_SetRTMPInfo_Response
+         * Constructs a new CBroadcast_SetClipDetails_Response.
+         * @exports CBroadcast_SetClipDetails_Response
+         * @classdesc Represents a CBroadcast_SetClipDetails_Response.
+         * @implements ICBroadcast_SetClipDetails_Response
          * @constructor
-         * @param {ICBroadcast_SetRTMPInfo_Response=} [properties] Properties to set
+         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
          */
-        function CBroadcast_SetRTMPInfo_Response(properties) {
+        function CBroadcast_SetClipDetails_Response(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -12006,60 +24541,60 @@
         }
     
         /**
-         * Creates a new CBroadcast_SetRTMPInfo_Response instance using the specified properties.
+         * Creates a new CBroadcast_SetClipDetails_Response instance using the specified properties.
          * @function create
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
-         * @param {ICBroadcast_SetRTMPInfo_Response=} [properties] Properties to set
-         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response instance
+         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response instance
          */
-        CBroadcast_SetRTMPInfo_Response.create = function create(properties) {
-            return new CBroadcast_SetRTMPInfo_Response(properties);
+        CBroadcast_SetClipDetails_Response.create = function create(properties) {
+            return new CBroadcast_SetClipDetails_Response(properties);
         };
     
         /**
-         * Encodes the specified CBroadcast_SetRTMPInfo_Response message. Does not implicitly {@link CBroadcast_SetRTMPInfo_Response.verify|verify} messages.
+         * Encodes the specified CBroadcast_SetClipDetails_Response message. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
          * @function encode
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
-         * @param {ICBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response message or plain object to encode
+         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CBroadcast_SetRTMPInfo_Response.encode = function encode(message, writer) {
+        CBroadcast_SetClipDetails_Response.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             return writer;
         };
     
         /**
-         * Encodes the specified CBroadcast_SetRTMPInfo_Response message, length delimited. Does not implicitly {@link CBroadcast_SetRTMPInfo_Response.verify|verify} messages.
+         * Encodes the specified CBroadcast_SetClipDetails_Response message, length delimited. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
-         * @param {ICBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response message or plain object to encode
+         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CBroadcast_SetRTMPInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+        CBroadcast_SetClipDetails_Response.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
     
         /**
-         * Decodes a CBroadcast_SetRTMPInfo_Response message from the specified reader or buffer.
+         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer.
          * @function decode
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CBroadcast_SetRTMPInfo_Response.decode = function decode(reader, length) {
+        CBroadcast_SetClipDetails_Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetRTMPInfo_Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetClipDetails_Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12072,474 +24607,74 @@
         };
     
         /**
-         * Decodes a CBroadcast_SetRTMPInfo_Response message from the specified reader or buffer, length delimited.
+         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CBroadcast_SetRTMPInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+        CBroadcast_SetClipDetails_Response.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
     
         /**
-         * Verifies a CBroadcast_SetRTMPInfo_Response message.
+         * Verifies a CBroadcast_SetClipDetails_Response message.
          * @function verify
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        CBroadcast_SetRTMPInfo_Response.verify = function verify(message) {
+        CBroadcast_SetClipDetails_Response.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             return null;
         };
     
         /**
-         * Creates a CBroadcast_SetRTMPInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * Creates a CBroadcast_SetClipDetails_Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
          */
-        CBroadcast_SetRTMPInfo_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CBroadcast_SetRTMPInfo_Response)
+        CBroadcast_SetClipDetails_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SetClipDetails_Response)
                 return object;
-            return new $root.CBroadcast_SetRTMPInfo_Response();
+            return new $root.CBroadcast_SetClipDetails_Response();
         };
     
         /**
-         * Creates a plain object from a CBroadcast_SetRTMPInfo_Response message. Also converts values to other types if specified.
+         * Creates a plain object from a CBroadcast_SetClipDetails_Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @static
-         * @param {CBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response
+         * @param {CBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CBroadcast_SetRTMPInfo_Response.toObject = function toObject() {
+        CBroadcast_SetClipDetails_Response.toObject = function toObject() {
             return {};
         };
     
         /**
-         * Converts this CBroadcast_SetRTMPInfo_Response to JSON.
+         * Converts this CBroadcast_SetClipDetails_Response to JSON.
          * @function toJSON
-         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @memberof CBroadcast_SetClipDetails_Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        CBroadcast_SetRTMPInfo_Response.prototype.toJSON = function toJSON() {
+        CBroadcast_SetClipDetails_Response.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
     
-        return CBroadcast_SetRTMPInfo_Response;
-    })();
-    
-    $root.CBroadcast_GetRTMPInfo_Response = (function() {
-    
-        /**
-         * Properties of a CBroadcast_GetRTMPInfo_Response.
-         * @exports ICBroadcast_GetRTMPInfo_Response
-         * @interface ICBroadcast_GetRTMPInfo_Response
-         * @property {number|null} [broadcast_permission] CBroadcast_GetRTMPInfo_Response broadcast_permission
-         * @property {string|null} [rtmp_host] CBroadcast_GetRTMPInfo_Response rtmp_host
-         * @property {string|null} [rtmp_token] CBroadcast_GetRTMPInfo_Response rtmp_token
-         * @property {number|null} [broadcast_delay] CBroadcast_GetRTMPInfo_Response broadcast_delay
-         * @property {number|null} [app_id] CBroadcast_GetRTMPInfo_Response app_id
-         * @property {number|null} [required_app_id] CBroadcast_GetRTMPInfo_Response required_app_id
-         * @property {number|null} [broadcast_chat_permission] CBroadcast_GetRTMPInfo_Response broadcast_chat_permission
-         * @property {number|null} [broadcast_buffer] CBroadcast_GetRTMPInfo_Response broadcast_buffer
-         * @property {number|Long|null} [steamid] CBroadcast_GetRTMPInfo_Response steamid
-         * @property {number|null} [chat_rate_limit] CBroadcast_GetRTMPInfo_Response chat_rate_limit
-         */
-    
-        /**
-         * Constructs a new CBroadcast_GetRTMPInfo_Response.
-         * @exports CBroadcast_GetRTMPInfo_Response
-         * @classdesc Represents a CBroadcast_GetRTMPInfo_Response.
-         * @implements ICBroadcast_GetRTMPInfo_Response
-         * @constructor
-         * @param {ICBroadcast_GetRTMPInfo_Response=} [properties] Properties to set
-         */
-        function CBroadcast_GetRTMPInfo_Response(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response broadcast_permission.
-         * @member {number} broadcast_permission
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_permission = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response rtmp_host.
-         * @member {string} rtmp_host
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.rtmp_host = "";
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response rtmp_token.
-         * @member {string} rtmp_token
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.rtmp_token = "";
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response broadcast_delay.
-         * @member {number} broadcast_delay
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_delay = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response app_id.
-         * @member {number} app_id
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.app_id = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response required_app_id.
-         * @member {number} required_app_id
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.required_app_id = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response broadcast_chat_permission.
-         * @member {number} broadcast_chat_permission
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_chat_permission = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response broadcast_buffer.
-         * @member {number} broadcast_buffer
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_buffer = 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response steamid.
-         * @member {number|Long} steamid
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-        /**
-         * CBroadcast_GetRTMPInfo_Response chat_rate_limit.
-         * @member {number} chat_rate_limit
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.chat_rate_limit = 0;
-    
-        /**
-         * Creates a new CBroadcast_GetRTMPInfo_Response instance using the specified properties.
-         * @function create
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {ICBroadcast_GetRTMPInfo_Response=} [properties] Properties to set
-         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response instance
-         */
-        CBroadcast_GetRTMPInfo_Response.create = function create(properties) {
-            return new CBroadcast_GetRTMPInfo_Response(properties);
-        };
-    
-        /**
-         * Encodes the specified CBroadcast_GetRTMPInfo_Response message. Does not implicitly {@link CBroadcast_GetRTMPInfo_Response.verify|verify} messages.
-         * @function encode
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {ICBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CBroadcast_GetRTMPInfo_Response.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.broadcast_permission);
-            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rtmp_host);
-            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rtmp_token);
-            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.broadcast_delay);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.app_id);
-            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
-                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.required_app_id);
-            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.broadcast_chat_permission);
-            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.broadcast_buffer);
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                writer.uint32(/* id 9, wireType 1 =*/73).fixed64(message.steamid);
-            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.chat_rate_limit);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified CBroadcast_GetRTMPInfo_Response message, length delimited. Does not implicitly {@link CBroadcast_GetRTMPInfo_Response.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {ICBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        CBroadcast_GetRTMPInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a CBroadcast_GetRTMPInfo_Response message from the specified reader or buffer.
-         * @function decode
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CBroadcast_GetRTMPInfo_Response.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetRTMPInfo_Response();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.broadcast_permission = reader.int32();
-                    break;
-                case 2:
-                    message.rtmp_host = reader.string();
-                    break;
-                case 3:
-                    message.rtmp_token = reader.string();
-                    break;
-                case 4:
-                    message.broadcast_delay = reader.int32();
-                    break;
-                case 5:
-                    message.app_id = reader.uint32();
-                    break;
-                case 6:
-                    message.required_app_id = reader.uint32();
-                    break;
-                case 7:
-                    message.broadcast_chat_permission = reader.int32();
-                    break;
-                case 8:
-                    message.broadcast_buffer = reader.int32();
-                    break;
-                case 9:
-                    message.steamid = reader.fixed64();
-                    break;
-                case 10:
-                    message.chat_rate_limit = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a CBroadcast_GetRTMPInfo_Response message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        CBroadcast_GetRTMPInfo_Response.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a CBroadcast_GetRTMPInfo_Response message.
-         * @function verify
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        CBroadcast_GetRTMPInfo_Response.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
-                if (!$util.isInteger(message.broadcast_permission))
-                    return "broadcast_permission: integer expected";
-            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
-                if (!$util.isString(message.rtmp_host))
-                    return "rtmp_host: string expected";
-            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
-                if (!$util.isString(message.rtmp_token))
-                    return "rtmp_token: string expected";
-            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
-                if (!$util.isInteger(message.broadcast_delay))
-                    return "broadcast_delay: integer expected";
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                if (!$util.isInteger(message.app_id))
-                    return "app_id: integer expected";
-            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
-                if (!$util.isInteger(message.required_app_id))
-                    return "required_app_id: integer expected";
-            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
-                if (!$util.isInteger(message.broadcast_chat_permission))
-                    return "broadcast_chat_permission: integer expected";
-            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
-                if (!$util.isInteger(message.broadcast_buffer))
-                    return "broadcast_buffer: integer expected";
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
-                    return "steamid: integer|Long expected";
-            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
-                if (!$util.isInteger(message.chat_rate_limit))
-                    return "chat_rate_limit: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a CBroadcast_GetRTMPInfo_Response message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
-         */
-        CBroadcast_GetRTMPInfo_Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.CBroadcast_GetRTMPInfo_Response)
-                return object;
-            var message = new $root.CBroadcast_GetRTMPInfo_Response();
-            if (object.broadcast_permission != null)
-                message.broadcast_permission = object.broadcast_permission | 0;
-            if (object.rtmp_host != null)
-                message.rtmp_host = String(object.rtmp_host);
-            if (object.rtmp_token != null)
-                message.rtmp_token = String(object.rtmp_token);
-            if (object.broadcast_delay != null)
-                message.broadcast_delay = object.broadcast_delay | 0;
-            if (object.app_id != null)
-                message.app_id = object.app_id >>> 0;
-            if (object.required_app_id != null)
-                message.required_app_id = object.required_app_id >>> 0;
-            if (object.broadcast_chat_permission != null)
-                message.broadcast_chat_permission = object.broadcast_chat_permission | 0;
-            if (object.broadcast_buffer != null)
-                message.broadcast_buffer = object.broadcast_buffer | 0;
-            if (object.steamid != null)
-                if ($util.Long)
-                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
-                else if (typeof object.steamid === "string")
-                    message.steamid = parseInt(object.steamid, 10);
-                else if (typeof object.steamid === "number")
-                    message.steamid = object.steamid;
-                else if (typeof object.steamid === "object")
-                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
-            if (object.chat_rate_limit != null)
-                message.chat_rate_limit = object.chat_rate_limit >>> 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a CBroadcast_GetRTMPInfo_Response message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @static
-         * @param {CBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        CBroadcast_GetRTMPInfo_Response.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.broadcast_permission = 0;
-                object.rtmp_host = "";
-                object.rtmp_token = "";
-                object.broadcast_delay = 0;
-                object.app_id = 0;
-                object.required_app_id = 0;
-                object.broadcast_chat_permission = 0;
-                object.broadcast_buffer = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.steamid = options.longs === String ? "0" : 0;
-                object.chat_rate_limit = 0;
-            }
-            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
-                object.broadcast_permission = message.broadcast_permission;
-            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
-                object.rtmp_host = message.rtmp_host;
-            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
-                object.rtmp_token = message.rtmp_token;
-            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
-                object.broadcast_delay = message.broadcast_delay;
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                object.app_id = message.app_id;
-            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
-                object.required_app_id = message.required_app_id;
-            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
-                object.broadcast_chat_permission = message.broadcast_chat_permission;
-            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
-                object.broadcast_buffer = message.broadcast_buffer;
-            if (message.steamid != null && message.hasOwnProperty("steamid"))
-                if (typeof message.steamid === "number")
-                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
-                else
-                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
-            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
-                object.chat_rate_limit = message.chat_rate_limit;
-            return object;
-        };
-    
-        /**
-         * Converts this CBroadcast_GetRTMPInfo_Response to JSON.
-         * @function toJSON
-         * @memberof CBroadcast_GetRTMPInfo_Response
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        CBroadcast_GetRTMPInfo_Response.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        return CBroadcast_GetRTMPInfo_Response;
+        return CBroadcast_SetClipDetails_Response;
     })();
     
     $root.CProductImpressionsFromClient_Notification = (function() {
@@ -13237,6 +25372,39 @@
          * @instance
          * @param {ICCommunity_GetAppRichPresenceLocalization_Request} request CCommunity_GetAppRichPresenceLocalization_Request message or plain object
          * @returns {Promise<CCommunity_GetAppRichPresenceLocalization_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Community#getUserPartnerEventNews}.
+         * @memberof Community
+         * @typedef GetUserPartnerEventNewsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CCommunity_GetUserPartnerEventNews_Response} [response] CCommunity_GetUserPartnerEventNews_Response
+         */
+    
+        /**
+         * Calls GetUserPartnerEventNews.
+         * @function getUserPartnerEventNews
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {Community.GetUserPartnerEventNewsCallback} callback Node-style callback called with the error, if any, and CCommunity_GetUserPartnerEventNews_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Community.prototype.getUserPartnerEventNews = function getUserPartnerEventNews(request, callback) {
+            return this.rpcCall(getUserPartnerEventNews, $root.NotImplemented, $root.CCommunity_GetUserPartnerEventNews_Response, request, callback);
+        }, "name", { value: "GetUserPartnerEventNews" });
+    
+        /**
+         * Calls GetUserPartnerEventNews.
+         * @function getUserPartnerEventNews
+         * @memberof Community
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CCommunity_GetUserPartnerEventNews_Response>} Promise
          * @variation 2
          */
     
@@ -14008,6 +26176,1064 @@
          */
     
         return VoiceChatClient;
+    })();
+    
+    $root.SteamTV = (function() {
+    
+        /**
+         * Constructs a new SteamTV service.
+         * @exports SteamTV
+         * @classdesc Represents a SteamTV
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function SteamTV(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (SteamTV.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SteamTV;
+    
+        /**
+         * Creates new SteamTV service using the specified rpc implementation.
+         * @function create
+         * @memberof SteamTV
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {SteamTV} RPC service. Useful where requests and/or responses are streamed.
+         */
+        SteamTV.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link SteamTV#createBroadcastChannel}.
+         * @memberof SteamTV
+         * @typedef CreateBroadcastChannelCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_CreateBroadcastChannel_Response} [response] CSteamTV_CreateBroadcastChannel_Response
+         */
+    
+        /**
+         * Calls CreateBroadcastChannel.
+         * @function createBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.CreateBroadcastChannelCallback} callback Node-style callback called with the error, if any, and CSteamTV_CreateBroadcastChannel_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.createBroadcastChannel = function createBroadcastChannel(request, callback) {
+            return this.rpcCall(createBroadcastChannel, $root.NotImplemented, $root.CSteamTV_CreateBroadcastChannel_Response, request, callback);
+        }, "name", { value: "CreateBroadcastChannel" });
+    
+        /**
+         * Calls CreateBroadcastChannel.
+         * @function createBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_CreateBroadcastChannel_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelID}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelIDCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelID_Response} [response] CSteamTV_GetBroadcastChannelID_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelID.
+         * @function getBroadcastChannelID
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelIDCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelID_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelID = function getBroadcastChannelID(request, callback) {
+            return this.rpcCall(getBroadcastChannelID, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelID_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelID" });
+    
+        /**
+         * Calls GetBroadcastChannelID.
+         * @function getBroadcastChannelID
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelID_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#setBroadcastChannelProfile}.
+         * @memberof SteamTV
+         * @typedef SetBroadcastChannelProfileCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_SetBroadcastChannelProfile_Response} [response] CSteamTV_SetBroadcastChannelProfile_Response
+         */
+    
+        /**
+         * Calls SetBroadcastChannelProfile.
+         * @function setBroadcastChannelProfile
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SetBroadcastChannelProfileCallback} callback Node-style callback called with the error, if any, and CSteamTV_SetBroadcastChannelProfile_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.setBroadcastChannelProfile = function setBroadcastChannelProfile(request, callback) {
+            return this.rpcCall(setBroadcastChannelProfile, $root.NotImplemented, $root.CSteamTV_SetBroadcastChannelProfile_Response, request, callback);
+        }, "name", { value: "SetBroadcastChannelProfile" });
+    
+        /**
+         * Calls SetBroadcastChannelProfile.
+         * @function setBroadcastChannelProfile
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_SetBroadcastChannelProfile_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelProfile}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelProfileCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelProfile_Response} [response] CSteamTV_GetBroadcastChannelProfile_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelProfile.
+         * @function getBroadcastChannelProfile
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelProfileCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelProfile_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelProfile = function getBroadcastChannelProfile(request, callback) {
+            return this.rpcCall(getBroadcastChannelProfile, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelProfile_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelProfile" });
+    
+        /**
+         * Calls GetBroadcastChannelProfile.
+         * @function getBroadcastChannelProfile
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelProfile_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#setBroadcastChannelImage}.
+         * @memberof SteamTV
+         * @typedef SetBroadcastChannelImageCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_SetBroadcastChannelImage_Response} [response] CSteamTV_SetBroadcastChannelImage_Response
+         */
+    
+        /**
+         * Calls SetBroadcastChannelImage.
+         * @function setBroadcastChannelImage
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SetBroadcastChannelImageCallback} callback Node-style callback called with the error, if any, and CSteamTV_SetBroadcastChannelImage_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.setBroadcastChannelImage = function setBroadcastChannelImage(request, callback) {
+            return this.rpcCall(setBroadcastChannelImage, $root.NotImplemented, $root.CSteamTV_SetBroadcastChannelImage_Response, request, callback);
+        }, "name", { value: "SetBroadcastChannelImage" });
+    
+        /**
+         * Calls SetBroadcastChannelImage.
+         * @function setBroadcastChannelImage
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_SetBroadcastChannelImage_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelImages}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelImagesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelImages_Response} [response] CSteamTV_GetBroadcastChannelImages_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelImages.
+         * @function getBroadcastChannelImages
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelImagesCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelImages_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelImages = function getBroadcastChannelImages(request, callback) {
+            return this.rpcCall(getBroadcastChannelImages, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelImages_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelImages" });
+    
+        /**
+         * Calls GetBroadcastChannelImages.
+         * @function getBroadcastChannelImages
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelImages_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#setBroadcastChannelLinkRegions}.
+         * @memberof SteamTV
+         * @typedef SetBroadcastChannelLinkRegionsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_SetBroadcastChannelLinkRegions_Response} [response] CSteamTV_SetBroadcastChannelLinkRegions_Response
+         */
+    
+        /**
+         * Calls SetBroadcastChannelLinkRegions.
+         * @function setBroadcastChannelLinkRegions
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SetBroadcastChannelLinkRegionsCallback} callback Node-style callback called with the error, if any, and CSteamTV_SetBroadcastChannelLinkRegions_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.setBroadcastChannelLinkRegions = function setBroadcastChannelLinkRegions(request, callback) {
+            return this.rpcCall(setBroadcastChannelLinkRegions, $root.NotImplemented, $root.CSteamTV_SetBroadcastChannelLinkRegions_Response, request, callback);
+        }, "name", { value: "SetBroadcastChannelLinkRegions" });
+    
+        /**
+         * Calls SetBroadcastChannelLinkRegions.
+         * @function setBroadcastChannelLinkRegions
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_SetBroadcastChannelLinkRegions_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelLinks}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelLinksCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelLinks_Response} [response] CSteamTV_GetBroadcastChannelLinks_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelLinks.
+         * @function getBroadcastChannelLinks
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelLinksCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelLinks_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelLinks = function getBroadcastChannelLinks(request, callback) {
+            return this.rpcCall(getBroadcastChannelLinks, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelLinks_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelLinks" });
+    
+        /**
+         * Calls GetBroadcastChannelLinks.
+         * @function getBroadcastChannelLinks
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelLinks_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelBroadcasters}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelBroadcastersCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelBroadcasters_Response} [response] CSteamTV_GetBroadcastChannelBroadcasters_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelBroadcasters.
+         * @function getBroadcastChannelBroadcasters
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelBroadcastersCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelBroadcasters_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelBroadcasters = function getBroadcastChannelBroadcasters(request, callback) {
+            return this.rpcCall(getBroadcastChannelBroadcasters, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelBroadcasters_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelBroadcasters" });
+    
+        /**
+         * Calls GetBroadcastChannelBroadcasters.
+         * @function getBroadcastChannelBroadcasters
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelBroadcasters_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getFollowedChannels}.
+         * @memberof SteamTV
+         * @typedef GetFollowedChannelsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetFollowedChannels_Response} [response] CSteamTV_GetFollowedChannels_Response
+         */
+    
+        /**
+         * Calls GetFollowedChannels.
+         * @function getFollowedChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetFollowedChannelsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetFollowedChannels_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getFollowedChannels = function getFollowedChannels(request, callback) {
+            return this.rpcCall(getFollowedChannels, $root.NotImplemented, $root.CSteamTV_GetFollowedChannels_Response, request, callback);
+        }, "name", { value: "GetFollowedChannels" });
+    
+        /**
+         * Calls GetFollowedChannels.
+         * @function getFollowedChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetFollowedChannels_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getSubscribedChannels}.
+         * @memberof SteamTV
+         * @typedef GetSubscribedChannelsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetSubscribedChannels_Response} [response] CSteamTV_GetSubscribedChannels_Response
+         */
+    
+        /**
+         * Calls GetSubscribedChannels.
+         * @function getSubscribedChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetSubscribedChannelsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetSubscribedChannels_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getSubscribedChannels = function getSubscribedChannels(request, callback) {
+            return this.rpcCall(getSubscribedChannels, $root.NotImplemented, $root.CSteamTV_GetSubscribedChannels_Response, request, callback);
+        }, "name", { value: "GetSubscribedChannels" });
+    
+        /**
+         * Calls GetSubscribedChannels.
+         * @function getSubscribedChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetSubscribedChannels_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelStatus}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelStatus_Response} [response] CSteamTV_GetBroadcastChannelStatus_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelStatus.
+         * @function getBroadcastChannelStatus
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelStatusCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelStatus = function getBroadcastChannelStatus(request, callback) {
+            return this.rpcCall(getBroadcastChannelStatus, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelStatus_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelStatus" });
+    
+        /**
+         * Calls GetBroadcastChannelStatus.
+         * @function getBroadcastChannelStatus
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#followBroadcastChannel}.
+         * @memberof SteamTV
+         * @typedef FollowBroadcastChannelCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_FollowBroadcastChannel_Response} [response] CSteamTV_FollowBroadcastChannel_Response
+         */
+    
+        /**
+         * Calls FollowBroadcastChannel.
+         * @function followBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.FollowBroadcastChannelCallback} callback Node-style callback called with the error, if any, and CSteamTV_FollowBroadcastChannel_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.followBroadcastChannel = function followBroadcastChannel(request, callback) {
+            return this.rpcCall(followBroadcastChannel, $root.NotImplemented, $root.CSteamTV_FollowBroadcastChannel_Response, request, callback);
+        }, "name", { value: "FollowBroadcastChannel" });
+    
+        /**
+         * Calls FollowBroadcastChannel.
+         * @function followBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_FollowBroadcastChannel_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#subscribeBroadcastChannel}.
+         * @memberof SteamTV
+         * @typedef SubscribeBroadcastChannelCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_SubscribeBroadcastChannel_Response} [response] CSteamTV_SubscribeBroadcastChannel_Response
+         */
+    
+        /**
+         * Calls SubscribeBroadcastChannel.
+         * @function subscribeBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SubscribeBroadcastChannelCallback} callback Node-style callback called with the error, if any, and CSteamTV_SubscribeBroadcastChannel_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.subscribeBroadcastChannel = function subscribeBroadcastChannel(request, callback) {
+            return this.rpcCall(subscribeBroadcastChannel, $root.NotImplemented, $root.CSteamTV_SubscribeBroadcastChannel_Response, request, callback);
+        }, "name", { value: "SubscribeBroadcastChannel" });
+    
+        /**
+         * Calls SubscribeBroadcastChannel.
+         * @function subscribeBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_SubscribeBroadcastChannel_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelClips}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelClipsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelClips_Response} [response] CSteamTV_GetBroadcastChannelClips_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelClips.
+         * @function getBroadcastChannelClips
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelClipsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelClips_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelClips = function getBroadcastChannelClips(request, callback) {
+            return this.rpcCall(getBroadcastChannelClips, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelClips_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelClips" });
+    
+        /**
+         * Calls GetBroadcastChannelClips.
+         * @function getBroadcastChannelClips
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelClips_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#reportBroadcastChannel}.
+         * @memberof SteamTV
+         * @typedef ReportBroadcastChannelCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_ReportBroadcastChannel_Response} [response] CSteamTV_ReportBroadcastChannel_Response
+         */
+    
+        /**
+         * Calls ReportBroadcastChannel.
+         * @function reportBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.ReportBroadcastChannelCallback} callback Node-style callback called with the error, if any, and CSteamTV_ReportBroadcastChannel_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.reportBroadcastChannel = function reportBroadcastChannel(request, callback) {
+            return this.rpcCall(reportBroadcastChannel, $root.NotImplemented, $root.CSteamTV_ReportBroadcastChannel_Response, request, callback);
+        }, "name", { value: "ReportBroadcastChannel" });
+    
+        /**
+         * Calls ReportBroadcastChannel.
+         * @function reportBroadcastChannel
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_ReportBroadcastChannel_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getBroadcastChannelInteraction}.
+         * @memberof SteamTV
+         * @typedef GetBroadcastChannelInteractionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetBroadcastChannelInteraction_Response} [response] CSteamTV_GetBroadcastChannelInteraction_Response
+         */
+    
+        /**
+         * Calls GetBroadcastChannelInteraction.
+         * @function getBroadcastChannelInteraction
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetBroadcastChannelInteractionCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetBroadcastChannelInteraction_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getBroadcastChannelInteraction = function getBroadcastChannelInteraction(request, callback) {
+            return this.rpcCall(getBroadcastChannelInteraction, $root.NotImplemented, $root.CSteamTV_GetBroadcastChannelInteraction_Response, request, callback);
+        }, "name", { value: "GetBroadcastChannelInteraction" });
+    
+        /**
+         * Calls GetBroadcastChannelInteraction.
+         * @function getBroadcastChannelInteraction
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetBroadcastChannelInteraction_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getGames}.
+         * @memberof SteamTV
+         * @typedef GetGamesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetGames_Response} [response] CSteamTV_GetGames_Response
+         */
+    
+        /**
+         * Calls GetGames.
+         * @function getGames
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetGamesCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetGames_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getGames = function getGames(request, callback) {
+            return this.rpcCall(getGames, $root.NotImplemented, $root.CSteamTV_GetGames_Response, request, callback);
+        }, "name", { value: "GetGames" });
+    
+        /**
+         * Calls GetGames.
+         * @function getGames
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetGames_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getChannels}.
+         * @memberof SteamTV
+         * @typedef GetChannelsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetChannels_Response} [response] CSteamTV_GetChannels_Response
+         */
+    
+        /**
+         * Calls GetChannels.
+         * @function getChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetChannelsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetChannels_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getChannels = function getChannels(request, callback) {
+            return this.rpcCall(getChannels, $root.NotImplemented, $root.CSteamTV_GetChannels_Response, request, callback);
+        }, "name", { value: "GetChannels" });
+    
+        /**
+         * Calls GetChannels.
+         * @function getChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetChannels_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#addChatBan}.
+         * @memberof SteamTV
+         * @typedef AddChatBanCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_AddChatBan_Response} [response] CSteamTV_AddChatBan_Response
+         */
+    
+        /**
+         * Calls AddChatBan.
+         * @function addChatBan
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_AddChatBan_Request} request CSteamTV_AddChatBan_Request message or plain object
+         * @param {SteamTV.AddChatBanCallback} callback Node-style callback called with the error, if any, and CSteamTV_AddChatBan_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.addChatBan = function addChatBan(request, callback) {
+            return this.rpcCall(addChatBan, $root.CSteamTV_AddChatBan_Request, $root.CSteamTV_AddChatBan_Response, request, callback);
+        }, "name", { value: "AddChatBan" });
+    
+        /**
+         * Calls AddChatBan.
+         * @function addChatBan
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_AddChatBan_Request} request CSteamTV_AddChatBan_Request message or plain object
+         * @returns {Promise<CSteamTV_AddChatBan_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getChatBans}.
+         * @memberof SteamTV
+         * @typedef GetChatBansCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetChatBans_Response} [response] CSteamTV_GetChatBans_Response
+         */
+    
+        /**
+         * Calls GetChatBans.
+         * @function getChatBans
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetChatBansCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetChatBans_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getChatBans = function getChatBans(request, callback) {
+            return this.rpcCall(getChatBans, $root.NotImplemented, $root.CSteamTV_GetChatBans_Response, request, callback);
+        }, "name", { value: "GetChatBans" });
+    
+        /**
+         * Calls GetChatBans.
+         * @function getChatBans
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetChatBans_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#addChatModerator}.
+         * @memberof SteamTV
+         * @typedef AddChatModeratorCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_AddChatModerator_Response} [response] CSteamTV_AddChatModerator_Response
+         */
+    
+        /**
+         * Calls AddChatModerator.
+         * @function addChatModerator
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_AddChatModerator_Request} request CSteamTV_AddChatModerator_Request message or plain object
+         * @param {SteamTV.AddChatModeratorCallback} callback Node-style callback called with the error, if any, and CSteamTV_AddChatModerator_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.addChatModerator = function addChatModerator(request, callback) {
+            return this.rpcCall(addChatModerator, $root.CSteamTV_AddChatModerator_Request, $root.CSteamTV_AddChatModerator_Response, request, callback);
+        }, "name", { value: "AddChatModerator" });
+    
+        /**
+         * Calls AddChatModerator.
+         * @function addChatModerator
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_AddChatModerator_Request} request CSteamTV_AddChatModerator_Request message or plain object
+         * @returns {Promise<CSteamTV_AddChatModerator_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getChatModerators}.
+         * @memberof SteamTV
+         * @typedef GetChatModeratorsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetChatModerators_Response} [response] CSteamTV_GetChatModerators_Response
+         */
+    
+        /**
+         * Calls GetChatModerators.
+         * @function getChatModerators
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_GetChatModerators_Request} request CSteamTV_GetChatModerators_Request message or plain object
+         * @param {SteamTV.GetChatModeratorsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetChatModerators_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getChatModerators = function getChatModerators(request, callback) {
+            return this.rpcCall(getChatModerators, $root.CSteamTV_GetChatModerators_Request, $root.CSteamTV_GetChatModerators_Response, request, callback);
+        }, "name", { value: "GetChatModerators" });
+    
+        /**
+         * Calls GetChatModerators.
+         * @function getChatModerators
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_GetChatModerators_Request} request CSteamTV_GetChatModerators_Request message or plain object
+         * @returns {Promise<CSteamTV_GetChatModerators_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#addWordBan}.
+         * @memberof SteamTV
+         * @typedef AddWordBanCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_AddWordBan_Response} [response] CSteamTV_AddWordBan_Response
+         */
+    
+        /**
+         * Calls AddWordBan.
+         * @function addWordBan
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.AddWordBanCallback} callback Node-style callback called with the error, if any, and CSteamTV_AddWordBan_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.addWordBan = function addWordBan(request, callback) {
+            return this.rpcCall(addWordBan, $root.NotImplemented, $root.CSteamTV_AddWordBan_Response, request, callback);
+        }, "name", { value: "AddWordBan" });
+    
+        /**
+         * Calls AddWordBan.
+         * @function addWordBan
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_AddWordBan_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getWordBans}.
+         * @memberof SteamTV
+         * @typedef GetWordBansCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetWordBans_Response} [response] CSteamTV_GetWordBans_Response
+         */
+    
+        /**
+         * Calls GetWordBans.
+         * @function getWordBans
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetWordBansCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetWordBans_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getWordBans = function getWordBans(request, callback) {
+            return this.rpcCall(getWordBans, $root.NotImplemented, $root.CSteamTV_GetWordBans_Response, request, callback);
+        }, "name", { value: "GetWordBans" });
+    
+        /**
+         * Calls GetWordBans.
+         * @function getWordBans
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetWordBans_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#joinChat}.
+         * @memberof SteamTV
+         * @typedef JoinChatCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_JoinChat_Response} [response] CSteamTV_JoinChat_Response
+         */
+    
+        /**
+         * Calls JoinChat.
+         * @function joinChat
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_JoinChat_Request} request CSteamTV_JoinChat_Request message or plain object
+         * @param {SteamTV.JoinChatCallback} callback Node-style callback called with the error, if any, and CSteamTV_JoinChat_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.joinChat = function joinChat(request, callback) {
+            return this.rpcCall(joinChat, $root.CSteamTV_JoinChat_Request, $root.CSteamTV_JoinChat_Response, request, callback);
+        }, "name", { value: "JoinChat" });
+    
+        /**
+         * Calls JoinChat.
+         * @function joinChat
+         * @memberof SteamTV
+         * @instance
+         * @param {ICSteamTV_JoinChat_Request} request CSteamTV_JoinChat_Request message or plain object
+         * @returns {Promise<CSteamTV_JoinChat_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#search}.
+         * @memberof SteamTV
+         * @typedef SearchCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_Search_Response} [response] CSteamTV_Search_Response
+         */
+    
+        /**
+         * Calls Search.
+         * @function search
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SearchCallback} callback Node-style callback called with the error, if any, and CSteamTV_Search_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.search = function search(request, callback) {
+            return this.rpcCall(search, $root.NotImplemented, $root.CSteamTV_Search_Response, request, callback);
+        }, "name", { value: "Search" });
+    
+        /**
+         * Calls Search.
+         * @function search
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_Search_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getSteamTVUserSettings}.
+         * @memberof SteamTV
+         * @typedef GetSteamTVUserSettingsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetSteamTVUserSettings_Response} [response] CSteamTV_GetSteamTVUserSettings_Response
+         */
+    
+        /**
+         * Calls GetSteamTVUserSettings.
+         * @function getSteamTVUserSettings
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetSteamTVUserSettingsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetSteamTVUserSettings_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getSteamTVUserSettings = function getSteamTVUserSettings(request, callback) {
+            return this.rpcCall(getSteamTVUserSettings, $root.NotImplemented, $root.CSteamTV_GetSteamTVUserSettings_Response, request, callback);
+        }, "name", { value: "GetSteamTVUserSettings" });
+    
+        /**
+         * Calls GetSteamTVUserSettings.
+         * @function getSteamTVUserSettings
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetSteamTVUserSettings_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#setSteamTVUserSettings}.
+         * @memberof SteamTV
+         * @typedef SetSteamTVUserSettingsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_SetSteamTVUserSettings_Response} [response] CSteamTV_SetSteamTVUserSettings_Response
+         */
+    
+        /**
+         * Calls SetSteamTVUserSettings.
+         * @function setSteamTVUserSettings
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.SetSteamTVUserSettingsCallback} callback Node-style callback called with the error, if any, and CSteamTV_SetSteamTVUserSettings_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.setSteamTVUserSettings = function setSteamTVUserSettings(request, callback) {
+            return this.rpcCall(setSteamTVUserSettings, $root.NotImplemented, $root.CSteamTV_SetSteamTVUserSettings_Response, request, callback);
+        }, "name", { value: "SetSteamTVUserSettings" });
+    
+        /**
+         * Calls SetSteamTVUserSettings.
+         * @function setSteamTVUserSettings
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_SetSteamTVUserSettings_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getMyBroadcastChannels}.
+         * @memberof SteamTV
+         * @typedef GetMyBroadcastChannelsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetMyBroadcastChannels_Response} [response] CSteamTV_GetMyBroadcastChannels_Response
+         */
+    
+        /**
+         * Calls GetMyBroadcastChannels.
+         * @function getMyBroadcastChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetMyBroadcastChannelsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetMyBroadcastChannels_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getMyBroadcastChannels = function getMyBroadcastChannels(request, callback) {
+            return this.rpcCall(getMyBroadcastChannels, $root.NotImplemented, $root.CSteamTV_GetMyBroadcastChannels_Response, request, callback);
+        }, "name", { value: "GetMyBroadcastChannels" });
+    
+        /**
+         * Calls GetMyBroadcastChannels.
+         * @function getMyBroadcastChannels
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetMyBroadcastChannels_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link SteamTV#getHomePageContents}.
+         * @memberof SteamTV
+         * @typedef GetHomePageContentsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CSteamTV_GetHomePageContents_Response} [response] CSteamTV_GetHomePageContents_Response
+         */
+    
+        /**
+         * Calls GetHomePageContents.
+         * @function getHomePageContents
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @param {SteamTV.GetHomePageContentsCallback} callback Node-style callback called with the error, if any, and CSteamTV_GetHomePageContents_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(SteamTV.prototype.getHomePageContents = function getHomePageContents(request, callback) {
+            return this.rpcCall(getHomePageContents, $root.NotImplemented, $root.CSteamTV_GetHomePageContents_Response, request, callback);
+        }, "name", { value: "GetHomePageContents" });
+    
+        /**
+         * Calls GetHomePageContents.
+         * @function getHomePageContents
+         * @memberof SteamTV
+         * @instance
+         * @param {INotImplemented} request NotImplemented message or plain object
+         * @returns {Promise<CSteamTV_GetHomePageContents_Response>} Promise
+         * @variation 2
+         */
+    
+        return SteamTV;
     })();
     
     $root.FriendsList = (function() {
@@ -21199,6 +34425,242 @@
         return google;
     })();
     
+    $root.CMsgIPAddress = (function() {
+    
+        /**
+         * Properties of a CMsgIPAddress.
+         * @exports ICMsgIPAddress
+         * @interface ICMsgIPAddress
+         * @property {number|null} [v4] CMsgIPAddress v4
+         * @property {Uint8Array|null} [v6] CMsgIPAddress v6
+         */
+    
+        /**
+         * Constructs a new CMsgIPAddress.
+         * @exports CMsgIPAddress
+         * @classdesc Represents a CMsgIPAddress.
+         * @implements ICMsgIPAddress
+         * @constructor
+         * @param {ICMsgIPAddress=} [properties] Properties to set
+         */
+        function CMsgIPAddress(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgIPAddress v4.
+         * @member {number} v4
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        CMsgIPAddress.prototype.v4 = 0;
+    
+        /**
+         * CMsgIPAddress v6.
+         * @member {Uint8Array} v6
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        CMsgIPAddress.prototype.v6 = $util.newBuffer([]);
+    
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+    
+        /**
+         * CMsgIPAddress ip.
+         * @member {"v4"|"v6"|undefined} ip
+         * @memberof CMsgIPAddress
+         * @instance
+         */
+        Object.defineProperty(CMsgIPAddress.prototype, "ip", {
+            get: $util.oneOfGetter($oneOfFields = ["v4", "v6"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+    
+        /**
+         * Creates a new CMsgIPAddress instance using the specified properties.
+         * @function create
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress=} [properties] Properties to set
+         * @returns {CMsgIPAddress} CMsgIPAddress instance
+         */
+        CMsgIPAddress.create = function create(properties) {
+            return new CMsgIPAddress(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddress message. Does not implicitly {@link CMsgIPAddress.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress} message CMsgIPAddress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddress.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.v4 != null && message.hasOwnProperty("v4"))
+                writer.uint32(/* id 1, wireType 5 =*/13).fixed32(message.v4);
+            if (message.v6 != null && message.hasOwnProperty("v6"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.v6);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgIPAddress message, length delimited. Does not implicitly {@link CMsgIPAddress.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {ICMsgIPAddress} message CMsgIPAddress message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgIPAddress.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgIPAddress message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddress.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgIPAddress();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.v4 = reader.fixed32();
+                    break;
+                case 2:
+                    message.v6 = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgIPAddress message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgIPAddress.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgIPAddress message.
+         * @function verify
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgIPAddress.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.v4 != null && message.hasOwnProperty("v4")) {
+                properties.ip = 1;
+                if (!$util.isInteger(message.v4))
+                    return "v4: integer expected";
+            }
+            if (message.v6 != null && message.hasOwnProperty("v6")) {
+                if (properties.ip === 1)
+                    return "ip: multiple values";
+                properties.ip = 1;
+                if (!(message.v6 && typeof message.v6.length === "number" || $util.isString(message.v6)))
+                    return "v6: buffer expected";
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgIPAddress message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgIPAddress} CMsgIPAddress
+         */
+        CMsgIPAddress.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgIPAddress)
+                return object;
+            var message = new $root.CMsgIPAddress();
+            if (object.v4 != null)
+                message.v4 = object.v4 >>> 0;
+            if (object.v6 != null)
+                if (typeof object.v6 === "string")
+                    $util.base64.decode(object.v6, message.v6 = $util.newBuffer($util.base64.length(object.v6)), 0);
+                else if (object.v6.length)
+                    message.v6 = object.v6;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgIPAddress message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgIPAddress
+         * @static
+         * @param {CMsgIPAddress} message CMsgIPAddress
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgIPAddress.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (message.v4 != null && message.hasOwnProperty("v4")) {
+                object.v4 = message.v4;
+                if (options.oneofs)
+                    object.ip = "v4";
+            }
+            if (message.v6 != null && message.hasOwnProperty("v6")) {
+                object.v6 = options.bytes === String ? $util.base64.encode(message.v6, 0, message.v6.length) : options.bytes === Array ? Array.prototype.slice.call(message.v6) : message.v6;
+                if (options.oneofs)
+                    object.ip = "v6";
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgIPAddress to JSON.
+         * @function toJSON
+         * @memberof CMsgIPAddress
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgIPAddress.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgIPAddress;
+    })();
+    
     $root.CMsgProtoBufHeader = (function() {
     
         /**
@@ -21214,7 +34676,6 @@
          * @property {number|null} [seq_num] CMsgProtoBufHeader seq_num
          * @property {number|null} [eresult] CMsgProtoBufHeader eresult
          * @property {string|null} [error_message] CMsgProtoBufHeader error_message
-         * @property {number|null} [ip] CMsgProtoBufHeader ip
          * @property {number|null} [auth_account_flags] CMsgProtoBufHeader auth_account_flags
          * @property {number|null} [token_source] CMsgProtoBufHeader token_source
          * @property {boolean|null} [admin_spoofing_user] CMsgProtoBufHeader admin_spoofing_user
@@ -21227,6 +34688,9 @@
          * @property {boolean|null} [is_from_external_source] CMsgProtoBufHeader is_from_external_source
          * @property {Array.<number>|null} [forward_to_sysid] CMsgProtoBufHeader forward_to_sysid
          * @property {number|null} [cm_sysid] CMsgProtoBufHeader cm_sysid
+         * @property {string|null} [wg_token] CMsgProtoBufHeader wg_token
+         * @property {number|null} [ip] CMsgProtoBufHeader ip
+         * @property {Uint8Array|null} [ip_v6] CMsgProtoBufHeader ip_v6
          */
     
         /**
@@ -21316,14 +34780,6 @@
          * @instance
          */
         CMsgProtoBufHeader.prototype.error_message = "";
-    
-        /**
-         * CMsgProtoBufHeader ip.
-         * @member {number} ip
-         * @memberof CMsgProtoBufHeader
-         * @instance
-         */
-        CMsgProtoBufHeader.prototype.ip = 0;
     
         /**
          * CMsgProtoBufHeader auth_account_flags.
@@ -21422,6 +34878,44 @@
         CMsgProtoBufHeader.prototype.cm_sysid = 0;
     
         /**
+         * CMsgProtoBufHeader wg_token.
+         * @member {string} wg_token
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.wg_token = "";
+    
+        /**
+         * CMsgProtoBufHeader ip.
+         * @member {number} ip
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.ip = 0;
+    
+        /**
+         * CMsgProtoBufHeader ip_v6.
+         * @member {Uint8Array} ip_v6
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        CMsgProtoBufHeader.prototype.ip_v6 = $util.newBuffer([]);
+    
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+    
+        /**
+         * CMsgProtoBufHeader ip_addr.
+         * @member {"ip"|"ip_v6"|undefined} ip_addr
+         * @memberof CMsgProtoBufHeader
+         * @instance
+         */
+        Object.defineProperty(CMsgProtoBufHeader.prototype, "ip_addr", {
+            get: $util.oneOfGetter($oneOfFields = ["ip", "ip_v6"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+    
+        /**
          * Creates a new CMsgProtoBufHeader instance using the specified properties.
          * @function create
          * @memberof CMsgProtoBufHeader
@@ -21490,6 +34984,10 @@
                     writer.uint32(/* id 27, wireType 0 =*/216).uint32(message.forward_to_sysid[i]);
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 writer.uint32(/* id 28, wireType 0 =*/224).uint32(message.cm_sysid);
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6"))
+                writer.uint32(/* id 29, wireType 2 =*/234).bytes(message.ip_v6);
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                writer.uint32(/* id 30, wireType 2 =*/242).string(message.wg_token);
             return writer;
         };
     
@@ -21551,9 +35049,6 @@
                 case 14:
                     message.error_message = reader.string();
                     break;
-                case 15:
-                    message.ip = reader.uint32();
-                    break;
                 case 16:
                     message.auth_account_flags = reader.uint32();
                     break;
@@ -21597,6 +35092,15 @@
                 case 28:
                     message.cm_sysid = reader.uint32();
                     break;
+                case 30:
+                    message.wg_token = reader.string();
+                    break;
+                case 15:
+                    message.ip = reader.uint32();
+                    break;
+                case 29:
+                    message.ip_v6 = reader.bytes();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -21632,6 +35136,7 @@
         CMsgProtoBufHeader.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            var properties = {};
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
                     return "steamid: integer|Long expected";
@@ -21659,9 +35164,6 @@
             if (message.error_message != null && message.hasOwnProperty("error_message"))
                 if (!$util.isString(message.error_message))
                     return "error_message: string expected";
-            if (message.ip != null && message.hasOwnProperty("ip"))
-                if (!$util.isInteger(message.ip))
-                    return "ip: integer expected";
             if (message.auth_account_flags != null && message.hasOwnProperty("auth_account_flags"))
                 if (!$util.isInteger(message.auth_account_flags))
                     return "auth_account_flags: integer expected";
@@ -21702,6 +35204,21 @@
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 if (!$util.isInteger(message.cm_sysid))
                     return "cm_sysid: integer expected";
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                if (!$util.isString(message.wg_token))
+                    return "wg_token: string expected";
+            if (message.ip != null && message.hasOwnProperty("ip")) {
+                properties.ip_addr = 1;
+                if (!$util.isInteger(message.ip))
+                    return "ip: integer expected";
+            }
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6")) {
+                if (properties.ip_addr === 1)
+                    return "ip_addr: multiple values";
+                properties.ip_addr = 1;
+                if (!(message.ip_v6 && typeof message.ip_v6.length === "number" || $util.isString(message.ip_v6)))
+                    return "ip_v6: buffer expected";
+            }
             return null;
         };
     
@@ -21756,8 +35273,6 @@
                 message.eresult = object.eresult | 0;
             if (object.error_message != null)
                 message.error_message = String(object.error_message);
-            if (object.ip != null)
-                message.ip = object.ip >>> 0;
             if (object.auth_account_flags != null)
                 message.auth_account_flags = object.auth_account_flags >>> 0;
             if (object.token_source != null)
@@ -21801,6 +35316,15 @@
             }
             if (object.cm_sysid != null)
                 message.cm_sysid = object.cm_sysid >>> 0;
+            if (object.wg_token != null)
+                message.wg_token = String(object.wg_token);
+            if (object.ip != null)
+                message.ip = object.ip >>> 0;
+            if (object.ip_v6 != null)
+                if (typeof object.ip_v6 === "string")
+                    $util.base64.decode(object.ip_v6, message.ip_v6 = $util.newBuffer($util.base64.length(object.ip_v6)), 0);
+                else if (object.ip_v6.length)
+                    message.ip_v6 = object.ip_v6;
             return message;
         };
     
@@ -21840,7 +35364,6 @@
                 object.target_job_name = "";
                 object.eresult = 2;
                 object.error_message = "";
-                object.ip = 0;
                 object.auth_account_flags = 0;
                 object.transport_error = 1;
                 if ($util.Long) {
@@ -21861,6 +35384,7 @@
                 object.webapi_key_id = 0;
                 object.is_from_external_source = false;
                 object.cm_sysid = 0;
+                object.wg_token = "";
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -21887,8 +35411,11 @@
                 object.eresult = message.eresult;
             if (message.error_message != null && message.hasOwnProperty("error_message"))
                 object.error_message = message.error_message;
-            if (message.ip != null && message.hasOwnProperty("ip"))
+            if (message.ip != null && message.hasOwnProperty("ip")) {
                 object.ip = message.ip;
+                if (options.oneofs)
+                    object.ip_addr = "ip";
+            }
             if (message.auth_account_flags != null && message.hasOwnProperty("auth_account_flags"))
                 object.auth_account_flags = message.auth_account_flags;
             if (message.transport_error != null && message.hasOwnProperty("transport_error"))
@@ -21924,6 +35451,13 @@
             }
             if (message.cm_sysid != null && message.hasOwnProperty("cm_sysid"))
                 object.cm_sysid = message.cm_sysid;
+            if (message.ip_v6 != null && message.hasOwnProperty("ip_v6")) {
+                object.ip_v6 = options.bytes === String ? $util.base64.encode(message.ip_v6, 0, message.ip_v6.length) : options.bytes === Array ? Array.prototype.slice.call(message.ip_v6) : message.ip_v6;
+                if (options.oneofs)
+                    object.ip_addr = "ip_v6";
+            }
+            if (message.wg_token != null && message.hasOwnProperty("wg_token"))
+                object.wg_token = message.wg_token;
             return object;
         };
     
@@ -24365,6 +37899,674 @@
         };
     
         return CLocalizationToken;
+    })();
+    
+    $root.CClanEventUserNewsTuple = (function() {
+    
+        /**
+         * Properties of a CClanEventUserNewsTuple.
+         * @exports ICClanEventUserNewsTuple
+         * @interface ICClanEventUserNewsTuple
+         * @property {number|null} [clanid] CClanEventUserNewsTuple clanid
+         * @property {number|Long|null} [event_gid] CClanEventUserNewsTuple event_gid
+         * @property {number|Long|null} [announcement_gid] CClanEventUserNewsTuple announcement_gid
+         * @property {number|null} [rtime_start] CClanEventUserNewsTuple rtime_start
+         * @property {number|null} [rtime_end] CClanEventUserNewsTuple rtime_end
+         * @property {number|null} [priority_score] CClanEventUserNewsTuple priority_score
+         * @property {number|null} [type] CClanEventUserNewsTuple type
+         * @property {number|null} [clamp_range_slot] CClanEventUserNewsTuple clamp_range_slot
+         * @property {number|null} [appid] CClanEventUserNewsTuple appid
+         */
+    
+        /**
+         * Constructs a new CClanEventUserNewsTuple.
+         * @exports CClanEventUserNewsTuple
+         * @classdesc Represents a CClanEventUserNewsTuple.
+         * @implements ICClanEventUserNewsTuple
+         * @constructor
+         * @param {ICClanEventUserNewsTuple=} [properties] Properties to set
+         */
+        function CClanEventUserNewsTuple(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClanEventUserNewsTuple clanid.
+         * @member {number} clanid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.clanid = 0;
+    
+        /**
+         * CClanEventUserNewsTuple event_gid.
+         * @member {number|Long} event_gid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.event_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventUserNewsTuple announcement_gid.
+         * @member {number|Long} announcement_gid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.announcement_gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CClanEventUserNewsTuple rtime_start.
+         * @member {number} rtime_start
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.rtime_start = 0;
+    
+        /**
+         * CClanEventUserNewsTuple rtime_end.
+         * @member {number} rtime_end
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.rtime_end = 0;
+    
+        /**
+         * CClanEventUserNewsTuple priority_score.
+         * @member {number} priority_score
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.priority_score = 0;
+    
+        /**
+         * CClanEventUserNewsTuple type.
+         * @member {number} type
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.type = 0;
+    
+        /**
+         * CClanEventUserNewsTuple clamp_range_slot.
+         * @member {number} clamp_range_slot
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.clamp_range_slot = 0;
+    
+        /**
+         * CClanEventUserNewsTuple appid.
+         * @member {number} appid
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         */
+        CClanEventUserNewsTuple.prototype.appid = 0;
+    
+        /**
+         * Creates a new CClanEventUserNewsTuple instance using the specified properties.
+         * @function create
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple=} [properties] Properties to set
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple instance
+         */
+        CClanEventUserNewsTuple.create = function create(properties) {
+            return new CClanEventUserNewsTuple(properties);
+        };
+    
+        /**
+         * Encodes the specified CClanEventUserNewsTuple message. Does not implicitly {@link CClanEventUserNewsTuple.verify|verify} messages.
+         * @function encode
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple} message CClanEventUserNewsTuple message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanEventUserNewsTuple.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.clanid);
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.event_gid);
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.announcement_gid);
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.rtime_start);
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.rtime_end);
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.priority_score);
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.type);
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.clamp_range_slot);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClanEventUserNewsTuple message, length delimited. Does not implicitly {@link CClanEventUserNewsTuple.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {ICClanEventUserNewsTuple} message CClanEventUserNewsTuple message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanEventUserNewsTuple.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClanEventUserNewsTuple message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanEventUserNewsTuple.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClanEventUserNewsTuple();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.clanid = reader.uint32();
+                    break;
+                case 2:
+                    message.event_gid = reader.fixed64();
+                    break;
+                case 3:
+                    message.announcement_gid = reader.fixed64();
+                    break;
+                case 4:
+                    message.rtime_start = reader.uint32();
+                    break;
+                case 5:
+                    message.rtime_end = reader.uint32();
+                    break;
+                case 6:
+                    message.priority_score = reader.uint32();
+                    break;
+                case 7:
+                    message.type = reader.uint32();
+                    break;
+                case 8:
+                    message.clamp_range_slot = reader.uint32();
+                    break;
+                case 9:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClanEventUserNewsTuple message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanEventUserNewsTuple.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClanEventUserNewsTuple message.
+         * @function verify
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClanEventUserNewsTuple.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                if (!$util.isInteger(message.clanid))
+                    return "clanid: integer expected";
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (!$util.isInteger(message.event_gid) && !(message.event_gid && $util.isInteger(message.event_gid.low) && $util.isInteger(message.event_gid.high)))
+                    return "event_gid: integer|Long expected";
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (!$util.isInteger(message.announcement_gid) && !(message.announcement_gid && $util.isInteger(message.announcement_gid.low) && $util.isInteger(message.announcement_gid.high)))
+                    return "announcement_gid: integer|Long expected";
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                if (!$util.isInteger(message.rtime_start))
+                    return "rtime_start: integer expected";
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                if (!$util.isInteger(message.rtime_end))
+                    return "rtime_end: integer expected";
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                if (!$util.isInteger(message.priority_score))
+                    return "priority_score: integer expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                if (!$util.isInteger(message.type))
+                    return "type: integer expected";
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                if (!$util.isInteger(message.clamp_range_slot))
+                    return "clamp_range_slot: integer expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CClanEventUserNewsTuple message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClanEventUserNewsTuple} CClanEventUserNewsTuple
+         */
+        CClanEventUserNewsTuple.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClanEventUserNewsTuple)
+                return object;
+            var message = new $root.CClanEventUserNewsTuple();
+            if (object.clanid != null)
+                message.clanid = object.clanid >>> 0;
+            if (object.event_gid != null)
+                if ($util.Long)
+                    (message.event_gid = $util.Long.fromValue(object.event_gid)).unsigned = false;
+                else if (typeof object.event_gid === "string")
+                    message.event_gid = parseInt(object.event_gid, 10);
+                else if (typeof object.event_gid === "number")
+                    message.event_gid = object.event_gid;
+                else if (typeof object.event_gid === "object")
+                    message.event_gid = new $util.LongBits(object.event_gid.low >>> 0, object.event_gid.high >>> 0).toNumber();
+            if (object.announcement_gid != null)
+                if ($util.Long)
+                    (message.announcement_gid = $util.Long.fromValue(object.announcement_gid)).unsigned = false;
+                else if (typeof object.announcement_gid === "string")
+                    message.announcement_gid = parseInt(object.announcement_gid, 10);
+                else if (typeof object.announcement_gid === "number")
+                    message.announcement_gid = object.announcement_gid;
+                else if (typeof object.announcement_gid === "object")
+                    message.announcement_gid = new $util.LongBits(object.announcement_gid.low >>> 0, object.announcement_gid.high >>> 0).toNumber();
+            if (object.rtime_start != null)
+                message.rtime_start = object.rtime_start >>> 0;
+            if (object.rtime_end != null)
+                message.rtime_end = object.rtime_end >>> 0;
+            if (object.priority_score != null)
+                message.priority_score = object.priority_score >>> 0;
+            if (object.type != null)
+                message.type = object.type >>> 0;
+            if (object.clamp_range_slot != null)
+                message.clamp_range_slot = object.clamp_range_slot >>> 0;
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClanEventUserNewsTuple message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClanEventUserNewsTuple
+         * @static
+         * @param {CClanEventUserNewsTuple} message CClanEventUserNewsTuple
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClanEventUserNewsTuple.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.clanid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.event_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.event_gid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.announcement_gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.announcement_gid = options.longs === String ? "0" : 0;
+                object.rtime_start = 0;
+                object.rtime_end = 0;
+                object.priority_score = 0;
+                object.type = 0;
+                object.clamp_range_slot = 0;
+                object.appid = 0;
+            }
+            if (message.clanid != null && message.hasOwnProperty("clanid"))
+                object.clanid = message.clanid;
+            if (message.event_gid != null && message.hasOwnProperty("event_gid"))
+                if (typeof message.event_gid === "number")
+                    object.event_gid = options.longs === String ? String(message.event_gid) : message.event_gid;
+                else
+                    object.event_gid = options.longs === String ? $util.Long.prototype.toString.call(message.event_gid) : options.longs === Number ? new $util.LongBits(message.event_gid.low >>> 0, message.event_gid.high >>> 0).toNumber() : message.event_gid;
+            if (message.announcement_gid != null && message.hasOwnProperty("announcement_gid"))
+                if (typeof message.announcement_gid === "number")
+                    object.announcement_gid = options.longs === String ? String(message.announcement_gid) : message.announcement_gid;
+                else
+                    object.announcement_gid = options.longs === String ? $util.Long.prototype.toString.call(message.announcement_gid) : options.longs === Number ? new $util.LongBits(message.announcement_gid.low >>> 0, message.announcement_gid.high >>> 0).toNumber() : message.announcement_gid;
+            if (message.rtime_start != null && message.hasOwnProperty("rtime_start"))
+                object.rtime_start = message.rtime_start;
+            if (message.rtime_end != null && message.hasOwnProperty("rtime_end"))
+                object.rtime_end = message.rtime_end;
+            if (message.priority_score != null && message.hasOwnProperty("priority_score"))
+                object.priority_score = message.priority_score;
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = message.type;
+            if (message.clamp_range_slot != null && message.hasOwnProperty("clamp_range_slot"))
+                object.clamp_range_slot = message.clamp_range_slot;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CClanEventUserNewsTuple to JSON.
+         * @function toJSON
+         * @memberof CClanEventUserNewsTuple
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClanEventUserNewsTuple.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClanEventUserNewsTuple;
+    })();
+    
+    $root.CClanMatchEventByRange = (function() {
+    
+        /**
+         * Properties of a CClanMatchEventByRange.
+         * @exports ICClanMatchEventByRange
+         * @interface ICClanMatchEventByRange
+         * @property {number|null} [rtime_before] CClanMatchEventByRange rtime_before
+         * @property {number|null} [rtime_after] CClanMatchEventByRange rtime_after
+         * @property {number|null} [qualified] CClanMatchEventByRange qualified
+         * @property {Array.<ICClanEventUserNewsTuple>|null} [events] CClanMatchEventByRange events
+         */
+    
+        /**
+         * Constructs a new CClanMatchEventByRange.
+         * @exports CClanMatchEventByRange
+         * @classdesc Represents a CClanMatchEventByRange.
+         * @implements ICClanMatchEventByRange
+         * @constructor
+         * @param {ICClanMatchEventByRange=} [properties] Properties to set
+         */
+        function CClanMatchEventByRange(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CClanMatchEventByRange rtime_before.
+         * @member {number} rtime_before
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.rtime_before = 0;
+    
+        /**
+         * CClanMatchEventByRange rtime_after.
+         * @member {number} rtime_after
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.rtime_after = 0;
+    
+        /**
+         * CClanMatchEventByRange qualified.
+         * @member {number} qualified
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.qualified = 0;
+    
+        /**
+         * CClanMatchEventByRange events.
+         * @member {Array.<ICClanEventUserNewsTuple>} events
+         * @memberof CClanMatchEventByRange
+         * @instance
+         */
+        CClanMatchEventByRange.prototype.events = $util.emptyArray;
+    
+        /**
+         * Creates a new CClanMatchEventByRange instance using the specified properties.
+         * @function create
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange=} [properties] Properties to set
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange instance
+         */
+        CClanMatchEventByRange.create = function create(properties) {
+            return new CClanMatchEventByRange(properties);
+        };
+    
+        /**
+         * Encodes the specified CClanMatchEventByRange message. Does not implicitly {@link CClanMatchEventByRange.verify|verify} messages.
+         * @function encode
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange} message CClanMatchEventByRange message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanMatchEventByRange.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.rtime_before);
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.rtime_after);
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.qualified);
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.CClanEventUserNewsTuple.encode(message.events[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CClanMatchEventByRange message, length delimited. Does not implicitly {@link CClanMatchEventByRange.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {ICClanMatchEventByRange} message CClanMatchEventByRange message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CClanMatchEventByRange.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CClanMatchEventByRange message from the specified reader or buffer.
+         * @function decode
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanMatchEventByRange.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CClanMatchEventByRange();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.rtime_before = reader.uint32();
+                    break;
+                case 2:
+                    message.rtime_after = reader.uint32();
+                    break;
+                case 3:
+                    message.qualified = reader.uint32();
+                    break;
+                case 4:
+                    if (!(message.events && message.events.length))
+                        message.events = [];
+                    message.events.push($root.CClanEventUserNewsTuple.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CClanMatchEventByRange message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CClanMatchEventByRange.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CClanMatchEventByRange message.
+         * @function verify
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CClanMatchEventByRange.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                if (!$util.isInteger(message.rtime_before))
+                    return "rtime_before: integer expected";
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                if (!$util.isInteger(message.rtime_after))
+                    return "rtime_after: integer expected";
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                if (!$util.isInteger(message.qualified))
+                    return "qualified: integer expected";
+            if (message.events != null && message.hasOwnProperty("events")) {
+                if (!Array.isArray(message.events))
+                    return "events: array expected";
+                for (var i = 0; i < message.events.length; ++i) {
+                    var error = $root.CClanEventUserNewsTuple.verify(message.events[i]);
+                    if (error)
+                        return "events." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CClanMatchEventByRange message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CClanMatchEventByRange} CClanMatchEventByRange
+         */
+        CClanMatchEventByRange.fromObject = function fromObject(object) {
+            if (object instanceof $root.CClanMatchEventByRange)
+                return object;
+            var message = new $root.CClanMatchEventByRange();
+            if (object.rtime_before != null)
+                message.rtime_before = object.rtime_before >>> 0;
+            if (object.rtime_after != null)
+                message.rtime_after = object.rtime_after >>> 0;
+            if (object.qualified != null)
+                message.qualified = object.qualified >>> 0;
+            if (object.events) {
+                if (!Array.isArray(object.events))
+                    throw TypeError(".CClanMatchEventByRange.events: array expected");
+                message.events = [];
+                for (var i = 0; i < object.events.length; ++i) {
+                    if (typeof object.events[i] !== "object")
+                        throw TypeError(".CClanMatchEventByRange.events: object expected");
+                    message.events[i] = $root.CClanEventUserNewsTuple.fromObject(object.events[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CClanMatchEventByRange message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CClanMatchEventByRange
+         * @static
+         * @param {CClanMatchEventByRange} message CClanMatchEventByRange
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CClanMatchEventByRange.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.events = [];
+            if (options.defaults) {
+                object.rtime_before = 0;
+                object.rtime_after = 0;
+                object.qualified = 0;
+            }
+            if (message.rtime_before != null && message.hasOwnProperty("rtime_before"))
+                object.rtime_before = message.rtime_before;
+            if (message.rtime_after != null && message.hasOwnProperty("rtime_after"))
+                object.rtime_after = message.rtime_after;
+            if (message.qualified != null && message.hasOwnProperty("qualified"))
+                object.qualified = message.qualified;
+            if (message.events && message.events.length) {
+                object.events = [];
+                for (var j = 0; j < message.events.length; ++j)
+                    object.events[j] = $root.CClanEventUserNewsTuple.toObject(message.events[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CClanMatchEventByRange to JSON.
+         * @function toJSON
+         * @memberof CClanMatchEventByRange
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CClanMatchEventByRange.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CClanMatchEventByRange;
     })();
     
     $root.CMsgClientFriendMsg = (function() {
@@ -28257,6 +42459,7 @@
          * @property {boolean|null} [persona_set_by_user] CMsgClientChangeStatus persona_set_by_user
          * @property {number|null} [persona_state_flags] CMsgClientChangeStatus persona_state_flags
          * @property {boolean|null} [need_persona_response] CMsgClientChangeStatus need_persona_response
+         * @property {boolean|null} [is_client_idle] CMsgClientChangeStatus is_client_idle
          */
     
         /**
@@ -28331,6 +42534,14 @@
         CMsgClientChangeStatus.prototype.need_persona_response = false;
     
         /**
+         * CMsgClientChangeStatus is_client_idle.
+         * @member {boolean} is_client_idle
+         * @memberof CMsgClientChangeStatus
+         * @instance
+         */
+        CMsgClientChangeStatus.prototype.is_client_idle = false;
+    
+        /**
          * Creates a new CMsgClientChangeStatus instance using the specified properties.
          * @function create
          * @memberof CMsgClientChangeStatus
@@ -28368,6 +42579,8 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.persona_state_flags);
             if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.need_persona_response);
+            if (message.is_client_idle != null && message.hasOwnProperty("is_client_idle"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.is_client_idle);
             return writer;
         };
     
@@ -28422,6 +42635,9 @@
                     break;
                 case 7:
                     message.need_persona_response = reader.bool();
+                    break;
+                case 8:
+                    message.is_client_idle = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -28479,6 +42695,9 @@
             if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
                 if (typeof message.need_persona_response !== "boolean")
                     return "need_persona_response: boolean expected";
+            if (message.is_client_idle != null && message.hasOwnProperty("is_client_idle"))
+                if (typeof message.is_client_idle !== "boolean")
+                    return "is_client_idle: boolean expected";
             return null;
         };
     
@@ -28508,6 +42727,8 @@
                 message.persona_state_flags = object.persona_state_flags >>> 0;
             if (object.need_persona_response != null)
                 message.need_persona_response = Boolean(object.need_persona_response);
+            if (object.is_client_idle != null)
+                message.is_client_idle = Boolean(object.is_client_idle);
             return message;
         };
     
@@ -28532,6 +42753,7 @@
                 object.persona_set_by_user = false;
                 object.persona_state_flags = 0;
                 object.need_persona_response = false;
+                object.is_client_idle = false;
             }
             if (message.persona_state != null && message.hasOwnProperty("persona_state"))
                 object.persona_state = message.persona_state;
@@ -28547,6 +42769,8 @@
                 object.persona_state_flags = message.persona_state_flags;
             if (message.need_persona_response != null && message.hasOwnProperty("need_persona_response"))
                 object.need_persona_response = message.need_persona_response;
+            if (message.is_client_idle != null && message.hasOwnProperty("is_client_idle"))
+                object.is_client_idle = message.is_client_idle;
             return object;
         };
     

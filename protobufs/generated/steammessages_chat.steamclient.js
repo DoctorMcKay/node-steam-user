@@ -471,6 +471,7 @@
          * @property {string|null} [name] CChatRoom_CreateChatRoomGroup_Request name
          * @property {Array.<number|Long>|null} [steamid_invitees] CChatRoom_CreateChatRoomGroup_Request steamid_invitees
          * @property {number|null} [watching_broadcast_accountid] CChatRoom_CreateChatRoomGroup_Request watching_broadcast_accountid
+         * @property {number|Long|null} [watching_broadcast_channel_id] CChatRoom_CreateChatRoomGroup_Request watching_broadcast_channel_id
          */
     
         /**
@@ -530,6 +531,14 @@
         CChatRoom_CreateChatRoomGroup_Request.prototype.watching_broadcast_accountid = 0;
     
         /**
+         * CChatRoom_CreateChatRoomGroup_Request watching_broadcast_channel_id.
+         * @member {number|Long} watching_broadcast_channel_id
+         * @memberof CChatRoom_CreateChatRoomGroup_Request
+         * @instance
+         */
+        CChatRoom_CreateChatRoomGroup_Request.prototype.watching_broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CChatRoom_CreateChatRoomGroup_Request instance using the specified properties.
          * @function create
          * @memberof CChatRoom_CreateChatRoomGroup_Request
@@ -564,6 +573,8 @@
                     writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid_invitees[i]);
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.watching_broadcast_accountid);
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                writer.uint32(/* id 7, wireType 0 =*/56).uint64(message.watching_broadcast_channel_id);
             return writer;
         };
     
@@ -620,6 +631,9 @@
                 case 6:
                     message.watching_broadcast_accountid = reader.uint32();
                     break;
+                case 7:
+                    message.watching_broadcast_channel_id = reader.uint64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -674,6 +688,9 @@
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 if (!$util.isInteger(message.watching_broadcast_accountid))
                     return "watching_broadcast_accountid: integer expected";
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (!$util.isInteger(message.watching_broadcast_channel_id) && !(message.watching_broadcast_channel_id && $util.isInteger(message.watching_broadcast_channel_id.low) && $util.isInteger(message.watching_broadcast_channel_id.high)))
+                    return "watching_broadcast_channel_id: integer|Long expected";
             return null;
         };
     
@@ -725,6 +742,15 @@
             }
             if (object.watching_broadcast_accountid != null)
                 message.watching_broadcast_accountid = object.watching_broadcast_accountid >>> 0;
+            if (object.watching_broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.watching_broadcast_channel_id = $util.Long.fromValue(object.watching_broadcast_channel_id)).unsigned = true;
+                else if (typeof object.watching_broadcast_channel_id === "string")
+                    message.watching_broadcast_channel_id = parseInt(object.watching_broadcast_channel_id, 10);
+                else if (typeof object.watching_broadcast_channel_id === "number")
+                    message.watching_broadcast_channel_id = object.watching_broadcast_channel_id;
+                else if (typeof object.watching_broadcast_channel_id === "object")
+                    message.watching_broadcast_channel_id = new $util.LongBits(object.watching_broadcast_channel_id.low >>> 0, object.watching_broadcast_channel_id.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -756,6 +782,11 @@
                     object.steamid_invited = options.longs === String ? "0" : 0;
                 object.name = "";
                 object.watching_broadcast_accountid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.watching_broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.watching_broadcast_channel_id = options.longs === String ? "0" : 0;
             }
             if (message.steamid_partner != null && message.hasOwnProperty("steamid_partner"))
                 if (typeof message.steamid_partner === "number")
@@ -779,6 +810,11 @@
             }
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 object.watching_broadcast_accountid = message.watching_broadcast_accountid;
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (typeof message.watching_broadcast_channel_id === "number")
+                    object.watching_broadcast_channel_id = options.longs === String ? String(message.watching_broadcast_channel_id) : message.watching_broadcast_channel_id;
+                else
+                    object.watching_broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.watching_broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.watching_broadcast_channel_id.low >>> 0, message.watching_broadcast_channel_id.high >>> 0).toNumber(true) : message.watching_broadcast_channel_id;
             return object;
         };
     
@@ -1786,6 +1822,7 @@
          * @property {Array.<ICChatRoleActions>|null} [role_actions] CChatRoomGroupHeaderState role_actions
          * @property {number|null} [watching_broadcast_accountid] CChatRoomGroupHeaderState watching_broadcast_accountid
          * @property {Array.<ICChatPartyBeacon>|null} [party_beacons] CChatRoomGroupHeaderState party_beacons
+         * @property {number|Long|null} [watching_broadcast_channel_id] CChatRoomGroupHeaderState watching_broadcast_channel_id
          */
     
         /**
@@ -1903,6 +1940,14 @@
         CChatRoomGroupHeaderState.prototype.party_beacons = $util.emptyArray;
     
         /**
+         * CChatRoomGroupHeaderState watching_broadcast_channel_id.
+         * @member {number|Long} watching_broadcast_channel_id
+         * @memberof CChatRoomGroupHeaderState
+         * @instance
+         */
+        CChatRoomGroupHeaderState.prototype.watching_broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CChatRoomGroupHeaderState instance using the specified properties.
          * @function create
          * @memberof CChatRoomGroupHeaderState
@@ -1953,6 +1998,8 @@
             if (message.party_beacons != null && message.party_beacons.length)
                 for (var i = 0; i < message.party_beacons.length; ++i)
                     $root.CChatPartyBeacon.encode(message.party_beacons[i], writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                writer.uint32(/* id 23, wireType 0 =*/184).uint64(message.watching_broadcast_channel_id);
             return writer;
         };
     
@@ -2028,6 +2075,9 @@
                     if (!(message.party_beacons && message.party_beacons.length))
                         message.party_beacons = [];
                     message.party_beacons.push($root.CChatPartyBeacon.decode(reader, reader.uint32()));
+                    break;
+                case 23:
+                    message.watching_broadcast_channel_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2118,6 +2168,9 @@
                         return "party_beacons." + error;
                 }
             }
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (!$util.isInteger(message.watching_broadcast_channel_id) && !(message.watching_broadcast_channel_id && $util.isInteger(message.watching_broadcast_channel_id.low) && $util.isInteger(message.watching_broadcast_channel_id.high)))
+                    return "watching_broadcast_channel_id: integer|Long expected";
             return null;
         };
     
@@ -2198,6 +2251,15 @@
                     message.party_beacons[i] = $root.CChatPartyBeacon.fromObject(object.party_beacons[i]);
                 }
             }
+            if (object.watching_broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.watching_broadcast_channel_id = $util.Long.fromValue(object.watching_broadcast_channel_id)).unsigned = true;
+                else if (typeof object.watching_broadcast_channel_id === "string")
+                    message.watching_broadcast_channel_id = parseInt(object.watching_broadcast_channel_id, 10);
+                else if (typeof object.watching_broadcast_channel_id === "number")
+                    message.watching_broadcast_channel_id = object.watching_broadcast_channel_id;
+                else if (typeof object.watching_broadcast_channel_id === "object")
+                    message.watching_broadcast_channel_id = new $util.LongBits(object.watching_broadcast_channel_id.low >>> 0, object.watching_broadcast_channel_id.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -2243,6 +2305,11 @@
                     object.default_role_id = options.longs === String ? "0" : 0;
                 object.watching_broadcast_accountid = 0;
                 object.appid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.watching_broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.watching_broadcast_channel_id = options.longs === String ? "0" : 0;
             }
             if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
                 if (typeof message.chat_group_id === "number")
@@ -2283,6 +2350,11 @@
                 for (var j = 0; j < message.party_beacons.length; ++j)
                     object.party_beacons[j] = $root.CChatPartyBeacon.toObject(message.party_beacons[j], options);
             }
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (typeof message.watching_broadcast_channel_id === "number")
+                    object.watching_broadcast_channel_id = options.longs === String ? String(message.watching_broadcast_channel_id) : message.watching_broadcast_channel_id;
+                else
+                    object.watching_broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.watching_broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.watching_broadcast_channel_id.low >>> 0, message.watching_broadcast_channel_id.high >>> 0).toNumber(true) : message.watching_broadcast_channel_id;
             return object;
         };
     
@@ -2686,6 +2758,8 @@
          * @property {Array.<number>|null} [members_in_voice] CChatRoomState members_in_voice
          * @property {number|null} [time_last_message] CChatRoomState time_last_message
          * @property {number|null} [sort_order] CChatRoomState sort_order
+         * @property {string|null} [last_message] CChatRoomState last_message
+         * @property {number|null} [accountid_last_message] CChatRoomState accountid_last_message
          */
     
         /**
@@ -2753,6 +2827,22 @@
         CChatRoomState.prototype.sort_order = 0;
     
         /**
+         * CChatRoomState last_message.
+         * @member {string} last_message
+         * @memberof CChatRoomState
+         * @instance
+         */
+        CChatRoomState.prototype.last_message = "";
+    
+        /**
+         * CChatRoomState accountid_last_message.
+         * @member {number} accountid_last_message
+         * @memberof CChatRoomState
+         * @instance
+         */
+        CChatRoomState.prototype.accountid_last_message = 0;
+    
+        /**
          * Creates a new CChatRoomState instance using the specified properties.
          * @function create
          * @memberof CChatRoomState
@@ -2789,6 +2879,10 @@
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.time_last_message);
             if (message.sort_order != null && message.hasOwnProperty("sort_order"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.sort_order);
+            if (message.last_message != null && message.hasOwnProperty("last_message"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.last_message);
+            if (message.accountid_last_message != null && message.hasOwnProperty("accountid_last_message"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.accountid_last_message);
             return writer;
         };
     
@@ -2848,6 +2942,12 @@
                 case 6:
                     message.sort_order = reader.uint32();
                     break;
+                case 7:
+                    message.last_message = reader.string();
+                    break;
+                case 8:
+                    message.accountid_last_message = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2905,6 +3005,12 @@
             if (message.sort_order != null && message.hasOwnProperty("sort_order"))
                 if (!$util.isInteger(message.sort_order))
                     return "sort_order: integer expected";
+            if (message.last_message != null && message.hasOwnProperty("last_message"))
+                if (!$util.isString(message.last_message))
+                    return "last_message: string expected";
+            if (message.accountid_last_message != null && message.hasOwnProperty("accountid_last_message"))
+                if (!$util.isInteger(message.accountid_last_message))
+                    return "accountid_last_message: integer expected";
             return null;
         };
     
@@ -2944,6 +3050,10 @@
                 message.time_last_message = object.time_last_message >>> 0;
             if (object.sort_order != null)
                 message.sort_order = object.sort_order >>> 0;
+            if (object.last_message != null)
+                message.last_message = String(object.last_message);
+            if (object.accountid_last_message != null)
+                message.accountid_last_message = object.accountid_last_message >>> 0;
             return message;
         };
     
@@ -2972,6 +3082,8 @@
                 object.voice_allowed = false;
                 object.time_last_message = 0;
                 object.sort_order = 0;
+                object.last_message = "";
+                object.accountid_last_message = 0;
             }
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 if (typeof message.chat_id === "number")
@@ -2991,6 +3103,10 @@
                 object.time_last_message = message.time_last_message;
             if (message.sort_order != null && message.hasOwnProperty("sort_order"))
                 object.sort_order = message.sort_order;
+            if (message.last_message != null && message.hasOwnProperty("last_message"))
+                object.last_message = message.last_message;
+            if (message.accountid_last_message != null && message.hasOwnProperty("accountid_last_message"))
+                object.accountid_last_message = message.accountid_last_message;
             return object;
         };
     
@@ -3381,6 +3497,7 @@
          * @property {EChatRoomNotificationLevel|null} [mobile_notification_level] CUserChatRoomState mobile_notification_level
          * @property {number|null} [time_last_mention] CUserChatRoomState time_last_mention
          * @property {boolean|null} [unread_indicator_muted] CUserChatRoomState unread_indicator_muted
+         * @property {number|null} [time_first_unread] CUserChatRoomState time_first_unread
          */
     
         /**
@@ -3455,6 +3572,14 @@
         CUserChatRoomState.prototype.unread_indicator_muted = false;
     
         /**
+         * CUserChatRoomState time_first_unread.
+         * @member {number} time_first_unread
+         * @memberof CUserChatRoomState
+         * @instance
+         */
+        CUserChatRoomState.prototype.time_first_unread = 0;
+    
+        /**
          * Creates a new CUserChatRoomState instance using the specified properties.
          * @function create
          * @memberof CUserChatRoomState
@@ -3492,6 +3617,8 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.time_last_mention);
             if (message.unread_indicator_muted != null && message.hasOwnProperty("unread_indicator_muted"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.unread_indicator_muted);
+            if (message.time_first_unread != null && message.hasOwnProperty("time_first_unread"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.time_first_unread);
             return writer;
         };
     
@@ -3546,6 +3673,9 @@
                     break;
                 case 7:
                     message.unread_indicator_muted = reader.bool();
+                    break;
+                case 8:
+                    message.time_first_unread = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3619,6 +3749,9 @@
             if (message.unread_indicator_muted != null && message.hasOwnProperty("unread_indicator_muted"))
                 if (typeof message.unread_indicator_muted !== "boolean")
                     return "unread_indicator_muted: boolean expected";
+            if (message.time_first_unread != null && message.hasOwnProperty("time_first_unread"))
+                if (!$util.isInteger(message.time_first_unread))
+                    return "time_first_unread: integer expected";
             return null;
         };
     
@@ -3695,6 +3828,8 @@
                 message.time_last_mention = object.time_last_mention >>> 0;
             if (object.unread_indicator_muted != null)
                 message.unread_indicator_muted = Boolean(object.unread_indicator_muted);
+            if (object.time_first_unread != null)
+                message.time_first_unread = object.time_first_unread >>> 0;
             return message;
         };
     
@@ -3723,6 +3858,7 @@
                 object.mobile_notification_level = options.enums === String ? "k_EChatroomNotificationLevel_Invalid" : 0;
                 object.time_last_mention = 0;
                 object.unread_indicator_muted = false;
+                object.time_first_unread = 0;
             }
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 if (typeof message.chat_id === "number")
@@ -3741,6 +3877,8 @@
                 object.time_last_mention = message.time_last_mention;
             if (message.unread_indicator_muted != null && message.hasOwnProperty("unread_indicator_muted"))
                 object.unread_indicator_muted = message.unread_indicator_muted;
+            if (message.time_first_unread != null && message.hasOwnProperty("time_first_unread"))
+                object.time_first_unread = message.time_first_unread;
             return object;
         };
     
@@ -6006,6 +6144,7 @@
          * @interface ICChatRoom_SetChatRoomGroupWatchingBroadcast_Request
          * @property {number|Long|null} [chat_group_id] CChatRoom_SetChatRoomGroupWatchingBroadcast_Request chat_group_id
          * @property {number|null} [watching_broadcast_accountid] CChatRoom_SetChatRoomGroupWatchingBroadcast_Request watching_broadcast_accountid
+         * @property {number|Long|null} [watching_broadcast_channel_id] CChatRoom_SetChatRoomGroupWatchingBroadcast_Request watching_broadcast_channel_id
          */
     
         /**
@@ -6040,6 +6179,14 @@
         CChatRoom_SetChatRoomGroupWatchingBroadcast_Request.prototype.watching_broadcast_accountid = 0;
     
         /**
+         * CChatRoom_SetChatRoomGroupWatchingBroadcast_Request watching_broadcast_channel_id.
+         * @member {number|Long} watching_broadcast_channel_id
+         * @memberof CChatRoom_SetChatRoomGroupWatchingBroadcast_Request
+         * @instance
+         */
+        CChatRoom_SetChatRoomGroupWatchingBroadcast_Request.prototype.watching_broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CChatRoom_SetChatRoomGroupWatchingBroadcast_Request instance using the specified properties.
          * @function create
          * @memberof CChatRoom_SetChatRoomGroupWatchingBroadcast_Request
@@ -6067,6 +6214,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.chat_group_id);
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.watching_broadcast_accountid);
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.watching_broadcast_channel_id);
             return writer;
         };
     
@@ -6106,6 +6255,9 @@
                     break;
                 case 2:
                     message.watching_broadcast_accountid = reader.uint32();
+                    break;
+                case 3:
+                    message.watching_broadcast_channel_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6148,6 +6300,9 @@
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 if (!$util.isInteger(message.watching_broadcast_accountid))
                     return "watching_broadcast_accountid: integer expected";
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (!$util.isInteger(message.watching_broadcast_channel_id) && !(message.watching_broadcast_channel_id && $util.isInteger(message.watching_broadcast_channel_id.low) && $util.isInteger(message.watching_broadcast_channel_id.high)))
+                    return "watching_broadcast_channel_id: integer|Long expected";
             return null;
         };
     
@@ -6174,6 +6329,15 @@
                     message.chat_group_id = new $util.LongBits(object.chat_group_id.low >>> 0, object.chat_group_id.high >>> 0).toNumber(true);
             if (object.watching_broadcast_accountid != null)
                 message.watching_broadcast_accountid = object.watching_broadcast_accountid >>> 0;
+            if (object.watching_broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.watching_broadcast_channel_id = $util.Long.fromValue(object.watching_broadcast_channel_id)).unsigned = true;
+                else if (typeof object.watching_broadcast_channel_id === "string")
+                    message.watching_broadcast_channel_id = parseInt(object.watching_broadcast_channel_id, 10);
+                else if (typeof object.watching_broadcast_channel_id === "number")
+                    message.watching_broadcast_channel_id = object.watching_broadcast_channel_id;
+                else if (typeof object.watching_broadcast_channel_id === "object")
+                    message.watching_broadcast_channel_id = new $util.LongBits(object.watching_broadcast_channel_id.low >>> 0, object.watching_broadcast_channel_id.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -6197,6 +6361,11 @@
                 } else
                     object.chat_group_id = options.longs === String ? "0" : 0;
                 object.watching_broadcast_accountid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.watching_broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.watching_broadcast_channel_id = options.longs === String ? "0" : 0;
             }
             if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
                 if (typeof message.chat_group_id === "number")
@@ -6205,6 +6374,11 @@
                     object.chat_group_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_group_id) : options.longs === Number ? new $util.LongBits(message.chat_group_id.low >>> 0, message.chat_group_id.high >>> 0).toNumber(true) : message.chat_group_id;
             if (message.watching_broadcast_accountid != null && message.hasOwnProperty("watching_broadcast_accountid"))
                 object.watching_broadcast_accountid = message.watching_broadcast_accountid;
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (typeof message.watching_broadcast_channel_id === "number")
+                    object.watching_broadcast_channel_id = options.longs === String ? String(message.watching_broadcast_channel_id) : message.watching_broadcast_channel_id;
+                else
+                    object.watching_broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.watching_broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.watching_broadcast_channel_id.low >>> 0, message.watching_broadcast_channel_id.high >>> 0).toNumber(true) : message.watching_broadcast_channel_id;
             return object;
         };
     
@@ -18023,6 +18197,7 @@
          * @property {number|null} [watching_broadcast_accountid] CChatRoom_GetChatRoomGroupSummary_Response watching_broadcast_accountid
          * @property {number|null} [appid] CChatRoom_GetChatRoomGroupSummary_Response appid
          * @property {Array.<ICChatPartyBeacon>|null} [party_beacons] CChatRoom_GetChatRoomGroupSummary_Response party_beacons
+         * @property {number|Long|null} [watching_broadcast_channel_id] CChatRoom_GetChatRoomGroupSummary_Response watching_broadcast_channel_id
          */
     
         /**
@@ -18190,6 +18365,14 @@
         CChatRoom_GetChatRoomGroupSummary_Response.prototype.party_beacons = $util.emptyArray;
     
         /**
+         * CChatRoom_GetChatRoomGroupSummary_Response watching_broadcast_channel_id.
+         * @member {number|Long} watching_broadcast_channel_id
+         * @memberof CChatRoom_GetChatRoomGroupSummary_Response
+         * @instance
+         */
+        CChatRoom_GetChatRoomGroupSummary_Response.prototype.watching_broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CChatRoom_GetChatRoomGroupSummary_Response instance using the specified properties.
          * @function create
          * @memberof CChatRoom_GetChatRoomGroupSummary_Response
@@ -18254,6 +18437,8 @@
             if (message.party_beacons != null && message.party_beacons.length)
                 for (var i = 0; i < message.party_beacons.length; ++i)
                     $root.CChatPartyBeacon.encode(message.party_beacons[i], writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                writer.uint32(/* id 19, wireType 0 =*/152).uint64(message.watching_broadcast_channel_id);
             return writer;
         };
     
@@ -18361,6 +18546,9 @@
                     if (!(message.party_beacons && message.party_beacons.length))
                         message.party_beacons = [];
                     message.party_beacons.push($root.CChatPartyBeacon.decode(reader, reader.uint32()));
+                    break;
+                case 19:
+                    message.watching_broadcast_channel_id = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -18488,6 +18676,9 @@
                         return "party_beacons." + error;
                 }
             }
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (!$util.isInteger(message.watching_broadcast_channel_id) && !(message.watching_broadcast_channel_id && $util.isInteger(message.watching_broadcast_channel_id.low) && $util.isInteger(message.watching_broadcast_channel_id.high)))
+                    return "watching_broadcast_channel_id: integer|Long expected";
             return null;
         };
     
@@ -18636,6 +18827,15 @@
                     message.party_beacons[i] = $root.CChatPartyBeacon.fromObject(object.party_beacons[i]);
                 }
             }
+            if (object.watching_broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.watching_broadcast_channel_id = $util.Long.fromValue(object.watching_broadcast_channel_id)).unsigned = true;
+                else if (typeof object.watching_broadcast_channel_id === "string")
+                    message.watching_broadcast_channel_id = parseInt(object.watching_broadcast_channel_id, 10);
+                else if (typeof object.watching_broadcast_channel_id === "number")
+                    message.watching_broadcast_channel_id = object.watching_broadcast_channel_id;
+                else if (typeof object.watching_broadcast_channel_id === "object")
+                    message.watching_broadcast_channel_id = new $util.LongBits(object.watching_broadcast_channel_id.low >>> 0, object.watching_broadcast_channel_id.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -18691,6 +18891,11 @@
                     object.default_role_id = options.longs === String ? "0" : 0;
                 object.watching_broadcast_accountid = 0;
                 object.appid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.watching_broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.watching_broadcast_channel_id = options.longs === String ? "0" : 0;
             }
             if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
                 if (typeof message.chat_group_id === "number")
@@ -18755,6 +18960,11 @@
                 for (var j = 0; j < message.party_beacons.length; ++j)
                     object.party_beacons[j] = $root.CChatPartyBeacon.toObject(message.party_beacons[j], options);
             }
+            if (message.watching_broadcast_channel_id != null && message.hasOwnProperty("watching_broadcast_channel_id"))
+                if (typeof message.watching_broadcast_channel_id === "number")
+                    object.watching_broadcast_channel_id = options.longs === String ? String(message.watching_broadcast_channel_id) : message.watching_broadcast_channel_id;
+                else
+                    object.watching_broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.watching_broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.watching_broadcast_channel_id.low >>> 0, message.watching_broadcast_channel_id.high >>> 0).toNumber(true) : message.watching_broadcast_channel_id;
             return object;
         };
     
@@ -27254,6 +27464,7 @@
          * @property {number|null} [ordinal] CChatRoom_IncomingChatMessage_Notification ordinal
          * @property {IServerMessage|null} [server_message] CChatRoom_IncomingChatMessage_Notification server_message
          * @property {string|null} [message_no_bbcode] CChatRoom_IncomingChatMessage_Notification message_no_bbcode
+         * @property {string|null} [chat_name] CChatRoom_IncomingChatMessage_Notification chat_name
          */
     
         /**
@@ -27344,6 +27555,14 @@
         CChatRoom_IncomingChatMessage_Notification.prototype.message_no_bbcode = "";
     
         /**
+         * CChatRoom_IncomingChatMessage_Notification chat_name.
+         * @member {string} chat_name
+         * @memberof CChatRoom_IncomingChatMessage_Notification
+         * @instance
+         */
+        CChatRoom_IncomingChatMessage_Notification.prototype.chat_name = "";
+    
+        /**
          * Creates a new CChatRoom_IncomingChatMessage_Notification instance using the specified properties.
          * @function create
          * @memberof CChatRoom_IncomingChatMessage_Notification
@@ -27385,6 +27604,8 @@
                 $root.ServerMessage.encode(message.server_message, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
             if (message.message_no_bbcode != null && message.hasOwnProperty("message_no_bbcode"))
                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.message_no_bbcode);
+            if (message.chat_name != null && message.hasOwnProperty("chat_name"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.chat_name);
             return writer;
         };
     
@@ -27445,6 +27666,9 @@
                     break;
                 case 9:
                     message.message_no_bbcode = reader.string();
+                    break;
+                case 10:
+                    message.chat_name = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -27512,6 +27736,9 @@
             if (message.message_no_bbcode != null && message.hasOwnProperty("message_no_bbcode"))
                 if (!$util.isString(message.message_no_bbcode))
                     return "message_no_bbcode: string expected";
+            if (message.chat_name != null && message.hasOwnProperty("chat_name"))
+                if (!$util.isString(message.chat_name))
+                    return "chat_name: string expected";
             return null;
         };
     
@@ -27572,6 +27799,8 @@
             }
             if (object.message_no_bbcode != null)
                 message.message_no_bbcode = String(object.message_no_bbcode);
+            if (object.chat_name != null)
+                message.chat_name = String(object.chat_name);
             return message;
         };
     
@@ -27610,6 +27839,7 @@
                 object.ordinal = 0;
                 object.server_message = null;
                 object.message_no_bbcode = "";
+                object.chat_name = "";
             }
             if (message.chat_group_id != null && message.hasOwnProperty("chat_group_id"))
                 if (typeof message.chat_group_id === "number")
@@ -27638,6 +27868,8 @@
                 object.server_message = $root.ServerMessage.toObject(message.server_message, options);
             if (message.message_no_bbcode != null && message.hasOwnProperty("message_no_bbcode"))
                 object.message_no_bbcode = message.message_no_bbcode;
+            if (message.chat_name != null && message.hasOwnProperty("chat_name"))
+                object.chat_name = message.chat_name;
             return object;
         };
     

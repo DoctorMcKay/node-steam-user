@@ -4093,6 +4093,1141 @@
         return CAccountHardware_GetPersonalizationFile_Response;
     })();
     
+    $root.CAccountHardware_VRCompatibilityCheck_Request = (function() {
+    
+        /**
+         * Properties of a CAccountHardware_VRCompatibilityCheck_Request.
+         * @exports ICAccountHardware_VRCompatibilityCheck_Request
+         * @interface ICAccountHardware_VRCompatibilityCheck_Request
+         * @property {string|null} [product_name] CAccountHardware_VRCompatibilityCheck_Request product_name
+         * @property {Array.<CAccountHardware_VRCompatibilityCheck_Request.IPair>|null} [values] CAccountHardware_VRCompatibilityCheck_Request values
+         */
+    
+        /**
+         * Constructs a new CAccountHardware_VRCompatibilityCheck_Request.
+         * @exports CAccountHardware_VRCompatibilityCheck_Request
+         * @classdesc Represents a CAccountHardware_VRCompatibilityCheck_Request.
+         * @implements ICAccountHardware_VRCompatibilityCheck_Request
+         * @constructor
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request=} [properties] Properties to set
+         */
+        function CAccountHardware_VRCompatibilityCheck_Request(properties) {
+            this.values = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAccountHardware_VRCompatibilityCheck_Request product_name.
+         * @member {string} product_name
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.prototype.product_name = "";
+    
+        /**
+         * CAccountHardware_VRCompatibilityCheck_Request values.
+         * @member {Array.<CAccountHardware_VRCompatibilityCheck_Request.IPair>} values
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.prototype.values = $util.emptyArray;
+    
+        /**
+         * Creates a new CAccountHardware_VRCompatibilityCheck_Request instance using the specified properties.
+         * @function create
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request=} [properties] Properties to set
+         * @returns {CAccountHardware_VRCompatibilityCheck_Request} CAccountHardware_VRCompatibilityCheck_Request instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.create = function create(properties) {
+            return new CAccountHardware_VRCompatibilityCheck_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_VRCompatibilityCheck_Request message. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request} message CAccountHardware_VRCompatibilityCheck_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.product_name != null && message.hasOwnProperty("product_name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.product_name);
+            if (message.values != null && message.values.length)
+                for (var i = 0; i < message.values.length; ++i)
+                    $root.CAccountHardware_VRCompatibilityCheck_Request.Pair.encode(message.values[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_VRCompatibilityCheck_Request message, length delimited. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request} message CAccountHardware_VRCompatibilityCheck_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountHardware_VRCompatibilityCheck_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountHardware_VRCompatibilityCheck_Request} CAccountHardware_VRCompatibilityCheck_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_VRCompatibilityCheck_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.product_name = reader.string();
+                    break;
+                case 2:
+                    if (!(message.values && message.values.length))
+                        message.values = [];
+                    message.values.push($root.CAccountHardware_VRCompatibilityCheck_Request.Pair.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountHardware_VRCompatibilityCheck_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountHardware_VRCompatibilityCheck_Request} CAccountHardware_VRCompatibilityCheck_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountHardware_VRCompatibilityCheck_Request message.
+         * @function verify
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.product_name != null && message.hasOwnProperty("product_name"))
+                if (!$util.isString(message.product_name))
+                    return "product_name: string expected";
+            if (message.values != null && message.hasOwnProperty("values")) {
+                if (!Array.isArray(message.values))
+                    return "values: array expected";
+                for (var i = 0; i < message.values.length; ++i) {
+                    var error = $root.CAccountHardware_VRCompatibilityCheck_Request.Pair.verify(message.values[i]);
+                    if (error)
+                        return "values." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountHardware_VRCompatibilityCheck_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountHardware_VRCompatibilityCheck_Request} CAccountHardware_VRCompatibilityCheck_Request
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountHardware_VRCompatibilityCheck_Request)
+                return object;
+            var message = new $root.CAccountHardware_VRCompatibilityCheck_Request();
+            if (object.product_name != null)
+                message.product_name = String(object.product_name);
+            if (object.values) {
+                if (!Array.isArray(object.values))
+                    throw TypeError(".CAccountHardware_VRCompatibilityCheck_Request.values: array expected");
+                message.values = [];
+                for (var i = 0; i < object.values.length; ++i) {
+                    if (typeof object.values[i] !== "object")
+                        throw TypeError(".CAccountHardware_VRCompatibilityCheck_Request.values: object expected");
+                    message.values[i] = $root.CAccountHardware_VRCompatibilityCheck_Request.Pair.fromObject(object.values[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAccountHardware_VRCompatibilityCheck_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @static
+         * @param {CAccountHardware_VRCompatibilityCheck_Request} message CAccountHardware_VRCompatibilityCheck_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.values = [];
+            if (options.defaults)
+                object.product_name = "";
+            if (message.product_name != null && message.hasOwnProperty("product_name"))
+                object.product_name = message.product_name;
+            if (message.values && message.values.length) {
+                object.values = [];
+                for (var j = 0; j < message.values.length; ++j)
+                    object.values[j] = $root.CAccountHardware_VRCompatibilityCheck_Request.Pair.toObject(message.values[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CAccountHardware_VRCompatibilityCheck_Request to JSON.
+         * @function toJSON
+         * @memberof CAccountHardware_VRCompatibilityCheck_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountHardware_VRCompatibilityCheck_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CAccountHardware_VRCompatibilityCheck_Request.Pair = (function() {
+    
+            /**
+             * Properties of a Pair.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request
+             * @interface IPair
+             * @property {string|null} [key] Pair key
+             * @property {string|null} [value] Pair value
+             */
+    
+            /**
+             * Constructs a new Pair.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request
+             * @classdesc Represents a Pair.
+             * @implements IPair
+             * @constructor
+             * @param {CAccountHardware_VRCompatibilityCheck_Request.IPair=} [properties] Properties to set
+             */
+            function Pair(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Pair key.
+             * @member {string} key
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @instance
+             */
+            Pair.prototype.key = "";
+    
+            /**
+             * Pair value.
+             * @member {string} value
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @instance
+             */
+            Pair.prototype.value = "";
+    
+            /**
+             * Creates a new Pair instance using the specified properties.
+             * @function create
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Request.IPair=} [properties] Properties to set
+             * @returns {CAccountHardware_VRCompatibilityCheck_Request.Pair} Pair instance
+             */
+            Pair.create = function create(properties) {
+                return new Pair(properties);
+            };
+    
+            /**
+             * Encodes the specified Pair message. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Request.Pair.verify|verify} messages.
+             * @function encode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Request.IPair} message Pair message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Pair.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.key != null && message.hasOwnProperty("key"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                if (message.value != null && message.hasOwnProperty("value"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Pair message, length delimited. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Request.Pair.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Request.IPair} message Pair message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Pair.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Pair message from the specified reader or buffer.
+             * @function decode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CAccountHardware_VRCompatibilityCheck_Request.Pair} Pair
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Pair.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_VRCompatibilityCheck_Request.Pair();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.key = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Pair message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CAccountHardware_VRCompatibilityCheck_Request.Pair} Pair
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Pair.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Pair message.
+             * @function verify
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Pair.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.key != null && message.hasOwnProperty("key"))
+                    if (!$util.isString(message.key))
+                        return "key: string expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Pair message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CAccountHardware_VRCompatibilityCheck_Request.Pair} Pair
+             */
+            Pair.fromObject = function fromObject(object) {
+                if (object instanceof $root.CAccountHardware_VRCompatibilityCheck_Request.Pair)
+                    return object;
+                var message = new $root.CAccountHardware_VRCompatibilityCheck_Request.Pair();
+                if (object.key != null)
+                    message.key = String(object.key);
+                if (object.value != null)
+                    message.value = String(object.value);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Pair message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Request.Pair} message Pair
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Pair.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.key = "";
+                    object.value = "";
+                }
+                if (message.key != null && message.hasOwnProperty("key"))
+                    object.key = message.key;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                return object;
+            };
+    
+            /**
+             * Converts this Pair to JSON.
+             * @function toJSON
+             * @memberof CAccountHardware_VRCompatibilityCheck_Request.Pair
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Pair.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Pair;
+        })();
+    
+        return CAccountHardware_VRCompatibilityCheck_Request;
+    })();
+    
+    $root.CAccountHardware_VRCompatibilityCheck_Response = (function() {
+    
+        /**
+         * Properties of a CAccountHardware_VRCompatibilityCheck_Response.
+         * @exports ICAccountHardware_VRCompatibilityCheck_Response
+         * @interface ICAccountHardware_VRCompatibilityCheck_Response
+         * @property {Array.<CAccountHardware_VRCompatibilityCheck_Response.IPair>|null} [values] CAccountHardware_VRCompatibilityCheck_Response values
+         * @property {Array.<CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay>|null} [components] CAccountHardware_VRCompatibilityCheck_Response components
+         */
+    
+        /**
+         * Constructs a new CAccountHardware_VRCompatibilityCheck_Response.
+         * @exports CAccountHardware_VRCompatibilityCheck_Response
+         * @classdesc Represents a CAccountHardware_VRCompatibilityCheck_Response.
+         * @implements ICAccountHardware_VRCompatibilityCheck_Response
+         * @constructor
+         * @param {ICAccountHardware_VRCompatibilityCheck_Response=} [properties] Properties to set
+         */
+        function CAccountHardware_VRCompatibilityCheck_Response(properties) {
+            this.values = [];
+            this.components = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAccountHardware_VRCompatibilityCheck_Response values.
+         * @member {Array.<CAccountHardware_VRCompatibilityCheck_Response.IPair>} values
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.prototype.values = $util.emptyArray;
+    
+        /**
+         * CAccountHardware_VRCompatibilityCheck_Response components.
+         * @member {Array.<CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay>} components
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.prototype.components = $util.emptyArray;
+    
+        /**
+         * Creates a new CAccountHardware_VRCompatibilityCheck_Response instance using the specified properties.
+         * @function create
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Response=} [properties] Properties to set
+         * @returns {CAccountHardware_VRCompatibilityCheck_Response} CAccountHardware_VRCompatibilityCheck_Response instance
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.create = function create(properties) {
+            return new CAccountHardware_VRCompatibilityCheck_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_VRCompatibilityCheck_Response message. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Response} message CAccountHardware_VRCompatibilityCheck_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.values != null && message.values.length)
+                for (var i = 0; i < message.values.length; ++i)
+                    $root.CAccountHardware_VRCompatibilityCheck_Response.Pair.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.components != null && message.components.length)
+                for (var i = 0; i < message.components.length; ++i)
+                    $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.encode(message.components[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAccountHardware_VRCompatibilityCheck_Response message, length delimited. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {ICAccountHardware_VRCompatibilityCheck_Response} message CAccountHardware_VRCompatibilityCheck_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAccountHardware_VRCompatibilityCheck_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAccountHardware_VRCompatibilityCheck_Response} CAccountHardware_VRCompatibilityCheck_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_VRCompatibilityCheck_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.values && message.values.length))
+                        message.values = [];
+                    message.values.push($root.CAccountHardware_VRCompatibilityCheck_Response.Pair.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.components && message.components.length))
+                        message.components = [];
+                    message.components.push($root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAccountHardware_VRCompatibilityCheck_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAccountHardware_VRCompatibilityCheck_Response} CAccountHardware_VRCompatibilityCheck_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAccountHardware_VRCompatibilityCheck_Response message.
+         * @function verify
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.values != null && message.hasOwnProperty("values")) {
+                if (!Array.isArray(message.values))
+                    return "values: array expected";
+                for (var i = 0; i < message.values.length; ++i) {
+                    var error = $root.CAccountHardware_VRCompatibilityCheck_Response.Pair.verify(message.values[i]);
+                    if (error)
+                        return "values." + error;
+                }
+            }
+            if (message.components != null && message.hasOwnProperty("components")) {
+                if (!Array.isArray(message.components))
+                    return "components: array expected";
+                for (var i = 0; i < message.components.length; ++i) {
+                    var error = $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.verify(message.components[i]);
+                    if (error)
+                        return "components." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CAccountHardware_VRCompatibilityCheck_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAccountHardware_VRCompatibilityCheck_Response} CAccountHardware_VRCompatibilityCheck_Response
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAccountHardware_VRCompatibilityCheck_Response)
+                return object;
+            var message = new $root.CAccountHardware_VRCompatibilityCheck_Response();
+            if (object.values) {
+                if (!Array.isArray(object.values))
+                    throw TypeError(".CAccountHardware_VRCompatibilityCheck_Response.values: array expected");
+                message.values = [];
+                for (var i = 0; i < object.values.length; ++i) {
+                    if (typeof object.values[i] !== "object")
+                        throw TypeError(".CAccountHardware_VRCompatibilityCheck_Response.values: object expected");
+                    message.values[i] = $root.CAccountHardware_VRCompatibilityCheck_Response.Pair.fromObject(object.values[i]);
+                }
+            }
+            if (object.components) {
+                if (!Array.isArray(object.components))
+                    throw TypeError(".CAccountHardware_VRCompatibilityCheck_Response.components: array expected");
+                message.components = [];
+                for (var i = 0; i < object.components.length; ++i) {
+                    if (typeof object.components[i] !== "object")
+                        throw TypeError(".CAccountHardware_VRCompatibilityCheck_Response.components: object expected");
+                    message.components[i] = $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.fromObject(object.components[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAccountHardware_VRCompatibilityCheck_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @static
+         * @param {CAccountHardware_VRCompatibilityCheck_Response} message CAccountHardware_VRCompatibilityCheck_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.values = [];
+                object.components = [];
+            }
+            if (message.values && message.values.length) {
+                object.values = [];
+                for (var j = 0; j < message.values.length; ++j)
+                    object.values[j] = $root.CAccountHardware_VRCompatibilityCheck_Response.Pair.toObject(message.values[j], options);
+            }
+            if (message.components && message.components.length) {
+                object.components = [];
+                for (var j = 0; j < message.components.length; ++j)
+                    object.components[j] = $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.toObject(message.components[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CAccountHardware_VRCompatibilityCheck_Response to JSON.
+         * @function toJSON
+         * @memberof CAccountHardware_VRCompatibilityCheck_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAccountHardware_VRCompatibilityCheck_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CAccountHardware_VRCompatibilityCheck_Response.Pair = (function() {
+    
+            /**
+             * Properties of a Pair.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response
+             * @interface IPair
+             * @property {string|null} [key] Pair key
+             * @property {string|null} [value] Pair value
+             */
+    
+            /**
+             * Constructs a new Pair.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response
+             * @classdesc Represents a Pair.
+             * @implements IPair
+             * @constructor
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IPair=} [properties] Properties to set
+             */
+            function Pair(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Pair key.
+             * @member {string} key
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @instance
+             */
+            Pair.prototype.key = "";
+    
+            /**
+             * Pair value.
+             * @member {string} value
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @instance
+             */
+            Pair.prototype.value = "";
+    
+            /**
+             * Creates a new Pair instance using the specified properties.
+             * @function create
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IPair=} [properties] Properties to set
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.Pair} Pair instance
+             */
+            Pair.create = function create(properties) {
+                return new Pair(properties);
+            };
+    
+            /**
+             * Encodes the specified Pair message. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.Pair.verify|verify} messages.
+             * @function encode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IPair} message Pair message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Pair.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.key != null && message.hasOwnProperty("key"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                if (message.value != null && message.hasOwnProperty("value"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Pair message, length delimited. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.Pair.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IPair} message Pair message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Pair.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Pair message from the specified reader or buffer.
+             * @function decode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.Pair} Pair
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Pair.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_VRCompatibilityCheck_Response.Pair();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.key = reader.string();
+                        break;
+                    case 2:
+                        message.value = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Pair message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.Pair} Pair
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Pair.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Pair message.
+             * @function verify
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Pair.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.key != null && message.hasOwnProperty("key"))
+                    if (!$util.isString(message.key))
+                        return "key: string expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Pair message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.Pair} Pair
+             */
+            Pair.fromObject = function fromObject(object) {
+                if (object instanceof $root.CAccountHardware_VRCompatibilityCheck_Response.Pair)
+                    return object;
+                var message = new $root.CAccountHardware_VRCompatibilityCheck_Response.Pair();
+                if (object.key != null)
+                    message.key = String(object.key);
+                if (object.value != null)
+                    message.value = String(object.value);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a Pair message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.Pair} message Pair
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Pair.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.key = "";
+                    object.value = "";
+                }
+                if (message.key != null && message.hasOwnProperty("key"))
+                    object.key = message.key;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                return object;
+            };
+    
+            /**
+             * Converts this Pair to JSON.
+             * @function toJSON
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.Pair
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Pair.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Pair;
+        })();
+    
+        CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay = (function() {
+    
+            /**
+             * Properties of a ComponentDisplay.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response
+             * @interface IComponentDisplay
+             * @property {string|null} [name] ComponentDisplay name
+             * @property {string|null} [image] ComponentDisplay image
+             * @property {string|null} [value] ComponentDisplay value
+             */
+    
+            /**
+             * Constructs a new ComponentDisplay.
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response
+             * @classdesc Represents a ComponentDisplay.
+             * @implements IComponentDisplay
+             * @constructor
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay=} [properties] Properties to set
+             */
+            function ComponentDisplay(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ComponentDisplay name.
+             * @member {string} name
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @instance
+             */
+            ComponentDisplay.prototype.name = "";
+    
+            /**
+             * ComponentDisplay image.
+             * @member {string} image
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @instance
+             */
+            ComponentDisplay.prototype.image = "";
+    
+            /**
+             * ComponentDisplay value.
+             * @member {string} value
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @instance
+             */
+            ComponentDisplay.prototype.value = "";
+    
+            /**
+             * Creates a new ComponentDisplay instance using the specified properties.
+             * @function create
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay=} [properties] Properties to set
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay} ComponentDisplay instance
+             */
+            ComponentDisplay.create = function create(properties) {
+                return new ComponentDisplay(properties);
+            };
+    
+            /**
+             * Encodes the specified ComponentDisplay message. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.verify|verify} messages.
+             * @function encode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay} message ComponentDisplay message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ComponentDisplay.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && message.hasOwnProperty("name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.image != null && message.hasOwnProperty("image"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.image);
+                if (message.value != null && message.hasOwnProperty("value"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ComponentDisplay message, length delimited. Does not implicitly {@link CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.IComponentDisplay} message ComponentDisplay message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ComponentDisplay.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ComponentDisplay message from the specified reader or buffer.
+             * @function decode
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay} ComponentDisplay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ComponentDisplay.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.name = reader.string();
+                        break;
+                    case 2:
+                        message.image = reader.string();
+                        break;
+                    case 3:
+                        message.value = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ComponentDisplay message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay} ComponentDisplay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ComponentDisplay.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ComponentDisplay message.
+             * @function verify
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ComponentDisplay.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.image != null && message.hasOwnProperty("image"))
+                    if (!$util.isString(message.image))
+                        return "image: string expected";
+                if (message.value != null && message.hasOwnProperty("value"))
+                    if (!$util.isString(message.value))
+                        return "value: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ComponentDisplay message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay} ComponentDisplay
+             */
+            ComponentDisplay.fromObject = function fromObject(object) {
+                if (object instanceof $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay)
+                    return object;
+                var message = new $root.CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.image != null)
+                    message.image = String(object.image);
+                if (object.value != null)
+                    message.value = String(object.value);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ComponentDisplay message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @static
+             * @param {CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay} message ComponentDisplay
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ComponentDisplay.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.image = "";
+                    object.value = "";
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.image != null && message.hasOwnProperty("image"))
+                    object.image = message.image;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = message.value;
+                return object;
+            };
+    
+            /**
+             * Converts this ComponentDisplay to JSON.
+             * @function toJSON
+             * @memberof CAccountHardware_VRCompatibilityCheck_Response.ComponentDisplay
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ComponentDisplay.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ComponentDisplay;
+        })();
+    
+        return CAccountHardware_VRCompatibilityCheck_Response;
+    })();
+    
     $root.AccountHardware = (function() {
     
         /**
@@ -4386,6 +5521,39 @@
          * @instance
          * @param {ICAccountHardware_GetPersonalizationFile_Request} request CAccountHardware_GetPersonalizationFile_Request message or plain object
          * @returns {Promise<CAccountHardware_GetPersonalizationFile_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link AccountHardware#vRCompatibilityCheck}.
+         * @memberof AccountHardware
+         * @typedef VRCompatibilityCheckCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CAccountHardware_VRCompatibilityCheck_Response} [response] CAccountHardware_VRCompatibilityCheck_Response
+         */
+    
+        /**
+         * Calls VRCompatibilityCheck.
+         * @function vRCompatibilityCheck
+         * @memberof AccountHardware
+         * @instance
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request} request CAccountHardware_VRCompatibilityCheck_Request message or plain object
+         * @param {AccountHardware.VRCompatibilityCheckCallback} callback Node-style callback called with the error, if any, and CAccountHardware_VRCompatibilityCheck_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(AccountHardware.prototype.vRCompatibilityCheck = function vRCompatibilityCheck(request, callback) {
+            return this.rpcCall(vRCompatibilityCheck, $root.CAccountHardware_VRCompatibilityCheck_Request, $root.CAccountHardware_VRCompatibilityCheck_Response, request, callback);
+        }, "name", { value: "VRCompatibilityCheck" });
+    
+        /**
+         * Calls VRCompatibilityCheck.
+         * @function vRCompatibilityCheck
+         * @memberof AccountHardware
+         * @instance
+         * @param {ICAccountHardware_VRCompatibilityCheck_Request} request CAccountHardware_VRCompatibilityCheck_Request message or plain object
+         * @returns {Promise<CAccountHardware_VRCompatibilityCheck_Response>} Promise
          * @variation 2
          */
     

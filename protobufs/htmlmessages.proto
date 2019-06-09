@@ -12,6 +12,7 @@ message CMsgKeyUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 keyCode = 2;
 	optional uint32 modifiers = 3;
+	optional uint32 nativeKeyCode = 4;
 }
 
 message CMsgKeyDown {
@@ -19,12 +20,15 @@ message CMsgKeyDown {
 	optional uint32 keyCode = 2;
 	optional uint32 modifiers = 3;
 	optional bool is_system_key = 4;
+	optional uint32 nativeKeyCode = 5;
 }
 
 message CMsgKeyChar {
 	optional uint32 browser_handle = 1;
 	optional uint32 unichar = 2;
 	optional uint32 modifiers = 3;
+	optional uint32 keyCode = 4;
+	optional uint32 nativeKeyCode = 5;
 }
 
 message CMsgMouseDown {
@@ -838,6 +842,10 @@ message CMsgBringWindowToFront {
 	optional uint32 browser_handle = 1;
 }
 
+message CMsgSetForegroundWindow {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgMaximizeRestoreWindow {
 	optional uint32 browser_handle = 1;
 }
@@ -865,6 +873,12 @@ message CMsgImeCancelComposition {
 }
 
 message CMsgImeCompositionRangeChanged {
+	optional uint32 browser_handle = 1;
+	optional uint32 x = 2;
+	optional uint32 y = 3;
+}
+
+message CMsgInspectElement {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;

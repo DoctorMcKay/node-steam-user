@@ -213,8 +213,6 @@
          * @property {number|null} [reason] CEconMarket_IsMarketplaceAllowed_Response reason
          * @property {number|null} [allowed_at_time] CEconMarket_IsMarketplaceAllowed_Response allowed_at_time
          * @property {number|null} [steamguard_required_days] CEconMarket_IsMarketplaceAllowed_Response steamguard_required_days
-         * @property {number|null} [sales_this_year] CEconMarket_IsMarketplaceAllowed_Response sales_this_year
-         * @property {number|null} [max_sales_per_year] CEconMarket_IsMarketplaceAllowed_Response max_sales_per_year
          * @property {boolean|null} [forms_requested] CEconMarket_IsMarketplaceAllowed_Response forms_requested
          * @property {boolean|null} [forms_require_verification] CEconMarket_IsMarketplaceAllowed_Response forms_require_verification
          * @property {number|null} [new_device_cooldown_days] CEconMarket_IsMarketplaceAllowed_Response new_device_cooldown_days
@@ -266,22 +264,6 @@
          * @instance
          */
         CEconMarket_IsMarketplaceAllowed_Response.prototype.steamguard_required_days = 0;
-    
-        /**
-         * CEconMarket_IsMarketplaceAllowed_Response sales_this_year.
-         * @member {number} sales_this_year
-         * @memberof CEconMarket_IsMarketplaceAllowed_Response
-         * @instance
-         */
-        CEconMarket_IsMarketplaceAllowed_Response.prototype.sales_this_year = 0;
-    
-        /**
-         * CEconMarket_IsMarketplaceAllowed_Response max_sales_per_year.
-         * @member {number} max_sales_per_year
-         * @memberof CEconMarket_IsMarketplaceAllowed_Response
-         * @instance
-         */
-        CEconMarket_IsMarketplaceAllowed_Response.prototype.max_sales_per_year = 0;
     
         /**
          * CEconMarket_IsMarketplaceAllowed_Response forms_requested.
@@ -339,10 +321,6 @@
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.allowed_at_time);
             if (message.steamguard_required_days != null && message.hasOwnProperty("steamguard_required_days"))
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.steamguard_required_days);
-            if (message.sales_this_year != null && message.hasOwnProperty("sales_this_year"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sales_this_year);
-            if (message.max_sales_per_year != null && message.hasOwnProperty("max_sales_per_year"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.max_sales_per_year);
             if (message.forms_requested != null && message.hasOwnProperty("forms_requested"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.forms_requested);
             if (message.forms_require_verification != null && message.hasOwnProperty("forms_require_verification"))
@@ -394,12 +372,6 @@
                     break;
                 case 4:
                     message.steamguard_required_days = reader.uint32();
-                    break;
-                case 5:
-                    message.sales_this_year = reader.int32();
-                    break;
-                case 6:
-                    message.max_sales_per_year = reader.int32();
                     break;
                 case 7:
                     message.forms_requested = reader.bool();
@@ -457,12 +429,6 @@
             if (message.steamguard_required_days != null && message.hasOwnProperty("steamguard_required_days"))
                 if (!$util.isInteger(message.steamguard_required_days))
                     return "steamguard_required_days: integer expected";
-            if (message.sales_this_year != null && message.hasOwnProperty("sales_this_year"))
-                if (!$util.isInteger(message.sales_this_year))
-                    return "sales_this_year: integer expected";
-            if (message.max_sales_per_year != null && message.hasOwnProperty("max_sales_per_year"))
-                if (!$util.isInteger(message.max_sales_per_year))
-                    return "max_sales_per_year: integer expected";
             if (message.forms_requested != null && message.hasOwnProperty("forms_requested"))
                 if (typeof message.forms_requested !== "boolean")
                     return "forms_requested: boolean expected";
@@ -495,10 +461,6 @@
                 message.allowed_at_time = object.allowed_at_time >>> 0;
             if (object.steamguard_required_days != null)
                 message.steamguard_required_days = object.steamguard_required_days >>> 0;
-            if (object.sales_this_year != null)
-                message.sales_this_year = object.sales_this_year | 0;
-            if (object.max_sales_per_year != null)
-                message.max_sales_per_year = object.max_sales_per_year | 0;
             if (object.forms_requested != null)
                 message.forms_requested = Boolean(object.forms_requested);
             if (object.forms_require_verification != null)
@@ -526,8 +488,6 @@
                 object.reason = 0;
                 object.allowed_at_time = 0;
                 object.steamguard_required_days = 0;
-                object.sales_this_year = 0;
-                object.max_sales_per_year = 0;
                 object.forms_requested = false;
                 object.forms_require_verification = false;
                 object.new_device_cooldown_days = 0;
@@ -540,10 +500,6 @@
                 object.allowed_at_time = message.allowed_at_time;
             if (message.steamguard_required_days != null && message.hasOwnProperty("steamguard_required_days"))
                 object.steamguard_required_days = message.steamguard_required_days;
-            if (message.sales_this_year != null && message.hasOwnProperty("sales_this_year"))
-                object.sales_this_year = message.sales_this_year;
-            if (message.max_sales_per_year != null && message.hasOwnProperty("max_sales_per_year"))
-                object.max_sales_per_year = message.max_sales_per_year;
             if (message.forms_requested != null && message.hasOwnProperty("forms_requested"))
                 object.forms_requested = message.forms_requested;
             if (message.forms_require_verification != null && message.hasOwnProperty("forms_require_verification"))

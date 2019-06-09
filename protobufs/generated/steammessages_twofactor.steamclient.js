@@ -2990,6 +2990,7 @@
          * Properties of a CTwoFactor_CreateEmergencyCodes_Request.
          * @exports ICTwoFactor_CreateEmergencyCodes_Request
          * @interface ICTwoFactor_CreateEmergencyCodes_Request
+         * @property {string|null} [code] CTwoFactor_CreateEmergencyCodes_Request code
          */
     
         /**
@@ -3006,6 +3007,14 @@
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+    
+        /**
+         * CTwoFactor_CreateEmergencyCodes_Request code.
+         * @member {string} code
+         * @memberof CTwoFactor_CreateEmergencyCodes_Request
+         * @instance
+         */
+        CTwoFactor_CreateEmergencyCodes_Request.prototype.code = "";
     
         /**
          * Creates a new CTwoFactor_CreateEmergencyCodes_Request instance using the specified properties.
@@ -3031,6 +3040,8 @@
         CTwoFactor_CreateEmergencyCodes_Request.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
             return writer;
         };
     
@@ -3065,6 +3076,9 @@
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -3100,6 +3114,9 @@
         CTwoFactor_CreateEmergencyCodes_Request.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isString(message.code))
+                    return "code: string expected";
             return null;
         };
     
@@ -3114,7 +3131,10 @@
         CTwoFactor_CreateEmergencyCodes_Request.fromObject = function fromObject(object) {
             if (object instanceof $root.CTwoFactor_CreateEmergencyCodes_Request)
                 return object;
-            return new $root.CTwoFactor_CreateEmergencyCodes_Request();
+            var message = new $root.CTwoFactor_CreateEmergencyCodes_Request();
+            if (object.code != null)
+                message.code = String(object.code);
+            return message;
         };
     
         /**
@@ -3126,8 +3146,15 @@
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        CTwoFactor_CreateEmergencyCodes_Request.toObject = function toObject() {
-            return {};
+        CTwoFactor_CreateEmergencyCodes_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.code = "";
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            return object;
         };
     
         /**

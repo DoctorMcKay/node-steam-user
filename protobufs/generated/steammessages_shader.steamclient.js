@@ -1587,6 +1587,7 @@
          * @interface ICShader_GetBucketManifest_Response
          * @property {number|Long|null} [manifestid] CShader_GetBucketManifest_Response manifestid
          * @property {number|null} [depotsize] CShader_GetBucketManifest_Response depotsize
+         * @property {number|Long|null} [bucketid] CShader_GetBucketManifest_Response bucketid
          */
     
         /**
@@ -1621,6 +1622,14 @@
         CShader_GetBucketManifest_Response.prototype.depotsize = 0;
     
         /**
+         * CShader_GetBucketManifest_Response bucketid.
+         * @member {number|Long} bucketid
+         * @memberof CShader_GetBucketManifest_Response
+         * @instance
+         */
+        CShader_GetBucketManifest_Response.prototype.bucketid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
          * Creates a new CShader_GetBucketManifest_Response instance using the specified properties.
          * @function create
          * @memberof CShader_GetBucketManifest_Response
@@ -1648,6 +1657,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.manifestid);
             if (message.depotsize != null && message.hasOwnProperty("depotsize"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.depotsize);
+            if (message.bucketid != null && message.hasOwnProperty("bucketid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.bucketid);
             return writer;
         };
     
@@ -1687,6 +1698,9 @@
                     break;
                 case 2:
                     message.depotsize = reader.uint32();
+                    break;
+                case 3:
+                    message.bucketid = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1729,6 +1743,9 @@
             if (message.depotsize != null && message.hasOwnProperty("depotsize"))
                 if (!$util.isInteger(message.depotsize))
                     return "depotsize: integer expected";
+            if (message.bucketid != null && message.hasOwnProperty("bucketid"))
+                if (!$util.isInteger(message.bucketid) && !(message.bucketid && $util.isInteger(message.bucketid.low) && $util.isInteger(message.bucketid.high)))
+                    return "bucketid: integer|Long expected";
             return null;
         };
     
@@ -1755,6 +1772,15 @@
                     message.manifestid = new $util.LongBits(object.manifestid.low >>> 0, object.manifestid.high >>> 0).toNumber(true);
             if (object.depotsize != null)
                 message.depotsize = object.depotsize >>> 0;
+            if (object.bucketid != null)
+                if ($util.Long)
+                    (message.bucketid = $util.Long.fromValue(object.bucketid)).unsigned = true;
+                else if (typeof object.bucketid === "string")
+                    message.bucketid = parseInt(object.bucketid, 10);
+                else if (typeof object.bucketid === "number")
+                    message.bucketid = object.bucketid;
+                else if (typeof object.bucketid === "object")
+                    message.bucketid = new $util.LongBits(object.bucketid.low >>> 0, object.bucketid.high >>> 0).toNumber(true);
             return message;
         };
     
@@ -1778,6 +1804,11 @@
                 } else
                     object.manifestid = options.longs === String ? "0" : 0;
                 object.depotsize = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.bucketid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.bucketid = options.longs === String ? "0" : 0;
             }
             if (message.manifestid != null && message.hasOwnProperty("manifestid"))
                 if (typeof message.manifestid === "number")
@@ -1786,6 +1817,11 @@
                     object.manifestid = options.longs === String ? $util.Long.prototype.toString.call(message.manifestid) : options.longs === Number ? new $util.LongBits(message.manifestid.low >>> 0, message.manifestid.high >>> 0).toNumber(true) : message.manifestid;
             if (message.depotsize != null && message.hasOwnProperty("depotsize"))
                 object.depotsize = message.depotsize;
+            if (message.bucketid != null && message.hasOwnProperty("bucketid"))
+                if (typeof message.bucketid === "number")
+                    object.bucketid = options.longs === String ? String(message.bucketid) : message.bucketid;
+                else
+                    object.bucketid = options.longs === String ? $util.Long.prototype.toString.call(message.bucketid) : options.longs === Number ? new $util.LongBits(message.bucketid.low >>> 0, message.bucketid.high >>> 0).toNumber(true) : message.bucketid;
             return object;
         };
     

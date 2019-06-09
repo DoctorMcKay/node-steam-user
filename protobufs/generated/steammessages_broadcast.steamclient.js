@@ -28,6 +28,12 @@
      * @property {number} k_EBroadcastWatchLocation_CommunityPage=5 k_EBroadcastWatchLocation_CommunityPage value
      * @property {number} k_EBroadcastWatchLocation_StoreAppPage=6 k_EBroadcastWatchLocation_StoreAppPage value
      * @property {number} k_EBroadcastWatchLocation_InGame=7 k_EBroadcastWatchLocation_InGame value
+     * @property {number} k_EBroadcastWatchLocation_BigPicture=8 k_EBroadcastWatchLocation_BigPicture value
+     * @property {number} k_EBroadcastWatchLocation_SalesPage=9 k_EBroadcastWatchLocation_SalesPage value
+     * @property {number} k_EBroadcastWatchLocation_CuratorPage=10 k_EBroadcastWatchLocation_CuratorPage value
+     * @property {number} k_EBroadcastWatchLocation_DeveloperPage=11 k_EBroadcastWatchLocation_DeveloperPage value
+     * @property {number} k_EBroadcastWatchLocation_Chat_Friends=12 k_EBroadcastWatchLocation_Chat_Friends value
+     * @property {number} k_EBroadcastWatchLocation_SteamTV_Web=13 k_EBroadcastWatchLocation_SteamTV_Web value
      */
     $root.EBroadcastWatchLocation = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -39,6 +45,26 @@
         values[valuesById[5] = "k_EBroadcastWatchLocation_CommunityPage"] = 5;
         values[valuesById[6] = "k_EBroadcastWatchLocation_StoreAppPage"] = 6;
         values[valuesById[7] = "k_EBroadcastWatchLocation_InGame"] = 7;
+        values[valuesById[8] = "k_EBroadcastWatchLocation_BigPicture"] = 8;
+        values[valuesById[9] = "k_EBroadcastWatchLocation_SalesPage"] = 9;
+        values[valuesById[10] = "k_EBroadcastWatchLocation_CuratorPage"] = 10;
+        values[valuesById[11] = "k_EBroadcastWatchLocation_DeveloperPage"] = 11;
+        values[valuesById[12] = "k_EBroadcastWatchLocation_Chat_Friends"] = 12;
+        values[valuesById[13] = "k_EBroadcastWatchLocation_SteamTV_Web"] = 13;
+        return values;
+    })();
+    
+    /**
+     * EBroadcastChatPermission enum.
+     * @exports EBroadcastChatPermission
+     * @enum {string}
+     * @property {number} k_EBroadcastChatPermissionPublic=0 k_EBroadcastChatPermissionPublic value
+     * @property {number} k_EBroadcastChatPermissionOwnsApp=1 k_EBroadcastChatPermissionOwnsApp value
+     */
+    $root.EBroadcastChatPermission = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EBroadcastChatPermissionPublic"] = 0;
+        values[valuesById[1] = "k_EBroadcastChatPermissionOwnsApp"] = 1;
         return values;
     })();
     
@@ -55,6 +81,7 @@
          * @property {number|null} [cellid] CBroadcast_BeginBroadcastSession_Request cellid
          * @property {number|Long|null} [rtmp_token] CBroadcast_BeginBroadcastSession_Request rtmp_token
          * @property {boolean|null} [thumbnail_upload] CBroadcast_BeginBroadcastSession_Request thumbnail_upload
+         * @property {string|null} [client_beta] CBroadcast_BeginBroadcastSession_Request client_beta
          */
     
         /**
@@ -129,6 +156,14 @@
         CBroadcast_BeginBroadcastSession_Request.prototype.thumbnail_upload = false;
     
         /**
+         * CBroadcast_BeginBroadcastSession_Request client_beta.
+         * @member {string} client_beta
+         * @memberof CBroadcast_BeginBroadcastSession_Request
+         * @instance
+         */
+        CBroadcast_BeginBroadcastSession_Request.prototype.client_beta = "";
+    
+        /**
          * Creates a new CBroadcast_BeginBroadcastSession_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_BeginBroadcastSession_Request
@@ -166,6 +201,8 @@
                 writer.uint32(/* id 6, wireType 0 =*/48).uint64(message.rtmp_token);
             if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.thumbnail_upload);
+            if (message.client_beta != null && message.hasOwnProperty("client_beta"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.client_beta);
             return writer;
         };
     
@@ -220,6 +257,9 @@
                     break;
                 case 7:
                     message.thumbnail_upload = reader.bool();
+                    break;
+                case 8:
+                    message.client_beta = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -277,6 +317,9 @@
             if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
                 if (typeof message.thumbnail_upload !== "boolean")
                     return "thumbnail_upload: boolean expected";
+            if (message.client_beta != null && message.hasOwnProperty("client_beta"))
+                if (!$util.isString(message.client_beta))
+                    return "client_beta: string expected";
             return null;
         };
     
@@ -327,6 +370,8 @@
                     message.rtmp_token = new $util.LongBits(object.rtmp_token.low >>> 0, object.rtmp_token.high >>> 0).toNumber(true);
             if (object.thumbnail_upload != null)
                 message.thumbnail_upload = Boolean(object.thumbnail_upload);
+            if (object.client_beta != null)
+                message.client_beta = String(object.client_beta);
             return message;
         };
     
@@ -363,6 +408,7 @@
                 } else
                     object.rtmp_token = options.longs === String ? "0" : 0;
                 object.thumbnail_upload = false;
+                object.client_beta = "";
             }
             if (message.permission != null && message.hasOwnProperty("permission"))
                 object.permission = message.permission;
@@ -387,6 +433,8 @@
                     object.rtmp_token = options.longs === String ? $util.Long.prototype.toString.call(message.rtmp_token) : options.longs === Number ? new $util.LongBits(message.rtmp_token.low >>> 0, message.rtmp_token.high >>> 0).toNumber(true) : message.rtmp_token;
             if (message.thumbnail_upload != null && message.hasOwnProperty("thumbnail_upload"))
                 object.thumbnail_upload = message.thumbnail_upload;
+            if (message.client_beta != null && message.hasOwnProperty("client_beta"))
+                object.client_beta = message.client_beta;
             return object;
         };
     
@@ -1066,6 +1114,8 @@
          * @property {boolean|null} [as_rtmp] CBroadcast_StartBroadcastUpload_Request as_rtmp
          * @property {number|null} [delay_seconds] CBroadcast_StartBroadcastUpload_Request delay_seconds
          * @property {number|Long|null} [rtmp_token] CBroadcast_StartBroadcastUpload_Request rtmp_token
+         * @property {number|null} [upload_ip_address] CBroadcast_StartBroadcastUpload_Request upload_ip_address
+         * @property {boolean|null} [is_replay] CBroadcast_StartBroadcastUpload_Request is_replay
          */
     
         /**
@@ -1124,6 +1174,22 @@
         CBroadcast_StartBroadcastUpload_Request.prototype.rtmp_token = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
+         * CBroadcast_StartBroadcastUpload_Request upload_ip_address.
+         * @member {number} upload_ip_address
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.upload_ip_address = 0;
+    
+        /**
+         * CBroadcast_StartBroadcastUpload_Request is_replay.
+         * @member {boolean} is_replay
+         * @memberof CBroadcast_StartBroadcastUpload_Request
+         * @instance
+         */
+        CBroadcast_StartBroadcastUpload_Request.prototype.is_replay = false;
+    
+        /**
          * Creates a new CBroadcast_StartBroadcastUpload_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_StartBroadcastUpload_Request
@@ -1157,6 +1223,10 @@
                 writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.delay_seconds);
             if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.rtmp_token);
+            if (message.upload_ip_address != null && message.hasOwnProperty("upload_ip_address"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.upload_ip_address);
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_replay);
             return writer;
         };
     
@@ -1205,6 +1275,12 @@
                     break;
                 case 5:
                     message.rtmp_token = reader.uint64();
+                    break;
+                case 6:
+                    message.upload_ip_address = reader.uint32();
+                    break;
+                case 7:
+                    message.is_replay = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1256,6 +1332,12 @@
             if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
                 if (!$util.isInteger(message.rtmp_token) && !(message.rtmp_token && $util.isInteger(message.rtmp_token.low) && $util.isInteger(message.rtmp_token.high)))
                     return "rtmp_token: integer|Long expected";
+            if (message.upload_ip_address != null && message.hasOwnProperty("upload_ip_address"))
+                if (!$util.isInteger(message.upload_ip_address))
+                    return "upload_ip_address: integer expected";
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                if (typeof message.is_replay !== "boolean")
+                    return "is_replay: boolean expected";
             return null;
         };
     
@@ -1295,6 +1377,10 @@
                     message.rtmp_token = object.rtmp_token;
                 else if (typeof object.rtmp_token === "object")
                     message.rtmp_token = new $util.LongBits(object.rtmp_token.low >>> 0, object.rtmp_token.high >>> 0).toNumber(true);
+            if (object.upload_ip_address != null)
+                message.upload_ip_address = object.upload_ip_address >>> 0;
+            if (object.is_replay != null)
+                message.is_replay = Boolean(object.is_replay);
             return message;
         };
     
@@ -1325,6 +1411,8 @@
                     object.rtmp_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.rtmp_token = options.longs === String ? "0" : 0;
+                object.upload_ip_address = 0;
+                object.is_replay = false;
             }
             if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
                 if (typeof message.broadcast_id === "number")
@@ -1342,6 +1430,10 @@
                     object.rtmp_token = options.longs === String ? String(message.rtmp_token) : message.rtmp_token;
                 else
                     object.rtmp_token = options.longs === String ? $util.Long.prototype.toString.call(message.rtmp_token) : options.longs === Number ? new $util.LongBits(message.rtmp_token.low >>> 0, message.rtmp_token.high >>> 0).toNumber(true) : message.rtmp_token;
+            if (message.upload_ip_address != null && message.hasOwnProperty("upload_ip_address"))
+                object.upload_ip_address = message.upload_ip_address;
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                object.is_replay = message.is_replay;
             return object;
         };
     
@@ -1367,9 +1459,9 @@
          * @interface ICBroadcast_StartBroadcastUpload_Response
          * @property {string|null} [upload_token] CBroadcast_StartBroadcastUpload_Response upload_token
          * @property {string|null} [upload_address] CBroadcast_StartBroadcastUpload_Response upload_address
-         * @property {number|Long|null} [upload_relay_id] CBroadcast_StartBroadcastUpload_Response upload_relay_id
-         * @property {string|null} [thumbnail_upload_address] CBroadcast_StartBroadcastUpload_Response thumbnail_upload_address
-         * @property {number|null} [thumbnail_interval_seconds] CBroadcast_StartBroadcastUpload_Response thumbnail_interval_seconds
+         * @property {number|Long|null} [broadcast_upload_id] CBroadcast_StartBroadcastUpload_Response broadcast_upload_id
+         * @property {boolean|null} [enable_replay] CBroadcast_StartBroadcastUpload_Response enable_replay
+         * @property {string|null} [http_address] CBroadcast_StartBroadcastUpload_Response http_address
          */
     
         /**
@@ -1404,28 +1496,28 @@
         CBroadcast_StartBroadcastUpload_Response.prototype.upload_address = "";
     
         /**
-         * CBroadcast_StartBroadcastUpload_Response upload_relay_id.
-         * @member {number|Long} upload_relay_id
+         * CBroadcast_StartBroadcastUpload_Response broadcast_upload_id.
+         * @member {number|Long} broadcast_upload_id
          * @memberof CBroadcast_StartBroadcastUpload_Response
          * @instance
          */
-        CBroadcast_StartBroadcastUpload_Response.prototype.upload_relay_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        CBroadcast_StartBroadcastUpload_Response.prototype.broadcast_upload_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CBroadcast_StartBroadcastUpload_Response thumbnail_upload_address.
-         * @member {string} thumbnail_upload_address
+         * CBroadcast_StartBroadcastUpload_Response enable_replay.
+         * @member {boolean} enable_replay
          * @memberof CBroadcast_StartBroadcastUpload_Response
          * @instance
          */
-        CBroadcast_StartBroadcastUpload_Response.prototype.thumbnail_upload_address = "";
+        CBroadcast_StartBroadcastUpload_Response.prototype.enable_replay = false;
     
         /**
-         * CBroadcast_StartBroadcastUpload_Response thumbnail_interval_seconds.
-         * @member {number} thumbnail_interval_seconds
+         * CBroadcast_StartBroadcastUpload_Response http_address.
+         * @member {string} http_address
          * @memberof CBroadcast_StartBroadcastUpload_Response
          * @instance
          */
-        CBroadcast_StartBroadcastUpload_Response.prototype.thumbnail_interval_seconds = 0;
+        CBroadcast_StartBroadcastUpload_Response.prototype.http_address = "";
     
         /**
          * Creates a new CBroadcast_StartBroadcastUpload_Response instance using the specified properties.
@@ -1455,12 +1547,12 @@
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.upload_token);
             if (message.upload_address != null && message.hasOwnProperty("upload_address"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.upload_address);
-            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
-                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.upload_relay_id);
-            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.thumbnail_upload_address);
-            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.thumbnail_interval_seconds);
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.broadcast_upload_id);
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enable_replay);
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.http_address);
             return writer;
         };
     
@@ -1502,13 +1594,13 @@
                     message.upload_address = reader.string();
                     break;
                 case 3:
-                    message.upload_relay_id = reader.fixed64();
+                    message.broadcast_upload_id = reader.fixed64();
                     break;
-                case 4:
-                    message.thumbnail_upload_address = reader.string();
+                case 6:
+                    message.enable_replay = reader.bool();
                     break;
-                case 5:
-                    message.thumbnail_interval_seconds = reader.uint32();
+                case 7:
+                    message.http_address = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1551,15 +1643,15 @@
             if (message.upload_address != null && message.hasOwnProperty("upload_address"))
                 if (!$util.isString(message.upload_address))
                     return "upload_address: string expected";
-            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
-                if (!$util.isInteger(message.upload_relay_id) && !(message.upload_relay_id && $util.isInteger(message.upload_relay_id.low) && $util.isInteger(message.upload_relay_id.high)))
-                    return "upload_relay_id: integer|Long expected";
-            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
-                if (!$util.isString(message.thumbnail_upload_address))
-                    return "thumbnail_upload_address: string expected";
-            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
-                if (!$util.isInteger(message.thumbnail_interval_seconds))
-                    return "thumbnail_interval_seconds: integer expected";
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (!$util.isInteger(message.broadcast_upload_id) && !(message.broadcast_upload_id && $util.isInteger(message.broadcast_upload_id.low) && $util.isInteger(message.broadcast_upload_id.high)))
+                    return "broadcast_upload_id: integer|Long expected";
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                if (typeof message.enable_replay !== "boolean")
+                    return "enable_replay: boolean expected";
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                if (!$util.isString(message.http_address))
+                    return "http_address: string expected";
             return null;
         };
     
@@ -1579,19 +1671,19 @@
                 message.upload_token = String(object.upload_token);
             if (object.upload_address != null)
                 message.upload_address = String(object.upload_address);
-            if (object.upload_relay_id != null)
+            if (object.broadcast_upload_id != null)
                 if ($util.Long)
-                    (message.upload_relay_id = $util.Long.fromValue(object.upload_relay_id)).unsigned = false;
-                else if (typeof object.upload_relay_id === "string")
-                    message.upload_relay_id = parseInt(object.upload_relay_id, 10);
-                else if (typeof object.upload_relay_id === "number")
-                    message.upload_relay_id = object.upload_relay_id;
-                else if (typeof object.upload_relay_id === "object")
-                    message.upload_relay_id = new $util.LongBits(object.upload_relay_id.low >>> 0, object.upload_relay_id.high >>> 0).toNumber();
-            if (object.thumbnail_upload_address != null)
-                message.thumbnail_upload_address = String(object.thumbnail_upload_address);
-            if (object.thumbnail_interval_seconds != null)
-                message.thumbnail_interval_seconds = object.thumbnail_interval_seconds >>> 0;
+                    (message.broadcast_upload_id = $util.Long.fromValue(object.broadcast_upload_id)).unsigned = false;
+                else if (typeof object.broadcast_upload_id === "string")
+                    message.broadcast_upload_id = parseInt(object.broadcast_upload_id, 10);
+                else if (typeof object.broadcast_upload_id === "number")
+                    message.broadcast_upload_id = object.broadcast_upload_id;
+                else if (typeof object.broadcast_upload_id === "object")
+                    message.broadcast_upload_id = new $util.LongBits(object.broadcast_upload_id.low >>> 0, object.broadcast_upload_id.high >>> 0).toNumber();
+            if (object.enable_replay != null)
+                message.enable_replay = Boolean(object.enable_replay);
+            if (object.http_address != null)
+                message.http_address = String(object.http_address);
             return message;
         };
     
@@ -1613,25 +1705,25 @@
                 object.upload_address = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.upload_relay_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.broadcast_upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.upload_relay_id = options.longs === String ? "0" : 0;
-                object.thumbnail_upload_address = "";
-                object.thumbnail_interval_seconds = 0;
+                    object.broadcast_upload_id = options.longs === String ? "0" : 0;
+                object.enable_replay = false;
+                object.http_address = "";
             }
             if (message.upload_token != null && message.hasOwnProperty("upload_token"))
                 object.upload_token = message.upload_token;
             if (message.upload_address != null && message.hasOwnProperty("upload_address"))
                 object.upload_address = message.upload_address;
-            if (message.upload_relay_id != null && message.hasOwnProperty("upload_relay_id"))
-                if (typeof message.upload_relay_id === "number")
-                    object.upload_relay_id = options.longs === String ? String(message.upload_relay_id) : message.upload_relay_id;
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (typeof message.broadcast_upload_id === "number")
+                    object.broadcast_upload_id = options.longs === String ? String(message.broadcast_upload_id) : message.broadcast_upload_id;
                 else
-                    object.upload_relay_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_relay_id) : options.longs === Number ? new $util.LongBits(message.upload_relay_id.low >>> 0, message.upload_relay_id.high >>> 0).toNumber() : message.upload_relay_id;
-            if (message.thumbnail_upload_address != null && message.hasOwnProperty("thumbnail_upload_address"))
-                object.thumbnail_upload_address = message.thumbnail_upload_address;
-            if (message.thumbnail_interval_seconds != null && message.hasOwnProperty("thumbnail_interval_seconds"))
-                object.thumbnail_interval_seconds = message.thumbnail_interval_seconds;
+                    object.broadcast_upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_upload_id) : options.longs === Number ? new $util.LongBits(message.broadcast_upload_id.low >>> 0, message.broadcast_upload_id.high >>> 0).toNumber() : message.broadcast_upload_id;
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                object.enable_replay = message.enable_replay;
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                object.http_address = message.http_address;
             return object;
         };
     
@@ -1655,7 +1747,7 @@
          * Properties of a CBroadcast_NotifyBroadcastUploadStop_Notification.
          * @exports ICBroadcast_NotifyBroadcastUploadStop_Notification
          * @interface ICBroadcast_NotifyBroadcastUploadStop_Notification
-         * @property {number|Long|null} [broadcast_relay_id] CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_relay_id
+         * @property {number|Long|null} [broadcast_upload_id] CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_upload_id
          * @property {number|null} [upload_result] CBroadcast_NotifyBroadcastUploadStop_Notification upload_result
          */
     
@@ -1675,12 +1767,12 @@
         }
     
         /**
-         * CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_relay_id.
-         * @member {number|Long} broadcast_relay_id
+         * CBroadcast_NotifyBroadcastUploadStop_Notification broadcast_upload_id.
+         * @member {number|Long} broadcast_upload_id
          * @memberof CBroadcast_NotifyBroadcastUploadStop_Notification
          * @instance
          */
-        CBroadcast_NotifyBroadcastUploadStop_Notification.prototype.broadcast_relay_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        CBroadcast_NotifyBroadcastUploadStop_Notification.prototype.broadcast_upload_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
          * CBroadcast_NotifyBroadcastUploadStop_Notification upload_result.
@@ -1714,8 +1806,8 @@
         CBroadcast_NotifyBroadcastUploadStop_Notification.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
-                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_relay_id);
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_upload_id);
             if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.upload_result);
             return writer;
@@ -1753,7 +1845,7 @@
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.broadcast_relay_id = reader.fixed64();
+                    message.broadcast_upload_id = reader.fixed64();
                     break;
                 case 2:
                     message.upload_result = reader.uint32();
@@ -1793,9 +1885,9 @@
         CBroadcast_NotifyBroadcastUploadStop_Notification.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
-                if (!$util.isInteger(message.broadcast_relay_id) && !(message.broadcast_relay_id && $util.isInteger(message.broadcast_relay_id.low) && $util.isInteger(message.broadcast_relay_id.high)))
-                    return "broadcast_relay_id: integer|Long expected";
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (!$util.isInteger(message.broadcast_upload_id) && !(message.broadcast_upload_id && $util.isInteger(message.broadcast_upload_id.low) && $util.isInteger(message.broadcast_upload_id.high)))
+                    return "broadcast_upload_id: integer|Long expected";
             if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                 if (!$util.isInteger(message.upload_result))
                     return "upload_result: integer expected";
@@ -1814,15 +1906,15 @@
             if (object instanceof $root.CBroadcast_NotifyBroadcastUploadStop_Notification)
                 return object;
             var message = new $root.CBroadcast_NotifyBroadcastUploadStop_Notification();
-            if (object.broadcast_relay_id != null)
+            if (object.broadcast_upload_id != null)
                 if ($util.Long)
-                    (message.broadcast_relay_id = $util.Long.fromValue(object.broadcast_relay_id)).unsigned = false;
-                else if (typeof object.broadcast_relay_id === "string")
-                    message.broadcast_relay_id = parseInt(object.broadcast_relay_id, 10);
-                else if (typeof object.broadcast_relay_id === "number")
-                    message.broadcast_relay_id = object.broadcast_relay_id;
-                else if (typeof object.broadcast_relay_id === "object")
-                    message.broadcast_relay_id = new $util.LongBits(object.broadcast_relay_id.low >>> 0, object.broadcast_relay_id.high >>> 0).toNumber();
+                    (message.broadcast_upload_id = $util.Long.fromValue(object.broadcast_upload_id)).unsigned = false;
+                else if (typeof object.broadcast_upload_id === "string")
+                    message.broadcast_upload_id = parseInt(object.broadcast_upload_id, 10);
+                else if (typeof object.broadcast_upload_id === "number")
+                    message.broadcast_upload_id = object.broadcast_upload_id;
+                else if (typeof object.broadcast_upload_id === "object")
+                    message.broadcast_upload_id = new $util.LongBits(object.broadcast_upload_id.low >>> 0, object.broadcast_upload_id.high >>> 0).toNumber();
             if (object.upload_result != null)
                 message.upload_result = object.upload_result >>> 0;
             return message;
@@ -1844,16 +1936,16 @@
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.broadcast_relay_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.broadcast_upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.broadcast_relay_id = options.longs === String ? "0" : 0;
+                    object.broadcast_upload_id = options.longs === String ? "0" : 0;
                 object.upload_result = 0;
             }
-            if (message.broadcast_relay_id != null && message.hasOwnProperty("broadcast_relay_id"))
-                if (typeof message.broadcast_relay_id === "number")
-                    object.broadcast_relay_id = options.longs === String ? String(message.broadcast_relay_id) : message.broadcast_relay_id;
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (typeof message.broadcast_upload_id === "number")
+                    object.broadcast_upload_id = options.longs === String ? String(message.broadcast_upload_id) : message.broadcast_upload_id;
                 else
-                    object.broadcast_relay_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_relay_id) : options.longs === Number ? new $util.LongBits(message.broadcast_relay_id.low >>> 0, message.broadcast_relay_id.high >>> 0).toNumber() : message.broadcast_relay_id;
+                    object.broadcast_upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_upload_id) : options.longs === Number ? new $util.LongBits(message.broadcast_upload_id.low >>> 0, message.broadcast_upload_id.high >>> 0).toNumber() : message.broadcast_upload_id;
             if (message.upload_result != null && message.hasOwnProperty("upload_result"))
                 object.upload_result = message.upload_result;
             return object;
@@ -1885,6 +1977,7 @@
          * @property {number|null} [client_ip] CBroadcast_WatchBroadcast_Request client_ip
          * @property {number|null} [client_cell] CBroadcast_WatchBroadcast_Request client_cell
          * @property {EBroadcastWatchLocation|null} [watch_location] CBroadcast_WatchBroadcast_Request watch_location
+         * @property {boolean|null} [is_webrtc] CBroadcast_WatchBroadcast_Request is_webrtc
          */
     
         /**
@@ -1951,6 +2044,14 @@
         CBroadcast_WatchBroadcast_Request.prototype.watch_location = 0;
     
         /**
+         * CBroadcast_WatchBroadcast_Request is_webrtc.
+         * @member {boolean} is_webrtc
+         * @memberof CBroadcast_WatchBroadcast_Request
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Request.prototype.is_webrtc = false;
+    
+        /**
          * Creates a new CBroadcast_WatchBroadcast_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_WatchBroadcast_Request
@@ -1986,6 +2087,8 @@
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.client_cell);
             if (message.watch_location != null && message.hasOwnProperty("watch_location"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.watch_location);
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_webrtc);
             return writer;
         };
     
@@ -2037,6 +2140,9 @@
                     break;
                 case 6:
                     message.watch_location = reader.int32();
+                    break;
+                case 7:
+                    message.is_webrtc = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2100,8 +2206,17 @@
                 case 5:
                 case 6:
                 case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
                     break;
                 }
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                if (typeof message.is_webrtc !== "boolean")
+                    return "is_webrtc: boolean expected";
             return null;
         };
     
@@ -2181,7 +2296,33 @@
             case 7:
                 message.watch_location = 7;
                 break;
+            case "k_EBroadcastWatchLocation_BigPicture":
+            case 8:
+                message.watch_location = 8;
+                break;
+            case "k_EBroadcastWatchLocation_SalesPage":
+            case 9:
+                message.watch_location = 9;
+                break;
+            case "k_EBroadcastWatchLocation_CuratorPage":
+            case 10:
+                message.watch_location = 10;
+                break;
+            case "k_EBroadcastWatchLocation_DeveloperPage":
+            case 11:
+                message.watch_location = 11;
+                break;
+            case "k_EBroadcastWatchLocation_Chat_Friends":
+            case 12:
+                message.watch_location = 12;
+                break;
+            case "k_EBroadcastWatchLocation_SteamTV_Web":
+            case 13:
+                message.watch_location = 13;
+                break;
             }
+            if (object.is_webrtc != null)
+                message.is_webrtc = Boolean(object.is_webrtc);
             return message;
         };
     
@@ -2217,6 +2358,7 @@
                 object.client_ip = 0;
                 object.client_cell = 0;
                 object.watch_location = options.enums === String ? "k_EBroadcastWatchLocation_Invalid" : 0;
+                object.is_webrtc = false;
             }
             if (message.steamid != null && message.hasOwnProperty("steamid"))
                 if (typeof message.steamid === "number")
@@ -2239,6 +2381,8 @@
                 object.client_cell = message.client_cell;
             if (message.watch_location != null && message.hasOwnProperty("watch_location"))
                 object.watch_location = options.enums === String ? $root.EBroadcastWatchLocation[message.watch_location] : message.watch_location;
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                object.is_webrtc = message.is_webrtc;
             return object;
         };
     
@@ -2275,6 +2419,12 @@
          * @property {string|null} [hls_m3u8_master_url] CBroadcast_WatchBroadcast_Response hls_m3u8_master_url
          * @property {number|null} [heartbeat_interval] CBroadcast_WatchBroadcast_Response heartbeat_interval
          * @property {string|null} [thumbnail_url] CBroadcast_WatchBroadcast_Response thumbnail_url
+         * @property {boolean|null} [is_webrtc] CBroadcast_WatchBroadcast_Response is_webrtc
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WatchBroadcast_Response webrtc_session_id
+         * @property {string|null} [webrtc_offer_sdp] CBroadcast_WatchBroadcast_Response webrtc_offer_sdp
+         * @property {string|null} [webrtc_turn_server] CBroadcast_WatchBroadcast_Response webrtc_turn_server
+         * @property {boolean|null} [is_replay] CBroadcast_WatchBroadcast_Response is_replay
+         * @property {number|null} [duration] CBroadcast_WatchBroadcast_Response duration
          */
     
         /**
@@ -2397,6 +2547,54 @@
         CBroadcast_WatchBroadcast_Response.prototype.thumbnail_url = "";
     
         /**
+         * CBroadcast_WatchBroadcast_Response is_webrtc.
+         * @member {boolean} is_webrtc
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.is_webrtc = false;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response webrtc_offer_sdp.
+         * @member {string} webrtc_offer_sdp
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.webrtc_offer_sdp = "";
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response webrtc_turn_server.
+         * @member {string} webrtc_turn_server
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.webrtc_turn_server = "";
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response is_replay.
+         * @member {boolean} is_replay
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.is_replay = false;
+    
+        /**
+         * CBroadcast_WatchBroadcast_Response duration.
+         * @member {number} duration
+         * @memberof CBroadcast_WatchBroadcast_Response
+         * @instance
+         */
+        CBroadcast_WatchBroadcast_Response.prototype.duration = 0;
+    
+        /**
          * Creates a new CBroadcast_WatchBroadcast_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_WatchBroadcast_Response
@@ -2446,6 +2644,18 @@
                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.heartbeat_interval);
             if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.thumbnail_url);
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_webrtc);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 15, wireType 1 =*/121).fixed64(message.webrtc_session_id);
+            if (message.webrtc_offer_sdp != null && message.hasOwnProperty("webrtc_offer_sdp"))
+                writer.uint32(/* id 16, wireType 2 =*/130).string(message.webrtc_offer_sdp);
+            if (message.webrtc_turn_server != null && message.hasOwnProperty("webrtc_turn_server"))
+                writer.uint32(/* id 17, wireType 2 =*/138).string(message.webrtc_turn_server);
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.is_replay);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.duration);
             return writer;
         };
     
@@ -2518,6 +2728,24 @@
                     break;
                 case 13:
                     message.thumbnail_url = reader.string();
+                    break;
+                case 14:
+                    message.is_webrtc = reader.bool();
+                    break;
+                case 15:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 16:
+                    message.webrtc_offer_sdp = reader.string();
+                    break;
+                case 17:
+                    message.webrtc_turn_server = reader.string();
+                    break;
+                case 18:
+                    message.is_replay = reader.bool();
+                    break;
+                case 19:
+                    message.duration = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2608,6 +2836,24 @@
             if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 if (!$util.isString(message.thumbnail_url))
                     return "thumbnail_url: string expected";
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                if (typeof message.is_webrtc !== "boolean")
+                    return "is_webrtc: boolean expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.webrtc_offer_sdp != null && message.hasOwnProperty("webrtc_offer_sdp"))
+                if (!$util.isString(message.webrtc_offer_sdp))
+                    return "webrtc_offer_sdp: string expected";
+            if (message.webrtc_turn_server != null && message.hasOwnProperty("webrtc_turn_server"))
+                if (!$util.isString(message.webrtc_turn_server))
+                    return "webrtc_turn_server: string expected";
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                if (typeof message.is_replay !== "boolean")
+                    return "is_replay: boolean expected";
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
             return null;
         };
     
@@ -2718,6 +2964,25 @@
                 message.heartbeat_interval = object.heartbeat_interval | 0;
             if (object.thumbnail_url != null)
                 message.thumbnail_url = String(object.thumbnail_url);
+            if (object.is_webrtc != null)
+                message.is_webrtc = Boolean(object.is_webrtc);
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.webrtc_offer_sdp != null)
+                message.webrtc_offer_sdp = String(object.webrtc_offer_sdp);
+            if (object.webrtc_turn_server != null)
+                message.webrtc_turn_server = String(object.webrtc_turn_server);
+            if (object.is_replay != null)
+                message.is_replay = Boolean(object.is_replay);
+            if (object.duration != null)
+                message.duration = object.duration | 0;
             return message;
         };
     
@@ -2760,6 +3025,16 @@
                 object.hls_m3u8_master_url = "";
                 object.heartbeat_interval = 0;
                 object.thumbnail_url = "";
+                object.is_webrtc = false;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.webrtc_offer_sdp = "";
+                object.webrtc_turn_server = "";
+                object.is_replay = false;
+                object.duration = 0;
             }
             if (message.response != null && message.hasOwnProperty("response"))
                 object.response = options.enums === String ? $root.CBroadcast_WatchBroadcast_Response.EWatchResponse[message.response] : message.response;
@@ -2796,6 +3071,21 @@
                 object.heartbeat_interval = message.heartbeat_interval;
             if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 object.thumbnail_url = message.thumbnail_url;
+            if (message.is_webrtc != null && message.hasOwnProperty("is_webrtc"))
+                object.is_webrtc = message.is_webrtc;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.webrtc_offer_sdp != null && message.hasOwnProperty("webrtc_offer_sdp"))
+                object.webrtc_offer_sdp = message.webrtc_offer_sdp;
+            if (message.webrtc_turn_server != null && message.hasOwnProperty("webrtc_turn_server"))
+                object.webrtc_turn_server = message.webrtc_turn_server;
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                object.is_replay = message.is_replay;
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
             return object;
         };
     
@@ -3672,6 +3962,7 @@
          * @property {number|null} [update_interval] CBroadcast_GetBroadcastStatus_Response update_interval
          * @property {boolean|null} [is_uploading] CBroadcast_GetBroadcastStatus_Response is_uploading
          * @property {number|null} [duration] CBroadcast_GetBroadcastStatus_Response duration
+         * @property {boolean|null} [is_replay] CBroadcast_GetBroadcastStatus_Response is_replay
          */
     
         /**
@@ -3778,6 +4069,14 @@
         CBroadcast_GetBroadcastStatus_Response.prototype.duration = 0;
     
         /**
+         * CBroadcast_GetBroadcastStatus_Response is_replay.
+         * @member {boolean} is_replay
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_replay = false;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastStatus_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastStatus_Response
@@ -3823,6 +4122,8 @@
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.is_uploading);
             if (message.duration != null && message.hasOwnProperty("duration"))
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.duration);
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.is_replay);
             return writer;
         };
     
@@ -3889,6 +4190,9 @@
                     break;
                 case 11:
                     message.duration = reader.uint32();
+                    break;
+                case 12:
+                    message.is_replay = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3958,6 +4262,9 @@
             if (message.duration != null && message.hasOwnProperty("duration"))
                 if (!$util.isInteger(message.duration))
                     return "duration: integer expected";
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                if (typeof message.is_replay !== "boolean")
+                    return "is_replay: boolean expected";
             return null;
         };
     
@@ -4002,6 +4309,8 @@
                 message.is_uploading = Boolean(object.is_uploading);
             if (object.duration != null)
                 message.duration = object.duration >>> 0;
+            if (object.is_replay != null)
+                message.is_replay = Boolean(object.is_replay);
             return message;
         };
     
@@ -4034,6 +4343,7 @@
                 object.update_interval = 0;
                 object.is_uploading = false;
                 object.duration = 0;
+                object.is_replay = false;
             }
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 if (typeof message.gameid === "number")
@@ -4060,6 +4370,8 @@
                 object.is_uploading = message.is_uploading;
             if (message.duration != null && message.hasOwnProperty("duration"))
                 object.duration = message.duration;
+            if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                object.is_replay = message.is_replay;
             return object;
         };
     
@@ -4324,6 +4636,7 @@
          * @property {string|null} [thumbnail_url] CBroadcast_GetBroadcastThumbnail_Response thumbnail_url
          * @property {number|null} [update_interval] CBroadcast_GetBroadcastThumbnail_Response update_interval
          * @property {number|null} [num_viewers] CBroadcast_GetBroadcastThumbnail_Response num_viewers
+         * @property {number|null} [duration] CBroadcast_GetBroadcastThumbnail_Response duration
          */
     
         /**
@@ -4366,6 +4679,14 @@
         CBroadcast_GetBroadcastThumbnail_Response.prototype.num_viewers = 0;
     
         /**
+         * CBroadcast_GetBroadcastThumbnail_Response duration.
+         * @member {number} duration
+         * @memberof CBroadcast_GetBroadcastThumbnail_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastThumbnail_Response.prototype.duration = 0;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastThumbnail_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastThumbnail_Response
@@ -4395,6 +4716,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.update_interval);
             if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.num_viewers);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.duration);
             return writer;
         };
     
@@ -4437,6 +4760,9 @@
                     break;
                 case 3:
                     message.num_viewers = reader.int32();
+                    break;
+                case 4:
+                    message.duration = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4482,6 +4808,9 @@
             if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 if (!$util.isInteger(message.num_viewers))
                     return "num_viewers: integer expected";
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
             return null;
         };
     
@@ -4503,6 +4832,8 @@
                 message.update_interval = object.update_interval | 0;
             if (object.num_viewers != null)
                 message.num_viewers = object.num_viewers | 0;
+            if (object.duration != null)
+                message.duration = object.duration | 0;
             return message;
         };
     
@@ -4523,6 +4854,7 @@
                 object.thumbnail_url = "";
                 object.update_interval = 0;
                 object.num_viewers = 0;
+                object.duration = 0;
             }
             if (message.thumbnail_url != null && message.hasOwnProperty("thumbnail_url"))
                 object.thumbnail_url = message.thumbnail_url;
@@ -4530,6 +4862,8 @@
                 object.update_interval = message.update_interval;
             if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
                 object.num_viewers = message.num_viewers;
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
             return object;
         };
     
@@ -5876,8 +6210,8 @@
          * @exports ICBroadcast_GetBroadcastChatInfo_Response
          * @interface ICBroadcast_GetBroadcastChatInfo_Response
          * @property {number|Long|null} [chat_id] CBroadcast_GetBroadcastChatInfo_Response chat_id
-         * @property {string|null} [view_url] CBroadcast_GetBroadcastChatInfo_Response view_url
          * @property {string|null} [view_url_template] CBroadcast_GetBroadcastChatInfo_Response view_url_template
+         * @property {Array.<number>|null} [flair_group_ids] CBroadcast_GetBroadcastChatInfo_Response flair_group_ids
          */
     
         /**
@@ -5889,6 +6223,7 @@
          * @param {ICBroadcast_GetBroadcastChatInfo_Response=} [properties] Properties to set
          */
         function CBroadcast_GetBroadcastChatInfo_Response(properties) {
+            this.flair_group_ids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5904,20 +6239,20 @@
         CBroadcast_GetBroadcastChatInfo_Response.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
-         * CBroadcast_GetBroadcastChatInfo_Response view_url.
-         * @member {string} view_url
-         * @memberof CBroadcast_GetBroadcastChatInfo_Response
-         * @instance
-         */
-        CBroadcast_GetBroadcastChatInfo_Response.prototype.view_url = "";
-    
-        /**
          * CBroadcast_GetBroadcastChatInfo_Response view_url_template.
          * @member {string} view_url_template
          * @memberof CBroadcast_GetBroadcastChatInfo_Response
          * @instance
          */
         CBroadcast_GetBroadcastChatInfo_Response.prototype.view_url_template = "";
+    
+        /**
+         * CBroadcast_GetBroadcastChatInfo_Response flair_group_ids.
+         * @member {Array.<number>} flair_group_ids
+         * @memberof CBroadcast_GetBroadcastChatInfo_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastChatInfo_Response.prototype.flair_group_ids = $util.emptyArray;
     
         /**
          * Creates a new CBroadcast_GetBroadcastChatInfo_Response instance using the specified properties.
@@ -5945,10 +6280,11 @@
                 writer = $Writer.create();
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
-            if (message.view_url != null && message.hasOwnProperty("view_url"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.view_url);
             if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.view_url_template);
+            if (message.flair_group_ids != null && message.flair_group_ids.length)
+                for (var i = 0; i < message.flair_group_ids.length; ++i)
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.flair_group_ids[i]);
             return writer;
         };
     
@@ -5986,11 +6322,18 @@
                 case 1:
                     message.chat_id = reader.fixed64();
                     break;
-                case 2:
-                    message.view_url = reader.string();
-                    break;
                 case 3:
                     message.view_url_template = reader.string();
+                    break;
+                case 4:
+                    if (!(message.flair_group_ids && message.flair_group_ids.length))
+                        message.flair_group_ids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.flair_group_ids.push(reader.uint32());
+                    } else
+                        message.flair_group_ids.push(reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6030,12 +6373,16 @@
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
                 if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
                     return "chat_id: integer|Long expected";
-            if (message.view_url != null && message.hasOwnProperty("view_url"))
-                if (!$util.isString(message.view_url))
-                    return "view_url: string expected";
             if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
                 if (!$util.isString(message.view_url_template))
                     return "view_url_template: string expected";
+            if (message.flair_group_ids != null && message.hasOwnProperty("flair_group_ids")) {
+                if (!Array.isArray(message.flair_group_ids))
+                    return "flair_group_ids: array expected";
+                for (var i = 0; i < message.flair_group_ids.length; ++i)
+                    if (!$util.isInteger(message.flair_group_ids[i]))
+                        return "flair_group_ids: integer[] expected";
+            }
             return null;
         };
     
@@ -6060,10 +6407,15 @@
                     message.chat_id = object.chat_id;
                 else if (typeof object.chat_id === "object")
                     message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
-            if (object.view_url != null)
-                message.view_url = String(object.view_url);
             if (object.view_url_template != null)
                 message.view_url_template = String(object.view_url_template);
+            if (object.flair_group_ids) {
+                if (!Array.isArray(object.flair_group_ids))
+                    throw TypeError(".CBroadcast_GetBroadcastChatInfo_Response.flair_group_ids: array expected");
+                message.flair_group_ids = [];
+                for (var i = 0; i < object.flair_group_ids.length; ++i)
+                    message.flair_group_ids[i] = object.flair_group_ids[i] >>> 0;
+            }
             return message;
         };
     
@@ -6080,13 +6432,14 @@
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.flair_group_ids = [];
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.chat_id = options.longs === String ? "0" : 0;
-                object.view_url = "";
                 object.view_url_template = "";
             }
             if (message.chat_id != null && message.hasOwnProperty("chat_id"))
@@ -6094,10 +6447,13 @@
                     object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
                 else
                     object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
-            if (message.view_url != null && message.hasOwnProperty("view_url"))
-                object.view_url = message.view_url;
             if (message.view_url_template != null && message.hasOwnProperty("view_url_template"))
                 object.view_url_template = message.view_url_template;
+            if (message.flair_group_ids && message.flair_group_ids.length) {
+                object.flair_group_ids = [];
+                for (var j = 0; j < message.flair_group_ids.length; ++j)
+                    object.flair_group_ids[j] = message.flair_group_ids[j];
+            }
             return object;
         };
     
@@ -6613,6 +6969,476 @@
         };
     
         return CBroadcast_PostChatMessage_Response;
+    })();
+    
+    $root.CBroadcast_UpdateChatMessageFlair_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_UpdateChatMessageFlair_Request.
+         * @exports ICBroadcast_UpdateChatMessageFlair_Request
+         * @interface ICBroadcast_UpdateChatMessageFlair_Request
+         * @property {number|Long|null} [chat_id] CBroadcast_UpdateChatMessageFlair_Request chat_id
+         * @property {string|null} [flair] CBroadcast_UpdateChatMessageFlair_Request flair
+         */
+    
+        /**
+         * Constructs a new CBroadcast_UpdateChatMessageFlair_Request.
+         * @exports CBroadcast_UpdateChatMessageFlair_Request
+         * @classdesc Represents a CBroadcast_UpdateChatMessageFlair_Request.
+         * @implements ICBroadcast_UpdateChatMessageFlair_Request
+         * @constructor
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request=} [properties] Properties to set
+         */
+        function CBroadcast_UpdateChatMessageFlair_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_UpdateChatMessageFlair_Request chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_UpdateChatMessageFlair_Request flair.
+         * @member {string} flair
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.prototype.flair = "";
+    
+        /**
+         * Creates a new CBroadcast_UpdateChatMessageFlair_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request=} [properties] Properties to set
+         * @returns {CBroadcast_UpdateChatMessageFlair_Request} CBroadcast_UpdateChatMessageFlair_Request instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.create = function create(properties) {
+            return new CBroadcast_UpdateChatMessageFlair_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_UpdateChatMessageFlair_Request message. Does not implicitly {@link CBroadcast_UpdateChatMessageFlair_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request} message CBroadcast_UpdateChatMessageFlair_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.chat_id);
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.flair);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_UpdateChatMessageFlair_Request message, length delimited. Does not implicitly {@link CBroadcast_UpdateChatMessageFlair_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request} message CBroadcast_UpdateChatMessageFlair_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_UpdateChatMessageFlair_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_UpdateChatMessageFlair_Request} CBroadcast_UpdateChatMessageFlair_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_UpdateChatMessageFlair_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.flair = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_UpdateChatMessageFlair_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_UpdateChatMessageFlair_Request} CBroadcast_UpdateChatMessageFlair_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_UpdateChatMessageFlair_Request message.
+         * @function verify
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                if (!$util.isString(message.flair))
+                    return "flair: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_UpdateChatMessageFlair_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_UpdateChatMessageFlair_Request} CBroadcast_UpdateChatMessageFlair_Request
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_UpdateChatMessageFlair_Request)
+                return object;
+            var message = new $root.CBroadcast_UpdateChatMessageFlair_Request();
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.flair != null)
+                message.flair = String(object.flair);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_UpdateChatMessageFlair_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @static
+         * @param {CBroadcast_UpdateChatMessageFlair_Request} message CBroadcast_UpdateChatMessageFlair_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                object.flair = "";
+            }
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                object.flair = message.flair;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_UpdateChatMessageFlair_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_UpdateChatMessageFlair_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_UpdateChatMessageFlair_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_UpdateChatMessageFlair_Request;
+    })();
+    
+    $root.CBroadcast_UpdateChatMessageFlair_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_UpdateChatMessageFlair_Response.
+         * @exports ICBroadcast_UpdateChatMessageFlair_Response
+         * @interface ICBroadcast_UpdateChatMessageFlair_Response
+         * @property {number|null} [result] CBroadcast_UpdateChatMessageFlair_Response result
+         * @property {number|Long|null} [chat_id] CBroadcast_UpdateChatMessageFlair_Response chat_id
+         * @property {string|null} [flair] CBroadcast_UpdateChatMessageFlair_Response flair
+         */
+    
+        /**
+         * Constructs a new CBroadcast_UpdateChatMessageFlair_Response.
+         * @exports CBroadcast_UpdateChatMessageFlair_Response
+         * @classdesc Represents a CBroadcast_UpdateChatMessageFlair_Response.
+         * @implements ICBroadcast_UpdateChatMessageFlair_Response
+         * @constructor
+         * @param {ICBroadcast_UpdateChatMessageFlair_Response=} [properties] Properties to set
+         */
+        function CBroadcast_UpdateChatMessageFlair_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_UpdateChatMessageFlair_Response result.
+         * @member {number} result
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.prototype.result = 0;
+    
+        /**
+         * CBroadcast_UpdateChatMessageFlair_Response chat_id.
+         * @member {number|Long} chat_id
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.prototype.chat_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_UpdateChatMessageFlair_Response flair.
+         * @member {string} flair
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.prototype.flair = "";
+    
+        /**
+         * Creates a new CBroadcast_UpdateChatMessageFlair_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Response=} [properties] Properties to set
+         * @returns {CBroadcast_UpdateChatMessageFlair_Response} CBroadcast_UpdateChatMessageFlair_Response instance
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.create = function create(properties) {
+            return new CBroadcast_UpdateChatMessageFlair_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_UpdateChatMessageFlair_Response message. Does not implicitly {@link CBroadcast_UpdateChatMessageFlair_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Response} message CBroadcast_UpdateChatMessageFlair_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.result != null && message.hasOwnProperty("result"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result);
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.chat_id);
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.flair);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_UpdateChatMessageFlair_Response message, length delimited. Does not implicitly {@link CBroadcast_UpdateChatMessageFlair_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {ICBroadcast_UpdateChatMessageFlair_Response} message CBroadcast_UpdateChatMessageFlair_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_UpdateChatMessageFlair_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_UpdateChatMessageFlair_Response} CBroadcast_UpdateChatMessageFlair_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_UpdateChatMessageFlair_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.result = reader.int32();
+                    break;
+                case 2:
+                    message.chat_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.flair = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_UpdateChatMessageFlair_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_UpdateChatMessageFlair_Response} CBroadcast_UpdateChatMessageFlair_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_UpdateChatMessageFlair_Response message.
+         * @function verify
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.result != null && message.hasOwnProperty("result"))
+                if (!$util.isInteger(message.result))
+                    return "result: integer expected";
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (!$util.isInteger(message.chat_id) && !(message.chat_id && $util.isInteger(message.chat_id.low) && $util.isInteger(message.chat_id.high)))
+                    return "chat_id: integer|Long expected";
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                if (!$util.isString(message.flair))
+                    return "flair: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_UpdateChatMessageFlair_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_UpdateChatMessageFlair_Response} CBroadcast_UpdateChatMessageFlair_Response
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_UpdateChatMessageFlair_Response)
+                return object;
+            var message = new $root.CBroadcast_UpdateChatMessageFlair_Response();
+            if (object.result != null)
+                message.result = object.result | 0;
+            if (object.chat_id != null)
+                if ($util.Long)
+                    (message.chat_id = $util.Long.fromValue(object.chat_id)).unsigned = false;
+                else if (typeof object.chat_id === "string")
+                    message.chat_id = parseInt(object.chat_id, 10);
+                else if (typeof object.chat_id === "number")
+                    message.chat_id = object.chat_id;
+                else if (typeof object.chat_id === "object")
+                    message.chat_id = new $util.LongBits(object.chat_id.low >>> 0, object.chat_id.high >>> 0).toNumber();
+            if (object.flair != null)
+                message.flair = String(object.flair);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_UpdateChatMessageFlair_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @static
+         * @param {CBroadcast_UpdateChatMessageFlair_Response} message CBroadcast_UpdateChatMessageFlair_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.result = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.chat_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.chat_id = options.longs === String ? "0" : 0;
+                object.flair = "";
+            }
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = message.result;
+            if (message.chat_id != null && message.hasOwnProperty("chat_id"))
+                if (typeof message.chat_id === "number")
+                    object.chat_id = options.longs === String ? String(message.chat_id) : message.chat_id;
+                else
+                    object.chat_id = options.longs === String ? $util.Long.prototype.toString.call(message.chat_id) : options.longs === Number ? new $util.LongBits(message.chat_id.low >>> 0, message.chat_id.high >>> 0).toNumber() : message.chat_id;
+            if (message.flair != null && message.hasOwnProperty("flair"))
+                object.flair = message.flair;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_UpdateChatMessageFlair_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_UpdateChatMessageFlair_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_UpdateChatMessageFlair_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_UpdateChatMessageFlair_Response;
     })();
     
     $root.CBroadcast_MuteBroadcastChatUser_Request = (function() {
@@ -8120,6 +8946,8074 @@
         return CBroadcast_GetBroadcastChatUserNames_Response;
     })();
     
+    $root.CBroadcast_StartBuildClip_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StartBuildClip_Request.
+         * @exports ICBroadcast_StartBuildClip_Request
+         * @interface ICBroadcast_StartBuildClip_Request
+         * @property {number|Long|null} [steamid] CBroadcast_StartBuildClip_Request steamid
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_StartBuildClip_Request broadcast_session_id
+         * @property {number|null} [first_segment] CBroadcast_StartBuildClip_Request first_segment
+         * @property {number|null} [num_segments] CBroadcast_StartBuildClip_Request num_segments
+         * @property {string|null} [clip_description] CBroadcast_StartBuildClip_Request clip_description
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StartBuildClip_Request.
+         * @exports CBroadcast_StartBuildClip_Request
+         * @classdesc Represents a CBroadcast_StartBuildClip_Request.
+         * @implements ICBroadcast_StartBuildClip_Request
+         * @constructor
+         * @param {ICBroadcast_StartBuildClip_Request=} [properties] Properties to set
+         */
+        function CBroadcast_StartBuildClip_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StartBuildClip_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StartBuildClip_Request broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Request.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_StartBuildClip_Request first_segment.
+         * @member {number} first_segment
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Request.prototype.first_segment = 0;
+    
+        /**
+         * CBroadcast_StartBuildClip_Request num_segments.
+         * @member {number} num_segments
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Request.prototype.num_segments = 0;
+    
+        /**
+         * CBroadcast_StartBuildClip_Request clip_description.
+         * @member {string} clip_description
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Request.prototype.clip_description = "";
+    
+        /**
+         * Creates a new CBroadcast_StartBuildClip_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Request=} [properties] Properties to set
+         * @returns {CBroadcast_StartBuildClip_Request} CBroadcast_StartBuildClip_Request instance
+         */
+        CBroadcast_StartBuildClip_Request.create = function create(properties) {
+            return new CBroadcast_StartBuildClip_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBuildClip_Request message. Does not implicitly {@link CBroadcast_StartBuildClip_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Request} message CBroadcast_StartBuildClip_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBuildClip_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.broadcast_session_id);
+            if (message.first_segment != null && message.hasOwnProperty("first_segment"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.first_segment);
+            if (message.num_segments != null && message.hasOwnProperty("num_segments"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.num_segments);
+            if (message.clip_description != null && message.hasOwnProperty("clip_description"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.clip_description);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBuildClip_Request message, length delimited. Does not implicitly {@link CBroadcast_StartBuildClip_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Request} message CBroadcast_StartBuildClip_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBuildClip_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBuildClip_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StartBuildClip_Request} CBroadcast_StartBuildClip_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBuildClip_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StartBuildClip_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.first_segment = reader.int32();
+                    break;
+                case 4:
+                    message.num_segments = reader.int32();
+                    break;
+                case 5:
+                    message.clip_description = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBuildClip_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StartBuildClip_Request} CBroadcast_StartBuildClip_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBuildClip_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StartBuildClip_Request message.
+         * @function verify
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StartBuildClip_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            if (message.first_segment != null && message.hasOwnProperty("first_segment"))
+                if (!$util.isInteger(message.first_segment))
+                    return "first_segment: integer expected";
+            if (message.num_segments != null && message.hasOwnProperty("num_segments"))
+                if (!$util.isInteger(message.num_segments))
+                    return "num_segments: integer expected";
+            if (message.clip_description != null && message.hasOwnProperty("clip_description"))
+                if (!$util.isString(message.clip_description))
+                    return "clip_description: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StartBuildClip_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StartBuildClip_Request} CBroadcast_StartBuildClip_Request
+         */
+        CBroadcast_StartBuildClip_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StartBuildClip_Request)
+                return object;
+            var message = new $root.CBroadcast_StartBuildClip_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            if (object.first_segment != null)
+                message.first_segment = object.first_segment | 0;
+            if (object.num_segments != null)
+                message.num_segments = object.num_segments | 0;
+            if (object.clip_description != null)
+                message.clip_description = String(object.clip_description);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StartBuildClip_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @static
+         * @param {CBroadcast_StartBuildClip_Request} message CBroadcast_StartBuildClip_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StartBuildClip_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+                object.first_segment = 0;
+                object.num_segments = 0;
+                object.clip_description = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            if (message.first_segment != null && message.hasOwnProperty("first_segment"))
+                object.first_segment = message.first_segment;
+            if (message.num_segments != null && message.hasOwnProperty("num_segments"))
+                object.num_segments = message.num_segments;
+            if (message.clip_description != null && message.hasOwnProperty("clip_description"))
+                object.clip_description = message.clip_description;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StartBuildClip_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StartBuildClip_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StartBuildClip_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StartBuildClip_Request;
+    })();
+    
+    $root.CBroadcast_StartBuildClip_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_StartBuildClip_Response.
+         * @exports ICBroadcast_StartBuildClip_Response
+         * @interface ICBroadcast_StartBuildClip_Response
+         * @property {number|Long|null} [broadcast_clip_id] CBroadcast_StartBuildClip_Response broadcast_clip_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_StartBuildClip_Response.
+         * @exports CBroadcast_StartBuildClip_Response
+         * @classdesc Represents a CBroadcast_StartBuildClip_Response.
+         * @implements ICBroadcast_StartBuildClip_Response
+         * @constructor
+         * @param {ICBroadcast_StartBuildClip_Response=} [properties] Properties to set
+         */
+        function CBroadcast_StartBuildClip_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_StartBuildClip_Response broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @instance
+         */
+        CBroadcast_StartBuildClip_Response.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_StartBuildClip_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Response=} [properties] Properties to set
+         * @returns {CBroadcast_StartBuildClip_Response} CBroadcast_StartBuildClip_Response instance
+         */
+        CBroadcast_StartBuildClip_Response.create = function create(properties) {
+            return new CBroadcast_StartBuildClip_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBuildClip_Response message. Does not implicitly {@link CBroadcast_StartBuildClip_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Response} message CBroadcast_StartBuildClip_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBuildClip_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_clip_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_StartBuildClip_Response message, length delimited. Does not implicitly {@link CBroadcast_StartBuildClip_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {ICBroadcast_StartBuildClip_Response} message CBroadcast_StartBuildClip_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_StartBuildClip_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBuildClip_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_StartBuildClip_Response} CBroadcast_StartBuildClip_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBuildClip_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_StartBuildClip_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_StartBuildClip_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_StartBuildClip_Response} CBroadcast_StartBuildClip_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_StartBuildClip_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_StartBuildClip_Response message.
+         * @function verify
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_StartBuildClip_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_StartBuildClip_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_StartBuildClip_Response} CBroadcast_StartBuildClip_Response
+         */
+        CBroadcast_StartBuildClip_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_StartBuildClip_Response)
+                return object;
+            var message = new $root.CBroadcast_StartBuildClip_Response();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = false;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_StartBuildClip_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @static
+         * @param {CBroadcast_StartBuildClip_Response} message CBroadcast_StartBuildClip_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_StartBuildClip_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber() : message.broadcast_clip_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_StartBuildClip_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_StartBuildClip_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_StartBuildClip_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_StartBuildClip_Response;
+    })();
+    
+    $root.CBroadcast_GetBuildClipStatus_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBuildClipStatus_Request.
+         * @exports ICBroadcast_GetBuildClipStatus_Request
+         * @interface ICBroadcast_GetBuildClipStatus_Request
+         * @property {number|Long|null} [broadcast_clip_id] CBroadcast_GetBuildClipStatus_Request broadcast_clip_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBuildClipStatus_Request.
+         * @exports CBroadcast_GetBuildClipStatus_Request
+         * @classdesc Represents a CBroadcast_GetBuildClipStatus_Request.
+         * @implements ICBroadcast_GetBuildClipStatus_Request
+         * @constructor
+         * @param {ICBroadcast_GetBuildClipStatus_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBuildClipStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBuildClipStatus_Request broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @instance
+         */
+        CBroadcast_GetBuildClipStatus_Request.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBuildClipStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBuildClipStatus_Request} CBroadcast_GetBuildClipStatus_Request instance
+         */
+        CBroadcast_GetBuildClipStatus_Request.create = function create(properties) {
+            return new CBroadcast_GetBuildClipStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBuildClipStatus_Request message. Does not implicitly {@link CBroadcast_GetBuildClipStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Request} message CBroadcast_GetBuildClipStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBuildClipStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_clip_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBuildClipStatus_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBuildClipStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Request} message CBroadcast_GetBuildClipStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBuildClipStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBuildClipStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBuildClipStatus_Request} CBroadcast_GetBuildClipStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBuildClipStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBuildClipStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBuildClipStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBuildClipStatus_Request} CBroadcast_GetBuildClipStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBuildClipStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBuildClipStatus_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBuildClipStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBuildClipStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBuildClipStatus_Request} CBroadcast_GetBuildClipStatus_Request
+         */
+        CBroadcast_GetBuildClipStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBuildClipStatus_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBuildClipStatus_Request();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = false;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBuildClipStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @static
+         * @param {CBroadcast_GetBuildClipStatus_Request} message CBroadcast_GetBuildClipStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBuildClipStatus_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber() : message.broadcast_clip_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBuildClipStatus_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBuildClipStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBuildClipStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBuildClipStatus_Request;
+    })();
+    
+    $root.CBroadcast_GetBuildClipStatus_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBuildClipStatus_Response.
+         * @exports ICBroadcast_GetBuildClipStatus_Response
+         * @interface ICBroadcast_GetBuildClipStatus_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBuildClipStatus_Response.
+         * @exports CBroadcast_GetBuildClipStatus_Response
+         * @classdesc Represents a CBroadcast_GetBuildClipStatus_Response.
+         * @implements ICBroadcast_GetBuildClipStatus_Response
+         * @constructor
+         * @param {ICBroadcast_GetBuildClipStatus_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBuildClipStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_GetBuildClipStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBuildClipStatus_Response} CBroadcast_GetBuildClipStatus_Response instance
+         */
+        CBroadcast_GetBuildClipStatus_Response.create = function create(properties) {
+            return new CBroadcast_GetBuildClipStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBuildClipStatus_Response message. Does not implicitly {@link CBroadcast_GetBuildClipStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Response} message CBroadcast_GetBuildClipStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBuildClipStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBuildClipStatus_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBuildClipStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {ICBroadcast_GetBuildClipStatus_Response} message CBroadcast_GetBuildClipStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBuildClipStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBuildClipStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBuildClipStatus_Response} CBroadcast_GetBuildClipStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBuildClipStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBuildClipStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBuildClipStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBuildClipStatus_Response} CBroadcast_GetBuildClipStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBuildClipStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBuildClipStatus_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBuildClipStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBuildClipStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBuildClipStatus_Response} CBroadcast_GetBuildClipStatus_Response
+         */
+        CBroadcast_GetBuildClipStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBuildClipStatus_Response)
+                return object;
+            return new $root.CBroadcast_GetBuildClipStatus_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBuildClipStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @static
+         * @param {CBroadcast_GetBuildClipStatus_Response} message CBroadcast_GetBuildClipStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBuildClipStatus_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBuildClipStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBuildClipStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBuildClipStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBuildClipStatus_Response;
+    })();
+    
+    $root.CBroadcast_GetClipDetails_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetClipDetails_Request.
+         * @exports ICBroadcast_GetClipDetails_Request
+         * @interface ICBroadcast_GetClipDetails_Request
+         * @property {number|Long|null} [broadcast_clip_id] CBroadcast_GetClipDetails_Request broadcast_clip_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetClipDetails_Request.
+         * @exports CBroadcast_GetClipDetails_Request
+         * @classdesc Represents a CBroadcast_GetClipDetails_Request.
+         * @implements ICBroadcast_GetClipDetails_Request
+         * @constructor
+         * @param {ICBroadcast_GetClipDetails_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetClipDetails_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetClipDetails_Request broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Request.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetClipDetails_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetClipDetails_Request} CBroadcast_GetClipDetails_Request instance
+         */
+        CBroadcast_GetClipDetails_Request.create = function create(properties) {
+            return new CBroadcast_GetClipDetails_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetClipDetails_Request message. Does not implicitly {@link CBroadcast_GetClipDetails_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Request} message CBroadcast_GetClipDetails_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetClipDetails_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetClipDetails_Request message, length delimited. Does not implicitly {@link CBroadcast_GetClipDetails_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Request} message CBroadcast_GetClipDetails_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetClipDetails_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetClipDetails_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetClipDetails_Request} CBroadcast_GetClipDetails_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetClipDetails_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetClipDetails_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetClipDetails_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetClipDetails_Request} CBroadcast_GetClipDetails_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetClipDetails_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetClipDetails_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetClipDetails_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetClipDetails_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetClipDetails_Request} CBroadcast_GetClipDetails_Request
+         */
+        CBroadcast_GetClipDetails_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetClipDetails_Request)
+                return object;
+            var message = new $root.CBroadcast_GetClipDetails_Request();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = true;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetClipDetails_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @static
+         * @param {CBroadcast_GetClipDetails_Request} message CBroadcast_GetClipDetails_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetClipDetails_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber(true) : message.broadcast_clip_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetClipDetails_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetClipDetails_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetClipDetails_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetClipDetails_Request;
+    })();
+    
+    $root.CBroadcast_GetClipDetails_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetClipDetails_Response.
+         * @exports ICBroadcast_GetClipDetails_Response
+         * @interface ICBroadcast_GetClipDetails_Response
+         * @property {number|Long|null} [broadcast_clip_id] CBroadcast_GetClipDetails_Response broadcast_clip_id
+         * @property {number|Long|null} [video_id] CBroadcast_GetClipDetails_Response video_id
+         * @property {number|Long|null} [channel_id] CBroadcast_GetClipDetails_Response channel_id
+         * @property {number|null} [app_id] CBroadcast_GetClipDetails_Response app_id
+         * @property {number|null} [accountid_broadcaster] CBroadcast_GetClipDetails_Response accountid_broadcaster
+         * @property {number|null} [accountid_clipmaker] CBroadcast_GetClipDetails_Response accountid_clipmaker
+         * @property {string|null} [video_description] CBroadcast_GetClipDetails_Response video_description
+         * @property {number|null} [start_time] CBroadcast_GetClipDetails_Response start_time
+         * @property {number|null} [length_milliseconds] CBroadcast_GetClipDetails_Response length_milliseconds
+         * @property {string|null} [thumbnail_path] CBroadcast_GetClipDetails_Response thumbnail_path
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetClipDetails_Response.
+         * @exports CBroadcast_GetClipDetails_Response
+         * @classdesc Represents a CBroadcast_GetClipDetails_Response.
+         * @implements ICBroadcast_GetClipDetails_Response
+         * @constructor
+         * @param {ICBroadcast_GetClipDetails_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetClipDetails_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetClipDetails_Response broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response video_id.
+         * @member {number|Long} video_id
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.video_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response channel_id.
+         * @member {number|Long} channel_id
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.channel_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response app_id.
+         * @member {number} app_id
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.app_id = 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response accountid_broadcaster.
+         * @member {number} accountid_broadcaster
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.accountid_broadcaster = 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response accountid_clipmaker.
+         * @member {number} accountid_clipmaker
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.accountid_clipmaker = 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response video_description.
+         * @member {string} video_description
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.video_description = "";
+    
+        /**
+         * CBroadcast_GetClipDetails_Response start_time.
+         * @member {number} start_time
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.start_time = 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response length_milliseconds.
+         * @member {number} length_milliseconds
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.length_milliseconds = 0;
+    
+        /**
+         * CBroadcast_GetClipDetails_Response thumbnail_path.
+         * @member {string} thumbnail_path
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         */
+        CBroadcast_GetClipDetails_Response.prototype.thumbnail_path = "";
+    
+        /**
+         * Creates a new CBroadcast_GetClipDetails_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetClipDetails_Response} CBroadcast_GetClipDetails_Response instance
+         */
+        CBroadcast_GetClipDetails_Response.create = function create(properties) {
+            return new CBroadcast_GetClipDetails_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetClipDetails_Response message. Does not implicitly {@link CBroadcast_GetClipDetails_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Response} message CBroadcast_GetClipDetails_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetClipDetails_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
+            if (message.video_id != null && message.hasOwnProperty("video_id"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.video_id);
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.channel_id);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.app_id);
+            if (message.accountid_broadcaster != null && message.hasOwnProperty("accountid_broadcaster"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.accountid_broadcaster);
+            if (message.accountid_clipmaker != null && message.hasOwnProperty("accountid_clipmaker"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.accountid_clipmaker);
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.video_description);
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.start_time);
+            if (message.length_milliseconds != null && message.hasOwnProperty("length_milliseconds"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.length_milliseconds);
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.thumbnail_path);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetClipDetails_Response message, length delimited. Does not implicitly {@link CBroadcast_GetClipDetails_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_GetClipDetails_Response} message CBroadcast_GetClipDetails_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetClipDetails_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetClipDetails_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetClipDetails_Response} CBroadcast_GetClipDetails_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetClipDetails_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetClipDetails_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.uint64();
+                    break;
+                case 2:
+                    message.video_id = reader.uint64();
+                    break;
+                case 3:
+                    message.channel_id = reader.uint64();
+                    break;
+                case 4:
+                    message.app_id = reader.uint32();
+                    break;
+                case 5:
+                    message.accountid_broadcaster = reader.uint32();
+                    break;
+                case 6:
+                    message.accountid_clipmaker = reader.uint32();
+                    break;
+                case 7:
+                    message.video_description = reader.string();
+                    break;
+                case 8:
+                    message.start_time = reader.uint32();
+                    break;
+                case 9:
+                    message.length_milliseconds = reader.uint32();
+                    break;
+                case 10:
+                    message.thumbnail_path = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetClipDetails_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetClipDetails_Response} CBroadcast_GetClipDetails_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetClipDetails_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetClipDetails_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetClipDetails_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            if (message.video_id != null && message.hasOwnProperty("video_id"))
+                if (!$util.isInteger(message.video_id) && !(message.video_id && $util.isInteger(message.video_id.low) && $util.isInteger(message.video_id.high)))
+                    return "video_id: integer|Long expected";
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                if (!$util.isInteger(message.channel_id) && !(message.channel_id && $util.isInteger(message.channel_id.low) && $util.isInteger(message.channel_id.high)))
+                    return "channel_id: integer|Long expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.accountid_broadcaster != null && message.hasOwnProperty("accountid_broadcaster"))
+                if (!$util.isInteger(message.accountid_broadcaster))
+                    return "accountid_broadcaster: integer expected";
+            if (message.accountid_clipmaker != null && message.hasOwnProperty("accountid_clipmaker"))
+                if (!$util.isInteger(message.accountid_clipmaker))
+                    return "accountid_clipmaker: integer expected";
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                if (!$util.isString(message.video_description))
+                    return "video_description: string expected";
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                if (!$util.isInteger(message.start_time))
+                    return "start_time: integer expected";
+            if (message.length_milliseconds != null && message.hasOwnProperty("length_milliseconds"))
+                if (!$util.isInteger(message.length_milliseconds))
+                    return "length_milliseconds: integer expected";
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                if (!$util.isString(message.thumbnail_path))
+                    return "thumbnail_path: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetClipDetails_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetClipDetails_Response} CBroadcast_GetClipDetails_Response
+         */
+        CBroadcast_GetClipDetails_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetClipDetails_Response)
+                return object;
+            var message = new $root.CBroadcast_GetClipDetails_Response();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = true;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber(true);
+            if (object.video_id != null)
+                if ($util.Long)
+                    (message.video_id = $util.Long.fromValue(object.video_id)).unsigned = true;
+                else if (typeof object.video_id === "string")
+                    message.video_id = parseInt(object.video_id, 10);
+                else if (typeof object.video_id === "number")
+                    message.video_id = object.video_id;
+                else if (typeof object.video_id === "object")
+                    message.video_id = new $util.LongBits(object.video_id.low >>> 0, object.video_id.high >>> 0).toNumber(true);
+            if (object.channel_id != null)
+                if ($util.Long)
+                    (message.channel_id = $util.Long.fromValue(object.channel_id)).unsigned = true;
+                else if (typeof object.channel_id === "string")
+                    message.channel_id = parseInt(object.channel_id, 10);
+                else if (typeof object.channel_id === "number")
+                    message.channel_id = object.channel_id;
+                else if (typeof object.channel_id === "object")
+                    message.channel_id = new $util.LongBits(object.channel_id.low >>> 0, object.channel_id.high >>> 0).toNumber(true);
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.accountid_broadcaster != null)
+                message.accountid_broadcaster = object.accountid_broadcaster >>> 0;
+            if (object.accountid_clipmaker != null)
+                message.accountid_clipmaker = object.accountid_clipmaker >>> 0;
+            if (object.video_description != null)
+                message.video_description = String(object.video_description);
+            if (object.start_time != null)
+                message.start_time = object.start_time >>> 0;
+            if (object.length_milliseconds != null)
+                message.length_milliseconds = object.length_milliseconds >>> 0;
+            if (object.thumbnail_path != null)
+                message.thumbnail_path = String(object.thumbnail_path);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetClipDetails_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @static
+         * @param {CBroadcast_GetClipDetails_Response} message CBroadcast_GetClipDetails_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetClipDetails_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.video_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.video_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.channel_id = options.longs === String ? "0" : 0;
+                object.app_id = 0;
+                object.accountid_broadcaster = 0;
+                object.accountid_clipmaker = 0;
+                object.video_description = "";
+                object.start_time = 0;
+                object.length_milliseconds = 0;
+                object.thumbnail_path = "";
+            }
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber(true) : message.broadcast_clip_id;
+            if (message.video_id != null && message.hasOwnProperty("video_id"))
+                if (typeof message.video_id === "number")
+                    object.video_id = options.longs === String ? String(message.video_id) : message.video_id;
+                else
+                    object.video_id = options.longs === String ? $util.Long.prototype.toString.call(message.video_id) : options.longs === Number ? new $util.LongBits(message.video_id.low >>> 0, message.video_id.high >>> 0).toNumber(true) : message.video_id;
+            if (message.channel_id != null && message.hasOwnProperty("channel_id"))
+                if (typeof message.channel_id === "number")
+                    object.channel_id = options.longs === String ? String(message.channel_id) : message.channel_id;
+                else
+                    object.channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.channel_id) : options.longs === Number ? new $util.LongBits(message.channel_id.low >>> 0, message.channel_id.high >>> 0).toNumber(true) : message.channel_id;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.accountid_broadcaster != null && message.hasOwnProperty("accountid_broadcaster"))
+                object.accountid_broadcaster = message.accountid_broadcaster;
+            if (message.accountid_clipmaker != null && message.hasOwnProperty("accountid_clipmaker"))
+                object.accountid_clipmaker = message.accountid_clipmaker;
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                object.video_description = message.video_description;
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                object.start_time = message.start_time;
+            if (message.length_milliseconds != null && message.hasOwnProperty("length_milliseconds"))
+                object.length_milliseconds = message.length_milliseconds;
+            if (message.thumbnail_path != null && message.hasOwnProperty("thumbnail_path"))
+                object.thumbnail_path = message.thumbnail_path;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetClipDetails_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetClipDetails_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetClipDetails_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetClipDetails_Response;
+    })();
+    
+    $root.CBroadcast_SetRTMPInfo_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SetRTMPInfo_Request.
+         * @exports ICBroadcast_SetRTMPInfo_Request
+         * @interface ICBroadcast_SetRTMPInfo_Request
+         * @property {number|null} [broadcast_permission] CBroadcast_SetRTMPInfo_Request broadcast_permission
+         * @property {boolean|null} [update_token] CBroadcast_SetRTMPInfo_Request update_token
+         * @property {number|null} [broadcast_delay] CBroadcast_SetRTMPInfo_Request broadcast_delay
+         * @property {number|null} [app_id] CBroadcast_SetRTMPInfo_Request app_id
+         * @property {number|null} [required_app_id] CBroadcast_SetRTMPInfo_Request required_app_id
+         * @property {EBroadcastChatPermission|null} [broadcast_chat_permission] CBroadcast_SetRTMPInfo_Request broadcast_chat_permission
+         * @property {number|null} [broadcast_buffer] CBroadcast_SetRTMPInfo_Request broadcast_buffer
+         * @property {number|Long|null} [steamid] CBroadcast_SetRTMPInfo_Request steamid
+         * @property {number|null} [chat_rate_limit] CBroadcast_SetRTMPInfo_Request chat_rate_limit
+         * @property {boolean|null} [enable_replay] CBroadcast_SetRTMPInfo_Request enable_replay
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SetRTMPInfo_Request.
+         * @exports CBroadcast_SetRTMPInfo_Request
+         * @classdesc Represents a CBroadcast_SetRTMPInfo_Request.
+         * @implements ICBroadcast_SetRTMPInfo_Request
+         * @constructor
+         * @param {ICBroadcast_SetRTMPInfo_Request=} [properties] Properties to set
+         */
+        function CBroadcast_SetRTMPInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request broadcast_permission.
+         * @member {number} broadcast_permission
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.broadcast_permission = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request update_token.
+         * @member {boolean} update_token
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.update_token = false;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request broadcast_delay.
+         * @member {number} broadcast_delay
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.broadcast_delay = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request app_id.
+         * @member {number} app_id
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.app_id = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request required_app_id.
+         * @member {number} required_app_id
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.required_app_id = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request broadcast_chat_permission.
+         * @member {EBroadcastChatPermission} broadcast_chat_permission
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.broadcast_chat_permission = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request broadcast_buffer.
+         * @member {number} broadcast_buffer
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.broadcast_buffer = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request chat_rate_limit.
+         * @member {number} chat_rate_limit
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.chat_rate_limit = 0;
+    
+        /**
+         * CBroadcast_SetRTMPInfo_Request enable_replay.
+         * @member {boolean} enable_replay
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.enable_replay = false;
+    
+        /**
+         * Creates a new CBroadcast_SetRTMPInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Request=} [properties] Properties to set
+         * @returns {CBroadcast_SetRTMPInfo_Request} CBroadcast_SetRTMPInfo_Request instance
+         */
+        CBroadcast_SetRTMPInfo_Request.create = function create(properties) {
+            return new CBroadcast_SetRTMPInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetRTMPInfo_Request message. Does not implicitly {@link CBroadcast_SetRTMPInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Request} message CBroadcast_SetRTMPInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetRTMPInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.broadcast_permission);
+            if (message.update_token != null && message.hasOwnProperty("update_token"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.update_token);
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.broadcast_delay);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.app_id);
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.required_app_id);
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.broadcast_chat_permission);
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.broadcast_buffer);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 8, wireType 1 =*/65).fixed64(message.steamid);
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.chat_rate_limit);
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enable_replay);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetRTMPInfo_Request message, length delimited. Does not implicitly {@link CBroadcast_SetRTMPInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Request} message CBroadcast_SetRTMPInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetRTMPInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetRTMPInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SetRTMPInfo_Request} CBroadcast_SetRTMPInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetRTMPInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetRTMPInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_permission = reader.int32();
+                    break;
+                case 2:
+                    message.update_token = reader.bool();
+                    break;
+                case 3:
+                    message.broadcast_delay = reader.int32();
+                    break;
+                case 4:
+                    message.app_id = reader.uint32();
+                    break;
+                case 5:
+                    message.required_app_id = reader.uint32();
+                    break;
+                case 6:
+                    message.broadcast_chat_permission = reader.int32();
+                    break;
+                case 7:
+                    message.broadcast_buffer = reader.int32();
+                    break;
+                case 8:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 9:
+                    message.chat_rate_limit = reader.uint32();
+                    break;
+                case 10:
+                    message.enable_replay = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetRTMPInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SetRTMPInfo_Request} CBroadcast_SetRTMPInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetRTMPInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SetRTMPInfo_Request message.
+         * @function verify
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SetRTMPInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                if (!$util.isInteger(message.broadcast_permission))
+                    return "broadcast_permission: integer expected";
+            if (message.update_token != null && message.hasOwnProperty("update_token"))
+                if (typeof message.update_token !== "boolean")
+                    return "update_token: boolean expected";
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                if (!$util.isInteger(message.broadcast_delay))
+                    return "broadcast_delay: integer expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                if (!$util.isInteger(message.required_app_id))
+                    return "required_app_id: integer expected";
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                switch (message.broadcast_chat_permission) {
+                default:
+                    return "broadcast_chat_permission: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                if (!$util.isInteger(message.broadcast_buffer))
+                    return "broadcast_buffer: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                if (!$util.isInteger(message.chat_rate_limit))
+                    return "chat_rate_limit: integer expected";
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                if (typeof message.enable_replay !== "boolean")
+                    return "enable_replay: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SetRTMPInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SetRTMPInfo_Request} CBroadcast_SetRTMPInfo_Request
+         */
+        CBroadcast_SetRTMPInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SetRTMPInfo_Request)
+                return object;
+            var message = new $root.CBroadcast_SetRTMPInfo_Request();
+            if (object.broadcast_permission != null)
+                message.broadcast_permission = object.broadcast_permission | 0;
+            if (object.update_token != null)
+                message.update_token = Boolean(object.update_token);
+            if (object.broadcast_delay != null)
+                message.broadcast_delay = object.broadcast_delay | 0;
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.required_app_id != null)
+                message.required_app_id = object.required_app_id >>> 0;
+            switch (object.broadcast_chat_permission) {
+            case "k_EBroadcastChatPermissionPublic":
+            case 0:
+                message.broadcast_chat_permission = 0;
+                break;
+            case "k_EBroadcastChatPermissionOwnsApp":
+            case 1:
+                message.broadcast_chat_permission = 1;
+                break;
+            }
+            if (object.broadcast_buffer != null)
+                message.broadcast_buffer = object.broadcast_buffer | 0;
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.chat_rate_limit != null)
+                message.chat_rate_limit = object.chat_rate_limit >>> 0;
+            if (object.enable_replay != null)
+                message.enable_replay = Boolean(object.enable_replay);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SetRTMPInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @static
+         * @param {CBroadcast_SetRTMPInfo_Request} message CBroadcast_SetRTMPInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SetRTMPInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.broadcast_permission = 0;
+                object.update_token = false;
+                object.broadcast_delay = 0;
+                object.app_id = 0;
+                object.required_app_id = 0;
+                object.broadcast_chat_permission = options.enums === String ? "k_EBroadcastChatPermissionPublic" : 0;
+                object.broadcast_buffer = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.chat_rate_limit = 0;
+                object.enable_replay = false;
+            }
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                object.broadcast_permission = message.broadcast_permission;
+            if (message.update_token != null && message.hasOwnProperty("update_token"))
+                object.update_token = message.update_token;
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                object.broadcast_delay = message.broadcast_delay;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                object.required_app_id = message.required_app_id;
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                object.broadcast_chat_permission = options.enums === String ? $root.EBroadcastChatPermission[message.broadcast_chat_permission] : message.broadcast_chat_permission;
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                object.broadcast_buffer = message.broadcast_buffer;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                object.chat_rate_limit = message.chat_rate_limit;
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                object.enable_replay = message.enable_replay;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_SetRTMPInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SetRTMPInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SetRTMPInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SetRTMPInfo_Request;
+    })();
+    
+    $root.CBroadcast_SetRTMPInfo_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SetRTMPInfo_Response.
+         * @exports ICBroadcast_SetRTMPInfo_Response
+         * @interface ICBroadcast_SetRTMPInfo_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SetRTMPInfo_Response.
+         * @exports CBroadcast_SetRTMPInfo_Response
+         * @classdesc Represents a CBroadcast_SetRTMPInfo_Response.
+         * @implements ICBroadcast_SetRTMPInfo_Response
+         * @constructor
+         * @param {ICBroadcast_SetRTMPInfo_Response=} [properties] Properties to set
+         */
+        function CBroadcast_SetRTMPInfo_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_SetRTMPInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Response=} [properties] Properties to set
+         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response instance
+         */
+        CBroadcast_SetRTMPInfo_Response.create = function create(properties) {
+            return new CBroadcast_SetRTMPInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetRTMPInfo_Response message. Does not implicitly {@link CBroadcast_SetRTMPInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetRTMPInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetRTMPInfo_Response message, length delimited. Does not implicitly {@link CBroadcast_SetRTMPInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetRTMPInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetRTMPInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetRTMPInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetRTMPInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetRTMPInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetRTMPInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SetRTMPInfo_Response message.
+         * @function verify
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SetRTMPInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SetRTMPInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SetRTMPInfo_Response} CBroadcast_SetRTMPInfo_Response
+         */
+        CBroadcast_SetRTMPInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SetRTMPInfo_Response)
+                return object;
+            return new $root.CBroadcast_SetRTMPInfo_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SetRTMPInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @static
+         * @param {CBroadcast_SetRTMPInfo_Response} message CBroadcast_SetRTMPInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SetRTMPInfo_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_SetRTMPInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SetRTMPInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SetRTMPInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SetRTMPInfo_Response;
+    })();
+    
+    $root.CBroadcast_GetRTMPInfo_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetRTMPInfo_Request.
+         * @exports ICBroadcast_GetRTMPInfo_Request
+         * @interface ICBroadcast_GetRTMPInfo_Request
+         * @property {number|null} [ip] CBroadcast_GetRTMPInfo_Request ip
+         * @property {number|Long|null} [steamid] CBroadcast_GetRTMPInfo_Request steamid
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetRTMPInfo_Request.
+         * @exports CBroadcast_GetRTMPInfo_Request
+         * @classdesc Represents a CBroadcast_GetRTMPInfo_Request.
+         * @implements ICBroadcast_GetRTMPInfo_Request
+         * @constructor
+         * @param {ICBroadcast_GetRTMPInfo_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetRTMPInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Request ip.
+         * @member {number} ip
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Request.prototype.ip = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetRTMPInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetRTMPInfo_Request} CBroadcast_GetRTMPInfo_Request instance
+         */
+        CBroadcast_GetRTMPInfo_Request.create = function create(properties) {
+            return new CBroadcast_GetRTMPInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetRTMPInfo_Request message. Does not implicitly {@link CBroadcast_GetRTMPInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Request} message CBroadcast_GetRTMPInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetRTMPInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.ip);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetRTMPInfo_Request message, length delimited. Does not implicitly {@link CBroadcast_GetRTMPInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Request} message CBroadcast_GetRTMPInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetRTMPInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetRTMPInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetRTMPInfo_Request} CBroadcast_GetRTMPInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetRTMPInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetRTMPInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ip = reader.uint32();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetRTMPInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetRTMPInfo_Request} CBroadcast_GetRTMPInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetRTMPInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetRTMPInfo_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetRTMPInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                if (!$util.isInteger(message.ip))
+                    return "ip: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetRTMPInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetRTMPInfo_Request} CBroadcast_GetRTMPInfo_Request
+         */
+        CBroadcast_GetRTMPInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetRTMPInfo_Request)
+                return object;
+            var message = new $root.CBroadcast_GetRTMPInfo_Request();
+            if (object.ip != null)
+                message.ip = object.ip >>> 0;
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetRTMPInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @static
+         * @param {CBroadcast_GetRTMPInfo_Request} message CBroadcast_GetRTMPInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetRTMPInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ip = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+            }
+            if (message.ip != null && message.hasOwnProperty("ip"))
+                object.ip = message.ip;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetRTMPInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetRTMPInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetRTMPInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetRTMPInfo_Request;
+    })();
+    
+    $root.CBroadcast_GetRTMPInfo_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetRTMPInfo_Response.
+         * @exports ICBroadcast_GetRTMPInfo_Response
+         * @interface ICBroadcast_GetRTMPInfo_Response
+         * @property {number|null} [broadcast_permission] CBroadcast_GetRTMPInfo_Response broadcast_permission
+         * @property {string|null} [rtmp_host] CBroadcast_GetRTMPInfo_Response rtmp_host
+         * @property {string|null} [rtmp_token] CBroadcast_GetRTMPInfo_Response rtmp_token
+         * @property {number|null} [broadcast_delay] CBroadcast_GetRTMPInfo_Response broadcast_delay
+         * @property {number|null} [app_id] CBroadcast_GetRTMPInfo_Response app_id
+         * @property {number|null} [required_app_id] CBroadcast_GetRTMPInfo_Response required_app_id
+         * @property {EBroadcastChatPermission|null} [broadcast_chat_permission] CBroadcast_GetRTMPInfo_Response broadcast_chat_permission
+         * @property {number|null} [broadcast_buffer] CBroadcast_GetRTMPInfo_Response broadcast_buffer
+         * @property {number|Long|null} [steamid] CBroadcast_GetRTMPInfo_Response steamid
+         * @property {number|null} [chat_rate_limit] CBroadcast_GetRTMPInfo_Response chat_rate_limit
+         * @property {boolean|null} [enable_replay] CBroadcast_GetRTMPInfo_Response enable_replay
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetRTMPInfo_Response.
+         * @exports CBroadcast_GetRTMPInfo_Response
+         * @classdesc Represents a CBroadcast_GetRTMPInfo_Response.
+         * @implements ICBroadcast_GetRTMPInfo_Response
+         * @constructor
+         * @param {ICBroadcast_GetRTMPInfo_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetRTMPInfo_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response broadcast_permission.
+         * @member {number} broadcast_permission
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_permission = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response rtmp_host.
+         * @member {string} rtmp_host
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.rtmp_host = "";
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response rtmp_token.
+         * @member {string} rtmp_token
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.rtmp_token = "";
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response broadcast_delay.
+         * @member {number} broadcast_delay
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_delay = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response app_id.
+         * @member {number} app_id
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.app_id = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response required_app_id.
+         * @member {number} required_app_id
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.required_app_id = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response broadcast_chat_permission.
+         * @member {EBroadcastChatPermission} broadcast_chat_permission
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_chat_permission = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response broadcast_buffer.
+         * @member {number} broadcast_buffer
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.broadcast_buffer = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response chat_rate_limit.
+         * @member {number} chat_rate_limit
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.chat_rate_limit = 0;
+    
+        /**
+         * CBroadcast_GetRTMPInfo_Response enable_replay.
+         * @member {boolean} enable_replay
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.enable_replay = false;
+    
+        /**
+         * Creates a new CBroadcast_GetRTMPInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response instance
+         */
+        CBroadcast_GetRTMPInfo_Response.create = function create(properties) {
+            return new CBroadcast_GetRTMPInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetRTMPInfo_Response message. Does not implicitly {@link CBroadcast_GetRTMPInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetRTMPInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.broadcast_permission);
+            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rtmp_host);
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.rtmp_token);
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.broadcast_delay);
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.app_id);
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.required_app_id);
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.broadcast_chat_permission);
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.broadcast_buffer);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 9, wireType 1 =*/73).fixed64(message.steamid);
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.chat_rate_limit);
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enable_replay);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetRTMPInfo_Response message, length delimited. Does not implicitly {@link CBroadcast_GetRTMPInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {ICBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetRTMPInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetRTMPInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetRTMPInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetRTMPInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_permission = reader.int32();
+                    break;
+                case 2:
+                    message.rtmp_host = reader.string();
+                    break;
+                case 3:
+                    message.rtmp_token = reader.string();
+                    break;
+                case 4:
+                    message.broadcast_delay = reader.int32();
+                    break;
+                case 5:
+                    message.app_id = reader.uint32();
+                    break;
+                case 6:
+                    message.required_app_id = reader.uint32();
+                    break;
+                case 7:
+                    message.broadcast_chat_permission = reader.int32();
+                    break;
+                case 8:
+                    message.broadcast_buffer = reader.int32();
+                    break;
+                case 9:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 10:
+                    message.chat_rate_limit = reader.uint32();
+                    break;
+                case 11:
+                    message.enable_replay = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetRTMPInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetRTMPInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetRTMPInfo_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetRTMPInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                if (!$util.isInteger(message.broadcast_permission))
+                    return "broadcast_permission: integer expected";
+            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
+                if (!$util.isString(message.rtmp_host))
+                    return "rtmp_host: string expected";
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                if (!$util.isString(message.rtmp_token))
+                    return "rtmp_token: string expected";
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                if (!$util.isInteger(message.broadcast_delay))
+                    return "broadcast_delay: integer expected";
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                if (!$util.isInteger(message.app_id))
+                    return "app_id: integer expected";
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                if (!$util.isInteger(message.required_app_id))
+                    return "required_app_id: integer expected";
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                switch (message.broadcast_chat_permission) {
+                default:
+                    return "broadcast_chat_permission: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                if (!$util.isInteger(message.broadcast_buffer))
+                    return "broadcast_buffer: integer expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                if (!$util.isInteger(message.chat_rate_limit))
+                    return "chat_rate_limit: integer expected";
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                if (typeof message.enable_replay !== "boolean")
+                    return "enable_replay: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetRTMPInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetRTMPInfo_Response} CBroadcast_GetRTMPInfo_Response
+         */
+        CBroadcast_GetRTMPInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetRTMPInfo_Response)
+                return object;
+            var message = new $root.CBroadcast_GetRTMPInfo_Response();
+            if (object.broadcast_permission != null)
+                message.broadcast_permission = object.broadcast_permission | 0;
+            if (object.rtmp_host != null)
+                message.rtmp_host = String(object.rtmp_host);
+            if (object.rtmp_token != null)
+                message.rtmp_token = String(object.rtmp_token);
+            if (object.broadcast_delay != null)
+                message.broadcast_delay = object.broadcast_delay | 0;
+            if (object.app_id != null)
+                message.app_id = object.app_id >>> 0;
+            if (object.required_app_id != null)
+                message.required_app_id = object.required_app_id >>> 0;
+            switch (object.broadcast_chat_permission) {
+            case "k_EBroadcastChatPermissionPublic":
+            case 0:
+                message.broadcast_chat_permission = 0;
+                break;
+            case "k_EBroadcastChatPermissionOwnsApp":
+            case 1:
+                message.broadcast_chat_permission = 1;
+                break;
+            }
+            if (object.broadcast_buffer != null)
+                message.broadcast_buffer = object.broadcast_buffer | 0;
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.chat_rate_limit != null)
+                message.chat_rate_limit = object.chat_rate_limit >>> 0;
+            if (object.enable_replay != null)
+                message.enable_replay = Boolean(object.enable_replay);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetRTMPInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @static
+         * @param {CBroadcast_GetRTMPInfo_Response} message CBroadcast_GetRTMPInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetRTMPInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.broadcast_permission = 0;
+                object.rtmp_host = "";
+                object.rtmp_token = "";
+                object.broadcast_delay = 0;
+                object.app_id = 0;
+                object.required_app_id = 0;
+                object.broadcast_chat_permission = options.enums === String ? "k_EBroadcastChatPermissionPublic" : 0;
+                object.broadcast_buffer = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.chat_rate_limit = 0;
+                object.enable_replay = false;
+            }
+            if (message.broadcast_permission != null && message.hasOwnProperty("broadcast_permission"))
+                object.broadcast_permission = message.broadcast_permission;
+            if (message.rtmp_host != null && message.hasOwnProperty("rtmp_host"))
+                object.rtmp_host = message.rtmp_host;
+            if (message.rtmp_token != null && message.hasOwnProperty("rtmp_token"))
+                object.rtmp_token = message.rtmp_token;
+            if (message.broadcast_delay != null && message.hasOwnProperty("broadcast_delay"))
+                object.broadcast_delay = message.broadcast_delay;
+            if (message.app_id != null && message.hasOwnProperty("app_id"))
+                object.app_id = message.app_id;
+            if (message.required_app_id != null && message.hasOwnProperty("required_app_id"))
+                object.required_app_id = message.required_app_id;
+            if (message.broadcast_chat_permission != null && message.hasOwnProperty("broadcast_chat_permission"))
+                object.broadcast_chat_permission = options.enums === String ? $root.EBroadcastChatPermission[message.broadcast_chat_permission] : message.broadcast_chat_permission;
+            if (message.broadcast_buffer != null && message.hasOwnProperty("broadcast_buffer"))
+                object.broadcast_buffer = message.broadcast_buffer;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.chat_rate_limit != null && message.hasOwnProperty("chat_rate_limit"))
+                object.chat_rate_limit = message.chat_rate_limit;
+            if (message.enable_replay != null && message.hasOwnProperty("enable_replay"))
+                object.enable_replay = message.enable_replay;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetRTMPInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetRTMPInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetRTMPInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetRTMPInfo_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCHaveTURNServer_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCHaveTURNServer_Notification.
+         * @exports ICBroadcast_WebRTCHaveTURNServer_Notification
+         * @interface ICBroadcast_WebRTCHaveTURNServer_Notification
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_WebRTCHaveTURNServer_Notification broadcast_session_id
+         * @property {string|null} [turn_server] CBroadcast_WebRTCHaveTURNServer_Notification turn_server
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCHaveTURNServer_Notification.
+         * @exports CBroadcast_WebRTCHaveTURNServer_Notification
+         * @classdesc Represents a CBroadcast_WebRTCHaveTURNServer_Notification.
+         * @implements ICBroadcast_WebRTCHaveTURNServer_Notification
+         * @constructor
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCHaveTURNServer_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCHaveTURNServer_Notification broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCHaveTURNServer_Notification turn_server.
+         * @member {string} turn_server
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.prototype.turn_server = "";
+    
+        /**
+         * Creates a new CBroadcast_WebRTCHaveTURNServer_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCHaveTURNServer_Notification} CBroadcast_WebRTCHaveTURNServer_Notification instance
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.create = function create(properties) {
+            return new CBroadcast_WebRTCHaveTURNServer_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCHaveTURNServer_Notification message. Does not implicitly {@link CBroadcast_WebRTCHaveTURNServer_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification} message CBroadcast_WebRTCHaveTURNServer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.turn_server);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCHaveTURNServer_Notification message, length delimited. Does not implicitly {@link CBroadcast_WebRTCHaveTURNServer_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification} message CBroadcast_WebRTCHaveTURNServer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCHaveTURNServer_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCHaveTURNServer_Notification} CBroadcast_WebRTCHaveTURNServer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCHaveTURNServer_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.turn_server = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCHaveTURNServer_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCHaveTURNServer_Notification} CBroadcast_WebRTCHaveTURNServer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCHaveTURNServer_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                if (!$util.isString(message.turn_server))
+                    return "turn_server: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCHaveTURNServer_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCHaveTURNServer_Notification} CBroadcast_WebRTCHaveTURNServer_Notification
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCHaveTURNServer_Notification)
+                return object;
+            var message = new $root.CBroadcast_WebRTCHaveTURNServer_Notification();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            if (object.turn_server != null)
+                message.turn_server = String(object.turn_server);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCHaveTURNServer_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @static
+         * @param {CBroadcast_WebRTCHaveTURNServer_Notification} message CBroadcast_WebRTCHaveTURNServer_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+                object.turn_server = "";
+            }
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                object.turn_server = message.turn_server;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCHaveTURNServer_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCHaveTURNServer_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCHaveTURNServer_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCHaveTURNServer_Notification;
+    })();
+    
+    $root.CBroadcast_WebRTCStartResult_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCStartResult_Request.
+         * @exports ICBroadcast_WebRTCStartResult_Request
+         * @interface ICBroadcast_WebRTCStartResult_Request
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCStartResult_Request webrtc_session_id
+         * @property {boolean|null} [started] CBroadcast_WebRTCStartResult_Request started
+         * @property {string|null} [offer] CBroadcast_WebRTCStartResult_Request offer
+         * @property {number|null} [resolution_x] CBroadcast_WebRTCStartResult_Request resolution_x
+         * @property {number|null} [resolution_y] CBroadcast_WebRTCStartResult_Request resolution_y
+         * @property {number|null} [fps] CBroadcast_WebRTCStartResult_Request fps
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCStartResult_Request.
+         * @exports CBroadcast_WebRTCStartResult_Request
+         * @classdesc Represents a CBroadcast_WebRTCStartResult_Request.
+         * @implements ICBroadcast_WebRTCStartResult_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCStartResult_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCStartResult_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request started.
+         * @member {boolean} started
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.started = false;
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request offer.
+         * @member {string} offer
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.offer = "";
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request resolution_x.
+         * @member {number} resolution_x
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.resolution_x = 0;
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request resolution_y.
+         * @member {number} resolution_y
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.resolution_y = 0;
+    
+        /**
+         * CBroadcast_WebRTCStartResult_Request fps.
+         * @member {number} fps
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.fps = 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCStartResult_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCStartResult_Request} CBroadcast_WebRTCStartResult_Request instance
+         */
+        CBroadcast_WebRTCStartResult_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCStartResult_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStartResult_Request message. Does not implicitly {@link CBroadcast_WebRTCStartResult_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Request} message CBroadcast_WebRTCStartResult_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStartResult_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
+            if (message.started != null && message.hasOwnProperty("started"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.started);
+            if (message.offer != null && message.hasOwnProperty("offer"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.offer);
+            if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.resolution_x);
+            if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.resolution_y);
+            if (message.fps != null && message.hasOwnProperty("fps"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.fps);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStartResult_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCStartResult_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Request} message CBroadcast_WebRTCStartResult_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStartResult_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStartResult_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCStartResult_Request} CBroadcast_WebRTCStartResult_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStartResult_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCStartResult_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.started = reader.bool();
+                    break;
+                case 3:
+                    message.offer = reader.string();
+                    break;
+                case 4:
+                    message.resolution_x = reader.uint32();
+                    break;
+                case 5:
+                    message.resolution_y = reader.uint32();
+                    break;
+                case 6:
+                    message.fps = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStartResult_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCStartResult_Request} CBroadcast_WebRTCStartResult_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStartResult_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCStartResult_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCStartResult_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.started != null && message.hasOwnProperty("started"))
+                if (typeof message.started !== "boolean")
+                    return "started: boolean expected";
+            if (message.offer != null && message.hasOwnProperty("offer"))
+                if (!$util.isString(message.offer))
+                    return "offer: string expected";
+            if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                if (!$util.isInteger(message.resolution_x))
+                    return "resolution_x: integer expected";
+            if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                if (!$util.isInteger(message.resolution_y))
+                    return "resolution_y: integer expected";
+            if (message.fps != null && message.hasOwnProperty("fps"))
+                if (!$util.isInteger(message.fps))
+                    return "fps: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCStartResult_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCStartResult_Request} CBroadcast_WebRTCStartResult_Request
+         */
+        CBroadcast_WebRTCStartResult_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCStartResult_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCStartResult_Request();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.started != null)
+                message.started = Boolean(object.started);
+            if (object.offer != null)
+                message.offer = String(object.offer);
+            if (object.resolution_x != null)
+                message.resolution_x = object.resolution_x >>> 0;
+            if (object.resolution_y != null)
+                message.resolution_y = object.resolution_y >>> 0;
+            if (object.fps != null)
+                message.fps = object.fps >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCStartResult_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @static
+         * @param {CBroadcast_WebRTCStartResult_Request} message CBroadcast_WebRTCStartResult_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCStartResult_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.started = false;
+                object.offer = "";
+                object.resolution_x = 0;
+                object.resolution_y = 0;
+                object.fps = 0;
+            }
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.started != null && message.hasOwnProperty("started"))
+                object.started = message.started;
+            if (message.offer != null && message.hasOwnProperty("offer"))
+                object.offer = message.offer;
+            if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                object.resolution_x = message.resolution_x;
+            if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                object.resolution_y = message.resolution_y;
+            if (message.fps != null && message.hasOwnProperty("fps"))
+                object.fps = message.fps;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCStartResult_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCStartResult_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCStartResult_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCStartResult_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCStartResult_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCStartResult_Response.
+         * @exports ICBroadcast_WebRTCStartResult_Response
+         * @interface ICBroadcast_WebRTCStartResult_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCStartResult_Response.
+         * @exports CBroadcast_WebRTCStartResult_Response
+         * @classdesc Represents a CBroadcast_WebRTCStartResult_Response.
+         * @implements ICBroadcast_WebRTCStartResult_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCStartResult_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCStartResult_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_WebRTCStartResult_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCStartResult_Response} CBroadcast_WebRTCStartResult_Response instance
+         */
+        CBroadcast_WebRTCStartResult_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCStartResult_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStartResult_Response message. Does not implicitly {@link CBroadcast_WebRTCStartResult_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Response} message CBroadcast_WebRTCStartResult_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStartResult_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStartResult_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCStartResult_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStartResult_Response} message CBroadcast_WebRTCStartResult_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStartResult_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStartResult_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCStartResult_Response} CBroadcast_WebRTCStartResult_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStartResult_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCStartResult_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStartResult_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCStartResult_Response} CBroadcast_WebRTCStartResult_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStartResult_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCStartResult_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCStartResult_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCStartResult_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCStartResult_Response} CBroadcast_WebRTCStartResult_Response
+         */
+        CBroadcast_WebRTCStartResult_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCStartResult_Response)
+                return object;
+            return new $root.CBroadcast_WebRTCStartResult_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCStartResult_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @static
+         * @param {CBroadcast_WebRTCStartResult_Response} message CBroadcast_WebRTCStartResult_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCStartResult_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCStartResult_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCStartResult_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCStartResult_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCStartResult_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCStopped_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCStopped_Request.
+         * @exports ICBroadcast_WebRTCStopped_Request
+         * @interface ICBroadcast_WebRTCStopped_Request
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCStopped_Request webrtc_session_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCStopped_Request.
+         * @exports CBroadcast_WebRTCStopped_Request
+         * @classdesc Represents a CBroadcast_WebRTCStopped_Request.
+         * @implements ICBroadcast_WebRTCStopped_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCStopped_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCStopped_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCStopped_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @instance
+         */
+        CBroadcast_WebRTCStopped_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCStopped_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCStopped_Request} CBroadcast_WebRTCStopped_Request instance
+         */
+        CBroadcast_WebRTCStopped_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCStopped_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStopped_Request message. Does not implicitly {@link CBroadcast_WebRTCStopped_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Request} message CBroadcast_WebRTCStopped_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStopped_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStopped_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCStopped_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Request} message CBroadcast_WebRTCStopped_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStopped_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStopped_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCStopped_Request} CBroadcast_WebRTCStopped_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStopped_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCStopped_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStopped_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCStopped_Request} CBroadcast_WebRTCStopped_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStopped_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCStopped_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCStopped_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCStopped_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCStopped_Request} CBroadcast_WebRTCStopped_Request
+         */
+        CBroadcast_WebRTCStopped_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCStopped_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCStopped_Request();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCStopped_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @static
+         * @param {CBroadcast_WebRTCStopped_Request} message CBroadcast_WebRTCStopped_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCStopped_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCStopped_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCStopped_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCStopped_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCStopped_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCStopped_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCStopped_Response.
+         * @exports ICBroadcast_WebRTCStopped_Response
+         * @interface ICBroadcast_WebRTCStopped_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCStopped_Response.
+         * @exports CBroadcast_WebRTCStopped_Response
+         * @classdesc Represents a CBroadcast_WebRTCStopped_Response.
+         * @implements ICBroadcast_WebRTCStopped_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCStopped_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCStopped_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_WebRTCStopped_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCStopped_Response} CBroadcast_WebRTCStopped_Response instance
+         */
+        CBroadcast_WebRTCStopped_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCStopped_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStopped_Response message. Does not implicitly {@link CBroadcast_WebRTCStopped_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Response} message CBroadcast_WebRTCStopped_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStopped_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStopped_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCStopped_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {ICBroadcast_WebRTCStopped_Response} message CBroadcast_WebRTCStopped_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStopped_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStopped_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCStopped_Response} CBroadcast_WebRTCStopped_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStopped_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCStopped_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStopped_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCStopped_Response} CBroadcast_WebRTCStopped_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStopped_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCStopped_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCStopped_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCStopped_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCStopped_Response} CBroadcast_WebRTCStopped_Response
+         */
+        CBroadcast_WebRTCStopped_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCStopped_Response)
+                return object;
+            return new $root.CBroadcast_WebRTCStopped_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCStopped_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @static
+         * @param {CBroadcast_WebRTCStopped_Response} message CBroadcast_WebRTCStopped_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCStopped_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCStopped_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCStopped_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCStopped_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCStopped_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCSetAnswer_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCSetAnswer_Request.
+         * @exports ICBroadcast_WebRTCSetAnswer_Request
+         * @interface ICBroadcast_WebRTCSetAnswer_Request
+         * @property {number|Long|null} [broadcaster_steamid] CBroadcast_WebRTCSetAnswer_Request broadcaster_steamid
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCSetAnswer_Request webrtc_session_id
+         * @property {string|null} [answer] CBroadcast_WebRTCSetAnswer_Request answer
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCSetAnswer_Request.
+         * @exports CBroadcast_WebRTCSetAnswer_Request
+         * @classdesc Represents a CBroadcast_WebRTCSetAnswer_Request.
+         * @implements ICBroadcast_WebRTCSetAnswer_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCSetAnswer_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCSetAnswer_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Request broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Request.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Request answer.
+         * @member {string} answer
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Request.prototype.answer = "";
+    
+        /**
+         * Creates a new CBroadcast_WebRTCSetAnswer_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCSetAnswer_Request} CBroadcast_WebRTCSetAnswer_Request instance
+         */
+        CBroadcast_WebRTCSetAnswer_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCSetAnswer_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Request message. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Request} message CBroadcast_WebRTCSetAnswer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.answer);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Request} message CBroadcast_WebRTCSetAnswer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCSetAnswer_Request} CBroadcast_WebRTCSetAnswer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCSetAnswer_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.answer = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCSetAnswer_Request} CBroadcast_WebRTCSetAnswer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCSetAnswer_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCSetAnswer_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                if (!$util.isString(message.answer))
+                    return "answer: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCSetAnswer_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCSetAnswer_Request} CBroadcast_WebRTCSetAnswer_Request
+         */
+        CBroadcast_WebRTCSetAnswer_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCSetAnswer_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCSetAnswer_Request();
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.answer != null)
+                message.answer = String(object.answer);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCSetAnswer_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @static
+         * @param {CBroadcast_WebRTCSetAnswer_Request} message CBroadcast_WebRTCSetAnswer_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCSetAnswer_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.answer = "";
+            }
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                object.answer = message.answer;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCSetAnswer_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCSetAnswer_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCSetAnswer_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCSetAnswer_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCSetAnswer_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCSetAnswer_Response.
+         * @exports ICBroadcast_WebRTCSetAnswer_Response
+         * @interface ICBroadcast_WebRTCSetAnswer_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCSetAnswer_Response.
+         * @exports CBroadcast_WebRTCSetAnswer_Response
+         * @classdesc Represents a CBroadcast_WebRTCSetAnswer_Response.
+         * @implements ICBroadcast_WebRTCSetAnswer_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCSetAnswer_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCSetAnswer_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_WebRTCSetAnswer_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCSetAnswer_Response} CBroadcast_WebRTCSetAnswer_Response instance
+         */
+        CBroadcast_WebRTCSetAnswer_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCSetAnswer_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Response message. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Response} message CBroadcast_WebRTCSetAnswer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Response} message CBroadcast_WebRTCSetAnswer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCSetAnswer_Response} CBroadcast_WebRTCSetAnswer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCSetAnswer_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCSetAnswer_Response} CBroadcast_WebRTCSetAnswer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCSetAnswer_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCSetAnswer_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCSetAnswer_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCSetAnswer_Response} CBroadcast_WebRTCSetAnswer_Response
+         */
+        CBroadcast_WebRTCSetAnswer_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCSetAnswer_Response)
+                return object;
+            return new $root.CBroadcast_WebRTCSetAnswer_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCSetAnswer_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @static
+         * @param {CBroadcast_WebRTCSetAnswer_Response} message CBroadcast_WebRTCSetAnswer_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCSetAnswer_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCSetAnswer_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCSetAnswer_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCSetAnswer_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCSetAnswer_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCLookupTURNServer_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCLookupTURNServer_Request.
+         * @exports ICBroadcast_WebRTCLookupTURNServer_Request
+         * @interface ICBroadcast_WebRTCLookupTURNServer_Request
+         * @property {number|null} [cellid] CBroadcast_WebRTCLookupTURNServer_Request cellid
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCLookupTURNServer_Request.
+         * @exports CBroadcast_WebRTCLookupTURNServer_Request
+         * @classdesc Represents a CBroadcast_WebRTCLookupTURNServer_Request.
+         * @implements ICBroadcast_WebRTCLookupTURNServer_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCLookupTURNServer_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCLookupTURNServer_Request cellid.
+         * @member {number} cellid
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @instance
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.prototype.cellid = 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCLookupTURNServer_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Request} CBroadcast_WebRTCLookupTURNServer_Request instance
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCLookupTURNServer_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCLookupTURNServer_Request message. Does not implicitly {@link CBroadcast_WebRTCLookupTURNServer_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request} message CBroadcast_WebRTCLookupTURNServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.cellid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCLookupTURNServer_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCLookupTURNServer_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request} message CBroadcast_WebRTCLookupTURNServer_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCLookupTURNServer_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Request} CBroadcast_WebRTCLookupTURNServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCLookupTURNServer_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.cellid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCLookupTURNServer_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Request} CBroadcast_WebRTCLookupTURNServer_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCLookupTURNServer_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                if (!$util.isInteger(message.cellid))
+                    return "cellid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCLookupTURNServer_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Request} CBroadcast_WebRTCLookupTURNServer_Request
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCLookupTURNServer_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCLookupTURNServer_Request();
+            if (object.cellid != null)
+                message.cellid = object.cellid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCLookupTURNServer_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @static
+         * @param {CBroadcast_WebRTCLookupTURNServer_Request} message CBroadcast_WebRTCLookupTURNServer_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.cellid = 0;
+            if (message.cellid != null && message.hasOwnProperty("cellid"))
+                object.cellid = message.cellid;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCLookupTURNServer_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCLookupTURNServer_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCLookupTURNServer_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCLookupTURNServer_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCLookupTURNServer_Response.
+         * @exports ICBroadcast_WebRTCLookupTURNServer_Response
+         * @interface ICBroadcast_WebRTCLookupTURNServer_Response
+         * @property {string|null} [turn_server] CBroadcast_WebRTCLookupTURNServer_Response turn_server
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCLookupTURNServer_Response.
+         * @exports CBroadcast_WebRTCLookupTURNServer_Response
+         * @classdesc Represents a CBroadcast_WebRTCLookupTURNServer_Response.
+         * @implements ICBroadcast_WebRTCLookupTURNServer_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCLookupTURNServer_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCLookupTURNServer_Response turn_server.
+         * @member {string} turn_server
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @instance
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.prototype.turn_server = "";
+    
+        /**
+         * Creates a new CBroadcast_WebRTCLookupTURNServer_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Response} CBroadcast_WebRTCLookupTURNServer_Response instance
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCLookupTURNServer_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCLookupTURNServer_Response message. Does not implicitly {@link CBroadcast_WebRTCLookupTURNServer_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Response} message CBroadcast_WebRTCLookupTURNServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.turn_server);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCLookupTURNServer_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCLookupTURNServer_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Response} message CBroadcast_WebRTCLookupTURNServer_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCLookupTURNServer_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Response} CBroadcast_WebRTCLookupTURNServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCLookupTURNServer_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.turn_server = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCLookupTURNServer_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Response} CBroadcast_WebRTCLookupTURNServer_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCLookupTURNServer_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                if (!$util.isString(message.turn_server))
+                    return "turn_server: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCLookupTURNServer_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCLookupTURNServer_Response} CBroadcast_WebRTCLookupTURNServer_Response
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCLookupTURNServer_Response)
+                return object;
+            var message = new $root.CBroadcast_WebRTCLookupTURNServer_Response();
+            if (object.turn_server != null)
+                message.turn_server = String(object.turn_server);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCLookupTURNServer_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @static
+         * @param {CBroadcast_WebRTCLookupTURNServer_Response} message CBroadcast_WebRTCLookupTURNServer_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.turn_server = "";
+            if (message.turn_server != null && message.hasOwnProperty("turn_server"))
+                object.turn_server = message.turn_server;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCLookupTURNServer_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCLookupTURNServer_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCLookupTURNServer_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCLookupTURNServer_Response;
+    })();
+    
+    $root.CBroadcast_WebRTC_Candidate = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTC_Candidate.
+         * @exports ICBroadcast_WebRTC_Candidate
+         * @interface ICBroadcast_WebRTC_Candidate
+         * @property {string|null} [sdp_mid] CBroadcast_WebRTC_Candidate sdp_mid
+         * @property {number|null} [sdp_mline_index] CBroadcast_WebRTC_Candidate sdp_mline_index
+         * @property {string|null} [candidate] CBroadcast_WebRTC_Candidate candidate
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTC_Candidate.
+         * @exports CBroadcast_WebRTC_Candidate
+         * @classdesc Represents a CBroadcast_WebRTC_Candidate.
+         * @implements ICBroadcast_WebRTC_Candidate
+         * @constructor
+         * @param {ICBroadcast_WebRTC_Candidate=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTC_Candidate(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTC_Candidate sdp_mid.
+         * @member {string} sdp_mid
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @instance
+         */
+        CBroadcast_WebRTC_Candidate.prototype.sdp_mid = "";
+    
+        /**
+         * CBroadcast_WebRTC_Candidate sdp_mline_index.
+         * @member {number} sdp_mline_index
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @instance
+         */
+        CBroadcast_WebRTC_Candidate.prototype.sdp_mline_index = 0;
+    
+        /**
+         * CBroadcast_WebRTC_Candidate candidate.
+         * @member {string} candidate
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @instance
+         */
+        CBroadcast_WebRTC_Candidate.prototype.candidate = "";
+    
+        /**
+         * Creates a new CBroadcast_WebRTC_Candidate instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {ICBroadcast_WebRTC_Candidate=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTC_Candidate} CBroadcast_WebRTC_Candidate instance
+         */
+        CBroadcast_WebRTC_Candidate.create = function create(properties) {
+            return new CBroadcast_WebRTC_Candidate(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTC_Candidate message. Does not implicitly {@link CBroadcast_WebRTC_Candidate.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {ICBroadcast_WebRTC_Candidate} message CBroadcast_WebRTC_Candidate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTC_Candidate.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sdp_mid);
+            if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sdp_mline_index);
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.candidate);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTC_Candidate message, length delimited. Does not implicitly {@link CBroadcast_WebRTC_Candidate.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {ICBroadcast_WebRTC_Candidate} message CBroadcast_WebRTC_Candidate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTC_Candidate.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTC_Candidate message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTC_Candidate} CBroadcast_WebRTC_Candidate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTC_Candidate.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTC_Candidate();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.sdp_mid = reader.string();
+                    break;
+                case 2:
+                    message.sdp_mline_index = reader.int32();
+                    break;
+                case 3:
+                    message.candidate = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTC_Candidate message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTC_Candidate} CBroadcast_WebRTC_Candidate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTC_Candidate.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTC_Candidate message.
+         * @function verify
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTC_Candidate.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                if (!$util.isString(message.sdp_mid))
+                    return "sdp_mid: string expected";
+            if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                if (!$util.isInteger(message.sdp_mline_index))
+                    return "sdp_mline_index: integer expected";
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                if (!$util.isString(message.candidate))
+                    return "candidate: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTC_Candidate message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTC_Candidate} CBroadcast_WebRTC_Candidate
+         */
+        CBroadcast_WebRTC_Candidate.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTC_Candidate)
+                return object;
+            var message = new $root.CBroadcast_WebRTC_Candidate();
+            if (object.sdp_mid != null)
+                message.sdp_mid = String(object.sdp_mid);
+            if (object.sdp_mline_index != null)
+                message.sdp_mline_index = object.sdp_mline_index | 0;
+            if (object.candidate != null)
+                message.candidate = String(object.candidate);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTC_Candidate message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @static
+         * @param {CBroadcast_WebRTC_Candidate} message CBroadcast_WebRTC_Candidate
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTC_Candidate.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.sdp_mid = "";
+                object.sdp_mline_index = 0;
+                object.candidate = "";
+            }
+            if (message.sdp_mid != null && message.hasOwnProperty("sdp_mid"))
+                object.sdp_mid = message.sdp_mid;
+            if (message.sdp_mline_index != null && message.hasOwnProperty("sdp_mline_index"))
+                object.sdp_mline_index = message.sdp_mline_index;
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                object.candidate = message.candidate;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTC_Candidate to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTC_Candidate
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTC_Candidate.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTC_Candidate;
+    })();
+    
+    $root.CBroadcast_WebRTCAddHostCandidate_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCAddHostCandidate_Request.
+         * @exports ICBroadcast_WebRTCAddHostCandidate_Request
+         * @interface ICBroadcast_WebRTCAddHostCandidate_Request
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCAddHostCandidate_Request webrtc_session_id
+         * @property {ICBroadcast_WebRTC_Candidate|null} [candidate] CBroadcast_WebRTCAddHostCandidate_Request candidate
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCAddHostCandidate_Request.
+         * @exports CBroadcast_WebRTCAddHostCandidate_Request
+         * @classdesc Represents a CBroadcast_WebRTCAddHostCandidate_Request.
+         * @implements ICBroadcast_WebRTCAddHostCandidate_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCAddHostCandidate_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCAddHostCandidate_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @instance
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCAddHostCandidate_Request candidate.
+         * @member {ICBroadcast_WebRTC_Candidate|null|undefined} candidate
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @instance
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.prototype.candidate = null;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCAddHostCandidate_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Request} CBroadcast_WebRTCAddHostCandidate_Request instance
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCAddHostCandidate_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddHostCandidate_Request message. Does not implicitly {@link CBroadcast_WebRTCAddHostCandidate_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request} message CBroadcast_WebRTCAddHostCandidate_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.webrtc_session_id);
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddHostCandidate_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCAddHostCandidate_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request} message CBroadcast_WebRTCAddHostCandidate_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddHostCandidate_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Request} CBroadcast_WebRTCAddHostCandidate_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCAddHostCandidate_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.candidate = $root.CBroadcast_WebRTC_Candidate.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddHostCandidate_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Request} CBroadcast_WebRTCAddHostCandidate_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCAddHostCandidate_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.candidate != null && message.hasOwnProperty("candidate")) {
+                var error = $root.CBroadcast_WebRTC_Candidate.verify(message.candidate);
+                if (error)
+                    return "candidate." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCAddHostCandidate_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Request} CBroadcast_WebRTCAddHostCandidate_Request
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCAddHostCandidate_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCAddHostCandidate_Request();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.candidate != null) {
+                if (typeof object.candidate !== "object")
+                    throw TypeError(".CBroadcast_WebRTCAddHostCandidate_Request.candidate: object expected");
+                message.candidate = $root.CBroadcast_WebRTC_Candidate.fromObject(object.candidate);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCAddHostCandidate_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @static
+         * @param {CBroadcast_WebRTCAddHostCandidate_Request} message CBroadcast_WebRTCAddHostCandidate_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.candidate = null;
+            }
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                object.candidate = $root.CBroadcast_WebRTC_Candidate.toObject(message.candidate, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCAddHostCandidate_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCAddHostCandidate_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCAddHostCandidate_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCAddHostCandidate_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCAddHostCandidate_Response.
+         * @exports ICBroadcast_WebRTCAddHostCandidate_Response
+         * @interface ICBroadcast_WebRTCAddHostCandidate_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCAddHostCandidate_Response.
+         * @exports CBroadcast_WebRTCAddHostCandidate_Response
+         * @classdesc Represents a CBroadcast_WebRTCAddHostCandidate_Response.
+         * @implements ICBroadcast_WebRTCAddHostCandidate_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCAddHostCandidate_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_WebRTCAddHostCandidate_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Response} CBroadcast_WebRTCAddHostCandidate_Response instance
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCAddHostCandidate_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddHostCandidate_Response message. Does not implicitly {@link CBroadcast_WebRTCAddHostCandidate_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Response} message CBroadcast_WebRTCAddHostCandidate_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddHostCandidate_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCAddHostCandidate_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Response} message CBroadcast_WebRTCAddHostCandidate_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddHostCandidate_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Response} CBroadcast_WebRTCAddHostCandidate_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCAddHostCandidate_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddHostCandidate_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Response} CBroadcast_WebRTCAddHostCandidate_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCAddHostCandidate_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCAddHostCandidate_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCAddHostCandidate_Response} CBroadcast_WebRTCAddHostCandidate_Response
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCAddHostCandidate_Response)
+                return object;
+            return new $root.CBroadcast_WebRTCAddHostCandidate_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCAddHostCandidate_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @static
+         * @param {CBroadcast_WebRTCAddHostCandidate_Response} message CBroadcast_WebRTCAddHostCandidate_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCAddHostCandidate_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCAddHostCandidate_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCAddHostCandidate_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCAddHostCandidate_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCAddViewerCandidate_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCAddViewerCandidate_Request.
+         * @exports ICBroadcast_WebRTCAddViewerCandidate_Request
+         * @interface ICBroadcast_WebRTCAddViewerCandidate_Request
+         * @property {number|Long|null} [broadcaster_steamid] CBroadcast_WebRTCAddViewerCandidate_Request broadcaster_steamid
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCAddViewerCandidate_Request webrtc_session_id
+         * @property {ICBroadcast_WebRTC_Candidate|null} [candidate] CBroadcast_WebRTCAddViewerCandidate_Request candidate
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCAddViewerCandidate_Request.
+         * @exports CBroadcast_WebRTCAddViewerCandidate_Request
+         * @classdesc Represents a CBroadcast_WebRTCAddViewerCandidate_Request.
+         * @implements ICBroadcast_WebRTCAddViewerCandidate_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCAddViewerCandidate_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Request broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Request candidate.
+         * @member {ICBroadcast_WebRTC_Candidate|null|undefined} candidate
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.prototype.candidate = null;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCAddViewerCandidate_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Request} CBroadcast_WebRTCAddViewerCandidate_Request instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCAddViewerCandidate_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Request message. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request} message CBroadcast_WebRTCAddViewerCandidate_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request} message CBroadcast_WebRTCAddViewerCandidate_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Request} CBroadcast_WebRTCAddViewerCandidate_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCAddViewerCandidate_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.candidate = $root.CBroadcast_WebRTC_Candidate.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Request} CBroadcast_WebRTCAddViewerCandidate_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCAddViewerCandidate_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.candidate != null && message.hasOwnProperty("candidate")) {
+                var error = $root.CBroadcast_WebRTC_Candidate.verify(message.candidate);
+                if (error)
+                    return "candidate." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCAddViewerCandidate_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Request} CBroadcast_WebRTCAddViewerCandidate_Request
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCAddViewerCandidate_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCAddViewerCandidate_Request();
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.candidate != null) {
+                if (typeof object.candidate !== "object")
+                    throw TypeError(".CBroadcast_WebRTCAddViewerCandidate_Request.candidate: object expected");
+                message.candidate = $root.CBroadcast_WebRTC_Candidate.fromObject(object.candidate);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCAddViewerCandidate_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @static
+         * @param {CBroadcast_WebRTCAddViewerCandidate_Request} message CBroadcast_WebRTCAddViewerCandidate_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.candidate = null;
+            }
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                object.candidate = $root.CBroadcast_WebRTC_Candidate.toObject(message.candidate, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCAddViewerCandidate_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCAddViewerCandidate_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCAddViewerCandidate_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCAddViewerCandidate_Response.
+         * @exports ICBroadcast_WebRTCAddViewerCandidate_Response
+         * @interface ICBroadcast_WebRTCAddViewerCandidate_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCAddViewerCandidate_Response.
+         * @exports CBroadcast_WebRTCAddViewerCandidate_Response
+         * @classdesc Represents a CBroadcast_WebRTCAddViewerCandidate_Response.
+         * @implements ICBroadcast_WebRTCAddViewerCandidate_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCAddViewerCandidate_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_WebRTCAddViewerCandidate_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Response} CBroadcast_WebRTCAddViewerCandidate_Response instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCAddViewerCandidate_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Response message. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Response} message CBroadcast_WebRTCAddViewerCandidate_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Response} message CBroadcast_WebRTCAddViewerCandidate_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Response} CBroadcast_WebRTCAddViewerCandidate_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCAddViewerCandidate_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Response} CBroadcast_WebRTCAddViewerCandidate_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCAddViewerCandidate_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCAddViewerCandidate_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Response} CBroadcast_WebRTCAddViewerCandidate_Response
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCAddViewerCandidate_Response)
+                return object;
+            return new $root.CBroadcast_WebRTCAddViewerCandidate_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCAddViewerCandidate_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @static
+         * @param {CBroadcast_WebRTCAddViewerCandidate_Response} message CBroadcast_WebRTCAddViewerCandidate_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCAddViewerCandidate_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCAddViewerCandidate_Response;
+    })();
+    
+    $root.CBroadcast_WebRTCGetHostCandidates_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCGetHostCandidates_Request.
+         * @exports ICBroadcast_WebRTCGetHostCandidates_Request
+         * @interface ICBroadcast_WebRTCGetHostCandidates_Request
+         * @property {number|Long|null} [broadcaster_steamid] CBroadcast_WebRTCGetHostCandidates_Request broadcaster_steamid
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCGetHostCandidates_Request webrtc_session_id
+         * @property {number|null} [candidate_generation] CBroadcast_WebRTCGetHostCandidates_Request candidate_generation
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCGetHostCandidates_Request.
+         * @exports CBroadcast_WebRTCGetHostCandidates_Request
+         * @classdesc Represents a CBroadcast_WebRTCGetHostCandidates_Request.
+         * @implements ICBroadcast_WebRTCGetHostCandidates_Request
+         * @constructor
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCGetHostCandidates_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCGetHostCandidates_Request broadcaster_steamid.
+         * @member {number|Long} broadcaster_steamid
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.prototype.broadcaster_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCGetHostCandidates_Request webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCGetHostCandidates_Request candidate_generation.
+         * @member {number} candidate_generation
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.prototype.candidate_generation = 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCGetHostCandidates_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Request} CBroadcast_WebRTCGetHostCandidates_Request instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.create = function create(properties) {
+            return new CBroadcast_WebRTCGetHostCandidates_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCGetHostCandidates_Request message. Does not implicitly {@link CBroadcast_WebRTCGetHostCandidates_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request} message CBroadcast_WebRTCGetHostCandidates_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcaster_steamid);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.candidate_generation);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCGetHostCandidates_Request message, length delimited. Does not implicitly {@link CBroadcast_WebRTCGetHostCandidates_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request} message CBroadcast_WebRTCGetHostCandidates_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCGetHostCandidates_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Request} CBroadcast_WebRTCGetHostCandidates_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCGetHostCandidates_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcaster_steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.candidate_generation = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCGetHostCandidates_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Request} CBroadcast_WebRTCGetHostCandidates_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCGetHostCandidates_Request message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (!$util.isInteger(message.broadcaster_steamid) && !(message.broadcaster_steamid && $util.isInteger(message.broadcaster_steamid.low) && $util.isInteger(message.broadcaster_steamid.high)))
+                    return "broadcaster_steamid: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                if (!$util.isInteger(message.candidate_generation))
+                    return "candidate_generation: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCGetHostCandidates_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Request} CBroadcast_WebRTCGetHostCandidates_Request
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCGetHostCandidates_Request)
+                return object;
+            var message = new $root.CBroadcast_WebRTCGetHostCandidates_Request();
+            if (object.broadcaster_steamid != null)
+                if ($util.Long)
+                    (message.broadcaster_steamid = $util.Long.fromValue(object.broadcaster_steamid)).unsigned = false;
+                else if (typeof object.broadcaster_steamid === "string")
+                    message.broadcaster_steamid = parseInt(object.broadcaster_steamid, 10);
+                else if (typeof object.broadcaster_steamid === "number")
+                    message.broadcaster_steamid = object.broadcaster_steamid;
+                else if (typeof object.broadcaster_steamid === "object")
+                    message.broadcaster_steamid = new $util.LongBits(object.broadcaster_steamid.low >>> 0, object.broadcaster_steamid.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.candidate_generation != null)
+                message.candidate_generation = object.candidate_generation >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCGetHostCandidates_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @static
+         * @param {CBroadcast_WebRTCGetHostCandidates_Request} message CBroadcast_WebRTCGetHostCandidates_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcaster_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcaster_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.candidate_generation = 0;
+            }
+            if (message.broadcaster_steamid != null && message.hasOwnProperty("broadcaster_steamid"))
+                if (typeof message.broadcaster_steamid === "number")
+                    object.broadcaster_steamid = options.longs === String ? String(message.broadcaster_steamid) : message.broadcaster_steamid;
+                else
+                    object.broadcaster_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.broadcaster_steamid) : options.longs === Number ? new $util.LongBits(message.broadcaster_steamid.low >>> 0, message.broadcaster_steamid.high >>> 0).toNumber() : message.broadcaster_steamid;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                object.candidate_generation = message.candidate_generation;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCGetHostCandidates_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCGetHostCandidates_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCGetHostCandidates_Request;
+    })();
+    
+    $root.CBroadcast_WebRTCGetHostCandidates_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCGetHostCandidates_Response.
+         * @exports ICBroadcast_WebRTCGetHostCandidates_Response
+         * @interface ICBroadcast_WebRTCGetHostCandidates_Response
+         * @property {number|null} [candidate_generation] CBroadcast_WebRTCGetHostCandidates_Response candidate_generation
+         * @property {Array.<ICBroadcast_WebRTC_Candidate>|null} [candidates] CBroadcast_WebRTCGetHostCandidates_Response candidates
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCGetHostCandidates_Response.
+         * @exports CBroadcast_WebRTCGetHostCandidates_Response
+         * @classdesc Represents a CBroadcast_WebRTCGetHostCandidates_Response.
+         * @implements ICBroadcast_WebRTCGetHostCandidates_Response
+         * @constructor
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Response=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCGetHostCandidates_Response(properties) {
+            this.candidates = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCGetHostCandidates_Response candidate_generation.
+         * @member {number} candidate_generation
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.prototype.candidate_generation = 0;
+    
+        /**
+         * CBroadcast_WebRTCGetHostCandidates_Response candidates.
+         * @member {Array.<ICBroadcast_WebRTC_Candidate>} candidates
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.prototype.candidates = $util.emptyArray;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCGetHostCandidates_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Response=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Response} CBroadcast_WebRTCGetHostCandidates_Response instance
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.create = function create(properties) {
+            return new CBroadcast_WebRTCGetHostCandidates_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCGetHostCandidates_Response message. Does not implicitly {@link CBroadcast_WebRTCGetHostCandidates_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Response} message CBroadcast_WebRTCGetHostCandidates_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.candidate_generation);
+            if (message.candidates != null && message.candidates.length)
+                for (var i = 0; i < message.candidates.length; ++i)
+                    $root.CBroadcast_WebRTC_Candidate.encode(message.candidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCGetHostCandidates_Response message, length delimited. Does not implicitly {@link CBroadcast_WebRTCGetHostCandidates_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Response} message CBroadcast_WebRTCGetHostCandidates_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCGetHostCandidates_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Response} CBroadcast_WebRTCGetHostCandidates_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCGetHostCandidates_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.candidate_generation = reader.uint32();
+                    break;
+                case 2:
+                    if (!(message.candidates && message.candidates.length))
+                        message.candidates = [];
+                    message.candidates.push($root.CBroadcast_WebRTC_Candidate.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCGetHostCandidates_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Response} CBroadcast_WebRTCGetHostCandidates_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCGetHostCandidates_Response message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                if (!$util.isInteger(message.candidate_generation))
+                    return "candidate_generation: integer expected";
+            if (message.candidates != null && message.hasOwnProperty("candidates")) {
+                if (!Array.isArray(message.candidates))
+                    return "candidates: array expected";
+                for (var i = 0; i < message.candidates.length; ++i) {
+                    var error = $root.CBroadcast_WebRTC_Candidate.verify(message.candidates[i]);
+                    if (error)
+                        return "candidates." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCGetHostCandidates_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCGetHostCandidates_Response} CBroadcast_WebRTCGetHostCandidates_Response
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCGetHostCandidates_Response)
+                return object;
+            var message = new $root.CBroadcast_WebRTCGetHostCandidates_Response();
+            if (object.candidate_generation != null)
+                message.candidate_generation = object.candidate_generation >>> 0;
+            if (object.candidates) {
+                if (!Array.isArray(object.candidates))
+                    throw TypeError(".CBroadcast_WebRTCGetHostCandidates_Response.candidates: array expected");
+                message.candidates = [];
+                for (var i = 0; i < object.candidates.length; ++i) {
+                    if (typeof object.candidates[i] !== "object")
+                        throw TypeError(".CBroadcast_WebRTCGetHostCandidates_Response.candidates: object expected");
+                    message.candidates[i] = $root.CBroadcast_WebRTC_Candidate.fromObject(object.candidates[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCGetHostCandidates_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @static
+         * @param {CBroadcast_WebRTCGetHostCandidates_Response} message CBroadcast_WebRTCGetHostCandidates_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.candidates = [];
+            if (options.defaults)
+                object.candidate_generation = 0;
+            if (message.candidate_generation != null && message.hasOwnProperty("candidate_generation"))
+                object.candidate_generation = message.candidate_generation;
+            if (message.candidates && message.candidates.length) {
+                object.candidates = [];
+                for (var j = 0; j < message.candidates.length; ++j)
+                    object.candidates[j] = $root.CBroadcast_WebRTC_Candidate.toObject(message.candidates[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCGetHostCandidates_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCGetHostCandidates_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCGetHostCandidates_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCGetHostCandidates_Response;
+    })();
+    
+    $root.CBroadcast_GetBroadcastUploadStats_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastUploadStats_Request.
+         * @exports ICBroadcast_GetBroadcastUploadStats_Request
+         * @interface ICBroadcast_GetBroadcastUploadStats_Request
+         * @property {number|null} [row_limit] CBroadcast_GetBroadcastUploadStats_Request row_limit
+         * @property {number|null} [start_time] CBroadcast_GetBroadcastUploadStats_Request start_time
+         * @property {number|Long|null} [upload_id] CBroadcast_GetBroadcastUploadStats_Request upload_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastUploadStats_Request.
+         * @exports CBroadcast_GetBroadcastUploadStats_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastUploadStats_Request.
+         * @implements ICBroadcast_GetBroadcastUploadStats_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastUploadStats_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastUploadStats_Request row_limit.
+         * @member {number} row_limit
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.row_limit = 100;
+    
+        /**
+         * CBroadcast_GetBroadcastUploadStats_Request start_time.
+         * @member {number} start_time
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.start_time = 0;
+    
+        /**
+         * CBroadcast_GetBroadcastUploadStats_Request upload_id.
+         * @member {number|Long} upload_id
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.upload_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastUploadStats_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastUploadStats_Request} CBroadcast_GetBroadcastUploadStats_Request instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastUploadStats_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastUploadStats_Request message. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request} message CBroadcast_GetBroadcastUploadStats_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.row_limit != null && message.hasOwnProperty("row_limit"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.row_limit);
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_time);
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.upload_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastUploadStats_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request} message CBroadcast_GetBroadcastUploadStats_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastUploadStats_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastUploadStats_Request} CBroadcast_GetBroadcastUploadStats_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastUploadStats_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.row_limit = reader.uint32();
+                    break;
+                case 2:
+                    message.start_time = reader.uint32();
+                    break;
+                case 3:
+                    message.upload_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastUploadStats_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastUploadStats_Request} CBroadcast_GetBroadcastUploadStats_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastUploadStats_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.row_limit != null && message.hasOwnProperty("row_limit"))
+                if (!$util.isInteger(message.row_limit))
+                    return "row_limit: integer expected";
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                if (!$util.isInteger(message.start_time))
+                    return "start_time: integer expected";
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                if (!$util.isInteger(message.upload_id) && !(message.upload_id && $util.isInteger(message.upload_id.low) && $util.isInteger(message.upload_id.high)))
+                    return "upload_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastUploadStats_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastUploadStats_Request} CBroadcast_GetBroadcastUploadStats_Request
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastUploadStats_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastUploadStats_Request();
+            if (object.row_limit != null)
+                message.row_limit = object.row_limit >>> 0;
+            if (object.start_time != null)
+                message.start_time = object.start_time >>> 0;
+            if (object.upload_id != null)
+                if ($util.Long)
+                    (message.upload_id = $util.Long.fromValue(object.upload_id)).unsigned = true;
+                else if (typeof object.upload_id === "string")
+                    message.upload_id = parseInt(object.upload_id, 10);
+                else if (typeof object.upload_id === "number")
+                    message.upload_id = object.upload_id;
+                else if (typeof object.upload_id === "object")
+                    message.upload_id = new $util.LongBits(object.upload_id.low >>> 0, object.upload_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastUploadStats_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastUploadStats_Request} message CBroadcast_GetBroadcastUploadStats_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.row_limit = 100;
+                object.start_time = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.upload_id = options.longs === String ? "0" : 0;
+            }
+            if (message.row_limit != null && message.hasOwnProperty("row_limit"))
+                object.row_limit = message.row_limit;
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                object.start_time = message.start_time;
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                if (typeof message.upload_id === "number")
+                    object.upload_id = options.longs === String ? String(message.upload_id) : message.upload_id;
+                else
+                    object.upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_id) : options.longs === Number ? new $util.LongBits(message.upload_id.low >>> 0, message.upload_id.high >>> 0).toNumber(true) : message.upload_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastUploadStats_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastUploadStats_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastUploadStats_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastUploadStats_Response.
+         * @exports ICBroadcast_GetBroadcastUploadStats_Response
+         * @interface ICBroadcast_GetBroadcastUploadStats_Response
+         * @property {Array.<CBroadcast_GetBroadcastUploadStats_Response.IUploadStats>|null} [upload_stats] CBroadcast_GetBroadcastUploadStats_Response upload_stats
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastUploadStats_Response.
+         * @exports CBroadcast_GetBroadcastUploadStats_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastUploadStats_Response.
+         * @implements ICBroadcast_GetBroadcastUploadStats_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastUploadStats_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastUploadStats_Response(properties) {
+            this.upload_stats = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastUploadStats_Response upload_stats.
+         * @member {Array.<CBroadcast_GetBroadcastUploadStats_Response.IUploadStats>} upload_stats
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.prototype.upload_stats = $util.emptyArray;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastUploadStats_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastUploadStats_Response} CBroadcast_GetBroadcastUploadStats_Response instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastUploadStats_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastUploadStats_Response message. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Response} message CBroadcast_GetBroadcastUploadStats_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.upload_stats != null && message.upload_stats.length)
+                for (var i = 0; i < message.upload_stats.length; ++i)
+                    $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats.encode(message.upload_stats[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastUploadStats_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastUploadStats_Response} message CBroadcast_GetBroadcastUploadStats_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastUploadStats_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastUploadStats_Response} CBroadcast_GetBroadcastUploadStats_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastUploadStats_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.upload_stats && message.upload_stats.length))
+                        message.upload_stats = [];
+                    message.upload_stats.push($root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastUploadStats_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastUploadStats_Response} CBroadcast_GetBroadcastUploadStats_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastUploadStats_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.upload_stats != null && message.hasOwnProperty("upload_stats")) {
+                if (!Array.isArray(message.upload_stats))
+                    return "upload_stats: array expected";
+                for (var i = 0; i < message.upload_stats.length; ++i) {
+                    var error = $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats.verify(message.upload_stats[i]);
+                    if (error)
+                        return "upload_stats." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastUploadStats_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastUploadStats_Response} CBroadcast_GetBroadcastUploadStats_Response
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastUploadStats_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastUploadStats_Response();
+            if (object.upload_stats) {
+                if (!Array.isArray(object.upload_stats))
+                    throw TypeError(".CBroadcast_GetBroadcastUploadStats_Response.upload_stats: array expected");
+                message.upload_stats = [];
+                for (var i = 0; i < object.upload_stats.length; ++i) {
+                    if (typeof object.upload_stats[i] !== "object")
+                        throw TypeError(".CBroadcast_GetBroadcastUploadStats_Response.upload_stats: object expected");
+                    message.upload_stats[i] = $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats.fromObject(object.upload_stats[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastUploadStats_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastUploadStats_Response} message CBroadcast_GetBroadcastUploadStats_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.upload_stats = [];
+            if (message.upload_stats && message.upload_stats.length) {
+                object.upload_stats = [];
+                for (var j = 0; j < message.upload_stats.length; ++j)
+                    object.upload_stats[j] = $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats.toObject(message.upload_stats[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastUploadStats_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastUploadStats_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastUploadStats_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CBroadcast_GetBroadcastUploadStats_Response.UploadStats = (function() {
+    
+            /**
+             * Properties of an UploadStats.
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response
+             * @interface IUploadStats
+             * @property {number|null} [upload_result] UploadStats upload_result
+             * @property {number|null} [time_stopped] UploadStats time_stopped
+             * @property {number|null} [seconds_uploaded] UploadStats seconds_uploaded
+             * @property {number|null} [max_viewers] UploadStats max_viewers
+             * @property {number|null} [resolution_x] UploadStats resolution_x
+             * @property {number|null} [resolution_y] UploadStats resolution_y
+             * @property {number|null} [avg_bandwidth] UploadStats avg_bandwidth
+             * @property {number|Long|null} [total_bytes] UploadStats total_bytes
+             * @property {number|null} [app_id] UploadStats app_id
+             * @property {number|null} [total_unique_viewers] UploadStats total_unique_viewers
+             * @property {number|Long|null} [total_seconds_watched] UploadStats total_seconds_watched
+             * @property {number|null} [time_started] UploadStats time_started
+             * @property {number|Long|null} [upload_id] UploadStats upload_id
+             * @property {string|null} [local_address] UploadStats local_address
+             * @property {string|null} [remote_address] UploadStats remote_address
+             * @property {number|null} [frames_per_second] UploadStats frames_per_second
+             * @property {number|null} [num_representations] UploadStats num_representations
+             * @property {string|null} [app_name] UploadStats app_name
+             * @property {boolean|null} [is_replay] UploadStats is_replay
+             */
+    
+            /**
+             * Constructs a new UploadStats.
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response
+             * @classdesc Represents an UploadStats.
+             * @implements IUploadStats
+             * @constructor
+             * @param {CBroadcast_GetBroadcastUploadStats_Response.IUploadStats=} [properties] Properties to set
+             */
+            function UploadStats(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * UploadStats upload_result.
+             * @member {number} upload_result
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.upload_result = 0;
+    
+            /**
+             * UploadStats time_stopped.
+             * @member {number} time_stopped
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.time_stopped = 0;
+    
+            /**
+             * UploadStats seconds_uploaded.
+             * @member {number} seconds_uploaded
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.seconds_uploaded = 0;
+    
+            /**
+             * UploadStats max_viewers.
+             * @member {number} max_viewers
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.max_viewers = 0;
+    
+            /**
+             * UploadStats resolution_x.
+             * @member {number} resolution_x
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.resolution_x = 0;
+    
+            /**
+             * UploadStats resolution_y.
+             * @member {number} resolution_y
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.resolution_y = 0;
+    
+            /**
+             * UploadStats avg_bandwidth.
+             * @member {number} avg_bandwidth
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.avg_bandwidth = 0;
+    
+            /**
+             * UploadStats total_bytes.
+             * @member {number|Long} total_bytes
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.total_bytes = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * UploadStats app_id.
+             * @member {number} app_id
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.app_id = 0;
+    
+            /**
+             * UploadStats total_unique_viewers.
+             * @member {number} total_unique_viewers
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.total_unique_viewers = 0;
+    
+            /**
+             * UploadStats total_seconds_watched.
+             * @member {number|Long} total_seconds_watched
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.total_seconds_watched = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * UploadStats time_started.
+             * @member {number} time_started
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.time_started = 0;
+    
+            /**
+             * UploadStats upload_id.
+             * @member {number|Long} upload_id
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.upload_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+            /**
+             * UploadStats local_address.
+             * @member {string} local_address
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.local_address = "";
+    
+            /**
+             * UploadStats remote_address.
+             * @member {string} remote_address
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.remote_address = "";
+    
+            /**
+             * UploadStats frames_per_second.
+             * @member {number} frames_per_second
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.frames_per_second = 0;
+    
+            /**
+             * UploadStats num_representations.
+             * @member {number} num_representations
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.num_representations = 0;
+    
+            /**
+             * UploadStats app_name.
+             * @member {string} app_name
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.app_name = "";
+    
+            /**
+             * UploadStats is_replay.
+             * @member {boolean} is_replay
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             */
+            UploadStats.prototype.is_replay = false;
+    
+            /**
+             * Creates a new UploadStats instance using the specified properties.
+             * @function create
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {CBroadcast_GetBroadcastUploadStats_Response.IUploadStats=} [properties] Properties to set
+             * @returns {CBroadcast_GetBroadcastUploadStats_Response.UploadStats} UploadStats instance
+             */
+            UploadStats.create = function create(properties) {
+                return new UploadStats(properties);
+            };
+    
+            /**
+             * Encodes the specified UploadStats message. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Response.UploadStats.verify|verify} messages.
+             * @function encode
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {CBroadcast_GetBroadcastUploadStats_Response.IUploadStats} message UploadStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UploadStats.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.upload_result);
+                if (message.time_stopped != null && message.hasOwnProperty("time_stopped"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.time_stopped);
+                if (message.seconds_uploaded != null && message.hasOwnProperty("seconds_uploaded"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.seconds_uploaded);
+                if (message.max_viewers != null && message.hasOwnProperty("max_viewers"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.max_viewers);
+                if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.resolution_x);
+                if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.resolution_y);
+                if (message.avg_bandwidth != null && message.hasOwnProperty("avg_bandwidth"))
+                    writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.avg_bandwidth);
+                if (message.total_bytes != null && message.hasOwnProperty("total_bytes"))
+                    writer.uint32(/* id 8, wireType 0 =*/64).uint64(message.total_bytes);
+                if (message.app_id != null && message.hasOwnProperty("app_id"))
+                    writer.uint32(/* id 9, wireType 0 =*/72).uint32(message.app_id);
+                if (message.total_unique_viewers != null && message.hasOwnProperty("total_unique_viewers"))
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.total_unique_viewers);
+                if (message.total_seconds_watched != null && message.hasOwnProperty("total_seconds_watched"))
+                    writer.uint32(/* id 11, wireType 0 =*/88).uint64(message.total_seconds_watched);
+                if (message.time_started != null && message.hasOwnProperty("time_started"))
+                    writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.time_started);
+                if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                    writer.uint32(/* id 13, wireType 0 =*/104).uint64(message.upload_id);
+                if (message.local_address != null && message.hasOwnProperty("local_address"))
+                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.local_address);
+                if (message.remote_address != null && message.hasOwnProperty("remote_address"))
+                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.remote_address);
+                if (message.frames_per_second != null && message.hasOwnProperty("frames_per_second"))
+                    writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.frames_per_second);
+                if (message.num_representations != null && message.hasOwnProperty("num_representations"))
+                    writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.num_representations);
+                if (message.app_name != null && message.hasOwnProperty("app_name"))
+                    writer.uint32(/* id 18, wireType 2 =*/146).string(message.app_name);
+                if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                    writer.uint32(/* id 19, wireType 0 =*/152).bool(message.is_replay);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified UploadStats message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastUploadStats_Response.UploadStats.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {CBroadcast_GetBroadcastUploadStats_Response.IUploadStats} message UploadStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            UploadStats.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an UploadStats message from the specified reader or buffer.
+             * @function decode
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CBroadcast_GetBroadcastUploadStats_Response.UploadStats} UploadStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UploadStats.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.upload_result = reader.uint32();
+                        break;
+                    case 2:
+                        message.time_stopped = reader.uint32();
+                        break;
+                    case 3:
+                        message.seconds_uploaded = reader.uint32();
+                        break;
+                    case 4:
+                        message.max_viewers = reader.uint32();
+                        break;
+                    case 5:
+                        message.resolution_x = reader.uint32();
+                        break;
+                    case 6:
+                        message.resolution_y = reader.uint32();
+                        break;
+                    case 7:
+                        message.avg_bandwidth = reader.uint32();
+                        break;
+                    case 8:
+                        message.total_bytes = reader.uint64();
+                        break;
+                    case 9:
+                        message.app_id = reader.uint32();
+                        break;
+                    case 10:
+                        message.total_unique_viewers = reader.uint32();
+                        break;
+                    case 11:
+                        message.total_seconds_watched = reader.uint64();
+                        break;
+                    case 12:
+                        message.time_started = reader.uint32();
+                        break;
+                    case 13:
+                        message.upload_id = reader.uint64();
+                        break;
+                    case 14:
+                        message.local_address = reader.string();
+                        break;
+                    case 15:
+                        message.remote_address = reader.string();
+                        break;
+                    case 16:
+                        message.frames_per_second = reader.uint32();
+                        break;
+                    case 17:
+                        message.num_representations = reader.uint32();
+                        break;
+                    case 18:
+                        message.app_name = reader.string();
+                        break;
+                    case 19:
+                        message.is_replay = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an UploadStats message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CBroadcast_GetBroadcastUploadStats_Response.UploadStats} UploadStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            UploadStats.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an UploadStats message.
+             * @function verify
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            UploadStats.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                    if (!$util.isInteger(message.upload_result))
+                        return "upload_result: integer expected";
+                if (message.time_stopped != null && message.hasOwnProperty("time_stopped"))
+                    if (!$util.isInteger(message.time_stopped))
+                        return "time_stopped: integer expected";
+                if (message.seconds_uploaded != null && message.hasOwnProperty("seconds_uploaded"))
+                    if (!$util.isInteger(message.seconds_uploaded))
+                        return "seconds_uploaded: integer expected";
+                if (message.max_viewers != null && message.hasOwnProperty("max_viewers"))
+                    if (!$util.isInteger(message.max_viewers))
+                        return "max_viewers: integer expected";
+                if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                    if (!$util.isInteger(message.resolution_x))
+                        return "resolution_x: integer expected";
+                if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                    if (!$util.isInteger(message.resolution_y))
+                        return "resolution_y: integer expected";
+                if (message.avg_bandwidth != null && message.hasOwnProperty("avg_bandwidth"))
+                    if (!$util.isInteger(message.avg_bandwidth))
+                        return "avg_bandwidth: integer expected";
+                if (message.total_bytes != null && message.hasOwnProperty("total_bytes"))
+                    if (!$util.isInteger(message.total_bytes) && !(message.total_bytes && $util.isInteger(message.total_bytes.low) && $util.isInteger(message.total_bytes.high)))
+                        return "total_bytes: integer|Long expected";
+                if (message.app_id != null && message.hasOwnProperty("app_id"))
+                    if (!$util.isInteger(message.app_id))
+                        return "app_id: integer expected";
+                if (message.total_unique_viewers != null && message.hasOwnProperty("total_unique_viewers"))
+                    if (!$util.isInteger(message.total_unique_viewers))
+                        return "total_unique_viewers: integer expected";
+                if (message.total_seconds_watched != null && message.hasOwnProperty("total_seconds_watched"))
+                    if (!$util.isInteger(message.total_seconds_watched) && !(message.total_seconds_watched && $util.isInteger(message.total_seconds_watched.low) && $util.isInteger(message.total_seconds_watched.high)))
+                        return "total_seconds_watched: integer|Long expected";
+                if (message.time_started != null && message.hasOwnProperty("time_started"))
+                    if (!$util.isInteger(message.time_started))
+                        return "time_started: integer expected";
+                if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                    if (!$util.isInteger(message.upload_id) && !(message.upload_id && $util.isInteger(message.upload_id.low) && $util.isInteger(message.upload_id.high)))
+                        return "upload_id: integer|Long expected";
+                if (message.local_address != null && message.hasOwnProperty("local_address"))
+                    if (!$util.isString(message.local_address))
+                        return "local_address: string expected";
+                if (message.remote_address != null && message.hasOwnProperty("remote_address"))
+                    if (!$util.isString(message.remote_address))
+                        return "remote_address: string expected";
+                if (message.frames_per_second != null && message.hasOwnProperty("frames_per_second"))
+                    if (!$util.isInteger(message.frames_per_second))
+                        return "frames_per_second: integer expected";
+                if (message.num_representations != null && message.hasOwnProperty("num_representations"))
+                    if (!$util.isInteger(message.num_representations))
+                        return "num_representations: integer expected";
+                if (message.app_name != null && message.hasOwnProperty("app_name"))
+                    if (!$util.isString(message.app_name))
+                        return "app_name: string expected";
+                if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                    if (typeof message.is_replay !== "boolean")
+                        return "is_replay: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates an UploadStats message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CBroadcast_GetBroadcastUploadStats_Response.UploadStats} UploadStats
+             */
+            UploadStats.fromObject = function fromObject(object) {
+                if (object instanceof $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats)
+                    return object;
+                var message = new $root.CBroadcast_GetBroadcastUploadStats_Response.UploadStats();
+                if (object.upload_result != null)
+                    message.upload_result = object.upload_result >>> 0;
+                if (object.time_stopped != null)
+                    message.time_stopped = object.time_stopped >>> 0;
+                if (object.seconds_uploaded != null)
+                    message.seconds_uploaded = object.seconds_uploaded >>> 0;
+                if (object.max_viewers != null)
+                    message.max_viewers = object.max_viewers >>> 0;
+                if (object.resolution_x != null)
+                    message.resolution_x = object.resolution_x >>> 0;
+                if (object.resolution_y != null)
+                    message.resolution_y = object.resolution_y >>> 0;
+                if (object.avg_bandwidth != null)
+                    message.avg_bandwidth = object.avg_bandwidth >>> 0;
+                if (object.total_bytes != null)
+                    if ($util.Long)
+                        (message.total_bytes = $util.Long.fromValue(object.total_bytes)).unsigned = true;
+                    else if (typeof object.total_bytes === "string")
+                        message.total_bytes = parseInt(object.total_bytes, 10);
+                    else if (typeof object.total_bytes === "number")
+                        message.total_bytes = object.total_bytes;
+                    else if (typeof object.total_bytes === "object")
+                        message.total_bytes = new $util.LongBits(object.total_bytes.low >>> 0, object.total_bytes.high >>> 0).toNumber(true);
+                if (object.app_id != null)
+                    message.app_id = object.app_id >>> 0;
+                if (object.total_unique_viewers != null)
+                    message.total_unique_viewers = object.total_unique_viewers >>> 0;
+                if (object.total_seconds_watched != null)
+                    if ($util.Long)
+                        (message.total_seconds_watched = $util.Long.fromValue(object.total_seconds_watched)).unsigned = true;
+                    else if (typeof object.total_seconds_watched === "string")
+                        message.total_seconds_watched = parseInt(object.total_seconds_watched, 10);
+                    else if (typeof object.total_seconds_watched === "number")
+                        message.total_seconds_watched = object.total_seconds_watched;
+                    else if (typeof object.total_seconds_watched === "object")
+                        message.total_seconds_watched = new $util.LongBits(object.total_seconds_watched.low >>> 0, object.total_seconds_watched.high >>> 0).toNumber(true);
+                if (object.time_started != null)
+                    message.time_started = object.time_started >>> 0;
+                if (object.upload_id != null)
+                    if ($util.Long)
+                        (message.upload_id = $util.Long.fromValue(object.upload_id)).unsigned = true;
+                    else if (typeof object.upload_id === "string")
+                        message.upload_id = parseInt(object.upload_id, 10);
+                    else if (typeof object.upload_id === "number")
+                        message.upload_id = object.upload_id;
+                    else if (typeof object.upload_id === "object")
+                        message.upload_id = new $util.LongBits(object.upload_id.low >>> 0, object.upload_id.high >>> 0).toNumber(true);
+                if (object.local_address != null)
+                    message.local_address = String(object.local_address);
+                if (object.remote_address != null)
+                    message.remote_address = String(object.remote_address);
+                if (object.frames_per_second != null)
+                    message.frames_per_second = object.frames_per_second >>> 0;
+                if (object.num_representations != null)
+                    message.num_representations = object.num_representations >>> 0;
+                if (object.app_name != null)
+                    message.app_name = String(object.app_name);
+                if (object.is_replay != null)
+                    message.is_replay = Boolean(object.is_replay);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an UploadStats message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @static
+             * @param {CBroadcast_GetBroadcastUploadStats_Response.UploadStats} message UploadStats
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            UploadStats.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.upload_result = 0;
+                    object.time_stopped = 0;
+                    object.seconds_uploaded = 0;
+                    object.max_viewers = 0;
+                    object.resolution_x = 0;
+                    object.resolution_y = 0;
+                    object.avg_bandwidth = 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.total_bytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.total_bytes = options.longs === String ? "0" : 0;
+                    object.app_id = 0;
+                    object.total_unique_viewers = 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.total_seconds_watched = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.total_seconds_watched = options.longs === String ? "0" : 0;
+                    object.time_started = 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, true);
+                        object.upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.upload_id = options.longs === String ? "0" : 0;
+                    object.local_address = "";
+                    object.remote_address = "";
+                    object.frames_per_second = 0;
+                    object.num_representations = 0;
+                    object.app_name = "";
+                    object.is_replay = false;
+                }
+                if (message.upload_result != null && message.hasOwnProperty("upload_result"))
+                    object.upload_result = message.upload_result;
+                if (message.time_stopped != null && message.hasOwnProperty("time_stopped"))
+                    object.time_stopped = message.time_stopped;
+                if (message.seconds_uploaded != null && message.hasOwnProperty("seconds_uploaded"))
+                    object.seconds_uploaded = message.seconds_uploaded;
+                if (message.max_viewers != null && message.hasOwnProperty("max_viewers"))
+                    object.max_viewers = message.max_viewers;
+                if (message.resolution_x != null && message.hasOwnProperty("resolution_x"))
+                    object.resolution_x = message.resolution_x;
+                if (message.resolution_y != null && message.hasOwnProperty("resolution_y"))
+                    object.resolution_y = message.resolution_y;
+                if (message.avg_bandwidth != null && message.hasOwnProperty("avg_bandwidth"))
+                    object.avg_bandwidth = message.avg_bandwidth;
+                if (message.total_bytes != null && message.hasOwnProperty("total_bytes"))
+                    if (typeof message.total_bytes === "number")
+                        object.total_bytes = options.longs === String ? String(message.total_bytes) : message.total_bytes;
+                    else
+                        object.total_bytes = options.longs === String ? $util.Long.prototype.toString.call(message.total_bytes) : options.longs === Number ? new $util.LongBits(message.total_bytes.low >>> 0, message.total_bytes.high >>> 0).toNumber(true) : message.total_bytes;
+                if (message.app_id != null && message.hasOwnProperty("app_id"))
+                    object.app_id = message.app_id;
+                if (message.total_unique_viewers != null && message.hasOwnProperty("total_unique_viewers"))
+                    object.total_unique_viewers = message.total_unique_viewers;
+                if (message.total_seconds_watched != null && message.hasOwnProperty("total_seconds_watched"))
+                    if (typeof message.total_seconds_watched === "number")
+                        object.total_seconds_watched = options.longs === String ? String(message.total_seconds_watched) : message.total_seconds_watched;
+                    else
+                        object.total_seconds_watched = options.longs === String ? $util.Long.prototype.toString.call(message.total_seconds_watched) : options.longs === Number ? new $util.LongBits(message.total_seconds_watched.low >>> 0, message.total_seconds_watched.high >>> 0).toNumber(true) : message.total_seconds_watched;
+                if (message.time_started != null && message.hasOwnProperty("time_started"))
+                    object.time_started = message.time_started;
+                if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                    if (typeof message.upload_id === "number")
+                        object.upload_id = options.longs === String ? String(message.upload_id) : message.upload_id;
+                    else
+                        object.upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_id) : options.longs === Number ? new $util.LongBits(message.upload_id.low >>> 0, message.upload_id.high >>> 0).toNumber(true) : message.upload_id;
+                if (message.local_address != null && message.hasOwnProperty("local_address"))
+                    object.local_address = message.local_address;
+                if (message.remote_address != null && message.hasOwnProperty("remote_address"))
+                    object.remote_address = message.remote_address;
+                if (message.frames_per_second != null && message.hasOwnProperty("frames_per_second"))
+                    object.frames_per_second = message.frames_per_second;
+                if (message.num_representations != null && message.hasOwnProperty("num_representations"))
+                    object.num_representations = message.num_representations;
+                if (message.app_name != null && message.hasOwnProperty("app_name"))
+                    object.app_name = message.app_name;
+                if (message.is_replay != null && message.hasOwnProperty("is_replay"))
+                    object.is_replay = message.is_replay;
+                return object;
+            };
+    
+            /**
+             * Converts this UploadStats to JSON.
+             * @function toJSON
+             * @memberof CBroadcast_GetBroadcastUploadStats_Response.UploadStats
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            UploadStats.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return UploadStats;
+        })();
+    
+        return CBroadcast_GetBroadcastUploadStats_Response;
+    })();
+    
+    $root.CBroadcast_GetBroadcastViewerStats_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastViewerStats_Request.
+         * @exports ICBroadcast_GetBroadcastViewerStats_Request
+         * @interface ICBroadcast_GetBroadcastViewerStats_Request
+         * @property {number|Long|null} [upload_id] CBroadcast_GetBroadcastViewerStats_Request upload_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastViewerStats_Request.
+         * @exports CBroadcast_GetBroadcastViewerStats_Request
+         * @classdesc Represents a CBroadcast_GetBroadcastViewerStats_Request.
+         * @implements ICBroadcast_GetBroadcastViewerStats_Request
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastViewerStats_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastViewerStats_Request upload_id.
+         * @member {number|Long} upload_id
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.prototype.upload_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastViewerStats_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastViewerStats_Request} CBroadcast_GetBroadcastViewerStats_Request instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.create = function create(properties) {
+            return new CBroadcast_GetBroadcastViewerStats_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastViewerStats_Request message. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request} message CBroadcast_GetBroadcastViewerStats_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.upload_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastViewerStats_Request message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request} message CBroadcast_GetBroadcastViewerStats_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastViewerStats_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastViewerStats_Request} CBroadcast_GetBroadcastViewerStats_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastViewerStats_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.upload_id = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastViewerStats_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastViewerStats_Request} CBroadcast_GetBroadcastViewerStats_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastViewerStats_Request message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                if (!$util.isInteger(message.upload_id) && !(message.upload_id && $util.isInteger(message.upload_id.low) && $util.isInteger(message.upload_id.high)))
+                    return "upload_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastViewerStats_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastViewerStats_Request} CBroadcast_GetBroadcastViewerStats_Request
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastViewerStats_Request)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastViewerStats_Request();
+            if (object.upload_id != null)
+                if ($util.Long)
+                    (message.upload_id = $util.Long.fromValue(object.upload_id)).unsigned = true;
+                else if (typeof object.upload_id === "string")
+                    message.upload_id = parseInt(object.upload_id, 10);
+                else if (typeof object.upload_id === "number")
+                    message.upload_id = object.upload_id;
+                else if (typeof object.upload_id === "object")
+                    message.upload_id = new $util.LongBits(object.upload_id.low >>> 0, object.upload_id.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastViewerStats_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @static
+         * @param {CBroadcast_GetBroadcastViewerStats_Request} message CBroadcast_GetBroadcastViewerStats_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.upload_id = options.longs === String ? "0" : 0;
+            if (message.upload_id != null && message.hasOwnProperty("upload_id"))
+                if (typeof message.upload_id === "number")
+                    object.upload_id = options.longs === String ? String(message.upload_id) : message.upload_id;
+                else
+                    object.upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_id) : options.longs === Number ? new $util.LongBits(message.upload_id.low >>> 0, message.upload_id.high >>> 0).toNumber(true) : message.upload_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastViewerStats_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_GetBroadcastViewerStats_Request;
+    })();
+    
+    $root.CBroadcast_GetBroadcastViewerStats_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_GetBroadcastViewerStats_Response.
+         * @exports ICBroadcast_GetBroadcastViewerStats_Response
+         * @interface ICBroadcast_GetBroadcastViewerStats_Response
+         * @property {Array.<CBroadcast_GetBroadcastViewerStats_Response.IViewerStats>|null} [viewer_stats] CBroadcast_GetBroadcastViewerStats_Response viewer_stats
+         * @property {Array.<CBroadcast_GetBroadcastViewerStats_Response.ICountryStats>|null} [country_stats] CBroadcast_GetBroadcastViewerStats_Response country_stats
+         */
+    
+        /**
+         * Constructs a new CBroadcast_GetBroadcastViewerStats_Response.
+         * @exports CBroadcast_GetBroadcastViewerStats_Response
+         * @classdesc Represents a CBroadcast_GetBroadcastViewerStats_Response.
+         * @implements ICBroadcast_GetBroadcastViewerStats_Response
+         * @constructor
+         * @param {ICBroadcast_GetBroadcastViewerStats_Response=} [properties] Properties to set
+         */
+        function CBroadcast_GetBroadcastViewerStats_Response(properties) {
+            this.viewer_stats = [];
+            this.country_stats = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_GetBroadcastViewerStats_Response viewer_stats.
+         * @member {Array.<CBroadcast_GetBroadcastViewerStats_Response.IViewerStats>} viewer_stats
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.prototype.viewer_stats = $util.emptyArray;
+    
+        /**
+         * CBroadcast_GetBroadcastViewerStats_Response country_stats.
+         * @member {Array.<CBroadcast_GetBroadcastViewerStats_Response.ICountryStats>} country_stats
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.prototype.country_stats = $util.emptyArray;
+    
+        /**
+         * Creates a new CBroadcast_GetBroadcastViewerStats_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Response=} [properties] Properties to set
+         * @returns {CBroadcast_GetBroadcastViewerStats_Response} CBroadcast_GetBroadcastViewerStats_Response instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.create = function create(properties) {
+            return new CBroadcast_GetBroadcastViewerStats_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastViewerStats_Response message. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Response} message CBroadcast_GetBroadcastViewerStats_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.viewer_stats != null && message.viewer_stats.length)
+                for (var i = 0; i < message.viewer_stats.length; ++i)
+                    $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.encode(message.viewer_stats[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.country_stats != null && message.country_stats.length)
+                for (var i = 0; i < message.country_stats.length; ++i)
+                    $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats.encode(message.country_stats[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_GetBroadcastViewerStats_Response message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {ICBroadcast_GetBroadcastViewerStats_Response} message CBroadcast_GetBroadcastViewerStats_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastViewerStats_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_GetBroadcastViewerStats_Response} CBroadcast_GetBroadcastViewerStats_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastViewerStats_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.viewer_stats && message.viewer_stats.length))
+                        message.viewer_stats = [];
+                    message.viewer_stats.push($root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.country_stats && message.country_stats.length))
+                        message.country_stats = [];
+                    message.country_stats.push($root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_GetBroadcastViewerStats_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_GetBroadcastViewerStats_Response} CBroadcast_GetBroadcastViewerStats_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_GetBroadcastViewerStats_Response message.
+         * @function verify
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.viewer_stats != null && message.hasOwnProperty("viewer_stats")) {
+                if (!Array.isArray(message.viewer_stats))
+                    return "viewer_stats: array expected";
+                for (var i = 0; i < message.viewer_stats.length; ++i) {
+                    var error = $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.verify(message.viewer_stats[i]);
+                    if (error)
+                        return "viewer_stats." + error;
+                }
+            }
+            if (message.country_stats != null && message.hasOwnProperty("country_stats")) {
+                if (!Array.isArray(message.country_stats))
+                    return "country_stats: array expected";
+                for (var i = 0; i < message.country_stats.length; ++i) {
+                    var error = $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats.verify(message.country_stats[i]);
+                    if (error)
+                        return "country_stats." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_GetBroadcastViewerStats_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_GetBroadcastViewerStats_Response} CBroadcast_GetBroadcastViewerStats_Response
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_GetBroadcastViewerStats_Response)
+                return object;
+            var message = new $root.CBroadcast_GetBroadcastViewerStats_Response();
+            if (object.viewer_stats) {
+                if (!Array.isArray(object.viewer_stats))
+                    throw TypeError(".CBroadcast_GetBroadcastViewerStats_Response.viewer_stats: array expected");
+                message.viewer_stats = [];
+                for (var i = 0; i < object.viewer_stats.length; ++i) {
+                    if (typeof object.viewer_stats[i] !== "object")
+                        throw TypeError(".CBroadcast_GetBroadcastViewerStats_Response.viewer_stats: object expected");
+                    message.viewer_stats[i] = $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.fromObject(object.viewer_stats[i]);
+                }
+            }
+            if (object.country_stats) {
+                if (!Array.isArray(object.country_stats))
+                    throw TypeError(".CBroadcast_GetBroadcastViewerStats_Response.country_stats: array expected");
+                message.country_stats = [];
+                for (var i = 0; i < object.country_stats.length; ++i) {
+                    if (typeof object.country_stats[i] !== "object")
+                        throw TypeError(".CBroadcast_GetBroadcastViewerStats_Response.country_stats: object expected");
+                    message.country_stats[i] = $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats.fromObject(object.country_stats[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_GetBroadcastViewerStats_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @static
+         * @param {CBroadcast_GetBroadcastViewerStats_Response} message CBroadcast_GetBroadcastViewerStats_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.viewer_stats = [];
+                object.country_stats = [];
+            }
+            if (message.viewer_stats && message.viewer_stats.length) {
+                object.viewer_stats = [];
+                for (var j = 0; j < message.viewer_stats.length; ++j)
+                    object.viewer_stats[j] = $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.toObject(message.viewer_stats[j], options);
+            }
+            if (message.country_stats && message.country_stats.length) {
+                object.country_stats = [];
+                for (var j = 0; j < message.country_stats.length; ++j)
+                    object.country_stats[j] = $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats.toObject(message.country_stats[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_GetBroadcastViewerStats_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_GetBroadcastViewerStats_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_GetBroadcastViewerStats_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CBroadcast_GetBroadcastViewerStats_Response.ViewerStats = (function() {
+    
+            /**
+             * Properties of a ViewerStats.
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response
+             * @interface IViewerStats
+             * @property {number|null} [time] ViewerStats time
+             * @property {number|null} [num_viewers] ViewerStats num_viewers
+             */
+    
+            /**
+             * Constructs a new ViewerStats.
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response
+             * @classdesc Represents a ViewerStats.
+             * @implements IViewerStats
+             * @constructor
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.IViewerStats=} [properties] Properties to set
+             */
+            function ViewerStats(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ViewerStats time.
+             * @member {number} time
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @instance
+             */
+            ViewerStats.prototype.time = 0;
+    
+            /**
+             * ViewerStats num_viewers.
+             * @member {number} num_viewers
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @instance
+             */
+            ViewerStats.prototype.num_viewers = 0;
+    
+            /**
+             * Creates a new ViewerStats instance using the specified properties.
+             * @function create
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.IViewerStats=} [properties] Properties to set
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.ViewerStats} ViewerStats instance
+             */
+            ViewerStats.create = function create(properties) {
+                return new ViewerStats(properties);
+            };
+    
+            /**
+             * Encodes the specified ViewerStats message. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.verify|verify} messages.
+             * @function encode
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.IViewerStats} message ViewerStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ViewerStats.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.time != null && message.hasOwnProperty("time"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.time);
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_viewers);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ViewerStats message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.ViewerStats.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.IViewerStats} message ViewerStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ViewerStats.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a ViewerStats message from the specified reader or buffer.
+             * @function decode
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.ViewerStats} ViewerStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ViewerStats.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.time = reader.uint32();
+                        break;
+                    case 2:
+                        message.num_viewers = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a ViewerStats message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.ViewerStats} ViewerStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ViewerStats.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a ViewerStats message.
+             * @function verify
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ViewerStats.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.time != null && message.hasOwnProperty("time"))
+                    if (!$util.isInteger(message.time))
+                        return "time: integer expected";
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    if (!$util.isInteger(message.num_viewers))
+                        return "num_viewers: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a ViewerStats message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.ViewerStats} ViewerStats
+             */
+            ViewerStats.fromObject = function fromObject(object) {
+                if (object instanceof $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats)
+                    return object;
+                var message = new $root.CBroadcast_GetBroadcastViewerStats_Response.ViewerStats();
+                if (object.time != null)
+                    message.time = object.time >>> 0;
+                if (object.num_viewers != null)
+                    message.num_viewers = object.num_viewers >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a ViewerStats message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.ViewerStats} message ViewerStats
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ViewerStats.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.time = 0;
+                    object.num_viewers = 0;
+                }
+                if (message.time != null && message.hasOwnProperty("time"))
+                    object.time = message.time;
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    object.num_viewers = message.num_viewers;
+                return object;
+            };
+    
+            /**
+             * Converts this ViewerStats to JSON.
+             * @function toJSON
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.ViewerStats
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ViewerStats.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ViewerStats;
+        })();
+    
+        CBroadcast_GetBroadcastViewerStats_Response.CountryStats = (function() {
+    
+            /**
+             * Properties of a CountryStats.
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response
+             * @interface ICountryStats
+             * @property {string|null} [country_code] CountryStats country_code
+             * @property {number|null} [num_viewers] CountryStats num_viewers
+             */
+    
+            /**
+             * Constructs a new CountryStats.
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response
+             * @classdesc Represents a CountryStats.
+             * @implements ICountryStats
+             * @constructor
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.ICountryStats=} [properties] Properties to set
+             */
+            function CountryStats(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * CountryStats country_code.
+             * @member {string} country_code
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @instance
+             */
+            CountryStats.prototype.country_code = "";
+    
+            /**
+             * CountryStats num_viewers.
+             * @member {number} num_viewers
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @instance
+             */
+            CountryStats.prototype.num_viewers = 0;
+    
+            /**
+             * Creates a new CountryStats instance using the specified properties.
+             * @function create
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.ICountryStats=} [properties] Properties to set
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.CountryStats} CountryStats instance
+             */
+            CountryStats.create = function create(properties) {
+                return new CountryStats(properties);
+            };
+    
+            /**
+             * Encodes the specified CountryStats message. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.CountryStats.verify|verify} messages.
+             * @function encode
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.ICountryStats} message CountryStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CountryStats.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.country_code != null && message.hasOwnProperty("country_code"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.country_code);
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.num_viewers);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified CountryStats message, length delimited. Does not implicitly {@link CBroadcast_GetBroadcastViewerStats_Response.CountryStats.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.ICountryStats} message CountryStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CountryStats.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a CountryStats message from the specified reader or buffer.
+             * @function decode
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.CountryStats} CountryStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CountryStats.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.country_code = reader.string();
+                        break;
+                    case 2:
+                        message.num_viewers = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a CountryStats message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.CountryStats} CountryStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CountryStats.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a CountryStats message.
+             * @function verify
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CountryStats.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.country_code != null && message.hasOwnProperty("country_code"))
+                    if (!$util.isString(message.country_code))
+                        return "country_code: string expected";
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    if (!$util.isInteger(message.num_viewers))
+                        return "num_viewers: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a CountryStats message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CBroadcast_GetBroadcastViewerStats_Response.CountryStats} CountryStats
+             */
+            CountryStats.fromObject = function fromObject(object) {
+                if (object instanceof $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats)
+                    return object;
+                var message = new $root.CBroadcast_GetBroadcastViewerStats_Response.CountryStats();
+                if (object.country_code != null)
+                    message.country_code = String(object.country_code);
+                if (object.num_viewers != null)
+                    message.num_viewers = object.num_viewers >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a CountryStats message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @static
+             * @param {CBroadcast_GetBroadcastViewerStats_Response.CountryStats} message CountryStats
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CountryStats.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.country_code = "";
+                    object.num_viewers = 0;
+                }
+                if (message.country_code != null && message.hasOwnProperty("country_code"))
+                    object.country_code = message.country_code;
+                if (message.num_viewers != null && message.hasOwnProperty("num_viewers"))
+                    object.num_viewers = message.num_viewers;
+                return object;
+            };
+    
+            /**
+             * Converts this CountryStats to JSON.
+             * @function toJSON
+             * @memberof CBroadcast_GetBroadcastViewerStats_Response.CountryStats
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CountryStats.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return CountryStats;
+        })();
+    
+        return CBroadcast_GetBroadcastViewerStats_Response;
+    })();
+    
     $root.CBroadcast_BroadcastViewerState_Notification = (function() {
     
         /**
@@ -8577,6 +17471,354 @@
         };
     
         return CBroadcast_WaitingBroadcastViewer_Notification;
+    })();
+    
+    $root.CBroadcast_BroadcastUploadStarted_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BroadcastUploadStarted_Notification.
+         * @exports ICBroadcast_BroadcastUploadStarted_Notification
+         * @interface ICBroadcast_BroadcastUploadStarted_Notification
+         * @property {number|Long|null} [broadcast_id] CBroadcast_BroadcastUploadStarted_Notification broadcast_id
+         * @property {string|null} [upload_token] CBroadcast_BroadcastUploadStarted_Notification upload_token
+         * @property {string|null} [upload_address] CBroadcast_BroadcastUploadStarted_Notification upload_address
+         * @property {string|null} [http_address] CBroadcast_BroadcastUploadStarted_Notification http_address
+         * @property {number|Long|null} [broadcast_upload_id] CBroadcast_BroadcastUploadStarted_Notification broadcast_upload_id
+         * @property {number|null} [heartbeat_interval_seconds] CBroadcast_BroadcastUploadStarted_Notification heartbeat_interval_seconds
+         * @property {boolean|null} [is_rtmp] CBroadcast_BroadcastUploadStarted_Notification is_rtmp
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BroadcastUploadStarted_Notification.
+         * @exports CBroadcast_BroadcastUploadStarted_Notification
+         * @classdesc Represents a CBroadcast_BroadcastUploadStarted_Notification.
+         * @implements ICBroadcast_BroadcastUploadStarted_Notification
+         * @constructor
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_BroadcastUploadStarted_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification broadcast_id.
+         * @member {number|Long} broadcast_id
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.broadcast_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification upload_token.
+         * @member {string} upload_token
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.upload_token = "";
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification upload_address.
+         * @member {string} upload_address
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.upload_address = "";
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification http_address.
+         * @member {string} http_address
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.http_address = "";
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification broadcast_upload_id.
+         * @member {number|Long} broadcast_upload_id
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.broadcast_upload_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification heartbeat_interval_seconds.
+         * @member {number} heartbeat_interval_seconds
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.heartbeat_interval_seconds = 0;
+    
+        /**
+         * CBroadcast_BroadcastUploadStarted_Notification is_rtmp.
+         * @member {boolean} is_rtmp
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.is_rtmp = false;
+    
+        /**
+         * Creates a new CBroadcast_BroadcastUploadStarted_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_BroadcastUploadStarted_Notification} CBroadcast_BroadcastUploadStarted_Notification instance
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.create = function create(properties) {
+            return new CBroadcast_BroadcastUploadStarted_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastUploadStarted_Notification message. Does not implicitly {@link CBroadcast_BroadcastUploadStarted_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification} message CBroadcast_BroadcastUploadStarted_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_id);
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.upload_token);
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.upload_address);
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.http_address);
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                writer.uint32(/* id 5, wireType 1 =*/41).fixed64(message.broadcast_upload_id);
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.heartbeat_interval_seconds);
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.is_rtmp);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastUploadStarted_Notification message, length delimited. Does not implicitly {@link CBroadcast_BroadcastUploadStarted_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification} message CBroadcast_BroadcastUploadStarted_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastUploadStarted_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BroadcastUploadStarted_Notification} CBroadcast_BroadcastUploadStarted_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BroadcastUploadStarted_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.upload_token = reader.string();
+                    break;
+                case 3:
+                    message.upload_address = reader.string();
+                    break;
+                case 4:
+                    message.http_address = reader.string();
+                    break;
+                case 5:
+                    message.broadcast_upload_id = reader.fixed64();
+                    break;
+                case 6:
+                    message.heartbeat_interval_seconds = reader.uint32();
+                    break;
+                case 7:
+                    message.is_rtmp = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastUploadStarted_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BroadcastUploadStarted_Notification} CBroadcast_BroadcastUploadStarted_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BroadcastUploadStarted_Notification message.
+         * @function verify
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (!$util.isInteger(message.broadcast_id) && !(message.broadcast_id && $util.isInteger(message.broadcast_id.low) && $util.isInteger(message.broadcast_id.high)))
+                    return "broadcast_id: integer|Long expected";
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                if (!$util.isString(message.upload_token))
+                    return "upload_token: string expected";
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                if (!$util.isString(message.upload_address))
+                    return "upload_address: string expected";
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                if (!$util.isString(message.http_address))
+                    return "http_address: string expected";
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (!$util.isInteger(message.broadcast_upload_id) && !(message.broadcast_upload_id && $util.isInteger(message.broadcast_upload_id.low) && $util.isInteger(message.broadcast_upload_id.high)))
+                    return "broadcast_upload_id: integer|Long expected";
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                if (!$util.isInteger(message.heartbeat_interval_seconds))
+                    return "heartbeat_interval_seconds: integer expected";
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                if (typeof message.is_rtmp !== "boolean")
+                    return "is_rtmp: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BroadcastUploadStarted_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BroadcastUploadStarted_Notification} CBroadcast_BroadcastUploadStarted_Notification
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BroadcastUploadStarted_Notification)
+                return object;
+            var message = new $root.CBroadcast_BroadcastUploadStarted_Notification();
+            if (object.broadcast_id != null)
+                if ($util.Long)
+                    (message.broadcast_id = $util.Long.fromValue(object.broadcast_id)).unsigned = false;
+                else if (typeof object.broadcast_id === "string")
+                    message.broadcast_id = parseInt(object.broadcast_id, 10);
+                else if (typeof object.broadcast_id === "number")
+                    message.broadcast_id = object.broadcast_id;
+                else if (typeof object.broadcast_id === "object")
+                    message.broadcast_id = new $util.LongBits(object.broadcast_id.low >>> 0, object.broadcast_id.high >>> 0).toNumber();
+            if (object.upload_token != null)
+                message.upload_token = String(object.upload_token);
+            if (object.upload_address != null)
+                message.upload_address = String(object.upload_address);
+            if (object.http_address != null)
+                message.http_address = String(object.http_address);
+            if (object.broadcast_upload_id != null)
+                if ($util.Long)
+                    (message.broadcast_upload_id = $util.Long.fromValue(object.broadcast_upload_id)).unsigned = false;
+                else if (typeof object.broadcast_upload_id === "string")
+                    message.broadcast_upload_id = parseInt(object.broadcast_upload_id, 10);
+                else if (typeof object.broadcast_upload_id === "number")
+                    message.broadcast_upload_id = object.broadcast_upload_id;
+                else if (typeof object.broadcast_upload_id === "object")
+                    message.broadcast_upload_id = new $util.LongBits(object.broadcast_upload_id.low >>> 0, object.broadcast_upload_id.high >>> 0).toNumber();
+            if (object.heartbeat_interval_seconds != null)
+                message.heartbeat_interval_seconds = object.heartbeat_interval_seconds >>> 0;
+            if (object.is_rtmp != null)
+                message.is_rtmp = Boolean(object.is_rtmp);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BroadcastUploadStarted_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @static
+         * @param {CBroadcast_BroadcastUploadStarted_Notification} message CBroadcast_BroadcastUploadStarted_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_id = options.longs === String ? "0" : 0;
+                object.upload_token = "";
+                object.upload_address = "";
+                object.http_address = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_upload_id = options.longs === String ? "0" : 0;
+                object.heartbeat_interval_seconds = 0;
+                object.is_rtmp = false;
+            }
+            if (message.broadcast_id != null && message.hasOwnProperty("broadcast_id"))
+                if (typeof message.broadcast_id === "number")
+                    object.broadcast_id = options.longs === String ? String(message.broadcast_id) : message.broadcast_id;
+                else
+                    object.broadcast_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_id) : options.longs === Number ? new $util.LongBits(message.broadcast_id.low >>> 0, message.broadcast_id.high >>> 0).toNumber() : message.broadcast_id;
+            if (message.upload_token != null && message.hasOwnProperty("upload_token"))
+                object.upload_token = message.upload_token;
+            if (message.upload_address != null && message.hasOwnProperty("upload_address"))
+                object.upload_address = message.upload_address;
+            if (message.http_address != null && message.hasOwnProperty("http_address"))
+                object.http_address = message.http_address;
+            if (message.broadcast_upload_id != null && message.hasOwnProperty("broadcast_upload_id"))
+                if (typeof message.broadcast_upload_id === "number")
+                    object.broadcast_upload_id = options.longs === String ? String(message.broadcast_upload_id) : message.broadcast_upload_id;
+                else
+                    object.broadcast_upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_upload_id) : options.longs === Number ? new $util.LongBits(message.broadcast_upload_id.low >>> 0, message.broadcast_upload_id.high >>> 0).toNumber() : message.broadcast_upload_id;
+            if (message.heartbeat_interval_seconds != null && message.hasOwnProperty("heartbeat_interval_seconds"))
+                object.heartbeat_interval_seconds = message.heartbeat_interval_seconds;
+            if (message.is_rtmp != null && message.hasOwnProperty("is_rtmp"))
+                object.is_rtmp = message.is_rtmp;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BroadcastUploadStarted_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BroadcastUploadStarted_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BroadcastUploadStarted_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_BroadcastUploadStarted_Notification;
     })();
     
     $root.CBroadcast_StopBroadcastUpload_Notification = (function() {
@@ -9487,6 +18729,252 @@
         return CBroadcast_BroadcastStatus_Notification;
     })();
     
+    $root.CBroadcast_BroadcastChannelLive_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_BroadcastChannelLive_Notification.
+         * @exports ICBroadcast_BroadcastChannelLive_Notification
+         * @interface ICBroadcast_BroadcastChannelLive_Notification
+         * @property {number|Long|null} [broadcast_channel_id] CBroadcast_BroadcastChannelLive_Notification broadcast_channel_id
+         * @property {string|null} [broadcast_channel_name] CBroadcast_BroadcastChannelLive_Notification broadcast_channel_name
+         * @property {string|null} [broadcast_channel_avatar] CBroadcast_BroadcastChannelLive_Notification broadcast_channel_avatar
+         */
+    
+        /**
+         * Constructs a new CBroadcast_BroadcastChannelLive_Notification.
+         * @exports CBroadcast_BroadcastChannelLive_Notification
+         * @classdesc Represents a CBroadcast_BroadcastChannelLive_Notification.
+         * @implements ICBroadcast_BroadcastChannelLive_Notification
+         * @constructor
+         * @param {ICBroadcast_BroadcastChannelLive_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_BroadcastChannelLive_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_BroadcastChannelLive_Notification broadcast_channel_id.
+         * @member {number|Long} broadcast_channel_id
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastChannelLive_Notification.prototype.broadcast_channel_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_BroadcastChannelLive_Notification broadcast_channel_name.
+         * @member {string} broadcast_channel_name
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastChannelLive_Notification.prototype.broadcast_channel_name = "";
+    
+        /**
+         * CBroadcast_BroadcastChannelLive_Notification broadcast_channel_avatar.
+         * @member {string} broadcast_channel_avatar
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @instance
+         */
+        CBroadcast_BroadcastChannelLive_Notification.prototype.broadcast_channel_avatar = "";
+    
+        /**
+         * Creates a new CBroadcast_BroadcastChannelLive_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastChannelLive_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_BroadcastChannelLive_Notification} CBroadcast_BroadcastChannelLive_Notification instance
+         */
+        CBroadcast_BroadcastChannelLive_Notification.create = function create(properties) {
+            return new CBroadcast_BroadcastChannelLive_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastChannelLive_Notification message. Does not implicitly {@link CBroadcast_BroadcastChannelLive_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastChannelLive_Notification} message CBroadcast_BroadcastChannelLive_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastChannelLive_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_channel_id);
+            if (message.broadcast_channel_name != null && message.hasOwnProperty("broadcast_channel_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.broadcast_channel_name);
+            if (message.broadcast_channel_avatar != null && message.hasOwnProperty("broadcast_channel_avatar"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.broadcast_channel_avatar);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_BroadcastChannelLive_Notification message, length delimited. Does not implicitly {@link CBroadcast_BroadcastChannelLive_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {ICBroadcast_BroadcastChannelLive_Notification} message CBroadcast_BroadcastChannelLive_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_BroadcastChannelLive_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastChannelLive_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_BroadcastChannelLive_Notification} CBroadcast_BroadcastChannelLive_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastChannelLive_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_BroadcastChannelLive_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_channel_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.broadcast_channel_name = reader.string();
+                    break;
+                case 3:
+                    message.broadcast_channel_avatar = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_BroadcastChannelLive_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_BroadcastChannelLive_Notification} CBroadcast_BroadcastChannelLive_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_BroadcastChannelLive_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_BroadcastChannelLive_Notification message.
+         * @function verify
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_BroadcastChannelLive_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (!$util.isInteger(message.broadcast_channel_id) && !(message.broadcast_channel_id && $util.isInteger(message.broadcast_channel_id.low) && $util.isInteger(message.broadcast_channel_id.high)))
+                    return "broadcast_channel_id: integer|Long expected";
+            if (message.broadcast_channel_name != null && message.hasOwnProperty("broadcast_channel_name"))
+                if (!$util.isString(message.broadcast_channel_name))
+                    return "broadcast_channel_name: string expected";
+            if (message.broadcast_channel_avatar != null && message.hasOwnProperty("broadcast_channel_avatar"))
+                if (!$util.isString(message.broadcast_channel_avatar))
+                    return "broadcast_channel_avatar: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_BroadcastChannelLive_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_BroadcastChannelLive_Notification} CBroadcast_BroadcastChannelLive_Notification
+         */
+        CBroadcast_BroadcastChannelLive_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_BroadcastChannelLive_Notification)
+                return object;
+            var message = new $root.CBroadcast_BroadcastChannelLive_Notification();
+            if (object.broadcast_channel_id != null)
+                if ($util.Long)
+                    (message.broadcast_channel_id = $util.Long.fromValue(object.broadcast_channel_id)).unsigned = false;
+                else if (typeof object.broadcast_channel_id === "string")
+                    message.broadcast_channel_id = parseInt(object.broadcast_channel_id, 10);
+                else if (typeof object.broadcast_channel_id === "number")
+                    message.broadcast_channel_id = object.broadcast_channel_id;
+                else if (typeof object.broadcast_channel_id === "object")
+                    message.broadcast_channel_id = new $util.LongBits(object.broadcast_channel_id.low >>> 0, object.broadcast_channel_id.high >>> 0).toNumber();
+            if (object.broadcast_channel_name != null)
+                message.broadcast_channel_name = String(object.broadcast_channel_name);
+            if (object.broadcast_channel_avatar != null)
+                message.broadcast_channel_avatar = String(object.broadcast_channel_avatar);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_BroadcastChannelLive_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @static
+         * @param {CBroadcast_BroadcastChannelLive_Notification} message CBroadcast_BroadcastChannelLive_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_BroadcastChannelLive_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_channel_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_channel_id = options.longs === String ? "0" : 0;
+                object.broadcast_channel_name = "";
+                object.broadcast_channel_avatar = "";
+            }
+            if (message.broadcast_channel_id != null && message.hasOwnProperty("broadcast_channel_id"))
+                if (typeof message.broadcast_channel_id === "number")
+                    object.broadcast_channel_id = options.longs === String ? String(message.broadcast_channel_id) : message.broadcast_channel_id;
+                else
+                    object.broadcast_channel_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_channel_id) : options.longs === Number ? new $util.LongBits(message.broadcast_channel_id.low >>> 0, message.broadcast_channel_id.high >>> 0).toNumber() : message.broadcast_channel_id;
+            if (message.broadcast_channel_name != null && message.hasOwnProperty("broadcast_channel_name"))
+                object.broadcast_channel_name = message.broadcast_channel_name;
+            if (message.broadcast_channel_avatar != null && message.hasOwnProperty("broadcast_channel_avatar"))
+                object.broadcast_channel_avatar = message.broadcast_channel_avatar;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_BroadcastChannelLive_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_BroadcastChannelLive_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_BroadcastChannelLive_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_BroadcastChannelLive_Notification;
+    })();
+    
     $root.CBroadcast_SendThumbnailToRelay_Notification = (function() {
     
         /**
@@ -9784,6 +19272,1042 @@
         };
     
         return CBroadcast_SendThumbnailToRelay_Notification;
+    })();
+    
+    $root.CBroadcast_WebRTCNeedTURNServer_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCNeedTURNServer_Notification.
+         * @exports ICBroadcast_WebRTCNeedTURNServer_Notification
+         * @interface ICBroadcast_WebRTCNeedTURNServer_Notification
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_WebRTCNeedTURNServer_Notification broadcast_session_id
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCNeedTURNServer_Notification.
+         * @exports CBroadcast_WebRTCNeedTURNServer_Notification
+         * @classdesc Represents a CBroadcast_WebRTCNeedTURNServer_Notification.
+         * @implements ICBroadcast_WebRTCNeedTURNServer_Notification
+         * @constructor
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCNeedTURNServer_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCNeedTURNServer_Notification broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCNeedTURNServer_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCNeedTURNServer_Notification} CBroadcast_WebRTCNeedTURNServer_Notification instance
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.create = function create(properties) {
+            return new CBroadcast_WebRTCNeedTURNServer_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCNeedTURNServer_Notification message. Does not implicitly {@link CBroadcast_WebRTCNeedTURNServer_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification} message CBroadcast_WebRTCNeedTURNServer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCNeedTURNServer_Notification message, length delimited. Does not implicitly {@link CBroadcast_WebRTCNeedTURNServer_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification} message CBroadcast_WebRTCNeedTURNServer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCNeedTURNServer_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCNeedTURNServer_Notification} CBroadcast_WebRTCNeedTURNServer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCNeedTURNServer_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCNeedTURNServer_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCNeedTURNServer_Notification} CBroadcast_WebRTCNeedTURNServer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCNeedTURNServer_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCNeedTURNServer_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCNeedTURNServer_Notification} CBroadcast_WebRTCNeedTURNServer_Notification
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCNeedTURNServer_Notification)
+                return object;
+            var message = new $root.CBroadcast_WebRTCNeedTURNServer_Notification();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCNeedTURNServer_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @static
+         * @param {CBroadcast_WebRTCNeedTURNServer_Notification} message CBroadcast_WebRTCNeedTURNServer_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCNeedTURNServer_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCNeedTURNServer_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCNeedTURNServer_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCNeedTURNServer_Notification;
+    })();
+    
+    $root.CBroadcast_WebRTCStart_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCStart_Notification.
+         * @exports ICBroadcast_WebRTCStart_Notification
+         * @interface ICBroadcast_WebRTCStart_Notification
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_WebRTCStart_Notification broadcast_session_id
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCStart_Notification webrtc_session_id
+         * @property {number|Long|null} [viewer_steamid] CBroadcast_WebRTCStart_Notification viewer_steamid
+         * @property {number|Long|null} [viewer_token] CBroadcast_WebRTCStart_Notification viewer_token
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCStart_Notification.
+         * @exports CBroadcast_WebRTCStart_Notification
+         * @classdesc Represents a CBroadcast_WebRTCStart_Notification.
+         * @implements ICBroadcast_WebRTCStart_Notification
+         * @constructor
+         * @param {ICBroadcast_WebRTCStart_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCStart_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCStart_Notification broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCStart_Notification.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCStart_Notification webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCStart_Notification.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCStart_Notification viewer_steamid.
+         * @member {number|Long} viewer_steamid
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCStart_Notification.prototype.viewer_steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCStart_Notification viewer_token.
+         * @member {number|Long} viewer_token
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCStart_Notification.prototype.viewer_token = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCStart_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCStart_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCStart_Notification} CBroadcast_WebRTCStart_Notification instance
+         */
+        CBroadcast_WebRTCStart_Notification.create = function create(properties) {
+            return new CBroadcast_WebRTCStart_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStart_Notification message. Does not implicitly {@link CBroadcast_WebRTCStart_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCStart_Notification} message CBroadcast_WebRTCStart_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStart_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.viewer_steamid != null && message.hasOwnProperty("viewer_steamid"))
+                writer.uint32(/* id 3, wireType 1 =*/25).fixed64(message.viewer_steamid);
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.viewer_token);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCStart_Notification message, length delimited. Does not implicitly {@link CBroadcast_WebRTCStart_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCStart_Notification} message CBroadcast_WebRTCStart_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCStart_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStart_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCStart_Notification} CBroadcast_WebRTCStart_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStart_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCStart_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.viewer_steamid = reader.fixed64();
+                    break;
+                case 4:
+                    message.viewer_token = reader.fixed64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCStart_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCStart_Notification} CBroadcast_WebRTCStart_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCStart_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCStart_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCStart_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.viewer_steamid != null && message.hasOwnProperty("viewer_steamid"))
+                if (!$util.isInteger(message.viewer_steamid) && !(message.viewer_steamid && $util.isInteger(message.viewer_steamid.low) && $util.isInteger(message.viewer_steamid.high)))
+                    return "viewer_steamid: integer|Long expected";
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (!$util.isInteger(message.viewer_token) && !(message.viewer_token && $util.isInteger(message.viewer_token.low) && $util.isInteger(message.viewer_token.high)))
+                    return "viewer_token: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCStart_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCStart_Notification} CBroadcast_WebRTCStart_Notification
+         */
+        CBroadcast_WebRTCStart_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCStart_Notification)
+                return object;
+            var message = new $root.CBroadcast_WebRTCStart_Notification();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.viewer_steamid != null)
+                if ($util.Long)
+                    (message.viewer_steamid = $util.Long.fromValue(object.viewer_steamid)).unsigned = false;
+                else if (typeof object.viewer_steamid === "string")
+                    message.viewer_steamid = parseInt(object.viewer_steamid, 10);
+                else if (typeof object.viewer_steamid === "number")
+                    message.viewer_steamid = object.viewer_steamid;
+                else if (typeof object.viewer_steamid === "object")
+                    message.viewer_steamid = new $util.LongBits(object.viewer_steamid.low >>> 0, object.viewer_steamid.high >>> 0).toNumber();
+            if (object.viewer_token != null)
+                if ($util.Long)
+                    (message.viewer_token = $util.Long.fromValue(object.viewer_token)).unsigned = false;
+                else if (typeof object.viewer_token === "string")
+                    message.viewer_token = parseInt(object.viewer_token, 10);
+                else if (typeof object.viewer_token === "number")
+                    message.viewer_token = object.viewer_token;
+                else if (typeof object.viewer_token === "object")
+                    message.viewer_token = new $util.LongBits(object.viewer_token.low >>> 0, object.viewer_token.high >>> 0).toNumber();
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCStart_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @static
+         * @param {CBroadcast_WebRTCStart_Notification} message CBroadcast_WebRTCStart_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCStart_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.viewer_token = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.viewer_token = options.longs === String ? "0" : 0;
+            }
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.viewer_steamid != null && message.hasOwnProperty("viewer_steamid"))
+                if (typeof message.viewer_steamid === "number")
+                    object.viewer_steamid = options.longs === String ? String(message.viewer_steamid) : message.viewer_steamid;
+                else
+                    object.viewer_steamid = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_steamid) : options.longs === Number ? new $util.LongBits(message.viewer_steamid.low >>> 0, message.viewer_steamid.high >>> 0).toNumber() : message.viewer_steamid;
+            if (message.viewer_token != null && message.hasOwnProperty("viewer_token"))
+                if (typeof message.viewer_token === "number")
+                    object.viewer_token = options.longs === String ? String(message.viewer_token) : message.viewer_token;
+                else
+                    object.viewer_token = options.longs === String ? $util.Long.prototype.toString.call(message.viewer_token) : options.longs === Number ? new $util.LongBits(message.viewer_token.low >>> 0, message.viewer_token.high >>> 0).toNumber() : message.viewer_token;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCStart_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCStart_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCStart_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCStart_Notification;
+    })();
+    
+    $root.CBroadcast_WebRTCSetAnswer_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCSetAnswer_Notification.
+         * @exports ICBroadcast_WebRTCSetAnswer_Notification
+         * @interface ICBroadcast_WebRTCSetAnswer_Notification
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_WebRTCSetAnswer_Notification broadcast_session_id
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCSetAnswer_Notification webrtc_session_id
+         * @property {string|null} [answer] CBroadcast_WebRTCSetAnswer_Notification answer
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCSetAnswer_Notification.
+         * @exports CBroadcast_WebRTCSetAnswer_Notification
+         * @classdesc Represents a CBroadcast_WebRTCSetAnswer_Notification.
+         * @implements ICBroadcast_WebRTCSetAnswer_Notification
+         * @constructor
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCSetAnswer_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Notification broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Notification webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCSetAnswer_Notification answer.
+         * @member {string} answer
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.prototype.answer = "";
+    
+        /**
+         * Creates a new CBroadcast_WebRTCSetAnswer_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCSetAnswer_Notification} CBroadcast_WebRTCSetAnswer_Notification instance
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.create = function create(properties) {
+            return new CBroadcast_WebRTCSetAnswer_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Notification message. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification} message CBroadcast_WebRTCSetAnswer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.answer);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCSetAnswer_Notification message, length delimited. Does not implicitly {@link CBroadcast_WebRTCSetAnswer_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification} message CBroadcast_WebRTCSetAnswer_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCSetAnswer_Notification} CBroadcast_WebRTCSetAnswer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCSetAnswer_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.answer = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCSetAnswer_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCSetAnswer_Notification} CBroadcast_WebRTCSetAnswer_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCSetAnswer_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                if (!$util.isString(message.answer))
+                    return "answer: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCSetAnswer_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCSetAnswer_Notification} CBroadcast_WebRTCSetAnswer_Notification
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCSetAnswer_Notification)
+                return object;
+            var message = new $root.CBroadcast_WebRTCSetAnswer_Notification();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.answer != null)
+                message.answer = String(object.answer);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCSetAnswer_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @static
+         * @param {CBroadcast_WebRTCSetAnswer_Notification} message CBroadcast_WebRTCSetAnswer_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.answer = "";
+            }
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.answer != null && message.hasOwnProperty("answer"))
+                object.answer = message.answer;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCSetAnswer_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCSetAnswer_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCSetAnswer_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCSetAnswer_Notification;
+    })();
+    
+    $root.CBroadcast_WebRTCAddViewerCandidate_Notification = (function() {
+    
+        /**
+         * Properties of a CBroadcast_WebRTCAddViewerCandidate_Notification.
+         * @exports ICBroadcast_WebRTCAddViewerCandidate_Notification
+         * @interface ICBroadcast_WebRTCAddViewerCandidate_Notification
+         * @property {number|Long|null} [broadcast_session_id] CBroadcast_WebRTCAddViewerCandidate_Notification broadcast_session_id
+         * @property {number|Long|null} [webrtc_session_id] CBroadcast_WebRTCAddViewerCandidate_Notification webrtc_session_id
+         * @property {ICBroadcast_WebRTC_Candidate|null} [candidate] CBroadcast_WebRTCAddViewerCandidate_Notification candidate
+         */
+    
+        /**
+         * Constructs a new CBroadcast_WebRTCAddViewerCandidate_Notification.
+         * @exports CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @classdesc Represents a CBroadcast_WebRTCAddViewerCandidate_Notification.
+         * @implements ICBroadcast_WebRTCAddViewerCandidate_Notification
+         * @constructor
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification=} [properties] Properties to set
+         */
+        function CBroadcast_WebRTCAddViewerCandidate_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Notification broadcast_session_id.
+         * @member {number|Long} broadcast_session_id
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.prototype.broadcast_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Notification webrtc_session_id.
+         * @member {number|Long} webrtc_session_id
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.prototype.webrtc_session_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CBroadcast_WebRTCAddViewerCandidate_Notification candidate.
+         * @member {ICBroadcast_WebRTC_Candidate|null|undefined} candidate
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.prototype.candidate = null;
+    
+        /**
+         * Creates a new CBroadcast_WebRTCAddViewerCandidate_Notification instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification=} [properties] Properties to set
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Notification} CBroadcast_WebRTCAddViewerCandidate_Notification instance
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.create = function create(properties) {
+            return new CBroadcast_WebRTCAddViewerCandidate_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Notification message. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification} message CBroadcast_WebRTCAddViewerCandidate_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.broadcast_session_id);
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.webrtc_session_id);
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                $root.CBroadcast_WebRTC_Candidate.encode(message.candidate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_WebRTCAddViewerCandidate_Notification message, length delimited. Does not implicitly {@link CBroadcast_WebRTCAddViewerCandidate_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification} message CBroadcast_WebRTCAddViewerCandidate_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Notification} CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_WebRTCAddViewerCandidate_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_session_id = reader.fixed64();
+                    break;
+                case 2:
+                    message.webrtc_session_id = reader.fixed64();
+                    break;
+                case 3:
+                    message.candidate = $root.CBroadcast_WebRTC_Candidate.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_WebRTCAddViewerCandidate_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Notification} CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_WebRTCAddViewerCandidate_Notification message.
+         * @function verify
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (!$util.isInteger(message.broadcast_session_id) && !(message.broadcast_session_id && $util.isInteger(message.broadcast_session_id.low) && $util.isInteger(message.broadcast_session_id.high)))
+                    return "broadcast_session_id: integer|Long expected";
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (!$util.isInteger(message.webrtc_session_id) && !(message.webrtc_session_id && $util.isInteger(message.webrtc_session_id.low) && $util.isInteger(message.webrtc_session_id.high)))
+                    return "webrtc_session_id: integer|Long expected";
+            if (message.candidate != null && message.hasOwnProperty("candidate")) {
+                var error = $root.CBroadcast_WebRTC_Candidate.verify(message.candidate);
+                if (error)
+                    return "candidate." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_WebRTCAddViewerCandidate_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_WebRTCAddViewerCandidate_Notification} CBroadcast_WebRTCAddViewerCandidate_Notification
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_WebRTCAddViewerCandidate_Notification)
+                return object;
+            var message = new $root.CBroadcast_WebRTCAddViewerCandidate_Notification();
+            if (object.broadcast_session_id != null)
+                if ($util.Long)
+                    (message.broadcast_session_id = $util.Long.fromValue(object.broadcast_session_id)).unsigned = false;
+                else if (typeof object.broadcast_session_id === "string")
+                    message.broadcast_session_id = parseInt(object.broadcast_session_id, 10);
+                else if (typeof object.broadcast_session_id === "number")
+                    message.broadcast_session_id = object.broadcast_session_id;
+                else if (typeof object.broadcast_session_id === "object")
+                    message.broadcast_session_id = new $util.LongBits(object.broadcast_session_id.low >>> 0, object.broadcast_session_id.high >>> 0).toNumber();
+            if (object.webrtc_session_id != null)
+                if ($util.Long)
+                    (message.webrtc_session_id = $util.Long.fromValue(object.webrtc_session_id)).unsigned = false;
+                else if (typeof object.webrtc_session_id === "string")
+                    message.webrtc_session_id = parseInt(object.webrtc_session_id, 10);
+                else if (typeof object.webrtc_session_id === "number")
+                    message.webrtc_session_id = object.webrtc_session_id;
+                else if (typeof object.webrtc_session_id === "object")
+                    message.webrtc_session_id = new $util.LongBits(object.webrtc_session_id.low >>> 0, object.webrtc_session_id.high >>> 0).toNumber();
+            if (object.candidate != null) {
+                if (typeof object.candidate !== "object")
+                    throw TypeError(".CBroadcast_WebRTCAddViewerCandidate_Notification.candidate: object expected");
+                message.candidate = $root.CBroadcast_WebRTC_Candidate.fromObject(object.candidate);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_WebRTCAddViewerCandidate_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @static
+         * @param {CBroadcast_WebRTCAddViewerCandidate_Notification} message CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.broadcast_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_session_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.webrtc_session_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.webrtc_session_id = options.longs === String ? "0" : 0;
+                object.candidate = null;
+            }
+            if (message.broadcast_session_id != null && message.hasOwnProperty("broadcast_session_id"))
+                if (typeof message.broadcast_session_id === "number")
+                    object.broadcast_session_id = options.longs === String ? String(message.broadcast_session_id) : message.broadcast_session_id;
+                else
+                    object.broadcast_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_session_id) : options.longs === Number ? new $util.LongBits(message.broadcast_session_id.low >>> 0, message.broadcast_session_id.high >>> 0).toNumber() : message.broadcast_session_id;
+            if (message.webrtc_session_id != null && message.hasOwnProperty("webrtc_session_id"))
+                if (typeof message.webrtc_session_id === "number")
+                    object.webrtc_session_id = options.longs === String ? String(message.webrtc_session_id) : message.webrtc_session_id;
+                else
+                    object.webrtc_session_id = options.longs === String ? $util.Long.prototype.toString.call(message.webrtc_session_id) : options.longs === Number ? new $util.LongBits(message.webrtc_session_id.low >>> 0, message.webrtc_session_id.high >>> 0).toNumber() : message.webrtc_session_id;
+            if (message.candidate != null && message.hasOwnProperty("candidate"))
+                object.candidate = $root.CBroadcast_WebRTC_Candidate.toObject(message.candidate, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_WebRTCAddViewerCandidate_Notification to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_WebRTCAddViewerCandidate_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_WebRTCAddViewerCandidate_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_WebRTCAddViewerCandidate_Notification;
     })();
     
     $root.Broadcast = (function() {
@@ -10281,6 +20805,39 @@
          */
     
         /**
+         * Callback as used by {@link Broadcast#updateChatMessageFlair}.
+         * @memberof Broadcast
+         * @typedef UpdateChatMessageFlairCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_UpdateChatMessageFlair_Response} [response] CBroadcast_UpdateChatMessageFlair_Response
+         */
+    
+        /**
+         * Calls UpdateChatMessageFlair.
+         * @function updateChatMessageFlair
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request} request CBroadcast_UpdateChatMessageFlair_Request message or plain object
+         * @param {Broadcast.UpdateChatMessageFlairCallback} callback Node-style callback called with the error, if any, and CBroadcast_UpdateChatMessageFlair_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.updateChatMessageFlair = function updateChatMessageFlair(request, callback) {
+            return this.rpcCall(updateChatMessageFlair, $root.CBroadcast_UpdateChatMessageFlair_Request, $root.CBroadcast_UpdateChatMessageFlair_Response, request, callback);
+        }, "name", { value: "UpdateChatMessageFlair" });
+    
+        /**
+         * Calls UpdateChatMessageFlair.
+         * @function updateChatMessageFlair
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_UpdateChatMessageFlair_Request} request CBroadcast_UpdateChatMessageFlair_Request message or plain object
+         * @returns {Promise<CBroadcast_UpdateChatMessageFlair_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link Broadcast#muteBroadcastChatUser}.
          * @memberof Broadcast
          * @typedef MuteBroadcastChatUserCallback
@@ -10376,6 +20933,501 @@
          * @instance
          * @param {ICBroadcast_GetBroadcastChatUserNames_Request} request CBroadcast_GetBroadcastChatUserNames_Request message or plain object
          * @returns {Promise<CBroadcast_GetBroadcastChatUserNames_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#startBuildClip}.
+         * @memberof Broadcast
+         * @typedef StartBuildClipCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_StartBuildClip_Response} [response] CBroadcast_StartBuildClip_Response
+         */
+    
+        /**
+         * Calls StartBuildClip.
+         * @function startBuildClip
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StartBuildClip_Request} request CBroadcast_StartBuildClip_Request message or plain object
+         * @param {Broadcast.StartBuildClipCallback} callback Node-style callback called with the error, if any, and CBroadcast_StartBuildClip_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.startBuildClip = function startBuildClip(request, callback) {
+            return this.rpcCall(startBuildClip, $root.CBroadcast_StartBuildClip_Request, $root.CBroadcast_StartBuildClip_Response, request, callback);
+        }, "name", { value: "StartBuildClip" });
+    
+        /**
+         * Calls StartBuildClip.
+         * @function startBuildClip
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_StartBuildClip_Request} request CBroadcast_StartBuildClip_Request message or plain object
+         * @returns {Promise<CBroadcast_StartBuildClip_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBuildClipStatus}.
+         * @memberof Broadcast
+         * @typedef GetBuildClipStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBuildClipStatus_Response} [response] CBroadcast_GetBuildClipStatus_Response
+         */
+    
+        /**
+         * Calls GetBuildClipStatus.
+         * @function getBuildClipStatus
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBuildClipStatus_Request} request CBroadcast_GetBuildClipStatus_Request message or plain object
+         * @param {Broadcast.GetBuildClipStatusCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBuildClipStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBuildClipStatus = function getBuildClipStatus(request, callback) {
+            return this.rpcCall(getBuildClipStatus, $root.CBroadcast_GetBuildClipStatus_Request, $root.CBroadcast_GetBuildClipStatus_Response, request, callback);
+        }, "name", { value: "GetBuildClipStatus" });
+    
+        /**
+         * Calls GetBuildClipStatus.
+         * @function getBuildClipStatus
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBuildClipStatus_Request} request CBroadcast_GetBuildClipStatus_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBuildClipStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getClipDetails}.
+         * @memberof Broadcast
+         * @typedef GetClipDetailsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetClipDetails_Response} [response] CBroadcast_GetClipDetails_Response
+         */
+    
+        /**
+         * Calls GetClipDetails.
+         * @function getClipDetails
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetClipDetails_Request} request CBroadcast_GetClipDetails_Request message or plain object
+         * @param {Broadcast.GetClipDetailsCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetClipDetails_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getClipDetails = function getClipDetails(request, callback) {
+            return this.rpcCall(getClipDetails, $root.CBroadcast_GetClipDetails_Request, $root.CBroadcast_GetClipDetails_Response, request, callback);
+        }, "name", { value: "GetClipDetails" });
+    
+        /**
+         * Calls GetClipDetails.
+         * @function getClipDetails
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetClipDetails_Request} request CBroadcast_GetClipDetails_Request message or plain object
+         * @returns {Promise<CBroadcast_GetClipDetails_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#setRTMPInfo}.
+         * @memberof Broadcast
+         * @typedef SetRTMPInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_SetRTMPInfo_Response} [response] CBroadcast_SetRTMPInfo_Response
+         */
+    
+        /**
+         * Calls SetRTMPInfo.
+         * @function setRTMPInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SetRTMPInfo_Request} request CBroadcast_SetRTMPInfo_Request message or plain object
+         * @param {Broadcast.SetRTMPInfoCallback} callback Node-style callback called with the error, if any, and CBroadcast_SetRTMPInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.setRTMPInfo = function setRTMPInfo(request, callback) {
+            return this.rpcCall(setRTMPInfo, $root.CBroadcast_SetRTMPInfo_Request, $root.CBroadcast_SetRTMPInfo_Response, request, callback);
+        }, "name", { value: "SetRTMPInfo" });
+    
+        /**
+         * Calls SetRTMPInfo.
+         * @function setRTMPInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SetRTMPInfo_Request} request CBroadcast_SetRTMPInfo_Request message or plain object
+         * @returns {Promise<CBroadcast_SetRTMPInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getRTMPInfo}.
+         * @memberof Broadcast
+         * @typedef GetRTMPInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetRTMPInfo_Response} [response] CBroadcast_GetRTMPInfo_Response
+         */
+    
+        /**
+         * Calls GetRTMPInfo.
+         * @function getRTMPInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetRTMPInfo_Request} request CBroadcast_GetRTMPInfo_Request message or plain object
+         * @param {Broadcast.GetRTMPInfoCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetRTMPInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getRTMPInfo = function getRTMPInfo(request, callback) {
+            return this.rpcCall(getRTMPInfo, $root.CBroadcast_GetRTMPInfo_Request, $root.CBroadcast_GetRTMPInfo_Response, request, callback);
+        }, "name", { value: "GetRTMPInfo" });
+    
+        /**
+         * Calls GetRTMPInfo.
+         * @function getRTMPInfo
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetRTMPInfo_Request} request CBroadcast_GetRTMPInfo_Request message or plain object
+         * @returns {Promise<CBroadcast_GetRTMPInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#notifyWebRTCHaveTURNServer}.
+         * @memberof Broadcast
+         * @typedef NotifyWebRTCHaveTURNServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWebRTCHaveTURNServer.
+         * @function notifyWebRTCHaveTURNServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification} request CBroadcast_WebRTCHaveTURNServer_Notification message or plain object
+         * @param {Broadcast.NotifyWebRTCHaveTURNServerCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.notifyWebRTCHaveTURNServer = function notifyWebRTCHaveTURNServer(request, callback) {
+            return this.rpcCall(notifyWebRTCHaveTURNServer, $root.CBroadcast_WebRTCHaveTURNServer_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWebRTCHaveTURNServer" });
+    
+        /**
+         * Calls NotifyWebRTCHaveTURNServer.
+         * @function notifyWebRTCHaveTURNServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCHaveTURNServer_Notification} request CBroadcast_WebRTCHaveTURNServer_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCStartResult}.
+         * @memberof Broadcast
+         * @typedef WebRTCStartResultCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCStartResult_Response} [response] CBroadcast_WebRTCStartResult_Response
+         */
+    
+        /**
+         * Calls WebRTCStartResult.
+         * @function webRTCStartResult
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCStartResult_Request} request CBroadcast_WebRTCStartResult_Request message or plain object
+         * @param {Broadcast.WebRTCStartResultCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCStartResult_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCStartResult = function webRTCStartResult(request, callback) {
+            return this.rpcCall(webRTCStartResult, $root.CBroadcast_WebRTCStartResult_Request, $root.CBroadcast_WebRTCStartResult_Response, request, callback);
+        }, "name", { value: "WebRTCStartResult" });
+    
+        /**
+         * Calls WebRTCStartResult.
+         * @function webRTCStartResult
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCStartResult_Request} request CBroadcast_WebRTCStartResult_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCStartResult_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCStopped}.
+         * @memberof Broadcast
+         * @typedef WebRTCStoppedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCStopped_Response} [response] CBroadcast_WebRTCStopped_Response
+         */
+    
+        /**
+         * Calls WebRTCStopped.
+         * @function webRTCStopped
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCStopped_Request} request CBroadcast_WebRTCStopped_Request message or plain object
+         * @param {Broadcast.WebRTCStoppedCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCStopped_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCStopped = function webRTCStopped(request, callback) {
+            return this.rpcCall(webRTCStopped, $root.CBroadcast_WebRTCStopped_Request, $root.CBroadcast_WebRTCStopped_Response, request, callback);
+        }, "name", { value: "WebRTCStopped" });
+    
+        /**
+         * Calls WebRTCStopped.
+         * @function webRTCStopped
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCStopped_Request} request CBroadcast_WebRTCStopped_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCStopped_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCSetAnswer}.
+         * @memberof Broadcast
+         * @typedef WebRTCSetAnswerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCSetAnswer_Response} [response] CBroadcast_WebRTCSetAnswer_Response
+         */
+    
+        /**
+         * Calls WebRTCSetAnswer.
+         * @function webRTCSetAnswer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCSetAnswer_Request} request CBroadcast_WebRTCSetAnswer_Request message or plain object
+         * @param {Broadcast.WebRTCSetAnswerCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCSetAnswer_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCSetAnswer = function webRTCSetAnswer(request, callback) {
+            return this.rpcCall(webRTCSetAnswer, $root.CBroadcast_WebRTCSetAnswer_Request, $root.CBroadcast_WebRTCSetAnswer_Response, request, callback);
+        }, "name", { value: "WebRTCSetAnswer" });
+    
+        /**
+         * Calls WebRTCSetAnswer.
+         * @function webRTCSetAnswer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCSetAnswer_Request} request CBroadcast_WebRTCSetAnswer_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCSetAnswer_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCLookupTURNServer}.
+         * @memberof Broadcast
+         * @typedef WebRTCLookupTURNServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCLookupTURNServer_Response} [response] CBroadcast_WebRTCLookupTURNServer_Response
+         */
+    
+        /**
+         * Calls WebRTCLookupTURNServer.
+         * @function webRTCLookupTURNServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request} request CBroadcast_WebRTCLookupTURNServer_Request message or plain object
+         * @param {Broadcast.WebRTCLookupTURNServerCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCLookupTURNServer_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCLookupTURNServer = function webRTCLookupTURNServer(request, callback) {
+            return this.rpcCall(webRTCLookupTURNServer, $root.CBroadcast_WebRTCLookupTURNServer_Request, $root.CBroadcast_WebRTCLookupTURNServer_Response, request, callback);
+        }, "name", { value: "WebRTCLookupTURNServer" });
+    
+        /**
+         * Calls WebRTCLookupTURNServer.
+         * @function webRTCLookupTURNServer
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCLookupTURNServer_Request} request CBroadcast_WebRTCLookupTURNServer_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCLookupTURNServer_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCAddHostCandidate}.
+         * @memberof Broadcast
+         * @typedef WebRTCAddHostCandidateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCAddHostCandidate_Response} [response] CBroadcast_WebRTCAddHostCandidate_Response
+         */
+    
+        /**
+         * Calls WebRTCAddHostCandidate.
+         * @function webRTCAddHostCandidate
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request} request CBroadcast_WebRTCAddHostCandidate_Request message or plain object
+         * @param {Broadcast.WebRTCAddHostCandidateCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCAddHostCandidate_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCAddHostCandidate = function webRTCAddHostCandidate(request, callback) {
+            return this.rpcCall(webRTCAddHostCandidate, $root.CBroadcast_WebRTCAddHostCandidate_Request, $root.CBroadcast_WebRTCAddHostCandidate_Response, request, callback);
+        }, "name", { value: "WebRTCAddHostCandidate" });
+    
+        /**
+         * Calls WebRTCAddHostCandidate.
+         * @function webRTCAddHostCandidate
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCAddHostCandidate_Request} request CBroadcast_WebRTCAddHostCandidate_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCAddHostCandidate_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCAddViewerCandidate}.
+         * @memberof Broadcast
+         * @typedef WebRTCAddViewerCandidateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCAddViewerCandidate_Response} [response] CBroadcast_WebRTCAddViewerCandidate_Response
+         */
+    
+        /**
+         * Calls WebRTCAddViewerCandidate.
+         * @function webRTCAddViewerCandidate
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request} request CBroadcast_WebRTCAddViewerCandidate_Request message or plain object
+         * @param {Broadcast.WebRTCAddViewerCandidateCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCAddViewerCandidate_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCAddViewerCandidate = function webRTCAddViewerCandidate(request, callback) {
+            return this.rpcCall(webRTCAddViewerCandidate, $root.CBroadcast_WebRTCAddViewerCandidate_Request, $root.CBroadcast_WebRTCAddViewerCandidate_Response, request, callback);
+        }, "name", { value: "WebRTCAddViewerCandidate" });
+    
+        /**
+         * Calls WebRTCAddViewerCandidate.
+         * @function webRTCAddViewerCandidate
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Request} request CBroadcast_WebRTCAddViewerCandidate_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCAddViewerCandidate_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#webRTCGetHostCandidates}.
+         * @memberof Broadcast
+         * @typedef WebRTCGetHostCandidatesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_WebRTCGetHostCandidates_Response} [response] CBroadcast_WebRTCGetHostCandidates_Response
+         */
+    
+        /**
+         * Calls WebRTCGetHostCandidates.
+         * @function webRTCGetHostCandidates
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request} request CBroadcast_WebRTCGetHostCandidates_Request message or plain object
+         * @param {Broadcast.WebRTCGetHostCandidatesCallback} callback Node-style callback called with the error, if any, and CBroadcast_WebRTCGetHostCandidates_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.webRTCGetHostCandidates = function webRTCGetHostCandidates(request, callback) {
+            return this.rpcCall(webRTCGetHostCandidates, $root.CBroadcast_WebRTCGetHostCandidates_Request, $root.CBroadcast_WebRTCGetHostCandidates_Response, request, callback);
+        }, "name", { value: "WebRTCGetHostCandidates" });
+    
+        /**
+         * Calls WebRTCGetHostCandidates.
+         * @function webRTCGetHostCandidates
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_WebRTCGetHostCandidates_Request} request CBroadcast_WebRTCGetHostCandidates_Request message or plain object
+         * @returns {Promise<CBroadcast_WebRTCGetHostCandidates_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastUploadStats}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastUploadStatsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastUploadStats_Response} [response] CBroadcast_GetBroadcastUploadStats_Response
+         */
+    
+        /**
+         * Calls GetBroadcastUploadStats.
+         * @function getBroadcastUploadStats
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request} request CBroadcast_GetBroadcastUploadStats_Request message or plain object
+         * @param {Broadcast.GetBroadcastUploadStatsCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastUploadStats_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastUploadStats = function getBroadcastUploadStats(request, callback) {
+            return this.rpcCall(getBroadcastUploadStats, $root.CBroadcast_GetBroadcastUploadStats_Request, $root.CBroadcast_GetBroadcastUploadStats_Response, request, callback);
+        }, "name", { value: "GetBroadcastUploadStats" });
+    
+        /**
+         * Calls GetBroadcastUploadStats.
+         * @function getBroadcastUploadStats
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastUploadStats_Request} request CBroadcast_GetBroadcastUploadStats_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastUploadStats_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#getBroadcastViewerStats}.
+         * @memberof Broadcast
+         * @typedef GetBroadcastViewerStatsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_GetBroadcastViewerStats_Response} [response] CBroadcast_GetBroadcastViewerStats_Response
+         */
+    
+        /**
+         * Calls GetBroadcastViewerStats.
+         * @function getBroadcastViewerStats
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request} request CBroadcast_GetBroadcastViewerStats_Request message or plain object
+         * @param {Broadcast.GetBroadcastViewerStatsCallback} callback Node-style callback called with the error, if any, and CBroadcast_GetBroadcastViewerStats_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.getBroadcastViewerStats = function getBroadcastViewerStats(request, callback) {
+            return this.rpcCall(getBroadcastViewerStats, $root.CBroadcast_GetBroadcastViewerStats_Request, $root.CBroadcast_GetBroadcastViewerStats_Response, request, callback);
+        }, "name", { value: "GetBroadcastViewerStats" });
+    
+        /**
+         * Calls GetBroadcastViewerStats.
+         * @function getBroadcastViewerStats
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_GetBroadcastViewerStats_Request} request CBroadcast_GetBroadcastViewerStats_Request message or plain object
+         * @returns {Promise<CBroadcast_GetBroadcastViewerStats_Response>} Promise
          * @variation 2
          */
     
@@ -10476,6 +21528,39 @@
          * @memberof BroadcastClient
          * @instance
          * @param {ICBroadcast_WaitingBroadcastViewer_Notification} request CBroadcast_WaitingBroadcastViewer_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyBroadcastUploadStarted}.
+         * @memberof BroadcastClient
+         * @typedef NotifyBroadcastUploadStartedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastUploadStarted.
+         * @function notifyBroadcastUploadStarted
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification} request CBroadcast_BroadcastUploadStarted_Notification message or plain object
+         * @param {BroadcastClient.NotifyBroadcastUploadStartedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyBroadcastUploadStarted = function notifyBroadcastUploadStarted(request, callback) {
+            return this.rpcCall(notifyBroadcastUploadStarted, $root.CBroadcast_BroadcastUploadStarted_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastUploadStarted" });
+    
+        /**
+         * Calls NotifyBroadcastUploadStarted.
+         * @function notifyBroadcastUploadStarted
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastUploadStarted_Notification} request CBroadcast_BroadcastUploadStarted_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */
@@ -10613,6 +21698,39 @@
          */
     
         /**
+         * Callback as used by {@link BroadcastClient#notifyBroadcastChannelLive}.
+         * @memberof BroadcastClient
+         * @typedef NotifyBroadcastChannelLiveCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyBroadcastChannelLive.
+         * @function notifyBroadcastChannelLive
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastChannelLive_Notification} request CBroadcast_BroadcastChannelLive_Notification message or plain object
+         * @param {BroadcastClient.NotifyBroadcastChannelLiveCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyBroadcastChannelLive = function notifyBroadcastChannelLive(request, callback) {
+            return this.rpcCall(notifyBroadcastChannelLive, $root.CBroadcast_BroadcastChannelLive_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyBroadcastChannelLive" });
+    
+        /**
+         * Calls NotifyBroadcastChannelLive.
+         * @function notifyBroadcastChannelLive
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_BroadcastChannelLive_Notification} request CBroadcast_BroadcastChannelLive_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link BroadcastClient#sendThumbnailToRelay}.
          * @memberof BroadcastClient
          * @typedef SendThumbnailToRelayCallback
@@ -10641,6 +21759,138 @@
          * @memberof BroadcastClient
          * @instance
          * @param {ICBroadcast_SendThumbnailToRelay_Notification} request CBroadcast_SendThumbnailToRelay_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyWebRTCNeedTURNServer}.
+         * @memberof BroadcastClient
+         * @typedef NotifyWebRTCNeedTURNServerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWebRTCNeedTURNServer.
+         * @function notifyWebRTCNeedTURNServer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification} request CBroadcast_WebRTCNeedTURNServer_Notification message or plain object
+         * @param {BroadcastClient.NotifyWebRTCNeedTURNServerCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyWebRTCNeedTURNServer = function notifyWebRTCNeedTURNServer(request, callback) {
+            return this.rpcCall(notifyWebRTCNeedTURNServer, $root.CBroadcast_WebRTCNeedTURNServer_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWebRTCNeedTURNServer" });
+    
+        /**
+         * Calls NotifyWebRTCNeedTURNServer.
+         * @function notifyWebRTCNeedTURNServer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCNeedTURNServer_Notification} request CBroadcast_WebRTCNeedTURNServer_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyWebRTCStart}.
+         * @memberof BroadcastClient
+         * @typedef NotifyWebRTCStartCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWebRTCStart.
+         * @function notifyWebRTCStart
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCStart_Notification} request CBroadcast_WebRTCStart_Notification message or plain object
+         * @param {BroadcastClient.NotifyWebRTCStartCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyWebRTCStart = function notifyWebRTCStart(request, callback) {
+            return this.rpcCall(notifyWebRTCStart, $root.CBroadcast_WebRTCStart_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWebRTCStart" });
+    
+        /**
+         * Calls NotifyWebRTCStart.
+         * @function notifyWebRTCStart
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCStart_Notification} request CBroadcast_WebRTCStart_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyWebRTCSetAnswer}.
+         * @memberof BroadcastClient
+         * @typedef NotifyWebRTCSetAnswerCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWebRTCSetAnswer.
+         * @function notifyWebRTCSetAnswer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification} request CBroadcast_WebRTCSetAnswer_Notification message or plain object
+         * @param {BroadcastClient.NotifyWebRTCSetAnswerCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyWebRTCSetAnswer = function notifyWebRTCSetAnswer(request, callback) {
+            return this.rpcCall(notifyWebRTCSetAnswer, $root.CBroadcast_WebRTCSetAnswer_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWebRTCSetAnswer" });
+    
+        /**
+         * Calls NotifyWebRTCSetAnswer.
+         * @function notifyWebRTCSetAnswer
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCSetAnswer_Notification} request CBroadcast_WebRTCSetAnswer_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link BroadcastClient#notifyWebRTCAddViewerCandidate}.
+         * @memberof BroadcastClient
+         * @typedef NotifyWebRTCAddViewerCandidateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyWebRTCAddViewerCandidate.
+         * @function notifyWebRTCAddViewerCandidate
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification} request CBroadcast_WebRTCAddViewerCandidate_Notification message or plain object
+         * @param {BroadcastClient.NotifyWebRTCAddViewerCandidateCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(BroadcastClient.prototype.notifyWebRTCAddViewerCandidate = function notifyWebRTCAddViewerCandidate(request, callback) {
+            return this.rpcCall(notifyWebRTCAddViewerCandidate, $root.CBroadcast_WebRTCAddViewerCandidate_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyWebRTCAddViewerCandidate" });
+    
+        /**
+         * Calls NotifyWebRTCAddViewerCandidate.
+         * @function notifyWebRTCAddViewerCandidate
+         * @memberof BroadcastClient
+         * @instance
+         * @param {ICBroadcast_WebRTCAddViewerCandidate_Notification} request CBroadcast_WebRTCAddViewerCandidate_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */

@@ -645,6 +645,1138 @@
         return CPlayer_GetMutualFriendsForIncomingInvites_Response;
     })();
     
+    $root.CPlayer_GetFriendsGameplayInfo_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetFriendsGameplayInfo_Request.
+         * @exports ICPlayer_GetFriendsGameplayInfo_Request
+         * @interface ICPlayer_GetFriendsGameplayInfo_Request
+         * @property {number|null} [appid] CPlayer_GetFriendsGameplayInfo_Request appid
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetFriendsGameplayInfo_Request.
+         * @exports CPlayer_GetFriendsGameplayInfo_Request
+         * @classdesc Represents a CPlayer_GetFriendsGameplayInfo_Request.
+         * @implements ICPlayer_GetFriendsGameplayInfo_Request
+         * @constructor
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetFriendsGameplayInfo_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Request appid.
+         * @member {number} appid
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.prototype.appid = 0;
+    
+        /**
+         * Creates a new CPlayer_GetFriendsGameplayInfo_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetFriendsGameplayInfo_Request} CPlayer_GetFriendsGameplayInfo_Request instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.create = function create(properties) {
+            return new CPlayer_GetFriendsGameplayInfo_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsGameplayInfo_Request message. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request} message CPlayer_GetFriendsGameplayInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsGameplayInfo_Request message, length delimited. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request} message CPlayer_GetFriendsGameplayInfo_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsGameplayInfo_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetFriendsGameplayInfo_Request} CPlayer_GetFriendsGameplayInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsGameplayInfo_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsGameplayInfo_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetFriendsGameplayInfo_Request} CPlayer_GetFriendsGameplayInfo_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetFriendsGameplayInfo_Request message.
+         * @function verify
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetFriendsGameplayInfo_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetFriendsGameplayInfo_Request} CPlayer_GetFriendsGameplayInfo_Request
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetFriendsGameplayInfo_Request)
+                return object;
+            var message = new $root.CPlayer_GetFriendsGameplayInfo_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetFriendsGameplayInfo_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @static
+         * @param {CPlayer_GetFriendsGameplayInfo_Request} message CPlayer_GetFriendsGameplayInfo_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.appid = 0;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetFriendsGameplayInfo_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetFriendsGameplayInfo_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetFriendsGameplayInfo_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetFriendsGameplayInfo_Request;
+    })();
+    
+    $root.CPlayer_GetFriendsGameplayInfo_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetFriendsGameplayInfo_Response.
+         * @exports ICPlayer_GetFriendsGameplayInfo_Response
+         * @interface ICPlayer_GetFriendsGameplayInfo_Response
+         * @property {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo|null} [your_info] CPlayer_GetFriendsGameplayInfo_Response your_info
+         * @property {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>|null} [in_game] CPlayer_GetFriendsGameplayInfo_Response in_game
+         * @property {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>|null} [played_recently] CPlayer_GetFriendsGameplayInfo_Response played_recently
+         * @property {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>|null} [played_ever] CPlayer_GetFriendsGameplayInfo_Response played_ever
+         * @property {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>|null} [owns] CPlayer_GetFriendsGameplayInfo_Response owns
+         * @property {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>|null} [in_wishlist] CPlayer_GetFriendsGameplayInfo_Response in_wishlist
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetFriendsGameplayInfo_Response.
+         * @exports CPlayer_GetFriendsGameplayInfo_Response
+         * @classdesc Represents a CPlayer_GetFriendsGameplayInfo_Response.
+         * @implements ICPlayer_GetFriendsGameplayInfo_Response
+         * @constructor
+         * @param {ICPlayer_GetFriendsGameplayInfo_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetFriendsGameplayInfo_Response(properties) {
+            this.in_game = [];
+            this.played_recently = [];
+            this.played_ever = [];
+            this.owns = [];
+            this.in_wishlist = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response your_info.
+         * @member {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo|null|undefined} your_info
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.your_info = null;
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response in_game.
+         * @member {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>} in_game
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.in_game = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response played_recently.
+         * @member {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>} played_recently
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.played_recently = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response played_ever.
+         * @member {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>} played_ever
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.played_ever = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response owns.
+         * @member {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>} owns
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.owns = $util.emptyArray;
+    
+        /**
+         * CPlayer_GetFriendsGameplayInfo_Response in_wishlist.
+         * @member {Array.<CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo>} in_wishlist
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.in_wishlist = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetFriendsGameplayInfo_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetFriendsGameplayInfo_Response} CPlayer_GetFriendsGameplayInfo_Response instance
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.create = function create(properties) {
+            return new CPlayer_GetFriendsGameplayInfo_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsGameplayInfo_Response message. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Response} message CPlayer_GetFriendsGameplayInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.your_info != null && message.hasOwnProperty("your_info"))
+                $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.encode(message.your_info, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.in_game != null && message.in_game.length)
+                for (var i = 0; i < message.in_game.length; ++i)
+                    $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.encode(message.in_game[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.played_recently != null && message.played_recently.length)
+                for (var i = 0; i < message.played_recently.length; ++i)
+                    $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.encode(message.played_recently[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.played_ever != null && message.played_ever.length)
+                for (var i = 0; i < message.played_ever.length; ++i)
+                    $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.encode(message.played_ever[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.owns != null && message.owns.length)
+                for (var i = 0; i < message.owns.length; ++i)
+                    $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.encode(message.owns[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.in_wishlist != null && message.in_wishlist.length)
+                for (var i = 0; i < message.in_wishlist.length; ++i)
+                    $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.encode(message.in_wishlist[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetFriendsGameplayInfo_Response message, length delimited. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {ICPlayer_GetFriendsGameplayInfo_Response} message CPlayer_GetFriendsGameplayInfo_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsGameplayInfo_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetFriendsGameplayInfo_Response} CPlayer_GetFriendsGameplayInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsGameplayInfo_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.your_info = $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    if (!(message.in_game && message.in_game.length))
+                        message.in_game = [];
+                    message.in_game.push($root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.played_recently && message.played_recently.length))
+                        message.played_recently = [];
+                    message.played_recently.push($root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.played_ever && message.played_ever.length))
+                        message.played_ever = [];
+                    message.played_ever.push($root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    if (!(message.owns && message.owns.length))
+                        message.owns = [];
+                    message.owns.push($root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    if (!(message.in_wishlist && message.in_wishlist.length))
+                        message.in_wishlist = [];
+                    message.in_wishlist.push($root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetFriendsGameplayInfo_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetFriendsGameplayInfo_Response} CPlayer_GetFriendsGameplayInfo_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetFriendsGameplayInfo_Response message.
+         * @function verify
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.your_info != null && message.hasOwnProperty("your_info")) {
+                var error = $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.verify(message.your_info);
+                if (error)
+                    return "your_info." + error;
+            }
+            if (message.in_game != null && message.hasOwnProperty("in_game")) {
+                if (!Array.isArray(message.in_game))
+                    return "in_game: array expected";
+                for (var i = 0; i < message.in_game.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify(message.in_game[i]);
+                    if (error)
+                        return "in_game." + error;
+                }
+            }
+            if (message.played_recently != null && message.hasOwnProperty("played_recently")) {
+                if (!Array.isArray(message.played_recently))
+                    return "played_recently: array expected";
+                for (var i = 0; i < message.played_recently.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify(message.played_recently[i]);
+                    if (error)
+                        return "played_recently." + error;
+                }
+            }
+            if (message.played_ever != null && message.hasOwnProperty("played_ever")) {
+                if (!Array.isArray(message.played_ever))
+                    return "played_ever: array expected";
+                for (var i = 0; i < message.played_ever.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify(message.played_ever[i]);
+                    if (error)
+                        return "played_ever." + error;
+                }
+            }
+            if (message.owns != null && message.hasOwnProperty("owns")) {
+                if (!Array.isArray(message.owns))
+                    return "owns: array expected";
+                for (var i = 0; i < message.owns.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify(message.owns[i]);
+                    if (error)
+                        return "owns." + error;
+                }
+            }
+            if (message.in_wishlist != null && message.hasOwnProperty("in_wishlist")) {
+                if (!Array.isArray(message.in_wishlist))
+                    return "in_wishlist: array expected";
+                for (var i = 0; i < message.in_wishlist.length; ++i) {
+                    var error = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify(message.in_wishlist[i]);
+                    if (error)
+                        return "in_wishlist." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetFriendsGameplayInfo_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetFriendsGameplayInfo_Response} CPlayer_GetFriendsGameplayInfo_Response
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetFriendsGameplayInfo_Response)
+                return object;
+            var message = new $root.CPlayer_GetFriendsGameplayInfo_Response();
+            if (object.your_info != null) {
+                if (typeof object.your_info !== "object")
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.your_info: object expected");
+                message.your_info = $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.fromObject(object.your_info);
+            }
+            if (object.in_game) {
+                if (!Array.isArray(object.in_game))
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.in_game: array expected");
+                message.in_game = [];
+                for (var i = 0; i < object.in_game.length; ++i) {
+                    if (typeof object.in_game[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.in_game: object expected");
+                    message.in_game[i] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.fromObject(object.in_game[i]);
+                }
+            }
+            if (object.played_recently) {
+                if (!Array.isArray(object.played_recently))
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.played_recently: array expected");
+                message.played_recently = [];
+                for (var i = 0; i < object.played_recently.length; ++i) {
+                    if (typeof object.played_recently[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.played_recently: object expected");
+                    message.played_recently[i] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.fromObject(object.played_recently[i]);
+                }
+            }
+            if (object.played_ever) {
+                if (!Array.isArray(object.played_ever))
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.played_ever: array expected");
+                message.played_ever = [];
+                for (var i = 0; i < object.played_ever.length; ++i) {
+                    if (typeof object.played_ever[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.played_ever: object expected");
+                    message.played_ever[i] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.fromObject(object.played_ever[i]);
+                }
+            }
+            if (object.owns) {
+                if (!Array.isArray(object.owns))
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.owns: array expected");
+                message.owns = [];
+                for (var i = 0; i < object.owns.length; ++i) {
+                    if (typeof object.owns[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.owns: object expected");
+                    message.owns[i] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.fromObject(object.owns[i]);
+                }
+            }
+            if (object.in_wishlist) {
+                if (!Array.isArray(object.in_wishlist))
+                    throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.in_wishlist: array expected");
+                message.in_wishlist = [];
+                for (var i = 0; i < object.in_wishlist.length; ++i) {
+                    if (typeof object.in_wishlist[i] !== "object")
+                        throw TypeError(".CPlayer_GetFriendsGameplayInfo_Response.in_wishlist: object expected");
+                    message.in_wishlist[i] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.fromObject(object.in_wishlist[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetFriendsGameplayInfo_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @static
+         * @param {CPlayer_GetFriendsGameplayInfo_Response} message CPlayer_GetFriendsGameplayInfo_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.in_game = [];
+                object.played_recently = [];
+                object.played_ever = [];
+                object.owns = [];
+                object.in_wishlist = [];
+            }
+            if (options.defaults)
+                object.your_info = null;
+            if (message.your_info != null && message.hasOwnProperty("your_info"))
+                object.your_info = $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.toObject(message.your_info, options);
+            if (message.in_game && message.in_game.length) {
+                object.in_game = [];
+                for (var j = 0; j < message.in_game.length; ++j)
+                    object.in_game[j] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.toObject(message.in_game[j], options);
+            }
+            if (message.played_recently && message.played_recently.length) {
+                object.played_recently = [];
+                for (var j = 0; j < message.played_recently.length; ++j)
+                    object.played_recently[j] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.toObject(message.played_recently[j], options);
+            }
+            if (message.played_ever && message.played_ever.length) {
+                object.played_ever = [];
+                for (var j = 0; j < message.played_ever.length; ++j)
+                    object.played_ever[j] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.toObject(message.played_ever[j], options);
+            }
+            if (message.owns && message.owns.length) {
+                object.owns = [];
+                for (var j = 0; j < message.owns.length; ++j)
+                    object.owns[j] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.toObject(message.owns[j], options);
+            }
+            if (message.in_wishlist && message.in_wishlist.length) {
+                object.in_wishlist = [];
+                for (var j = 0; j < message.in_wishlist.length; ++j)
+                    object.in_wishlist[j] = $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.toObject(message.in_wishlist[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetFriendsGameplayInfo_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetFriendsGameplayInfo_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetFriendsGameplayInfo_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo = (function() {
+    
+            /**
+             * Properties of a FriendsGameplayInfo.
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response
+             * @interface IFriendsGameplayInfo
+             * @property {number|Long|null} [steamid] FriendsGameplayInfo steamid
+             * @property {number|null} [minutes_played] FriendsGameplayInfo minutes_played
+             * @property {number|null} [minutes_played_forever] FriendsGameplayInfo minutes_played_forever
+             */
+    
+            /**
+             * Constructs a new FriendsGameplayInfo.
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response
+             * @classdesc Represents a FriendsGameplayInfo.
+             * @implements IFriendsGameplayInfo
+             * @constructor
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo=} [properties] Properties to set
+             */
+            function FriendsGameplayInfo(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * FriendsGameplayInfo steamid.
+             * @member {number|Long} steamid
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @instance
+             */
+            FriendsGameplayInfo.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * FriendsGameplayInfo minutes_played.
+             * @member {number} minutes_played
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @instance
+             */
+            FriendsGameplayInfo.prototype.minutes_played = 0;
+    
+            /**
+             * FriendsGameplayInfo minutes_played_forever.
+             * @member {number} minutes_played_forever
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @instance
+             */
+            FriendsGameplayInfo.prototype.minutes_played_forever = 0;
+    
+            /**
+             * Creates a new FriendsGameplayInfo instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo=} [properties] Properties to set
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo} FriendsGameplayInfo instance
+             */
+            FriendsGameplayInfo.create = function create(properties) {
+                return new FriendsGameplayInfo(properties);
+            };
+    
+            /**
+             * Encodes the specified FriendsGameplayInfo message. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo} message FriendsGameplayInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FriendsGameplayInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.minutes_played);
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.minutes_played_forever);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified FriendsGameplayInfo message, length delimited. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IFriendsGameplayInfo} message FriendsGameplayInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FriendsGameplayInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a FriendsGameplayInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo} FriendsGameplayInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FriendsGameplayInfo.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steamid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.minutes_played = reader.uint32();
+                        break;
+                    case 3:
+                        message.minutes_played_forever = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a FriendsGameplayInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo} FriendsGameplayInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FriendsGameplayInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a FriendsGameplayInfo message.
+             * @function verify
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FriendsGameplayInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    if (!$util.isInteger(message.minutes_played))
+                        return "minutes_played: integer expected";
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    if (!$util.isInteger(message.minutes_played_forever))
+                        return "minutes_played_forever: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates a FriendsGameplayInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo} FriendsGameplayInfo
+             */
+            FriendsGameplayInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo)
+                    return object;
+                var message = new $root.CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo();
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+                if (object.minutes_played != null)
+                    message.minutes_played = object.minutes_played >>> 0;
+                if (object.minutes_played_forever != null)
+                    message.minutes_played_forever = object.minutes_played_forever >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a FriendsGameplayInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo} message FriendsGameplayInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FriendsGameplayInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.minutes_played = 0;
+                    object.minutes_played_forever = 0;
+                }
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    object.minutes_played = message.minutes_played;
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    object.minutes_played_forever = message.minutes_played_forever;
+                return object;
+            };
+    
+            /**
+             * Converts this FriendsGameplayInfo to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.FriendsGameplayInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FriendsGameplayInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return FriendsGameplayInfo;
+        })();
+    
+        CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo = (function() {
+    
+            /**
+             * Properties of an OwnGameplayInfo.
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response
+             * @interface IOwnGameplayInfo
+             * @property {number|Long|null} [steamid] OwnGameplayInfo steamid
+             * @property {number|null} [minutes_played] OwnGameplayInfo minutes_played
+             * @property {number|null} [minutes_played_forever] OwnGameplayInfo minutes_played_forever
+             * @property {boolean|null} [in_wishlist] OwnGameplayInfo in_wishlist
+             * @property {boolean|null} [owned] OwnGameplayInfo owned
+             */
+    
+            /**
+             * Constructs a new OwnGameplayInfo.
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response
+             * @classdesc Represents an OwnGameplayInfo.
+             * @implements IOwnGameplayInfo
+             * @constructor
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo=} [properties] Properties to set
+             */
+            function OwnGameplayInfo(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * OwnGameplayInfo steamid.
+             * @member {number|Long} steamid
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             */
+            OwnGameplayInfo.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+            /**
+             * OwnGameplayInfo minutes_played.
+             * @member {number} minutes_played
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             */
+            OwnGameplayInfo.prototype.minutes_played = 0;
+    
+            /**
+             * OwnGameplayInfo minutes_played_forever.
+             * @member {number} minutes_played_forever
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             */
+            OwnGameplayInfo.prototype.minutes_played_forever = 0;
+    
+            /**
+             * OwnGameplayInfo in_wishlist.
+             * @member {boolean} in_wishlist
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             */
+            OwnGameplayInfo.prototype.in_wishlist = false;
+    
+            /**
+             * OwnGameplayInfo owned.
+             * @member {boolean} owned
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             */
+            OwnGameplayInfo.prototype.owned = false;
+    
+            /**
+             * Creates a new OwnGameplayInfo instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo=} [properties] Properties to set
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo} OwnGameplayInfo instance
+             */
+            OwnGameplayInfo.create = function create(properties) {
+                return new OwnGameplayInfo(properties);
+            };
+    
+            /**
+             * Encodes the specified OwnGameplayInfo message. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo} message OwnGameplayInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            OwnGameplayInfo.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.minutes_played);
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.minutes_played_forever);
+                if (message.in_wishlist != null && message.hasOwnProperty("in_wishlist"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.in_wishlist);
+                if (message.owned != null && message.hasOwnProperty("owned"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.owned);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified OwnGameplayInfo message, length delimited. Does not implicitly {@link CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.IOwnGameplayInfo} message OwnGameplayInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            OwnGameplayInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an OwnGameplayInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo} OwnGameplayInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            OwnGameplayInfo.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.steamid = reader.fixed64();
+                        break;
+                    case 2:
+                        message.minutes_played = reader.uint32();
+                        break;
+                    case 3:
+                        message.minutes_played_forever = reader.uint32();
+                        break;
+                    case 4:
+                        message.in_wishlist = reader.bool();
+                        break;
+                    case 5:
+                        message.owned = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an OwnGameplayInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo} OwnGameplayInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            OwnGameplayInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an OwnGameplayInfo message.
+             * @function verify
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            OwnGameplayInfo.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                        return "steamid: integer|Long expected";
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    if (!$util.isInteger(message.minutes_played))
+                        return "minutes_played: integer expected";
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    if (!$util.isInteger(message.minutes_played_forever))
+                        return "minutes_played_forever: integer expected";
+                if (message.in_wishlist != null && message.hasOwnProperty("in_wishlist"))
+                    if (typeof message.in_wishlist !== "boolean")
+                        return "in_wishlist: boolean expected";
+                if (message.owned != null && message.hasOwnProperty("owned"))
+                    if (typeof message.owned !== "boolean")
+                        return "owned: boolean expected";
+                return null;
+            };
+    
+            /**
+             * Creates an OwnGameplayInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo} OwnGameplayInfo
+             */
+            OwnGameplayInfo.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo)
+                    return object;
+                var message = new $root.CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo();
+                if (object.steamid != null)
+                    if ($util.Long)
+                        (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                    else if (typeof object.steamid === "string")
+                        message.steamid = parseInt(object.steamid, 10);
+                    else if (typeof object.steamid === "number")
+                        message.steamid = object.steamid;
+                    else if (typeof object.steamid === "object")
+                        message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+                if (object.minutes_played != null)
+                    message.minutes_played = object.minutes_played >>> 0;
+                if (object.minutes_played_forever != null)
+                    message.minutes_played_forever = object.minutes_played_forever >>> 0;
+                if (object.in_wishlist != null)
+                    message.in_wishlist = Boolean(object.in_wishlist);
+                if (object.owned != null)
+                    message.owned = Boolean(object.owned);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an OwnGameplayInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @static
+             * @param {CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo} message OwnGameplayInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OwnGameplayInfo.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.steamid = options.longs === String ? "0" : 0;
+                    object.minutes_played = 0;
+                    object.minutes_played_forever = 0;
+                    object.in_wishlist = false;
+                    object.owned = false;
+                }
+                if (message.steamid != null && message.hasOwnProperty("steamid"))
+                    if (typeof message.steamid === "number")
+                        object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                    else
+                        object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+                if (message.minutes_played != null && message.hasOwnProperty("minutes_played"))
+                    object.minutes_played = message.minutes_played;
+                if (message.minutes_played_forever != null && message.hasOwnProperty("minutes_played_forever"))
+                    object.minutes_played_forever = message.minutes_played_forever;
+                if (message.in_wishlist != null && message.hasOwnProperty("in_wishlist"))
+                    object.in_wishlist = message.in_wishlist;
+                if (message.owned != null && message.hasOwnProperty("owned"))
+                    object.owned = message.owned;
+                return object;
+            };
+    
+            /**
+             * Converts this OwnGameplayInfo to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetFriendsGameplayInfo_Response.OwnGameplayInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            OwnGameplayInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return OwnGameplayInfo;
+        })();
+    
+        return CPlayer_GetFriendsGameplayInfo_Response;
+    })();
+    
     $root.CPlayer_GetGameBadgeLevels_Request = (function() {
     
         /**
@@ -1293,6 +2425,650 @@
         })();
     
         return CPlayer_GetGameBadgeLevels_Response;
+    })();
+    
+    $root.CPlayer_GetEmoticonList_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetEmoticonList_Request.
+         * @exports ICPlayer_GetEmoticonList_Request
+         * @interface ICPlayer_GetEmoticonList_Request
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetEmoticonList_Request.
+         * @exports CPlayer_GetEmoticonList_Request
+         * @classdesc Represents a CPlayer_GetEmoticonList_Request.
+         * @implements ICPlayer_GetEmoticonList_Request
+         * @constructor
+         * @param {ICPlayer_GetEmoticonList_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetEmoticonList_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_GetEmoticonList_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetEmoticonList_Request} CPlayer_GetEmoticonList_Request instance
+         */
+        CPlayer_GetEmoticonList_Request.create = function create(properties) {
+            return new CPlayer_GetEmoticonList_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetEmoticonList_Request message. Does not implicitly {@link CPlayer_GetEmoticonList_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Request} message CPlayer_GetEmoticonList_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetEmoticonList_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetEmoticonList_Request message, length delimited. Does not implicitly {@link CPlayer_GetEmoticonList_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Request} message CPlayer_GetEmoticonList_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetEmoticonList_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetEmoticonList_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetEmoticonList_Request} CPlayer_GetEmoticonList_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetEmoticonList_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetEmoticonList_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetEmoticonList_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetEmoticonList_Request} CPlayer_GetEmoticonList_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetEmoticonList_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetEmoticonList_Request message.
+         * @function verify
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetEmoticonList_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetEmoticonList_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetEmoticonList_Request} CPlayer_GetEmoticonList_Request
+         */
+        CPlayer_GetEmoticonList_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetEmoticonList_Request)
+                return object;
+            return new $root.CPlayer_GetEmoticonList_Request();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetEmoticonList_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @static
+         * @param {CPlayer_GetEmoticonList_Request} message CPlayer_GetEmoticonList_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetEmoticonList_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_GetEmoticonList_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetEmoticonList_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetEmoticonList_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetEmoticonList_Request;
+    })();
+    
+    $root.CPlayer_GetEmoticonList_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetEmoticonList_Response.
+         * @exports ICPlayer_GetEmoticonList_Response
+         * @interface ICPlayer_GetEmoticonList_Response
+         * @property {Array.<CPlayer_GetEmoticonList_Response.IEmoticon>|null} [emoticons] CPlayer_GetEmoticonList_Response emoticons
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetEmoticonList_Response.
+         * @exports CPlayer_GetEmoticonList_Response
+         * @classdesc Represents a CPlayer_GetEmoticonList_Response.
+         * @implements ICPlayer_GetEmoticonList_Response
+         * @constructor
+         * @param {ICPlayer_GetEmoticonList_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetEmoticonList_Response(properties) {
+            this.emoticons = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetEmoticonList_Response emoticons.
+         * @member {Array.<CPlayer_GetEmoticonList_Response.IEmoticon>} emoticons
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @instance
+         */
+        CPlayer_GetEmoticonList_Response.prototype.emoticons = $util.emptyArray;
+    
+        /**
+         * Creates a new CPlayer_GetEmoticonList_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetEmoticonList_Response} CPlayer_GetEmoticonList_Response instance
+         */
+        CPlayer_GetEmoticonList_Response.create = function create(properties) {
+            return new CPlayer_GetEmoticonList_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetEmoticonList_Response message. Does not implicitly {@link CPlayer_GetEmoticonList_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Response} message CPlayer_GetEmoticonList_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetEmoticonList_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.emoticons != null && message.emoticons.length)
+                for (var i = 0; i < message.emoticons.length; ++i)
+                    $root.CPlayer_GetEmoticonList_Response.Emoticon.encode(message.emoticons[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetEmoticonList_Response message, length delimited. Does not implicitly {@link CPlayer_GetEmoticonList_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {ICPlayer_GetEmoticonList_Response} message CPlayer_GetEmoticonList_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetEmoticonList_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetEmoticonList_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetEmoticonList_Response} CPlayer_GetEmoticonList_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetEmoticonList_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetEmoticonList_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.emoticons && message.emoticons.length))
+                        message.emoticons = [];
+                    message.emoticons.push($root.CPlayer_GetEmoticonList_Response.Emoticon.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetEmoticonList_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetEmoticonList_Response} CPlayer_GetEmoticonList_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetEmoticonList_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetEmoticonList_Response message.
+         * @function verify
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetEmoticonList_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.emoticons != null && message.hasOwnProperty("emoticons")) {
+                if (!Array.isArray(message.emoticons))
+                    return "emoticons: array expected";
+                for (var i = 0; i < message.emoticons.length; ++i) {
+                    var error = $root.CPlayer_GetEmoticonList_Response.Emoticon.verify(message.emoticons[i]);
+                    if (error)
+                        return "emoticons." + error;
+                }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetEmoticonList_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetEmoticonList_Response} CPlayer_GetEmoticonList_Response
+         */
+        CPlayer_GetEmoticonList_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetEmoticonList_Response)
+                return object;
+            var message = new $root.CPlayer_GetEmoticonList_Response();
+            if (object.emoticons) {
+                if (!Array.isArray(object.emoticons))
+                    throw TypeError(".CPlayer_GetEmoticonList_Response.emoticons: array expected");
+                message.emoticons = [];
+                for (var i = 0; i < object.emoticons.length; ++i) {
+                    if (typeof object.emoticons[i] !== "object")
+                        throw TypeError(".CPlayer_GetEmoticonList_Response.emoticons: object expected");
+                    message.emoticons[i] = $root.CPlayer_GetEmoticonList_Response.Emoticon.fromObject(object.emoticons[i]);
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetEmoticonList_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @static
+         * @param {CPlayer_GetEmoticonList_Response} message CPlayer_GetEmoticonList_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetEmoticonList_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.emoticons = [];
+            if (message.emoticons && message.emoticons.length) {
+                object.emoticons = [];
+                for (var j = 0; j < message.emoticons.length; ++j)
+                    object.emoticons[j] = $root.CPlayer_GetEmoticonList_Response.Emoticon.toObject(message.emoticons[j], options);
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetEmoticonList_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetEmoticonList_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetEmoticonList_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        CPlayer_GetEmoticonList_Response.Emoticon = (function() {
+    
+            /**
+             * Properties of an Emoticon.
+             * @memberof CPlayer_GetEmoticonList_Response
+             * @interface IEmoticon
+             * @property {string|null} [name] Emoticon name
+             * @property {number|null} [count] Emoticon count
+             * @property {number|null} [time_last_used] Emoticon time_last_used
+             * @property {number|null} [use_count] Emoticon use_count
+             * @property {number|null} [time_received] Emoticon time_received
+             */
+    
+            /**
+             * Constructs a new Emoticon.
+             * @memberof CPlayer_GetEmoticonList_Response
+             * @classdesc Represents an Emoticon.
+             * @implements IEmoticon
+             * @constructor
+             * @param {CPlayer_GetEmoticonList_Response.IEmoticon=} [properties] Properties to set
+             */
+            function Emoticon(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Emoticon name.
+             * @member {string} name
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.name = "";
+    
+            /**
+             * Emoticon count.
+             * @member {number} count
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.count = 0;
+    
+            /**
+             * Emoticon time_last_used.
+             * @member {number} time_last_used
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.time_last_used = 0;
+    
+            /**
+             * Emoticon use_count.
+             * @member {number} use_count
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.use_count = 0;
+    
+            /**
+             * Emoticon time_received.
+             * @member {number} time_received
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             */
+            Emoticon.prototype.time_received = 0;
+    
+            /**
+             * Creates a new Emoticon instance using the specified properties.
+             * @function create
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {CPlayer_GetEmoticonList_Response.IEmoticon=} [properties] Properties to set
+             * @returns {CPlayer_GetEmoticonList_Response.Emoticon} Emoticon instance
+             */
+            Emoticon.create = function create(properties) {
+                return new Emoticon(properties);
+            };
+    
+            /**
+             * Encodes the specified Emoticon message. Does not implicitly {@link CPlayer_GetEmoticonList_Response.Emoticon.verify|verify} messages.
+             * @function encode
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {CPlayer_GetEmoticonList_Response.IEmoticon} message Emoticon message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Emoticon.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && message.hasOwnProperty("name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.count != null && message.hasOwnProperty("count"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.count);
+                if (message.time_last_used != null && message.hasOwnProperty("time_last_used"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.time_last_used);
+                if (message.use_count != null && message.hasOwnProperty("use_count"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.use_count);
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.time_received);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Emoticon message, length delimited. Does not implicitly {@link CPlayer_GetEmoticonList_Response.Emoticon.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {CPlayer_GetEmoticonList_Response.IEmoticon} message Emoticon message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Emoticon.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an Emoticon message from the specified reader or buffer.
+             * @function decode
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {CPlayer_GetEmoticonList_Response.Emoticon} Emoticon
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Emoticon.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetEmoticonList_Response.Emoticon();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.name = reader.string();
+                        break;
+                    case 2:
+                        message.count = reader.int32();
+                        break;
+                    case 3:
+                        message.time_last_used = reader.uint32();
+                        break;
+                    case 4:
+                        message.use_count = reader.uint32();
+                        break;
+                    case 5:
+                        message.time_received = reader.uint32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an Emoticon message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {CPlayer_GetEmoticonList_Response.Emoticon} Emoticon
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Emoticon.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an Emoticon message.
+             * @function verify
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Emoticon.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.count != null && message.hasOwnProperty("count"))
+                    if (!$util.isInteger(message.count))
+                        return "count: integer expected";
+                if (message.time_last_used != null && message.hasOwnProperty("time_last_used"))
+                    if (!$util.isInteger(message.time_last_used))
+                        return "time_last_used: integer expected";
+                if (message.use_count != null && message.hasOwnProperty("use_count"))
+                    if (!$util.isInteger(message.use_count))
+                        return "use_count: integer expected";
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    if (!$util.isInteger(message.time_received))
+                        return "time_received: integer expected";
+                return null;
+            };
+    
+            /**
+             * Creates an Emoticon message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {CPlayer_GetEmoticonList_Response.Emoticon} Emoticon
+             */
+            Emoticon.fromObject = function fromObject(object) {
+                if (object instanceof $root.CPlayer_GetEmoticonList_Response.Emoticon)
+                    return object;
+                var message = new $root.CPlayer_GetEmoticonList_Response.Emoticon();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.count != null)
+                    message.count = object.count | 0;
+                if (object.time_last_used != null)
+                    message.time_last_used = object.time_last_used >>> 0;
+                if (object.use_count != null)
+                    message.use_count = object.use_count >>> 0;
+                if (object.time_received != null)
+                    message.time_received = object.time_received >>> 0;
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an Emoticon message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @static
+             * @param {CPlayer_GetEmoticonList_Response.Emoticon} message Emoticon
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Emoticon.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.count = 0;
+                    object.time_last_used = 0;
+                    object.use_count = 0;
+                    object.time_received = 0;
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.count != null && message.hasOwnProperty("count"))
+                    object.count = message.count;
+                if (message.time_last_used != null && message.hasOwnProperty("time_last_used"))
+                    object.time_last_used = message.time_last_used;
+                if (message.use_count != null && message.hasOwnProperty("use_count"))
+                    object.use_count = message.use_count;
+                if (message.time_received != null && message.hasOwnProperty("time_received"))
+                    object.time_received = message.time_received;
+                return object;
+            };
+    
+            /**
+             * Converts this Emoticon to JSON.
+             * @function toJSON
+             * @memberof CPlayer_GetEmoticonList_Response.Emoticon
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Emoticon.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Emoticon;
+        })();
+    
+        return CPlayer_GetEmoticonList_Response;
     })();
     
     $root.CPlayer_GetLastPlayedTimes_Request = (function() {
@@ -3038,6 +4814,7 @@
          * @property {ENotificationSetting|null} [sounds_showingame] PerFriendPreferences sounds_showingame
          * @property {ENotificationSetting|null} [sounds_showonline] PerFriendPreferences sounds_showonline
          * @property {ENotificationSetting|null} [sounds_showmessages] PerFriendPreferences sounds_showmessages
+         * @property {ENotificationSetting|null} [notifications_sendmobile] PerFriendPreferences notifications_sendmobile
          */
     
         /**
@@ -3120,6 +4897,14 @@
         PerFriendPreferences.prototype.sounds_showmessages = 0;
     
         /**
+         * PerFriendPreferences notifications_sendmobile.
+         * @member {ENotificationSetting} notifications_sendmobile
+         * @memberof PerFriendPreferences
+         * @instance
+         */
+        PerFriendPreferences.prototype.notifications_sendmobile = 0;
+    
+        /**
          * Creates a new PerFriendPreferences instance using the specified properties.
          * @function create
          * @memberof PerFriendPreferences
@@ -3159,6 +4944,8 @@
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.sounds_showonline);
             if (message.sounds_showmessages != null && message.hasOwnProperty("sounds_showmessages"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.sounds_showmessages);
+            if (message.notifications_sendmobile != null && message.hasOwnProperty("notifications_sendmobile"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.notifications_sendmobile);
             return writer;
         };
     
@@ -3216,6 +5003,9 @@
                     break;
                 case 8:
                     message.sounds_showmessages = reader.int32();
+                    break;
+                case 9:
+                    message.notifications_sendmobile = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3307,6 +5097,15 @@
                 switch (message.sounds_showmessages) {
                 default:
                     return "sounds_showmessages: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.notifications_sendmobile != null && message.hasOwnProperty("notifications_sendmobile"))
+                switch (message.notifications_sendmobile) {
+                default:
+                    return "notifications_sendmobile: enum value expected";
                 case 0:
                 case 1:
                 case 2:
@@ -3415,6 +5214,20 @@
                 message.sounds_showmessages = 2;
                 break;
             }
+            switch (object.notifications_sendmobile) {
+            case "k_ENotificationSettingNotifyUseDefault":
+            case 0:
+                message.notifications_sendmobile = 0;
+                break;
+            case "k_ENotificationSettingAlways":
+            case 1:
+                message.notifications_sendmobile = 1;
+                break;
+            case "k_ENotificationSettingNever":
+            case 2:
+                message.notifications_sendmobile = 2;
+                break;
+            }
             return message;
         };
     
@@ -3440,6 +5253,7 @@
                 object.sounds_showingame = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
                 object.sounds_showonline = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
                 object.sounds_showmessages = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
+                object.notifications_sendmobile = options.enums === String ? "k_ENotificationSettingNotifyUseDefault" : 0;
             }
             if (message.accountid != null && message.hasOwnProperty("accountid"))
                 object.accountid = message.accountid;
@@ -3457,6 +5271,8 @@
                 object.sounds_showonline = options.enums === String ? $root.ENotificationSetting[message.sounds_showonline] : message.sounds_showonline;
             if (message.sounds_showmessages != null && message.hasOwnProperty("sounds_showmessages"))
                 object.sounds_showmessages = options.enums === String ? $root.ENotificationSetting[message.sounds_showmessages] : message.sounds_showmessages;
+            if (message.notifications_sendmobile != null && message.hasOwnProperty("notifications_sendmobile"))
+                object.notifications_sendmobile = options.enums === String ? $root.ENotificationSetting[message.notifications_sendmobile] : message.notifications_sendmobile;
             return object;
         };
     
@@ -7063,6 +8879,1053 @@
         return CPlayer_UpdateSteamAnnouncementLastRead_Response;
     })();
     
+    $root.CPlayer_GetPrivacySettings_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPrivacySettings_Request.
+         * @exports ICPlayer_GetPrivacySettings_Request
+         * @interface ICPlayer_GetPrivacySettings_Request
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPrivacySettings_Request.
+         * @exports CPlayer_GetPrivacySettings_Request
+         * @classdesc Represents a CPlayer_GetPrivacySettings_Request.
+         * @implements ICPlayer_GetPrivacySettings_Request
+         * @constructor
+         * @param {ICPlayer_GetPrivacySettings_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetPrivacySettings_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_GetPrivacySettings_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetPrivacySettings_Request} CPlayer_GetPrivacySettings_Request instance
+         */
+        CPlayer_GetPrivacySettings_Request.create = function create(properties) {
+            return new CPlayer_GetPrivacySettings_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPrivacySettings_Request message. Does not implicitly {@link CPlayer_GetPrivacySettings_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Request} message CPlayer_GetPrivacySettings_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPrivacySettings_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPrivacySettings_Request message, length delimited. Does not implicitly {@link CPlayer_GetPrivacySettings_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Request} message CPlayer_GetPrivacySettings_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPrivacySettings_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPrivacySettings_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPrivacySettings_Request} CPlayer_GetPrivacySettings_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPrivacySettings_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPrivacySettings_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPrivacySettings_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPrivacySettings_Request} CPlayer_GetPrivacySettings_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPrivacySettings_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPrivacySettings_Request message.
+         * @function verify
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPrivacySettings_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPrivacySettings_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPrivacySettings_Request} CPlayer_GetPrivacySettings_Request
+         */
+        CPlayer_GetPrivacySettings_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPrivacySettings_Request)
+                return object;
+            return new $root.CPlayer_GetPrivacySettings_Request();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPrivacySettings_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @static
+         * @param {CPlayer_GetPrivacySettings_Request} message CPlayer_GetPrivacySettings_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPrivacySettings_Request.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_GetPrivacySettings_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPrivacySettings_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPrivacySettings_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPrivacySettings_Request;
+    })();
+    
+    $root.CPrivacySettings = (function() {
+    
+        /**
+         * Properties of a CPrivacySettings.
+         * @exports ICPrivacySettings
+         * @interface ICPrivacySettings
+         * @property {number|null} [privacy_state] CPrivacySettings privacy_state
+         * @property {number|null} [privacy_state_inventory] CPrivacySettings privacy_state_inventory
+         * @property {number|null} [privacy_state_gifts] CPrivacySettings privacy_state_gifts
+         * @property {number|null} [privacy_state_ownedgames] CPrivacySettings privacy_state_ownedgames
+         * @property {number|null} [privacy_state_playtime] CPrivacySettings privacy_state_playtime
+         * @property {number|null} [privacy_state_friendslist] CPrivacySettings privacy_state_friendslist
+         */
+    
+        /**
+         * Constructs a new CPrivacySettings.
+         * @exports CPrivacySettings
+         * @classdesc Represents a CPrivacySettings.
+         * @implements ICPrivacySettings
+         * @constructor
+         * @param {ICPrivacySettings=} [properties] Properties to set
+         */
+        function CPrivacySettings(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPrivacySettings privacy_state.
+         * @member {number} privacy_state
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state = 0;
+    
+        /**
+         * CPrivacySettings privacy_state_inventory.
+         * @member {number} privacy_state_inventory
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state_inventory = 0;
+    
+        /**
+         * CPrivacySettings privacy_state_gifts.
+         * @member {number} privacy_state_gifts
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state_gifts = 0;
+    
+        /**
+         * CPrivacySettings privacy_state_ownedgames.
+         * @member {number} privacy_state_ownedgames
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state_ownedgames = 0;
+    
+        /**
+         * CPrivacySettings privacy_state_playtime.
+         * @member {number} privacy_state_playtime
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state_playtime = 0;
+    
+        /**
+         * CPrivacySettings privacy_state_friendslist.
+         * @member {number} privacy_state_friendslist
+         * @memberof CPrivacySettings
+         * @instance
+         */
+        CPrivacySettings.prototype.privacy_state_friendslist = 0;
+    
+        /**
+         * Creates a new CPrivacySettings instance using the specified properties.
+         * @function create
+         * @memberof CPrivacySettings
+         * @static
+         * @param {ICPrivacySettings=} [properties] Properties to set
+         * @returns {CPrivacySettings} CPrivacySettings instance
+         */
+        CPrivacySettings.create = function create(properties) {
+            return new CPrivacySettings(properties);
+        };
+    
+        /**
+         * Encodes the specified CPrivacySettings message. Does not implicitly {@link CPrivacySettings.verify|verify} messages.
+         * @function encode
+         * @memberof CPrivacySettings
+         * @static
+         * @param {ICPrivacySettings} message CPrivacySettings message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPrivacySettings.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.privacy_state != null && message.hasOwnProperty("privacy_state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.privacy_state);
+            if (message.privacy_state_inventory != null && message.hasOwnProperty("privacy_state_inventory"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.privacy_state_inventory);
+            if (message.privacy_state_gifts != null && message.hasOwnProperty("privacy_state_gifts"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.privacy_state_gifts);
+            if (message.privacy_state_ownedgames != null && message.hasOwnProperty("privacy_state_ownedgames"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.privacy_state_ownedgames);
+            if (message.privacy_state_playtime != null && message.hasOwnProperty("privacy_state_playtime"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.privacy_state_playtime);
+            if (message.privacy_state_friendslist != null && message.hasOwnProperty("privacy_state_friendslist"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.privacy_state_friendslist);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPrivacySettings message, length delimited. Does not implicitly {@link CPrivacySettings.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPrivacySettings
+         * @static
+         * @param {ICPrivacySettings} message CPrivacySettings message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPrivacySettings.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPrivacySettings message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPrivacySettings
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPrivacySettings} CPrivacySettings
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPrivacySettings.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPrivacySettings();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.privacy_state = reader.int32();
+                    break;
+                case 2:
+                    message.privacy_state_inventory = reader.int32();
+                    break;
+                case 3:
+                    message.privacy_state_gifts = reader.int32();
+                    break;
+                case 4:
+                    message.privacy_state_ownedgames = reader.int32();
+                    break;
+                case 5:
+                    message.privacy_state_playtime = reader.int32();
+                    break;
+                case 6:
+                    message.privacy_state_friendslist = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPrivacySettings message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPrivacySettings
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPrivacySettings} CPrivacySettings
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPrivacySettings.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPrivacySettings message.
+         * @function verify
+         * @memberof CPrivacySettings
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPrivacySettings.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.privacy_state != null && message.hasOwnProperty("privacy_state"))
+                if (!$util.isInteger(message.privacy_state))
+                    return "privacy_state: integer expected";
+            if (message.privacy_state_inventory != null && message.hasOwnProperty("privacy_state_inventory"))
+                if (!$util.isInteger(message.privacy_state_inventory))
+                    return "privacy_state_inventory: integer expected";
+            if (message.privacy_state_gifts != null && message.hasOwnProperty("privacy_state_gifts"))
+                if (!$util.isInteger(message.privacy_state_gifts))
+                    return "privacy_state_gifts: integer expected";
+            if (message.privacy_state_ownedgames != null && message.hasOwnProperty("privacy_state_ownedgames"))
+                if (!$util.isInteger(message.privacy_state_ownedgames))
+                    return "privacy_state_ownedgames: integer expected";
+            if (message.privacy_state_playtime != null && message.hasOwnProperty("privacy_state_playtime"))
+                if (!$util.isInteger(message.privacy_state_playtime))
+                    return "privacy_state_playtime: integer expected";
+            if (message.privacy_state_friendslist != null && message.hasOwnProperty("privacy_state_friendslist"))
+                if (!$util.isInteger(message.privacy_state_friendslist))
+                    return "privacy_state_friendslist: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPrivacySettings message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPrivacySettings
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPrivacySettings} CPrivacySettings
+         */
+        CPrivacySettings.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPrivacySettings)
+                return object;
+            var message = new $root.CPrivacySettings();
+            if (object.privacy_state != null)
+                message.privacy_state = object.privacy_state | 0;
+            if (object.privacy_state_inventory != null)
+                message.privacy_state_inventory = object.privacy_state_inventory | 0;
+            if (object.privacy_state_gifts != null)
+                message.privacy_state_gifts = object.privacy_state_gifts | 0;
+            if (object.privacy_state_ownedgames != null)
+                message.privacy_state_ownedgames = object.privacy_state_ownedgames | 0;
+            if (object.privacy_state_playtime != null)
+                message.privacy_state_playtime = object.privacy_state_playtime | 0;
+            if (object.privacy_state_friendslist != null)
+                message.privacy_state_friendslist = object.privacy_state_friendslist | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPrivacySettings message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPrivacySettings
+         * @static
+         * @param {CPrivacySettings} message CPrivacySettings
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPrivacySettings.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.privacy_state = 0;
+                object.privacy_state_inventory = 0;
+                object.privacy_state_gifts = 0;
+                object.privacy_state_ownedgames = 0;
+                object.privacy_state_playtime = 0;
+                object.privacy_state_friendslist = 0;
+            }
+            if (message.privacy_state != null && message.hasOwnProperty("privacy_state"))
+                object.privacy_state = message.privacy_state;
+            if (message.privacy_state_inventory != null && message.hasOwnProperty("privacy_state_inventory"))
+                object.privacy_state_inventory = message.privacy_state_inventory;
+            if (message.privacy_state_gifts != null && message.hasOwnProperty("privacy_state_gifts"))
+                object.privacy_state_gifts = message.privacy_state_gifts;
+            if (message.privacy_state_ownedgames != null && message.hasOwnProperty("privacy_state_ownedgames"))
+                object.privacy_state_ownedgames = message.privacy_state_ownedgames;
+            if (message.privacy_state_playtime != null && message.hasOwnProperty("privacy_state_playtime"))
+                object.privacy_state_playtime = message.privacy_state_playtime;
+            if (message.privacy_state_friendslist != null && message.hasOwnProperty("privacy_state_friendslist"))
+                object.privacy_state_friendslist = message.privacy_state_friendslist;
+            return object;
+        };
+    
+        /**
+         * Converts this CPrivacySettings to JSON.
+         * @function toJSON
+         * @memberof CPrivacySettings
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPrivacySettings.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPrivacySettings;
+    })();
+    
+    $root.CPlayer_GetPrivacySettings_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPrivacySettings_Response.
+         * @exports ICPlayer_GetPrivacySettings_Response
+         * @interface ICPlayer_GetPrivacySettings_Response
+         * @property {ICPrivacySettings|null} [privacy_settings] CPlayer_GetPrivacySettings_Response privacy_settings
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPrivacySettings_Response.
+         * @exports CPlayer_GetPrivacySettings_Response
+         * @classdesc Represents a CPlayer_GetPrivacySettings_Response.
+         * @implements ICPlayer_GetPrivacySettings_Response
+         * @constructor
+         * @param {ICPlayer_GetPrivacySettings_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetPrivacySettings_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPrivacySettings_Response privacy_settings.
+         * @member {ICPrivacySettings|null|undefined} privacy_settings
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @instance
+         */
+        CPlayer_GetPrivacySettings_Response.prototype.privacy_settings = null;
+    
+        /**
+         * Creates a new CPlayer_GetPrivacySettings_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetPrivacySettings_Response} CPlayer_GetPrivacySettings_Response instance
+         */
+        CPlayer_GetPrivacySettings_Response.create = function create(properties) {
+            return new CPlayer_GetPrivacySettings_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPrivacySettings_Response message. Does not implicitly {@link CPlayer_GetPrivacySettings_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Response} message CPlayer_GetPrivacySettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPrivacySettings_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings"))
+                $root.CPrivacySettings.encode(message.privacy_settings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPrivacySettings_Response message, length delimited. Does not implicitly {@link CPlayer_GetPrivacySettings_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {ICPlayer_GetPrivacySettings_Response} message CPlayer_GetPrivacySettings_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPrivacySettings_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPrivacySettings_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPrivacySettings_Response} CPlayer_GetPrivacySettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPrivacySettings_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPrivacySettings_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.privacy_settings = $root.CPrivacySettings.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPrivacySettings_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPrivacySettings_Response} CPlayer_GetPrivacySettings_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPrivacySettings_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPrivacySettings_Response message.
+         * @function verify
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPrivacySettings_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings")) {
+                var error = $root.CPrivacySettings.verify(message.privacy_settings);
+                if (error)
+                    return "privacy_settings." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPrivacySettings_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPrivacySettings_Response} CPlayer_GetPrivacySettings_Response
+         */
+        CPlayer_GetPrivacySettings_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPrivacySettings_Response)
+                return object;
+            var message = new $root.CPlayer_GetPrivacySettings_Response();
+            if (object.privacy_settings != null) {
+                if (typeof object.privacy_settings !== "object")
+                    throw TypeError(".CPlayer_GetPrivacySettings_Response.privacy_settings: object expected");
+                message.privacy_settings = $root.CPrivacySettings.fromObject(object.privacy_settings);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPrivacySettings_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @static
+         * @param {CPlayer_GetPrivacySettings_Response} message CPlayer_GetPrivacySettings_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPrivacySettings_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.privacy_settings = null;
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings"))
+                object.privacy_settings = $root.CPrivacySettings.toObject(message.privacy_settings, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPrivacySettings_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPrivacySettings_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPrivacySettings_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPrivacySettings_Response;
+    })();
+    
+    $root.CPlayer_GetDurationControl_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetDurationControl_Request.
+         * @exports ICPlayer_GetDurationControl_Request
+         * @interface ICPlayer_GetDurationControl_Request
+         * @property {number|null} [appid] CPlayer_GetDurationControl_Request appid
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetDurationControl_Request.
+         * @exports CPlayer_GetDurationControl_Request
+         * @classdesc Represents a CPlayer_GetDurationControl_Request.
+         * @implements ICPlayer_GetDurationControl_Request
+         * @constructor
+         * @param {ICPlayer_GetDurationControl_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetDurationControl_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetDurationControl_Request appid.
+         * @member {number} appid
+         * @memberof CPlayer_GetDurationControl_Request
+         * @instance
+         */
+        CPlayer_GetDurationControl_Request.prototype.appid = 0;
+    
+        /**
+         * Creates a new CPlayer_GetDurationControl_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {ICPlayer_GetDurationControl_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetDurationControl_Request} CPlayer_GetDurationControl_Request instance
+         */
+        CPlayer_GetDurationControl_Request.create = function create(properties) {
+            return new CPlayer_GetDurationControl_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetDurationControl_Request message. Does not implicitly {@link CPlayer_GetDurationControl_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {ICPlayer_GetDurationControl_Request} message CPlayer_GetDurationControl_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetDurationControl_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetDurationControl_Request message, length delimited. Does not implicitly {@link CPlayer_GetDurationControl_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {ICPlayer_GetDurationControl_Request} message CPlayer_GetDurationControl_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetDurationControl_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetDurationControl_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetDurationControl_Request} CPlayer_GetDurationControl_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetDurationControl_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetDurationControl_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetDurationControl_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetDurationControl_Request} CPlayer_GetDurationControl_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetDurationControl_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetDurationControl_Request message.
+         * @function verify
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetDurationControl_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetDurationControl_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetDurationControl_Request} CPlayer_GetDurationControl_Request
+         */
+        CPlayer_GetDurationControl_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetDurationControl_Request)
+                return object;
+            var message = new $root.CPlayer_GetDurationControl_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetDurationControl_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetDurationControl_Request
+         * @static
+         * @param {CPlayer_GetDurationControl_Request} message CPlayer_GetDurationControl_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetDurationControl_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.appid = 0;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetDurationControl_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetDurationControl_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetDurationControl_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetDurationControl_Request;
+    })();
+    
+    $root.CPlayer_GetDurationControl_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetDurationControl_Response.
+         * @exports ICPlayer_GetDurationControl_Response
+         * @interface ICPlayer_GetDurationControl_Response
+         * @property {boolean|null} [is_enabled] CPlayer_GetDurationControl_Response is_enabled
+         * @property {number|null} [seconds] CPlayer_GetDurationControl_Response seconds
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetDurationControl_Response.
+         * @exports CPlayer_GetDurationControl_Response
+         * @classdesc Represents a CPlayer_GetDurationControl_Response.
+         * @implements ICPlayer_GetDurationControl_Response
+         * @constructor
+         * @param {ICPlayer_GetDurationControl_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetDurationControl_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetDurationControl_Response is_enabled.
+         * @member {boolean} is_enabled
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         */
+        CPlayer_GetDurationControl_Response.prototype.is_enabled = false;
+    
+        /**
+         * CPlayer_GetDurationControl_Response seconds.
+         * @member {number} seconds
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         */
+        CPlayer_GetDurationControl_Response.prototype.seconds = 0;
+    
+        /**
+         * Creates a new CPlayer_GetDurationControl_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {ICPlayer_GetDurationControl_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetDurationControl_Response} CPlayer_GetDurationControl_Response instance
+         */
+        CPlayer_GetDurationControl_Response.create = function create(properties) {
+            return new CPlayer_GetDurationControl_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetDurationControl_Response message. Does not implicitly {@link CPlayer_GetDurationControl_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {ICPlayer_GetDurationControl_Response} message CPlayer_GetDurationControl_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetDurationControl_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.is_enabled != null && message.hasOwnProperty("is_enabled"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.is_enabled);
+            if (message.seconds != null && message.hasOwnProperty("seconds"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.seconds);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetDurationControl_Response message, length delimited. Does not implicitly {@link CPlayer_GetDurationControl_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {ICPlayer_GetDurationControl_Response} message CPlayer_GetDurationControl_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetDurationControl_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetDurationControl_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetDurationControl_Response} CPlayer_GetDurationControl_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetDurationControl_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetDurationControl_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.is_enabled = reader.bool();
+                    break;
+                case 2:
+                    message.seconds = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetDurationControl_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetDurationControl_Response} CPlayer_GetDurationControl_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetDurationControl_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetDurationControl_Response message.
+         * @function verify
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetDurationControl_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.is_enabled != null && message.hasOwnProperty("is_enabled"))
+                if (typeof message.is_enabled !== "boolean")
+                    return "is_enabled: boolean expected";
+            if (message.seconds != null && message.hasOwnProperty("seconds"))
+                if (!$util.isInteger(message.seconds))
+                    return "seconds: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetDurationControl_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetDurationControl_Response} CPlayer_GetDurationControl_Response
+         */
+        CPlayer_GetDurationControl_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetDurationControl_Response)
+                return object;
+            var message = new $root.CPlayer_GetDurationControl_Response();
+            if (object.is_enabled != null)
+                message.is_enabled = Boolean(object.is_enabled);
+            if (object.seconds != null)
+                message.seconds = object.seconds | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetDurationControl_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetDurationControl_Response
+         * @static
+         * @param {CPlayer_GetDurationControl_Response} message CPlayer_GetDurationControl_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetDurationControl_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.is_enabled = false;
+                object.seconds = 0;
+            }
+            if (message.is_enabled != null && message.hasOwnProperty("is_enabled"))
+                object.is_enabled = message.is_enabled;
+            if (message.seconds != null && message.hasOwnProperty("seconds"))
+                object.seconds = message.seconds;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetDurationControl_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetDurationControl_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetDurationControl_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetDurationControl_Response;
+    })();
+    
     $root.CPlayer_LastPlayedTimes_Notification = (function() {
     
         /**
@@ -8200,6 +11063,198 @@
         return CPlayer_PerFriendPreferencesChanged_Notification;
     })();
     
+    $root.CPlayer_PrivacySettingsChanged_Notification = (function() {
+    
+        /**
+         * Properties of a CPlayer_PrivacySettingsChanged_Notification.
+         * @exports ICPlayer_PrivacySettingsChanged_Notification
+         * @interface ICPlayer_PrivacySettingsChanged_Notification
+         * @property {ICPrivacySettings|null} [privacy_settings] CPlayer_PrivacySettingsChanged_Notification privacy_settings
+         */
+    
+        /**
+         * Constructs a new CPlayer_PrivacySettingsChanged_Notification.
+         * @exports CPlayer_PrivacySettingsChanged_Notification
+         * @classdesc Represents a CPlayer_PrivacySettingsChanged_Notification.
+         * @implements ICPlayer_PrivacySettingsChanged_Notification
+         * @constructor
+         * @param {ICPlayer_PrivacySettingsChanged_Notification=} [properties] Properties to set
+         */
+        function CPlayer_PrivacySettingsChanged_Notification(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_PrivacySettingsChanged_Notification privacy_settings.
+         * @member {ICPrivacySettings|null|undefined} privacy_settings
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @instance
+         */
+        CPlayer_PrivacySettingsChanged_Notification.prototype.privacy_settings = null;
+    
+        /**
+         * Creates a new CPlayer_PrivacySettingsChanged_Notification instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {ICPlayer_PrivacySettingsChanged_Notification=} [properties] Properties to set
+         * @returns {CPlayer_PrivacySettingsChanged_Notification} CPlayer_PrivacySettingsChanged_Notification instance
+         */
+        CPlayer_PrivacySettingsChanged_Notification.create = function create(properties) {
+            return new CPlayer_PrivacySettingsChanged_Notification(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PrivacySettingsChanged_Notification message. Does not implicitly {@link CPlayer_PrivacySettingsChanged_Notification.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {ICPlayer_PrivacySettingsChanged_Notification} message CPlayer_PrivacySettingsChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PrivacySettingsChanged_Notification.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings"))
+                $root.CPrivacySettings.encode(message.privacy_settings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PrivacySettingsChanged_Notification message, length delimited. Does not implicitly {@link CPlayer_PrivacySettingsChanged_Notification.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {ICPlayer_PrivacySettingsChanged_Notification} message CPlayer_PrivacySettingsChanged_Notification message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PrivacySettingsChanged_Notification.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_PrivacySettingsChanged_Notification message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_PrivacySettingsChanged_Notification} CPlayer_PrivacySettingsChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PrivacySettingsChanged_Notification.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PrivacySettingsChanged_Notification();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.privacy_settings = $root.CPrivacySettings.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_PrivacySettingsChanged_Notification message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_PrivacySettingsChanged_Notification} CPlayer_PrivacySettingsChanged_Notification
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PrivacySettingsChanged_Notification.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_PrivacySettingsChanged_Notification message.
+         * @function verify
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_PrivacySettingsChanged_Notification.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings")) {
+                var error = $root.CPrivacySettings.verify(message.privacy_settings);
+                if (error)
+                    return "privacy_settings." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_PrivacySettingsChanged_Notification message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_PrivacySettingsChanged_Notification} CPlayer_PrivacySettingsChanged_Notification
+         */
+        CPlayer_PrivacySettingsChanged_Notification.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_PrivacySettingsChanged_Notification)
+                return object;
+            var message = new $root.CPlayer_PrivacySettingsChanged_Notification();
+            if (object.privacy_settings != null) {
+                if (typeof object.privacy_settings !== "object")
+                    throw TypeError(".CPlayer_PrivacySettingsChanged_Notification.privacy_settings: object expected");
+                message.privacy_settings = $root.CPrivacySettings.fromObject(object.privacy_settings);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_PrivacySettingsChanged_Notification message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @static
+         * @param {CPlayer_PrivacySettingsChanged_Notification} message CPlayer_PrivacySettingsChanged_Notification
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_PrivacySettingsChanged_Notification.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.privacy_settings = null;
+            if (message.privacy_settings != null && message.hasOwnProperty("privacy_settings"))
+                object.privacy_settings = $root.CPrivacySettings.toObject(message.privacy_settings, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_PrivacySettingsChanged_Notification to JSON.
+         * @function toJSON
+         * @memberof CPlayer_PrivacySettingsChanged_Notification
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_PrivacySettingsChanged_Notification.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_PrivacySettingsChanged_Notification;
+    })();
+    
     $root.Player = (function() {
     
         /**
@@ -8266,6 +11321,39 @@
          */
     
         /**
+         * Callback as used by {@link Player#getFriendsGameplayInfo}.
+         * @memberof Player
+         * @typedef GetFriendsGameplayInfoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetFriendsGameplayInfo_Response} [response] CPlayer_GetFriendsGameplayInfo_Response
+         */
+    
+        /**
+         * Calls GetFriendsGameplayInfo.
+         * @function getFriendsGameplayInfo
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request} request CPlayer_GetFriendsGameplayInfo_Request message or plain object
+         * @param {Player.GetFriendsGameplayInfoCallback} callback Node-style callback called with the error, if any, and CPlayer_GetFriendsGameplayInfo_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getFriendsGameplayInfo = function getFriendsGameplayInfo(request, callback) {
+            return this.rpcCall(getFriendsGameplayInfo, $root.CPlayer_GetFriendsGameplayInfo_Request, $root.CPlayer_GetFriendsGameplayInfo_Response, request, callback);
+        }, "name", { value: "GetFriendsGameplayInfo" });
+    
+        /**
+         * Calls GetFriendsGameplayInfo.
+         * @function getFriendsGameplayInfo
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetFriendsGameplayInfo_Request} request CPlayer_GetFriendsGameplayInfo_Request message or plain object
+         * @returns {Promise<CPlayer_GetFriendsGameplayInfo_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
          * Callback as used by {@link Player#getGameBadgeLevels}.
          * @memberof Player
          * @typedef GetGameBadgeLevelsCallback
@@ -8295,6 +11383,39 @@
          * @instance
          * @param {ICPlayer_GetGameBadgeLevels_Request} request CPlayer_GetGameBadgeLevels_Request message or plain object
          * @returns {Promise<CPlayer_GetGameBadgeLevels_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getEmoticonList}.
+         * @memberof Player
+         * @typedef GetEmoticonListCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetEmoticonList_Response} [response] CPlayer_GetEmoticonList_Response
+         */
+    
+        /**
+         * Calls GetEmoticonList.
+         * @function getEmoticonList
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetEmoticonList_Request} request CPlayer_GetEmoticonList_Request message or plain object
+         * @param {Player.GetEmoticonListCallback} callback Node-style callback called with the error, if any, and CPlayer_GetEmoticonList_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getEmoticonList = function getEmoticonList(request, callback) {
+            return this.rpcCall(getEmoticonList, $root.CPlayer_GetEmoticonList_Request, $root.CPlayer_GetEmoticonList_Response, request, callback);
+        }, "name", { value: "GetEmoticonList" });
+    
+        /**
+         * Calls GetEmoticonList.
+         * @function getEmoticonList
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetEmoticonList_Request} request CPlayer_GetEmoticonList_Request message or plain object
+         * @returns {Promise<CPlayer_GetEmoticonList_Response>} Promise
          * @variation 2
          */
     
@@ -8694,6 +11815,72 @@
          * @variation 2
          */
     
+        /**
+         * Callback as used by {@link Player#getPrivacySettings}.
+         * @memberof Player
+         * @typedef GetPrivacySettingsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetPrivacySettings_Response} [response] CPlayer_GetPrivacySettings_Response
+         */
+    
+        /**
+         * Calls GetPrivacySettings.
+         * @function getPrivacySettings
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPrivacySettings_Request} request CPlayer_GetPrivacySettings_Request message or plain object
+         * @param {Player.GetPrivacySettingsCallback} callback Node-style callback called with the error, if any, and CPlayer_GetPrivacySettings_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getPrivacySettings = function getPrivacySettings(request, callback) {
+            return this.rpcCall(getPrivacySettings, $root.CPlayer_GetPrivacySettings_Request, $root.CPlayer_GetPrivacySettings_Response, request, callback);
+        }, "name", { value: "GetPrivacySettings" });
+    
+        /**
+         * Calls GetPrivacySettings.
+         * @function getPrivacySettings
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPrivacySettings_Request} request CPlayer_GetPrivacySettings_Request message or plain object
+         * @returns {Promise<CPlayer_GetPrivacySettings_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getDurationControl}.
+         * @memberof Player
+         * @typedef GetDurationControlCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetDurationControl_Response} [response] CPlayer_GetDurationControl_Response
+         */
+    
+        /**
+         * Calls GetDurationControl.
+         * @function getDurationControl
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetDurationControl_Request} request CPlayer_GetDurationControl_Request message or plain object
+         * @param {Player.GetDurationControlCallback} callback Node-style callback called with the error, if any, and CPlayer_GetDurationControl_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getDurationControl = function getDurationControl(request, callback) {
+            return this.rpcCall(getDurationControl, $root.CPlayer_GetDurationControl_Request, $root.CPlayer_GetDurationControl_Response, request, callback);
+        }, "name", { value: "GetDurationControl" });
+    
+        /**
+         * Calls GetDurationControl.
+         * @function getDurationControl
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetDurationControl_Request} request CPlayer_GetDurationControl_Request message or plain object
+         * @returns {Promise<CPlayer_GetDurationControl_Response>} Promise
+         * @variation 2
+         */
+    
         return Player;
     })();
     
@@ -8890,6 +12077,39 @@
          * @memberof PlayerClient
          * @instance
          * @param {ICPlayer_PerFriendPreferencesChanged_Notification} request CPlayer_PerFriendPreferencesChanged_Notification message or plain object
+         * @returns {Promise<NoResponse>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link PlayerClient#notifyPrivacyPrivacySettingsChanged}.
+         * @memberof PlayerClient
+         * @typedef NotifyPrivacyPrivacySettingsChangedCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {NoResponse} [response] NoResponse
+         */
+    
+        /**
+         * Calls NotifyPrivacyPrivacySettingsChanged.
+         * @function notifyPrivacyPrivacySettingsChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_PrivacySettingsChanged_Notification} request CPlayer_PrivacySettingsChanged_Notification message or plain object
+         * @param {PlayerClient.NotifyPrivacyPrivacySettingsChangedCallback} callback Node-style callback called with the error, if any, and NoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(PlayerClient.prototype.notifyPrivacyPrivacySettingsChanged = function notifyPrivacyPrivacySettingsChanged(request, callback) {
+            return this.rpcCall(notifyPrivacyPrivacySettingsChanged, $root.CPlayer_PrivacySettingsChanged_Notification, $root.NoResponse, request, callback);
+        }, "name", { value: "NotifyPrivacyPrivacySettingsChanged" });
+    
+        /**
+         * Calls NotifyPrivacyPrivacySettingsChanged.
+         * @function notifyPrivacyPrivacySettingsChanged
+         * @memberof PlayerClient
+         * @instance
+         * @param {ICPlayer_PrivacySettingsChanged_Notification} request CPlayer_PrivacySettingsChanged_Notification message or plain object
          * @returns {Promise<NoResponse>} Promise
          * @variation 2
          */

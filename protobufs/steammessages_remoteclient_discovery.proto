@@ -13,6 +13,7 @@ enum ERemoteClientBroadcastMsg {
 	k_ERemoteDeviceAuthorizationCancelRequest = 9;
 	k_ERemoteDeviceStreamingCancelRequest = 10;
 	k_ERemoteClientBroadcastMsgClientIDDeconflict = 11;
+	k_ERemoteDeviceStreamTransportSignal = 12;
 }
 
 enum ERemoteClientService {
@@ -35,6 +36,13 @@ enum ERemoteDeviceAuthorizationResult {
 	k_ERemoteDeviceAuthorizationCanceled = 8;
 }
 
+enum EStreamTransport {
+	k_EStreamTransportNone = 0;
+	k_EStreamTransportUDP = 1;
+	k_EStreamTransportUDPRelay = 2;
+	k_EStreamTransportWebRTC = 3;
+}
+
 enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingSuccess = 0;
 	k_ERemoteDeviceStreamingUnauthorized = 1;
@@ -48,12 +56,15 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingBroadcastingActive = 9;
 	k_ERemoteDeviceStreamingVRActive = 10;
 	k_ERemoteDeviceStreamingPINRequired = 11;
+	k_ERemoteDeviceStreamingTransportUnavailable = 12;
 }
 
 message CMsgRemoteClientBroadcastHeader {
 	optional uint64 client_id = 1;
 	optional .ERemoteClientBroadcastMsg msg_type = 2 [default = k_ERemoteClientBroadcastMsgDiscovery];
 	optional uint64 instance_id = 3;
+	optional uint64 device_id = 4;
+	optional bytes device_token = 5;
 }
 
 message CMsgRemoteClientBroadcastStatus {
@@ -68,7 +79,7 @@ message CMsgRemoteClientBroadcastStatus {
 	optional string hostname = 4;
 	optional uint32 enabled_services = 6;
 	optional int32 ostype = 7 [default = 0];
-	optional bool is64bit = 8 [default = false];
+	optional bool is64bit = 8;
 	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
 	optional int32 euniverse = 11;
 	optional uint32 timestamp = 12;
@@ -79,6 +90,8 @@ message CMsgRemoteClientBroadcastStatus {
 	optional bool broadcasting_active = 17;
 	optional bool vr_active = 18;
 	optional uint32 content_cache_port = 19;
+	repeated string ip_addresses = 20;
+	optional string public_ip_address = 21;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -117,6 +130,7 @@ message CMsgRemoteDeviceAuthorizationCancelRequest {
 
 message CMsgRemoteDeviceAuthorizationResponse {
 	required .ERemoteDeviceAuthorizationResult result = 1 [default = k_ERemoteDeviceAuthorizationSuccess];
+	optional fixed64 steamid = 2;
 }
 
 message CMsgRemoteDeviceStreamingRequest {
@@ -132,6 +146,8 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional bool enable_audio_streaming = 10 [default = true];
 	optional bool enable_input_streaming = 11 [default = true];
 	optional bool network_test = 12;
+	optional uint64 client_id = 13;
+	repeated .EStreamTransport supported_transport = 14;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
@@ -143,7 +159,8 @@ message CMsgRemoteDeviceStreamingResponse {
 	required .ERemoteDeviceStreamingResult result = 2 [default = k_ERemoteDeviceStreamingSuccess];
 	optional uint32 port = 3;
 	optional bytes encrypted_session_key = 4;
-	optional int32 virtualhere_licensed_device_count_OBSOLETE = 5;
+	optional .EStreamTransport transport = 6 [default = k_EStreamTransportUDP];
+	optional string relay_server = 7;
 }
 
 message CMsgRemoteDeviceProofRequest {
@@ -152,5 +169,10 @@ message CMsgRemoteDeviceProofRequest {
 
 message CMsgRemoteDeviceProofResponse {
 	required bytes response = 1;
+}
+
+message CMsgRemoteDeviceStreamTransportSignal {
+	optional bytes token = 1;
+	optional bytes payload = 2;
 }
 

@@ -6,6 +6,7 @@ option cc_generic_services = false;
 message CMsgClientSiteInfo {
 	optional uint64 site_id = 1;
 	optional string site_name = 2;
+	optional bool allow_cached_credentials = 3;
 }
 
 message CMsgClientSiteLicenseCheckout {
@@ -33,5 +34,6 @@ message CMsgClientSiteLicenseGetContentCacheInfoResponse {
 	optional uint32 ipv4_address = 2;
 	optional uint32 port_number = 3;
 	optional uint32 p2p_group = 4;
+	optional string ip_address = 5;
 }
 

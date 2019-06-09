@@ -1,0 +1,115 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CRemoteClient_GetPairingInfo_Request {
+	optional uint32 pin = 1;
+}
+
+message CRemoteClient_GetPairingInfo_Response {
+	optional fixed64 session_id = 1;
+	optional fixed64 device_id = 2;
+	optional bytes request = 3;
+}
+
+message CRemoteClient_Online_Notification {
+	optional fixed64 steamid = 1;
+}
+
+message CRemoteClient_ReplyPacket_Notification {
+	optional fixed64 session_id = 1;
+	optional bytes payload = 2;
+}
+
+message CRemoteClient_AllocateTURNServer_Request {
+	optional uint32 cellid = 1;
+	optional string credentials = 2;
+}
+
+message CRemoteClient_AllocateTURNServer_Response {
+	optional string turn_server = 1;
+}
+
+message CRemoteClient_AllocateRelayServer_Request {
+	optional uint32 cellid = 1;
+	optional string credentials = 2;
+}
+
+message CRemoteClient_AllocateRelayServer_Response {
+	optional string relay_server = 1;
+}
+
+message CRemoteClient_SteamBroadcast_Notification {
+	optional fixed64 steamid = 1;
+	optional fixed64 clientid = 2;
+	optional bytes payload = 3;
+}
+
+message CRemoteClient_SteamToSteam_Notification {
+	optional fixed64 steamid = 1;
+	optional fixed64 src_clientid = 2;
+	optional fixed64 dst_clientid = 3;
+	optional uint32 secretid = 4;
+	optional bytes encrypted_payload = 5;
+}
+
+message CRemoteClient_RegisterStatusUpdate_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+	optional fixed64 device_id = 3;
+}
+
+message CRemoteClient_UnregisterStatusUpdate_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+}
+
+message CRemoteClient_RemotePacket_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+	optional bytes payload = 4;
+}
+
+service RemoteClient {
+	option (service_description) = "Methods for Steam remote client operations";
+	rpc GetPairingInfo (.CRemoteClient_GetPairingInfo_Request) returns (.CRemoteClient_GetPairingInfo_Response) {
+		option (method_description) = "Get pairing info for an entered PIN";
+	}
+	rpc NotifyOnline (.CRemoteClient_Online_Notification) returns (.NoResponse) {
+		option (method_description) = "Let the service know we're available for status listeners";
+	}
+	rpc NotifyReplyPacket (.CRemoteClient_ReplyPacket_Notification) returns (.NoResponse) {
+		option (method_description) = "Send a reply to a remote client";
+	}
+	rpc AllocateTURNServer (.CRemoteClient_AllocateTURNServer_Request) returns (.CRemoteClient_AllocateTURNServer_Response) {
+		option (method_description) = "Allocate a TURN server for a streaming session";
+	}
+	rpc AllocateRelayServer (.CRemoteClient_AllocateRelayServer_Request) returns (.CRemoteClient_AllocateRelayServer_Response) {
+		option (method_description) = "Allocate a UDP relay server for a streaming session";
+	}
+	rpc SendSteamBroadcastPacket (.CRemoteClient_SteamBroadcast_Notification) returns (.NoResponse) {
+		option (method_description) = "Broadcast a packet to remote Steam clients";
+	}
+	rpc SendSteamToSteamPacket (.CRemoteClient_SteamToSteam_Notification) returns (.NoResponse) {
+		option (method_description) = "Send a packet to a remote Steam client";
+	}
+}
+service RemoteClientSteamClient {
+	option (service_description) = "Methods for Steam remote client operations";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyRegisterStatusUpdate (.CRemoteClient_RegisterStatusUpdate_Notification) returns (.NoResponse) {
+		option (method_description) = "Register for status updates with a Steam client";
+	}
+	rpc NotifyUnregisterStatusUpdate (.CRemoteClient_UnregisterStatusUpdate_Notification) returns (.NoResponse) {
+		option (method_description) = "Unregister for status updates with a Steam client";
+	}
+	rpc NotifyRemotePacket (.CRemoteClient_RemotePacket_Notification) returns (.NoResponse) {
+		option (method_description) = "Send a packet to a Steam client";
+	}
+	rpc NotifySteamBroadcastPacket (.CRemoteClient_SteamBroadcast_Notification) returns (.NoResponse) {
+		option (method_description) = "Broadcast a packet to remote Steam clients";
+	}
+	rpc NotifySteamToSteamPacket (.CRemoteClient_SteamToSteam_Notification) returns (.NoResponse) {
+		option (method_description) = "Send a packet to a Steam client from a remote Steam client";
+	}
+}

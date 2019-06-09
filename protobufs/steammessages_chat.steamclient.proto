@@ -66,6 +66,7 @@ message CChatRoom_CreateChatRoomGroup_Request {
 	optional string name = 3;
 	repeated fixed64 steamid_invitees = 4;
 	optional uint32 watching_broadcast_accountid = 6;
+	optional uint64 watching_broadcast_channel_id = 7;
 }
 
 message CChatRole {
@@ -109,6 +110,7 @@ message CChatRoomGroupHeaderState {
 	repeated .CChatRoleActions role_actions = 19;
 	optional uint32 watching_broadcast_accountid = 20;
 	repeated .CChatPartyBeacon party_beacons = 22;
+	optional uint64 watching_broadcast_channel_id = 23;
 }
 
 message CChatRoomMember {
@@ -126,6 +128,8 @@ message CChatRoomState {
 	repeated uint32 members_in_voice = 4;
 	optional uint32 time_last_message = 5;
 	optional uint32 sort_order = 6;
+	optional string last_message = 7;
+	optional uint32 accountid_last_message = 8;
 }
 
 message CChatRoomGroupState {
@@ -144,6 +148,7 @@ message CUserChatRoomState {
 	optional .EChatRoomNotificationLevel mobile_notification_level = 5 [default = k_EChatroomNotificationLevel_Invalid];
 	optional uint32 time_last_mention = 6;
 	optional bool unread_indicator_muted = 7 [default = false];
+	optional uint32 time_first_unread = 8;
 }
 
 message CUserChatRoomGroupState {
@@ -198,6 +203,7 @@ message CChatRoom_SetChatRoomGroupAvatar_Response {
 message CChatRoom_SetChatRoomGroupWatchingBroadcast_Request {
 	optional uint64 chat_group_id = 1;
 	optional uint32 watching_broadcast_accountid = 2;
+	optional uint64 watching_broadcast_channel_id = 3;
 }
 
 message CChatRoom_SetChatRoomGroupWatchingBroadcast_Response {
@@ -473,6 +479,7 @@ message CChatRoom_GetChatRoomGroupSummary_Response {
 	optional uint32 watching_broadcast_accountid = 16;
 	optional uint32 appid = 17;
 	repeated .CChatPartyBeacon party_beacons = 18;
+	optional uint64 watching_broadcast_channel_id = 19;
 }
 
 message CChatRoomSummaryPair {
@@ -671,6 +678,7 @@ message CChatRoom_IncomingChatMessage_Notification {
 	optional uint32 ordinal = 7;
 	optional .ServerMessage server_message = 8;
 	optional string message_no_bbcode = 9;
+	optional string chat_name = 10 [(description) = "A name to use for the chat, intended for notifications"];
 }
 
 message CChatRoom_ChatMessageModified_Notification {

@@ -16,6 +16,13 @@ extend .google.protobuf.FieldOptions {
 	optional bool php_output_always_number = 50020 [default = false];
 }
 
+message CMsgIPAddress {
+	oneof ip {
+		fixed32 v4 = 1;
+		bytes v6 = 2;
+	}
+}
+
 message CMsgProtoBufHeader {
 	optional fixed64 steamid = 1;
 	optional int32 client_sessionid = 2;
@@ -26,7 +33,6 @@ message CMsgProtoBufHeader {
 	optional int32 seq_num = 24;
 	optional int32 eresult = 13 [default = 2];
 	optional string error_message = 14;
-	optional uint32 ip = 15;
 	optional uint32 auth_account_flags = 16;
 	optional uint32 token_source = 22;
 	optional bool admin_spoofing_user = 23;
@@ -39,6 +45,11 @@ message CMsgProtoBufHeader {
 	optional bool is_from_external_source = 26;
 	repeated uint32 forward_to_sysid = 27;
 	optional uint32 cm_sysid = 28;
+	optional string wg_token = 30;
+	oneof ip_addr {
+		uint32 ip = 15;
+		bytes ip_v6 = 29;
+	}
 }
 
 message CMsgMulti {
@@ -113,5 +124,24 @@ message CCuratorPreferences {
 message CLocalizationToken {
 	optional uint32 language = 1;
 	optional string localized_string = 2;
+}
+
+message CClanEventUserNewsTuple {
+	optional uint32 clanid = 1;
+	optional fixed64 event_gid = 2;
+	optional fixed64 announcement_gid = 3;
+	optional uint32 rtime_start = 4;
+	optional uint32 rtime_end = 5;
+	optional uint32 priority_score = 6;
+	optional uint32 type = 7;
+	optional uint32 clamp_range_slot = 8;
+	optional uint32 appid = 9;
+}
+
+message CClanMatchEventByRange {
+	optional uint32 rtime_before = 1;
+	optional uint32 rtime_after = 2;
+	optional uint32 qualified = 3;
+	repeated .CClanEventUserNewsTuple events = 4;
 }
 

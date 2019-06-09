@@ -103,6 +103,7 @@ message CMsgClientUCMUpdatePublishedFile {
 	repeated .CMsgClientUCMUpdatePublishedFile.AdditionalPreview previews = 25;
 	repeated int32 previews_to_remove = 26;
 	optional bool clear_in_progress = 27;
+	optional bool remove_all_kvtags = 28;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {
@@ -457,22 +458,6 @@ message CMsgTrading_StartSession {
 	optional uint64 other_steamid = 1;
 }
 
-message CMsgClientEmailChange {
-	optional string password = 1;
-	optional string email = 2;
-	optional string code = 3;
-	optional bool final = 4;
-	optional bool newmethod = 5;
-	optional string twofactor_code = 6;
-	optional string sms_code = 7;
-	optional bool client_supports_sms = 8;
-}
-
-message CMsgClientEmailChangeResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional bool requires_sms_code = 2;
-}
-
 message CMsgClientGetCDNAuthToken {
 	optional uint32 depot_id = 1;
 	optional string host_name = 2;
@@ -527,6 +512,7 @@ message CMsgClientUpdateAppJobReport {
 	optional uint64 total_bytes_legacy = 19;
 	optional uint64 total_bytes_patched = 20;
 	optional uint64 total_bytes_saved = 21;
+	optional uint32 cell_id = 22;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -552,6 +538,7 @@ message CMsgDownloadRateStatistics {
 		optional uint32 seconds = 3;
 		optional uint64 bytes = 4;
 		optional string host_name = 5;
+		optional uint64 microseconds = 6;
 	}
 
 	optional uint32 cell_id = 1;

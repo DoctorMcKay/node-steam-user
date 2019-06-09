@@ -4,6 +4,12 @@ import "steammessages_remoteclient_discovery.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+message CMsgRemoteClientStatus {
+	optional uint64 client_id = 1;
+	optional uint64 instance_id = 2;
+	optional .CMsgRemoteClientBroadcastStatus status = 3;
+}
+
 message CMsgRemoteClientAppStatus {
 	message AppUpdateInfo {
 		optional fixed32 time_update_start = 1;
@@ -32,16 +38,6 @@ message CMsgRemoteClientAppStatus {
 	repeated .CMsgRemoteClientAppStatus.AppStatus status_updates = 1;
 }
 
-message CMsgRemoteClientAuth {
-	optional uint64 client_id = 1;
-	optional .CMsgRemoteClientBroadcastStatus status = 2;
-	optional uint64 instance_id = 3;
-}
-
-message CMsgRemoteClientAuthResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
 message CMsgRemoteClientStartStream {
 	message ReservedGamepad {
 		optional uint32 controller_type = 1;
@@ -58,6 +54,7 @@ message CMsgRemoteClientStartStream {
 	optional int32 maximum_resolution_y = 8;
 	repeated .CMsgRemoteClientStartStream.ReservedGamepad gamepads = 9;
 	optional int32 audio_channel_count = 10 [default = 2];
+	repeated .EStreamTransport supported_transport = 11;
 }
 
 message CMsgRemoteClientStartStreamResponse {
@@ -65,6 +62,8 @@ message CMsgRemoteClientStartStreamResponse {
 	optional uint32 stream_port = 2;
 	repeated int32 launch_options = 3;
 	optional bytes auth_token = 4;
+	optional .EStreamTransport transport = 5 [default = k_EStreamTransportUDP];
+	optional string relay_server = 6;
 }
 
 message CMsgRemoteClientPing {

@@ -1,0 +1,131 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message SiteServerUI_Login_Request {
+	optional string username = 1;
+	optional string password = 2;
+	optional string steamguardcode = 3;
+	optional bool remember_password = 4;
+}
+
+message SiteServerUI_Login_Response {
+	optional int32 logon_state = 1;
+	optional int32 logon_eresult = 2;
+}
+
+message SiteServerUI_LoginStatus_Request {
+}
+
+message SiteServerUI_LoginStatus_Response {
+	optional string username = 1;
+	optional bool cached_credentials = 2;
+	optional int32 logon_state = 3;
+	optional int32 logon_eresult = 4;
+}
+
+message SiteServerUI_CancelLogin_Request {
+}
+
+message SiteServerUI_CancelLogin_Response {
+	optional int32 logon_state = 1;
+	optional int32 logon_eresult = 2;
+}
+
+message SiteServerUI_Logout_Request {
+}
+
+message SiteServerUI_Logout_Response {
+	optional int32 logon_state = 1;
+	optional int32 logout_eresult = 2;
+}
+
+message SiteServerUI_Quit_Request {
+	optional bool restart = 1;
+}
+
+message SiteServerUI_Quit_Response {
+}
+
+message SiteServerUI_Status_Request {
+}
+
+message SiteServerUI_Status_Response {
+	optional int32 logon_state = 1;
+	optional int32 logon_eresult = 2;
+	optional bool connected = 3;
+	optional bool cache_enabled = 4;
+	optional int32 acct_status = 5;
+}
+
+message SiteServerUI_GetLanguage_Request {
+}
+
+message SiteServerUI_GetLanguage_Response {
+	optional string language = 1;
+}
+
+message SiteServerUI_SetLanguage_Request {
+	optional string language = 1;
+}
+
+message SiteServerUI_SetLanguage_Response {
+}
+
+message SiteServerUI_ClientStatus_Request {
+}
+
+message SiteServerUI_ClientStatus_Response {
+	message ClientInfo {
+		optional uint32 ip = 1;
+		optional string hostname = 2;
+		optional bool connected = 3;
+		optional uint64 instance_id = 4;
+	}
+
+	message Payment {
+		optional uint64 transid = 1;
+		optional uint64 steamid = 2;
+		optional string amount = 3;
+		optional int32 time_created = 4;
+		optional int32 purchase_status = 5;
+		optional string hostname = 6;
+		optional string persona_name = 7;
+		optional string profile_url = 8;
+		optional string avatar_url = 9;
+	}
+
+	repeated .SiteServerUI_ClientStatus_Response.ClientInfo clients = 4;
+	repeated .SiteServerUI_ClientStatus_Response.Payment payments = 5;
+}
+
+message SiteServerUI_ContentCacheStatus_Request {
+}
+
+message SiteServerUI_ContentCacheStatus_Response {
+	optional bool enabled = 1;
+	optional uint32 port = 2;
+	optional string cache_location = 3;
+	optional uint32 max_size_gb = 4;
+	optional bool p2p_enabled = 5;
+	optional string explicit_ip_address = 9;
+	optional bool external_process = 10;
+	optional uint32 current_size_gb = 6;
+	optional uint64 current_bw = 7;
+	optional uint64 total_bytes_served = 8;
+}
+
+message SiteServerUI_ContentCacheConfig_Request {
+	optional bool enabled = 1;
+	optional uint32 port = 2;
+	optional string cache_location = 3;
+	optional uint32 max_size_gb = 4;
+	optional bool p2p_enabled = 5;
+	optional bool external_process = 6;
+	optional string explicit_ip_address = 7;
+}
+
+message SiteServerUI_ContentCacheConfig_Response {
+}
+

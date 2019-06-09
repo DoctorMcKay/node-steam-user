@@ -84,6 +84,10 @@ enum EStreamControlMessage {
 	k_EStreamControlTouchActionSetActive = 114;
 	k_EStreamControlGetTouchIconData = 115;
 	k_EStreamControlSetTouchIconData = 116;
+	k_EStreamControlInputTouchFingerDown = 117;
+	k_EStreamControlInputTouchFingerMotion = 118;
+	k_EStreamControlInputTouchFingerUp = 119;
+	k_EStreamControlSetCaptureSize = 120;
 }
 
 enum EStreamVersion {
@@ -120,6 +124,11 @@ enum EStreamQualityPreference {
 enum EStreamBitrate {
 	k_EStreamBitrateAutodetect = -1;
 	k_EStreamBitrateUnlimited = 0;
+}
+
+enum EStreamHostPlayAudioPreference {
+	k_EStreamHostPlayAudioDefault = 0;
+	k_EStreamHostPlayAudioAlways = 1;
 }
 
 enum EStreamingDataType {
@@ -321,6 +330,7 @@ message CStartNetworkTestMsg {
 	optional uint32 framerate = 2;
 	optional uint32 bitrate_kbps = 3;
 	optional uint32 burst_bitrate_kbps = 4;
+	optional bool bandwidth_test = 5;
 }
 
 message CStreamVideoMode {
@@ -369,6 +379,7 @@ message CStreamingServerConfig {
 	optional bool enable_hardware_encoding_intel = 6;
 	optional int32 software_encoding_threads = 7;
 	optional bool enable_traffic_priority = 8;
+	optional .EStreamHostPlayAudioPreference host_play_audio = 9 [default = k_EStreamHostPlayAudioDefault];
 }
 
 message CNegotiatedConfig {
@@ -377,6 +388,7 @@ message CNegotiatedConfig {
 	optional .EStreamVideoCodec selected_video_codec = 3 [default = k_EStreamVideoCodecNone];
 	repeated .CStreamVideoMode available_video_modes = 4;
 	optional bool enable_remote_hid = 5;
+	optional bool enable_touch_input = 6;
 }
 
 message CNegotiationInitMsg {
@@ -384,6 +396,7 @@ message CNegotiationInitMsg {
 	repeated .EStreamAudioCodec supported_audio_codecs = 2;
 	repeated .EStreamVideoCodec supported_video_codecs = 3;
 	optional bool supports_remote_hid = 4;
+	optional bool supports_touch_input = 5;
 }
 
 message CNegotiationSetConfigMsg {
@@ -420,6 +433,27 @@ message CStopVideoDataMsg {
 message CInputLatencyTestMsg {
 	required uint32 input_mark = 1;
 	optional uint32 color = 2;
+}
+
+message CInputTouchFingerDownMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
+}
+
+message CInputTouchFingerMotionMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
+}
+
+message CInputTouchFingerUpMsg {
+	optional uint32 input_mark = 1;
+	optional uint64 fingerid = 2;
+	optional float x_normalized = 3;
+	optional float y_normalized = 4;
 }
 
 message CInputMouseMotionMsg {
@@ -462,6 +496,11 @@ message CInputTextMsg {
 
 message CSetTitleMsg {
 	optional string text = 1;
+}
+
+message CSetCaptureSizeMsg {
+	optional int32 width = 1;
+	optional int32 height = 2;
 }
 
 message CSetIconMsg {
@@ -670,5 +709,24 @@ message CLogMsg {
 message CLogUploadMsg {
 	optional .ELogFileType type = 1 [default = k_ELogFileSystemBoot];
 	optional bytes data = 3;
+}
+
+message CTransportSignalMsg {
+	message WebRTCMessage {
+		message Candidate {
+			optional string sdp_mid = 1;
+			optional int32 sdp_mline_index = 2;
+			optional string candidate = 3;
+		}
+
+		oneof msg {
+			bool greeting = 1;
+			string offer = 2;
+			string answer = 3;
+			.CTransportSignalMsg.WebRTCMessage.Candidate candidate = 4;
+		}
+	}
+
+	optional .CTransportSignalMsg.WebRTCMessage webrtc = 1;
 }
 

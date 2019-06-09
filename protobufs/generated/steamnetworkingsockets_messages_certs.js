@@ -332,11 +332,12 @@
          * @interface ICMsgSteamDatagramCertificate
          * @property {CMsgSteamDatagramCertificate.EKeyType|null} [key_type] CMsgSteamDatagramCertificate key_type
          * @property {Uint8Array|null} [key_data] CMsgSteamDatagramCertificate key_data
-         * @property {number|Long|null} [steam_id] CMsgSteamDatagramCertificate steam_id
+         * @property {number|Long|null} [legacy_steam_id] CMsgSteamDatagramCertificate legacy_steam_id
+         * @property {ICMsgSteamNetworkingIdentity|null} [identity] CMsgSteamDatagramCertificate identity
          * @property {Array.<number>|null} [gameserver_datacenter_ids] CMsgSteamDatagramCertificate gameserver_datacenter_ids
          * @property {number|null} [time_created] CMsgSteamDatagramCertificate time_created
          * @property {number|null} [time_expiry] CMsgSteamDatagramCertificate time_expiry
-         * @property {number|null} [app_id] CMsgSteamDatagramCertificate app_id
+         * @property {Array.<number>|null} [app_ids] CMsgSteamDatagramCertificate app_ids
          */
     
         /**
@@ -349,6 +350,7 @@
          */
         function CMsgSteamDatagramCertificate(properties) {
             this.gameserver_datacenter_ids = [];
+            this.app_ids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -372,12 +374,20 @@
         CMsgSteamDatagramCertificate.prototype.key_data = $util.newBuffer([]);
     
         /**
-         * CMsgSteamDatagramCertificate steam_id.
-         * @member {number|Long} steam_id
+         * CMsgSteamDatagramCertificate legacy_steam_id.
+         * @member {number|Long} legacy_steam_id
          * @memberof CMsgSteamDatagramCertificate
          * @instance
          */
-        CMsgSteamDatagramCertificate.prototype.steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        CMsgSteamDatagramCertificate.prototype.legacy_steam_id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CMsgSteamDatagramCertificate identity.
+         * @member {ICMsgSteamNetworkingIdentity|null|undefined} identity
+         * @memberof CMsgSteamDatagramCertificate
+         * @instance
+         */
+        CMsgSteamDatagramCertificate.prototype.identity = null;
     
         /**
          * CMsgSteamDatagramCertificate gameserver_datacenter_ids.
@@ -404,12 +414,12 @@
         CMsgSteamDatagramCertificate.prototype.time_expiry = 0;
     
         /**
-         * CMsgSteamDatagramCertificate app_id.
-         * @member {number} app_id
+         * CMsgSteamDatagramCertificate app_ids.
+         * @member {Array.<number>} app_ids
          * @memberof CMsgSteamDatagramCertificate
          * @instance
          */
-        CMsgSteamDatagramCertificate.prototype.app_id = 0;
+        CMsgSteamDatagramCertificate.prototype.app_ids = $util.emptyArray;
     
         /**
          * Creates a new CMsgSteamDatagramCertificate instance using the specified properties.
@@ -439,8 +449,8 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.key_type);
             if (message.key_data != null && message.hasOwnProperty("key_data"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.key_data);
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
-                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steam_id);
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.legacy_steam_id);
             if (message.gameserver_datacenter_ids != null && message.gameserver_datacenter_ids.length)
                 for (var i = 0; i < message.gameserver_datacenter_ids.length; ++i)
                     writer.uint32(/* id 5, wireType 5 =*/45).fixed32(message.gameserver_datacenter_ids[i]);
@@ -448,8 +458,11 @@
                 writer.uint32(/* id 8, wireType 5 =*/69).fixed32(message.time_created);
             if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 writer.uint32(/* id 9, wireType 5 =*/77).fixed32(message.time_expiry);
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_id);
+            if (message.app_ids != null && message.app_ids.length)
+                for (var i = 0; i < message.app_ids.length; ++i)
+                    writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.app_ids[i]);
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                $root.CMsgSteamNetworkingIdentity.encode(message.identity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
     
@@ -491,7 +504,10 @@
                     message.key_data = reader.bytes();
                     break;
                 case 4:
-                    message.steam_id = reader.fixed64();
+                    message.legacy_steam_id = reader.fixed64();
+                    break;
+                case 11:
+                    message.identity = $root.CMsgSteamNetworkingIdentity.decode(reader, reader.uint32());
                     break;
                 case 5:
                     if (!(message.gameserver_datacenter_ids && message.gameserver_datacenter_ids.length))
@@ -510,7 +526,14 @@
                     message.time_expiry = reader.fixed32();
                     break;
                 case 10:
-                    message.app_id = reader.uint32();
+                    if (!(message.app_ids && message.app_ids.length))
+                        message.app_ids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.app_ids.push(reader.uint32());
+                    } else
+                        message.app_ids.push(reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -558,9 +581,14 @@
             if (message.key_data != null && message.hasOwnProperty("key_data"))
                 if (!(message.key_data && typeof message.key_data.length === "number" || $util.isString(message.key_data)))
                     return "key_data: buffer expected";
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
-                if (!$util.isInteger(message.steam_id) && !(message.steam_id && $util.isInteger(message.steam_id.low) && $util.isInteger(message.steam_id.high)))
-                    return "steam_id: integer|Long expected";
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                if (!$util.isInteger(message.legacy_steam_id) && !(message.legacy_steam_id && $util.isInteger(message.legacy_steam_id.low) && $util.isInteger(message.legacy_steam_id.high)))
+                    return "legacy_steam_id: integer|Long expected";
+            if (message.identity != null && message.hasOwnProperty("identity")) {
+                var error = $root.CMsgSteamNetworkingIdentity.verify(message.identity);
+                if (error)
+                    return "identity." + error;
+            }
             if (message.gameserver_datacenter_ids != null && message.hasOwnProperty("gameserver_datacenter_ids")) {
                 if (!Array.isArray(message.gameserver_datacenter_ids))
                     return "gameserver_datacenter_ids: array expected";
@@ -574,9 +602,13 @@
             if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 if (!$util.isInteger(message.time_expiry))
                     return "time_expiry: integer expected";
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                if (!$util.isInteger(message.app_id))
-                    return "app_id: integer expected";
+            if (message.app_ids != null && message.hasOwnProperty("app_ids")) {
+                if (!Array.isArray(message.app_ids))
+                    return "app_ids: array expected";
+                for (var i = 0; i < message.app_ids.length; ++i)
+                    if (!$util.isInteger(message.app_ids[i]))
+                        return "app_ids: integer[] expected";
+            }
             return null;
         };
     
@@ -607,15 +639,20 @@
                     $util.base64.decode(object.key_data, message.key_data = $util.newBuffer($util.base64.length(object.key_data)), 0);
                 else if (object.key_data.length)
                     message.key_data = object.key_data;
-            if (object.steam_id != null)
+            if (object.legacy_steam_id != null)
                 if ($util.Long)
-                    (message.steam_id = $util.Long.fromValue(object.steam_id)).unsigned = false;
-                else if (typeof object.steam_id === "string")
-                    message.steam_id = parseInt(object.steam_id, 10);
-                else if (typeof object.steam_id === "number")
-                    message.steam_id = object.steam_id;
-                else if (typeof object.steam_id === "object")
-                    message.steam_id = new $util.LongBits(object.steam_id.low >>> 0, object.steam_id.high >>> 0).toNumber();
+                    (message.legacy_steam_id = $util.Long.fromValue(object.legacy_steam_id)).unsigned = false;
+                else if (typeof object.legacy_steam_id === "string")
+                    message.legacy_steam_id = parseInt(object.legacy_steam_id, 10);
+                else if (typeof object.legacy_steam_id === "number")
+                    message.legacy_steam_id = object.legacy_steam_id;
+                else if (typeof object.legacy_steam_id === "object")
+                    message.legacy_steam_id = new $util.LongBits(object.legacy_steam_id.low >>> 0, object.legacy_steam_id.high >>> 0).toNumber();
+            if (object.identity != null) {
+                if (typeof object.identity !== "object")
+                    throw TypeError(".CMsgSteamDatagramCertificate.identity: object expected");
+                message.identity = $root.CMsgSteamNetworkingIdentity.fromObject(object.identity);
+            }
             if (object.gameserver_datacenter_ids) {
                 if (!Array.isArray(object.gameserver_datacenter_ids))
                     throw TypeError(".CMsgSteamDatagramCertificate.gameserver_datacenter_ids: array expected");
@@ -627,8 +664,13 @@
                 message.time_created = object.time_created >>> 0;
             if (object.time_expiry != null)
                 message.time_expiry = object.time_expiry >>> 0;
-            if (object.app_id != null)
-                message.app_id = object.app_id >>> 0;
+            if (object.app_ids) {
+                if (!Array.isArray(object.app_ids))
+                    throw TypeError(".CMsgSteamDatagramCertificate.app_ids: array expected");
+                message.app_ids = [];
+                for (var i = 0; i < object.app_ids.length; ++i)
+                    message.app_ids[i] = object.app_ids[i] >>> 0;
+            }
             return message;
         };
     
@@ -645,8 +687,10 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.gameserver_datacenter_ids = [];
+                object.app_ids = [];
+            }
             if (options.defaults) {
                 object.key_type = options.enums === String ? "INVALID" : 0;
                 if (options.bytes === String)
@@ -658,22 +702,22 @@
                 }
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.legacy_steam_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.steam_id = options.longs === String ? "0" : 0;
+                    object.legacy_steam_id = options.longs === String ? "0" : 0;
                 object.time_created = 0;
                 object.time_expiry = 0;
-                object.app_id = 0;
+                object.identity = null;
             }
             if (message.key_type != null && message.hasOwnProperty("key_type"))
                 object.key_type = options.enums === String ? $root.CMsgSteamDatagramCertificate.EKeyType[message.key_type] : message.key_type;
             if (message.key_data != null && message.hasOwnProperty("key_data"))
                 object.key_data = options.bytes === String ? $util.base64.encode(message.key_data, 0, message.key_data.length) : options.bytes === Array ? Array.prototype.slice.call(message.key_data) : message.key_data;
-            if (message.steam_id != null && message.hasOwnProperty("steam_id"))
-                if (typeof message.steam_id === "number")
-                    object.steam_id = options.longs === String ? String(message.steam_id) : message.steam_id;
+            if (message.legacy_steam_id != null && message.hasOwnProperty("legacy_steam_id"))
+                if (typeof message.legacy_steam_id === "number")
+                    object.legacy_steam_id = options.longs === String ? String(message.legacy_steam_id) : message.legacy_steam_id;
                 else
-                    object.steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.steam_id) : options.longs === Number ? new $util.LongBits(message.steam_id.low >>> 0, message.steam_id.high >>> 0).toNumber() : message.steam_id;
+                    object.legacy_steam_id = options.longs === String ? $util.Long.prototype.toString.call(message.legacy_steam_id) : options.longs === Number ? new $util.LongBits(message.legacy_steam_id.low >>> 0, message.legacy_steam_id.high >>> 0).toNumber() : message.legacy_steam_id;
             if (message.gameserver_datacenter_ids && message.gameserver_datacenter_ids.length) {
                 object.gameserver_datacenter_ids = [];
                 for (var j = 0; j < message.gameserver_datacenter_ids.length; ++j)
@@ -683,8 +727,13 @@
                 object.time_created = message.time_created;
             if (message.time_expiry != null && message.hasOwnProperty("time_expiry"))
                 object.time_expiry = message.time_expiry;
-            if (message.app_id != null && message.hasOwnProperty("app_id"))
-                object.app_id = message.app_id;
+            if (message.app_ids && message.app_ids.length) {
+                object.app_ids = [];
+                for (var j = 0; j < message.app_ids.length; ++j)
+                    object.app_ids[j] = message.app_ids[j];
+            }
+            if (message.identity != null && message.hasOwnProperty("identity"))
+                object.identity = $root.CMsgSteamNetworkingIdentity.toObject(message.identity, options);
             return object;
         };
     
