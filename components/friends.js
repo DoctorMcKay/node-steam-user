@@ -117,6 +117,156 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 };
 
 /**
+ * Create a new quick-invite link that can be used by any Steam user to directly add you as a friend.
+ * @param {{invite_limit?: int}} [options]
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.createQuickInviteLink = function(options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
+		this._sendUnified("UserAccount.CreateFriendInviteToken#1", {
+			"invite_limit": options.invite_limit || 1,
+			// there's invite_duration, but if it's anything other than null then the token can't be redeemed (eresult 8)
+			// there's also invite_note, but this doesn't appear to be used anywhere so we don't support it
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			processInviteToken(this.steamID, body);
+			resolve({"token": body});
+		})
+	});
+};
+
+/**
+ * Get a list of friend quick-invite links for your account.
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.listQuickInviteLinks = function(callback) {
+	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
+		this._sendUnified("UserAccount.GetFriendInviteTokens#1", {}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			body.tokens.forEach((token) => processInviteToken(this.steamID, token));
+			resolve(body);
+		});
+	});
+};
+
+function processInviteToken(userSteamId, token) {
+	let friendCode = Helpers.createFriendCode(userSteamId);
+	token.invite_link = `https://s.team/p/${friendCode}/${token.invite_token}`;
+	token.time_created = token.time_created ? new Date(token.time_created * 1000) : null;
+	token.invite_limit = token.invite_limit ? parseInt(token.invite_limit, 10) : null;
+	token.invite_duration = token.invite_duration ? parseInt(token.invite_duration, 10) : null;
+}
+
+/**
+ * Revoke an active quick-invite link.
+ * @param {string} linkOrToken - Either the full link, or just the token from the link
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.revokeQuickInviteLink = function(linkOrToken, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		if (linkOrToken.includes('/')) {
+			// It's a link
+			let parts = linkOrToken.split('/');
+			parts = parts.filter(part => !!part); // remove any trailing slash
+			linkOrToken = parts[parts.length - 1];
+		}
+
+		this._sendUnified("UserAccount.RevokeFriendInviteToken#1", {
+			"invite_token": linkOrToken
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			// No data
+			resolve();
+		});
+	});
+};
+
+/**
+ * Check whether a given quick-invite link is valid.
+ * @param {string} link
+ * @param {function} [callback]
+ * @returns {Promise<{valid: boolean, steamid: SteamID, invite_duration?: int}>}
+ */
+SteamUser.prototype.checkQuickInviteLinkValidity = function(link, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
+		let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+		if (!match) {
+			return reject(new Error('Malformed quick-invite link'));
+		}
+
+		let steamID = Helpers.parseFriendCode(match[1]);
+		let token = match[2];
+
+		this._sendUnified("UserAccount.ViewFriendInviteToken#1", {
+			"steamid": steamID.toString(),
+			"invite_token": token
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			body.steamid = Helpers.steamID(body.steamid);
+			body.invite_duration = body.invite_duration ? parseInt(body.invite_duration, 10) : null;
+			resolve(body);
+		})
+	});
+};
+
+/**
+ * Redeem a quick-invite link and add the sender to your friends list.
+ * @param {string} link
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.redeemQuickInviteLink = function(link, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		let match = link.match(/^https?:\/\/s\.team\/p\/([^\/]+)\/([^\/]+)/);
+		if (!match) {
+			return reject(new Error('Malformed quick-invite link'));
+		}
+
+		let steamID = Helpers.parseFriendCode(match[1]);
+		let token = match[2];
+
+		this._sendUnified("UserAccount.RedeemFriendInviteToken#1", {
+			"steamid": steamID.toString(),
+			"invite_token": token
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			// No response data
+			resolve();
+		});
+	});
+};
+
+/**
  * Requests information about one or more user profiles.
  * @param {(SteamID[]|string[])} steamids - An array of SteamID objects or strings which can parse into them.
  * @param {function} [callback] - Optional. Called with `err`, and an object whose keys are 64-bit SteamIDs as strings, and whose values are persona objects.

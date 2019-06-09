@@ -274,6 +274,16 @@ protobufs['FriendMessagesClient.IncomingMessage#1'] = Schema.CFriendMessages_Inc
 protobufs['FriendMessagesClient.NotifyAckMessageEcho#1'] = Schema.CFriendMessages_AckMessage_Notification;
 protobufs['Community.GetAppRichPresenceLocalization#1_Request'] = Schema.CCommunity_GetAppRichPresenceLocalization_Request;
 protobufs['Community.GetAppRichPresenceLocalization#1_Response'] = Schema.CCommunity_GetAppRichPresenceLocalization_Response;
+protobufs['UserAccount.CreateFriendInviteToken#1_Request'] = Schema.CUserAccount_CreateFriendInviteToken_Request;
+protobufs['UserAccount.CreateFriendInviteToken#1_Response'] = Schema.CUserAccount_CreateFriendInviteToken_Response;
+protobufs['UserAccount.GetFriendInviteTokens#1_Request'] = Schema.CUserAccount_GetFriendInviteTokens_Request;
+protobufs['UserAccount.GetFriendInviteTokens#1_Response'] = Schema.CUserAccount_GetFriendInviteTokens_Response;
+protobufs['UserAccount.ViewFriendInviteToken#1_Request'] = Schema.CUserAccount_ViewFriendInviteToken_Request;
+protobufs['UserAccount.ViewFriendInviteToken#1_Response'] = Schema.CUserAccount_ViewFriendInviteToken_Response;
+protobufs['UserAccount.RedeemFriendInviteToken#1_Request'] = Schema.CUserAccount_RedeemFriendInviteToken_Request;
+protobufs['UserAccount.RedeemFriendInviteToken#1_Response'] = Schema.CUserAccount_RedeemFriendInviteToken_Response;
+protobufs['UserAccount.RevokeFriendInviteToken#1_Request'] = Schema.CUserAccount_RevokeFriendInviteToken_Request;
+protobufs['UserAccount.RevokeFriendInviteToken#1_Response'] = Schema.CUserAccount_RevokeFriendInviteToken_Response;
 
 /**
  * Encode a protobuf.
