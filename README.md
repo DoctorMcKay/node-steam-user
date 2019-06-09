@@ -628,6 +628,22 @@ Gets when you last changed various account credentials.
 
 Gets your account's auth secret, which is the pre-shared key used for in-home streaming.
 
+### getPrivacySettings(callback)
+- `callback` - A function to be called when the requested data is available
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `privacy_state` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your profile
+		- `privacy_state_inventory` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your Steam inventory
+		- `privacy_state_gifts` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your Steam gift inventory
+		- `privacy_state_ownedgames` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your owned games list
+		- `privacy_state_playtime` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your game playtime
+		- `privacy_state_friendslist` - The [privacy state](https://github.com/DoctorMcKay/node-steam-user/blob/master/resources/EPrivacyState.js) of your friends list
+
+**v4.11.0 or later is required to use this method**
+
+Retrieves your account's privacy settings. You can't change your privacy state using steam-user; you'll need to use
+[steamcommunity](https://github.com/DoctorMcKay/node-steamcommunity/wiki/SteamCommunity#profilesettingssettings-callback).
+
 ### kickPlayingSession([callback])
 - `callback` - Optional. A function to be called once Steam receives and responds to this request.
     - `err` - An `Error` object on failure, or `null` on success

@@ -90,6 +90,24 @@ SteamUser.prototype.getAuthSecret = function(callback) {
 	});
 };
 
+/**
+ * Get your account's profile privacy settings.
+ * @param {function} [callback]
+ * @returns {Promise<{privacy_state: int, privacy_state_inventory: int, privacy_state_gifts: int, privacy_state_ownedgames: int, privacy_state_playtime: int, privacy_state_friendslist: int}>}
+ */
+SteamUser.prototype.getPrivacySettings = function(callback) {
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+		this._sendUnified("Player.GetPrivacySettings#1", {}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve(body.privacy_settings);
+		});
+	});
+};
+
 // Honestly not sure what this is for, but it works.
 /*SteamUser.prototype.getStreamingEncryptionKey = function(callback) {
 	this._send(SteamUser.EMsg.ClientUnlockStreaming, {}, function(body) {

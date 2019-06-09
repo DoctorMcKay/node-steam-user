@@ -15,6 +15,7 @@ SteamUser.EClientUIMode = require('./resources/EClientUIMode.js');
 SteamUser.EConnectionProtocol = require('./resources/EConnectionProtocol.js');
 SteamUser.EMachineIDType = require('./resources/EMachineIDType.js');
 SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
+SteamUser.EPrivacyState = require('./resources/EPrivacyState.js');
 
 require('./resources/enums.js');
 
