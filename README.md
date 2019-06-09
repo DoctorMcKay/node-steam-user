@@ -932,6 +932,76 @@ Blocks all communication with a specified user.
 
 Unblocks all communication with a specified user.
 
+### createQuickInviteLink([options,] callback)
+- `options` - Optional. An object with zero or more of these properties:
+	- `invite_limit` - How many times this link can be used before it's no longer valid. Defaults to 1.
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `token` - An object with these properties:
+			- `invite_link` - The link that can be used to add your account as a friend directly
+			- `invite_token` - Just the token part of the link
+			- `invite_limit` - How many times the link can be used before it's no longer valid
+			- `invite_duration` - How many seconds are left until the link expires. `null` if it never expires.
+			- `time_created` - A `Date` object representing when the link was created
+			- `valid` - `true` if the link is currently valid, or `false` if not
+
+**v4.11.0 or later is required to use this method**
+
+Creates a quick-invite link that can be used by anyone who has it to add you to their friends list without needing to
+send an invite that you must to approve.
+
+### listQuickInviteLinks(callback)
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `tokens` - An array of objects, each of which is identical to the output of `createQuickInviteLink`
+
+**v4.11.0 or later is required to use this method**
+
+Retrieves the list of quick-invite links on your account. Links that you've revoked won't appear here.
+
+### revokeQuickInviteLink(linkOrToken[, callback])
+- `linkOrToken` - Either the full link, or just the token part of the link
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+
+**v4.11.0 or later is required to use this method**
+
+Revokes a quick-invite link. Can also be used to delete an already-used code from `listQuickInviteLinks`.
+
+### getQuickInviteLinkSteamID(link)
+- `link` - The full quick-invite link
+
+**v4.11.0 or later is required to use this method**
+
+Decodes a quick-invite link and returns a `SteamID` object representing the user account to whom this link belongs.
+Returns `null` if the link is not well-formed.
+
+This happens offline and thus returns immediately, without need for a callback or Promise.
+
+### checkQuickInviteLinkValidity(link, callback)
+- `link` - The full quick-invite link
+- `callback` - Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+	- `response` - The response object
+		- `valid` - `true` if the link exists and is valid, `false` if the link exists but is not valid (e.g. it's already been used); it's an error if the link doesn't exist at all
+		- `steamid` - A `SteamID` object representing who the link belongs to
+		- `invite_duration` - How many seconds are left until the link expires. `null` if it never expires.
+
+**v4.11.0 or later is required to use this method**
+
+Checks whether a quick-invite link is valid.
+
+### redeemQuickInviteLink(link[, callback])
+- `link` - The full quick-invite link
+- `callback` - Optional. Called when the request completes
+	- `err` - An `Error` object on failure, or `null` on success
+
+**v4.11.0 or later is required to use this method**
+
+Redeems a quick-invite link and adds the user to your friends list.
+
 ### getPersonas(steamids[, callback])
 - `steamids` - An array of `SteamID` objects or strings which can parse into `SteamID` objects
 - `callback` - Optional. Called when the requested data is available.
