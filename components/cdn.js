@@ -374,7 +374,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 					}
 				}
 
-				this.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
+				self.downloadChunk(appID, depotID, chunk.sha, servers[serverIdx], (err, data) => {
 					serversInUse[serverIdx] = false;
 
 					if (killed) {
