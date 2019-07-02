@@ -54,6 +54,7 @@ function SteamUser(options) {
 	this._authSeqThem = 0;
 	this._hSteamPipe = Math.floor(Math.random() * 1000000) + 1;
 	this._contentServers = [];
+	this._contentServersTimestamp = 0;
 	this._contentServerTokens = {};
 	this._lastNotificationCounts = {};
 	this._sessionID = 0;
