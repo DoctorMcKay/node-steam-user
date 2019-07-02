@@ -20,47 +20,36 @@ const VZIP_FOOTER = 0x767A;
  */
 SteamUser.prototype.getContentServers = function(callback) {
 	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
-		if (this._contentServers.length > 0 && Date.now() - this._contentServers.timestamp < (1000 * 60 * 60)) {
+		if (this._contentServers.length > 0 && Date.now() - this._contentServersTimestamp < (1000 * 60 * 60)) {
 			return accept({"servers": JSON.parse(JSON.stringify(this._contentServers))});
 		}
 
-		let list = this.steamServers[SteamUser.EServerType.CS];
-
-		if (!list || list.length == 0) {
-			return reject(new Error("Server list not yet available"));
-		}
-
-		// pick a random one
-		let server = list[Math.floor(Math.random() * list.length)];
-		download("http://" + StdLib.IPv4.intToString(server.server_ip) + ":" + server.server_port + "/serverlist/" + this.cellID + "/20/", "cs.steamcontent.com", (err, res) => {
+		this._apiRequest("GET", "IContentServerDirectoryService", "GetServersForSteamPipe", 1, {"cell_id": this.cellID || 0}, (err, res) => {
 			if (err) {
 				return reject(err);
 			}
 
-			if (res.type != 'complete') {
-				return;
-			}
-
-			let parsed;
-			try {
-				parsed = VDF.parse(res.data.toString('utf8'));
-			} catch (ex) {
+			if (!res || !res.response || !res.response.servers) {
 				return reject(new Error("Malformed response"));
 			}
 
-			if (!parsed || !parsed.serverlist || !parsed.serverlist[0]) {
-				return reject(new Error("Malformed response"));
-			}
+			const servers = [];
 
-			parsed.serverlist.length = 0;
-			for (let i in parsed.serverlist) {
-				if (parsed.serverlist.hasOwnProperty(i) && i != 'length') {
-					parsed.serverlist.length = parseInt(i, 10) + 1;
+			for (const serverKey in res.response.servers) {
+				const server = res.response.servers[serverKey];
+
+				if (server.type === "CDN" || server.type === "SteamCache") {
+					servers.push(server);
 				}
 			}
 
-			this._contentServers = Array.prototype.slice.call(parsed.serverlist);
-			return accept({"servers": JSON.parse(JSON.stringify(this._contentServers))});
+			if (servers.length === 0) {
+				return reject(new Error("No content servers available"));
+			}
+
+			this._contentServers = servers;
+			this._contentServersTimestamp = Date.now();
+			return accept({"servers": servers});
 		});
 	});
 };
@@ -188,8 +177,8 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 			}
 
 			let server = servers[Math.floor(Math.random() * servers.length)];
-			let urlBase = "http://" + server.Host;
-			let vhost = server.vhost || server.Host;
+			let urlBase = "http://" + server.host;
+			let vhost = server.vhost || server.host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
@@ -250,8 +239,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		}
 
 		function performDownload() {
-			let urlBase = "http://" + contentServer.Host;
-			let vhost = contentServer.vhost || contentServer.Host;
+			let urlBase = "http://" + contentServer.host;
+			let vhost = contentServer.vhost || contentServer.host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
@@ -506,29 +495,6 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 		});
 	});
 };
-
-// Handlers
-
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientServerList, function(body) {
-	// It appears that each message of this type is for one server type.
-	let servers = {};
-
-	body.servers.forEach((server) => {
-		servers[server.server_type] = servers[server.server_type] || [];
-		servers[server.server_type].push(server);
-	});
-
-	for (let i in servers) {
-		if (servers.hasOwnProperty(i)) {
-			this.steamServers[i] = servers[i];
-		}
-	}
-
-	if (!this.contentServersReady && this.steamServers[SteamUser.EServerType.CS]) {
-		this.contentServersReady = true;
-		this.emit('contentServersReady');
-	}
-});
 
 // Private functions
 function download(url, hostHeader, destinationFilename, callback) {

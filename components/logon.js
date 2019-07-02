@@ -366,6 +366,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			this.publicIP = StdLib.IPv4.intToString(body.public_ip);
 			this.cellID = body.cell_id;
 			this.vanityURL = body.vanity_url;
+			this.contentServersReady = true;
 
 			this._connectTime = Date.now();
 			this._connectionCount = 0;
@@ -399,6 +400,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			}
 
 			this.emit('loggedOn', body, parental);
+			this.emit('contentServersReady');
 
 			this._getChangelistUpdate();
 
@@ -492,10 +494,14 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 	delete this.publicIP;
 	delete this.cellID;
+	this.contentServersReady = false;
 
 	this._gcTokens = [];
 	this._connectionCount = 0;
 	this._connectTime = 0;
+	this._contentServers = [];
+	this._contentServersTimestamp = 0;
+	this._contentServerTokens = {};
 
 	this._clearChangelistUpdateTimer();
 	clearInterval(this._heartbeatInterval);
