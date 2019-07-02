@@ -19,9 +19,9 @@ const VZIP_FOOTER = 0x767A;
  * @return Promise
  */
 SteamUser.prototype.getContentServers = function(callback) {
-	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(['servers'], callback, (resolve, reject) => {
 		if (this._contentServers.length > 0 && Date.now() - this._contentServersTimestamp < (1000 * 60 * 60)) {
-			return accept({"servers": JSON.parse(JSON.stringify(this._contentServers))});
+			return resolve({"servers": JSON.parse(JSON.stringify(this._contentServers))});
 		}
 
 		this._apiRequest("GET", "IContentServerDirectoryService", "GetServersForSteamPipe", 1, {"cell_id": this.cellID || 0}, (err, res) => {
@@ -33,23 +33,39 @@ SteamUser.prototype.getContentServers = function(callback) {
 				return reject(new Error("Malformed response"));
 			}
 
-			const servers = [];
+			let servers = [];
 
-			for (const serverKey in res.response.servers) {
-				const server = res.response.servers[serverKey];
-
-				if (server.type === "CDN" || server.type === "SteamCache") {
+			for (let serverKey in res.response.servers) {
+				let server = res.response.servers[serverKey];
+				if (server.type == "CDN" || server.type == "SteamCache") {
 					servers.push(server);
 				}
 			}
 
-			if (servers.length === 0) {
+			if (servers.length == 0) {
 				return reject(new Error("No content servers available"));
 			}
 
+			servers = servers.map((srv) => {
+				return {
+					"type": srv.type,
+					"sourceid": srv.source_id,
+					"cell": srv.cell_id,
+					"load": srv.load,
+					"preferred_server": srv.preferred_server,
+					"weightedload": srv.weighted_load,
+					"NumEntriesInClientList": srv.num_entries_in_client_list,
+					"Host": srv.host,
+					"vhost": srv.vhost,
+					"https_support": srv.https_support,
+					"usetokenauth": "1"
+				};
+			});
+
 			this._contentServers = servers;
 			this._contentServersTimestamp = Date.now();
-			return accept({"servers": servers});
+			// Return a copy of the array, not the original
+			return resolve({"servers": JSON.parse(JSON.stringify(servers))});
 		});
 	});
 };
@@ -177,8 +193,8 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 			}
 
 			let server = servers[Math.floor(Math.random() * servers.length)];
-			let urlBase = "http://" + server.host;
-			let vhost = server.vhost || server.host;
+			let urlBase = "http://" + server.Host;
+			let vhost = server.vhost || server.Host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
@@ -239,8 +255,8 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 		}
 
 		function performDownload() {
-			let urlBase = "http://" + contentServer.host;
-			let vhost = contentServer.vhost || contentServer.host;
+			let urlBase = "http://" + contentServer.Host;
+			let vhost = contentServer.vhost || contentServer.Host;
 
 			this.getCDNAuthToken(appID, depotID, vhost, (err, token, expires) => {
 				if (err) {
