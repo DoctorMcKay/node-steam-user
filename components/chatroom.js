@@ -700,6 +700,87 @@ SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, mes
 };
 
 /**
+ * Create a text/voice chat room in a group, provided you have permissions to do so.
+ * @param {int|string} groupId - The ID of the group in which you want to create the channel
+ * @param {string} name - The name of your new channel
+ * @param {{isVoiceRoom?: boolean}} [options] - Options for your new room
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.createChatRoom = function(groupId, name, options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		this.user._sendUnified("ChatRoom.CreateChatRoom#1", {
+			"chat_group_id": groupId,
+			name,
+			"allow_voice": !!options.isVoiceRoom
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			processChatRoomState(body.chat_room, false);
+			resolve({"chat_room": body.chat_room});
+		});
+	});
+};
+
+/**
+ * Rename a text/voice chat room in a group, provided you have permissions to do so.
+ * @param {int|string} groupId - The ID of the group in which you want to rename the room
+ * @param {int|string} chatId - The ID of the chat room you want to rename
+ * @param {string} newChatRoomName - The new name for the room
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.renameChatRoom = function(groupId, chatId, newChatRoomName, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		this.user._sendUnified("ChatRoom.RenameChatRoom#1", {
+			"chat_group_id": groupId,
+			"chat_id": chatId,
+			"name": newChatRoomName
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
+		});
+	});
+};
+
+/**
+ * Delete a text/voice chat room in a group (and all the messages it contains), provided you have permissions to do so.
+ * @param {int|string} groupId - The ID of the group in which you want to delete a room
+ * @param {int|string} chatId - The ID of the room you want to delete
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamChatRoomClient.prototype.deleteChatRoom = function(groupId, chatId, callback) {
+	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+		this.user._sendUnified("ChatRoom.DeleteChatRoom#1", {
+			"chat_group_id": groupId,
+			"chat_id": chatId
+		}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
+		});
+	});
+};
+
+/**
  * Kick a user from a chat room group.
  * @param {int|string} groupId
  * @param {SteamID|string} steamId
