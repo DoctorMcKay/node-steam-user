@@ -83,6 +83,12 @@ function SteamChatRoomClient(user) {
 
 		this.chat.emit('chatMessagesModified', body);
 	});
+
+	this.user._handlerManager.add('ChatRoomClient.NotifyChatRoomGroupRoomsChange#1', function(body) {
+		body = preProcessObject(body);
+		body.chat_rooms.map(room => processChatRoomState(room, true));
+		this.chat.emit('chatRoomGroupRoomsChange', body);
+	});
 }
 
 /**
@@ -921,6 +927,11 @@ function processUserChatRoomState(state, preProcessed) {
 	return state;
 }
 
+/**
+ * @param {object} state
+ * @param {boolean} [preProcessed=false]
+ * @returns {object}
+ */
 function processChatRoomState(state, preProcessed) {
 	if (!preProcessed) {
 		state = preProcessObject(state);
