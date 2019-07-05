@@ -110,7 +110,6 @@ protobufs[EMsg.ClientAMGetPersonaNameHistory] = Schema.CMsgClientAMGetPersonaNam
 protobufs[EMsg.ClientAMGetPersonaNameHistoryResponse] = Schema.CMsgClientAMGetPersonaNameHistoryResponse;
 protobufs[EMsg.ClientUnlockStreaming] = Schema.CMsgAMUnlockStreaming;
 protobufs[EMsg.ClientUnlockStreamingResponse] = Schema.CMsgAMUnlockStreamingResponse;
-protobufs[EMsg.ClientServerList] = Schema.CMsgClientServerList;
 protobufs[EMsg.ClientGetDepotDecryptionKey] = Schema.CMsgClientGetDepotDecryptionKey;
 protobufs[EMsg.ClientGetDepotDecryptionKeyResponse] = Schema.CMsgClientGetDepotDecryptionKeyResponse;
 protobufs[EMsg.ClientGetCDNAuthToken] = Schema.CMsgClientGetCDNAuthToken;
