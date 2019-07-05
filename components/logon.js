@@ -53,7 +53,7 @@ SteamUser.prototype.logOn = function(details) {
 				"auth_code": details.authCode,
 				"two_factor_code": details.twoFactorCode,
 				"should_remember_password": !!details.rememberPassword,
-				"obfustucated_private_ip": details.logonID || 0,
+				"obfuscated_private_ip": {"v4": details.logonID || 0},
 				"protocol_version": PROTOCOL_VERSION,
 				"supports_rate_limit_response": !!details.accountName,
 				"machine_name": details.accountName ? (details.machineName || "") : "",
@@ -363,7 +363,10 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			delete this._logOnDetails.two_factor_code;
 			this.logOnResult = body;
 
-			this.publicIP = StdLib.IPv4.intToString(body.public_ip);
+			this.publicIP = null;
+			if (body.public_ip && body.public_ip.v4) {
+				this.publicIP = StdLib.IPv4.intToString(body.public_ip.v4);
+			}
 			this.cellID = body.cell_id;
 			this.vanityURL = body.vanity_url;
 			this.contentServersReady = true;
