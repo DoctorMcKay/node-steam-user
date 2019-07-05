@@ -151,6 +151,8 @@ message CBroadcast_GetBroadcastStatus_Response {
 	optional bool is_uploading = 10;
 	optional uint32 duration = 11;
 	optional bool is_replay = 12;
+	optional bool is_capturing_vod = 13;
+	optional bool is_store_whitelisted = 14;
 }
 
 message CBroadcast_GetBroadcastThumbnail_Request {
@@ -275,6 +277,16 @@ message CBroadcast_GetBuildClipStatus_Request {
 message CBroadcast_GetBuildClipStatus_Response {
 }
 
+message CBroadcast_SetClipDetails_Request {
+	optional uint64 broadcast_clip_id = 1 [(description) = "Clip ID"];
+	optional uint32 start_time = 2 [(description) = "start time of the clip"];
+	optional uint32 end_time = 3 [(description) = "end time of the clip"];
+	optional string video_description = 4;
+}
+
+message CBroadcast_SetClipDetails_Response {
+}
+
 message CBroadcast_GetClipDetails_Request {
 	optional uint64 broadcast_clip_id = 1 [(description) = "List of clip IDs we want details for"];
 }
@@ -287,9 +299,9 @@ message CBroadcast_GetClipDetails_Response {
 	optional uint32 accountid_broadcaster = 5 [(description) = "Account ID of broadcaster"];
 	optional uint32 accountid_clipmaker = 6 [(description) = "Account ID of clip-maker"];
 	optional string video_description = 7 [(description) = "Short name or description of this clip"];
-	optional uint32 start_time = 8 [(description) = "Wall time at beginning of this clip"];
+	optional uint32 start_time = 8 [(description) = "Wall time clip was broadcasted live"];
 	optional uint32 length_milliseconds = 9 [(description) = "length of video in MS"];
-	optional string thumbnail_path = 10 [(description) = "relative path for thumbnail URL (no host)"];
+	optional string thumbnail_path = 10 [(description) = "Path for thumbnail URL"];
 }
 
 message CBroadcast_SetRTMPInfo_Request {
@@ -406,6 +418,7 @@ message CBroadcast_GetBroadcastUploadStats_Request {
 	optional uint32 row_limit = 1 [default = 100, (description) = "How many at maximum to return."];
 	optional uint32 start_time = 2 [default = 0, (description) = "Start time"];
 	optional uint64 upload_id = 3 [(description) = "Optional relay upload ID"];
+	optional fixed64 steamid = 4 [(description) = "Optional the steamid whose stats you want, otherwise the user logged in - admin only"];
 }
 
 message CBroadcast_GetBroadcastUploadStats_Response {
@@ -436,6 +449,7 @@ message CBroadcast_GetBroadcastUploadStats_Response {
 
 message CBroadcast_GetBroadcastViewerStats_Request {
 	optional uint64 upload_id = 1 [(description) = "Get stats for this stream"];
+	optional fixed64 steamid = 2 [(description) = "Optional: The steamid of the broadcast whose details you are requesting."];
 }
 
 message CBroadcast_GetBroadcastViewerStats_Response {
@@ -596,6 +610,9 @@ service Broadcast {
 	}
 	rpc GetBuildClipStatus (.CBroadcast_GetBuildClipStatus_Request) returns (.CBroadcast_GetBuildClipStatus_Response) {
 		option (method_description) = "Start building a broadcast clip";
+	}
+	rpc SetClipDetails (.CBroadcast_SetClipDetails_Request) returns (.CBroadcast_SetClipDetails_Response) {
+		option (method_description) = "Updates a broadcast clip";
 	}
 	rpc GetClipDetails (.CBroadcast_GetClipDetails_Request) returns (.CBroadcast_GetClipDetails_Response) {
 		option (method_description) = "Get details for Broadcast Clips";

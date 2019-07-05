@@ -148,6 +148,7 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional bool network_test = 12;
 	optional uint64 client_id = 13;
 	repeated .EStreamTransport supported_transport = 14;
+	optional bool restricted = 15;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {

@@ -1,7 +1,7 @@
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
-message CMsgSteamNetworkingIdentity {
+message CMsgSteamNetworkingIdentityLegacyBinary {
 	optional fixed64 steam_id = 16;
 	optional string xbox_pairwise_id = 17;
 	optional bytes generic_bytes = 2;
@@ -18,7 +18,8 @@ message CMsgSteamDatagramCertificate {
 	optional .CMsgSteamDatagramCertificate.EKeyType key_type = 1 [default = INVALID];
 	optional bytes key_data = 2;
 	optional fixed64 legacy_steam_id = 4;
-	optional .CMsgSteamNetworkingIdentity identity = 11;
+	optional .CMsgSteamNetworkingIdentityLegacyBinary legacy_identity_binary = 11;
+	optional string identity_string = 12;
 	repeated fixed32 gameserver_datacenter_ids = 5;
 	optional fixed32 time_created = 8;
 	optional fixed32 time_expiry = 9;
@@ -29,5 +30,9 @@ message CMsgSteamDatagramCertificateSigned {
 	optional bytes cert = 4;
 	optional fixed64 ca_key_id = 5;
 	optional bytes ca_signature = 6;
+}
+
+message CMsgSteamDatagramCertificateRequest {
+	optional .CMsgSteamDatagramCertificate cert = 1;
 }
 

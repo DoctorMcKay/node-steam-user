@@ -990,13 +990,13 @@ message CMsgClientFriendUserStatusPublished {
 	optional string status_text = 3;
 }
 
-message CMsgClientServiceMethod {
+message CMsgClientServiceMethodLegacy {
 	optional string method_name = 1;
 	optional bytes serialized_method = 2;
 	optional bool is_notification = 3;
 }
 
-message CMsgClientServiceMethodResponse {
+message CMsgClientServiceMethodLegacyResponse {
 	optional string method_name = 1;
 	optional bytes serialized_method_response = 2;
 }

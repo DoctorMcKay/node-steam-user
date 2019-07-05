@@ -7,9 +7,10 @@ enum EInputMode {
 
 enum EMouseMode {
 	k_EMouseModeUnknown = 0;
-	k_EMouseModeRelative = 1;
-	k_EMouseModeAbsolute = 2;
+	k_EMouseModeRelativeCursor = 1;
+	k_EMouseModeAbsoluteCursor = 2;
 	k_EMouseModeTouch = 3;
+	k_EMouseModeRelative = 4;
 }
 
 enum EControllerElementType {

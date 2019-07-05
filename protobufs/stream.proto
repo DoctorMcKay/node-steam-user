@@ -88,6 +88,7 @@ enum EStreamControlMessage {
 	k_EStreamControlInputTouchFingerMotion = 118;
 	k_EStreamControlInputTouchFingerUp = 119;
 	k_EStreamControlSetCaptureSize = 120;
+	k_EStreamControlSetFlashState = 121;
 }
 
 enum EStreamVersion {
@@ -507,6 +508,12 @@ message CSetIconMsg {
 	optional int32 width = 1;
 	optional int32 height = 2;
 	optional bytes image = 3;
+}
+
+message CSetFlashStateMsg {
+	optional uint32 flags = 1;
+	optional uint32 count = 2;
+	optional uint32 timeout_ms = 3;
 }
 
 message CShowCursorMsg {

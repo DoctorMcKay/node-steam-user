@@ -173,7 +173,8 @@ message CMsgSteamDatagramConnectionClosed {
 
 	optional fixed32 to_connection_id = 7;
 	optional fixed32 from_connection_id = 8;
-	optional .CMsgSteamNetworkingIdentity from_identity = 13;
+	optional string from_identity_string = 15;
+	optional .CMsgSteamNetworkingIdentityLegacyBinary legacy_from_identity_binary = 13;
 	optional fixed64 legacy_from_steam_id = 3;
 	optional uint32 legacy_gameserver_relay_session_id = 2;
 	optional fixed32 to_relay_session_id = 9;
@@ -192,7 +193,8 @@ message CMsgSteamDatagramNoConnection {
 	optional uint32 legacy_gameserver_relay_session_id = 2;
 	optional fixed32 to_relay_session_id = 9;
 	optional fixed32 from_relay_session_id = 10;
-	optional fixed64 from_steam_id = 3;
+	optional string from_identity_string = 7;
+	optional fixed64 legacy_from_steam_id = 3;
 	optional bool end_to_end = 4;
 	optional fixed32 dummy_pad = 1023;
 	optional fixed64 routing_secret = 11;
@@ -210,9 +212,11 @@ message CMsgSteamDatagramGameserverSessionRequest {
 
 message CMsgSteamDatagramGameserverSessionEstablished {
 	optional fixed32 connection_id = 1;
-	optional fixed64 gameserver_steam_id = 3;
+	optional string gameserver_identity_string = 2;
 	optional uint32 seconds_until_shutdown = 4;
 	optional uint32 seq_num_r2c = 6;
+	optional bytes dummy_legacy_identity_binary = 7;
+	optional fixed64 legacy_gameserver_steamid = 3;
 }
 
 message CMsgSteamDatagramConnectionStatsClientToRouter {
@@ -267,7 +271,8 @@ message CMsgSteamDatagramConnectionStatsRouterToServer {
 	optional uint32 flags = 12;
 	optional uint32 seq_num_r2s = 5;
 	optional uint32 seq_num_e2e = 6;
-	optional fixed64 client_steam_id = 7;
+	optional string client_identity_string = 15;
+	optional fixed64 legacy_client_steam_id = 7;
 	optional uint32 relay_session_id = 8;
 	optional fixed32 client_connection_id = 9;
 	optional fixed32 server_connection_id = 13;
@@ -288,7 +293,6 @@ message CMsgSteamDatagramConnectionStatsServerToRouter {
 	optional uint32 flags = 10;
 	optional uint32 seq_num_s2r = 3;
 	optional uint32 seq_num_e2e = 4;
-	optional fixed64 client_steam_id = 5;
 	optional uint32 relay_session_id = 6;
 	optional fixed32 client_connection_id = 7;
 	optional fixed32 server_connection_id = 11;

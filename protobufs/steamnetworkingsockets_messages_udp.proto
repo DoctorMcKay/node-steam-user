@@ -34,8 +34,9 @@ message CMsgSteamSockets_UDP_ConnectRequest {
 	optional .CMsgSteamDatagramSessionCryptInfoSigned crypt = 7;
 	optional .CMsgSteamDatagramCertificateSigned cert = 4;
 	optional uint32 legacy_protocol_version = 8;
-	optional .CMsgSteamNetworkingIdentity identity = 9;
+	optional string identity_string = 10;
 	optional fixed64 legacy_client_steam_id = 3;
+	optional .CMsgSteamNetworkingIdentityLegacyBinary legacy_identity_binary = 9;
 }
 
 message CMsgSteamSockets_UDP_ConnectOK {
@@ -45,8 +46,9 @@ message CMsgSteamSockets_UDP_ConnectOK {
 	optional uint32 delay_time_usec = 4;
 	optional .CMsgSteamDatagramSessionCryptInfoSigned crypt = 7;
 	optional .CMsgSteamDatagramCertificateSigned cert = 8;
-	optional .CMsgSteamNetworkingIdentity identity = 10;
+	optional string identity_string = 11;
 	optional fixed64 legacy_server_steam_id = 2;
+	optional .CMsgSteamNetworkingIdentityLegacyBinary legacy_identity_binary = 10;
 }
 
 message CMsgSteamSockets_UDP_ConnectionClosed {

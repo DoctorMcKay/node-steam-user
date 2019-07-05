@@ -521,6 +521,11 @@ message CMsgScalePageToValue {
 	optional float y = 4;
 }
 
+message CMsgForcePopupsToDirectHWND {
+	optional uint32 browser_handle = 1;
+	optional bool force_direct_hwnd_popups = 2;
+}
+
 message CMsgScalePageToValueResponse {
 	optional uint32 browser_handle = 1;
 	optional float zoom = 2;

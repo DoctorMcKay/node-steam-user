@@ -159,6 +159,7 @@ message CMsgClientGamesPlayed {
 		optional uint32 total_non_steam_controller_count = 19 [default = 0];
 		optional uint64 controller_workshop_file_id = 20 [default = 0];
 		optional uint32 launch_source = 21 [default = 0];
+		optional uint32 vr_hmd_runtime = 22;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -301,16 +302,6 @@ message CMsgClientIsLimitedAccount {
 	optional bool bis_community_banned = 2;
 	optional bool bis_locked_account = 3;
 	optional bool bis_limited_account_allowed_to_invite_friends = 4;
-}
-
-message CMsgClientServerList {
-	message Server {
-		optional uint32 server_type = 1;
-		optional uint32 server_ip = 2;
-		optional uint32 server_port = 3;
-	}
-
-	repeated .CMsgClientServerList.Server servers = 1;
 }
 
 message CMsgClientRequestedClientStats {
@@ -552,6 +543,7 @@ message CMsgClientInviteToGame {
 	optional fixed64 steam_id_dest = 1;
 	optional fixed64 steam_id_src = 2;
 	optional string connect_string = 3;
+	optional string remote_play = 4;
 }
 
 message CMsgClientChatInvite {

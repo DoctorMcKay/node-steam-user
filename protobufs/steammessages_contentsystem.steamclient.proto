@@ -23,6 +23,7 @@ message CContentServerDirectory_ServerInfo {
 	optional string proxy_request_path_template = 11;
 	optional string https_support = 12;
 	repeated uint32 allowed_app_ids = 13;
+	optional bool preferred_server = 14;
 }
 
 message CContentServerDirectory_GetServersForSteamPipe_Response {

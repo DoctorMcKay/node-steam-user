@@ -2,6 +2,7 @@ option optimize_for = SPEED;
 option cc_generic_services = true;
 
 enum EDisplayStatus {
+	k_EDisplayStatusInvalid = 0;
 	k_EDisplayStatusLaunching = 1;
 	k_EDisplayStatusUninstalling = 2;
 	k_EDisplayStatusInstalling = 3;
@@ -88,17 +89,22 @@ message CAppOverview_PlayAreaDimensions {
 	optional float height = 2;
 }
 
+message CAppOverview_PerClientData {
+	optional uint64 clientid = 1;
+	optional string client_name = 2;
+	optional .EDisplayStatus display_status = 3 [default = k_EDisplayStatusInvalid];
+	optional uint32 status_percentage = 4 [default = 0];
+	optional string active_beta = 5;
+	optional bool installed = 6;
+}
+
 message CAppOverview {
 	optional uint32 appid = 1;
 	optional string display_name = 2;
-	optional .EDisplayStatus display_status = 3 [default = k_EDisplayStatusLaunching];
 	optional bool visible_in_game_list = 4;
-	optional uint32 status_percentage = 5 [default = 0];
 	optional string sort_as = 6;
 	optional .EProtoAppType app_type = 7 [default = k_EAppTypeInvalid];
-	optional string active_beta = 8;
 	optional bool subscribed = 9;
-	optional bool installed = 10;
 	optional bool favorite = 11;
 	optional bool hidden = 12;
 	optional uint32 mru_index = 13;
@@ -116,7 +122,6 @@ message CAppOverview {
 	optional uint32 rt_original_release_date = 25 [default = 0];
 	optional uint32 rt_steam_release_date = 26 [default = 0];
 	optional string icon_hash = 27;
-	optional string icon_path = 28;
 	optional string logo_hash = 30;
 	optional .EAppControllerSupportLevel controller_support = 31 [default = k_EAppControllerSupportLevelNone];
 	optional bool vr_supported = 32;
@@ -129,6 +134,11 @@ message CAppOverview {
 	optional string icon_data = 39;
 	optional string icon_data_format = 40;
 	optional string gameid = 41;
+	optional string library_capsule_filename = 42;
+	repeated .CAppOverview_PerClientData per_client_data = 43;
+	optional uint64 most_available_clientid = 44;
+	optional uint64 selected_clientid = 45;
+	optional uint32 rt_store_asset_mtime = 46;
 }
 
 message CAppOverview_Change {
