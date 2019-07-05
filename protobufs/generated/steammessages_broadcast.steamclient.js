@@ -3963,6 +3963,8 @@
          * @property {boolean|null} [is_uploading] CBroadcast_GetBroadcastStatus_Response is_uploading
          * @property {number|null} [duration] CBroadcast_GetBroadcastStatus_Response duration
          * @property {boolean|null} [is_replay] CBroadcast_GetBroadcastStatus_Response is_replay
+         * @property {boolean|null} [is_capturing_vod] CBroadcast_GetBroadcastStatus_Response is_capturing_vod
+         * @property {boolean|null} [is_store_whitelisted] CBroadcast_GetBroadcastStatus_Response is_store_whitelisted
          */
     
         /**
@@ -4077,6 +4079,22 @@
         CBroadcast_GetBroadcastStatus_Response.prototype.is_replay = false;
     
         /**
+         * CBroadcast_GetBroadcastStatus_Response is_capturing_vod.
+         * @member {boolean} is_capturing_vod
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_capturing_vod = false;
+    
+        /**
+         * CBroadcast_GetBroadcastStatus_Response is_store_whitelisted.
+         * @member {boolean} is_store_whitelisted
+         * @memberof CBroadcast_GetBroadcastStatus_Response
+         * @instance
+         */
+        CBroadcast_GetBroadcastStatus_Response.prototype.is_store_whitelisted = false;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastStatus_Response instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastStatus_Response
@@ -4124,6 +4142,10 @@
                 writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.duration);
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.is_replay);
+            if (message.is_capturing_vod != null && message.hasOwnProperty("is_capturing_vod"))
+                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.is_capturing_vod);
+            if (message.is_store_whitelisted != null && message.hasOwnProperty("is_store_whitelisted"))
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.is_store_whitelisted);
             return writer;
         };
     
@@ -4193,6 +4215,12 @@
                     break;
                 case 12:
                     message.is_replay = reader.bool();
+                    break;
+                case 13:
+                    message.is_capturing_vod = reader.bool();
+                    break;
+                case 14:
+                    message.is_store_whitelisted = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4265,6 +4293,12 @@
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 if (typeof message.is_replay !== "boolean")
                     return "is_replay: boolean expected";
+            if (message.is_capturing_vod != null && message.hasOwnProperty("is_capturing_vod"))
+                if (typeof message.is_capturing_vod !== "boolean")
+                    return "is_capturing_vod: boolean expected";
+            if (message.is_store_whitelisted != null && message.hasOwnProperty("is_store_whitelisted"))
+                if (typeof message.is_store_whitelisted !== "boolean")
+                    return "is_store_whitelisted: boolean expected";
             return null;
         };
     
@@ -4311,6 +4345,10 @@
                 message.duration = object.duration >>> 0;
             if (object.is_replay != null)
                 message.is_replay = Boolean(object.is_replay);
+            if (object.is_capturing_vod != null)
+                message.is_capturing_vod = Boolean(object.is_capturing_vod);
+            if (object.is_store_whitelisted != null)
+                message.is_store_whitelisted = Boolean(object.is_store_whitelisted);
             return message;
         };
     
@@ -4344,6 +4382,8 @@
                 object.is_uploading = false;
                 object.duration = 0;
                 object.is_replay = false;
+                object.is_capturing_vod = false;
+                object.is_store_whitelisted = false;
             }
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 if (typeof message.gameid === "number")
@@ -4372,6 +4412,10 @@
                 object.duration = message.duration;
             if (message.is_replay != null && message.hasOwnProperty("is_replay"))
                 object.is_replay = message.is_replay;
+            if (message.is_capturing_vod != null && message.hasOwnProperty("is_capturing_vod"))
+                object.is_capturing_vod = message.is_capturing_vod;
+            if (message.is_store_whitelisted != null && message.hasOwnProperty("is_store_whitelisted"))
+                object.is_store_whitelisted = message.is_store_whitelisted;
             return object;
         };
     
@@ -9812,6 +9856,434 @@
         return CBroadcast_GetBuildClipStatus_Response;
     })();
     
+    $root.CBroadcast_SetClipDetails_Request = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SetClipDetails_Request.
+         * @exports ICBroadcast_SetClipDetails_Request
+         * @interface ICBroadcast_SetClipDetails_Request
+         * @property {number|Long|null} [broadcast_clip_id] CBroadcast_SetClipDetails_Request broadcast_clip_id
+         * @property {number|null} [start_time] CBroadcast_SetClipDetails_Request start_time
+         * @property {number|null} [end_time] CBroadcast_SetClipDetails_Request end_time
+         * @property {string|null} [video_description] CBroadcast_SetClipDetails_Request video_description
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SetClipDetails_Request.
+         * @exports CBroadcast_SetClipDetails_Request
+         * @classdesc Represents a CBroadcast_SetClipDetails_Request.
+         * @implements ICBroadcast_SetClipDetails_Request
+         * @constructor
+         * @param {ICBroadcast_SetClipDetails_Request=} [properties] Properties to set
+         */
+        function CBroadcast_SetClipDetails_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CBroadcast_SetClipDetails_Request broadcast_clip_id.
+         * @member {number|Long} broadcast_clip_id
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @instance
+         */
+        CBroadcast_SetClipDetails_Request.prototype.broadcast_clip_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_SetClipDetails_Request start_time.
+         * @member {number} start_time
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @instance
+         */
+        CBroadcast_SetClipDetails_Request.prototype.start_time = 0;
+    
+        /**
+         * CBroadcast_SetClipDetails_Request end_time.
+         * @member {number} end_time
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @instance
+         */
+        CBroadcast_SetClipDetails_Request.prototype.end_time = 0;
+    
+        /**
+         * CBroadcast_SetClipDetails_Request video_description.
+         * @member {string} video_description
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @instance
+         */
+        CBroadcast_SetClipDetails_Request.prototype.video_description = "";
+    
+        /**
+         * Creates a new CBroadcast_SetClipDetails_Request instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Request=} [properties] Properties to set
+         * @returns {CBroadcast_SetClipDetails_Request} CBroadcast_SetClipDetails_Request instance
+         */
+        CBroadcast_SetClipDetails_Request.create = function create(properties) {
+            return new CBroadcast_SetClipDetails_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetClipDetails_Request message. Does not implicitly {@link CBroadcast_SetClipDetails_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Request} message CBroadcast_SetClipDetails_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetClipDetails_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.broadcast_clip_id);
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_time);
+            if (message.end_time != null && message.hasOwnProperty("end_time"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.end_time);
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.video_description);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetClipDetails_Request message, length delimited. Does not implicitly {@link CBroadcast_SetClipDetails_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Request} message CBroadcast_SetClipDetails_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetClipDetails_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetClipDetails_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SetClipDetails_Request} CBroadcast_SetClipDetails_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetClipDetails_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetClipDetails_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.broadcast_clip_id = reader.uint64();
+                    break;
+                case 2:
+                    message.start_time = reader.uint32();
+                    break;
+                case 3:
+                    message.end_time = reader.uint32();
+                    break;
+                case 4:
+                    message.video_description = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetClipDetails_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SetClipDetails_Request} CBroadcast_SetClipDetails_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetClipDetails_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SetClipDetails_Request message.
+         * @function verify
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SetClipDetails_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (!$util.isInteger(message.broadcast_clip_id) && !(message.broadcast_clip_id && $util.isInteger(message.broadcast_clip_id.low) && $util.isInteger(message.broadcast_clip_id.high)))
+                    return "broadcast_clip_id: integer|Long expected";
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                if (!$util.isInteger(message.start_time))
+                    return "start_time: integer expected";
+            if (message.end_time != null && message.hasOwnProperty("end_time"))
+                if (!$util.isInteger(message.end_time))
+                    return "end_time: integer expected";
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                if (!$util.isString(message.video_description))
+                    return "video_description: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SetClipDetails_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SetClipDetails_Request} CBroadcast_SetClipDetails_Request
+         */
+        CBroadcast_SetClipDetails_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SetClipDetails_Request)
+                return object;
+            var message = new $root.CBroadcast_SetClipDetails_Request();
+            if (object.broadcast_clip_id != null)
+                if ($util.Long)
+                    (message.broadcast_clip_id = $util.Long.fromValue(object.broadcast_clip_id)).unsigned = true;
+                else if (typeof object.broadcast_clip_id === "string")
+                    message.broadcast_clip_id = parseInt(object.broadcast_clip_id, 10);
+                else if (typeof object.broadcast_clip_id === "number")
+                    message.broadcast_clip_id = object.broadcast_clip_id;
+                else if (typeof object.broadcast_clip_id === "object")
+                    message.broadcast_clip_id = new $util.LongBits(object.broadcast_clip_id.low >>> 0, object.broadcast_clip_id.high >>> 0).toNumber(true);
+            if (object.start_time != null)
+                message.start_time = object.start_time >>> 0;
+            if (object.end_time != null)
+                message.end_time = object.end_time >>> 0;
+            if (object.video_description != null)
+                message.video_description = String(object.video_description);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SetClipDetails_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @static
+         * @param {CBroadcast_SetClipDetails_Request} message CBroadcast_SetClipDetails_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SetClipDetails_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.broadcast_clip_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.broadcast_clip_id = options.longs === String ? "0" : 0;
+                object.start_time = 0;
+                object.end_time = 0;
+                object.video_description = "";
+            }
+            if (message.broadcast_clip_id != null && message.hasOwnProperty("broadcast_clip_id"))
+                if (typeof message.broadcast_clip_id === "number")
+                    object.broadcast_clip_id = options.longs === String ? String(message.broadcast_clip_id) : message.broadcast_clip_id;
+                else
+                    object.broadcast_clip_id = options.longs === String ? $util.Long.prototype.toString.call(message.broadcast_clip_id) : options.longs === Number ? new $util.LongBits(message.broadcast_clip_id.low >>> 0, message.broadcast_clip_id.high >>> 0).toNumber(true) : message.broadcast_clip_id;
+            if (message.start_time != null && message.hasOwnProperty("start_time"))
+                object.start_time = message.start_time;
+            if (message.end_time != null && message.hasOwnProperty("end_time"))
+                object.end_time = message.end_time;
+            if (message.video_description != null && message.hasOwnProperty("video_description"))
+                object.video_description = message.video_description;
+            return object;
+        };
+    
+        /**
+         * Converts this CBroadcast_SetClipDetails_Request to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SetClipDetails_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SetClipDetails_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SetClipDetails_Request;
+    })();
+    
+    $root.CBroadcast_SetClipDetails_Response = (function() {
+    
+        /**
+         * Properties of a CBroadcast_SetClipDetails_Response.
+         * @exports ICBroadcast_SetClipDetails_Response
+         * @interface ICBroadcast_SetClipDetails_Response
+         */
+    
+        /**
+         * Constructs a new CBroadcast_SetClipDetails_Response.
+         * @exports CBroadcast_SetClipDetails_Response
+         * @classdesc Represents a CBroadcast_SetClipDetails_Response.
+         * @implements ICBroadcast_SetClipDetails_Response
+         * @constructor
+         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
+         */
+        function CBroadcast_SetClipDetails_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CBroadcast_SetClipDetails_Response instance using the specified properties.
+         * @function create
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Response=} [properties] Properties to set
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response instance
+         */
+        CBroadcast_SetClipDetails_Response.create = function create(properties) {
+            return new CBroadcast_SetClipDetails_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetClipDetails_Response message. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetClipDetails_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CBroadcast_SetClipDetails_Response message, length delimited. Does not implicitly {@link CBroadcast_SetClipDetails_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {ICBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CBroadcast_SetClipDetails_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetClipDetails_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CBroadcast_SetClipDetails_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CBroadcast_SetClipDetails_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CBroadcast_SetClipDetails_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CBroadcast_SetClipDetails_Response message.
+         * @function verify
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CBroadcast_SetClipDetails_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CBroadcast_SetClipDetails_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CBroadcast_SetClipDetails_Response} CBroadcast_SetClipDetails_Response
+         */
+        CBroadcast_SetClipDetails_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CBroadcast_SetClipDetails_Response)
+                return object;
+            return new $root.CBroadcast_SetClipDetails_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CBroadcast_SetClipDetails_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @static
+         * @param {CBroadcast_SetClipDetails_Response} message CBroadcast_SetClipDetails_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CBroadcast_SetClipDetails_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CBroadcast_SetClipDetails_Response to JSON.
+         * @function toJSON
+         * @memberof CBroadcast_SetClipDetails_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CBroadcast_SetClipDetails_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CBroadcast_SetClipDetails_Response;
+    })();
+    
     $root.CBroadcast_GetClipDetails_Request = (function() {
     
         /**
@@ -15070,6 +15542,7 @@
          * @property {number|null} [row_limit] CBroadcast_GetBroadcastUploadStats_Request row_limit
          * @property {number|null} [start_time] CBroadcast_GetBroadcastUploadStats_Request start_time
          * @property {number|Long|null} [upload_id] CBroadcast_GetBroadcastUploadStats_Request upload_id
+         * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastUploadStats_Request steamid
          */
     
         /**
@@ -15112,6 +15585,14 @@
         CBroadcast_GetBroadcastUploadStats_Request.prototype.upload_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
     
         /**
+         * CBroadcast_GetBroadcastUploadStats_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetBroadcastUploadStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastUploadStats_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
          * Creates a new CBroadcast_GetBroadcastUploadStats_Request instance using the specified properties.
          * @function create
          * @memberof CBroadcast_GetBroadcastUploadStats_Request
@@ -15141,6 +15622,8 @@
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.start_time);
             if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.upload_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 4, wireType 1 =*/33).fixed64(message.steamid);
             return writer;
         };
     
@@ -15183,6 +15666,9 @@
                     break;
                 case 3:
                     message.upload_id = reader.uint64();
+                    break;
+                case 4:
+                    message.steamid = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -15228,6 +15714,9 @@
             if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 if (!$util.isInteger(message.upload_id) && !(message.upload_id && $util.isInteger(message.upload_id.low) && $util.isInteger(message.upload_id.high)))
                     return "upload_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
             return null;
         };
     
@@ -15256,6 +15745,15 @@
                     message.upload_id = object.upload_id;
                 else if (typeof object.upload_id === "object")
                     message.upload_id = new $util.LongBits(object.upload_id.low >>> 0, object.upload_id.high >>> 0).toNumber(true);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
             return message;
         };
     
@@ -15280,6 +15778,11 @@
                     object.upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.upload_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
             }
             if (message.row_limit != null && message.hasOwnProperty("row_limit"))
                 object.row_limit = message.row_limit;
@@ -15290,6 +15793,11 @@
                     object.upload_id = options.longs === String ? String(message.upload_id) : message.upload_id;
                 else
                     object.upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_id) : options.longs === Number ? new $util.LongBits(message.upload_id.low >>> 0, message.upload_id.high >>> 0).toNumber(true) : message.upload_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
             return object;
         };
     
@@ -16148,6 +16656,7 @@
          * @exports ICBroadcast_GetBroadcastViewerStats_Request
          * @interface ICBroadcast_GetBroadcastViewerStats_Request
          * @property {number|Long|null} [upload_id] CBroadcast_GetBroadcastViewerStats_Request upload_id
+         * @property {number|Long|null} [steamid] CBroadcast_GetBroadcastViewerStats_Request steamid
          */
     
         /**
@@ -16172,6 +16681,14 @@
          * @instance
          */
         CBroadcast_GetBroadcastViewerStats_Request.prototype.upload_id = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CBroadcast_GetBroadcastViewerStats_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CBroadcast_GetBroadcastViewerStats_Request
+         * @instance
+         */
+        CBroadcast_GetBroadcastViewerStats_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
         /**
          * Creates a new CBroadcast_GetBroadcastViewerStats_Request instance using the specified properties.
@@ -16199,6 +16716,8 @@
                 writer = $Writer.create();
             if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.upload_id);
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 2, wireType 1 =*/17).fixed64(message.steamid);
             return writer;
         };
     
@@ -16235,6 +16754,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.upload_id = reader.uint64();
+                    break;
+                case 2:
+                    message.steamid = reader.fixed64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -16274,6 +16796,9 @@
             if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 if (!$util.isInteger(message.upload_id) && !(message.upload_id && $util.isInteger(message.upload_id.low) && $util.isInteger(message.upload_id.high)))
                     return "upload_id: integer|Long expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
             return null;
         };
     
@@ -16298,6 +16823,15 @@
                     message.upload_id = object.upload_id;
                 else if (typeof object.upload_id === "object")
                     message.upload_id = new $util.LongBits(object.upload_id.low >>> 0, object.upload_id.high >>> 0).toNumber(true);
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
             return message;
         };
     
@@ -16314,17 +16848,28 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.upload_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.upload_id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+            }
             if (message.upload_id != null && message.hasOwnProperty("upload_id"))
                 if (typeof message.upload_id === "number")
                     object.upload_id = options.longs === String ? String(message.upload_id) : message.upload_id;
                 else
                     object.upload_id = options.longs === String ? $util.Long.prototype.toString.call(message.upload_id) : options.longs === Number ? new $util.LongBits(message.upload_id.low >>> 0, message.upload_id.high >>> 0).toNumber(true) : message.upload_id;
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
             return object;
         };
     
@@ -20999,6 +21544,39 @@
          * @instance
          * @param {ICBroadcast_GetBuildClipStatus_Request} request CBroadcast_GetBuildClipStatus_Request message or plain object
          * @returns {Promise<CBroadcast_GetBuildClipStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Broadcast#setClipDetails}.
+         * @memberof Broadcast
+         * @typedef SetClipDetailsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CBroadcast_SetClipDetails_Response} [response] CBroadcast_SetClipDetails_Response
+         */
+    
+        /**
+         * Calls SetClipDetails.
+         * @function setClipDetails
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SetClipDetails_Request} request CBroadcast_SetClipDetails_Request message or plain object
+         * @param {Broadcast.SetClipDetailsCallback} callback Node-style callback called with the error, if any, and CBroadcast_SetClipDetails_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Broadcast.prototype.setClipDetails = function setClipDetails(request, callback) {
+            return this.rpcCall(setClipDetails, $root.CBroadcast_SetClipDetails_Request, $root.CBroadcast_SetClipDetails_Response, request, callback);
+        }, "name", { value: "SetClipDetails" });
+    
+        /**
+         * Calls SetClipDetails.
+         * @function setClipDetails
+         * @memberof Broadcast
+         * @instance
+         * @param {ICBroadcast_SetClipDetails_Request} request CBroadcast_SetClipDetails_Request message or plain object
+         * @returns {Promise<CBroadcast_SetClipDetails_Response>} Promise
          * @variation 2
          */
     

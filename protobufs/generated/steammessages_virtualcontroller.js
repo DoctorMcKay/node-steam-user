@@ -39,16 +39,18 @@
      * @exports EMouseMode
      * @enum {string}
      * @property {number} k_EMouseModeUnknown=0 k_EMouseModeUnknown value
-     * @property {number} k_EMouseModeRelative=1 k_EMouseModeRelative value
-     * @property {number} k_EMouseModeAbsolute=2 k_EMouseModeAbsolute value
+     * @property {number} k_EMouseModeRelativeCursor=1 k_EMouseModeRelativeCursor value
+     * @property {number} k_EMouseModeAbsoluteCursor=2 k_EMouseModeAbsoluteCursor value
      * @property {number} k_EMouseModeTouch=3 k_EMouseModeTouch value
+     * @property {number} k_EMouseModeRelative=4 k_EMouseModeRelative value
      */
     $root.EMouseMode = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "k_EMouseModeUnknown"] = 0;
-        values[valuesById[1] = "k_EMouseModeRelative"] = 1;
-        values[valuesById[2] = "k_EMouseModeAbsolute"] = 2;
+        values[valuesById[1] = "k_EMouseModeRelativeCursor"] = 1;
+        values[valuesById[2] = "k_EMouseModeAbsoluteCursor"] = 2;
         values[valuesById[3] = "k_EMouseModeTouch"] = 3;
+        values[valuesById[4] = "k_EMouseModeRelative"] = 4;
         return values;
     })();
     
@@ -1023,6 +1025,7 @@
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             return null;
@@ -1073,17 +1076,21 @@
             case 0:
                 message.mouse_mode = 0;
                 break;
-            case "k_EMouseModeRelative":
+            case "k_EMouseModeRelativeCursor":
             case 1:
                 message.mouse_mode = 1;
                 break;
-            case "k_EMouseModeAbsolute":
+            case "k_EMouseModeAbsoluteCursor":
             case 2:
                 message.mouse_mode = 2;
                 break;
             case "k_EMouseModeTouch":
             case 3:
                 message.mouse_mode = 3;
+                break;
+            case "k_EMouseModeRelative":
+            case 4:
+                message.mouse_mode = 4;
                 break;
             }
             return message;
@@ -1183,7 +1190,7 @@
          * @memberof CVirtualControllerConfig
          * @instance
          */
-        CVirtualControllerConfig.prototype.default_mouse_mode = 1;
+        CVirtualControllerConfig.prototype.default_mouse_mode = 4;
     
         /**
          * Creates a new CVirtualControllerConfig instance using the specified properties.
@@ -1316,6 +1323,7 @@
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             return null;
@@ -1350,17 +1358,21 @@
             case 0:
                 message.default_mouse_mode = 0;
                 break;
-            case "k_EMouseModeRelative":
+            case "k_EMouseModeRelativeCursor":
             case 1:
                 message.default_mouse_mode = 1;
                 break;
-            case "k_EMouseModeAbsolute":
+            case "k_EMouseModeAbsoluteCursor":
             case 2:
                 message.default_mouse_mode = 2;
                 break;
             case "k_EMouseModeTouch":
             case 3:
                 message.default_mouse_mode = 3;
+                break;
+            case "k_EMouseModeRelative":
+            case 4:
+                message.default_mouse_mode = 4;
                 break;
             }
             return message;
@@ -1383,7 +1395,7 @@
                 object.actionsets = [];
             if (options.defaults) {
                 object.name = "";
-                object.default_mouse_mode = options.enums === String ? "k_EMouseModeRelative" : 1;
+                object.default_mouse_mode = options.enums === String ? "k_EMouseModeRelative" : 4;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;

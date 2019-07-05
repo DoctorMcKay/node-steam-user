@@ -20,6 +20,7 @@
      * EDisplayStatus enum.
      * @exports EDisplayStatus
      * @enum {string}
+     * @property {number} k_EDisplayStatusInvalid=0 k_EDisplayStatusInvalid value
      * @property {number} k_EDisplayStatusLaunching=1 k_EDisplayStatusLaunching value
      * @property {number} k_EDisplayStatusUninstalling=2 k_EDisplayStatusUninstalling value
      * @property {number} k_EDisplayStatusInstalling=3 k_EDisplayStatusInstalling value
@@ -54,6 +55,7 @@
      */
     $root.EDisplayStatus = (function() {
         var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "k_EDisplayStatusInvalid"] = 0;
         values[valuesById[1] = "k_EDisplayStatusLaunching"] = 1;
         values[valuesById[2] = "k_EDisplayStatusUninstalling"] = 2;
         values[valuesById[3] = "k_EDisplayStatusInstalling"] = 3;
@@ -869,6 +871,481 @@
         return CAppOverview_PlayAreaDimensions;
     })();
     
+    $root.CAppOverview_PerClientData = (function() {
+    
+        /**
+         * Properties of a CAppOverview_PerClientData.
+         * @exports ICAppOverview_PerClientData
+         * @interface ICAppOverview_PerClientData
+         * @property {number|Long|null} [clientid] CAppOverview_PerClientData clientid
+         * @property {string|null} [client_name] CAppOverview_PerClientData client_name
+         * @property {EDisplayStatus|null} [display_status] CAppOverview_PerClientData display_status
+         * @property {number|null} [status_percentage] CAppOverview_PerClientData status_percentage
+         * @property {string|null} [active_beta] CAppOverview_PerClientData active_beta
+         * @property {boolean|null} [installed] CAppOverview_PerClientData installed
+         */
+    
+        /**
+         * Constructs a new CAppOverview_PerClientData.
+         * @exports CAppOverview_PerClientData
+         * @classdesc Represents a CAppOverview_PerClientData.
+         * @implements ICAppOverview_PerClientData
+         * @constructor
+         * @param {ICAppOverview_PerClientData=} [properties] Properties to set
+         */
+        function CAppOverview_PerClientData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CAppOverview_PerClientData clientid.
+         * @member {number|Long} clientid
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.clientid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAppOverview_PerClientData client_name.
+         * @member {string} client_name
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.client_name = "";
+    
+        /**
+         * CAppOverview_PerClientData display_status.
+         * @member {EDisplayStatus} display_status
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.display_status = 0;
+    
+        /**
+         * CAppOverview_PerClientData status_percentage.
+         * @member {number} status_percentage
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.status_percentage = 0;
+    
+        /**
+         * CAppOverview_PerClientData active_beta.
+         * @member {string} active_beta
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.active_beta = "";
+    
+        /**
+         * CAppOverview_PerClientData installed.
+         * @member {boolean} installed
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         */
+        CAppOverview_PerClientData.prototype.installed = false;
+    
+        /**
+         * Creates a new CAppOverview_PerClientData instance using the specified properties.
+         * @function create
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {ICAppOverview_PerClientData=} [properties] Properties to set
+         * @returns {CAppOverview_PerClientData} CAppOverview_PerClientData instance
+         */
+        CAppOverview_PerClientData.create = function create(properties) {
+            return new CAppOverview_PerClientData(properties);
+        };
+    
+        /**
+         * Encodes the specified CAppOverview_PerClientData message. Does not implicitly {@link CAppOverview_PerClientData.verify|verify} messages.
+         * @function encode
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {ICAppOverview_PerClientData} message CAppOverview_PerClientData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppOverview_PerClientData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.clientid);
+            if (message.client_name != null && message.hasOwnProperty("client_name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.client_name);
+            if (message.display_status != null && message.hasOwnProperty("display_status"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.display_status);
+            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.status_percentage);
+            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.active_beta);
+            if (message.installed != null && message.hasOwnProperty("installed"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.installed);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CAppOverview_PerClientData message, length delimited. Does not implicitly {@link CAppOverview_PerClientData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {ICAppOverview_PerClientData} message CAppOverview_PerClientData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CAppOverview_PerClientData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CAppOverview_PerClientData message from the specified reader or buffer.
+         * @function decode
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CAppOverview_PerClientData} CAppOverview_PerClientData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppOverview_PerClientData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CAppOverview_PerClientData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.clientid = reader.uint64();
+                    break;
+                case 2:
+                    message.client_name = reader.string();
+                    break;
+                case 3:
+                    message.display_status = reader.int32();
+                    break;
+                case 4:
+                    message.status_percentage = reader.uint32();
+                    break;
+                case 5:
+                    message.active_beta = reader.string();
+                    break;
+                case 6:
+                    message.installed = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CAppOverview_PerClientData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CAppOverview_PerClientData} CAppOverview_PerClientData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CAppOverview_PerClientData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CAppOverview_PerClientData message.
+         * @function verify
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CAppOverview_PerClientData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                if (!$util.isInteger(message.clientid) && !(message.clientid && $util.isInteger(message.clientid.low) && $util.isInteger(message.clientid.high)))
+                    return "clientid: integer|Long expected";
+            if (message.client_name != null && message.hasOwnProperty("client_name"))
+                if (!$util.isString(message.client_name))
+                    return "client_name: string expected";
+            if (message.display_status != null && message.hasOwnProperty("display_status"))
+                switch (message.display_status) {
+                default:
+                    return "display_status: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                    break;
+                }
+            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
+                if (!$util.isInteger(message.status_percentage))
+                    return "status_percentage: integer expected";
+            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
+                if (!$util.isString(message.active_beta))
+                    return "active_beta: string expected";
+            if (message.installed != null && message.hasOwnProperty("installed"))
+                if (typeof message.installed !== "boolean")
+                    return "installed: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CAppOverview_PerClientData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CAppOverview_PerClientData} CAppOverview_PerClientData
+         */
+        CAppOverview_PerClientData.fromObject = function fromObject(object) {
+            if (object instanceof $root.CAppOverview_PerClientData)
+                return object;
+            var message = new $root.CAppOverview_PerClientData();
+            if (object.clientid != null)
+                if ($util.Long)
+                    (message.clientid = $util.Long.fromValue(object.clientid)).unsigned = true;
+                else if (typeof object.clientid === "string")
+                    message.clientid = parseInt(object.clientid, 10);
+                else if (typeof object.clientid === "number")
+                    message.clientid = object.clientid;
+                else if (typeof object.clientid === "object")
+                    message.clientid = new $util.LongBits(object.clientid.low >>> 0, object.clientid.high >>> 0).toNumber(true);
+            if (object.client_name != null)
+                message.client_name = String(object.client_name);
+            switch (object.display_status) {
+            case "k_EDisplayStatusInvalid":
+            case 0:
+                message.display_status = 0;
+                break;
+            case "k_EDisplayStatusLaunching":
+            case 1:
+                message.display_status = 1;
+                break;
+            case "k_EDisplayStatusUninstalling":
+            case 2:
+                message.display_status = 2;
+                break;
+            case "k_EDisplayStatusInstalling":
+            case 3:
+                message.display_status = 3;
+                break;
+            case "k_EDisplayStatusRunning":
+            case 4:
+                message.display_status = 4;
+                break;
+            case "k_EDisplayStatusValidating":
+            case 5:
+                message.display_status = 5;
+                break;
+            case "k_EDisplayStatusUpdating":
+            case 6:
+                message.display_status = 6;
+                break;
+            case "k_EDisplayStatusDownloading":
+            case 7:
+                message.display_status = 7;
+                break;
+            case "k_EDisplayStatusSynchronizing":
+            case 8:
+                message.display_status = 8;
+                break;
+            case "k_EDisplayStatusReadyToInstall":
+            case 9:
+                message.display_status = 9;
+                break;
+            case "k_EDisplayStatusReadyToPreload":
+            case 10:
+                message.display_status = 10;
+                break;
+            case "k_EDisplayStatusReadyToLaunch":
+            case 11:
+                message.display_status = 11;
+                break;
+            case "k_EDisplayStatusRegionRestricted":
+            case 12:
+                message.display_status = 12;
+                break;
+            case "k_EDisplayStatusPresaleOnly":
+            case 13:
+                message.display_status = 13;
+                break;
+            case "k_EDisplayStatusInvalidPlatform":
+            case 14:
+                message.display_status = 14;
+                break;
+            case "k_EDisplayStatusParentalBlocked":
+            case 15:
+                message.display_status = 15;
+                break;
+            case "k_EDisplayStatusPreloadOnly":
+            case 16:
+                message.display_status = 16;
+                break;
+            case "k_EDisplayStatusBorrowerLocked":
+            case 17:
+                message.display_status = 17;
+                break;
+            case "k_EDisplayStatusUpdatePaused":
+            case 18:
+                message.display_status = 18;
+                break;
+            case "k_EDisplayStatusUpdateQueued":
+            case 19:
+                message.display_status = 19;
+                break;
+            case "k_EDisplayStatusUpdateRequired":
+            case 20:
+                message.display_status = 20;
+                break;
+            case "k_EDisplayStatusUpdateDisabled":
+            case 21:
+                message.display_status = 21;
+                break;
+            case "k_EDisplayStatusDownloadPaused":
+            case 22:
+                message.display_status = 22;
+                break;
+            case "k_EDisplayStatusDownloadQueued":
+            case 23:
+                message.display_status = 23;
+                break;
+            case "k_EDisplayStatusDownloadRequired":
+            case 24:
+                message.display_status = 24;
+                break;
+            case "k_EDisplayStatusDownloadDisabled":
+            case 25:
+                message.display_status = 25;
+                break;
+            case "k_EDisplayStatusLicensePending":
+            case 26:
+                message.display_status = 26;
+                break;
+            case "k_EDisplayStatusLicenseExpired":
+            case 27:
+                message.display_status = 27;
+                break;
+            case "k_EDisplayStatusAvailForFree":
+            case 28:
+                message.display_status = 28;
+                break;
+            case "k_EDisplayStatusAvailToBorrow":
+            case 29:
+                message.display_status = 29;
+                break;
+            case "k_EDisplayStatusAvailGuestPass":
+            case 30:
+                message.display_status = 30;
+                break;
+            case "k_EDisplayStatusPurchase":
+            case 31:
+                message.display_status = 31;
+                break;
+            }
+            if (object.status_percentage != null)
+                message.status_percentage = object.status_percentage >>> 0;
+            if (object.active_beta != null)
+                message.active_beta = String(object.active_beta);
+            if (object.installed != null)
+                message.installed = Boolean(object.installed);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CAppOverview_PerClientData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CAppOverview_PerClientData
+         * @static
+         * @param {CAppOverview_PerClientData} message CAppOverview_PerClientData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CAppOverview_PerClientData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.clientid = options.longs === String ? "0" : 0;
+                object.client_name = "";
+                object.display_status = options.enums === String ? "k_EDisplayStatusInvalid" : 0;
+                object.status_percentage = 0;
+                object.active_beta = "";
+                object.installed = false;
+            }
+            if (message.clientid != null && message.hasOwnProperty("clientid"))
+                if (typeof message.clientid === "number")
+                    object.clientid = options.longs === String ? String(message.clientid) : message.clientid;
+                else
+                    object.clientid = options.longs === String ? $util.Long.prototype.toString.call(message.clientid) : options.longs === Number ? new $util.LongBits(message.clientid.low >>> 0, message.clientid.high >>> 0).toNumber(true) : message.clientid;
+            if (message.client_name != null && message.hasOwnProperty("client_name"))
+                object.client_name = message.client_name;
+            if (message.display_status != null && message.hasOwnProperty("display_status"))
+                object.display_status = options.enums === String ? $root.EDisplayStatus[message.display_status] : message.display_status;
+            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
+                object.status_percentage = message.status_percentage;
+            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
+                object.active_beta = message.active_beta;
+            if (message.installed != null && message.hasOwnProperty("installed"))
+                object.installed = message.installed;
+            return object;
+        };
+    
+        /**
+         * Converts this CAppOverview_PerClientData to JSON.
+         * @function toJSON
+         * @memberof CAppOverview_PerClientData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CAppOverview_PerClientData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CAppOverview_PerClientData;
+    })();
+    
     $root.CAppOverview = (function() {
     
         /**
@@ -877,14 +1354,10 @@
          * @interface ICAppOverview
          * @property {number|null} [appid] CAppOverview appid
          * @property {string|null} [display_name] CAppOverview display_name
-         * @property {EDisplayStatus|null} [display_status] CAppOverview display_status
          * @property {boolean|null} [visible_in_game_list] CAppOverview visible_in_game_list
-         * @property {number|null} [status_percentage] CAppOverview status_percentage
          * @property {string|null} [sort_as] CAppOverview sort_as
          * @property {EProtoAppType|null} [app_type] CAppOverview app_type
-         * @property {string|null} [active_beta] CAppOverview active_beta
          * @property {boolean|null} [subscribed] CAppOverview subscribed
-         * @property {boolean|null} [installed] CAppOverview installed
          * @property {boolean|null} [favorite] CAppOverview favorite
          * @property {boolean|null} [hidden] CAppOverview hidden
          * @property {number|null} [mru_index] CAppOverview mru_index
@@ -902,7 +1375,6 @@
          * @property {number|null} [rt_original_release_date] CAppOverview rt_original_release_date
          * @property {number|null} [rt_steam_release_date] CAppOverview rt_steam_release_date
          * @property {string|null} [icon_hash] CAppOverview icon_hash
-         * @property {string|null} [icon_path] CAppOverview icon_path
          * @property {string|null} [logo_hash] CAppOverview logo_hash
          * @property {EAppControllerSupportLevel|null} [controller_support] CAppOverview controller_support
          * @property {boolean|null} [vr_supported] CAppOverview vr_supported
@@ -915,6 +1387,11 @@
          * @property {string|null} [icon_data] CAppOverview icon_data
          * @property {string|null} [icon_data_format] CAppOverview icon_data_format
          * @property {string|null} [gameid] CAppOverview gameid
+         * @property {string|null} [library_capsule_filename] CAppOverview library_capsule_filename
+         * @property {Array.<ICAppOverview_PerClientData>|null} [per_client_data] CAppOverview per_client_data
+         * @property {number|Long|null} [most_available_clientid] CAppOverview most_available_clientid
+         * @property {number|Long|null} [selected_clientid] CAppOverview selected_clientid
+         * @property {number|null} [rt_store_asset_mtime] CAppOverview rt_store_asset_mtime
          */
     
         /**
@@ -932,6 +1409,7 @@
             this.genre = [];
             this.store_category = [];
             this.language_feature = [];
+            this.per_client_data = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -955,28 +1433,12 @@
         CAppOverview.prototype.display_name = "";
     
         /**
-         * CAppOverview display_status.
-         * @member {EDisplayStatus} display_status
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.display_status = 1;
-    
-        /**
          * CAppOverview visible_in_game_list.
          * @member {boolean} visible_in_game_list
          * @memberof CAppOverview
          * @instance
          */
         CAppOverview.prototype.visible_in_game_list = false;
-    
-        /**
-         * CAppOverview status_percentage.
-         * @member {number} status_percentage
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.status_percentage = 0;
     
         /**
          * CAppOverview sort_as.
@@ -995,28 +1457,12 @@
         CAppOverview.prototype.app_type = 0;
     
         /**
-         * CAppOverview active_beta.
-         * @member {string} active_beta
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.active_beta = "";
-    
-        /**
          * CAppOverview subscribed.
          * @member {boolean} subscribed
          * @memberof CAppOverview
          * @instance
          */
         CAppOverview.prototype.subscribed = false;
-    
-        /**
-         * CAppOverview installed.
-         * @member {boolean} installed
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.installed = false;
     
         /**
          * CAppOverview favorite.
@@ -1155,14 +1601,6 @@
         CAppOverview.prototype.icon_hash = "";
     
         /**
-         * CAppOverview icon_path.
-         * @member {string} icon_path
-         * @memberof CAppOverview
-         * @instance
-         */
-        CAppOverview.prototype.icon_path = "";
-    
-        /**
          * CAppOverview logo_hash.
          * @member {string} logo_hash
          * @memberof CAppOverview
@@ -1259,6 +1697,46 @@
         CAppOverview.prototype.gameid = "";
     
         /**
+         * CAppOverview library_capsule_filename.
+         * @member {string} library_capsule_filename
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.library_capsule_filename = "";
+    
+        /**
+         * CAppOverview per_client_data.
+         * @member {Array.<ICAppOverview_PerClientData>} per_client_data
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.per_client_data = $util.emptyArray;
+    
+        /**
+         * CAppOverview most_available_clientid.
+         * @member {number|Long} most_available_clientid
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.most_available_clientid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAppOverview selected_clientid.
+         * @member {number|Long} selected_clientid
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.selected_clientid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CAppOverview rt_store_asset_mtime.
+         * @member {number} rt_store_asset_mtime
+         * @memberof CAppOverview
+         * @instance
+         */
+        CAppOverview.prototype.rt_store_asset_mtime = 0;
+    
+        /**
          * Creates a new CAppOverview instance using the specified properties.
          * @function create
          * @memberof CAppOverview
@@ -1286,22 +1764,14 @@
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
             if (message.display_name != null && message.hasOwnProperty("display_name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.display_name);
-            if (message.display_status != null && message.hasOwnProperty("display_status"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.display_status);
             if (message.visible_in_game_list != null && message.hasOwnProperty("visible_in_game_list"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.visible_in_game_list);
-            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
-                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.status_percentage);
             if (message.sort_as != null && message.hasOwnProperty("sort_as"))
                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sort_as);
             if (message.app_type != null && message.hasOwnProperty("app_type"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.app_type);
-            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
-                writer.uint32(/* id 8, wireType 2 =*/66).string(message.active_beta);
             if (message.subscribed != null && message.hasOwnProperty("subscribed"))
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.subscribed);
-            if (message.installed != null && message.hasOwnProperty("installed"))
-                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.installed);
             if (message.favorite != null && message.hasOwnProperty("favorite"))
                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.favorite);
             if (message.hidden != null && message.hasOwnProperty("hidden"))
@@ -1342,8 +1812,6 @@
                 writer.uint32(/* id 26, wireType 0 =*/208).uint32(message.rt_steam_release_date);
             if (message.icon_hash != null && message.hasOwnProperty("icon_hash"))
                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.icon_hash);
-            if (message.icon_path != null && message.hasOwnProperty("icon_path"))
-                writer.uint32(/* id 28, wireType 2 =*/226).string(message.icon_path);
             if (message.logo_hash != null && message.hasOwnProperty("logo_hash"))
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.logo_hash);
             if (message.controller_support != null && message.hasOwnProperty("controller_support"))
@@ -1368,6 +1836,17 @@
                 writer.uint32(/* id 40, wireType 2 =*/322).string(message.icon_data_format);
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 writer.uint32(/* id 41, wireType 2 =*/330).string(message.gameid);
+            if (message.library_capsule_filename != null && message.hasOwnProperty("library_capsule_filename"))
+                writer.uint32(/* id 42, wireType 2 =*/338).string(message.library_capsule_filename);
+            if (message.per_client_data != null && message.per_client_data.length)
+                for (var i = 0; i < message.per_client_data.length; ++i)
+                    $root.CAppOverview_PerClientData.encode(message.per_client_data[i], writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+            if (message.most_available_clientid != null && message.hasOwnProperty("most_available_clientid"))
+                writer.uint32(/* id 44, wireType 0 =*/352).uint64(message.most_available_clientid);
+            if (message.selected_clientid != null && message.hasOwnProperty("selected_clientid"))
+                writer.uint32(/* id 45, wireType 0 =*/360).uint64(message.selected_clientid);
+            if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
+                writer.uint32(/* id 46, wireType 0 =*/368).uint32(message.rt_store_asset_mtime);
             return writer;
         };
     
@@ -1408,14 +1887,8 @@
                 case 2:
                     message.display_name = reader.string();
                     break;
-                case 3:
-                    message.display_status = reader.int32();
-                    break;
                 case 4:
                     message.visible_in_game_list = reader.bool();
-                    break;
-                case 5:
-                    message.status_percentage = reader.uint32();
                     break;
                 case 6:
                     message.sort_as = reader.string();
@@ -1423,14 +1896,8 @@
                 case 7:
                     message.app_type = reader.int32();
                     break;
-                case 8:
-                    message.active_beta = reader.string();
-                    break;
                 case 9:
                     message.subscribed = reader.bool();
-                    break;
-                case 10:
-                    message.installed = reader.bool();
                     break;
                 case 11:
                     message.favorite = reader.bool();
@@ -1510,9 +1977,6 @@
                 case 27:
                     message.icon_hash = reader.string();
                     break;
-                case 28:
-                    message.icon_path = reader.string();
-                    break;
                 case 30:
                     message.logo_hash = reader.string();
                     break;
@@ -1548,6 +2012,23 @@
                     break;
                 case 41:
                     message.gameid = reader.string();
+                    break;
+                case 42:
+                    message.library_capsule_filename = reader.string();
+                    break;
+                case 43:
+                    if (!(message.per_client_data && message.per_client_data.length))
+                        message.per_client_data = [];
+                    message.per_client_data.push($root.CAppOverview_PerClientData.decode(reader, reader.uint32()));
+                    break;
+                case 44:
+                    message.most_available_clientid = reader.uint64();
+                    break;
+                case 45:
+                    message.selected_clientid = reader.uint64();
+                    break;
+                case 46:
+                    message.rt_store_asset_mtime = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1590,49 +2071,9 @@
             if (message.display_name != null && message.hasOwnProperty("display_name"))
                 if (!$util.isString(message.display_name))
                     return "display_name: string expected";
-            if (message.display_status != null && message.hasOwnProperty("display_status"))
-                switch (message.display_status) {
-                default:
-                    return "display_status: enum value expected";
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                case 21:
-                case 22:
-                case 23:
-                case 24:
-                case 25:
-                case 26:
-                case 27:
-                case 28:
-                case 29:
-                case 30:
-                case 31:
-                    break;
-                }
             if (message.visible_in_game_list != null && message.hasOwnProperty("visible_in_game_list"))
                 if (typeof message.visible_in_game_list !== "boolean")
                     return "visible_in_game_list: boolean expected";
-            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
-                if (!$util.isInteger(message.status_percentage))
-                    return "status_percentage: integer expected";
             if (message.sort_as != null && message.hasOwnProperty("sort_as"))
                 if (!$util.isString(message.sort_as))
                     return "sort_as: string expected";
@@ -1662,15 +2103,9 @@
                 case -2147483648:
                     break;
                 }
-            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
-                if (!$util.isString(message.active_beta))
-                    return "active_beta: string expected";
             if (message.subscribed != null && message.hasOwnProperty("subscribed"))
                 if (typeof message.subscribed !== "boolean")
                     return "subscribed: boolean expected";
-            if (message.installed != null && message.hasOwnProperty("installed"))
-                if (typeof message.installed !== "boolean")
-                    return "installed: boolean expected";
             if (message.favorite != null && message.hasOwnProperty("favorite"))
                 if (typeof message.favorite !== "boolean")
                     return "favorite: boolean expected";
@@ -1750,9 +2185,6 @@
             if (message.icon_hash != null && message.hasOwnProperty("icon_hash"))
                 if (!$util.isString(message.icon_hash))
                     return "icon_hash: string expected";
-            if (message.icon_path != null && message.hasOwnProperty("icon_path"))
-                if (!$util.isString(message.icon_path))
-                    return "icon_path: string expected";
             if (message.logo_hash != null && message.hasOwnProperty("logo_hash"))
                 if (!$util.isString(message.logo_hash))
                     return "logo_hash: string expected";
@@ -1797,6 +2229,27 @@
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 if (!$util.isString(message.gameid))
                     return "gameid: string expected";
+            if (message.library_capsule_filename != null && message.hasOwnProperty("library_capsule_filename"))
+                if (!$util.isString(message.library_capsule_filename))
+                    return "library_capsule_filename: string expected";
+            if (message.per_client_data != null && message.hasOwnProperty("per_client_data")) {
+                if (!Array.isArray(message.per_client_data))
+                    return "per_client_data: array expected";
+                for (var i = 0; i < message.per_client_data.length; ++i) {
+                    var error = $root.CAppOverview_PerClientData.verify(message.per_client_data[i]);
+                    if (error)
+                        return "per_client_data." + error;
+                }
+            }
+            if (message.most_available_clientid != null && message.hasOwnProperty("most_available_clientid"))
+                if (!$util.isInteger(message.most_available_clientid) && !(message.most_available_clientid && $util.isInteger(message.most_available_clientid.low) && $util.isInteger(message.most_available_clientid.high)))
+                    return "most_available_clientid: integer|Long expected";
+            if (message.selected_clientid != null && message.hasOwnProperty("selected_clientid"))
+                if (!$util.isInteger(message.selected_clientid) && !(message.selected_clientid && $util.isInteger(message.selected_clientid.low) && $util.isInteger(message.selected_clientid.high)))
+                    return "selected_clientid: integer|Long expected";
+            if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
+                if (!$util.isInteger(message.rt_store_asset_mtime))
+                    return "rt_store_asset_mtime: integer expected";
             return null;
         };
     
@@ -1816,136 +2269,8 @@
                 message.appid = object.appid >>> 0;
             if (object.display_name != null)
                 message.display_name = String(object.display_name);
-            switch (object.display_status) {
-            case "k_EDisplayStatusLaunching":
-            case 1:
-                message.display_status = 1;
-                break;
-            case "k_EDisplayStatusUninstalling":
-            case 2:
-                message.display_status = 2;
-                break;
-            case "k_EDisplayStatusInstalling":
-            case 3:
-                message.display_status = 3;
-                break;
-            case "k_EDisplayStatusRunning":
-            case 4:
-                message.display_status = 4;
-                break;
-            case "k_EDisplayStatusValidating":
-            case 5:
-                message.display_status = 5;
-                break;
-            case "k_EDisplayStatusUpdating":
-            case 6:
-                message.display_status = 6;
-                break;
-            case "k_EDisplayStatusDownloading":
-            case 7:
-                message.display_status = 7;
-                break;
-            case "k_EDisplayStatusSynchronizing":
-            case 8:
-                message.display_status = 8;
-                break;
-            case "k_EDisplayStatusReadyToInstall":
-            case 9:
-                message.display_status = 9;
-                break;
-            case "k_EDisplayStatusReadyToPreload":
-            case 10:
-                message.display_status = 10;
-                break;
-            case "k_EDisplayStatusReadyToLaunch":
-            case 11:
-                message.display_status = 11;
-                break;
-            case "k_EDisplayStatusRegionRestricted":
-            case 12:
-                message.display_status = 12;
-                break;
-            case "k_EDisplayStatusPresaleOnly":
-            case 13:
-                message.display_status = 13;
-                break;
-            case "k_EDisplayStatusInvalidPlatform":
-            case 14:
-                message.display_status = 14;
-                break;
-            case "k_EDisplayStatusParentalBlocked":
-            case 15:
-                message.display_status = 15;
-                break;
-            case "k_EDisplayStatusPreloadOnly":
-            case 16:
-                message.display_status = 16;
-                break;
-            case "k_EDisplayStatusBorrowerLocked":
-            case 17:
-                message.display_status = 17;
-                break;
-            case "k_EDisplayStatusUpdatePaused":
-            case 18:
-                message.display_status = 18;
-                break;
-            case "k_EDisplayStatusUpdateQueued":
-            case 19:
-                message.display_status = 19;
-                break;
-            case "k_EDisplayStatusUpdateRequired":
-            case 20:
-                message.display_status = 20;
-                break;
-            case "k_EDisplayStatusUpdateDisabled":
-            case 21:
-                message.display_status = 21;
-                break;
-            case "k_EDisplayStatusDownloadPaused":
-            case 22:
-                message.display_status = 22;
-                break;
-            case "k_EDisplayStatusDownloadQueued":
-            case 23:
-                message.display_status = 23;
-                break;
-            case "k_EDisplayStatusDownloadRequired":
-            case 24:
-                message.display_status = 24;
-                break;
-            case "k_EDisplayStatusDownloadDisabled":
-            case 25:
-                message.display_status = 25;
-                break;
-            case "k_EDisplayStatusLicensePending":
-            case 26:
-                message.display_status = 26;
-                break;
-            case "k_EDisplayStatusLicenseExpired":
-            case 27:
-                message.display_status = 27;
-                break;
-            case "k_EDisplayStatusAvailForFree":
-            case 28:
-                message.display_status = 28;
-                break;
-            case "k_EDisplayStatusAvailToBorrow":
-            case 29:
-                message.display_status = 29;
-                break;
-            case "k_EDisplayStatusAvailGuestPass":
-            case 30:
-                message.display_status = 30;
-                break;
-            case "k_EDisplayStatusPurchase":
-            case 31:
-                message.display_status = 31;
-                break;
-            }
             if (object.visible_in_game_list != null)
                 message.visible_in_game_list = Boolean(object.visible_in_game_list);
-            if (object.status_percentage != null)
-                message.status_percentage = object.status_percentage >>> 0;
             if (object.sort_as != null)
                 message.sort_as = String(object.sort_as);
             switch (object.app_type) {
@@ -2030,12 +2355,8 @@
                 message.app_type = -2147483648;
                 break;
             }
-            if (object.active_beta != null)
-                message.active_beta = String(object.active_beta);
             if (object.subscribed != null)
                 message.subscribed = Boolean(object.subscribed);
-            if (object.installed != null)
-                message.installed = Boolean(object.installed);
             if (object.favorite != null)
                 message.favorite = Boolean(object.favorite);
             if (object.hidden != null)
@@ -2106,8 +2427,6 @@
                 message.rt_steam_release_date = object.rt_steam_release_date >>> 0;
             if (object.icon_hash != null)
                 message.icon_hash = String(object.icon_hash);
-            if (object.icon_path != null)
-                message.icon_path = String(object.icon_path);
             if (object.logo_hash != null)
                 message.logo_hash = String(object.logo_hash);
             switch (object.controller_support) {
@@ -2154,6 +2473,38 @@
                 message.icon_data_format = String(object.icon_data_format);
             if (object.gameid != null)
                 message.gameid = String(object.gameid);
+            if (object.library_capsule_filename != null)
+                message.library_capsule_filename = String(object.library_capsule_filename);
+            if (object.per_client_data) {
+                if (!Array.isArray(object.per_client_data))
+                    throw TypeError(".CAppOverview.per_client_data: array expected");
+                message.per_client_data = [];
+                for (var i = 0; i < object.per_client_data.length; ++i) {
+                    if (typeof object.per_client_data[i] !== "object")
+                        throw TypeError(".CAppOverview.per_client_data: object expected");
+                    message.per_client_data[i] = $root.CAppOverview_PerClientData.fromObject(object.per_client_data[i]);
+                }
+            }
+            if (object.most_available_clientid != null)
+                if ($util.Long)
+                    (message.most_available_clientid = $util.Long.fromValue(object.most_available_clientid)).unsigned = true;
+                else if (typeof object.most_available_clientid === "string")
+                    message.most_available_clientid = parseInt(object.most_available_clientid, 10);
+                else if (typeof object.most_available_clientid === "number")
+                    message.most_available_clientid = object.most_available_clientid;
+                else if (typeof object.most_available_clientid === "object")
+                    message.most_available_clientid = new $util.LongBits(object.most_available_clientid.low >>> 0, object.most_available_clientid.high >>> 0).toNumber(true);
+            if (object.selected_clientid != null)
+                if ($util.Long)
+                    (message.selected_clientid = $util.Long.fromValue(object.selected_clientid)).unsigned = true;
+                else if (typeof object.selected_clientid === "string")
+                    message.selected_clientid = parseInt(object.selected_clientid, 10);
+                else if (typeof object.selected_clientid === "number")
+                    message.selected_clientid = object.selected_clientid;
+                else if (typeof object.selected_clientid === "object")
+                    message.selected_clientid = new $util.LongBits(object.selected_clientid.low >>> 0, object.selected_clientid.high >>> 0).toNumber(true);
+            if (object.rt_store_asset_mtime != null)
+                message.rt_store_asset_mtime = object.rt_store_asset_mtime >>> 0;
             return message;
         };
     
@@ -2177,18 +2528,15 @@
                 object.genre = [];
                 object.store_category = [];
                 object.language_feature = [];
+                object.per_client_data = [];
             }
             if (options.defaults) {
                 object.appid = 0;
                 object.display_name = "";
-                object.display_status = options.enums === String ? "k_EDisplayStatusLaunching" : 1;
                 object.visible_in_game_list = false;
-                object.status_percentage = 0;
                 object.sort_as = "";
                 object.app_type = options.enums === String ? "k_EAppTypeInvalid" : 0;
-                object.active_beta = "";
                 object.subscribed = false;
-                object.installed = false;
                 object.favorite = false;
                 object.hidden = false;
                 object.mru_index = 0;
@@ -2200,7 +2548,6 @@
                 object.rt_original_release_date = 0;
                 object.rt_steam_release_date = 0;
                 object.icon_hash = "";
-                object.icon_path = "";
                 object.logo_hash = "";
                 object.controller_support = options.enums === String ? "k_EAppControllerSupportLevelNone" : 0;
                 object.vr_supported = false;
@@ -2217,27 +2564,31 @@
                 object.icon_data = "";
                 object.icon_data_format = "";
                 object.gameid = "";
+                object.library_capsule_filename = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.most_available_clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.most_available_clientid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.selected_clientid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.selected_clientid = options.longs === String ? "0" : 0;
+                object.rt_store_asset_mtime = 0;
             }
             if (message.appid != null && message.hasOwnProperty("appid"))
                 object.appid = message.appid;
             if (message.display_name != null && message.hasOwnProperty("display_name"))
                 object.display_name = message.display_name;
-            if (message.display_status != null && message.hasOwnProperty("display_status"))
-                object.display_status = options.enums === String ? $root.EDisplayStatus[message.display_status] : message.display_status;
             if (message.visible_in_game_list != null && message.hasOwnProperty("visible_in_game_list"))
                 object.visible_in_game_list = message.visible_in_game_list;
-            if (message.status_percentage != null && message.hasOwnProperty("status_percentage"))
-                object.status_percentage = message.status_percentage;
             if (message.sort_as != null && message.hasOwnProperty("sort_as"))
                 object.sort_as = message.sort_as;
             if (message.app_type != null && message.hasOwnProperty("app_type"))
                 object.app_type = options.enums === String ? $root.EProtoAppType[message.app_type] : message.app_type;
-            if (message.active_beta != null && message.hasOwnProperty("active_beta"))
-                object.active_beta = message.active_beta;
             if (message.subscribed != null && message.hasOwnProperty("subscribed"))
                 object.subscribed = message.subscribed;
-            if (message.installed != null && message.hasOwnProperty("installed"))
-                object.installed = message.installed;
             if (message.favorite != null && message.hasOwnProperty("favorite"))
                 object.favorite = message.favorite;
             if (message.hidden != null && message.hasOwnProperty("hidden"))
@@ -2290,8 +2641,6 @@
                 object.rt_steam_release_date = message.rt_steam_release_date;
             if (message.icon_hash != null && message.hasOwnProperty("icon_hash"))
                 object.icon_hash = message.icon_hash;
-            if (message.icon_path != null && message.hasOwnProperty("icon_path"))
-                object.icon_path = message.icon_path;
             if (message.logo_hash != null && message.hasOwnProperty("logo_hash"))
                 object.logo_hash = message.logo_hash;
             if (message.controller_support != null && message.hasOwnProperty("controller_support"))
@@ -2319,6 +2668,25 @@
                 object.icon_data_format = message.icon_data_format;
             if (message.gameid != null && message.hasOwnProperty("gameid"))
                 object.gameid = message.gameid;
+            if (message.library_capsule_filename != null && message.hasOwnProperty("library_capsule_filename"))
+                object.library_capsule_filename = message.library_capsule_filename;
+            if (message.per_client_data && message.per_client_data.length) {
+                object.per_client_data = [];
+                for (var j = 0; j < message.per_client_data.length; ++j)
+                    object.per_client_data[j] = $root.CAppOverview_PerClientData.toObject(message.per_client_data[j], options);
+            }
+            if (message.most_available_clientid != null && message.hasOwnProperty("most_available_clientid"))
+                if (typeof message.most_available_clientid === "number")
+                    object.most_available_clientid = options.longs === String ? String(message.most_available_clientid) : message.most_available_clientid;
+                else
+                    object.most_available_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.most_available_clientid) : options.longs === Number ? new $util.LongBits(message.most_available_clientid.low >>> 0, message.most_available_clientid.high >>> 0).toNumber(true) : message.most_available_clientid;
+            if (message.selected_clientid != null && message.hasOwnProperty("selected_clientid"))
+                if (typeof message.selected_clientid === "number")
+                    object.selected_clientid = options.longs === String ? String(message.selected_clientid) : message.selected_clientid;
+                else
+                    object.selected_clientid = options.longs === String ? $util.Long.prototype.toString.call(message.selected_clientid) : options.longs === Number ? new $util.LongBits(message.selected_clientid.low >>> 0, message.selected_clientid.high >>> 0).toNumber(true) : message.selected_clientid;
+            if (message.rt_store_asset_mtime != null && message.hasOwnProperty("rt_store_asset_mtime"))
+                object.rt_store_asset_mtime = message.rt_store_asset_mtime;
             return object;
         };
     

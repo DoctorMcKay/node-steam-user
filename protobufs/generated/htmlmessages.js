@@ -19586,6 +19586,216 @@
         return CMsgScalePageToValue;
     })();
     
+    $root.CMsgForcePopupsToDirectHWND = (function() {
+    
+        /**
+         * Properties of a CMsgForcePopupsToDirectHWND.
+         * @exports ICMsgForcePopupsToDirectHWND
+         * @interface ICMsgForcePopupsToDirectHWND
+         * @property {number|null} [browser_handle] CMsgForcePopupsToDirectHWND browser_handle
+         * @property {boolean|null} [force_direct_hwnd_popups] CMsgForcePopupsToDirectHWND force_direct_hwnd_popups
+         */
+    
+        /**
+         * Constructs a new CMsgForcePopupsToDirectHWND.
+         * @exports CMsgForcePopupsToDirectHWND
+         * @classdesc Represents a CMsgForcePopupsToDirectHWND.
+         * @implements ICMsgForcePopupsToDirectHWND
+         * @constructor
+         * @param {ICMsgForcePopupsToDirectHWND=} [properties] Properties to set
+         */
+        function CMsgForcePopupsToDirectHWND(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CMsgForcePopupsToDirectHWND browser_handle.
+         * @member {number} browser_handle
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @instance
+         */
+        CMsgForcePopupsToDirectHWND.prototype.browser_handle = 0;
+    
+        /**
+         * CMsgForcePopupsToDirectHWND force_direct_hwnd_popups.
+         * @member {boolean} force_direct_hwnd_popups
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @instance
+         */
+        CMsgForcePopupsToDirectHWND.prototype.force_direct_hwnd_popups = false;
+    
+        /**
+         * Creates a new CMsgForcePopupsToDirectHWND instance using the specified properties.
+         * @function create
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {ICMsgForcePopupsToDirectHWND=} [properties] Properties to set
+         * @returns {CMsgForcePopupsToDirectHWND} CMsgForcePopupsToDirectHWND instance
+         */
+        CMsgForcePopupsToDirectHWND.create = function create(properties) {
+            return new CMsgForcePopupsToDirectHWND(properties);
+        };
+    
+        /**
+         * Encodes the specified CMsgForcePopupsToDirectHWND message. Does not implicitly {@link CMsgForcePopupsToDirectHWND.verify|verify} messages.
+         * @function encode
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {ICMsgForcePopupsToDirectHWND} message CMsgForcePopupsToDirectHWND message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgForcePopupsToDirectHWND.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.browser_handle);
+            if (message.force_direct_hwnd_popups != null && message.hasOwnProperty("force_direct_hwnd_popups"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force_direct_hwnd_popups);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CMsgForcePopupsToDirectHWND message, length delimited. Does not implicitly {@link CMsgForcePopupsToDirectHWND.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {ICMsgForcePopupsToDirectHWND} message CMsgForcePopupsToDirectHWND message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CMsgForcePopupsToDirectHWND.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CMsgForcePopupsToDirectHWND message from the specified reader or buffer.
+         * @function decode
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CMsgForcePopupsToDirectHWND} CMsgForcePopupsToDirectHWND
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgForcePopupsToDirectHWND.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CMsgForcePopupsToDirectHWND();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.browser_handle = reader.uint32();
+                    break;
+                case 2:
+                    message.force_direct_hwnd_popups = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CMsgForcePopupsToDirectHWND message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CMsgForcePopupsToDirectHWND} CMsgForcePopupsToDirectHWND
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CMsgForcePopupsToDirectHWND.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CMsgForcePopupsToDirectHWND message.
+         * @function verify
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CMsgForcePopupsToDirectHWND.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                if (!$util.isInteger(message.browser_handle))
+                    return "browser_handle: integer expected";
+            if (message.force_direct_hwnd_popups != null && message.hasOwnProperty("force_direct_hwnd_popups"))
+                if (typeof message.force_direct_hwnd_popups !== "boolean")
+                    return "force_direct_hwnd_popups: boolean expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CMsgForcePopupsToDirectHWND message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CMsgForcePopupsToDirectHWND} CMsgForcePopupsToDirectHWND
+         */
+        CMsgForcePopupsToDirectHWND.fromObject = function fromObject(object) {
+            if (object instanceof $root.CMsgForcePopupsToDirectHWND)
+                return object;
+            var message = new $root.CMsgForcePopupsToDirectHWND();
+            if (object.browser_handle != null)
+                message.browser_handle = object.browser_handle >>> 0;
+            if (object.force_direct_hwnd_popups != null)
+                message.force_direct_hwnd_popups = Boolean(object.force_direct_hwnd_popups);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CMsgForcePopupsToDirectHWND message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @static
+         * @param {CMsgForcePopupsToDirectHWND} message CMsgForcePopupsToDirectHWND
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CMsgForcePopupsToDirectHWND.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.browser_handle = 0;
+                object.force_direct_hwnd_popups = false;
+            }
+            if (message.browser_handle != null && message.hasOwnProperty("browser_handle"))
+                object.browser_handle = message.browser_handle;
+            if (message.force_direct_hwnd_popups != null && message.hasOwnProperty("force_direct_hwnd_popups"))
+                object.force_direct_hwnd_popups = message.force_direct_hwnd_popups;
+            return object;
+        };
+    
+        /**
+         * Converts this CMsgForcePopupsToDirectHWND to JSON.
+         * @function toJSON
+         * @memberof CMsgForcePopupsToDirectHWND
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CMsgForcePopupsToDirectHWND.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CMsgForcePopupsToDirectHWND;
+    })();
+    
     $root.CMsgScalePageToValueResponse = (function() {
     
         /**

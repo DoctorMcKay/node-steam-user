@@ -3071,6 +3071,1265 @@
         return CPlayer_GetEmoticonList_Response;
     })();
     
+    $root.CPlayer_PostStatusToFriends_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_PostStatusToFriends_Request.
+         * @exports ICPlayer_PostStatusToFriends_Request
+         * @interface ICPlayer_PostStatusToFriends_Request
+         * @property {number|null} [appid] CPlayer_PostStatusToFriends_Request appid
+         * @property {string|null} [status_text] CPlayer_PostStatusToFriends_Request status_text
+         */
+    
+        /**
+         * Constructs a new CPlayer_PostStatusToFriends_Request.
+         * @exports CPlayer_PostStatusToFriends_Request
+         * @classdesc Represents a CPlayer_PostStatusToFriends_Request.
+         * @implements ICPlayer_PostStatusToFriends_Request
+         * @constructor
+         * @param {ICPlayer_PostStatusToFriends_Request=} [properties] Properties to set
+         */
+        function CPlayer_PostStatusToFriends_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_PostStatusToFriends_Request appid.
+         * @member {number} appid
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @instance
+         */
+        CPlayer_PostStatusToFriends_Request.prototype.appid = 0;
+    
+        /**
+         * CPlayer_PostStatusToFriends_Request status_text.
+         * @member {string} status_text
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @instance
+         */
+        CPlayer_PostStatusToFriends_Request.prototype.status_text = "";
+    
+        /**
+         * Creates a new CPlayer_PostStatusToFriends_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Request=} [properties] Properties to set
+         * @returns {CPlayer_PostStatusToFriends_Request} CPlayer_PostStatusToFriends_Request instance
+         */
+        CPlayer_PostStatusToFriends_Request.create = function create(properties) {
+            return new CPlayer_PostStatusToFriends_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Request message. Does not implicitly {@link CPlayer_PostStatusToFriends_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Request} message CPlayer_PostStatusToFriends_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.appid);
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status_text);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Request message, length delimited. Does not implicitly {@link CPlayer_PostStatusToFriends_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Request} message CPlayer_PostStatusToFriends_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_PostStatusToFriends_Request} CPlayer_PostStatusToFriends_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PostStatusToFriends_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.appid = reader.uint32();
+                    break;
+                case 2:
+                    message.status_text = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_PostStatusToFriends_Request} CPlayer_PostStatusToFriends_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_PostStatusToFriends_Request message.
+         * @function verify
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_PostStatusToFriends_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                if (!$util.isString(message.status_text))
+                    return "status_text: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_PostStatusToFriends_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_PostStatusToFriends_Request} CPlayer_PostStatusToFriends_Request
+         */
+        CPlayer_PostStatusToFriends_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_PostStatusToFriends_Request)
+                return object;
+            var message = new $root.CPlayer_PostStatusToFriends_Request();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.status_text != null)
+                message.status_text = String(object.status_text);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_PostStatusToFriends_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @static
+         * @param {CPlayer_PostStatusToFriends_Request} message CPlayer_PostStatusToFriends_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_PostStatusToFriends_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appid = 0;
+                object.status_text = "";
+            }
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                object.status_text = message.status_text;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_PostStatusToFriends_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_PostStatusToFriends_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_PostStatusToFriends_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_PostStatusToFriends_Request;
+    })();
+    
+    $root.CPlayer_PostStatusToFriends_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_PostStatusToFriends_Response.
+         * @exports ICPlayer_PostStatusToFriends_Response
+         * @interface ICPlayer_PostStatusToFriends_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_PostStatusToFriends_Response.
+         * @exports CPlayer_PostStatusToFriends_Response
+         * @classdesc Represents a CPlayer_PostStatusToFriends_Response.
+         * @implements ICPlayer_PostStatusToFriends_Response
+         * @constructor
+         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
+         */
+        function CPlayer_PostStatusToFriends_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_PostStatusToFriends_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response=} [properties] Properties to set
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response instance
+         */
+        CPlayer_PostStatusToFriends_Response.create = function create(properties) {
+            return new CPlayer_PostStatusToFriends_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Response message. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_PostStatusToFriends_Response message, length delimited. Does not implicitly {@link CPlayer_PostStatusToFriends_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {ICPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_PostStatusToFriends_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_PostStatusToFriends_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_PostStatusToFriends_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_PostStatusToFriends_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_PostStatusToFriends_Response message.
+         * @function verify
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_PostStatusToFriends_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_PostStatusToFriends_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_PostStatusToFriends_Response} CPlayer_PostStatusToFriends_Response
+         */
+        CPlayer_PostStatusToFriends_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_PostStatusToFriends_Response)
+                return object;
+            return new $root.CPlayer_PostStatusToFriends_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_PostStatusToFriends_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @static
+         * @param {CPlayer_PostStatusToFriends_Response} message CPlayer_PostStatusToFriends_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_PostStatusToFriends_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_PostStatusToFriends_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_PostStatusToFriends_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_PostStatusToFriends_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_PostStatusToFriends_Response;
+    })();
+    
+    $root.CPlayer_GetPostedStatus_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPostedStatus_Request.
+         * @exports ICPlayer_GetPostedStatus_Request
+         * @interface ICPlayer_GetPostedStatus_Request
+         * @property {number|Long|null} [steamid] CPlayer_GetPostedStatus_Request steamid
+         * @property {number|Long|null} [postid] CPlayer_GetPostedStatus_Request postid
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPostedStatus_Request.
+         * @exports CPlayer_GetPostedStatus_Request
+         * @classdesc Represents a CPlayer_GetPostedStatus_Request.
+         * @implements ICPlayer_GetPostedStatus_Request
+         * @constructor
+         * @param {ICPlayer_GetPostedStatus_Request=} [properties] Properties to set
+         */
+        function CPlayer_GetPostedStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPostedStatus_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_GetPostedStatus_Request postid.
+         * @member {number|Long} postid
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Request.prototype.postid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_GetPostedStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Request=} [properties] Properties to set
+         * @returns {CPlayer_GetPostedStatus_Request} CPlayer_GetPostedStatus_Request instance
+         */
+        CPlayer_GetPostedStatus_Request.create = function create(properties) {
+            return new CPlayer_GetPostedStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Request message. Does not implicitly {@link CPlayer_GetPostedStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Request} message CPlayer_GetPostedStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.steamid);
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.postid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Request message, length delimited. Does not implicitly {@link CPlayer_GetPostedStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Request} message CPlayer_GetPostedStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPostedStatus_Request} CPlayer_GetPostedStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPostedStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.uint64();
+                    break;
+                case 2:
+                    message.postid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPostedStatus_Request} CPlayer_GetPostedStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPostedStatus_Request message.
+         * @function verify
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPostedStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (!$util.isInteger(message.postid) && !(message.postid && $util.isInteger(message.postid.low) && $util.isInteger(message.postid.high)))
+                    return "postid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPostedStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPostedStatus_Request} CPlayer_GetPostedStatus_Request
+         */
+        CPlayer_GetPostedStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPostedStatus_Request)
+                return object;
+            var message = new $root.CPlayer_GetPostedStatus_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = true;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber(true);
+            if (object.postid != null)
+                if ($util.Long)
+                    (message.postid = $util.Long.fromValue(object.postid)).unsigned = true;
+                else if (typeof object.postid === "string")
+                    message.postid = parseInt(object.postid, 10);
+                else if (typeof object.postid === "number")
+                    message.postid = object.postid;
+                else if (typeof object.postid === "object")
+                    message.postid = new $util.LongBits(object.postid.low >>> 0, object.postid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPostedStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @static
+         * @param {CPlayer_GetPostedStatus_Request} message CPlayer_GetPostedStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPostedStatus_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.postid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.postid = options.longs === String ? "0" : 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber(true) : message.steamid;
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (typeof message.postid === "number")
+                    object.postid = options.longs === String ? String(message.postid) : message.postid;
+                else
+                    object.postid = options.longs === String ? $util.Long.prototype.toString.call(message.postid) : options.longs === Number ? new $util.LongBits(message.postid.low >>> 0, message.postid.high >>> 0).toNumber(true) : message.postid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPostedStatus_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPostedStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPostedStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPostedStatus_Request;
+    })();
+    
+    $root.CPlayer_GetPostedStatus_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_GetPostedStatus_Response.
+         * @exports ICPlayer_GetPostedStatus_Response
+         * @interface ICPlayer_GetPostedStatus_Response
+         * @property {number|null} [accountid] CPlayer_GetPostedStatus_Response accountid
+         * @property {number|Long|null} [postid] CPlayer_GetPostedStatus_Response postid
+         * @property {string|null} [status_text] CPlayer_GetPostedStatus_Response status_text
+         * @property {boolean|null} [deleted] CPlayer_GetPostedStatus_Response deleted
+         * @property {number|null} [appid] CPlayer_GetPostedStatus_Response appid
+         */
+    
+        /**
+         * Constructs a new CPlayer_GetPostedStatus_Response.
+         * @exports CPlayer_GetPostedStatus_Response
+         * @classdesc Represents a CPlayer_GetPostedStatus_Response.
+         * @implements ICPlayer_GetPostedStatus_Response
+         * @constructor
+         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
+         */
+        function CPlayer_GetPostedStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_GetPostedStatus_Response accountid.
+         * @member {number} accountid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.accountid = 0;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response postid.
+         * @member {number|Long} postid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.postid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response status_text.
+         * @member {string} status_text
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.status_text = "";
+    
+        /**
+         * CPlayer_GetPostedStatus_Response deleted.
+         * @member {boolean} deleted
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.deleted = false;
+    
+        /**
+         * CPlayer_GetPostedStatus_Response appid.
+         * @member {number} appid
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         */
+        CPlayer_GetPostedStatus_Response.prototype.appid = 0;
+    
+        /**
+         * Creates a new CPlayer_GetPostedStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response=} [properties] Properties to set
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response instance
+         */
+        CPlayer_GetPostedStatus_Response.create = function create(properties) {
+            return new CPlayer_GetPostedStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Response message. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.accountid);
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.postid);
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.status_text);
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deleted);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.appid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_GetPostedStatus_Response message, length delimited. Does not implicitly {@link CPlayer_GetPostedStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {ICPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_GetPostedStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_GetPostedStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.accountid = reader.uint32();
+                    break;
+                case 2:
+                    message.postid = reader.uint64();
+                    break;
+                case 3:
+                    message.status_text = reader.string();
+                    break;
+                case 4:
+                    message.deleted = reader.bool();
+                    break;
+                case 5:
+                    message.appid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_GetPostedStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_GetPostedStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_GetPostedStatus_Response message.
+         * @function verify
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_GetPostedStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                if (!$util.isInteger(message.accountid))
+                    return "accountid: integer expected";
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (!$util.isInteger(message.postid) && !(message.postid && $util.isInteger(message.postid.low) && $util.isInteger(message.postid.high)))
+                    return "postid: integer|Long expected";
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                if (!$util.isString(message.status_text))
+                    return "status_text: string expected";
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                if (typeof message.deleted !== "boolean")
+                    return "deleted: boolean expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_GetPostedStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_GetPostedStatus_Response} CPlayer_GetPostedStatus_Response
+         */
+        CPlayer_GetPostedStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_GetPostedStatus_Response)
+                return object;
+            var message = new $root.CPlayer_GetPostedStatus_Response();
+            if (object.accountid != null)
+                message.accountid = object.accountid >>> 0;
+            if (object.postid != null)
+                if ($util.Long)
+                    (message.postid = $util.Long.fromValue(object.postid)).unsigned = true;
+                else if (typeof object.postid === "string")
+                    message.postid = parseInt(object.postid, 10);
+                else if (typeof object.postid === "number")
+                    message.postid = object.postid;
+                else if (typeof object.postid === "object")
+                    message.postid = new $util.LongBits(object.postid.low >>> 0, object.postid.high >>> 0).toNumber(true);
+            if (object.status_text != null)
+                message.status_text = String(object.status_text);
+            if (object.deleted != null)
+                message.deleted = Boolean(object.deleted);
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_GetPostedStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @static
+         * @param {CPlayer_GetPostedStatus_Response} message CPlayer_GetPostedStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_GetPostedStatus_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.accountid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.postid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.postid = options.longs === String ? "0" : 0;
+                object.status_text = "";
+                object.deleted = false;
+                object.appid = 0;
+            }
+            if (message.accountid != null && message.hasOwnProperty("accountid"))
+                object.accountid = message.accountid;
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (typeof message.postid === "number")
+                    object.postid = options.longs === String ? String(message.postid) : message.postid;
+                else
+                    object.postid = options.longs === String ? $util.Long.prototype.toString.call(message.postid) : options.longs === Number ? new $util.LongBits(message.postid.low >>> 0, message.postid.high >>> 0).toNumber(true) : message.postid;
+            if (message.status_text != null && message.hasOwnProperty("status_text"))
+                object.status_text = message.status_text;
+            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                object.deleted = message.deleted;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_GetPostedStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_GetPostedStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_GetPostedStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_GetPostedStatus_Response;
+    })();
+    
+    $root.CPlayer_DeletePostedStatus_Request = (function() {
+    
+        /**
+         * Properties of a CPlayer_DeletePostedStatus_Request.
+         * @exports ICPlayer_DeletePostedStatus_Request
+         * @interface ICPlayer_DeletePostedStatus_Request
+         * @property {number|Long|null} [postid] CPlayer_DeletePostedStatus_Request postid
+         */
+    
+        /**
+         * Constructs a new CPlayer_DeletePostedStatus_Request.
+         * @exports CPlayer_DeletePostedStatus_Request
+         * @classdesc Represents a CPlayer_DeletePostedStatus_Request.
+         * @implements ICPlayer_DeletePostedStatus_Request
+         * @constructor
+         * @param {ICPlayer_DeletePostedStatus_Request=} [properties] Properties to set
+         */
+        function CPlayer_DeletePostedStatus_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CPlayer_DeletePostedStatus_Request postid.
+         * @member {number|Long} postid
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @instance
+         */
+        CPlayer_DeletePostedStatus_Request.prototype.postid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+        /**
+         * Creates a new CPlayer_DeletePostedStatus_Request instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Request=} [properties] Properties to set
+         * @returns {CPlayer_DeletePostedStatus_Request} CPlayer_DeletePostedStatus_Request instance
+         */
+        CPlayer_DeletePostedStatus_Request.create = function create(properties) {
+            return new CPlayer_DeletePostedStatus_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_DeletePostedStatus_Request message. Does not implicitly {@link CPlayer_DeletePostedStatus_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Request} message CPlayer_DeletePostedStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_DeletePostedStatus_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.postid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_DeletePostedStatus_Request message, length delimited. Does not implicitly {@link CPlayer_DeletePostedStatus_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Request} message CPlayer_DeletePostedStatus_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_DeletePostedStatus_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_DeletePostedStatus_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_DeletePostedStatus_Request} CPlayer_DeletePostedStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_DeletePostedStatus_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_DeletePostedStatus_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.postid = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_DeletePostedStatus_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_DeletePostedStatus_Request} CPlayer_DeletePostedStatus_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_DeletePostedStatus_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_DeletePostedStatus_Request message.
+         * @function verify
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_DeletePostedStatus_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (!$util.isInteger(message.postid) && !(message.postid && $util.isInteger(message.postid.low) && $util.isInteger(message.postid.high)))
+                    return "postid: integer|Long expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_DeletePostedStatus_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_DeletePostedStatus_Request} CPlayer_DeletePostedStatus_Request
+         */
+        CPlayer_DeletePostedStatus_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_DeletePostedStatus_Request)
+                return object;
+            var message = new $root.CPlayer_DeletePostedStatus_Request();
+            if (object.postid != null)
+                if ($util.Long)
+                    (message.postid = $util.Long.fromValue(object.postid)).unsigned = true;
+                else if (typeof object.postid === "string")
+                    message.postid = parseInt(object.postid, 10);
+                else if (typeof object.postid === "number")
+                    message.postid = object.postid;
+                else if (typeof object.postid === "object")
+                    message.postid = new $util.LongBits(object.postid.low >>> 0, object.postid.high >>> 0).toNumber(true);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_DeletePostedStatus_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @static
+         * @param {CPlayer_DeletePostedStatus_Request} message CPlayer_DeletePostedStatus_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_DeletePostedStatus_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.postid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.postid = options.longs === String ? "0" : 0;
+            if (message.postid != null && message.hasOwnProperty("postid"))
+                if (typeof message.postid === "number")
+                    object.postid = options.longs === String ? String(message.postid) : message.postid;
+                else
+                    object.postid = options.longs === String ? $util.Long.prototype.toString.call(message.postid) : options.longs === Number ? new $util.LongBits(message.postid.low >>> 0, message.postid.high >>> 0).toNumber(true) : message.postid;
+            return object;
+        };
+    
+        /**
+         * Converts this CPlayer_DeletePostedStatus_Request to JSON.
+         * @function toJSON
+         * @memberof CPlayer_DeletePostedStatus_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_DeletePostedStatus_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_DeletePostedStatus_Request;
+    })();
+    
+    $root.CPlayer_DeletePostedStatus_Response = (function() {
+    
+        /**
+         * Properties of a CPlayer_DeletePostedStatus_Response.
+         * @exports ICPlayer_DeletePostedStatus_Response
+         * @interface ICPlayer_DeletePostedStatus_Response
+         */
+    
+        /**
+         * Constructs a new CPlayer_DeletePostedStatus_Response.
+         * @exports CPlayer_DeletePostedStatus_Response
+         * @classdesc Represents a CPlayer_DeletePostedStatus_Response.
+         * @implements ICPlayer_DeletePostedStatus_Response
+         * @constructor
+         * @param {ICPlayer_DeletePostedStatus_Response=} [properties] Properties to set
+         */
+        function CPlayer_DeletePostedStatus_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Creates a new CPlayer_DeletePostedStatus_Response instance using the specified properties.
+         * @function create
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Response=} [properties] Properties to set
+         * @returns {CPlayer_DeletePostedStatus_Response} CPlayer_DeletePostedStatus_Response instance
+         */
+        CPlayer_DeletePostedStatus_Response.create = function create(properties) {
+            return new CPlayer_DeletePostedStatus_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CPlayer_DeletePostedStatus_Response message. Does not implicitly {@link CPlayer_DeletePostedStatus_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Response} message CPlayer_DeletePostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_DeletePostedStatus_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CPlayer_DeletePostedStatus_Response message, length delimited. Does not implicitly {@link CPlayer_DeletePostedStatus_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {ICPlayer_DeletePostedStatus_Response} message CPlayer_DeletePostedStatus_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CPlayer_DeletePostedStatus_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CPlayer_DeletePostedStatus_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CPlayer_DeletePostedStatus_Response} CPlayer_DeletePostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_DeletePostedStatus_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CPlayer_DeletePostedStatus_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CPlayer_DeletePostedStatus_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CPlayer_DeletePostedStatus_Response} CPlayer_DeletePostedStatus_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CPlayer_DeletePostedStatus_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CPlayer_DeletePostedStatus_Response message.
+         * @function verify
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CPlayer_DeletePostedStatus_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CPlayer_DeletePostedStatus_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CPlayer_DeletePostedStatus_Response} CPlayer_DeletePostedStatus_Response
+         */
+        CPlayer_DeletePostedStatus_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CPlayer_DeletePostedStatus_Response)
+                return object;
+            return new $root.CPlayer_DeletePostedStatus_Response();
+        };
+    
+        /**
+         * Creates a plain object from a CPlayer_DeletePostedStatus_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @static
+         * @param {CPlayer_DeletePostedStatus_Response} message CPlayer_DeletePostedStatus_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CPlayer_DeletePostedStatus_Response.toObject = function toObject() {
+            return {};
+        };
+    
+        /**
+         * Converts this CPlayer_DeletePostedStatus_Response to JSON.
+         * @function toJSON
+         * @memberof CPlayer_DeletePostedStatus_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CPlayer_DeletePostedStatus_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CPlayer_DeletePostedStatus_Response;
+    })();
+    
     $root.CPlayer_GetLastPlayedTimes_Request = (function() {
     
         /**
@@ -11416,6 +12675,105 @@
          * @instance
          * @param {ICPlayer_GetEmoticonList_Request} request CPlayer_GetEmoticonList_Request message or plain object
          * @returns {Promise<CPlayer_GetEmoticonList_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#postStatusToFriends}.
+         * @memberof Player
+         * @typedef PostStatusToFriendsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_PostStatusToFriends_Response} [response] CPlayer_PostStatusToFriends_Response
+         */
+    
+        /**
+         * Calls PostStatusToFriends.
+         * @function postStatusToFriends
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_PostStatusToFriends_Request} request CPlayer_PostStatusToFriends_Request message or plain object
+         * @param {Player.PostStatusToFriendsCallback} callback Node-style callback called with the error, if any, and CPlayer_PostStatusToFriends_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.postStatusToFriends = function postStatusToFriends(request, callback) {
+            return this.rpcCall(postStatusToFriends, $root.CPlayer_PostStatusToFriends_Request, $root.CPlayer_PostStatusToFriends_Response, request, callback);
+        }, "name", { value: "PostStatusToFriends" });
+    
+        /**
+         * Calls PostStatusToFriends.
+         * @function postStatusToFriends
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_PostStatusToFriends_Request} request CPlayer_PostStatusToFriends_Request message or plain object
+         * @returns {Promise<CPlayer_PostStatusToFriends_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#getPostedStatus}.
+         * @memberof Player
+         * @typedef GetPostedStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_GetPostedStatus_Response} [response] CPlayer_GetPostedStatus_Response
+         */
+    
+        /**
+         * Calls GetPostedStatus.
+         * @function getPostedStatus
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPostedStatus_Request} request CPlayer_GetPostedStatus_Request message or plain object
+         * @param {Player.GetPostedStatusCallback} callback Node-style callback called with the error, if any, and CPlayer_GetPostedStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.getPostedStatus = function getPostedStatus(request, callback) {
+            return this.rpcCall(getPostedStatus, $root.CPlayer_GetPostedStatus_Request, $root.CPlayer_GetPostedStatus_Response, request, callback);
+        }, "name", { value: "GetPostedStatus" });
+    
+        /**
+         * Calls GetPostedStatus.
+         * @function getPostedStatus
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_GetPostedStatus_Request} request CPlayer_GetPostedStatus_Request message or plain object
+         * @returns {Promise<CPlayer_GetPostedStatus_Response>} Promise
+         * @variation 2
+         */
+    
+        /**
+         * Callback as used by {@link Player#deletePostedStatus}.
+         * @memberof Player
+         * @typedef DeletePostedStatusCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CPlayer_DeletePostedStatus_Response} [response] CPlayer_DeletePostedStatus_Response
+         */
+    
+        /**
+         * Calls DeletePostedStatus.
+         * @function deletePostedStatus
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_DeletePostedStatus_Request} request CPlayer_DeletePostedStatus_Request message or plain object
+         * @param {Player.DeletePostedStatusCallback} callback Node-style callback called with the error, if any, and CPlayer_DeletePostedStatus_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Player.prototype.deletePostedStatus = function deletePostedStatus(request, callback) {
+            return this.rpcCall(deletePostedStatus, $root.CPlayer_DeletePostedStatus_Request, $root.CPlayer_DeletePostedStatus_Response, request, callback);
+        }, "name", { value: "DeletePostedStatus" });
+    
+        /**
+         * Calls DeletePostedStatus.
+         * @function deletePostedStatus
+         * @memberof Player
+         * @instance
+         * @param {ICPlayer_DeletePostedStatus_Request} request CPlayer_DeletePostedStatus_Request message or plain object
+         * @returns {Promise<CPlayer_DeletePostedStatus_Response>} Promise
          * @variation 2
          */
     

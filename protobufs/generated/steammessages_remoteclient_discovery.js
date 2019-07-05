@@ -2989,6 +2989,7 @@
          * @property {boolean|null} [network_test] CMsgRemoteDeviceStreamingRequest network_test
          * @property {number|Long|null} [client_id] CMsgRemoteDeviceStreamingRequest client_id
          * @property {Array.<EStreamTransport>|null} [supported_transport] CMsgRemoteDeviceStreamingRequest supported_transport
+         * @property {boolean|null} [restricted] CMsgRemoteDeviceStreamingRequest restricted
          */
     
         /**
@@ -3120,6 +3121,14 @@
         CMsgRemoteDeviceStreamingRequest.prototype.supported_transport = $util.emptyArray;
     
         /**
+         * CMsgRemoteDeviceStreamingRequest restricted.
+         * @member {boolean} restricted
+         * @memberof CMsgRemoteDeviceStreamingRequest
+         * @instance
+         */
+        CMsgRemoteDeviceStreamingRequest.prototype.restricted = false;
+    
+        /**
          * Creates a new CMsgRemoteDeviceStreamingRequest instance using the specified properties.
          * @function create
          * @memberof CMsgRemoteDeviceStreamingRequest
@@ -3171,6 +3180,8 @@
             if (message.supported_transport != null && message.supported_transport.length)
                 for (var i = 0; i < message.supported_transport.length; ++i)
                     writer.uint32(/* id 14, wireType 0 =*/112).int32(message.supported_transport[i]);
+            if (message.restricted != null && message.hasOwnProperty("restricted"))
+                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.restricted);
             return writer;
         };
     
@@ -3253,6 +3264,9 @@
                             message.supported_transport.push(reader.int32());
                     } else
                         message.supported_transport.push(reader.int32());
+                    break;
+                case 15:
+                    message.restricted = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3343,6 +3357,9 @@
                         break;
                     }
             }
+            if (message.restricted != null && message.hasOwnProperty("restricted"))
+                if (typeof message.restricted !== "boolean")
+                    return "restricted: boolean expected";
             return null;
         };
     
@@ -3422,6 +3439,8 @@
                         break;
                     }
             }
+            if (object.restricted != null)
+                message.restricted = Boolean(object.restricted);
             return message;
         };
     
@@ -3470,6 +3489,7 @@
                     object.client_id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.client_id = options.longs === String ? "0" : 0;
+                object.restricted = false;
             }
             if (message.request_id != null && message.hasOwnProperty("request_id"))
                 object.request_id = message.request_id;
@@ -3505,6 +3525,8 @@
                 for (var j = 0; j < message.supported_transport.length; ++j)
                     object.supported_transport[j] = options.enums === String ? $root.EStreamTransport[message.supported_transport[j]] : message.supported_transport[j];
             }
+            if (message.restricted != null && message.hasOwnProperty("restricted"))
+                object.restricted = message.restricted;
             return object;
         };
     

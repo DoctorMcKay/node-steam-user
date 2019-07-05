@@ -289,6 +289,7 @@
          * @property {string|null} [proxy_request_path_template] CContentServerDirectory_ServerInfo proxy_request_path_template
          * @property {string|null} [https_support] CContentServerDirectory_ServerInfo https_support
          * @property {Array.<number>|null} [allowed_app_ids] CContentServerDirectory_ServerInfo allowed_app_ids
+         * @property {boolean|null} [preferred_server] CContentServerDirectory_ServerInfo preferred_server
          */
     
         /**
@@ -412,6 +413,14 @@
         CContentServerDirectory_ServerInfo.prototype.allowed_app_ids = $util.emptyArray;
     
         /**
+         * CContentServerDirectory_ServerInfo preferred_server.
+         * @member {boolean} preferred_server
+         * @memberof CContentServerDirectory_ServerInfo
+         * @instance
+         */
+        CContentServerDirectory_ServerInfo.prototype.preferred_server = false;
+    
+        /**
          * Creates a new CContentServerDirectory_ServerInfo instance using the specified properties.
          * @function create
          * @memberof CContentServerDirectory_ServerInfo
@@ -462,6 +471,8 @@
             if (message.allowed_app_ids != null && message.allowed_app_ids.length)
                 for (var i = 0; i < message.allowed_app_ids.length; ++i)
                     writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.allowed_app_ids[i]);
+            if (message.preferred_server != null && message.hasOwnProperty("preferred_server"))
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.preferred_server);
             return writer;
         };
     
@@ -542,6 +553,9 @@
                     } else
                         message.allowed_app_ids.push(reader.uint32());
                     break;
+                case 14:
+                    message.preferred_server = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -620,6 +634,9 @@
                     if (!$util.isInteger(message.allowed_app_ids[i]))
                         return "allowed_app_ids: integer[] expected";
             }
+            if (message.preferred_server != null && message.hasOwnProperty("preferred_server"))
+                if (typeof message.preferred_server !== "boolean")
+                    return "preferred_server: boolean expected";
             return null;
         };
     
@@ -666,6 +683,8 @@
                 for (var i = 0; i < object.allowed_app_ids.length; ++i)
                     message.allowed_app_ids[i] = object.allowed_app_ids[i] >>> 0;
             }
+            if (object.preferred_server != null)
+                message.preferred_server = Boolean(object.preferred_server);
             return message;
         };
     
@@ -697,6 +716,7 @@
                 object.use_as_proxy = false;
                 object.proxy_request_path_template = "";
                 object.https_support = "";
+                object.preferred_server = false;
             }
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = message.type;
@@ -727,6 +747,8 @@
                 for (var j = 0; j < message.allowed_app_ids.length; ++j)
                     object.allowed_app_ids[j] = message.allowed_app_ids[j];
             }
+            if (message.preferred_server != null && message.hasOwnProperty("preferred_server"))
+                object.preferred_server = message.preferred_server;
             return object;
         };
     

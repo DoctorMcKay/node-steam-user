@@ -127,6 +127,7 @@
      * @property {number} k_EStreamControlInputTouchFingerMotion=118 k_EStreamControlInputTouchFingerMotion value
      * @property {number} k_EStreamControlInputTouchFingerUp=119 k_EStreamControlInputTouchFingerUp value
      * @property {number} k_EStreamControlSetCaptureSize=120 k_EStreamControlSetCaptureSize value
+     * @property {number} k_EStreamControlSetFlashState=121 k_EStreamControlSetFlashState value
      */
     $root.EStreamControlMessage = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -203,6 +204,7 @@
         values[valuesById[118] = "k_EStreamControlInputTouchFingerMotion"] = 118;
         values[valuesById[119] = "k_EStreamControlInputTouchFingerUp"] = 119;
         values[valuesById[120] = "k_EStreamControlSetCaptureSize"] = 120;
+        values[valuesById[121] = "k_EStreamControlSetFlashState"] = 121;
         return values;
     })();
     
@@ -9720,6 +9722,238 @@
         };
     
         return CSetIconMsg;
+    })();
+    
+    $root.CSetFlashStateMsg = (function() {
+    
+        /**
+         * Properties of a CSetFlashStateMsg.
+         * @exports ICSetFlashStateMsg
+         * @interface ICSetFlashStateMsg
+         * @property {number|null} [flags] CSetFlashStateMsg flags
+         * @property {number|null} [count] CSetFlashStateMsg count
+         * @property {number|null} [timeout_ms] CSetFlashStateMsg timeout_ms
+         */
+    
+        /**
+         * Constructs a new CSetFlashStateMsg.
+         * @exports CSetFlashStateMsg
+         * @classdesc Represents a CSetFlashStateMsg.
+         * @implements ICSetFlashStateMsg
+         * @constructor
+         * @param {ICSetFlashStateMsg=} [properties] Properties to set
+         */
+        function CSetFlashStateMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CSetFlashStateMsg flags.
+         * @member {number} flags
+         * @memberof CSetFlashStateMsg
+         * @instance
+         */
+        CSetFlashStateMsg.prototype.flags = 0;
+    
+        /**
+         * CSetFlashStateMsg count.
+         * @member {number} count
+         * @memberof CSetFlashStateMsg
+         * @instance
+         */
+        CSetFlashStateMsg.prototype.count = 0;
+    
+        /**
+         * CSetFlashStateMsg timeout_ms.
+         * @member {number} timeout_ms
+         * @memberof CSetFlashStateMsg
+         * @instance
+         */
+        CSetFlashStateMsg.prototype.timeout_ms = 0;
+    
+        /**
+         * Creates a new CSetFlashStateMsg instance using the specified properties.
+         * @function create
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {ICSetFlashStateMsg=} [properties] Properties to set
+         * @returns {CSetFlashStateMsg} CSetFlashStateMsg instance
+         */
+        CSetFlashStateMsg.create = function create(properties) {
+            return new CSetFlashStateMsg(properties);
+        };
+    
+        /**
+         * Encodes the specified CSetFlashStateMsg message. Does not implicitly {@link CSetFlashStateMsg.verify|verify} messages.
+         * @function encode
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {ICSetFlashStateMsg} message CSetFlashStateMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetFlashStateMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.flags);
+            if (message.count != null && message.hasOwnProperty("count"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count);
+            if (message.timeout_ms != null && message.hasOwnProperty("timeout_ms"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.timeout_ms);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CSetFlashStateMsg message, length delimited. Does not implicitly {@link CSetFlashStateMsg.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {ICSetFlashStateMsg} message CSetFlashStateMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CSetFlashStateMsg.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CSetFlashStateMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CSetFlashStateMsg} CSetFlashStateMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetFlashStateMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CSetFlashStateMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.flags = reader.uint32();
+                    break;
+                case 2:
+                    message.count = reader.uint32();
+                    break;
+                case 3:
+                    message.timeout_ms = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CSetFlashStateMsg message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CSetFlashStateMsg} CSetFlashStateMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CSetFlashStateMsg.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CSetFlashStateMsg message.
+         * @function verify
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CSetFlashStateMsg.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                if (!$util.isInteger(message.flags))
+                    return "flags: integer expected";
+            if (message.count != null && message.hasOwnProperty("count"))
+                if (!$util.isInteger(message.count))
+                    return "count: integer expected";
+            if (message.timeout_ms != null && message.hasOwnProperty("timeout_ms"))
+                if (!$util.isInteger(message.timeout_ms))
+                    return "timeout_ms: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CSetFlashStateMsg message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CSetFlashStateMsg} CSetFlashStateMsg
+         */
+        CSetFlashStateMsg.fromObject = function fromObject(object) {
+            if (object instanceof $root.CSetFlashStateMsg)
+                return object;
+            var message = new $root.CSetFlashStateMsg();
+            if (object.flags != null)
+                message.flags = object.flags >>> 0;
+            if (object.count != null)
+                message.count = object.count >>> 0;
+            if (object.timeout_ms != null)
+                message.timeout_ms = object.timeout_ms >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CSetFlashStateMsg message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CSetFlashStateMsg
+         * @static
+         * @param {CSetFlashStateMsg} message CSetFlashStateMsg
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CSetFlashStateMsg.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.flags = 0;
+                object.count = 0;
+                object.timeout_ms = 0;
+            }
+            if (message.flags != null && message.hasOwnProperty("flags"))
+                object.flags = message.flags;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            if (message.timeout_ms != null && message.hasOwnProperty("timeout_ms"))
+                object.timeout_ms = message.timeout_ms;
+            return object;
+        };
+    
+        /**
+         * Converts this CSetFlashStateMsg to JSON.
+         * @function toJSON
+         * @memberof CSetFlashStateMsg
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CSetFlashStateMsg.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CSetFlashStateMsg;
     })();
     
     $root.CShowCursorMsg = (function() {

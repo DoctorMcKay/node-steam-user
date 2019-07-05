@@ -3801,6 +3801,744 @@
         return CAccountLinking_GetLinkedAccountInfo_Response;
     })();
     
+    $root.CEmbeddedClient_AuthorizeCurrentDevice_Request = (function() {
+    
+        /**
+         * Properties of a CEmbeddedClient_AuthorizeCurrentDevice_Request.
+         * @exports ICEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @interface ICEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @property {number|Long|null} [steamid] CEmbeddedClient_AuthorizeCurrentDevice_Request steamid
+         * @property {number|null} [appid] CEmbeddedClient_AuthorizeCurrentDevice_Request appid
+         * @property {string|null} [device_info] CEmbeddedClient_AuthorizeCurrentDevice_Request device_info
+         */
+    
+        /**
+         * Constructs a new CEmbeddedClient_AuthorizeCurrentDevice_Request.
+         * @exports CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @classdesc Represents a CEmbeddedClient_AuthorizeCurrentDevice_Request.
+         * @implements ICEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @constructor
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request=} [properties] Properties to set
+         */
+        function CEmbeddedClient_AuthorizeCurrentDevice_Request(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CEmbeddedClient_AuthorizeCurrentDevice_Request steamid.
+         * @member {number|Long} steamid
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CEmbeddedClient_AuthorizeCurrentDevice_Request appid.
+         * @member {number} appid
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.appid = 0;
+    
+        /**
+         * CEmbeddedClient_AuthorizeCurrentDevice_Request device_info.
+         * @member {string} device_info
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.device_info = "";
+    
+        /**
+         * Creates a new CEmbeddedClient_AuthorizeCurrentDevice_Request instance using the specified properties.
+         * @function create
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request=} [properties] Properties to set
+         * @returns {CEmbeddedClient_AuthorizeCurrentDevice_Request} CEmbeddedClient_AuthorizeCurrentDevice_Request instance
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.create = function create(properties) {
+            return new CEmbeddedClient_AuthorizeCurrentDevice_Request(properties);
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_AuthorizeCurrentDevice_Request message. Does not implicitly {@link CEmbeddedClient_AuthorizeCurrentDevice_Request.verify|verify} messages.
+         * @function encode
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request} message CEmbeddedClient_AuthorizeCurrentDevice_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.appid);
+            if (message.device_info != null && message.hasOwnProperty("device_info"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.device_info);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_AuthorizeCurrentDevice_Request message, length delimited. Does not implicitly {@link CEmbeddedClient_AuthorizeCurrentDevice_Request.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request} message CEmbeddedClient_AuthorizeCurrentDevice_Request message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_AuthorizeCurrentDevice_Request message from the specified reader or buffer.
+         * @function decode
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CEmbeddedClient_AuthorizeCurrentDevice_Request} CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEmbeddedClient_AuthorizeCurrentDevice_Request();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.appid = reader.uint32();
+                    break;
+                case 3:
+                    message.device_info = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_AuthorizeCurrentDevice_Request message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CEmbeddedClient_AuthorizeCurrentDevice_Request} CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CEmbeddedClient_AuthorizeCurrentDevice_Request message.
+         * @function verify
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                if (!$util.isInteger(message.appid))
+                    return "appid: integer expected";
+            if (message.device_info != null && message.hasOwnProperty("device_info"))
+                if (!$util.isString(message.device_info))
+                    return "device_info: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CEmbeddedClient_AuthorizeCurrentDevice_Request message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CEmbeddedClient_AuthorizeCurrentDevice_Request} CEmbeddedClient_AuthorizeCurrentDevice_Request
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.fromObject = function fromObject(object) {
+            if (object instanceof $root.CEmbeddedClient_AuthorizeCurrentDevice_Request)
+                return object;
+            var message = new $root.CEmbeddedClient_AuthorizeCurrentDevice_Request();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.appid != null)
+                message.appid = object.appid >>> 0;
+            if (object.device_info != null)
+                message.device_info = String(object.device_info);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CEmbeddedClient_AuthorizeCurrentDevice_Request message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @static
+         * @param {CEmbeddedClient_AuthorizeCurrentDevice_Request} message CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                object.appid = 0;
+                object.device_info = "";
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.appid != null && message.hasOwnProperty("appid"))
+                object.appid = message.appid;
+            if (message.device_info != null && message.hasOwnProperty("device_info"))
+                object.device_info = message.device_info;
+            return object;
+        };
+    
+        /**
+         * Converts this CEmbeddedClient_AuthorizeCurrentDevice_Request to JSON.
+         * @function toJSON
+         * @memberof CEmbeddedClient_AuthorizeCurrentDevice_Request
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CEmbeddedClient_AuthorizeCurrentDevice_Request.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CEmbeddedClient_AuthorizeCurrentDevice_Request;
+    })();
+    
+    $root.CEmbeddedClient_Token = (function() {
+    
+        /**
+         * Properties of a CEmbeddedClient_Token.
+         * @exports ICEmbeddedClient_Token
+         * @interface ICEmbeddedClient_Token
+         * @property {number|Long|null} [steamid] CEmbeddedClient_Token steamid
+         * @property {Uint8Array|null} [client_token] CEmbeddedClient_Token client_token
+         * @property {number|null} [expiry] CEmbeddedClient_Token expiry
+         * @property {number|null} [deviceid] CEmbeddedClient_Token deviceid
+         */
+    
+        /**
+         * Constructs a new CEmbeddedClient_Token.
+         * @exports CEmbeddedClient_Token
+         * @classdesc Represents a CEmbeddedClient_Token.
+         * @implements ICEmbeddedClient_Token
+         * @constructor
+         * @param {ICEmbeddedClient_Token=} [properties] Properties to set
+         */
+        function CEmbeddedClient_Token(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CEmbeddedClient_Token steamid.
+         * @member {number|Long} steamid
+         * @memberof CEmbeddedClient_Token
+         * @instance
+         */
+        CEmbeddedClient_Token.prototype.steamid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+        /**
+         * CEmbeddedClient_Token client_token.
+         * @member {Uint8Array} client_token
+         * @memberof CEmbeddedClient_Token
+         * @instance
+         */
+        CEmbeddedClient_Token.prototype.client_token = $util.newBuffer([]);
+    
+        /**
+         * CEmbeddedClient_Token expiry.
+         * @member {number} expiry
+         * @memberof CEmbeddedClient_Token
+         * @instance
+         */
+        CEmbeddedClient_Token.prototype.expiry = 0;
+    
+        /**
+         * CEmbeddedClient_Token deviceid.
+         * @member {number} deviceid
+         * @memberof CEmbeddedClient_Token
+         * @instance
+         */
+        CEmbeddedClient_Token.prototype.deviceid = 0;
+    
+        /**
+         * Creates a new CEmbeddedClient_Token instance using the specified properties.
+         * @function create
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {ICEmbeddedClient_Token=} [properties] Properties to set
+         * @returns {CEmbeddedClient_Token} CEmbeddedClient_Token instance
+         */
+        CEmbeddedClient_Token.create = function create(properties) {
+            return new CEmbeddedClient_Token(properties);
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_Token message. Does not implicitly {@link CEmbeddedClient_Token.verify|verify} messages.
+         * @function encode
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {ICEmbeddedClient_Token} message CEmbeddedClient_Token message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_Token.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                writer.uint32(/* id 1, wireType 1 =*/9).fixed64(message.steamid);
+            if (message.client_token != null && message.hasOwnProperty("client_token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.client_token);
+            if (message.expiry != null && message.hasOwnProperty("expiry"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.expiry);
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.deviceid);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_Token message, length delimited. Does not implicitly {@link CEmbeddedClient_Token.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {ICEmbeddedClient_Token} message CEmbeddedClient_Token message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_Token.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_Token message from the specified reader or buffer.
+         * @function decode
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CEmbeddedClient_Token} CEmbeddedClient_Token
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_Token.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEmbeddedClient_Token();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.steamid = reader.fixed64();
+                    break;
+                case 2:
+                    message.client_token = reader.bytes();
+                    break;
+                case 3:
+                    message.expiry = reader.uint32();
+                    break;
+                case 4:
+                    message.deviceid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_Token message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CEmbeddedClient_Token} CEmbeddedClient_Token
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_Token.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CEmbeddedClient_Token message.
+         * @function verify
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CEmbeddedClient_Token.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (!$util.isInteger(message.steamid) && !(message.steamid && $util.isInteger(message.steamid.low) && $util.isInteger(message.steamid.high)))
+                    return "steamid: integer|Long expected";
+            if (message.client_token != null && message.hasOwnProperty("client_token"))
+                if (!(message.client_token && typeof message.client_token.length === "number" || $util.isString(message.client_token)))
+                    return "client_token: buffer expected";
+            if (message.expiry != null && message.hasOwnProperty("expiry"))
+                if (!$util.isInteger(message.expiry))
+                    return "expiry: integer expected";
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                if (!$util.isInteger(message.deviceid))
+                    return "deviceid: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a CEmbeddedClient_Token message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CEmbeddedClient_Token} CEmbeddedClient_Token
+         */
+        CEmbeddedClient_Token.fromObject = function fromObject(object) {
+            if (object instanceof $root.CEmbeddedClient_Token)
+                return object;
+            var message = new $root.CEmbeddedClient_Token();
+            if (object.steamid != null)
+                if ($util.Long)
+                    (message.steamid = $util.Long.fromValue(object.steamid)).unsigned = false;
+                else if (typeof object.steamid === "string")
+                    message.steamid = parseInt(object.steamid, 10);
+                else if (typeof object.steamid === "number")
+                    message.steamid = object.steamid;
+                else if (typeof object.steamid === "object")
+                    message.steamid = new $util.LongBits(object.steamid.low >>> 0, object.steamid.high >>> 0).toNumber();
+            if (object.client_token != null)
+                if (typeof object.client_token === "string")
+                    $util.base64.decode(object.client_token, message.client_token = $util.newBuffer($util.base64.length(object.client_token)), 0);
+                else if (object.client_token.length)
+                    message.client_token = object.client_token;
+            if (object.expiry != null)
+                message.expiry = object.expiry >>> 0;
+            if (object.deviceid != null)
+                message.deviceid = object.deviceid >>> 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CEmbeddedClient_Token message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CEmbeddedClient_Token
+         * @static
+         * @param {CEmbeddedClient_Token} message CEmbeddedClient_Token
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CEmbeddedClient_Token.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.steamid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.steamid = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.client_token = "";
+                else {
+                    object.client_token = [];
+                    if (options.bytes !== Array)
+                        object.client_token = $util.newBuffer(object.client_token);
+                }
+                object.expiry = 0;
+                object.deviceid = 0;
+            }
+            if (message.steamid != null && message.hasOwnProperty("steamid"))
+                if (typeof message.steamid === "number")
+                    object.steamid = options.longs === String ? String(message.steamid) : message.steamid;
+                else
+                    object.steamid = options.longs === String ? $util.Long.prototype.toString.call(message.steamid) : options.longs === Number ? new $util.LongBits(message.steamid.low >>> 0, message.steamid.high >>> 0).toNumber() : message.steamid;
+            if (message.client_token != null && message.hasOwnProperty("client_token"))
+                object.client_token = options.bytes === String ? $util.base64.encode(message.client_token, 0, message.client_token.length) : options.bytes === Array ? Array.prototype.slice.call(message.client_token) : message.client_token;
+            if (message.expiry != null && message.hasOwnProperty("expiry"))
+                object.expiry = message.expiry;
+            if (message.deviceid != null && message.hasOwnProperty("deviceid"))
+                object.deviceid = message.deviceid;
+            return object;
+        };
+    
+        /**
+         * Converts this CEmbeddedClient_Token to JSON.
+         * @function toJSON
+         * @memberof CEmbeddedClient_Token
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CEmbeddedClient_Token.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CEmbeddedClient_Token;
+    })();
+    
+    $root.CEmbeddedClient_AuthorizeDevice_Response = (function() {
+    
+        /**
+         * Properties of a CEmbeddedClient_AuthorizeDevice_Response.
+         * @exports ICEmbeddedClient_AuthorizeDevice_Response
+         * @interface ICEmbeddedClient_AuthorizeDevice_Response
+         * @property {number|null} [result] CEmbeddedClient_AuthorizeDevice_Response result
+         * @property {ICEmbeddedClient_Token|null} [token] CEmbeddedClient_AuthorizeDevice_Response token
+         */
+    
+        /**
+         * Constructs a new CEmbeddedClient_AuthorizeDevice_Response.
+         * @exports CEmbeddedClient_AuthorizeDevice_Response
+         * @classdesc Represents a CEmbeddedClient_AuthorizeDevice_Response.
+         * @implements ICEmbeddedClient_AuthorizeDevice_Response
+         * @constructor
+         * @param {ICEmbeddedClient_AuthorizeDevice_Response=} [properties] Properties to set
+         */
+        function CEmbeddedClient_AuthorizeDevice_Response(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * CEmbeddedClient_AuthorizeDevice_Response result.
+         * @member {number} result
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.prototype.result = 0;
+    
+        /**
+         * CEmbeddedClient_AuthorizeDevice_Response token.
+         * @member {ICEmbeddedClient_Token|null|undefined} token
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @instance
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.prototype.token = null;
+    
+        /**
+         * Creates a new CEmbeddedClient_AuthorizeDevice_Response instance using the specified properties.
+         * @function create
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeDevice_Response=} [properties] Properties to set
+         * @returns {CEmbeddedClient_AuthorizeDevice_Response} CEmbeddedClient_AuthorizeDevice_Response instance
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.create = function create(properties) {
+            return new CEmbeddedClient_AuthorizeDevice_Response(properties);
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_AuthorizeDevice_Response message. Does not implicitly {@link CEmbeddedClient_AuthorizeDevice_Response.verify|verify} messages.
+         * @function encode
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeDevice_Response} message CEmbeddedClient_AuthorizeDevice_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.result != null && message.hasOwnProperty("result"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.result);
+            if (message.token != null && message.hasOwnProperty("token"))
+                $root.CEmbeddedClient_Token.encode(message.token, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified CEmbeddedClient_AuthorizeDevice_Response message, length delimited. Does not implicitly {@link CEmbeddedClient_AuthorizeDevice_Response.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {ICEmbeddedClient_AuthorizeDevice_Response} message CEmbeddedClient_AuthorizeDevice_Response message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_AuthorizeDevice_Response message from the specified reader or buffer.
+         * @function decode
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CEmbeddedClient_AuthorizeDevice_Response} CEmbeddedClient_AuthorizeDevice_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEmbeddedClient_AuthorizeDevice_Response();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.result = reader.uint32();
+                    break;
+                case 2:
+                    message.token = $root.CEmbeddedClient_Token.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a CEmbeddedClient_AuthorizeDevice_Response message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {CEmbeddedClient_AuthorizeDevice_Response} CEmbeddedClient_AuthorizeDevice_Response
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a CEmbeddedClient_AuthorizeDevice_Response message.
+         * @function verify
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.result != null && message.hasOwnProperty("result"))
+                if (!$util.isInteger(message.result))
+                    return "result: integer expected";
+            if (message.token != null && message.hasOwnProperty("token")) {
+                var error = $root.CEmbeddedClient_Token.verify(message.token);
+                if (error)
+                    return "token." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a CEmbeddedClient_AuthorizeDevice_Response message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {CEmbeddedClient_AuthorizeDevice_Response} CEmbeddedClient_AuthorizeDevice_Response
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.fromObject = function fromObject(object) {
+            if (object instanceof $root.CEmbeddedClient_AuthorizeDevice_Response)
+                return object;
+            var message = new $root.CEmbeddedClient_AuthorizeDevice_Response();
+            if (object.result != null)
+                message.result = object.result >>> 0;
+            if (object.token != null) {
+                if (typeof object.token !== "object")
+                    throw TypeError(".CEmbeddedClient_AuthorizeDevice_Response.token: object expected");
+                message.token = $root.CEmbeddedClient_Token.fromObject(object.token);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a CEmbeddedClient_AuthorizeDevice_Response message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @static
+         * @param {CEmbeddedClient_AuthorizeDevice_Response} message CEmbeddedClient_AuthorizeDevice_Response
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.result = 0;
+                object.token = null;
+            }
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = message.result;
+            if (message.token != null && message.hasOwnProperty("token"))
+                object.token = $root.CEmbeddedClient_Token.toObject(message.token, options);
+            return object;
+        };
+    
+        /**
+         * Converts this CEmbeddedClient_AuthorizeDevice_Response to JSON.
+         * @function toJSON
+         * @memberof CEmbeddedClient_AuthorizeDevice_Response
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CEmbeddedClient_AuthorizeDevice_Response.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        return CEmbeddedClient_AuthorizeDevice_Response;
+    })();
+    
     $root.UserAccount = (function() {
     
         /**
@@ -4133,6 +4871,74 @@
          */
     
         return AccountLinking;
+    })();
+    
+    $root.EmbeddedClient = (function() {
+    
+        /**
+         * Constructs a new EmbeddedClient service.
+         * @exports EmbeddedClient
+         * @classdesc Represents an EmbeddedClient
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function EmbeddedClient(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+    
+        (EmbeddedClient.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = EmbeddedClient;
+    
+        /**
+         * Creates new EmbeddedClient service using the specified rpc implementation.
+         * @function create
+         * @memberof EmbeddedClient
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {EmbeddedClient} RPC service. Useful where requests and/or responses are streamed.
+         */
+        EmbeddedClient.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+    
+        /**
+         * Callback as used by {@link EmbeddedClient#authorizeCurrentDevice}.
+         * @memberof EmbeddedClient
+         * @typedef AuthorizeCurrentDeviceCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {CEmbeddedClient_AuthorizeDevice_Response} [response] CEmbeddedClient_AuthorizeDevice_Response
+         */
+    
+        /**
+         * Calls AuthorizeCurrentDevice.
+         * @function authorizeCurrentDevice
+         * @memberof EmbeddedClient
+         * @instance
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request} request CEmbeddedClient_AuthorizeCurrentDevice_Request message or plain object
+         * @param {EmbeddedClient.AuthorizeCurrentDeviceCallback} callback Node-style callback called with the error, if any, and CEmbeddedClient_AuthorizeDevice_Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(EmbeddedClient.prototype.authorizeCurrentDevice = function authorizeCurrentDevice(request, callback) {
+            return this.rpcCall(authorizeCurrentDevice, $root.CEmbeddedClient_AuthorizeCurrentDevice_Request, $root.CEmbeddedClient_AuthorizeDevice_Response, request, callback);
+        }, "name", { value: "AuthorizeCurrentDevice" });
+    
+        /**
+         * Calls AuthorizeCurrentDevice.
+         * @function authorizeCurrentDevice
+         * @memberof EmbeddedClient
+         * @instance
+         * @param {ICEmbeddedClient_AuthorizeCurrentDevice_Request} request CEmbeddedClient_AuthorizeCurrentDevice_Request message or plain object
+         * @returns {Promise<CEmbeddedClient_AuthorizeDevice_Response>} Promise
+         * @variation 2
+         */
+    
+        return EmbeddedClient;
     })();
     
     /**

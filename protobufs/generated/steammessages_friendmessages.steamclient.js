@@ -900,6 +900,7 @@
          * @exports ICFriendsMessages_GetActiveMessageSessions_Request
          * @interface ICFriendsMessages_GetActiveMessageSessions_Request
          * @property {number|null} [lastmessage_since] CFriendsMessages_GetActiveMessageSessions_Request lastmessage_since
+         * @property {boolean|null} [only_sessions_with_messages] CFriendsMessages_GetActiveMessageSessions_Request only_sessions_with_messages
          */
     
         /**
@@ -924,6 +925,14 @@
          * @instance
          */
         CFriendsMessages_GetActiveMessageSessions_Request.prototype.lastmessage_since = 0;
+    
+        /**
+         * CFriendsMessages_GetActiveMessageSessions_Request only_sessions_with_messages.
+         * @member {boolean} only_sessions_with_messages
+         * @memberof CFriendsMessages_GetActiveMessageSessions_Request
+         * @instance
+         */
+        CFriendsMessages_GetActiveMessageSessions_Request.prototype.only_sessions_with_messages = false;
     
         /**
          * Creates a new CFriendsMessages_GetActiveMessageSessions_Request instance using the specified properties.
@@ -951,6 +960,8 @@
                 writer = $Writer.create();
             if (message.lastmessage_since != null && message.hasOwnProperty("lastmessage_since"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.lastmessage_since);
+            if (message.only_sessions_with_messages != null && message.hasOwnProperty("only_sessions_with_messages"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.only_sessions_with_messages);
             return writer;
         };
     
@@ -987,6 +998,9 @@
                 switch (tag >>> 3) {
                 case 1:
                     message.lastmessage_since = reader.uint32();
+                    break;
+                case 2:
+                    message.only_sessions_with_messages = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1026,6 +1040,9 @@
             if (message.lastmessage_since != null && message.hasOwnProperty("lastmessage_since"))
                 if (!$util.isInteger(message.lastmessage_since))
                     return "lastmessage_since: integer expected";
+            if (message.only_sessions_with_messages != null && message.hasOwnProperty("only_sessions_with_messages"))
+                if (typeof message.only_sessions_with_messages !== "boolean")
+                    return "only_sessions_with_messages: boolean expected";
             return null;
         };
     
@@ -1043,6 +1060,8 @@
             var message = new $root.CFriendsMessages_GetActiveMessageSessions_Request();
             if (object.lastmessage_since != null)
                 message.lastmessage_since = object.lastmessage_since >>> 0;
+            if (object.only_sessions_with_messages != null)
+                message.only_sessions_with_messages = Boolean(object.only_sessions_with_messages);
             return message;
         };
     
@@ -1059,10 +1078,14 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.lastmessage_since = 0;
+                object.only_sessions_with_messages = false;
+            }
             if (message.lastmessage_since != null && message.hasOwnProperty("lastmessage_since"))
                 object.lastmessage_since = message.lastmessage_since;
+            if (message.only_sessions_with_messages != null && message.hasOwnProperty("only_sessions_with_messages"))
+                object.only_sessions_with_messages = message.only_sessions_with_messages;
             return object;
         };
     
