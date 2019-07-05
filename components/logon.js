@@ -13,6 +13,7 @@ const WebSocketConnection = require('./connection_protocols/websocket.js');
 const EResult = SteamUser.EResult;
 
 const PROTOCOL_VERSION = 65580;
+const PRIVATE_IP_OBFUSCATION_MASK = 0xbaadf00d;
 
 SteamUser.prototype.logOn = function(details) {
 	// Delay the actual logon by one tick, so if users call logOn from the error event they won't get a crash because
@@ -40,10 +41,15 @@ SteamUser.prototype.logOn = function(details) {
 			// We're not logging on with saved details
 			details = details || {};
 
-			let maxUint32 = Math.pow(2, 32) - 1;
-			if (details.logonID && details.logonID > maxUint32) {
-				process.stderr.write("[steam-user] Warning: logonID " + details.logonID + " is greater than " + maxUint32 + " and has been truncated.\n");
-				details.logonID = maxUint32;
+			let logonId = details.logonID;
+			if (logonId) {
+				let maxUint32 = Math.pow(2, 32) - 1;
+				if (typeof logonId == 'string' && logonId.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)) {
+					logonId = StdLib.IPv4.stringToInt(logonId) ^ PRIVATE_IP_OBFUSCATION_MASK;
+				} else if (typeof logonId == 'number' && logonId > maxUint32) {
+					console.error("[steam-user] Warning: logonID " + details.logonID + " is greater than " + maxUint32 + " and has been truncated.");
+					logonId = maxUint32;
+				}
 			}
 
 			this._logOnDetails = {
@@ -53,7 +59,7 @@ SteamUser.prototype.logOn = function(details) {
 				"auth_code": details.authCode,
 				"two_factor_code": details.twoFactorCode,
 				"should_remember_password": !!details.rememberPassword,
-				"obfuscated_private_ip": {"v4": details.logonID || 0},
+				"obfuscated_private_ip": {"v4": logonId || 0},
 				"protocol_version": PROTOCOL_VERSION,
 				"supports_rate_limit_response": !!details.accountName,
 				"machine_name": details.accountName ? (details.machineName || "") : "",
