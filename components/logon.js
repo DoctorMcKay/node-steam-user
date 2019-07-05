@@ -72,7 +72,7 @@ SteamUser.prototype.logOn = function(details) {
 		if (this._logOnDetails.web_logon_nonce) {
 			this._logOnDetails.client_os_type = 4294966596;
 			this._logOnDetails.ui_mode = 4;
-			delete this._logOnDetails.obfustucated_private_ip;
+			delete this._logOnDetails.obfuscated_private_ip;
 			delete this._logOnDetails.cell_id;
 			delete this._logOnDetails.client_language;
 			delete this._logOnDetails.should_remember_password;
