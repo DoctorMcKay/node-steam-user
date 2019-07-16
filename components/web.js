@@ -43,6 +43,9 @@ SteamUser.prototype._webAuthenticate = function(nonce) {
 	this._apiRequest("POST", "ISteamUserAuth", "AuthenticateUser", 1, data, (err, res) => {
 		if (err) {
 			this.emit('debug', 'Error in AuthenticateUser: ' + err.message);
+			if (err.message == 'HTTP error 429') {
+				this._webauthTimeout = 50000;
+			}
 			fail();
 		} else if (!res.authenticateuser || (!res.authenticateuser.token && !res.authenticateuser.tokensecure)) {
 			this.emit('debug', 'Error in AuthenticateUser: malformed response');
