@@ -108,43 +108,36 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 };
 
 SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
-	return StdLib.Promises.callbackPromise(['appOwnershipTicket'], callback, (accept, reject) => {
-		let getNewTicket = () => {
-			this._send(SteamUser.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, (body) => {
-				let err = Helpers.eresultError(body.eresult);
-				if (err) {
-					return reject(err);
-				}
-
-				if (body.app_id != appid) {
-					return reject(new Error("Cannot get app ownership ticket"));
-				}
-
-				let ticket = body.ticket;
-				if (ticket && ticket.length > 10 && this.options.saveAppTickets && this.storage) {
-					this.storage.saveFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", ticket);
-				}
-
-				accept({"appOwnershipTicket": ticket});
-			});
-		};
-
+	return StdLib.Promises.callbackPromise(['appOwnershipTicket'], callback, async (accept, reject) => {
 		// See if we have one saved
-		if (this.storage) {
-			this.storage.readFile("appOwnershipTicket_" + this.steamID + "_" + appid + ".bin", (err, file) => {
-				if (!err && file) {
-					let parsed = SteamUser.parseAppTicket(file);
-					// Only return the saved ticket if it has a valid signature, expires more than 6 hours from now, and has the same external IP as we have right now.
-					if (parsed && parsed.isValid && parsed.ownershipTicketExpires - Date.now() >= (1000 * 60 * 60 * 6) && parsed.ownershipTicketExternalIP == this.publicIP) {
-						return accept({"appOwnershipTicket": file});
-					}
-				}
-
-				getNewTicket();
-			});
-		} else {
-			getNewTicket();
+		let filename = `appOwnershipTicket_${this.steamID}_${appid}.bin`;
+		let file = await this._readFile(filename);
+		if (file) {
+			let parsed = SteamUser.parseAppTicket(file);
+			// Only return the saved ticket if it has a valid signature, expires more than 6 hours from now, and has the same external IP as we have right now.
+			if (parsed && parsed.isValid && parsed.ownershipTicketExpires - Date.now() >= (1000 * 60 * 60 * 6) && parsed.ownershipTicketExternalIP == this.publicIP) {
+				return accept({"appOwnershipTicket": file});
+			}
 		}
+
+		// No saved ticket, we'll have to get a new one
+		this._send(SteamUser.EMsg.ClientGetAppOwnershipTicket, {"app_id": appid}, async (body) => {
+			let err = Helpers.eresultError(body.eresult);
+			if (err) {
+				return reject(err);
+			}
+
+			if (body.app_id != appid) {
+				return reject(new Error("Cannot get app ownership ticket"));
+			}
+
+			let ticket = body.ticket;
+			if (ticket && ticket.length > 10 && this.options.saveAppTickets) {
+				await this._saveFile(filename, ticket);
+			}
+
+			accept({"appOwnershipTicket": ticket});
+		});
 	});
 };
 

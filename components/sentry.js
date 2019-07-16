@@ -16,12 +16,11 @@ SteamUser.prototype._getSentryFilename = function() {
 
 // Handlers
 
-SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateMachineAuth, function(body, hdr, callback) {
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUpdateMachineAuth, async function(body, hdr, callback) {
 	// TODO: Handle partial updates
-	if (this.storage) {
-		this.storage.writeFile(this._getSentryFilename(), body.bytes);
-	}
 
+	this.emit('debug', 'Got new sentry file');
+	await this._saveFile(this._getSentryFilename(), body.bytes);
 	this.emit('sentry', body.bytes);
 
 	// Accept the sentry

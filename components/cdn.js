@@ -83,28 +83,28 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 	appID = parseInt(appID, 10);
 	depotID = parseInt(depotID, 10);
 
-	return StdLib.Promises.callbackPromise(['key'], callback, (accept, reject) => {
-		this.storage.readFile("depot_key_" + appID + "_" + depotID + ".bin", (err, file) => {
-			if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
-				return accept({"key": file.slice(4)});
+	return StdLib.Promises.callbackPromise(['key'], callback, async (accept, reject) => {
+		let filename = `depot_key_${appID}_${depotID}.bin`;
+		let file = await this._readFile(filename);
+		if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
+			return accept({"key": file.slice(4)});
+		}
+
+		this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, async (body) => {
+			if (body.eresult != SteamUser.EResult.OK) {
+				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, (body) => {
-				if (body.eresult != SteamUser.EResult.OK) {
-					return reject(Helpers.eresultError(body.eresult));
-				}
+			if (body.depot_id != depotID) {
+				return reject(new Error("Did not receive decryption key for correct depot"));
+			}
 
-				if (body.depot_id != depotID) {
-					return reject(new Error("Did not receive decryption key for correct depot"));
-				}
+			let key = body.depot_encryption_key;
+			file = Buffer.concat([Buffer.alloc(4), key]);
+			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
 
-				let key = body.depot_encryption_key;
-				let file = Buffer.concat([new Buffer(4), key]);
-				file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
-				this.storage.writeFile("depot_key_" + appID + "_" + depotID + ".bin", file, () => {
-					return accept({key});
-				});
-			});
+			await this._saveFile(filename, file);
+			return accept({key});
 		});
 	});
 };
