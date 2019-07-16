@@ -721,7 +721,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientPersonaState, funct
 
 			for (let i in processedUser) {
 				if (processedUser.hasOwnProperty(i) && processedUser[i] !== null) {
-					this.users[sid][i] = processedUser[i];
+					this.users[sid64][i] = processedUser[i];
 				}
 			}
 		});
