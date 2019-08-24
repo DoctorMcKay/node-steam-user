@@ -390,6 +390,13 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 				parental.steamid = sid;
 			}
 
+			if (!this.steamID && body.client_supplied_steamid) {
+				// This should ordinarily not happen. this.steamID is supposed to be set in messages.js according to
+				// the SteamID in the message header. But apparently, sometimes Steam doesn't set that SteamID
+				// appropriately in the log on response message. ¯\_(ツ)_/¯
+				this.steamID = new SteamID(body.client_supplied_steamid);
+			}
+
 			this.emit('loggedOn', body, parental);
 			this.emit('contentServersReady');
 
