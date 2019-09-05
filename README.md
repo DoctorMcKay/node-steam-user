@@ -1198,6 +1198,11 @@ Removes a friend to a friends group (also known as a tag within the official Ste
 
 Send a trade request to the specified user. Listen for the [`tradeResponse`](#traderesponse) event for their response.
 
+**Note: Valve seems to have dropped real-time trade requests from the Steam UI, in favor of trade offers. However,
+real-time trades are not fully deprecated as they can still be initiated from inside of some games, for example TF2.
+Users using the Steam client will not see real-time trade requests that your bots send them, but bots should still be
+able to send and accept trade requests amongst themselves.**
+
 ### cancelTradeRequest(steamID)
 - `steamID` - Either a `SteamID` object or a string which can parse into one
 
