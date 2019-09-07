@@ -1,5 +1,3 @@
-require('@doctormckay/stats-reporter').setup(require('./package.json'));
-
 const AppDirectory = require('appdirectory');
 const FileManager = require('file-manager');
 
