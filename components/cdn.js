@@ -1,7 +1,7 @@
 const AdmZip = require('adm-zip');
 const ByteBuffer = require('bytebuffer');
 const FS = require('fs');
-const LZMA = require('lzma');
+const lzma = require('lzma-native');
 const StdLib = require('@doctormckay/stdlib');
 const SteamCrypto = require('@doctormckay/steam-crypto');
 const VDF = require('vdf');
@@ -606,7 +606,7 @@ function unzip(data, callback) {
 		uncompressedSizeBuffer.writeUInt32LE(decompressedSize, 0);
 		uncompressedSizeBuffer.writeUInt32LE(0, 4);
 
-		LZMA.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), (result, err) => {
+		lzma.decompress(Buffer.concat([properties, uncompressedSizeBuffer, compressedData.toBuffer()]), (result, err) => {
 			if (err) {
 				callback(err);
 				return;

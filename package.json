@@ -30,7 +30,7 @@
 		"binarykvparser": "^2.2.0",
 		"bytebuffer": "^5.0.0",
 		"file-manager": "^2.0.0",
-		"lzma": "^2.3.2",
+		"lzma-native": "^4.0.5",
 		"protobufjs": "^6.8.8",
 		"steam-appticket": "^1.0.0",
 		"steam-totp": "^2.0.1",
