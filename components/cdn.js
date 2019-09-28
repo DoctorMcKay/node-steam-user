@@ -348,7 +348,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 					}
 
 					outputFd = fd;
-					FS.truncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
+					FS.ftruncate(outputFd, parseInt(fileManifest.size, 10), (err) => {
 						if (err) {
 							FS.closeSync(outputFd);
 							return reject(err);
