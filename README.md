@@ -706,7 +706,7 @@ Requests a list of game servers from the master server.
 
 ### getServerList(filter, limit, callback)
 - `filter` - A master server [filter string](https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol#Filter)
-- `limit` - How many servers should be returned, at maximum. Hard limit is 5000.
+- `limit` - How many servers should be returned, at maximum. Hard limit is 20,000.
 - `callback` - Called when the requested data is available
     - `err` - An `Error` object on failure, or `null` on success
 	- `servers` - An array of objects containing server data
