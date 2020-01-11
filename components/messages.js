@@ -469,7 +469,9 @@ SteamUser.prototype._handleNetMessage = function(buffer) {
 
 	let sessionID = (header.proto && header.proto.client_sessionid) || header.sessionID;
 	let steamID = (header.proto && header.proto.steamid) || header.steamID;
-	if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != this.steamID.toString())) {
+	let ourCurrentSteamID = this.steamID ? this.steamID.toString() : null;
+	if (steamID && sessionID && (sessionID != this._sessionID || steamID.toString() != ourCurrentSteamID)) {
+		// TODO if we get a new sessionid, should we check if it matches a previously-closed session? probably not necessary...
 		this._sessionID = sessionID;
 		this.steamID = new SteamID(steamID.toString());
 		delete this._tempSteamID;
