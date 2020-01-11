@@ -421,6 +421,11 @@ SteamUser.prototype._resetChangelistUpdateTimer = function() {
 	this._clearChangelistUpdateTimer();
 
 	if (this.options.enablePicsCache && this.options.changelistUpdateInterval) {
+		if (this.options.changelistUpdateInterval < 1000) {
+			this._warn(`Option changelistUpdateInterval with value '${this.options.changelistUpdateInterval}' is below the required minimum of '1000'. Clamping to '1000'.`);
+			this.options.changelistUpdateInterval = 1000;
+		}
+
 		this._changelistUpdateTimer = setTimeout(this._getChangelistUpdate.bind(this), this.options.changelistUpdateInterval);
 	}
 };
