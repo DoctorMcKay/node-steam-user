@@ -16,6 +16,7 @@ SteamUser.EPurchaseResult = require('./resources/EPurchaseResult.js');
 SteamUser.EPrivacyState = require('./resources/EPrivacyState.js');
 
 require('./resources/enums.js');
+const DefaultOptions = require('./resources/default_options.js');
 
 function SteamUser(options) {
 	this.steamID = null;
@@ -71,33 +72,17 @@ function SteamUser(options) {
 
 	this.options = options || {};
 
-	let defaultOptions = {
-		"protocol": SteamUser.EConnectionProtocol.Auto,
-		"httpProxy": null,
-		"localAddress": null,
-		"localPort": null,
-		"autoRelogin": true,
-		"singleSentryfile": false,
-		"machineIdType": SteamUser.EMachineIDType.AccountNameGenerated,
-		"machineIdFormat": ["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_name}", "SteamUser Hash 3B3 {account_name}"],
-		"enablePicsCache": false,
-		"picsCacheAll": false,
-		"changelistUpdateInterval": 60000,
-		"saveAppTickets": true,
-		"additionalHeaders": {},
-		"language": "english",
-		"webCompatibilityMode": false
-	};
-
-	for (let i in defaultOptions) {
-		if (!defaultOptions.hasOwnProperty(i)) {
+	for (let i in DefaultOptions) {
+		if (!DefaultOptions.hasOwnProperty(i)) {
 			continue;
 		}
 
 		if (typeof this.options[i] === 'undefined') {
-			this.options[i] = defaultOptions[i];
+			this.options[i] = DefaultOptions[i];
 		}
 	}
+
+	this._checkOptionTypes();
 
 	if (!this.options.dataDirectory && this.options.dataDirectory !== null) {
 		if (process.env.OPENSHIFT_DATA_DIR) {
@@ -115,14 +100,43 @@ function SteamUser(options) {
 	}
 
 	if (this.options.webCompatibilityMode && this.options.protocol == SteamUser.EConnectionProtocol.TCP) {
-		process.stderr.write("[steam-user] Warning: webCompatibilityMode is enabled so connection protocol is being forced to WebSocket\n");
+		this._warn('webCompatibilityMode is enabled so connection protocol is being forced to WebSocket.');
 	}
 }
 
 SteamUser.prototype.packageName = require('./package.json').name;
 SteamUser.prototype.packageVersion = require('./package.json').version;
 
+/**
+ * Set a configuration option.
+ * @param {string} option
+ * @param {*} value
+ */
 SteamUser.prototype.setOption = function(option, value) {
+	this._setOption(option, value);
+	this._checkOptionTypes();
+};
+
+/**
+ * Set one or more configuration options
+ * @param {object} options
+ */
+SteamUser.prototype.setOptions = function(options) {
+	for (let i in options) {
+		this._setOption(i, options[i]);
+	}
+
+	this._checkOptionTypes();
+};
+
+/**
+ * Actually commit an option change. This is a separate method since user-facing methods need to be able to call
+ * _checkOptionTypes() but we also want to be able to change options internally without calling it.
+ * @param {string} option
+ * @param {*} value
+ * @private
+ */
+SteamUser.prototype._setOption = function(option, value) {
 	this.options[option] = value;
 
 	// Handle anything that needs to happen when particular options update
@@ -151,20 +165,54 @@ SteamUser.prototype.setOption = function(option, value) {
 				(option == 'webCompatibilityMode' && value && this.options.protocol == SteamUser.EConnectionProtocol.TCP) ||
 				(option == 'protocol' && value == SteamUser.EConnectionProtocol.TCP && this.options.webCompatibilityMode)
 			) {
-				process.stderr.write("[steam-user] Warning: webCompatibilityMode is enabled so connection protocol is being forced to WebSocket\n");
+				this._warn('webCompatibilityMode is enabled so connection protocol is being forced to WebSocket');
 			}
 			break;
 	}
 };
 
-SteamUser.prototype.setOptions = function(options) {
-	for (let i in options) {
-		if (!options.hasOwnProperty(i)) {
+SteamUser.prototype._checkOptionTypes = function() {
+	// We'll infer types from DefaultOptions, but stuff that's null (for example) needs to be defined explicitly
+	let types = {
+		httpProxy: 'string',
+		localAddress: 'string',
+		localPort: 'number',
+		machineIdFormat: 'array'
+	};
+
+	for (let opt in DefaultOptions) {
+		if (types[opt]) {
+			// already specified
 			continue;
 		}
 
-		this.setOption(i, options[i]);
+		types[opt] = typeof DefaultOptions[opt];
 	}
+
+	for (let opt in this.options) {
+		if (!types[opt]) {
+			// no type specified for this option, so bail
+			continue;
+		}
+
+		let requiredType = types[opt];
+		let providedType = typeof this.options[opt];
+		if (providedType == 'object' && Array.isArray(this.options[opt])) {
+			providedType = 'array';
+		} else if (requiredType == 'number' && providedType == 'string' && !isNaN(this.options[opt])) {
+			providedType = 'number';
+			this.options[opt] = parseFloat(this.options[opt]);
+		}
+
+		if (this.options[opt] !== null && requiredType != providedType) {
+			this._warn(`Incorrect type '${providedType}' provided for option ${opt}, '${requiredType}' expected. Resetting to default value ${DefaultOptions[opt]}`);
+			this._setOption(opt, DefaultOptions[opt]);
+		}
+	}
+};
+
+SteamUser.prototype._warn = function(msg) {
+	process.stderr.write(`[steam-user] Warning: ${msg}\n`);
 };
 
 SteamUser.prototype._handlers = {};

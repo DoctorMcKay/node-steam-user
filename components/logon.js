@@ -47,7 +47,7 @@ SteamUser.prototype.logOn = function(details) {
 				if (typeof logonId == 'string' && logonId.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)) {
 					logonId = StdLib.IPv4.stringToInt(logonId) ^ PRIVATE_IP_OBFUSCATION_MASK;
 				} else if (typeof logonId == 'number' && logonId > maxUint32) {
-					console.error("[steam-user] Warning: logonID " + details.logonID + " is greater than " + maxUint32 + " and has been truncated.");
+					this._warn(`logonID ${details.logonID} is greater than ${maxUint32} and has been truncated.`);
 					logonId = maxUint32;
 				}
 			}
@@ -212,7 +212,7 @@ SteamUser.prototype.logOn = function(details) {
 		}
 
 		if (anonLogin && this._logOnDetails.password) {
-			process.stderr.write("[steam-user] Warning: Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?\n");
+			this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
 		}
 
 		this._doConnection();
