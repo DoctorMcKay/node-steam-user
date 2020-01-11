@@ -188,11 +188,12 @@ Defaults to `false`.
 ### changelistUpdateInterval
 
 If `enablePicsCache` is enabled, then `node-steam-user` will automatically request app/package changes (via
-`getProductChanges`) for known apps and packages, and update the internal cache when they update. Set to `0` to disable.
+`getProductChanges`) for known apps and packages, and update the internal cache when they update. This is the frequency,
+in milliseconds, for changelist update requests. Set to `0` to disable.
 
 Added in 3.3.0.
 
-Defaults to `60000`.
+Defaults to `60000`. Minimum value `1000`, although you're recommended to not go below 10 seconds or so.
 
 ### additionalHeaders
 
