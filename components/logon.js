@@ -211,7 +211,7 @@ SteamUser.prototype.logOn = function(details) {
 			this._tempSteamID = sid;
 		}
 
-		if (anonLogin && this._logOnDetails.password) {
+		if (anonLogin && (this._logOnDetails.password || this._logOnDetails.login_key)) {
 			this._warn('Logging into anonymous Steam account but a password was specified... did you specify your accountName improperly?');
 		}
 
