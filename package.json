@@ -32,7 +32,7 @@
 		"file-manager": "^2.0.0",
 		"lzma": "^2.3.2",
 		"protobufjs": "^6.8.8",
-		"steam-appticket": "^1.0.0",
+		"steam-appticket": "^1.0.1",
 		"steam-totp": "^2.0.1",
 		"steamid": "^1.1.0",
 		"vdf": "^0.0.2",
