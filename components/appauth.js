@@ -190,7 +190,7 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 				"steamid": isOurTicket ? 0 : sid,
 				"gameid": appid,
 				"h_steam_pipe": this._hSteamPipe,
-				"ticket_crc": CRC32.unsigned(authTicket),
+				"ticket_crc": StdLib.Hashing.crc32(authTicket),
 				"ticket": authTicket
 			});
 
