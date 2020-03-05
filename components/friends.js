@@ -118,7 +118,7 @@ SteamUser.prototype.unblockUser = function(steamID, callback) {
 
 /**
  * Create a new quick-invite link that can be used by any Steam user to directly add you as a friend.
- * @param {{invite_limit?: int}} [options]
+ * @param {{invite_limit?: int, invite_duration?: int}} [options]
  * @param {function} [callback]
  * @returns {Promise}
  */
@@ -131,9 +131,9 @@ SteamUser.prototype.createQuickInviteLink = function(options, callback) {
 	options = options || {};
 
 	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
-		this._sendUnified("UserAccount.CreateFriendInviteToken#1", {
-			"invite_limit": options.invite_limit || 1,
-			// there's invite_duration, but if it's anything other than null then the token can't be redeemed (eresult 8)
+		this._sendUnified('UserAccount.CreateFriendInviteToken#1', {
+			invite_limit: options.invite_limit || 1,
+			invite_duration: options.invite_duration || null
 			// there's also invite_note, but this doesn't appear to be used anywhere so we don't support it
 		}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
