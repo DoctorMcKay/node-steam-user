@@ -157,16 +157,16 @@ Defaults to `["SteamUser Hash BB3 {account_name}", "SteamUser Hash FF2 {account_
 
 ### enablePicsCache
 
-If enabled, then `node-steam-user` will internally cache data about all apps and packages that it knows about.
+If enabled, then `node-steam-user` will internally cache data in memory about all apps and packages that it knows about.
 Currently, `node-steam-user` "knows about" an app/package if:
 
 - Packages
-    - You own it
+    - You own it, or
     - You request info about it via `getProductInfo`
 - Apps
-    - It's in a known package
-    - You request info about it via `getProductInfo`
-    - A friend who is online plays the app
+    - It's in a known package, or
+    - You request info about it via `getProductInfo`, or
+    - A friend who is online plays the app, or
     - You request info about an online user who is playing it via `getPersonas`
 
 This option is required in order to use several methods and events. This works when logging in anonymously.
@@ -177,9 +177,9 @@ Defaults to `false`.
 
 ### picsCacheAll
 
-If enabled, `enablePicsCache` is enabled, and `changelistUpdateInterval` is nonzero, then apps and packages which get
-updated while your bot is running will also be added to the cache. Default behavior is to only cache apps and packages
-that are "known" via the above criteria.
+If `picsCacheAll` is enabled, `enablePicsCache` is enabled, and `changelistUpdateInterval` is nonzero, then apps and
+packages which get updated while your bot is running will also be added to the cache. Default behavior is to only cache
+apps and packages that are "known" via the above criteria.
 
 Added in 3.3.0.
 
