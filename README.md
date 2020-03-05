@@ -939,7 +939,8 @@ Unblocks all communication with a specified user.
 
 ### createQuickInviteLink([options,] callback)
 - `options` - Optional. An object with zero or more of these properties:
-	- `invite_limit` - How many times this link can be used before it's no longer valid. Defaults to 1.
+	- `inviteLimit` - How many times this link can be used before it's no longer valid. Defaults to 1.
+	- `inviteDuration` - How long in seconds this link can be used before it's no longer valid. Defaults to `null` (no time limit).
 - `callback` - Called when the request completes
 	- `err` - An `Error` object on failure, or `null` on success
 	- `response` - The response object
