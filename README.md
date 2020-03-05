@@ -954,6 +954,8 @@ Unblocks all communication with a specified user.
 
 **v4.11.0 or later is required to use this method**
 
+**v4.13.0 or later is required to use `inviteDuration`**
+
 Creates a quick-invite link that can be used by anyone who has it to add you to their friends list without needing to
 send an invite that you must to approve.
 
