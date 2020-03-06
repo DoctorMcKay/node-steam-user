@@ -397,6 +397,15 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 				this.steamID = new SteamID(body.client_supplied_steamid);
 			}
 
+			if (!this.steamID) {
+				// This should never happen, but apparently sometimes it does
+				this._disconnect(true);
+				let err = new Error('BadResponse');
+				err.eresult = EResult.BadResponse;
+				this.emit('error', err);
+				return;
+			}
+
 			this.emit('loggedOn', body, parental);
 			this.emit('contentServersReady');
 
