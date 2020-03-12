@@ -80,5 +80,6 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientFromGC, function(bo
 		this._jobsGC[targetJobID].call(this, body.appid, msgType, payload);
 	} else {
 		this.emit('receivedFromGC', body.appid, msgType, payload);
+		this.emit('recievedFromGC', body.appid, msgType, payload);
 	}
 });
