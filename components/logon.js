@@ -261,6 +261,7 @@ SteamUser.prototype.logOff = function() {
  */
 SteamUser.prototype._disconnect = function(suppressLogoff) {
 	this._clearChangelistUpdateTimer();
+	clearTimeout(this._logonTimeout); // cancel any queued reconnect attempt
 
 	if (this.steamID && !suppressLogoff) {
 		this._loggingOff = true;
@@ -344,7 +345,7 @@ SteamUser.prototype.relog = function() {
 SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, function(body) {
 	switch (body.eresult) {
 		case EResult.OK:
-			delete this._logonTimeout; // success, so reset reconnect timer
+			delete this._logonTimeoutDuration; // success, so reset reconnect timer
 
 			this._logOnDetails.last_session_id = this._sessionID;
 			this._logOnDetails.client_instance_id = body.client_instance_id;
@@ -431,7 +432,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 		case EResult.AccountLoginDeniedNeedTwoFactor:
 		case EResult.TwoFactorCodeMismatch:
 			// server is up, so reset logon timer
-			delete this._logonTimeout;
+			delete this._logonTimeoutDuration;
 
 			this._disconnect(true);
 
@@ -451,10 +452,10 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 			this.emit('debug', 'Log on response: ' + EResult[body.eresult]);
 			this._disconnect(true);
 
-			let timer = this._logonTimeout || 1000;
-			this._logonTimeout = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
+			let timer = this._logonTimeoutDuration || 1000;
+			this._logonTimeoutDuration = Math.min(timer * 2, 60000); // exponential backoff, max 1 minute
 
-			setTimeout(() => {
+			this._logonTimeout = setTimeout(() => {
 				this.logOn(true);
 			}, timer);
 
@@ -462,7 +463,7 @@ SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientLogOnResponse, func
 
 		default:
 			// server is up, so reset logon timer
-			delete this._logonTimeout;
+			delete this._logonTimeoutDuration;
 
 			let error = new Error(EResult[body.eresult] || body.eresult);
 			error.eresult = body.eresult;
@@ -533,7 +534,7 @@ SteamUser.prototype._handleLogOff = function(result, msg) {
 
 		// if we're manually relogging, or we got disconnected because steam went down, enqueue a reconnect
 		if (!this._loggingOff || this._relogging) {
-			setTimeout(() => {
+			this._logonTimeout = setTimeout(() => {
 				this.logOn(true);
 			}, 1000);
 		}
