@@ -240,6 +240,7 @@ require('./components/cdn.js');
 require('./components/econ.js');
 require('./components/store.js');
 require('./components/gamecoordinator.js');
+require('./components/device.js');
 
 /**
  * Called when the request completes.

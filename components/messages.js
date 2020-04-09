@@ -123,6 +123,7 @@ protobufs[EMsg.ClientFromGC] = Schema.CMsgGCClient;
 protobufs[EMsg.ClientRichPresenceUpload] = Schema.CMsgClientRichPresenceUpload;
 protobufs[EMsg.ClientGetEmoticonList] = Schema.CMsgClientGetEmoticonList;
 protobufs[EMsg.ClientEmoticonList] = Schema.CMsgClientEmoticonList;
+protobufs[EMsg.ClientAuthorizeLocalDeviceRequest] = Schema.CMsgClientAuthorizeLocalDeviceRequest;
 
 // Unified protobufs
 protobufs['GameServers.GetServerList#1_Request'] = Schema.CGameServers_GetServerList_Request;
@@ -283,6 +284,8 @@ protobufs['UserAccount.RedeemFriendInviteToken#1_Request'] = Schema.CUserAccount
 protobufs['UserAccount.RedeemFriendInviteToken#1_Response'] = Schema.CUserAccount_RedeemFriendInviteToken_Response;
 protobufs['UserAccount.RevokeFriendInviteToken#1_Request'] = Schema.CUserAccount_RevokeFriendInviteToken_Request;
 protobufs['UserAccount.RevokeFriendInviteToken#1_Response'] = Schema.CUserAccount_RevokeFriendInviteToken_Response;
+protobufs['DeviceAuth.GetOwnAuthorizedDevices#1_Request'] = Schema.CDeviceAuth_GetOwnAuthorizedDevices_Request;
+protobufs['DeviceAuth.GetOwnAuthorizedDevices#1_Response'] = Schema.CDeviceAuth_GetOwnAuthorizedDevices_Response;
 
 /**
  * Encode a protobuf.
