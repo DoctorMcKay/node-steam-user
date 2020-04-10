@@ -6,11 +6,14 @@ const Helpers = require('./helpers.js');
 const SteamID = require('steamid');
 const SteamUser = require('../index.js');
 
+const Messages = require('./messages.js');
+const Schema = require('../protobufs/generated/_load.js');
+
 SteamUser.prototype.getOwnAuthorizedDevices = function(includeCanceled, callback) {
 	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
 		this._sendUnified('DeviceAuth.GetOwnAuthorizedDevices#1', {
 			'steamid': this.steamID.getSteamID64(),
-			'include_canceled': includeCanceled
+			includeCanceled
 		}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
@@ -41,58 +44,96 @@ SteamUser.prototype.authorizeLocalDevice = function(deviceName){
 	if(!deviceName){
 		throw new Error('No deviceName specified.');
 	}
+	this._send(SteamUser.EMsg.ClientAuthorizeLocalDeviceRequest, {device_description: deviceName, owner_account_id: this.steamID.accountid});
+}
 
-	this.getAuthorizedLocalDevice(deviceName, (err, device) =>{
-		if(device){
-			device.is_new = false;
-			this.emit('authorizedLocalDevice', device);
-		}else{
-			this._send(SteamUser.EMsg.ClientAuthorizeLocalDeviceRequest, {device_description: deviceName, owner_account_id: this.steamID.accountid});
-			this.getAuthorizedLocalDevice(deviceName, (err, device) =>{
-				device.is_new = true;
-				this.emit('authorizedLocalDevice', device);
-			});
-		}
+
+SteamUser.prototype.useLocalDeviceAuthorizations = function(ownerSteamID, devices, authorization_accounts){
+
+	// if (!Array.isArray(messages)) {
+	// 	return reject(new Error('The \'messages\' argument must be an array'));
+	// }
+
+	let device_tokens = [];
+
+	devices.forEach((device) => {
+
+		console.log(device);
+
+		device_tokens.push({
+			'owner_account_id': Helpers.steamID(ownerSteamID).accountid,
+			'token_id': device.authed_device_token
+		});
+
+		// device_tokens.push(Schema.CMsgClientUseLocalDeviceAuthorizations.DeviceToken.create({
+		// 	'owner_account_id': Helpers.steamID(ownerSteamID).accountid,
+		// 	'token_id': parseInt(device.authed_device_token)
+		// }))
+
+		// device_tokens.push(
+		// 	Messages.encodeProto(Schema.CMsgClientUseLocalDeviceAuthorizations.DeviceToken, {
+		// 		'owner_account_id': Helpers.steamID(ownerSteamID).accountid,
+		// 		'token_id': 11269942845245054476
+		// 	})
+		// );
+
+		// console.log(
+		// Schema.CMsgClientUseLocalDeviceAuthorizations.DeviceToken.verify({
+		// 		'owner_account_id': Helpers.steamID(ownerSteamID).accountid,
+		// 		'token_id': parseInt(device.authed_device_token)
+		// })
+	// )
+
+	})
+
+	let authorization_account_id = [];
+	authorization_accounts.forEach((auth_acc_id) => {
+		authorization_account_id.push(Helpers.steamID(auth_acc_id).accountid)
+	})
+
+	// console.log(authorization_account_id);
+	// console.log(device_tokens);
+
+	console.log({
+		authorization_account_id,
+		device_tokens
+	})
+
+
+	// console.log(Schema.CMsgClientUseLocalDeviceAuthorizations.verify({
+	// 	authorization_account_id,
+	// 	device_tokens
+	// }));
+
+	this._send(SteamUser.EMsg.ClientUseLocalDeviceAuthorizations, {
+		authorization_account_id,
+		device_tokens
+	}, (body) => {
+		console.log(body);
 	});
 }
 
+// SteamUser.prototype.getAuthorizedDevices = function(){
+// 	this._send(SteamUser.EMsg.ClientGetAuthorizedDevices, {}, (body) => {
+// 		console.log(body);
+// 	});
+// }
+
 //handlers
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAuthorizeLocalDeviceResponse, function(body) {
+	this.emit("authorizedLocalDevice", body);
+});
 
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientGetAuthorizedDevicesResponse, function(body) {
+	// console.log(body);
+	// this.emit("authorizedLocalDevice", body);
+});
 
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUseLocalDeviceAuthorizationsResponse, function(body){
+	console.log(body);
+});
 
-// SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientAuthorizeLocalDeviceResponse, function(body) {
-
-// 	const buf = Buffer.from("73148135", 'utf8');
-// 	console.log(buf)
-// 	// body.readUint64();
-// 	// console.log(body.toString("debug"));
-
-// 	// const buf = Buffer.from(this.steamID.accountid, 'utf8');
-// 	// console.log(buf)
-
-// 	// console.log(body.readUint8());
-// 	// console.log(body.readUint8());
-// 	// console.log(body.readUint8());
-// 	// console.log(body.readUint8());
-
-// 	// body.flip();
-// 	// let eresult = body.readUint64().toString();
-// 	// let eresult2 = body.readUint32().toString();
-// 	// let chatID = new SteamID(body.readUint64().toString());
-// 	// let friendID = new SteamID(body.readUint64().toString());
-
-// 	// body.flip();
-// 	// const c = body.readUint32();
-// 	// const a = body.readByte();
-// 	// const b = body.readUint16();
-// 	// body
-// 	// console.log(a, b, c)
-// 	// body.readUint64();
-// 	// console.log(body.readUint64().toString());
-// 	// console.log(chatID);
-// 	// console.log(friendID);
-
-// 	// this.emit('funciono', );
-// 	// this.vanityURL = body.vanity_url;
-// 	// console.log(body);
-// });
+SteamUser.prototype._handlerManager.add(SteamUser.EMsg.ClientUseLocalDeviceAuthorizations, function(body){
+	console.log("ClientUseLocalDeviceAuthorizations");
+	console.log(body);
+})

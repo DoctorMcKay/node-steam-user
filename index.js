@@ -241,6 +241,7 @@ require('./components/econ.js');
 require('./components/store.js');
 require('./components/gamecoordinator.js');
 require('./components/device.js');
+require('./components/family_share.js');
 
 /**
  * Called when the request completes.
