@@ -303,11 +303,7 @@ protobufs['DeviceAuth.RemoveAuthorizedBorrowers#1_Response'] = Schema.CDeviceAut
  * @returns {Buffer}
  */
 exports.encodeProto = function(proto, data) {
-	a = proto.encode(data).finish();
-	if(proto == EMsg.ClientUseLocalDeviceAuthorizations){
-		console.log(a);
-	}
-	return a;
+	return proto.encode(data).finish();
 };
 
 /**
