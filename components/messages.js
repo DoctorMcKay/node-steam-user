@@ -123,9 +123,11 @@ protobufs[EMsg.ClientFromGC] = Schema.CMsgGCClient;
 protobufs[EMsg.ClientRichPresenceUpload] = Schema.CMsgClientRichPresenceUpload;
 protobufs[EMsg.ClientGetEmoticonList] = Schema.CMsgClientGetEmoticonList;
 protobufs[EMsg.ClientEmoticonList] = Schema.CMsgClientEmoticonList;
+protobufs[EMsg.ClientGetAuthorizedDevicesResponse] = Schema.CMsgClientGetAuthorizedDevices;
 protobufs[EMsg.ClientAuthorizeLocalDeviceRequest] = Schema.CMsgClientAuthorizeLocalDeviceRequest;
 protobufs[EMsg.ClientAuthorizeLocalDeviceResponse] = Schema.CMsgClientAuthorizeLocalDevice;
-protobufs[EMsg.ClientGetAuthorizedDevicesResponse] = Schema.CMsgClientGetAuthorizedDevices;
+protobufs[EMsg.ClientDeauthorizeDeviceRequest] = Schema.CMsgClientDeauthorizeDeviceRequest;
+protobufs[EMsg.ClientDeauthorizeDevice] = Schema.CMsgClientDeauthorizeDevice;
 protobufs[EMsg.ClientUseLocalDeviceAuthorizations] = Schema.CMsgClientUseLocalDeviceAuthorizations;
 
 // Unified protobufs
