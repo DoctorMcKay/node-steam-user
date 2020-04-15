@@ -1,10 +1,12 @@
 const AppDirectory = require('appdirectory');
+const {EventEmitter} = require('events');
 const FileManager = require('file-manager');
+const Util = require('util');
 
 const HandlerManager = require('./components/classes/HandlerManager.js');
 const SteamChatRoomClient = require('./components/chatroom.js');
 
-require('util').inherits(SteamUser, require('events').EventEmitter);
+Util.inherits(SteamUser, EventEmitter);
 
 module.exports = SteamUser;
 
@@ -18,6 +20,27 @@ SteamUser.EPrivacyState = require('./resources/EPrivacyState.js');
 require('./resources/enums.js');
 const DefaultOptions = require('./resources/default_options.js');
 
+/**
+ * @param {{
+ *      protocol?: number,
+ *      httpProxy?: string,
+ *      localAddress?: string,
+ *      localPort?: number,
+ *      autoRelogin?: boolean,
+ *      singleSentryfile?: boolean,
+ *      machineIdType?: number,
+ *      machineIdFormat?: [string, string, string],
+ *      enablePicsCache?: boolean,
+ *      picsCacheAll?: boolean,
+ *      changelistUpdateInterval?: number,
+ *      saveAppTickets?: boolean,
+ *      additionalHeaders?: Object.<string, string>,
+ *      language?: string,
+ *      webCompatibilityMode?: boolean
+ * }} [options]
+ * @constructor
+ * @extends EventEmitter
+ */
 function SteamUser(options) {
 	this.steamID = null;
 

@@ -14,6 +14,11 @@ Util.inherits(SteamChatRoomClient, EventEmitter);
 
 module.exports = SteamChatRoomClient;
 
+/**
+ * @param {SteamUser} user
+ * @constructor
+ * @extends EventEmitter
+ */
 function SteamChatRoomClient(user) {
 	this.user = user;
 
