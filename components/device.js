@@ -4,19 +4,19 @@ const SteamUser = require('../index.js');
 
 /**
  * Get authorized devices.
- * @param {boolean} [inclTokens=false] - If true, include canceled devices
+ * @param {boolean} [includeCancelled=false] - If true, include cancelled devices
  * @param {function} [callback]
  * @returns {Promise}
  */
-SteamUser.prototype.getOwnAuthorizedDevices = function(includeCanceled, callback) {
-	if (typeof includeCanceled !== 'boolean'){
-		includeCanceled = false;
+SteamUser.prototype.getOwnAuthorizedDevices = function(includeCancelled, callback) {
+	if (typeof includeCancelled !== 'boolean'){
+		includeCancelled = false;
 	}
 
 	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
 		this._sendUnified('DeviceAuth.GetOwnAuthorizedDevices#1', {
 			'steamid': this.steamID.getSteamID64(),
-			includeCanceled
+			includeCancelled
 		}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
