@@ -165,6 +165,12 @@ class SteamUser extends EventEmitter {
 					this._warn('webCompatibilityMode is enabled so connection protocol is being forced to WebSocket');
 				}
 				break;
+
+			case 'httpProxy':
+				if (typeof this.options.httpProxy == 'string' && !this.options.httpProxy.includes('://')) {
+					this.options.httpProxy = 'http://' + this.options.httpProxy;
+				}
+				break;
 		}
 	}
 
