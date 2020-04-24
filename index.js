@@ -51,6 +51,7 @@ class SteamUser extends EventEmitter {
 		this._sessionID = 0;
 		this._jobs = {};
 		this._richPresenceLocalization = {};
+		this._initialized = false;
 
 		// App and package cache
 		this._changelistUpdateTimer = null;
@@ -62,15 +63,15 @@ class SteamUser extends EventEmitter {
 
 		this._sentry = null;
 
-		this.options = options || {};
+		this.options = {};
+
+		for (let i in (options || {})) {
+			this._setOption(i, options[i]);
+		}
 
 		for (let i in DefaultOptions) {
-			if (!DefaultOptions.hasOwnProperty(i)) {
-				continue;
-			}
-
 			if (typeof this.options[i] === 'undefined') {
-				this.options[i] = DefaultOptions[i];
+				this._setOption(i, DefaultOptions[i]);
 			}
 		}
 
@@ -91,9 +92,7 @@ class SteamUser extends EventEmitter {
 			this.storage = new FileManager(this.options.dataDirectory);
 		}
 
-		if (this.options.webCompatibilityMode && this.options.protocol == SteamUser.EConnectionProtocol.TCP) {
-			this._warn('webCompatibilityMode is enabled so connection protocol is being forced to WebSocket.');
-		}
+		this._initialized = true;
 	}
 
 	get packageName() {
@@ -139,21 +138,29 @@ class SteamUser extends EventEmitter {
 		// Handle anything that needs to happen when particular options update
 		switch (option) {
 			case 'dataDirectory':
-				if (!this.storage) {
-					this.storage = new FileManager(value);
-				} else {
-					this.storage.directory = value;
+				if (this._initialized) {
+					if (!this.storage) {
+						this.storage = new FileManager(value);
+					} else {
+						this.storage.directory = value;
+					}
 				}
 
 				break;
 
 			case 'enablePicsCache':
-				this._resetChangelistUpdateTimer();
-				this._getLicenseInfo();
+				if (this._initialized) {
+					this._resetChangelistUpdateTimer();
+					this._getLicenseInfo();
+				}
+
 				break;
 
 			case 'changelistUpdateInterval':
-				this._resetChangelistUpdateTimer();
+				if (this._initialized) {
+					this._resetChangelistUpdateTimer();
+				}
+
 				break;
 
 			case 'webCompatibilityMode':
