@@ -117,7 +117,7 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 	this.stream.on('connected', () => {
 		this.user.emit('debug', 'WebSocket connection success; now logging in');
 		this.stream.setTimeout(0); // Disable timeout
-		this.user._send(this.user._logOnDetails.game_server_token ? SteamUser.EMsg.ClientLogonGameServer : SteamUser.EMsg.ClientLogon, this.user._logOnDetails);
+		this.user._sendLogOn();
 	});
 
 	this.stream.on('timeout', () => {
