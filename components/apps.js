@@ -335,7 +335,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 							}
 
 							for (let packageid in packageTokens) {
-								tokenPackages.push({appid: parseInt(packageid, 10), access_token: packageTokens[packageid]})
+								tokenPackages.push({packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]})
 							}
 
 							this.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
