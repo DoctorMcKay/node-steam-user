@@ -23,7 +23,7 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 		userData = new Buffer(0);
 	}
 
-	return StdLib.Promises.callbackPromise(['encryptedAppTicket'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['encryptedAppTicket'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientRequestEncryptedAppTicket, {"app_id": appid, "userdata": userData}, (body) => {
 			let err = Helpers.eresultError(body.eresult);
 			if (err) {
@@ -39,7 +39,7 @@ SteamUser.prototype.getEncryptedAppTicket = function(appid, userData, callback) 
 				return reject(new Error("No appticket in response"));
 			}
 
-			accept({
+			resolve({
 				"encryptedAppTicket": Messages.encodeProto(Schema.EncryptedAppTicket, body.encrypted_app_ticket)
 			});
 		});
@@ -63,7 +63,7 @@ SteamUser.parseEncryptedAppTicket = AppTicket.parseEncryptedAppTicket;
 SteamUser.parseAppTicket = AppTicket.parseAppTicket;
 
 SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
-	return StdLib.Promises.callbackPromise(['appTicket'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['appTicket'], callback, (resolve, reject) => {
 		// For an auth session ticket we need the following:
 		// 1. Length-prefixed GCTOKEN
 		// 2. Length-prefixed SESSIONHEADER
@@ -93,7 +93,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 
 				// We need to activate our ticket
 				this.validateAuthTickets(appid, buffer, () => {
-					accept({"appTicket": buffer});
+					resolve({"appTicket": buffer});
 				});
 			};
 
@@ -108,7 +108,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 };
 
 SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
-	return StdLib.Promises.callbackPromise(['appOwnershipTicket'], callback, async (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['appOwnershipTicket'], callback, async (resolve, reject) => {
 		// See if we have one saved
 		let filename = `appOwnershipTicket_${this.steamID}_${appid}.bin`;
 		let file = await this._readFile(filename);
@@ -116,7 +116,7 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 			let parsed = SteamUser.parseAppTicket(file);
 			// Only return the saved ticket if it has a valid signature, expires more than 6 hours from now, and has the same external IP as we have right now.
 			if (parsed && parsed.isValid && parsed.ownershipTicketExpires - Date.now() >= (1000 * 60 * 60 * 6) && parsed.ownershipTicketExternalIP == this.publicIP) {
-				return accept({"appOwnershipTicket": file});
+				return resolve({"appOwnershipTicket": file});
 			}
 		}
 
@@ -136,7 +136,7 @@ SteamUser.prototype.getAppOwnershipTicket = function(appid, callback) {
 				await this._saveFile(filename, ticket);
 			}
 
-			accept({"appOwnershipTicket": ticket});
+			resolve({"appOwnershipTicket": ticket});
 		});
 	});
 };
@@ -148,7 +148,7 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 		tickets = [tickets];
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		let obj = {
 			"tokens_left": (this._gcTokens ? this._gcTokens.length : 0),
 			"last_request_seq": this._authSeqMe,
@@ -203,7 +203,7 @@ SteamUser.prototype.validateAuthTickets = function(appid, tickets, callback) {
 
 		this._send(SteamUser.EMsg.ClientAuthList, obj, (body) => {
 			this._authSeqThem = body.message_sequence;
-			accept();
+			resolve();
 		});
 	});
 };

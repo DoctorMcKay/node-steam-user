@@ -19,7 +19,7 @@ const VZIP_FOOTER = 0x767A;
  * @return Promise
  */
 SteamUser.prototype.getContentServers = function(callback) {
-	return StdLib.Promises.callbackPromise(['servers'], callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
 		if (this._contentServers.length > 0 && Date.now() - this._contentServersTimestamp < (1000 * 60 * 60)) {
 			return resolve({"servers": JSON.parse(JSON.stringify(this._contentServers))});
 		}
@@ -83,11 +83,11 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 	appID = parseInt(appID, 10);
 	depotID = parseInt(depotID, 10);
 
-	return StdLib.Promises.callbackPromise(['key'], callback, async (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['key'], callback, async (resolve, reject) => {
 		let filename = `depot_key_${appID}_${depotID}.bin`;
 		let file = await this._readFile(filename);
 		if (file && file.length > 4 && Math.floor(Date.now() / 1000) - file.readUInt32LE(0) < (60 * 60 * 24 * 14)) {
-			return accept({"key": file.slice(4)});
+			return resolve({"key": file.slice(4)});
 		}
 
 		this._send(SteamUser.EMsg.ClientGetDepotDecryptionKey, {"depot_id": depotID, "app_id": appID}, async (body) => {
@@ -104,7 +104,7 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
 			file.writeUInt32LE(Math.floor(Date.now() / 1000), 0);
 
 			await this._saveFile(filename, file);
-			return accept({key});
+			return resolve({key});
 		});
 	});
 };
@@ -118,9 +118,9 @@ SteamUser.prototype.getDepotDecryptionKey = function(appID, depotID, callback) {
  * @return Promise
  */
 SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callback) {
-	return StdLib.Promises.callbackPromise(['token', 'expires'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['token', 'expires'], callback, (resolve, reject) => {
 		if (this._contentServerTokens[depotID + '_' + hostname] && this._contentServerTokens[depotID + '_' + hostname].expires - Date.now() > (1000 * 60 * 60)) {
-			return accept(this._contentServerTokens[depotID + '_' + hostname]);
+			return resolve(this._contentServerTokens[depotID + '_' + hostname]);
 		}
 
 		this._send(SteamUser.EMsg.ClientGetCDNAuthToken, {
@@ -132,7 +132,7 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
 				return reject(Helpers.eresultError(body.eresult));
 			}
 
-			return accept(this._contentServerTokens[depotID + '_' + hostname] = {
+			return resolve(this._contentServerTokens[depotID + '_' + hostname] = {
 				"token": body.token,
 				"expires": new Date(body.expiration_time * 1000)
 			});
@@ -149,7 +149,7 @@ SteamUser.prototype.getCDNAuthToken = function(appID, depotID, hostname, callbac
  * @return Promise
  */
 SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback) {
-	return StdLib.Promises.callbackPromise(['manifest'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['manifest'], callback, (resolve, reject) => {
 		this.getRawManifest(appID, depotID, manifestID, (err, manifest) => {
 			if (err) {
 				return reject(err);
@@ -163,7 +163,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
 
 
 			if (!manifest.filenames_encrypted) {
-				return accept({manifest});
+				return resolve({manifest});
 			}
 
 			this.getDepotDecryptionKey(appID, depotID, (err, key) => {
@@ -172,7 +172,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
 				}
 
 				ContentManifest.decryptFilenames(manifest, key);
-				return accept({manifest});
+				return resolve({manifest});
 			});
 		});
 	});
@@ -186,7 +186,7 @@ SteamUser.prototype.getManifest = function(appID, depotID, manifestID, callback)
  * @param {function} [callback]
  */
 SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callback) {
-	return StdLib.Promises.callbackPromise(['manifest'], callback, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(['manifest'], callback, (resolve, reject) => {
 		this.getContentServers((err, servers) => {
 			if (err) {
 				return reject(err);
@@ -214,7 +214,7 @@ SteamUser.prototype.getRawManifest = function(appID, depotID, manifestID, callba
 						if (err) {
 							return reject(err);
 						} else {
-							return accept({manifest});
+							return resolve({manifest});
 						}
 					});
 				});
@@ -240,7 +240,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 
 	chunkSha1 = chunkSha1.toLowerCase();
 
-	return StdLib.Promises.callbackPromise(['chunk'], callback, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(['chunk'], callback, (resolve, reject) => {
 		if (!contentServer) {
 			this.getContentServers((err, servers) => {
 				if (err) {
@@ -287,7 +287,7 @@ SteamUser.prototype.downloadChunk = function(appID, depotID, chunkSha1, contentS
 								return reject(new Error("Checksum mismatch"));
 							}
 
-							return accept({"chunk": result});
+							return resolve({"chunk": result});
 						});
 					});
 				});
@@ -311,7 +311,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 		outputFilePath = null;
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
 		if (fileManifest.flags & SteamUser.EDepotFileFlag.Directory) {
 			return reject(new Error("Attempted to download a directory " + fileManifest.filename));
 		}
@@ -455,7 +455,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 							if (hash.toString('hex') != fileManifest.sha_content) {
 								return reject(new Error("File checksum mismatch"));
 							} else {
-								accept({
+								resolve({
 									"type": "complete"
 								});
 							}
@@ -468,7 +468,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
 						return reject(new Error("File checksum mismatch"));
 					}
 
-					return accept({
+					return resolve({
 						"type": "complete",
 						"file": downloadBuffer
 					});
@@ -496,7 +496,7 @@ SteamUser.prototype.downloadFile = function(appID, depotID, fileManifest, output
  * @return Promise
  */
 SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callback) {
-	return StdLib.Promises.callbackPromise(['keys'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['keys'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientCheckAppBetaPassword, {"app_id": appID, "betapassword": password}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {
 				return reject(Helpers.eresultError(body.eresult));
@@ -507,7 +507,7 @@ SteamUser.prototype.getAppBetaDecryptionKeys = function(appID, password, callbac
 				branches[beta.betaname] = new Buffer(beta.betapassword, 'hex');
 			});
 
-			return accept({"keys": branches});
+			return resolve({"keys": branches});
 		});
 	});
 };

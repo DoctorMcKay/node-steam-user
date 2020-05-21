@@ -13,9 +13,9 @@ const Helpers = require('./helpers.js');
  * @return Promise
  */
 SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callback) {
-	return StdLib.Promises.callbackPromise(['descriptions'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['descriptions'], callback, (resolve, reject) => {
 		this._sendUnified("Econ.GetAssetClassInfo#1", {language, appid, classes}, (body) => {
-			accept({"descriptions": body.descriptions});
+			resolve({"descriptions": body.descriptions});
 		});
 	});
 };
@@ -26,9 +26,9 @@ SteamUser.prototype.getAssetClassInfo = function(language, appid, classes, callb
  * @return Promise
  */
 SteamUser.prototype.getTradeURL = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(null, callback, (resolve, reject) => {
 		this._sendUnified("Econ.GetTradeOfferAccessToken#1", {}, (body) => {
-			accept({
+			resolve({
 				"token": body.trade_offer_access_token,
 				"url": "https://steamcommunity.com/tradeoffer/new/?partner=" + this.steamID.accountid + "&token=" + body.trade_offer_access_token
 			});
@@ -42,9 +42,9 @@ SteamUser.prototype.getTradeURL = function(callback) {
  * @return Promise
  */
 SteamUser.prototype.changeTradeURL = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this._sendUnified("Econ.GetTradeOfferAccessToken#1", {"generate_new_token": true}, (body) => {
-			accept({
+			resolve({
 				"token": body.trade_offer_access_token,
 				"url": "https://steamcommunity.com/tradeoffer/new/?partner=" + this.steamID.accountid + "&token=" + body.trade_offer_access_token
 			});
@@ -58,7 +58,7 @@ SteamUser.prototype.changeTradeURL = function(callback) {
  * @returns {Promise}
  */
 SteamUser.prototype.getEmoticonList = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this._sendUnified("Player.GetEmoticonList#1", {}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
 			if (err) {

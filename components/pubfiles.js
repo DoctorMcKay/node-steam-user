@@ -14,7 +14,7 @@ SteamUser.prototype.getPublishedFileDetails = function(ids, callback) {
 		ids = [ids];
 	}
 
-	return StdLib.Promises.callbackPromise(['files'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['files'], callback, (resolve, reject) => {
 		this._sendUnified("PublishedFile.GetDetails#1", {
 			"publishedfileids": ids,
 			"includetags": true,
@@ -68,8 +68,7 @@ SteamUser.prototype.getPublishedFileDetails = function(ids, callback) {
 				results[item.publishedfileid] = item;
 			});
 
-			// Send an `err` argument just in case we want to add one someday
-			accept({"files": results});
+			resolve({"files": results});
 		});
 	});
 };

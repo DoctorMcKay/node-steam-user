@@ -78,13 +78,13 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
  * @return Promise
  */
 SteamUser.prototype.kickPlayingSession = function(callback) {
-	return StdLib.Promises.callbackPromise([], callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, [], callback, true, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
 		this.once('playingState', (blocked, playingApp) => {
 			if (blocked) {
 				reject(new Error("Cannot kick other session"));
 			} else {
-				accept();
+				resolve();
 			}
 		});
 	});
@@ -129,13 +129,13 @@ SteamUser.prototype.uploadRichPresence = function(appid, richPresence) {
  * @return Promise
  */
 SteamUser.prototype.getPlayerCount = function(appid, callback) {
-	return StdLib.Promises.callbackPromise(['playerCount'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['playerCount'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientGetNumberOfCurrentPlayersDP, {"appid": appid}, (body) => {
 			let err = Helpers.eresultError(body.eresult);
 			if (err) {
 				reject(err);
 			} else {
-				accept({"playerCount": body.player_count});
+				resolve({"playerCount": body.player_count});
 			}
 		});
 	});
@@ -149,13 +149,13 @@ SteamUser.prototype.getPlayerCount = function(appid, callback) {
  */
 SteamUser.prototype.getProductChanges = function(sinceChangenumber, callback) {
 	let args = ['currentChangeNumber', 'appChanges', 'packageChanges'];
-	return StdLib.Promises.callbackPromise(args, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientPICSChangesSinceRequest, {
 			"since_change_number": sinceChangenumber,
 			"send_app_info_changes": true,
 			"send_package_info_changes": true
 		}, (body) => {
-			accept({
+			resolve({
 				"currentChangeNumber": body.current_change_number,
 				"appChanges": body.app_changes,
 				"packageChanges": body.package_changes
@@ -181,7 +181,8 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		inclTokens = false;
 	}
 
-	return StdLib.Promises.callbackPromise(['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (accept, reject) => {
+	// This one actually can take a while, so allow it to go as long as 90 seconds
+	return StdLib.Promises.timeoutCallbackPromise(90000, ['apps', 'packages', 'unknownApps', 'unknownPackages'], callback, (resolve, reject) => {
 		requestType = requestType || PICSRequestType.User;
 
 		// Steam can send us the full response in multiple responses, so we need to buffer them into one callback
@@ -357,7 +358,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 								if (!callbackFired) {
 									callbackFired = true;
-									accept(response);
+									resolve(response);
 								}
 							});
 						});
@@ -365,13 +366,13 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 						// No tokenless apps or packages
 						if (!callbackFired) {
 							callbackFired = true;
-							accept(response);
+							resolve(response);
 						}
 					}
 				} else {
 					if (!callbackFired) {
 						callbackFired = true;
-						accept(response);
+						resolve(response);
 					}
 				}
 			}
@@ -388,7 +389,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
  */
 SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 	let args = ['appTokens', 'packageTokens', 'appDeniedTokens', 'packageDeniedTokens'];
-	return StdLib.Promises.callbackPromise(args, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, args, callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientPICSAccessTokenRequest, {
 			"packageids": packages,
 			"appids": apps
@@ -404,7 +405,7 @@ SteamUser.prototype.getProductAccessToken = function(apps, packages, callback) {
 				packageTokens[pkg.packageid] = pkg.access_token;
 			});
 
-			accept({
+			resolve({
 				appTokens,
 				packageTokens,
 				"appDeniedTokens": body.app_denied_tokens || [],
@@ -732,7 +733,7 @@ function sortNumeric(a, b) {
  * @return Promise
  */
 SteamUser.prototype.redeemKey = function(key, callback) {
-	return StdLib.Promises.callbackPromise(['purchaseResultDetails', 'packageList'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['purchaseResultDetails', 'packageList'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientRegisterKey, {"key": key}, (body) => {
 			let packageList = {};
 
@@ -750,7 +751,7 @@ SteamUser.prototype.redeemKey = function(key, callback) {
 				err.packageList = packageList;
 				reject(err);
 			} else {
-				accept({
+				resolve({
 					"purchaseResultDetails": body.purchase_result_details,
 					packageList
 				});
@@ -770,12 +771,12 @@ SteamUser.prototype.requestFreeLicense = function(appIDs, callback) {
 		appIDs = [appIDs];
 	}
 
-	return StdLib.Promises.callbackPromise(['grantedPackageIds', 'grantedAppIds'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['grantedPackageIds', 'grantedAppIds'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientRequestFreeLicense, {"appids": appIDs}, (body) => {
 			if (body.eresult != SteamUser.EResult.OK) {
 				reject(Helpers.eresultError(body.eresult));
 			} else {
-				accept({
+				resolve({
 					"grantedPackageIds": body.granted_packageids,
 					"grantedAppIds": body.granted_appids
 				})

@@ -47,7 +47,7 @@ SteamUser.prototype.chatTyping = function(recipient) {
  * @return Promise
  */
 SteamUser.prototype.getChatHistory = function(steamID, callback) {
-	return StdLib.Promises.callbackPromise(['messages'], callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['messages'], callback, true, (resolve, reject) => {
 		steamID = Helpers.steamID(steamID);
 		let sid64 = steamID.getSteamID64();
 
@@ -70,7 +70,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 			if (err) {
 				return reject(err);
 			} else {
-				return accept({messages});
+				return resolve({messages});
 			}
 		});
 	});
@@ -84,7 +84,7 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.joinChat = function(steamID, callback) {
-	return StdLib.Promises.callbackPromise([], callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, [], callback, true, (resolve, reject) => {
 		let msg = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 		msg.writeUint8(0); // isVoiceSpeaker
@@ -95,7 +95,7 @@ SteamUser.prototype.joinChat = function(steamID, callback) {
 			if (err) {
 				return reject(err);
 			} else {
-				return accept();
+				return resolve();
 			}
 		});
 	});
@@ -244,7 +244,7 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
-	return StdLib.Promises.callbackPromise(['chatID'], callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['chatID'], callback, true, (resolve, reject) => {
 		convertUserID = convertUserID || new SteamID();
 		inviteUserID = inviteUserID || new SteamID();
 
@@ -272,7 +272,7 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 			if (err) {
 				return reject(err);
 			} else {
-				return accept({chatID});
+				return resolve({chatID});
 			}
 		});
 	});

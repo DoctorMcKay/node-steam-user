@@ -10,7 +10,7 @@ const SteamUser = require('../index.js');
  * @return {Promise}
  */
 SteamUser.prototype.enableTwoFactor = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
 		this._sendUnified("TwoFactor.AddAuthenticator#1", {
 			"steamid": this.steamID.getSteamID64(),
 			"authenticator_time": Math.floor(Date.now() / 1000),
@@ -30,7 +30,7 @@ SteamUser.prototype.enableTwoFactor = function(callback) {
 				}
 			}
 
-			accept(body);
+			resolve(body);
 		});
 	});
 };
@@ -47,7 +47,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 	let diff = 0;
 
 	let self = this;
-	return StdLib.Promises.callbackPromise(null, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(15000, null, callback, (resolve, reject) => {
 		SteamTotp.getTimeOffset((err, offset, latency) => {
 			if (err) {
 				return reject(err);
@@ -80,7 +80,7 @@ SteamUser.prototype.finalizeTwoFactor = function(secret, activationCode, callbac
 
 					finalize();
 				} else {
-					accept();
+					resolve();
 				}
 			});
 		}

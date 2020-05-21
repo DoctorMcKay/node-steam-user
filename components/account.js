@@ -5,15 +5,11 @@ const Helpers = require('./helpers.js');
 const SteamUser = require('../index.js');
 
 SteamUser.prototype.requestValidationEmail = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		let body = Buffer.alloc(1, 0x0); // pre-fills with 0x0
 		this._send(SteamUser.EMsg.ClientRequestValidationMail, body, (response) => {
 			let err = Helpers.eresultError(response.readUint32());
-			if (err) {
-				reject(err);
-			} else {
-				accept();
-			}
+			err ? reject(err) : resolve();
 		});
 	});
 };
@@ -28,7 +24,7 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 		'isPhoneVerified'
 	];
 
-	return StdLib.Promises.callbackPromise(callbackArgs, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, callbackArgs, callback, (resolve, reject) => {
 		this._sendUnified("Credentials.GetSteamGuardDetails#1", {}, (body) => {
 			let res = {};
 
@@ -56,7 +52,7 @@ SteamUser.prototype.getSteamGuardDetails = function(callback) {
 			res.timestampTwoFactorEnabled = body.timestamp_twofactor_enabled ? new Date(body.timestamp_twofactor_enabled * 1000) : null;
 			res.isPhoneVerified = !!body.is_phone_verified;
 
-			accept(res);
+			resolve(res);
 		});
 	});
 };
@@ -68,9 +64,9 @@ SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 		'timestampLastEmailChange'
 	];
 
-	return StdLib.Promises.callbackPromise(callbackArgs, callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, callbackArgs, callback, (resolve, reject) => {
 		this._sendUnified("Credentials.GetCredentialChangeTimeDetails#1", {}, (body) => {
-			accept({
+			resolve({
 				"timestampLastPasswordChange": body.timestamp_last_password_change ? new Date(body.timestamp_last_password_change * 1000) : null,
 				"timestampLastPasswordReset": body.timestamp_last_password_reset ? new Date(body.timestamp_last_password_reset * 1000) : null,
 				"timestampLastEmailChange": body.timestamp_last_email_change ? new Date(body.timestamp_last_email_change * 1000) : null
@@ -80,9 +76,9 @@ SteamUser.prototype.getCredentialChangeTimes = function(callback) {
 };
 
 SteamUser.prototype.getAuthSecret = function(callback) {
-	return StdLib.Promises.callbackPromise(['secretID', 'key'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['secretID', 'key'], callback, (resolve, reject) => {
 		this._sendUnified("Credentials.GetAccountAuthSecret#1", {}, (body) => {
-			accept({
+			resolve({
 				"secretID": body.secret_id,
 				"key": body.secret
 			});
@@ -96,7 +92,7 @@ SteamUser.prototype.getAuthSecret = function(callback) {
  * @returns {Promise<{privacy_state: int, privacy_state_inventory: int, privacy_state_gifts: int, privacy_state_ownedgames: int, privacy_state_playtime: int, privacy_state_friendslist: int}>}
  */
 SteamUser.prototype.getPrivacySettings = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this._sendUnified("Player.GetPrivacySettings#1", {}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
 			if (err) {

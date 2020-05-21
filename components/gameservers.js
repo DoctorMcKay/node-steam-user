@@ -19,14 +19,14 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
 		conditions.geo_location_ip = StdLib.IPv4.stringToInt(conditions.geo_location_ip);
 	}
 
-	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(30000, ['servers'], callback, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientGMSServerQuery, conditions, function (body) {
 			if (body.error) {
 				reject(new Error(body.error));
 				return;
 			}
 
-			accept({
+			resolve({
 				"servers": (body.servers || []).map((server) => {
 					return {
 						"ip": StdLib.IPv4.intToString(server.server_ip),
@@ -47,12 +47,12 @@ SteamUser.prototype.serverQuery = function(conditions, callback) {
  * @return {Promise}
  */
 SteamUser.prototype.getServerList = function(filter, limit, callback) {
-	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(30000, ['servers'], callback, (resolve, reject) => {
 		this._sendUnified("GameServers.GetServerList#1", {
 			"filter": filter,
 			"limit": limit
 		}, (body) => {
-			accept({
+			resolve({
 				"servers": (body.servers || []).map((server) => {
 					try {
 						server.steamid = new SteamID(server.steamid.toString());
@@ -72,7 +72,7 @@ SteamUser.prototype.getServerList = function(filter, limit, callback) {
  * @param {function} [callback]
  */
 SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
-	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
 		this._sendUnified("GameServers.GetServerSteamIDsByIP#1", {
 			"server_ips": ips
 		}, (body) => {
@@ -82,7 +82,7 @@ SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
 				servers[server.addr] = new SteamID(server.steamid.toString());
 			});
 
-			accept({servers});
+			resolve({servers});
 		});
 	});
 };
@@ -94,7 +94,7 @@ SteamUser.prototype.getServerSteamIDsByIP = function(ips, callback) {
  * @return {Promise}
  */
 SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
-	return StdLib.Promises.callbackPromise(['servers'], callback, (accept, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, ['servers'], callback, (resolve, reject) => {
 		steamids = steamids.map(Helpers.steamID);
 
 		this._sendUnified("GameServers.GetServerIPsBySteamID#1", {
@@ -106,7 +106,7 @@ SteamUser.prototype.getServerIPsBySteamID = function(steamids, callback) {
 				servers[server.steamid.toString()] = server.addr;
 			});
 
-			accept({servers});
+			resolve({servers});
 		});
 	});
 };

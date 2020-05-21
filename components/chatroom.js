@@ -102,7 +102,7 @@ function SteamChatRoomClient(user) {
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.getGroups = function(callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.GetMyChatRoomGroups#1", {}, (body, hdr) => {
 			let err = Helpers.eresultError(hdr.proto);
 			if (err) {
@@ -133,7 +133,7 @@ SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callba
 		groupIDs = [groupIDs];
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.SetSessionActiveChatRoomGroups#1", {
 			"chat_group_ids": groupIDs,
 			"chat_groups_data_requested": groupIDs
@@ -160,7 +160,7 @@ SteamChatRoomClient.prototype.setSessionActiveGroups = function(groupIDs, callba
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		let match = linkUrl.match(/^https?:\/\/s\.team\/chat\/([^\/]+)$/);
 		if (!match) {
 			return reject(new Error("Invalid invite link"));
@@ -199,7 +199,7 @@ SteamChatRoomClient.prototype.getInviteLinkInfo = function(linkUrl, callback) {
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.getClanChatGroupInfo = function(clanSteamID, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		clanSteamID = Helpers.steamID(clanSteamID);
 		if (clanSteamID.type != SteamID.Type.CLAN) {
 			return reject(new Error("SteamID is not for a clan"));
@@ -244,7 +244,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
 		inviteCode = undefined;
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.JoinChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"invite_code": inviteCode
@@ -276,7 +276,7 @@ SteamChatRoomClient.prototype.joinGroup = function(groupId, inviteCode, callback
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.inviteUserToGroup = function(groupId, steamId, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.InviteFriendToChatRoomGroup#1", {
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString()
@@ -306,7 +306,7 @@ SteamChatRoomClient.prototype.createInviteLink = function(groupId, options, call
 
 	options = options || {};
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified('ChatRoom.CreateInviteLink#1', {
 			"chat_group_id": groupId,
 			"seconds_valid": options.secondsValid || 60 * 60,
@@ -330,7 +330,7 @@ SteamChatRoomClient.prototype.createInviteLink = function(groupId, options, call
  * @returns {Promise<{invite_links: {invite_code: string, invite_url: string, steamid_creator: SteamID, time_expires: Date|null, chat_id: string}[]}>}
  */
 SteamChatRoomClient.prototype.getGroupInviteLinks = function(groupId, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified('ChatRoom.GetInviteLinksForGroup#1', {
 			"chat_group_id": groupId
 		}, (body, hdr) => {
@@ -364,7 +364,7 @@ SteamChatRoomClient.prototype.getGroupInviteLinks = function(groupId, callback) 
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.deleteInviteLink = function(linkUrl, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, async (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, async (resolve, reject) => {
 		let details = await this.getInviteLinkInfo(linkUrl);
 
 		this.user._sendUnified('ChatRoom.DeleteInviteLink#1', {
@@ -405,7 +405,7 @@ SteamChatRoomClient.prototype.sendFriendMessage = function(steamId, message, opt
 		options.containsBbCode = true;
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("FriendMessages.SendMessage#1", {
 			"steamid": Helpers.steamID(steamId).toString(),
 			"chat_entry_type": options.chatEntryType,
@@ -445,7 +445,7 @@ SteamChatRoomClient.prototype.sendFriendTyping = function(steamId, callback) {
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.sendChatMessage = function(groupId, chatId, message, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.SendChatMessage#1", {
 			"chat_group_id": groupId,
 			"chat_id": chatId,
@@ -479,7 +479,7 @@ SteamChatRoomClient.prototype.getActiveFriendMessageSessions = function(options,
 
 	options = options || {};
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		let lastmessage_since = options.conversationsSince ? convertDateToUnix(options.conversationsSince) : undefined;
 
 		this.user._sendUnified("FriendMessages.GetActiveMessageSessions#1", {
@@ -524,7 +524,7 @@ SteamChatRoomClient.prototype.getFriendMessageHistory = function(friendSteamId, 
 
 	options = options || {};
 
-	return StdLib.Promises.callbackPromise(null, callback, async (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, async (resolve, reject) => {
 		let steamid2 = Helpers.steamID(friendSteamId).toString();
 		let count = options.maxCount || 100;
 		let bbcode_format = options.wantBbcode !== false;
@@ -592,7 +592,7 @@ SteamChatRoomClient.prototype.getChatMessageHistory = function(groupId, chatId, 
 		options = {};
 	}
 
-	return StdLib.Promises.callbackPromise(null, callback, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, (resolve, reject) => {
 		let max_count = options.maxCount || 100;
 		let last_time = options.lastTime ? convertDateToUnix(options.lastTime) : undefined;
 		let last_ordinal = options.lastOrdinal;
@@ -667,7 +667,7 @@ SteamChatRoomClient.prototype.ackChatMessage = function(chatGroupId, chatId, tim
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.deleteChatMessages = function(groupId, chatId, messages, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		if (!Array.isArray(messages)) {
 			return reject(new Error('The \'messages\' argument must be an array'));
 		}
@@ -726,7 +726,7 @@ SteamChatRoomClient.prototype.createChatRoom = function(groupId, name, options, 
 
 	options = options || {};
 
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.CreateChatRoom#1", {
 			"chat_group_id": groupId,
 			name,
@@ -752,7 +752,7 @@ SteamChatRoomClient.prototype.createChatRoom = function(groupId, name, options, 
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.renameChatRoom = function(groupId, chatId, newChatRoomName, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.RenameChatRoom#1", {
 			"chat_group_id": groupId,
 			"chat_id": chatId,
@@ -776,7 +776,7 @@ SteamChatRoomClient.prototype.renameChatRoom = function(groupId, chatId, newChat
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.deleteChatRoom = function(groupId, chatId, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.DeleteChatRoom#1", {
 			"chat_group_id": groupId,
 			"chat_id": chatId
@@ -800,7 +800,7 @@ SteamChatRoomClient.prototype.deleteChatRoom = function(groupId, chatId, callbac
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, expireTime, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.KickUserFromGroup#1", {
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(steamId).toString(),
@@ -823,7 +823,7 @@ SteamChatRoomClient.prototype.kickUserFromGroup = function(groupId, steamId, exp
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, false, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.GetBanList#1", {
 			"chat_group_id": groupId
 		}, (body, hdr) => {
@@ -847,7 +847,7 @@ SteamChatRoomClient.prototype.getGroupBanList = function(groupId, callback) {
  * @returns {Promise}
  */
 SteamChatRoomClient.prototype.setGroupUserBanState = function(groupId, userSteamId, banState, callback) {
-	return StdLib.Promises.callbackPromise(null, callback, true, (resolve, reject) => {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
 		this.user._sendUnified("ChatRoom.SetUserBanState#1", {
 			"chat_group_id": groupId,
 			"steamid": Helpers.steamID(userSteamId).toString(),
