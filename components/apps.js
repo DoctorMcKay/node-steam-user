@@ -538,33 +538,35 @@ SteamUser.prototype._addAppToCache = function(appid) {
 /**
  * @private
  */
-SteamUser.prototype._getLicenseInfo = function() {
+SteamUser.prototype._getLicenseInfo = async function() {
 	if (!this.options.enablePicsCache || !this.steamID) {
 		return;
 	}
 
 	let packageids = this.getOwnedPackages();
+	let result;
 
-	this.getProductInfo([], packageids, false, (apps, packages) => {
-		// Request info for all the apps in these packages
-		let appids = [];
+	try {
+		result = await this.getProductInfo([], packageids, false, undefined, PICSRequestType.Licenses);
+	} catch (ex) {
+		this.emit('debug', `Error retrieving package info for licenses: ${ex.message}`);
+		return;
+	}
 
-		for (let pkgid in packages) {
-			if (!packages.hasOwnProperty(pkgid)) {
-				continue;
-			}
+	let {packages} = result;
+	// Request info for all the apps in these packages
+	let appids = [];
 
-			((packages[pkgid].packageinfo || {}).appids || []).forEach(function(appid) {
-				if (appids.indexOf(appid) == -1) {
-					appids.push(appid);
-				}
-			});
-		}
+	for (let pkgid in packages) {
+		((packages[pkgid].packageinfo || {}).appids || []).filter(appid => appids.includes(appid)).forEach(appid => appids.push(appid));
+	}
 
-		this.getProductInfo(appids, [], false, (apps, packages) => {
-			this.emit('appOwnershipCached');
-		}, PICSRequestType.PackageContents);
-	}, PICSRequestType.Licenses);
+	try {
+		await this.getProductInfo(appids, [], false, undefined, PICSRequestType.PackageContents);
+		this.emit('appOwnershipCached');
+	} catch (ex) {
+		this.emit('debug', `Error retrieving app info for licenses: ${ex.message}`);
+	}
 };
 
 /**
