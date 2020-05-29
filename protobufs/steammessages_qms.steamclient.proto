@@ -101,18 +101,23 @@ message CQueuedMatchmakingGameHost_EndGame_Response {
 
 service QueuedMatchmaking {
 	option (service_description) = "Queued matchmaking service";
+
 	rpc SearchForGame (.CQueuedMatchmaking_SearchForGame_Request) returns (.CQueuedMatchmaking_SearchForGame_Response) {
 		option (method_description) = "Search for a game";
 	}
 }
+
 service QueuedMatchmakingGameHost {
 	option (service_description) = "Queued matchmaking host service";
+
 	rpc SearchForPlayers (.CQueuedMatchmakingGameHost_SearchForPlayers_Request) returns (.CQueuedMatchmakingGameHost_SearchForPlayers_Response) {
 		option (method_description) = "SearchForPlayers";
 	}
+
 	rpc SubmitPlayerResult (.CQueuedMatchmakingGameHost_SubmitPlayerResult_Request) returns (.CQueuedMatchmakingGameHost_SubmitPlayerResult_Response) {
 		option (method_description) = "SubmitPlayerResult";
 	}
+
 	rpc EndGame (.CQueuedMatchmakingGameHost_EndGame_Request) returns (.CQueuedMatchmakingGameHost_EndGame_Response) {
 		option (method_description) = "EndGame";
 	}

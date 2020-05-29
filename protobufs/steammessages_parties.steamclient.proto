@@ -66,21 +66,27 @@ message CParties_DestroyBeacon_Response {
 
 service Parties {
 	option (service_description) = "Party-related services";
+
 	rpc JoinParty (.CParties_JoinParty_Request) returns (.CParties_JoinParty_Response) {
 		option (method_description) = "Request to join a Party via the given Beacon ID. If successful, will be given the necessary 'connect' string.";
 	}
+
 	rpc CreateBeacon (.CParties_CreateBeacon_Request) returns (.CParties_CreateBeacon_Response) {
 		option (method_description) = "Create a Beacon to attract people to your Party.";
 	}
+
 	rpc OnReservationCompleted (.CParties_OnReservationCompleted_Request) returns (.CParties_OnReservationCompleted_Response) {
 		option (method_description) = "Notify Steam that a user with a reservation has successfully joined.";
 	}
+
 	rpc CancelReservation (.CParties_CancelReservation_Request) returns (.CParties_CancelReservation_Response) {
 		option (method_description) = "Notify Steam that a user with a reservation either never showed up, or has left the party.";
 	}
+
 	rpc ChangeNumOpenSlots (.CParties_ChangeNumOpenSlots_Request) returns (.CParties_ChangeNumOpenSlots_Response) {
 		option (method_description) = "Change the number of open slots";
 	}
+
 	rpc DestroyBeacon (.CParties_DestroyBeacon_Request) returns (.CParties_DestroyBeacon_Response) {
 		option (method_description) = "Delete the Beacon.";
 	}

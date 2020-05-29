@@ -25,6 +25,7 @@ message LobbyMatchmakingLegacy_GetLobbyStatus_Response {
 
 service LobbyMatchmakingLegacy {
 	option (service_description) = "Lobby matchmaking legacy service";
+
 	rpc GetLobbyStatus (.LobbyMatchmakingLegacy_GetLobbyStatus_Request) returns (.LobbyMatchmakingLegacy_GetLobbyStatus_Response) {
 		option (method_description) = "GetLobbyStatus";
 	}

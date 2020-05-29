@@ -396,6 +396,8 @@ message CMsgFileLoadDialog {
 	optional uint32 browser_handle = 1;
 	optional string title = 2;
 	optional string initialFile = 3;
+	repeated string accept_types = 4;
+	optional bool is_save = 5;
 }
 
 message CMsgFileLoadDialogResponse {
@@ -833,6 +835,8 @@ message CMsgSetWindowPosition {
 	optional int32 y = 3;
 	optional int32 width = 4;
 	optional int32 height = 5;
+	optional int32 min_width = 6;
+	optional int32 min_height = 7;
 }
 
 message CMsgShowWindow {
@@ -889,3 +893,12 @@ message CMsgInspectElement {
 	optional uint32 y = 3;
 }
 
+message CMsgDisableF5 {
+	optional uint32 browser_handle = 1;
+	optional bool disable = 2;
+}
+
+message CMsgStartDownload {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+}

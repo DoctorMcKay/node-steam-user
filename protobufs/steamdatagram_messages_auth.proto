@@ -62,4 +62,3 @@ message CMsgSteamDatagramHostedServerAddressPlaintext {
 	optional uint32 port = 3;
 	optional fixed64 routing_secret = 4;
 }
-

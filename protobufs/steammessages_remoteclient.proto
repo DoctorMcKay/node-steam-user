@@ -26,6 +26,7 @@ message CMsgRemoteClientAppStatus {
 		optional string name = 1;
 		optional string icon = 2;
 		repeated string categories = 3;
+		optional string exepath = 4;
 	}
 
 	message AppStatus {
@@ -33,6 +34,7 @@ message CMsgRemoteClientAppStatus {
 		optional uint32 app_state = 2;
 		optional .CMsgRemoteClientAppStatus.AppUpdateInfo update_info = 3;
 		optional .CMsgRemoteClientAppStatus.ShortcutInfo shortcut_info = 4;
+		optional bool launch_available = 5 [default = true];
 	}
 
 	repeated .CMsgRemoteClientAppStatus.AppStatus status_updates = 1;
@@ -64,6 +66,10 @@ message CMsgRemoteClientStartStreamResponse {
 	optional bytes auth_token = 4;
 	optional .EStreamTransport transport = 5 [default = k_EStreamTransportUDP];
 	optional string relay_server = 6;
+	optional string launch_task = 7;
+	optional string launch_task_detail = 8;
+	optional int32 launch_tasks_done = 9;
+	optional int32 launch_tasks_total = 10;
 }
 
 message CMsgRemoteClientPing {
@@ -89,4 +95,3 @@ message CMsgRemoteClientGetControllerConfigResponse {
 message CMsgRemoteClientStreamingEnabled {
 	required bool enabled = 1;
 }
-

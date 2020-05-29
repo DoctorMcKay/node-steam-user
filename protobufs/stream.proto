@@ -89,6 +89,16 @@ enum EStreamControlMessage {
 	k_EStreamControlInputTouchFingerUp = 119;
 	k_EStreamControlSetCaptureSize = 120;
 	k_EStreamControlSetFlashState = 121;
+	k_EStreamControlPause = 122;
+	k_EStreamControlResume = 123;
+	k_EStreamControlEnableHighResCapture = 124;
+	k_EStreamControlDisableHighResCapture = 125;
+	k_EStreamControlToggleMagnification = 126;
+	k_EStreamControlSetCapslock = 127;
+	k_EStreamControlSetKeymap = 128;
+	k_EStreamControlStopRequest = 129;
+	k_EStreamControlTouchActionSetLayerAdded = 130;
+	k_EStreamControlTouchActionSetLayerRemoved = 131;
 }
 
 enum EStreamVersion {
@@ -127,6 +137,14 @@ enum EStreamBitrate {
 	k_EStreamBitrateUnlimited = 0;
 }
 
+enum EStreamP2PScope {
+	k_EStreamP2PScopeUnknown = 0;
+	k_EStreamP2PScopeDisabled = 1;
+	k_EStreamP2PScopeOnlyMe = 2;
+	k_EStreamP2PScopeFriends = 3;
+	k_EStreamP2PScopeEveryone = 4;
+}
+
 enum EStreamHostPlayAudioPreference {
 	k_EStreamHostPlayAudioDefault = 0;
 	k_EStreamHostPlayAudioAlways = 1;
@@ -154,31 +172,6 @@ enum EStreamMouseWheelDirection {
 	k_EStreamMouseWheelRight = 4;
 }
 
-enum EStreamGamepadInputType {
-	k_EStreamGamepadInputInvalid = 0;
-	k_EStreamGamepadInputDPadUp = 1;
-	k_EStreamGamepadInputDPadDown = 2;
-	k_EStreamGamepadInputDPadLeft = 4;
-	k_EStreamGamepadInputDPadRight = 8;
-	k_EStreamGamepadInputStart = 16;
-	k_EStreamGamepadInputBack = 32;
-	k_EStreamGamepadInputLeftThumb = 64;
-	k_EStreamGamepadInputRightThumb = 128;
-	k_EStreamGamepadInputLeftShoulder = 256;
-	k_EStreamGamepadInputRightShoulder = 512;
-	k_EStreamGamepadInputGuide = 1024;
-	k_EStreamGamepadInputA = 4096;
-	k_EStreamGamepadInputB = 8192;
-	k_EStreamGamepadInputX = 16384;
-	k_EStreamGamepadInputY = 32768;
-	k_EStreamGamepadInputLeftThumbX = 65536;
-	k_EStreamGamepadInputLeftThumbY = 131072;
-	k_EStreamGamepadInputRightThumbX = 262144;
-	k_EStreamGamepadInputRightThumbY = 524288;
-	k_EStreamGamepadInputLeftTrigger = 1048576;
-	k_EStreamGamepadInputRightTrigger = 2097152;
-}
-
 enum EStreamFramerateLimiter {
 	k_EStreamFramerateSlowCapture = 1;
 	k_EStreamFramerateSlowConvert = 2;
@@ -193,6 +186,7 @@ enum EStreamActivity {
 	k_EStreamActivityIdle = 1;
 	k_EStreamActivityGame = 2;
 	k_EStreamActivityDesktop = 3;
+	k_EStreamActivitySecureDesktop = 4;
 }
 
 enum EStreamDataMessage {
@@ -353,6 +347,7 @@ message CStreamingClientCaps {
 	optional bool disable_intel_hardware_encoding = 8;
 	optional bool disable_amd_hardware_encoding = 9;
 	optional bool disable_nvidia_hardware_encoding = 10;
+	optional int32 form_factor = 11;
 }
 
 message CStreamingClientConfig {
@@ -369,6 +364,11 @@ message CStreamingClientConfig {
 	optional bool enable_input_streaming = 11 [default = true];
 	optional int32 audio_channels = 12 [default = 2];
 	optional bool enable_video_hevc = 13 [default = false];
+	optional bool enable_performance_icons = 14 [default = true];
+	optional bool enable_microphone_streaming = 15 [default = false];
+	optional string controller_overlay_hotkey = 16;
+	optional bool enable_touch_controller = 17 [default = false];
+	optional .EStreamP2PScope p2p_scope = 18 [default = k_EStreamP2PScopeUnknown];
 }
 
 message CStreamingServerConfig {
@@ -429,6 +429,29 @@ message CStartVideoDataMsg {
 }
 
 message CStopVideoDataMsg {
+}
+
+message CRecordedInput {
+	optional .EStreamControlMessage type = 1 [default = k_EStreamControlAuthenticationRequest];
+	optional uint32 timestamp = 2;
+
+	oneof data {
+		.CInputTouchFingerDownMsg finger_down = 3;
+		.CInputTouchFingerMotionMsg finger_motion = 4;
+		.CInputTouchFingerUpMsg finger_up = 5;
+		.CInputMouseMotionMsg mouse_motion = 6;
+		.CInputMouseWheelMsg mouse_wheel = 7;
+		.CInputMouseDownMsg mouse_down = 8;
+		.CInputMouseUpMsg mouse_up = 9;
+		.CInputKeyDownMsg key_down = 10;
+		.CInputKeyUpMsg key_up = 11;
+		.CInputTextMsg text = 12;
+		.CRemoteHIDMsg hid = 13;
+	}
+}
+
+message CRecordedInputStream {
+	repeated .CRecordedInput entries = 1;
 }
 
 message CInputLatencyTestMsg {
@@ -550,6 +573,48 @@ message CVideoEncoderInfoMsg {
 	optional string info = 1;
 }
 
+message CPauseMsg {
+}
+
+message CResumeMsg {
+}
+
+message CEnableHighResCaptureMsg {
+}
+
+message CDisableHighResCaptureMsg {
+}
+
+message CToggleMagnificationMsg {
+}
+
+message CSetCapslockMsg {
+	optional bool pressed = 1;
+}
+
+message CStreamingKeymapEntry {
+	optional int32 scancode = 1;
+	optional int32 normal_keycode = 2;
+	optional int32 shift_keycode = 3;
+	optional int32 capslock_keycode = 4;
+	optional int32 shift_capslock_keycode = 5;
+	optional int32 altgr_keycode = 6;
+	optional int32 altgr_shift_keycode = 7;
+	optional int32 altgr_capslock_keycode = 8;
+	optional int32 altgr_shift_capslock_keycode = 9;
+}
+
+message CStreamingKeymap {
+	repeated .CStreamingKeymapEntry entries = 1;
+}
+
+message CSetKeymapMsg {
+	optional .CStreamingKeymap keymap = 1;
+}
+
+message CStopRequest {
+}
+
 message CQuitRequest {
 }
 
@@ -586,6 +651,8 @@ message CSetGammaRampMsg {
 
 message CSetActivityMsg {
 	optional .EStreamActivity activity = 1 [default = k_EStreamActivityIdle];
+	optional uint32 appid = 2;
+	optional uint64 gameid = 3;
 }
 
 message CSystemSuspendMsg {
@@ -614,6 +681,7 @@ message CRemoteHIDMsg {
 message CTouchConfigActiveMsg {
 	optional uint32 appid = 1;
 	optional uint32 revision = 2;
+	optional uint64 creator = 3;
 }
 
 message CGetTouchConfigDataMsg {
@@ -625,6 +693,7 @@ message CSetTouchConfigDataMsg {
 	optional uint32 revision = 2;
 	optional bytes data = 3;
 	optional bytes layout = 4;
+	optional uint64 creator = 5;
 }
 
 message CSaveTouchConfigLayoutMsg {
@@ -633,6 +702,16 @@ message CSaveTouchConfigLayoutMsg {
 }
 
 message CTouchActionSetActiveMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CTouchActionSetLayerAddedMsg {
+	optional uint32 appid = 1;
+	optional int32 actionset_id = 2;
+}
+
+message CTouchActionSetLayerRemovedMsg {
 	optional uint32 appid = 1;
 	optional int32 actionset_id = 2;
 }
@@ -735,5 +814,5 @@ message CTransportSignalMsg {
 	}
 
 	optional .CTransportSignalMsg.WebRTCMessage webrtc = 1;
+	repeated bytes sdr = 2;
 }
-

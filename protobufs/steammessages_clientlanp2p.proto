@@ -24,4 +24,3 @@ message CMsgClientLANP2PRequestChunksResponse {
 
 	repeated .CMsgClientLANP2PRequestChunksResponse.ChunkData chunk_responses = 1;
 }
-

@@ -1,0 +1,43 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CFileVerification_SignatureCheck_Request {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional uint64 file_size = 3;
+	optional uint32 file_timestamp = 4;
+	optional uint32 file_timestamp2 = 5;
+	optional uint32 signature_result = 6;
+	optional string filename = 7;
+	optional uint32 client_package_version = 8;
+	optional bytes sha1hash = 9;
+}
+
+message CFileVerification_SignatureCheck_Response {
+	optional bool deny_operation = 1;
+}
+
+message CFileVerification_SteamServiceCheck_Request {
+	optional uint32 service_status = 2;
+	optional uint32 client_package_version = 3;
+	optional uint32 launcher_type = 4;
+	optional uint32 os_type = 5;
+	optional uint32 service_repair = 6;
+}
+
+message CFileVerification_SteamServiceCheck_Response {
+	optional bool attempt_repair = 1;
+}
+
+service FileVerification {
+	option (service_description) = "File verification services";
+
+	rpc SignatureCheck (.CFileVerification_SignatureCheck_Request) returns (.CFileVerification_SignatureCheck_Response) {
+		option (method_description) = "File signature check was performed";
+	}
+
+	rpc SteamServiceCheck (.CFileVerification_SteamServiceCheck_Request) returns (.CFileVerification_SteamServiceCheck_Response) {
+		option (method_description) = "Steam Service check was performed";
+	}
+}

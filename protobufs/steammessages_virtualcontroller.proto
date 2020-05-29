@@ -44,7 +44,13 @@ enum EControllerElementType {
 	k_EControllerElementTypeTrackpadLeft = 26;
 	k_EControllerElementTypeTrackpadRight = 27;
 	k_EControllerElementTypeKeyboard = 28;
-	k_EControllerElementTypeMax = 29;
+	k_EControllerElementTypeMagnifyingGlass = 29;
+	k_EControllerElementTypeButtonMacro1Finger = 30;
+	k_EControllerElementTypeButtonMacro2Finger = 31;
+	k_EControllerElementTypeRecordInput = 32;
+	k_EControllerElementTypePlaybackInput = 33;
+	k_EControllerElementTypePaste = 34;
+	k_EControllerElementTypeMax = 35;
 }
 
 message CVirtualControllerElement {
@@ -56,16 +62,31 @@ message CVirtualControllerElement {
 	optional float y_scale = 6 [default = 1];
 }
 
+message CVirtualControllerColor {
+	optional float r = 1 [default = 1];
+	optional float g = 2 [default = 1];
+	optional float b = 3 [default = 1];
+	optional float a = 4 [default = 1];
+}
+
 message CVirtualControllerLayout {
 	optional int32 layout_version = 1;
 	optional int32 actionset_id = 2;
 	repeated .CVirtualControllerElement elements = 4;
+	optional .CVirtualControllerColor color = 5;
 }
 
 message CVirtualControllerLayouts {
 	repeated .CVirtualControllerLayout layouts = 1;
 	optional .EInputMode input_mode = 2 [default = k_EInputModeController];
 	optional .EMouseMode mouse_mode = 3 [default = k_EMouseModeUnknown];
+	optional float trackpad_sensitivity = 4 [default = 1];
+	optional bool pinch_zoom_enabled = 5 [default = false];
+	optional float pinch_zoom_x = 6 [default = 0];
+	optional float pinch_zoom_y = 7 [default = 0];
+	optional float pinch_zoom_scale = 8 [default = 1];
+	optional bool shaken = 9;
+	optional bool mouse_offscreen = 10;
 }
 
 message CVirtualControllerConfig {
@@ -80,6 +101,11 @@ message CVirtualControllerConfig {
 		optional int32 output_mouse = 8;
 		optional string icon_foreground = 9;
 		optional string icon_background = 10;
+		optional bool input_toggle = 11;
+		optional int32 input_activate_stick_or_trackpad = 12;
+		optional int32 activation_type = 13;
+		optional int32 long_press_ms = 14;
+		optional int32 double_press_ms = 15;
 	}
 
 	message ActionSet {
@@ -96,12 +122,17 @@ message CVirtualControllerConfig {
 
 message CVirtualControllerLayoutPackage {
 	optional uint32 appid = 1;
-	optional uint32 revision = 2;
-	optional .CVirtualControllerConfig config = 3;
-	optional .CVirtualControllerLayouts layouts = 4;
+	optional uint64 creator = 2;
+	optional uint32 initial_revision = 3;
+	optional uint32 saved_revision = 4;
+	optional .CVirtualControllerConfig config = 5;
+	optional .CVirtualControllerLayouts layouts = 6;
 }
 
 message CVirtualControllerGlobalConfig {
 	optional bool feedback_enabled = 1;
+	optional bool gyroscope_enabled = 2 [default = true];
+	optional bool auto_fade_enabled = 3 [default = true];
+	optional bool rumble_enabled = 4 [default = true];
+	optional bool shake_fade_enabled = 5;
 }
-

@@ -67,12 +67,9 @@ message CMsgSteamSockets_UDP_Stats {
 	enum Flags {
 		ACK_REQUEST_E2E = 2;
 		ACK_REQUEST_IMMEDIATE = 4;
+		NOT_PRIMARY_TRANSPORT_E2E = 16;
 	}
 
 	optional .CMsgSteamDatagramConnectionQuality stats = 1;
 	optional uint32 flags = 3;
-	optional fixed32 to_connection_id = 9;
-	optional fixed32 from_connection_id = 10;
-	optional uint32 seq_num = 4;
 }
-

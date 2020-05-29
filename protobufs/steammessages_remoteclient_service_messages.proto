@@ -1,0 +1,153 @@
+message CRemoteClient_CreateSession_Request {
+}
+
+message CRemoteClient_CreateSession_Response {
+	optional fixed64 session_id = 1;
+	optional int32 euniverse = 2;
+}
+
+message CRemoteClient_StartPairing_Request {
+	optional fixed64 session_id = 1;
+}
+
+message CRemoteClient_StartPairing_Response {
+	optional uint32 pin = 1;
+}
+
+message CRemoteClient_SetPairingInfo_Request {
+	optional fixed64 session_id = 1;
+	optional fixed64 device_id = 2;
+	optional bytes request = 3;
+}
+
+message CRemoteClient_SetPairingInfo_Response {
+}
+
+message CRemoteClient_GetPairingInfo_Request {
+	optional uint32 pin = 1;
+}
+
+message CRemoteClient_GetPairingInfo_Response {
+	optional fixed64 session_id = 1;
+	optional fixed64 device_id = 2;
+	optional bytes request = 3;
+}
+
+message CRemoteClient_CancelPairing_Request {
+	optional fixed64 session_id = 1;
+}
+
+message CRemoteClient_CancelPairing_Response {
+}
+
+message CRemoteClient_RegisterStatusUpdate_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+	optional fixed64 device_id = 3;
+}
+
+message CRemoteClient_UnregisterStatusUpdate_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+}
+
+message CRemoteClient_Online_Notification {
+	optional fixed64 steamid = 1;
+}
+
+message CRemoteClient_RemotePacket_Notification {
+	optional fixed64 session_id = 1;
+	optional fixed64 steamid = 2;
+	optional bytes payload = 4;
+}
+
+message CRemoteClient_ReplyPacket_Notification {
+	optional fixed64 session_id = 1;
+	optional bytes payload = 2;
+}
+
+message CRemoteClient_GetReplies_Request {
+	optional fixed64 session_id = 1;
+}
+
+message CRemoteClient_GetReplies_Response {
+	repeated bytes payload = 1;
+}
+
+message CRemoteClient_AllocateTURNServer_Request {
+	optional uint32 cellid = 1;
+	optional string credentials = 2;
+}
+
+message CRemoteClient_AllocateTURNServer_Response {
+	optional string turn_server = 1;
+}
+
+message CRemoteClient_AllocateRelayServer_Request {
+	optional uint32 cellid = 1;
+	optional string credentials = 2;
+}
+
+message CRemoteClient_AllocateRelayServer_Response {
+	optional string relay_server = 1;
+}
+
+message CRemoteClient_AllocateSDR_Request {
+	optional uint32 appid = 1;
+}
+
+message CRemoteClient_AllocateSDR_Response {
+}
+
+message CRemoteClient_SteamBroadcast_Notification {
+	optional fixed64 steamid = 1;
+	optional fixed64 clientid = 2;
+	optional bytes payload = 3;
+}
+
+message CRemoteClient_SteamToSteam_Notification {
+	optional fixed64 steamid = 1;
+	optional fixed64 src_clientid = 2;
+	optional fixed64 dst_clientid = 3;
+	optional uint32 secretid = 4;
+	optional bytes encrypted_payload = 5;
+}
+
+message CRemotePlay_SessionStarted_Request {
+	optional uint32 host_account_id = 1;
+	optional uint32 client_account_id = 2;
+	optional uint32 appid = 3;
+	optional int32 device_form_factor = 4;
+}
+
+message CRemotePlay_SessionStarted_Response {
+	optional fixed64 record_id = 1;
+}
+
+message CRemotePlay_SessionStopped_Notification {
+	optional fixed64 record_id = 1;
+	optional bool used_x264 = 2;
+	optional bool used_h264 = 3;
+	optional bool used_hevc = 4;
+}
+
+message CRemotePlayTogether_Notification {
+	message ControllerSlots {
+		optional uint32 slotid = 1;
+		optional fixed64 steamid = 2;
+	}
+
+	message GroupUpdated {
+		optional fixed64 host_steamid = 1;
+		optional fixed64 host_clientid = 2;
+		repeated fixed64 players = 3;
+		optional fixed64 host_gameid = 4;
+		repeated .CRemotePlayTogether_Notification.ControllerSlots controller_slots = 5;
+	}
+
+	optional fixed64 steamid = 1;
+
+	oneof Message {
+		.CRemotePlayTogether_Notification.GroupUpdated group_updated = 2;
+	}
+}

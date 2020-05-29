@@ -30,9 +30,9 @@ message CMsgSteamDatagramCertificateSigned {
 	optional bytes cert = 4;
 	optional fixed64 ca_key_id = 5;
 	optional bytes ca_signature = 6;
+	optional bytes private_key_data = 1;
 }
 
 message CMsgSteamDatagramCertificateRequest {
 	optional .CMsgSteamDatagramCertificate cert = 1;
 }
-

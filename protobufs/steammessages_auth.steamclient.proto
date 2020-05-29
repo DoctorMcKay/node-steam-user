@@ -1,0 +1,40 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CCloudGaming_CreateNonce_Request {
+	optional string platform = 1;
+	optional uint32 appid = 2;
+	optional bool request_trial = 3;
+}
+
+message CCloudGaming_CreateNonce_Response {
+	optional string nonce = 1;
+	optional uint32 expiry = 2;
+}
+
+message CCloudGaming_GetTimeRemaining_Request {
+	optional string platform = 1;
+	repeated uint32 appid_list = 2;
+}
+
+message CCloudGaming_TimeRemaining {
+	optional uint32 appid = 1;
+	optional uint32 minutes_remaining = 2;
+}
+
+message CCloudGaming_GetTimeRemaining_Response {
+	repeated .CCloudGaming_TimeRemaining entries = 2;
+}
+
+service CloudGaming {
+	option (service_description) = "Methods for Steam cloud gaming operations";
+
+	rpc CreateNonce (.CCloudGaming_CreateNonce_Request) returns (.CCloudGaming_CreateNonce_Response) {
+		option (method_description) = "Create a nonce for a cloud gaming service session";
+	}
+
+	rpc GetTimeRemaining (.CCloudGaming_GetTimeRemaining_Request) returns (.CCloudGaming_GetTimeRemaining_Response) {
+		option (method_description) = "Get the amount of streaming time remaining for a set of apps";
+	}
+}

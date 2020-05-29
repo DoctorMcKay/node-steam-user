@@ -36,4 +36,3 @@ message CMsgClientSiteLicenseGetContentCacheInfoResponse {
 	optional uint32 p2p_group = 4;
 	optional string ip_address = 5;
 }
-

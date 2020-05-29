@@ -14,6 +14,7 @@ enum ERemoteClientBroadcastMsg {
 	k_ERemoteDeviceStreamingCancelRequest = 10;
 	k_ERemoteClientBroadcastMsgClientIDDeconflict = 11;
 	k_ERemoteDeviceStreamTransportSignal = 12;
+	k_ERemoteDeviceStreamingProgress = 13;
 }
 
 enum ERemoteClientService {
@@ -36,11 +37,29 @@ enum ERemoteDeviceAuthorizationResult {
 	k_ERemoteDeviceAuthorizationCanceled = 8;
 }
 
+enum EStreamDeviceFormFactor {
+	k_EStreamDeviceFormFactorUnknown = 0;
+	k_EStreamDeviceFormFactorPhone = 1;
+	k_EStreamDeviceFormFactorTablet = 2;
+	k_EStreamDeviceFormFactorComputer = 3;
+	k_EStreamDeviceFormFactorTV = 4;
+}
+
 enum EStreamTransport {
 	k_EStreamTransportNone = 0;
 	k_EStreamTransportUDP = 1;
 	k_EStreamTransportUDPRelay = 2;
 	k_EStreamTransportWebRTC = 3;
+	k_EStreamTransportSDR = 4;
+	k_EStreamTransportUDP_SNS = 5;
+	k_EStreamTransportUDPRelay_SNS = 6;
+}
+
+enum EStreamInterface {
+	k_EStreamInterfaceDefault = 0;
+	k_EStreamInterfaceRecentGames = 1;
+	k_EStreamInterfaceBigPicture = 2;
+	k_EStreamInterfaceDesktop = 3;
 }
 
 enum ERemoteDeviceStreamingResult {
@@ -57,6 +76,8 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingVRActive = 10;
 	k_ERemoteDeviceStreamingPINRequired = 11;
 	k_ERemoteDeviceStreamingTransportUnavailable = 12;
+	k_ERemoteDeviceStreamingInvisible = 13;
+	k_ERemoteDeviceStreamingGameLaunchFailed = 14;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -92,6 +113,7 @@ message CMsgRemoteClientBroadcastStatus {
 	optional uint32 content_cache_port = 19;
 	repeated string ip_addresses = 20;
 	optional string public_ip_address = 21;
+	optional bool remoteplay_active = 22;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -134,6 +156,11 @@ message CMsgRemoteDeviceAuthorizationResponse {
 }
 
 message CMsgRemoteDeviceStreamingRequest {
+	message ReservedGamepad {
+		optional uint32 controller_type = 1;
+		optional uint32 controller_subtype = 2;
+	}
+
 	required uint32 request_id = 1;
 	optional int32 maximum_resolution_x = 2;
 	optional int32 maximum_resolution_y = 3;
@@ -149,10 +176,20 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional uint64 client_id = 13;
 	repeated .EStreamTransport supported_transport = 14;
 	optional bool restricted = 15;
+	optional .EStreamDeviceFormFactor form_factor = 16 [default = k_EStreamDeviceFormFactorUnknown];
+	optional int32 gamepad_count = 17;
+	repeated .CMsgRemoteDeviceStreamingRequest.ReservedGamepad gamepads = 18;
+	optional uint64 gameid = 19;
+	optional .EStreamInterface stream_interface = 20 [default = k_EStreamInterfaceDefault];
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
 	required uint32 request_id = 1;
+}
+
+message CMsgRemoteDeviceStreamingProgress {
+	required uint32 request_id = 1;
+	optional float progress = 2;
 }
 
 message CMsgRemoteDeviceStreamingResponse {
@@ -162,18 +199,20 @@ message CMsgRemoteDeviceStreamingResponse {
 	optional bytes encrypted_session_key = 4;
 	optional .EStreamTransport transport = 6 [default = k_EStreamTransportUDP];
 	optional string relay_server = 7;
+	optional string cert = 8;
 }
 
 message CMsgRemoteDeviceProofRequest {
 	required bytes challenge = 1;
+	optional uint32 request_id = 2;
 }
 
 message CMsgRemoteDeviceProofResponse {
 	required bytes response = 1;
+	optional uint32 request_id = 2;
 }
 
 message CMsgRemoteDeviceStreamTransportSignal {
 	optional bytes token = 1;
 	optional bytes payload = 2;
 }
-

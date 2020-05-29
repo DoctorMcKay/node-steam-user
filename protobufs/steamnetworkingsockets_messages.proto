@@ -1,5 +1,13 @@
+import "steamnetworkingsockets_messages_certs.proto";
+
 option optimize_for = SPEED;
 option cc_generic_services = false;
+
+enum ESteamNetworkingSocketsCipher {
+	k_ESteamNetworkingSocketsCipher_INVALID = 0;
+	k_ESteamNetworkingSocketsCipher_NULL = 1;
+	k_ESteamNetworkingSocketsCipher_AES_256_GCM = 2;
+}
 
 message CMsgSteamDatagramSessionCryptInfo {
 	enum EKeyType {
@@ -11,6 +19,7 @@ message CMsgSteamDatagramSessionCryptInfo {
 	optional bytes key_data = 2;
 	optional fixed64 nonce = 3;
 	optional uint32 protocol_version = 4;
+	repeated .ESteamNetworkingSocketsCipher ciphers = 5;
 }
 
 message CMsgSteamDatagramSessionCryptInfoSigned {
@@ -35,6 +44,7 @@ message CMsgSteamDatagramLinkInstantaneousStats {
 }
 
 message CMsgSteamDatagramLinkLifetimeStats {
+	optional uint32 connected_seconds = 2;
 	optional uint64 packets_sent = 3;
 	optional uint64 kb_sent = 4;
 	optional uint64 packets_recv = 5;
@@ -112,3 +122,62 @@ message CMsgSteamDatagramConnectionQuality {
 	optional .CMsgSteamDatagramLinkLifetimeStats lifetime = 2;
 }
 
+message CMsgICERendezvous {
+	message Auth {
+		optional string pwd_frag = 1;
+	}
+
+	message Candidate {
+		optional string candidate = 3;
+	}
+
+	optional .CMsgICERendezvous.Auth auth = 2;
+	optional .CMsgICERendezvous.Candidate add_candidate = 1;
+}
+
+message CMsgSteamNetworkingP2PRendezvous {
+	message ConnectRequest {
+		optional .CMsgSteamDatagramSessionCryptInfoSigned crypt = 6;
+		optional .CMsgSteamDatagramCertificateSigned cert = 7;
+		optional uint32 virtual_port = 9;
+	}
+
+	message ConnectOK {
+		optional .CMsgSteamDatagramSessionCryptInfoSigned crypt = 5;
+		optional .CMsgSteamDatagramCertificateSigned cert = 6;
+	}
+
+	message ConnectionClosed {
+		optional string debug = 5;
+		optional uint32 reason_code = 6;
+	}
+
+	message ReliableMessage {
+		optional .CMsgICERendezvous ice = 1;
+	}
+
+	optional string from_identity = 8;
+	optional fixed32 from_connection_id = 9;
+	optional string to_identity = 10;
+	optional fixed32 to_connection_id = 1;
+	optional bytes sdr_routes = 2;
+	optional uint32 ack_peer_routes_revision = 3;
+	optional bool ice_enabled = 7;
+	optional .CMsgSteamNetworkingP2PRendezvous.ConnectRequest connect_request = 4;
+	optional .CMsgSteamNetworkingP2PRendezvous.ConnectOK connect_ok = 5;
+	optional .CMsgSteamNetworkingP2PRendezvous.ConnectionClosed connection_closed = 6;
+	optional uint32 ack_reliable_msg = 11;
+	optional uint32 first_reliable_msg = 12;
+	repeated .CMsgSteamNetworkingP2PRendezvous.ReliableMessage reliable_messages = 13;
+}
+
+message CMsgSteamNetworkingICESessionSummary {
+	optional uint32 failure_reason_code = 7;
+	optional uint32 local_candidate_types = 1;
+	optional uint32 remote_candidate_types = 2;
+	optional uint32 initial_route_kind = 3;
+	optional uint32 initial_ping = 4;
+	optional uint32 initial_score = 6;
+	optional uint32 negotiation_ms = 5;
+	optional uint32 selected_seconds = 12;
+}

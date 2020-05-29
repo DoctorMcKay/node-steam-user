@@ -56,6 +56,7 @@ message CSTAR_Response {
 
 service STAR {
 	option (service_description) = "service for reading/writing STAR data";
+
 	rpc ProcessMessage (.CSTAR_Request) returns (.CSTAR_Response) {
 		option (method_description) = "processes a generic message";
 	}
