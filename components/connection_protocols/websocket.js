@@ -111,7 +111,13 @@ WebSocketConnection.prototype._chooseAndConnect = function() {
 
 		this._disconnected = true;
 		this.user.emit('debug', 'WebSocket disconnected with error: ' + err.message);
-		this.user._handleConnectionClose();
+
+		if (err.proxyConnecting) {
+			// This error happened while connecting to the proxy
+			this.user.emit('error', err);
+		} else {
+			this.user._handleConnectionClose();
+		}
 	});
 
 	this.stream.on('connected', () => {
