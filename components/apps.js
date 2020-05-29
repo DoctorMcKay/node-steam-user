@@ -221,7 +221,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 		this._send(SteamUser.EMsg.ClientPICSProductInfoRequest, {
 			"apps": apps,
 			"packages": packages
-		}, (body) => {
+		}, async (body) => {
 			// If we're using the PICS cache, then add the items in this response to it
 			if (this.options.enablePicsCache) {
 				let cache = this.picsCache;
@@ -263,7 +263,7 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 					// Request info for all the apps in this package, if this request didn't originate from the license list
 					if (requestType != PICSRequestType.Licenses) {
 						let appids = (pkg.packageinfo || {}).appids || [];
-						this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents);
+						this.getProductInfo(appids, [], false, null, PICSRequestType.PackageContents).catch(() => {});
 					}
 				});
 			}
@@ -312,70 +312,65 @@ SteamUser.prototype.getProductInfo = function(apps, packages, inclTokens, callba
 
 			// appids and packageids contain the list of IDs that we're still waiting on data for
 			if (appids.length === 0 && packageids.length === 0) {
-				if (inclTokens) {
-					let tokenlessAppids = [];
-					let tokenlessPackages = [];
+				if (!inclTokens) {
+					return resolve(response);
+				}
 
-					for (let appid in response.apps) {
-						if (response.apps[appid].missingToken) {
-							tokenlessAppids.push(parseInt(appid, 10));
+				// We want tokens
+				let tokenlessAppids = [];
+				let tokenlessPackages = [];
+
+				for (let appid in response.apps) {
+					if (response.apps[appid].missingToken) {
+						tokenlessAppids.push(parseInt(appid, 10));
+					}
+				}
+
+				for (let packageid in response.packages) {
+					if (response.packages[packageid].missingToken) {
+						tokenlessPackages.push(parseInt(packageid, 10));
+					}
+				}
+
+				if (tokenlessAppids.length == 0 && tokenlessPackages.length == 0) {
+					// No tokens needed
+					return resolve(response);
+				}
+
+				try {
+					let {appTokens, packageTokens} = await this.getProductAccessToken(tokenlessAppids, tokenlessPackages);
+					let tokenApps = [];
+					let tokenPackages = [];
+
+					for (let appid in appTokens) {
+						tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
+					}
+
+					for (let packageid in packageTokens) {
+						tokenPackages.push({packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]})
+					}
+
+					// Now we have the tokens. Request the data.
+					let {apps, packages} = await this.getProductInfo(tokenApps, tokenPackages, false);
+					for (let appid in apps) {
+						response.apps[appid] = apps[appid];
+						let index = response.unknownApps.indexOf(parseInt(appid, 10));
+						if (index != -1) {
+							response.unknownApps.splice(index, 1);
 						}
 					}
 
-					for (let packageid in response.packages) {
-						if (response.packages[packageid].missingToken) {
-							tokenlessPackages.push(parseInt(packageid, 10));
+					for (let packageid in packages) {
+						response.packages[packageid] = packages[packageid];
+						let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
+						if (index != -1) {
+							response.unknownPackages.splice(index, 1);
 						}
 					}
 
-					if (tokenlessAppids.length > 0 || tokenlessPackages.length > 0) {
-						this.getProductAccessToken(tokenlessAppids, tokenlessPackages, (appTokens, packageTokens) => {
-							let tokenApps = [];
-							let tokenPackages = [];
-
-							for (let appid in appTokens) {
-								tokenApps.push({appid: parseInt(appid, 10), access_token: appTokens[appid]})
-							}
-
-							for (let packageid in packageTokens) {
-								tokenPackages.push({packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]})
-							}
-
-							this.getProductInfo(tokenApps, tokenPackages, false, (apps, packages) => {
-								for (let appid in apps) {
-									response.apps[appid] = apps[appid];
-									let index = response.unknownApps.indexOf(parseInt(appid, 10));
-									if (index != -1) {
-										response.unknownApps.splice(index, 1);
-									}
-								}
-
-								for (let packageid in packages) {
-									response.packages[packageid] = packages[packageid];
-									let index = response.unknownPackages.indexOf(parseInt(packageid, 10));
-									if (index != -1) {
-										response.unknownPackages.splice(index, 1);
-									}
-								}
-
-								if (!callbackFired) {
-									callbackFired = true;
-									resolve(response);
-								}
-							});
-						});
-					} else {
-						// No tokenless apps or packages
-						if (!callbackFired) {
-							callbackFired = true;
-							resolve(response);
-						}
-					}
-				} else {
-					if (!callbackFired) {
-						callbackFired = true;
-						resolve(response);
-					}
+					resolve(response);
+				} catch (ex) {
+					return reject(ex);
 				}
 			}
 		});
