@@ -446,77 +446,76 @@ SteamUser.prototype._clearChangelistUpdateTimer = function() {
 /**
  * @private
  */
-SteamUser.prototype._getChangelistUpdate = function() {
+SteamUser.prototype._getChangelistUpdate = async function() {
 	this._clearChangelistUpdateTimer();
 
 	if (!this.options.enablePicsCache || !this.options.changelistUpdateInterval) {
 		return;
 	}
 
-	// Set a local timeout if Steam doesn't respond
-	let timedOut = false;
-	let timeout = setTimeout(() => {
-		timedOut = true;
+	let result = null;
+	try {
+		result = await this.getProductChanges(this.picsCache.changenumber);
+	} catch (ex) {
+		this.emit('debug', `Error getting changelist update: ${ex.message}`);
 		this._resetChangelistUpdateTimer();
-	}, Math.max(Math.round(this.options.changelistUpdateInterval / 2), 30000));
+		return;
+	}
 
-	this.getProductChanges(this.picsCache.changenumber, (err, currentChangenumber, apps, packages) => {
-		if (err || timedOut) {
-			return;
+	let cache = this.picsCache;
+	let {appChanges, packageChanges, currentChangeNumber} = result;
+
+	cache.apps = cache.apps || {};
+	cache.packages = cache.packages || {};
+
+	appChanges = appChanges.map(app => app.appid);
+	packageChanges = packageChanges.map(pkg => pkg.packageid);
+
+	let ourApps = appChanges.filter(appid => this.options.picsCacheAll || cache.apps[appid]);
+	let ourPackages = packageChanges.filter(pkgid => this.options.picsCacheAll || cache.packages[pkgid]);
+
+	if (ourApps.length + ourPackages.length === 0) {
+		// We're done here
+
+		if (currentChangeNumber != cache.changenumber && cache.changenumber != 0) {
+			this.emit('changelist', currentChangeNumber, appChanges, packageChanges);
 		}
 
-		let cache = this.picsCache;
+		cache.changenumber = currentChangeNumber;
+		this._resetChangelistUpdateTimer();
+		return;
+	}
 
-		cache.apps = cache.apps || {};
-		cache.packages = cache.packages || {};
-
-		apps = apps.map(app => app.appid);
-		packages = packages.map(pkg => pkg.packageid);
-
-		let ourApps = apps.filter(appid => this.options.picsCacheAll || cache.apps[appid]);
-		let ourPackages = packages.filter(pkgid => this.options.picsCacheAll || cache.packages[pkgid]);
-
-		if (ourApps.length + ourPackages.length === 0) {
-			// We're done here
-
-			if (currentChangenumber != cache.changenumber && cache.changenumber != 0) {
-				this.emit('changelist', currentChangenumber, apps, packages);
-			}
-
-			cache.changenumber = currentChangenumber;
-			this._resetChangelistUpdateTimer();
-			clearTimeout(timeout);
-			return;
-		}
-
+	try {
 		// Get any access tokens we may need
-		this.getProductAccessToken(ourApps, ourPackages, (appTokens, packageTokens, appDeniedTokens, packageDeniedTokens) => {
-			if (timedOut) {
-				return;
-			}
+		result = await this.getProductAccessToken(ourApps, ourPackages);
+	} catch (ex) {
+		this.emit('debug', `Error getting tokens for changelist: ${ex.message}`);
+		this._resetChangelistUpdateTimer();
+		return;
+	}
 
-			this.emit('changelist', currentChangenumber, apps, packages);
+	this.emit('changelist', currentChangeNumber, appChanges, packageChanges);
 
-			cache.changenumber = currentChangenumber;
-			this._resetChangelistUpdateTimer();
-			clearTimeout(timeout);
+	let {appTokens, packageTokens} = result;
+	cache.changenumber = currentChangeNumber;
+	this._resetChangelistUpdateTimer();
 
-			let index = -1;
-			for (let appid in appTokens) {
-				if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
-					ourApps[index] = {"appid": parseInt(appid, 10), "access_token": appTokens[appid]};
-				}
-			}
+	let index = -1;
+	for (let appid in appTokens) {
+		if (appTokens.hasOwnProperty(appid) && (index = ourApps.indexOf(parseInt(appid, 10))) != -1) {
+			ourApps[index] = {appid: parseInt(appid, 10), access_token: appTokens[appid]};
+		}
+	}
 
-			for (let packageid in packageTokens) {
-				if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
-					ourPackages[index] = {"packageid": parseInt(packageid, 10), "access_token": packageTokens[packageid]};
-				}
-			}
+	for (let packageid in packageTokens) {
+		if (packageTokens.hasOwnProperty(packageid) && (index = ourPackages.indexOf(parseInt(packageid, 10))) != -1) {
+			ourPackages[index] = {packageid: parseInt(packageid, 10), access_token: packageTokens[packageid]};
+		}
+	}
 
-			this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist);
-		});
-	});
+	// Add a no-op catch in case there's some kind of error
+	this.getProductInfo(ourApps, ourPackages, false, null, PICSRequestType.Changelist).catch(() => {});
 };
 
 /**
