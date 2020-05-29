@@ -205,3 +205,18 @@ exports.fixVdfArray = function(arr) {
 	arr.length = Object.keys(arr).length;
 	return Array.prototype.slice.call(arr);
 };
+
+exports.onceTimeout = function(timeoutMilliseconds, emitter, event, handler) {
+	let timeout;
+	let internalHandler = function() {
+		clearTimeout(timeout);
+		handler.apply(emitter, [null].concat(Array.prototype.slice.call(arguments)));
+	};
+
+	timeout = setTimeout(() => {
+		emitter.removeListener(event, internalHandler);
+		handler.call(emitter, new Error('Request timed out'));
+	}, timeoutMilliseconds);
+
+	emitter.once(event, internalHandler);
+};

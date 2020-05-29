@@ -303,10 +303,14 @@ SteamUser.prototype.getPersonas = function(steamids, callback) {
 		let output = {};
 
 		ids.forEach((id) => {
-			this.once('user#' + id, receive);
+			Helpers.onceTimeout(10000, this, 'user#' + id, receive);
 		});
 
-		function receive(sid, user) {
+		function receive(err, sid, user) {
+			if (err) {
+				return reject(err);
+			}
+
 			let sid64 = sid.getSteamID64();
 			output[sid64] = user;
 

@@ -78,13 +78,15 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
  * @return Promise
  */
 SteamUser.prototype.kickPlayingSession = function(callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, [], callback, true, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise([], callback, true, (resolve, reject) => {
 		this._send(SteamUser.EMsg.ClientKickPlayingSession, {});
-		this.once('playingState', (blocked, playingApp) => {
-			if (blocked) {
-				reject(new Error("Cannot kick other session"));
+		Helpers.onceTimeout(10000, this, 'playingState', (err, blocked, playingApp) => {
+			if (err) {
+				return reject(err);
+			} else if (blocked) {
+				return reject(new Error('Cannot kick other session'));
 			} else {
-				resolve();
+				return resolve();
 			}
 		});
 	});

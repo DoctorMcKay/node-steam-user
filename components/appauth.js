@@ -63,7 +63,7 @@ SteamUser.parseEncryptedAppTicket = AppTicket.parseEncryptedAppTicket;
 SteamUser.parseAppTicket = AppTicket.parseAppTicket;
 
 SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['appTicket'], callback, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(['appTicket'], callback, (resolve, reject) => {
 		// For an auth session ticket we need the following:
 		// 1. Length-prefixed GCTOKEN
 		// 2. Length-prefixed SESSIONHEADER
@@ -74,7 +74,11 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 				return reject(err);
 			}
 
-			let buildToken = () => {
+			let buildToken = (err) => {
+				if (err) {
+					return reject(err);
+				}
+
 				let gcToken = this._gcTokens.splice(0, 1)[0];
 				let buffer = ByteBuffer.allocate(4 + gcToken.length + 4 + 24 + 4 + ticket.length, ByteBuffer.LITTLE_ENDIAN);
 				buffer.writeUint32(gcToken.length);
@@ -101,7 +105,7 @@ SteamUser.prototype.getAuthSessionTicket = function(appid, callback) {
 			if (this._gcTokens.length > 0) {
 				buildToken();
 			} else {
-				this.once('_gcTokens', buildToken); // continue once we get some tokens
+				Helpers.onceTimeout(10000, this, '_gcTokens', buildToken);
 			}
 		});
 	});

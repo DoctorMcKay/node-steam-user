@@ -47,7 +47,7 @@ SteamUser.prototype.chatTyping = function(recipient) {
  * @return Promise
  */
 SteamUser.prototype.getChatHistory = function(steamID, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['messages'], callback, true, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(['messages'], callback, true, (resolve, reject) => {
 		steamID = Helpers.steamID(steamID);
 		let sid64 = steamID.getSteamID64();
 
@@ -65,8 +65,8 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
 		 * @param {string} messages[].message - The message that was sent
 		 * @param {bool} messages[].unread - true if it was an unread offline message, false if just a history message
 		 */
-		this.once('chatHistory#' + sid64, (steamID, success, messages) => {
-			let err = Helpers.eresultError(success);
+		Helpers.onceTimeout(10000, this, 'chatHistory#' + sid64, (err, steamID, success, messages) => {
+			err = err || Helpers.eresultError(success);
 			if (err) {
 				return reject(err);
 			} else {
@@ -84,14 +84,14 @@ SteamUser.prototype.getChatHistory = function(steamID, callback) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.joinChat = function(steamID, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, [], callback, true, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise([], callback, true, (resolve, reject) => {
 		let msg = ByteBuffer.allocate(9, ByteBuffer.LITTLE_ENDIAN);
 		msg.writeUint64(toChatID(steamID).getSteamID64()); // steamIdChat
 		msg.writeUint8(0); // isVoiceSpeaker
 		this._send(SteamUser.EMsg.ClientJoinChat, msg.flip());
 
-		this.once('chatEnter#' + Helpers.steamID(steamID).getSteamID64(), (chatID, result) => {
-			let err = Helpers.eresultError(result);
+		Helpers.onceTimeout(10000, this, 'chatEnter#' + Helpers.steamID(steamID).getSteamID64(), (err, chatID, result) => {
+			err = err || Helpers.eresultError(result);
 			if (err) {
 				return reject(err);
 			} else {
@@ -244,7 +244,7 @@ SteamUser.prototype.inviteToChat = function(chatID, userID) {
  * @deprecated This uses the old-style chat rooms, if you want new chat instead use this.chat
  */
 SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callback) {
-	return StdLib.Promises.timeoutCallbackPromise(10000, ['chatID'], callback, true, (resolve, reject) => {
+	return StdLib.Promises.callbackPromise(['chatID'], callback, true, (resolve, reject) => {
 		convertUserID = convertUserID || new SteamID();
 		inviteUserID = inviteUserID || new SteamID();
 
@@ -267,8 +267,8 @@ SteamUser.prototype.createChatRoom = function(convertUserID, inviteUserID, callb
 		 * @param {Error|null} err - The result of the creation request
 		 * @param {SteamID} [chatID] - The SteamID of the newly-created room, if successful
 		 */
-		this.once('chatCreated#' + convertUserID.getSteamID64(), (convertedUserID, result, chatID) => {
-			let err = Helpers.eresultError(result || SteamUser.EResult.OK);
+		Helpers.onceTimeout(10000, this, 'chatCreated#' + convertUserID.getSteamID64(), (err, convertUserID, result, chatID) => {
+			err = err || Helpers.eresultError(result || SteamUser.EResult.OK);
 			if (err) {
 				return reject(err);
 			} else {
