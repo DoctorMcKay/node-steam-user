@@ -84,13 +84,45 @@ SteamUser.prototype.getEmoticonList = function(callback) {
 };
 
 /**
- * Retrieves a user's active profile background item.
- * @param {SteamID|string} steamID - Either a SteamID object or a string which can parse into one
+ * Get a listing of profile items you own.
  * @param {{language?: string}} [options]
  * @param {function} [callback]
  * @returns {Promise}
  */
-SteamUser.prototype.getUserProfileBackground = function(steamID, options, callback) {
+SteamUser.prototype.getOwnedProfileItems = function(options, callback) {
+	if (typeof options == 'function') {
+		callback = options;
+		options = {};
+	}
+
+	options = options || {};
+
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
+		this._sendUnified('Player.GetProfileItemsOwned#1', {language: options.language || 'english'}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			for (let i in body) {
+				if (Array.isArray(body[i])) {
+					body[i] = body[i].map(processProfileItem);
+				}
+			}
+
+			resolve(body);
+		});
+	});
+};
+
+/**
+ * Get a user's equipped profile items.
+ * @param {SteamID|string} steamID - Either a SteamID object or a string that can parse into one
+ * @param {{language?: string}} [options]
+ * @param {function} [callback]
+ * @returns {Promise}
+ */
+SteamUser.prototype.getEquippedProfileItems = function(steamID, options, callback) {
 	if (typeof options == 'function') {
 		callback = options;
 		options = {};
@@ -101,7 +133,7 @@ SteamUser.prototype.getUserProfileBackground = function(steamID, options, callba
 	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, false, (resolve, reject) => {
 		steamID = Helpers.steamID(steamID);
 
-		this._sendUnified('Player.GetProfileBackground#1', {
+		this._sendUnified('Player.GetProfileItemsEquipped#1', {
 			steamid: steamID.toString(),
 			language: options.language || 'english'
 		}, (body, hdr) => {
@@ -110,24 +142,13 @@ SteamUser.prototype.getUserProfileBackground = function(steamID, options, callba
 				return reject(err);
 			}
 
-			if (typeof body.profile_background == 'undefined') {
-				return reject(new Error('Malformed response'));
+			for (let i in body) {
+				body[i] = processProfileItem(body[i]);
 			}
 
-			let background = body.profile_background;
-			if (!background || !background.image_large) {
-				return resolve(null); // no background
-			}
-
-			['image_large', 'image_small', 'movie_webm', 'movie_mp4'].forEach((key) => {
-				if (background[key]) {
-					background[key] = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/' + background[key];
-				}
-			});
-
-			return resolve(background);
+			resolve(body);
 		});
-	})
+	});
 };
 
 /**
@@ -147,3 +168,16 @@ SteamUser.prototype.setProfileBackground = function(backgroundAssetID, callback)
 		});
 	});
 };
+
+function processProfileItem(item) {
+	if (!Object.keys(item).some(k => item[k] !== null)) {
+		return null;
+	}
+
+	['image_large', 'image_small', 'movie_webm', 'movie_mp4'].forEach((key) => {
+		if (item[key]) {
+			item[key] = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/' + item[key];
+		}
+	});
+	return item;
+}

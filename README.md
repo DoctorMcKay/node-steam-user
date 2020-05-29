@@ -1152,29 +1152,55 @@ Retrieves a user's list of owned apps. The user's games must not be private.
 *This is functionally identical to [IPlayerService/GetOwnedGames](https://steamapi.xpaw.me/#IPlayerService/GetOwnedGames)
 but with some minor data processing.*
 
-### getUserProfileBackground(steamID[, options], callback)
-- `steamID` - Either a `SteamID` object or a string that can parse into one
+### getOwnedProfileItems([options,] callback)
 - `options` - Optional. An object with zero or more of these properties:
     - `language` - A language to localize item data into. Defaults to `english`
 - `callback` - Called when the request completes.
     - `err` - An `Error` object on failure or `null` on success.
-    - `response` - The response object. Will be `null` if the user has no profile background.
-        - `communityitemid` - The asset ID of the item which is the user's current profile background
-        - `image_small` - The URL to a small version of the image. May be `null`.
-        - `image_large` - The URL to the full size of the image.
-        - `name` - The internal name of the item
-        - `item_title` - The localized name of the item
-        - `item_description` - The localized description of the item
-        - `appid` - The AppID of the app which owns this background
-        - `item_type`
-        - `item_class`
-        - `movie_webm`
-        - `movie_mp4`
-        - `equipped_flags`
+    - `response` - The response object. Each property is an array of [profile item data](#profile-item-data) objects.
+        - `profile_backgrounds` - Owned profile backgrounds
+        - `mini_profile_backgrounds` - Owned miniprofile backgrounds
+        - `avatar_frames` - Owned avatar frames
+        - `animated_avatars` - Owned animated avatars
+        - `profile_modifiers` - Owned profile modifiers
 
 **v4.16.0 or later is required to use this method**
 
-Retrieves the details of a user's current profile background.
+Retrieves a listing of all profile items you currently own.
+
+#### Profile Item Data
+
+Profile item objects have these properties:
+
+- `communityitemid` - The asset ID of the item
+- `image_small` - The URL to the image shown in the inventory. May be `null`.
+- `image_large` - The URL to the full size of the item's image. May be `null` if not a profile background.
+- `name` - The internal name of the item
+- `item_title` - The localized name of the item
+- `item_description` - The localized description of the item
+- `appid` - The AppID of the app which owns this background
+- `item_type`
+- `item_class`
+- `movie_webm` - The URL to a webm version of a video associated with this item, likely for animated avatars.
+- `movie_mp4` - The URL to an mp4 version of a video associated with this item, likely for animated avatars.
+- `equipped_flags` - Unknown at this time
+
+### getEquippedProfileItems(steamID[, options], callback)
+- `steamID` - Either a `SteamID` object or a string that can parse into one for the user whose currently-equiped profile items you want to see
+- `options` - Optional. An object with zero or more of these properties:
+    - `language` - A language to localize item data into. Defaults to `english`
+- `callback` - Called when the request completes.
+    - `err` - An `Error` object on failure or `null` on success
+    - `response` - The response object. Each property is either `null` or a [profile item data](#profile-item-data) object
+        - `profile_background`
+        - `mini_profile_background`
+        - `avatar_frame`
+        - `animated_avatars`
+        - `profile_modifiers`
+
+**v4.16.0 or later is required to use this method**
+
+Retrieves a list of a given user's equipped profile items.
 
 ### setProfileBackground(backgroundAssetID)
 - `backgroundAssetID` - The asset ID of the item you want to set as your background. Use `0` to remove your background.
