@@ -381,6 +381,7 @@ SteamUser.prototype.getGameBadgeLevel = function(appid, callback) {
 			});
 
 			resolve({
+				"steamLevel": body.player_level,
 				"playerLevel": body.player_level,
 				"regularBadgeLevel": regular,
 				"foilBadgeLevel": foil
