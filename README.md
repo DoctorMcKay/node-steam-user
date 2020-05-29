@@ -1176,6 +1176,13 @@ but with some minor data processing.*
 
 Retrieves the details of a user's current profile background.
 
+### setProfileBackground(backgroundAssetID)
+- `backgroundAssetID` - The asset ID of the item you want to set as your background. Use `0` to remove your background.
+
+**v4.16.0 or later is required to use this method**
+
+Changes your own profile background.
+
 ### inviteToGroup(userSteamID, groupSteamID)
 - `userSteamID` - The SteamID of the user you want to invite, as a `SteamID` object or a string which can parse into one
 - `groupSteamID` - The SteamID of the group you want to invite the user to, as a `SteamID` object or a string which can parse into one

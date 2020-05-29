@@ -129,3 +129,21 @@ SteamUser.prototype.getUserProfileBackground = function(steamID, options, callba
 		});
 	})
 };
+
+/**
+ * Change your current profile background.
+ * @param {number|string} backgroundAssetID
+ * @param {function} [callback]
+ */
+SteamUser.prototype.setProfileBackground = function(backgroundAssetID, callback) {
+	return StdLib.Promises.timeoutCallbackPromise(10000, null, callback, true, (resolve, reject) => {
+		this._sendUnified('Player.SetProfileBackground#1', {communityitemid: backgroundAssetID}, (body, hdr) => {
+			let err = Helpers.eresultError(hdr.proto);
+			if (err) {
+				return reject(err);
+			}
+
+			resolve();
+		});
+	});
+};
