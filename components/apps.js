@@ -25,30 +25,26 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 		apps = [apps];
 	}
 
-	let self = this;
-	if (this._playingBlocked && force) {
-		this.kickPlayingSession(doTheThing);
-	} else {
-		doTheThing();
-	}
+	let execute = async () => {
+		if (this._playingBlocked && force) {
+			await this.kickPlayingSession();
+		}
 
-	function doTheThing() {
 		let processedApps = apps.map((app) => {
-			if (typeof app === 'string') {
-				return {
-					"game_id": "15190414816125648896",
-					"game_extra_info": app
-				};
+			if (typeof app == 'string') {
+				app = {game_id: '15190414816125648896', game_extra_info: app};
+			} else if (typeof app != 'object') {
+				app = {game_id: app};
 			}
 
-			if (typeof app === 'object') {
-				return app;
+			if (typeof app.game_ip_address == 'number') {
+				app.game_ip_address = {v4: app.game_ip_address};
 			}
 
-			return {"game_id": app};
+			return app;
 		});
 
-		self._send(SteamUser.EMsg.ClientGamesPlayedWithDataBlob, {"games_played": processedApps});
+		this._send(SteamUser.EMsg.ClientGamesPlayedWithDataBlob, {games_played: processedApps});
 
 		processedApps.forEach((app) => {
 			if (app.game_id > Math.pow(2, 32)) {
@@ -57,19 +53,21 @@ SteamUser.prototype.gamesPlayed = function(apps, force) {
 			}
 
 			let appid = parseInt(app.game_id, 10);
-			if (!self._playingAppIds.includes(appid)) {
-				self.emit('appLaunched', appid);
+			if (!this._playingAppIds.includes(appid)) {
+				this.emit('appLaunched', appid);
 			}
 		});
 
-		self._playingAppIds.forEach((appid) => {
+		this._playingAppIds.forEach((appid) => {
 			if (!processedApps.some(app => app.game_id == appid)) {
-				self.emit('appQuit', appid);
+				this.emit('appQuit', appid);
 			}
 		});
 
-		self._playingAppIds = processedApps.filter(app => app.game_id < Math.pow(2, 32)).map(app => parseInt(app.game_id, 10));
-	}
+		this._playingAppIds = processedApps.filter(app => app.game_id < Math.pow(2, 32)).map(app => parseInt(app.game_id, 10));
+	};
+
+	execute().catch(() => {});
 };
 
 /**
